@@ -1,0 +1,136 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Bank Accounts
+  summary: Retrieve a Bank Account
+  operationId: GetBankAccount
+  description: |
+    Retrieve a Bank Account with specified identifier string
+  responses:
+    '200':
+      description: Bank Account was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/BankAccounts/BankAccount.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/bank-accounts@{id}/get.php'
+patch:
+  tags:
+    - Bank Accounts
+  summary: Update a bank account's values
+  operationId: PatchBankAccount
+  description: >
+    Update bank account's values except for the account number and routing
+    number
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            bankName:
+              description: Bank's name.
+              type: string
+            accountType:
+              description: Bank's Account type.
+              type: string
+              enum:
+                - checking
+                - savings
+                - other
+            address:
+              description: The Address.
+              allOf:
+                - $ref: ../components/schemas/Contact/ContactObject.yaml
+            customFields:
+              $ref: ../components/schemas/ResourceCustomFields.yaml
+    description: Bank Account
+  responses:
+    '200':
+      description: Bank Account was updated
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/BankAccounts/BankAccount.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml
+put:
+  tags:
+    - Bank Accounts
+  summary: Create a Bank Account with predefined ID
+  operationId: PutBankAccount
+  description: |
+    Create or update a BankAccount with predefined identifier string
+  requestBody:
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: ../components/schemas/BankAccounts/BankAccountCreateToken.yaml
+            - $ref: ../components/schemas/BankAccounts/BankAccountCreatePlain.yaml
+    description: BankAccount resource
+    required: true
+  responses:
+    '200':
+      description: BankAccount was updated
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/BankAccounts/BankAccount.yaml
+    '201':
+      description: BankAccount was created
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/BankAccounts/BankAccount.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/bank-accounts@{id}/put.php'

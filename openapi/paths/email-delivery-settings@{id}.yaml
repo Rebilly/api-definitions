@@ -1,0 +1,90 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  tags:
+    - Email Delivery Settings
+  summary: Retrieve an email delivery setting
+  operationId: GetEmailDeliverySetting
+  description: |
+    Retrieve an email delivery setting
+  responses:
+    '200':
+      description: >-
+        Email delivery setting with specified identifier was retrieved
+        successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: >-
+              ../components/schemas/EmailDeliverySettings/EmailDeliverySetting.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+delete:
+  tags:
+    - Email Delivery Settings
+  summary: Delete an email delivery setting
+  operationId: DeleteEmailDeliverySetting
+  description: |
+    Delete an email delivery setting
+  responses:
+    '204':
+      description: Email delivery setting was deleted
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+patch:
+  tags:
+    - Email Delivery Settings
+  summary: Update an email delivery setting
+  operationId: PatchEmailDeliverySettings
+  description: |
+    Update an email delivery setting
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: >-
+            ../components/schemas/EmailDeliverySettings/EmailDeliverySetting.yaml
+    description: Email delivery setting resource
+    required: true
+  responses:
+    '200':
+      description: Email delivery setting was updated successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: >-
+              ../components/schemas/EmailDeliverySettings/EmailDeliverySetting.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml

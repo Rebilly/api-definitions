@@ -1,0 +1,22 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Transactions
+  summary: Retrieve a Transaction Gateway Logs
+  operationId: GetTransactionGatewayLogCollection
+  description: >-
+    Retrieve Gateway communication Logs for Transaction with specified
+    identifier string
+  responses:
+    '200':
+      description: Logs were retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TransactionGatewayLog.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

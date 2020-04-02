@@ -1,0 +1,33 @@
+type: object
+properties:
+  method:
+    type: string
+    enum:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+  url:
+    type: string
+    format: uri
+  query:
+    type: object
+    description: The URI parameters
+    additionalProperties:
+      type: string
+      example:
+        param1: value1
+        param2: value2
+  body:
+    type: string
+  credentialHash:
+    type: string
+    description: Webhook Credential identifier string.
+  headers:
+    type: array
+    items:
+      $ref: ./WebhookHeader.yaml
+required:
+  - method
+  - url

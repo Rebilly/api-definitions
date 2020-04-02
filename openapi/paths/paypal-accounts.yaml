@@ -1,0 +1,56 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - PayPal Accounts
+  summary: Retrieve a list of PayPal accounts
+  operationId: GetPayPalAccountCollection
+  description: |
+    Retrieve a list of PayPal Accounts
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+  responses:
+    '200':
+      description: A list of PayPal Accounts was retrieved successfully
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/PayPalAccount.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/paypal-accounts/get.php
+post:
+  tags:
+    - PayPal Accounts
+  summary: Create a PayPal Account
+  operationId: PostPayPalAccount
+  description: |
+    Create a PayPal Account
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PayPalAccount.yaml
+    description: PayPalAccount resource
+    required: true
+  responses:
+    '201':
+      description: PayPal Account was created
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PayPalAccount.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/paypal-accounts/post.php

@@ -1,0 +1,27 @@
+description: iCheque Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          clientId:
+            type: string
+            description: iCheque Gateway client ID
+          secretWord:
+            type: string
+            description: iCheque Gateway secret word
+            format: password
+          apiUserId:
+            type: string
+            description: Username for the Alliance API (transaction reporting)
+          apiSecurityToken:
+            type: string
+            description: Hash of the password for the Alliance API (transaction reporting)
+            format: password
+        required:
+          - clientId
+          - secretWord

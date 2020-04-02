@@ -1,0 +1,30 @@
+description: EPG config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: EPG credentials object
+        properties:
+          merchantId:
+            type: string
+            description: Merchant ID
+          productId:
+            type: string
+            description: Product ID
+          merchantPassword:
+            type: string
+            description: Merchant password
+            format: password
+          merchantKey:
+            type: string
+            description: Merchant key
+            format: password
+        required:
+          - merchantId
+          - productId
+          - merchantPassword
+          - merchantKey

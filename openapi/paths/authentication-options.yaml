@@ -1,0 +1,70 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Customer Authentication
+  summary: Read current authentication options
+  operationId: GetAuthenticationOption
+  description: |
+    Read current authentication options
+  responses:
+    '200':
+      description: Current authentication options was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: >-
+                ../components/schemas/CustomerAuthentication/AuthenticationOptions.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/authentication-options/get.php
+put:
+  tags:
+    - Customer Authentication
+  summary: Change authentication options
+  operationId: PutAuthenticationOption
+  description: |
+    Change options
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: >-
+            ../components/schemas/CustomerAuthentication/AuthenticationOptions.yaml
+    description: Authentication Options resource
+    required: true
+  responses:
+    '200':
+      description: Authentication Options were updated
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: >-
+              ../components/schemas/CustomerAuthentication/AuthenticationOptions.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/authentication-options/put.php

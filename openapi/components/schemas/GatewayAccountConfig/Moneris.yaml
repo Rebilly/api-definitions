@@ -1,0 +1,20 @@
+description: Moneris Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          apiToken:
+            type: string
+            description: Moneris Gateway api token
+            format: password
+          storeId:
+            type: string
+            description: Moneris Gateway store ID
+        required:
+          - storeId
+          - apiToken

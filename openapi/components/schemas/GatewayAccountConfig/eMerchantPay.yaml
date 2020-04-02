@@ -1,0 +1,39 @@
+description: eMerchantPay Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          clientId:
+            type: string
+            description: eMerchantPay Gateway client ID
+          apiKey:
+            type: string
+            description: eMerchantPay Gateway api key
+            format: password
+          username:
+            type: string
+            description: eMerchantPay username for Genesis platform
+          token:
+            type: string
+            description: eMerchantPay token for Genesis platform
+          password:
+            type: string
+            description: eMerchantPay password for Genesis platform
+            format: password
+      settings:
+        type: object
+        description: eMerchantPay settings object
+        properties:
+          platform:
+            type: string
+            description: eMerchantPay platform to process payment. default to IPG
+            enum:
+              - IPG
+              - Genesis
+      mpi:
+        $ref: ../Mpi/EMerchantPayMpis/eMerchantPayMpis.yaml

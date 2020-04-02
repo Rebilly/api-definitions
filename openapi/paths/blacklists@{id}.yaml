@@ -1,0 +1,94 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Blacklists
+  summary: Retrieve a blacklist
+  operationId: GetBlacklist
+  description: |
+    Retrieve a blacklist with specified identifier string
+  responses:
+    '200':
+      description: Blacklist was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Blacklist.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/blacklists@{id}/get.php'
+put:
+  tags:
+    - Blacklists
+  summary: Create a blacklist with predefined ID
+  operationId: PutBlacklist
+  description: |
+    Create a blacklist with predefined identifier string
+  requestBody:
+    $ref: ../components/requestBodies/Blacklist.yaml
+  responses:
+    '201':
+      description: Blacklist was created
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Blacklist.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '409':
+      description: Blacklist exist and cannot be updated
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Error.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/blacklists@{id}/put.php'
+delete:
+  tags:
+    - Blacklists
+  summary: Delete a blacklist
+  operationId: DeleteBlacklist
+  description: |
+    Delete a blacklist with predefined identifier string
+  responses:
+    '204':
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      description: Blacklist was deleted
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/blacklists@{id}/delete.php'

@@ -1,0 +1,43 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: invoiceId
+    in: path
+    description: The Upcoming Invoice ID
+    required: true
+    schema:
+      type: string
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  tags:
+    - Subscriptions
+  summary: Issue an upcoming invoice for early pay
+  operationId: PostUpcomingInvoiceIssuance
+  description: |
+    Issue an upcoming invoice with specified identifier string for early pay.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Invoices/InvoiceIssue.yaml
+    description: InvoiceIssue resource
+    required: true
+  responses:
+    '201':
+      description: Upcoming Invoice was issued successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Invoices/Invoice.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml

@@ -1,0 +1,53 @@
+type: object
+discriminator:
+  propertyName: name
+  mapping:
+    add-risk-score: ./Actions/add-risk-score.yaml
+    blacklist: ./Actions/blacklist.yaml
+    cancel-scheduled-payments: ./Actions/cancel-scheduled-payments.yaml
+    create-infusionsoft-order: ./Actions/create-infusionsoft-order.yaml
+    create-infusionsoft-payment: ./Actions/create-infusionsoft-payment.yaml
+    display-other-choices: ./Actions/display-other-choices.yaml
+    guess-payment-card-expiration: ./Actions/guess-payment-card-expiration.yaml
+    offer-purchase-bump: ./Actions/offer-purchase-bump.yaml
+    pick-gateway-account: ./Actions/pick-gateway-account.yaml
+    remove-reminder: ./Actions/remove-reminder.yaml
+    request-kyc: ./Actions/request-kyc.yaml
+    reset-reminder: ./Actions/reset-reminder.yaml
+    schedule-invoice-retry: ./Actions/schedule-invoice-retry.yaml
+    schedule-payment-retry: ./Actions/schedule-payment-retry.yaml
+    schedule-payment: ./Actions/schedule-payment.yaml
+    schedule-reminder: ./Actions/schedule-reminder.yaml
+    send-email: ./Actions/send-email.yaml
+    stop-subscriptions: ./Actions/stop-subscriptions.yaml
+    tag-or-untag-customer: ./Actions/tag-or-untag-customer.yaml
+    trigger-webhook: ./Actions/trigger-webhook.yaml
+properties:
+  name:
+    type: string
+    description: The action name
+    enum:
+      - blacklist
+      - cancel-scheduled-payments
+      - guess-payment-card-expiration
+      - pick-gateway-account
+      - schedule-payment-retry
+      - schedule-payment
+      - schedule-invoice-retry
+      - send-email
+      - trigger-webhook
+      - stop-subscriptions
+      - add-risk-score
+      - request-kyc
+      - tag-or-untag-customer
+      - display-other-choices
+      - offer-purchase-bump
+      - schedule-reminder
+      - reset-reminder
+      - remove-reminder
+      - create-infusionsoft-order
+      - create-infusionsoft-payment
+  status:
+    $ref: ../OnOff.yaml
+required:
+  - name

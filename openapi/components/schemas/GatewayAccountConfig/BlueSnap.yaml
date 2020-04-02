@@ -1,0 +1,21 @@
+description: BlueSnap config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: BlueSnap credentials object
+        properties:
+          username:
+            type: string
+            description: BlueSnap merchant's api username.
+          password:
+            type: string
+            description: BlueSnap merchant's api password.
+            format: password
+        required:
+          - username
+          - password

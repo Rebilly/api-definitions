@@ -1,0 +1,40 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  tags:
+    - Rules
+  summary: Trigger a test webhook
+  operationId: PostPreviewRuleActionWebhookTrigger
+  description: |
+    Trigger a test webhook
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Rules/ActionTests/SendPreviewWebhook.yaml
+    description: Test webhook resource
+    required: true
+  responses:
+    '200':
+      description: Test webhook was triggered
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Rules/ActionTests/SendPreviewWebhook.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      description: Invalid data was sent
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InvalidError.yaml

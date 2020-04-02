@@ -1,0 +1,98 @@
+parameters:
+  - $ref: ../components/parameters/customFieldResource.yaml
+  - name: name
+    in: path
+    description: The custom field's identifier string
+    required: true
+    schema:
+      type: string
+      maxLength: 60
+      pattern: '^[\w-]+$'
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Custom Fields
+  summary: Retrieve a Custom Field
+  operationId: GetCustomField
+  description: |
+    Retrieve a schema of the given Custom Field for the given resource type
+  responses:
+    '200':
+      description: A schema of the Custom Field was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CustomField.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/custom-fields@{resource}@{name}/get.php'
+put:
+  tags:
+    - Custom Fields
+  summary: Create or alter a Custom Field
+  operationId: PutCustomField
+  description: >
+    Create or alter a schema of the given Custom Field for the given resource
+    type.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CustomField.yaml
+    description: Custom Fields schema of the given resource type
+    required: true
+  responses:
+    '200':
+      description: The Custom Field was updated
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CustomField.yaml
+    '201':
+      description: The Custom Fields was created
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CustomField.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '409':
+      description: >
+        The schema is in use: remove all the associated data in order to remove
+        or alter the schema
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Error.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/custom-fields@{resource}@{name}/put.php'

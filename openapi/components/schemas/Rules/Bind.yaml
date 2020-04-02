@@ -1,0 +1,26 @@
+type: object
+description: The rule
+properties:
+  name:
+    type: string
+  labels:
+    type: array
+    uniqueItems: true
+    example:
+      - test-rule
+      - 'category:foo'
+    items:
+      type: string
+      pattern: '[a-zA-Z][a-zA-Z0-9:-]*'
+  status:
+    $ref: ../OnOff.yaml
+  criteria:
+    $ref: ../Criteria/Condition.yaml
+  actions:
+    type: array
+    uniqueItems: true
+    items:
+      $ref: ./RuleAction.yaml
+required:
+  - name
+  - actions

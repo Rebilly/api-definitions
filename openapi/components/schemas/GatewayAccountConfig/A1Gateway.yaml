@@ -1,0 +1,23 @@
+description: A1Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: A1Gateway credentials object
+        properties:
+          accountId:
+            type: string
+            description: A1Gateway account ID
+          password:
+            type: string
+            description: A1Gateway password
+            format: password
+        required:
+          - accountId
+          - password
+      mpi:
+        $ref: ../Mpi/A1GatewayMpis/A1GatewayMpis.yaml

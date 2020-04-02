@@ -1,0 +1,25 @@
+type: object
+description: >
+  The calculation instruction of due time.
+
+  This is used in conjunction with the **billing anchor** to calculate due time
+  of invoice.
+
+  The chronology of due time shift is always **after**.
+default:
+  duration: 1
+  unit: hour
+properties:
+  duration:
+    type: integer
+    description: The number of the units
+    minimum: 1
+  unit:
+    oneOf:
+      - $ref: >-
+          https://rebilly.github.io/api-standards/schema/json-schema-draft-04/date-time/time-unit.json
+      - $ref: >-
+          https://rebilly.github.io/api-standards/schema/json-schema-draft-04/date-time/time-plural-unit.json
+required:
+  - duration
+  - unit

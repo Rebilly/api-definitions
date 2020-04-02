@@ -1,0 +1,29 @@
+allOf:
+  - $ref: ../GatewayAccountPickInstruction.yaml
+  - type: object
+    properties:
+      weightedList:
+        type: array
+        uniqueItems: true
+        minimum: 0
+        items:
+          type: object
+          properties:
+            gatewayName:
+              $ref: >-
+                https://rebilly.github.io/api-standards/schema/json-schema-draft-04/payment-gateways/gateway-name.json
+            acquirerName:
+              $ref: >-
+                https://rebilly.github.io/api-standards/schema/json-schema-draft-04/payment-gateways/acquirer-name.json
+            weight:
+              type: integer
+          required:
+            - gatewayName
+            - acquirerName
+            - weight
+        example: |
+          [
+            {"gatewayName": "TestProcessor", "acquirerName": "AIB", "weight": 80},
+            {"gatewayName": "TestProcessor", "acquirerName": "B+S", "weight": 20}
+    required:
+      - weightedList

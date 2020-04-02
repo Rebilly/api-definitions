@@ -1,0 +1,16 @@
+description: ''
+allOf:
+  - $ref: ../RuleAction.yaml
+  - type: object
+    properties:
+      role:
+        type: string
+        enum:
+          - all
+          - renewal
+          - trial-end
+        description: >-
+          The role of Reminder (available only on Subscription events, other
+          events should use `all`).
+    required:
+      - role

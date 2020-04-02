@@ -1,0 +1,51 @@
+parameters:
+  - name: redemptionCode
+    in: path
+    description: The coupon's redemption code
+    required: true
+    schema:
+      type: string
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  tags:
+    - Coupons
+  summary: Set a coupon's expiration time.
+  operationId: PostCouponExpiration
+  description: |
+    Set a coupon's expiry time with the specified redemption code.
+    The expiredTime of a coupon must be greater than its issuedTime.
+    This cannot be performed on expired coupons.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Coupon/CouponExpiration.yaml
+    description: Coupon resource
+  responses:
+    '201':
+      description: Coupon expiration was successfully set
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Coupon/Coupon.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      description: >-
+        The coupon is already expired and has been redeemed, unable to
+        reschedule expiration
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Error.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml

@@ -1,0 +1,79 @@
+type: object
+required:
+  - type
+  - unitPrice
+properties:
+  id:
+    description: The website identifier string
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  type:
+    description: Invoice item's type
+    type: string
+    enum:
+      - debit
+      - credit
+  description:
+    description: Invoice item's description
+    type: string
+  unitPrice:
+    description: Invoice item's price
+    type: number
+    format: double
+  quantity:
+    description: Invoice item's quantity
+    type: integer
+  price:
+    description: Invoice item's total price
+    type: number
+    format: double
+    readOnly: true
+  productId:
+    description: The product's ID
+    allOf:
+      - $ref: ../ResourceId.yaml
+  discountAmount:
+    description: Invoice item discount amount
+    type: number
+    format: double
+    readOnly: true
+  periodStartTime:
+    description: Start time
+    type: string
+    format: date-time
+  periodEndTime:
+    description: End time
+    type: string
+    format: date-time
+  periodNumber:
+    description: Invoice item subscription period number
+    type: integer
+  createdTime:
+    description: Invoice item created time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: Invoice item updated time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Links/SelfLink.yaml
+        - $ref: ../Links/ProductLink.yaml
+  _embedded:
+    type: array
+    description: >-
+      Any embedded objects available that are requested by the `expand`
+      querystring parameter.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Embeds/ProductEmbed.yaml
+        - $ref: ../Embeds/PlanEmbed.yaml

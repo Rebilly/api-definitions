@@ -1,0 +1,40 @@
+type: object
+readOnly: true
+properties:
+  id:
+    description: Event tracking id
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  event:
+    $ref: ../EventType.yaml
+  description:
+    description: Rule's description
+    type: string
+  rulesVersion:
+    type: integer
+    description: Rule version
+  occurredTime:
+    description: Time when event occurred.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  context:
+    type: object
+    description: Event's context
+    additionalProperties:
+      type: string
+  processedRules:
+    type: object
+    description: Processed rules
+    properties:
+      name:
+        type: string
+        description: Rule name
+      actions:
+        type: array
+        description: Rule actions applied
+        items:
+          type: string
+      result:
+        type: string
+        description: Rule result

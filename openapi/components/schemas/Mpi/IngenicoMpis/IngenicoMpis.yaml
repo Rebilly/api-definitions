@@ -1,0 +1,14 @@
+description: Ingenico Mpis
+discriminator:
+  propertyName: name
+  mapping:
+    IngenicoMpi: ./IngenicoMpi.yaml
+type: object
+required:
+  - name
+properties:
+  name:
+    allOf:
+      - $ref: ../../Gateways/MpiName.yaml
+    enum:
+      - IngenicoMpi

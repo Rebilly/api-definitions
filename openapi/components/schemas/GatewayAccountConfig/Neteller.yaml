@@ -1,0 +1,33 @@
+description: Neteller Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Neteller credentials object
+        properties:
+          clientId:
+            type: string
+            description: Neteller App Client ID
+          clientSecret:
+            type: string
+            description: Neteller App Client Secret
+            format: password
+          webhookSecretKey:
+            type: string
+            description: Neteller Webhook Secret Key
+            format: password
+        required:
+          - clientId
+          - clientSecret
+          - webhookSecretKey
+      settings:
+        type: object
+        description: Neteller settings object
+        properties:
+          netellerGo:
+            type: boolean
+            description: Enable NETELLERgo! payment flow

@@ -1,0 +1,17 @@
+description: Coupon fixed amount discount
+allOf:
+  - $ref: ../Discount.yaml
+  - type: object
+    required:
+      - amount
+      - currency
+    properties:
+      amount:
+        description: Discount amount
+        type: number
+        format: double
+        minimum: 0
+        exclusiveMinimum: true
+      currency:
+        allOf:
+          - $ref: ../../CurrencyCode.yaml

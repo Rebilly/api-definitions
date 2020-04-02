@@ -1,0 +1,18 @@
+type: object
+description: Version of rules
+readOnly: true
+properties:
+  version:
+    type: integer
+  createdTime:
+    $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to a resource
+    readOnly: true
+    minItems: 3
+    items:
+      anyOf:
+        - $ref: ../Links/SelfLink.yaml
+        - $ref: ../Links/RuleSetHistoryLink.yaml
+        - $ref: ../Links/RuleSetVersionLink.yaml

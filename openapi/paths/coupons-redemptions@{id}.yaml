@@ -1,0 +1,23 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Coupons
+  summary: Retrieve a coupon redemption with specified identifier string
+  operationId: GetCouponRedemption
+  responses:
+    '200':
+      description: Retrieve a coupon redemption with specified identifier string
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Coupon/CouponRedemption.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/coupons-redemptions@{id}/get.php'

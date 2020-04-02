@@ -1,0 +1,42 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  tags:
+    - Invoices
+  summary: Issue an invoice
+  operationId: PostInvoiceIssuance
+  description: >
+    Issue an invoice with specified identifier string. It must be in `draft`
+    status.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Invoices/InvoiceIssue.yaml
+    description: InvoiceIssue resource
+    required: true
+  responses:
+    '201':
+      description: Invoice was issued successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Invoices/Invoice.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/invoices@{id}@issue/post.php'

@@ -1,0 +1,32 @@
+type: object
+required:
+  - customerId
+  - pan
+  - expYear
+  - expMonth
+  - billingAddress
+properties:
+  customerId:
+    description: The Customer's ID.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  pan:
+    description: The card PAN (Primary Account Number).
+    type: string
+    writeOnly: true
+  expYear:
+    description: Card's expiry year.
+    type: integer
+  expMonth:
+    description: Card's expiry month.
+    type: integer
+  cvv:
+    description: Card's cvv (card verification value).
+    type: string
+    writeOnly: true
+  billingAddress:
+    description: The Billing Address.
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  customFields:
+    $ref: ../ResourceCustomFields.yaml

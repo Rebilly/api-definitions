@@ -1,0 +1,43 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: extension
+    in: path
+    description: File extension which also indicates the desired file format
+    required: true
+    schema:
+      type: string
+      enum:
+        - .png
+        - .jpg
+        - .gif
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Files
+  summary: Download image in specific format
+  operationId: GetFileDownloadExtension
+  description: |
+    Download image in specific format. Images are converted server-side
+  responses:
+    '200':
+      description: The file was retrieved successfully
+      headers:
+        Content-Length:
+          description: The number of bytes in the file
+          schema:
+            type: integer
+        Content-Type:
+          description: The MIME type of the file
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            type: string
+            readOnly: true
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml

@@ -1,0 +1,31 @@
+type: object
+required:
+  - name
+properties:
+  id:
+    description: Customer Timeline Custom Event identifier string
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  name:
+    description: >-
+      Customer Timeline Custom Event type name. It must not be similar to any
+      Rebilly system event.
+    type: string
+    minLength: 1
+    maxLength: 255
+  createdTime:
+    description: Customer Timeline Custom event created time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: Customer Timeline Custom event updated time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml

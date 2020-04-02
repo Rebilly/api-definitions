@@ -1,0 +1,49 @@
+type: object
+required:
+  - organizationId
+  - name
+  - url
+  - servicePhone
+  - serviceEmail
+properties:
+  id:
+    description: The website identifier string
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  organizationId:
+    description: Organization ID
+    allOf:
+      - $ref: ./ResourceId.yaml
+  name:
+    description: The website's name
+    type: string
+  url:
+    description: The website's domain address
+    type: string
+  servicePhone:
+    description: The website's customer service phone number
+    type: string
+  serviceEmail:
+    description: The website's customer service email address
+    type: string
+    format: email
+  createdTime:
+    description: Website created time
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    description: Website updated time
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  customFields:
+    $ref: ./ResourceCustomFields.yaml
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Links/SelfLink.yaml
+        - $ref: ./Links/OrganizationLink.yaml

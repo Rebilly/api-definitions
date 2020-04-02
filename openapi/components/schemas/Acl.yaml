@@ -1,0 +1,22 @@
+type: array
+items:
+  type: object
+  required:
+    - scope
+    - permissions
+  properties:
+    scopes:
+      deprecated: true
+      description: Array of api key scopes
+      allOf:
+        - $ref: ./ApiKeyScopes.yaml
+    scope:
+      description: Api Key scope
+      allOf:
+        - $ref: ./ApiKeyScope.yaml
+    permissions:
+      description: >-
+        Specify individual permission here if creating a restricted API key.
+        Use wildcard `*` for full access.
+      allOf:
+        - $ref: ./AclPermissions.yaml

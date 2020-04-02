@@ -1,0 +1,68 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Payment Instrument Validation
+  summary: Retrieve a Payment Instrument validation
+  operationId: GetPaymentInstrumentValidationCollection
+  description: |
+    Retrieve a Payment Instrument validation with specified identifier string
+  responses:
+    '200':
+      description: Successfully retrieved a payment instrument validation
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/PaymentInstrumentValidation.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+post:
+  tags:
+    - Payment Instrument Validation
+  summary: Validate a payment instrument
+  operationId: PostPaymentInstrumentValidation
+  description: |
+    Validate a payment instrument
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - method
+            - paymentInstrumentId
+          properties:
+            method:
+              description: Payment method
+              type: string
+            paymentInstrumentId:
+              description: Payment instrument ID
+              type: string
+    description: Payment instrument
+  responses:
+    '201':
+      description: Validation successful
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PaymentInstrumentValidation.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml

@@ -1,0 +1,15 @@
+description: minimum-order-amount restrictions
+allOf:
+  - $ref: ../CouponRestriction.yaml
+  - $ref: ../RedemptionRestriction.yaml
+  - type: object
+    required:
+      - amount
+      - currency
+    properties:
+      amount:
+        type: integer
+        description: Minimum order quantity
+      currency:
+        allOf:
+          - $ref: ../../CurrencyCode.yaml

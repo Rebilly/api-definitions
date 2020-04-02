@@ -1,0 +1,92 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Customers
+  summary: Retrieve a customer
+  operationId: GetCustomer
+  description: |
+    Retrieve a customer with specified identifier string
+  responses:
+    '200':
+      description: Customer was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Customer.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/customers@{id}/get.php'
+put:
+  tags:
+    - Customers
+  summary: Upsert a customer with predefined ID
+  operationId: PutCustomer
+  description: >
+    Create or update (upsert) a customer with predefined identifier string.
+
+    Read our guide to [preventing
+    duplicates](https://api-guides.rebilly.com/core-concepts/preventing-duplicates)
+
+    to understand more.
+  requestBody:
+    $ref: ../components/requestBodies/Customer.yaml
+  responses:
+    '200':
+      $ref: ../components/responses/Customer.yaml
+    '201':
+      $ref: ../components/responses/Customer.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/customers@{id}/put.php'
+delete:
+  parameters:
+    - in: query
+      name: targetCustomerId
+      required: true
+      schema:
+        type: string
+      description: >-
+        The customer idendifier to get the data of the deleted duplicate
+        customer
+  tags:
+    - Customers
+  summary: Merge and delete a customer
+  operationId: DeleteCustomer
+  description: >-
+    Merge one duplicate customer to another target customer and delete the
+    former.
+  responses:
+    '204':
+      description: Customer has been merged and removed
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

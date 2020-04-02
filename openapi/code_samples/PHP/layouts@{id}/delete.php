@@ -1,0 +1,1 @@
+$client->layouts()->delete('layoutId');

@@ -1,0 +1,23 @@
+type: object
+description: The calculation instruction of scheduled time
+discriminator:
+  propertyName: method
+  mapping:
+    auto: ./Methods/auto.yaml
+    date-interval: ./Methods/date-interval.yaml
+    day-of-month: ./Methods/day-of-month.yaml
+    day-of-week: ./Methods/day-of-week.yaml
+    immediately: ./Methods/immediately.yaml
+    intelligent: ./Methods/intelligent.yaml
+properties:
+  method:
+    type: string
+    enum:
+      - auto
+      - intelligent
+      - immediately
+      - date-interval
+      - day-of-month
+      - day-of-week
+required:
+  - method

@@ -1,0 +1,40 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  tags:
+    - Rules
+  summary: Send a test email
+  operationId: PostPreviewRuleActionEmailSending
+  description: |
+    Send a test email
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Rules/ActionTests/SendTestEmail.yaml
+    description: Test email resource
+    required: true
+  responses:
+    '200':
+      description: Test email was sent
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Rules/ActionTests/SendTestEmail.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      description: Invalid data was sent
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InvalidError.yaml

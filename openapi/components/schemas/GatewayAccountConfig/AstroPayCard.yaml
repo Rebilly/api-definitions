@@ -1,0 +1,26 @@
+description: AstroPay Card config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: AstroPay Card credentials object
+        properties:
+          x_login:
+            type: string
+            description: AstroPay Card login
+          x_tran_key:
+            type: string
+            description: AstroPay Card transaction key
+            format: password
+          secret_key:
+            type: string
+            description: AstroPay Card secret key
+            format: password
+        required:
+          - x_login
+          - x_tran_key
+          - secret_key

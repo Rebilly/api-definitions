@@ -1,0 +1,36 @@
+type: object
+properties:
+  canceledTime:
+    description: Subscription canceled time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  canceledBy:
+    description: Canceled by
+    type: string
+    readOnly: true
+    enum:
+      - merchant
+      - customer
+      - rebilly
+  cancelCategory:
+    description: Cancel category
+    type: string
+    readOnly: true
+    enum:
+      - billing-failure
+      - did-not-use
+      - did-not-want
+      - missing-features
+      - bugs-or-problems
+      - do-not-remember
+      - risk-warning
+      - contract-expired
+      - too-expensive
+      - never-started
+      - switched-plan
+      - other
+  cancelDescription:
+    description: Cancel reason description in free form
+    type: string
+    readOnly: true
+    maxLength: 255

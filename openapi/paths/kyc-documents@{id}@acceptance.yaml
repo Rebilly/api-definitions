@@ -1,0 +1,29 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  tags:
+    - KYC Documents
+  summary: Accept a KYC document
+  operationId: PostKycDocumentAcceptance
+  description: >
+    Marks that status of the document as `accepted`. Updates the review time and
+    reviewer information. Intended to be used for manual overrides.
+  responses:
+    '201':
+      description: KYC document acceptance was created
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KycDocument/KycDocument.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

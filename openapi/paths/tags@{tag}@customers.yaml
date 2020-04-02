@@ -1,0 +1,67 @@
+parameters:
+  - $ref: ../components/parameters/tag.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  tags:
+    - Tags
+  summary: Tag a list of customers
+  operationId: PostTagCustomerCollection
+  description: |
+    Tag a list of customers.
+    If the customer from the list is already tagged it will be ignored.
+    It's an asynchronous operation.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - customerIds
+          properties:
+            customerIds:
+              description: The list of customer IDs
+              type: array
+              minItems: 1
+              maxItems: 1000
+              items:
+                type: string
+  responses:
+    '204':
+      description: Customers was tagged
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml
+delete:
+  tags:
+    - Tags
+  summary: Untag a list of customers
+  operationId: DeleteTagCustomerCollection
+  description: |
+    Untag a list of customers.
+    If the customer from the list is already untagged it will be ignored.
+    It's an asynchronous operation.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - customerIds
+          properties:
+            customerIds:
+              description: The list of customer IDs
+              type: array
+              minItems: 1
+              maxItems: 1000
+              items:
+                type: string
+  responses:
+    '204':
+      description: Customers was untagged
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml

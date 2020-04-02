@@ -1,0 +1,96 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: downtimeId
+    in: path
+    description: The Gateway Account downtime schedule ID
+    required: true
+    schema:
+      type: string
+get:
+  tags:
+    - Gateway Accounts
+  summary: Retrieve a Gateway Downtime schedule
+  operationId: GetGatewayAccountDowntimeSchedule
+  description: |
+    Retrieve a Gateway Downtime schedule with specified identifier string
+  responses:
+    '200':
+      description: Gateway Downtime schedule was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccountDowntimeSchedule.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  tags:
+    - Gateway Accounts
+  summary: Update a Gateway Account downtime schedule
+  operationId: PutGatewayAccountDowntimeSchedule
+  description: |
+    Update a Gateway Account downtime schedule with predefined identifier string
+  responses:
+    '200':
+      description: Gateway Account downtime schedule was updated
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccountDowntimeSchedule.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      description: Invalid data was sent
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InvalidError.yaml
+  requestBody:
+    $ref: ../components/requestBodies/GatewayAccountDowntimeSchedule.yaml
+delete:
+  tags:
+    - Gateway Accounts
+  summary: Delete a Gateway Account downtime schedule
+  operationId: DeleteGatewayAccountDowntimeSchedule
+  description: |
+    Delete a Gateway Account downtime schedule
+  responses:
+    '204':
+      description: Gateway Account downtime schedule was deleted
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

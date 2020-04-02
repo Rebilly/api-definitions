@@ -1,0 +1,19 @@
+type: object
+description: Additional information about Timeline message
+discriminator:
+  propertyName: type
+  mapping:
+    three-columns: ./three-columns.yaml
+    two-columns: ./two-columns.yaml
+properties:
+  type:
+    type: string
+    enum:
+      - two-columns
+      - three-columns
+  title:
+    type: string
+    description: Data table title
+  footer:
+    type: string
+    description: Data table footer

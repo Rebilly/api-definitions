@@ -1,0 +1,16 @@
+content:
+  application/json:
+    schema:
+      properties:
+        organizationId:
+          $ref: ../schemas/ResourceId.yaml
+        userId:
+          $ref: ../schemas/ResourceId.yaml
+        isOwner:
+          type: boolean
+        permissions:
+          description: The memberships's permissions. See the format in example. Use wildcard `*` for full access.
+          allOf:
+            - $ref: ../schemas/AclPermissions.yaml
+description: Membership resource
+required: true

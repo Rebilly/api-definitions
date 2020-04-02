@@ -1,0 +1,55 @@
+type: object
+description: API secret Key.
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  description:
+    description: API key description
+    type: string
+  datetimeFormat:
+    description: Date time format
+    type: string
+    default: iso8601
+    enum:
+      - mysql
+      - iso8601
+  type:
+    description: Type of API key
+    type: string
+    default: secret
+    enum:
+      - secret
+      - publishable
+  permissions:
+    description: >-
+      Specify individual permissions here if creating a restricted API key.
+    deprecated: true
+    allOf:
+      - $ref: ./AclPermissions.yaml
+  acl:
+    description: >-
+      Specify access control list here if creating a restricted API key. Send
+      all matching permission with an empty scope to allow all permissions.
+    allOf:
+      - $ref: ./Acl.yaml
+  apiUser:
+    description: API user name
+    type: string
+    readOnly: true
+  secretKey:
+    description: API secret key's value
+    type: string
+    readOnly: true
+  createdTime:
+    description: The API key created time
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ./Links/SelfLink.yaml

@@ -1,0 +1,72 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - PayPal Accounts
+  summary: Retrieve a PayPal Account
+  operationId: GetPayPalAccount
+  description: |
+    Retrieve a PayPal Account with specified identifier string
+  responses:
+    '200':
+      description: PayPal Account was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PayPalAccount.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/paypal-accounts@{id}/get.php'
+put:
+  tags:
+    - PayPal Accounts
+  summary: Create a PayPal account with predefined ID
+  operationId: PutPayPalAccount
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PayPalAccount.yaml
+    description: PayPal Account
+    required: true
+  responses:
+    '201':
+      description: PayPal Account was created
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PayPalAccount.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '409':
+      description: PayPal Account exist and cannot be updated
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Error.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/paypal-accounts@{id}/put.php'

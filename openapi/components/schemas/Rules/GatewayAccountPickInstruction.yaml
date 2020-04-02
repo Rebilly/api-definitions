@@ -1,0 +1,14 @@
+type: object
+discriminator:
+  propertyName: method
+  mapping:
+    gateway-account-weights: ./PickInstructions/gateway-account-weights.yaml
+    gateway-acquirer-weights: ./PickInstructions/gateway-acquirer-weights.yaml
+properties:
+  method:
+    type: string
+    enum:
+      - gateway-account-weights
+      - gateway-acquirer-weights
+required:
+  - method

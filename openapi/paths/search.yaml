@@ -1,0 +1,68 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Search
+  summary: Search merchant data
+  operationId: GetSearch
+  description: >
+    Search merchant's data to return resources such as customers, invoices,
+    orders, transactions
+  parameters:
+    - x-rebillyMerge:
+        - $ref: ../components/parameters/collectionQuery.yaml
+        - description: >
+            The default or "global" search. It will search all searchable
+            resources across as many fields as possible.
+    - x-rebillyMerge:
+        - $ref: ../components/parameters/collectionFilter.yaml
+        - description: >
+            The collection items filter requires a special format.
+
+            Use "," for multiple allowed values.  Use ";" for multiple fields.
+
+            Use one or more of the listed filter fields. i.e. `is:customer
+            email:bob@test.com`.
+
+            The `date` value can be surrounded with quotes. Examples:
+
+            `>2019-01-01`, `last month`, `yesterday`, `<=2019-04-30`.
+        - schema:
+            enum:
+              - is
+              - amount
+              - bin
+              - coupon
+              - currency
+              - date
+              - email
+              - last4
+              - name
+              - paypalUsername
+              - plan
+              - product
+              - tag
+  responses:
+    '200':
+      description: Results keyed by resource
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Search.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml

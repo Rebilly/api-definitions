@@ -1,0 +1,17 @@
+description: Finrax config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Finrax credentials object
+        properties:
+          businessToken:
+            type: string
+            description: Finrax business token
+            format: password
+        required:
+          - businessToken

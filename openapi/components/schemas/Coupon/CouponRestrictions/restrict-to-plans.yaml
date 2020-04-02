@@ -1,0 +1,13 @@
+description: restrict-to-plans restrictions
+allOf:
+  - $ref: ../CouponRestriction.yaml
+  - $ref: ../RedemptionRestriction.yaml
+  - type: object
+    required:
+      - planIds
+    properties:
+      planIds:
+        type: array
+        description: Plan IDs coupon can be applied to
+        items:
+          type: string

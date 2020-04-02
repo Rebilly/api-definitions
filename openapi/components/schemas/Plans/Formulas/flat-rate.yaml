@@ -1,0 +1,23 @@
+allOf:
+  - $ref: ../PlanPriceFormula.yaml
+  - type: object
+    required:
+      - price
+    properties:
+      price:
+        description: |
+          Flat-rate pricing is represented in a simple price per unit.
+          Some examples:
+
+          - $30 per unit
+          - $0.10 per transaction
+          - $50 per period
+
+          If the price is 0, it's free.
+        type: number
+        format: double
+        example: 99.95
+      maxQuantity:
+        description: 'If the value is `null`, it''s assumed to be infinite.'
+        type: integer
+        example: 1

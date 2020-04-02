@@ -1,0 +1,20 @@
+description: Tag or untag a customer with specified list of tags
+allOf:
+  - $ref: ../RuleAction.yaml
+  - type: object
+    properties:
+      addingTags:
+        description: The list of tag ID customer should be tagged with
+        type: array
+        maxItems: 1000
+        items:
+          type: string
+      removingTags:
+        description: The list of tag ID customer should be untagged from
+        type: array
+        maxItems: 1000
+        items:
+          type: string
+    required:
+      - addingTags
+      - removingTags

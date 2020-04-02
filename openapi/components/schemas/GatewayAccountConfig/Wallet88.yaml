@@ -1,0 +1,21 @@
+description: Wallet88 config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Wallet88 credentials object
+        properties:
+          username:
+            type: string
+            description: Wallet88 API user
+          password:
+            type: string
+            description: Wallet88 API password
+            format: password
+        required:
+          - username
+          - password

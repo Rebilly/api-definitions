@@ -1,0 +1,33 @@
+parameters:
+  - $ref: ../components/parameters/customFieldResource.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Custom Fields
+  summary: Retrieve Custom Fields
+  operationId: GetCustomFieldCollection
+  description: |
+    Retrieve a schema of Custom Fields for the given resource type
+  responses:
+    '200':
+      description: A schema of Custom Fields was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            description: The list of custom fields
+            type: array
+            items:
+              $ref: ../components/schemas/CustomField.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/custom-fields@{resource}/get.php'

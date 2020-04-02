@@ -1,0 +1,53 @@
+type: object
+required:
+  - method
+  - url
+  - credentialHash
+properties:
+  id:
+    description: The webhook identifier string
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  eventsFilter:
+    description: An array of System event type
+    type: array
+    default: []
+    items:
+      $ref: ./GlobalWebhookEventType.yaml
+  status:
+    $ref: ./OnOff.yaml
+  method:
+    type: string
+    enum:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+  url:
+    description: URL that will be triggered when the given event occurs.
+    type: string
+    format: uri
+  headers:
+    type: array
+    items:
+      $ref: ./Rules/WebhookHeader.yaml
+  credentialHash:
+    type: string
+    description: Hash from Credentials which is used for authentication by the given URL
+  createdTime:
+    description: List created time
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    description: List updated time
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  _links:
+    type: array
+    description: Links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ./Links/SelfLink.yaml

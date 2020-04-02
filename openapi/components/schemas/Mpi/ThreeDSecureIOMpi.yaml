@@ -1,0 +1,39 @@
+description: ThreeDSecureIOMpi
+allOf:
+  - $ref: ./WorldlineAtosFrankfurtMpis/WorldlineAtosFrankfurtMpis.yaml
+  - type: object
+    required:
+      - merchantId
+      - merchantName
+      - merchantAcquirerBinVisa
+      - merchantAcquirerBinMastercard
+      - merchantCountry
+      - merchantUrl
+    properties:
+      merchantId:
+        type: string
+        description: Merchant Id
+        maxLength: 24
+      merchantName:
+        type: string
+        description: Merchant Name
+        maxLength: 25
+      merchantAcquirerBinVisa:
+        type: string
+        description: Visa Acquirer BIN
+        minLength: 6
+        maxLength: 11
+      merchantAcquirerBinMastercard:
+        type: string
+        description: Mastercard Acquirer BIN
+        minLength: 6
+        maxLength: 11
+      merchantCountry:
+        type: string
+        description: Merchant Country ISO Alpha-2 Code
+        maxLength: 2
+        example: US
+      merchantUrl:
+        type: string
+        description: Merchant URL
+        maxLength: 2048

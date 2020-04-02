@@ -1,0 +1,29 @@
+description: Citadel config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Citadel credentials object
+        properties:
+          storeName:
+            type: string
+            description: Store name
+          storeId:
+            type: string
+            description: Store ID
+          username:
+            type: string
+            description: Username
+          password:
+            type: string
+            description: Password
+            format: password
+        required:
+          - storeName
+          - storeId
+          - username
+          - password

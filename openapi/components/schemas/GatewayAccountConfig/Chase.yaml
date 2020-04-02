@@ -1,0 +1,33 @@
+description: Chase Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          username:
+            type: string
+            description: Chase Gateway Net Connect username
+          password:
+            type: string
+            description: Chase Gateway Net Connect password
+            format: password
+          coNumber:
+            type: string
+            description: Chase Gateway CO Number used for delimited file reports
+          divisionId:
+            type: string
+            description: Chase Gateway division ID
+          partialAuth:
+            type: boolean
+            description: Support for Partial Auths
+            default: false
+        required:
+          - username
+          - password
+          - coNumber
+          - divisionId
+          - partialAuth

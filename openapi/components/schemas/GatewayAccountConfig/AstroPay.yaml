@@ -1,0 +1,47 @@
+description: AstroPay config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: AstroPay credentials object
+        properties:
+          x_login:
+            type: string
+            description: AstroPay login
+          x_tran_key:
+            type: string
+            description: AstroPay transaction key
+            format: password
+          secret_key:
+            type: string
+            description: AstroPay secret key
+            format: password
+          web_pay_login:
+            type: string
+            description: AstroPay web pay status login
+          web_pay_tran_key:
+            type: string
+            description: AstroPay web pay status password
+            format: password
+        required:
+          - x_login
+          - x_tran_key
+          - secret_key
+          - web_pay_login
+          - web_pay_tran_key
+      settings:
+        type: object
+        description: AstroPay settings object
+        properties:
+          banks:
+            type: array
+            description: list of banks which will show on hook page
+            items:
+              $ref: ../AstroPayBanks.yaml
+          skipStep:
+            type: boolean
+            description: Skip step for user to enter their personal information.

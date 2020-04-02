@@ -1,0 +1,56 @@
+type: object
+required:
+  - from
+  - name
+properties:
+  id:
+    description: The email delivery setting's identifier string
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  from:
+    description: |
+      The sender's email address.  It must be unique within your account.
+    type: string
+    format: email
+    maxLength: 254
+    example: from-example@rebilly.com
+  name:
+    description: The sender's name
+    type: string
+    example: John Doe
+  status:
+    description: The email message's status
+    readOnly: true
+    type: string
+    enum:
+      - pending
+      - verified
+  credentialId:
+    type: string
+    description: SMTP or any Email Service Provider credential identifier string.
+    example: b120c2ca-6c2b-4690-9dff-3b0d87852dc7
+  provider:
+    readOnly: true
+    description: The service provider name
+    type: string
+    enum:
+      - rebilly
+      - smtp
+      - aws-ses
+      - mailgun
+      - postmark
+      - sendgrid
+    example: rebilly
+  isDefault:
+    type: boolean
+    description: Whether this setting will be used by default or not.
+    default: false
+  createdTime:
+    description: The created time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: The updated time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml

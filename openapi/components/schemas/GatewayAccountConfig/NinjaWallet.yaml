@@ -1,0 +1,27 @@
+description: NinjaWallet config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: NinjaWallet credentials object
+        properties:
+          apiKey:
+            type: string
+            description: NinjaWallet api key
+            format: password
+          secret:
+            type: string
+            description: NinjaWallet secret
+            format: password
+          passphrase:
+            type: string
+            description: NinjaWallet passphrase
+            format: password
+        required:
+          - apiKey
+          - secret
+          - passphrase

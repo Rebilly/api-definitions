@@ -1,0 +1,55 @@
+type: object
+required:
+  - method
+  - paymentInstrumentId
+properties:
+  id:
+    description: Payment instrument validation ID
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  method:
+    description: Payment method
+    type: string
+  paymentInstrumentId:
+    description: Payment instrument ID
+    type: string
+  actionCode:
+    description: Action code
+    type: string
+    readOnly: true
+  responseCode:
+    description: Response code
+    type: string
+    readOnly: true
+  avsResult:
+    description: Address verification result
+    type: string
+    readOnly: true
+  cvvResult:
+    description: CVV result
+    type: string
+    readOnly: true
+  billingAddress:
+    description: Billing address.
+    allOf:
+      - $ref: ./Contact/ContactObject.yaml
+  expYear:
+    description: Payment card's expiry year.
+    type: integer
+    readOnly: true
+  expMonth:
+    description: Payment card's expiry month.
+    type: integer
+    readOnly: true
+  createdTime:
+    description: Payment instrument validation created time.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ./Links/SelfLink.yaml

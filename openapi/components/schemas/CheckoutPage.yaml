@@ -1,0 +1,213 @@
+type: object
+required:
+  - planId
+  - websiteId
+  - urlPathSegment
+  - name
+properties:
+  id:
+    description: Checkout page identifier string
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  planId:
+    description: >-
+      Checkout page plan ID.  If the plan is deactivated, the submit button on
+      the checkout page will be deactivated and the page will display "Sold
+      Out."
+    type: string
+    allOf:
+      - $ref: ./ResourceId.yaml
+  websiteId:
+    description: Checkout page website ID
+    type: string
+    allOf:
+      - $ref: ./ResourceId.yaml
+  urlPathSegment:
+    description: >-
+      Your own custom url path segment for this Checkout Page. It will be
+      appended to checkout url
+      https://checkout.rebilly.com/checkout/`urlPathSegment`
+    type: string
+    minLength: 5
+    maxLength: 50
+  name:
+    description: >-
+      Checkout page name, used for internal display to help you organize your
+      various checkout pages.
+    type: string
+    maxLength: 100
+  redirect:
+    type: object
+    description: >-
+      After a successful checkout, the customer can optionally be redirected to
+      a url of your choice.
+    properties:
+      url:
+        description: >-
+          After a successful checkout, the customer can be redirected to a url
+          of your choice.  If left empty, the customer will remain on the thank
+          you page.
+        type: string
+      timeout:
+        description: >-
+          The time (in seconds) that the customer will remain on the thank you
+          page before being redirected to the corresponding `url`.
+        type: integer
+        default: 5
+  isCustomCustomerIdAllowed:
+    description: >-
+      Set to true if you want to supply your own customer ID's in a querystring
+      parameter on your checkout page.
+    type: boolean
+    default: false
+  isBillingAddressHidden:
+    description: Set to true if you want to hide billing address on your checkout page.
+    type: boolean
+    default: false
+  isPlanSummaryHidden:
+    description: Set to true if you want to hide plan summary on your checkout page.
+    type: boolean
+    default: false
+  isPreCheckedTerms:
+    description: >-
+      Set to true if you want to pre-checked checkbox of terms on your checkout
+      page.
+    type: boolean
+    default: false
+  oneTimeOffer:
+    type: object
+    description: One time offer for checkout page.
+    properties:
+      planId:
+        description: Reference to Plan ID.
+        type: string
+        allOf:
+          - $ref: ./ResourceId.yaml
+      isTiedToQuantity:
+        description: >-
+          Set to true if you want to tie one time offer to quantity on your
+          checkout page.
+        type: boolean
+        default: false
+  thankYouOneTimeOffer:
+    type: object
+    description: One time offer for thank you page.
+    properties:
+      planId:
+        description: Reference to Plan ID.
+        type: string
+        allOf:
+          - $ref: ./ResourceId.yaml
+      isTiedToQuantity:
+        description: >-
+          Set to true if you want to tie one time offer to quantity on your
+          checkout page.
+        type: boolean
+        default: false
+  suggestedUpgrade:
+    type: object
+    description: Suggested upgrade for checkout page.
+    properties:
+      planId:
+        description: Reference to Plan ID.
+        type: string
+        allOf:
+          - $ref: ./ResourceId.yaml
+      hasProration:
+        description: >-
+          Set to true if you want to pro rata credits given due change a
+          subscription's plan.
+        type: boolean
+        default: false
+  theme:
+    description: Select from pre-designed themes for your checkout page.
+    type: string
+    default: classic
+    enum:
+      - classic
+      - long-copy
+  logoAlignment:
+    description: Checkout page logo position.
+    type: string
+    enum:
+      - left
+      - center
+      - right
+    default: left
+  quantityLabel:
+    description: >-
+      Checkout page quantity label, used in case you want to customize the
+      quantity field label.
+    type: string
+    maxLength: 255
+  quantityType:
+    description: >-
+      Checkout page quantity type, used in case you want to customize the
+      quantity field type.
+    type: string
+    enum:
+      - selectbox
+      - textinput
+    default: selectbox
+  quantityMin:
+    description: >-
+      Checkout page quantity min, used in case you want to set the minimun
+      quantity.
+    type: integer
+    minimum: 1
+    maximum: 255
+  markup:
+    description: >
+      Sections of styled content that will display within the page body, keyed
+      by "section."
+
+      The themes rely on specific "section" key values, for example "header",
+      "button", "footer", "body", "thank-you", "terms".
+    type: array
+    uniqueItems: true
+    items:
+      $ref: ./CheckoutPage/Section.yaml
+  fields:
+    description: >-
+      Take granular control over the default field settings.  You can make
+      specific fields hidden, optional, or required.  You can specify labels and
+      default values.
+    type: array
+    uniqueItems: true
+    items:
+      $ref: ./CheckoutPage/FieldConfig.yaml
+  taxes:
+    type: object
+    description: 'Taxes, you can specify description and list of name-value items.'
+    properties:
+      description:
+        description: Taxes description.
+        type: string
+      items:
+        description: Taxes values.
+        type: array
+        items:
+          $ref: ./CheckoutPage/Taxes.yaml
+  status:
+    description: 'If `inactive`, the checkout page url will result in a 404.'
+    type: string
+    enum:
+      - active
+      - inactive
+    default: active
+  createdTime:
+    description: Checkout page created time
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    description: Checkout page updated time
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ./Links/SelfLink.yaml

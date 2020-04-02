@@ -1,0 +1,28 @@
+description: Coppr config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Coppr credentials object
+        properties:
+          organizationId:
+            type: string
+            description: Coppr Organization's ID
+          apiKey:
+            type: string
+            description: Coppr api key
+            format: password
+        required:
+          - organizationId
+          - apiKey
+      settings:
+        type: object
+        description: Coppr settings object
+        properties:
+          rebillyPublishableKey:
+            type: string
+            description: Rebilly publishable api key. If provided a payment token will be created for each transaction.

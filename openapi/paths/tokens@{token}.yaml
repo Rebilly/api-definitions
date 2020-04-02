@@ -1,0 +1,39 @@
+parameters:
+  - name: token
+    in: path
+    description: The token identifier string
+    required: true
+    schema:
+      type: string
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Payment Tokens
+  summary: Retrieve a token
+  operationId: GetToken
+  description: |
+    Retrieve a token with specified identifier string
+  security:
+    - PublishableApiKey: []
+  responses:
+    '200':
+      description: Token was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PaymentTokens/PaymentToken.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/tokens@{token}/get.php'

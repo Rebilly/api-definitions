@@ -1,0 +1,42 @@
+description: BBAN type object
+allOf:
+  - $ref: ../BankAccountCreatePlain.yaml
+  - type: object
+    required:
+      - customerId
+      - accountNumber
+      - routingNumber
+      - accountType
+      - address
+    properties:
+      customerId:
+        description: The Customer's ID.
+        allOf:
+          - $ref: ../../ResourceId.yaml
+      accountNumber:
+        description: Bank's Account Number.
+        type: string
+        pattern: '^[0-9]+$'
+      routingNumber:
+        description: Bank's Routing Number.
+        type: string
+        pattern: '^[0-9]+$'
+      accountType:
+        description: Bank's Account type.
+        type: string
+        enum:
+          - checking
+          - savings
+          - other
+      bankName:
+        description: Bank's name.
+        type: string
+      bic:
+        description: Bank Identifier Code.
+        type: string
+      address:
+        description: The Address.
+        allOf:
+          - $ref: ../../Contact/ContactObject.yaml
+      customFields:
+        $ref: ../../ResourceCustomFields.yaml

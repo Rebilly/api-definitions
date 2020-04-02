@@ -1,0 +1,20 @@
+description: RPN Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          mid:
+            type: string
+            description: RPN MID
+          key:
+            type: string
+            description: RPN Key
+            format: password
+        required:
+          - mid
+          - key

@@ -1,0 +1,41 @@
+description: Ipay Options config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+      - settings
+    properties:
+      credentials:
+        type: object
+        description: Ipay Options credentials object
+        properties:
+          sid:
+            type: string
+            description: Ipay Options website ID
+          rcode:
+            type: string
+            description: Ipay Options rcode
+            format: password
+        required:
+          - sid
+          - rcode
+      settings:
+        type: object
+        description: Ipay Options settings object
+        properties:
+          extraStep:
+            type: boolean
+            description: Show extra step for user to enter their email and DNI number
+          subdomain:
+            type: string
+            description: Subdomain to use when sending request to IpayOptions.
+            enum:
+              - miglite
+              - w88asiapay
+          platform:
+            type: string
+            description: Platform which IpayOptions will process.
+            enum:
+              - SOAP
+              - TxHandler

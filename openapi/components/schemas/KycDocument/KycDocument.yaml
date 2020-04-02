@@ -1,0 +1,79 @@
+type: object
+required:
+  - fileId
+  - customerId
+  - documentType
+  - status
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  fileId:
+    description: Linked File object id
+    allOf:
+      - $ref: ../ResourceId.yaml
+  customerId:
+    description: Linked Customer object id
+    allOf:
+      - $ref: ../ResourceId.yaml
+  documentType:
+    description: >-
+      Document type submitted for validation, only identity-proof type is
+      analyzed in an automated manner.
+    type: string
+    enum:
+      - identity-proof
+      - address-proof
+  status:
+    description: Status of the validation.
+    type: string
+    readOnly: true
+    enum:
+      - pending
+      - in-progress
+      - accepted
+      - rejected
+  reviewerId:
+    description: Reviewer's user ID.
+    type: string
+    nullable: true
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  reviewerName:
+    description: Reviewer's first and last name.
+    type: string
+    nullable: true
+    readOnly: true
+  reviewTime:
+    description: Date and time of manual review.
+    nullable: true
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  rejectionReason:
+    $ref: ./KycDocumentRejection.yaml
+  documentMatches:
+    $ref: ./KycDocumentMatches.yaml
+  createdTime:
+    description: Creation date/time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: Latest update date/time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  processedTime:
+    description: Processing date/time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 3
+    items:
+      anyOf:
+        - $ref: ../Links/SelfLink.yaml
+        - $ref: ../Links/FileLink.yaml
+        - $ref: ../Links/CustomerLink.yaml

@@ -1,0 +1,47 @@
+type: object
+required:
+  - startTime
+  - endTime
+properties:
+  id:
+    description: The Gateway Account downtime schedule identifier string
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  status:
+    description: The Gateway Account downtime schedule status
+    readOnly: true
+    type: string
+    enum:
+      - pending
+      - ongoing
+      - finished
+  reason:
+    description: The Gateway Account downtime schedule reason
+    readOnly: true
+    type: string
+    enum:
+      - scheduled-maintenance
+  startTime:
+    description: The Gateway Account scheduled downtime start time.
+    type: string
+    format: date-time
+  endTime:
+    description: The Gateway Account scheduled downtime end time.
+    type: string
+    format: date-time
+  createdTime:
+    description: Gateway downtime schedule created time
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    description: Gateway downtime schedule updated time
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ./Links/SelfLink.yaml

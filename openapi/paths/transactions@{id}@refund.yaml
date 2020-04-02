@@ -1,0 +1,42 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  tags:
+    - Transactions
+  summary: Refund a Transaction
+  operationId: PostTransactionRefund
+  description: >
+    Refund a Transaction with specified identifier string.
+
+    Note that the refund will be in the same currency as the original
+    transaction.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/TransactionRefund.yaml
+    description: Transaction resource
+    required: true
+  responses:
+    '201':
+      description: Transaction was refunded successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Transactions/Transaction.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/transactions@{id}@refund/post.php'

@@ -1,0 +1,22 @@
+post:
+  tags:
+    - JWT Session
+  summary: Destroys the user's current session
+  operationId: PostLogoutRequest
+  description: >
+    Destroys the user's current session. Endpoint must be accessed with valid
+    JWT Authorization header.
+  responses:
+    '204':
+      description: Session was deleted
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml

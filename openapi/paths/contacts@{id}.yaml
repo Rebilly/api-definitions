@@ -1,0 +1,93 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Contacts
+  summary: Retrieve a contact
+  operationId: GetContact
+  deprecated: true
+  description: |
+    Retrieve a contact with specified identifier string
+  responses:
+    '200':
+      description: Contact was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Contact.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/contacts@{id}/get.php'
+put:
+  tags:
+    - Contacts
+  summary: Create or update a contact with predefined ID
+  operationId: PutContact
+  deprecated: true
+  description: |
+    Create or update a contact with predefined identifier string
+  requestBody:
+    $ref: ../components/requestBodies/Contact.yaml
+  responses:
+    '201':
+      description: Contact was created
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Contact.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      description: Contact exists and cannot be updated
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/contacts@{id}/put.php'
+delete:
+  tags:
+    - Contacts
+  summary: Delete a contact
+  operationId: DeleteContact
+  deprecated: true
+  description: |
+    Delete a contact with predefined identifier string
+  responses:
+    '204':
+      description: Contact was deleted
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '402':
+      description: Contact cannot be deleted
+    '404':
+      $ref: ../components/responses/NotFound.yaml

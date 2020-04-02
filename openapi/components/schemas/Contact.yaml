@@ -1,0 +1,85 @@
+type: object
+properties:
+  id:
+    description: The contact identifier string
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  customerId:
+    description: The contact customer ID
+    allOf:
+      - $ref: ./ResourceId.yaml
+  firstName:
+    description: The contact first name
+    type: string
+  lastName:
+    description: The contact last name
+    type: string
+  organization:
+    description: The contact organization
+    type: string
+  address:
+    description: The contact street address
+    type: string
+    maxLength: 60
+  address2:
+    description: The contact street address (second line)
+    type: string
+    maxLength: 60
+  city:
+    description: The contact city
+    type: string
+    maxLength: 45
+  region:
+    description: The contact region (state)
+    type: string
+    maxLength: 45
+  country:
+    description: The contact country ISO Alpha-2 code
+    type: string
+    pattern: '^[A-Z]{2}$'
+  postalCode:
+    description: The contact postal code
+    type: string
+    maxLength: 10
+  phoneNumbers:
+    $ref: ./Contact/ContactPhoneNumbers.yaml
+  emails:
+    $ref: ./Contact/ContactEmails.yaml
+  hash:
+    description: >-
+      A hash that can be used to compare multiple contacts for identical
+      attribute values, excluding id, customer id, createdTime, updatedTime.
+    type: string
+    maxLength: 40
+    example: 056ae6d97c788b9e98b049ebafd7b229bf852221
+    readOnly: true
+  createdTime:
+    description: The contact created time
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    description: The contact updated time
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  customFields:
+    $ref: ./ResourceCustomFields.yaml
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Links/SelfLink.yaml
+        - $ref: ./Links/CustomerLink.yaml
+  _embedded:
+    type: array
+    description: >-
+      Any embedded objects available that are requested by the `expand`
+      querystring parameter.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Embeds/CustomerEmbed.yaml

@@ -1,0 +1,29 @@
+type: object
+description: The application event
+readOnly: true
+properties:
+  eventType:
+    $ref: ../EventType.yaml
+  title:
+    type: string
+  description:
+    type: string
+  category:
+    description: The event system category it belongs to
+    type: string
+    enum:
+      - billing
+      - payments
+  rulesCount:
+    type: integer
+    readOnly: true
+  bindsCount:
+    type: integer
+    readOnly: true
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml

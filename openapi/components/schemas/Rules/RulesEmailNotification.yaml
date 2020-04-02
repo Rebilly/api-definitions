@@ -1,0 +1,158 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    description: The message identifier string.
+  version:
+    type: string
+    description: >-
+      The message version (useful for split tests). (By default is empty, but if
+      you make multiple versions, you can name or number them to distinguish
+      them.)
+  weight:
+    type: integer
+    description: >
+      The value for random-weighted picking of a template in the case of a split
+      test.
+
+      The split test algorithm does not factor localization when making a
+      weighted-random template selection.  Therefore, a version will be selected
+      first, and then after a version is selected a specific localization will
+      be selected.  Take the case where two versions have  different locale
+      content -- the locales of the content is not considered when selecting the
+      version.  
+    minimum: 0
+    maximum: 100
+    example: 75
+    default: 100
+  templates:
+    description: >
+      An array of message templates with the language locale identifiers
+      according to [RFC 5646](https://tools.ietf.org/html/rfc5646). A language
+      will be selected based on the customer's locale.
+
+
+      If there is no locale set for the customer, then `en-US` (US English) will
+      be used as the locale.
+
+
+      If there is no template with the customer's locale,  then a template
+      locale will be selected by Rebilly using a closest match algorithm (which
+      may be random at worst).
+
+
+      If your email message templates are localized into more than one
+      language,  you SHOULD set a customer locale.
+
+
+      An invalid placeholder will render to an empty string. For example, `Hello
+      {{invalid.placeholder}}!`  will be rendered to `Hello !`.
+    type: array
+    minItems: 1
+    items:
+      type: object
+      required:
+        - locale
+        - subject
+        - text
+        - html
+        - from
+        - to
+      properties:
+        locale:
+          type: string
+          description: >-
+            The language locale identifier according to [RFC
+            5646](https://tools.ietf.org/html/rfc5646).
+          example: fr-FR
+        from:
+          type: string
+          description: >
+            The sender address. Template placeholders are allowed.  If a
+            placeholder does not resolve to a **verified** from address, then
+            the default verified from address will be used instead.   # todo add
+            a link to help docs on how to verify an email address
+          maxLength: 254
+        to:
+          type: array
+          description: >
+            The recipients addresses. Template placeholders are allowed. If a
+            placeholder does not resolve to an email address, then no email will
+            be sent.
+          minItems: 1
+          items:
+            type: string
+            maxLength: 254
+        cc:
+          type: array
+          description: >
+            The recipients to be carbon copied addresses. Template placeholders
+            are allowed. If a placeholder does not resolve to an email address,
+            then they will not be added to the cc.
+          items:
+            type: string
+            maxLength: 254
+        bcc:
+          type: array
+          description: >
+            The blind carbon copy recipients addresses. Template placeholders
+            are allowed. If a placeholder does not resolve to an email address,
+            then they will not be added to the cc.
+          items:
+            type: string
+            maxLength: 254
+        subject:
+          type: string
+          description: The message subject. Template placeholders are allowed.
+          maxLength: 998
+        text:
+          type: string
+          description: |
+            The message's text body.
+            Leave empty to use content from "html".
+            Template placeholders are allowed.
+        html:
+          type: string
+          description: |
+            The message's html body.
+            Leave empty to use content from "text".
+            Template placeholders are allowed.
+        editor:
+          type: string
+          description: |
+            The source of the message required for the email editor.
+            Not used for sending emails.
+            Used by the editor to reproduce the message for future updates.
+        attachments:
+          description: The message's attachments
+          type: array
+          items:
+            type: object
+            required:
+              - resourceType
+              - resourceId
+            properties:
+              resourceType:
+                description: The attachment's resource type.
+                type: string
+                example: invoice
+              resourceId:
+                description: >-
+                  The attachment's resource identifier string. Template
+                  placeholders are allowed.
+                type: string
+                maxLength: 255
+                example: INV-1
+      example:
+        locale: fr-FR
+        from:
+          - example@example.com
+        to:
+          - '{{ invoice.customer.email }}'
+        subject: Sujet de démonstration
+        text: Texte de démonstration
+        html: <p>Texte de démonstration</p>
+        editor: <div class="block">Texte de démonstration</div>
+required:
+  - templates

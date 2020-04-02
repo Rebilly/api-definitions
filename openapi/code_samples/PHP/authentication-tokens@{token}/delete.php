@@ -1,0 +1,1 @@
+$client->authenticationTokens()->logout('token');

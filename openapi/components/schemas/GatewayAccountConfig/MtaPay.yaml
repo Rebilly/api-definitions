@@ -1,0 +1,38 @@
+description: MTA Pay Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+      - settings
+    properties:
+      credentials:
+        type: object
+        properties:
+          accountId:
+            type: string
+            description: MTA Pay Gateway account ID
+          partyId:
+            type: string
+            description: MTA Pay Gateway party ID
+          md5key:
+            type: string
+            description: MTA Pay Gateway md5key
+            format: password
+        required:
+          - accountId
+          - partyId
+          - md5key
+      settings:
+        type: object
+        description: MTA Pay settings object
+        properties:
+          goods:
+            type: string
+            description: MTA Pay Gateway goods
+          mobilePay:
+            type: string
+            description: MTA Pay Gateway mobile pay param
+        required:
+          - mobilePay
+          - goods

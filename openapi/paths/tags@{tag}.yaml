@@ -1,0 +1,60 @@
+parameters:
+  - $ref: ../components/parameters/tag.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Tags
+  summary: Retrieve a tag
+  operationId: GetTag
+  description: |
+    Retrieve a tag
+  responses:
+    '200':
+      description: Tag with specified name was retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Tags/Tag.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+patch:
+  tags:
+    - Tags
+  summary: Update a tag
+  operationId: PatchTag
+  description: |
+    Update a tag
+  requestBody:
+    $ref: ../components/requestBodies/Tag.yaml
+  responses:
+    '200':
+      description: Tag was updated
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Tags/Tag.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml
+delete:
+  tags:
+    - Tags
+  summary: Delete a tag
+  operationId: DeleteTag
+  description: |
+    Delete a tag.
+    It's an asynchronous operation.
+  responses:
+    '204':
+      description: Tag was deleted
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

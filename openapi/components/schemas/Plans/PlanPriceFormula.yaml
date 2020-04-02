@@ -1,0 +1,32 @@
+type: object
+discriminator:
+  propertyName: formula
+  mapping:
+    fixed-fee: ./Formulas/fixed-fee.yaml
+    flat-rate: ./Formulas/flat-rate.yaml
+    stairstep: ./Formulas/stairstep.yaml
+    tiered: ./Formulas/tiered.yaml
+    volume: ./Formulas/volume.yaml
+required:
+  - formula
+properties:
+  formula:
+    type: string
+    description: >
+      The price formula determines what algorithm is used to calculate the
+      invoice price based on a few factors,
+
+      - the quantity in the subscription (which may be variable if usage
+      pricing, otherwise determined when creating the subscription)
+
+      - the price brackets data
+
+
+      To determine which formula is correct, please see the price formula
+      documentation.
+    enum:
+      - fixed-fee
+      - flat-rate
+      - stairstep
+      - tiered
+      - volume

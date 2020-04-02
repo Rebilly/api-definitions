@@ -1,0 +1,36 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Invoices
+  summary: Retrieve customer's upcoming invoices
+  operationId: GetCustomerUpcomingInvoiceCollection
+  description: >
+    Retrieve a list of upcoming invoices from the subscriptions which belong to
+    the given customer.
+
+    The endpoint is temporary before upcoming invoices get a complete
+    integration.
+  parameters:
+    - $ref: ../components/parameters/collectionExpand.yaml
+  responses:
+    '200':
+      description: Upcoming invoices are retrieved successfully.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Invoices/Invoice.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

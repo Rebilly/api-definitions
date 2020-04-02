@@ -1,0 +1,24 @@
+description: Invalid data was sent
+allOf:
+  - $ref: ./Error.yaml
+  - type: object
+    properties:
+      invalidFields:
+        type: array
+        items:
+          type: object
+          properties:
+            field:
+              type: string
+              description: >-
+                The field name. Dot notation is used for nested object field
+                names.
+            message:
+              type: string
+        example:
+          - field: field1
+            message: field1 is invalid
+          - field: subObject.field2
+            message: field2 is invalid
+          - field: subObject.field2
+            message: another error in the field2

@@ -1,0 +1,51 @@
+allOf:
+  - $ref: ../PlanPriceFormula.yaml
+  - type: object
+    required:
+      - brackets
+    properties:
+      brackets:
+        description: >
+          The price brackets, along with the price formula,
+
+          is used to calculate the amount to charge for the product on this plan
+          on the invoice.
+
+
+          The "tiered" example:
+
+
+          Price per apple | Max quantity | Description
+
+          ----------------|--------------|------------
+
+          $5              | 1            | 1
+
+          $4              | 5            | 2 to 5
+
+          $3              | null         | 6 or more
+
+
+          If someone bought 1 apple, it would be $5.
+
+
+          If someone bought 2 apples, it would be $9. $5 per apple for the first
+          apple, then $4 per apple for the 2nd to 5th apple.
+        type: array
+        minItems: 1
+        items:
+          type: object
+          properties:
+            price:
+              description: 'If the price is 0, it''s free.'
+              type: number
+              format: double
+              example: 99.95
+            maxQuantity:
+              description: >
+                If the value is `null`, it's assumed to be infinite.  It starts
+                at the end of the previous bracket.
+
+                If there is no previous bracket, it starts at 1.
+              type: integer
+              example: 1

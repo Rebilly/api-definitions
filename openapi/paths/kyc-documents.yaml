@@ -1,0 +1,82 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - KYC Documents
+  summary: Retrieve a list of KYC documents
+  operationId: GetKycDocumentCollection
+  description: |
+    Retrieve a list of KYC documents
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - x-rebillyMerge:
+        - $ref: ../components/parameters/collectionSort.yaml
+        - schema:
+            items:
+              x-sortableEnum:
+                - id
+                - createdTime
+                - updatedTime
+    - x-rebillyMerge:
+        - $ref: ../components/parameters/mediaType.yaml
+        - schema:
+            enum:
+              - application/json
+  responses:
+    '200':
+      description: A list of KYC documents was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/KycDocument/KycDocument.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+post:
+  tags:
+    - KYC Documents
+  summary: Create a KYC Document
+  operationId: PostKycDocument
+  description: |
+    Create a KYC Document
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/KycDocument/KycDocument.yaml
+    description: Kyc document resource
+    required: true
+  responses:
+    '201':
+      description: Kyc document was created
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KycDocument/KycDocument.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml

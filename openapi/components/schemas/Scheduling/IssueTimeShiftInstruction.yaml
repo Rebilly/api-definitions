@@ -1,0 +1,26 @@
+type: object
+description: >
+  The calculation instruction of billing time.
+
+  This is used in conjunction with the **service period anchor** to calculate
+  the time the invoice is issued.
+required:
+  - chronology
+  - duration
+  - unit
+properties:
+  chronology:
+    type: string
+    description: The chronology of the billing time relatively to the service period start.
+    enum:
+      - before
+  duration:
+    type: integer
+    description: The number of the units
+    minimum: 1
+  unit:
+    oneOf:
+      - $ref: >-
+          https://rebilly.github.io/api-standards/schema/json-schema-draft-04/date-time/time-unit.json
+      - $ref: >-
+          https://rebilly.github.io/api-standards/schema/json-schema-draft-04/date-time/time-plural-unit.json

@@ -1,0 +1,20 @@
+description: GlobalOne Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          terminalId:
+            type: string
+            description: GlobalOne Gateway terminal ID
+          sharedSecret:
+            type: string
+            description: GlobalOne Gateway shared secret
+            format: password
+        required:
+          - terminalId
+          - sharedSecret

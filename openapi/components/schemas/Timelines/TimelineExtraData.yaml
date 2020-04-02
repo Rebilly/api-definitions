@@ -1,0 +1,52 @@
+type: object
+description: Additional data
+readOnly: true
+properties:
+  actions:
+    description: >-
+      Actions available to a Timeline message. Can be empty in case no actions
+      are available for a message
+    type: array
+    minItems: 0
+    items:
+      $ref: ./TimelineAction.yaml
+  tables:
+    type: array
+    minItems: 0
+    items:
+      $ref: ./TimelineTable.yaml
+  author:
+    type: object
+    description: Timeline comment author data
+    properties:
+      userFullName:
+        type: string
+      userId:
+        type: string
+  mentions:
+    type: object
+    additionalProperties:
+      type: string
+      example:
+        '@test@mail.com': userId-1
+  links:
+    type: array
+    items:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          enum:
+            - kyc-document
+            - invoice
+            - subscription
+            - transaction
+            - email-message
+            - dispute
+            - credit-memo
+            - coupon
+        resourceId:
+          $ref: ../ResourceId.yaml
+        placeholder:
+          type: string
+          example: KYC Document

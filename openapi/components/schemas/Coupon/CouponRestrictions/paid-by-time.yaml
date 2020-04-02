@@ -1,0 +1,15 @@
+description: paid-by-time restrictions
+allOf:
+  - $ref: ../CouponRestriction.yaml
+  - $ref: ../RedemptionRestriction.yaml
+  - type: object
+    required:
+      - time
+    properties:
+      time:
+        type: string
+        format: date-time
+        description: >-
+          The time when the coupon's redemption is no longer valid and removed
+          from unpaid invoices if applied. Note that this datetime cannot be
+          changed.

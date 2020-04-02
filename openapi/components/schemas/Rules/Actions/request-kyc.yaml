@@ -1,0 +1,72 @@
+description: Request KYC page to verify customer identity
+allOf:
+  - $ref: ../RuleAction.yaml
+  - type: object
+    properties:
+      excludePolicy:
+        type: string
+        description: Who should be excluded from the verification
+        enum:
+          - customers-with-accepted-document
+          - customers-with-document
+          - none
+        default: customers-with-accepted-document
+      isMandatory:
+        type: boolean
+        description: Is the verification mandatory
+        default: true
+      promptPolicy:
+        type: string
+        description: 'When to prompt, before or after processing the transaction'
+        enum:
+          - before-transaction-process
+          - after-transaction-process
+        default: before-transaction-process
+      rejectedBeforeTransactionProcessPolicy:
+        type: string
+        description: >-
+          What to do if verification is before transaction processing, and is
+          rejected
+        enum:
+          - process-transaction
+          - decline
+          - use-alternate-gateway
+        default: decline
+      alternateGatewayAccountIfRejected:
+        type: string
+        description: >-
+          Gateway account to use if use-alternate-gateway is selected for
+          rejectedBeforeTransactionProcessPolicy
+      rejectedAfterTransactionProcessPolicy:
+        type: string
+        description: >-
+          What to do if verification is after transaction processing, and is
+          rejected
+        enum:
+          - proceed
+        default: proceed
+      optionalPolicy:
+        type: string
+        description: What to do if verification is optional
+        enum:
+          - allow-bypass
+          - allow-use-alternate-gateway
+        default: allow-bypass
+      alternateGatewayAccountIfOptional:
+        type: string
+        description: >-
+          Gateway account to use if allow-use-alternate-gateway is selected for
+          optionalPolicy
+      bypassCurrencyToDisplay:
+        description: >-
+          The currency three letter code to display on the bypass link, if
+          optional
+        type: string
+        default: USD
+    required:
+      - excludePolicy
+      - isMandatory
+      - promptPolicy
+      - rejectedBeforeTransactionProcessPolicy
+      - rejectedAfterTransactionProcessPolicy
+      - optionalPolicy

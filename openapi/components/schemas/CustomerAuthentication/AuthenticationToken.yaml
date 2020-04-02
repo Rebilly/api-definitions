@@ -1,0 +1,27 @@
+type: object
+discriminator:
+  propertyName: mode
+  mapping:
+    password: ./TokenModes/password.yaml
+    passwordless: ./TokenModes/passwordless.yaml
+properties:
+  token:
+    description: The token identifier string
+    type: string
+    readOnly: true
+  mode:
+    description: The token's generation mode
+    type: string
+    enum:
+      - password
+      - passwordless
+    writeOnly: true
+    default: password
+  otpRequired:
+    description: Should OTP be required to exchange this token
+    type: boolean
+  credentialId:
+    description: The credential's ID
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml

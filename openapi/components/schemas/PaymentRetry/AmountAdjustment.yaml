@@ -1,0 +1,15 @@
+type: object
+discriminator:
+  propertyName: method
+  mapping:
+    discount: ./Policies/discount.yaml
+    partial: ./Policies/partial.yaml
+properties:
+  method:
+    type: string
+    enum:
+      - none
+      - partial
+      - discount
+required:
+  - method

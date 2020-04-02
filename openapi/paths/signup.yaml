@@ -1,0 +1,38 @@
+post:
+  tags:
+    - Profile
+  summary: Register and create new profile
+  operationId: PostSignupRequest
+  description: |
+    Creates a new user and sends an email confirmation
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Signup.yaml
+    description: Signup resource
+    required: true
+  responses:
+    '201':
+      description: User was created
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/User.yaml
+    '422':
+      description: Invalid data was sent
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InvalidError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/signup/post.php

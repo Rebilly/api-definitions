@@ -1,0 +1,35 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  tags:
+    - Gateway Accounts
+  summary: Close a Gateway Account
+  operationId: PostGatewayAccountClosure
+  description: >
+    Close a gateway account with specified identifier string.
+
+    Also known as archiving. Closing a Gateway Account cannot be undone, so use
+    with caution. It will no longer be able
+
+    to process transactions. The "status" attribute will be set to "closed".
+  responses:
+    '201':
+      description: Closed successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccount.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

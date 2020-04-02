@@ -1,0 +1,34 @@
+description: Ilixium Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Ilixium credentials object
+        properties:
+          merchantId:
+            type: string
+            description: Ilixium Gateway merchant ID
+          accountId:
+            type: string
+            description: Ilixium Gateway account ID
+          digestPassword:
+            type: string
+            description: Ilixium Gateway digest password
+            format: password
+        required:
+          - merchantId
+          - accountId
+          - digestPassword
+      settings:
+        type: object
+        description: Ilixium settings object
+        properties:
+          useIpFrame:
+            type: boolean
+            description: Force Ilixium to process via Ip Frame
+      mpi:
+        $ref: ../Mpi/IlixiumMpis/IlixiumMpis.yaml

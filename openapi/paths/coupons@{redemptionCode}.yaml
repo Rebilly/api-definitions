@@ -1,0 +1,85 @@
+parameters:
+  - name: redemptionCode
+    in: path
+    description: The Coupon's redemption code
+    required: true
+    schema:
+      type: string
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Coupons
+  summary: Retrieve a coupon
+  operationId: GetCoupon
+  description: |
+    Retrieve a coupon with specified redemption code string
+  responses:
+    '200':
+      description: Coupon was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Coupon/Coupon.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/coupons@{redemptionCode}/get.php'
+put:
+  tags:
+    - Coupons
+  summary: Create or update a coupon with predefined redemption code
+  operationId: PutCoupon
+  description: |
+    Create or update a coupon with predefined redemption code
+  requestBody:
+    $ref: ../components/requestBodies/Coupon.yaml
+  responses:
+    '200':
+      description: Coupon was updated
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Coupon/Coupon.yaml
+    '201':
+      description: Coupon was created
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Coupon/Coupon.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/coupons@{redemptionCode}/put.php'

@@ -1,0 +1,38 @@
+description: Wirecard Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantUsername:
+            type: string
+            description: Wirecard Gateway merchant username
+          merchantPassword:
+            type: string
+            description: Wirecard Gateway merchant password
+            format: password
+          businessSignature:
+            type: string
+            description: Wirecard Gateway merchant business case signature
+            format: password
+          delay:
+            type: integer
+            description: Wirecard Gateway delay
+          sftpUsername:
+            type: string
+            description: Wirecard sftp username.
+          sftpPrivateKey:
+            type: string
+            description: Wirecard sftp private key.
+            format: password
+        required:
+          - merchantUsername
+          - merchantPassword
+          - businessSignature
+          - delay
+      mpi:
+        $ref: ../Mpi/WirecardMpis/WirecardMpis.yaml

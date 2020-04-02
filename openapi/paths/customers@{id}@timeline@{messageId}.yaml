@@ -1,0 +1,57 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: messageId
+    in: path
+    description: The Customer Timeline message ID
+    required: true
+    schema:
+      type: string
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Customers Timeline
+  summary: Retrieve a customer Timeline message
+  operationId: GetCustomerTimeline
+  description: |
+    Retrieve a customer message with specified identifier string
+  responses:
+    '200':
+      description: Customer message was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Timelines/CustomerTimeline.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+delete:
+  tags:
+    - Customers Timeline
+  summary: Delete a Customer Timeline message
+  operationId: DeleteCustomerTimeline
+  description: |
+    Delete a Customer Timeline message with predefined identifier string
+  responses:
+    '204':
+      description: Customer Timeline message was deleted
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml

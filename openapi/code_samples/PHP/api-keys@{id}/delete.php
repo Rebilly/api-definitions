@@ -1,0 +1,1 @@
+$client->apiKeys()->delete('apiKeyID');

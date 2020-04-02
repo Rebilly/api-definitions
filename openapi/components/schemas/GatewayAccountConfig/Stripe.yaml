@@ -1,0 +1,16 @@
+description: Stripe Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          redirectUrl:
+            type: string
+            description: Stripe Gateway redirect url
+            format: url
+        required:
+          - redirectUrl

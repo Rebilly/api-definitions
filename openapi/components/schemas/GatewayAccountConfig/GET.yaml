@@ -1,0 +1,17 @@
+description: GET Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          accountId:
+            type: string
+            description: GET Gateway account ID
+        required:
+          - accountId
+      mpi:
+        $ref: ../Mpi/GET/GETMpis.yaml

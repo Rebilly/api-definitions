@@ -1,0 +1,13 @@
+description: restrict-to-subscriptions restrictions
+allOf:
+  - $ref: ../CouponRestriction.yaml
+  - $ref: ../RedemptionRestriction.yaml
+  - type: object
+    required:
+      - subscriptionIds
+    properties:
+      subscriptionIds:
+        type: array
+        description: Subscription IDs coupon can be applied to
+        items:
+          type: string

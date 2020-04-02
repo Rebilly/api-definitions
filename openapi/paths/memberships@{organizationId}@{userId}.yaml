@@ -1,0 +1,118 @@
+parameters:
+  - name: organizationId
+    in: path
+    required: true
+    description: Organization identifier
+    schema:
+      $ref: ../components/schemas/ResourceId.yaml
+  - name: userId
+    in: path
+    required: true
+    description: User identifier
+    schema:
+      $ref: ../components/schemas/ResourceId.yaml
+get:
+  tags:
+    - Memberships
+  summary: Retrieve the membership
+  operationId: GetMembership
+  description: |
+    Retrieve the membership using organization and user identifiers
+  responses:
+    '200':
+      description: Membership was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Membership.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  tags:
+    - Memberships
+  summary: Create or update membership
+  operationId: PutMembership
+  description: |
+    Create or update membership using organization and user identifiers.
+    Only membership's owner can add other users in the membership.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          properties:
+            isOwner:
+              type: boolean
+            permissions:
+              description: The memberships's permissions. See the format in example. Use wildcard `*` for full access.
+              allOf:
+                - $ref: ../components/schemas/AclPermissions.yaml
+    required: true
+  responses:
+    '200':
+      description: Membership was updated
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Membership.yaml
+    '201':
+      description: Membership was created
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Membership.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+delete:
+  tags:
+    - Memberships
+  summary: Delete the membership
+  operationId: DeleteMembership
+  description: |
+    Delete the membership using organization and user identifiers
+  responses:
+    '204':
+      description: Membership message was deleted
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml

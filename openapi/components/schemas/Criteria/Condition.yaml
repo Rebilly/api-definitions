@@ -1,0 +1,31 @@
+type: object
+discriminator:
+  propertyName: op
+  mapping:
+    and: ./Conditions/and.yaml
+    between: ./Conditions/between.yaml
+    equals: ./Conditions/equals.yaml
+    gt: ./Conditions/gt.yaml
+    gte: ./Conditions/gte.yaml
+    in: ./Conditions/in.yaml
+    lt: ./Conditions/lt.yaml
+    lte: ./Conditions/lte.yaml
+    not: ./Conditions/not.yaml
+    or: ./Conditions/or.yaml
+properties:
+  op:
+    type: string
+    description: The condition operation
+    enum:
+      - and
+      - or
+      - not
+      - between
+      - equals
+      - in
+      - gt
+      - gte
+      - lt
+      - lte
+required:
+  - op

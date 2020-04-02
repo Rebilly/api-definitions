@@ -1,0 +1,47 @@
+type: object
+required:
+  - planId
+  - renewalPolicy
+  - prorated
+properties:
+  planId:
+    description: The plan identifier string
+    allOf:
+      - $ref: ./ResourceId.yaml
+  quantity:
+    description: >-
+      Number of units of the product on the given plan. If null or omitted,
+      current quantity will not be changed.
+    type: integer
+  renewalPolicy:
+    description: >-
+      The value determines whether the subscription retains its current
+      `renewalTime` or resets it to a newly calculated `renewalTime`.
+    type: string
+    enum:
+      - reset
+      - retain
+  prorated:
+    description: >
+      Whether or not to give a pro rata credit for the amount of time remaining
+      between the `effectiveTime` and the end of the current period.
+
+      In addition, if the `renewalTime` is retained (by setting the
+      `renewalPolicy` to `retain`), then a pro rata debit will occur as well,
+
+      for the amount between the `effectiveTime` and the `renewalTime` as a
+      percentage of the normal period size.
+    type: boolean
+  effectiveTime:
+    description: >-
+      The date from which the renewal time (for `reset` operations) and
+      proration calculations are made.  If omitted, it will default to the
+      current time.
+    type: string
+    format: date-time
+  preview:
+    description: >-
+      If set to true, it will not change the subscription.  It allows for a way
+      to preview the changes that would be made to a subscription.
+    type: boolean
+    default: false

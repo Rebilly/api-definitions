@@ -1,0 +1,29 @@
+description: Payeezy Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantId:
+            type: string
+            description: Payeezy Merchant ID
+          merchantToken:
+            type: string
+            description: Merchant Token
+            format: password
+          apiKey:
+            type: string
+            description: API Key
+          apiSecret:
+            type: string
+            description: API Secret
+            format: password
+        required:
+          - merchantId
+          - merchantToken
+          - apiKey
+          - apiSecret

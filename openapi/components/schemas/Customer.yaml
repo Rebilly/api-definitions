@@ -1,0 +1,87 @@
+type: object
+properties:
+  id:
+    description: The customer identifier string
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  websiteId:
+    description: The website's ID
+    allOf:
+      - $ref: ./ResourceId.yaml
+  paymentToken:
+    type: string
+    writeOnly: true
+    description: |
+      A write-only payment token; if supplied, it will be converted into a
+      payment instrument and be set as the `defaultPaymentInstrument`. The
+      value of this property will override the `defaultPaymentInstrument`
+      in the case that both are supplied. The token may only be used once
+      before it is expired.
+  defaultPaymentInstrument:
+    $ref: ./PaymentInstrument.yaml
+  createdTime:
+    description: The customer created time
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    description: The customer updated time
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  customFields:
+    $ref: ./ResourceCustomFields.yaml
+  primaryAddress:
+    $ref: ./Contact/ContactObject.yaml
+  averageValue:
+    $ref: ./CustomerAverageValue.yaml
+  paymentCount:
+    description: The number of approved payments for the customer
+    readOnly: true
+    type: integer
+  lastPaymentTime:
+    description: The most recent time of an approved payment for the customer
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  lifetimeRevenue:
+    $ref: ./CustomerLifetimeRevenue.yaml
+  invoiceCount:
+    description: >-
+      An auto-incrementing number based on the sequence of invoices. If set to
+      0, then this record is a Lead, otherwise is a Customer
+    readOnly: true
+    type: integer
+  tags:
+    description: A list of customer's tags
+    readOnly: true
+    type: array
+    items:
+      $ref: ./Tags/Tag.yaml
+  revision:
+    description: >
+      The number of times the customer data has been modified.
+
+      The revision is useful when analyzing webhook data to determine if the
+      change takes precedence over the current representation.
+    type: integer
+    readOnly: true
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 3
+    items:
+      anyOf:
+        - $ref: ./Links/SelfLink.yaml
+        - $ref: ./Links/DefaultPaymentInstrumentLink.yaml
+        - $ref: ./Links/LeadSourceLink.yaml
+        - $ref: ./Links/WebsiteLink.yaml
+  _embedded:
+    type: array
+    description: >-
+      Any embedded objects available that are requested by the `expand`
+      querystring parameter.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Embeds/LeadSourceEmbed.yaml

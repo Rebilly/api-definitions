@@ -1,0 +1,16 @@
+description: GET Mpis
+discriminator:
+  propertyName: name
+  mapping:
+    Other: ../Other.yaml
+    PaayMpi: ../PaayMpi.yaml
+type: object
+required:
+  - name
+properties:
+  name:
+    allOf:
+      - $ref: ../../Gateways/MpiName.yaml
+    enum:
+      - PaayMpi
+      - Other

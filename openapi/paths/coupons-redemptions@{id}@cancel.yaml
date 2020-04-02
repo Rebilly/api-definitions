@@ -1,0 +1,19 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  tags:
+    - Coupons
+  summary: Cancel a coupon redemption
+  operationId: PostCouponRedemptionCancellation
+  responses:
+    '201':
+      description: Cancel a coupon redemption
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/coupons-redemptions@{id}@cancel/post.php'

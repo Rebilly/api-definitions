@@ -1,0 +1,29 @@
+description: Realex Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantId:
+            type: string
+            description: Realex Gateway merchant id
+          secretKey:
+            type: string
+            description: Realex Gateway secret key
+            format: password
+          rebatePassword:
+            type: string
+            description: Realex Gateway rebate password
+            format: password
+          account:
+            type: string
+            description: Realex Gateway account
+        required:
+          - merchantId
+          - secretKey
+          - rebatePassword
+          - account

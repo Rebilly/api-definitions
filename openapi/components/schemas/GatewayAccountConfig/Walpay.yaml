@@ -1,0 +1,22 @@
+description: Walpay Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantName:
+            type: string
+            description: Walpay Gateway merchant name
+          merchantPin:
+            type: string
+            description: Walpay Gateway merchant pin
+            format: password
+        required:
+          - merchantName
+          - merchantPin
+      mpi:
+        $ref: ../Mpi/WalpayMpis/WalpayMpis.yaml

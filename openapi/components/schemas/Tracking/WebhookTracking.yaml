@@ -1,0 +1,60 @@
+type: object
+description: Webhook Tracking Requests.
+readOnly: true
+properties:
+  id:
+    allOf:
+      - $ref: ../ResourceId.yaml
+  eventType:
+    $ref: ../EventType.yaml
+  url:
+    type: string
+    description: Url where webhook was sent
+  method:
+    type: string
+    description: HTTP method which was used to send webhook
+    example: POST
+  headers:
+    type: object
+    description: HTTP headers which were used to send webhook
+    additionalProperties:
+      type: string
+    example:
+      My-Header: Cool-Value
+  responseCode:
+    type: integer
+    description: HTTP code response
+  responseBody:
+    type: string
+    description: Response body received
+  payload:
+    type: string
+    description: Webhook's payload
+  source:
+    type: string
+    description: The Webhook's source
+    enum:
+      - webhooks
+      - rules
+  attempt:
+    type: integer
+    description: The Webhook's attempt number
+  sentTime:
+    description: Sent time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  initiatedTime:
+    description: Initiated time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  createdTime:
+    description: The log created time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml

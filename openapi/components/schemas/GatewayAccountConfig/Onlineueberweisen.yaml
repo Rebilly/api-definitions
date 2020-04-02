@@ -1,0 +1,38 @@
+description: Onlineueberweisen config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+      - settings
+    properties:
+      credentials:
+        type: object
+        description: Onlineueberweisen credentials object
+        properties:
+          apiKey:
+            type: string
+            description: Onlineueberweisen API Key
+            format: password
+          nuaPayApiKey:
+            type: string
+            description: NuaPay API Key for reconciliation
+            format: password
+          nuaPayAccountId:
+            type: string
+            description: NuaPay account ID for reconciliation
+        required:
+          - apiKey
+      settings:
+        type: object
+        description: Onlineueberweisen settings object
+        properties:
+          payformCode:
+            type: string
+            description: Onlineueberweisen payform code to use customized Payform template
+            default: default
+          autoAbandonTtl:
+            type: integer
+            description: Auto-abandon if transaction is not reconciled after x hours
+        required:
+          - autoAbandonTtl

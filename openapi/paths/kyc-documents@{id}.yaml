@@ -1,0 +1,79 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - KYC Documents
+  summary: Retrieve a KYC Document
+  operationId: GetKycDocument
+  description: Retrieve a KYC document with specified identifier string.
+  parameters:
+    - x-rebillyMerge:
+        - $ref: ../components/parameters/mediaType.yaml
+        - schema:
+            enum:
+              - application/json
+  responses:
+    '200':
+      description: KYC document was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KycDocument/KycDocument.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  tags:
+    - KYC Documents
+  summary: Create or update a KYC document with predefined ID
+  operationId: PutKycDocument
+  description: Create or update a KYC document with predefined identifier string.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/KycDocument/KycDocument.yaml
+    description: KYC document resource.
+    required: true
+  responses:
+    '200':
+      description: KYC document was updated.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KycDocument/KycDocument.yaml
+    '201':
+      description: KYC document was created
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KycDocument/KycDocument.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml

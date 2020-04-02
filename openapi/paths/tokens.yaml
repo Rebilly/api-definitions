@@ -1,0 +1,94 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  tags:
+    - Payment Tokens
+  summary: Create a payment token
+  operationId: PostToken
+  description: |
+    [FramePay](https://rebilly.github.io/framepay-docs/)
+    is the recommended way to 
+    create a payment token because it minimizes
+    PCI DSS compliance.  Once a payment token 
+    is created, it can only be used once.
+
+    A payment token expires upon first use
+    or within 30 minutes of the token creation
+    (whichever comes first).
+  requestBody:
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: ../components/schemas/PaymentTokens/PaymentCardToken.yaml
+            - $ref: ../components/schemas/PaymentTokens/BankAccountToken.yaml
+            - $ref: ../components/schemas/PaymentTokens/PaymentToken.yaml
+    description: PaymentToken resource
+    required: true
+  security:
+    - PublishableApiKey: []
+    - SecretApiKey: []
+    - JWT: []
+  responses:
+    '201':
+      description: Token was created
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: ../components/schemas/PaymentTokens/PaymentCardToken.yaml
+              - $ref: ../components/schemas/PaymentTokens/BankAccountToken.yaml
+              - $ref: ../components/schemas/PaymentTokens/PaymentToken.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/tokens/post.php
+get:
+  tags:
+    - Payment Tokens
+  summary: Retrieve a list of tokens
+  operationId: GetTokenCollection
+  description: |
+    Retrieve a list of tokens
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+  responses:
+    '200':
+      description: A list of tokens was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/PaymentTokens/PaymentToken.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/tokens/get.php

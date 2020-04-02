@@ -1,0 +1,20 @@
+allOf:
+  - $ref: ../CommonScheduleInstruction.yaml
+  - $ref: ../CustomEventScheduleInstruction.yaml
+  - $ref: ../ServicePeriodAnchorInstruction.yaml
+  - $ref: ../InvoiceRetryScheduleInstruction.yaml
+  - type: object
+    properties:
+      day:
+        type: integer
+        minimum: 1
+        maximum: 31
+        description: |
+          The day of the month when event will be scheduled.
+          Be aware if the month has less days,
+          the last day of the month will be selected.
+      time:
+        $ref: >-
+          https://rebilly.github.io/api-standards/schema/json-schema-draft-04/date-time/extended-time-iso8601.json
+    required:
+      - day

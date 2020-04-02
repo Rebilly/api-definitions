@@ -1,0 +1,37 @@
+type: object
+required:
+  - name
+  - currency
+  - price
+properties:
+  name:
+    description: The shipping rate name
+    type: string
+    maxLength: 255
+  minOrderSubtotal:
+    description: >-
+      Minimum order subtotal for which this shipping rate is applicable,
+      defaults to 0.00
+    type: number
+    format: double
+    default: 0
+  maxOrderSubtotal:
+    description: >-
+      Maximum order subtotal for which this shipping rate is applicable (NULL if
+      no maximum)
+    type: number
+    format: double
+  price:
+    description: The shipping price - 0 is a valid value (for free)
+    type: number
+    format: double
+  currency:
+    allOf:
+      - $ref: ./CurrencyCode.yaml
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ./Links/SelfLink.yaml

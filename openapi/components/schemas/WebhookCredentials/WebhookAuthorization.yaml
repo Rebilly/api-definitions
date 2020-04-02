@@ -1,0 +1,20 @@
+type: object
+discriminator:
+  propertyName: type
+  mapping:
+    none: ./WebhookAuthorization/WebhookAuthorizationNone.yaml
+    basic: ./WebhookAuthorization/basic.yaml
+    digest: ./WebhookAuthorization/digest.yaml
+    oauth1: ./WebhookAuthorization/oauth1.yaml
+properties:
+  type:
+    type: string
+    description: The authorization type
+    enum:
+      - none
+      - basic
+      - digest
+      - oauth1
+    default: none
+required:
+  - type

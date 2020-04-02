@@ -1,0 +1,100 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  tags:
+    - Transactions
+  summary: Create a transaction
+  operationId: PostTransaction
+  description: |
+    Create a transactions of type `sale`, `authorize`, or `credit`.
+    This endpoint supports two main styles of transactions:
+      1. A real-time decision and response.
+      2. User approval/interaction is required.
+
+    A real-time decision is very familiar.  You send a request, and
+    inspect the `result` of the response for `approved` or `declined`.
+
+    However, many transactions, especially those for alternative
+    methods, require the user to interact with a 3rd party.  You
+    may be able to envision PayPal, for example, the user must
+    give permission to complete the payment (or accept the 
+    billing agreement).  
+
+    Even payment cards may require user approval in the case of
+    3D secure authentication.  In the event that approval is 
+    required, you will receive a response back and notice
+    that the `result` is `unknown`.  You will find that the
+    `status` is `waiting-approval`. And you will find in the
+    `_links` section of the response a link for the `approvalUrl`.
+
+    In this case you would either open the `approvalUrl` in an 
+    iframe or in a pop (better workflow for mobile).  
+  requestBody:
+    $ref: ../components/requestBodies/TransactionRequest.yaml
+  responses:
+    '201':
+      description: Transaction was created
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Transactions/Transaction.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml
+get:
+  tags:
+    - Transactions
+  summary: Retrieve a list of transactions
+  operationId: GetTransactionCollection
+  description: |
+    Retrieve a list of transactions
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - x-rebillyMerge:
+        - $ref: ../components/parameters/mediaType.yaml
+        - schema:
+            enum:
+              - application/json
+              - text/csv
+  responses:
+    '200':
+      description: A list of transactions was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Transactions/Transaction.yaml
+        text/csv:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Transactions/Transaction.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/transactions/get.php

@@ -1,0 +1,29 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  tags:
+    - Users
+  summary: Reset (renew) totpSecret
+  operationId: PostUserTotpReset
+  description: |
+    Reset (renew) totpSecret
+  responses:
+    '201':
+      description: totpSecret reset (renewed) successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/User.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/users@{id}@totp-reset/post.php'

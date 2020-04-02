@@ -1,0 +1,62 @@
+type: object
+description: Coupons and Discounts
+required:
+  - discount
+  - issuedTime
+properties:
+  redemptionCode:
+    description: Coupon's redemption code
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  discount:
+    $ref: ./Discount.yaml
+  restrictions:
+    description: Coupon restrictions
+    type: array
+    items:
+      $ref: ./CouponRestriction.yaml
+  redemptionsCount:
+    type: integer
+    description: Coupon's redemptions count
+    minimum: 0
+    readOnly: true
+  status:
+    type: string
+    description: If coupon enabled
+    readOnly: true
+    enum:
+      - draft
+      - issued
+      - expired
+  description:
+    type: string
+    description: >
+      Your coupon description. When it is not empty this is used for invoice
+      discount item description,
+
+      otherwise the item's description uses coupon's redemptionCode like 'Coupon
+      "redemptionCode"'
+  issuedTime:
+    description: Coupon's issued time (start time)
+    type: string
+    format: date-time
+  expiredTime:
+    description: Coupon's expire time (end time)
+    type: string
+    format: date-time
+  createdTime:
+    description: Coupon created time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: Coupon updated time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml

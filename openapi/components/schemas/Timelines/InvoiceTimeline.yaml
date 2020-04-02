@@ -1,0 +1,57 @@
+type: object
+properties:
+  id:
+    description: The Timeline message identifier string
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  type:
+    description: Timeline message type
+    type: string
+    readOnly: true
+    enum:
+      - timeline-comment-created
+      - invoice-created
+      - invoice-issued
+      - invoice-abandoned
+      - invoice-voided
+      - invoice-past-due
+      - invoice-paid
+      - invoice-partially-paid
+      - invoice-disputed
+      - invoice-refunded
+      - invoice-partially-refunded
+      - invoice-renewal-payment-declined
+      - email-message-sent
+      - coupon-applied
+      - transaction-approved
+      - transaction-abandoned
+      - transaction-canceled
+      - transaction-declined
+      - transaction-refunded
+      - transaction-voided
+  triggeredBy:
+    description: Shows who or what triggered the Timeline event
+    type: string
+    readOnly: true
+    enum:
+      - rebilly
+      - app
+      - direct-api
+  message:
+    description: The message that describes the message details
+    type: string
+  extraData:
+    $ref: ./TimelineExtraData.yaml
+  occurredTime:
+    description: Timeline message time
+    readOnly: true
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml

@@ -1,0 +1,91 @@
+type: object
+required:
+  - data
+  - owner
+  - scope
+properties:
+  id:
+    description: ID of current Segment
+    readOnly: true
+    type: string
+    allOf:
+      - $ref: ../ResourceId.yaml
+  owner:
+    description: Owner (creator) of Segment
+    readOnly: true
+    type: object
+    properties:
+      id:
+        description: User ID
+        type: string
+        allOf:
+          - $ref: ../ResourceId.yaml
+      name:
+        description: First and last name
+        type: string
+  data:
+    description: >
+      An object containing schema to set up the UI for the segment. This schema
+      is built
+
+      and consumed by the frontend. It includes such information as Segment
+      name, UI settings, etc.
+    type: object
+  isStarred:
+    description: Toggle whether this Segment is starred by the current user
+    type: boolean
+  isVisible:
+    description: Toggle whether this Segment is visible to the current user
+    type: boolean
+  userIds:
+    type: array
+    uniqueItems: true
+    writeOnly: true
+    description: |
+      A list of user id's with whom to share, used if scope is set to `shared`
+    items:
+      description: User ID
+      allOf:
+        - $ref: ../ResourceId.yaml
+  users:
+    type: array
+    uniqueItems: true
+    description: |
+      A list of user's id and first and last names with whom this Segment
+      is shared
+    readOnly: true
+    items:
+      type: object
+      description: User person
+      properties:
+        id:
+          description: User ID
+          type: string
+          allOf:
+            - $ref: ../ResourceId.yaml
+        name:
+          description: First and last name
+          type: string
+  scope:
+    description: >
+      If `private`, then only the owner/creator can view this Segment. If set
+
+      to `public`, then it's shared with anyone in the owner's organization.
+
+      If set to `shared`, then it is only shared with specific users as
+      specified
+
+      in the `userIds` field
+    type: string
+    enum:
+      - private
+      - public
+      - shared
+  systemId:
+    description: >
+      If the Segment is based off of a system Segment, this will be the id of
+      the system Segment from which it was
+
+      derived. The scope must be `private` when providing this in the request.
+    writeOnly: true
+    type: string

@@ -1,0 +1,23 @@
+description: Worldpay Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantCode:
+            type: string
+            description: Worldpay Gateway merchant code
+            format: password
+          merchantPassword:
+            type: string
+            description: Worldpay Gateway merchant password
+            format: password
+        required:
+          - merchantCode
+          - merchantPassword
+      mpi:
+        $ref: ../Mpi/WorldpayMpis/WorldpayMpis.yaml

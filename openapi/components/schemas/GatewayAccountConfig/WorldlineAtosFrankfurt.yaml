@@ -1,0 +1,40 @@
+description: WorldlineAtosFrankfurt Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+      - settings
+    properties:
+      mpi:
+        $ref: ../Mpi/WorldlineAtosFrankfurtMpis/WorldlineAtosFrankfurtMpis.yaml
+      credentials:
+        type: object
+        description: WorldlineAtosFrankfurt credentials
+        properties:
+          cardAcceptorIdCode:
+            type: string
+            description: Card Acceptor ID Code
+          acquiringInstitutionIdentificationCode:
+            type: string
+            description: Acquiring Institution Identification Code
+        required:
+          - cardAcceptorIdCode
+          - acquiringInstitutionIdentificationCode
+      settings:
+        type: object
+        description: WorldlineAtosFrankfurt settings
+        properties:
+          cardAcceptorName:
+            type: string
+            description: Card Acceptor Name
+          cardAcceptorLocation:
+            type: string
+            description: Card Acceptor Location
+          cardAcceptorCountryCode:
+            type: string
+            description: Card Acceptor Country Code
+        required:
+          - cardAcceptorName
+          - cardAcceptorLocation
+          - cardAcceptorCountryCode

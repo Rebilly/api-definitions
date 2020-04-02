@@ -1,0 +1,89 @@
+type: object
+properties:
+  ipAddress:
+    description: The customer's IP
+    type: string
+    format: ipv4
+  isProxy:
+    description: True if customer's ip address is related to proxy
+    type: boolean
+    readOnly: true
+  isVpn:
+    description: True if customer's ip address is related to VPN
+    type: boolean
+    readOnly: true
+  isTor:
+    description: True if customer's ip address is related to TOR
+    type: boolean
+    readOnly: true
+  isHosting:
+    description: True if customer's ip address is related to hosting
+    type: boolean
+    readOnly: true
+  vpnServiceName:
+    description: 'VPN service name, if available'
+    type: string
+    readOnly: true
+  isp:
+    description: 'Internet Service Provider name, if available'
+    type: string
+    readOnly: true
+  country:
+    description: Country ISO Alpha-2 code for specified ipAddress
+    maxLength: 2
+    type: string
+    readOnly: true
+    example: US
+  region:
+    description: Region for specified ipAddress
+    type: string
+    readOnly: true
+    example: NY
+  city:
+    description: City for specified ipAddress
+    type: string
+    readOnly: true
+    example: New York
+  latitude:
+    description: Latitude for specified ipAddress
+    type: number
+    format: double
+    readOnly: true
+  longitude:
+    description: Longitude for specified ipAddress
+    type: number
+    format: double
+    readOnly: true
+  postalCode:
+    description: Postal code for specified ipAddress
+    type: string
+    maxLength: 10
+    readOnly: true
+  timeZone:
+    description: Time zone for specified ipAddress
+    type: string
+    readOnly: true
+    example: America/New_York
+  accuracyRadius:
+    description: Accuracy radius for specified ipAddress (kilometers)
+    type: integer
+    readOnly: true
+  fingerprint:
+    description: The fingerprint
+    type: string
+  httpHeaders:
+    description: HTTP headers
+    type: object
+    additionalProperties:
+      type: string
+    example:
+      User-Agent: Mozilla/5.0
+      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+  distance:
+    description: Distance between IP Address and Billing Address geolocation (kilometers)
+    type: integer
+    readOnly: true
+  score:
+    description: Risk score computed per all the factors
+    type: integer
+    readOnly: true

@@ -1,0 +1,67 @@
+type: object
+required:
+  - fileId
+  - relatedId
+  - relatedType
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  fileId:
+    description: Linked File object id
+    type: string
+  relatedType:
+    description: Linked object type
+    type: string
+    enum:
+      - customer
+      - dispute
+      - gateway-timeline-comment
+      - invoice
+      - organization
+      - payment
+      - plan
+      - product
+      - subscription
+      - transaction
+      - customer-timeline-comment
+      - transaction-timeline-comment
+      - order-timeline-comment
+  relatedId:
+    description: Linked object Id
+    type: string
+  name:
+    description: The Original Attachment name
+    type: string
+  description:
+    description: The Attachment description
+    type: string
+  createdTime:
+    description: Creation date/time
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    description: Latest update date/time
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 3
+    items:
+      anyOf:
+        - $ref: ./Links/SelfLink.yaml
+        - $ref: ./Links/FileLink.yaml
+        - $ref: ./Links/AttachmentResourceLink.yaml
+  _embedded:
+    type: array
+    description: >-
+      Any embedded objects available that are requested by the `expand`
+      querystring parameter.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Embeds/FileEmbed.yaml

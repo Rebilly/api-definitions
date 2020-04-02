@@ -1,0 +1,21 @@
+description: Add customer data to blacklist
+allOf:
+  - $ref: ../RuleAction.yaml
+  - type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - customer-id
+          - email
+          - fingerprint
+          - ip-address
+          - payment-card
+      ttl:
+        type: integer
+        description: >-
+          Blacklist TTL. Defaults to zero, meaning blacklist record won't expire
+          ever.
+        default: 0
+    required:
+      - type

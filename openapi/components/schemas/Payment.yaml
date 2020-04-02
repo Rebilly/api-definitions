@@ -1,0 +1,117 @@
+type: object
+required:
+  - websiteId
+  - customerId
+  - currency
+  - amount
+properties:
+  id:
+    description: The payment identifier string
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  websiteId:
+    description: The website identifier string
+    allOf:
+      - $ref: ./ResourceId.yaml
+  customerId:
+    description: The customer identifier string
+    allOf:
+      - $ref: ./ResourceId.yaml
+  currency:
+    allOf:
+      - $ref: ./CurrencyCode.yaml
+  amount:
+    description: The payment amount
+    type: number
+    format: double
+  scheduledTime:
+    description: The time the payment is scheduled for collection
+    type: string
+    format: date-time
+  invoiceIds:
+    description: The array of invoice identifiers
+    type: array
+    items:
+      $ref: ./ResourceId.yaml
+  description:
+    description: The payment description
+    type: string
+    maxLength: 255
+  retryInstruction:
+    $ref: ./PaymentRetry/PaymentRetry.yaml
+  retryNumber:
+    readOnly: true
+    description: The position in the sequence of retries
+    type: integer
+  retriedPaymentId:
+    readOnly: true
+    description: The retried payment ID
+    allOf:
+      - $ref: ./ResourceId.yaml
+  customFields:
+    $ref: ./ResourceCustomFields.yaml
+  paymentInstrument:
+    $ref: ./PaymentInstrument.yaml
+  billingAddress:
+    description: Billing Address
+    allOf:
+      - $ref: ./Contact/ContactObject.yaml
+  status:
+    description: Payment status
+    type: string
+    readOnly: true
+    enum:
+      - scheduled
+      - queued
+      - in-progress
+      - incomplete
+      - waiting-gateway
+      - suspended
+      - completed
+  result:
+    description: Payment result
+    type: string
+    readOnly: true
+    enum:
+      - approved
+      - declined
+      - canceled
+      - abandoned
+      - unknown
+  riskMetadata:
+    description: Risk metadata
+    allOf:
+      - $ref: ./RiskMetadata.yaml
+  createdTime:
+    description: Payment created time
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    description: Payment updated time
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Links/SelfLink.yaml
+        - $ref: ./Links/WebsiteLink.yaml
+        - $ref: ./Links/TransactionLink.yaml
+        - $ref: ./Links/ApprovalUrlLink.yaml
+        - $ref: ./Links/LeadSourceLink.yaml
+  _embedded:
+    type: array
+    description: >-
+      Any embedded objects available that are requested by the `expand`
+      querystring parameter.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Embeds/WebsiteEmbed.yaml
+        - $ref: ./Embeds/CustomerEmbed.yaml
+        - $ref: ./Embeds/TransactionEmbed.yaml

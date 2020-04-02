@@ -1,0 +1,26 @@
+description: Payment Token instrument object
+allOf:
+  - $ref: ../TokenBankAccountInstrument.yaml
+  - type: object
+    required:
+      - accountNumber
+    properties:
+      accountNumber:
+        description: >
+          Bank Account Number. Detailed information about all ISO
+          13616-compliant national IBAN formats is available
+
+          in [SWIFT IBAN
+          Registry](https://www.swift.com/standards/data-standards/iban).
+        type: string
+        writeOnly: true
+      bic:
+        description: Bank Identifier Code
+        type: string
+      bankName:
+        description: Bank name
+        type: string
+      last4:
+        description: Bank Account Number's last 4 digits
+        type: string
+        readOnly: true

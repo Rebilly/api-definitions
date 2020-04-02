@@ -1,0 +1,35 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  tags:
+    - Gateway Accounts
+  summary: Enable a Gateway Account
+  operationId: PostGatewayAccountEnablement
+  description: >
+    Enable a gateway account with specified identifier string.
+
+    Enabled gateway accounts have their "status" attribute set to "active" and
+    can process transactions.
+  responses:
+    '201':
+      description: Enabled successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccount.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      description: Gateway account is pending activation and cannot be enabled.

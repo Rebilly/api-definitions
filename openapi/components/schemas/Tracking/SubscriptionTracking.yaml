@@ -1,0 +1,35 @@
+type: object
+description: Tracking subscription log
+readOnly: true
+properties:
+  id:
+    allOf:
+      - $ref: ../ResourceId.yaml
+  subscriptionId:
+    allOf:
+      - $ref: ../ResourceId.yaml
+  invoiceItemId:
+    allOf:
+      - $ref: ../ResourceId.yaml
+  result:
+    type: string
+    description: Subscription's result
+    enum:
+      - created
+      - postponed
+      - stopped
+      - error
+  message:
+    type: string
+    description: It contains the transaction number and renewal time
+  createdTime:
+    description: The log created time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml

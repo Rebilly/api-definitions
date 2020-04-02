@@ -1,0 +1,44 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  tags:
+    - Subscriptions
+  summary: Change a subscription's plan
+  operationId: PostSubscriptionPlanChange
+  description: >
+    Change a subscription's plan and designate when and if there should be pro
+    rata credits given.
+
+    Only active subscriptions with a single plan can be changed.
+
+    Edit pending unpaid subscriptions directly regardless the number of plans.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/SubscriptionChange.yaml
+    description: Change the plan
+    required: true
+  responses:
+    '201':
+      description: Subscription was changed
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Subscription.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/subscriptions@{id}@change-plan/post.php'

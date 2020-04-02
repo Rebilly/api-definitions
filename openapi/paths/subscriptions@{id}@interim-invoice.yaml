@@ -1,0 +1,41 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  tags:
+    - Subscriptions
+  summary: Issue an interim invoice for a subscription
+  operationId: PostSubscriptionInterimInvoice
+  description: >
+    Issue an interim invoice for a subscription, typically used in conjunction
+    with plan changes and pro rata adjustments.
+
+    This process creates an invoice, adds the subscription's line items to the
+    invoice, and issues the invoice, and applies
+
+    payment to it if a transaction id is supplied.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/SubscriptionInvoice.yaml
+    description: Issue an interim invoice
+    required: true
+  responses:
+    '201':
+      description: Invoice was created
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Invoices/Invoice.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml

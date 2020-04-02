@@ -1,0 +1,21 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  tags:
+    - Tracking
+  summary: Retrieve a tracking webhook notification with specified identifier string
+  operationId: GetTrackingWebhook
+  responses:
+    '200':
+      description: Tracking webhook notification was retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Tracking/WebhookTracking.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

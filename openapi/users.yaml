@@ -1,0 +1,423 @@
+openapi: 3.0.2
+info:
+  version: "2.1"
+  title: "Rebilly User API"
+  contact:
+    name: "Rebilly API Support"
+    url: "https://www.rebilly.com/contact/"
+    email: "integrations@rebilly.com"
+  license:
+    name: "Rebilly"
+    url: "https://www.rebilly.com/api-license/"
+  termsOfService: "https://www.rebilly.com/terms/"
+  x-logo:
+    url: 'https://rebilly-api.redoc.ly/rb_apiLogo.svg'
+    backgroundColor: '#0033A0'
+  description: |
+    # Introduction
+    This document covers APIs mostly intended for consumption by Rebilly's
+    Frontend GUI [app](https://app.rebilly.com).  However, any client is welcome
+    to use these APIs.  Our main API docs can be [found here](https://api-reference.rebilly.com/).
+
+    The Rebilly API is built on HTTP.  Our API is RESTful.  It has predictable
+    resource URLs.  It returns HTTP response codes to indicate errors.  It also
+    accepts and returns JSON in the HTTP body.  You can use your favorite
+    HTTP/REST library for your programming language to use Rebilly's API, or
+    you can use one of our SDKs (currently available in [PHP](https://github.com/Rebilly/rebilly-php)
+    or [Javascript](https://github.com/Rebilly/rebilly-js-sdk)).
+
+    # Authentication
+    When you sign up for an account, you are given your first API key.
+    You can generate additional API keys, and delete API keys (as you may
+    need to rotate your keys in the future). You authenticate to the
+    Rebilly API by providing your secret key in the request header.
+
+    Rebilly offers three forms of authentication:  secret key, publishable key, JSON Web Tokens, and public signature key.
+    - [Secret API key](#section/Authentication/SecretApiKey): used for requests made from the server side. Never share these keys. Keep them guarded and secure
+    - [Publishable API key](#section/Authentication/PublishableApiKey): used for requests from the client side.
+    - [JWT](#section/Authentication/JWT): short lifetime tokens that can be assigned a specific expiration time
+
+    Never share your secret keys. Keep them guarded and secure.
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+
+    # PHP SDK
+    For all PHP SDK examples provided in this spec you will need to configure `$client`.
+    You may do it like this:
+
+    ```php
+    $client = new Rebilly\Client([
+        'apiKey' => 'YourApiKeyHere',
+        'baseUrl' => 'https://api.rebilly.com',
+    ]);
+    ```
+
+    # Using filter
+    Rebilly provides collections filtering. You can use `?filter` param on collection to define which records should be shown in the response.
+
+    Here is filter format description:
+
+    - Fields and values in filter are separated with `:`: `?filter=firstName:John`.
+
+    - Fields in filter are separated with `;`: `?filter=firstName:John;lastName:Doe`.
+
+    - You can use multiple values using `,` as values separator: `?filter=firstName:John,Bob`.
+
+    - To negate the filter use `!`: `?filter=firstName:!John`. Note that you can negate multiple values like this: `?filter=firstName:!John,Bob`. This filter rule will exclude all Johns and Bobs from the response.
+
+    - You can use range filters like this: `?filter=amount:1..10`.
+
+    - You can use gte (greater than or equals) filter like this: `?filter=amount:1..`, or lte (less than or equals) than filter like this: `?filter=amount:..10`.
+
+    - You can create some [predefined values lists](https://user-api-docs.rebilly.com/#tag/Lists) and use them in filter: `?filter=firstName:@yourListName`. You can also exclude list values: `?filter=firstName:!@yourListName`
+################################################################################
+tags:
+  - name: API Keys
+    description: |
+      Always keep your API Keys private. When creating your API keys,
+      you can restrict them to a given set of permissions.
+      In addition to your API Keys, you may use
+      JSON Web Tokens (JWT) to authenticate to the API.  See
+      our [Sessions](https://user-api-docs.rebilly.com/#tag/JWT-Session) resource for more information.
+  - name: Checkout Pages
+    description: |
+      Hosted checkout pages can be configured here.  You can customize the theme
+      and content and more that appears on your hosted checkout pages.
+  - name: Email Credentials
+    description: |
+      Get and create SMTP credential hashes.
+  - name: Gateway Accounts
+    description: |
+      Gateway accounts connect payment request to third party networks and platforms.
+  - name: Layouts
+    description: |
+      Layouts are used to hold collections of plans. A layout can be used to
+      power a pricing page. You can make multiple layouts, and use rules to
+      target them to different audiences.
+  - name: Lists
+    description: |
+      Lists contain sets of values and may be referenced within Rules criteria.
+
+      List order may not be maintained and duplicates may be removed.
+
+      You may grant permissions to edit Lists to different people than those who can edit Rules.
+      It may be useful if your workflow involves frequent updates to value sets used in criteria.
+  - name: Payment Cards
+    description: |
+      Payment cards are a type of payment instrument used for credit and debit card sales.
+  - name: Organizations
+    description: |
+      Organizations include the name and address of the entities related to your
+      account. An account may be multi-national, and support multiple
+      organizations. Note: Organizations are share between "Live" and "Sandbox"
+  - name: Profile
+    description: |
+      A Profile represents the person currently logged in to Rebilly.
+  - name: Rebilly API
+    description: |
+      The Rebilly API is the main API commonly integrated by 3rd parties.  You may see
+      the [Rebilly API Documentation here](https://api-reference.rebilly.com).
+  - name: Reports API
+    description: |
+      The Rebilly Reporting API is currently experimental.  You may see
+      the [Reports API Documentation here](https://reports-api-docs.rebilly.com).
+  - name: Reset password
+    description: |
+      When a password reset is requested, an email with a token is sent. Upon receiving the email
+      the user then needs to click a link and choose a new password.
+  - name: Rules
+    description: |
+      "Don't conform to the rules. Create the rules."
+      Rather than adapt your workflow and business, Rebilly can align with your business
+      objectives by giving you the power to automate certain behaviors when key events happen.
+      You can use this to your advantage to mitigate risk, maximize conversions and minimize costs.
+      You have the controls at your fingertips here. If you need more control,
+      or help dialing in on a strategy, feel free to contact us.
+
+      When an event happens, it triggers the evaluation of conditions (that you set up),
+      in order from top to bottom. If the condition is met, the corresponding actions are executed.
+      The conditions continue to be checked until either all of the conditions have been executed,
+      or a special "stop" action is executed.
+  - name: JWT Session
+    description: |
+      A session contains a token, which is a JSON Web Token.  The token is created
+      with a user's signin credentials.
+
+      This token can be used to authenticate to the API.  In addition, the session can be set to
+      expire at a particular time. Use the token to then authenticate for further requests to the Rebilly API.
+
+      The token should be kept private, but could be stored on the user's browser
+      client to simulate a "session".
+  - name: Status
+    description: |
+      Check the status of the Rebilly API (no authentication required).
+  - name: Tracking
+    description: |
+      Tracking is a layer for accessing all the activity (API requests,
+      subscriptions, webhooks, events, etc.), thus providing easier
+      debugging and issues auditing.
+  - name: Users
+    description: |
+      A User represents a person who can login to Rebilly, and take actions subject to
+      their granted permissions.
+  - name: Websites
+    description: |
+      A Website represents the website/brand that customers interact with... You
+      could think of it like a brand.  For example, Nestle owns Perrier and Purina
+      and PowerBar.
+
+      We recognize that some enterprises have more than one website (or brand).  The
+      website is related to each invoice and each payment gateway account.  This feature
+      would allow you to have gateway accounts that are related to multiple websites, or
+      exclusive to particular websites.  And gives you more control over your business.
+  - name: Webhook Credentials
+    description: |
+      Get and create Webhook credential hashes.
+  - name: Webhooks
+    description: |
+      Webhooks are designed to notify your systems when certain/all registered events happen in near real-time.
+      They allow you to collect information about those events. Rebilly can send these information via
+      POST to an URL of your choice.
+  - name: Segments
+    description: |
+      Segments are grid UI settings that can be shared with other users. They are like a custom view.
+      For example, one may set up a transaction grid to show specific columns and sort a certain way, and share it with
+      others in their organization.
+  - name: Memberships
+    description: |
+      Membership describe the relationships between organizations and users.
+      For example, one user could have more than one organization.
+################################################################################
+x-tagGroups:
+  - name: Security
+    tags:
+      - JWT Session
+      - API Keys
+      - Reset password
+  - name: Email
+    tags:
+      - Broadcast Messages
+      - Email Credentials
+      - Email Delivery Settings
+      - Email Messages
+  - name: Rules
+    tags:
+      - Rules
+      - Lists
+  - name: Users
+    tags:
+      - Profile
+      - Users
+  - name: Webhooks
+    tags:
+      - Webhook Credentials
+      - Webhooks
+  - name: Other
+    tags:
+      - Checkout Pages
+      - Gateway Accounts
+      - Layouts
+      - Payment Cards
+      - Memberships
+      - Organizations
+      - Segments
+      - Status
+      - Tracking
+      - Websites
+      - Integrations
+  - name: Related docs
+    tags:
+      - Rebilly API
+      - Reports API
+security:
+  - SecretApiKey: []
+  - JWT: []
+servers:
+  - url: 'https://api.rebilly.com/v2.1'
+    description: Live Server
+  - url: 'https://api-sandbox.rebilly.com/v2.1'
+    description: Sandbox Server
+
+
+components:
+  securitySchemes:
+    JWT:
+      $ref: components/securitySchemes/JWT.yaml
+    PublishableApiKey:
+      $ref: components/securitySchemes/PublishableApiKey.yaml
+    SecretApiKey:
+      $ref: components/securitySchemes/SecretApiKey.yaml
+
+paths:
+  '/activation/{token}':
+    $ref: './paths/activation@{token}.yaml'
+  /api-keys:
+    $ref: ./paths/api-keys.yaml
+  '/api-keys/{id}':
+    $ref: './paths/api-keys@{id}.yaml'
+  /broadcast-messages:
+    $ref: ./paths/broadcast-messages.yaml
+  '/broadcast-messages/{id}':
+    $ref: './paths/broadcast-messages@{id}.yaml'
+  /checkout-pages:
+    $ref: ./paths/checkout-pages.yaml
+  '/checkout-pages/{id}':
+    $ref: './paths/checkout-pages@{id}.yaml'
+  /credential-hashes/aws-ses:
+    $ref: ./paths/credential-hashes@aws-ses.yaml
+  '/credential-hashes/aws-ses/{hash}':
+    $ref: './paths/credential-hashes@aws-ses@{hash}.yaml'
+  /credential-hashes/emails:
+    $ref: ./paths/credential-hashes@emails.yaml
+  '/credential-hashes/emails/{hash}':
+    $ref: './paths/credential-hashes@emails@{hash}.yaml'
+  /credential-hashes/mailgun:
+    $ref: ./paths/credential-hashes@mailgun.yaml
+  '/credential-hashes/mailgun/{hash}':
+    $ref: './paths/credential-hashes@mailgun@{hash}.yaml'
+  /credential-hashes/oauth2:
+    $ref: ./paths/credential-hashes@oauth2.yaml
+  '/credential-hashes/oauth2/{hash}':
+    $ref: './paths/credential-hashes@oauth2@{hash}.yaml'
+  '/credential-hashes/oauth2/{hash}/items':
+    $ref: './paths/credential-hashes@oauth2@{hash}@items.yaml'
+  /credential-hashes/postmark:
+    $ref: ./paths/credential-hashes@postmark.yaml
+  '/credential-hashes/postmark/{hash}':
+    $ref: './paths/credential-hashes@postmark@{hash}.yaml'
+  /credential-hashes/sendgrid:
+    $ref: ./paths/credential-hashes@sendgrid.yaml
+  '/credential-hashes/sendgrid/{hash}':
+    $ref: './paths/credential-hashes@sendgrid@{hash}.yaml'
+  /credential-hashes/webhooks:
+    $ref: ./paths/credential-hashes@webhooks.yaml
+  '/credential-hashes/webhooks/{hash}':
+    $ref: './paths/credential-hashes@webhooks@{hash}.yaml'
+  '/email-delivery-setting-verifications/{token}':
+    $ref: './paths/email-delivery-setting-verifications@{token}.yaml'
+  /email-delivery-settings:
+    $ref: ./paths/email-delivery-settings.yaml
+  '/email-delivery-settings/{id}':
+    $ref: './paths/email-delivery-settings@{id}.yaml'
+  '/email-delivery-settings/{id}/resend-email-verification':
+    $ref: './paths/email-delivery-settings@{id}@resend-email-verification.yaml'
+  /email-messages:
+    $ref: ./paths/email-messages.yaml
+  '/email-messages/{id}':
+    $ref: './paths/email-messages@{id}.yaml'
+  /email-notifications:
+    $ref: ./paths/email-notifications.yaml
+  /events:
+    $ref: ./paths/events.yaml
+  '/events/{eventType}':
+    $ref: './paths/events@{eventType}.yaml'
+  '/events/{eventType}/rules':
+    $ref: './paths/events@{eventType}@rules.yaml'
+  '/events/{eventType}/rules/history':
+    $ref: './paths/events@{eventType}@rules@history.yaml'
+  '/events/{eventType}/rules/history/{version}':
+    $ref: './paths/events@{eventType}@rules@history@{version}.yaml'
+  '/events/{eventType}/rules/versions/{version}':
+    $ref: './paths/events@{eventType}@rules@versions@{version}.yaml'
+  /forgot-password:
+    $ref: ./paths/forgot-password.yaml
+  /gateway-accounts:
+    $ref: ./paths/gateway-accounts.yaml
+  '/gateway-accounts/{id}':
+    $ref: './paths/gateway-accounts@{id}.yaml'
+  '/gateway-accounts/{id}/close':
+    $ref: './paths/gateway-accounts@{id}@close.yaml'
+  '/gateway-accounts/{id}/disable':
+    $ref: './paths/gateway-accounts@{id}@disable.yaml'
+  '/gateway-accounts/{id}/downtime-schedules':
+    $ref: './paths/gateway-accounts@{id}@downtime-schedules.yaml'
+  '/gateway-accounts/{id}/downtime-schedules/{downtimeId}':
+    $ref: './paths/gateway-accounts@{id}@downtime-schedules@{downtimeId}.yaml'
+  '/gateway-accounts/{id}/enable':
+    $ref: './paths/gateway-accounts@{id}@enable.yaml'
+  '/gateway-accounts/{id}/timeline':
+    $ref: './paths/gateway-accounts@{id}@timeline.yaml'
+  '/gateway-accounts/{id}/timeline/{messageId}':
+    $ref: './paths/gateway-accounts@{id}@timeline@{messageId}.yaml'
+  /grid-segments:
+    $ref: ./paths/grid-segments.yaml
+  '/grid-segments/{id}':
+    $ref: './paths/grid-segments@{id}.yaml'
+  /integrations:
+    $ref: ./paths/integrations.yaml
+  '/integrations/{label}':
+    $ref: './paths/integrations@{label}.yaml'
+  /layouts:
+    $ref: ./paths/layouts.yaml
+  '/layouts/{id}':
+    $ref: './paths/layouts@{id}.yaml'
+  /lists:
+    $ref: ./paths/lists.yaml
+  '/lists/{id}':
+    $ref: './paths/lists@{id}.yaml'
+  '/lists/{id}/{version}':
+    $ref: './paths/lists@{id}@{version}.yaml'
+  /logout:
+    $ref: ./paths/logout.yaml
+  /memberships:
+    $ref: ./paths/memberships.yaml
+  '/memberships/{organizationId}/{userId}':
+    $ref: './paths/memberships@{organizationId}@{userId}.yaml'
+  /organizations:
+    $ref: ./paths/organizations.yaml
+  '/organizations/{id}':
+    $ref: './paths/organizations@{id}.yaml'
+  /payment-cards-bank-names:
+    $ref: ./paths/payment-cards-bank-names.yaml
+  /previews/rule-actions/send-email:
+    $ref: ./paths/previews@rule-actions@send-email.yaml
+  /previews/rule-actions/trigger-webhook:
+    $ref: ./paths/previews@rule-actions@trigger-webhook.yaml
+  /previews/webhooks:
+    $ref: ./paths/previews@webhooks.yaml
+  /profile:
+    $ref: ./paths/profile.yaml
+  /profile/password:
+    $ref: ./paths/profile@password.yaml
+  /profile/totp-reset:
+    $ref: ./paths/profile@totp-reset.yaml
+  '/reset-password/{token}':
+    $ref: './paths/reset-password@{token}.yaml'
+  '/send-through-attribution/{eventType}':
+    $ref: './paths/send-through-attribution@{eventType}.yaml'
+  /signin:
+    $ref: ./paths/signin.yaml
+  /signup:
+    $ref: ./paths/signup.yaml
+  /status:
+    $ref: ./paths/status.yaml
+  /tracking/api:
+    $ref: ./paths/tracking@api.yaml
+  '/tracking/api/{id}':
+    $ref: './paths/tracking@api@{id}.yaml'
+  /tracking/lists:
+    $ref: ./paths/tracking@lists.yaml
+  /tracking/webhooks:
+    $ref: ./paths/tracking@webhooks.yaml
+  '/tracking/webhooks/{id}':
+    $ref: './paths/tracking@webhooks@{id}.yaml'
+  '/tracking/webhooks/{id}/history':
+    $ref: './paths/tracking@webhooks@{id}@history.yaml'
+  '/tracking/webhooks/{id}/resend':
+    $ref: './paths/tracking@webhooks@{id}@resend.yaml'
+  /users:
+    $ref: ./paths/users.yaml
+  '/users/{id}':
+    $ref: './paths/users@{id}.yaml'
+  '/users/{id}/password':
+    $ref: './paths/users@{id}@password.yaml'
+  '/users/{id}/totp-reset':
+    $ref: './paths/users@{id}@totp-reset.yaml'
+  /webhooks:
+    $ref: ./paths/webhooks.yaml
+  '/webhooks/{id}':
+    $ref: './paths/webhooks@{id}.yaml'
+  /websites:
+    $ref: ./paths/websites.yaml
+  '/websites/{id}':
+    $ref: './paths/websites@{id}.yaml'

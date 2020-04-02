@@ -1,0 +1,21 @@
+description: Prosa config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Prosa credentials object
+        properties:
+          entityId:
+            type: string
+            description: Entity ID
+          accessToken:
+            type: string
+            description: Access token
+            format: password
+        required:
+          - entityId
+          - accessToken

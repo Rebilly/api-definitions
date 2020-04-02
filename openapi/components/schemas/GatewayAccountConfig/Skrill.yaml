@@ -1,0 +1,25 @@
+description: Skrill config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Skrill credentials object
+        properties:
+          accountEmail:
+            type: string
+            description: Email address of your Skrill merchant account
+          secretWord:
+            type: string
+            description: Secret word used for MD5 signature verifications
+            format: password
+          mqiPassword:
+            type: string
+            description: Password used during MQI/API requests
+            format: password
+        required:
+          - accountEmail
+          - secretWord

@@ -1,0 +1,32 @@
+parameters:
+  - $ref: ../components/parameters/tag.yaml
+  - $ref: ../components/parameters/customerId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  tags:
+    - Tags
+  summary: Tag a customer
+  operationId: PostTagCustomer
+  description: |
+    Tag a customer
+  responses:
+    '204':
+      description: Customer was tagged
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+delete:
+  tags:
+    - Tags
+  summary: Untag a customer
+  operationId: DeleteTagCustomer
+  description: |
+    Untag a customer
+  responses:
+    '204':
+      description: Customer was untagged
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

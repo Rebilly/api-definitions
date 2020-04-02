@@ -1,0 +1,40 @@
+type: object
+properties:
+  service:
+    readOnly: true
+    description: The integration service
+    allOf:
+      - $ref: ../OAuth2Credentials/OAuth2CredentialService.yaml
+  count:
+    readOnly: true
+    type: integer
+    minimum: 1
+    description: The number of available rule sets
+  configurations:
+    readOnly: true
+    type: array
+    minItems: 1
+    description: The list of configurations
+    items:
+      type: object
+      properties:
+        labels:
+          description: The configuration labels
+          type: array
+          minItems: 1
+          items:
+            type: string
+        eventType:
+          $ref: ../EventType.yaml
+        title:
+          type: string
+          description: The configuration title
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Links/SelfLink.yaml
+        - $ref: ../Links/OAuth2ConnectLink.yaml

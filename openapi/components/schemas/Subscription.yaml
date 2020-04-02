@@ -1,0 +1,172 @@
+type: object
+discriminator:
+  propertyName: orderType
+  mapping:
+    one-time-order: ./Subscription/OrderTypes/one-time-order.yaml
+    subscription-order: ./Subscription/OrderTypes/subscription-order.yaml
+required:
+  - orderType
+  - customerId
+  - websiteId
+  - items
+properties:
+  id:
+    description: The Subscription identifier string
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  orderType:
+    description: |
+      Specifies the type of order, a subscription or a one-time purchase.
+    type: string
+    enum:
+      - subscription-order
+      - one-time-order
+    default: subscription-order
+  billingStatus:
+    description: |
+      The billing status of the most recent invoice.  It may
+      help you determine if you should change the service status
+      such as suspending the service.
+    type: string
+    readOnly: true
+    enum:
+      - unpaid
+      - past-due
+      - delinquent
+      - paid
+      - voided
+      - refunded
+      - disputed
+      - voided
+  customerId:
+    description: Unique id for each customer
+    allOf:
+      - $ref: ./ResourceId.yaml
+  websiteId:
+    description: Unique id for each website
+    allOf:
+      - $ref: ./ResourceId.yaml
+  initialInvoiceId:
+    description: Unique id for the initial invoice
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  recentInvoiceId:
+    description: >-
+      Unique id for the most recently issued invoice. It might not be `paid`
+      yet.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  items:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      required:
+        - planId
+      properties:
+        planId:
+          description: Unique id for each plan
+          allOf:
+            - $ref: ./ResourceId.yaml
+        quantity:
+          description: Number of units of the product on the given plan
+          type: integer
+  deliveryAddress:
+    description: Delivery address
+    nullable: true
+    allOf:
+      - $ref: ./Contact/ContactObject.yaml
+  billingAddress:
+    description: Billing address
+    nullable: true
+    allOf:
+      - $ref: ./Contact/ContactObject.yaml
+  riskMetadata:
+    nullable: true
+    example: null
+    description: >-
+      Risk metadata. If null, the value would coalesce to the risk metadata
+      captured when creating the payment token.
+    allOf:
+      - $ref: ./RiskMetadata.yaml
+  activationTime:
+    description: Subscription activation time
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  couponIds:
+    type: array
+    nullable: true
+    description: >
+      A list of coupons to redeem on the customer and restrict to this
+      subscription.
+
+      Read more about [coupons
+      here](https://docs.rebilly.com/docs/dashboard/marketing/coupons-and-discounts/).
+
+
+      This parameter respects the following logic:
+
+
+      - When not passed then applied coupons will not be changed.
+
+
+      - When empty array passed then all applied coupon redemptions will be
+      canceled.
+
+
+      - When list of coupons is passed then not applied yet coupons will be
+      applied, already applied coupons
+
+      will not change their state, applied coupons that are not presented in
+      passed list will be canceled.
+
+
+      If list of applied coupons on pending subscription will be changed due to
+      this param during update subscription,
+       Invoice for the subscription will be reissued.
+    writeOnly: true
+    items:
+      type: string
+      description: Coupon ID
+  poNumber:
+    description: 'Purchase order number, will be displayed on the issued invoices'
+    nullable: true
+    example: PO123456
+    type: string
+  revision:
+    description: >
+      The number of times the subscription data has been modified.
+
+      The revision is useful when analyzing webhook data to determine if the
+      change takes precedence over the current representation.
+    type: integer
+    readOnly: true
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Links/SelfLink.yaml
+        - $ref: ./Links/CustomerLink.yaml
+        - $ref: ./Links/InitialInvoiceLink.yaml
+        - $ref: ./Links/RecentInvoiceLink.yaml
+        - $ref: ./Links/WebsiteLink.yaml
+  _embedded:
+    type: array
+    description: >-
+      Any embedded objects available that are requested by the `expand`
+      querystring parameter.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Embeds/RecentInvoiceEmbed.yaml
+        - $ref: ./Embeds/InitialInvoiceEmbed.yaml
+        - $ref: ./Embeds/CustomerEmbed.yaml
+        - $ref: ./Embeds/WebsiteEmbed.yaml
+        - $ref: ./Embeds/LeadSourceEmbed.yaml

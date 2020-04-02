@@ -1,0 +1,71 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Customers Timeline
+  summary: Retrieve a list of customer timeline custom event types
+  operationId: GetCustomerTimelineCustomEventTypeCollection
+  description: |
+    Retrieve a list of customer timeline custom event types
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+  responses:
+    '200':
+      description: >-
+        A list of customer timeline custom event types was retrieved
+        successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Timelines/CustomerTimelineCustomEvent.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+post:
+  tags:
+    - Customers
+  summary: Create Customer Timeline custom event type
+  operationId: PostCustomerTimelineCustomEventType
+  description: |
+    Create Customer Timeline custom event type
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Timelines/CustomerTimelineCustomEvent.yaml
+    description: Customer Timeline Custom Event Type resource
+    required: true
+  responses:
+    '201':
+      description: Customer Timeline Custom Event Type was created
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Timelines/CustomerTimelineCustomEvent.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml

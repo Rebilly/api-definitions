@@ -1,0 +1,35 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+  - $ref: ../components/parameters/systemEventType.yaml
+  - $ref: ../components/parameters/rulesVersion.yaml
+get:
+  tags:
+    - Rules
+  summary: Retrieve the record from the change history of the set of rules
+  operationId: GetEventRuleHistoryVersion
+  description: |
+    Retrieve the record from the change history of the selected set of rules.
+    A history record is created each time you change the rules.
+  parameters:
+    - $ref: ../components/parameters/collectionFields.yaml
+    - $ref: ../components/parameters/collectionExpand.yaml
+  responses:
+    '200':
+      description: History record was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Rules/RuleSetHistoryItem.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

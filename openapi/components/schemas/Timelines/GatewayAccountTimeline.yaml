@@ -1,0 +1,44 @@
+type: object
+properties:
+  id:
+    description: The Timeline message identifier string
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  type:
+    description: Timeline message type
+    type: string
+    readOnly: true
+    enum:
+      - gateway-account-created
+      - gateway-account-changed
+      - gateway-account-enabled
+      - gateway-account-disabled
+      - gateway-account-down
+      - gateway-account-up
+      - gateway-account-closed
+  triggeredBy:
+    description: Shows who or what triggered the Timeline message
+    type: string
+    readOnly: true
+    enum:
+      - rebilly
+      - app
+      - direct-api
+  message:
+    description: The message that describes the message details
+    type: string
+  extraData:
+    $ref: ./TimelineExtraData.yaml
+  occurredTime:
+    description: Timeline message time
+    readOnly: true
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml

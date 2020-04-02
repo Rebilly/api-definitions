@@ -1,0 +1,17 @@
+type: object
+discriminator:
+  propertyName: type
+  mapping:
+    none: ./SmtpAuthorizations/SmtpAuthorizationNone.yaml
+    cram-md5: ./SmtpAuthorizations/cram-md5.yaml
+    login: ./SmtpAuthorizations/login.yaml
+    plain: ./SmtpAuthorizations/plain.yaml
+properties:
+  type:
+    type: string
+    enum:
+      - none
+      - plain
+      - login
+      - cram-md5
+    default: none

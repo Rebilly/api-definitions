@@ -1,0 +1,1 @@
+$client->blacklists()->delete('blacklistId');

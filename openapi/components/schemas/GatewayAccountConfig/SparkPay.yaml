@@ -1,0 +1,21 @@
+description: SparkPay config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: SparkPay credentials object
+        properties:
+          shopId:
+            type: string
+            description: SparkPay shop ID
+          secretKey:
+            type: string
+            description: SparkPay secret key
+            format: password
+        required:
+          - shopId
+          - secretKey

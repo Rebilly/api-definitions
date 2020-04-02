@@ -1,0 +1,17 @@
+description: EPro config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: EPro credentials object
+        properties:
+          apiSecretKey:
+            type: string
+            description: EPro API secret key
+            format: password
+        required:
+          - apiSecretKey

@@ -1,0 +1,33 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Files
+  summary: Download a file
+  operationId: GetFileDownload
+  description: |
+    Download a file
+  responses:
+    '200':
+      description: The file was retrieved successfully
+      headers:
+        Content-Length:
+          description: The number of bytes in the file
+          schema:
+            type: integer
+        Content-Type:
+          description: The MIME type of the file
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            type: string
+            readOnly: true
+    '302':
+      $ref: ../components/responses/Found.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

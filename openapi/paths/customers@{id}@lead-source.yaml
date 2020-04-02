@@ -1,0 +1,95 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Customers
+  summary: Retrieve a customer's Lead Source
+  operationId: GetCustomerLeadSource
+  description: |
+    Retrieve a Lead Source of given customer
+  responses:
+    '200':
+      description: Lead Source was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/LeadSource.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/customers@{id}@lead-source/get.php'
+put:
+  tags:
+    - Customers
+  summary: Create a Lead Source for a customer
+  operationId: PutCustomerLeadSource
+  description: |
+    Create a Lead Source for a customer
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/LeadSource.yaml
+    description: Lead Source resource
+    required: true
+  responses:
+    '201':
+      description: Lead Source was created
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/LeadSource.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '422':
+      $ref: ../components/responses/InvalidDataError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/customers@{id}@lead-source/put.php'
+delete:
+  tags:
+    - Customers
+  summary: Delete a Lead Source for a customer
+  operationId: DeleteCustomerLeadSource
+  description: |
+    Delete a Lead Source that belongs to a certain customer
+  responses:
+    '204':
+      description: Lead Source was deleted
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/customers@{id}@lead-source/delete.php'

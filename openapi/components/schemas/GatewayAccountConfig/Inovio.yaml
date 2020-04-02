@@ -1,0 +1,41 @@
+description: Inovio config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+      - settings
+    properties:
+      credentials:
+        type: object
+        description: Inovio credentials object
+        properties:
+          username:
+            type: string
+            description: Inovio username
+          password:
+            type: string
+            description: Inovio password
+            format: password
+        required:
+          - username
+          - password
+      settings:
+        type: object
+        description: Inovio settings object
+        properties:
+          websiteId:
+            type: string
+            description: Inovio website ID
+          merchantAccountId:
+            type: string
+            description: Inovio merchant account ID
+          productId:
+            type: string
+            description: Inovio product ID
+        required:
+          - websiteId
+          - merchantAccountId
+          - productId
+      mpi:
+        $ref: ../Mpi/InovioMpis/InovioMpis.yaml

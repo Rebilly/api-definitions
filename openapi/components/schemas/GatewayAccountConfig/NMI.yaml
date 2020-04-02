@@ -1,0 +1,22 @@
+description: NMI Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          username:
+            type: string
+            description: NMI Gateway api token
+          password:
+            type: string
+            description: NMI Gateway store ID
+            format: password
+        required:
+          - username
+          - password
+      mpi:
+        $ref: ../Mpi/NMI/NMIMpis.yaml

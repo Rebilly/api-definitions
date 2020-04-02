@@ -1,0 +1,30 @@
+description: BraintreePayments Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          publicKey:
+            type: string
+            description: BraintreePayments Public Key
+          privateKey:
+            type: string
+            description: BraintreePayments Private Key
+            format: password
+          merchantId:
+            type: string
+            description: BraintreePayments merchant ID
+            format: password
+          merchantAccountId:
+            type: string
+            description: BraintreePayments merchant account ID
+            format: password
+        required:
+          - publicKey
+          - privateKey
+          - merchantId
+          - merchantAccountId

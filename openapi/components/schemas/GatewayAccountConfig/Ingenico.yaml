@@ -1,0 +1,29 @@
+description: Ingenico Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantId:
+            type: string
+            description: Ingenico Gateway merchant ID
+          apiKeyId:
+            type: string
+            description: Ingenico Gateway api key ID
+          apiSecretKey:
+            type: string
+            description: Ingenico Gateway api secret key
+            format: password
+          skipFraudService:
+            type: boolean
+            description: Ingenico skip fraud service
+        required:
+          - merchantId
+          - apiKeyId
+          - apiSecretKey
+      mpi:
+        $ref: ../Mpi/IngenicoMpis/IngenicoMpis.yaml

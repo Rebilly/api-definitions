@@ -1,0 +1,13 @@
+type: object
+discriminator:
+  propertyName: action
+  mapping:
+    redemption-cancel: ./Actions/redemption-cancel.yaml
+    resend-email: ./Actions/resend-email.yaml
+readOnly: true
+properties:
+  action:
+    type: string
+    enum:
+      - resend-email
+      - redemption-cancel

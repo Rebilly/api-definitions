@@ -1,0 +1,110 @@
+type: object
+description: Tracking API Requests.
+readOnly: true
+properties:
+  id:
+    allOf:
+      - $ref: ../ResourceId.yaml
+  status:
+    type: integer
+    description: HTTP response code
+  url:
+    type: string
+    description: API request address
+  route:
+    type: string
+    description: API request route
+    example: '/v2.1/customers/{param}'
+  method:
+    type: string
+    description: HTTP method
+    enum:
+      - HEAD
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - PATCH
+  request:
+    type: string
+    description: Request JSON-string
+  response:
+    type: string
+    description: Response JSON-string
+  requestHeaders:
+    type: object
+    additionalProperties:
+      type: string
+    example:
+      User-Agent: Mozilla/5.0
+      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+  responseHeaders:
+    type: object
+    additionalProperties:
+      type: string
+    example:
+      Rate-Limit-Limit: 5000
+      Rate-Limit-Remaining: 4999
+      Rate-Limit-Reset: 'Mon, 31 Jul 2017 04:16:00 +0000'
+  user:
+    type: object
+    description: The user who has made a request
+    readOnly: true
+    properties:
+      userId:
+        allOf:
+          - $ref: ../ResourceId.yaml
+      apiKeyId:
+        allOf:
+          - $ref: ../ResourceId.yaml
+      email:
+        description: The user email
+        type: string
+        format: email
+      firstName:
+        description: The user first name
+        type: string
+      lastName:
+        description: The user last name
+        type: string
+      ipAddress:
+        type: string
+        description: Client IP address
+        format: ipv4
+      userAgent:
+        description: The software that is acting on behalf of a user
+        type: string
+      fingerprint:
+        description: The user device fingerprint hash
+        type: string
+      isSupport:
+        description: If user from support
+        type: boolean
+  relatedIds:
+    type: object
+    description: The IDs of related resources
+    readOnly: true
+    properties:
+      customerId:
+        allOf:
+          - $ref: ../ResourceId.yaml
+      transactionId:
+        allOf:
+          - $ref: ../ResourceId.yaml
+      tokenId:
+        allOf:
+          - $ref: ../ResourceId.yaml
+  duration:
+    type: integer
+    description: Request duration in milliseconds
+  createdTime:
+    description: The log created time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml

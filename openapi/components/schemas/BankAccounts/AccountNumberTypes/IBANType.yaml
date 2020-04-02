@@ -1,0 +1,33 @@
+description: IBAN type object
+allOf:
+  - $ref: ../BankAccountCreatePlain.yaml
+  - type: object
+    required:
+      - customerId
+      - accountNumber
+      - address
+    properties:
+      customerId:
+        description: The Customer's ID.
+        allOf:
+          - $ref: ../../ResourceId.yaml
+      accountNumber:
+        description: >
+          Bank's Account Number. Detailed information about all ISO
+          13616-compliant national IBAN formats is available
+
+          in [SWIFT IBAN
+          Registry](https://www.swift.com/standards/data-standards/iban).
+        type: string
+      bankName:
+        description: Bank's name.
+        type: string
+      bic:
+        description: Bank Identifier Code.
+        type: string
+      address:
+        description: The Address.
+        allOf:
+          - $ref: ../../Contact/ContactObject.yaml
+      customFields:
+        $ref: ../../ResourceCustomFields.yaml

@@ -1,0 +1,18 @@
+description: Clearhaus Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          apiKey:
+            type: string
+            description: Clearhaus api key
+            format: password
+        required:
+          - apiKey
+      mpi:
+        $ref: ../Mpi/Clearhaus/ClearhausMpis.yaml

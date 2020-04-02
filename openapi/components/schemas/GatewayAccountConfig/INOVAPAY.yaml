@@ -1,0 +1,21 @@
+description: INOVAPAY config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: INOVAPAY credentials object
+        properties:
+          apiKey:
+            type: string
+            description: INOVAPAY API key
+          apiSecret:
+            type: string
+            description: INOVAPAY API secret
+            format: password
+        required:
+          - apiKey
+          - apiSecret

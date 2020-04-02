@@ -1,0 +1,135 @@
+allOf:
+  - $ref: ../../Subscription.yaml
+  - properties:
+      status:
+        description: |
+          The status of the subscription service. A subscription starts
+          in the `pending` status, and will become `active` when the
+          service period begins.
+        type: string
+        readOnly: true
+        enum:
+          - pending
+          - active
+          - canceled
+          - churned
+          - suspended
+          - paused
+          - abandoned
+      inTrial:
+        description: True if the subscription is currently in a trial period
+        type: boolean
+        readOnly: true
+      trial:
+        type: object
+        description: >-
+          To use plan defaults do not send the `trial` key, or send a `null`
+          value with it.
+        required:
+          - endTime
+        properties:
+          enabled:
+            description: >-
+              Enable or disable the trial for this subscription. If enabled for
+              plans without trial prices, the trial will be free.
+            type: boolean
+          endTime:
+            description: The time the trial should end
+            type: string
+            format: date-time
+      invoiceTimeShift:
+        description: >
+          You can shift issue time and due time of invoices for this
+          subscription.
+
+          This setting overrides plan settings. To use plan settings, set
+          `null`.
+
+          To use multiple plans in one subscription they all must have the same
+          billing period,
+
+          this property allows to subscribe to different plans.
+        nullable: true
+        example: null
+        allOf:
+          - $ref: ../../Invoices/InvoiceTimeShift.yaml
+      recurringInterval:
+        type: object
+        description: >
+          The recurring interval to override plan settings. To use plan
+          settings, set `null`.
+
+          To use multiple plans in one subscription they all must have the same
+          recurring period length,
+
+          this property allows to subscribe to different plans.
+        nullable: true
+        example: null
+        properties:
+          periodAnchorInstruction:
+            $ref: ../../Scheduling/ServicePeriodAnchorInstruction.yaml
+      autopay:
+        description: Autopay determines if a payment attempt will be automatic
+        type: boolean
+        default: true
+      startTime:
+        description: >-
+          Subscription start time.  When the value is sent as null, it will use
+          the current time. This value can't be in past more than one service
+          period.
+        nullable: true
+        example: null
+        type: string
+        format: date-time
+      endTime:
+        description: Subscription end time
+        allOf:
+          - $ref: ../../ServerTimestamp.yaml
+      renewalTime:
+        description: Subscription renewal time
+        type: string
+        format: date-time
+      rebillNumber:
+        description: The current period number
+        type: integer
+        readOnly: true
+      renewalReminderTime:
+        description: Time renewal reminder event will be triggered
+        nullable: true
+        allOf:
+          - $ref: ../../ServerTimestamp.yaml
+      renewalReminderNumber:
+        description: Number of renewal reminder events triggered
+        type: integer
+        readOnly: true
+      trialReminderTime:
+        description: Time renewal reminder event will be triggered
+        nullable: true
+        allOf:
+          - $ref: ../../ServerTimestamp.yaml
+      trialReminderNumber:
+        description: Number of renewal reminder events triggered
+        type: integer
+        readOnly: true
+      lineItems:
+        description: >-
+          Subscription line items which queue until the next renewal (or interim)
+          invoice is issued for the subscription.
+        readOnly: true
+        allOf:
+          - $ref: ../UpcomingInvoiceItemCollection.yaml
+      lineItemSubtotal:
+        type: object
+        readOnly: true
+        description: >-
+          Subtotal of line items in this subscription (signed value). If credits
+          exceed debits, it will be a negative number.
+        properties:
+          currency:
+            $ref: ../../CurrencyCode.yaml
+          amount:
+            type: number
+            format: double
+            example: 49.95
+  - $ref: ../SubscriptionMetadata.yaml
+  - $ref: ../SubscriptionCancellationState.yaml

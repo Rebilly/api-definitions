@@ -1,0 +1,18 @@
+type: object
+required:
+  - accountNumberType
+discriminator:
+  propertyName: accountNumberType
+  mapping:
+    BBAN: ./AccountNumberTypes/BBANType.yaml
+    IBAN: ./AccountNumberTypes/IBANType.yaml
+properties:
+  accountNumberType:
+    description: >-
+      Bank's Account Number type. A valid value is basic bank account number
+      (BBAN) or international bank account number (IBAN).
+    type: string
+    default: BBAN
+    enum:
+      - IBAN
+      - BBAN

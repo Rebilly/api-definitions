@@ -1,0 +1,32 @@
+type: object
+description: Tag
+required:
+  - name
+properties:
+  id:
+    description: The tag's identifier string
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  name:
+    description: 'The tag''s unique name, which is case-insensitive.'
+    type: string
+    maxLength: 255
+    pattern: '^[@~\-\.\w\s]+$'
+    example: New
+  createdTime:
+    description: The tag's created time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: The tag's updated time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Links/SelfLink.yaml

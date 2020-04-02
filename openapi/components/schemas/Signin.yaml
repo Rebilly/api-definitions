@@ -1,0 +1,22 @@
+type: object
+required:
+  - email
+  - password
+properties:
+  email:
+    description: Email
+    type: string
+    example: email@example.com
+  password:
+    description: Password
+    type: string
+    format: password
+  oneTimePassword:
+    description: One time password for 2 factor authentication. Should contain digits only.
+    type: string
+    pattern: '^[0-9]{6}$'
+    example: '123456'
+  expiredTime:
+    description: Session expired time. Defaults to one hour
+    type: string
+    format: date-time

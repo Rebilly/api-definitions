@@ -1,0 +1,24 @@
+type: object
+description: >
+  Instruction for calculating the service period anchor.
+
+  This is used in conjunction with the **subscription start** to calculate the
+  time the service period starts and ends.
+discriminator:
+  propertyName: method
+  mapping:
+    day-of-month: ./Methods/day-of-month.yaml
+    day-of-week: ./Methods/day-of-week.yaml
+    immediately: ./Methods/immediately.yaml
+default:
+  method: immediately
+required:
+  - method
+properties:
+  method:
+    type: string
+    default: immediately
+    enum:
+      - immediately
+      - day-of-month
+      - day-of-week

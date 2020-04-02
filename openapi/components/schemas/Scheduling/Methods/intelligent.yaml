@@ -1,0 +1,19 @@
+allOf:
+  - $ref: ../CommonScheduleInstruction.yaml
+  - $ref: ../CustomEventScheduleInstruction.yaml
+  - $ref: ../InvoiceRetryScheduleInstruction.yaml
+  - type: object
+    properties:
+      duration:
+        type: integer
+        description: The number of the units
+        minimum: 1
+      unit:
+        oneOf:
+          - $ref: >-
+              https://rebilly.github.io/api-standards/schema/json-schema-draft-04/date-time/time-unit.json
+          - $ref: >-
+              https://rebilly.github.io/api-standards/schema/json-schema-draft-04/date-time/time-plural-unit.json
+    required:
+      - duration
+      - unit

@@ -1,0 +1,43 @@
+description: FinTecSystems config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+      - settings
+    properties:
+      credentials:
+        type: object
+        description: FinTecSystems credentials object
+        properties:
+          apiKey:
+            type: string
+            description: FinTecSystems api key
+            format: password
+        required:
+          - apiKey
+      settings:
+        type: object
+        description: FinTecSystems settings object
+        properties:
+          recipientIBAN:
+            type: string
+            description: IBAN of the recipient account
+          recipientBIC:
+            type: string
+            description: BIC of the recipient account
+          recipientCountry:
+            type: string
+            description: Two letter country code
+            enum:
+              - AT
+              - CH
+              - DE
+          recipientHolder:
+            type: string
+            description: Account holder of the recipient account
+        required:
+          - recipientIBAN
+          - recipientBIC
+          - recipientHolder
+          - recipientCountry

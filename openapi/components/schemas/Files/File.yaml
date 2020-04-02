@@ -1,0 +1,70 @@
+type: object
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  name:
+    description: Original File name
+    type: string
+  extension:
+    description: The File extension
+    type: string
+  description:
+    description: The File description
+    type: string
+  tags:
+    description: The tags list
+    type: array
+    items:
+      type: string
+  mime:
+    description: The mime type
+    type: string
+    readOnly: true
+    enum:
+      - image/png
+      - image/jpeg
+      - image/gif
+      - application/pdf
+      - audio/mpeg
+  size:
+    description: The File size in bytes
+    type: integer
+    readOnly: true
+  width:
+    description: 'Image width, applicable to images only'
+    type: integer
+    readOnly: true
+  height:
+    description: 'Image height, applicable to images only'
+    type: integer
+    readOnly: true
+  sha1:
+    description: Hash sum of the file
+    type: string
+    readOnly: true
+  createdTime:
+    description: The upload date/time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: The latest update date/time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  isPublic:
+    description: >-
+      Is the file available publicly (without authentication). If true, the
+      permalink in the _links section contains the public URL.
+    type: boolean
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 3
+    items:
+      anyOf:
+        - $ref: ../Links/SelfLink.yaml
+        - $ref: ../Links/FileDownloadLink.yaml
+        - $ref: ../Links/SignedLinkLink.yaml
+        - $ref: ../Links/PermalinkLink.yaml

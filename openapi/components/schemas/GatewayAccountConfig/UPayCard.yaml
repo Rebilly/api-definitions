@@ -1,0 +1,32 @@
+description: UPayCard Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          receiver_account:
+            type: string
+            description: merchant receiver account
+          key:
+            type: string
+            description: merchant key
+            format: password
+          secret:
+            type: string
+            description: merchant secret
+            format: password
+        required:
+          - receiver_account
+          - key
+          - secret
+      settings:
+        type: object
+        description: UpayCard settings object
+        properties:
+          tolerancePercentage:
+            type: string
+            description: Tolerance paercentage for settled amount

@@ -1,0 +1,19 @@
+description: Tap config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Tap credentials object
+        properties:
+          apiKey:
+            type: string
+            description: Secret API key
+            format: password
+        required:
+          - apiKey
+      mpi:
+        $ref: ../Mpi/TapMpis/TapMpis.yaml

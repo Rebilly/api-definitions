@@ -1,0 +1,35 @@
+description: iCanPay Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          authenticateId:
+            type: string
+            description: iCanPay Gateway authenticate ID
+          authenticatePw:
+            type: string
+            description: iCanPay Gateway authenticate password
+            format: password
+          publicKey:
+            type: string
+            description: iCanPay Gateway API public key
+          secretKey:
+            type: string
+            description: iCanPay Gateway API secret key
+            format: password
+        required:
+          - authenticateId
+          - authenticatePw
+          - publicKey
+          - secretKey
+      settings:
+        type: object
+        properties:
+          use3DSEndpoint:
+            type: boolean
+            description: Use 3DS endpoint

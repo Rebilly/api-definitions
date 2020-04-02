@@ -1,0 +1,37 @@
+description: Payvision Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          memberId:
+            type: string
+            description: Payvision Gateway member id
+          memberGuid:
+            type: string
+            description: Payvision Gateway member guid
+            format: password
+        required:
+          - memberId
+          - memberGuid
+      settings:
+        type: object
+        description: Payvision settings object
+        properties:
+          avs:
+            type: boolean
+            description: Payvision Gateway avs
+          delay:
+            type: integer
+            description: Payvision Gateway delay
+          merchantAccountType:
+            type: integer
+            description: Payvision merchant account type
+        required:
+          - merchantAccountType
+      mpi:
+        $ref: ../Mpi/PayvisionMpis/PayvisionMpis.yaml

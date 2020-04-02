@@ -1,0 +1,47 @@
+parameters:
+  - name: token
+    in: path
+    description: The token identifier string
+    required: true
+    schema:
+      type: string
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  tags:
+    - Customer Authentication
+  summary: Exchange
+  operationId: PostAuthenticationTokenExchange
+  description: >
+    Exchange Authentication Token for JWT
+
+
+    It will also invalidate an Authentication Token by default (so it can only
+    be exchanged once).
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - PublishableApiKey: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CustomerAuthentication/CustomerJWT.yaml
+    required: true
+  responses:
+    '200':
+      description: Authentication Token exchanged for JWT
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CustomerAuthentication/CustomerJWT.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

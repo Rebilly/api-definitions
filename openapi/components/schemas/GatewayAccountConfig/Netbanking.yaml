@@ -1,0 +1,21 @@
+description: Netbanking config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Netbanking credentials object
+        properties:
+          midcode:
+            type: string
+            description: Netbanking MID code
+          midsecret:
+            type: string
+            description: Netbanking MID secret key
+            format: password
+        required:
+          - midcode
+          - midsecret

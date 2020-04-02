@@ -1,0 +1,25 @@
+allOf:
+  - $ref: ../GatewayAccountPickInstruction.yaml
+  - type: object
+    properties:
+      weightedList:
+        type: array
+        uniqueItems: true
+        minimum: 0
+        items:
+          type: object
+          properties:
+            gatewayAccountId:
+              $ref: ../../ResourceId.yaml
+            weight:
+              type: integer
+          required:
+            - gatewayAccountId
+            - weight
+        example: |
+          [
+            {"gatewayAccountId": "my_gateway_account_1", "weight": 80},
+            {"gatewayAccountId": "my_gateway_account_2", "weight": 20}
+          ]
+    required:
+      - weightedList

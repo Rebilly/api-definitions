@@ -1,0 +1,25 @@
+description: OchaPay Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          apiUsername:
+            type: string
+            description: OchaPay Gateway username
+          apiPassword:
+            type: string
+            description: OchaPay Gateway api password
+            format: password
+          secretWord:
+            type: string
+            description: OchaPay Gateway secret word
+            format: password
+        required:
+          - apiUsername
+          - apiPassword
+          - secretWord

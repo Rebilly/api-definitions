@@ -1,0 +1,148 @@
+type: object
+required:
+  - emails
+  - startSendingTime
+properties:
+  id:
+    description: The broadcast message's identifier string
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  filter:
+    type: string
+    description: >
+      The filter that will be used on customer selection during the broadcast
+      message processing.
+
+      The syntax is the same as the `query` filter, without `filter=` prefix.
+
+      For example: `firstName:John`, `firstName:John;lastName:Doe`, etc.
+
+      Attention: You should not URL encode the filter value.
+    example: 'firstName:John;lastName:Doe'
+  title:
+    type: string
+    description: The title of the messages. (This title will appear in reports.)
+  messages:
+    type: array
+    description: The list of messages.
+    minItems: 1
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The message identifier string.
+        version:
+          type: string
+          description: >-
+            The message version. (By default is empty, but if you make multiple
+            versions, you can name or number them to distinguish them.)
+        weight:
+          type: integer
+          description: >
+            The value for random-weighted picking of a template in the case of a
+            split test.
+
+            The split test algorithm does not factor localization when making a
+            weighted-random template selection.  Therefore, a version will be
+            selected first, and then after a version is selected a specific
+            localization will be selected.  Take the case where two versions
+            have different locale content -- the locales of the content is not
+            considered when selecting the version.
+          minimum: 0
+          maximum: 100
+          example: 75
+          default: 100
+        templates:
+          description: >
+            The value for random-weighted picking of a template in the case of a
+            split test.
+
+            The split test algorithm does not factor localization when making a
+            weighted-random template selection.  Therefore, a version will be
+            selected first, and then after a version is selected a specific
+            localization will be selected.  Take the case where two versions
+            have different locale content -- the locales of the content is not
+            considered when selecting the version.
+          example:
+            locale: fr-FR
+            from: example@example.com
+            subject: Sujet de démonstration
+            text: Texte de démonstration
+            html: <p>Texte de démonstration</p>
+          type: array
+          minItems: 1
+          items:
+            type: object
+            properties:
+              from:
+                type: string
+                description: >
+                  The sender address. It must be a **verified** address. # todo
+                  add a link to help docs on how to verify an email address
+                maxLength: 254
+              subject:
+                type: string
+                description: The message subject. The template placeholders are allowed.
+                maxLength: 998
+              text:
+                type: string
+                description: |
+                  The message's text body.
+                  Leave empty to use content from "html".
+                  The template placeholders are allowed.
+              html:
+                type: string
+                description: |
+                  The message's html body.
+                  Leave empty to use content from "text".
+                  The template placeholders are allowed.
+              locale:
+                type: string
+                description: >-
+                  The language locale identifier according to [RFC
+                  5646](https://tools.ietf.org/html/rfc5646).
+                example: fr-FR
+            required:
+              - from
+              - subject
+              - text
+              - html
+              - locale
+      required:
+        - templates
+  splitTestStartTime:
+    readOnly: true
+    type: string
+    format: date-time
+    description: The split test start time
+  startSendingTime:
+    type: string
+    format: date-time
+    description: The start sending time
+  status:
+    readOnly: true
+    type: string
+    description: The broadcast message's status
+    enum:
+      - draft
+      - sending
+      - sent
+      - archived
+  createdTime:
+    description: The broadcast message's created time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: The broadcast message's updated time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to the resource
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml
