@@ -1,0 +1,61 @@
+content:
+  application/json:
+    schema:
+      required:
+        - name
+        - website
+        - country
+        - reportCurrency
+      properties:
+        name:
+          description: The organization name. It must be globally unique within Rebilly.
+          type: string
+        website:
+          description: The organization website address
+          type: string
+          format: url
+        address:
+          description: The organization street address
+          type: string
+          maxLength: 60
+        address2:
+          description: The organization street address
+          type: string
+          maxLength: 60
+        city:
+          description: The organization city
+          type: string
+          maxLength: 45
+        region:
+          description: The organization region (state)
+          type: string
+          maxLength: 45
+        country:
+          description: The organization country ISO Alpha-2 code
+          type: string
+          pattern: '^[A-Z]{2}$'
+        postalCode:
+          description: The organization postal code
+          type: string
+          maxLength: 10
+        phoneNumbers:
+          $ref: ../schemas/Organizations/ContactPhoneNumbers.yaml
+        emails:
+          $ref: ../schemas/Organizations/ContactEmails.yaml
+        taxDescriptor:
+          description: The organization's tax label. This will be displayed on the invoice.
+          type: string
+          maxLength: 255
+        invoiceTimeZone:
+          description: >-
+            Invoice will use this time zone to display time otherwise UTC will
+            be used. Example "America/New_York"
+          type: string
+          maxLength: 50
+        reportCurrency:
+          description: >-
+            The currency used for reports. It can only be set upon organization
+            creation.
+          type: string
+          pattern: '^[A-Z]{3}$'
+description: Create Organization Request

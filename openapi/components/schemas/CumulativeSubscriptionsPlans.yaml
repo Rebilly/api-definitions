@@ -1,0 +1,31 @@
+type: array
+items:
+  type: object
+  description: Contains an aggregation
+  readOnly: true
+  properties:
+    day:
+      type: string
+      description: Date in format YYYY-MM-DD
+    month:
+      type: integer
+      description: Date in format YYYY-MM
+    planId:
+      type: integer
+      description: Plan id for which the aggregation is given
+    newCount:
+      type: integer
+      description: Number of new subscriptions within the aggregation
+    canceledCount:
+      type: integer
+      description: Number of canceled subscriptions within the aggregation
+    netCount:
+      type: integer
+      description: newCount - canceledCount
+    cumulativeCount:
+      type: integer
+      description: >
+        Number of cumulative subscriptions from the previous aggregation +
+
+        number of new subscriptions - number of canceled subscriptions within
+        the aggregation.

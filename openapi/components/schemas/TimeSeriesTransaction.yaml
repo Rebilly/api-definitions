@@ -1,0 +1,29 @@
+type: object
+properties:
+  data:
+    type: array
+    items:
+      type: object
+      description: Contains an aggregation
+      readOnly: true
+      properties:
+        date:
+          type: string
+          description: Date in format YYYY-MM-DD
+        total:
+          type: number
+          format: double
+          description: Amount or count of all transactions within the aggregation
+        subaggregates:
+          type: object
+          description: Subaggregates which have appropriate transactions within the range
+          properties:
+            subaggregate:
+              type: string
+              description: Subaggregate identifier
+            value:
+              type: number
+              format: double
+              description: >-
+                Amount or count of the subaggregate's transactions within the
+                aggregation

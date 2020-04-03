@@ -1,0 +1,151 @@
+type: object
+discriminator:
+  propertyName: resource
+  mapping:
+    customers: ./resources/customers.yaml
+    subscriptions: ./resources/subscriptions.yaml
+    transactions: ./resources/transactions.yaml
+required:
+  - name
+  - format
+  - resource
+properties:
+  id:
+    description: The export identifier string
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  name:
+    description: Export name
+    type: string
+  resource:
+    description: 'The type of resource being exported (eg., transactions).'
+    type: string
+    enum:
+      - transactions
+      - customers
+      - subscriptions
+  format:
+    description: Export result format
+    type: string
+    enum:
+      - csv
+      - json
+      - json-api
+      - xml
+  arguments:
+    description: >-
+      Export request arguments that can be passed to filter and/or sort the
+      result set. See the [arguments
+      guide](https://docs-reconciliation.rebilly.com/getting-started/arguments)
+      for more options and examples.
+    type: object
+    properties:
+      filter:
+        description: >-
+          The collection items filter requires a special format. Use "," for
+          multiple allowed values. Use ";" for multiple fields.
+        type: string
+      sort:
+        type: string
+        description: >-
+          The collection items sort field and order (prefix with "-" for
+          descending sort).
+      q:
+        type: string
+        description: The partial search of the text fields.
+  dateRange:
+    type: object
+    description: >-
+      The date range (can be in relative formats).  If omitted, all time will be
+      included. See the [Date Range
+      guide](https://docs-reconciliation.rebilly.com/getting-started/date-range)
+      for more options and examples.
+    properties:
+      start:
+        type: string
+        description: >-
+          Any valid datetime arguments including [relative datetime
+          arguments](http://php.net/manual/en/datetime.formats.php).
+        example: yesterday
+      end:
+        type: string
+        description: >-
+          Any valid datetime arguments including [relative datetime
+          arguments](http://php.net/manual/en/datetime.formats.php).
+        example: today
+      field:
+        type: string
+        description: The field to apply date range to.
+    required:
+      - start
+      - end
+  emailNotification:
+    description: List of emails to be notified when export is completed
+    type: array
+    items:
+      type: string
+      format: email
+  fields:
+    description: >-
+      List of fields to include in the export.  See supporting documentation for
+      more info.  If omitted, default fields will be included.
+    type: array
+    items:
+      type: string
+  recurring:
+    description: Exports can reoccur according to your own schedule
+    type: object
+    required:
+      - instruction
+    properties:
+      instruction:
+        type: string
+        description: RRule RFC 5545 formatted string used for recurring exports
+      start:
+        type: string
+        format: date-time
+        description: >-
+          The date and time when the first recurring scheduled export will
+          occur. Defaults to now.
+  userId:
+    description: The ID of the User who requested the data export
+    readOnly: true
+    type: string
+  recordCount:
+    description: The number of records in the export (excluding the header row)
+    readOnly: true
+    type: integer
+  scheduledTime:
+    description: The date and time this data export is scheduled to generate a file
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  createdTime:
+    description: The time the data export was requested
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: Data export updated time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  status:
+    description: Status of export request
+    readOnly: true
+    type: string
+    enum:
+      - pending
+      - queued
+      - processing
+      - completed
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    maxItems: 4
+    items:
+      anyOf:
+        - $ref: ../Links/LinkSelf.yaml
+        - $ref: ../Links/LinkUser.yaml
+        - $ref: ../Links/LinkFileDownload.yaml
+        - $ref: ../Links/LinkSignedLink.yaml

@@ -1,0 +1,131 @@
+openapi: 3.0.0
+info:
+  version: '0.1'
+  title: Rebilly Experimental Reports REST API
+  contact:
+    name: Rebilly API Support
+    url: 'https://www.rebilly.com/contact/'
+    email: integrations@rebilly.com
+  license:
+    name: Rebilly
+    url: 'https://my.rebilly.com/api/license/'
+  termsOfService: 'https://www.rebilly.com/terms/'
+  x-logo:
+    url: 'https://rebilly-api.redoc.ly/rb_apiLogo.svg'
+    backgroundColor: '#0033A0'
+tags:
+  - name: Introduction
+    description: |
+      This API is experimental and likely to change.  We would appreciate
+      feedback.
+  - name: Authentication
+    description: >
+      When you sign up for an account, you are given your first API key.
+      You can generate additional API keys, and delete API keys (as you may
+      need to rotate your keys in the future). You authenticate to the
+      Rebilly API by providing your secret key in the request header.
+
+      Rebilly offers three forms of authentication:  private key, JSON Web
+      Tokens, and public key.
+      - private key: authenticates each request by searching for the presence
+      of an HTTP header: REB-APIKEY.
+      - JWT: authenticates each request by the HTTP header: Authorization.
+      - public key: authenticates by the HTTP header: REB-AUTH (read more on
+      this below).
+
+      Rebilly also offers JSON Web Tokens (JWT) authentication, where you can
+      control the specific granular permissions and expiration for that JWT.  We call
+      our resource for generating JWT [Sessions](#tag/Sessions).
+
+      Rebilly also has a client-side authentication scheme that uses an
+      apiUser and HMAC-SHA1 signature (only for the Tokens resource), so
+      that you may safely create tokens from the client-side without
+      compromising your secret keys.
+      
+      Never share your secret keys. Keep them guarded and secure.
+      The client-side authentication scheme uses one HTTP header named REB-AUTH.
+  - name: Histograms
+    description: |
+      Histograms are for particular kinds of reports with cohorts and periods.
+  - name: Reports
+    description: >
+      Retrieve summary information about your customers, subscriptions,
+      transactions, and more.
+  - name: Data Exports
+    description: |
+      Data exports.
+  - name: Activity Feed
+    description: |
+      Activity Feed is holding various events that occurred in the app.
+security:
+  - ApiKey: []
+servers:
+  - url: 'https://api.rebilly.com/experimental'
+
+
+components:
+  securitySchemes:
+    JWT:
+      $ref: components/securitySchemes/JWT.yaml
+    PublishableApiKey:
+      $ref: components/securitySchemes/PublishableApiKey.yaml
+    SecretApiKey:
+      $ref: components/securitySchemes/SecretApiKey.yaml
+
+paths:
+  '/customers/{customerId}/summary-metrics':
+    $ref: './paths/customers@{customerId}@summary-metrics.yaml'
+  /data-exports:
+    $ref: ./paths/data-exports.yaml
+  '/data-exports/{id}':
+    $ref: './paths/data-exports@{id}.yaml'
+  /histograms/transactions:
+    $ref: ./paths/histograms@transactions.yaml
+  /organizations:
+    $ref: ./paths/experimental-organizations.yaml
+  '/organizations/{id}':
+    $ref: './paths/experimental-organizations@{id}.yaml'
+  /reports/payments-success-by-decline-reason:
+    $ref: ./paths/reports@payments-success-by-decline-reason.yaml
+  /reports/api-log-summary:
+    $ref: ./paths/reports@api-log-summary.yaml
+  /reports/cumulative-subscriptions-plans:
+    $ref: ./paths/reports@cumulative-subscriptions-plans.yaml
+  /reports/cumulative-subscriptions:
+    $ref: ./paths/reports@cumulative-subscriptions.yaml
+  /reports/dashboard:
+    $ref: ./paths/reports@dashboard.yaml
+  /reports/dcc-markup:
+    $ref: ./paths/reports@dcc-markup.yaml
+  /reports/disputes:
+    $ref: ./paths/reports@disputes.yaml
+  /reports/events-triggered:
+    $ref: ./paths/reports@events-triggered.yaml
+  '/reports/events-triggered/{eventType}/rules':
+    $ref: './paths/reports@events-triggered@{eventType}@rules.yaml'
+  /reports/future-renewals:
+    $ref: ./paths/reports@future-renewals.yaml
+  /reports/renewal-sales:
+    $ref: ./paths/reports@renewal-sales.yaml
+  /reports/retention-percentage:
+    $ref: ./paths/reports@retention-percentage.yaml
+  /reports/retention-value:
+    $ref: ./paths/reports@retention-value.yaml
+  /reports/retry-transaction:
+    $ref: ./paths/reports@retry-transaction.yaml
+  /reports/statistics:
+    $ref: ./paths/reports@statistics.yaml
+  /reports/subscription-cancellation:
+    $ref: ./paths/reports@subscription-cancellation.yaml
+  /reports/subscription-renewal:
+    $ref: ./paths/reports@subscription-renewal.yaml
+  /reports/time-series-transaction:
+    $ref: ./paths/reports@time-series-transaction.yaml
+  /reports/transactions-plan:
+    $ref: ./paths/reports@transactions-plan.yaml
+  /reports/transactions-time-dispute:
+    $ref: ./paths/reports@transactions-time-dispute.yaml
+  /reports/transactions:
+    $ref: ./paths/reports@transactions.yaml
+  '/subscriptions/{subscriptionId}/summary-metrics':
+    $ref: './paths/subscriptions@{subscriptionId}@summary-metrics.yaml'

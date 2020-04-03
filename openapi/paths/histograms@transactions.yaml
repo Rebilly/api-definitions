@@ -1,0 +1,87 @@
+servers:
+  - url: 'https://api.rebilly.com/experimental'
+  - url: 'https://api-sandbox.rebilly.com/experimental'
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Histograms
+  summary: Get Transaction histogram report data
+  operationId: GetHistogramTransactionReport
+  description: |
+    Get Transaction histogram report data.
+  parameters:
+    - name: periodStart
+      in: query
+      description: Report start day
+      required: true
+      schema:
+        type: string
+        format: date-time
+    - name: periodEnd
+      in: query
+      description: Report end day
+      required: true
+      schema:
+        type: string
+        format: date-time
+    - name: aggregationField
+      in: query
+      description: Report aggregation field
+      required: true
+      schema:
+        type: string
+        enum:
+          - website
+          - currency
+          - bin
+          - rebillNumber
+          - transactionResult
+          - transactionType
+          - gatewayAccount
+          - leadsAffiliate
+          - leadsCampaign
+          - leadsContent
+          - leadsMedium
+          - leadsSalesAgent
+          - leadsSource
+          - leadsSubAffiliate
+          - leadsTerm
+    - name: aggregationPeriod
+      in: query
+      description: Report aggregation period
+      required: true
+      schema:
+        type: string
+        enum:
+          - hour
+          - day
+          - month
+    - name: metric
+      in: query
+      description: Report metric
+      required: true
+      schema:
+        type: string
+        enum:
+          - ApprovalThroughput
+          - AuthApprovalThroughput
+          - AvgSalesPrice
+          - Refunds
+          - RefundCount
+          - Sales
+          - SalesCount
+  responses:
+    '200':
+      description: Transaction report was retrieved successfully.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HistogramData.yaml

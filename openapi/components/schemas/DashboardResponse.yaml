@@ -1,0 +1,86 @@
+type: array
+items:
+  type: object
+  properties:
+    metric:
+      type: string
+      description: Metric type
+      enum:
+        - approvalRate
+        - salesCount
+        - salesValue
+        - refundsValue
+        - chargebacksCount
+        - chargebacksValue
+        - transactionsCount
+        - redeemedCouponsCount
+        - newLeadsCount
+        - newCustomersCount
+        - appliedCouponsCount
+        - trialConversionsCount
+        - trialConversionsRate
+        - renewalSuccessRate
+        - renewalsCount
+        - newTrialsCount
+        - reactivationsCount
+        - successfulRetriesCount
+        - invoicedRevenue
+        - churnCount
+        - churnRate
+        - cancellationsCount
+        - cancellationsRate
+        - activeSubscriptionsCount
+        - newSubscriptionsCount
+        - upgradesCount
+        - downgradesCount
+    humanName:
+      type: string
+      description: Metric name to display
+    increaseIsGood:
+      type: boolean
+      description: >-
+        True when the higher value means a better performance thus positive for
+        a merchant, false otherwise
+    segments:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Segment name
+          value:
+            type: number
+            format: double
+            description: Segment value for the given date range
+          previousValue:
+            type: number
+            format: double
+            description: >-
+              Segment value for the previous date range (relative to the given
+              date range)
+          humanValue:
+            type: string
+            description: Human readable segment value (formatted with a currency sign)
+          changeRatio:
+            type: number
+            format: double
+            description: Ratio of current value per previous value null is infinity
+          humanChangeRatio:
+            type: string
+            description: >-
+              Human readable change ratio (formatted percentage with a "%"
+              sign), null is infinity
+          timeseries:
+            type: array
+            items:
+              type: object
+              description: Chart data
+              readOnly: true
+              properties:
+                date:
+                  type: string
+                  description: Entry date-time
+                value:
+                  type: number
+                  description: Entry value

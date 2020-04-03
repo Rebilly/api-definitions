@@ -1,0 +1,65 @@
+servers:
+  - url: 'https://api.rebilly.com/experimental'
+  - url: 'https://api-sandbox.rebilly.com/experimental'
+parameters:
+  - name: eventType
+    in: path
+    required: true
+    description: The system event type
+    schema:
+      type: string
+      enum:
+        - dispute-created
+        - gateway-account-requested
+        - transaction-processed
+        - subscription-canceled
+        - subscription-renewed
+        - payment-card-expired
+        - payment-declined
+        - transaction-process-requested
+        - risk-score-changed
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Reports
+  summary: Retrieve a rules matched summary report
+  operationId: GetTriggeredEventRuleReport
+  description: |
+    Retrieve a rules matched summary report by events triggered.
+  parameters:
+    - name: periodStart
+      in: query
+      description: Report start date
+      required: true
+      schema:
+        type: string
+    - name: periodEnd
+      in: query
+      description: Report end date
+      required: true
+      schema:
+        type: string
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+  responses:
+    '200':
+      description: Report was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ReportRulesMatchedSummary.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml

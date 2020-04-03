@@ -1,0 +1,55 @@
+type: object
+properties:
+  data:
+    type: array
+    items:
+      type: object
+      description: Contains an aggregation
+      readOnly: true
+      properties:
+        aggregationValue:
+          type: string
+          description: >
+            Value by which the report provides retention periods and values. The
+            date values are displayed as following:
+
+            Day: YYYY-MM-DD;
+
+            Month: YYYY-MM;
+
+            Quarter: YYYY-MM/YYYY-MM;
+
+            Year: YYYY.
+        customersCount:
+          type: integer
+          description: Number of customers within the aggregation with their first payment
+        periods:
+          type: array
+          items:
+            type: object
+            description: The period for the given aggregation
+            properties:
+              period:
+                type: integer
+                description: >
+                  Retention period (0 - first, 1 - second etc) since the
+                  beginning boundary of the aggregation
+              retentionAverage:
+                type: number
+                format: double
+                description: >
+                  Summary amount of all transactions for all periods up to the
+                  current one
+
+                  divided by the aggregation customers number
+              transactionsCount:
+                type: integer
+                description: >-
+                  The number of transactions happened in the retention period
+                  (e.g. in 3 rebills)
+              transactionsValue:
+                type: number
+                format: double
+                description: >-
+                  The amount of transactions (income transactions - loss
+                  transactions)

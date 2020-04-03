@@ -1,0 +1,34 @@
+servers:
+  - url: 'https://api.rebilly.com/experimental'
+  - url: 'https://api-sandbox.rebilly.com/experimental'
+parameters:
+  - name: subscriptionId
+    in: path
+    required: true
+    description: Subscription's ID
+    schema:
+      type: string
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Subscriptions
+  summary: Retrieve subscription summary metrics
+  operationId: GetSubscriptionSummaryMetricReport
+  description: |
+    Retrieve subscription summary metrics
+  responses:
+    '200':
+      description: Metrics were retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SubscriptionSummaryMetrics.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml
