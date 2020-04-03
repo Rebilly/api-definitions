@@ -1,0 +1,28 @@
+servers:
+  - url: 'https://api.rebilly.com/experimental'
+  - url: 'https://api-sandbox.rebilly.com/experimental'
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Reports
+  summary: Retrieve a statistics report
+  operationId: GetStatisticReport
+  description: |
+    Retrieve a statistics report
+  responses:
+    '200':
+      description: Report was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ReportStatistics.yaml
+    '401':
+      $ref: ../components/responses/AccessForbidden.yaml

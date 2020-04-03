@@ -12,6 +12,7 @@ may automate any workflows necessary.  This document contains the most commonly
 integrated resources.
 
 # Authentication
+
 When you sign up for an account, you are given your first secret API key.
 You can generate additional API keys, and delete API keys (as you may
 need to rotate your keys in the future). You authenticate to the
