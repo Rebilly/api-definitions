@@ -1,0 +1,687 @@
+openapi: 3.0.3
+info:
+  version: '2.1'
+  title: Combined API
+  contact:
+    name: Rebilly API Support
+    url: 'https://www.rebilly.com/contact/'
+    email: integrations@rebilly.com
+  license:
+    name: Rebilly
+    url: 'https://www.rebilly.com/api-license/'
+  termsOfService: 'https://www.rebilly.com/terms-of-use/'
+  x-logo:
+    url: 'https://rebilly-api.redoc.ly/rb_apiLogo.svg'
+    backgroundColor: '#0033A0'
+  description:
+    $ref: description.md
+servers:
+  - url: 'https://api.rebilly.com/v2.1'
+    description: Live Server
+  - url: 'https://api-sandbox.rebilly.com/v2.1'
+    description: Sandbox Server
+tags:
+  - name: 3D Secure
+    description: |
+      3D Secure is a way to authenticate and protect transactions.  Typically,
+      it's only possible to protect the initial transaction in a subscription
+      with 3D Secure.
+  - name: Bank Accounts
+    description: |
+      Bank Accounts are a type of payment instrument used to collect
+      ACH (echeck) payments, similar to how a payment
+      card would be used to for a credit card payment.
+  - name: Blacklists
+    description: |
+      Your blacklists contains values of customerIds, email addresses,
+      ipAddresses, bank identification numbers, countries or payment cards that
+      you do NOT want to do business with. They are a good tool for managing
+      risk. A blacklist entry that expires after a period of time we call a
+      greylist.
+  - name: Contacts
+    description: >
+      Contacts are Customer's address book.
+
+      All contact information used in Invoices, Subscriptions, Transactions, etc
+      is enlisted here. Hovewer, changing a Contact won't change corresponding
+      contact information in related resources
+  - name: Coupons
+    description: >
+      Coupons allows to apply different types of discounts to Invoices,
+      Subscriptions and Plans. Redeemed Coupons will be applied only to Invoices
+      with the same currency.
+  - name: Customers
+    description: |
+      Customers are your customers, sometimes known as accounts, clients,
+      members, patrons, or players in other systems.
+  - name: Customers Timeline
+    description: |
+      The customers timeline keeps an audit trail of changes and activity for each customer.
+  - name: KYC Documents
+    description: >
+      Customer KYC files uploaded on behalf of a customer, tagged with a
+      document type and submitted for validation.
+  - name: Customer Authentication
+    description: >
+      Create authentication credentials, login, logout, and verify your
+      customers.
+  - name: Custom Fields
+    description: |
+      Create additional custom fields for particular resources.  You may name,
+      describe, and determine the type of the schema.
+  - name: Disputes
+    description: |
+      Handle disputes (chargebacks and retrievals).
+  - name: Files
+    description: >
+      A File is an entity that can store a physical file and some metadata. It
+      also provides an easy access to
+
+      its size, mime-type, user-defined tags and description thus allowing easy
+      sorting and searching among stored
+
+      files.
+
+      There are several methods of file uploading available: multipart/form-data
+      encoded form, RAW POST (by sending
+
+      file contents as POST body), fetching from URL (by providing the file URL
+      via 'url' param)
+
+      Attachment is an entity that is used to link a File to one or multiple
+      objects like Customer, Dispute, Payment,
+
+      Transaction, Subscription, Plan, Product, Invoice, Note. That allows to
+      quickly find and use files related to
+
+      those specific entities.
+  - name: Invoices
+    description: >
+      Invoices leave a record for both you and your customer of the products
+      sold.
+  - name: Payments
+    description: >
+      Payments endpoints are deprecated.  Please use the transactions resource
+
+      instead.  A payment is a transaction with type `sale`.  The transactions
+
+      resource is more robust and has withstood the test of time by enterprises.
+
+
+      Collect money from your customers with payments.  You can schedule a
+      payment
+
+      to occur in the future.  You can assign a dunning schedule to a payment to
+      collect
+
+      in the case of a decline.
+
+
+      Some payments may be, what we term, offsite payments.  These types of
+      payments
+
+      require user interaction.  For example, an initial PayPal purchase, a 3D
+      Secure
+
+      purchase, China Union Pay, and more require the customer's interaction to
+
+      complete the payment.  We call these a "offsite" payment flow.
+  - name: Payment Cards
+    description: >
+      Payment cards are a type of payment instrument used for credit and debit
+      card
+
+      sales.  Rebilly securely vaults the full payment card number, and can pass
+      it
+
+      onward securely to any gateway account to transact business.
+  - name: PayPal Accounts
+    description: >
+      PayPal Accounts are used for paying with PayPal.  We can generate a BAID
+      (billing
+
+      agreement id) which will allow for recurring billing.
+  - name: Payment Tokens
+    description: >
+      Payment tokens are used to reduce the scope of PCI DSS compliance.  A
+      payment
+
+      token can be made using a different authentication scheme (refer to the
+      public key
+
+      authentication scheme in the Authentication section), which allows you to
+
+      create a payment token directly from the browser, bypassing the need to
+      send
+
+      sensitive cardholder info to your servers.  We recommend using this with
+      our
+
+      Rebilly.js library, which helps you wire a form into this API resource and
+      create
+
+      payment tokens.
+  - name: Plans
+    description: >
+      Plans are a template for making a subscription.  For example, you may have
+      a plan
+
+      that has a 30-day free trial followed by a recurring charge of $19.95 per
+      month
+
+      until canceled.  The combination of the plan and a request to make a
+      subscription
+
+      will apply those instructions to create the invoices according to the
+      plan's
+
+      schedule.
+  - name: Products
+    description: |
+      A product describes what you sell (goods or services).
+      A product determines how what you sell appears on invoices and receipts.
+      The pricing for products is set in Plans.  One product can have many
+      plans.
+  - name: Reports
+    description: >
+      The Rebilly Reporting API is currently experimental. You may see
+
+      the [Reports API Documentation
+      here](https://reports-api-docs.rebilly.com).
+  - name: Search
+    description: |
+      Search data including customers, invoices, orders, transactions and more.
+  - name: Shipping Zones
+    description: >
+      A shipping zone contains regions and countries that you ship to. Each
+      shipping zone has its own shipping rates.
+  - name: Subscriptions
+    description: >
+      A subscription applies a plan's template to create invoices for a customer
+      at the
+
+      appropriate scheduled intervals.  A subscription may also determine if the
+      payment
+
+      is collected automatically (with autopay set true).
+  - name: Taxes
+    description: |
+      You can map a product to a tax category.  The tax category is used by
+      tax providers to calculate taxes for invoices.
+  - name: Transactions
+    description: |
+      Get and refund transactions.
+  - name: Users
+    description: >
+      The Rebilly User API is primarily for our GUI apps.  You may see
+
+      the [User API Documentation
+      here](https://user-api-docs.rebilly.com).
+
+      A User represents a person who can login to Rebilly, and take actions
+      subject to
+
+      their granted permissions.  It has resources less commonly integrated by
+
+      3rd parties.
+
+security:
+  - SecretApiKey: []
+  - JWT: []
+
+components:
+  securitySchemes:
+    JWT:
+      $ref: components/securitySchemes/JWT.yaml
+    PublishableApiKey:
+      $ref: components/securitySchemes/PublishableApiKey.yaml
+    SecretApiKey:
+      $ref: components/securitySchemes/SecretApiKey.yaml
+  
+paths:
+  /3dsecure:
+    $ref: ./paths/3dsecure.yaml
+  '/3dsecure/{id}':
+    $ref: './paths/3dsecure@{id}.yaml'
+  /attachments:
+    $ref: ./paths/attachments.yaml
+  '/attachments/{id}':
+    $ref: './paths/attachments@{id}.yaml'
+  /authentication-options:
+    $ref: ./paths/authentication-options.yaml
+  /authentication-tokens:
+    $ref: ./paths/authentication-tokens.yaml
+  '/authentication-tokens/{token}':
+    $ref: './paths/authentication-tokens@{token}.yaml'
+  '/authentication-tokens/{token}/exchange':
+    $ref: './paths/authentication-tokens@{token}@exchange.yaml'
+  /bank-accounts:
+    $ref: ./paths/bank-accounts.yaml
+  '/bank-accounts/{id}':
+    $ref: './paths/bank-accounts@{id}.yaml'
+  '/bank-accounts/{id}/deactivation':
+    $ref: './paths/bank-accounts@{id}@deactivation.yaml'
+  /blacklists:
+    $ref: ./paths/blacklists.yaml
+  '/blacklists/{id}':
+    $ref: './paths/blacklists@{id}.yaml'
+  /contacts:
+    $ref: ./paths/contacts.yaml
+  '/contacts/{id}':
+    $ref: './paths/contacts@{id}.yaml'
+  /coupons-redemptions:
+    $ref: ./paths/coupons-redemptions.yaml
+  '/coupons-redemptions/{id}':
+    $ref: './paths/coupons-redemptions@{id}.yaml'
+  '/coupons-redemptions/{id}/cancel':
+    $ref: './paths/coupons-redemptions@{id}@cancel.yaml'
+  /coupons:
+    $ref: ./paths/coupons.yaml
+  '/coupons/{redemptionCode}':
+    $ref: './paths/coupons@{redemptionCode}.yaml'
+  '/coupons/{redemptionCode}/expiration':
+    $ref: './paths/coupons@{redemptionCode}@expiration.yaml'
+  /credentials:
+    $ref: ./paths/credentials.yaml
+  '/credentials/{id}':
+    $ref: './paths/credentials@{id}.yaml'
+  '/custom-fields/{resource}':
+    $ref: './paths/custom-fields@{resource}.yaml'
+  '/custom-fields/{resource}/{name}':
+    $ref: './paths/custom-fields@{resource}@{name}.yaml'
+  /customers:
+    $ref: ./paths/customers.yaml
+  '/customers/{id}':
+    $ref: './paths/customers@{id}.yaml'
+  /customer-timeline-custom-events:
+    $ref: ./paths/customer-timeline-custom-events.yaml
+  '/customer-timeline-custom-events/{id}':
+    $ref: './paths/customer-timeline-custom-events@{id}.yaml'
+  /customer-timeline-events:
+    $ref: ./paths/customer-timeline-events.yaml
+  '/customers/{id}/lead-source':
+    $ref: './paths/customers@{id}@lead-source.yaml'
+  '/customers/{id}/timeline':
+    $ref: './paths/customers@{id}@timeline.yaml'
+  '/customers/{id}/timeline/{messageId}':
+    $ref: './paths/customers@{id}@timeline@{messageId}.yaml'
+  '/customers/{id}/upcoming-invoices':
+    $ref: './paths/customers@{id}@upcoming-invoices.yaml'
+  /disputes:
+    $ref: ./paths/disputes.yaml
+  '/disputes/{id}':
+    $ref: './paths/disputes@{id}.yaml'
+  '/disputes/{id}/matched-rules':
+    $ref: './paths/disputes@{id}@matched-rules.yaml'
+  /files:
+    $ref: ./paths/files.yaml
+  '/files/{id}':
+    $ref: './paths/files@{id}.yaml'
+  '/files/{id}/download':
+    $ref: './paths/files@{id}@download.yaml'
+  '/files/{id}/download{extension}':
+    $ref: './paths/files@{id}@download{extension}.yaml'
+  /invoices:
+    $ref: ./paths/invoices.yaml
+  '/invoices/{id}':
+    $ref: './paths/invoices@{id}.yaml'
+  '/invoices/{id}/abandon':
+    $ref: './paths/invoices@{id}@abandon.yaml'
+  '/invoices/{id}/issue':
+    $ref: './paths/invoices@{id}@issue.yaml'
+  '/invoices/{id}/items':
+    $ref: './paths/invoices@{id}@items.yaml'
+  '/invoices/{id}/matched-rules':
+    $ref: './paths/invoices@{id}@matched-rules.yaml'
+  '/invoices/{id}/recalculate':
+    $ref: './paths/invoices@{id}@recalculate.yaml'
+  '/invoices/{id}/reissue':
+    $ref: './paths/invoices@{id}@reissue.yaml'
+  '/invoices/{id}/timeline':
+    $ref: './paths/invoices@{id}@timeline.yaml'
+  '/invoices/{id}/timeline/{messageId}':
+    $ref: './paths/invoices@{id}@timeline@{messageId}.yaml'
+  '/invoices/{id}/transaction-allocations':
+    $ref: './paths/invoices@{id}@transaction-allocations.yaml'
+  '/invoices/{id}/void':
+    $ref: './paths/invoices@{id}@void.yaml'
+  /kyc-documents:
+    $ref: ./paths/kyc-documents.yaml
+  '/kyc-documents/{id}':
+    $ref: './paths/kyc-documents@{id}.yaml'
+  '/kyc-documents/{id}/acceptance':
+    $ref: './paths/kyc-documents@{id}@acceptance.yaml'
+  '/kyc-documents/{id}/rejection':
+    $ref: './paths/kyc-documents@{id}@rejection.yaml'
+  '/kyc-documents/{id}/review':
+    $ref: './paths/kyc-documents@{id}@review.yaml'
+  /password-tokens:
+    $ref: ./paths/password-tokens.yaml
+  '/password-tokens/{id}':
+    $ref: './paths/password-tokens@{id}.yaml'
+  /payment-cards:
+    $ref: ./paths/payment-cards.yaml
+  '/payment-cards/{id}':
+    $ref: './paths/payment-cards@{id}.yaml'
+  '/payment-cards/{id}/authorization':
+    $ref: './paths/payment-cards@{id}@authorization.yaml'
+  '/payment-cards/{id}/deactivation':
+    $ref: './paths/payment-cards@{id}@deactivation.yaml'
+  '/payment-cards/{id}/matched-rules':
+    $ref: './paths/payment-cards@{id}@matched-rules.yaml'
+  /payment-instrument-validation:
+    $ref: ./paths/payment-instrument-validation.yaml
+  '/payment-instrument-validation/{id}':
+    $ref: './paths/payment-instrument-validation@{id}.yaml'
+  /payments:
+    $ref: ./paths/payments.yaml
+  '/payments/{id}':
+    $ref: './paths/payments@{id}.yaml'
+  /paypal-accounts:
+    $ref: ./paths/paypal-accounts.yaml
+  '/paypal-accounts/{id}':
+    $ref: './paths/paypal-accounts@{id}.yaml'
+  '/paypal-accounts/{id}/activation':
+    $ref: './paths/paypal-accounts@{id}@activation.yaml'
+  '/paypal-accounts/{id}/deactivation':
+    $ref: './paths/paypal-accounts@{id}@deactivation.yaml'
+  /plans:
+    $ref: ./paths/plans.yaml
+  '/plans/{id}':
+    $ref: './paths/plans@{id}.yaml'
+  /products:
+    $ref: ./paths/products.yaml
+  '/products/{id}':
+    $ref: './paths/products@{id}.yaml'
+  /search:
+    $ref: ./paths/search.yaml
+  /shipping-zones:
+    $ref: ./paths/shipping-zones.yaml
+  '/shipping-zones/{id}':
+    $ref: './paths/shipping-zones@{id}.yaml'
+  /subscription-cancellations:
+    $ref: ./paths/subscription-cancellations.yaml
+  '/subscription-cancellations/{id}':
+    $ref: './paths/subscription-cancellations@{id}.yaml'
+  /subscription-reactivations:
+    $ref: ./paths/subscription-reactivations.yaml
+  '/subscription-reactivations/{id}':
+    $ref: './paths/subscription-reactivations@{id}.yaml'
+  /subscriptions:
+    $ref: ./paths/subscriptions.yaml
+  '/subscriptions/{id}':
+    $ref: './paths/subscriptions@{id}.yaml'
+  '/subscriptions/{id}/change-plan':
+    $ref: './paths/subscriptions@{id}@change-plan.yaml'
+  '/subscriptions/{id}/interim-invoice':
+    $ref: './paths/subscriptions@{id}@interim-invoice.yaml'
+  '/subscriptions/{id}/matched-rules':
+    $ref: './paths/subscriptions@{id}@matched-rules.yaml'
+  '/subscriptions/{id}/timeline':
+    $ref: './paths/subscriptions@{id}@timeline.yaml'
+  '/subscriptions/{id}/timeline/{messageId}':
+    $ref: './paths/subscriptions@{id}@timeline@{messageId}.yaml'
+  '/subscriptions/{id}/upcoming-invoices':
+    $ref: './paths/subscriptions@{id}@upcoming-invoices.yaml'
+  '/subscriptions/{id}/upcoming-invoices/{invoiceId}/issue':
+    $ref: './paths/subscriptions@{id}@upcoming-invoices@{invoiceId}@issue.yaml'
+  /tags:
+    $ref: ./paths/tags.yaml
+  '/tags/{tag}':
+    $ref: './paths/tags@{tag}.yaml'
+  '/tags/{tag}/customers':
+    $ref: './paths/tags@{tag}@customers.yaml'
+  '/tags/{tag}/customers/{customerId}':
+    $ref: './paths/tags@{tag}@customers@{customerId}.yaml'
+  /tokens:
+    $ref: ./paths/tokens.yaml
+  '/tokens/{token}':
+    $ref: './paths/tokens@{token}.yaml'
+  /transactions:
+    $ref: ./paths/transactions.yaml
+  '/transactions/{id}':
+    $ref: './paths/transactions@{id}.yaml'
+  '/transactions/{id}/cancel':
+    $ref: './paths/transactions@{id}@cancel.yaml'
+  '/transactions/{id}/gateway-logs':
+    $ref: './paths/transactions@{id}@gateway-logs.yaml'
+  '/transactions/{id}/matched-rules':
+    $ref: './paths/transactions@{id}@matched-rules.yaml'
+  '/transactions/{id}/refund':
+    $ref: './paths/transactions@{id}@refund.yaml'
+  '/transactions/{id}/timeline':
+    $ref: './paths/transactions@{id}@timeline.yaml'
+  '/transactions/{id}/timeline/{messageId}':
+    $ref: './paths/transactions@{id}@timeline@{messageId}.yaml'
+
+# Users API
+  '/activation/{token}':
+    $ref: './paths/activation@{token}.yaml'
+  /api-keys:
+    $ref: ./paths/api-keys.yaml
+  '/api-keys/{id}':
+    $ref: './paths/api-keys@{id}.yaml'
+  /broadcast-messages:
+    $ref: ./paths/broadcast-messages.yaml
+  '/broadcast-messages/{id}':
+    $ref: './paths/broadcast-messages@{id}.yaml'
+  /checkout-pages:
+    $ref: ./paths/checkout-pages.yaml
+  '/checkout-pages/{id}':
+    $ref: './paths/checkout-pages@{id}.yaml'
+  /credential-hashes/aws-ses:
+    $ref: ./paths/credential-hashes@aws-ses.yaml
+  '/credential-hashes/aws-ses/{hash}':
+    $ref: './paths/credential-hashes@aws-ses@{hash}.yaml'
+  /credential-hashes/emails:
+    $ref: ./paths/credential-hashes@emails.yaml
+  '/credential-hashes/emails/{hash}':
+    $ref: './paths/credential-hashes@emails@{hash}.yaml'
+  /credential-hashes/mailgun:
+    $ref: ./paths/credential-hashes@mailgun.yaml
+  '/credential-hashes/mailgun/{hash}':
+    $ref: './paths/credential-hashes@mailgun@{hash}.yaml'
+  /credential-hashes/oauth2:
+    $ref: ./paths/credential-hashes@oauth2.yaml
+  '/credential-hashes/oauth2/{hash}':
+    $ref: './paths/credential-hashes@oauth2@{hash}.yaml'
+  '/credential-hashes/oauth2/{hash}/items':
+    $ref: './paths/credential-hashes@oauth2@{hash}@items.yaml'
+  /credential-hashes/postmark:
+    $ref: ./paths/credential-hashes@postmark.yaml
+  '/credential-hashes/postmark/{hash}':
+    $ref: './paths/credential-hashes@postmark@{hash}.yaml'
+  /credential-hashes/sendgrid:
+    $ref: ./paths/credential-hashes@sendgrid.yaml
+  '/credential-hashes/sendgrid/{hash}':
+    $ref: './paths/credential-hashes@sendgrid@{hash}.yaml'
+  /credential-hashes/webhooks:
+    $ref: ./paths/credential-hashes@webhooks.yaml
+  '/credential-hashes/webhooks/{hash}':
+    $ref: './paths/credential-hashes@webhooks@{hash}.yaml'
+  '/email-delivery-setting-verifications/{token}':
+    $ref: './paths/email-delivery-setting-verifications@{token}.yaml'
+  /email-delivery-settings:
+    $ref: ./paths/email-delivery-settings.yaml
+  '/email-delivery-settings/{id}':
+    $ref: './paths/email-delivery-settings@{id}.yaml'
+  '/email-delivery-settings/{id}/resend-email-verification':
+    $ref: './paths/email-delivery-settings@{id}@resend-email-verification.yaml'
+  /email-messages:
+    $ref: ./paths/email-messages.yaml
+  '/email-messages/{id}':
+    $ref: './paths/email-messages@{id}.yaml'
+  /email-notifications:
+    $ref: ./paths/email-notifications.yaml
+  /events:
+    $ref: ./paths/events.yaml
+  '/events/{eventType}':
+    $ref: './paths/events@{eventType}.yaml'
+  '/events/{eventType}/rules':
+    $ref: './paths/events@{eventType}@rules.yaml'
+  '/events/{eventType}/rules/history':
+    $ref: './paths/events@{eventType}@rules@history.yaml'
+  '/events/{eventType}/rules/history/{version}':
+    $ref: './paths/events@{eventType}@rules@history@{version}.yaml'
+  '/events/{eventType}/rules/versions/{version}':
+    $ref: './paths/events@{eventType}@rules@versions@{version}.yaml'
+  /forgot-password:
+    $ref: ./paths/forgot-password.yaml
+  /gateway-accounts:
+    $ref: ./paths/gateway-accounts.yaml
+  '/gateway-accounts/{id}':
+    $ref: './paths/gateway-accounts@{id}.yaml'
+  '/gateway-accounts/{id}/close':
+    $ref: './paths/gateway-accounts@{id}@close.yaml'
+  '/gateway-accounts/{id}/disable':
+    $ref: './paths/gateway-accounts@{id}@disable.yaml'
+  '/gateway-accounts/{id}/downtime-schedules':
+    $ref: './paths/gateway-accounts@{id}@downtime-schedules.yaml'
+  '/gateway-accounts/{id}/downtime-schedules/{downtimeId}':
+    $ref: './paths/gateway-accounts@{id}@downtime-schedules@{downtimeId}.yaml'
+  '/gateway-accounts/{id}/enable':
+    $ref: './paths/gateway-accounts@{id}@enable.yaml'
+  '/gateway-accounts/{id}/timeline':
+    $ref: './paths/gateway-accounts@{id}@timeline.yaml'
+  '/gateway-accounts/{id}/timeline/{messageId}':
+    $ref: './paths/gateway-accounts@{id}@timeline@{messageId}.yaml'
+  /grid-segments:
+    $ref: ./paths/grid-segments.yaml
+  '/grid-segments/{id}':
+    $ref: './paths/grid-segments@{id}.yaml'
+  /integrations:
+    $ref: ./paths/integrations.yaml
+  '/integrations/{label}':
+    $ref: './paths/integrations@{label}.yaml'
+  /layouts:
+    $ref: ./paths/layouts.yaml
+  '/layouts/{id}':
+    $ref: './paths/layouts@{id}.yaml'
+  /lists:
+    $ref: ./paths/lists.yaml
+  '/lists/{id}':
+    $ref: './paths/lists@{id}.yaml'
+  '/lists/{id}/{version}':
+    $ref: './paths/lists@{id}@{version}.yaml'
+  /logout:
+    $ref: ./paths/logout.yaml
+  /memberships:
+    $ref: ./paths/memberships.yaml
+  '/memberships/{organizationId}/{userId}':
+    $ref: './paths/memberships@{organizationId}@{userId}.yaml'
+  /organizations:
+    $ref: ./paths/organizations.yaml
+  '/organizations/{id}':
+    $ref: './paths/organizations@{id}.yaml'
+  /payment-cards-bank-names:
+    $ref: ./paths/payment-cards-bank-names.yaml
+  /previews/rule-actions/send-email:
+    $ref: ./paths/previews@rule-actions@send-email.yaml
+  /previews/rule-actions/trigger-webhook:
+    $ref: ./paths/previews@rule-actions@trigger-webhook.yaml
+  /previews/webhooks:
+    $ref: ./paths/previews@webhooks.yaml
+  /profile:
+    $ref: ./paths/profile.yaml
+  /profile/password:
+    $ref: ./paths/profile@password.yaml
+  /profile/totp-reset:
+    $ref: ./paths/profile@totp-reset.yaml
+  '/reset-password/{token}':
+    $ref: './paths/reset-password@{token}.yaml'
+  '/send-through-attribution/{eventType}':
+    $ref: './paths/send-through-attribution@{eventType}.yaml'
+  /signin:
+    $ref: ./paths/signin.yaml
+  /signup:
+    $ref: ./paths/signup.yaml
+  /status:
+    $ref: ./paths/status.yaml
+  /tracking/api:
+    $ref: ./paths/tracking@api.yaml
+  '/tracking/api/{id}':
+    $ref: './paths/tracking@api@{id}.yaml'
+  /tracking/lists:
+    $ref: ./paths/tracking@lists.yaml
+  /tracking/webhooks:
+    $ref: ./paths/tracking@webhooks.yaml
+  '/tracking/webhooks/{id}':
+    $ref: './paths/tracking@webhooks@{id}.yaml'
+  '/tracking/webhooks/{id}/history':
+    $ref: './paths/tracking@webhooks@{id}@history.yaml'
+  '/tracking/webhooks/{id}/resend':
+    $ref: './paths/tracking@webhooks@{id}@resend.yaml'
+  /users:
+    $ref: ./paths/users.yaml
+  '/users/{id}':
+    $ref: './paths/users@{id}.yaml'
+  '/users/{id}/password':
+    $ref: './paths/users@{id}@password.yaml'
+  '/users/{id}/totp-reset':
+    $ref: './paths/users@{id}@totp-reset.yaml'
+  /webhooks:
+    $ref: ./paths/webhooks.yaml
+  '/webhooks/{id}':
+    $ref: './paths/webhooks@{id}.yaml'
+  /websites:
+    $ref: ./paths/websites.yaml
+  '/websites/{id}':
+    $ref: './paths/websites@{id}.yaml'
+
+  # Reports
+  '/customers/{customerId}/summary-metrics':
+    $ref: './paths/customers@{customerId}@summary-metrics.yaml'
+  /data-exports:
+    $ref: ./paths/data-exports.yaml
+  '/data-exports/{id}':
+    $ref: './paths/data-exports@{id}.yaml'
+  /histograms/transactions:
+    $ref: ./paths/histograms@transactions.yaml
+  /experimental/organizations:
+    $ref: ./paths/experimental-organizations.yaml
+  '/experimental/organizations/{id}':
+    $ref: './paths/experimental-organizations@{id}.yaml'
+  /reports/payments-success-by-decline-reason:
+    $ref: ./paths/reports@payments-success-by-decline-reason.yaml
+  /reports/api-log-summary:
+    $ref: ./paths/reports@api-log-summary.yaml
+  /reports/cumulative-subscriptions-plans:
+    $ref: ./paths/reports@cumulative-subscriptions-plans.yaml
+  /reports/cumulative-subscriptions:
+    $ref: ./paths/reports@cumulative-subscriptions.yaml
+  /reports/dashboard:
+    $ref: ./paths/reports@dashboard.yaml
+  /reports/dcc-markup:
+    $ref: ./paths/reports@dcc-markup.yaml
+  /reports/disputes:
+    $ref: ./paths/reports@disputes.yaml
+  /reports/events-triggered:
+    $ref: ./paths/reports@events-triggered.yaml
+  '/reports/events-triggered/{eventType}/rules':
+    $ref: './paths/reports@events-triggered@{eventType}@rules.yaml'
+  /reports/future-renewals:
+    $ref: ./paths/reports@future-renewals.yaml
+  /reports/renewal-sales:
+    $ref: ./paths/reports@renewal-sales.yaml
+  /reports/retention-percentage:
+    $ref: ./paths/reports@retention-percentage.yaml
+  /reports/retention-value:
+    $ref: ./paths/reports@retention-value.yaml
+  /reports/retry-transaction:
+    $ref: ./paths/reports@retry-transaction.yaml
+  /reports/statistics:
+    $ref: ./paths/reports@statistics.yaml
+  /reports/subscription-cancellation:
+    $ref: ./paths/reports@subscription-cancellation.yaml
+  /reports/subscription-renewal:
+    $ref: ./paths/reports@subscription-renewal.yaml
+  /reports/time-series-transaction:
+    $ref: ./paths/reports@time-series-transaction.yaml
+  /reports/transactions-plan:
+    $ref: ./paths/reports@transactions-plan.yaml
+  /reports/transactions-time-dispute:
+    $ref: ./paths/reports@transactions-time-dispute.yaml
+  /reports/transactions:
+    $ref: ./paths/reports@transactions.yaml
+  '/subscriptions/{subscriptionId}/summary-metrics':
+    $ref: './paths/subscriptions@{subscriptionId}@summary-metrics.yaml'
