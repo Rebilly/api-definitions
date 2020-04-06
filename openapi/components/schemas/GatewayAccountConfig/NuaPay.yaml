@@ -1,0 +1,39 @@
+description: NuaPay Gateway config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: NuaPay credentials object
+        properties:
+          nuaPayCommonName:
+            type: string
+            description: NuaPay common name
+          nuaPaySerialNumber:
+            type: string
+            description: NuaPay serial number
+          nuaPayAccountId:
+            type: string
+            description: NuaPay account ID
+          nuaPayOriginatorIban:
+            type: string
+            description: NuaPay origiantor IBAN
+            format: password
+          nuaPayApiKey:
+            type: string
+            description: NuaPay api key
+            format: password
+          nuaPayPrivateKey:
+            type: string
+            description: NuaPay private key
+            format: password
+        required:
+          - nuaPayCommonName
+          - nuaPaySerialNumber
+          - nuaPayAccountId
+          - nuaPayOriginatorIban
+          - nuaPayApiKey
+          - nuaPayPrivateKey
