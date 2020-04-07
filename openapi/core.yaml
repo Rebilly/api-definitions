@@ -26,6 +26,13 @@ tags:
       3D Secure is a way to authenticate and protect transactions.  Typically,
       it's only possible to protect the initial transaction in a subscription
       with 3D Secure.
+  - name: AML
+    description: |
+      AML, also known as Anti-Money-Laundering is an endpoint that searches multiple
+      PEP, Sanctions, and Adverse Media lists for listed identities or media for screening
+      purposes. Used during some transaction processing and on Contact creation, it helps
+      determine whether someone is blacklisted or has political or economic sanctions against
+      them.
   - name: Bank Accounts
     description: |
       Bank Accounts are a type of payment instrument used to collect
@@ -233,6 +240,7 @@ x-tagGroups:
       - Contacts
       - Files
       - KYC Documents
+      - AML
       - Tags
       - Customers Timeline
   - name: Payment Instruments
@@ -271,6 +279,8 @@ paths:
     $ref: ./paths/3dsecure.yaml
   '/3dsecure/{id}':
     $ref: './paths/3dsecure@{id}.yaml'
+  /aml:
+    $ref: './paths/aml.yaml'
   /attachments:
     $ref: ./paths/attachments.yaml
   '/attachments/{id}':
