@@ -12,13 +12,23 @@ allOf:
           clientId:
             type: string
             description: Neteller App Client ID
+            deprecated: true
           clientSecret:
             type: string
             description: Neteller App Client Secret
             format: password
+            deprecated: true
           webhookSecretKey:
             type: string
             description: Neteller Webhook Secret Key
+            format: password
+            deprecated: true
+          paysafePaymentsApiUsername:
+            type: string
+            description: Neteller App PaySafe Payments API Username (PRIVATE Key)
+          paysafePaymentsApiPassword:
+            type: string
+            description: Neteller App PaySafe Payments API Password (PRIVATE Key)
             format: password
         required:
           - clientId
@@ -31,3 +41,7 @@ allOf:
           netellerGo:
             type: boolean
             description: Enable NETELLERgo! payment flow
+            deprecated: true
+          paysafePaymentsApi:
+            type: boolean
+            description: Enable new PaySafe Payments API
