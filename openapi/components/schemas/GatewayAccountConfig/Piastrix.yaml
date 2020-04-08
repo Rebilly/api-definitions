@@ -1,0 +1,23 @@
+description: Piastrix config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Piastrix credentials object
+        properties:
+          shop_id:
+            type: string
+            description: Shop ID
+          secret_key:
+            type: string
+            description: Secret Key
+            format: password
+        required:
+          - shop_id
+          - secret_key
+      mpi:
+        $ref: ../Mpi/PiastrixMpis/PiastrixMpis.yaml
