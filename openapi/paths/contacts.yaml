@@ -48,14 +48,14 @@ post:
   operationId: PostContact
   deprecated: true
   description: |
-    Contacts are created automatically by data passed to the 
+    Contacts are created automatically by data passed to the
     contact-related hashes within the customer, invoice,
     payment instrument (like payment card), subscriptions,
-    and more.    
+    and more.
     <div class="alert alert-warning">
       Note: This method should almost never be used.
       Please check with us on your use case before using it.
-    </div>  
+    </div>
   requestBody:
     $ref: ../components/requestBodies/Contact.yaml
   responses:
@@ -75,7 +75,7 @@ post:
     '401':
       $ref: ../components/responses/AccessForbidden.yaml
     '422':
-      $ref: ../components/responses/InvalidDataError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   x-code-samples:
     - lang: PHP
       source:
