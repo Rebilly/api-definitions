@@ -17,18 +17,18 @@ post:
     However, many transactions, especially those for alternative
     methods, require the user to interact with a 3rd party.  You
     may be able to envision PayPal, for example, the user must
-    give permission to complete the payment (or accept the 
-    billing agreement).  
+    give permission to complete the payment (or accept the
+    billing agreement).
 
     Even payment cards may require user approval in the case of
-    3D secure authentication.  In the event that approval is 
+    3D secure authentication.  In the event that approval is
     required, you will receive a response back and notice
     that the `result` is `unknown`.  You will find that the
     `status` is `waiting-approval`. And you will find in the
     `_links` section of the response a link for the `approvalUrl`.
 
-    In this case you would either open the `approvalUrl` in an 
-    iframe or in a pop (better workflow for mobile).  
+    In this case you would either open the `approvalUrl` in an
+    iframe or in a pop (better workflow for mobile).
   requestBody:
     $ref: ../components/requestBodies/TransactionRequest.yaml
   responses:
@@ -43,7 +43,7 @@ post:
     '409':
       $ref: ../components/responses/Conflict.yaml
     '422':
-      $ref: ../components/responses/InvalidDataError.yaml
+      $ref: ../components/responses/ValidationError.yaml
 get:
   tags:
     - Transactions
@@ -93,7 +93,7 @@ get:
     '401':
       $ref: ../components/responses/AccessForbidden.yaml
     '422':
-      $ref: ../components/responses/InvalidDataError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   x-code-samples:
     - lang: PHP
       source:
