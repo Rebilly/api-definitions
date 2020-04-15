@@ -34,6 +34,9 @@ Never share your secret keys. Keep them guarded and secure.
 # Errors
 Rebilly follow's the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs.  As with our normal API responses, your client must be prepared to gracefully handle additional members of the response.
 
+## Forbidden
+<RedocResponse pointer={"#/components/responses/Forbidden"} />
+
 ## Conflict
 <RedocResponse pointer={"#/components/responses/Conflict"} />
 
