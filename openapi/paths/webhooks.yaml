@@ -78,7 +78,13 @@ post:
             content:
               application/json:
                 schema:
-                  $ref: ../components/schemas/PaymentCards/PaymentCard.yaml
+                  type: object
+                  properties:
+                    timestamp:
+                      type: string
+                      format: date-time
+                    userData:
+                      type: string
           responses:
             '202':
               description: |
