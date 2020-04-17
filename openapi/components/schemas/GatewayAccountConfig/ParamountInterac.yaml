@@ -1,0 +1,21 @@
+description: ParamountInterac config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: ParamountInterac credentials object
+        properties:
+          merchantId:
+            type: string
+            description: ParamountInterac merchant ID
+          encryptionKey:
+            type: string
+            description: ParamountInterac encryption key
+            format: password
+        required:
+          - merchantId
+          - encryptionKey
