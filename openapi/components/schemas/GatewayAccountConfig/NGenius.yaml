@@ -1,0 +1,21 @@
+description: NGenius config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: NGenius credentials object
+        properties:
+          outletId:
+            type: string
+            description: NGenius outlet ID
+          apiKey:
+            type: string
+            description: NGenius API key
+            format: password
+        required:
+          - outletId
+          - apiKey

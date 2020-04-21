@@ -7,9 +7,9 @@ post:
   operationId: PostToken
   description: |
     [FramePay](https://rebilly.github.io/framepay-docs/)
-    is the recommended way to 
+    is the recommended way to
     create a payment token because it minimizes
-    PCI DSS compliance.  Once a payment token 
+    PCI DSS compliance.  Once a payment token
     is created, it can only be used once.
 
     A payment token expires upon first use
@@ -47,9 +47,9 @@ post:
               - $ref: ../components/schemas/PaymentTokens/BankAccountToken.yaml
               - $ref: ../components/schemas/PaymentTokens/PaymentToken.yaml
     '401':
-      $ref: ../components/responses/AccessForbidden.yaml
+      $ref: ../components/responses/Unauthorized.yaml
     '422':
-      $ref: ../components/responses/InvalidDataError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   x-code-samples:
     - lang: PHP
       source:
@@ -87,7 +87,7 @@ get:
             items:
               $ref: ../components/schemas/PaymentTokens/PaymentToken.yaml
     '401':
-      $ref: ../components/responses/AccessForbidden.yaml
+      $ref: ../components/responses/Unauthorized.yaml
   x-code-samples:
     - lang: PHP
       source:

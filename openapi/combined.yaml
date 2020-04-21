@@ -38,13 +38,6 @@ tags:
       you do NOT want to do business with. They are a good tool for managing
       risk. A blacklist entry that expires after a period of time we call a
       greylist.
-  - name: Contacts
-    description: >
-      Contacts are Customer's address book.
-
-      All contact information used in Invoices, Subscriptions, Transactions, etc
-      is enlisted here. Hovewer, changing a Contact won't change corresponding
-      contact information in related resources
   - name: Coupons
     description: >
       Coupons allows to apply different types of discounts to Invoices,
@@ -99,33 +92,6 @@ tags:
     description: >
       Invoices leave a record for both you and your customer of the products
       sold.
-  - name: Payments
-    description: >
-      Payments endpoints are deprecated.  Please use the transactions resource
-
-      instead.  A payment is a transaction with type `sale`.  The transactions
-
-      resource is more robust and has withstood the test of time by enterprises.
-
-
-      Collect money from your customers with payments.  You can schedule a
-      payment
-
-      to occur in the future.  You can assign a dunning schedule to a payment to
-      collect
-
-      in the case of a decline.
-
-
-      Some payments may be, what we term, offsite payments.  These types of
-      payments
-
-      require user interaction.  For example, an initial PayPal purchase, a 3D
-      Secure
-
-      purchase, China Union Pay, and more require the customer's interaction to
-
-      complete the payment.  We call these a "offsite" payment flow.
   - name: Payment Cards
     description: >
       Payment cards are a type of payment instrument used for credit and debit
@@ -237,7 +203,7 @@ components:
       $ref: components/securitySchemes/PublishableApiKey.yaml
     SecretApiKey:
       $ref: components/securitySchemes/SecretApiKey.yaml
-  
+
 paths:
   /3dsecure:
     $ref: ./paths/3dsecure.yaml
@@ -265,10 +231,6 @@ paths:
     $ref: ./paths/blacklists.yaml
   '/blacklists/{id}':
     $ref: './paths/blacklists@{id}.yaml'
-  /contacts:
-    $ref: ./paths/contacts.yaml
-  '/contacts/{id}':
-    $ref: './paths/contacts@{id}.yaml'
   /coupons-redemptions:
     $ref: ./paths/coupons-redemptions.yaml
   '/coupons-redemptions/{id}':
@@ -373,10 +335,6 @@ paths:
     $ref: ./paths/payment-instrument-validation.yaml
   '/payment-instrument-validation/{id}':
     $ref: './paths/payment-instrument-validation@{id}.yaml'
-  /payments:
-    $ref: ./paths/payments.yaml
-  '/payments/{id}':
-    $ref: './paths/payments@{id}.yaml'
   /paypal-accounts:
     $ref: ./paths/paypal-accounts.yaml
   '/paypal-accounts/{id}':

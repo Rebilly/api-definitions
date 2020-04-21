@@ -23,7 +23,7 @@ get:
           schema:
             $ref: ../components/schemas/Product.yaml
     '401':
-      $ref: ../components/responses/AccessForbidden.yaml
+      $ref: ../components/responses/Unauthorized.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
 put:
@@ -63,9 +63,9 @@ put:
           schema:
             $ref: ../components/schemas/Product.yaml
     '401':
-      $ref: ../components/responses/AccessForbidden.yaml
+      $ref: ../components/responses/Unauthorized.yaml
     '422':
-      $ref: ../components/responses/InvalidDataError.yaml
+      $ref: ../components/responses/ValidationError.yaml
 delete:
   tags:
     - Products
@@ -84,6 +84,6 @@ delete:
         Rate-Limit-Reset:
           $ref: ../components/headers/Rate-Limit-Reset.yaml
     '401':
-      $ref: ../components/responses/AccessForbidden.yaml
+      $ref: ../components/responses/Unauthorized.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
