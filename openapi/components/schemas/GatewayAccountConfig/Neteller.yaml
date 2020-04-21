@@ -9,25 +9,13 @@ allOf:
         type: object
         description: Neteller credentials object
         properties:
-          clientId:
+          paysafePaymentsApiUsername:
             type: string
-            description: Neteller App Client ID
-          clientSecret:
+            description: Neteller App Paysafe Payments API Username for a private key
+          paysafePaymentsApiPassword:
             type: string
-            description: Neteller App Client Secret
-            format: password
-          webhookSecretKey:
-            type: string
-            description: Neteller Webhook Secret Key
+            description: Neteller App Paysafe Payments API Password for a private key
             format: password
         required:
-          - clientId
-          - clientSecret
-          - webhookSecretKey
-      settings:
-        type: object
-        description: Neteller settings object
-        properties:
-          netellerGo:
-            type: boolean
-            description: Enable NETELLERgo! payment flow
+          - paysafePaymentsApiUsername
+          - paysafePaymentsApiPassword
