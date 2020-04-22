@@ -4,7 +4,6 @@ required:
 properties:
   id:
     description: The card identifier string
-    readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   customerId:
@@ -14,18 +13,15 @@ properties:
   method:
     description: The method of payment instrument.
     type: string
-    readOnly: true
     enum:
       - payment-card
   bin:
     description: The card's bin (the PAN's first 6 digits)
     type: string
     format: bin
-    readOnly: true
   last4:
     description: The PAN's last 4 digits
     type: string
-    readOnly: true
   expYear:
     description: Card's expiry year.
     type: integer
@@ -41,14 +37,12 @@ properties:
       A unique value to identify the PAN regardless of expiration dates.  It
       contains alphanumeric values.
     type: string
-    readOnly: true
   panFingerprint:
     deprecated: true
     description: >-
       A unique value to identify the PAN regardless of expiration dates.  It
       contains alphanumeric values. Use `fingerprint` instead.
     type: string
-    readOnly: true
   status:
     description: >
       Payment Card status.  When a card is `active` it means it has been used at
@@ -57,7 +51,6 @@ properties:
       To remove a card from being in use, set it as `deactivated` (see the
       deactivation endpoint).
     type: string
-    readOnly: true
     enum:
       - active
       - expired
@@ -66,21 +59,17 @@ properties:
       - pending
       - verification-needed
   brand:
-    readOnly: true
     allOf:
       - $ref: ./PaymentCardBrand.yaml
   bankCountry:
     description: Payment Card bank country
     type: string
-    readOnly: true
   bankName:
     description: Payment Card bank name
     type: string
-    readOnly: true
   stickyGatewayAccountId:
     description: Default Gateway Account ID used for transactions
     type: string
-    readOnly: true
   createdTime:
     description: Card created time
     allOf:
@@ -97,13 +86,11 @@ properties:
   expirationReminderNumber:
     description: Number of expiration reminder events triggered
     type: integer
-    readOnly: true
   customFields:
     $ref: ../ResourceCustomFields.yaml
   _links:
     type: array
     description: The links related to resource
-    readOnly: true
     minItems: 1
     items:
       anyOf:
@@ -116,7 +103,6 @@ properties:
     description: >-
       Any embedded objects available that are requested by the `expand`
       querystring parameter.
-    readOnly: true
     minItems: 1
     items:
       anyOf:
