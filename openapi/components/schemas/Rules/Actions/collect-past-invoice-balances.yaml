@@ -1,0 +1,15 @@
+description: Try to collect previous renewal autopay invoice balances
+allOf:
+  - $ref: ../RuleAction.yaml
+  - type: object
+    description: Configuration of invoice balances collection
+    properties:
+      collectPartiallyPaidAndPastDue:
+        type: boolean
+        description: Collect previous past-due (includes partially paid) invoice balances
+      collectAbandoned:
+        type: boolean
+        description: Collect previous abandoned invoice balances
+    required:
+      - scheduleInstruction
+      - amountPolicy
