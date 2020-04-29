@@ -1,0 +1,26 @@
+description: Google Pay digital wallet
+allOf:
+  -
+    $ref: ../DigitalWallet.yaml
+  -
+    type: "object"
+    required:
+      - settings
+    properties:
+      settings:
+        description: Google Pay digital wallet settings
+        type: array
+        items:
+          type: object
+          required:
+            - merchantName
+            - merchantOrigin
+          properties:
+            merchantName:
+              description: The merchant name in Google Pay
+              type: string
+              example: "Test Merchant"
+            merchantOrigin:
+              description: The Merchant Origin in Google Pay.  The fully qualified domain
+              type: string
+              example: "www.example.com"

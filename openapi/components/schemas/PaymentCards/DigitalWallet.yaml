@@ -1,0 +1,11 @@
+type: object
+required:
+  - digitalWalletName
+discriminator:
+  propertyName: digitalWalletName
+  mapping:
+    Apple Pay: ./DigitalWallets/ApplePay.yaml
+    Google Pay: ./DigitalWallets/GooglePay.yaml
+properties:
+    digitalWalletName:
+      $ref: ./DigitalWalletName.yaml
