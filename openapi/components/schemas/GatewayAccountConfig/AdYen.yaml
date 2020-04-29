@@ -1,0 +1,31 @@
+description: AdYen config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+      - settings
+    properties:
+      credentials:
+        type: object
+        description: AdYen credentials object
+        properties:
+          merchantAccount:
+            type: string
+            description: AdYen merchant account
+          apiKey:
+            type: string
+            description: AdYen api key
+            format: password
+        required:
+          - merchantAccount
+          - apiKey
+      settings:
+        type: object
+        description: AdYen settings object
+        properties:
+          url:
+            type: string
+            description: AdYen post URL
+        required:
+          - url
