@@ -7,6 +7,11 @@ parameters:
     required: true
     schema:
       type: string
+      enum:
+        - money-daily-limit
+        - money-monthly-limit
+        - count-daily-limit
+        - count-monthly-limit
 get:
   tags:
     - Gateway Accounts
@@ -37,10 +42,10 @@ get:
 put:
   tags:
     - Gateway Accounts
-  summary: Update a aateway account limit
+  summary: Update a gateway account limit
   operationId: PutGatewayAccountLimit
   description: |
-    Update a gateway account limit with predefined identifier string
+    Update a gateway account limit with predefined identifier string.
   responses:
     '200':
       description: Gateway account limit was updated
