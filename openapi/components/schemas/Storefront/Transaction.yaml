@@ -1,0 +1,298 @@
+type: object
+properties:
+  id:
+    description: The transaction identifier string
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  websiteId:
+    description: The website identifier string
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  type:
+    description: Transaction type
+    type: string
+    readOnly: true
+    enum:
+      - authorize
+      - capture
+      - credit
+      - refund
+      - sale
+      - void
+  status:
+    description: Transaction status
+    type: string
+    readOnly: true
+    enum:
+      - completed
+      - connection-error
+      - disputed
+      - never-sent
+      - partially-refunded
+      - pending
+      - refunded
+      - sending
+      - suspended
+      - timeout
+      - voided
+      - waiting-capture
+      - waiting-refund
+  result:
+    description: Transaction result
+    type: string
+    readOnly: true
+    enum:
+      - abandoned
+      - approved
+      - canceled
+      - declined
+      - unknown
+  amount:
+    description: The transactions's amount
+    type: number
+    format: double
+    readOnly: true
+  currency:
+    readOnly: true
+    allOf:
+      - $ref: ../CurrencyCode.yaml
+  purchaseAmount:
+    description: The transactions's purchase amount
+    type: number
+    format: double
+    readOnly: true
+  purchaseCurrency:
+    readOnly: true
+    allOf:
+      - $ref: ../CurrencyCode.yaml
+  requestAmount:
+    description: The transactions's amount received in the payment request
+    type: number
+    format: double
+    readOnly: true
+  requestCurrency:
+    readOnly: true
+    allOf:
+      - $ref: ../CurrencyCode.yaml
+  parentTransactionId:
+    description: The transactions's parent ID
+    allOf:
+      - $ref: ../ResourceId.yaml
+    readOnly: true
+  childTransactions:
+    description: The child transaction IDs
+    readOnly: true
+    type: array
+    items:
+      $ref: ../ResourceId.yaml
+  invoiceIds:
+    description: The invoice IDs related to transaction
+    readOnly: true
+    type: array
+    items:
+      $ref: ../ResourceId.yaml
+  orderIds:
+    description: The order IDs related to transaction's invoice(s)
+    readOnly: true
+    type: array
+    items:
+      $ref: ../ResourceId.yaml
+  planIds:
+    description: The plan IDs related to transaction's subscription(s)
+    readOnly: true
+    type: array
+    items:
+      $ref: ../ResourceId.yaml
+  isRebill:
+    type: boolean
+    readOnly: true
+  rebillNumber:
+    description: The transactions's rebill number
+    type: integer
+    readOnly: true
+  paymentInstrument:
+    $ref: PaymentInstrumentReference.yaml
+  billingAddress:
+    description: Billing Address
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  has3ds:
+    type: boolean
+    readOnly: true
+  3ds:
+    allOf:
+      - $ref: ../Transactions/ThreeDSecureResult.yaml
+  hasDcc:
+    description: True if transaction has Dynamic Currency Conversion applied
+    type: boolean
+    readOnly: true
+  dcc:
+    description: Dynamic Currency Conversion detailed information. Null if hasDcc is false
+    type: object
+    readOnly: true
+    properties:
+      base:
+        type: object
+        description: Initial amount and currency to convert from
+        properties:
+          amount:
+            type: number
+            format: double
+          currency:
+            allOf:
+              - $ref: ../CurrencyCode.yaml
+      quote:
+        type: object
+        description: Suggested amount and currency to convert to
+        properties:
+          amount:
+            type: number
+            format: double
+          currency:
+            allOf:
+              - $ref: ../CurrencyCode.yaml
+      usdMarkup:
+        description: The amount of markup translated to USD
+        type: number
+        format: double
+      outcome:
+        type: string
+        description: Dynamic Currency Conversion outcome
+        enum:
+          - rejected
+          - selected
+          - unknown
+  hasBumpOffer:
+    description: True if transaction has a Bump offer
+    type: boolean
+    readOnly: true
+  bumpOffer:
+    description: Bump offer information. Null if hasBumpOffer is false
+    type: object
+    readOnly: true
+    properties:
+      order:
+        type: object
+        description: Initial amount and currency
+        properties:
+          amount:
+            type: number
+            format: double
+          currency:
+            allOf:
+              - $ref: ../CurrencyCode.yaml
+      bump:
+        type: object
+        description: Bump amount and currency
+        properties:
+          amount:
+            type: number
+            format: double
+          currency:
+            allOf:
+              - $ref: ../CurrencyCode.yaml
+      bonus:
+        type: object
+        description: Bonus amount and currency
+        properties:
+          amount:
+            type: number
+            format: double
+          currency:
+            allOf:
+              - $ref: ../CurrencyCode.yaml
+      usdOrder:
+        description: The amount of initial amount translated to USD
+        type: number
+        format: double
+      usdBump:
+        description: The amount of bump amount translated to USD
+        type: number
+        format: double
+      usdBonus:
+        description: The amount of bonus amount translated to USD
+        type: number
+        format: double
+      language:
+        description: The language of the bump offer that was displayed to user (useful for finding any translation problems)
+        type: string
+      outcome:
+        type: string
+        description: Bump offer outcome
+        enum:
+          - rejected
+          - selected
+          - unknown
+  redirectUrl:
+    description: The URL to redirect the end-user when an offsite transaction is completed.  Defaults to the website's configured URL.
+    type: string
+    format: uri
+  retryNumber:
+    type: integer
+    readOnly: true
+    description: The position in the sequence of retries
+  retriedTransactionId:
+    readOnly: true
+    description: The retried transaction ID
+    allOf:
+      - $ref: ../ResourceId.yaml
+  retriesResult:
+    type: string
+    readOnly: true
+    description: Retries sequence result
+    enum:
+      - approved
+      - canceled
+      - declined
+      - scheduled
+  isRetry:
+    type: boolean
+    readOnly: true
+    description: True if this transaction is retry.
+  billingDescriptor:
+    type: string
+    readOnly: true
+    description: The billing descriptor that appears
+      on the periodic billing statement. Commonly
+      12 or fewer characters for a credit card
+      statement.
+  description:
+    type: string
+    description: The payment description
+    maxLength: 255
+  isDisputed:
+    description: True if transaction is disputed
+    type: boolean
+    readOnly: true
+  isReconciled:
+    description: True if the transaction has been verified with gateway batch data
+    type: boolean
+    readOnly: true
+  hadDiscrepancy:
+    description: True if the transaction has been updated due to a disprepancy with its source of truth
+    type: boolean
+    readOnly: true
+  requestId:
+    description: The transactions's request ID.  This ID must be unique within a 24 hour period.
+      Use this field to prevent duplicated transactions.
+    type: string
+  customFields:
+    $ref: ../ResourceCustomFields.yaml
+  scheduledTime:
+    type: string
+    description: The time the transaction is scheduled for collection
+    format: date-time
+  processedTime:
+    description: Transaction processed time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  createdTime:
+    description: Transaction created time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: Transaction updated time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml

@@ -1,0 +1,41 @@
+type: object
+title: 'PayPal Account'
+properties:
+  id:
+    description: The Payment Instrument identifier string
+    readOnly: true
+    allOf:
+      - $ref: ../../ResourceId.yaml
+  method:
+    description: The method of payment instrument
+    type: string
+    readOnly: true
+    enum:
+      - paypal
+  status:
+    type: string
+    description: |
+      Payment Instrument status. When an instrument is `active` it means it has been used at least once for an approved transaction.
+      To remove an instrument from being in use, set it as `deactivated` (see the deactivation endpoint).
+    enum:
+      - active
+      - inactive
+      - deactivated
+  username:
+    description: PayPal username.
+    type: string
+    readOnly: true
+  billingAddress:
+    description: The Billing Address.
+    allOf:
+      - $ref: ../../Contact/ContactObject.yaml
+  createdTime:
+    description: Payment Instrument created time
+    allOf:
+      - $ref: ../../ServerTimestamp.yaml
+  updatedTime:
+    description: Payment Instrument updated time
+    allOf:
+      - $ref: ../../ServerTimestamp.yaml
+  customFields:
+    $ref: ../../ResourceCustomFields.yaml
