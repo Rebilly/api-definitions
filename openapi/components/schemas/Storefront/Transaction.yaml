@@ -59,7 +59,7 @@ properties:
     allOf:
       - $ref: ../CurrencyCode.yaml
   purchaseAmount:
-    description: The transactions's purchase amount
+    description: The amount actually purchased which may have differed from the originally requested amount in case of an adjustment.
     type: number
     format: double
     readOnly: true
@@ -68,7 +68,7 @@ properties:
     allOf:
       - $ref: ../CurrencyCode.yaml
   requestAmount:
-    description: The transactions's amount received in the payment request
+    description: The amount in the payment request. If adjusted, the purchase amount and billing amount may vary from it.
     type: number
     format: double
     readOnly: true
@@ -77,7 +77,7 @@ properties:
     allOf:
       - $ref: ../CurrencyCode.yaml
   parentTransactionId:
-    description: The transactions's parent ID
+    description: The parent's transaction ID
     allOf:
       - $ref: ../ResourceId.yaml
     readOnly: true
@@ -124,107 +124,6 @@ properties:
   3ds:
     allOf:
       - $ref: ../Transactions/ThreeDSecureResult.yaml
-  hasDcc:
-    description: True if transaction has dynamic currency conversion applied
-    type: boolean
-    readOnly: true
-  dcc:
-    description: Dynamic currency conversion detailed information. Null if hasDcc is false.
-    type: object
-    readOnly: true
-    properties:
-      base:
-        type: object
-        description: Initial amount and currency to convert from
-        properties:
-          amount:
-            type: number
-            format: double
-          currency:
-            allOf:
-              - $ref: ../CurrencyCode.yaml
-      quote:
-        type: object
-        description: Suggested amount and currency to convert to
-        properties:
-          amount:
-            type: number
-            format: double
-          currency:
-            allOf:
-              - $ref: ../CurrencyCode.yaml
-      usdMarkup:
-        description: The amount of markup translated to USD
-        type: number
-        format: double
-      outcome:
-        type: string
-        description: Dynamic currency conversion outcome
-        enum:
-          - rejected
-          - selected
-          - unknown
-  hasBumpOffer:
-    description: True if transaction has a bump offer
-    type: boolean
-    readOnly: true
-  bumpOffer:
-    description: Bump offer information. Null if `hasBumpOffer` is false.
-    type: object
-    readOnly: true
-    properties:
-      order:
-        type: object
-        description: Initial amount and currency
-        properties:
-          amount:
-            type: number
-            format: double
-          currency:
-            allOf:
-              - $ref: ../CurrencyCode.yaml
-      bump:
-        type: object
-        description: Bump amount and currency
-        properties:
-          amount:
-            type: number
-            format: double
-          currency:
-            allOf:
-              - $ref: ../CurrencyCode.yaml
-      bonus:
-        type: object
-        description: Bonus amount and currency
-        properties:
-          amount:
-            type: number
-            format: double
-          currency:
-            allOf:
-              - $ref: ../CurrencyCode.yaml
-      usdOrder:
-        description: The amount of initial amount translated to USD
-        type: number
-        format: double
-      usdBump:
-        description: The amount of bump amount translated to USD
-        type: number
-        format: double
-      usdBonus:
-        description: The amount of bonus amount translated to USD
-        type: number
-        format: double
-      language:
-        description: The language of the bump offer that was displayed to user (useful for finding any translation problems).
-        type: string
-      outcome:
-        type: string
-        description: Bump offer outcome
-        enum:
-          - rejected
-          - selected
-          - unknown
   redirectUrl:
     description: The URL to redirect the end-user when an offsite transaction is completed. Defaults to the website's configured URL.
     type: string
@@ -233,20 +132,6 @@ properties:
     type: integer
     readOnly: true
     description: The position in the sequence of retries
-  retriedTransactionId:
-    readOnly: true
-    description: The retried transaction ID
-    allOf:
-      - $ref: ../ResourceId.yaml
-  retriesResult:
-    type: string
-    readOnly: true
-    description: Retries sequence result
-    enum:
-      - approved
-      - canceled
-      - declined
-      - scheduled
   isRetry:
     type: boolean
     readOnly: true
@@ -261,28 +146,12 @@ properties:
     type: string
     description: The payment description
     maxLength: 255
-  isDisputed:
-    description: True if transaction is disputed
-    type: boolean
-    readOnly: true
-  isReconciled:
-    description: True if the transaction has been verified with gateway batch data
-    type: boolean
-    readOnly: true
-  hadDiscrepancy:
-    description: True if the transaction has been updated due to a disprepancy with its source of truth
-    type: boolean
-    readOnly: true
   requestId:
-    description: The transactions's request ID.  This ID must be unique within a 24 hour period.
+    description: The transaction's request ID.  This ID must be unique within a 24 hour period.
       Use this field to prevent duplicated transactions.
     type: string
   customFields:
     $ref: ../ResourceCustomFields.yaml
-  scheduledTime:
-    type: string
-    description: The time the transaction is scheduled for collection
-    format: date-time
   processedTime:
     description: Transaction processed time
     allOf:
