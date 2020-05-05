@@ -2,7 +2,7 @@ type: object
 title: 'PayPal Account'
 properties:
   id:
-    description: The Payment Instrument identifier string
+    description: The payment instrument ID
     readOnly: true
     allOf:
       - $ref: ../../ResourceId.yaml
@@ -15,7 +15,7 @@ properties:
   status:
     type: string
     description: |
-      Payment Instrument status. When an instrument is `active` it means it has been used at least once for an approved transaction.
+      Payment instrument status. When an instrument is `active` it means it has been used at least once for an approved transaction.
       To remove an instrument from being in use, set it as `deactivated` (see the deactivation endpoint).
     enum:
       - active
@@ -26,15 +26,15 @@ properties:
     type: string
     readOnly: true
   billingAddress:
-    description: The Billing Address.
+    description: The billing address
     allOf:
       - $ref: ../../Contact/ContactObject.yaml
   createdTime:
-    description: Payment Instrument created time
+    description: Payment instrument created time
     allOf:
       - $ref: ../../ServerTimestamp.yaml
   updatedTime:
-    description: Payment Instrument updated time
+    description: Payment instrument updated time
     allOf:
       - $ref: ../../ServerTimestamp.yaml
   customFields:

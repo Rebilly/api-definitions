@@ -6,7 +6,7 @@ required:
   - pricing
 properties:
   id:
-    description: The plan identifier string
+    description: The plan ID
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
@@ -14,7 +14,7 @@ properties:
     description: The plan name, displayed on invoices and receipts.
     type: string
   productId:
-    description: The related product identifier string
+    description: The related product ID
     allOf:
       - $ref: ../ResourceId.yaml
   productOptions:
@@ -41,7 +41,10 @@ properties:
       - type: object
         properties:
           limit:
-            description: The number of invoices this subscription will generate (if 1, it will not generate any beyond the initial subscription creation).  For example, set this property to `12`, when the `periodUnit` is month and the `periodDuration` is 1, for a 1 year contract billed monthly.
+            description: |
+              The number of invoices this subscription will generate (if 1, it will not generate any beyond the initial
+              subscription creation). For example, set this property to `12`, when the `periodUnit` is month and the
+              `periodDuration` is 1, for a 1 year contract billed monthly.
             type: integer
           billingTiming:
             $ref: ../Plans/PlanBillingTiming.yaml
@@ -65,7 +68,7 @@ properties:
       - price
     properties:
       price:
-        description: The price of a setup - 0 is a valid value (for free)
+        description: The price of a setup - 0 is a valid value (for free).
         type: number
         format: double
   customFields:

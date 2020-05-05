@@ -2,12 +2,12 @@ type: object
 title: 'Bank Account'
 properties:
   id:
-    description: The Payment Instrument identifier string
+    description: The payment instrument ID
     readOnly: true
     allOf:
       - $ref: ../../ResourceId.yaml
   method:
-    description: The method of payment instrument.
+    description: The method of payment instrument
     type: string
     readOnly: true
     enum:
@@ -15,54 +15,54 @@ properties:
   status:
     type: string
     description: |
-      Payment Instrument status. When an instrument is `active` it means it has been used at least once for an approved transaction.
+      Payment instrument status. When an instrument is `active` it means it has been used at least once for an approved transaction.
       To remove an instrument from being in use, set it as `deactivated` (see the deactivation endpoint).
     enum:
       - active
       - inactive
       - deactivated
   fingerprint:
-    description: A unique value to identify the Payment Instrument regardless of variable values. It contains alphanumeric values.
+    description: A unique value to identify the payment instrument regardless of variable values. It contains alphanumeric values.
     type: string
     readOnly: true
   bic:
-    description: Bank Identifier Code, sometimes called a SWIFT code.
+    description: Bank identifier code, sometimes called a SWIFT code.
     type: string
   last4:
     description: The last 4 digits of the bank account number.
     type: string
     readOnly: true
   routingNumber:
-    description: Bank's Routing Number.
+    description: Bank's routing number.
     type: string
   accountNumberType:
-    description: Bank's Account Number type. A valid value is basic bank account number (BBAN) or international bank account number (IBAN).
+    description: Bank's account number type. A valid value is basic bank account number (BBAN) or international bank account number (IBAN).
     type: string
     default: BBAN
     enum:
       - BBAN
       - IBAN
   accountType:
-    description: Bank's Account type.
+    description: Bank's account type
     type: string
     enum:
       - checking
       - savings
       - other
   bankName:
-    description: Payment Instrument bank name
+    description: Payment instrument bank name
     type: string
     readOnly: true
   billingAddress:
-    description: The Billing Address.
+    description: The billing address
     allOf:
       - $ref: ../../Contact/ContactObject.yaml
   createdTime:
-    description: Payment Instrument created time
+    description: Payment instrument created time
     allOf:
       - $ref: ../../ServerTimestamp.yaml
   updatedTime:
-    description: Payment Instrument updated time
+    description: Payment instrument updated time
     allOf:
       - $ref: ../../ServerTimestamp.yaml
   customFields:

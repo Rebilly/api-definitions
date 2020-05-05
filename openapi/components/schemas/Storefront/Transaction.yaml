@@ -1,12 +1,12 @@
 type: object
 properties:
   id:
-    description: The transaction identifier string
+    description: The transaction ID
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   websiteId:
-    description: The website identifier string
+    description: The website ID
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
@@ -115,7 +115,7 @@ properties:
   paymentInstrument:
     $ref: PaymentInstrumentReference.yaml
   billingAddress:
-    description: Billing Address
+    description: Billing address
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   has3ds:
@@ -125,11 +125,11 @@ properties:
     allOf:
       - $ref: ../Transactions/ThreeDSecureResult.yaml
   hasDcc:
-    description: True if transaction has Dynamic Currency Conversion applied
+    description: True if transaction has dynamic currency conversion applied
     type: boolean
     readOnly: true
   dcc:
-    description: Dynamic Currency Conversion detailed information. Null if hasDcc is false
+    description: Dynamic currency conversion detailed information. Null if hasDcc is false.
     type: object
     readOnly: true
     properties:
@@ -159,17 +159,17 @@ properties:
         format: double
       outcome:
         type: string
-        description: Dynamic Currency Conversion outcome
+        description: Dynamic currency conversion outcome
         enum:
           - rejected
           - selected
           - unknown
   hasBumpOffer:
-    description: True if transaction has a Bump offer
+    description: True if transaction has a bump offer
     type: boolean
     readOnly: true
   bumpOffer:
-    description: Bump offer information. Null if hasBumpOffer is false
+    description: Bump offer information. Null if `hasBumpOffer` is false.
     type: object
     readOnly: true
     properties:
@@ -216,7 +216,7 @@ properties:
         type: number
         format: double
       language:
-        description: The language of the bump offer that was displayed to user (useful for finding any translation problems)
+        description: The language of the bump offer that was displayed to user (useful for finding any translation problems).
         type: string
       outcome:
         type: string
@@ -226,7 +226,7 @@ properties:
           - selected
           - unknown
   redirectUrl:
-    description: The URL to redirect the end-user when an offsite transaction is completed.  Defaults to the website's configured URL.
+    description: The URL to redirect the end-user when an offsite transaction is completed. Defaults to the website's configured URL.
     type: string
     format: uri
   retryNumber:
@@ -254,10 +254,9 @@ properties:
   billingDescriptor:
     type: string
     readOnly: true
-    description: The billing descriptor that appears
-      on the periodic billing statement. Commonly
-      12 or fewer characters for a credit card
-      statement.
+    description: |
+      The billing descriptor that appears on the periodic billing statement. Commonly
+      12 or fewer characters for a credit card statement.
   description:
     type: string
     description: The payment description

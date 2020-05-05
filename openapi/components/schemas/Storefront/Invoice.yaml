@@ -3,12 +3,12 @@ required:
   - currency
 properties:
   id:
-    description: The invoice identifier string
+    description: The invoice ID
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   websiteId:
-    description: The website identifier string
+    description: The website ID
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
@@ -17,7 +17,7 @@ properties:
     readOnly: true
     type: integer
   subscriptionId:
-    description: The related Subscription's ID if available, otherwise null
+    description: The related subscription's ID if available, otherwise null.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
@@ -25,32 +25,32 @@ properties:
     allOf:
       - $ref: ../CurrencyCode.yaml
   amount:
-    description: The Invoice's amount
+    description: The invoice's amount
     type: number
     format: double
     readOnly: true
   amountDue:
-    description: The Invoice's due amount
+    description: The invoice's due amount
     type: number
     format: double
     readOnly: true
   subtotalAmount:
-    description: The Invoice's subtotal amount
+    description: The invoice's subtotal amount
     type: number
     format: double
     readOnly: true
   discountAmount:
-    description: The Invoice's discounts amount
+    description: The invoice's discounts amount
     type: number
     format: double
     readOnly: true
   taxAmount:
-    description: The Invoice's taxes amount
+    description: The invoice's taxes amount
     type: number
     format: double
     readOnly: true
   shippingAmount:
-    description: The Invoice's shipping amount
+    description: The invoice's shipping amount
     type: number
     format: double
     readOnly: true
@@ -72,7 +72,7 @@ properties:
     type: string
   items:
     type: array
-    description: Invoice Items array
+    description: Invoice items array
     readOnly: true
     items:
       $ref: ../Invoices/InvoiceItem.yaml
@@ -108,7 +108,7 @@ properties:
     default: 0
   status:
     type: string
-    description: Invoice status.
+    description: Invoice status
     readOnly: true
     enum:
      - "draft"
@@ -123,11 +123,11 @@ properties:
      - "disputed"
   delinquentCollectionPeriod:
     type: integer
-    description: Delinquent Collection Period - difference between paidTime and dueTime in days.
+    description: Delinquent collection period - difference between paidTime and dueTime in days.
     readOnly: true
   collectionPeriod:
     type: integer
-    description: Collection Period - difference between paidTime and issuedTime in days.
+    description: Collection period - difference between paidTime and issuedTime in days.
     readOnly: true
   abandonedTime:
     description: Invoice abandoned time
