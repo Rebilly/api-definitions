@@ -1,264 +1,81 @@
-type: object
-required:
-  - customerId
-  - websiteId
-  - currency
-properties:
-  id:
-    description: The invoice identifier string
-    readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
-  invoiceNumber:
-    description: >-
-      An auto-incrementing number based on the sequence of invoices for any
-      particular customer.
-    readOnly: true
-    type: integer
-  customerId:
-    description: The customer's ID
-    allOf:
-      - $ref: ../ResourceId.yaml
-  websiteId:
-    description: The website's ID
-    allOf:
-      - $ref: ../ResourceId.yaml
-  organizationId:
-    description: The organization's ID
-    readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
-  subscriptionId:
-    description: 'The related Subscription''s ID if available, otherwise null'
-    readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
-  currency:
-    allOf:
-      - $ref: ../CurrencyCode.yaml
-  amount:
-    description: The Invoice's amount
-    type: number
-    format: double
-    readOnly: true
-  amountDue:
-    description: The Invoice's due amount
-    type: number
-    format: double
-    readOnly: true
-  subtotalAmount:
-    description: The Invoice's subtotal amount
-    type: number
-    format: double
-    readOnly: true
-  discountAmount:
-    description: The Invoice's discounts amount
-    type: number
-    format: double
-    readOnly: true
-  taxAmount:
-    description: The Invoice's taxes amount
-    type: number
-    format: double
-    readOnly: true
-  shippingAmount:
-    description: The Invoice's shipping amount
-    type: number
-    format: double
-    readOnly: true
-  billingAddress:
-    description: Invoice's billing address
-    allOf:
-      - $ref: ../Contact/ContactObject.yaml
-  deliveryAddress:
-    description: Invoice's delivery address
-    allOf:
-      - $ref: ../Contact/ContactObject.yaml
-  poNumber:
-    description: Purchase order number which will be displayed on the invoice
-    nullable: true
-    example: PO123456
-    type: string
-  notes:
-    description: Notes for the customer which will be displayed on the invoice
-    type: string
-  items:
-    type: array
-    description: Invoice Items array
-    readOnly: true
-    items:
-      $ref: ./InvoiceItem.yaml
-  taxes:
-    type: array
-    description: Taxes applied to this invoice
-    readOnly: true
-    items:
-      allOf:
-        - $ref: ./InvoiceTax.yaml
-  discounts:
-    type: array
-    description: Discounts applied
-    readOnly: true
-    items:
-      allOf:
-        - $ref: ../Coupon/InvoiceDiscount.yaml
-  transactions:
-    type: array
-    description: Invoice transactions array
-    readOnly: true
-    items:
-      $ref: ../Transactions/Transaction.yaml
-  autopayScheduledTime:
-    description: Invoice autopay scheduled time
-    type: string
-    format: date-time
-  autopayRetryNumber:
-    description: Invoice autopay retry number
-    readOnly: true
-    type: integer
-    minimum: 0
-    default: 0
-  retryInstruction:
-    description: The invoice retry instruction
-    type: object
-    properties:
-      attempts:
+allOf:
+  - $ref: ../Common/Invoice.yaml
+  - properties:
+      retryInstruction:
+        description: The invoice retry instruction
+        type: object
+        properties:
+          attempts:
+            type: array
+            minItems: 1
+            items:
+              type: object
+              properties:
+                scheduleInstruction:
+                  $ref: ../Scheduling/InvoiceRetryScheduleInstruction.yaml
+              required:
+                - scheduleInstruction
+          afterAttemptPolicies:
+            description: The policy on the attempt finishes
+            type: array
+            items:
+              type: string
+              enum:
+                - change-subscription-renewal-time
+          afterRetryEndPolicies:
+            description: The policy on the retry ends
+            type: array
+            items:
+              type: string
+              enum:
+                - abandon-invoice
+                - cancel-subscription
+        required:
+          - attempts
+          - afterAttemptPolicies
+          - afterRetryEndPolicies
+      revision:
+        description: >
+          The number of times the invoice data has been modified.
+
+          The revision is useful when analyzing webhook data to determine if the
+          change takes precedence over the current representation.
+        type: integer
+        readOnly: true
+      dueReminderTime:
+        description: Time past due reminder event will be triggered
+        nullable: true
+        allOf:
+          - $ref: ../ServerTimestamp.yaml
+      dueReminderNumber:
+        description: Number of past due reminder events triggered
+        type: integer
+        readOnly: true
+      _links:
         type: array
+        description: The links related to resource
+        readOnly: true
         minItems: 1
         items:
-          type: object
-          properties:
-            scheduleInstruction:
-              $ref: ../Scheduling/InvoiceRetryScheduleInstruction.yaml
-          required:
-            - scheduleInstruction
-      afterAttemptPolicies:
-        description: The policy on the attempt finishes
+          anyOf:
+            - $ref: ../Links/SelfLink.yaml
+            - $ref: ../Links/CustomerLink.yaml
+            - $ref: ../Links/WebsiteLink.yaml
+            - $ref: ../Links/OrganizationLink.yaml
+            - $ref: ../Links/LeadSourceLink.yaml
+            - $ref: ../Links/TransactionAllocationsLink.yaml
+            - $ref: ../Links/RecalculateInvoiceLink.yaml
+            - $ref: ../Links/SubscriptionLink.yaml
+      _embedded:
         type: array
+        description: >-
+          Any embedded objects available that are requested by the `expand`
+          querystring parameter.
+        readOnly: true
+        minItems: 1
         items:
-          type: string
-          enum:
-            - change-subscription-renewal-time
-      afterRetryEndPolicies:
-        description: The policy on the retry ends
-        type: array
-        items:
-          type: string
-          enum:
-            - abandon-invoice
-            - cancel-subscription
-    required:
-      - attempts
-      - afterAttemptPolicies
-      - afterRetryEndPolicies
-  revision:
-    description: >
-      The number of times the invoice data has been modified.
-
-      The revision is useful when analyzing webhook data to determine if the
-      change takes precedence over the current representation.
-    type: integer
-    readOnly: true
-  status:
-    type: string
-    description: Invoice status.
-    readOnly: true
-    enum:
-      - draft
-      - unpaid
-      - paid
-      - past-due
-      - delinquent
-      - abandoned
-      - voided
-      - partially-paid
-      - partially-refunded
-      - refunded
-      - disputed
-  type:
-    type: string
-    description: Invoice type.
-    readOnly: true
-    enum:
-      - initial
-      - renewal
-      - interim
-      - cancellation
-      - one-time
-      - refund
-      - charge
-  delinquentCollectionPeriod:
-    type: integer
-    description: >-
-      Delinquent Collection Period - difference between paidTime and dueTime in
-      days.
-    readOnly: true
-  collectionPeriod:
-    type: integer
-    description: Collection Period - difference between paidTime and issuedTime in days.
-    readOnly: true
-  abandonedTime:
-    description: Invoice abandoned time
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
-  voidedTime:
-    description: Invoice voided time
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
-  paidTime:
-    description: Invoice paid time
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
-  dueTime:
-    description: Invoice due time
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
-  issuedTime:
-    description: Invoice issued time
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
-  createdTime:
-    description: Invoice created time
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
-  updatedTime:
-    description: Invoice updated time
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
-  dueReminderTime:
-    description: Time past due reminder event will be triggered
-    nullable: true
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
-  dueReminderNumber:
-    description: Number of past due reminder events triggered
-    type: integer
-    readOnly: true
-  _links:
-    type: array
-    description: The links related to resource
-    readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Links/SelfLink.yaml
-        - $ref: ../Links/CustomerLink.yaml
-        - $ref: ../Links/WebsiteLink.yaml
-        - $ref: ../Links/OrganizationLink.yaml
-        - $ref: ../Links/LeadSourceLink.yaml
-        - $ref: ../Links/TransactionAllocationsLink.yaml
-        - $ref: ../Links/RecalculateInvoiceLink.yaml
-        - $ref: ../Links/SubscriptionLink.yaml
-  _embedded:
-    type: array
-    description: >-
-      Any embedded objects available that are requested by the `expand`
-      querystring parameter.
-    readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Embeds/CustomerEmbed.yaml
-        - $ref: ../Embeds/WebsiteEmbed.yaml
-        - $ref: ../Embeds/OrganizationEmbed.yaml
-        - $ref: ../Embeds/LeadSourceEmbed.yaml
+          anyOf:
+            - $ref: ../Embeds/CustomerEmbed.yaml
+            - $ref: ../Embeds/WebsiteEmbed.yaml
+            - $ref: ../Embeds/OrganizationEmbed.yaml
+            - $ref: ../Embeds/LeadSourceEmbed.yaml
