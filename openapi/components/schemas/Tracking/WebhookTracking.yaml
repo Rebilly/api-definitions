@@ -1,5 +1,9 @@
 type: object
-description: Webhook Tracking Requests.
+description: >
+  Webhook tracking lists up to the 1,000 most-recent webhooks delivered.
+  Filters are limited to only the id or the entityId (the core related-entity's id).
+  The results are sorted in reverse chronological order.
+  Sort order may not be further controlled.
 readOnly: true
 properties:
   id:
@@ -7,6 +11,9 @@ properties:
       - $ref: ../ResourceId.yaml
   eventType:
     $ref: ../EventType.yaml
+  entityId:
+    type: string
+    description: The id of the main entity related to the event type.
   url:
     type: string
     description: Url where webhook was sent
