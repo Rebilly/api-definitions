@@ -1,0 +1,22 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+get:
+  tags:
+    - Plan
+  summary: Retrieve a plan
+  operationId: StorefrontGetPlan
+  description: |
+    Retrieve a plan with specified ID
+  responses:
+    200:
+      description: Plan was retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Common/Plan.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml

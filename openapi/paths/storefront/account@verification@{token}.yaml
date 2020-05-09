@@ -1,0 +1,20 @@
+parameters:
+  - $ref: ../../components/parameters/token.yaml
+post:
+  tags:
+    - Email verification
+  summary: Verify account email
+  operationId: StorefrontPostAccountVerification
+  security:
+    - PublishableApiKey: []
+  description: |
+    Verify account email
+  responses:
+    204:
+      description: Account was verified
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    422:
+      $ref: ../../components/responses/ValidationError.yaml
