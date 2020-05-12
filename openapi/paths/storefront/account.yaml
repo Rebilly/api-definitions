@@ -1,0 +1,49 @@
+get:
+  tags:
+    - Account
+  summary: Retrieve Account
+  operationId: StorefrontGetAccount
+  security:
+    - CustomerJWT: []
+  description: |
+    Retrieve account
+  responses:
+    200:
+      description: Account was retrieved successfuly
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/Account.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+patch:
+  tags:
+    - Account
+  summary: Update Account
+  operationId: StorefrontPatchAccount
+  security:
+    - CustomerJWT: []
+  description: |
+    Register account
+  requestBody:
+    content:
+      application/json:
+        schema:
+          allOf:
+            - $ref: ../../components/schemas/Storefront/Account.yaml
+
+  responses:
+    200:
+      description: Account updated
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/Account.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    422:
+      $ref: ../../components/responses/ValidationError.yaml
