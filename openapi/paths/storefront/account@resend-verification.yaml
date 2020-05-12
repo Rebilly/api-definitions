@@ -1,0 +1,29 @@
+post:
+  tags:
+    - Email verification
+  summary: Resend email verification
+  operationId: StorefrontPostAccountResendVerification
+  security:
+    - PublishableApiKey: []
+  description: |
+    Resend email verification
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - username
+          properties:
+            username:
+              description: Username
+              type: string
+  responses:
+    204:
+      description: Email sent successfuly
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    422:
+      $ref: ../../components/responses/ValidationError.yaml
