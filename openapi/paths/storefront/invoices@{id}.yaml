@@ -1,0 +1,22 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+get:
+  tags:
+    - Invoice
+  summary: Retrieve a Invoice
+  operationId: StorefrontGetInvoice
+  security:
+    - CustomerJWT: []
+  description: |
+    Retrieve a invoice with specified ID
+  responses:
+    200:
+      description: Invoice was retrieved successfuly
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Common/Invoice.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml

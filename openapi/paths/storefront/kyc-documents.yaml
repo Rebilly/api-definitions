@@ -1,0 +1,61 @@
+get:
+  tags:
+    - KYC Document
+  summary: Retrieve a list of KYC documents
+  operationId: StorefrontGetKycDocumentCollection
+  security:
+    - CustomerJWT: []
+  description: |
+    Retrieve a list of KYC documents
+  parameters:
+    - $ref: ../../components/parameters/collectionLimit.yaml
+    - $ref: ../../components/parameters/collectionOffset.yaml
+  responses:
+    200:
+      description: A list of KYC documents was retrieved successfully
+      headers:
+        Pagination-Total:
+          $ref: ../../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../../components/schemas/Common/KycDocument.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+post:
+  tags:
+    - KYC Document
+  summary: Create a KYC Document
+  operationId: StorefrontPostKycDocument
+  security:
+    - CustomerJWT: []
+  description: |
+    Create a KYC document
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/Common/KycDocument.yaml
+    description: Kyc document resource
+    required: true
+  responses:
+    201:
+      description: Kyc document was created
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Common/KycDocument.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    422:
+      $ref: ../../components/responses/ValidationError.yaml

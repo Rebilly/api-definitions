@@ -1,0 +1,170 @@
+type: object
+properties:
+  id:
+    description: The transaction ID
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  websiteId:
+    description: The website ID
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  customerId:
+    description: The сustomer's ID
+    allOf:
+      - $ref: ../ResourceId.yaml
+  type:
+    description: Transaction type
+    type: string
+    readOnly: true
+    enum:
+      - authorize
+      - capture
+      - credit
+      - refund
+      - sale
+      - void
+  status:
+    description: Transaction status
+    type: string
+    readOnly: true
+    enum:
+      - completed
+      - connection-error
+      - disputed
+      - never-sent
+      - partially-refunded
+      - pending
+      - refunded
+      - sending
+      - suspended
+      - timeout
+      - voided
+      - waiting-capture
+      - waiting-refund
+  result:
+    description: Transaction result
+    type: string
+    readOnly: true
+    enum:
+      - abandoned
+      - approved
+      - canceled
+      - declined
+      - unknown
+  amount:
+    description: The transactions's amount
+    type: number
+    format: double
+    readOnly: true
+  currency:
+    readOnly: true
+    allOf:
+      - $ref: ../CurrencyCode.yaml
+  purchaseAmount:
+    description: The amount actually purchased which may have differed from the originally requested amount in case of an adjustment.
+    type: number
+    format: double
+    readOnly: true
+  purchaseCurrency:
+    readOnly: true
+    allOf:
+      - $ref: ../CurrencyCode.yaml
+  requestAmount:
+    description: The amount in the payment request. If adjusted, the purchase amount and billing amount may vary from it.
+    type: number
+    format: double
+    readOnly: true
+  requestCurrency:
+    readOnly: true
+    allOf:
+      - $ref: ../CurrencyCode.yaml
+  parentTransactionId:
+    description: The parent's transaction ID
+    allOf:
+      - $ref: ../ResourceId.yaml
+    readOnly: true
+  childTransactions:
+    description: The child transaction IDs
+    readOnly: true
+    type: array
+    items:
+      $ref: ../ResourceId.yaml
+  invoiceIds:
+    description: The invoice IDs related to transaction
+    readOnly: true
+    type: array
+    items:
+      $ref: ../ResourceId.yaml
+  subscriptionIds:
+    description: The subscription IDs related to transaction's invoice(s)
+    readOnly: true
+    type: array
+    items:
+      $ref: ../ResourceId.yaml
+  planIds:
+    description: The plan IDs related to transaction's subscription(s)
+    readOnly: true
+    type: array
+    items:
+      $ref: ../ResourceId.yaml
+  isRebill:
+    type: boolean
+    readOnly: true
+  rebillNumber:
+    description: The transactions's rebill number
+    type: integer
+    readOnly: true
+  paymentInstrument:
+    $ref: ../Storefront/PaymentInstrumentReference.yaml
+  billingAddress:
+    description: Billing address
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  has3ds:
+    type: boolean
+    readOnly: true
+  3ds:
+    allOf:
+      - $ref: ../Transactions/ThreeDSecureResult.yaml
+  redirectUrl:
+    description: The URL to redirect the end-user when an offsite transaction is completed. Defaults to the website's configured URL.
+    type: string
+    format: uri
+  retryNumber:
+    type: integer
+    readOnly: true
+    description: The position in the sequence of retries
+  isRetry:
+    type: boolean
+    readOnly: true
+    description: True if this transaction is retry.
+  billingDescriptor:
+    type: string
+    readOnly: true
+    description: |
+      The billing descriptor that appears on the periodic billing statement. Commonly
+      12 or fewer characters for a credit card statement.
+  description:
+    type: string
+    description: The payment description
+    maxLength: 255
+  requestId:
+    description: The transaction's request ID.  This ID must be unique within a 24 hour period.
+      Use this field to prevent duplicated transactions.
+    type: string
+  customFields:
+    $ref: ../ResourceCustomFields.yaml
+  processedTime:
+    description: Transaction processed time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  createdTime:
+    description: Transaction created time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: Transaction updated time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
