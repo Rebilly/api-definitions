@@ -1,0 +1,16 @@
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        token:
+          description: Payment instrument token ID
+          type: string
+        billingAddress:
+          description: The billing address (if supplied – overrides billing address from token).
+          allOf:
+            - $ref: ../../schemas/Contact/ContactObject.yaml
+        customFields:
+          $ref: ../../schemas/ResourceCustomFields.yaml
+description: Payment instrument
+required: true

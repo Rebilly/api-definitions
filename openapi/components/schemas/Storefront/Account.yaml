@@ -1,0 +1,32 @@
+type: object
+properties:
+  id:
+    description: The account ID
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  username:
+    type: string
+    description: Username
+    readOnly: true
+  primaryAddress:
+    $ref: ../Contact/ContactObject.yaml
+  paymentToken:
+    type: string
+    writeOnly: true
+    description: |
+      A write-only payment token; if supplied, it will be converted into a
+      payment instrument and be set as the `defaultPaymentInstrument`. The
+      value of this property will override the `defaultPaymentInstrument`
+      in the case that both are supplied. The token may only be used once
+      before it is expired.
+  defaultPaymentInstrument:
+    $ref: PaymentInstrumentReference.yaml
+  createdTime:
+    description: The customer created time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: The customer updated time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
