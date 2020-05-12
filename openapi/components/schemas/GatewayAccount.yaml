@@ -203,8 +203,12 @@ properties:
     type: array
     items:
       $ref: ./PaymentCards/PaymentCardBrand.yaml
-  digitalWallet:
-    $ref: ./PaymentCards/DigitalWallet.yaml
+  digitalWallets:
+    description: Accepted digital wallets
+    type: array
+    maxItems: 1
+    items:
+      $ref: ./PaymentCards/DigitalWallet.yaml
   isDown:
     description: True if gateway is currently in downtime period.
     type: boolean
