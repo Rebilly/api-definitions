@@ -1,0 +1,69 @@
+type: object
+title: Browser data
+description: Browser data used for 3DS and risk scoring.
+required:
+  - colorDepth
+  - javaEnabled
+  - language
+  - screenHeight
+  - screenWidth
+  - timeZoneOffset
+properties:
+  acceptHeader:
+    description: The browser's accept header value.
+    type: string
+    maxLength: 2048
+    example: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+  colorDepth:
+    description: The browser's color depth in bits per pixel obtained using the `screen.colorDepth` property.
+    type: integer
+    enum:
+      - 1
+      - 4
+      - 8
+      - 15
+      - 16
+      - 24
+      - 32
+      - 48
+    example: 24
+  ipAddress:
+    description: The browser's IP address (ipv4 or ipv6).
+    type: string
+    format: ipv4 or ipv6
+    example: 93.92.91.90
+  javaEnabled:
+    description: Whether Java is enabled in a browser or not. Value is returned from the `navigator.javaEnabled` property.
+    type: boolean
+  language:
+    description: The browser's language settings returned from the `navigator.language` property.
+    type: string
+    example: en-US
+    maxLength: 8
+  screenHeight:
+    description: The browser's screen height returned from the `screen.height` property.
+    type: integer
+    example: 900
+  screenWidth:
+    description: The browser's screen width returned from the `screen.width` property.
+    type: integer
+    example: 1440
+  timeZoneOffset:
+    description: |
+      The browser's time zone offset in minutes from UTC.
+      A positive offset indicates the local time is behind UTC, and negative is ahead.
+      Can find it with `(new Date()).getTimezoneOffset()` property.
+    type: integer
+    minimum: -1410
+    maximum: 1410
+    example: 300
+  userAgent:
+    description: The user-agent header.
+    type: string
+    maxLength: 2048
+    example: |
+      Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+  deviceFingerprintHash:
+    description: The device fingerprint hash. See [Valve's fingerprintjs2](https://github.com/Valve/fingerprintjs2).
+    type: string
+    example: pIUt3xbgX3l9g3YDiLbx
