@@ -1,0 +1,24 @@
+post:
+  tags:
+    - Account
+  summary: Register Account
+  operationId: StorefrontPostRegister
+  security:
+    - PublishableApiKey: []
+  description: |
+    Register account
+  requestBody:
+    $ref: ../../components/requestBodies/storefront/PostRegister.yaml
+  responses:
+    201:
+      description: Account registered
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/Account.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    422:
+      $ref: ../../components/responses/ValidationError.yaml

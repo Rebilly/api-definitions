@@ -1,0 +1,55 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+get:
+  tags:
+    - KYC Document
+  summary: Retrieve a KYC Document
+  operationId: StorefrontGetKycDocument
+  security:
+    - CustomerJWT: []
+  description: |
+    Retrieve a KYC document with specified ID
+  responses:
+    200:
+      description: KYC document was retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Common/KycDocument.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml
+patch:
+  tags:
+    - KYC Document
+  summary: Update a KYC document
+  operationId: StorefrontPatchKycDocument
+  security:
+    - CustomerJWT: []
+  description: |
+    Update a KYC document with predefined ID
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/Common/KycDocument.yaml
+    description: KYC document resource
+    required: true
+  responses:
+    200:
+      description: KYC document was updated
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Common/KycDocument.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml
+    422:
+      $ref: ../../components/responses/ValidationError.yaml
