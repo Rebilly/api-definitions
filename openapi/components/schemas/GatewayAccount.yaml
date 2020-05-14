@@ -180,10 +180,22 @@ properties:
     minimum: 0
   approvalWindowTtl:
     description: >-
-      The time window (in seconds) allotted for approving a suspended
-      transaction before it is automatically canceled
+      The time window (in seconds) allotted for approving an offsite
+      transaction before it is automatically `abandoned`.
     type: integer
     default: 3600
+    minimum: 300
+    maximum: 16777215
+  reconciliationWindowEnabled:
+    description: >-      
+      If a transaction is not reconciled within the `reconciliationWindowTtl` time, 
+      then the transaction is marked as `abandoned`.
+    type: boolean
+  reconciliationWindowTtl:
+    description: >-
+      The time window (in seconds) allotted for a reconciliation to occur.
+      If it is not reconciled in that time, then the transaction is marked as `abandoned`.
+    type: integer
     minimum: 300
     maximum: 16777215
   threeDSecure:
