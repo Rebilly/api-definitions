@@ -1,21 +1,21 @@
-description: Payvision Mpis
+description: Payvision 3DS Servers
 discriminator:
   propertyName: name
   mapping:
     Other: ../Other.yaml
-    PaayMpi: ../PaayMpi.yaml
-    CardinalCommerce: ./CardinalCommerce.yaml
-    PayvisionMpi: ./PayvisionMpi.yaml
+    Paay3dsServer: ../Paay3dsServer.yaml
+    CardinalCommerce3dsServer: ./CardinalCommerce3dsServer.yaml
+    Payvision3dsServer: ./Payvision3dsServer.yaml
 type: object
 required:
   - name
 properties:
   name:
     allOf:
-      - $ref: ../../Gateways/MpiName.yaml
+      - $ref: ../../Gateways/ThreeDSecureServerName.yaml
     enum:
-      - PayvisionMpi
-      - Payvision3DS2
-      - CardinalCommerce
-      - PaayMpi
+      - Payvision3dsServer
+      - Payvision3ds2Server
+      - CardinalCommerce3dsServer
+      - Paay3dsServer
       - Other
