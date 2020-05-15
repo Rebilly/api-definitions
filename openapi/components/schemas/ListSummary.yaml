@@ -1,0 +1,30 @@
+type: object
+required:
+  - id
+  - version
+  - description
+  - createdTime
+  - updatedTime
+properties:
+  id:
+    description: List ID
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  version:
+    description: List version
+    type: integer
+    readOnly: true
+    minimum: 1
+  description:
+    description: List description
+    type: string
+    readOnly: true
+  createdTime:
+    description: List created time
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    description: List updated time
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
