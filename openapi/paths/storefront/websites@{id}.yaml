@@ -1,0 +1,22 @@
+get:
+  tags:
+    - Website
+  summary: Retrieve a website
+  operationId: StorefrontGetWebsite
+  security:
+    - CustomerJWT: []
+  description: |
+    Retrieve a website. Use it to find the website name, logo, or more.
+  responses:
+    200:
+      description: Website was retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Website.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml

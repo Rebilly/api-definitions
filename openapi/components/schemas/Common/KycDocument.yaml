@@ -1,0 +1,48 @@
+type: object
+required:
+  - fileId
+  - customerId
+  - documentType
+  - status
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  customerId:
+    description: The сustomer's ID
+    allOf:
+      - $ref: ../ResourceId.yaml
+  fileId:
+    description: Linked file object id
+    allOf:
+      - $ref: ../ResourceId.yaml
+  documentType:
+    description: Document type submitted for validation, only identity-proof type is analyzed in an automated manner.
+    type: string
+    enum:
+      - identity-proof
+      - address-proof
+  status:
+    description: Status of the validation
+    type: string
+    readOnly: true
+    enum:
+      - pending
+      - in-progress
+      - accepted
+      - rejected
+  rejectionReason:
+    $ref: ../KycDocument/KycDocumentRejection.yaml
+  createdTime:
+    description: Creation date/time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: Latest update date/time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  processedTime:
+    description: Processing date/time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
