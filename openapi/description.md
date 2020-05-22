@@ -54,10 +54,10 @@ Rebilly follow's the error response format proposed in [RFC 7807](https://tools.
 Rebilly offers a Javascript SDK and a PHP SDK to help interact with
 the API.  However, no SDK is required to use the API.
 
-Rebilly also offers [FramePay](https://rebilly.github.io/framepay-docs/),
+Rebilly also offers [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/),
  a client-side iFrame-based solution to help
 create payment tokens while minimizing PCI DSS compliance burdens
-and maximizing the customizability. [FramePay](https://rebilly.github.io/framepay-docs/)
+and maximizing the customizability. [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/)
 is interacting with the [payment tokens creation operation](#operation/PostToken).
 
 ## Javascript SDK
@@ -76,7 +76,7 @@ $client = new Rebilly\Client([
 ]);
 ```
 
-# Using filter with Collections
+# Using filter with collections
 Rebilly provides collections filtering. You can use `?filter` param on collection to define which records should be shown in the response.
 
 Here is filter format description:
@@ -95,7 +95,7 @@ Here is filter format description:
 
 - You can create some [predefined values lists](https://user-api-docs.rebilly.com/#tag/Lists) and use them in filter: `?filter=firstName:@yourListName`. You can also exclude list values: `?filter=firstName:!@yourListName`
 
-# Expand to Include Embedded Objects
+# Expand to include embedded objects
 Rebilly provides the ability to pre-load additional 
 objects with a request. 
 
@@ -124,7 +124,7 @@ And in the response, you would see:
 Expand may be utilitized not only on `GET` requests but also on `PATCH`, `POST`, `PUT` requests too.
 
 
-# Getting Started Guide
+# Getting started guide
 
 Rebilly's API has over 300 operations.  That's more than you'll 
 need to implement your use cases.  If you have a use 

@@ -1,0 +1,22 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+get:
+  tags:
+    - Product
+  summary: Retrieve a product
+  operationId: StorefrontGetProduct
+  description: |
+    Retrieve a product with specified ID
+  responses:
+    200:
+      description: Product was retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Common/Product.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml

@@ -1,0 +1,33 @@
+post:
+  tags:
+    - Authentication
+  summary: Create a session with username and password
+  operationId: StorefrontPostLogin
+  security:
+    - PublishableApiKey: []
+  description: |
+    Create a session with username and password
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - username
+            - password
+          properties:
+            username:
+              description: Username
+              type: string
+            password:
+              description: Password
+              type: string
+  responses:
+    201:
+      description: Account logged in
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/CustomerJWT.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml

@@ -1,76 +1,26 @@
-type: object
-required:
-  - name
-description: |
-  Products include digital goods, services, and physical goods.
-  Products appear on invoice line items. If you set a tax category identifier,
-  taxes will be calculated upon invoice generation.  If it is shippable,
-  shipping will be calculated upon invoice generation.  Pricing and 
-  variations are set within Plans.
-properties:
-  id:
-    description: The product identifier string
-    readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
-    example: membership
-  name:
-    description: The product name
-    type: string
-    maxLength: 255
-    example: Premium membership
-  unitLabel:
-    description: 'The unit label, such as per `seat` or per `unit`.'
-    type: string
-    maxLength: 50
-    example: seat
-    default: unit
-  description:
-    description: The product description
-    type: string
-    maxLength: 512
-  taxCategoryId:
-    description: The product's tax category identifier string
-    type: string
-    enum:
-      - '00000'
-      - '99999'
-      - '20010'
-      - '40030'
-      - '51020'
-      - '51010'
-      - '31000'
-      - '30070'
-  requiresShipping:
-    description: 'If the product requires shipping, shipping calculations will be applied'
-    type: boolean
-    example: false
-  accountingCode:
-    description: The product accounting code
-    type: string
-    example: '4010'
-  options:
-    description: >-
-      The product options such as Color, Size, etc.  The product options
-      definition does not include option values.  Those are defined within the
-      Plans.
-    type: array
-    items:
-      type: string
-  customFields:
-    $ref: ./ResourceCustomFields.yaml
-  createdTime:
-    description: The product created time
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
-  updatedTime:
-    description: The product updated time
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
-  _links:
-    type: array
-    description: The links related to resource
-    readOnly: true
-    minItems: 1
-    items:
-      $ref: ./Links/SelfLink.yaml
+allOf:
+  - $ref: Common/Product.yaml
+  - properties:
+      taxCategoryId:
+        description: The product's tax category identifier string
+        type: string
+        enum:
+          - '00000'
+          - '99999'
+          - '20010'
+          - '40030'
+          - '51020'
+          - '51010'
+          - '31000'
+          - '30070'
+      accountingCode:
+        description: The product accounting code
+        type: string
+        example: '4010'
+      _links:
+        type: array
+        description: The links related to resource
+        readOnly: true
+        minItems: 1
+        items:
+          $ref: ./Links/SelfLink.yaml
