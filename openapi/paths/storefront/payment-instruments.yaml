@@ -1,0 +1,59 @@
+get:
+  tags:
+    - Payment Instrument
+  summary: Retrieve a list of Payment Instruments
+  operationId: StorefrontGetPaymentInstrumentCollection
+  security:
+    - CustomerJWT: []
+  description: |
+    Retrieve a list of payment instruments
+  parameters:
+    - $ref: ../../components/parameters/collectionLimit.yaml
+    - $ref: ../../components/parameters/collectionOffset.yaml
+  responses:
+    200:
+      description: A list of payment instrument was retrieved successfully
+      headers:
+        Pagination-Total:
+          $ref: ../../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../../components/schemas/Storefront/PaymentInstrument.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+post:
+  tags:
+    - Payment Instrument
+  summary: Create a Payment Instrument
+  operationId: StorefrontPostPaymentInstrument
+  security:
+    - CustomerJWT: []
+  description: |
+    Create a payment instrument.
+
+    The only way to create a payment instrument is using a payment instrument
+    token pre-created via [FramePay](https://rebilly.github.io/framepay-docs/)
+  requestBody:
+    $ref: ../../components/requestBodies/storefront/PostPaymentInstrument.yaml
+  responses:
+    201:
+      description: Payment instrument was created
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/PaymentInstrument.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    422:
+      $ref: ../../components/responses/ValidationError.yaml

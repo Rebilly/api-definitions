@@ -1,0 +1,14 @@
+description: Tap 3DS Servers
+discriminator:
+  propertyName: name
+  mapping:
+    Tap3dsServer: ./Tap3dsServer.yaml
+type: object
+required:
+  - name
+properties:
+  name:
+    allOf:
+      - $ref: ../../Gateways/ThreeDSecureServerName.yaml
+    enum:
+      - Tap3dsServer

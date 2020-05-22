@@ -1,0 +1,35 @@
+get:
+  tags:
+    - Invoice
+  summary: Retrieve a list of invoices
+  operationId: StorefrontGetInvoiceCollection
+  security:
+    - CustomerJWT: []
+  description: |
+    Retrieve a list of invoices
+  parameters:
+    - $ref: ../../components/parameters/collectionLimit.yaml
+    - $ref: ../../components/parameters/collectionOffset.yaml
+    - $ref: ../../components/parameters/collectionFilter.yaml
+    - $ref: ../../components/parameters/collectionQuery.yaml
+    - $ref: ../../components/parameters/collectionSort.yaml
+  responses:
+    200:
+      description: Invoices were retrieved successfuly
+      headers:
+        Pagination-Total:
+          $ref: ../../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../../components/schemas/Common/Invoice.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml

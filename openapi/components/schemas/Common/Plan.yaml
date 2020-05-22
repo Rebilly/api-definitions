@@ -1,0 +1,83 @@
+type: object
+required:
+  - name
+  - currency
+  - productId
+  - pricing
+properties:
+  id:
+    description: The plan ID
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  name:
+    description: The plan name, displayed on invoices and receipts.
+    type: string
+  productId:
+    description: The related product ID
+    allOf:
+      - $ref: ../ResourceId.yaml
+  productOptions:
+    type: object
+    description: Name-value pairs to specify the product options.
+    additionalProperties:
+      type: string
+    example:
+      color: red
+      size: xxl
+  currency:
+    allOf:
+      - $ref: ../CurrencyCode.yaml
+  currencySign:
+    description: Currency sign
+    readOnly: true
+    type: string
+  pricing:
+    $ref: ../Plans/PlanPriceFormula.yaml
+  recurringInterval:
+    description: The service interval. For a one-time item, use `null`.
+    allOf:
+      - $ref: ../Plans/PlanPeriod.yaml
+      - type: object
+        properties:
+          limit:
+            description: |
+              The number of invoices this subscription will generate (if 1, it will not generate any beyond the initial
+              subscription creation). For example, set this property to `12`, when the `periodUnit` is month and the
+              `periodDuration` is 1, for a 1 year contract billed monthly.
+            type: integer
+          billingTiming:
+            $ref: ../Plans/PlanBillingTiming.yaml
+  trial:
+    type: object
+    description: The trial. Set `null` if no trial.
+    required:
+      - price
+      - period
+    properties:
+      price:
+        description: The price of the trial. For a free trial, use `0`.
+        type: number
+        format: double
+      period:
+        $ref: ../Plans/PlanPeriod.yaml
+  setup:
+    type: object
+    description: The setup. Set `null` if no setup.
+    required:
+      - price
+    properties:
+      price:
+        description: The price of a setup - 0 is a valid value (for free).
+        type: number
+        format: double
+  customFields:
+    $ref: ../ResourceCustomFields.yaml
+  createdTime:
+    description: Plan created time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: Plan updated time
+    allOf:
+      - $ref: ../ServerTimestamp.yaml

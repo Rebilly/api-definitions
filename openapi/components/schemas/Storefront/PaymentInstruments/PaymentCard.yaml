@@ -1,0 +1,82 @@
+type: object
+title: 'Payment Card'
+properties:
+  id:
+    description: The payment instrument ID
+    readOnly: true
+    allOf:
+      - $ref: ../../ResourceId.yaml
+  customerId:
+    description: The сustomer's ID
+    allOf:
+      - $ref: ../../ResourceId.yaml
+  method:
+    description: The method of payment instrument
+    type: string
+    readOnly: true
+    enum:
+      - payment-card
+  status:
+    type: string
+    description: |
+      Payment instrument status. When an instrument is `active` it means it has been used at least once for an approved transaction.
+      To remove an instrument from being in use, set it as `deactivated` (see the deactivation endpoint).
+    enum:
+      - active
+      - inactive
+      - expired
+      - deactivated
+      - verification-needed
+  fingerprint:
+    description: A unique value to identify the payment instrument regardless of variable values. It contains alphanumeric values.
+    type: string
+    readOnly: true
+  bin:
+    description: The card's bin (the PAN's first 6 digits)
+    type: string
+    format: bin
+    readOnly: true
+  last4:
+    description: The PAN's last 4 digits
+    type: string
+    readOnly: true
+  pan:
+    description: The card PAN (primary account number).
+    type: string
+    writeOnly: true
+  expirationYear:
+    description: Card's expiration year.
+    type: integer
+  expirationMonth:
+    description: Card's expiration month.
+    type: integer
+  cvv:
+    description: Card's cvv (card verification value).
+    type: string
+    writeOnly: true
+  brand:
+    readOnly: true
+    allOf:
+      - $ref: ../../PaymentCards/PaymentCardBrand.yaml
+  bankCountry:
+    description: Payment instrument bank country
+    type: string
+    readOnly: true
+  bankName:
+    description: Payment instrument bank name
+    type: string
+    readOnly: true
+  billingAddress:
+    description: The billing address
+    allOf:
+      - $ref: ../../Contact/ContactObject.yaml
+  createdTime:
+    description: Payment instrument created time
+    allOf:
+      - $ref: ../../ServerTimestamp.yaml
+  updatedTime:
+    description: Payment instrument updated time
+    allOf:
+      - $ref: ../../ServerTimestamp.yaml
+  customFields:
+    $ref: ../../ResourceCustomFields.yaml

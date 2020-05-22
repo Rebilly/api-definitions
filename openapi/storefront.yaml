@@ -1,0 +1,115 @@
+openapi: 3.0.0
+info:
+  version: '0.1'
+  title: Rebilly Storefront REST API
+  contact:
+    name: Rebilly API Support
+    url: 'https://www.rebilly.com/contact/'
+    email: integrations@rebilly.com
+  license:
+    name: Rebilly
+    url: 'https://www.rebilly.com/api-license/'
+  termsOfService: 'https://www.rebilly.com/terms-of-use/'
+  x-logo:
+    url: 'https://rebilly-core.redoc.ly/rb_apiLogo.svg'
+    backgroundColor: '#0033A0'
+  description: |
+    # Introduction
+    The Rebilly Storefront API is built on HTTP.  Our API is RESTful.  It has predictable
+    resource URLs.  It returns HTTP response codes to indicate errors.  It also
+    accepts and returns JSON in the HTTP body. You can use your favorite
+    HTTP/REST library for your programming language to use Rebilly's Storefront API.
+tags:
+  - name: Account management
+  - name: Account
+  - name: Authentication
+  - name: Email verification
+  - name: Password reset
+  - name: KYC Document
+  - name: Payments
+  - name: Payment Instrument
+  - name: Transaction
+  - name: Orders
+  - name: Invoice
+  - name: Product
+  - name: Plan
+  - name: System
+  - name: Website
+x-tagGroups:
+  - name: Account management
+    tags:
+      - Account
+      - Authentication
+      - Email verification
+      - Password reset
+      - KYC Document
+  - name: Payments
+    tags:
+      - Payment Instrument
+      - Transaction
+  - name: Orders
+    tags:
+      - Invoice
+      - Product
+      - Plan
+  - name: System
+    tags:
+      - Website
+servers:
+  - url: 'https://api.rebilly.com/storefront/v1'
+    description: Live Server
+  - url: 'https://api-sandbox.rebilly.com/storefront/v1'
+    description: Sandbox Server
+components:
+  securitySchemes:
+    CustomerJWT:
+      $ref: components/securitySchemes/CustomerJWT.yaml
+    PublishableApiKey:
+      $ref: components/securitySchemes/PublishableApiKey.yaml
+paths:
+  '/account':
+    $ref: paths/storefront/account.yaml
+  '/account/forgot-password':
+    $ref: paths/storefront/account@forgot-password.yaml
+  '/account/password':
+    $ref: paths/storefront/account@password.yaml
+  '/account/resend-verification':
+    $ref: paths/storefront/account@resend-verification.yaml
+  '/account/reset-password/{token}':
+    $ref: paths/storefront/account@reset-password@{token}.yaml
+  '/account/verification/{token}':
+    $ref: paths/storefront/account@verification@{token}.yaml
+  '/invoices':
+    $ref: paths/storefront/invoices.yaml
+  '/invoices/{id}':
+    $ref: paths/storefront/invoices@{id}.yaml
+  '/kyc-documents':
+    $ref: paths/storefront/kyc-documents.yaml
+  '/kyc-documents/{id}':
+    $ref: paths/storefront/kyc-documents@{id}.yaml
+  '/login':
+    $ref: paths/storefront/login.yaml
+  '/logout':
+    $ref: paths/storefront/logout.yaml
+  '/payment-instrumeents':
+    $ref: paths/storefront/payment-instruments.yaml
+  '/payment-instruments/{id}':
+    $ref: paths/storefront/payment-instruments@{id}.yaml
+  '/payment-instruments/{id}/deactivation':
+    $ref: paths/storefront/payment-instruments@{id}@deactivation.yaml
+  '/plans':
+    $ref: paths/storefront/plans.yaml
+  '/plans/{id}':
+    $ref: paths/storefront/plans@{id}.yaml
+  '/products':
+    $ref: paths/storefront/products.yaml
+  '/products/{id}':
+    $ref: paths/storefront/products@{id}.yaml
+  '/register':
+    $ref: paths/storefront/register.yaml
+  '/transactions':
+    $ref: paths/storefront/transactions.yaml
+  '/transactions/{id}':
+    $ref: paths/storefront/transactions@{id}.yaml
+  '/websites/{id}':
+    $ref: paths/storefront/websites@{id}.yaml
