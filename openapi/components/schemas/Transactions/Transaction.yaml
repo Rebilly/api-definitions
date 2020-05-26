@@ -1,5 +1,5 @@
 allOf:
-  - $ref: ../Common/Transaction.yaml
+  - $ref: ../Common/CommonTransaction.yaml
   - properties:
       gatewayAccountId:
         description: The transactions's Gateway Account ID
@@ -80,7 +80,8 @@ allOf:
         allOf:
           - $ref: ../Gateways/AcquirerName.yaml
       method:
-        description: Payment Method
+        deprecated: true
+        description: Payment Method. Use `paymentInstrument.method` instead.
         allOf:
           - $ref: ../Method.yaml
       velocity:

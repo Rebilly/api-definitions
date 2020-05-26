@@ -23,6 +23,7 @@ Starts the development server to preview the docs (Core API by default).
 - `yarn start core` - preview Core API docs
 - `yarn start users` - preview Users API docs
 - `yarn start reports` - preview Reports API doc
+- `yarn start storefront` - preview Storefront API docs
 - `yarn start combined` - preview combined API docs
 
 #### `yarn build`
