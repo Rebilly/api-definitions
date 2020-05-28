@@ -11,3 +11,13 @@ allOf:
             - $ref: ./Links/SelfLink.yaml
             - $ref: ./Links/CustomerLink.yaml
             - $ref: ./Links/ApprovalUrlLink.yaml
+      _embedded:
+        type: array
+        description: >-
+          Any embedded objects available that are requested by the `expand`
+          querystring parameter.
+        readOnly: true
+        minItems: 1
+        items:
+          anyOf:
+            - $ref: ../Embeds/CustomerEmbed.yaml
