@@ -5,7 +5,7 @@ properties:
     description: The PayPal identifier string
     readOnly: true
     allOf:
-      - $ref: ../../ResourceId.yaml
+      - $ref: ../ResourceId.yaml
   method:
     description: The method of payment instrument
     type: string
@@ -15,13 +15,13 @@ properties:
   customerId:
     description: The customer's ID.
     allOf:
-      - $ref: ../../ResourceId.yaml
+      - $ref: ../ResourceId.yaml
   billingAddress:
     description: The customer's billing address
     allOf:
-      - $ref: ../../Contact/ContactObject.yaml
+      - $ref: ../Contact/ContactObject.yaml
   username:
-    description: PayPal username.
+    description: PayPal username
     type: string
     readOnly: true
   status:
@@ -32,15 +32,15 @@ properties:
       - inactive
       - active
       - deactivated
+  browserData:
+    $ref: ../PaymentTokens/BrowserData.yaml
   createdTime:
     description: PayPal account created time
     allOf:
-      - $ref: ../../ServerTimestamp.yaml
+      - $ref: ../ServerTimestamp.yaml
   updatedTime:
     description: PayPal account updated time
     allOf:
-      - $ref: ../../ServerTimestamp.yaml
+      - $ref: ../ServerTimestamp.yaml
   customFields:
-    $ref: ../../ServerTimestamp.yaml
-  browserData:
-    $ref: ../../PaymentTokens/BrowserData.yaml
+    $ref: ../ResourceCustomFields.yaml

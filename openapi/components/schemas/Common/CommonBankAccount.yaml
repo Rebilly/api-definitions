@@ -5,11 +5,11 @@ properties:
     description: The bank account identifier string
     readOnly: true
     allOf:
-      - $ref: ../../ResourceId.yaml
+      - $ref: ../ResourceId.yaml
   customerId:
-    description: The Customer's ID
+    description: The customer's ID
     allOf:
-      - $ref: ../../ResourceId.yaml
+      - $ref: ../ResourceId.yaml
   method:
     description: The method of payment instrument
     type: string
@@ -17,7 +17,7 @@ properties:
     enum:
       - bank-account
   bankName:
-    description: Bank's name.
+    description: Bank's name
     type: string
   routingNumber:
     description: Bank's routing number
@@ -32,7 +32,7 @@ properties:
       - BBAN
       - IBAN
   accountType:
-    description: Bank's account type
+    description: Bank's account type.
     type: string
     enum:
       - checking
@@ -44,7 +44,7 @@ properties:
   billingAddress:
     description: The billing address
     allOf:
-      - $ref: ../../Contact/ContactObject.yaml
+      - $ref: ../Contact/ContactObject.yaml
   fingerprint:
     description: >-
       A unique value to identify the bank account. It contains alphanumeric
@@ -55,6 +55,8 @@ properties:
     description: The last 4 digits of the bank account
     type: string
     readOnly: true
+  browserData:
+    $ref: ../PaymentTokens/BrowserData.yaml
   status:
     description: Bank account status
     type: string
@@ -65,12 +67,10 @@ properties:
   createdTime:
     description: Bank account created time
     allOf:
-      - $ref: ../../ServerTimestamp.yaml
+      - $ref: ../ServerTimestamp.yaml
   updatedTime:
     description: Bank account updated time
     allOf:
-      - $ref: ../../ServerTimestamp.yaml
+      - $ref: ../ServerTimestamp.yaml
   customFields:
-    $ref: ../../ResourceCustomFields.yaml
-  browserData:
-    $ref: ../../PaymentTokens/BrowserData.yaml
+    $ref: ../ResourceCustomFields.yaml
