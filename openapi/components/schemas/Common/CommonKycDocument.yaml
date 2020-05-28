@@ -1,6 +1,6 @@
 type: object
 required:
-  - fileId
+  - fileIds
   - customerId
   - documentType
   - status
@@ -13,10 +13,12 @@ properties:
     description: The сustomer's ID
     allOf:
       - $ref: ../ResourceId.yaml
-  fileId:
-    description: Linked file object id
-    allOf:
-      - $ref: ../ResourceId.yaml
+  fileIds:
+    description: Linked file object id's
+    type: array
+    items:
+      allOf:
+        - $ref: ../ResourceId.yaml
   documentType:
     description: Document type submitted for validation, only identity-proof type is analyzed in an automated manner.
     type: string
