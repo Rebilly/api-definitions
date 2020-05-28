@@ -1,17 +1,15 @@
 type: object
 title: 'Bank Account'
-required:
-  - customerId
 properties:
   id:
     description: The bank account identifier string
     readOnly: true
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ../../ResourceId.yaml
   customerId:
-    description: The customer's ID
+    description: The Customer's ID
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ../../ResourceId.yaml
   method:
     description: The method of payment instrument
     type: string
@@ -19,7 +17,7 @@ properties:
     enum:
       - bank-account
   bankName:
-    description: Bank's name
+    description: Bank's name.
     type: string
   routingNumber:
     description: Bank's routing number
@@ -34,7 +32,7 @@ properties:
       - BBAN
       - IBAN
   accountType:
-    description: Bank's account type.
+    description: Bank's account type
     type: string
     enum:
       - checking
@@ -43,10 +41,10 @@ properties:
   bic:
     description: Bank Identifier Code
     type: string
-  address:
+  billingAddress:
     description: The billing address
     allOf:
-      - $ref: ../Contact/ContactObject.yaml
+      - $ref: ../../Contact/ContactObject.yaml
   fingerprint:
     description: >-
       A unique value to identify the bank account. It contains alphanumeric
@@ -57,8 +55,6 @@ properties:
     description: The last 4 digits of the bank account
     type: string
     readOnly: true
-  browserData:
-    $ref: ../PaymentTokens/BrowserData.yaml
   status:
     description: Bank account status
     type: string
@@ -69,29 +65,12 @@ properties:
   createdTime:
     description: Bank account created time
     allOf:
-      - $ref: ../ServerTimestamp.yaml
+      - $ref: ../../ServerTimestamp.yaml
   updatedTime:
     description: Bank account updated time
     allOf:
-      - $ref: ../ServerTimestamp.yaml
+      - $ref: ../../ServerTimestamp.yaml
   customFields:
-    $ref: ../ResourceCustomFields.yaml
-  _links:
-    type: array
-    description: The links related to resource
-    readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Links/SelfLink.yaml
-        - $ref: ../Links/CustomerLink.yaml
-  _embedded:
-    type: array
-    description: >-
-      Any embedded objects available that are requested by the `expand`
-      querystring parameter.
-    readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Embeds/CustomerEmbed.yaml
+    $ref: ../../ResourceCustomFields.yaml
+  browserData:
+    $ref: ../../PaymentTokens/BrowserData.yaml
