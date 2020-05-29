@@ -5,20 +5,26 @@ required:
   - authenticated
   - liability
 properties:
+  version:
+    description: 3D Secure version
+    type: integer
+    enum:
+      - 1
+      - 2
   enrolled:
     description: Is the cardholder enrolled in 3D Secure
     type: string
     enum:
-      - 'yes'
-      - 'no'
+      - yes
+      - no
       - invalid card/timeout
       - unavailable
   authenticated:
-    description: The 3D Secure entry Auth Response Status
+    description: 3D Secure authentication response status
     type: string
     enum:
-      - 'yes'
-      - 'no'
+      - yes
+      - no
       - not applicable
       - attempted
   liability:
@@ -27,3 +33,9 @@ properties:
       - protected
       - not protected
       - protected (attempt)
+  flow:
+    description: 3D Secure 2 flow
+    type: string
+    enum:
+      - frictionless
+      - challenge
