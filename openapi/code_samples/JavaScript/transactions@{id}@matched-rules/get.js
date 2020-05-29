@@ -1,0 +1,1 @@
+const rules = await api.transactions.getAllMatchedRules({id: 'foobar-001'});
