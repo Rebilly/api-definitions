@@ -1,0 +1,1 @@
+const rules = await api.subscriptions.getAllMatchedRules({id: 'foobar-001'});

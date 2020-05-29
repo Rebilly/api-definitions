@@ -1,6 +1,12 @@
 allOf:
-  - $ref: ../Common/Invoice.yaml
+  - $ref: ../Common/CommonInvoice.yaml
   - properties:
+      transactions:
+        type: array
+        description: Invoice transactions array
+        readOnly: true
+        items:
+          $ref: ../Transactions/Transaction.yaml
       retryInstruction:
         description: The invoice retry instruction
         type: object
