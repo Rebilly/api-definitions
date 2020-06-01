@@ -1,97 +1,22 @@
-type: object
-title: 'Bank Account'
-required:
-  - customerId
-properties:
-  id:
-    description: The bank account identifier string
-    readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
-  customerId:
-    description: The Customer's ID.
-    allOf:
-      - $ref: ../ResourceId.yaml
-  method:
-    description: The method of payment instrument
-    type: string
-    readOnly: true
-    enum:
-      - bank-account
-  bankName:
-    description: Bank's name.
-    type: string
-  routingNumber:
-    description: Bank's Routing Number.
-    type: string
-  accountNumberType:
-    description: >-
-      Bank's Account Number type. A valid value is basic bank account number
-      (BBAN) or international bank account number (IBAN).
-    type: string
-    default: BBAN
-    enum:
-      - BBAN
-      - IBAN
-  accountType:
-    description: Bank's Account type.
-    type: string
-    enum:
-      - checking
-      - savings
-      - other
-  bic:
-    description: Bank Identifier Code
-    type: string
-  billingAddress:
-    description: The billing address
-    allOf:
-      - $ref: ../Contact/ContactObject.yaml
-  fingerprint:
-    description: >-
-      A unique value to identify the Bank Account. It contains alphanumeric
-      values.
-    type: string
-    readOnly: true
-  last4:
-    description: The last 4 digits of the bank account
-    type: string
-    readOnly: true
-  browserData:
-    $ref: ../PaymentTokens/BrowserData.yaml
-  status:
-    description: Bank Account status
-    type: string
-    readOnly: true
-    enum:
-      - active
-      - deactivated
-  createdTime:
-    description: Bank Account created time
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
-  updatedTime:
-    description: Bank Account updated time
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
-  customFields:
-    $ref: ../ResourceCustomFields.yaml
-  _links:
-    type: array
-    description: The links related to resource
-    readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Links/SelfLink.yaml
-        - $ref: ../Links/CustomerLink.yaml
-  _embedded:
-    type: array
-    description: >-
-      Any embedded objects available that are requested by the `expand`
-      querystring parameter.
-    readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Embeds/CustomerEmbed.yaml
+allOf:
+  - $ref: ../Common/CommonBankAccount.yaml
+  - properties:
+      _links:
+        type: array
+        description: The links related to resource
+        readOnly: true
+        minItems: 1
+        items:
+          anyOf:
+            - $ref: ../Links/SelfLink.yaml
+            - $ref: ../Links/CustomerLink.yaml
+      _embedded:
+        type: array
+        description: >-
+          Any embedded objects available that are requested by the `expand`
+          querystring parameter.
+        readOnly: true
+        minItems: 1
+        items:
+          anyOf:
+            - $ref: ../Embeds/CustomerEmbed.yaml
