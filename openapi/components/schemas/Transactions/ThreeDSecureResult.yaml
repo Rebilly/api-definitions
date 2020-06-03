@@ -4,21 +4,29 @@ required:
   - enrolled
   - authenticated
   - liability
+  - isDowngraded
 properties:
+  version:
+    description: 3D Secure version
+    type: string
+    enum:
+      - '1.0.2'
+      - '2.1.0'
+      - '2.2.0'
   enrolled:
     description: Is the cardholder enrolled in 3D Secure
     type: string
     enum:
-      - 'yes'
-      - 'no'
+      - yes
+      - no
       - invalid card/timeout
       - unavailable
   authenticated:
-    description: The 3D Secure entry Auth Response Status
+    description: 3D Secure authentication response status
     type: string
     enum:
-      - 'yes'
-      - 'no'
+      - yes
+      - no
       - not applicable
       - attempted
   liability:
@@ -27,3 +35,13 @@ properties:
       - protected
       - not protected
       - protected (attempt)
+  flow:
+    description: 3D Secure 2 authentication flow
+    type: string
+    enum:
+      - frictionless
+      - challenge
+  isDowngraded:
+    description: If 3D Secure 2 was attempted but downgraded to 3D Secure 1
+    type: boolean
+    default: false
