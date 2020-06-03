@@ -224,11 +224,24 @@ properties:
     type: boolean
     readOnly: true
   additionalCriteria:
+    readOnly: true
+    deprecated: true
     description: >
       The additional criteria that allows to check whether the gateway account
       can be selected for the transaction to be processed.
     allOf:
       - $ref: ./Criteria/Condition.yaml
+  additionalFilters:
+    description: >
+      The additional filters are used to determine whether the gateway account
+      can be selected for the transaction to be processed.
+
+      For example, the filter may put a maximum amount value.
+      If the transaction is above that amount, this gateway account wouldn't be used.
+
+      This follows our standard filter format.
+    type: string
+    example: amount:1..100;bin:411111,444433
   timeout:
     description: Gateway Account request timeout in seconds
     type: integer
