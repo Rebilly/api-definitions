@@ -1,59 +1,23 @@
-type: object
-title: 'PayPal Account'
-properties:
-  id:
-    description: The PayPal identifier string
-    readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
-  method:
-    description: The method of payment instrument.
-    type: string
-    readOnly: true
-    enum:
-      - paypal
-  customerId:
-    description: The Customer's ID.
-    allOf:
-      - $ref: ./ResourceId.yaml
-  billingAddress:
-    description: The Customer's Billing Address.
-    allOf:
-      - $ref: ./Contact/ContactObject.yaml
-  username:
-    description: PayPal username.
-    type: string
-    readOnly: true
-  status:
-    description: PayPal Account status
-    type: string
-    readOnly: true
-    enum:
-      - inactive
-      - active
-      - deactivated
-  browserData:
-    $ref: ./PaymentTokens/BrowserData.yaml
-  createdTime:
-    description: PayPal Account created time
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
-  updatedTime:
-    description: PayPal Account updated time
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
-  customFields:
-    $ref: ./ResourceCustomFields.yaml
-  _links:
-    type: array
-    description: The links related to resource
-    readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ./Links/SelfLink.yaml
-        - $ref: ./Links/CustomerLink.yaml
-        - $ref: ./Links/ApprovalUrlLink.yaml
-required:
-  - customerId
-  - billingAddress
+allOf:
+  - $ref: ./Common/CommonPayPalAccount.yaml
+  - properties:
+      _links:
+        type: array
+        description: The links related to resource
+        readOnly: true
+        minItems: 1
+        items:
+          anyOf:
+            - $ref: ./Links/SelfLink.yaml
+            - $ref: ./Links/CustomerLink.yaml
+            - $ref: ./Links/ApprovalUrlLink.yaml
+      _embedded:
+        type: array
+        description: >-
+          Any embedded objects available that are requested by the `expand`
+          querystring parameter.
+        readOnly: true
+        minItems: 1
+        items:
+          anyOf:
+            - $ref: ./Embeds/CustomerEmbed.yaml
