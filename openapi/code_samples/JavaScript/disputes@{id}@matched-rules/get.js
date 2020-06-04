@@ -1,0 +1,1 @@
+const rules = await api.disputes.getAllMatchedRules({id: 'foobar-001'});

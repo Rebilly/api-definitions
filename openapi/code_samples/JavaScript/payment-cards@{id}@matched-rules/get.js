@@ -1,0 +1,1 @@
+const rules = await api.paymentCards.getAllMatchedRules({id: 'foobar-001'});
