@@ -63,7 +63,8 @@ is interacting with the [payment tokens creation operation](#operation/PostToken
 ## Javascript SDK
 
 The [Javascript SDK](https://github.com/Rebilly/rebilly-js-sdk) is maintained 
-within Github, and contains the installation and usage instructions.
+within Github, and contains the installation and usage instructions in the Readme file. 
+SDK code examples are included in these docs.
 
 ## PHP SDK
 For all PHP SDK examples provided in these docs you will need to configure the `$client`.
