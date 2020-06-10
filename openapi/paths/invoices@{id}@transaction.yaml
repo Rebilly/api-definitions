@@ -1,0 +1,39 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  tags:
+    - Invoices
+  summary: Assign a transaction to invoice
+  operationId: PostInvoiceTransaction
+  description: >
+    Assign a transaction to invoice. Invoice must be unpaid. Transaction must have unused amount (not fully assigned to other invoices)
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Invoices/InvoiceTransaction.yaml
+    description: InvoiceTransaction resource
+    required: true
+  responses:
+    '201':
+      description: Transaction was assigned to invoice successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Invoices/Invoice.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
