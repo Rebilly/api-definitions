@@ -4,10 +4,11 @@ parameters:
 post:
   tags:
     - Invoices
-  summary: Assign a transaction to invoice
+  summary: Apply a transaction to an invoice
   operationId: PostInvoiceTransaction
   description: >
-    Assign a transaction to invoice. Invoice must be unpaid. Transaction must have unused amount (not fully assigned to other invoices)
+    Apply a transaction to an invoice. The invoice must be unpaid.
+    The transaction must have a non-zero unused amount (not fully applied to other invoices).
   requestBody:
     content:
       application/json:
@@ -16,8 +17,8 @@ post:
     description: InvoiceTransaction resource
     required: true
   responses:
-    '201':
-      description: Transaction was assigned to invoice successfully
+    '200':
+      description: Transaction was applied to invoice successfully
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
