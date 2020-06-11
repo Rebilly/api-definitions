@@ -2,7 +2,9 @@
 const data = {
     customerId: 'foobar-0001',
     websiteId: 'my-main-website',
-    planId: 'my-plan-id',
+    items: [
+        { planId: 'my-plan-id', quantity: '1' },
+    ],
     // you can append this subscription to
     // an existing invoice by passing its ID
     initialInvoiceId: 'my-existing-invoice-id',
