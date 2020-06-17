@@ -1,0 +1,32 @@
+type: object
+description: Configure which digital wallets are enabled.
+title: Digital Wallets
+properties:
+  applePay:
+    type: object
+    description: The Apple Pay digital wallet configuration. Skip if not using Apple Pay.
+    required:
+        - isEnabled
+    properties:
+      isEnabled:
+        type: boolean
+        description: Set true if Apple Pay is enabled.
+        default: false
+  googlePay:
+    type: object
+    description: The Google Pay™ digital wallet configuration. Skip if not using Google Pay™.
+    required:
+      - isEnabled
+    properties:
+      isEnabled:
+        type: boolean
+        description: Set true if Google Pay is enabled.
+        default: false
+      merchantName:
+        description: The merchant name in Google Pay. Leave blank if using FramePay.
+        type: string
+        example: "Test Merchant"
+      merchantOrigin:
+        description: The merchant origin in Google Pay. The fully qualified domain name. Leave blank if using FramePay.
+        type: string
+        example: "www.example.com"

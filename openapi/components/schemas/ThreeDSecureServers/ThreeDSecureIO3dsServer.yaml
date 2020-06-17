@@ -50,3 +50,18 @@ allOf:
           Value determines if requests will attempt version 2 of 3DS.
           In case both v1 and v2 are enabled it will prefer v2.
           If v2 is not supported for the issuer, it will coalesce to v1.
+      transactionType:
+        type: string
+        enum:
+          - '01'
+          - '03'
+          - '10'
+          - '11'
+          - '28'
+        description: |
+          Identifies the type of transaction being authenticated.
+          01 - Goods/Service Purchase
+          03 - Check Acceptance
+          10 - Account Funding
+          11 - Quasi-Cash Transaction
+          28 - Prepaid Activation and Load
