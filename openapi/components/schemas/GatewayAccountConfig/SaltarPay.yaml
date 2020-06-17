@@ -1,0 +1,22 @@
+description: SaltarPay config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: SaltarPay credentials object
+        properties:
+          apiKey:
+            type: string
+            description: SaltarPay API key
+            format: password
+          secretKey:
+            type: string
+            description: SaltarPay secret key
+            format: password
+        required:
+          - apiKey
+          - secretKey
