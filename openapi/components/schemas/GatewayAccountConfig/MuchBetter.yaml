@@ -1,0 +1,21 @@
+description: MuchBetter config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: MuchBetter credentials object
+        properties:
+          merchantAccountId:
+            type: string
+            description: MuchBetter merchant account ID
+          apiKey:
+            type: string
+            description: MuchBetter api key
+            format: password
+        required:
+          - merchantAccountId
+          - apiKey

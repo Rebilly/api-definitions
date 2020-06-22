@@ -1,0 +1,14 @@
+description: Ingenico 3DS Servers
+discriminator:
+  propertyName: name
+  mapping:
+    Ingenico3dsServer: ./Ingenico3dsServer.yaml
+type: object
+required:
+  - name
+properties:
+  name:
+    allOf:
+      - $ref: ../../Gateways/ThreeDSecureServerName.yaml
+    enum:
+      - Ingenico3dsServer

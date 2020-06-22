@@ -1,0 +1,32 @@
+description: Trustly config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Trustly credentials object
+        properties:
+          username:
+            type: string
+            description: Trustly username
+          password:
+            type: string
+            description: Trustly password
+            format: password
+          publicKey:
+            type: string
+            description: Trustly public key
+            x-multiline: true
+          privateKey:
+            type: string
+            description: Trustly private key
+            format: password
+            x-multiline: true
+        required:
+          - usernmae
+          - password
+          - publicKey
+          - privateKey

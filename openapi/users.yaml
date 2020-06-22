@@ -8,8 +8,8 @@ info:
     email: "integrations@rebilly.com"
   license:
     name: "Rebilly"
-    url: "https://www.rebilly.com/api-license/"
-  termsOfService: "https://www.rebilly.com/terms/"
+    url: 'https://www.rebilly.com/api-license/'
+  termsOfService: 'https://www.rebilly.com/terms-of-use/'
   x-logo:
     url: 'https://rebilly-core.redoc.ly/rb_apiLogo.svg'
     backgroundColor: '#0033A0'
@@ -40,6 +40,12 @@ info:
     Never share your secret keys. Keep them guarded and secure.
 
     <!-- ReDoc-Inject: <security-definitions> -->
+
+    ## Javascript SDK
+
+    The [Javascript SDK](https://github.com/Rebilly/rebilly-js-sdk) is maintained 
+    within Github, and contains the installation and usage instructions in the Readme file. 
+    SDK code examples are included in these docs.
 
     # PHP SDK
     For all PHP SDK examples provided in this spec you will need to configure `$client`.
@@ -81,6 +87,7 @@ tags:
       our [Sessions](https://user-api-docs.rebilly.com/#tag/JWT-Session) resource for more information.
   - name: Checkout Pages
     description: |
+      Checkout Pages endpoints are deprecated.
       Hosted checkout pages can be configured here.  You can customize the theme
       and content and more that appears on your hosted checkout pages.
   - name: Email Credentials
@@ -91,6 +98,7 @@ tags:
       Gateway accounts connect payment request to third party networks and platforms.
   - name: Layouts
     description: |
+      Layouts endpoints are deprecated.
       Layouts are used to hold collections of plans. A layout can be used to
       power a pricing page. You can make multiple layouts, and use rules to
       target them to different audiences.
@@ -335,6 +343,10 @@ paths:
     $ref: './paths/gateway-accounts@{id}@downtime-schedules@{downtimeId}.yaml'
   '/gateway-accounts/{id}/enable':
     $ref: './paths/gateway-accounts@{id}@enable.yaml'
+  '/gateway-accounts/{id}/limits':
+    $ref: './paths/gateway-accounts@{id}@limits.yaml'
+  '/gateway-accounts/{id}/limits/{limitId}':
+    $ref: './paths/gateway-accounts@{id}@limits@{limitId}.yaml'
   '/gateway-accounts/{id}/timeline':
     $ref: './paths/gateway-accounts@{id}@timeline.yaml'
   '/gateway-accounts/{id}/timeline/{messageId}':

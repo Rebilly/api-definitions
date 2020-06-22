@@ -5,6 +5,16 @@ discriminator:
     gateway-account-weights: ./PickInstructions/gateway-account-weights.yaml
     gateway-acquirer-weights: ./PickInstructions/gateway-acquirer-weights.yaml
 properties:
+  strategy:
+    type: string
+    enum:
+      - weighted-random
+      - round-robin
+    description: |
+      Controls the picking strategy for gateway accounts.
+      The weighted-random strategy will pick based on weighted-random every time.
+      The round-robin strategy will try a weighted-random different gateway account for consecutive attempts from same payment instrument.
+    default: weighted-random
   method:
     type: string
     enum:

@@ -1,0 +1,16 @@
+type: object
+title: 'Instrument'
+required:
+  - method
+  - paymentInstrumentId
+properties:
+  method:
+    type: string
+    enum:
+      - payment-card
+      - bank-account
+      - paypal
+  paymentInstrumentId:
+    description: The payment instrument ID
+    allOf:
+      - $ref: ../../ResourceId.yaml
