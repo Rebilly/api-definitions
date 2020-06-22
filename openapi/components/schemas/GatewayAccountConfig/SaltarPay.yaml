@@ -1,4 +1,4 @@
-description: Tap config
+description: SaltarPay config
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -7,13 +7,16 @@ allOf:
     properties:
       credentials:
         type: object
-        description: Tap credentials object
+        description: SaltarPay credentials object
         properties:
           apiKey:
             type: string
-            description: Secret API key
+            description: SaltarPay API key
+            format: password
+          secretKey:
+            type: string
+            description: SaltarPay secret key
             format: password
         required:
           - apiKey
-      threeDSecureServer:
-        $ref: ../ThreeDSecureServers/Tap3dsServers/Tap3dsServers.yaml
+          - secretKey
