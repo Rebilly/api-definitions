@@ -72,8 +72,17 @@ properties:
     type: array
     items:
       $ref: ../ResourceId.yaml
+  paymentInstruction:
+    description: >-
+      Payment Instruction if supplied will be used instead of deprecated
+      `paymentInstrument` field. If you decide not to provide any of those
+      – Customer's default Payment Instrument will be used.
+    allOf:
+      - $ref: ../PaymentInstruction.yaml
   paymentInstrument:
-    $ref: ../PaymentInstrument.yaml
+    deprecated: true
+    allOf:
+      - $ref: ../PaymentInstrument.yaml
   billingAddress:
     description: >-
       Billing Address. If not supplied, we use the billing address associated
@@ -106,7 +115,7 @@ properties:
 
       when the transaction's result is finalized. Do not trust the notification;
 
-      follow with a `GET` request to confirm the result of the transaction. 
+      follow with a `GET` request to confirm the result of the transaction.
       Please respond with a `2xx`
 
       HTTP status code, or we will reattempt the request again.
