@@ -1,0 +1,11 @@
+allOf:
+  - $ref: CheckoutForm/CommonCheckoutForm.yaml
+  - type: object
+    properties:
+      status:
+        description: If `inactive`, the checkout form url will result in a 404
+        type: string
+        enum:
+          - active
+          - inactive
+        default: active

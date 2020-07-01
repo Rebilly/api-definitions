@@ -1,0 +1,16 @@
+type: object
+discriminator:
+  propertyName: type
+  mapping:
+    fixed: CheckoutFormFixedQuantity.yaml
+    variable: CheckoutFormVariableQuantity.yaml
+required:
+  - type
+properties:
+  type:
+    description: >-
+      If `variable` customers will be able to choose the amount of item.
+    type: string
+    enum:
+      - fixed
+      - variable
