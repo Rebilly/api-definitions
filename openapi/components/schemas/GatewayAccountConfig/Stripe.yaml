@@ -13,7 +13,7 @@ allOf:
             description: Stripe Gateway redirect url
             format: url
           plaid:
-            description: Plaid credentials.
+            description: The Plaid credentials are required for the `bank-account` payment method.
             properties:
               clientId:
                 type: string
@@ -38,12 +38,6 @@ allOf:
           usePaymentIntents:
             type: boolean
             description: If `true` the `PaymentIntents` API will be used instead of `Charges` API.
-            default: false
-          usePlaid:
-            type: boolean
-            description: |
-              If `true` the other Plaid credentials are required.
-              The Plaid integration is required to allow `bank-account` payment method for this account.
             default: false
       threeDSecureServer:
         $ref: ../ThreeDSecureServers/Stripe3dsServers/Stripe3dsServers.yaml
