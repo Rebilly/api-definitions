@@ -4,12 +4,12 @@ required:
   - plans
 properties:
   id:
-    description: The checkout form identifier string
+    description: The checkout form identifier string.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   websiteId:
-    description: Checkout form website ID
+    description: Checkout form website ID.
     type: string
     allOf:
       - $ref: ../ResourceId.yaml
@@ -38,17 +38,17 @@ properties:
     allOf:
       - $ref: CheckoutFormPlans.yaml
   accountsEnabled:
-    description: If `true` customer will be able to sign-up and sign-in using the form
+    description: If `true` customer will be able to sign-up and sign-in using the form.
     type: boolean
     default: false
   couponsEnabled:
-    description: If `true` customer will be able to use coupons on the form
+    description: If `true` customer will be able to use coupons on the form.
     type: boolean
     default: false
   purchaseLimit:
     description: >-
       If the purchase limit is set – every purchase will decrease it. Zero
-      purchase limit will make form inactive
+      purchase limit will make form inactive.
     type: integer
     minimum: 0
     nullable: true
@@ -63,19 +63,18 @@ properties:
     items:
       $ref: ../Method.yaml
   customization:
-    description: Visual customization options for the form
+    description: Visual customization options for the form.
     type: object
     properties:
       logoId:
-        description: Linked file object id
+        description: Linked file object ID.
         allOf:
           - $ref: ../ResourceId.yaml
       summary:
-        description: Summary text
+        description: Summary text.
         type: string
       buttonText:
-        description: >-
-          You can use placeholder `{{amount}}` to substitute with the form total
+        description: You can use placeholder `{{amount}}` to substitute with the form total.
         type: string
         default: Pay {{amount}}
       colors:
@@ -83,36 +82,36 @@ properties:
         type: object
         properties:
           primary:
-            description: Primary color for the form in hexadecimal format
+            description: Primary color for the form in hexadecimal format.
             type: string
             maxLength: 6
             default: ffffff
           buttonText:
-            description: Button text color for the form in hexadecimal format
+            description: Button text color for the form in hexadecimal format.
             type: string
             maxLength: 6
             default: 000000
       links:
-        description: Various urls that appear on the form
+        description: Various urls that appear on the form.
         type: object
         properties:
           refundPolicy:
-            description: The url to the website refund policy
+            description: The url to the website refund policy.
             type: string
             format: url
           privacyPolicy:
-            description: The url to the website privacy policy
+            description: The url to the website privacy policy.
             type: string
             format: url
           termsOfService:
-            description: The url to the website terms of service
+            description: The url to the website terms of service.
             type: string
             format: url
   createdTime:
-    description: Checkout form created time
+    description: Checkout form created time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
-    description: Checkout form updated time
+    description: Checkout form updated time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
