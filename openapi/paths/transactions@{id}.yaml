@@ -35,3 +35,39 @@ get:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/transactions@{id}/get.js'
+patch:
+  tags:
+    - Transactions
+  summary: Update a transaction
+  operationId: PatchTransaction
+  description: |
+    Update a transaction's custom fields.
+  requestBody:
+    $ref: ../components/requestBodies/PatchTransactionRequest.yaml
+  responses:
+    '200':
+      description: Transaction was updated successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Transactions/Transaction.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/transactions@{id}/patch.php'
+    - lang: JavaScript
+      source:
+        $ref: '../code_samples/JavaScript/transactions@{id}/patch.js'
