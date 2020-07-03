@@ -6,7 +6,7 @@ get:
   summary: Retrieve a list of customers
   operationId: GetCustomerCollection
   description: |
-    Retrieve a list of customers
+    Retrieve a list of customers.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -14,20 +14,7 @@ get:
     - $ref: ../components/parameters/collectionQuery.yaml
     - $ref: ../components/parameters/collectionExpand.yaml
     - $ref: ../components/parameters/collectionFields.yaml
-    - x-rebillyMerge:
-        - $ref: ../components/parameters/collectionSort.yaml
-        - schema:
-            items:
-              x-sortableEnum:
-                - id
-                - email
-                - averageValue
-                - paymentCount
-                - lastPaymentTime
-                - lifetimeRevenue
-                - invoiceCount
-                - createdTime
-                - updatedTime
+    - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
       description: A list of Customers was retrieved successfully
