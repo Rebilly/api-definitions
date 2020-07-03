@@ -9,11 +9,11 @@ get:
     Search merchant's data to return resources such as customers, invoices,
     orders, transactions
   parameters:
-    - x-rebillyMerge:
-        - $ref: ../components/parameters/collectionQuery.yaml
-        - description: >
-            The default or "global" search. It will search all searchable
-            resources across as many fields as possible.
+    - name: q
+      in: query
+      description: The default search. It will search across resources and many fields.
+      schema:
+        type: string    
     - x-rebillyMerge:
         - $ref: ../components/parameters/collectionFilter.yaml
         - description: >
