@@ -12,7 +12,7 @@ Inline references and merge all subschemas using [JSON Merge Patch](https://tool
 
 ```yaml
   x-rebillyMerge:
-    - $ref: "#/components/arameters/someParam"
+    - $ref: "#/components/parameters/someParam"
     - enum:
         - aaa
         - bbb
