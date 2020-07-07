@@ -1,0 +1,30 @@
+description: Payment Token instrument object
+allOf:
+  - $ref: ../TokenDigitalWalletInstrument.yaml
+  - type: object
+    required:
+      - type
+      - amount
+      - currency
+      - descriptor
+      - tokenData
+    properties:
+      type:
+        description: THe digital wallet type
+        type: string
+        enum:
+          - Google Pay
+      amount:
+        description: Authorized for the digital wallet's payment amount
+        type: number
+        format: double
+      currency:
+        description: Authorized for the digital wallet's payment currency
+        allOf:
+            - $ref: ../../CurrencyCode.yaml
+      descriptor:
+        descripton: The digital wallet's payment descriptor
+        type: string
+      tokenData:
+        description: The digital wallet encoded data
+        type: object

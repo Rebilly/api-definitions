@@ -1,0 +1,16 @@
+type: object
+required:
+  - type
+discriminator:
+  propertyName: type
+  mapping:
+    Apple Pay: ./PaymentInstruments/ApplePay.yaml
+    Google Pay: ./PaymentInstruments/GooglePay.yaml
+properties:
+  type:
+    description: >-
+      The digital wallet type.
+    type: string
+    enum:
+      - Apple Pay
+      - Google Pay

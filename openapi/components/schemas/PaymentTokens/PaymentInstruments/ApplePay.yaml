@@ -1,0 +1,29 @@
+description: Payment Token instrument object
+allOf:
+  - $ref: ../TokenDigitalWalletInstrument.yaml
+  - type: object
+    required:
+      - type
+      - amount
+      - currency
+      - descriptor
+      - tokenData
+    properties:
+      type:
+        description: Digital wallet type
+        type: string
+        enum:
+          - Apple Pay
+      amount:
+        description: Authorized for the digital wallet amount
+        type: number
+        format: double
+      currency:
+        description: Authorized for the digital wallet currency
+        allOf:
+            - $ref: ../../CurrencyCode.yaml
+      descriptor:
+        type: string
+      tokenData:
+        description: The digital wallet encoded data
+        type: object
