@@ -1,11 +1,10 @@
 type: object
 required:
   - type
-discriminator:
-  propertyName: type
-  mapping:
-    Apple Pay: ./PaymentInstruments/ApplePay.yaml
-    Google Pay: ./PaymentInstruments/GooglePay.yaml
+  - amount
+  - currency
+  - descriptor
+  - payload
 properties:
   type:
     description: >-
@@ -14,3 +13,17 @@ properties:
     enum:
       - Apple Pay
       - Google Pay
+  amount:
+    description: Authorized for the digital wallet amount
+    type: number
+    format: double
+  currency:
+    description: Authorized for the digital wallet currency
+    allOf:
+      - $ref: ../CurrencyCode.yaml
+  descriptor:
+    description: The discriminator for a payment
+    type: string
+  payload:
+    description: The digital wallet encoded data
+    type: object
