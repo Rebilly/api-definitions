@@ -24,6 +24,28 @@ properties:
   descriptor:
     description: The discriminator for a payment
     type: string
+  bin:
+    description: Payment Card BIN (the PAN's first 6 digits)
+    type: string
+    format: bin
+    readOnly: true
+  last4:
+    description: Payment Card PAN's last 4 digits
+    type: string
+    readOnly: true
+  brand:
+    readOnly: true
+    allOf:
+      - $ref: ../PaymentCards/PaymentCardBrand.yaml
+  expMonth:
+    readOnly: true
+    description: Payment Card expiry month
+    type: integer
+  expYear:
+    readOnly: true
+    description: Payment Card expiry year
+    type: integer
   payload:
+    writeOnly: true
     description: The digital wallet encoded data. May contain the digital wallet billing address
     type: object
