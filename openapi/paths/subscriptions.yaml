@@ -11,12 +11,6 @@ get:
     - $ref: ../components/parameters/subscriptionExpand.yaml
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
-    - x-rebillyMerge:
-        - $ref: ../components/parameters/mediaType.yaml
-        - schema:
-            enum:
-              - application/json
-              - text/csv
   responses:
     '200':
       description: A list of subscriptions was retrieved successfully
@@ -35,11 +29,6 @@ get:
           $ref: ../components/headers/Pagination-Offset.yaml
       content:
         application/json:
-          schema:
-            type: array
-            items:
-              $ref: ../components/schemas/Subscription.yaml
-        text/csv:
           schema:
             type: array
             items:

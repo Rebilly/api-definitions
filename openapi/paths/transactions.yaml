@@ -63,12 +63,6 @@ get:
     - $ref: ../components/parameters/collectionFilter.yaml
     - $ref: ../components/parameters/collectionQuery.yaml
     - $ref: ../components/parameters/collectionSort.yaml
-    - x-rebillyMerge:
-        - $ref: ../components/parameters/mediaType.yaml
-        - schema:
-            enum:
-              - application/json
-              - text/csv
   responses:
     '200':
       description: A list of transactions was retrieved successfully
@@ -87,11 +81,6 @@ get:
           $ref: ../components/headers/Pagination-Offset.yaml
       content:
         application/json:
-          schema:
-            type: array
-            items:
-              $ref: ../components/schemas/Transactions/Transaction.yaml
-        text/csv:
           schema:
             type: array
             items:
