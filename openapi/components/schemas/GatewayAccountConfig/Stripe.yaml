@@ -3,15 +3,11 @@ allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
     required:
-      - credentials
+      - settings
     properties:
       credentials:
         type: object
         properties:
-          redirectUrl:
-            type: string
-            description: Stripe Gateway redirect url
-            format: url
           plaidClientId:
             type: string
             description: Plaid client ID is required for the `bank-account` payment method.
@@ -22,12 +18,16 @@ allOf:
              type: string
              description: Plaid secret key is required for the `bank-account` payment method.
              format: password
-        required:
-          - redirectUrl
       settings:
         type: object
         description: Stripe settings object
+        required:
+          - redirectUrl
         properties:
+          redirectUrl:
+            type: string
+            description: The URL where the user will be redirected after authorizing the account on Stripe.
+            format: url
           usePaymentIntents:
             type: boolean
             description: If `true` the `PaymentIntents` API will be used instead of `Charges` API.
