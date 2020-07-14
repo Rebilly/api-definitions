@@ -3,13 +3,15 @@ allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
     required:
-      - credentials
+      - settings
     properties:
-      credentials:
+      settings:
         type: object
-        properties:
-          merchantIdInPayPal:
-            type: string
-            description: PayPal Gateway merchant id
+        description: PayPal settings object
         required:
-          - merchantIdInPayPal
+          - redirectUrl
+        properties:
+          redirectUrl:
+            type: string
+            description: The URL where the user will be redirected after authorizing the account on PayPal.
+            format: url
