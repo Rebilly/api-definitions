@@ -29,7 +29,7 @@ get:
       $ref: ../components/responses/NotFound.yaml
 patch:
   tags:
-    - Payment Instrument
+    - Payment Instruments
   summary: Update a Payment Instrument's values
   operationId: PatchPaymentInstrument
   description: |
@@ -51,7 +51,6 @@ patch:
                 - $ref: ../components/schemas/Contact/ContactObject.yaml
             customFields:
               $ref: ../components/schemas/ResourceCustomFields.yaml
-    description: Payment instrument
     required: true
   responses:
     '200':
@@ -61,10 +60,10 @@ patch:
           schema:
             $ref: ../components/schemas/PaymentInstrument.yaml
     '401':
-      $ref: ../../components/responses/Unauthorized.yaml
+      $ref: ../components/responses/Unauthorized.yaml
     '403':
-      $ref: ../../components/responses/Forbidden.yaml
+      $ref: ../components/responses/Forbidden.yaml
     '404':
-      $ref: ../../components/responses/NotFound.yaml
+      $ref: ../components/responses/NotFound.yaml
     '422':
-      $ref: ../../components/responses/ValidationError.yaml
+      $ref: ../components/responses/ValidationError.yaml
