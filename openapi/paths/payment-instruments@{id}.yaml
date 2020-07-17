@@ -1,0 +1,69 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  tags:
+    - Payment Instruments
+  summary: Retrieve a Payment Instrument
+  operationId: GetPaymentInstrument
+  description: |
+    Retrieve a payment instrument by ID
+  responses:
+    '200':
+      description: Payment Instrument was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PaymentInstruments/PaymentInstrument.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+patch:
+  tags:
+    - Payment Instruments
+  summary: Update a Payment Instrument's values
+  operationId: PatchPaymentInstrument
+  description: |
+    Update any of the payment instrument's values.
+
+    Use Framepay payment token to update desired values.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            token:
+              description: Payment instrument token ID
+              type: string
+            billingAddress:
+              description: The billing address (if supplied – overrides billing address from token).
+              allOf:
+                - $ref: ../components/schemas/Contact/ContactObject.yaml
+            customFields:
+              $ref: ../components/schemas/ResourceCustomFields.yaml
+    required: true
+  responses:
+    '200':
+      description: Payment instrument was updated
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PaymentInstruments/PaymentInstrument.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
