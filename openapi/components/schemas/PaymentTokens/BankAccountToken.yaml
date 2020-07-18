@@ -1,20 +1,12 @@
 type: object
 title: Bank Account Token
+allOf:
+  - $ref: ../Common/CommonPaymentToken.yaml
 required:
   - method
   - paymentInstrument
   - billingAddress
 properties:
-  id:
-    description: The token identifier string
-    readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
-  isUsed:
-    description: Whether the token was already used
-    type: boolean
-    default: false
-    readOnly: true
   method:
     description: The token payment method
     type: string
@@ -24,40 +16,7 @@ properties:
     description: The payment instrument details
     allOf:
       - $ref: ./TokenBankAccountInstrument.yaml
-  fingerprint:
-    description: Device fingerprint hash
-    type: string
-    deprecated: true
-  browserData:
-    $ref: ./BrowserData.yaml
   billingAddress:
     description: The billing address object
     allOf:
       - $ref: ../Contact/ContactObject.yaml
-  leadSource:
-    allOf:
-      - $ref: ../LeadSource.yaml
-    writeOnly: true
-  createdTime:
-    description: Token created time
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
-  updatedTime:
-    description: Token updated time
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
-  usageTime:
-    description: Token usage time
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
-  expirationTime:
-    description: Token expiration time
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
-  _links:
-    type: array
-    description: The links related to resource
-    readOnly: true
-    minItems: 1
-    items:
-      $ref: ../Links/SelfLink.yaml

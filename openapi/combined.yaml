@@ -92,6 +92,9 @@ tags:
     description: >
       Invoices leave a record for both you and your customer of the products
       sold.
+  - name: Payment Instruments
+    description: >
+      The Payment Instrument allows you to accept a variety of payment methods through a single API.
   - name: Payment Cards
     description: >
       Payment cards are a type of payment instrument used for credit and debit
@@ -190,6 +193,47 @@ tags:
       their granted permissions.  It has resources less commonly integrated by
 
       3rd parties.
+  - name: Subscriptions
+  - name: Organizations
+  - name: Customers
+  - name: Tags
+    description: |
+      Tag customers to better organize your data.
+  - name: Histograms
+    description: |
+      Histograms are for particular kinds of reports with cohorts and periods.
+  - name: Reports
+    description: >
+      Retrieve summary information about your customers, subscriptions,
+      transactions, and more.
+  - name: Data Exports
+    description: |
+      Data exports.
+  - name: Activity Feed
+    description: |
+      Activity Feed is holding various events that occurred in the app.
+  - name: Websites
+  - name: Webhooks
+  - name: Status
+  - name: Profile
+  - name: Reset password
+  - name: Integrations
+  - name: Broadcast Messages
+  - name: Email Delivery Settings
+  - name: Email Messages
+  - name: Email Notifications
+  - name: Rules
+  - name: Memberships
+  - name: JWT Session
+  - name: Lists
+  - name: Layouts
+  - name: Segments
+  - name: Gateway Accounts
+  - name: Tracking
+  - name: Email Credentials
+  - name: Webhook Credentials
+  - name: Checkout Pages
+  - name: API Keys
 
 security:
   - SecretApiKey: []
@@ -321,6 +365,8 @@ paths:
     $ref: ./paths/password-tokens.yaml
   '/password-tokens/{id}':
     $ref: './paths/password-tokens@{id}.yaml'
+  '/payment-instruments/{id}':
+    $ref: './paths/payment-instruments@{id}.yaml'
   /payment-cards:
     $ref: ./paths/payment-cards.yaml
   '/payment-cards/{id}':
@@ -331,10 +377,6 @@ paths:
     $ref: './paths/payment-cards@{id}@deactivation.yaml'
   '/payment-cards/{id}/matched-rules':
     $ref: './paths/payment-cards@{id}@matched-rules.yaml'
-  /payment-instrument-validation:
-    $ref: ./paths/payment-instrument-validation.yaml
-  '/payment-instrument-validation/{id}':
-    $ref: './paths/payment-instrument-validation@{id}.yaml'
   /paypal-accounts:
     $ref: ./paths/paypal-accounts.yaml
   '/paypal-accounts/{id}':

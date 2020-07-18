@@ -1,0 +1,22 @@
+description: eZeeWallet config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: eZeeWallet credentials object
+        properties:
+          apiUsername:
+            type: string
+            description: eZeeWallet API username
+            format: password
+          apiPassword:
+            type: string
+            description: eZeeWallet API password
+            format: password
+        required:
+          - apiUsername
+          - apiPassword

@@ -3,28 +3,34 @@ allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
     required:
-      - credentials
+      - settings
     properties:
       credentials:
         type: object
         properties:
-          redirectUrl:
+          plaidClientId:
             type: string
-            description: Stripe Gateway redirect url
-            format: url
-        required:
-          - redirectUrl
+            description: Plaid client ID is required for the `bank-account` payment method.
+          plaidPublicKey:
+            type: string
+            description: Plaid public key is required for the `bank-account` payment method.
+          plaidSecret:
+             type: string
+             description: Plaid secret key is required for the `bank-account` payment method.
+             format: password
       settings:
         type: object
         description: Stripe settings object
+        required:
+          - redirectUrl
         properties:
+          redirectUrl:
+            type: string
+            description: The URL where the user will be redirected after authorizing the account on Stripe.
+            format: url
           usePaymentIntents:
             type: boolean
             description: If `true` the `PaymentIntents` API will be used instead of `Charges` API.
             default: false
-      mpi:
-        deprecated: true
-        allOf:
-          - $ref: ../ThreeDSecureServers/Stripe3dsServers/Stripe3dsServers.yaml
       threeDSecureServer:
         $ref: ../ThreeDSecureServers/Stripe3dsServers/Stripe3dsServers.yaml

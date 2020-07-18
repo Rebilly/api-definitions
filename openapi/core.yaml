@@ -99,6 +99,9 @@ tags:
     description: >
       Invoices leave a record for both you and your customer of the products
       sold.
+  - name: Payment Instruments
+    description: >
+      The Payment Instrument allows you to accept a variety of payment methods through a single API.
   - name: Payment Cards
     description: >
       Payment cards are a type of payment instrument used for credit and debit
@@ -177,6 +180,9 @@ tags:
       payment
 
       is collected automatically (with autopay set true).
+  - name: Tags
+    description: |
+      Tag customers to better organize your data.
   - name: Taxes
     description: |
       You can map a product to a tax category.  The tax category is used by
@@ -202,36 +208,36 @@ x-tagGroups:
     tags:
       - Customers
       - Customer Authentication
-      - Custom Fields
-      - Files
       - KYC Documents
       - AML
       - Tags
       - Customers Timeline
   - name: Payment Instruments
     tags:
-      - Bank Accounts
-      - Payment Cards
+      - Payment Instruments
       - Payment Tokens
+      - Payment Cards
+      - Bank Accounts
       - PayPal Accounts
-      - Payment Instrument Validation
   - name: Payments
     tags:
-      - 3D Secure
       - Transactions
+      - 3D Secure
       - Disputes
       - Blacklists
-  - name: Invoices & Subscriptions
+  - name: Subscriptions & Invoices
     tags:
-      - Coupons
+      - Subscriptions
       - Invoices
       - Plans
       - Products
+      - Coupons
       - Shipping Zones
-      - Subscriptions
       - Taxes
   - name: Misc
     tags:
+      - Custom Fields
+      - Files
       - Reports
       - Search
       - Users
@@ -303,8 +309,6 @@ paths:
     $ref: './paths/customers@{id}@timeline.yaml'
   '/customers/{id}/timeline/{messageId}':
     $ref: './paths/customers@{id}@timeline@{messageId}.yaml'
-  '/customers/{id}/upcoming-invoices':
-    $ref: './paths/customers@{id}@upcoming-invoices.yaml'
   /disputes:
     $ref: ./paths/disputes.yaml
   '/disputes/{id}':
@@ -323,26 +327,30 @@ paths:
     $ref: ./paths/invoices.yaml
   '/invoices/{id}':
     $ref: './paths/invoices@{id}.yaml'
-  '/invoices/{id}/abandon':
-    $ref: './paths/invoices@{id}@abandon.yaml'
-  '/invoices/{id}/issue':
-    $ref: './paths/invoices@{id}@issue.yaml'
   '/invoices/{id}/items':
     $ref: './paths/invoices@{id}@items.yaml'
-  '/invoices/{id}/matched-rules':
-    $ref: './paths/invoices@{id}@matched-rules.yaml'
+  '/invoices/{id}/issue':
+    $ref: './paths/invoices@{id}@issue.yaml'
+  '/invoices/{id}/abandon':
+    $ref: './paths/invoices@{id}@abandon.yaml'
+  '/invoices/{id}/void':
+    $ref: './paths/invoices@{id}@void.yaml'
   '/invoices/{id}/recalculate':
     $ref: './paths/invoices@{id}@recalculate.yaml'
   '/invoices/{id}/reissue':
     $ref: './paths/invoices@{id}@reissue.yaml'
+  '/invoices/{id}/transaction-allocations':
+    $ref: './paths/invoices@{id}@transaction-allocations.yaml'
+  '/invoices/{id}/transaction':
+    $ref: './paths/invoices@{id}@transaction.yaml'
+  '/customers/{id}/upcoming-invoices':
+    $ref: './paths/customers@{id}@upcoming-invoices.yaml'
+  '/invoices/{id}/matched-rules':
+    $ref: './paths/invoices@{id}@matched-rules.yaml'
   '/invoices/{id}/timeline':
     $ref: './paths/invoices@{id}@timeline.yaml'
   '/invoices/{id}/timeline/{messageId}':
     $ref: './paths/invoices@{id}@timeline@{messageId}.yaml'
-  '/invoices/{id}/transaction-allocations':
-    $ref: './paths/invoices@{id}@transaction-allocations.yaml'
-  '/invoices/{id}/void':
-    $ref: './paths/invoices@{id}@void.yaml'
   /kyc-documents:
     $ref: ./paths/kyc-documents.yaml
   '/kyc-documents/{id}':
@@ -361,16 +369,12 @@ paths:
     $ref: ./paths/payment-cards.yaml
   '/payment-cards/{id}':
     $ref: './paths/payment-cards@{id}.yaml'
-  '/payment-cards/{id}/authorization':
-    $ref: './paths/payment-cards@{id}@authorization.yaml'
+  # '/payment-cards/{id}/authorization':
+  #   $ref: './paths/payment-cards@{id}@authorization.yaml'
   '/payment-cards/{id}/deactivation':
     $ref: './paths/payment-cards@{id}@deactivation.yaml'
   '/payment-cards/{id}/matched-rules':
     $ref: './paths/payment-cards@{id}@matched-rules.yaml'
-  /payment-instrument-validation:
-    $ref: ./paths/payment-instrument-validation.yaml
-  '/payment-instrument-validation/{id}':
-    $ref: './paths/payment-instrument-validation@{id}.yaml'
   /paypal-accounts:
     $ref: ./paths/paypal-accounts.yaml
   '/paypal-accounts/{id}':
@@ -379,6 +383,8 @@ paths:
     $ref: './paths/paypal-accounts@{id}@activation.yaml'
   '/paypal-accounts/{id}/deactivation':
     $ref: './paths/paypal-accounts@{id}@deactivation.yaml'
+  '/payment-instruments/{id}':
+    $ref: './paths/payment-instruments@{id}.yaml'
   /plans:
     $ref: ./paths/plans.yaml
   '/plans/{id}':
@@ -393,14 +399,6 @@ paths:
     $ref: ./paths/shipping-zones.yaml
   '/shipping-zones/{id}':
     $ref: './paths/shipping-zones@{id}.yaml'
-  /subscription-cancellations:
-    $ref: ./paths/subscription-cancellations.yaml
-  '/subscription-cancellations/{id}':
-    $ref: './paths/subscription-cancellations@{id}.yaml'
-  /subscription-reactivations:
-    $ref: ./paths/subscription-reactivations.yaml
-  '/subscription-reactivations/{id}':
-    $ref: './paths/subscription-reactivations@{id}.yaml'
   /subscriptions:
     $ref: ./paths/subscriptions.yaml
   '/subscriptions/{id}':
@@ -409,16 +407,24 @@ paths:
     $ref: './paths/subscriptions@{id}@change-plan.yaml'
   '/subscriptions/{id}/interim-invoice':
     $ref: './paths/subscriptions@{id}@interim-invoice.yaml'
+  /subscription-cancellations:
+    $ref: ./paths/subscription-cancellations.yaml
+  '/subscription-cancellations/{id}':
+    $ref: './paths/subscription-cancellations@{id}.yaml'
+  /subscription-reactivations:
+    $ref: ./paths/subscription-reactivations.yaml
+  '/subscription-reactivations/{id}':
+    $ref: './paths/subscription-reactivations@{id}.yaml'
+  '/subscriptions/{id}/upcoming-invoices':
+    $ref: './paths/subscriptions@{id}@upcoming-invoices.yaml'
+  '/subscriptions/{id}/upcoming-invoices/{invoiceId}/issue':
+    $ref: './paths/subscriptions@{id}@upcoming-invoices@{invoiceId}@issue.yaml'
   '/subscriptions/{id}/matched-rules':
     $ref: './paths/subscriptions@{id}@matched-rules.yaml'
   '/subscriptions/{id}/timeline':
     $ref: './paths/subscriptions@{id}@timeline.yaml'
   '/subscriptions/{id}/timeline/{messageId}':
     $ref: './paths/subscriptions@{id}@timeline@{messageId}.yaml'
-  '/subscriptions/{id}/upcoming-invoices':
-    $ref: './paths/subscriptions@{id}@upcoming-invoices.yaml'
-  '/subscriptions/{id}/upcoming-invoices/{invoiceId}/issue':
-    $ref: './paths/subscriptions@{id}@upcoming-invoices@{invoiceId}@issue.yaml'
   /tags:
     $ref: ./paths/tags.yaml
   '/tags/{tag}':
