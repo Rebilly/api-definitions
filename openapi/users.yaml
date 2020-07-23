@@ -91,6 +91,10 @@ tags:
       Checkout Pages endpoints are deprecated.
       Hosted checkout pages can be configured here.  You can customize the theme
       and content and more that appears on your hosted checkout pages.
+  - name: Checkout Forms
+    description: |
+      Hosted checkout forms can be configured here. You can customize various
+      options that appears on your hosted checkout forms.
   - name: Email Credentials
     description: |
       Get and create SMTP credential hashes.
@@ -229,6 +233,7 @@ x-tagGroups:
   - name: Other
     tags:
       - Checkout Pages
+      - Checkout Forms
       - Gateway Accounts
       - Layouts
       - Payment Cards
@@ -273,6 +278,10 @@ paths:
     $ref: ./paths/broadcast-messages.yaml
   '/broadcast-messages/{id}':
     $ref: './paths/broadcast-messages@{id}.yaml'
+  /checkout-forms:
+    $ref: ./paths/checkout-forms.yaml
+  /checkout-forms/{id}:
+    $ref: './paths/checkout-forms@{id}.yaml'
   /checkout-pages:
     $ref: ./paths/checkout-pages.yaml
   '/checkout-pages/{id}':
