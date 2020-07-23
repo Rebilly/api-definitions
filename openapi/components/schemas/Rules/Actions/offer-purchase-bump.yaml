@@ -15,12 +15,27 @@ allOf:
             weight:
               description: Bump offer weight
               type: string
-            bumpAmount:
-              description: Bump amount offer
-              type: number
-            bonusAmount:
-              description: Bonus amount offer
-              type: number
+            offers:
+              type: array
+              minItems: 1
+              items:
+                type: object
+                properties:
+                  offerId:
+                    description: Offer ID
+                    type: string
+                  offerType:
+                    description: Offer type
+                    type: string
+                  bumpAmount:
+                    description: Bump amount
+                    type: number
+                  customFields:
+                    $ref: ../../ResourceCustomFields.yaml
+                required:
+                  - offerId
+                  - offerType
+                  - bumpAmount
             choices:
               type: array
               minItems: 1
@@ -38,8 +53,7 @@ allOf:
           required:
             - name
             - weight
-            - bumpAmount
-            - bonusAmount
+            - offers
             - choices
     required:
       - bumpOffers
