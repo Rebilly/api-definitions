@@ -1,0 +1,22 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+get:
+  tags:
+    - Checkout Forms
+  summary: Retrieve a checkout form
+  operationId: StorefrontGetCheckoutForm
+  description: |
+    Retrieve a checkout form with specified identifier string.
+  responses:
+    '200':
+      description: Checkout form was retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/CheckoutForm/StorefrontCheckoutForm.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../../components/responses/NotFound.yaml
