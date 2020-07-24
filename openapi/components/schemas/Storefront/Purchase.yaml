@@ -19,6 +19,33 @@ properties:
     readOnly: true
     allOf:
       - $ref: StorefrontTransaction.yaml
+  items:
+    type: array
+    writeOnly: true
+    minItems: 1
+    items:
+      type: object
+      required:
+        - planId
+      properties:
+        planId:
+          description: The plan identifier string.
+          allOf:
+            - $ref: ../ResourceId.yaml
+        quantity:
+          description: Number of units of the product on the given plan.
+          type: integer
+  billingAddress:
+    description: The billing address.
+    writeOnly: true
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  deliveryAddress:
+    description: The delivery address.
+    writeOnly: true
+    nullable: true
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
   paymentInstruction:
     description: >-
       The payment instruction to be used for purchasing.
