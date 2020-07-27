@@ -1,0 +1,13 @@
+type: object
+required:
+  - type
+discriminator:
+  propertyName: type
+  mapping:
+    'Apple Pay': ./DigitalWalletValidation/ApplePayValidation.yaml
+properties:
+  type:
+    description: Type of the digital wallet to validate.
+    type: string
+    enum:
+      - Apple Pay
