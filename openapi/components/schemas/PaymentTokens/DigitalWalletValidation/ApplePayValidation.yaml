@@ -3,36 +3,15 @@ allOf:
   - $ref: ../DigitalWalletValidation.yaml
   - type: object
     required:
-      - type
-      - validationUrl
+      - validationRequest
     properties:
       type:
         type: string
-      validationUrl:
-        description: The validation URL provided by the Apple Pay SDK to validate payment ability
-        type: string
+      validationRequest:
+        description: The validation request provided by the Apple Pay SDK to validate payment ability
+        type: object
         writeOnly: true
-      displayName:
-        type: string
-        readOnly: true
-      domainName:
-        type: string
-        readOnly: true
-      epochTimestamp:
-        type: integer
-        readOnly: true
-      expiresAt:
-        type: integer
-        readOnly: true
-      merchantIdentifier:
-        type: string
-        readOnly: true
-      merchantSessionIdentifier:
-        type: string
-        readOnly: true
-      nonce:
-        type: string
-        readOnly: true
-      signature:
-        type: string
+      validationResponse:
+        description: The validation response to use by the Apple Pay SDK to proceed
+        type: object
         readOnly: true
