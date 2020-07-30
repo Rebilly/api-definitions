@@ -2,12 +2,18 @@ title: Variable quantity
 type: object
 required:
   - planId
+  - type
   - quantity
 properties:
   planId:
     description: The plan identifier string.
     allOf:
       - $ref: ../ResourceId.yaml
+  type:
+    description: If `variable` customers will be able to choose the quantity.
+    type: string
+    enum:
+      - variable
   quantity:
     description: The default quantity.
     type: integer
