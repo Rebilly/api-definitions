@@ -23,6 +23,7 @@ tags:
   - name: Account management
   - name: Account
   - name: Authentication
+  - name: Checkout Forms
   - name: Email verification
   - name: Password reset
   - name: KYC Document
@@ -49,6 +50,7 @@ x-tagGroups:
       - Transaction
   - name: Orders
     tags:
+      - Checkout Forms
       - Invoice
       - Product
       - Plan
@@ -79,6 +81,8 @@ paths:
     $ref: paths/storefront/account@reset-password@{token}.yaml
   '/account/verification/{token}':
     $ref: paths/storefront/account@verification@{token}.yaml
+  '/checkout-forms/{id}':
+    $ref: paths/storefront/checkout-forms@{id}.yaml
   '/invoices':
     $ref: paths/storefront/invoices.yaml
   '/invoices/{id}':
