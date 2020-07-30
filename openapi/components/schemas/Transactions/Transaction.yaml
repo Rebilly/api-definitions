@@ -2,7 +2,7 @@ allOf:
   - $ref: ../Common/CommonTransaction.yaml
   - properties:
       gatewayAccountId:
-        description: The transactions's Gateway Account ID
+        description: The transaction's Gateway Account ID
         allOf:
           - $ref: ../ResourceId.yaml
         readOnly: true
@@ -196,7 +196,7 @@ allOf:
             allOf:
               - $ref: ../BumpOfferOffer.yaml
       riskScore:
-        description: The transactions's risk score
+        description: The transaction's risk score
         type: integer
         readOnly: true
       riskMetadata:
@@ -231,16 +231,21 @@ allOf:
         readOnly: true
       hadDiscrepancy:
         description: >-
-          True if the transaction has been updated due to a disprepancy with its
+          True if the transaction has been updated due to a discrepancy with its
           source of truth
         type: boolean
         readOnly: true
       orderId:
         deprecated: true
         description: >-
-          The transactions's order ID.  This ID must be unique within a 24 hour
+          The transaction's order ID.  This ID must be unique within a 24 hour
           period. This field was renamed to the `requestId`.
         type: string
+      arn:
+        type: string
+        readOnly: true
+        description: The acquirer reference number.
+        example: '74836950144358910018150'
       scheduledTime:
         type: string
         description: The time the transaction is scheduled for collection
