@@ -67,11 +67,6 @@ items:
       type: string
       description: Gateway's own transaction identifier
     paymentType:
-      type: string
-      enum:
-        - payment_card
-        - ach
-        - paypal
-        - china_unionpay
-        - ochapay
       description: Type of payment
+      allOf:
+        - $ref: ./PaymentMethods/PaymentMethod.yaml
