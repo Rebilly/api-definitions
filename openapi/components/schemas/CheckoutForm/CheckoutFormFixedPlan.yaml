@@ -1,0 +1,20 @@
+title: Fixed quantity
+type: object
+required:
+  - planId
+  - type
+  - quantity
+properties:
+  planId:
+    description: The plan identifier string.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  type:
+    description: If `variable` customers will be able to choose the quantity.
+    type: string
+    enum:
+      - fixed
+  quantity:
+    description: The quantity.
+    type: integer
+    minimum: 1
