@@ -1,0 +1,28 @@
+title: Variable quantity
+type: object
+required:
+  - planId
+  - quantity
+properties:
+  planId:
+    description: The plan identifier string.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  quantity:
+    description: The default quantity.
+    type: integer
+  minimum:
+    description: The minimum quantity.
+    type: integer
+    minimum: 1
+    default: 1
+  multipleOf:
+    description: The step quantity.
+    type: integer
+    minimum: 1
+    default: 1
+  maximum:
+    description: The maximum quantity.
+    type: integer
+    minimum: 1
+    default: 100
