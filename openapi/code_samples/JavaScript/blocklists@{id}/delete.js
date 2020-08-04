@@ -1,4 +1,4 @@
-const request = await api.blacklists.delete({id: 'my-second-key'});
+const request = await api.blocklists.delete({id: 'my-second-key'});
 
 // the request does not return any fields but
 // you can confirm the success using the status code

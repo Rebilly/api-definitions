@@ -10,7 +10,7 @@ const data = {
 };
 
 // the ID is optional
-const firstKey = await api.blacklists.create({data});
+const firstKey = await api.blocklists.create({data});
 
 // or you can provide one
-const secondKey = await api.blacklists.create({id: 'my-second-id', data});
+const secondKey = await api.blocklists.create({id: 'my-second-id', data});

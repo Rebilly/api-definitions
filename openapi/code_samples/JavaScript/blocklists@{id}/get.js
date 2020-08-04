@@ -1,2 +1,2 @@
-const blacklistItem = await api.blacklists.get({id: 'foobar-001'});
-console.log(blacklistItem.fields.status);
+const blocklistItem = await api.blocklists.get({id: 'foobar-001'});
+console.log(blocklistItem.fields.status);
