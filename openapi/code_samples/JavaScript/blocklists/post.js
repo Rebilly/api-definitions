@@ -1,4 +1,4 @@
-// first set the required properties for the new blacklist item
+// first set the required properties for the new blocklist item
 const data = {
     type: 'ip-address',
     value: '63.118.98.100'
