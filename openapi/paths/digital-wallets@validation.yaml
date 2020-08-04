@@ -1,0 +1,39 @@
+post:
+  tags:
+    - Payment Tokens
+  summary: Validate a digital wallet session
+  operationId: PostDigitalWalletValidation
+  description: |
+    [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/)
+    is the recommended way to use when validating a digital wallet session.
+  requestBody:
+    content:
+      application/json:
+        schema:
+           $ref: ../components/schemas/PaymentTokens/DigitalWalletValidation.yaml
+    description: Digital wallet validation request
+    required: true
+  security:
+    - PublishableApiKey: []
+    - SecretApiKey: []
+    - JWT: []
+  responses:
+    '201':
+      description: Digital wallet validation was made
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+             $ref: ../components/schemas/PaymentTokens/DigitalWalletValidation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

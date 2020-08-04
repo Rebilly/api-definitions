@@ -1,0 +1,70 @@
+type: object
+title: Digital Wallet Token
+allOf:
+  - $ref: ../Common/CommonPaymentToken.yaml
+required:
+  - method
+  - paymentInstrument
+properties:
+  method:
+    description: The token payment method
+    type: string
+    enum:
+      - digital-wallet
+  paymentInstrument:
+    description: The payment instrument details
+    type: object
+    required:
+      - type
+      - amount
+      - currency
+      - descriptor
+      - payload
+    properties:
+      type:
+        description: The digital wallet type
+        type: string
+        enum:
+          - Apple Pay
+          - Google Pay
+      amount:
+        description: Authorized for the digital wallet amount
+        type: number
+        format: double
+      currency:
+        description: Authorized for the digital wallet currency
+        allOf:
+          - $ref: ../CurrencyCode.yaml
+      descriptor:
+        description: The descriptor for a payment
+        type: string
+      bin:
+        description: Payment Card BIN (the PAN's first 6 digits)
+        type: string
+        format: bin
+        readOnly: true
+      last4:
+        description: Payment Card PAN's last 4 digits
+        type: string
+        readOnly: true
+      brand:
+        readOnly: true
+        allOf:
+          - $ref: ../PaymentCards/PaymentCardBrand.yaml
+      expMonth:
+        readOnly: true
+        description: Payment Card expiration month
+        type: integer
+      expYear:
+        readOnly: true
+        description: Payment Card expiration year
+        type: integer
+      payload:
+        writeOnly: true
+        description: The digital wallet encoded data. May contain the digital wallet billing address
+        type: object
+  billingAddress:
+    readOnly: true
+    description: The billing address object
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml

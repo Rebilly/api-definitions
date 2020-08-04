@@ -99,6 +99,9 @@ tags:
     description: >
       Invoices leave a record for both you and your customer of the products
       sold.
+  - name: Payment Instruments
+    description: >
+      The Payment Instrument allows you to accept a variety of payment methods through a single API.
   - name: Payment Cards
     description: >
       Payment cards are a type of payment instrument used for credit and debit
@@ -177,6 +180,9 @@ tags:
       payment
 
       is collected automatically (with autopay set true).
+  - name: Tags
+    description: |
+      Tag customers to better organize your data.
   - name: Taxes
     description: |
       You can map a product to a tax category.  The tax category is used by
@@ -208,6 +214,7 @@ x-tagGroups:
       - Customers Timeline
   - name: Payment Instruments
     tags:
+      - Payment Instruments
       - Payment Tokens
       - Payment Cards
       - Bank Accounts
@@ -376,6 +383,8 @@ paths:
     $ref: './paths/paypal-accounts@{id}@activation.yaml'
   '/paypal-accounts/{id}/deactivation':
     $ref: './paths/paypal-accounts@{id}@deactivation.yaml'
+  '/payment-instruments/{id}':
+    $ref: './paths/payment-instruments@{id}.yaml'
   /plans:
     $ref: ./paths/plans.yaml
   '/plans/{id}':
@@ -428,6 +437,8 @@ paths:
     $ref: ./paths/tokens.yaml
   '/tokens/{token}':
     $ref: './paths/tokens@{token}.yaml'
+  /digital-wallets/validation:
+    $ref: './paths/digital-wallets@validation.yaml'
   /transactions:
     $ref: ./paths/transactions.yaml
   '/transactions/{id}':
