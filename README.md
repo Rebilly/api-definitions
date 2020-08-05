@@ -7,6 +7,7 @@ TBD: Add Redocly validation status badge.
 - [Core API docs](https://api-reference.rebilly.com/)
 - [Users API docs](https://user-api-docs.rebilly.com/)
 - [Reports API docs](https://reports-api-docs.rebilly.com/)
+- [Storefront API docs](https://storefront-api-docs.rebilly.com/)
 
 ## Working on the API definitions
 
@@ -18,6 +19,7 @@ TBD: Add Redocly validation status badge.
 ### Usage
 
 #### `yarn start`
+
 Starts the development server to preview the docs (Core API by default).
 
 - `yarn start core` - preview Core API docs
@@ -27,9 +29,11 @@ Starts the development server to preview the docs (Core API by default).
 - `yarn start combined` - preview combined API docs
 
 #### `yarn build`
+
 Bundles the definitions into a single file in the `dist` folder.
 
 #### `yarn test`
+
 Validates.
 
 ### Organization
