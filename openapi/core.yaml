@@ -31,19 +31,19 @@ tags:
       AML, also known as Anti-Money-Laundering is an endpoint that searches multiple
       PEP, Sanctions, and Adverse Media lists for listed identities or media for screening
       purposes. Used during some transaction processing and on Contact creation, it helps
-      determine whether someone is blacklisted or has political or economic sanctions against
+      determine whether someone is blocklisted or has political or economic sanctions against
       them.
   - name: Bank Accounts
     description: |
       Bank Accounts are a type of payment instrument used to collect
       ACH (echeck) payments, similar to how a payment
       card would be used to for a credit card payment.
-  - name: Blacklists
+  - name: Blocklists
     description: |
-      Your blacklists contains values of customerIds, email addresses,
+      Your blocklists contains values of customerIds, email addresses,
       ipAddresses, bank identification numbers, countries or payment cards that
       you do NOT want to do business with. They are a good tool for managing
-      risk. A blacklist entry that expires after a period of time we call a
+      risk. A blocklist entry that expires after a period of time we call a
       greylist.
   - name: Coupons
     description: >
@@ -224,7 +224,7 @@ x-tagGroups:
       - Transactions
       - 3D Secure
       - Disputes
-      - Blacklists
+      - Blocklists
   - name: Subscriptions & Invoices
     tags:
       - Subscriptions
@@ -269,10 +269,10 @@ paths:
     $ref: './paths/bank-accounts@{id}.yaml'
   '/bank-accounts/{id}/deactivation':
     $ref: './paths/bank-accounts@{id}@deactivation.yaml'
-  /blacklists:
-    $ref: ./paths/blacklists.yaml
-  '/blacklists/{id}':
-    $ref: './paths/blacklists@{id}.yaml'
+  /blocklists:
+    $ref: ./paths/blocklists.yaml
+  '/blocklists/{id}':
+    $ref: './paths/blocklists@{id}.yaml'
   /coupons-redemptions:
     $ref: ./paths/coupons-redemptions.yaml
   '/coupons-redemptions/{id}':
