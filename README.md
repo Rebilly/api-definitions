@@ -7,6 +7,7 @@ TBD: Add Redocly validation status badge.
 - [Core API docs](https://api-reference.rebilly.com/)
 - [Users API docs](https://user-api-docs.rebilly.com/)
 - [Reports API docs](https://reports-api-docs.rebilly.com/)
+- [Storefront API docs](https://storefront-api-docs.rebilly.com/)
 
 ## Working on the API definitions
 
