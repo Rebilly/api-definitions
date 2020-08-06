@@ -3,14 +3,14 @@ parameters:
   - $ref: ../components/parameters/organizationId.yaml
 get:
   tags:
-    - Blacklists
-  summary: Retrieve a blacklist
-  operationId: GetBlacklist
+    - Blocklists
+  summary: Retrieve a blocklist
+  operationId: GetBlocklist
   description: |
-    Retrieve a blacklist with specified identifier string
+    Retrieve a blocklist with specified identifier string
   responses:
     '200':
-      description: Blacklist was retrieved successfully
+      description: Blocklist was retrieved successfully
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -21,7 +21,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Blacklist.yaml
+            $ref: ../components/schemas/Blocklist.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -31,22 +31,22 @@ get:
   x-code-samples:
     - lang: PHP
       source:
-        $ref: '../code_samples/PHP/blacklists@{id}/get.php'
+        $ref: '../code_samples/PHP/blocklists@{id}/get.php'
     - lang: JavaScript
       source:
-        $ref: '../code_samples/JavaScript/blacklists@{id}/get.js'
+        $ref: '../code_samples/JavaScript/blocklists@{id}/get.js'
 put:
   tags:
-    - Blacklists
-  summary: Create a blacklist with predefined ID
-  operationId: PutBlacklist
+    - Blocklists
+  summary: Create a blocklist with predefined ID
+  operationId: PutBlocklist
   description: |
-    Create a blacklist with predefined identifier string
+    Create a blocklist with predefined identifier string
   requestBody:
-    $ref: ../components/requestBodies/Blacklist.yaml
+    $ref: ../components/requestBodies/Blocklist.yaml
   responses:
     '201':
-      description: Blacklist was created
+      description: Blocklist was created
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -57,13 +57,13 @@ put:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Blacklist.yaml
+            $ref: ../components/schemas/Blocklist.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '409':
-      description: Blacklist exist and cannot be updated
+      description: Blocklist exist and cannot be updated
       content:
         application/json:
           schema:
@@ -73,17 +73,17 @@ put:
   x-code-samples:
     - lang: PHP
       source:
-        $ref: '../code_samples/PHP/blacklists@{id}/put.php'
+        $ref: '../code_samples/PHP/blocklists@{id}/put.php'
     - lang: JavaScript
       source:
-        $ref: '../code_samples/JavaScript/blacklists@{id}/put.js'
+        $ref: '../code_samples/JavaScript/blocklists@{id}/put.js'
 delete:
   tags:
-    - Blacklists
-  summary: Delete a blacklist
-  operationId: DeleteBlacklist
+    - Blocklists
+  summary: Delete a blocklist
+  operationId: DeleteBlocklist
   description: |
-    Delete a blacklist with predefined identifier string
+    Delete a blocklist with predefined identifier string
   responses:
     '204':
       headers:
@@ -93,7 +93,7 @@ delete:
           $ref: ../components/headers/Rate-Limit-Remaining.yaml
         Rate-Limit-Reset:
           $ref: ../components/headers/Rate-Limit-Reset.yaml
-      description: Blacklist was deleted
+      description: Blocklist was deleted
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -103,7 +103,7 @@ delete:
   x-code-samples:
     - lang: PHP
       source:
-        $ref: '../code_samples/PHP/blacklists@{id}/delete.php'
+        $ref: '../code_samples/PHP/blocklists@{id}/delete.php'
     - lang: JavaScript
       source:
-        $ref: '../code_samples/JavaScript/blacklists@{id}/delete.js'
+        $ref: '../code_samples/JavaScript/blocklists@{id}/delete.js'
