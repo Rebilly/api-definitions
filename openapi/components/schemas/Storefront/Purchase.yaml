@@ -1,5 +1,6 @@
 type: object
 required:
+  - websiteId
   - paymentInstruction
   - items
   - billingAddress
@@ -19,6 +20,11 @@ properties:
     readOnly: true
     allOf:
       - $ref: StorefrontTransaction.yaml
+  websiteId:
+    description: The website identifier string.
+    writeOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
   items:
     type: array
     writeOnly: true

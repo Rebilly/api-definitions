@@ -1,7 +1,13 @@
 type: object
 required:
+  - websiteId
   - items
 properties:
+  websiteId:
+    description: The website identifier string.
+    writeOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
   items:
     type: array
     writeOnly: true
@@ -108,7 +114,7 @@ properties:
     type: number
     format: double
     readOnly: true
-  discountAmount:
+  discountsAmount:
     description: The purchase's discounts amount.
     type: number
     format: double
