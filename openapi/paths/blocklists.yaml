@@ -2,17 +2,17 @@ parameters:
   - $ref: ../components/parameters/organizationId.yaml
 get:
   tags:
-    - Blacklists
-  summary: Retrieve a list of blacklists
-  operationId: GetBlacklistCollection
+    - Blocklists
+  summary: Retrieve a list of blocklists
+  operationId: GetBlocklistCollection
   description: |
-    Retrieve a list of blacklists
+    Retrieve a list of blocklists
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
   responses:
     '200':
-      description: A list of Blacklists was retrieved successfully
+      description: A list of Blocklists was retrieved successfully
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -31,7 +31,7 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/Blacklist.yaml
+              $ref: ../components/schemas/Blocklist.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -39,22 +39,22 @@ get:
   x-code-samples:
     - lang: PHP
       source:
-        $ref: ../code_samples/PHP/blacklists/get.php
+        $ref: ../code_samples/PHP/blocklists/get.php
     - lang: JavaScript
       source:
-        $ref: ../code_samples/JavaScript/blacklists/get.js
+        $ref: ../code_samples/JavaScript/blocklists/get.js
 post:
   tags:
-    - Blacklists
-  summary: Create a blacklist
-  operationId: PostBlacklist
+    - Blocklists
+  summary: Create a blocklist
+  operationId: PostBlocklist
   description: |
-    Create a blacklist
+    Create a blocklist
   requestBody:
-    $ref: ../components/requestBodies/Blacklist.yaml
+    $ref: ../components/requestBodies/Blocklist.yaml
   responses:
     '201':
-      description: Blacklist was created
+      description: Blocklist was created
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -65,7 +65,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Blacklist.yaml
+            $ref: ../components/schemas/Blocklist.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -75,7 +75,7 @@ post:
   x-code-samples:
     - lang: PHP
       source:
-        $ref: ../code_samples/PHP/blacklists/post.php
+        $ref: ../code_samples/PHP/blocklists/post.php
     - lang: JavaScript
       source:
-        $ref: ../code_samples/JavaScript/blacklists/post.js
+        $ref: ../code_samples/JavaScript/blocklists/post.js
