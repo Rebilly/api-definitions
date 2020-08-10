@@ -1,0 +1,17 @@
+description: Apple Pay session validation
+allOf:
+  - $ref: ../DigitalWalletValidation.yaml
+  - type: object
+    required:
+      - validationRequest
+    properties:
+      type:
+        type: string
+      validationRequest:
+        description: The validation request provided by the Apple Pay SDK to validate payment ability
+        type: object
+        writeOnly: true
+      validationResponse:
+        description: The validation response to use by the Apple Pay SDK to proceed
+        type: object
+        readOnly: true

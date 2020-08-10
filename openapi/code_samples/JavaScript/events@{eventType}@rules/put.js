@@ -3,12 +3,12 @@ const data = {
     rules: [
         {
             name: 'The One Rule',
-            status: 'active', 
+            status: 'active',
             final: true,
-            criteria: {}, 
+            criteria: {},
             actions: [
                 {
-                     name: 'blacklist',
+                     name: 'blocklist',
                      status: 'active',
                      type: 'email',
                      ttl: 789
@@ -36,12 +36,12 @@ const data = {
     rules: [
         {
             name: 'The One Rule',
-            status: 'active', 
+            status: 'active',
             final: true,
-            criteria: {}, 
+            criteria: {},
             actions: [
                 {
-                     name: 'blacklist',
+                     name: 'blocklist',
                      status: 'active',
                      type: 'email',
                      ttl: 789
@@ -57,6 +57,6 @@ const data = {
 };
 
 const ruleset = await api.events.updateRules({eventType: 'risk-score-changed', data});
-// each time the event's ruleset is modified 
+// each time the event's ruleset is modified
 // the version number is incremented
 console.log(ruleset.fields.version);
