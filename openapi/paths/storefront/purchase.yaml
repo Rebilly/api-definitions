@@ -1,0 +1,30 @@
+post:
+  tags:
+    - Purchase
+  summary: Make a purchase
+  operationId: StorefrontPostPurchase
+  description: |
+    Purchase can be accomplished both with and without Authentication.
+    Purchase via pre-created Payment Instrument is only available with Authentication.
+    Use purchase preview before making an actual purchase.
+  security:
+    - CustomerJWT: []
+    - PublishableApiKey: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/Storefront/Purchase.yaml
+  responses:
+    201:
+      description: Order was created
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/Purchase.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    422:
+      $ref: ../../components/responses/ValidationError.yaml
