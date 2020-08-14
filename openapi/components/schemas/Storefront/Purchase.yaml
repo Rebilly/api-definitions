@@ -1,0 +1,71 @@
+type: object
+required:
+  - websiteId
+  - paymentInstruction
+  - items
+  - billingAddress
+properties:
+  orderId:
+    description: The order identifier string.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  invoice:
+    description: The initial invoice.
+    readOnly: true
+    allOf:
+      - $ref: StorefrontInvoice.yaml
+  transaction:
+    description: The initial transaction.
+    readOnly: true
+    allOf:
+      - $ref: StorefrontTransaction.yaml
+  websiteId:
+    description: The website identifier string.
+    writeOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  items:
+    type: array
+    writeOnly: true
+    minItems: 1
+    items:
+      type: object
+      required:
+        - planId
+      properties:
+        planId:
+          description: The plan identifier string.
+          allOf:
+            - $ref: ../ResourceId.yaml
+        quantity:
+          description: Number of units of the product on the given plan.
+          type: integer
+  billingAddress:
+    description: The billing address.
+    writeOnly: true
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  deliveryAddress:
+    description: The delivery address.
+    writeOnly: true
+    nullable: true
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  paymentInstruction:
+    description: >-
+      The payment instruction to be used for purchasing.
+    writeOnly: true
+    allOf:
+      - $ref: ../PaymentInstruction.yaml
+  couponIds:
+    type: array
+    description: The list of coupons applied to the order.
+    writeOnly: true
+    items:
+      type: string
+  password:
+    type: string
+    description: If set would be used to create customer account.
+    writeOnly: true
+    nullable: true
