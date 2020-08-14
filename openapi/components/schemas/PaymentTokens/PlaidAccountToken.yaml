@@ -1,0 +1,21 @@
+type: object
+title: Plaid Account Token
+allOf:
+  - $ref: ../Common/CommonPaymentToken.yaml
+required:
+  - method
+  - billingAddress
+  - paymentInstrument
+properties:
+  method:
+    description: The token method
+    type: string
+    enum: [plaid-account]
+  billingAddress:
+    description: The billing address object
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  paymentInstrument:
+    description: The payment instrument details
+    allOf:
+      - $ref: ./TokenPlaidAccountInstrument.yaml
