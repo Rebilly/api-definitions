@@ -1,0 +1,26 @@
+description: Khelocard config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Credentials object
+        required:
+          - merchantId
+          - apiKey
+          - apiSecret
+        properties:
+          merchantId:
+            type: string
+            description: Merchant ID
+          apiKey:
+            type: string
+            description: API key
+            format: password
+          apiSecret:
+            type: string
+            description: API secret
+            format: password
