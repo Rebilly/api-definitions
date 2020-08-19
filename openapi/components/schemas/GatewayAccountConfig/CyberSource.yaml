@@ -1,0 +1,26 @@
+description: CyberSource config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: CyberSource credentials object
+        properties:
+          merchantId:
+            type: string
+            description: CyberSource merchant ID
+          encryptionKey:
+            type: string
+            description: CyberSource encryption key
+            format: password
+          password:
+            type: string
+            description: CyberSource password for query
+            format: password
+        required:
+          - merchantId
+          - encryptionKey
+          - password
