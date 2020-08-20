@@ -1,0 +1,26 @@
+descripton: TWINT config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: TWINT credentials object
+        properties:
+          storeUuid:
+            type: string
+            description: TWINT store UUID
+          publicKey:
+            type: string
+            description: TWINT public key
+            x-multiline: true
+          privateKey:
+            type: string
+            description: TWINT private key
+            x-multiline: true
+        required:
+          - storeUuid
+          - publicKey
+          - privateKey
