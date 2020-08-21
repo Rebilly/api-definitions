@@ -53,20 +53,15 @@ properties:
   taxAmount:
     description: >-
       The invoice's taxes amount.
-      Can be calculated automatically (if related Product has `taxCategoryId`) or set manually (if `hasCustomTaxes` set to `true`)
+      Can be calculated automatically (if related Product has `taxCategoryId`) or set manually (with `taxes` field).
     type: number
     format: double
     readOnly: true
-  hasCustomShippingAmount:
-    description: >-
-      Set to `true` to overwrite shipping amount (in `shippingAmount` field).
-      If `shippingAmount` is 0 or omitted, field will be set to `false`.
-    type: boolean
-    default: false
   shippingAmount:
     description: >-
       The invoice's shipping amount.
-      Can be calculated from [Shipping Zones](#tag/Shipping-Zones) or set manually (if `hasCustomShippingAmount` set to `true`)
+      Can be automatically calculated from [Shipping Zones](#tag/Shipping-Zones) or set manually.
+      If `null` or omitted - auto calculation will be used. If `0` - invoice's shippingAmount will be `0`.
     type: number
     format: double
   billingAddress:
@@ -91,15 +86,12 @@ properties:
     readOnly: true
     items:
       $ref: ../Invoices/InvoiceItem.yaml
-  hasCustomTaxes:
-    description: >-
-      Set to `true` to overwrite taxes (in `taxes` field).
-      If `taxes` is empty or omitted, field will be set to `false`.
-    type: boolean
-    default: false
   taxes:
     type: array
-    description: Taxes applied to this invoice
+    description: >-
+      Taxes applied to this invoice.
+      If `null` or omitted - auto calculation will be used.
+      If empty array provided (`[]`) - `taxAmount` will be 0.
     items:
       allOf:
         - $ref: ../Invoices/InvoiceTax.yaml
