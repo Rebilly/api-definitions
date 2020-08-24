@@ -1,6 +1,12 @@
 type: object
 description: Payment Token instrument object
+required:
+  - method
 properties:
+  method:
+    description: The token payment method
+    type: string
+    enum: [payment-card]
   pan:
     description: Payment Card PAN (Primary Account Number)
     type: string
@@ -17,7 +23,7 @@ properties:
   brand:
     readOnly: true
     allOf:
-      - $ref: ../PaymentCards/PaymentCardBrand.yaml
+      - $ref: ../../PaymentCards/PaymentCardBrand.yaml
   expMonth:
     description: Payment Card expiration month
     type: integer

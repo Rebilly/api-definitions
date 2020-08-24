@@ -1,12 +1,17 @@
 type: object
 required:
+  - method
   - accountNumberType
 discriminator:
   propertyName: accountNumberType
   mapping:
-    BBAN: ./PaymentInstruments/BBANInstrument.yaml
-    IBAN: ./PaymentInstruments/IBANInstrument.yaml
+    BBAN: ./BankAccount/BBAN.yaml
+    IBAN: ./BankAccount/IBAN.yaml
 properties:
+  method:
+    description: The token payment method
+    type: string
+    enum: [ach]
   accountNumberType:
     description: >-
       Bank's Account Number type. A valid value is basic bank account number

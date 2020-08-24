@@ -1,12 +1,18 @@
 type: object
 required:
+  - method
+  - credentialHash
   - publicToken
   - accountId
 properties:
+  method:
+    description: The token method
+    type: string
+    enum: [plaid-account]
   credentialHash:
     description: The Plaid Credential hash
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ../../ResourceId.yaml
   publicToken:
     type: string
     description: The Plaid public token
