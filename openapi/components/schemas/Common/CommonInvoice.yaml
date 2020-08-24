@@ -50,18 +50,31 @@ properties:
     type: number
     format: double
     readOnly: true
+  taxCalculator:
+    description: Tax calculator. If "manual", "taxes" field should be presented.
+    type: string
+    default: "rebilly-taxjar"
+    enum:
+      - "rebilly-taxjar"
+      - "manual"
   taxAmount:
     description: >-
       The invoice's taxes amount.
-      Can be calculated automatically (if related Product has `taxCategoryId`) or set manually (with `taxes` field).
+      Can be calculated automatically (if related Product has `taxCategoryId`) or set manually if "taxCalculator"  is "manual" (with `taxes` field).
     type: number
     format: double
     readOnly: true
+  shippingCalculator:
+    description: Shipping calculator. If "manual", "shippingAmount" field should be presented.
+    type: string
+    default: "rebilly"
+    enum:
+      - "rebilly"
+      - "manual"
   shippingAmount:
     description: >-
       The invoice's shipping amount.
-      Can be automatically calculated from [Shipping Zones](#tag/Shipping-Zones) or set manually.
-      If `null` or omitted - auto calculation will be used. If `0` - invoice's shippingAmount will be `0`.
+      Can be automatically calculated from [Shipping Zones](#tag/Shipping-Zones) or set manually if "shippingCalculator" is "manual".
     type: number
     format: double
   billingAddress:
@@ -90,8 +103,7 @@ properties:
     type: array
     description: >-
       Taxes applied to this invoice.
-      If `null` or omitted - auto calculation will be used.
-      If empty array provided (`[]`) - `taxAmount` will be 0.
+      To apply manual taxes, set "taxesCalculator" to "manual".
     items:
       allOf:
         - $ref: ../Invoices/InvoiceTax.yaml
