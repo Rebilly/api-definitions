@@ -55,8 +55,8 @@ post:
     description: PaymentInstrument resource
     required: true
   responses:
-    '200':
-      description: PaymentInstrument was updated
+    '201':
+      description: PaymentInstrument was created
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -67,10 +67,12 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/PaymentCards/PaymentCard.yaml
-    '201':
-      description: PaymentInstrument was created
+            $ref: ../components/schemas/PaymentInstruments/PaymentInstrument.yaml
+    '303':
+      description: PaymentInstrument was updated
       headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
         Rate-Limit-Remaining:
