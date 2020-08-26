@@ -5,21 +5,21 @@ content:
         transactionId:
           description: The transaction ID
           type: string
-          readOnly: true
         invoiceId:
           description: The invoice ID
           type: string
-          readOnly: true
         eventType:
           $ref: ../../schemas/GlobalWebhookEventType.yaml
         _embedded:
-          allOf:
-            - $ref: ../../schemas/Embeds/TransactionEmbed.yaml
-            - $ref: ../../schemas/Embeds/InvoiceEmbed.yaml
+          type: object
+          properties:
+            transaction:
+              $ref: ../../schemas/Transactions/Transaction.yaml
+            invoice:
+              $ref: ../../schemas/Invoices/Invoice.yaml
         _links:
           type: array
           description: The links related to resource
-          readOnly: true
           minItems: 2
           items:
             anyOf:

@@ -5,7 +5,6 @@ content:
         targetCustomerId:
           description: The ID of the customer containing the merged data
           type: string
-          readOnly: true
         eventType:
           $ref: ../../schemas/GlobalWebhookEventType.yaml
         duplicatedCustomer:
@@ -13,14 +12,12 @@ content:
         _embedded:
           type: object
           description: Customer object
-          readOnly: true
           properties:
             targetCustomer:
               $ref: ../../schemas/Customer.yaml
         _links:
           type: array
           description: The links related to resource
-          readOnly: true
           minItems: 1
           items:
             anyOf:
