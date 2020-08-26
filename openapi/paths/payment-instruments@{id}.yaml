@@ -33,25 +33,12 @@ patch:
     - Payment Instruments
   summary: Update a Payment Instrument's values
   operationId: PatchPaymentInstrument
-  description: |
-    Update any of the payment instrument's values.
-
-    Use Framepay payment token to update desired values.
+  description: Update allowed payment instrument's values.
   requestBody:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            token:
-              description: Payment token ID
-              type: string
-            billingAddress:
-              description: The billing address (if supplied – overrides billing address from token).
-              allOf:
-                - $ref: ../components/schemas/Contact/ContactObject.yaml
-            customFields:
-              $ref: ../components/schemas/ResourceCustomFields.yaml
+          $ref: ../components/schemas/PaymentInstruments/UpdatePaymentInstrument.yaml
     required: true
   responses:
     '200':
