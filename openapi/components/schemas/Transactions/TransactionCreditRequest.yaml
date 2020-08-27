@@ -4,7 +4,6 @@ required:
   - customerId
   - currency
   - amount
-  - type
 properties:
   websiteId:
     description: The website identifier string
@@ -17,70 +16,31 @@ properties:
   currency:
     allOf:
       - $ref: ../CurrencyCode.yaml
-  type:
-    description: >
-      The type of transaction requested.
-
-      You should always include the type within your API request.
-
-      This supports a limited subset of Transaction types.  To refund or void,
-      use the refund endpoint.
-
-      To `capture` use the `sale` endpoint.  It will capture if there are any
-      eligible
-
-      transactions of type `authorize` that can be captured.
-    type: string
-    enum:
-      - sale
-      - authorize
-      - credit
   amount:
-    description: >
-      The transaction amount.  Use `0` for a zero dollar verification. This is
-      important if
-
-      you want to authorize a payment instrument before giving access to a free
-      trial, for example.
+    description: The transaction amount.
     type: number
     format: double
     example: 97.97
   invoiceIds:
     description: >
-      The array of invoice identifiers.  It's important to note that the
-      transaction
-
-      amount can be more or less than the combined invoice amounts.  If the
-      transaction
-
-      is a type `sale` and it is `approved` it will be applied to these invoices
-      in
-
-      the order of the first issued invoice to the most recently issued
-      invoice.  If
-
-      there are enough funds to fully pay an invoice, the invoice status will be
-      marked
-
-      as paid.
+      The array of invoice identifiers. It's important to note that the
+      transaction amount can be more or less than the combined invoice amounts. If the
+      transaction is a type `sale` and it is `approved` it will be applied to these invoices
+      in the order of the first issued invoice to the most recently issued
+      invoice. If there are enough funds to fully pay an invoice, the invoice status will be
+      marked as paid.
     nullable: true
     type: array
     items:
       $ref: ../ResourceId.yaml
   paymentInstruction:
     description: >-
-      Payment Instruction if supplied will be used instead of deprecated
-      `paymentInstrument` field. If you decide not to provide any of those
-      – Customer's default Payment Instrument will be used.
+      Payment instruction. If not supplied, customer's default payment instrument will be used.
     allOf:
       - $ref: ../PaymentInstruction.yaml
-  paymentInstrument:
-    deprecated: true
-    allOf:
-      - $ref: ../PaymentInstruments/ValueObjects/PaymentInstrument.yaml
   billingAddress:
     description: >-
-      Billing Address. If not supplied, we use the billing address associated
+      Billing address. If not supplied, we use the billing address associated
       with the payment instrument, and then customer.
     nullable: true
     allOf:
@@ -99,37 +59,31 @@ properties:
     example: 44433322-2c4y-483z-a0a9-158621f77a21
   description:
     nullable: true
-    description: The payment description
+    description: The payment description.
     type: string
     maxLength: 255
   notificationUrl:
     nullable: true
     description: >
       The URL where a server-to-server notification request type `POST` with a
-      transaction payload will be sent
-
-      when the transaction's result is finalized. Do not trust the notification;
-
-      follow with a `GET` request to confirm the result of the transaction.
-      Please respond with a `2xx`
-
+      transaction payload will be sent when the transaction's result is finalized. Do not trust the notification;
+      follow with a `GET` request to confirm the result of the transaction. Please respond with a `2xx`
       HTTP status code, or we will reattempt the request again.
-
       You may use `{id}` or `{result}` as placeholders in the URL and we will replace them with the transaction's id and result accordingly.
     type: string
     format: uri
   redirectUrl:
     nullable: true
     description: >-
-      The URL to redirect the end-user when an offsite transaction is
-      completed.  Defaults to the website's configured URL.
+      The URL to redirect the end-user when an offsite transaction is completed.
+      Defaults to the website's configured URL.
       You may use `{id}` or `{result}` as placeholders in the URL and we will replace them with the transaction's id and result accordingly.
     type: string
     format: uri
   customFields:
     $ref: ../ResourceCustomFields.yaml
   isProcessedOutside:
-    description: True if transaction was processed outside Rebilly
+    description: True if transaction was processed outside Rebilly.
     type: boolean
     default: false
   processedTime:
