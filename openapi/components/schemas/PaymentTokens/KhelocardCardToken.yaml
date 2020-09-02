@@ -1,0 +1,44 @@
+type: object
+title: Khelocard card token
+allOf:
+  - $ref: ../Common/CommonPaymentToken.yaml
+required:
+  - method
+  - billingAddress
+  - paymentInstrument
+properties:
+  method:
+    description: The token method.
+    type: string
+    enum: [Khelocard]
+  paymentInstrument:
+    description: The token instrument details.
+    type: object
+    required:
+      - number
+      - cvv
+      - expYear
+      - expMonth
+    properties:
+      number:
+        description: Khelocard card number.
+        type: string
+        writeOnly: true
+      cvv:
+        description: Khelocard card CVV.
+        type: string
+        writeOnly: true
+      last4:
+        description: Khelocard card number's last 4 digits.
+        type: string
+        readOnly: true
+      expMonth:
+        description: Khelocard card expiration month.
+        type: integer
+      expYear:
+        description: Khelocard card expiration year.
+        type: integer
+  billingAddress:
+    description: The billing address object
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
