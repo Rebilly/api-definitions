@@ -1,11 +1,12 @@
 type: object
+description: The bank account BBAN or IBAN instrument.
 required:
   - accountNumberType
 discriminator:
   propertyName: accountNumberType
   mapping:
-    BBAN: ./PaymentInstruments/BBANInstrument.yaml
-    IBAN: ./PaymentInstruments/IBANInstrument.yaml
+    BBAN: ./BBANInstrument.yaml
+    IBAN: ./IBANInstrument.yaml
 properties:
   accountNumberType:
     description: >-

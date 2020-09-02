@@ -10,12 +10,9 @@ properties:
   method:
     description: The token payment method
     type: string
-    enum:
-      - ach
+    enum: [ach]
   paymentInstrument:
-    description: The payment instrument details
-    allOf:
-      - $ref: ./TokenBankAccountInstrument.yaml
+    $ref: ./PaymentInstruments/BankAccountInstrument.yaml
   billingAddress:
     description: The billing address object
     allOf:
