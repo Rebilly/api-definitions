@@ -1,0 +1,17 @@
+type: object
+title: ACH
+required:
+  - method
+properties:
+  method:
+    type: string
+    description: The payment method
+    enum:
+      - ach
+  feature:
+    type: object
+    nullable: true
+    description: |
+      The specifc feature (eg. digital wallet or a processor) of this method. If method doesn't have any features – will be null.
+    oneOf:
+      - $ref: ../Features/AchPlaidFeature.yaml

@@ -1,0 +1,43 @@
+type: object
+title: Payment Card
+required:
+  - method
+properties:
+  method:
+    type: string
+    description: The payment method.
+    enum:
+      - payment-card
+  feature:
+    type: object
+    nullable: true
+    description: |
+      The specifc feature (eg. digital wallet or a processor) of this method. If method doesn't have any features – will be null.
+    oneOf:
+      - $ref: ../Features/PaymentCardDigitalWalletFeature.yaml
+  brands:
+    type: array
+    description: The list of supported brands.
+    minItems: 1
+    items:
+      $ref: ../../PaymentCards/PaymentCardBrand.yaml
+  bins:
+    type: object
+    description: The payment-card bins filter. If null all bins are allowed.
+    nullable: true
+    required:
+      - mode
+      - values
+    properties:
+      mode:
+        type: string
+        description: The filtering mode.
+        enum:
+          - allow
+          - deny
+      values:
+        type: array
+        description: The list of allowed/denyed (see `mode`) bins
+        minItems: 1
+        items:
+          type: string
