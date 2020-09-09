@@ -66,12 +66,6 @@ properties:
             localization will be selected.  Take the case where two versions
             have different locale content -- the locales of the content is not
             considered when selecting the version.
-          example:
-            locale: fr-FR
-            from: example@example.com
-            subject: Sujet de démonstration
-            text: Texte de démonstration
-            html: <p>Texte de démonstration</p>
           type: array
           minItems: 1
           items:
@@ -83,22 +77,26 @@ properties:
                   The sender address. It must be a **verified** address. # todo
                   add a link to help docs on how to verify an email address
                 maxLength: 254
+                example: example@example.com
               subject:
                 type: string
                 description: The message subject. The template placeholders are allowed.
                 maxLength: 998
+                example: Sujet de démonstration
               text:
                 type: string
                 description: |
                   The message's text body.
                   Leave empty to use content from "html".
                   The template placeholders are allowed.
+                example: Texte de démonstration
               html:
                 type: string
                 description: |
                   The message's html body.
                   Leave empty to use content from "text".
                   The template placeholders are allowed.
+                example: <p>Texte de démonstration</p>
               locale:
                 type: string
                 description: >-
