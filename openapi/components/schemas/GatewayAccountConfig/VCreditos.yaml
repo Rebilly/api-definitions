@@ -1,0 +1,21 @@
+description: VCreditos config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: VCreditos credentials object
+        properties:
+          publicKey:
+            type: string
+            description: VCreditos API public key
+          secretKey:
+            type: string
+            description: VCreditos API secret key
+            format: password
+        required:
+          - publicKey
+          - secretKey
