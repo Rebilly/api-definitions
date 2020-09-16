@@ -1,0 +1,21 @@
+description: HiPay config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: HiPay credentials object
+        properties:
+          apiUsername:
+            type: string
+            description: HiPay API user name
+          apiPassword:
+            type: string
+            description: HiPay API password
+            format: password
+        required:
+          - apiUsername
+          - apiPassword

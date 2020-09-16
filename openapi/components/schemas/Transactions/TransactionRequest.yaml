@@ -31,10 +31,10 @@ properties:
       This supports a limited subset of Transaction types.  To refund or void,
       use the refund endpoint.
 
-      To `capture` use the `sale` endpoint.  It will capture if there are any
-      eligible
+      To `capture` use the `sale` type. If any existing `authorize` transactions
+      are eligible, then they will be captured and the `sale` will be converted
+      to a `capture` type.
 
-      transactions of type `authorize` that can be captured.
     type: string
     enum:
       - sale

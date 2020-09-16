@@ -1,24 +1,10 @@
-type: object
-required:
-  - method
-  - accountNumberType
-discriminator:
-  propertyName: accountNumberType
-  mapping:
-    BBAN: ./AccountNumberTypes/BBANType.yaml
-    IBAN: ./AccountNumberTypes/IBANType.yaml
-properties:
-  method:
-    description: The method of payment instrument.
-    type: string
-    enum:
-      - ach
-  accountNumberType:
-    description: >-
-      Bank's Account Number type. A valid value is basic bank account number
-      (BBAN) or international bank account number (IBAN).
-    type: string
-    default: BBAN
-    enum:
-      - IBAN
-      - BBAN
+anyOf:
+  - $ref: ./AccountNumberTypes/BBANType.yaml
+  - $ref: ./AccountNumberTypes/IBANType.yaml
+
+## Preference is without the discriminator even if it is more accurate.
+# discriminator:
+#   propertyName: accountNumberType
+#   mapping:
+#     BBAN: ./AccountNumberTypes/BBANType.yaml
+#     IBAN: ./AccountNumberTypes/IBANType.yaml
