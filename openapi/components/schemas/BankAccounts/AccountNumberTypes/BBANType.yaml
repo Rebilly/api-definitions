@@ -1,42 +1,53 @@
+type: object
 description: BBAN type object
-allOf:
-  - $ref: ../BankAccountCreatePlain.yaml
-  - type: object
-    required:
-      - customerId
-      - accountNumber
-      - routingNumber
-      - accountType
-      - address
-    properties:
-      customerId:
-        description: Customer's ID
-        allOf:
-          - $ref: ../../ResourceId.yaml
-      accountNumber:
-        description: Bank's account number
-        type: string
-        pattern: '^[0-9]+$'
-      routingNumber:
-        description: Bank's routing number
-        type: string
-        pattern: '^[0-9]+$'
-      accountType:
-        description: Bank's account type
-        type: string
-        enum:
-          - checking
-          - savings
-          - other
-      bankName:
-        description: Bank's name
-        type: string
-      bic:
-        description: Bank Identifier Code
-        type: string
-      billingAddress:
-        description: The billing address
-        allOf:
-          - $ref: ../../Contact/ContactObject.yaml
-      customFields:
-        $ref: ../../ResourceCustomFields.yaml
+required:
+  - customerId
+  - accountNumber
+  - routingNumber
+  - accountType
+  - billingAddress
+properties:
+  accountNumberType:
+    description: >-
+      Bank's Account Number type. A valid value is basic bank account number
+      (BBAN) or international bank account number (IBAN).
+
+      This is the object for the BBAN.
+    type: string
+    default: BBAN
+    enum:
+      - IBAN
+      - BBAN
+  browserData:
+    $ref: ../../PaymentTokens/BrowserData.yaml
+  customerId:
+    description: Customer's ID
+    allOf:
+      - $ref: ../../ResourceId.yaml
+  accountNumber:
+    description: Bank's account number
+    type: string
+    pattern: '^[0-9]+$'
+  routingNumber:
+    description: Bank's routing number
+    type: string
+    pattern: '^[0-9]+$'
+  accountType:
+    description: Bank's account type
+    type: string
+    enum:
+      - checking
+      - savings
+      - other
+  bankName:
+    description: Bank's name
+    type: string
+  bic:
+    description: Bank Identifier Code
+    type: string
+  billingAddress:
+    description: The billing address
+    allOf:
+      - $ref: ../../Contact/ContactObject.yaml
+  customFields:
+    $ref: ../../ResourceCustomFields.yaml
