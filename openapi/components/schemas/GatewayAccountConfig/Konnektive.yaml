@@ -4,6 +4,7 @@ allOf:
   - type: object
     required:
       - credentials
+      - settings
     properties:
       credentials:
         type: object
@@ -11,8 +12,6 @@ allOf:
         required:
           - loginId
           - password
-          - campaignId
-          - productId
         properties:
           loginId:
             type: string
@@ -21,6 +20,13 @@ allOf:
             type: string
             description: Konnektive API password.
             format: password
+      settings:
+        type: object
+        description: Settings object
+        required:
+          - campaignId
+          - productId
+        properties:
           campaignId:
             type: string
             description: Konnektive campaign ID for which the order is being placed.
