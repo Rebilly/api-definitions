@@ -16,8 +16,4 @@ const data = {
     // scheduledTime: '2017-09-28T16:13:44Z'
 };
 
-// the ID is optional
-const firstTransaction = await api.transactions.create({data});
-
-// or you can provide one
-const secondTransaction = await api.transactions.create({id: 'my-second-id', data});
+const transaction = await api.transactions.create({data});

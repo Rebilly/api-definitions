@@ -1,33 +1,44 @@
+type: object
+required:
+  - customerId
+  - accountNumber
+  - billingAddress
 description: IBAN type object
-allOf:
-  - $ref: ../BankAccountCreatePlain.yaml
-  - type: object
-    required:
-      - customerId
-      - accountNumber
-      - address
-    properties:
-      customerId:
-        description: Customer's ID
-        allOf:
-          - $ref: ../../ResourceId.yaml
-      accountNumber:
-        description: >
-          Bank's account number. Detailed information about all ISO
-          13616-compliant national IBAN formats is available
+properties:
+  accountNumberType:
+    description: >-
+      Bank's Account Number type. A valid value is basic bank account number
+      (BBAN) or international bank account number (IBAN).
 
-          in [SWIFT IBAN
-          Registry](https://www.swift.com/standards/data-standards/iban).
-        type: string
-      bankName:
-        description: Bank's name
-        type: string
-      bic:
-        description: Bank Identifier Code
-        type: string
-      billingAddress:
-        description: The billing address
-        allOf:
-          - $ref: ../../Contact/ContactObject.yaml
-      customFields:
-        $ref: ../../ResourceCustomFields.yaml
+      This is the object for the IBAN.
+    type: string
+    default: BBAN
+    enum:
+      - IBAN
+      - BBAN
+  browserData:
+    $ref: ../../PaymentTokens/BrowserData.yaml
+  customerId:
+    description: Customer's ID
+    allOf:
+      - $ref: ../../ResourceId.yaml
+  accountNumber:
+    description: >
+      Bank's account number. Detailed information about all ISO
+      13616-compliant national IBAN formats is available
+
+      in the [SWIFT IBAN
+      Registry](https://www.swift.com/standards/data-standards/iban).
+    type: string
+  bankName:
+    description: Bank's name
+    type: string
+  bic:
+    description: Bank Identifier Code
+    type: string
+  billingAddress:
+    description: The billing address
+    allOf:
+      - $ref: ../../Contact/ContactObject.yaml
+  customFields:
+    $ref: ../../ResourceCustomFields.yaml
