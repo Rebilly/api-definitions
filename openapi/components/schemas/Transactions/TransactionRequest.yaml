@@ -1,145 +1,22 @@
-type: object
-required:
-  - websiteId
-  - customerId
-  - currency
-  - amount
-  - type
-properties:
-  id:
-    description: The payment identifier string
-    readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
-  websiteId:
-    description: The website identifier string
-    allOf:
-      - $ref: ../ResourceId.yaml
-  customerId:
-    description: The customer identifier string
-    allOf:
-      - $ref: ../ResourceId.yaml
-  currency:
-    allOf:
-      - $ref: ../CurrencyCode.yaml
-  type:
-    description: >
-      The type of transaction requested.
+allOf:
+  - $ref: ../Common/CommonTransactionRequest.yaml
+  - required:
+    - type
+  - properties:
+      type:
+        description: >
+          The type of transaction requested.
 
-      You should always include the type within your API request.
+          You should always include the type within your API request.
 
-      This supports a limited subset of Transaction types.  To refund or void,
-      use the refund endpoint.
+          This supports a limited subset of Transaction types.  To refund or void,
+          use the refund endpoint.
 
-      To `capture` use the `sale` type. If any existing `authorize` transactions
-      are eligible, then they will be captured and the `sale` will be converted
-      to a `capture` type.
+          To `capture` use the `sale` type. If any existing `authorize` transactions
+          are eligible, then they will be captured and the `sale` will be converted
+          to a `capture` type.
 
-    type: string
-    enum:
-      - sale
-      - authorize
-      - credit
-  amount:
-    description: >
-      The transaction amount.  Use `0` for a zero dollar verification. This is
-      important if
-
-      you want to authorize a payment instrument before giving access to a free
-      trial, for example.
-    type: number
-    format: double
-    example: 97.97
-  invoiceIds:
-    description: >
-      The array of invoice identifiers.  It's important to note that the
-      transaction
-
-      amount can be more or less than the combined invoice amounts.  If the
-      transaction
-
-      is a type `sale` and it is `approved` it will be applied to these invoices
-      in
-
-      the order of the first issued invoice to the most recently issued
-      invoice.  If
-
-      there are enough funds to fully pay an invoice, the invoice status will be
-      marked
-
-      as paid.
-    nullable: true
-    type: array
-    items:
-      $ref: ../ResourceId.yaml
-  paymentInstruction:
-    description: >-
-      Payment Instruction if supplied will be used instead of deprecated
-      `paymentInstrument` field. If you decide not to provide any of those
-      – Customer's default Payment Instrument will be used.
-    allOf:
-      - $ref: ../PaymentInstruction.yaml
-  paymentInstrument:
-    deprecated: true
-    allOf:
-      - $ref: ../PaymentInstruments/ValueObjects/PaymentInstrument.yaml
-  billingAddress:
-    description: >-
-      Billing Address. If not supplied, we use the billing address associated
-      with the payment instrument, and then customer.
-    nullable: true
-    allOf:
-      - $ref: ../Contact/ContactObject.yaml
-  requestId:
-    description: >-
-      The request id is **recommended**. It prevents duplicate transaction
-      requests within a short period of time. If a duplicate request is sent
-      with the same `requestId` it will be ignored to prevent double-billing
-      anyone.  It must be unique within a 24-hour period.  We recommend
-      generating a UUID v4 as its value.
-    type: string
-    nullable: true
-    maxLength: 50
-    pattern: '^[\-\w]+$'
-    example: 44433322-2c4y-483z-a0a9-158621f77a21
-  description:
-    nullable: true
-    description: The payment description
-    type: string
-    maxLength: 255
-  notificationUrl:
-    nullable: true
-    description: >
-      The URL where a server-to-server notification request type `POST` with a
-      transaction payload will be sent
-
-      when the transaction's result is finalized. Do not trust the notification;
-
-      follow with a `GET` request to confirm the result of the transaction.
-      Please respond with a `2xx`
-
-      HTTP status code, or we will reattempt the request again.
-
-      You may use `{id}` or `{result}` as placeholders in the URL and we will replace them with the transaction's id and result accordingly.
-    type: string
-    format: uri
-  redirectUrl:
-    nullable: true
-    description: >-
-      The URL to redirect the end-user when an offsite transaction is
-      completed.  Defaults to the website's configured URL.
-      You may use `{id}` or `{result}` as placeholders in the URL and we will replace them with the transaction's id and result accordingly.
-    type: string
-    format: uri
-  customFields:
-    $ref: ../ResourceCustomFields.yaml
-  isProcessedOutside:
-    description: True if transaction was processed outside Rebilly
-    type: boolean
-    default: false
-  processedTime:
-    type: string
-    description: >-
-      The time the transaction was processed. Can be specified only if
-      transaction was processed outside Rebilly.
-    format: date-time
+        type: string
+        enum:
+          - sale
+          - authorize
