@@ -11,7 +11,8 @@ example:
     brands:
       - Visa
       - MasterCard
-    bins: null
+    filters:
+      - "brand:Visa,MasterCard;bin:!411111"
   - method: ach
     feature:
       name: Plaid
@@ -21,12 +22,12 @@ example:
     feature: null
     brands:
       - Visa
-    bins:
-      mode: allow
-      values:
-        - "411111"
-        - "444433"
+    filters:
+      - "brand:Visa;bin:411111,444433"
   - method: ach
     feature: null
+    filters: []
   - method: paypal
+    filters: [ ]
   - method: Skrill
+    filters: [ ]

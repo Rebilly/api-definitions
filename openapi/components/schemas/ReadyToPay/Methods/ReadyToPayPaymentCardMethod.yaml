@@ -21,23 +21,10 @@ properties:
     minItems: 1
     items:
       $ref: ../../PaymentCards/PaymentCardBrand.yaml
-  bins:
-    type: object
-    description: The payment-card bins filter. If null all bins are allowed.
-    nullable: true
-    required:
-      - mode
-      - values
-    properties:
-      mode:
-        type: string
-        description: The filtering mode
-        enum:
-          - allow
-          - deny
-      values:
-        type: array
-        description: The list of allowed/denyed (see `mode`) bins.
-        minItems: 1
-        items:
-          type: string
+  filters:
+    type: array
+    description: |
+      For the method to be applicable any of the following filters should match.
+      If no filters sent – no restrictions applied. This follows our standard filter format.
+    items:
+      type: string
