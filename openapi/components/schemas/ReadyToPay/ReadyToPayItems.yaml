@@ -1,0 +1,21 @@
+type: object
+title: 'With items'
+required:
+  - items
+properties:
+  items:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      required:
+        - planId
+        - quantity
+      properties:
+        planId:
+          description: The plan identifier string
+          allOf:
+            - $ref: ../ResourceId.yaml
+        quantity:
+          description: Number of units of the product on the given plan.
+          type: integer

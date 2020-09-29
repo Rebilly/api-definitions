@@ -1,0 +1,107 @@
+allOf:
+  - $ref: ../RuleAction.yaml
+  - type: object
+    description: Add risk score
+    properties:
+      gatewayAccountsMode:
+        type: string
+        description: |
+          The global gateway accounts mode that will be applied at the beginning of the action processing.
+
+          - `allow-all` will mark all available gateway accounts as allowed if they were denied by any previous actions.
+          - `deny-all` will mark all available gateway accounts as denied if they were allowed by any previous actions.
+          - `manual` will not apply any global allow/deny rule.
+        enum:
+          - manual
+          - allow-all
+          - deny-all
+      gatewayAccounts:
+        type: array
+        description: The individual list of gateway account adjustments
+        items:
+          type: object
+          properties:
+            gatewayAccountId:
+              description: The desired Gateway Account ID
+              $ref: ../../ResourceId.yaml
+            mode:
+              type: string
+              description: The individual gateway account mode
+              enum:
+                - allow
+                - deny
+      paymentMethodsMode:
+        type: string
+        description: |
+          The global payment methods mode that will be applied at the beginning of the action processing.
+
+          - `allow-all` will mark all available payment methods as allowed if they were denied by any previous actions.
+          - `deny-all` will mark all available payment methods as denied if they were allowed by any previous actions.
+          - `manual` will not apply any global allow/deny rule.
+        enum:
+          - manual
+          - allow-all
+          - deny-all
+      paymentMethods:
+        type: array
+        description: The individual list of gateway account adjustments
+        items:
+          type: object
+          required:
+            - paymentMethod
+            - feature
+            - mode
+          oneOf:
+            - type: object
+              title: Payment Card
+              properties:
+                paymentMethod:
+                  type: string
+                  enum:
+                    - payment-card
+                feature:
+                  type: string
+                  nullable: true
+                  enum:
+                    - Google Pay
+                    - Apple Pay
+            - type: object
+              title: ACH
+              properties:
+                paymentMethod:
+                  type: string
+                  enum:
+                    - ach
+                feature:
+                  type: string
+                  nullable: true
+                  enum:
+                    - Plaid
+            - type: object
+              title: Generic
+              properties:
+                paymentMethod:
+                  $ref: ../../PaymentMethods/PaymentMethod.yaml
+                feature:
+                  nullable: true
+          properties:
+            paymentMethod:
+              description: The payment method name
+            feature:
+              description: |
+                The specific payment method feature like `Google Pay`, `Apple Pay` or `Plaid`.
+
+                If set to `null` – applies to the payment method itself.
+            mode:
+              type: string
+              description: The individual payment method mode
+              enum:
+                - allow
+                - deny
+            weight:
+              type: integer
+              description: |
+                The weight is used to order (descending) the payment method in the final response. It can be negative.
+
+                It gets summed up through each triggered rule action.
+              default: 0
