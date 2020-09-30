@@ -1,0 +1,33 @@
+type: array
+items:
+  oneOf:
+    - $ref: ./Methods/ReadyToPayPaymentCardMethod.yaml
+    - $ref: ./Methods/ReadyToPayAchMethod.yaml
+    - $ref: ./Methods/ReadyToPayGenericMethod.yaml
+example:
+  - method: payment-card
+    feature:
+      name: Google Pay
+    brands:
+      - Visa
+      - MasterCard
+    filters:
+      - "brand:Visa,MasterCard;bin:!411111"
+  - method: ach
+    feature:
+      name: Plaid
+      linkToken: "some-random-link_token-for-plaid"
+      expirationTime: "2006-01-02T15:04:05Z"
+  - method: payment-card
+    feature: null
+    brands:
+      - Visa
+    filters:
+      - "brand:Visa;bin:411111,444433"
+  - method: ach
+    feature: null
+    filters: []
+  - method: paypal
+    filters: []
+  - method: Skrill
+    filters: []

@@ -1,0 +1,16 @@
+type: object
+title: Generic
+required:
+  - method
+properties:
+  method:
+    description: The payment method
+    allOf:
+      - $ref: ../../PaymentMethods/TokenPaymentMethod.yaml
+  filters:
+    type: array
+    description: |
+      For the method to be applicable any of the following filters should match.
+      If no filters sent – no restrictions applied. This follows our standard filter format.
+    items:
+      type: string

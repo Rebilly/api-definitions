@@ -1,0 +1,27 @@
+post:
+  tags:
+    - Transactions
+  summary: Ready to Pay
+  operationId: PostReadyToPay
+  description: |
+    Get available payment methods for a specific transaction or a purchase.
+
+    The payment methods order shown to a customer **SHOULD** be the same as the order in the response.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ReadyToPay/CoreReadyToPay.yaml
+  responses:
+    200:
+      description: Payment methods retrieved
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ReadyToPay/ReadyToPayMethods.yaml
+    401:
+      $ref: ../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../components/responses/Forbidden.yaml
+    422:
+      $ref: ../components/responses/ValidationError.yaml
