@@ -1,10 +1,21 @@
 type: object
 required:
+  - method
   - customerId
+  - accountNumberType
   - accountNumber
   - billingAddress
 description: IBAN type object
 properties:
+  method:
+    description: The method of payment instrument.
+    type: string
+    enum:
+      - ach
+  customerId:
+    description: Customer's ID
+    allOf:
+      - $ref: ../../ResourceId.yaml
   accountNumberType:
     description: >-
       Bank's Account Number type. A valid value is basic bank account number
@@ -16,19 +27,11 @@ properties:
     enum:
       - IBAN
       - BBAN
-  browserData:
-    $ref: ../../PaymentTokens/BrowserData.yaml
-  customerId:
-    description: Customer's ID
-    allOf:
-      - $ref: ../../ResourceId.yaml
   accountNumber:
     description: >
       Bank's account number. Detailed information about all ISO
       13616-compliant national IBAN formats is available
-
-      in the [SWIFT IBAN
-      Registry](https://www.swift.com/standards/data-standards/iban).
+      in the [SWIFT IBAN Registry](https://www.swift.com/standards/data-standards/iban).
     type: string
   bankName:
     description: Bank's name
@@ -42,3 +45,6 @@ properties:
       - $ref: ../../Contact/ContactObject.yaml
   customFields:
     $ref: ../../ResourceCustomFields.yaml
+  browserData:
+    $ref: ../../PaymentTokens/BrowserData.yaml
+

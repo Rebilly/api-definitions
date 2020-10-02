@@ -30,7 +30,7 @@ Starts the development server to preview the docs:
 
 #### Build
 
-Run `npm build` to bundle the definitions into a single file in the `dist` folder.
+Run `npm run build` to bundle the definitions into a single file in the `dist` folder.
 
 #### Validate
 

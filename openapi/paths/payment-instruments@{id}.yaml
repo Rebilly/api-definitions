@@ -1,5 +1,6 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
 get:
   tags:
     - Payment Instruments
@@ -32,26 +33,9 @@ patch:
     - Payment Instruments
   summary: Update a Payment Instrument's values
   operationId: PatchPaymentInstrument
-  description: |
-    Update any of the payment instrument's values.
-
-    Use Framepay payment token to update desired values.
+  description: Update allowed payment instrument's values.
   requestBody:
-    content:
-      application/json:
-        schema:
-          type: object
-          properties:
-            token:
-              description: Payment instrument token ID
-              type: string
-            billingAddress:
-              description: The billing address (if supplied – overrides billing address from token).
-              allOf:
-                - $ref: ../components/schemas/Contact/ContactObject.yaml
-            customFields:
-              $ref: ../components/schemas/ResourceCustomFields.yaml
-    required: true
+    $ref: ../components/requestBodies/PatchPaymentInstrument.yaml
   responses:
     '200':
       description: Payment instrument was updated

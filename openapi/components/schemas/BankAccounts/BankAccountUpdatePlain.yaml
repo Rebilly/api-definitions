@@ -1,0 +1,18 @@
+type: object
+properties:
+  bankName:
+    description: Bank's name.
+    type: string
+  accountType:
+    description: Bank's account type.
+    type: string
+    enum:
+      - checking
+      - savings
+      - other
+  billingAddress:
+    description: The billing address.
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  customFields:
+    $ref: ../ResourceCustomFields.yaml

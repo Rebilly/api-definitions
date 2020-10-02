@@ -2,25 +2,19 @@ type: object
 title: 'Bank Account'
 properties:
   id:
-    description: The bank account identifier string
+    description: The payment instrument ID.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   customerId:
-    description: The customer's ID
+    description: The customer's ID.
     allOf:
       - $ref: ../ResourceId.yaml
-  method:
-    description: The method of payment instrument
-    type: string
-    readOnly: true
-    enum:
-      - bank-account
   bankName:
-    description: Bank's name
+    description: Bank's name.
     type: string
   routingNumber:
-    description: Bank's routing number
+    description: Bank's routing number.
     type: string
   accountNumberType:
     description: >-
@@ -39,10 +33,10 @@ properties:
       - savings
       - other
   bic:
-    description: Bank Identifier Code
+    description: Bank Identifier Code.
     type: string
   billingAddress:
-    description: The billing address
+    description: The billing address.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   fingerprint:
@@ -52,24 +46,24 @@ properties:
     type: string
     readOnly: true
   last4:
-    description: The last 4 digits of the bank account
+    description: The last 4 digits of the bank account.
     type: string
     readOnly: true
   browserData:
     $ref: ../PaymentTokens/BrowserData.yaml
   status:
-    description: Bank account status
+    description: Bank account status.
     type: string
     readOnly: true
     enum:
       - active
       - deactivated
   createdTime:
-    description: Bank account created time
+    description: Bank account created time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
-    description: Bank account updated time
+    description: Bank account updated time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   customFields:
