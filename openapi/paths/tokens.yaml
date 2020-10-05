@@ -19,11 +19,7 @@ post:
     content:
       application/json:
         schema:
-          oneOf:
-            - $ref: ../components/schemas/PaymentTokens/PaymentCardToken.yaml
-            - $ref: ../components/schemas/PaymentTokens/BankAccountToken.yaml
-            - $ref: ../components/schemas/PaymentTokens/PaymentToken.yaml
-            - $ref: ../components/schemas/PaymentTokens/DigitalWalletToken.yaml
+          $ref: ../components/schemas/PaymentTokens/CompositeToken.yaml
     description: PaymentToken resource
     required: true
   security:
@@ -43,11 +39,7 @@ post:
       content:
         application/json:
           schema:
-            oneOf:
-              - $ref: ../components/schemas/PaymentTokens/PaymentCardToken.yaml
-              - $ref: ../components/schemas/PaymentTokens/BankAccountToken.yaml
-              - $ref: ../components/schemas/PaymentTokens/PaymentToken.yaml
-              - $ref: ../components/schemas/PaymentTokens/DigitalWalletToken.yaml
+            $ref: ../components/schemas/PaymentTokens/CompositeToken.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -92,7 +84,7 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/PaymentTokens/PaymentToken.yaml
+              $ref: ../components/schemas/PaymentTokens/CompositeToken.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

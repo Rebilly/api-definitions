@@ -31,12 +31,12 @@ tags:
       Bank Accounts are a type of payment instrument used to collect
       ACH (echeck) payments, similar to how a payment
       card would be used to for a credit card payment.
-  - name: Blacklists
+  - name: Blocklists
     description: |
-      Your blacklists contains values of customerIds, email addresses,
+      Your blocklists contains values of customerIds, email addresses,
       ipAddresses, bank identification numbers, countries or payment cards that
       you do NOT want to do business with. They are a good tool for managing
-      risk. A blacklist entry that expires after a period of time we call a
+      risk. A blocklist entry that expires after a period of time we call a
       greylist.
   - name: Coupons
     description: >
@@ -232,6 +232,7 @@ tags:
   - name: Tracking
   - name: Email Credentials
   - name: Webhook Credentials
+  - name: Checkout Forms
   - name: Checkout Pages
   - name: API Keys
 
@@ -271,10 +272,10 @@ paths:
     $ref: './paths/bank-accounts@{id}.yaml'
   '/bank-accounts/{id}/deactivation':
     $ref: './paths/bank-accounts@{id}@deactivation.yaml'
-  /blacklists:
-    $ref: ./paths/blacklists.yaml
-  '/blacklists/{id}':
-    $ref: './paths/blacklists@{id}.yaml'
+  /blocklists:
+    $ref: ./paths/blocklists.yaml
+  '/blocklists/{id}':
+    $ref: './paths/blocklists@{id}.yaml'
   /coupons-redemptions:
     $ref: ./paths/coupons-redemptions.yaml
   '/coupons-redemptions/{id}':
@@ -317,8 +318,6 @@ paths:
     $ref: ./paths/disputes.yaml
   '/disputes/{id}':
     $ref: './paths/disputes@{id}.yaml'
-  '/disputes/{id}/matched-rules':
-    $ref: './paths/disputes@{id}@matched-rules.yaml'
   /files:
     $ref: ./paths/files.yaml
   '/files/{id}':
@@ -337,8 +336,6 @@ paths:
     $ref: './paths/invoices@{id}@issue.yaml'
   '/invoices/{id}/items':
     $ref: './paths/invoices@{id}@items.yaml'
-  '/invoices/{id}/matched-rules':
-    $ref: './paths/invoices@{id}@matched-rules.yaml'
   '/invoices/{id}/recalculate':
     $ref: './paths/invoices@{id}@recalculate.yaml'
   '/invoices/{id}/reissue':
@@ -365,8 +362,12 @@ paths:
     $ref: ./paths/password-tokens.yaml
   '/password-tokens/{id}':
     $ref: './paths/password-tokens@{id}.yaml'
+  '/payment-instruments':
+    $ref: './paths/payment-instruments.yaml'
   '/payment-instruments/{id}':
     $ref: './paths/payment-instruments@{id}.yaml'
+  '/payment-instruments/{id}/deactivation':
+    $ref: './paths/payment-instruments@{id}@deactivation.yaml'
   /payment-cards:
     $ref: ./paths/payment-cards.yaml
   '/payment-cards/{id}':
@@ -375,8 +376,6 @@ paths:
     $ref: './paths/payment-cards@{id}@authorization.yaml'
   '/payment-cards/{id}/deactivation':
     $ref: './paths/payment-cards@{id}@deactivation.yaml'
-  '/payment-cards/{id}/matched-rules':
-    $ref: './paths/payment-cards@{id}@matched-rules.yaml'
   /paypal-accounts:
     $ref: ./paths/paypal-accounts.yaml
   '/paypal-accounts/{id}':
@@ -415,8 +414,6 @@ paths:
     $ref: './paths/subscriptions@{id}@change-plan.yaml'
   '/subscriptions/{id}/interim-invoice':
     $ref: './paths/subscriptions@{id}@interim-invoice.yaml'
-  '/subscriptions/{id}/matched-rules':
-    $ref: './paths/subscriptions@{id}@matched-rules.yaml'
   '/subscriptions/{id}/timeline':
     $ref: './paths/subscriptions@{id}@timeline.yaml'
   '/subscriptions/{id}/timeline/{messageId}':
@@ -437,16 +434,18 @@ paths:
     $ref: ./paths/tokens.yaml
   '/tokens/{token}':
     $ref: './paths/tokens@{token}.yaml'
+  /digital-wallets/validation:
+    $ref: './paths/digital-wallets@validation.yaml'
   /transactions:
     $ref: ./paths/transactions.yaml
   '/transactions/{id}':
     $ref: './paths/transactions@{id}.yaml'
+  /payouts:
+    $ref: ./paths/payouts.yaml
   '/transactions/{id}/cancel':
     $ref: './paths/transactions@{id}@cancel.yaml'
   '/transactions/{id}/gateway-logs':
     $ref: './paths/transactions@{id}@gateway-logs.yaml'
-  '/transactions/{id}/matched-rules':
-    $ref: './paths/transactions@{id}@matched-rules.yaml'
   '/transactions/{id}/refund':
     $ref: './paths/transactions@{id}@refund.yaml'
   '/transactions/{id}/timeline':
@@ -491,6 +490,10 @@ paths:
     $ref: './paths/credential-hashes@oauth2@{hash}.yaml'
   '/credential-hashes/oauth2/{hash}/items':
     $ref: './paths/credential-hashes@oauth2@{hash}@items.yaml'
+  /credential-hashes/plaid:
+    $ref: './paths/credential-hashes@plaid.yaml'
+  '/credential-hashes/plaid/{hash}':
+    $ref: './paths/credential-hashes@plaid@{hash}.yaml'
   /credential-hashes/postmark:
     $ref: ./paths/credential-hashes@postmark.yaml
   '/credential-hashes/postmark/{hash}':

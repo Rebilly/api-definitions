@@ -1,0 +1,46 @@
+description: TWINT config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+      - settings
+    properties:
+      credentials:
+        type: object
+        description: TWINT credentials object
+        properties:
+          storeUuid:
+            type: string
+            description: TWINT store UUID
+          cashRegisterId:
+            type: string
+            description: Cash register ID
+          publicKey:
+            type: string
+            description: TWINT public key
+            x-multiline: true
+          privateKey:
+            type: string
+            description: TWINT private key
+            format: password
+            x-multiline: true
+          keyPassphrase:
+            type: string
+            description: TWINT key's passphrase
+            format: password
+        required:
+          - storeUuid
+          - cashRegisterId
+          - publicKey
+          - privateKey
+          - keyPassphrase
+      settings:
+        type: object
+        description: TWINT settings object
+        properties:
+          cashRegisterType:
+            type: string
+            description: TWINT cash register type
+        required:
+          - cashRegisterType

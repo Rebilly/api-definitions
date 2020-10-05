@@ -1,0 +1,26 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  tags:
+    - Transactions
+  summary: Create a credit transaction
+  operationId: PostPayout
+  description: |
+    Create a transaction of type `credit`.
+  requestBody:
+    $ref: ../components/requestBodies/PayoutRequest.yaml
+  responses:
+    '201':
+      description: Transaction was created
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Transactions/Transaction.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

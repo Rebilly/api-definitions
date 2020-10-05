@@ -1,15 +1,18 @@
 type: object
+required:
+  - method
+  - customerId
+  - billingAddress
 title: 'PayPal Account'
 properties:
   id:
-    description: The PayPal identifier string
+    description: The payment instrument ID.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   method:
-    description: The method of payment instrument
+    description: The method of payment instrument.
     type: string
-    readOnly: true
     enum:
       - paypal
   customerId:
@@ -17,30 +20,30 @@ properties:
     allOf:
       - $ref: ../ResourceId.yaml
   billingAddress:
-    description: The customer's billing address
+    description: The billing address.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   username:
-    description: PayPal username
+    description: PayPal username.
     type: string
     readOnly: true
   status:
-    description: PayPal account status
+    description: PayPal account status.
     type: string
     readOnly: true
     enum:
       - inactive
       - active
       - deactivated
-  browserData:
-    $ref: ../PaymentTokens/BrowserData.yaml
   createdTime:
-    description: PayPal account created time
+    description: PayPal account created time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
-    description: PayPal account updated time
+    description: PayPal account updated time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   customFields:
     $ref: ../ResourceCustomFields.yaml
+  browserData:
+    $ref: ../PaymentTokens/BrowserData.yaml

@@ -32,9 +32,7 @@ properties:
       The list of plans that can be used instead of ones specified in `plans`.
 
       Customer will be able to select whether to purchase bump plans or the regular ones.
-    nullable: true
-    default: null
-    minItems: 1
+    default: []
     allOf:
       - $ref: CheckoutFormPlans.yaml
   accountsEnabled:
@@ -61,7 +59,7 @@ properties:
       If not specified all available payment methods will be displayed.
     type: array
     items:
-      $ref: ../Method.yaml
+      $ref: ../PaymentMethods/PaymentMethod.yaml
   customization:
     description: Visual customization options for the form.
     type: object
@@ -78,7 +76,7 @@ properties:
         type: string
         default: Pay {{amount}}
       colors:
-        description:
+        description: Control the primary color used in the form and button text.
         type: object
         properties:
           primary:
