@@ -1,0 +1,68 @@
+allOf:
+  - $ref: ../Common/CommonKycDocument.yaml
+  - properties:
+      reviewerId:
+        description: Reviewer's user ID.
+        type: string
+        nullable: true
+        readOnly: true
+        allOf:
+          - $ref: ../ResourceId.yaml
+      reviewerName:
+        description: Reviewer's first and last name.
+        type: string
+        nullable: true
+        readOnly: true
+      reviewTime:
+        description: Date and time of manual review.
+        nullable: true
+        allOf:
+          - $ref: ../ServerTimestamp.yaml
+      documentMatches:
+        type: object
+        readOnly: true
+        properties:
+          score:
+            description: >-
+              The calculated score that represents the % of confidence that this proof of address
+              represents the given customer
+            type: number
+            format: double
+            example: 0.75
+          data:
+            type: object
+            properties:
+              firstName:
+                description: 'The customer first name if it was matched, null otherwise'
+                type: string
+                example: John
+              lastName:
+                description: 'The customer last name if it was matched, null otherwise'
+                type: string
+                example: Doe
+              line1:
+                description: 'The customer address if it was matched, null otherwise'
+                type: string
+                example: 36 Craven St
+              city:
+                description: 'The customer city if it was matched, null otherwise'
+                type: string
+                example: London
+              region:
+                description: 'The customer region if it was matched, null otherwise'
+                type: string
+                example: London
+              postalCode:
+                description: 'The customer postal code if it was matched, null otherwise'
+                type: string
+                example: WC2N 5NF
+      _links:
+        type: array
+        description: The links related to resource
+        readOnly: true
+        minItems: 3
+        items:
+          anyOf:
+            - $ref: ../Links/SelfLink.yaml
+            - $ref: ../Links/FileLink.yaml
+            - $ref: ../Links/CustomerLink.yaml
