@@ -4,7 +4,7 @@ properties:
   id:
     description: The payment instrument ID.
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ./ResourceId.yaml
   method:
     description: The method of payment instrument.
     type: string
@@ -13,7 +13,7 @@ properties:
   customerId:
     description: Customer's ID.
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ./ResourceId.yaml
   fingerprint:
     description: A unique value to identify the payment instrument regardless of variable values. It contains alphanumeric values.
     type: string
@@ -32,7 +32,7 @@ properties:
   billingAddress:
     description: The billing address.
     allOf:
-      - $ref: ../Contact/ContactObject.yaml
+      - $ref: ./Contact/ContactObject.yaml
   status:
     description: The payment instrument status.
     type: string
@@ -42,15 +42,15 @@ properties:
   createdTime:
     description: The payment instrument created time.
     allOf:
-      - $ref: ../ServerTimestamp.yaml
+      - $ref: ./ServerTimestamp.yaml
   updatedTime:
     description: The payment instrument updated time.
     allOf:
-      - $ref: ../ServerTimestamp.yaml
+      - $ref: ./ServerTimestamp.yaml
   customFields:
-    $ref: ../ResourceCustomFields.yaml
+    $ref: ./ResourceCustomFields.yaml
   browserData:
-    $ref: ../PaymentTokens/BrowserData.yaml
+    $ref: ./PaymentTokens/BrowserData.yaml
   _links:
     type: array
     description: Links related to the resource.
@@ -58,8 +58,8 @@ properties:
     minItems: 1
     items:
       anyOf:
-        - $ref: ../Links/SelfLink.yaml
-        - $ref: ../Links/CustomerLink.yaml
+        - $ref: ./Links/SelfLink.yaml
+        - $ref: ./Links/CustomerLink.yaml
   _embedded:
     type: array
     description: >-
@@ -69,4 +69,4 @@ properties:
     minItems: 1
     items:
       anyOf:
-        - $ref: ../Embeds/CustomerEmbed.yaml
+        - $ref: ./Embeds/CustomerEmbed.yaml
