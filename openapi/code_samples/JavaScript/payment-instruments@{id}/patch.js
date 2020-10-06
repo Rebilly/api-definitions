@@ -10,7 +10,7 @@ const data = {
 
 api.paymentInstruments.patch({id: 'id-to-update', data});
 
-// alternatively you can specify partial token
+// alternatively you can specify a partial token
 const tokenData = {
     token: 'partial-token',
     billingAddress: {

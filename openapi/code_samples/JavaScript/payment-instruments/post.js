@@ -21,7 +21,7 @@ const data = {
 
 const firstPaymentInstrument = await api.paymentInstruments.create({data});
 
-// alternatively you can specify payment token
+// alternatively you can specify a payment token
 const tokenData = {
     token: 'payment-token',
     // the customer ID for which
