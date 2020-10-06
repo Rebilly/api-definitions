@@ -2,7 +2,7 @@
 const data = {
     bankName: 'Your Fake Financial',
     accountType: 'savings',
-    address: {
+    billingAddress: {
         firstName: 'John'
     }
 };
