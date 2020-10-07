@@ -1,11 +1,17 @@
 type: object
 required:
+  - method
   - customerId
   - pan
   - expYear
   - expMonth
   - billingAddress
 properties:
+  method:
+    description: The method of payment instrument.
+    type: string
+    enum:
+      - payment-card
   customerId:
     description: The Customer's ID.
     allOf:
@@ -25,7 +31,7 @@ properties:
     type: string
     writeOnly: true
   billingAddress:
-    description: The Billing Address.
+    description: The billing address.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   customFields:

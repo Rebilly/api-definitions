@@ -1,0 +1,25 @@
+description: CyberSource config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: CyberSource credentials object
+        properties:
+          accessKey:
+            type: string
+            description: CyberSource access key
+          profileId:
+            type: string
+            description: CyberSource profile ID
+          secretKey:
+            type: string
+            description: CyberSource secret key
+            format: password
+        required:
+          - accessKey
+          - profileId
+          - secretKey

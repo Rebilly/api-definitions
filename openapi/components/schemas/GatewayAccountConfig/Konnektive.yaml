@@ -1,0 +1,35 @@
+description: Konnektive config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+      - settings
+    properties:
+      credentials:
+        type: object
+        description: Credentials object
+        required:
+          - loginId
+          - password
+        properties:
+          loginId:
+            type: string
+            description: Konnektive API login ID.
+          password:
+            type: string
+            description: Konnektive API password.
+            format: password
+      settings:
+        type: object
+        description: Settings object
+        required:
+          - campaignId
+          - productId
+        properties:
+          campaignId:
+            type: string
+            description: Konnektive campaign ID for which the order is being placed.
+          productId:
+            type: string
+            description: Konnektive campaign product ID for which the order is being placed.

@@ -5,7 +5,7 @@ const data = {
         pan: '4111111111111111',
         expYear: 2022,
         expMonth: 12,
-        cvv: 123
+        cvv: '123'
     },
     billingAddress: {
       firstName: 'Johnny',
@@ -14,7 +14,7 @@ const data = {
           label: 'main',
           value: 'johnny+test@grr.la',
           primary: true
-      }]  
+      }]
     }
 };
 
