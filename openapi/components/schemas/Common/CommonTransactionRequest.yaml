@@ -55,6 +55,15 @@ properties:
     maxLength: 50
     pattern: '^[\-\w]+$'
     example: 44433322-2c4y-483z-a0a9-158621f77a21
+  gatewayAccountId:
+    description: >-
+      Rebilly will select the appropriate payment gateway account for the transaction based on
+      the properties of the transaction and the `gateway-account-requested` event rules configurations.
+      If you wish to prevent Rebilly from making the gateway account selection, you may supply a
+      gateway account id here, and it will be used instead. Only use this field if you intend to override the settings.
+    nullable: true
+    allOf:
+      - $ref: ../ResourceId.yaml
   description:
     nullable: true
     description: The payment description.
