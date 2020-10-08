@@ -1,8 +1,13 @@
 allOf:
   - $ref: ../RuleAction.yaml
   - type: object
-    description: Add risk score
+    description: Adjust ready to pay
     properties:
+      pushInstrumentsUp:
+        type: boolean
+        default: false
+        description: |
+          If set `true` payment methods that customer has an instrument for will be pushed to the top of the list.
       gatewayAccountsMode:
         type: string
         description: |
