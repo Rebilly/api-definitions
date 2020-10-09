@@ -3,7 +3,7 @@ const data = {
     pan: '4111111111111111',
     expYear: 2022,
     expMonth: 11,
-    cvv: 123,
+    cvv: '123',
     billingAddress: {
       firstName: 'Johnny',
       lastName: 'Brown',
@@ -11,7 +11,7 @@ const data = {
           label: 'main',
           value: 'johnny+test@grr.la',
           primary: true
-      }]  
+      }]
     },
     // the customer ID for which
     // we are adding a payment card
