@@ -1,0 +1,25 @@
+description: PayUlatam config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: PayUlatam credentials object
+        properties:
+          merchantId:
+            type: string
+            description: PayUlatam merchant id
+          accountId:
+            type: string
+            description: PayUlatam account id
+          apiKey:
+            type: string
+            description: PayUlatam API key
+            format: password
+        required:
+          - merchantId
+          - accountId
+          - apiKey
