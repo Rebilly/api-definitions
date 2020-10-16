@@ -12,6 +12,15 @@ post:
 
     The payment methods order shown to a customer **SHOULD** be the same as the order in the response.
 
+    The list of available methods is generated from available [Gateway Accounts](https://user-api-docs.rebilly.com/tag/Gateway-Accounts)
+    intersected with the last matched [Rules Engine](https://user-api-docs.rebilly.com/tag/Rules#operation/PutEventRuleCollection)
+    `adjust-ready-to-pay` action on `ready-to-pay-requested` event.
+
+    If there were no actions matched for the specific request – all methods supported by the Gateway Accounts are sent.
+
+    To invert this behavior – place an all-matching rule at the very end of the `ready-to-pay-requested` event in
+    Rules Engine with an empty `paymentMethods` property of the `adjust-ready-to-pay` action.
+
     If Ready to Pay is used with Transaction-scoped JWT all fields will be ignored except the `browserData`.
   requestBody:
     content:
