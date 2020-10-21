@@ -1,3 +1,3 @@
-const deactivatedInstrument = await api.paymentInstruments.deactivate({id: 'instrument-id-to-deactivate'});
+const paymentInstrument = await api.paymentInstruments.deactivate({id: 'id-to-deactivate'});
 
-console.log(deactivatedInstrument.fields)
+console.log(paymentInstrument.fields.status);

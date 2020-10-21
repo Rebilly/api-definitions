@@ -22,6 +22,7 @@ discriminator:
     BraintreePayments: ./GatewayAccountConfig/BraintreePayments.yaml
     CASHlib: ./GatewayAccountConfig/CASHlib.yaml
     CODVoucher: ./GatewayAccountConfig/CODVoucher.yaml
+    CoinPayments: ./GatewayAccountConfig/CoinPayments.yaml
     Cardknox: ./GatewayAccountConfig/Cardknox.yaml
     CashToCode: ./GatewayAccountConfig/CashToCode.yaml
     Cashflows: ./GatewayAccountConfig/Cashflows.yaml
@@ -34,8 +35,10 @@ discriminator:
     Coppr: ./GatewayAccountConfig/Coppr.yaml
     Credorax: ./GatewayAccountConfig/Credorax.yaml
     Cryptonator: ./GatewayAccountConfig/Cryptonator.yaml
+    CyberSource: ./GatewayAccountConfig/CyberSource.yaml
     DataCash: ./GatewayAccountConfig/DataCash.yaml
     Dengi: ./GatewayAccountConfig/Dengi.yaml
+    Dragonphoenix: ./GatewayAccountConfig/Dragonphoenix.yaml
     Directa24: ./GatewayAccountConfig/Directa24.yaml
     EBANX: ./GatewayAccountConfig/EBANX.yaml
     EPG: ./GatewayAccountConfig/EPG.yaml
@@ -54,6 +57,8 @@ discriminator:
     Gooney: ./GatewayAccountConfig/Gooney.yaml
     Gpaysafe: ./GatewayAccountConfig/Gpaysafe.yaml
     Greenbox: ./GatewayAccountConfig/Greenbox.yaml
+    HiPay: ./GatewayAccountConfig/HiPay.yaml
+    ICEPAY: ./GatewayAccountConfig/ICEPAY.yaml
     INOVAPAY: ./GatewayAccountConfig/INOVAPAY.yaml
     Ilixium: ./GatewayAccountConfig/Ilixium.yaml
     Ingenico: ./GatewayAccountConfig/Ingenico.yaml
@@ -63,6 +68,8 @@ discriminator:
     IpayOptions: ./GatewayAccountConfig/IpayOptions.yaml
     JetPay: ./GatewayAccountConfig/JetPay.yaml
     Jeton: ./GatewayAccountConfig/Jeton.yaml
+    Khelocard: ./GatewayAccountConfig/Khelocard.yaml
+    Konnektive: ./GatewayAccountConfig/Konnektive.yaml
     LPG: ./GatewayAccountConfig/LPG.yaml
     Moneris: ./GatewayAccountConfig/Moneris.yaml
     MtaPay: ./GatewayAccountConfig/MtaPay.yaml
@@ -76,7 +83,6 @@ discriminator:
     NuaPay: ./GatewayAccountConfig/NuaPay.yaml
     OchaPay: ./GatewayAccountConfig/OchaPay.yaml
     Onlineueberweisen: ./GatewayAccountConfig/Onlineueberweisen.yaml
-    Optimal: ./GatewayAccountConfig/Optimal.yaml
     Pagsmile: ./GatewayAccountConfig/Pagsmile.yaml
     Panamerican: ./GatewayAccountConfig/Panamerican.yaml
     PandaGateway: ./GatewayAccountConfig/PandaGateway.yaml
@@ -92,6 +98,7 @@ discriminator:
     Payr: ./GatewayAccountConfig/Payr.yaml
     Paysafe: ./GatewayAccountConfig/Paysafe.yaml
     Paysafecash: ./GatewayAccountConfig/Paysafecash.yaml
+    PayULatam: ./GatewayAccountConfig/PayULatam.yaml
     Payvision: ./GatewayAccountConfig/Payvision.yaml
     Piastrix: ./GatewayAccountConfig/Piastrix.yaml
     Plugnpay: ./GatewayAccountConfig/Plugnpay.yaml
@@ -115,9 +122,11 @@ discriminator:
     TestProcessor: ./GatewayAccountConfig/TestProcessor.yaml
     ToditoCash: ./GatewayAccountConfig/ToditoCash.yaml
     Trustly: ./GatewayAccountConfig/Trustly.yaml
+    TWINT: ./GatewayAccountConfig/TWINT.yaml
     UPayCard: ./GatewayAccountConfig/UPayCard.yaml
     USAePay: ./GatewayAccountConfig/USAePay.yaml
     VantivLitle: ./GatewayAccountConfig/VantivLitle.yaml
+    VCreditos: ./GatewayAccountConfig/VCreditos.yaml
     Wallet88: ./GatewayAccountConfig/Wallet88.yaml
     Walpay: ./GatewayAccountConfig/Walpay.yaml
     Wirecard: ./GatewayAccountConfig/Wirecard.yaml
@@ -130,6 +139,7 @@ discriminator:
     iCheque: ./GatewayAccountConfig/iCheque.yaml
     iDebit: ./GatewayAccountConfig/iDebit.yaml
     vegaaH: ./GatewayAccountConfig/vegaaH.yaml
+    Zimpler: ./GatewayAccountConfig/Zimpler.yaml
 properties:
   id:
     description: The gateway identifier string
@@ -216,7 +226,7 @@ properties:
     items:
       type: string
   method:
-    $ref: ./Method.yaml
+    $ref: ./PaymentMethods/PaymentMethod.yaml
   paymentCardSchemes:
     description: Accepted payment card brands
     type: array
@@ -267,3 +277,5 @@ properties:
       anyOf:
         - $ref: ./Links/SelfLink.yaml
         - $ref: ./Links/OnBoardingUrlLink.yaml
+        - $ref: ./Links/DynamicIpnLink.yaml
+        - $ref: ./Links/StaticIpnLink.yaml

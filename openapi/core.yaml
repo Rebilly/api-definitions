@@ -31,19 +31,19 @@ tags:
       AML, also known as Anti-Money-Laundering is an endpoint that searches multiple
       PEP, Sanctions, and Adverse Media lists for listed identities or media for screening
       purposes. Used during some transaction processing and on Contact creation, it helps
-      determine whether someone is blacklisted or has political or economic sanctions against
+      determine whether someone is blocklisted or has political or economic sanctions against
       them.
   - name: Bank Accounts
     description: |
       Bank Accounts are a type of payment instrument used to collect
       ACH (echeck) payments, similar to how a payment
       card would be used to for a credit card payment.
-  - name: Blacklists
+  - name: Blocklists
     description: |
-      Your blacklists contains values of customerIds, email addresses,
+      Your blocklists contains values of customerIds, email addresses,
       ipAddresses, bank identification numbers, countries or payment cards that
       you do NOT want to do business with. They are a good tool for managing
-      risk. A blacklist entry that expires after a period of time we call a
+      risk. A blocklist entry that expires after a period of time we call a
       greylist.
   - name: Coupons
     description: >
@@ -99,6 +99,9 @@ tags:
     description: >
       Invoices leave a record for both you and your customer of the products
       sold.
+  - name: Payment Instruments
+    description: >
+      The Payment Instrument allows you to accept a variety of payment methods through a single API.
   - name: Payment Cards
     description: >
       Payment cards are a type of payment instrument used for credit and debit
@@ -177,6 +180,9 @@ tags:
       payment
 
       is collected automatically (with autopay set true).
+  - name: Tags
+    description: |
+      Tag customers to better organize your data.
   - name: Taxes
     description: |
       You can map a product to a tax category.  The tax category is used by
@@ -202,35 +208,36 @@ x-tagGroups:
     tags:
       - Customers
       - Customer Authentication
-      - Custom Fields
-      - Files
       - KYC Documents
       - AML
       - Tags
       - Customers Timeline
   - name: Payment Instruments
     tags:
-      - Bank Accounts
-      - Payment Cards
+      - Payment Instruments
       - Payment Tokens
+      - Payment Cards
+      - Bank Accounts
       - PayPal Accounts
   - name: Payments
     tags:
-      - 3D Secure
       - Transactions
+      - 3D Secure
       - Disputes
-      - Blacklists
-  - name: Invoices & Subscriptions
+      - Blocklists
+  - name: Subscriptions & Invoices
     tags:
-      - Coupons
+      - Subscriptions
       - Invoices
       - Plans
       - Products
+      - Coupons
       - Shipping Zones
-      - Subscriptions
       - Taxes
   - name: Misc
     tags:
+      - Custom Fields
+      - Files
       - Reports
       - Search
       - Users
@@ -262,10 +269,10 @@ paths:
     $ref: './paths/bank-accounts@{id}.yaml'
   '/bank-accounts/{id}/deactivation':
     $ref: './paths/bank-accounts@{id}@deactivation.yaml'
-  /blacklists:
-    $ref: ./paths/blacklists.yaml
-  '/blacklists/{id}':
-    $ref: './paths/blacklists@{id}.yaml'
+  /blocklists:
+    $ref: ./paths/blocklists.yaml
+  '/blocklists/{id}':
+    $ref: './paths/blocklists@{id}.yaml'
   /coupons-redemptions:
     $ref: ./paths/coupons-redemptions.yaml
   '/coupons-redemptions/{id}':
@@ -302,14 +309,10 @@ paths:
     $ref: './paths/customers@{id}@timeline.yaml'
   '/customers/{id}/timeline/{messageId}':
     $ref: './paths/customers@{id}@timeline@{messageId}.yaml'
-  '/customers/{id}/upcoming-invoices':
-    $ref: './paths/customers@{id}@upcoming-invoices.yaml'
   /disputes:
     $ref: ./paths/disputes.yaml
   '/disputes/{id}':
     $ref: './paths/disputes@{id}.yaml'
-  '/disputes/{id}/matched-rules':
-    $ref: './paths/disputes@{id}@matched-rules.yaml'
   /files:
     $ref: ./paths/files.yaml
   '/files/{id}':
@@ -322,28 +325,28 @@ paths:
     $ref: ./paths/invoices.yaml
   '/invoices/{id}':
     $ref: './paths/invoices@{id}.yaml'
-  '/invoices/{id}/abandon':
-    $ref: './paths/invoices@{id}@abandon.yaml'
-  '/invoices/{id}/issue':
-    $ref: './paths/invoices@{id}@issue.yaml'
   '/invoices/{id}/items':
     $ref: './paths/invoices@{id}@items.yaml'
-  '/invoices/{id}/matched-rules':
-    $ref: './paths/invoices@{id}@matched-rules.yaml'
+  '/invoices/{id}/issue':
+    $ref: './paths/invoices@{id}@issue.yaml'
+  '/invoices/{id}/abandon':
+    $ref: './paths/invoices@{id}@abandon.yaml'
+  '/invoices/{id}/void':
+    $ref: './paths/invoices@{id}@void.yaml'
   '/invoices/{id}/recalculate':
     $ref: './paths/invoices@{id}@recalculate.yaml'
   '/invoices/{id}/reissue':
     $ref: './paths/invoices@{id}@reissue.yaml'
+  '/invoices/{id}/transaction-allocations':
+    $ref: './paths/invoices@{id}@transaction-allocations.yaml'
+  '/invoices/{id}/transaction':
+    $ref: './paths/invoices@{id}@transaction.yaml'
+  '/customers/{id}/upcoming-invoices':
+    $ref: './paths/customers@{id}@upcoming-invoices.yaml'
   '/invoices/{id}/timeline':
     $ref: './paths/invoices@{id}@timeline.yaml'
   '/invoices/{id}/timeline/{messageId}':
     $ref: './paths/invoices@{id}@timeline@{messageId}.yaml'
-  '/invoices/{id}/transaction-allocations':
-    $ref: './paths/invoices@{id}@transaction-allocations.yaml'
-  '/invoices/{id}/void':
-    $ref: './paths/invoices@{id}@void.yaml'
-  '/invoices/{id}/transaction':
-    $ref: './paths/invoices@{id}@transaction.yaml'
   /kyc-documents:
     $ref: ./paths/kyc-documents.yaml
   '/kyc-documents/{id}':
@@ -362,20 +365,24 @@ paths:
     $ref: ./paths/payment-cards.yaml
   '/payment-cards/{id}':
     $ref: './paths/payment-cards@{id}.yaml'
-  '/payment-cards/{id}/authorization':
-    $ref: './paths/payment-cards@{id}@authorization.yaml'
+  # '/payment-cards/{id}/authorization':
+  #   $ref: './paths/payment-cards@{id}@authorization.yaml'
   '/payment-cards/{id}/deactivation':
     $ref: './paths/payment-cards@{id}@deactivation.yaml'
-  '/payment-cards/{id}/matched-rules':
-    $ref: './paths/payment-cards@{id}@matched-rules.yaml'
   /paypal-accounts:
     $ref: ./paths/paypal-accounts.yaml
   '/paypal-accounts/{id}':
     $ref: './paths/paypal-accounts@{id}.yaml'
-  '/paypal-accounts/{id}/activation':
-    $ref: './paths/paypal-accounts@{id}@activation.yaml'
+#  '/paypal-accounts/{id}/activation':
+#    $ref: './paths/paypal-accounts@{id}@activation.yaml'
   '/paypal-accounts/{id}/deactivation':
     $ref: './paths/paypal-accounts@{id}@deactivation.yaml'
+  '/payment-instruments':
+    $ref: './paths/payment-instruments.yaml'
+  '/payment-instruments/{id}':
+    $ref: './paths/payment-instruments@{id}.yaml'
+  '/payment-instruments/{id}/deactivation':
+    $ref: './paths/payment-instruments@{id}@deactivation.yaml'
   /plans:
     $ref: ./paths/plans.yaml
   '/plans/{id}':
@@ -384,20 +391,14 @@ paths:
     $ref: ./paths/products.yaml
   '/products/{id}':
     $ref: './paths/products@{id}.yaml'
+  '/ready-to-pay':
+    $ref: ./paths/ready-to-pay.yaml
   /search:
     $ref: ./paths/search.yaml
   /shipping-zones:
     $ref: ./paths/shipping-zones.yaml
   '/shipping-zones/{id}':
     $ref: './paths/shipping-zones@{id}.yaml'
-  /subscription-cancellations:
-    $ref: ./paths/subscription-cancellations.yaml
-  '/subscription-cancellations/{id}':
-    $ref: './paths/subscription-cancellations@{id}.yaml'
-  /subscription-reactivations:
-    $ref: ./paths/subscription-reactivations.yaml
-  '/subscription-reactivations/{id}':
-    $ref: './paths/subscription-reactivations@{id}.yaml'
   /subscriptions:
     $ref: ./paths/subscriptions.yaml
   '/subscriptions/{id}':
@@ -406,16 +407,22 @@ paths:
     $ref: './paths/subscriptions@{id}@change-plan.yaml'
   '/subscriptions/{id}/interim-invoice':
     $ref: './paths/subscriptions@{id}@interim-invoice.yaml'
-  '/subscriptions/{id}/matched-rules':
-    $ref: './paths/subscriptions@{id}@matched-rules.yaml'
-  '/subscriptions/{id}/timeline':
-    $ref: './paths/subscriptions@{id}@timeline.yaml'
-  '/subscriptions/{id}/timeline/{messageId}':
-    $ref: './paths/subscriptions@{id}@timeline@{messageId}.yaml'
+  /subscription-cancellations:
+    $ref: ./paths/subscription-cancellations.yaml
+  '/subscription-cancellations/{id}':
+    $ref: './paths/subscription-cancellations@{id}.yaml'
+  /subscription-reactivations:
+    $ref: ./paths/subscription-reactivations.yaml
+  '/subscription-reactivations/{id}':
+    $ref: './paths/subscription-reactivations@{id}.yaml'
   '/subscriptions/{id}/upcoming-invoices':
     $ref: './paths/subscriptions@{id}@upcoming-invoices.yaml'
   '/subscriptions/{id}/upcoming-invoices/{invoiceId}/issue':
     $ref: './paths/subscriptions@{id}@upcoming-invoices@{invoiceId}@issue.yaml'
+  '/subscriptions/{id}/timeline':
+    $ref: './paths/subscriptions@{id}@timeline.yaml'
+  '/subscriptions/{id}/timeline/{messageId}':
+    $ref: './paths/subscriptions@{id}@timeline@{messageId}.yaml'
   /tags:
     $ref: ./paths/tags.yaml
   '/tags/{tag}':
@@ -428,16 +435,18 @@ paths:
     $ref: ./paths/tokens.yaml
   '/tokens/{token}':
     $ref: './paths/tokens@{token}.yaml'
+  /digital-wallets/validation:
+    $ref: './paths/digital-wallets@validation.yaml'
   /transactions:
     $ref: ./paths/transactions.yaml
   '/transactions/{id}':
     $ref: './paths/transactions@{id}.yaml'
+  /payouts:
+    $ref: ./paths/payouts.yaml
   '/transactions/{id}/cancel':
     $ref: './paths/transactions@{id}@cancel.yaml'
   '/transactions/{id}/gateway-logs':
     $ref: './paths/transactions@{id}@gateway-logs.yaml'
-  '/transactions/{id}/matched-rules':
-    $ref: './paths/transactions@{id}@matched-rules.yaml'
   '/transactions/{id}/refund':
     $ref: './paths/transactions@{id}@refund.yaml'
   '/transactions/{id}/timeline':
@@ -452,3 +461,136 @@ components:
       $ref: components/securitySchemes/PublishableApiKey.yaml
     SecretApiKey:
       $ref: components/securitySchemes/SecretApiKey.yaml
+x-webhooks:
+  aml-list-possibly-matched:
+    post:
+      $ref: ./webhooks/aml-list-possibly-matched.yaml
+  customer-created:
+    post:
+      $ref: ./webhooks/customer-created.yaml
+  customer-merged:
+    post:
+      $ref: ./webhooks/customer-merged.yaml
+  customer-one-time-password-requested:
+    post:
+      $ref: ./webhooks/customer-one-time-password-requested.yaml
+  customer-updated:
+    post:
+      $ref: ./webhooks/customer-updated.yaml
+  dispute-created:
+    post:
+      $ref: ./webhooks/dispute-created.yaml
+  gateway-account-requested:
+    post:
+      $ref: ./webhooks/gateway-account-requested.yaml
+  invoice-abandoned:
+    post:
+      $ref: ./webhooks/invoice-abandoned.yaml
+  invoice-created:
+    post:
+      $ref: ./webhooks/invoice-created.yaml
+  invoice-issued:
+    post:
+      $ref: ./webhooks/invoice-issued.yaml
+  invoice-modified:
+    post:
+      $ref: ./webhooks/invoice-modified.yaml
+  invoice-paid:
+    post:
+      $ref: ./webhooks/invoice-paid.yaml
+  invoice-past-due:
+    post:
+      $ref: ./webhooks/invoice-past-due.yaml
+  invoice-past-due-reminder:
+    post:
+      $ref: ./webhooks/invoice-past-due-reminder.yaml
+  invoice-reissued:
+    post:
+      $ref: ./webhooks/invoice-reissued.yaml
+  invoice-voided:
+    post:
+      $ref: ./webhooks/invoice-voided.yaml
+  kyc-document-accepted:
+    post:
+      $ref: ./webhooks/kyc-document-accepted.yaml
+  kyc-document-rejected:
+    post:
+      $ref: ./webhooks/kyc-document-rejected.yaml
+  kyc-document-reviewed:
+    post:
+      $ref: ./webhooks/kyc-document-reviewed.yaml
+  nsf-response-received:
+    post:
+      $ref: ./webhooks/nsf-response-received.yaml
+  offsite-payment-completed:
+    post:
+      $ref: ./webhooks/offsite-payment-completed.yaml
+  order-completed:
+    post:
+      $ref: ./webhooks/order-completed.yaml
+  payment-card-created:
+    post:
+      $ref: ./webhooks/payment-card-created.yaml
+  payment-card-expiration-reminder:
+    post:
+      $ref: ./webhooks/payment-card-expiration-reminder.yaml
+  payment-card-expired:
+    post:
+      $ref: ./webhooks/payment-card-expired.yaml
+  renewal-invoice-issued:
+    post:
+      $ref: ./webhooks/renewal-invoice-issued.yaml
+  renewal-invoice-payment-canceled:
+    post:
+      $ref: ./webhooks/renewal-invoice-payment-canceled.yaml
+  renewal-invoice-payment-declined:
+    post:
+      $ref: ./webhooks/renewal-invoice-payment-declined.yaml
+  risk-score-changed:
+    post:
+      $ref: ./webhooks/risk-score-changed.yaml
+  subscription-activated:
+    post:
+      $ref: ./webhooks/subscription-activated.yaml
+  subscription-canceled:
+    post:
+      $ref: ./webhooks/subscription-canceled.yaml
+  subscription-reactivated:
+    post:
+      $ref: ./webhooks/subscription-reactivated.yaml
+  subscription-renewal-reminder:
+    post:
+      $ref: ./webhooks/subscription-renewal-reminder.yaml
+  subscription-renewed:
+    post:
+      $ref: ./webhooks/subscription-renewed.yaml
+  subscription-trial-converted:
+    post:
+      $ref: ./webhooks/subscription-trial-converted.yaml
+  subscription-trial-end-reminder:
+    post:
+      $ref: ./webhooks/subscription-trial-end-reminder.yaml
+  subscription-trial-ended:
+    post:
+      $ref: ./webhooks/subscription-trial-ended.yaml
+  transaction-amount-discrepancy-found:
+    post:
+      $ref: ./webhooks/transaction-amount-discrepancy-found.yaml
+  transaction-declined:
+    post:
+      $ref: ./webhooks/transaction-declined.yaml
+  transaction-discrepancy-found:
+    post:
+      $ref: ./webhooks/transaction-discrepancy-found.yaml
+  transaction-process-requested:
+    post:
+      $ref: ./webhooks/transaction-process-requested.yaml
+  transaction-processed:
+    post:
+      $ref: ./webhooks/transaction-processed.yaml
+  transaction-timeout-resolved:
+    post:
+      $ref: ./webhooks/transaction-timeout-resolved.yaml
+  waiting-gateway-transaction-completed:
+    post:
+      $ref: ./webhooks/waiting-gateway-transaction-completed.yaml

@@ -19,5 +19,21 @@ properties:
       anyOf:
         - $ref: ../Links/SelfLink.yaml
         - $ref: ../Links/CustomerLink.yaml
+        - $ref: ../Links/InitialInvoiceLink.yaml
+        - $ref: ../Links/RecentInvoiceLink.yaml
         - $ref: ../Links/WebsiteLink.yaml
-        - $ref: ../Links/LeadSourceLink.yaml
+        - $ref: ../Links/ApprovalUrlLink.yaml
+  _embedded:
+    type: array
+    description: >-
+      Any embedded objects available that are requested by the `expand`
+      querystring parameter.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Embeds/RecentInvoiceEmbed.yaml
+        - $ref: ../Embeds/InitialInvoiceEmbed.yaml
+        - $ref: ../Embeds/CustomerEmbed.yaml
+        - $ref: ../Embeds/WebsiteEmbed.yaml
+        - $ref: ../Embeds/LeadSourceEmbed.yaml

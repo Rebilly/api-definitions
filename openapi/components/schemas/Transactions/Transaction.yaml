@@ -2,7 +2,7 @@ allOf:
   - $ref: ../Common/CommonTransaction.yaml
   - properties:
       gatewayAccountId:
-        description: The transactions's Gateway Account ID
+        description: The transaction's Gateway Account ID
         allOf:
           - $ref: ../ResourceId.yaml
         readOnly: true
@@ -67,13 +67,6 @@ allOf:
               originalMessage:
                 description: The raw response message
                 type: string
-      gatewayName:
-        readOnly: true
-        description: >-
-          Payment Gateway name, available only when transaction use gateway, else
-          null
-        allOf:
-          - $ref: ../Gateways/GatewayName.yaml
       acquirerName:
         readOnly: true
         description: 'Acquirer name, available only when transaction use gateway, else null'
@@ -83,7 +76,7 @@ allOf:
         deprecated: true
         description: Payment Method. Use `paymentInstrument.method` instead.
         allOf:
-          - $ref: ../Method.yaml
+          - $ref: ../PaymentMethods/PaymentMethod.yaml
       velocity:
         description: The number of transactions by the same customer in the past 24 hours
         type: integer
@@ -110,7 +103,7 @@ allOf:
         format: bin
         readOnly: true
       paymentInstrument:
-        $ref: ../PaymentInstrument.yaml
+        $ref: ../PaymentInstruments/ValueObjects/PaymentInstrument.yaml
       hasDcc:
         description: True if transaction has Dynamic Currency Conversion applied
         type: boolean
@@ -170,47 +163,13 @@ allOf:
               currency:
                 allOf:
                   - $ref: ../CurrencyCode.yaml
-          bump:
-            type: object
-            description: Bump amount and currency
-            properties:
-              amount:
-                type: number
-                format: double
-              currency:
-                allOf:
-                  - $ref: ../CurrencyCode.yaml
-          bonus:
-            type: object
-            description: Bonus amount and currency
-            properties:
-              amount:
-                type: number
-                format: double
-              currency:
-                allOf:
-                  - $ref: ../CurrencyCode.yaml
-          usdOrder:
-            description: The amount of initial amount translated to USD
-            type: number
-            format: double
-          usdBump:
-            description: The amount of bump amount translated to USD
-            type: number
-            format: double
-          usdBonus:
-            description: The amount of bonus amount translated to USD
-            type: number
-            format: double
           version:
             description: >-
-              The name of the version that was picked (useful for measuring split
-              tests)
+              The name of the version that was picked (useful for measuring split tests)
             type: string
           language:
             description: >-
-              The language of the bump offer that was displayed to user (useful for
-              finding any translation problems)
+              The language of the bump offer that was displayed to user (useful for finding any translation problems)
             type: string
           outcome:
             type: string
@@ -219,8 +178,18 @@ allOf:
               - rejected
               - selected
               - unknown
+          presentedOffers:
+            type: array
+            description: Offers presented to a customer
+            minItems: 1
+            items:
+              $ref: ../BumpOfferOffer.yaml
+          selectedOffer:
+            description: Offer selected by a customer. Null if bump offer outcome is not `selected`
+            allOf:
+              - $ref: ../BumpOfferOffer.yaml
       riskScore:
-        description: The transactions's risk score
+        description: The transaction's risk score
         type: integer
         readOnly: true
       riskMetadata:
@@ -255,16 +224,21 @@ allOf:
         readOnly: true
       hadDiscrepancy:
         description: >-
-          True if the transaction has been updated due to a disprepancy with its
+          True if the transaction has been updated due to a discrepancy with its
           source of truth
         type: boolean
         readOnly: true
       orderId:
         deprecated: true
         description: >-
-          The transactions's order ID.  This ID must be unique within a 24 hour
+          The transaction's order ID.  This ID must be unique within a 24 hour
           period. This field was renamed to the `requestId`.
         type: string
+      arn:
+        type: string
+        readOnly: true
+        description: The acquirer reference number.
+        example: '74836950144358910018150'
       scheduledTime:
         type: string
         description: The time the transaction is scheduled for collection

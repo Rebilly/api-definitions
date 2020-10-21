@@ -41,13 +41,14 @@ info:
 
     <!-- ReDoc-Inject: <security-definitions> -->
 
+    # SDKs
+
     ## Javascript SDK
 
-    The [Javascript SDK](https://github.com/Rebilly/rebilly-js-sdk) is maintained 
-    within Github, and contains the installation and usage instructions in the Readme file. 
+    Installation and usage instructions can be found [here](https://docs.rebilly.com/docs/developer-docs/sdks).
     SDK code examples are included in these docs.
 
-    # PHP SDK
+    ## PHP SDK
     For all PHP SDK examples provided in this spec you will need to configure `$client`.
     You may do it like this:
 
@@ -90,6 +91,10 @@ tags:
       Checkout Pages endpoints are deprecated.
       Hosted checkout pages can be configured here.  You can customize the theme
       and content and more that appears on your hosted checkout pages.
+  - name: Checkout Forms
+    description: |
+      Hosted checkout forms can be configured here. You can customize various
+      options that appears on your hosted checkout forms.
   - name: Email Credentials
     description: |
       Get and create SMTP credential hashes.
@@ -195,6 +200,11 @@ tags:
     description: |
       Membership describe the relationships between organizations and users.
       For example, one user could have more than one organization.
+  - name: Integrations
+  - name: Broadcast Messages
+  - name: Email Delivery Settings
+  - name: Email Messages
+  - name: Email Notifications
 ################################################################################
 x-tagGroups:
   - name: Security
@@ -223,6 +233,7 @@ x-tagGroups:
   - name: Other
     tags:
       - Checkout Pages
+      - Checkout Forms
       - Gateway Accounts
       - Layouts
       - Payment Cards
@@ -233,6 +244,7 @@ x-tagGroups:
       - Tracking
       - Websites
       - Integrations
+      - Plaid credentials
   - name: Related docs
     tags:
       - Rebilly API
@@ -267,6 +279,10 @@ paths:
     $ref: ./paths/broadcast-messages.yaml
   '/broadcast-messages/{id}':
     $ref: './paths/broadcast-messages@{id}.yaml'
+  /checkout-forms:
+    $ref: ./paths/checkout-forms.yaml
+  /checkout-forms/{id}:
+    $ref: './paths/checkout-forms@{id}.yaml'
   /checkout-pages:
     $ref: ./paths/checkout-pages.yaml
   '/checkout-pages/{id}':
@@ -289,6 +305,10 @@ paths:
     $ref: './paths/credential-hashes@oauth2@{hash}.yaml'
   '/credential-hashes/oauth2/{hash}/items':
     $ref: './paths/credential-hashes@oauth2@{hash}@items.yaml'
+  /credential-hashes/plaid:
+    $ref: './paths/credential-hashes@plaid.yaml'
+  '/credential-hashes/plaid/{hash}':
+    $ref: './paths/credential-hashes@plaid@{hash}.yaml'
   /credential-hashes/postmark:
     $ref: ./paths/credential-hashes@postmark.yaml
   '/credential-hashes/postmark/{hash}':

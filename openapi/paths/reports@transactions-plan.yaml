@@ -24,12 +24,6 @@ get:
         type: string
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
-    - x-rebillyMerge:
-        - $ref: ../components/parameters/mediaType.yaml
-        - schema:
-            enum:
-              - application/json
-              - text/csv
   responses:
     '200':
       description: Report was retrieved successfully
@@ -48,9 +42,6 @@ get:
           $ref: ../components/headers/Pagination-Offset.yaml
       content:
         application/json:
-          schema:
-            $ref: ../components/schemas/TransactionsPlan.yaml
-        text/csv:
           schema:
             $ref: ../components/schemas/TransactionsPlan.yaml
     '401':

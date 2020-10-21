@@ -1,0 +1,126 @@
+type: object
+required:
+  - websiteId
+  - items
+properties:
+  websiteId:
+    description: The website identifier string.
+    writeOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  items:
+    type: array
+    writeOnly: true
+    minItems: 1
+    items:
+      type: object
+      required:
+        - planId
+      properties:
+        planId:
+          description: The plan identifier string.
+          allOf:
+            - $ref: ../ResourceId.yaml
+        quantity:
+          description: Number of units of the product on the given plan.
+          type: integer
+  billingAddress:
+    description: The billing address.
+    writeOnly: true
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  deliveryAddress:
+    description: The delivery address.
+    writeOnly: true
+    nullable: true
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  couponIds:
+    type: array
+    writeOnly: true
+    description: The list of coupons applied to the order.
+    items:
+      type: string
+  currency:
+    readOnly: true
+    allOf:
+      - $ref: ../CurrencyCode.yaml
+  lineItems:
+    type: array
+    description: Purchase items array.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        planId:
+          description: The item plan identifier string.
+          allOf:
+            - $ref: ../ResourceId.yaml
+        productId:
+          description: The item product identifier string.
+          allOf:
+            - $ref: ../ResourceId.yaml
+        quantity:
+          description: The item total quantity.
+          type: number
+          format: integer
+        price:
+          description: The item total amount.
+          type: number
+          format: double
+  taxes:
+    type: array
+    description: Taxes applied to this purchase.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        amount:
+          description: Tax amount.
+          type: number
+          format: double
+        description:
+          type: string
+          description: Tax description.
+  discounts:
+    type: array
+    description: Discounts applied to this purchase.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        couponId:
+          description: The coupon identifier string.
+          allOf:
+            - $ref: ../ResourceId.yaml
+        amount:
+          description: Total amount that was discounted by this coupon.
+          type: number
+        description:
+          description: The discount description.
+          type: string
+  subtotalAmount:
+    description: The purchase's subtotal amount.
+    type: number
+    format: double
+    readOnly: true
+  taxAmount:
+    description: The purchase's taxes amount.
+    type: number
+    format: double
+    readOnly: true
+  shippingAmount:
+    description: The purchase's shipping amount.
+    type: number
+    format: double
+    readOnly: true
+  discountsAmount:
+    description: The purchase's discounts amount.
+    type: number
+    format: double
+    readOnly: true
+  total:
+    description: The purchase's total amount.
+    type: number
+    format: double
+    readOnly: true

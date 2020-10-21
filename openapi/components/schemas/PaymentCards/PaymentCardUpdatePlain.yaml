@@ -1,0 +1,21 @@
+type: object
+properties:
+  cvv:
+    description: Card's cvv (card verification value).
+    type: string
+  expMonth:
+    description: Card's expiration month.
+    type: integer
+  expYear:
+    description: Card's expiration year.
+    type: integer
+  billingAddress:
+    description: The billing address.
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  stickyGatewayAccountId:
+    description: Sticky gateway account ID.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  customFields:
+    $ref: ../ResourceCustomFields.yaml

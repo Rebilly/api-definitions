@@ -1,0 +1,67 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Checkout Forms
+  summary: Browse a list of checkout forms
+  operationId: GetCheckoutFormCollection
+  description: |
+    Browse a list of checkout forms.
+  responses:
+    '200':
+      description: A list of checkout forms was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/CheckoutForm.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+post:
+  tags:
+    - Checkout Forms
+  summary: Create a checkout form
+  operationId: PostCheckoutForm
+  description: |
+    Create a checkout form.
+  responses:
+    '201':
+      description: Checkout form was created
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CheckoutForm.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CheckoutForm.yaml

@@ -15,6 +15,7 @@ allOf:
           apiKey:
             type: string
             description: Finrax API Key
+            format: password
           apiSecret:
             type: string
             description: Finrax API Secret
@@ -23,3 +24,10 @@ allOf:
           - businessId
           - apiKey
           - apiSecret
+      settings:
+        type: object
+        description: Finrax settings object
+        properties:
+          tolerancePercentage:
+            type: string
+            description: Tolerance percentage for settled amount

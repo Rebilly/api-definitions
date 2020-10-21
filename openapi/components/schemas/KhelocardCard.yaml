@@ -1,0 +1,72 @@
+type: object
+title: 'Khelocard Card'
+properties:
+  id:
+    description: The payment instrument ID.
+    allOf:
+      - $ref: ./ResourceId.yaml
+  method:
+    description: The method of payment instrument.
+    type: string
+    enum:
+      - Khelocard
+  customerId:
+    description: Customer's ID.
+    allOf:
+      - $ref: ./ResourceId.yaml
+  fingerprint:
+    description: A unique value to identify the payment instrument regardless of variable values. It contains alphanumeric values.
+    type: string
+  number:
+    description: Khelocard card's masked number.
+    type: string
+  last4:
+    description: The number's last 4 digits.
+    type: string
+  expYear:
+    description: Khelocard card's expiration year.
+    type: integer
+  expMonth:
+    description: Khelocard card's expiration month.
+    type: integer
+  billingAddress:
+    description: The billing address.
+    allOf:
+      - $ref: ./Contact/ContactObject.yaml
+  status:
+    description: The payment instrument status.
+    type: string
+    enum:
+      - active
+      - deactivated
+  createdTime:
+    description: The payment instrument created time.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    description: The payment instrument updated time.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  customFields:
+    $ref: ./ResourceCustomFields.yaml
+  browserData:
+    $ref: ./PaymentTokens/BrowserData.yaml
+  _links:
+    type: array
+    description: Links related to the resource.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Links/SelfLink.yaml
+        - $ref: ./Links/CustomerLink.yaml
+  _embedded:
+    type: array
+    description: >-
+      Any embedded objects available that are requested by the `expand`
+      querystring parameter.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Embeds/CustomerEmbed.yaml

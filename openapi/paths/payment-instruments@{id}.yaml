@@ -1,0 +1,67 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Payment Instruments
+  summary: Retrieve a Payment Instrument
+  operationId: GetPaymentInstrument
+  description: |
+    Retrieve a payment instrument by ID
+  responses:
+    '200':
+      description: Payment Instrument was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PaymentInstruments/PaymentInstrument.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/payment-instruments@{id}/get.php
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/payment-instruments@{id}/get.js
+patch:
+  tags:
+    - Payment Instruments
+  summary: Update a Payment Instrument's values
+  operationId: PatchPaymentInstrument
+  description: Update allowed payment instrument's values.
+  requestBody:
+    $ref: ../components/requestBodies/PatchPaymentInstrument.yaml
+  responses:
+    '200':
+      description: Payment instrument was updated
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PaymentInstruments/PaymentInstrument.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/payment-instruments@{id}/patch.php
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/payment-instruments@{id}/patch.js
