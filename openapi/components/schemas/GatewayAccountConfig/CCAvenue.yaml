@@ -1,0 +1,26 @@
+description: CCAvenue config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: CCAvenue credentials object
+        properties:
+          merchantId:
+            type: string
+            description: CCAvenue merchant id
+          accessCode :
+            type: string
+            description: CCAvenue access code
+            format: password
+          workingKey :
+            type: string
+            description: CCAvenue working key
+            format: password
+        required:
+          - merchantId
+          - accessCode
+          - workingKey
