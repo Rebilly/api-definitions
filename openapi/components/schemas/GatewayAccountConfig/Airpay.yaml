@@ -1,0 +1,30 @@
+description: Airpay config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Airpay credentials object
+        properties:
+          username:
+            type: string
+            description: Airpay username
+          merchantId:
+            type: string
+            description: Airpay merchant ID
+          password:
+            type: string
+            description: Airpay password
+            format: password
+          apiKey:
+            type: string
+            description: Airpay api key
+            format: password
+        required:
+          - username
+          - merchantId
+          - password
+          - apiKey
