@@ -1,6 +1,7 @@
 module.exports = OnlyOneTag
 
-function OnlyOneTag (options) {
+/** @type {import('@redocly/openapi-cli').OasRule} */
+function OnlyOneTag () {
   return {
     Operation(operation, { report, location }) {
       if (!operation.tags) return;
