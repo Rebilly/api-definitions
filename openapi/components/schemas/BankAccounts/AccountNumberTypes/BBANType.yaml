@@ -1,12 +1,23 @@
 type: object
 description: BBAN type object
 required:
+  - method
   - customerId
+  - accountNumberType
   - accountNumber
   - routingNumber
   - accountType
   - billingAddress
 properties:
+  method:
+    description: The method of payment instrument.
+    type: string
+    enum:
+      - ach
+  customerId:
+    description: Customer's ID
+    allOf:
+      - $ref: ../../ResourceId.yaml
   accountNumberType:
     description: >-
       Bank's Account Number type. A valid value is basic bank account number
@@ -18,12 +29,6 @@ properties:
     enum:
       - IBAN
       - BBAN
-  browserData:
-    $ref: ../../PaymentTokens/BrowserData.yaml
-  customerId:
-    description: Customer's ID
-    allOf:
-      - $ref: ../../ResourceId.yaml
   accountNumber:
     description: Bank's account number
     type: string
@@ -51,3 +56,6 @@ properties:
       - $ref: ../../Contact/ContactObject.yaml
   customFields:
     $ref: ../../ResourceCustomFields.yaml
+  browserData:
+    $ref: ../../PaymentTokens/BrowserData.yaml
+

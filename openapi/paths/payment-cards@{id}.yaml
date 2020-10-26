@@ -46,27 +46,7 @@ patch:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            cvv:
-              description: Card's cvv (card verification value).
-              type: string
-            expMonth:
-              description: Card's expiration month
-              type: integer
-            expYear:
-              description: Card's expiration year
-              type: integer
-            billingAddress:
-              description: Card's billing address
-              allOf:
-                - $ref: ../components/schemas/Contact/ContactObject.yaml
-            stickyGatewayAccountId:
-              description: Sticky Gateway Account ID
-              allOf:
-                - $ref: ../components/schemas/ResourceId.yaml
-            customFields:
-              $ref: ../components/schemas/ResourceCustomFields.yaml
+          $ref: ../components/schemas/PaymentCards/PaymentCardUpdatePlain.yaml
     description: Payment card
   responses:
     '200':

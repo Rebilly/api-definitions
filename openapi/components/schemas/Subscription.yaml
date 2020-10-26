@@ -144,29 +144,3 @@ properties:
       change takes precedence over the current representation.
     type: integer
     readOnly: true
-  _links:
-    type: array
-    description: The links related to resource
-    readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ./Links/SelfLink.yaml
-        - $ref: ./Links/CustomerLink.yaml
-        - $ref: ./Links/InitialInvoiceLink.yaml
-        - $ref: ./Links/RecentInvoiceLink.yaml
-        - $ref: ./Links/WebsiteLink.yaml
-  _embedded:
-    type: array
-    description: >-
-      Any embedded objects available that are requested by the `expand`
-      querystring parameter.
-    readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ./Embeds/RecentInvoiceEmbed.yaml
-        - $ref: ./Embeds/InitialInvoiceEmbed.yaml
-        - $ref: ./Embeds/CustomerEmbed.yaml
-        - $ref: ./Embeds/WebsiteEmbed.yaml
-        - $ref: ./Embeds/LeadSourceEmbed.yaml

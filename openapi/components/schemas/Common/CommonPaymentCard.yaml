@@ -2,20 +2,20 @@ type: object
 title: 'Payment Card'
 properties:
   id:
-    description: The payment instrument ID
+    description: The payment instrument ID.
     readOnly: true
     allOf:
-      - $ref: ../../ResourceId.yaml
-  customerId:
-    description: The сustomer's ID
-    allOf:
-      - $ref: ../../ResourceId.yaml
+      - $ref: ../ResourceId.yaml
   method:
-    description: The method of payment instrument
+    description: The method of payment instrument.
     type: string
     readOnly: true
     enum:
       - payment-card
+  customerId:
+    description: The сustomer's ID
+    allOf:
+      - $ref: ../ResourceId.yaml
   status:
     type: string
     description: |
@@ -32,12 +32,12 @@ properties:
     type: string
     readOnly: true
   bin:
-    description: The card's bin (the PAN's first 6 digits)
+    description: The card's bin (the PAN's first 6 digits).
     type: string
     format: bin
     readOnly: true
   last4:
-    description: The PAN's last 4 digits
+    description: The PAN's last 4 digits.
     type: string
     readOnly: true
   pan:
@@ -57,28 +57,28 @@ properties:
   brand:
     readOnly: true
     allOf:
-      - $ref: ../../PaymentCards/PaymentCardBrand.yaml
+      - $ref: ../PaymentCards/PaymentCardBrand.yaml
   bankCountry:
-    description: Payment instrument bank country
+    description: Payment instrument bank country.
     type: string
     readOnly: true
   bankName:
-    description: Payment instrument bank name
+    description: Payment instrument bank name.
     type: string
     readOnly: true
   billingAddress:
-    description: The billing address
+    description: The billing address.
     allOf:
-      - $ref: ../../Contact/ContactObject.yaml
+      - $ref: ../Contact/ContactObject.yaml
   createdTime:
-    description: Payment instrument created time
+    description: Payment instrument created time.
     allOf:
-      - $ref: ../../ServerTimestamp.yaml
+      - $ref: ../ServerTimestamp.yaml
   updatedTime:
-    description: Payment instrument updated time
+    description: Payment instrument updated time.
     allOf:
-      - $ref: ../../ServerTimestamp.yaml
+      - $ref: ../ServerTimestamp.yaml
   customFields:
-    $ref: ../../ResourceCustomFields.yaml
+    $ref: ../ResourceCustomFields.yaml
   browserData:
-    $ref: ../../PaymentTokens/BrowserData.yaml
+    $ref: ../PaymentTokens/BrowserData.yaml
