@@ -1,5 +1,5 @@
 const OneTagRule = require('./rules/one-tag-rule');
-const id = 'customRules';
+const id = 'custom-rules';
 
 const rules = {
   oas3: {
