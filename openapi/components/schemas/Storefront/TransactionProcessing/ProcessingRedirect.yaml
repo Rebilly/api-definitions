@@ -1,0 +1,25 @@
+type: object
+title: Redirect
+properties:
+  type:
+    enum:
+      - redirect
+  url:
+    type: string
+    description: The URL customer should be redirected to.
+    format: url
+  method:
+    type: string
+    description: The method customer should be redirected with with.
+    enum:
+      - get
+      - post
+  params:
+    type: object
+    description: |
+      The extra payload for the redirect.
+
+      If `method` is `get` should be treated as a query string params.
+
+      If `method` is `post` should be treated as a POST body.
+    nullable: true

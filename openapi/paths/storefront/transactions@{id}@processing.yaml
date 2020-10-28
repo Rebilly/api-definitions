@@ -1,0 +1,68 @@
+parameters:
+  - $ref: ../../components/parameters/organizationId.yaml
+  - $ref: ../../components/parameters/resourceId.yaml
+get:
+  tags:
+    - Transaction
+  summary: Retrieve a Transaction processing state
+  operationId: StorefrontGetTransactionProcessing
+  security:
+    - CustomerJWT: []
+  description: |
+    Retrieve a transaction processing state with specified ID.
+
+    The value of the `type` property describes what frontend should do.
+
+    If `type` is set to `form` – the actual form should be displayed to customer. On submit it should be sent to
+    [StorefrontPostTransactionProcessing](/#operation/StorefrontPostTransactionProcessing).
+
+    If `type` is set to `redirect` – customer should be redirected to the specified `url` using desired `method` with
+    some `params`.
+
+    If `type` is set to `confirm` – customer should see the information on the page and the submit button. On submit
+    [StorefrontPostTransactionProcessing](/#operation/StorefrontPostTransactionProcessing) operation should be triggered
+    to take the next action.
+
+    If `type` is set to `async` – customer should be see the information on the page. Status should be updated by
+    querying this operation within an interval to take the next action.
+  responses:
+    200:
+      description: Transaction was retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/TransactionProcessing.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml
+post:
+  tags:
+    - Transaction
+  summary: Update a Transaction's processing state
+  operationId: StorefrontPostTransactionProcessing
+  security:
+    - CustomerJWT: []
+  description: |
+    Update a transaction's processing state.
+
+    Available only if the current transaction's processing state `type` is `form` or `confirm`.
+  requestBody:
+    $ref: ../../components/requestBodies/storefront/PostTransactionProcessing.yaml
+  responses:
+    200:
+      description: Transaction was updated
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/TransactionProcessing.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml
+    422:
+      $ref: ../../components/responses/ValidationError.yaml

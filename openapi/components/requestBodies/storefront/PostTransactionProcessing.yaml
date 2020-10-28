@@ -1,0 +1,21 @@
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - action
+        - browserData
+      properties:
+        action:
+          type: string
+          description: The action customer performs to change current transaction's processing state.
+          enum:
+            - submit
+            - cancel
+        params:
+          type: object
+          description: Contains all the form values required by the current processing state.
+        browserData:
+          $ref: ../../schemas/PaymentTokens/BrowserData.yaml
+description: Transaction processing
+required: true

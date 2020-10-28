@@ -1,0 +1,15 @@
+type: object
+properties:
+  type:
+    type: string
+    description: The type of the required action.
+    enum:
+      - form
+      - redirect
+      - confirm
+      - async
+oneOf:
+  - $ref: TransactionProcessing/ProcessingForm.yaml
+  - $ref: TransactionProcessing/ProcessingRedirect.yaml
+  - $ref: TransactionProcessing/ProcessingConfirm.yaml
+  - $ref: TransactionProcessing/ProcessingAsync.yaml

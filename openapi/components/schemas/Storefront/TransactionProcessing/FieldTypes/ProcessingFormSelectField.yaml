@@ -1,0 +1,36 @@
+type: object
+title: Select
+properties:
+  type:
+    enum:
+      - select
+  appearance:
+    type: string
+    description: How field should be presented to the customer. If `null` should be chosen based on the other properties.
+    nullable: true
+    enum:
+      - select
+      - checkbox
+      - radio
+  multipleAllowed:
+    type: boolean
+    description: Should multiple choices be allowed. Not available when `appearance` set to `radio`.
+  options:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      required:
+        - label
+        - value
+      properties:
+        label:
+          type: string
+          description: The label of the option.
+        value:
+          type: string
+          description: The value of the option.
+        isSelected:
+          type: boolean
+          description: Should the option be selected by default.
+          default: false
