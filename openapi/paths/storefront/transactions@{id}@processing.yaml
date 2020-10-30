@@ -11,20 +11,10 @@ get:
   description: |
     Retrieve a transaction processing state with specified ID.
 
-    The value of the `type` property describes what frontend should do.
+    The value of the `type` property describes what form frontend should display to customer.
 
-    If `type` is set to `form` – the actual form should be displayed to customer. On submit it should be sent to
-    [StorefrontPostTransactionProcessing](/#operation/StorefrontPostTransactionProcessing).
-
-    If `type` is set to `redirect` – customer should be redirected to the specified `url` using desired `method` with
-    some `params`.
-
-    If `type` is set to `confirmation` – customer should see the information on the page and the submit button. On submit
-    [StorefrontPostTransactionProcessing](/#operation/StorefrontPostTransactionProcessing) operation should be triggered
-    to take the next action.
-
-    If `type` is set to `async` – customer should be see the information on the page. Status should be updated by
-    querying this operation within an interval to take the next action.
+    If `type` is set to `auto-submit` or `query` the
+    [StorefrontPostTransactionProcessing](#operation/StorefrontPostTransactionProcessing) is not available.
   responses:
     200:
       description: Transaction was retrieved successfully
@@ -48,7 +38,7 @@ post:
   description: |
     Update a transaction's processing state.
 
-    Available only if the current transaction's processing state `type` is `form` or `confirmation`.
+    Not available for `type: auto-sumbit`.
   requestBody:
     $ref: ../../components/requestBodies/storefront/PostTransactionProcessing.yaml
   responses:

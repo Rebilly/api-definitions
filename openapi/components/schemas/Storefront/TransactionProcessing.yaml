@@ -4,12 +4,24 @@ properties:
     type: string
     description: The type of the required action.
     enum:
-      - form
-      - redirect
-      - confirmation
-      - async
+      - amount-select
+      - auto-submit
+      - card-details
+      - customer-details
+      - disclaimer
+      - offer
+      - option-pick
+      - pin
+      - query
+      - wallet
 oneOf:
-  - $ref: TransactionProcessing/ProcessingForm.yaml
-  - $ref: TransactionProcessing/ProcessingRedirect.yaml
-  - $ref: TransactionProcessing/ProcessingConfirmation.yaml
-  - $ref: TransactionProcessing/ProcessingAsync.yaml
+  - $ref: ./TransactionProcessing/ProcessingAmountSelect.yaml
+  - $ref: ./TransactionProcessing/ProcessingAutoSubmit.yaml
+  - $ref: ./TransactionProcessing/ProcessingCardDetails.yaml
+  - $ref: ./TransactionProcessing/ProcessingCustomerDetails.yaml
+  - $ref: ./TransactionProcessing/ProcessingDisclaimer.yaml
+  - $ref: ./TransactionProcessing/ProcessingOffer.yaml
+  - $ref: ./TransactionProcessing/ProcessingOptionPick.yaml
+  - $ref: ./TransactionProcessing/ProcessingPin.yaml
+  - $ref: ./TransactionProcessing/ProcessingQuery.yaml
+  - $ref: ./TransactionProcessing/ProcessingWallet.yaml

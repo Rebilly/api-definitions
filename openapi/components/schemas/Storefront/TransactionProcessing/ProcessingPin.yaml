@@ -1,0 +1,54 @@
+type: object
+title: PIN
+properties:
+  type:
+    enum:
+      - pin
+  fields:
+    type: object
+    description: The form fields configuration.
+    readOnly: true
+    properties:
+      pin:
+        description: The PIN field configuration.
+        properties:
+          format:
+            type: array
+            description: |
+              The configuration of the pin field.
+
+              For example, `[4]` would mean one field with 4 digits in it. `[4,4,4,4]` would mean 4 fields with 4 digits
+              each.
+            items:
+              type: integer
+            example: [4]
+          secret:
+            type: boolean
+            description: Should the PIN input be hiden as a password field.
+        allOf:
+          - $ref: ./ProcessingFieldOptions.yaml
+  buttons:
+    type: object
+    description: The form buttons configuration.
+    readOnly: true
+    properties:
+      continue:
+        description: The accept button configuration.
+        allOf:
+          - $ref: ./ProcessingButtonOptions.yaml
+      cancel:
+        description: The reject button configuration.
+        properties:
+          enabled:
+            type: boolean
+            description: Is cancel button enabled or not.
+        allOf:
+          - $ref: ./ProcessingButtonOptions.yaml
+  pin:
+    type: array
+    description: The customer PIN. Each item should be passed as a string to preserve the leading `0`.
+    writeOnly: true
+    items:
+      type: string
+allOf:
+  - $ref: ./ProcessingInfo.yaml

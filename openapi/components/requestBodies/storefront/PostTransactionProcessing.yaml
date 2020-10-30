@@ -3,19 +3,32 @@ content:
     schema:
       type: object
       required:
-        - action
+        - type
         - browserData
       properties:
-        action:
-          type: string
-          description: The action customer performs to change current transaction's processing state.
-          enum:
-            - submit
-            - cancel
-        params:
-          type: object
-          description: Contains all the form values required by the current processing state.
         browserData:
           $ref: ../../schemas/PaymentTokens/BrowserData.yaml
+        type:
+          type: string
+          description: The type of the required action.
+          enum:
+            - amount-select
+            - card-details
+            - customer-details
+            - disclaimer
+            - offer
+            - option-pick
+            - pin
+            - wallet
+      oneOf:
+        - $ref: ../../schemas/Storefront/TransactionProcessing/ProcessingAmountSelect.yaml
+        - $ref: ../../schemas/Storefront/TransactionProcessing/ProcessingCardDetails.yaml
+        - $ref: ../../schemas/Storefront/TransactionProcessing/ProcessingCustomerDetails.yaml
+        - $ref: ../../schemas/Storefront/TransactionProcessing/ProcessingDisclaimer.yaml
+        - $ref: ../../schemas/Storefront/TransactionProcessing/ProcessingOffer.yaml
+        - $ref: ../../schemas/Storefront/TransactionProcessing/ProcessingOptionPick.yaml
+        - $ref: ../../schemas/Storefront/TransactionProcessing/ProcessingPin.yaml
+        - $ref: ../../schemas/Storefront/TransactionProcessing/ProcessingWallet.yaml
+
 description: Transaction processing
 required: true

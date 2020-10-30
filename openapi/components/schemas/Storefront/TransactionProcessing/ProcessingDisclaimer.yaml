@@ -1,0 +1,25 @@
+type: object
+title: Disclaimer
+properties:
+  type:
+    enum:
+      - disclaimer
+  buttons:
+    type: object
+    description: The form buttons configuration.
+    readOnly: true
+    properties:
+      continue:
+        description: The accept button configuration.
+        allOf:
+          - $ref: ./ProcessingButtonOptions.yaml
+      cancel:
+        description: The reject button configuration.
+        properties:
+          enabled:
+            type: boolean
+            description: Is cancel button enabled or not.
+        allOf:
+          - $ref: ./ProcessingButtonOptions.yaml
+allOf:
+  - $ref: ./ProcessingInfo.yaml

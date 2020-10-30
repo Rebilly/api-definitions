@@ -1,0 +1,21 @@
+type: object
+title: Query
+properties:
+  type:
+    enum:
+      - query
+  buttons:
+    type: object
+    description: The form buttons configuration.
+    readOnly: true
+    properties:
+      cancel:
+        description: The cancel button configuration.
+        allOf:
+          - $ref: ./ProcessingButtonOptions.yaml
+  interval:
+    type: integer
+    description: The interval transaction processing state should be updated at.
+    readOnly: true
+allOf:
+  - $ref: ./ProcessingInfo.yaml

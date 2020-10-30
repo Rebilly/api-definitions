@@ -1,0 +1,33 @@
+type: object
+title: Offer
+properties:
+  type:
+    enum:
+      - offer
+  buttons:
+    type: object
+    description: The form buttons configuration.
+    readOnly: true
+    properties:
+      accept:
+        description: The accept button configuration.
+        allOf:
+          - $ref: ./ProcessingButtonOptions.yaml
+      reject:
+        description: The reject button configuration.
+        allOf:
+          - $ref: ./ProcessingButtonOptions.yaml
+      cancel:
+        description: The reject button configuration.
+        properties:
+          enabled:
+            type: boolean
+            description: Is cancel button enabled or not.
+        allOf:
+          - $ref: ./ProcessingButtonOptions.yaml
+  accepted:
+    type: boolean
+    description: Whether the customer accepted the offer or not.
+    writeOnly: true
+allOf:
+  - $ref: ./ProcessingInfo.yaml
