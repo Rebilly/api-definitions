@@ -20,7 +20,18 @@ allOf:
             type: string
             description: AstroPay Card secret key
             format: password
+          api_key:
+            type: string
+            description: AstroPay Card key require to use wallet type api
+            format: password
         required:
           - x_login
           - x_tran_key
           - secret_key
+      settings:
+        type: object
+        description: AstroPay Card settings object
+        properties:
+          walletApi:
+            type: boolean
+            description: AstroPay Card wallet type api
