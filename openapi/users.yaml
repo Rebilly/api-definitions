@@ -205,6 +205,7 @@ tags:
   - name: Email Delivery Settings
   - name: Email Messages
   - name: Email Notifications
+  - name: Experian credentials
 ################################################################################
 x-tagGroups:
   - name: Security
@@ -245,6 +246,7 @@ x-tagGroups:
       - Websites
       - Integrations
       - Plaid credentials
+      - Experian credentials
   - name: Related docs
     tags:
       - Rebilly API
@@ -321,6 +323,10 @@ paths:
     $ref: ./paths/credential-hashes@webhooks.yaml
   '/credential-hashes/webhooks/{hash}':
     $ref: './paths/credential-hashes@webhooks@{hash}.yaml'
+  /credential-hashes/experian:
+    $ref: ./paths/credential-hashes@experian.yaml
+  '/credential-hashes/experian/{hash}':
+    $ref: './paths/credential-hashes@experian@{hash}.yaml'
   '/email-delivery-setting-verifications/{token}':
     $ref: './paths/email-delivery-setting-verifications@{token}.yaml'
   /email-delivery-settings:

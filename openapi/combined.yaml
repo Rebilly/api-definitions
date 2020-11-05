@@ -235,6 +235,7 @@ tags:
   - name: Checkout Forms
   - name: Checkout Pages
   - name: API Keys
+  - name: Experian credentials
 
 security:
   - SecretApiKey: []
@@ -506,6 +507,10 @@ paths:
     $ref: ./paths/credential-hashes@webhooks.yaml
   '/credential-hashes/webhooks/{hash}':
     $ref: './paths/credential-hashes@webhooks@{hash}.yaml'
+  /credential-hashes/experian:
+    $ref: ./paths/credential-hashes@experian.yaml
+  '/credential-hashes/experian/{hash}':
+    $ref: './paths/credential-hashes@experian@{hash}.yaml'
   '/email-delivery-setting-verifications/{token}':
     $ref: './paths/email-delivery-setting-verifications@{token}.yaml'
   /email-delivery-settings:
