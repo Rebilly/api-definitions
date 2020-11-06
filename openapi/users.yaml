@@ -86,11 +86,6 @@ tags:
       In addition to your API Keys, you may use
       JSON Web Tokens (JWT) to authenticate to the API.  See
       our [Sessions](https://user-api-docs.rebilly.com/#tag/JWT-Session) resource for more information.
-  - name: Checkout Pages
-    description: |
-      Checkout Pages endpoints are deprecated.
-      Hosted checkout pages can be configured here.  You can customize the theme
-      and content and more that appears on your hosted checkout pages.
   - name: Checkout Forms
     description: |
       Hosted checkout forms can be configured here. You can customize various
@@ -233,7 +228,6 @@ x-tagGroups:
       - Webhooks
   - name: Other
     tags:
-      - Checkout Pages
       - Checkout Forms
       - Gateway Accounts
       - Layouts
@@ -285,10 +279,6 @@ paths:
     $ref: ./paths/checkout-forms.yaml
   /checkout-forms/{id}:
     $ref: './paths/checkout-forms@{id}.yaml'
-  /checkout-pages:
-    $ref: ./paths/checkout-pages.yaml
-  '/checkout-pages/{id}':
-    $ref: './paths/checkout-pages@{id}.yaml'
   /credential-hashes/aws-ses:
     $ref: ./paths/credential-hashes@aws-ses.yaml
   '/credential-hashes/aws-ses/{hash}':
