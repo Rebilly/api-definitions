@@ -7,5 +7,14 @@ allOf:
         description: Hash of the Experian credential to use for performing the check.
         type: string
         example: 58816e40-387e-4834-982f-fa1855a75f64
+      tagForApprovedIdentity:
+        description: A tag ID that should be used to tag the customer when the identity matches Experian records.
+        type: string
+      tagForDeclinedIdentity:
+        description: A tag ID that should be used to tag the customer when the identity doesn't match Experian records.
+        type: string
+      tagForUnknownResult:
+        description: A tag ID that should be used to tag the customer when the identity is not found in Experian records or further analysis needed.
+        type: string
     required:
       - experianCredentialHash
