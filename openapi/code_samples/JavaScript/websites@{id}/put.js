@@ -4,10 +4,6 @@ const data = {
     url: 'https://www.acme.com',
     servicePhone: '15451234567',
     serviceEmail: 'support@acme.com',
-    // used to build the checkout page URI,
-    // this value would result in 
-    // https://checkout.rebilly.com/acme/page
-    checkoutPageUri: 'acme',
     customFields: {}
 };
 
@@ -25,10 +21,6 @@ const data = {
     url: 'https://www.acme.com',
     servicePhone: '15451234567',
     serviceEmail: 'support@acme.com',
-    // used to build the checkout page URI,
-    // this value would result in 
-    // https://checkout.rebilly.com/acme-checkout/page
-    checkoutPageUri: 'acme-checkout',
     customFields: {}
 };
 
