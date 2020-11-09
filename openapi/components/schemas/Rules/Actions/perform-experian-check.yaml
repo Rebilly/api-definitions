@@ -1,0 +1,20 @@
+description: Perform Experian ProveID check on the customer
+allOf:
+  - $ref: ../RuleAction.yaml
+  - type: object
+    properties:
+      experianCredentialHash:
+        description: Hash of the Experian credential to use for performing the check.
+        type: string
+        example: 58816e40-387e-4834-982f-fa1855a75f64
+      tagOnApprove:
+        description: A tag ID that should be used to tag the customer when the identity matches Experian records.
+        type: string
+      tagOnReject:
+        description: A tag ID that should be used to tag the customer when the identity doesn't match Experian records.
+        type: string
+      tagOnUnknown:
+        description: A tag ID that should be used to tag the customer when the identity is not found in Experian records or further analysis needed.
+        type: string
+    required:
+      - experianCredentialHash
