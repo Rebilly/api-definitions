@@ -19,9 +19,30 @@ allOf:
             type: string
             format: password
             description: EMS password
+          privateKey:
+            type: string
+            format: password
+            description: Private Key
+            x-multiline: true
+          privateKeyPassword:
+            type: string
+            format: password
+            description: Private key password
+          clientCertificate:
+            type: string
+            description: Client Certificate
+            x-multiline: true
+          clientCrtificatePassword:
+            type: string
+            format: password
+            description: Client Certificate password
         required:
           - storeId
           - userId
           - password
+          - privateKey
+          - privateKeyPassword
+          - clientCertificate
+          - clientCertificatePassword
       threeDSecureServer:
         $ref: ../ThreeDSecureServers/EMS3dsServers/EMS3dsServers.yaml
