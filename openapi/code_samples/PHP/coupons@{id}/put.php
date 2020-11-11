@@ -21,7 +21,7 @@ $restrictionForm = new Rebilly\Entities\Coupons\Restriction([
 $couponForm->setRestrictions($restrictionForm);
 
 try {
-    $coupon = $client->coupons()->create($couponForm, 'redemptionCode');
+    $coupon = $client->coupons()->create($couponForm, 'couponId');
 } catch (UnprocessableEntityException $e) {
     echo $e->getMessage();
 }
