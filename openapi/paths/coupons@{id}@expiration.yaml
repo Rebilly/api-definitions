@@ -1,10 +1,5 @@
 parameters:
-  - name: redemptionCode
-    in: path
-    description: The coupon's redemption code
-    required: true
-    schema:
-      type: string
+  - $ref: ../components/parameters/resourceId.yaml
   - $ref: ../components/parameters/organizationId.yaml
 post:
   tags:
@@ -54,4 +49,4 @@ post:
   x-code-samples:
     - lang: JavaScript
       source:
-        $ref: '../code_samples/JavaScript/coupons@{redemptionCode}@expiration/post.js'
+        $ref: '../code_samples/JavaScript/coupons@{id}@expiration/post.js'

@@ -1,10 +1,5 @@
 parameters:
-  - name: redemptionCode
-    in: path
-    description: The Coupon's redemption code
-    required: true
-    schema:
-      type: string
+  - $ref: ../components/parameters/resourceId.yaml
   - $ref: ../components/parameters/organizationId.yaml
 get:
   tags:
@@ -36,10 +31,10 @@ get:
   x-code-samples:
     - lang: PHP
       source:
-        $ref: '../code_samples/PHP/coupons@{redemptionCode}/get.php'
+        $ref: '../code_samples/PHP/coupons@{id}/get.php'
     - lang: JavaScript
       source:
-        $ref: '../code_samples/JavaScript/coupons@{redemptionCode}/get.js'
+        $ref: '../code_samples/JavaScript/coupons@{id}/get.js'
 put:
   tags:
     - Coupons
@@ -87,7 +82,7 @@ put:
   x-code-samples:
     - lang: PHP
       source:
-        $ref: '../code_samples/PHP/coupons@{redemptionCode}/put.php'
+        $ref: '../code_samples/PHP/coupons@{id}/put.php'
     - lang: JavaScript
       source:
-        $ref: '../code_samples/JavaScript/coupons@{redemptionCode}/put.js'
+        $ref: '../code_samples/JavaScript/coupons@{id}/put.js'
