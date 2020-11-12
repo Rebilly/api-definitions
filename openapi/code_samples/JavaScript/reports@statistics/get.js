@@ -1,1 +1,0 @@
-const report = await api.reports.getStatistics();

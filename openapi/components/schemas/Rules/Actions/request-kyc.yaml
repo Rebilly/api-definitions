@@ -5,7 +5,7 @@ allOf:
     properties:
       excludePolicy:
         type: string
-        description: Who should be excluded from the verification
+        description: Who should be excluded from the verification.
         enum:
           - customers-with-accepted-document
           - customers-with-document
@@ -13,11 +13,11 @@ allOf:
         default: customers-with-accepted-document
       isMandatory:
         type: boolean
-        description: Is the verification mandatory
+        description: Is the verification mandatory.
         default: true
       promptPolicy:
         type: string
-        description: 'When to prompt, before or after processing the transaction'
+        description: When to prompt, before or after processing the transaction.
         enum:
           - before-transaction-process
           - after-transaction-process
@@ -26,7 +26,7 @@ allOf:
         type: string
         description: >-
           What to do if verification is before transaction processing, and is
-          rejected
+          rejected.
         enum:
           - process-transaction
           - decline
@@ -36,18 +36,18 @@ allOf:
         type: string
         description: >-
           Gateway account to use if use-alternate-gateway is selected for
-          rejectedBeforeTransactionProcessPolicy
+          rejectedBeforeTransactionProcessPolicy.
       rejectedAfterTransactionProcessPolicy:
         type: string
         description: >-
           What to do if verification is after transaction processing, and is
-          rejected
+          rejected.
         enum:
           - proceed
         default: proceed
       optionalPolicy:
         type: string
-        description: What to do if verification is optional
+        description: What to do if verification is optional.
         enum:
           - allow-bypass
           - allow-use-alternate-gateway
@@ -56,13 +56,17 @@ allOf:
         type: string
         description: >-
           Gateway account to use if allow-use-alternate-gateway is selected for
-          optionalPolicy
+          optionalPolicy.
       bypassCurrencyToDisplay:
         description: >-
           The currency three letter code to display on the bypass link, if
-          optional
+          optional.
         type: string
         default: USD
+      maxAttempts:
+        description: Maximum number of verification attempts per transaction.
+        type: integer
+        default: 3
     required:
       - excludePolicy
       - isMandatory
