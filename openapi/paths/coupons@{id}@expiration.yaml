@@ -7,7 +7,7 @@ post:
   summary: Set a coupon's expiration time
   operationId: PostCouponExpiration
   description: |
-    Set a coupon's expiry time with the specified redemption code.
+    Set a coupon's expiry time with the specified coupon ID.
     The expiredTime of a coupon must be greater than its issuedTime.
     This cannot be performed on expired coupons.
   requestBody:
@@ -15,10 +15,10 @@ post:
       application/json:
         schema:
           $ref: ../components/schemas/Coupon/CouponExpiration.yaml
-    description: Coupon resource
+    description: Coupon resource.
   responses:
     '201':
-      description: Coupon expiration was successfully set
+      description: Coupon expiration was successfully set.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -39,7 +39,7 @@ post:
     '409':
       description: >-
         The coupon is already expired and has been redeemed, unable to
-        reschedule expiration
+        reschedule expiration.
       content:
         application/json:
           schema:
