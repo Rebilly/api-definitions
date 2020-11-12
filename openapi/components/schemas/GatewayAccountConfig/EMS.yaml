@@ -1,0 +1,53 @@
+description: EMS e-Commerce (XML) API config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: EMS credentials object
+        properties:
+          storeId:
+            type: string
+            description: EMS store id
+          userId:
+            type: string
+            description: EMS account id
+          password:
+            type: string
+            format: password
+            description: EMS password
+          privateKey:
+            type: string
+            format: password
+            description: Private Key
+            x-multiline: true
+          privateKeyPassword:
+            type: string
+            format: password
+            description: Private key password
+          clientCertificate:
+            type: string
+            description: Client Certificate
+            x-multiline: true
+          clientCertificatePassword:
+            type: string
+            format: password
+            description: Client Certificate password
+          serverCertificate:
+            type: string
+            description: Server Certificate
+            x-multiline: true
+        required:
+          - storeId
+          - userId
+          - password
+          - privateKey
+          - privateKeyPassword
+          - clientCertificate
+          - clientCertificatePassword
+          - serverCertificate
+      threeDSecureServer:
+        $ref: ../ThreeDSecureServers/EMS3dsServers/EMS3dsServers.yaml
