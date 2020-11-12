@@ -1,1 +1,1 @@
-$couponRedemption = $client->couponsRedemptions()->load('redemptionCode');
+$couponRedemption = $client->couponsRedemptions()->load('redemptionId');
