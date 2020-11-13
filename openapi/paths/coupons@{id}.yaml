@@ -7,10 +7,10 @@ get:
   summary: Retrieve a coupon
   operationId: GetCoupon
   description: |
-    Retrieve a coupon with specified redemption code string
+    Retrieve a coupon with specified coupon ID string.
   responses:
     '200':
-      description: Coupon was retrieved successfully
+      description: Coupon was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -38,15 +38,15 @@ get:
 put:
   tags:
     - Coupons
-  summary: Create or update a coupon with predefined redemption code
+  summary: Create or update a coupon with predefined coupon ID
   operationId: PutCoupon
   description: |
-    Create or update a coupon with predefined redemption code
+    Create or update a coupon with predefined coupon ID.
   requestBody:
     $ref: ../components/requestBodies/Coupon.yaml
   responses:
     '200':
-      description: Coupon was updated
+      description: Coupon was updated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -59,7 +59,7 @@ put:
           schema:
             $ref: ../components/schemas/Coupon/Coupon.yaml
     '201':
-      description: Coupon was created
+      description: Coupon was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
