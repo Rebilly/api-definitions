@@ -1,1 +1,0 @@
-$client->checkoutPages()->delete('checkoutPageId');

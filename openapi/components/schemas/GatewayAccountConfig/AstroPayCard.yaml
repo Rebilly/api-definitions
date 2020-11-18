@@ -20,7 +20,19 @@ allOf:
             type: string
             description: AstroPay Card secret key
             format: password
+          api_key:
+            type: string
+            description: One Touch Astropay API key
+            format: password
         required:
           - x_login
           - x_tran_key
           - secret_key
+      settings:
+        type: object
+        description: AstroPay Card settings object
+        properties:
+          oneTouchApi:
+            type: boolean
+            description: Use One Touch Astropay API
+            default: false
