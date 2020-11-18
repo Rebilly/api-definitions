@@ -16,10 +16,10 @@ info:
   description:
     $ref: description.md
 servers:
-  - url: 'https://api.rebilly.com/v2.1'
-    description: Live Server
   - url: 'https://api-sandbox.rebilly.com/v2.1'
     description: Sandbox Server
+  - url: 'https://api.rebilly.com/v2.1'
+    description: Live Server
 tags:
   - name: 3D Secure
     description: |
@@ -281,10 +281,10 @@ paths:
     $ref: './paths/coupons-redemptions@{id}@cancel.yaml'
   /coupons:
     $ref: ./paths/coupons.yaml
-  '/coupons/{redemptionCode}':
-    $ref: './paths/coupons@{redemptionCode}.yaml'
-  '/coupons/{redemptionCode}/expiration':
-    $ref: './paths/coupons@{redemptionCode}@expiration.yaml'
+  '/coupons/{id}':
+    $ref: './paths/coupons@{id}.yaml'
+  '/coupons/{id}/expiration':
+    $ref: './paths/coupons@{id}@expiration.yaml'
   /credentials:
     $ref: ./paths/credentials.yaml
   '/credentials/{id}':
@@ -480,6 +480,9 @@ x-webhooks:
   dispute-created:
     post:
       $ref: ./webhooks/dispute-created.yaml
+  experian-check-performed:
+    post:
+      $ref: ./webhooks/experian-check-performed.yaml
   gateway-account-requested:
     post:
       $ref: ./webhooks/gateway-account-requested.yaml
@@ -555,6 +558,9 @@ x-webhooks:
   subscription-canceled:
     post:
       $ref: ./webhooks/subscription-canceled.yaml
+  subscription-modified:
+    post:
+      $ref: ./webhooks/subscription-modified.yaml
   subscription-reactivated:
     post:
       $ref: ./webhooks/subscription-reactivated.yaml

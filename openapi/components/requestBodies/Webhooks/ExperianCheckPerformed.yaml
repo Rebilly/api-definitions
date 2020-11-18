@@ -1,0 +1,43 @@
+content:
+  application/json:
+    schema:
+      properties:
+        customerId:
+          description: The ID of the checked customer.
+          type: string
+        outcome:
+          description: The check decision where `1` - record matches, `0` - no matches found, `-1` - record mismatches.
+          type: integer
+          enum:
+            - -1
+            - 0
+            - 1
+          example: 1
+        reason:
+          description: The text representation of the outcome.
+          type: string
+          example: Individual has a 90 percent or greater match to forename surname premise postcode with ID verified and DOB
+        errorCode:
+          description: Error code produced by the Experian system.
+          type: string
+          example: '001'
+        errorMessage:
+          description: Error message produced by the Experian system.
+          type: string
+          example: 'Authentication Error: Bad Username or Password'
+        eventType:
+          $ref: ../../schemas/GlobalWebhookEventType.yaml
+        _embedded:
+          type: object
+          description: Customer object.
+          properties:
+            customer:
+              $ref: ../../schemas/Customer.yaml
+        _links:
+          type: array
+          description: The links related to resource.
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: ../../schemas/Links/CustomerLink.yaml
+description: Experian check performed webhook request body resource
