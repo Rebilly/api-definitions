@@ -56,3 +56,27 @@ post:
       $ref: ../../components/responses/NotFound.yaml
     422:
       $ref: ../../components/responses/ValidationError.yaml
+delete:
+  tags:
+    - Transaction
+    summary: Camcel a Transaction's processing state
+    operationId: StorefrontDe;eteTransactionProcessing
+    security:
+      - CustomerJWT: [ ]
+    description: |
+      Cancel a transaction's processing state.
+
+      Not available for `type: auto-sumbit`.
+    responses:
+      200:
+        description: Transaction was cancelled
+        content:
+          application/json:
+            schema:
+              $ref: ../../components/schemas/Storefront/TransactionProcessing.yaml
+      401:
+        $ref: ../../components/responses/Unauthorized.yaml
+      403:
+        $ref: ../../components/responses/Forbidden.yaml
+      404:
+        $ref: ../../components/responses/NotFound.yaml
