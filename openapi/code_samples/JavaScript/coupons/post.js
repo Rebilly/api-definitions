@@ -16,4 +16,4 @@ const data = {
 const firstKey = await api.coupons.create({data});
 
 // or you can provide one
-const secondKey = await api.coupons.create({redemptionCode: 'my-second-id', data});
+const secondKey = await api.coupons.create({id: 'my-second-id', data});
