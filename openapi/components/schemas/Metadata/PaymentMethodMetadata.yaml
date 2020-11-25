@@ -1,32 +1,30 @@
 type: object
 additionalProperties: false
 required:
-  - id
+  - apiName
   - name
   - summary
   - description
   - countries
 properties:
-  id:
-    description: |
-      The unique ID across all payment methods used internally by Rebilly.
-    type: string
+  apiName:
+    $ref: ./PaymentMethodApiName.yaml
   name:
     description: |
       The name of the payment method.
     type: string
     pattern: '^[\w\. -]+$'
-  apiName:
-    $ref: ./PaymentMethodApiName.yaml
   landscapeLogo:
     description: |
       The URL for the payment method logo optimized for landscape orientation.
     type: string
+    nullable: true
     format: uri
   portraitLogo:
     description: |
       The URL for the payment method logo optimized for portrait orientation.
     type: string
+    nullable: true
     format: uri
   summary:
     description: |
