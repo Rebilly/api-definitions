@@ -1,0 +1,54 @@
+type: object
+properties:
+  processResponse:
+    description: >
+      Whether the query response from payment gateway should be processed,
+      or only sent request to gateway to read the latest state.
+      If 'true' the response will be parsed and may update the transaction.
+    type: boolean
+    default: false
+  logRecordId:
+    description: The communication log record ID.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  gatewayResponse:
+    type: object
+    description: The gateway response.
+    readOnly: true
+    required:
+      - status
+      - amount
+      - currency
+    properties:
+      status:
+        description: Transaction status
+        type: string
+        readOnly: true
+        enum:
+          - pending
+          - conn-error
+          - timeout
+          - approved
+          - declined
+          - abandoned
+          - canceled
+          - waiting-approval
+          - waiting-capture
+          - waiting-gateway
+      amount:
+        description: The transaction amount.
+        type: number
+        format: double
+      currency:
+        description: The transaction currency.
+        allOf:
+          - $ref: ../CurrencyCode.yaml
+      _links:
+        type: array
+        description: The links related to resource
+        readOnly: true
+        minItems: 2
+        items:
+          anyOf:
+            - $ref: ../Links/TransactionLink.yaml
+            - $ref: ../Links/PaymentGatewayLogRecordLink.yaml
