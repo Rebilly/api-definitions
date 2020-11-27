@@ -1,17 +1,14 @@
 parameters:
-  - $ref: ../components/parameters/resourceId.yaml
   - $ref: ../components/parameters/organizationId.yaml
 get:
   tags:
     - Transactions
-  summary: Retrieve a Transaction Gateway Logs
-  operationId: GetTransactionGatewayLogCollection
-  description: >-
-    Retrieve Gateway communication Logs for Transaction with specified
-    identifier string
+  summary: Retrieve a payment gateway communication logs
+  operationId: GetPaymentGatewayLogCollection
+  description: Retrieve communication logs with payment gateway.
   responses:
     '200':
-      description: Logs were retrieved successfully
+      description: Logs collection was retrieved successfully.
       content:
         application/json:
           schema:
@@ -24,7 +21,3 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
-    - lang: JavaScript
-      source:
-        $ref: '../code_samples/JavaScript/transactions@{id}@gateway-logs/get.js'

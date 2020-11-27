@@ -1,0 +1,22 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Transactions
+  summary: Retrieve a record from payment gateway logs
+  operationId: GetPaymentGatewayLogRecord
+  description: Retrieve record from payment gateway communication logs.
+  responses:
+    '200':
+      description: Log record was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TransactionGatewayLog.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
