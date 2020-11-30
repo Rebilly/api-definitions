@@ -1,4 +1,5 @@
 parameters:
+  - $ref: ../../components/parameters/organizationId.yaml
   - $ref: ../../components/parameters/resourceId.yaml
 get:
   tags:
@@ -11,11 +12,11 @@ get:
     Retrieve a transaction with specified ID
   responses:
     200:
-      description: Transaction was retrieved successfuly
+      description: Transaction was retrieved successfully
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/Common/CommonTransaction.yaml
+            $ref: ../../components/schemas/Storefront/StorefrontTransaction.yaml
     401:
       $ref: ../../components/responses/Unauthorized.yaml
     403:
@@ -39,7 +40,7 @@ patch:
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/Common/CommonTransaction.yaml
+            $ref: ../../components/schemas/Storefront/StorefrontTransaction.yaml
     401:
       $ref: ../../components/responses/Unauthorized.yaml
     403:

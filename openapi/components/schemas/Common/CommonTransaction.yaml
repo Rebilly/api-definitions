@@ -19,6 +19,7 @@ properties:
     type: string
     readOnly: true
     enum:
+      - 3ds-authentication
       - authorize
       - capture
       - credit
@@ -31,7 +32,7 @@ properties:
     readOnly: true
     enum:
       - completed
-      - connection-error
+      - conn-error
       - disputed
       - never-sent
       - partially-refunded
@@ -41,7 +42,9 @@ properties:
       - suspended
       - timeout
       - voided
+      - waiting-approval
       - waiting-capture
+      - waiting-gateway
       - waiting-refund
   result:
     description: Transaction result
@@ -54,7 +57,7 @@ properties:
       - declined
       - unknown
   amount:
-    description: The transactions's amount
+    description: The transaction's amount
     type: number
     format: double
     readOnly: true
@@ -113,7 +116,7 @@ properties:
     type: boolean
     readOnly: true
   rebillNumber:
-    description: The transactions's rebill number
+    description: The transaction's rebill number
     type: integer
     readOnly: true
   paymentInstrument:
@@ -154,6 +157,16 @@ properties:
     description: The transaction's request ID.  This ID must be unique within a 24 hour period.
       Use this field to prevent duplicated transactions.
     type: string
+  hasAmountAdjustment:
+    description: True if transaction has amount adjustment
+    type: boolean
+    readOnly: true
+  gatewayName:
+    readOnly: true
+    description: |
+      Payment Gateway name, available only after the gateway is selected for the transaction.
+    allOf:
+      - $ref: ../Gateways/GatewayName.yaml
   customFields:
     $ref: ../ResourceCustomFields.yaml
   processedTime:

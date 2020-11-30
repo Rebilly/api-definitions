@@ -1,0 +1,21 @@
+description: Dragonphoenix config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Dragonphoenix credentials object
+        properties:
+          sid:
+            type: string
+            description: Dragonphoenix site ID
+          rcode:
+            type: string
+            description: Dragonphoenix rcode
+            format: password
+        required:
+          - sid
+          - rcode

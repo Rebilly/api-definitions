@@ -1,6 +1,6 @@
 // build the redemption data
 const data = {
-  redemptionCode: 'my-best-coupon',
+  couponId: 'my-best-coupon',
   customerId: 'foobar-001'
 };
 

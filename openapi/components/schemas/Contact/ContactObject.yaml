@@ -3,38 +3,48 @@ properties:
   firstName:
     description: The contact first name
     type: string
+    pattern: '^[\w\s\-\pL,.'']+$'
+    maxLength: 45
     example: Benjamin
     nullable: true
   lastName:
     description: The contact last name
     type: string
+    pattern: '^[\w\s\-\pL,.'']+$'
+    maxLength: 45
     example: Franklin
     nullable: true
   organization:
     description: The contact organization
     type: string
+    pattern: '^[\w\s\-\pL,.'']+$'
+    maxLength: 255
     nullable: true
     example: null
   address:
     description: The contact street address
     type: string
+    pattern: '^[\w\s\-\/\pL,.#;:()'']+$'
     maxLength: 60
     example: 36 Craven St
     nullable: true
   address2:
     description: The contact street address (second line)
     type: string
+    pattern: '^[\w\s\-\/\pL,.#;:()'']+$'
     maxLength: 60
     nullable: true
   city:
     description: The contact city
     type: string
+    pattern: '^[\w\s\-\pL,.'']+$'
     maxLength: 45
     nullable: true
     example: London
   region:
     description: The contact region (state)
     type: string
+    pattern: '^[\w\s\-\/\pL,.#;:()'']+$'
     maxLength: 45
     nullable: true
     example: London
@@ -42,11 +52,13 @@ properties:
     description: The contact country ISO Alpha-2 code
     type: string
     pattern: '^[A-Z]{2}$'
+    maxLength: 2
     nullable: true
     example: GB
   postalCode:
     description: The contact postal code
     type: string
+    pattern: '^[\w\s\-]+$'
     maxLength: 10
     nullable: true
     example: WC2N 5NF

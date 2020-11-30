@@ -1,0 +1,41 @@
+type: object
+additionalProperties: false
+required:
+  - apiName
+  - name
+  - summary
+  - description
+  - countries
+properties:
+  apiName:
+    $ref: ./PaymentMethodApiName.yaml
+  name:
+    description: |
+      The name of the payment method.
+    type: string
+    pattern: '^[\w\. -]+$'
+  landscapeLogo:
+    description: |
+      The URL for the payment method logo optimized for landscape orientation.
+    type: string
+    nullable: true
+    format: uri
+  portraitLogo:
+    description: |
+      The URL for the payment method logo optimized for portrait orientation.
+    type: string
+    nullable: true
+    format: uri
+  summary:
+    description: |
+      A short description of the payment method. (Markdown is supported).
+    type: string
+  description:
+    description: |
+      A detailed information about the payment method. (Markdown is supported).
+    type: string
+  countries:
+    $ref: ./PaymentMethodCountriesMetadata.yaml
+  storefrontEnabled:
+    type: boolean
+    default: false

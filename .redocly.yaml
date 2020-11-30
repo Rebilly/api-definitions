@@ -5,9 +5,13 @@ apiDefinitions:
   storefront: openapi/storefront.yaml
   combined: openapi/combined.yaml
 lint:
+  extends:
+    - recommended
+  plugins:
+    - './plugins/custom-rules.js'
   rules:
-    no-unused-schemas: warning
-  transformers: ./transformers/index.js
+    tag-description: off
+    custom-rules/one-tag-rule: error
 referenceDocs:
   showConsole: true
   layout:

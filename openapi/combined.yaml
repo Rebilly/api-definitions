@@ -16,10 +16,10 @@ info:
   description:
     $ref: description.md
 servers:
-  - url: 'https://api.rebilly.com/v2.1'
-    description: Live Server
-  - url: 'https://api-sandbox.rebilly.com/v2.1'
+  - url: 'https://api-sandbox.rebilly.com'
     description: Sandbox Server
+  - url: 'https://api.rebilly.com'
+    description: Live Server
 tags:
   - name: 3D Secure
     description: |
@@ -31,12 +31,12 @@ tags:
       Bank Accounts are a type of payment instrument used to collect
       ACH (echeck) payments, similar to how a payment
       card would be used to for a credit card payment.
-  - name: Blacklists
+  - name: Blocklists
     description: |
-      Your blacklists contains values of customerIds, email addresses,
+      Your blocklists contains values of customerIds, email addresses,
       ipAddresses, bank identification numbers, countries or payment cards that
       you do NOT want to do business with. They are a good tool for managing
-      risk. A blacklist entry that expires after a period of time we call a
+      risk. A blocklist entry that expires after a period of time we call a
       greylist.
   - name: Coupons
     description: >
@@ -92,6 +92,9 @@ tags:
     description: >
       Invoices leave a record for both you and your customer of the products
       sold.
+  - name: Payment Instruments
+    description: >
+      The Payment Instrument allows you to accept a variety of payment methods through a single API.
   - name: Payment Cards
     description: >
       Payment cards are a type of payment instrument used for credit and debit
@@ -190,7 +193,49 @@ tags:
       their granted permissions.  It has resources less commonly integrated by
 
       3rd parties.
-
+  - name: Subscriptions
+  - name: Organizations
+  - name: Customers
+  - name: Tags
+    description: |
+      Tag customers to better organize your data.
+  - name: Histograms
+    description: |
+      Histograms are for particular kinds of reports with cohorts and periods.
+  - name: Reports
+    description: >
+      Retrieve summary information about your customers, subscriptions,
+      transactions, and more.
+  - name: Data Exports
+    description: |
+      Data exports.
+  - name: Activity Feed
+    description: |
+      Activity Feed is holding various events that occurred in the app.
+  - name: Websites
+  - name: Webhooks
+  - name: Status
+  - name: Profile
+  - name: Reset password
+  - name: Integrations
+  - name: Broadcast Messages
+  - name: Email Delivery Settings
+  - name: Email Messages
+  - name: Email Notifications
+  - name: Rules
+  - name: Memberships
+  - name: JWT Session
+  - name: Lists
+  - name: Layouts
+  - name: Segments
+  - name: Gateway Accounts
+  - name: Tracking
+  - name: Email Credentials
+  - name: Webhook Credentials
+  - name: Checkout Forms
+  - name: API Keys
+  - name: Experian credentials
+  - name: Metadata
 security:
   - SecretApiKey: []
   - JWT: []
@@ -227,10 +272,10 @@ paths:
     $ref: './paths/bank-accounts@{id}.yaml'
   '/bank-accounts/{id}/deactivation':
     $ref: './paths/bank-accounts@{id}@deactivation.yaml'
-  /blacklists:
-    $ref: ./paths/blacklists.yaml
-  '/blacklists/{id}':
-    $ref: './paths/blacklists@{id}.yaml'
+  /blocklists:
+    $ref: ./paths/blocklists.yaml
+  '/blocklists/{id}':
+    $ref: './paths/blocklists@{id}.yaml'
   /coupons-redemptions:
     $ref: ./paths/coupons-redemptions.yaml
   '/coupons-redemptions/{id}':
@@ -239,10 +284,10 @@ paths:
     $ref: './paths/coupons-redemptions@{id}@cancel.yaml'
   /coupons:
     $ref: ./paths/coupons.yaml
-  '/coupons/{redemptionCode}':
-    $ref: './paths/coupons@{redemptionCode}.yaml'
-  '/coupons/{redemptionCode}/expiration':
-    $ref: './paths/coupons@{redemptionCode}@expiration.yaml'
+  '/coupons/{id}':
+    $ref: './paths/coupons@{id}.yaml'
+  '/coupons/{id}/expiration':
+    $ref: './paths/coupons@{id}@expiration.yaml'
   /credentials:
     $ref: ./paths/credentials.yaml
   '/credentials/{id}':
@@ -273,8 +318,6 @@ paths:
     $ref: ./paths/disputes.yaml
   '/disputes/{id}':
     $ref: './paths/disputes@{id}.yaml'
-  '/disputes/{id}/matched-rules':
-    $ref: './paths/disputes@{id}@matched-rules.yaml'
   /files:
     $ref: ./paths/files.yaml
   '/files/{id}':
@@ -293,8 +336,6 @@ paths:
     $ref: './paths/invoices@{id}@issue.yaml'
   '/invoices/{id}/items':
     $ref: './paths/invoices@{id}@items.yaml'
-  '/invoices/{id}/matched-rules':
-    $ref: './paths/invoices@{id}@matched-rules.yaml'
   '/invoices/{id}/recalculate':
     $ref: './paths/invoices@{id}@recalculate.yaml'
   '/invoices/{id}/reissue':
@@ -321,6 +362,12 @@ paths:
     $ref: ./paths/password-tokens.yaml
   '/password-tokens/{id}':
     $ref: './paths/password-tokens@{id}.yaml'
+  '/payment-instruments':
+    $ref: './paths/payment-instruments.yaml'
+  '/payment-instruments/{id}':
+    $ref: './paths/payment-instruments@{id}.yaml'
+  '/payment-instruments/{id}/deactivation':
+    $ref: './paths/payment-instruments@{id}@deactivation.yaml'
   /payment-cards:
     $ref: ./paths/payment-cards.yaml
   '/payment-cards/{id}':
@@ -329,12 +376,10 @@ paths:
     $ref: './paths/payment-cards@{id}@authorization.yaml'
   '/payment-cards/{id}/deactivation':
     $ref: './paths/payment-cards@{id}@deactivation.yaml'
-  '/payment-cards/{id}/matched-rules':
-    $ref: './paths/payment-cards@{id}@matched-rules.yaml'
-  /payment-instrument-validation:
-    $ref: ./paths/payment-instrument-validation.yaml
-  '/payment-instrument-validation/{id}':
-    $ref: './paths/payment-instrument-validation@{id}.yaml'
+  /payment-methods:
+    $ref: ./paths/payment-methods.yaml
+  /payment-methods/{apiName}:
+    $ref: './paths/payment-methods@{apiName}.yaml'
   /paypal-accounts:
     $ref: ./paths/paypal-accounts.yaml
   '/paypal-accounts/{id}':
@@ -373,8 +418,6 @@ paths:
     $ref: './paths/subscriptions@{id}@change-plan.yaml'
   '/subscriptions/{id}/interim-invoice':
     $ref: './paths/subscriptions@{id}@interim-invoice.yaml'
-  '/subscriptions/{id}/matched-rules':
-    $ref: './paths/subscriptions@{id}@matched-rules.yaml'
   '/subscriptions/{id}/timeline':
     $ref: './paths/subscriptions@{id}@timeline.yaml'
   '/subscriptions/{id}/timeline/{messageId}':
@@ -395,16 +438,18 @@ paths:
     $ref: ./paths/tokens.yaml
   '/tokens/{token}':
     $ref: './paths/tokens@{token}.yaml'
+  /digital-wallets/validation:
+    $ref: './paths/digital-wallets@validation.yaml'
   /transactions:
     $ref: ./paths/transactions.yaml
   '/transactions/{id}':
     $ref: './paths/transactions@{id}.yaml'
+  /payouts:
+    $ref: ./paths/payouts.yaml
   '/transactions/{id}/cancel':
     $ref: './paths/transactions@{id}@cancel.yaml'
   '/transactions/{id}/gateway-logs':
     $ref: './paths/transactions@{id}@gateway-logs.yaml'
-  '/transactions/{id}/matched-rules':
-    $ref: './paths/transactions@{id}@matched-rules.yaml'
   '/transactions/{id}/refund':
     $ref: './paths/transactions@{id}@refund.yaml'
   '/transactions/{id}/timeline':
@@ -423,10 +468,10 @@ paths:
     $ref: ./paths/broadcast-messages.yaml
   '/broadcast-messages/{id}':
     $ref: './paths/broadcast-messages@{id}.yaml'
-  /checkout-pages:
-    $ref: ./paths/checkout-pages.yaml
-  '/checkout-pages/{id}':
-    $ref: './paths/checkout-pages@{id}.yaml'
+  /checkout-forms:
+    $ref: ./paths/checkout-forms.yaml
+  /checkout-forms/{id}:
+    $ref: './paths/checkout-forms@{id}.yaml'
   /credential-hashes/aws-ses:
     $ref: ./paths/credential-hashes@aws-ses.yaml
   '/credential-hashes/aws-ses/{hash}':
@@ -445,6 +490,10 @@ paths:
     $ref: './paths/credential-hashes@oauth2@{hash}.yaml'
   '/credential-hashes/oauth2/{hash}/items':
     $ref: './paths/credential-hashes@oauth2@{hash}@items.yaml'
+  /credential-hashes/plaid:
+    $ref: './paths/credential-hashes@plaid.yaml'
+  '/credential-hashes/plaid/{hash}':
+    $ref: './paths/credential-hashes@plaid@{hash}.yaml'
   /credential-hashes/postmark:
     $ref: ./paths/credential-hashes@postmark.yaml
   '/credential-hashes/postmark/{hash}':
@@ -457,6 +506,10 @@ paths:
     $ref: ./paths/credential-hashes@webhooks.yaml
   '/credential-hashes/webhooks/{hash}':
     $ref: './paths/credential-hashes@webhooks@{hash}.yaml'
+  /credential-hashes/experian:
+    $ref: ./paths/credential-hashes@experian.yaml
+  '/credential-hashes/experian/{hash}':
+    $ref: './paths/credential-hashes@experian@{hash}.yaml'
   '/email-delivery-setting-verifications/{token}':
     $ref: './paths/email-delivery-setting-verifications@{token}.yaml'
   /email-delivery-settings:
@@ -603,12 +656,8 @@ paths:
     $ref: ./paths/experimental-organizations.yaml
   '/experimental/organizations/{id}':
     $ref: './paths/experimental-organizations@{id}.yaml'
-  /reports/payments-success-by-decline-reason:
-    $ref: ./paths/reports@payments-success-by-decline-reason.yaml
   /reports/api-log-summary:
     $ref: ./paths/reports@api-log-summary.yaml
-  /reports/cumulative-subscriptions-plans:
-    $ref: ./paths/reports@cumulative-subscriptions-plans.yaml
   /reports/cumulative-subscriptions:
     $ref: ./paths/reports@cumulative-subscriptions.yaml
   /reports/dashboard:
@@ -631,16 +680,12 @@ paths:
     $ref: ./paths/reports@retention-value.yaml
   /reports/retry-transaction:
     $ref: ./paths/reports@retry-transaction.yaml
-  /reports/statistics:
-    $ref: ./paths/reports@statistics.yaml
   /reports/subscription-cancellation:
     $ref: ./paths/reports@subscription-cancellation.yaml
   /reports/subscription-renewal:
     $ref: ./paths/reports@subscription-renewal.yaml
   /reports/time-series-transaction:
     $ref: ./paths/reports@time-series-transaction.yaml
-  /reports/transactions-plan:
-    $ref: ./paths/reports@transactions-plan.yaml
   /reports/transactions-time-dispute:
     $ref: ./paths/reports@transactions-time-dispute.yaml
   /reports/transactions:

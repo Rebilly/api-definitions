@@ -1,6 +1,17 @@
 allOf:
   - $ref: ../Common/CommonInvoice.yaml
+  - required:
+    - customerId
+    - websiteId
   - properties:
+      customerId:
+        description: The сustomer's ID
+        allOf:
+          - $ref: ../ResourceId.yaml
+      websiteId:
+        description: The website ID
+        allOf:
+          - $ref: ../ResourceId.yaml
       transactions:
         type: array
         description: Invoice transactions array
