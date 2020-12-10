@@ -111,11 +111,11 @@ allOf:
       dcc:
         description: Dynamic Currency Conversion detailed information. Null if hasDcc is false
         type: object
-        readOnly: true
         properties:
           base:
             type: object
             description: Initial amount and currency to convert from
+            readOnly: true
             properties:
               amount:
                 type: number
@@ -126,6 +126,7 @@ allOf:
           quote:
             type: object
             description: Suggested amount and currency to convert to
+            readOnly: true
             properties:
               amount:
                 type: number
@@ -134,16 +135,18 @@ allOf:
                 allOf:
                   - $ref: ../CurrencyCode.yaml
           usdMarkup:
-            description: The amount of markup translated to USD
             type: number
+            description: The amount of markup translated to USD
+            readOnly: true
             format: double
           outcome:
             type: string
             description: Dynamic Currency Conversion outcome
             enum:
+              - unknown
+              - presented
               - rejected
               - selected
-              - unknown
       hasBumpOffer:
         description: True if transaction has a Bump offer
         type: boolean
