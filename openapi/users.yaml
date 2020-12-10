@@ -59,7 +59,7 @@ info:
     ]);
     ```
 
-    # Using filter
+    # Using filter with collections
     Rebilly provides collections filtering. You can use `?filter` param on collection to define which records should be shown in the response.
 
     Here is filter format description:
@@ -201,6 +201,7 @@ tags:
   - name: Email Messages
   - name: Email Notifications
   - name: Experian credentials
+  - name: Metadata
 ################################################################################
 x-tagGroups:
   - name: Security
@@ -241,6 +242,7 @@ x-tagGroups:
       - Integrations
       - Plaid credentials
       - Experian credentials
+      - Metadata
   - name: Related docs
     tags:
       - Rebilly API
@@ -249,9 +251,9 @@ security:
   - SecretApiKey: []
   - JWT: []
 servers:
-  - url: 'https://api-sandbox.rebilly.com/v2.1'
+  - url: 'https://api-sandbox.rebilly.com'
     description: Sandbox Server
-  - url: 'https://api.rebilly.com/v2.1'
+  - url: 'https://api.rebilly.com'
     description: Live Server
 
 
@@ -397,6 +399,10 @@ paths:
     $ref: './paths/organizations@{id}.yaml'
   /payment-cards-bank-names:
     $ref: ./paths/payment-cards-bank-names.yaml
+  /payment-methods:
+    $ref: ./paths/payment-methods.yaml
+  /payment-methods/{apiName}:
+    $ref: './paths/payment-methods@{apiName}.yaml'
   /previews/rule-actions/send-email:
     $ref: ./paths/previews@rule-actions@send-email.yaml
   /previews/rule-actions/trigger-webhook:
@@ -449,3 +455,7 @@ paths:
     $ref: ./paths/websites.yaml
   '/websites/{id}':
     $ref: './paths/websites@{id}.yaml'
+x-webhooks:
+  gateway-account-limit-was-reached:
+    post:
+      $ref: ./webhooks/gateway-account-limit-was-reached.yaml

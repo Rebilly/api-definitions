@@ -16,9 +16,9 @@ info:
   description:
     $ref: description.md
 servers:
-  - url: 'https://api-sandbox.rebilly.com/v2.1'
+  - url: 'https://api-sandbox.rebilly.com'
     description: Sandbox Server
-  - url: 'https://api.rebilly.com/v2.1'
+  - url: 'https://api.rebilly.com'
     description: Live Server
 tags:
   - name: 3D Secure
@@ -235,7 +235,7 @@ tags:
   - name: Checkout Forms
   - name: API Keys
   - name: Experian credentials
-
+  - name: Metadata
 security:
   - SecretApiKey: []
   - JWT: []
@@ -376,6 +376,10 @@ paths:
     $ref: './paths/payment-cards@{id}@authorization.yaml'
   '/payment-cards/{id}/deactivation':
     $ref: './paths/payment-cards@{id}@deactivation.yaml'
+  /payment-methods:
+    $ref: ./paths/payment-methods.yaml
+  /payment-methods/{apiName}:
+    $ref: './paths/payment-methods@{apiName}.yaml'
   /paypal-accounts:
     $ref: ./paths/paypal-accounts.yaml
   '/paypal-accounts/{id}':

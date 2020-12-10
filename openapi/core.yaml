@@ -16,9 +16,9 @@ info:
   description:
     $ref: description.md
 servers:
-  - url: 'https://api-sandbox.rebilly.com/v2.1'
+  - url: 'https://api-sandbox.rebilly.com'
     description: Sandbox Server
-  - url: 'https://api.rebilly.com/v2.1'
+  - url: 'https://api.rebilly.com'
     description: Live Server
 tags:
   - name: 3D Secure
@@ -483,6 +483,9 @@ x-webhooks:
   experian-check-performed:
     post:
       $ref: ./webhooks/experian-check-performed.yaml
+  gateway-account-limit-was-reached:
+    post:
+      $ref: ./webhooks/gateway-account-limit-was-reached.yaml
   gateway-account-requested:
     post:
       $ref: ./webhooks/gateway-account-requested.yaml
@@ -579,6 +582,9 @@ x-webhooks:
   subscription-trial-ended:
     post:
       $ref: ./webhooks/subscription-trial-ended.yaml
+  subscription-trial-end-changed:
+    post:
+      $ref: ./webhooks/subscription-trial-end-changed.yaml
   transaction-amount-discrepancy-found:
     post:
       $ref: ./webhooks/transaction-amount-discrepancy-found.yaml
