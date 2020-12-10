@@ -1,0 +1,26 @@
+type: object
+allOf:
+  - $ref: ../PurchaseBumps/PurchaseBump.yaml
+  - type: object
+    properties:
+      status:
+        type: string
+        enum: ["pending", "presented", "accepted", "rejected"]
+      presentedOffers:
+        type: object
+        description: |
+          The choices (split verison) presented to customer.
+          Required to change status to "presented".
+        properties:
+          version:
+            type: string
+          language:
+            type: string
+      acceptedOffer:
+        type: object
+        description: |
+          The customer choice values.
+          Required to change status to "accepted".
+        properties:
+          offerId:
+            type: string
