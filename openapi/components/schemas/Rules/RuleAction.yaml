@@ -11,6 +11,7 @@ discriminator:
     display-other-choices: ./Actions/display-other-choices.yaml
     guess-payment-card-expiration: ./Actions/guess-payment-card-expiration.yaml
     offer-purchase-bump: ./Actions/offer-purchase-bump.yaml
+    perform-experian-check: ./Actions/perform-experian-check.yaml
     pick-gateway-account: ./Actions/pick-gateway-account.yaml
     remove-reminder: ./Actions/remove-reminder.yaml
     request-kyc: ./Actions/request-kyc.yaml
@@ -28,27 +29,28 @@ properties:
     type: string
     description: The action name
     enum:
+      - add-risk-score
+      - adjust-ready-to-pay
       - blocklist
       - cancel-scheduled-payments
-      - guess-payment-card-expiration
-      - pick-gateway-account
-      - schedule-payment-retry
-      - schedule-payment
-      - schedule-invoice-retry
-      - send-email
-      - trigger-webhook
-      - stop-subscriptions
-      - add-risk-score
-      - request-kyc
-      - tag-or-untag-customer
-      - display-other-choices
-      - offer-purchase-bump
-      - schedule-reminder
-      - reset-reminder
-      - remove-reminder
       - create-infusionsoft-order
       - create-infusionsoft-payment
-      - adjust-ready-to-pay
+      - display-other-choices
+      - guess-payment-card-expiration
+      - offer-purchase-bump
+      - perform-experian-check
+      - pick-gateway-account
+      - remove-reminder
+      - request-kyc
+      - reset-reminder
+      - schedule-invoice-retry
+      - schedule-payment
+      - schedule-payment-retry
+      - schedule-reminder
+      - send-email
+      - stop-subscriptions
+      - tag-or-untag-customer
+      - trigger-webhook
   status:
     $ref: ../OnOff.yaml
 required:
