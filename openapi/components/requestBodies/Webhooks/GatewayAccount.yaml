@@ -1,0 +1,25 @@
+content:
+  application/json:
+    schema:
+      properties:
+        gatewayAccountId:
+          description: The gateway account ID.
+          type: string
+        eventType:
+          $ref: ../../schemas/GlobalWebhookEventType.yaml
+        _embedded:
+          type: object
+          properties:
+            gatewayAccount:
+              $ref: ../../schemas/GatewayAccount.yaml
+            gatewayAccountLimit:
+              $ref: ../../schemas/GatewayAccountLimit.yaml
+        _links:
+          type: array
+          description: The links related to resource.
+          minItems: 2
+          items:
+            anyOf:
+              - $ref: ../../schemas/Links/GatewayAccountLink.yaml
+              - $ref: ../../schemas/Links/GatewayAccountLimitLink.yaml
+description: Gateway account limit was reached body resource.
