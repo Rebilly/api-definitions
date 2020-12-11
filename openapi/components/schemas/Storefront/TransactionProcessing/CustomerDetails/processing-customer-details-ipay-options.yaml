@@ -1,0 +1,25 @@
+type: object
+title: IpayOptions
+required:
+  - email
+  - documentId
+  - taxId
+properties:
+  gatewayName:
+    enum:
+      - IpayOptions
+  email:
+    type: string
+    description: The customer email address.
+    format: email
+    writeOnly: true
+  documentId:
+    type: string
+    description: The customer DNI number.
+    writeOnly: true
+  taxId:
+    type: string
+    description: The customer CNPJ identification.
+    writeOnly: true
+allOf:
+  - $ref: ../processing-customer-details.yaml

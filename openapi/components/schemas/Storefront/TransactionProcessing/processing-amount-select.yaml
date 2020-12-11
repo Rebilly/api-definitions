@@ -1,0 +1,29 @@
+type: object
+title: Amount select
+properties:
+  type:
+    enum:
+      - amount-select
+  allowedAmount:
+    type: array
+    description: The list of allowed amount values.
+    readOnly: true
+    items:
+      type: number
+      format: double
+  allowedCurrency:
+    type: array
+    description: The list of allowed currency values.
+    readOnly: true
+    items:
+      $ref: ../../CurrencyCode.yaml
+  amount:
+    type: number
+    description: The customer chosen amount.
+    format: double
+    writeOnly: true
+  currency:
+    description: The customer chosen ISO 4217 alphabetic currency code.
+    writeOnly: true
+    allOf:
+      - $ref: ../../CurrencyCode.yaml

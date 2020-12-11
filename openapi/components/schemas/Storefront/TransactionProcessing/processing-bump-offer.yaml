@@ -1,0 +1,40 @@
+type: object
+title: Bump offer
+discriminator:
+  propertyName: outcome
+  mapping:
+    accepted: ./BumpOffer/processing-bump-offer-accepted.yaml
+    rejected: ./BumpOffer/processing-bump-offer-rejected.yaml
+required:
+  - outcome
+properties:
+  type:
+    enum:
+      - bump-offer
+  orderCurrency:
+    readOnly: true
+    allOf:
+      - $ref: ../../CurrencyCode.yaml
+  orderAmount:
+    description: The order amount.
+    type: number
+    format: double
+    readOnly: true
+  offers:
+    description: The bump offers.
+    type: array
+    readOnly: true
+    items:
+      $ref: ../../BumpOfferOffer.yaml
+  returnUrl:
+    description: The return URL.
+    type: string
+    format: url
+    readOnly: true
+  outcome:
+    description: The bump offer outcome.
+    type: string
+    enum:
+      - accepted
+      - rejected
+    writeOnly: true

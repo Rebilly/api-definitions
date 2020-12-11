@@ -1,0 +1,31 @@
+type: object
+title: DCC offer
+properties:
+  type:
+    enum:
+      - dcc-offer
+  baseCurrency:
+    readOnly: true
+    description: The base ISO 4217 alphabetic currency code.
+    allOf:
+      - $ref: ../../CurrencyCode.yaml
+  baseAmount:
+    description: The base amount.
+    type: number
+    format: double
+    readOnly: true
+  quoteCurrency:
+    readOnly: true
+    description: The quote ISO 4217 alphabetic currency code.
+    allOf:
+      - $ref: ../../CurrencyCode.yaml
+  quoteAmount:
+    description: The quote amount.
+    type: number
+    format: double
+    readOnly: true
+  ratio:
+    description: The conversion ratio.
+    type: number
+    format: double
+    readOnly: true

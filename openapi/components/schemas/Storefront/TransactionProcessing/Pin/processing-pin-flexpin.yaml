@@ -1,0 +1,24 @@
+type: object
+title: Flexpin
+required:
+  - pin
+properties:
+  gatewayName:
+    enum:
+      - Flexpin
+  pin:
+    type: array
+    description: The customer PIN. Each item should be passed as a string to preserve the leading `0`.
+    minLength: 4
+    maxLength: 4
+    items:
+      type: string
+      minLength: 4
+      maxLength: 4
+    example:
+      - '0123'
+      - '4567'
+      - '8901'
+      - '2345'
+allOf:
+  - $ref: ../processing-pin.yaml

@@ -1,0 +1,19 @@
+type: object
+title: PIN
+discriminator:
+  propertyName: gatewayName
+  mapping:
+    INOVAPAY: ./Pin/processing-pin-inovapay.yaml
+    Flexpin: ./Pin/processing-pin-flexpin.yaml
+properties:
+  type:
+    enum:
+      - pin
+  gatewayName:
+    enum:
+      - INOVAPAY
+      - Flexepin
+  pin:
+    type: array
+    description: The customer PIN. Each item should be passed as a string to preserve the leading `0`.
+    writeOnly: true

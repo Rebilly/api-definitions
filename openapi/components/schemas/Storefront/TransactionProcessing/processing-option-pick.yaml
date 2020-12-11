@@ -1,0 +1,31 @@
+type: object
+title: Option pick
+properties:
+  type:
+    enum:
+      - option-pick
+  options:
+    type: array
+    description: The list of available options
+    readOnly: true
+    items:
+      type: object
+      required:
+        - label
+        - value
+      properties:
+        label:
+          type: string
+          description: The option label.
+        value:
+          type: string
+          description: The option value.
+        logo:
+          type: string
+          description: The option logo url.
+          format: url
+          nullable: true
+  option:
+    type: string
+    description: The customer picked option.
+    writeOnly: true

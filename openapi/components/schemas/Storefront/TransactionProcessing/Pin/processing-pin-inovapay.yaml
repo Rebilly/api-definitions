@@ -1,0 +1,16 @@
+type: object
+title: INOVAPAY
+required:
+  - pin
+properties:
+  gatewayName:
+    enum:
+      - INOVAPAY
+  pin:
+    type: string
+    description: The customer PIN. Should be passed as a string to preserve the leading `0`.
+    minLength: 16
+    maxLength: 16
+    example: '0123456789012345'
+allOf:
+  - $ref: ../processing-pin.yaml

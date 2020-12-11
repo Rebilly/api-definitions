@@ -1,0 +1,19 @@
+type: object
+title: Customer details
+discriminator:
+  propertyName: gatewayName
+  mapping:
+    EBANX: ./CustomerDetails/processing-customer-details-ipay-options.yaml
+    IpayOptions: ./CustomerDetails/processing-customer-details-ipay-options.yaml
+    Panamerican: ./CustomerDetails/processing-customer-details-panamerican.yaml
+    Piastrix: ./CustomerDetails/processing-customer-details-piastrix.yaml
+properties:
+  type:
+    enum:
+      - customer-details
+  gatewayName:
+    enum:
+      - EBANX
+      - IpayOptions
+      - Panamerican
+      - Piastrix
