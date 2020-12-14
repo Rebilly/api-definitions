@@ -68,6 +68,14 @@ allOf:
         description: Number of past due reminder events triggered
         type: integer
         readOnly: true
+      paymentFormUrl:
+        description: |
+          The URL customer should follow to pay the invoice. To replace the link – use `{{jwt}}` placeholder to get the
+          appropriate Customer JWT.
+
+          This URL will be available only if `status` is `unpaid` or `past-due`.
+        type: string
+        format: url
       _links:
         type: array
         description: The links related to resource
