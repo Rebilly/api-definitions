@@ -21,3 +21,19 @@ allOf:
           - merchantPassword
       threeDSecureServer:
         $ref: ../ThreeDSecureServers/Worldpay3dsServers/Worldpay3dsServers.yaml
+      settings:
+        type: object
+        properties:
+          merchantInitiatedReason:
+            type: string
+            description: The value of merchantInitiatedReason to send with merchant-initiated transactions.
+            enum:
+              - RECURRING
+              - INSTALMENT
+              - UNSCHEDULED
+              - REAUTH
+              - DELAYED
+              - INCREMENTAL
+              - RESUBMISSION
+              - NOSHOW
+            default: RECURRING
