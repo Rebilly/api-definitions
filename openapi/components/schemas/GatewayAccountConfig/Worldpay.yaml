@@ -21,3 +21,23 @@ allOf:
           - merchantPassword
       threeDSecureServer:
         $ref: ../ThreeDSecureServers/Worldpay3dsServers/Worldpay3dsServers.yaml
+      settings:
+        type: object
+        properties:
+          enableStoredCredentials:
+            type: boolean
+            description: True to enable Stored Credentials
+            default: false
+          merchantInitiatedReason:
+            type: string
+            description: The value of merchantInitiatedReason to send with merchant-initiated transactions.
+            enum:
+              - UNSCHEDULED
+              - RECURRING
+              - INSTALMENT
+              - REAUTH
+              - DELAYED
+              - INCREMENTAL
+              - RESUBMISSION
+              - NOSHOW
+            default: UNSCHEDULED
