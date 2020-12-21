@@ -21,23 +21,10 @@ allOf:
         description: True if the subscription is currently in a trial period
         type: boolean
         readOnly: true
-      trial:
-        type: object
-        description: >-
-          To use plan defaults do not send the `trial` key, or send a `null`
-          value with it.
-        required:
-          - endTime
-        properties:
-          enabled:
-            description: >-
-              Enable or disable the trial for this subscription. If enabled for
-              plans without trial prices, the trial will be free.
-            type: boolean
-          endTime:
-            description: The time the trial should end
-            type: string
-            format: date-time
+      trialEndTime:
+        description: The time the trial should end. To use plan defaults do not send the `trialEndTime` key
+        type: string
+        format: date-time
       isTrialOnly:
         description: Whether a subscription ends after a trial period. Recurring settings are ignored if it's `true`.
         type: boolean
