@@ -1,0 +1,26 @@
+description: DLocal config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: DLocal credentials object
+        properties:
+          xLogin:
+            type: string
+            description: DLocal xLogin
+          xTransKey:
+            type: string
+            description: DLocal xTransKey
+            format: password
+          secretKey:
+            type: string
+            description: DLocal Secret Key
+            format: password
+        required:
+          - xLogin
+          - xTransKey
+          - secretKey
