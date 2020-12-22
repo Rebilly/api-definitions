@@ -9,32 +9,32 @@ required:
   - reasonCode
 properties:
   id:
-    description: The dispute identifier string
+    description: The dispute identifier string.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
   customerId:
-    description: The dispute's customer ID
+    description: The dispute's customer ID.
     type: string
     readOnly: true
   transactionId:
-    description: The dispute's transaction ID
+    description: The dispute's transaction ID.
     type: string
   currency:
     allOf:
       - $ref: ./CurrencyCode.yaml
   amount:
-    description: The dispute amount
+    description: The dispute amount.
     type: number
     format: double
   acquirerReferenceNumber:
-    description: The dispute's acquirer reference number
+    description: The dispute's acquirer reference number.
     type: string
   caseId:
     description: The case ID for the dispute.
     type: string
   reasonCode:
-    description: The dispute's reason code
+    description: The dispute's reason code.
     type: string
     enum:
       - '1000'
@@ -205,7 +205,7 @@ properties:
       - 'B'
 
   category:
-    description: The dispute's category
+    description: The dispute's category.
     type: string
     readOnly: true
     enum:
@@ -218,7 +218,7 @@ properties:
       - subscription-canceled
       - uncategorized
   type:
-    description: The dispute's type
+    description: The dispute's type.
     type: string
     enum:
       - information-request
@@ -229,7 +229,7 @@ properties:
       - ethoca-alert
       - verifi-alert
   status:
-    description: The dispute's status
+    description: The dispute's status.
     type: string
     enum:
       - response-needed
@@ -239,32 +239,32 @@ properties:
       - lost
       - unknown
   postedTime:
-    description: Dispute posted time
+    description: Dispute posted time.
     type: string
     format: date-time
   deadlineTime:
-    description: Dispute deadline time
+    description: Dispute deadline time.
     type: string
     format: date-time
   rawResponse:
-    description: Dispute raw response from gateway
+    description: Dispute raw response from gateway.
     type: string
     readOnly: true
   resolvedTime:
-    description: Dispute resolved time
+    description: Dispute resolved time.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   createdTime:
-    description: Dispute created time
+    description: Dispute created time.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   updatedTime:
-    description: Dispute updated time
+    description: Dispute updated time.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   _links:
     type: array
-    description: The links related to resource
+    description: The links related to resource.
     readOnly: true
     minItems: 1
     items:

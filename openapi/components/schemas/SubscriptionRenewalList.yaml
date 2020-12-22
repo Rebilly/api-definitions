@@ -1,121 +1,121 @@
 type: array
 items:
   type: object
-  description: Contains a renewal data
+  description: Contains a renewal data.
   readOnly: true
   properties:
     invoiceId:
-      description: Invoice ID
+      description: Invoice ID.
       allOf:
         - $ref: ./ResourceId.yaml
     planId:
-      description: Plan ID
+      description: Plan ID.
       allOf:
         - $ref: ./ResourceId.yaml
     subscriptionId:
-      description: Subscription ID
+      description: Subscription ID.
       allOf:
         - $ref: ./ResourceId.yaml
     customerId:
-      description: Customer ID
+      description: Customer ID.
       allOf:
         - $ref: ./ResourceId.yaml
     paymentId:
-      description: Payment ID
+      description: Payment ID.
       allOf:
         - $ref: ./ResourceId.yaml
     createdTime:
-      description: Invoice created time
+      description: Invoice created time.
       allOf:
         - $ref: ./ServerTimestamp.yaml
     issuedTime:
-      description: Invoice issuing time
+      description: Invoice issuing time.
       allOf:
         - $ref: ./ServerTimestamp.yaml
     dueTime:
-      description: Invoice due time
+      description: Invoice due time.
       allOf:
         - $ref: ./ServerTimestamp.yaml
     closedTime:
-      description: Invoice closing time
+      description: Invoice closing time.
       allOf:
         - $ref: ./ServerTimestamp.yaml
     canceledTime:
-      description: Invoice canceling time
+      description: Invoice canceling time.
       allOf:
         - $ref: ./ServerTimestamp.yaml
     recurringAmount:
       type: number
       format: double
-      description: Recurring amount of the related plan
+      description: Recurring amount of the related plan.
     recurringCurrency:
       type: string
-      description: Recurring currency of the related plan
+      description: Recurring currency of the related plan.
     rebillNumber:
       type: integer
-      description: Number of rebill cycle of the renewal
+      description: Number of rebill cycle of the renewal.
     paymentDunningIndex:
       type: integer
-      description: Dunning index of the related payment
+      description: Dunning index of the related payment.
     isInitial:
       type: boolean
-      description: Whether it is the first renewal of the subscription or not
+      description: Whether it is the first renewal of the subscription or not.
     refund:
       type: object
-      description: Contains data for the related refund transaction if it exists
+      description: Contains data for the related refund transaction if it exists.
       readOnly: true
       properties:
         transactionId:
-          description: Refund transaction ID
+          description: Refund transaction ID.
           allOf:
             - $ref: ./ResourceId.yaml
         transactionCreatedTime:
-          description: Refund transaction creation time
+          description: Refund transaction creation time.
           allOf:
             - $ref: ./ServerTimestamp.yaml
     chargeback:
       type: object
-      description: Contains data for the related chargeback (dispute) if it exists
+      description: Contains data for the related chargeback (dispute) if it exists.
       readOnly: true
       properties:
         disputeId:
-          description: Dispute ID
+          description: Dispute ID.
           allOf:
             - $ref: ./ResourceId.yaml
         disputeCreatedTime:
-          description: Dispute creation time
+          description: Dispute creation time.
           allOf:
             - $ref: ./ServerTimestamp.yaml
     lead:
       type: object
-      description: Related lead source if it exists
+      description: Related lead source if it exists.
       readOnly: true
       properties:
         medium:
           type: string
-          description: Medium of the lead source
+          description: Medium of the lead source.
         source:
           type: string
-          description: Source of the lead source
+          description: Source of the lead source.
         campaign:
           type: string
-          description: Campaign of the lead source
+          description: Campaign of the lead source.
         content:
           type: string
-          description: Content of the lead source
+          description: Content of the lead source.
         term:
           type: string
-          description: Term of the lead source
+          description: Term of the lead source.
         affiliate:
           type: string
-          description: Affiliate of the lead source
+          description: Affiliate of the lead source.
         subAffiliate:
           type: string
-          description: SubAffiliate of the lead source
+          description: SubAffiliate of the lead source.
         salesAgent:
           type: string
-          description: SalesAgent of the lead source
+          description: SalesAgent of the lead source.
         createdTime:
-          description: Lead source creation time
+          description: Lead source creation time.
           allOf:
             - $ref: ./ServerTimestamp.yaml
