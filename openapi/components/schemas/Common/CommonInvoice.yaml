@@ -3,7 +3,7 @@ required:
   - currency
 properties:
   id:
-    description: The invoice ID
+    description: The invoice ID.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
@@ -20,84 +20,84 @@ properties:
     allOf:
       - $ref: ../CurrencyCode.yaml
   amount:
-    description: The invoice's amount
+    description: The invoice's amount.
     type: number
     format: double
     readOnly: true
   amountDue:
-    description: The invoice's due amount
+    description: The invoice's due amount.
     type: number
     format: double
     readOnly: true
   subtotalAmount:
-    description: The invoice's subtotal amount
+    description: The invoice's subtotal amount.
     type: number
     format: double
     readOnly: true
   discountAmount:
-    description: The invoice's discounts amount
+    description: The invoice's discounts amount.
     type: number
     format: double
     readOnly: true
   taxAmount:
-    description: The invoice's taxes amount
+    description: The invoice's taxes amount.
     type: number
     format: double
     readOnly: true
   shippingAmount:
-    description: The invoice's shipping amount
+    description: The invoice's shipping amount.
     type: number
     format: double
     readOnly: true
   billingAddress:
-    description: Invoice's billing address
+    description: Invoice's billing address.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   deliveryAddress:
-    description: Invoice's delivery address
+    description: Invoice's delivery address.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   poNumber:
-    description: Purchase order number which will be displayed on the invoice
+    description: Purchase order number which will be displayed on the invoice.
     nullable: true
     example: PO123456
     type: string
   notes:
-    description: Notes for the customer which will be displayed on the invoice
+    description: Notes for the customer which will be displayed on the invoice.
     type: string
   items:
     type: array
-    description: Invoice items array
+    description: Invoice items array.
     readOnly: true
     items:
       $ref: ../Invoices/InvoiceItem.yaml
   taxes:
     type: array
-    description: Taxes applied to this invoice
+    description: Taxes applied to this invoice.
     readOnly: true
     items:
       allOf:
         - $ref: ../Invoices/InvoiceTax.yaml
   discounts:
     type: array
-    description: Discounts applied
+    description: Discounts applied.
     readOnly: true
     items:
       allOf:
         - $ref: ../Coupon/InvoiceDiscount.yaml
   autopayScheduledTime:
-    description: Invoice autopay scheduled time
+    description: Invoice autopay scheduled time.
     type: string
     format: date-time
   autopayRetryNumber:
-    description: Invoice autopay retry number
+    description: Invoice autopay retry number.
     readOnly: true
     type: integer
     minimum: 0
     default: 0
   status:
     type: string
-    description: Invoice status
+    description: Invoice status.
     readOnly: true
     enum:
      - "draft"
@@ -126,30 +126,30 @@ properties:
       with one of the methods which are available for this customer.
       It's an alternative to creating a new transaction with empty `methods`.
   abandonedTime:
-    description: Invoice abandoned time
+    description: Invoice abandoned time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   voidedTime:
-    description: Invoice voided time
+    description: Invoice voided time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   paidTime:
-    description: Invoice paid time
+    description: Invoice paid time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   dueTime:
-    description: Invoice due time
+    description: Invoice due time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   issuedTime:
-    description: Invoice issued time
+    description: Invoice issued time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   createdTime:
-    description: Invoice created time
+    description: Invoice created time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
-    description: Invoice updated time
+    description: Invoice updated time.
     allOf:
       - $ref: ../ServerTimestamp.yaml

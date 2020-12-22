@@ -147,12 +147,12 @@ discriminator:
     Zimpler: ./GatewayAccountConfig/Zimpler.yaml
 properties:
   id:
-    description: The gateway identifier string
+    description: The gateway identifier string.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
   status:
-    description: The gateway account's status
+    description: The gateway account's status.
     readOnly: true
     type: string
     enum:
@@ -165,12 +165,12 @@ properties:
   acquirerName:
     $ref: ./Gateways/AcquirerName.yaml
   merchantCategoryCode:
-    description: The gateway account's merchant category code
+    description: The gateway account's merchant category code.
     type: integer
     minimum: 742
     maximum: 9950
   dccMarkup:
-    description: Dynamic currency conversion markup in basis points
+    description: Dynamic currency conversion markup in basis points.
     type: integer
     minimum: -10000
     maximum: 10000
@@ -180,22 +180,22 @@ properties:
       Force dynamic currency conversion to the specified currency on each sale.
       Leave it empty to disable force DCC.
   descriptor:
-    description: The gateway account's descriptor
+    description: The gateway account's descriptor.
     type: string
   cityField:
-    description: The gateway account's city field (also known as line 2 descriptor)
+    description: The gateway account's city field (also known as line 2 descriptor).
     type: string
   organizationId:
-    description: Organization ID
+    description: Organization ID.
     allOf:
       - $ref: ./ResourceId.yaml
   excludedDccQuoteCurrencies:
-    description: Excluded Dynamic Currency Conversion Quote Currencies
+    description: Excluded Dynamic Currency Conversion Quote Currencies.
     type: array
     items:
       type: string
   monthlyLimit:
-    description: Monthly Limit
+    description: Monthly Limit.
     type: number
     format: double
     minimum: 0
@@ -220,20 +220,20 @@ properties:
     minimum: 300
     maximum: 16777215
   threeDSecure:
-    description: 'True, if Gateway Account allows 3DSecure'
+    description: True, if Gateway Account allows 3DSecure.
     type: boolean
   dynamicDescriptor:
-    description: 'True, if Gateway Account allows dynamic descriptor'
+    description: True, if Gateway Account allows dynamic descriptor.
     type: boolean
   acceptedCurrencies:
-    description: Accepted currencies (array of the currency three letter code)
+    description: Accepted currencies (array of the currency three letter code).
     type: array
     items:
       type: string
   method:
     $ref: ./PaymentMethods/PaymentMethod.yaml
   paymentCardSchemes:
-    description: Accepted payment card brands
+    description: Accepted payment card brands.
     type: array
     items:
       $ref: ./PaymentCards/PaymentCardBrand.yaml
@@ -255,27 +255,27 @@ properties:
     type: string
     example: amount:1..100;bin:411111,444433
   timeout:
-    description: Gateway Account request timeout in seconds
+    description: Gateway Account request timeout in seconds.
     type: integer
     nullable: true
     minimum: 10
     maximum: 120
   token:
-    description: Gateway Account token
+    description: Gateway Account token.
     type: string
     readOnly: true
     example: TwiX3f92k4AiBE27BzTbQ38hHjicBz_w
   createdTime:
-    description: Gateway Account created time
+    description: Gateway Account created time.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   updatedTime:
-    description: Gateway Account updated time
+    description: Gateway Account updated time.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   _links:
     type: array
-    description: The links related to resource
+    description: The links related to resource.
     readOnly: true
     minItems: 1
     items:
