@@ -456,6 +456,12 @@ paths:
   '/websites/{id}':
     $ref: './paths/websites@{id}.yaml'
 x-webhooks:
-  gateway-account-limit-was-reached:
+  gateway-account-downtime-ended:
     post:
-      $ref: ./webhooks/gateway-account-limit-was-reached.yaml
+      $ref: ./webhooks/gateway-account-downtime-ended.yaml
+  gateway-account-downtime-started:
+    post:
+      $ref: ./webhooks/gateway-account-downtime-started.yaml
+  gateway-account-limit-reached:
+    post:
+      $ref: ./webhooks/gateway-account-limit-reached.yaml
