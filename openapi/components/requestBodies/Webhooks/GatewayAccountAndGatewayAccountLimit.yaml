@@ -12,11 +12,14 @@ content:
           properties:
             gatewayAccount:
               $ref: ../../schemas/GatewayAccount.yaml
+            gatewayAccountLimit:
+              $ref: ../../schemas/GatewayAccountLimit.yaml
         _links:
           type: array
           description: The links related to resource.
-          minItems: 1
+          minItems: 2
           items:
             anyOf:
               - $ref: ../../schemas/Links/GatewayAccountLink.yaml
+              - $ref: ../../schemas/Links/GatewayAccountLimitLink.yaml
 description: Gateway account limit was reached body resource.
