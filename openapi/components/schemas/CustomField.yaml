@@ -1,10 +1,10 @@
-description: A separate Custom Field schema
+description: A separate Custom Field schema.
 type: object
 required:
   - type
 properties:
   name:
-    description: The name of the custom field
+    description: The name of the custom field.
     type: string
     readOnly: true
   type:
@@ -13,26 +13,16 @@ properties:
 
       ------------- | -------------
 
-      array         | An array of strings up to 255 characters, maximum size is
-      1000 elements
-
+      array         | An array of strings up to 255 characters, maximum size is 1000 elements
       boolean       | true or false
-
-      date          | String of format "full-date" (YYYY-MM-DD) from RFC-3339
-      (full-date)
-
-      datetime      | String of format "date-time" (YYYY-MM-DDTHH:MM:SSZ) from
-      RFC-3339 (date-time)
-
+      date          | String of format "full-date" (YYYY-MM-DD) from RFC-3339 (full-date)
+      datetime      | String of format "date-time" (YYYY-MM-DDTHH:MM:SSZ) from RFC-3339 (date-time)
       integer       | Cardinal value of -2^31..2^31-1
-
-      number        | Float value. It can take cardinal values also which are
-      interpreted as float
-
+      number        | Float value. It can take cardinal values also which are interpreted as float
       string        | Regular string up to 255 characters
+      monetary      | A map of 3-letters currency code and amount, e.g. {"currency": "EUR", "amount": 25.30}
 
-      monetary      | A map of 3-letters currency code and amount, e.g.
-      {"currency": "EUR", "amount": 25.30}
+      The type cannot be changed.
     type: string
     enum:
       - array
@@ -43,24 +33,23 @@ properties:
       - string
       - monetary
   description:
-    description: The custom field description
+    description: The custom field description.
     type: string
   additionalSchema:
     description: >
       Additional parameters which can be added according to type:
-
 
       Parameter Name | Types         | Description
 
       -------------- | ------------- | -------------
 
       allowedValues  | string, array | List of allowed values
+      maxLength      | string        | Maximum allowed length for the string, 255 by default, up to 4000
 
-      maxLength      | string        | Maximum allowed length for the string,
-      255 by default, up to 4000
+      The additional schema adds additional constrains for values.
   _links:
     type: array
-    description: The links related to resource
+    description: The links related to resource.
     readOnly: true
     minItems: 1
     items:

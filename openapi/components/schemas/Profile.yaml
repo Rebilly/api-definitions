@@ -1,30 +1,30 @@
 type: object
 properties:
   id:
-    description: The user identifier string
+    description: The user identifier string.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
   email:
-    description: The user email
+    description: The user email.
     readOnly: true
     type: string
     format: email
     maxLength: 100
   firstName:
-    description: User's first name
+    description: User's first name.
     readOnly: true
     type: string
   lastName:
-    description: User's last name
+    description: User's last name.
     readOnly: true
     type: string
   businessPhone:
-    description: The user business phone number
+    description: The user business phone number.
     readOnly: true
     type: string
   mobilePhone:
-    description: The user mobile phone number
+    description: The user mobile phone number.
     readOnly: true
     type: string
   memberships:
@@ -34,22 +34,22 @@ properties:
       $ref: ./Membership.yaml
   availableCurrencies:
     type: array
-    description: An array of reporting currencies enabled for the merchant
+    description: An array of reporting currencies enabled for the merchant.
     readOnly: true
     items:
       type: string
   reportingCurrency:
-    description: The user's ISO Alpha-3 code used for reports
+    description: The user's ISO Alpha-3 code used for reports.
     type: string
   totpRequired:
-    description: The user setting of two-factor authentification
+    description: The user setting of two-factor authentification.
     type: boolean
   totpSecret:
-    description: The user TOTP key for authentification app (if TOTP enabled)
+    description: The user TOTP key for authentification app (if TOTP enabled).
     readOnly: true
     type: string
   totpUrl:
-    description: The user link to QR-code for TOTP authentification app (if TOTP enabled)
+    description: The user link to QR-code for TOTP authentification app (if TOTP enabled).
     readOnly: true
     type: string
     format: url
@@ -63,7 +63,7 @@ properties:
     pattern: '^[0-9]{6}$'
     example: '123456'
   country:
-    description: The user country setting - two letter code
+    description: The user country setting - two letter code.
     readOnly: true
     type: string
   preferences:

@@ -11,22 +11,22 @@ required:
   - resource
 properties:
   id:
-    description: The export identifier string
+    description: The export identifier string.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   name:
-    description: Export name
+    description: Export name.
     type: string
   resource:
-    description: 'The type of resource being exported (eg., transactions).'
+    description: The type of resource being exported (e.g. transactions).
     type: string
     enum:
       - transactions
       - customers
       - subscriptions
   format:
-    description: Export result format
+    description: Export result format.
     type: string
     enum:
       - csv
@@ -81,7 +81,7 @@ properties:
       - start
       - end
   emailNotification:
-    description: List of emails to be notified when export is completed
+    description: List of emails to be notified when export is completed.
     type: array
     items:
       type: string
@@ -94,14 +94,14 @@ properties:
     items:
       type: string
   recurring:
-    description: Exports can reoccur according to your own schedule
+    description: Exports can reoccur according to your own schedule.
     type: object
     required:
       - instruction
     properties:
       instruction:
         type: string
-        description: RRule RFC 5545 formatted string used for recurring exports
+        description: RRule RFC 5545 formatted string used for recurring exports.
       start:
         type: string
         format: date-time
@@ -109,27 +109,27 @@ properties:
           The date and time when the first recurring scheduled export will
           occur. Defaults to now.
   userId:
-    description: The ID of the User who requested the data export
+    description: The ID of the User who requested the data export.
     readOnly: true
     type: string
   recordCount:
-    description: The number of records in the export (excluding the header row)
+    description: The number of records in the export (excluding the header row).
     readOnly: true
     type: integer
   scheduledTime:
-    description: The date and time this data export is scheduled to generate a file
+    description: The date and time this data export is scheduled to generate a file.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   createdTime:
-    description: The time the data export was requested
+    description: The time the data export was requested.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
-    description: Data export updated time
+    description: Data export updated time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   status:
-    description: Status of export request
+    description: Status of export request.
     readOnly: true
     type: string
     enum:
@@ -139,7 +139,7 @@ properties:
       - completed
   _links:
     type: array
-    description: The links related to resource
+    description: The links related to resource.
     readOnly: true
     minItems: 1
     maxItems: 4

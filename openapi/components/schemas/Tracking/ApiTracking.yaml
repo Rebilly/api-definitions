@@ -7,17 +7,17 @@ properties:
       - $ref: ../ResourceId.yaml
   status:
     type: integer
-    description: HTTP response code
+    description: HTTP response code.
   url:
     type: string
-    description: API request address
+    description: API request address.
   route:
     type: string
-    description: API request route
+    description: API request route.
     example: '/customers/{param}'
   method:
     type: string
-    description: HTTP method
+    description: HTTP method.
     enum:
       - HEAD
       - GET
@@ -27,10 +27,10 @@ properties:
       - PATCH
   request:
     type: string
-    description: Request JSON-string
+    description: Request JSON-string.
   response:
     type: string
-    description: Response JSON-string
+    description: Response JSON-string.
   requestHeaders:
     type: object
     additionalProperties:
@@ -48,7 +48,7 @@ properties:
       Rate-Limit-Reset: 'Mon, 31 Jul 2017 04:16:00 +0000'
   user:
     type: object
-    description: The user who has made a request
+    description: The user who has made a request.
     readOnly: true
     properties:
       userId:
@@ -58,31 +58,31 @@ properties:
         allOf:
           - $ref: ../ResourceId.yaml
       email:
-        description: The user email
+        description: The user email.
         type: string
         format: email
       firstName:
-        description: The user first name
+        description: The user first name.
         type: string
       lastName:
-        description: The user last name
+        description: The user last name.
         type: string
       ipAddress:
         type: string
-        description: Client IP address
+        description: Client IP address.
         format: ipv4
       userAgent:
-        description: The software that is acting on behalf of a user
+        description: The software that is acting on behalf of a user.
         type: string
       fingerprint:
-        description: The user device fingerprint hash
+        description: The user device fingerprint hash.
         type: string
       isSupport:
-        description: If user from support
+        description: If user from support.
         type: boolean
   relatedIds:
     type: object
-    description: The IDs of related resources
+    description: The IDs of related resources.
     readOnly: true
     properties:
       customerId:
@@ -96,14 +96,14 @@ properties:
           - $ref: ../ResourceId.yaml
   duration:
     type: integer
-    description: Request duration in milliseconds
+    description: Request duration in milliseconds.
   createdTime:
-    description: The log created time
+    description: The log created time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   _links:
     type: array
-    description: The links related to resource
+    description: The links related to resource.
     readOnly: true
     minItems: 1
     items:
