@@ -6,13 +6,13 @@ get:
   summary: Retrieve a list of webhooks
   operationId: GetWebhookCollection
   description: |
-    Retrieve a list of webhooks
+    Retrieve a list of webhooks.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
   responses:
     '200':
-      description: A list of Webhooks was retrieved successfully
+      description: A list of Webhooks was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -46,12 +46,12 @@ post:
   summary: Create a webhook
   operationId: PostWebhook
   description: |
-    Create a webhook
+    Create a webhook.
   requestBody:
     $ref: ../components/requestBodies/GlobalWebhook.yaml
   responses:
     '201':
-      description: Webhook was created
+      description: Webhook was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -68,7 +68,7 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent
+      description: Invalid data was sent.
       content:
         application/json:
           schema:

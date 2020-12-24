@@ -1,12 +1,12 @@
 type: object
 properties:
   id:
-    description: The customer identifier string
+    description: The customer identifier string.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
   websiteId:
-    description: The website's ID
+    description: The website's ID.
     allOf:
       - $ref: ./ResourceId.yaml
   paymentToken:
@@ -21,11 +21,11 @@ properties:
   defaultPaymentInstrument:
     $ref: ./PaymentInstruments/ValueObjects/PaymentInstrument.yaml
   createdTime:
-    description: The customer created time
+    description: The customer created time.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   updatedTime:
-    description: The customer updated time
+    description: The customer updated time.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   customFields:
@@ -35,11 +35,11 @@ properties:
   averageValue:
     $ref: ./CustomerAverageValue.yaml
   paymentCount:
-    description: The number of approved payments for the customer
+    description: The number of approved payments for the customer.
     readOnly: true
     type: integer
   lastPaymentTime:
-    description: The most recent time of an approved payment for the customer
+    description: The most recent time of an approved payment for the customer.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   lifetimeRevenue:
@@ -47,11 +47,11 @@ properties:
   invoiceCount:
     description: >-
       An auto-incrementing number based on the sequence of invoices. If set to
-      0, then this record is a Lead, otherwise is a Customer
+      0, then this record is a Lead, otherwise is a Customer.
     readOnly: true
     type: integer
   tags:
-    description: A list of customer's tags
+    description: A list of customer's tags.
     readOnly: true
     type: array
     items:
@@ -66,7 +66,7 @@ properties:
     readOnly: true
   _links:
     type: array
-    description: The links related to resource
+    description: The links related to resource.
     readOnly: true
     minItems: 3
     items:

@@ -4,7 +4,7 @@ required:
   - startSendingTime
 properties:
   id:
-    description: The broadcast message's identifier string
+    description: The broadcast message's identifier string.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
@@ -22,7 +22,7 @@ properties:
     example: 'firstName:John;lastName:Doe'
   title:
     type: string
-    description: The title of the messages. (This title will appear in reports.)
+    description: The title of the messages (this title will appear in reports).
   messages:
     type: array
     description: The list of messages.
@@ -37,8 +37,8 @@ properties:
         version:
           type: string
           description: >-
-            The message version. (By default is empty, but if you make multiple
-            versions, you can name or number them to distinguish them.)
+            The message version (by default is empty, but if you make multiple
+            versions, you can name or number them to distinguish them).
         weight:
           type: integer
           description: >
@@ -75,7 +75,7 @@ properties:
                 type: string
                 description: >
                   The sender address. It must be a **verified** address. # todo
-                  add a link to help docs on how to verify an email address
+                  add a link to help docs on how to verify an email address.
                 maxLength: 254
                 example: example@example.com
               subject:
@@ -115,31 +115,31 @@ properties:
     readOnly: true
     type: string
     format: date-time
-    description: The split test start time
+    description: The split test start time.
   startSendingTime:
     type: string
     format: date-time
-    description: The start sending time
+    description: The start sending time.
   status:
     readOnly: true
     type: string
-    description: The broadcast message's status
+    description: The broadcast message's status.
     enum:
       - draft
       - sending
       - sent
       - archived
   createdTime:
-    description: The broadcast message's created time
+    description: The broadcast message's created time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
-    description: The broadcast message's updated time
+    description: The broadcast message's updated time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   _links:
     type: array
-    description: The links related to the resource
+    description: The links related to the resource.
     readOnly: true
     minItems: 1
     items:

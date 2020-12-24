@@ -1,21 +1,21 @@
 type: object
 properties:
   id:
-    description: The transaction ID
+    description: The transaction ID.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   websiteId:
-    description: The website ID
+    description: The website ID.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   customerId:
-    description: The сustomer's ID
+    description: The сustomer's ID.
     allOf:
       - $ref: ../ResourceId.yaml
   type:
-    description: Transaction type
+    description: Transaction type.
     type: string
     readOnly: true
     enum:
@@ -27,7 +27,7 @@ properties:
       - sale
       - void
   status:
-    description: Transaction status
+    description: Transaction status.
     type: string
     readOnly: true
     enum:
@@ -47,7 +47,7 @@ properties:
       - waiting-gateway
       - waiting-refund
   result:
-    description: Transaction result
+    description: Transaction result.
     type: string
     readOnly: true
     enum:
@@ -57,7 +57,7 @@ properties:
       - declined
       - unknown
   amount:
-    description: The transaction's amount
+    description: The transaction's amount.
     type: number
     format: double
     readOnly: true
@@ -84,30 +84,30 @@ properties:
     allOf:
       - $ref: ../CurrencyCode.yaml
   parentTransactionId:
-    description: The parent's transaction ID
+    description: The parent's transaction ID.
     allOf:
       - $ref: ../ResourceId.yaml
     readOnly: true
   childTransactions:
-    description: The child transaction IDs
+    description: The child transaction IDs.
     readOnly: true
     type: array
     items:
       $ref: ../ResourceId.yaml
   invoiceIds:
-    description: The invoice IDs related to transaction
+    description: The invoice IDs related to transaction.
     readOnly: true
     type: array
     items:
       $ref: ../ResourceId.yaml
   subscriptionIds:
-    description: The subscription IDs related to transaction's invoice(s)
+    description: The subscription IDs related to transaction's invoice(s).
     readOnly: true
     type: array
     items:
       $ref: ../ResourceId.yaml
   planIds:
-    description: The plan IDs related to transaction's subscription(s)
+    description: The plan IDs related to transaction's subscription(s).
     readOnly: true
     type: array
     items:
@@ -116,13 +116,13 @@ properties:
     type: boolean
     readOnly: true
   rebillNumber:
-    description: The transaction's rebill number
+    description: The transaction's rebill number.
     type: integer
     readOnly: true
   paymentInstrument:
     $ref: ../Storefront/PaymentInstrumentReference.yaml
   billingAddress:
-    description: Billing address
+    description: Billing address.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   has3ds:
@@ -138,7 +138,7 @@ properties:
   retryNumber:
     type: integer
     readOnly: true
-    description: The position in the sequence of retries
+    description: The position in the sequence of retries.
   isRetry:
     type: boolean
     readOnly: true
@@ -151,14 +151,14 @@ properties:
       12 or fewer characters for a credit card statement.
   description:
     type: string
-    description: The payment description
+    description: The payment description.
     maxLength: 255
   requestId:
     description: The transaction's request ID.  This ID must be unique within a 24 hour period.
       Use this field to prevent duplicated transactions.
     type: string
   hasAmountAdjustment:
-    description: True if transaction has amount adjustment
+    description: True if transaction has amount adjustment.
     type: boolean
     readOnly: true
   gatewayName:
@@ -170,14 +170,14 @@ properties:
   customFields:
     $ref: ../ResourceCustomFields.yaml
   processedTime:
-    description: Transaction processed time
+    description: Transaction processed time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   createdTime:
-    description: Transaction created time
+    description: Transaction created time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
-    description: Transaction updated time
+    description: Transaction updated time.
     allOf:
       - $ref: ../ServerTimestamp.yaml

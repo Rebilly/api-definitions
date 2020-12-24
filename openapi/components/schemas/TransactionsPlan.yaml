@@ -1,49 +1,49 @@
 type: array
 items:
   type: object
-  description: Contains transaction's data
+  description: Contains transaction's data.
   readOnly: true
   properties:
     transactionId:
-      description: Transaction's identifier
+      description: Transaction identifier.
       allOf:
         - $ref: ./ResourceId.yaml
     websiteId:
-      description: Website's identifier
+      description: Website's identifier.
       allOf:
         - $ref: ./ResourceId.yaml
     customerId:
-      description: Customer's identifier
+      description: Customer's identifier.
       allOf:
         - $ref: ./ResourceId.yaml
     customerEmail:
       type: string
-      description: Customer's email
+      description: Customer's email.
     planId:
-      description: Plan's identifier
+      description: Plan's identifier.
       allOf:
         - $ref: ./ResourceId.yaml
     subscriptionId:
-      description: Subscription's identifier
+      description: Subscription's identifier.
       allOf:
         - $ref: ./ResourceId.yaml
     currency:
       type: string
-      description: Transaction's currency 3-letters code
+      description: Transaction currency 3-letters code.
     amount:
       type: number
       format: double
-      description: Transaction's amount
+      description: Transaction amount.
     rebillNumber:
       type: integer
-      description: Transaction's rebill number
+      description: Transaction rebill number.
     createdTime:
-      description: Transaction's created time
+      description: Transaction created time.
       allOf:
         - $ref: ./ServerTimestamp.yaml
     type:
       type: string
-      description: Transaction's type
+      description: Transaction type.
       enum:
         - authorize
         - capture
@@ -53,7 +53,7 @@ items:
         - void
     result:
       type: string
-      description: Transaction's result
+      description: Transaction result.
       enum:
         - approved
         - connection-error
@@ -65,8 +65,8 @@ items:
         - unknown
     gatewayTransactionId:
       type: string
-      description: Gateway's own transaction identifier
+      description: Gateway's own transaction identifier.
     paymentType:
-      description: Type of payment
+      description: Type of payment.
       allOf:
         - $ref: ./PaymentMethods/PaymentMethod.yaml

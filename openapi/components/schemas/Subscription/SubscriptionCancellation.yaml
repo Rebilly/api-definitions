@@ -4,12 +4,12 @@ required:
   - churnTime
 properties:
   id:
-    description: Cancellation identifier
+    description: Cancellation identifier.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   subscriptionId:
-    description: Identifier of the canceled subscription
+    description: Identifier of the canceled subscription.
     allOf:
       - $ref: ../ResourceId.yaml
   proratedInvoiceId:
@@ -21,20 +21,19 @@ properties:
       - $ref: ../ResourceId.yaml
   appliedInvoiceId:
     description: >-
-      The identifier of the invoice where the cancellation fees or credits are
-      applied.
+      The identifier of the invoice where the cancellation fees or credits are applied.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   canceledBy:
-    description: Who did the cancellation
+    description: Who did the cancellation.
     type: string
     default: customer
     enum:
       - merchant
       - customer
   reason:
-    description: Cancellation reason
+    description: Cancellation reason.
     type: string
     default: other
     enum:
@@ -49,7 +48,7 @@ properties:
       - other
       - billing-failure
   description:
-    description: Cancel reason description in free form
+    description: Cancel reason description in free form.
     type: string
     maxLength: 255
   prorated:
@@ -105,14 +104,13 @@ properties:
       - $ref: ./UpcomingInvoiceItemCollection.yaml
   lineItemSubtotal:
     description: >-
-      Subtotal of the line items which will be added after the subscription's
-      cancellation
+      Subtotal of the line items which will be added after the subscription's cancellation.
     readOnly: true
     type: number
     example: 49.95
   _links:
     type: array
-    description: The links related to resource
+    description: The links related to resource.
     readOnly: true
     minItems: 1
     items:

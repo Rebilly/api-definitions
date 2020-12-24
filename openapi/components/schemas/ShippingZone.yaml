@@ -3,12 +3,12 @@ required:
   - name
 properties:
   id:
-    description: The shipping zone identifier string
+    description: The shipping zone identifier string.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
   name:
-    description: The shipping zone name
+    description: The shipping zone name.
     type: string
     maxLength: 255
   countries:
@@ -20,30 +20,30 @@ properties:
       countries that were not specified in other zones.
     type: array
     items:
-      description: Country ISO Alpha-2 code
+      description: Country ISO Alpha-2 code.
       type: string
       pattern: '^[A-Z]{2}$'
   rates:
-    description: Price-based shipping rate instructions
+    description: Price-based shipping rate instructions.
     type: array
     items:
-      description: Price based shipping rate instruction
+      description: Price based shipping rate instruction.
       allOf:
         - $ref: ./PriceBasedShippingRate.yaml
   isDefault:
-    description: Is this Shipping Zone default
+    description: Is this Shipping Zone default.
     readOnly: true
   createdTime:
-    description: The shipping zone created time
+    description: The shipping zone created time.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   updatedTime:
-    description: The shipping zone updated time
+    description: The shipping zone updated time.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   _links:
     type: array
-    description: The links related to resource
+    description: The links related to resource.
     readOnly: true
     minItems: 1
     items:
