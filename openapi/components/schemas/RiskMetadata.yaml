@@ -6,6 +6,20 @@ properties:
     description: The customer's IP.
     type: string
     format: ipv4
+  fingerprint:
+    description: The fingerprint.
+    type: string
+    maxLength: 50
+  httpHeaders:
+    description: HTTP headers.
+    type: object
+    additionalProperties:
+      type: string
+    example:
+      User-Agent: Mozilla/5.0
+      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+  browserData:
+    $ref: ./BrowserData.yaml
   isProxy:
     description: True if customer's ip address is related to proxy.
     type: boolean
@@ -70,19 +84,6 @@ properties:
     description: Accuracy radius for specified ipAddress (kilometers).
     type: integer
     readOnly: true
-  fingerprint:
-    description: The fingerprint.
-    type: string
-  httpHeaders:
-    description: HTTP headers.
-    type: object
-    additionalProperties:
-      type: string
-    example:
-      User-Agent: Mozilla/5.0
-      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
-  browserData:
-    $ref: ./BrowserData.yaml
   distance:
     description: Distance between IP Address and Billing Address geolocation (kilometers).
     type: integer

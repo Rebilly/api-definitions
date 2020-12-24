@@ -5,22 +5,15 @@ required:
   - colorDepth
   - javaEnabled
   - language
-  - screenHeight
   - screenWidth
+  - screenHeight
   - timeZoneOffset
 properties:
   colorDepth:
     description: The browser's color depth in bits per pixel obtained using the `screen.colorDepth` property.
     type: integer
-    enum:
-      - 1
-      - 4
-      - 8
-      - 15
-      - 16
-      - 24
-      - 32
-      - 48
+    minimum: 0
+    maximum: 48
     example: 24
   javaEnabled:
     description: Whether Java is enabled in a browser or not. Value is returned from the `navigator.javaEnabled` property.
@@ -30,14 +23,18 @@ properties:
     type: string
     example: en-US
     maxLength: 8
-  screenHeight:
-    description: The browser's screen height returned from the `screen.height` property.
-    type: integer
-    example: 900
   screenWidth:
     description: The browser's screen width returned from the `screen.width` property.
     type: integer
-    example: 1440
+    minimum: 0
+    maximum: 99999
+    example: 1920
+  screenHeight:
+    description: The browser's screen height returned from the `screen.height` property.
+    type: integer
+    minimum: 0
+    maximum: 99999
+    example: 1080
   timeZoneOffset:
     description: |
       The browser's time zone offset in minutes from UTC.
