@@ -4,44 +4,44 @@ required:
   - country
 properties:
   id:
-    description: The organization identifier string
+    description: The organization identifier string.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
   createdTime:
-    description: The organization created time
+    description: The organization created time.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   updatedTime:
-    description: The organization updated time
+    description: The organization updated time.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   name:
-    description: The organization name
+    description: The organization name.
     type: string
     maxLength: 60
   address:
-    description: The organization street address
+    description: The organization street address.
     type: string
     maxLength: 60
   address2:
-    description: The organization street address
+    description: The organization street address.
     type: string
     maxLength: 60
   city:
-    description: The organization city
+    description: The organization city.
     type: string
     maxLength: 45
   region:
-    description: The organization region (state)
+    description: The organization region (state).
     type: string
     maxLength: 45
   country:
-    description: The organization country ISO Alpha-2 code
+    description: The organization country ISO Alpha-2 code.
     type: string
     pattern: '^[A-Z]{2}$'
   postalCode:
-    description: The organization postal code
+    description: The organization postal code.
     type: string
     maxLength: 10
   phoneNumbers:
@@ -55,17 +55,17 @@ properties:
   invoiceTimeZone:
     description: >-
       Invoice will use this time zone to display time otherwise UTC will be
-      used. Example "America/New_York"
+      used. Example "America/New_York".
     type: string
     maxLength: 50
   isPrimary:
     description: >-
       True, if Organization is primary (available to set as true only, other
-      organizations will become as isPrimary=false)
+      organizations will become as isPrimary=false).
     type: boolean
   _links:
     type: array
-    description: The links related to resource
+    description: The links related to resource.
     readOnly: true
     minItems: 1
     items:

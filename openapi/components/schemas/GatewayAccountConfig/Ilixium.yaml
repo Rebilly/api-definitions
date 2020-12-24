@@ -1,4 +1,4 @@
-description: Ilixium Gateway config
+description: Ilixium Gateway config.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -7,17 +7,17 @@ allOf:
     properties:
       credentials:
         type: object
-        description: Ilixium credentials object
+        description: Ilixium credentials object.
         properties:
           merchantId:
             type: string
-            description: Ilixium Gateway merchant ID
+            description: Ilixium Gateway merchant ID.
           accountId:
             type: string
-            description: Ilixium Gateway account ID
+            description: Ilixium Gateway account ID.
           digestPassword:
             type: string
-            description: Ilixium Gateway digest password
+            description: Ilixium Gateway digest password.
             format: password
         required:
           - merchantId
@@ -25,19 +25,19 @@ allOf:
           - digestPassword
       settings:
         type: object
-        description: Ilixium settings object
+        description: Ilixium settings object.
         properties:
           useIpFrame:
             type: boolean
-            description: Force Ilixium to process via Ip Frame
+            description: Force Ilixium to process via Ip Frame.
           useSftpPayouts:
             type: boolean
-            description: Use SFTP for payouts
+            description: Use SFTP for payouts.
           useCreditEndpoint:
             type: boolean
-            description: Use previous approval credit endpoint for payouts
+            description: Use previous approval credit endpoint for payouts.
           useStandaloneCreditEndpoint:
             type: boolean
-            description: Use standalone (token) credit endpoint for payouts
+            description: Use standalone (token) credit endpoint for payouts.
       threeDSecureServer:
         $ref: ../ThreeDSecureServers/Ilixium3dsServers/Ilixium3dsServers.yaml

@@ -18,13 +18,13 @@ allOf:
           - abandoned
           - trial-ended
       inTrial:
-        description: True if the subscription is currently in a trial period
+        description: True if the subscription is currently in a trial period.
         type: boolean
         readOnly: true
       trial:
         type: object
         description: >-
-          To use plan defaults do not send the `trial` key, or send a `null`
+          To use plan defaults do not send the `trial` key, or send a `null`.
           value with it.
         required:
           - endTime
@@ -35,7 +35,7 @@ allOf:
               plans without trial prices, the trial will be free.
             type: boolean
           endTime:
-            description: The time the trial should end
+            description: The time the trial should end.
             type: string
             format: date-time
       isTrialOnly:
@@ -74,7 +74,7 @@ allOf:
           periodAnchorInstruction:
             $ref: ../../Scheduling/ServicePeriodAnchorInstruction.yaml
       autopay:
-        description: Autopay determines if a payment attempt will be automatic
+        description: Autopay determines if a payment attempt will be automatic.
         type: boolean
         default: true
       startTime:
@@ -87,33 +87,33 @@ allOf:
         type: string
         format: date-time
       endTime:
-        description: Subscription end time
+        description: Subscription end time.
         allOf:
           - $ref: ../../ServerTimestamp.yaml
       renewalTime:
-        description: Subscription renewal time
+        description: Subscription renewal time.
         type: string
         format: date-time
       rebillNumber:
-        description: The current period number
+        description: The current period number.
         type: integer
         readOnly: true
       renewalReminderTime:
-        description: Time renewal reminder event will be triggered
+        description: Time renewal reminder event will be triggered.
         nullable: true
         allOf:
           - $ref: ../../ServerTimestamp.yaml
       renewalReminderNumber:
-        description: Number of renewal reminder events triggered
+        description: Number of renewal reminder events triggered.
         type: integer
         readOnly: true
       trialReminderTime:
-        description: Time renewal reminder event will be triggered
+        description: Time renewal reminder event will be triggered.
         nullable: true
         allOf:
           - $ref: ../../ServerTimestamp.yaml
       trialReminderNumber:
-        description: Number of renewal reminder events triggered
+        description: Number of renewal reminder events triggered.
         type: integer
         readOnly: true
       lineItems:

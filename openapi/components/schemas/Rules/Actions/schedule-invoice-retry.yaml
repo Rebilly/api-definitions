@@ -1,4 +1,4 @@
-description: Schedule an invoice retry
+description: Schedule an invoice retry.
 allOf:
   - $ref: ../RuleAction.yaml
   - type: object
@@ -14,14 +14,14 @@ allOf:
           required:
             - scheduleInstruction
       afterAttemptPolicies:
-        description: The policy on the attempt finishes
+        description: The policy on the attempt finishes.
         type: array
         items:
           type: string
           enum:
             - change-subscription-renewal-time
       afterRetryEndPolicies:
-        description: The policy on the retry ends
+        description: The policy on the retry ends.
         type: array
         items:
           type: string
@@ -29,7 +29,7 @@ allOf:
             - abandon-invoice
             - cancel-subscription
       overrideRetryInstruction:
-        description: Whether to replace the existing retry or not
+        description: Whether to replace the existing retry or not.
         type: boolean
     required:
       - attempts

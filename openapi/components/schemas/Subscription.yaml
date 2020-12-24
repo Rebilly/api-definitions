@@ -11,7 +11,7 @@ required:
   - items
 properties:
   id:
-    description: The Subscription identifier string
+    description: The Subscription identifier string.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
@@ -40,22 +40,21 @@ properties:
       - disputed
       - voided
   customerId:
-    description: Unique id for each customer
+    description: Unique id for each customer.
     allOf:
       - $ref: ./ResourceId.yaml
   websiteId:
-    description: Unique id for each website
+    description: Unique id for each website.
     allOf:
       - $ref: ./ResourceId.yaml
   initialInvoiceId:
-    description: Unique id for the initial invoice
+    description: Unique id for the initial invoice.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
   recentInvoiceId:
     description: >-
-      Unique id for the most recently issued invoice. It might not be `paid`
-      yet.
+      Unique id for the most recently issued invoice. It might not be `paid` yet.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
@@ -68,19 +67,19 @@ properties:
         - planId
       properties:
         planId:
-          description: Unique id for each plan
+          description: Unique id for each plan.
           allOf:
             - $ref: ./ResourceId.yaml
         quantity:
-          description: Number of units of the product on the given plan
+          description: Number of units of the product on the given plan.
           type: integer
   deliveryAddress:
-    description: Delivery address
+    description: Delivery address.
     nullable: true
     allOf:
       - $ref: ./Contact/ContactObject.yaml
   billingAddress:
-    description: Billing address
+    description: Billing address.
     nullable: true
     allOf:
       - $ref: ./Contact/ContactObject.yaml
@@ -93,7 +92,7 @@ properties:
     allOf:
       - $ref: ./RiskMetadata.yaml
   activationTime:
-    description: Subscription activation time
+    description: Subscription activation time.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   couponIds:
@@ -130,9 +129,9 @@ properties:
     writeOnly: true
     items:
       type: string
-      description: Coupon ID
+      description: Coupon ID.
   poNumber:
-    description: 'Purchase order number, will be displayed on the issued invoices'
+    description: Purchase order number, will be displayed on the issued invoices.
     nullable: true
     example: PO123456
     type: string
