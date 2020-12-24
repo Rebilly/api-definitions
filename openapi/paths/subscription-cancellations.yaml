@@ -2,7 +2,7 @@ parameters:
   - $ref: ../components/parameters/organizationId.yaml
 get:
   tags:
-    - Subscriptions
+    - Orders
   summary: Retrieve a list of cancellations
   operationId: GetSubscriptionCancellationCollection
   description: Retrieve a list of cancellations for all subscriptions.
@@ -37,15 +37,15 @@ get:
       $ref: ../components/responses/Forbidden.yaml
 post:
   tags:
-    - Subscriptions
-  summary: Cancel a subscription
+    - Orders
+  summary: Cancel an order
   operationId: PostSubscriptionCancellation
-  description: Cancel a subscription or preview the cancellation parameters before that.
+  description: Cancel an order or preview the cancellation parameters before that.
   requestBody:
     $ref: ../components/requestBodies/SubscriptionCancellation.yaml
   responses:
     '201':
-      description: Cancellation was created, subscription is or will be deactivated.
+      description: Cancellation was created, the order is or will be deactivated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

@@ -3,16 +3,16 @@ parameters:
   - $ref: ../components/parameters/organizationId.yaml
 get:
   tags:
-    - Subscriptions
-  summary: Retrieve a subscription
+    - Orders
+  summary: Retrieve an order
   operationId: GetSubscription
   parameters:
     - $ref: ../components/parameters/subscriptionExpand.yaml
   description: |
-    Retrieve a subscription with specified identifier string.
+    Retrieve an order with specified identifier string.
   responses:
     '200':
-      description: Subscription was retrieved successfully.
+      description: Order was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -39,18 +39,18 @@ get:
         $ref: '../code_samples/JavaScript/subscriptions@{id}/get.js'
 put:
   tags:
-    - Subscriptions
-  summary: Upsert a subscription with predefined ID
+    - Orders
+  summary: Upsert an order with predefined ID
   operationId: PutSubscription
   description: |
-    Create or update a subscription with predefined identifier string.
+    Create or update an order with predefined identifier string.
   parameters:
     - $ref: ../components/parameters/subscriptionExpand.yaml
   requestBody:
     $ref: ../components/requestBodies/Subscription.yaml
   responses:
     '200':
-      description: Subscription was updated.
+      description: Order was updated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -63,7 +63,7 @@ put:
           schema:
             $ref: ../components/schemas/Subscription.yaml
     '201':
-      description: Subscription was created.
+      description: Order was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
