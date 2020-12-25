@@ -24,7 +24,7 @@ tags:
   - name: 3D Secure
     description: |
       3D Secure is a way to authenticate and protect transactions.  Typically,
-      it's only possible to protect the initial transaction in a subscription
+      it's only possible to protect the initial transaction in an order
       with 3D Secure.
   - name: Bank Accounts
     description: |
@@ -41,7 +41,7 @@ tags:
   - name: Coupons
     description: >
       Coupons allows to apply different types of discounts to Invoices,
-      Subscriptions and Plans. Redeemed Coupons will be applied only to Invoices
+      Orders and Plans. Redeemed Coupons will be applied only to Invoices
       with the same currency.
   - name: Customers
     description: |
@@ -84,7 +84,7 @@ tags:
       Attachment is an entity that is used to link a File to one or multiple
       objects like Customer, Dispute, Payment,
 
-      Transaction, Subscription, Plan, Product, Invoice, Note. That allows to
+      Transaction, Order, Plan, Product, Invoice, Note. That allows to
       quickly find and use files related to
 
       those specific entities.
@@ -138,8 +138,8 @@ tags:
       that has a 30-day free trial followed by a recurring charge of $19.95 per
       month
 
-      until canceled.  The combination of the plan and a request to make a
-      subscription
+      until canceled.  The combination of the plan and a request to make an
+      order
 
       will apply those instructions to create the invoices according to the
       plan's
@@ -164,14 +164,11 @@ tags:
     description: >
       A shipping zone contains regions and countries that you ship to. Each
       shipping zone has its own shipping rates.
-  - name: Subscriptions
+  - name: Orders
     description: >
-      A subscription applies a plan's template to create invoices for a customer
-      at the
-
-      appropriate scheduled intervals.  A subscription may also determine if the
-      payment
-
+      An order applies a plan's template to create invoice(s) for a customer,
+      optionally at the appropriate scheduled intervals.
+      A subscription order may also determine if the payment
       is collected automatically (with autopay set true).
   - name: Taxes
     description: |
@@ -193,7 +190,7 @@ tags:
       their granted permissions.  It has resources less commonly integrated by
 
       3rd parties.
-  - name: Subscriptions
+  - name: Orders
   - name: Organizations
   - name: Customers
   - name: Tags

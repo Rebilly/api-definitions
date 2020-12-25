@@ -2,11 +2,11 @@ parameters:
   - $ref: ../components/parameters/organizationId.yaml
 get:
   tags:
-    - Subscriptions
-  summary: Retrieve a list of subscriptions
+    - Orders
+  summary: Retrieve a list of orders
   operationId: GetSubscriptionCollection
   description: |
-    Retrieve a list of subscriptions.
+    Retrieve a list of orders.
   parameters:
     - $ref: ../components/parameters/subscriptionExpand.yaml
     - $ref: ../components/parameters/collectionLimit.yaml
@@ -46,11 +46,11 @@ get:
         $ref: ../code_samples/JavaScript/subscriptions/get.js
 post:
   tags:
-    - Subscriptions
-  summary: Create a subscription
+    - Orders
+  summary: Create an order
   operationId: PostSubscription
   description: |
-    Create a subscription. Consider using the upsert.
+    Create an order. Consider using the upsert.
     operation to accomplish this task.
   parameters:
     - $ref: ../components/parameters/subscriptionExpand.yaml
@@ -58,7 +58,7 @@ post:
     $ref: ../components/requestBodies/Subscription.yaml
   responses:
     '201':
-      description: Subscription was created.
+      description: Order was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

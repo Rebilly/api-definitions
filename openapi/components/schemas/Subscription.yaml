@@ -11,7 +11,7 @@ required:
   - items
 properties:
   id:
-    description: The Subscription identifier string.
+    description: The Order identifier string.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
@@ -92,7 +92,7 @@ properties:
     allOf:
       - $ref: ./RiskMetadata.yaml
   activationTime:
-    description: Subscription activation time.
+    description: Order activation time.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   couponIds:
@@ -123,9 +123,9 @@ properties:
       passed list will be canceled.
 
 
-      If list of applied coupons on pending subscription will be changed due to
-      this param during update subscription,
-       Invoice for the subscription will be reissued.
+      If list of applied coupons on pending order will be changed due to
+      this param during update order,
+       Invoice for the order will be reissued.
     writeOnly: true
     items:
       type: string
@@ -137,7 +137,7 @@ properties:
     type: string
   revision:
     description: >
-      The number of times the subscription data has been modified.
+      The number of times the order data has been modified.
 
       The revision is useful when analyzing webhook data to determine if the
       change takes precedence over the current representation.
