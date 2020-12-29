@@ -3,16 +3,15 @@ parameters:
   - $ref: ../components/parameters/organizationId.yaml
 post:
   tags:
-    - Subscriptions
-  summary: Change a subscription's plan
+    - Orders
+  summary: Change an order's plan
   operationId: PostSubscriptionPlanChange
   description: >
-    Change a subscription's plan and designate when and if there should be pro.
-    rata credits given.
+    Change an order's plan and designate when and if there should be pro-rata credits given.
 
-    Only active subscriptions with a single plan can be changed.
+    Only active subscription orders with a single plan can be changed.
 
-    Edit pending unpaid subscriptions directly regardless the number of plans.
+    Edit pending unpaid orders directly regardless the number of plans.
   requestBody:
     content:
       application/json:
@@ -22,7 +21,7 @@ post:
     required: true
   responses:
     '201':
-      description: Subscription was changed.
+      description: Order was changed.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
