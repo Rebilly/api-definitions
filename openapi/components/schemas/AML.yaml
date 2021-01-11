@@ -17,7 +17,7 @@ properties:
     description: Which list this came from.
   sourceType:
     readOnly: true
-    description: The list type
+    description: The list type.
     type: string
     enum:
       - pep
@@ -27,7 +27,7 @@ properties:
     type: string
     readOnly: true
     nullable: true
-    description: Gender of returned identity (if `type` is `individual`)
+    description: Gender of returned identity (if `type` is `individual`).
   title:
     type: array
     readOnly: true
@@ -43,25 +43,25 @@ properties:
   type:
     type: string
     readOnly: true
-    description: The record type
+    description: The record type.
     enum:
       - individual
       - entity
   legalBasis:
     type: array
     readOnly: true
-    description: List of references to legal documents if they exist
+    description: List of references to legal documents if they exist.
     items:
       type: string
   regime:
     type: string
     readOnly: true
-    description: Regime
+    description: Regime.
     nullable: true
     example: United States Government
   confidence:
     type: string
-    description: The source list's confidence in information
+    description: The source list's confidence in information.
     readOnly: true
     enum:
       - weak
@@ -71,11 +71,11 @@ properties:
   nationality:
     type: string
     readOnly: true
-    description: The nationality of the identity
+    description: The nationality of the identity.
   address:
     type: array
     readOnly: true
-    description: Addresses related to the identity
+    description: Addresses related to the identity.
     items:
       type: object
       properties:
@@ -83,60 +83,60 @@ properties:
           type: string
           nullable: true
           readOnly: true
-          description: Street Address Line 1
+          description: Street Address Line 1.
         address2:
           type: string
           nullable: true
           readOnly: true
-          description: Street Address Line 2
+          description: Street Address Line 2.
         city:
           type: string
           nullable: true
           readOnly: true
-          description: City
+          description: City.
         region:
           type: string
           nullable: true
           readOnly: true
-          description: State/Province/Region
+          description: State/Province/Region.
         country:
           type: string
           nullable: true
           readOnly: true
-          description: Country
+          description: Country.
         birthplace:
           type: boolean
           default: false
           readOnly: true
-          description: This address is their birth place
+          description: This address is their birth place.
   dob:
     type: array
     readOnly: true
-    description: One or more possible dates of birth
+    description: One or more possible dates of birth.
     items:
       type: string
       readOnly: true
-      description: Date of birth
+      description: Date of birth.
       format: date
       example: 1706-01-17
   aliases:
     type: array
     readOnly: true
-    description: List of aliases, if any
+    description: List of aliases, if any.
     items:
       type: object
       properties:
         firstName:
           type: string
-          description: First name of alias
+          description: First name of alias.
           readOnly: true
         lastName:
           type: string
-          description: Last name of alias
+          description: Last name of alias.
           readOnly: true
         authenticity:
           type: string
-          description: The level of confidence in the alias
+          description: The level of confidence in the alias.
           readOnly: true
           enum:
             - strong
@@ -145,27 +145,27 @@ properties:
   passport:
     type: array
     readOnly: true
-    description: Passport information
+    description: Passport information.
     items:
       type: object
       properties:
         number:
           type: string
           readOnly: true
-          description: Passport number
+          description: Passport number.
         registrationDate:
           type: string
           format: date
           readOnly: true
-          description: Passport registration date
+          description: Passport registration date.
   comments:
     type: string
     readOnly: true
     nullable: true
-    description: Extra information (the content varies per list)
+    description: Extra information (the content varies per list).
   _links:
     type: array
-    description: The links related to resource, including links provided by the list
+    description: The links related to resource, including links provided by the list.
     readOnly: true
     minItems: 1
     items:

@@ -8,7 +8,7 @@ post:
   operationId: PostPaymentCardAuthorization
   deprecated: true
   description: |
-    Authorize a Payment Card
+    Authorize a Payment Card.
 
     Instead of using this endpoint a Payment Card will
     be authorized on first usage (new transaction or order).
@@ -22,26 +22,26 @@ post:
             - currency
           properties:
             websiteId:
-              description: The Website ID
+              description: The Website ID.
               type: string
             currency:
               allOf:
                 - $ref: ../components/schemas/CurrencyCode.yaml
             gatewayAccountId:
-              description: The Gateway account ID
+              description: The Gateway account ID.
               type: string
             amount:
-              description: Amount
+              description: Amount.
               type: number
               format: double
             redirectUrl:
-              description: Redirect URL
+              description: Redirect URL.
               type: string
-    description: Payment Card resource
+    description: Payment Card resource.
     required: true
   responses:
     '201':
-      description: Payment Card was authorized
+      description: Payment Card was authorized.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

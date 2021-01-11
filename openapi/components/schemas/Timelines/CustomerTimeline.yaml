@@ -1,12 +1,12 @@
 type: object
 properties:
   id:
-    description: The Timeline message identifier string
+    description: The Timeline message identifier string.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   type:
-    description: Timeline message type
+    description: Timeline message type.
     type: string
     enum:
       - customer-comment-created
@@ -67,7 +67,7 @@ properties:
     description: >-
       Timeline custom event type. Used with `custom-event` type. Must be defined
       using [Customer Timeline custom event
-      API](#operation/PostCustomerTimelineCustomEventType)
+      API](#operation/PostCustomerTimelineCustomEventType).
     type: string
     nullable: true
     minLength: 1
@@ -75,14 +75,14 @@ properties:
   customData:
     description: >-
       Timeline custom event data. Used with `custom-event` type. Will be
-      transformed to `extraData` two-column table in response
+      transformed to `extraData` two-column table in response.
     type: object
     writeOnly: true
     example:
       customAttribute: customValue
       otherAttribute: otherValue
   triggeredBy:
-    description: Shows who or what triggered the Timeline message
+    description: Shows who or what triggered the Timeline message.
     type: string
     readOnly: true
     enum:
@@ -90,17 +90,17 @@ properties:
       - app
       - direct-api
   message:
-    description: The message that describes the message details
+    description: The message that describes the message details.
     type: string
   extraData:
     $ref: ./TimelineExtraData.yaml
   occurredTime:
-    description: Timeline message time
+    description: Timeline message time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   _links:
     type: array
-    description: The links related to resource
+    description: The links related to resource.
     readOnly: true
     minItems: 1
     items:
