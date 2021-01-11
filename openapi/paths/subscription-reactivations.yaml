@@ -2,7 +2,7 @@ parameters:
   - $ref: ../components/parameters/organizationId.yaml
 get:
   tags:
-    - Subscriptions
+    - Orders
   summary: Retrieve a list of reactivations
   operationId: GetSubscriptionReactivationCollection
   description: Retrieve a list of reactivations for all subscriptions.
@@ -41,8 +41,8 @@ get:
         $ref: ../code_samples/JavaScript/subscription-reactivations/get.js
 post:
   tags:
-    - Subscriptions
-  summary: Reactivate a subscription
+    - Orders
+  summary: Reactivate an order
   operationId: PostSubscriptionReactivation
   description: Reactivate a subscription.
   requestBody:
@@ -55,7 +55,7 @@ post:
   responses:
     '201':
       description: >
-        Reactivation was created, subscription is active and won't be.
+        Reactivation was created, the order is active and won't be.
         deactivated.
 
         If there was a cancellation with status "confirmed", it is revoked.
