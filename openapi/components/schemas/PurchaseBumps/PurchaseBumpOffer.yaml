@@ -1,4 +1,8 @@
 type: object
+required:
+  - offerId
+  - offerType
+  - bumpAmount
 properties:
   offerId:
     description: Offer ID.
@@ -6,11 +10,15 @@ properties:
   offerType:
     description: Offer Type.
     type: string
+    example: bonus
   bumpAmount:
     description: Bump amount.
     type: number
+    example: 10.0
   bumpAmountInUsd:
     description: Bump amount in USD.
+    readOnly: true
     type: number
+    example: 10.0
   customFields:
-    $ref: ./ResourceCustomFields.yaml
+    $ref: ../ResourceCustomFields.yaml
