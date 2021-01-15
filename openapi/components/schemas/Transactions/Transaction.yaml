@@ -114,29 +114,17 @@ allOf:
         readOnly: true
         properties:
           base:
-            type: object
             description: Initial amount and currency to convert from.
-            properties:
-              amount:
-                type: number
-                format: double
-              currency:
-                allOf:
-                  - $ref: ../CurrencyCode.yaml
+            allOf:
+              - $ref: ../Money.yaml
           quote:
-            type: object
             description: Suggested amount and currency to convert to.
-            properties:
-              amount:
-                type: number
-                format: double
-              currency:
-                allOf:
-                  - $ref: ../CurrencyCode.yaml
+            allOf:
+              - $ref: ../Money.yaml
           usdMarkup:
             description: The amount of markup translated to USD.
-            type: number
-            format: double
+            allOf:
+              - $ref: ../MoneyAmount.yaml
           outcome:
             type: string
             description: Dynamic Currency Conversion outcome.
@@ -154,15 +142,9 @@ allOf:
         readOnly: true
         properties:
           order:
-            type: object
             description: Initial amount and currency.
-            properties:
-              amount:
-                type: number
-                format: double
-              currency:
-                allOf:
-                  - $ref: ../CurrencyCode.yaml
+            allOf:
+              - $ref: ../Money.yaml
           version:
             description: The name of the version that was picked (useful for measuring split tests).
             allOf:

@@ -13,12 +13,12 @@ properties:
     example: bonus
   bumpAmount:
     description: Bump amount.
-    type: number
-    example: 10.0
+    allOf:
+      - $ref: ../MoneyAmount.yaml
   bumpAmountInUsd:
     description: Bump amount in USD.
     readOnly: true
-    type: number
-    example: 10.0
+    allOf:
+      - $ref: ../MoneyAmount.yaml
   customFields:
     $ref: ../ResourceCustomFields.yaml
