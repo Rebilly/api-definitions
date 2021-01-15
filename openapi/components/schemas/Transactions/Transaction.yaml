@@ -180,11 +180,9 @@ allOf:
               - selected
               - unknown
           presentedOffers:
-            type: array
             description: Offers presented to a customer.
-            minItems: 1
-            items:
-              $ref: ../PurchaseBumps/PurchaseBumpOffer.yaml
+            allOf:
+              - $ref: ../PurchaseBumps/PurchaseBumpOfferList.yaml
           selectedOffer:
             description: Offer selected by a customer. Null if bump offer outcome is not `selected`.
             allOf:
