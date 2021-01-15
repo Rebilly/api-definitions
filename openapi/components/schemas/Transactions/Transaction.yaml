@@ -114,29 +114,17 @@ allOf:
         readOnly: true
         properties:
           base:
-            type: object
             description: Initial amount and currency to convert from.
-            properties:
-              amount:
-                type: number
-                format: double
-              currency:
-                allOf:
-                  - $ref: ../CurrencyCode.yaml
+            allOf:
+              - $ref: ../Money.yaml
           quote:
-            type: object
             description: Suggested amount and currency to convert to.
-            properties:
-              amount:
-                type: number
-                format: double
-              currency:
-                allOf:
-                  - $ref: ../CurrencyCode.yaml
+            allOf:
+              - $ref: ../Money.yaml
           usdMarkup:
             description: The amount of markup translated to USD.
-            type: number
-            format: double
+            allOf:
+              - $ref: ../MoneyAmount.yaml
           outcome:
             type: string
             description: Dynamic Currency Conversion outcome.
@@ -154,40 +142,28 @@ allOf:
         readOnly: true
         properties:
           order:
-            type: object
             description: Initial amount and currency.
-            properties:
-              amount:
-                type: number
-                format: double
-              currency:
-                allOf:
-                  - $ref: ../CurrencyCode.yaml
+            allOf:
+              - $ref: ../Money.yaml
           version:
-            description: >-
-              The name of the version that was picked (useful for measuring split tests).
-            type: string
+            description: The name of the version that was picked (useful for measuring split tests).
+            allOf:
+              - $ref: ../PurchaseBumps/PurchaseBumpSplitVersionName.yaml
           language:
             description: >-
               The language of the bump offer that was displayed to user (useful for finding any translation problems).
-            type: string
+            allOf:
+              - $ref: ../LanguageIsoCode.yaml
           outcome:
-            type: string
-            description: Bump offer outcome.
-            enum:
-              - rejected
-              - selected
-              - unknown
+            $ref: ../PurchaseBumps/PurchaseBumpStatus.yaml
           presentedOffers:
-            type: array
             description: Offers presented to a customer.
-            minItems: 1
-            items:
-              $ref: ../BumpOfferOffer.yaml
+            allOf:
+              - $ref: ../PurchaseBumps/PurchaseBumpOfferList.yaml
           selectedOffer:
             description: Offer selected by a customer. Null if bump offer outcome is not `selected`.
             allOf:
-              - $ref: ../BumpOfferOffer.yaml
+              - $ref: ../PurchaseBumps/PurchaseBumpOffer.yaml
       riskScore:
         description: The transaction's risk score.
         type: integer
