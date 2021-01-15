@@ -3,7 +3,7 @@ required:
   - status
   - name
   - offers
-  - choices
+  - templates
 properties:
   status:
     type: string
@@ -16,15 +16,17 @@ properties:
     description: Choices of the bump offer version.
     allOf:
       - $ref: ../../PurchaseBumps/PurchaseBumpOfferList.yaml
-  choices:
+  templates:
     type: array
-    minItems: 1
+    description: Offer templates in different languages.
     items:
       $ref: ../../PurchaseBumps/PurchaseBumpOfferContent.yaml
-  language:
-    description: Language of the presented offer content. Required to change status to "presented".
-    allOf:
-      - $ref: ../../LanguageIsoCode.yaml
+  presentedTemplate:
+    type: object
+    description: Presented offer message. Required to change status to "presented".
+    properties:
+      language:
+        $ref: ../../LanguageIsoCode.yaml
   acceptedOffer:
     type: object
     description: The customer choice values. Required to change status to "accepted".
