@@ -1,0 +1,33 @@
+type: object
+required:
+  - status
+  - name
+  - offers
+  - choices
+properties:
+  status:
+    type: string
+    enum: ["pending", "presented", "accepted", "rejected"]
+  name:
+    description: Name of the bump offer version.
+    allOf:
+      - $ref: ../../PurchaseBumps/PurchaseBumpSplitVersionName.yaml
+  offers:
+    description: Choices of the bump offer version.
+    allOf:
+      - $ref: ../../PurchaseBumps/PurchaseBumpOfferList.yaml
+  choices:
+    type: array
+    minItems: 1
+    items:
+      $ref: ../../PurchaseBumps/PurchaseBumpOfferContent.yaml
+  language:
+    description: Language of the presented offer content. Required to change status to "presented".
+    allOf:
+      - $ref: ../../LanguageIsoCode.yaml
+  acceptedOffer:
+    type: object
+    description: The customer choice values. Required to change status to "accepted".
+    properties:
+      offerId:
+        type: string
