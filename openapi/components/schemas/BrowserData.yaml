@@ -3,7 +3,7 @@ title: Browser data
 description: Browser data used for 3DS and risk scoring.
 required:
   - colorDepth
-  - javaEnabled
+  - isJavaEnabled
   - language
   - screenWidth
   - screenHeight
@@ -15,25 +15,25 @@ properties:
     minimum: 0
     maximum: 48
     example: 24
-  javaEnabled:
+  isJavaEnabled:
     description: Whether Java is enabled in a browser or not. Value is returned from the `navigator.javaEnabled` property.
     type: boolean
   language:
     description: The browser's language settings returned from the `navigator.language` property.
     type: string
     example: en-US
-    maxLength: 8
+    maxLength: 10
   screenWidth:
     description: The browser's screen width returned from the `screen.width` property.
     type: integer
     minimum: 0
-    maximum: 99999
+    maximum: 65535
     example: 1920
   screenHeight:
     description: The browser's screen height returned from the `screen.height` property.
     type: integer
     minimum: 0
-    maximum: 99999
+    maximum: 65535
     example: 1080
   timeZoneOffset:
     description: |
