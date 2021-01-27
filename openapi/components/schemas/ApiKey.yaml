@@ -1,5 +1,7 @@
 type: object
 description: API secret Key.
+required:
+  - description
 properties:
   id:
     readOnly: true
@@ -8,13 +10,6 @@ properties:
   description:
     description: API key description.
     type: string
-  datetimeFormat:
-    description: Date time format.
-    type: string
-    default: iso8601
-    enum:
-      - mysql
-      - iso8601
   type:
     description: Type of API key.
     type: string
@@ -22,12 +17,6 @@ properties:
     enum:
       - secret
       - publishable
-  permissions:
-    description: >-
-      Specify individual permissions here if creating a restricted API key.
-    deprecated: true
-    allOf:
-      - $ref: ./AclPermissions.yaml
   acl:
     description: >-
       Specify access control list here if creating a restricted API key. Send
