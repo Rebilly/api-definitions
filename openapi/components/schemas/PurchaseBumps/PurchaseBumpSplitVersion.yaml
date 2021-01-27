@@ -6,33 +6,13 @@ required:
   - choices
 properties:
   name:
-    description: Bump offer name.
-    type: string
+    $ref: PurchaseBumpSplitVersionName.yaml
   weight:
     description: Bump offer weight.
     type: integer
     minimum: 0
   offers:
-    type: array
-    minItems: 1
-    items:
-      type: object
-      properties:
-        offerId:
-          description: Offer ID.
-          type: string
-        offerType:
-          description: Offer type.
-          type: string
-        bumpAmount:
-          description: Bump amount.
-          type: number
-        customFields:
-          $ref: ../ResourceCustomFields.yaml
-      required:
-        - offerId
-        - offerType
-        - bumpAmount
+    $ref: PurchaseBumpOfferList.yaml
   choices:
     type: array
     minItems: 1

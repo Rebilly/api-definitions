@@ -1,10 +1,7 @@
 // first set the properties for the new API key
 const data = {
     description: 'My new API key',
-    // the `datetimeFormat` defines how dates will be saved 
-    // and handled by Rebilly for this API key
-    // can be either `iso8601` (default) or `mysql`
-    datetimeFormat: 'iso8601'
+    type: 'secret'
 };
 
 // the ID is optional
