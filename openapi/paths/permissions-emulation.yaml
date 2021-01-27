@@ -1,0 +1,77 @@
+post:
+  tags:
+    - Profile
+  summary: Start permissions emulation
+  operationId: PostPermissionsEmulation
+  description: |
+    Start permissions emulation.
+
+    Emulation during emulation is not supported. If request sent during an ongoing emulation 403 sent in response.
+    
+    Escalation is also not supported.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - permissions
+          properties:
+            permissions:
+              description: >-
+                The list of permissions to be emulated.
+              allOf:
+                - $ref: ../components/schemas/AclPermissions.yaml
+    required: true
+  responses:
+    '201':
+      description: Session was created.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Session.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      description: Invalid data was sent.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InvalidError.yaml
+delete:
+  tags:
+    - Profile
+  summary: Stop permissions emulation
+  operationId: DeletePermissionsEmulation
+  description: |
+    Stop permissions emulation.
+
+    Session permissions would be restored to the state before emulation started.
+    If emulations was not started `403` is sent in response.
+  responses:
+    '201':
+      description: Session was restored.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Session.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
