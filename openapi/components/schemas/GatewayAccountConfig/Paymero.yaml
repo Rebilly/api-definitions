@@ -15,3 +15,15 @@ allOf:
             format: password
         required:
           - apiKey
+      settings:
+        type: object
+        description: Paymero settings object.
+        properties:
+          tolerancePercentage:
+            description: Tolerance percentage (from 1 to 100) for settled amount for crypto currency method.
+            type: integer
+            example: 5
+          targetCurrency:
+            description: This will be the currency to which you want to auto-convert the received cryptocurrency in to.
+            allOf:
+              - $ref: ../CurrencyCode.yaml
