@@ -1,0 +1,30 @@
+type: object
+description: Update a Transaction manually to completed status with given result with optional currency and amount.
+required:
+  - result
+properties:
+  result:
+    description: Transaction result.
+    type: string
+    readOnly: true
+    enum:
+      - abandoned
+      - approved
+      - canceled
+      - declined
+  amount:
+    description: The transaction amount.
+    type: number
+    format: double
+  currency:
+    description: The transaction currency.
+    allOf:
+      - $ref: ../CurrencyCode.yaml
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Links/TransactionLink.yaml
