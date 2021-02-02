@@ -1,9 +1,27 @@
 type: object
+title: Risk metadata
+description: Risk metadata used for 3DS and risk scoring.
 properties:
   ipAddress:
     description: The customer's IP.
     type: string
-    format: ipv4
+    format: ipv4 or ipv6
+    example: 93.92.91.90
+  fingerprint:
+    description: The fingerprint.
+    type: string
+    maxLength: 50
+    example: pIUt3xbgX3l9g3YDiLbx
+  httpHeaders:
+    description: HTTP headers.
+    type: object
+    additionalProperties:
+      type: string
+    example:
+      User-Agent: Mozilla/5.0
+      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+  browserData:
+    $ref: ./BrowserData.yaml
   isProxy:
     description: True if customer's ip address is related to proxy.
     type: boolean
@@ -68,17 +86,6 @@ properties:
     description: Accuracy radius for specified ipAddress (kilometers).
     type: integer
     readOnly: true
-  fingerprint:
-    description: The fingerprint.
-    type: string
-  httpHeaders:
-    description: HTTP headers.
-    type: object
-    additionalProperties:
-      type: string
-    example:
-      User-Agent: Mozilla/5.0
-      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
   distance:
     description: Distance between IP Address and Billing Address geolocation (kilometers).
     type: integer
