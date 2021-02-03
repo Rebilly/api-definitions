@@ -18,11 +18,11 @@ allOf:
       settings:
         type: object
         description: Paymero settings object.
+        required:
+          - tolerancePercentage
         properties:
           tolerancePercentage:
-            description: Tolerance percentage (from 1 to 100) for settled amount for crypto currency method.
-            type: integer
-            example: 5
+            $ref: ../Gateways/AmountAdjustmentTolerance.yaml
           targetCurrency:
             description: This will be the currency to which you want to auto-convert the received cryptocurrency in to.
             allOf:
