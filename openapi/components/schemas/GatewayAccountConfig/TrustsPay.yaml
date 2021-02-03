@@ -1,0 +1,22 @@
+description: TrustsPay config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: TrustsPay credentials object.
+        required:
+          - merchantNo
+          - gatewayNo
+          - signkey
+        properties:
+          merchantNo:
+            type: string
+          gatewayNo:
+            type: string
+          signkey:
+            type: string
+            format: password
