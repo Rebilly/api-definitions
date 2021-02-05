@@ -7,10 +7,10 @@ get:
   summary: Retrieve a Payment Card
   operationId: GetPaymentCard
   description: |
-    Retrieve a Payment Card with specified identifier string
+    Retrieve a Payment Card with specified identifier string.
   responses:
     '200':
-      description: Payment card was retrieved successfully
+      description: Payment card was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -41,16 +41,16 @@ patch:
   summary: Update a payment card's values
   operationId: PatchPaymentCard
   description: |
-    Update any of the payment card's values except for the pan
+    Update any of the payment card's values except for the pan.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/PaymentCards/PaymentCardUpdatePlain.yaml
-    description: Payment card
+    description: Payment card.
   responses:
     '200':
-      description: Payment card was updated
+      description: Payment card was updated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -82,10 +82,10 @@ put:
           oneOf:
             - $ref: ../components/schemas/PaymentCards/PaymentCardCreateToken.yaml
             - $ref: ../components/schemas/PaymentCards/PaymentCardCreatePlain.yaml
-    description: Payment card
+    description: Payment card.
   responses:
     '200':
-      description: Payment card was updated
+      description: Payment card was updated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -98,7 +98,7 @@ put:
           schema:
             $ref: ../components/schemas/PaymentCards/PaymentCard.yaml
     '201':
-      description: Payment card was created
+      description: Payment card was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -115,7 +115,7 @@ put:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '409':
-      description: Payment card already exists and cannot be updated
+      description: Payment card already exists and cannot be updated.
       content:
         application/json:
           schema:
