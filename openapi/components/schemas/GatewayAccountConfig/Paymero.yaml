@@ -22,8 +22,14 @@ allOf:
           - tolerancePercentage
         properties:
           tolerancePercentage:
-            $ref: ../Gateways/AmountAdjustmentTolerance.yaml
+            type: integer
+            description: Tolerance percentage for settled amount.
+            minimum: 0
+            maximum: 5
+            example: 5
           targetCurrency:
             description: This will be the currency to which you want to auto-convert the received cryptocurrency in to.
-            allOf:
-              - $ref: ../CurrencyCode.yaml
+            type: string
+            minLength: 3
+            maxLength: 3
+            example: USD
