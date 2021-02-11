@@ -4,49 +4,49 @@ required:
   - user
 properties:
   organization:
-    description: Membership organization
+    description: Membership organization.
     readOnly: true
     type: object
     properties:
       id:
-        description: Organization ID
+        description: Organization ID.
         type: string
         allOf:
           - $ref: ./ResourceId.yaml
       name:
-        description: Organization name
+        description: Organization name.
         type: string
       createdTime:
-        description: The organization created time
+        description: The organization created time.
         allOf:
           - $ref: ./ServerTimestamp.yaml
   user:
-    description: Membership user
+    description: Membership user.
     readOnly: true
     type: object
     properties:
       id:
-        description: Organization ID
+        description: Organization ID.
         type: string
         allOf:
           - $ref: ./ResourceId.yaml
       name:
-        description: First and last name
+        description: First and last name.
         type: string
   permissions:
     description: The user's permissions. See the format in example. Use wildcard `*` for full access.
     allOf:
       - $ref: ./AclPermissions.yaml
   isOwner:
-    description: User is owner of organization
+    description: User is owner of organization.
     type: boolean
   isDefault:
-    description: This organization is default for membership user
+    description: This organization is default for membership user.
     type: boolean
     readOnly: true
   _links:
     type: array
-    description: The links related to resource
+    description: The links related to resource.
     readOnly: true
     minItems: 1
     items:

@@ -4,18 +4,18 @@ post:
   summary: Create a session with email and password
   operationId: PostSigninRequest
   description: |
-    Create a session with email and password
+    Create a session with email and password.
   security: []
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/Signin.yaml
-    description: Signin resource
+    description: Signin resource.
     required: true
   responses:
     '201':
-      description: Session was created
+      description: Session was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -32,7 +32,7 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent
+      description: Invalid data was sent.
       content:
         application/json:
           schema:

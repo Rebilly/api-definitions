@@ -9,12 +9,12 @@ get:
   summary: Retrieve a retention value report
   operationId: GetRetentionValueReport
   description: |
-    The retention value report shows the count of new customers
+    The retention value report shows the count of new customers.
     per aggregation bucket and the corresponding per customer value over time.
   parameters:
     - name: aggregationField
       in: query
-      description: Report aggregation field
+      description: Report aggregation field.
       required: true
       schema:
         type: string
@@ -33,7 +33,7 @@ get:
           - leadsSalesAgent
     - name: aggregationPeriod
       in: query
-      description: Report aggregation period
+      description: Report aggregation period.
       required: true
       schema:
         type: string
@@ -44,7 +44,7 @@ get:
           - year
     - name: includeRefunds
       in: query
-      description: If to include refunds
+      description: If to include refunds.
       schema:
         type: string
         enum:
@@ -52,7 +52,7 @@ get:
           - "false"
     - name: includeDisputes
       in: query
-      description: If to include disputes
+      description: If to include disputes.
       schema:
         type: string
         enum:
@@ -60,13 +60,13 @@ get:
           - "false"
     - name: periodStart
       in: query
-      description: Report start date
+      description: Report start date.
       required: true
       schema:
         type: string
     - name: periodEnd
       in: query
-      description: Report end date
+      description: Report end date.
       required: true
       schema:
         type: string
@@ -75,7 +75,7 @@ get:
     - $ref: ../components/parameters/collectionFilter.yaml
   responses:
     '200':
-      description: Report was retrieved successfully
+      description: Report was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

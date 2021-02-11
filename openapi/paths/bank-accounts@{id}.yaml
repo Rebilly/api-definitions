@@ -7,10 +7,10 @@ get:
   summary: Retrieve a Bank Account
   operationId: GetBankAccount
   description: |
-    Retrieve a Bank Account with specified identifier string
+    Retrieve a Bank Account with specified identifier string.
   responses:
     '200':
-      description: Bank Account was retrieved successfully
+      description: Bank Account was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -41,17 +41,17 @@ patch:
   summary: Update a bank account's values
   operationId: PatchBankAccount
   description: >
-    Update bank account's values except for the account number and routing
-    number
+    Update bank account's values except for the account number and routing.
+    number.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/BankAccounts/BankAccountUpdatePlain.yaml
-    description: Bank Account
+    description: Bank Account.
   responses:
     '200':
-      description: Bank Account was updated
+      description: Bank Account was updated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -81,7 +81,7 @@ put:
   summary: Create a Bank Account with predefined ID
   operationId: PutBankAccount
   description: |
-    Create or update a BankAccount with predefined identifier string
+    Create or update a BankAccount with predefined identifier string.
   requestBody:
     content:
       application/json:
@@ -89,11 +89,11 @@ put:
           oneOf:
             - $ref: ../components/schemas/BankAccounts/BankAccountCreateToken.yaml
             - $ref: ../components/schemas/BankAccounts/BankAccountCreatePlain.yaml
-    description: BankAccount resource
+    description: BankAccount resource.
     required: true
   responses:
     '200':
-      description: BankAccount was updated
+      description: BankAccount was updated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -106,7 +106,7 @@ put:
           schema:
             $ref: ../components/schemas/BankAccounts/BankAccount.yaml
     '201':
-      description: BankAccount was created
+      description: BankAccount was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
