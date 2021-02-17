@@ -59,7 +59,7 @@ info:
     ]);
     ```
 
-    # Using filter
+    # Using filter with collections
     Rebilly provides collections filtering. You can use `?filter` param on collection to define which records should be shown in the response.
 
     Here is filter format description:
@@ -76,7 +76,7 @@ info:
 
     - You can use gte (greater than or equals) filter like this: `?filter=amount:1..`, or lte (less than or equals) than filter like this: `?filter=amount:..10`.
 
-    - You can create some [predefined values lists](https://user-api-docs.rebilly.com/#tag/Lists) and use them in filter: `?filter=firstName:@yourListName`. You can also exclude list values: `?filter=firstName:!@yourListName`
+    - You can create some [predefined values lists](https://user-api-docs.rebilly.com/#tag/Lists) and use them in filter: `?filter=firstName:@yourListName`. You can also exclude list values: `?filter=firstName:!@yourListName`.
 ################################################################################
 tags:
   - name: API Keys
@@ -86,11 +86,6 @@ tags:
       In addition to your API Keys, you may use
       JSON Web Tokens (JWT) to authenticate to the API.  See
       our [Sessions](https://user-api-docs.rebilly.com/#tag/JWT-Session) resource for more information.
-  - name: Checkout Pages
-    description: |
-      Checkout Pages endpoints are deprecated.
-      Hosted checkout pages can be configured here.  You can customize the theme
-      and content and more that appears on your hosted checkout pages.
   - name: Checkout Forms
     description: |
       Hosted checkout forms can be configured here. You can customize various
@@ -101,12 +96,6 @@ tags:
   - name: Gateway Accounts
     description: |
       Gateway accounts connect payment request to third party networks and platforms.
-  - name: Layouts
-    description: |
-      Layouts endpoints are deprecated.
-      Layouts are used to hold collections of plans. A layout can be used to
-      power a pricing page. You can make multiple layouts, and use rules to
-      target them to different audiences.
   - name: Lists
     description: |
       Lists contain sets of values and may be referenced within Rules criteria.
@@ -122,7 +111,7 @@ tags:
     description: |
       Organizations include the name and address of the entities related to your
       account. An account may be multi-national, and support multiple
-      organizations. Note: Organizations are share between "Live" and "Sandbox"
+      organizations. Note: Organizations are share between "Live" and "Sandbox".
   - name: Profile
     description: |
       A Profile represents the person currently logged in to Rebilly.
@@ -205,6 +194,8 @@ tags:
   - name: Email Delivery Settings
   - name: Email Messages
   - name: Email Notifications
+  - name: Experian credentials
+  - name: Metadata
 ################################################################################
 x-tagGroups:
   - name: Security
@@ -232,10 +223,8 @@ x-tagGroups:
       - Webhooks
   - name: Other
     tags:
-      - Checkout Pages
       - Checkout Forms
       - Gateway Accounts
-      - Layouts
       - Payment Cards
       - Memberships
       - Organizations
@@ -245,6 +234,8 @@ x-tagGroups:
       - Websites
       - Integrations
       - Plaid credentials
+      - Experian credentials
+      - Metadata
   - name: Related docs
     tags:
       - Rebilly API
@@ -253,10 +244,10 @@ security:
   - SecretApiKey: []
   - JWT: []
 servers:
-  - url: 'https://api.rebilly.com/v2.1'
-    description: Live Server
-  - url: 'https://api-sandbox.rebilly.com/v2.1'
-    description: Sandbox Server
+  - url: 'https://api-sandbox.rebilly.com'
+    description: Sandbox Server.
+  - url: 'https://api.rebilly.com'
+    description: Live Server.
 
 
 components:
@@ -283,10 +274,6 @@ paths:
     $ref: ./paths/checkout-forms.yaml
   /checkout-forms/{id}:
     $ref: './paths/checkout-forms@{id}.yaml'
-  /checkout-pages:
-    $ref: ./paths/checkout-pages.yaml
-  '/checkout-pages/{id}':
-    $ref: './paths/checkout-pages@{id}.yaml'
   /credential-hashes/aws-ses:
     $ref: ./paths/credential-hashes@aws-ses.yaml
   '/credential-hashes/aws-ses/{hash}':
@@ -321,6 +308,10 @@ paths:
     $ref: ./paths/credential-hashes@webhooks.yaml
   '/credential-hashes/webhooks/{hash}':
     $ref: './paths/credential-hashes@webhooks@{hash}.yaml'
+  /credential-hashes/experian:
+    $ref: ./paths/credential-hashes@experian.yaml
+  '/credential-hashes/experian/{hash}':
+    $ref: './paths/credential-hashes@experian@{hash}.yaml'
   '/email-delivery-setting-verifications/{token}':
     $ref: './paths/email-delivery-setting-verifications@{token}.yaml'
   /email-delivery-settings:
@@ -379,10 +370,6 @@ paths:
     $ref: ./paths/integrations.yaml
   '/integrations/{label}':
     $ref: './paths/integrations@{label}.yaml'
-  /layouts:
-    $ref: ./paths/layouts.yaml
-  '/layouts/{id}':
-    $ref: './paths/layouts@{id}.yaml'
   /lists:
     $ref: ./paths/lists.yaml
   '/lists/{id}':
@@ -401,6 +388,12 @@ paths:
     $ref: './paths/organizations@{id}.yaml'
   /payment-cards-bank-names:
     $ref: ./paths/payment-cards-bank-names.yaml
+  /payment-methods:
+    $ref: ./paths/payment-methods.yaml
+  /payment-methods/{apiName}:
+    $ref: './paths/payment-methods@{apiName}.yaml'
+  /permissions-emulation:
+    $ref: ./paths/permissions-emulation.yaml
   /previews/rule-actions/send-email:
     $ref: ./paths/previews@rule-actions@send-email.yaml
   /previews/rule-actions/trigger-webhook:
@@ -453,3 +446,13 @@ paths:
     $ref: ./paths/websites.yaml
   '/websites/{id}':
     $ref: './paths/websites@{id}.yaml'
+x-webhooks:
+  gateway-account-downtime-ended:
+    post:
+      $ref: ./webhooks/gateway-account-downtime-ended.yaml
+  gateway-account-downtime-started:
+    post:
+      $ref: ./webhooks/gateway-account-downtime-started.yaml
+  gateway-account-limit-reached:
+    post:
+      $ref: ./webhooks/gateway-account-limit-reached.yaml

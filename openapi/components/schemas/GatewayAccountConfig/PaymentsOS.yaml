@@ -1,0 +1,18 @@
+description: PaymentsOS config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          appId:
+            type: string
+          privateKey:
+            type: string
+            format: password
+        required:
+          - appId
+          - privateKey

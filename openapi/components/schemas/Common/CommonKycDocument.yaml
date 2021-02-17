@@ -1,6 +1,5 @@
 type: object
 required:
-  - fileId
   - customerId
   - documentType
   - status
@@ -10,21 +9,42 @@ properties:
     allOf:
       - $ref: ../ResourceId.yaml
   customerId:
-    description: The сustomer's ID
+    description: The сustomer's ID.
     allOf:
       - $ref: ../ResourceId.yaml
   fileId:
-    description: Linked file object id
+    deprecated: true
+    description: Linked file object id.
     allOf:
       - $ref: ../ResourceId.yaml
+  fileIds:
+    description: Linked file object id's.
+    type: array
+    items:
+      allOf:
+        - $ref: ../ResourceId.yaml
   documentType:
     description: Document type submitted for validation, only identity-proof type is analyzed in an automated manner.
     type: string
     enum:
       - identity-proof
       - address-proof
+      - funds-proof
+  documentSubtype:
+     description: Document subtype submitted for validation.
+     type: string
+     enum:
+      - passport
+      - id-card
+      - driver-license
+  matchLevel:
+    description: The level of strictness for the document matches.
+    type: integer
+    minimum: 1
+    maximum: 2
+    example: 2
   status:
-    description: Status of the validation
+    description: Status of the validation.
     type: string
     readOnly: true
     enum:
@@ -32,17 +52,37 @@ properties:
       - in-progress
       - accepted
       - rejected
+  reason:
+    description: Reason for uploading.
+    type: string
   rejectionReason:
     $ref: ../KycDocument/KycDocumentRejection.yaml
   createdTime:
-    description: Creation date/time
+    description: Creation date/time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
-    description: Latest update date/time
+    description: Latest update date/time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   processedTime:
-    description: Processing date/time
+    description: Processing date/time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  reviewerId:
+    description: Reviewer's user ID.
+    type: string
+    nullable: true
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  reviewerName:
+    description: Reviewer's first and last name.
+    type: string
+    nullable: true
+    readOnly: true
+  reviewTime:
+    description: Date and time of manual review.
+    nullable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml

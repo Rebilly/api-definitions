@@ -1,4 +1,4 @@
-description: Stripe Gateway config
+description: Stripe Gateway config.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -7,7 +7,7 @@ allOf:
     properties:
       settings:
         type: object
-        description: Stripe settings object
+        description: Stripe settings object.
         required:
           - redirectUrl
         properties:
@@ -18,6 +18,10 @@ allOf:
           usePaymentIntents:
             type: boolean
             description: If `true` the `PaymentIntents` API will be used instead of `Charges` API.
+            default: false
+          enforceOffSession:
+            type: boolean
+            description: If `true`, `off_session` param will always be `true` in Stripe requests.
             default: false
       threeDSecureServer:
         $ref: ../ThreeDSecureServers/Stripe3dsServers/Stripe3dsServers.yaml

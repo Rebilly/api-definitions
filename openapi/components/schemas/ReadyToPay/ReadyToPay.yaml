@@ -1,19 +1,19 @@
 type: object
 required:
   - websiteId
-  - browserData
+  - riskMetadata
 properties:
   websiteId:
-    description: The website identifier string
+    description: The website identifier string.
     allOf:
       - $ref: ../ResourceId.yaml
   billingAddress:
-    description: The billing address
+    description: The billing address.
     writeOnly: true
     allOf:
       - $ref: ../Contact/ContactObject.yaml
-  browserData:
-    $ref: ../PaymentTokens/BrowserData.yaml
+  riskMetadata:
+    $ref: ../RiskMetadata.yaml
 oneOf:
   - $ref: ReadyToPayAmount.yaml
   - $ref: ReadyToPayItems.yaml
