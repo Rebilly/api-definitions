@@ -1,0 +1,53 @@
+parameters:
+  - $ref: ../../components/parameters/organizationId.yaml
+  - $ref: ../../components/parameters/resourceId.yaml
+get:
+  tags:
+    - Transaction
+  summary: Retrieve a DCC offer for a transaction
+  operationId: StorefrontGetTransactionDccOffer
+  security:
+    - CustomerJWT: []
+  description: |
+    Retrieve a DCC offer for a transaction with specified ID.
+  responses:
+    200:
+      description: DCC offer was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/StorefrontTransactionDccOffer.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml
+patch:
+  tags:
+    - Transaction
+  summary: Update a DCC offer
+  operationId: StorefrontPatchTransactionDccOffer
+  security:
+    - CustomerJWT: []
+  description: |
+    Update a DCC offer proeprties.
+  requestBody:
+    $ref: ../../components/requestBodies/storefront/StorefrontTransactionDccOffer.yaml
+  responses:
+    200:
+      description: Payment instrument was updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/StorefrontTransactionDccOffer.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml
+    409:
+      $ref: ../../components/responses/Conflict.yaml
+    422:
+      $ref: ../../components/responses/ValidationError.yaml

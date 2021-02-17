@@ -1,0 +1,26 @@
+type: object
+required:
+  - status
+properties:
+  base:
+    description: Initial amount and currency to convert from.
+    readOnly: true
+    allOf:
+      - $ref: ../Money.yaml
+  quote:
+    description: Suggested amount and currency to convert to.
+    readOnly: true
+    allOf:
+      - $ref: ../Money.yaml
+  exchangeRate:
+    description: The exchange rate.
+    readOnly: true
+    type: float
+  status:
+    type: string
+    description: Offer status.
+    enum:
+      - presented
+      - rejected
+      - selected
+      - unknown
