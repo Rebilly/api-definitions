@@ -1,4 +1,4 @@
-description: MuchBetter config
+description: MuchBetter config.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -7,15 +7,26 @@ allOf:
     properties:
       credentials:
         type: object
-        description: MuchBetter credentials object
+        description: MuchBetter credentials object.
         properties:
           merchantAccountId:
             type: string
-            description: MuchBetter merchant account ID
+            description: MuchBetter merchant account ID.
           apiKey:
             type: string
-            description: MuchBetter api key
+            description: MuchBetter api key.
             format: password
         required:
           - merchantAccountId
           - apiKey
+      settings:
+        type: object
+        description: MuchBetter settings object.
+        properties:
+          brandName:
+            type: string
+            description: MuchBetter brand name used for reporting and logo.
+          hasPhoneNumberRequest:
+            type: boolean
+            description: Request phone number before submitting the request to MuchBetter.
+            default: false

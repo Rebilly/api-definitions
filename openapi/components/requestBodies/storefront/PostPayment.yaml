@@ -1,0 +1,29 @@
+content:
+  application/json:
+    schema:
+      oneOf:
+        - type: object
+          title: For transaction
+          required:
+            - transactionId
+          properties:
+            transactionId:
+              $ref: ../../schemas/ResourceId.yaml
+            riskMetadata:
+              $ref: ../../schemas/RiskMetadata.yaml
+          oneOf:
+            - $ref: ../../schemas/Storefront/PaymentInstructions/PaymentInstructionsToken.yaml
+            - $ref: ../../schemas/Storefront/PaymentInstructions/PaymentInstructionsInstrument.yaml
+        - type: object
+          title: For invoice
+          required:
+            - invoiceId
+          properties:
+            invoiceId:
+              $ref: ../../schemas/ResourceId.yaml
+            riskMetadata:
+              $ref: ../../schemas/RiskMetadata.yaml
+          oneOf:
+            - $ref: ../../schemas/Storefront/PaymentInstructions/PaymentInstructionsToken.yaml
+            - $ref: ../../schemas/Storefront/PaymentInstructions/PaymentInstructionsInstrument.yaml
+required: true

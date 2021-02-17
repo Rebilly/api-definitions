@@ -1,0 +1,46 @@
+type: object
+title: Browser data
+description: Browser data used for 3DS and risk scoring.
+required:
+  - colorDepth
+  - isJavaEnabled
+  - language
+  - screenWidth
+  - screenHeight
+  - timeZoneOffset
+properties:
+  colorDepth:
+    description: The browser's color depth in bits per pixel obtained using the `screen.colorDepth` property.
+    type: integer
+    minimum: 1
+    maximum: 48
+    example: 24
+  isJavaEnabled:
+    description: Whether Java is enabled in a browser or not. Value is returned from the `navigator.javaEnabled` property.
+    type: boolean
+  language:
+    description: The browser's language settings returned from the `navigator.language` property.
+    type: string
+    example: en-US
+    maxLength: 8
+  screenWidth:
+    description: The browser's screen width returned from the `screen.width` property.
+    type: integer
+    minimum: 0
+    maximum: 65535
+    example: 1920
+  screenHeight:
+    description: The browser's screen height returned from the `screen.height` property.
+    type: integer
+    minimum: 0
+    maximum: 65535
+    example: 1080
+  timeZoneOffset:
+    description: |
+      The browser's time zone offset in minutes from UTC.
+      A positive offset indicates the local time is behind UTC, and negative is ahead.
+      Can find it with `(new Date()).getTimezoneOffset()` property.
+    type: integer
+    minimum: -1410
+    maximum: 1410
+    example: 300

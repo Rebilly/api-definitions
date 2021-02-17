@@ -6,13 +6,13 @@ get:
   summary: Retrieve a list of auth tokens
   operationId: GetAuthenticationTokenCollection
   description: |
-    Retrieve a list of auth tokens
+    Retrieve a list of auth tokens.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
   responses:
     '200':
-      description: A list of auth tokens was retrieved successfully
+      description: A list of auth tokens was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -50,7 +50,7 @@ post:
   summary: Login
   operationId: PostAuthenticationToken
   description: |
-    Login a customer
+    Login a customer.
   security:
     - SecretApiKey: []
     - JWT: []
@@ -61,11 +61,11 @@ post:
         schema:
           $ref: >-
             ../components/schemas/CustomerAuthentication/AuthenticationToken.yaml
-    description: AuthenticationToken resource
+    description: AuthenticationToken resource.
     required: true
   responses:
     '201':
-      description: Login successful
+      description: Login successful.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
