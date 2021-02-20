@@ -1,0 +1,41 @@
+type: object
+required:
+  - status
+properties:
+  status:
+    $ref: ../PurchaseBumps/PurchaseBumpStatus.yaml
+  version:
+    description: Name of the bump offer version.
+    readOnly: true
+    allOf:
+      - $ref: ../PurchaseBumps/PurchaseBumpSplitVersionName.yaml
+  offers:
+    description: Offers of the bump offer version.
+    readOnly: true
+    allOf:
+      - $ref: ../PurchaseBumps/PurchaseBumpOfferList.yaml
+  availableLanguage:
+    type: array
+    description: The list of languages for all available translations of the offer.
+    readOnly: true
+    items:
+      $ref: ../LanguageIsoCode.yaml
+  language:
+    description: >-
+      The language of the bump offer that was displayed to user (useful for finding any translation problems).
+    allOf:
+      - $ref: ../LanguageIsoCode.yaml
+  html:
+    type: object
+    readOnly: true
+    properties:
+      language:
+        description: The language of the HTML content.
+        allOf:
+          - $ref: ../LanguageIsoCode.yaml
+      content:
+        type: string
+        description: The HTML content.
+  selectedOfferId:
+    type: string
+    description: The selected offer ID by a customer. Required to change status to "selected".
