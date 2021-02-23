@@ -5,11 +5,11 @@ parameters:
 post:
   tags:
     - Rules
-  summary: Append a rule to the rule set.
-  operationId: PostEventRuleSetRule
+  summary: Append a bind to the rule set.
+  operationId: PostRuleSetDraftBind
   responses:
     '200':
-      description: Rule was appended.
+      description: Bind was appended.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -20,7 +20,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Rules/Rule.yaml
+            $ref: ../components/schemas/Rules/Bind.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -37,4 +37,4 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/Rules/Rule.yaml
+          $ref: ../components/schemas/Rules/Bind.yaml

@@ -338,20 +338,6 @@ paths:
     $ref: './paths/events@{eventType}@rules@history@{version}.yaml'
   '/events/{eventType}/rules/versions/{version}':
     $ref: './paths/events@{eventType}@rules@versions@{version}.yaml'
-  '/events/{eventType}/rule-sets':
-    $ref: './paths/events@{eventType}@rule-sets.yaml'
-  '/events/{eventType}/rule-sets/{id}':
-    $ref: './paths/events@{eventType}@rule-sets@{id}.yaml'
-  '/events/{eventType}/rule-sets/{id}/apply':
-    $ref: './paths/events@{eventType}@rule-sets@{id}@apply.yaml'
-  '/events/{eventType}/rule-sets/{id}/binds':
-    $ref: './paths/events@{eventType}@rule-sets@{id}@binds.yaml'
-  '/events/{eventType}/rule-sets/{id}/binds@{bindId}':
-    $ref: './paths/events@{eventType}@rule-sets@{id}@binds@{bindId}.yaml'
-  '/events/{eventType}/rule-sets/{id}/rules':
-    $ref: './paths/events@{eventType}@rule-sets@{id}@rules.yaml'
-  '/events/{eventType}/rule-sets/{id}/rules@{ruleId}':
-    $ref: './paths/events@{eventType}@rule-sets@{id}@rules@{ruleId}.yaml'
   /forgot-password:
     $ref: ./paths/forgot-password.yaml
   /gateway-accounts:
@@ -422,6 +408,22 @@ paths:
     $ref: ./paths/profile@totp-reset.yaml
   '/reset-password/{token}':
     $ref: './paths/reset-password@{token}.yaml'
+  '/rule-sets/{eventType}/drafts':
+    $ref: './paths/rule-sets@{eventType}@drafts.yaml'
+  '/rule-sets/{eventType}':
+    $ref: './paths/rule-sets@{eventType}.yaml'
+  '/rule-sets/{eventType}/drafts/{id}':
+    $ref: './paths/rule-sets@{eventType}@drafts@{id}.yaml'
+  '/rule-sets/{eventType}/drafts/{id}/binds':
+    $ref: './paths/rule-sets@{eventType}@drafts@{id}@binds.yaml'
+  '/rule-sets/{eventType}/drafts/{id}/binds@{bindId}':
+    $ref: './paths/rule-sets@{eventType}@drafts@{id}@binds@{bindId}.yaml'
+  '/rule-sets/{eventType}/drafts/{id}/rules':
+    $ref: './paths/rule-sets@{eventType}@drafts@{id}@rules.yaml'
+  '/rule-sets/{eventType}/drafts/{id}/rules@{ruleId}':
+    $ref: './paths/rule-sets@{eventType}@drafts@{id}@rules@{ruleId}.yaml'
+  '/rule-sets/{eventType}/versions/{versionHash}':
+    $ref: './paths/rule-sets@{eventType}@versions@{versionHash}.yaml'
   '/send-through-attribution/{eventType}':
     $ref: './paths/send-through-attribution@{eventType}.yaml'
   /signin:

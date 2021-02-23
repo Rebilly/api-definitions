@@ -2,14 +2,15 @@ parameters:
   - $ref: ../components/parameters/organizationId.yaml
   - $ref: ../components/parameters/systemEventType.yaml
   - $ref: ../components/parameters/resourceId.yaml
-get:
+  - $ref: ../components/parameters/bindId.yaml
+patch:
   tags:
     - Rules
-  summary: Retrieve a rule sets for event
-  operationId: GetEventRuleSet
+  summary: Update a bind in the rule set.
+  operationId: PatchRuleSetDraftBind
   responses:
     '200':
-      description: Rule set were retrieved successfully.
+      description: Bind was updated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -20,21 +21,32 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Rules/EventRuleSet.yaml
+            $ref: ../components/schemas/Rules/Bind.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
+    '422':
+      description: Invalid data was sent.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InvalidError.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Rules/Bind.yaml
 delete:
   tags:
     - Rules
-  summary: Delete a rule set for event.
-  operationId: DeleteEventRuleSet
+  summary: Delete a bind from the rule set.
+  operationId: DeleteRuleSetDraftBind
   responses:
     '204':
-      description: Rule set was deleted.
+      description: Bind was deleted.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

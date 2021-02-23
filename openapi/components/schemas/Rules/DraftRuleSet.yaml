@@ -1,20 +1,9 @@
 type: object
-description: RuleSet for particular event.
+description: Draft rule set for particular event.
 properties:
   id:
     description: RuleSet identifier string.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
-  isActive:
-    type: boolean
-    readOnly: true
-  version:
-    type: string
-    readOnly: true
-  parent:
-    description: The parent RuleSet identifier string.
-    nullable: true
     allOf:
       - $ref: ../ResourceId.yaml
   name:
@@ -23,14 +12,12 @@ properties:
   description:
     type: string
     description: The description of the rule set contents.
-  binds:
-    type: array
-    items:
-      $ref: ./Bind.yaml
-  rules:
-    type: array
-    items:
-      $ref: ./Rule.yaml
+  versionHash:
+    type: string
+    description: The rule set version hash.
+    nullable: true
+  createdTime:
+    $ref: ../ServerTimestamp.yaml
   updatedTime:
     $ref: ../ServerTimestamp.yaml
   _links:

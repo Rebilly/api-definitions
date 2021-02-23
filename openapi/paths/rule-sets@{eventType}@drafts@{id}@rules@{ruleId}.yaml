@@ -1,14 +1,16 @@
 parameters:
   - $ref: ../components/parameters/organizationId.yaml
   - $ref: ../components/parameters/systemEventType.yaml
-get:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/ruleId.yaml
+patch:
   tags:
     - Rules
-  summary: Retrieve a list of rule sets for event
-  operationId: GetEventRuleSetCollection
+  summary: Update a rule in the rule set.
+  operationId: PatchRuleSetDraftRule
   responses:
     '200':
-      description: Rule sets were retrieved successfully.
+      description: Rule was updated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -19,34 +21,7 @@ get:
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: ../components/schemas/Rules/EventRuleSet.yaml
-    '401':
-      $ref: ../components/responses/Unauthorized.yaml
-    '403':
-      $ref: ../components/responses/Forbidden.yaml
-    '404':
-      $ref: ../components/responses/NotFound.yaml
-post:
-  tags:
-    - Rules
-  summary: Create rule set for event.
-  operationId: PostEventRuleSet
-  responses:
-    '200':
-      description: Rule set was created.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Rules/EventRuleSet.yaml
+            $ref: ../components/schemas/Rules/Rule.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -63,4 +38,25 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/Rules/EventRuleSet.yaml
+          $ref: ../components/schemas/Rules/Rule.yaml
+delete:
+  tags:
+    - Rules
+  summary: Delete a rule from the rule set.
+  operationId: DeleteRuleSetDraftRule
+  responses:
+    '204':
+      description: Rule was deleted.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
