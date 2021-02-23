@@ -1,22 +1,6 @@
 allOf:
   - $ref: ../Common/CommonKycDocument.yaml
   - properties:
-      customerInfo:
-        type: object
-        readOnly: true
-        properties:
-          firstName:
-            description: The customer first name if it was matched, null otherwise.
-            type: string
-            example: John
-          lastName:
-            description: The customer last name if it was matched, null otherwise.
-            type: string
-            example: Doe
-          dateOfBirth:
-            description: The date of birth found on the document, null if not found.
-            allOf:
-              - $ref: ../ServerTimestamp.yaml
       documentMatches:
         readOnly: true
         allOf:
