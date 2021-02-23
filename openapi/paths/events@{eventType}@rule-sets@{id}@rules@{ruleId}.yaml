@@ -1,0 +1,62 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+  - $ref: ../components/parameters/systemEventType.yaml
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/ruleId.yaml
+patch:
+  tags:
+    - Rules
+  summary: Update a rule in the rule set.
+  operationId: PatchEventRuleSetRule
+  responses:
+    '200':
+      description: Rule was updated.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Rules/Rule.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      description: Invalid data was sent.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InvalidError.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Rules/Rule.yaml
+delete:
+  tags:
+    - Rules
+  summary: Delete a rule from the rule set.
+  operationId: DeleteEventRuleSetRule
+  responses:
+    '204':
+      description: Rule was deleted.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

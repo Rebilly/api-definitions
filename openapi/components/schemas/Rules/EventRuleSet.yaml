@@ -1,0 +1,42 @@
+type: object
+description: RuleSet for particular event.
+properties:
+  id:
+    description: RuleSet identifier string.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  isActive:
+    type: boolean
+    readOnly: true
+  version:
+    type: string
+    readOnly: true
+  parent:
+    description: The parent RuleSet identifier string.
+    nullable: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  name:
+    type: string
+    description: The name of the rule set.
+  description:
+    type: string
+    description: The description of the rule set contents.
+  binds:
+    type: array
+    items:
+      $ref: ./Bind.yaml
+  rules:
+    type: array
+    items:
+      $ref: ./Rule.yaml
+  updatedTime:
+    $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource.
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml
