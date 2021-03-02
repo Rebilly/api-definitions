@@ -2,13 +2,31 @@ allOf:
   - $ref: ../Common/CommonKycDocument.yaml
   - properties:
       documentMatches:
+        type: object
         readOnly: true
-        allOf:
-          - $ref: ./IdentityMatches.yaml
+        properties:
+          score:
+            description: >-
+              The calculated score that represents the % of confidence that this ID
+              represents the given customer.
+            type: number
+            format: double
+            example: 0.75
+          data:
+            $ref: ./IdentityMatches.yaml
       parsedData:
+        type: object
         readOnly: true
-        allOf:
-          - $ref: ./IdentityMatches.yaml
+        properties:
+          score:
+            description: >-
+              The calculated score that represents the % of confidence that this ID
+              represents the given customer.
+            type: number
+            format: double
+            example: 0.75
+          data:
+            $ref: ./IdentityMatches.yaml
       _links:
         type: array
         description: The links related to resource.
