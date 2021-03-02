@@ -66,6 +66,7 @@ tags:
     description: |
       Activity Feed is holding various events that occurred in the app.
   - name: Orders
+  - name: Organizations
   - name: Customers
 security:
   - SecretApiKey: []
@@ -91,6 +92,10 @@ paths:
     $ref: './paths/data-exports@{id}.yaml'
   /histograms/transactions:
     $ref: ./paths/histograms@transactions.yaml
+  /organizations:
+    $ref: ./paths/experimental-organizations.yaml
+  '/organizations/{id}':
+    $ref: './paths/experimental-organizations@{id}.yaml'
   /reports/api-log-summary:
     $ref: ./paths/reports@api-log-summary.yaml
   /reports/cumulative-subscriptions:
