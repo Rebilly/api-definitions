@@ -2,14 +2,9 @@ allOf:
   - $ref: ../Common/CommonInvoice.yaml
   - required:
     - customerId
-    - websiteId
   - properties:
       customerId:
         description: The сustomer's ID.
-        allOf:
-          - $ref: ../ResourceId.yaml
-      websiteId:
-        description: The website ID.
         allOf:
           - $ref: ../ResourceId.yaml
       transactions:
@@ -70,7 +65,7 @@ allOf:
         readOnly: true
       paymentFormUrl:
         description: |
-          The URL customer should follow to pay the invoice. You can replace this URL with your own. To reset it to 
+          The URL customer should follow to pay the invoice. You can replace this URL with your own. To reset it to
           Rebilly one – set `null`.
 
           This URL will be available only if `status` is `unpaid` or `past-due`.
