@@ -4,10 +4,10 @@ parameters:
 get:
   tags:
     - Rules
-  summary: Retrieve the list of drafted rules
+  summary: Retrieve the list of rules drafts
   operationId: GetEventRuleDraftsCollection
   description: |
-    Retrieve a collection of drafted rule sets.
+    Retrieve a collection of rules drafts.
     The result is sorted by the updated time in reverse.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
@@ -19,7 +19,7 @@ get:
     - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: Drafts were retrieved successfully.
+      description: Rules drafts were retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -48,7 +48,7 @@ get:
 post:
   tags:
     - Rules
-  summary: Create the rules draft for event
+  summary: Create a rules draft for event
   operationId: PostEventRuleDraft
   responses:
     '200':
