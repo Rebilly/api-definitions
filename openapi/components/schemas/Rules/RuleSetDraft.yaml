@@ -6,6 +6,14 @@ properties:
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
+  clonedVersion:
+    type: integer
+    minimum: 0
+    description: |
+      The version of the rules draft. Normally it is copied from the other rule set which is being cloned.
+      This can be used to know how further the active rule set has advanced since the draft was created.
+      "0" means that the draft is created from scratch.
+      The field's value is only informational, it's not assigned to the active rule set.
   binds:
     type: array
     description: All binds are executed regardless of other binds, there can't be a final bind.
@@ -41,3 +49,4 @@ properties:
 required:
   - rules
   - name
+  - version
