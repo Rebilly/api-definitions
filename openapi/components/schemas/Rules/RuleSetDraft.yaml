@@ -27,10 +27,11 @@ properties:
       a final rule can stop the execution of following rules after execution.
     items:
       $ref: ./Rule.yaml
-  author:
-    type: string
+  authorUserId:
     readOnly: true
     description: The user which has created the draft.
+    allOf:
+        - $ref: ../ResourceId.yaml
   name:
     type: string
     description: Short name for the rules draft.
@@ -46,7 +47,9 @@ properties:
     description: The links related to resource.
     readOnly: true
     items:
-      $ref: ../Links/SelfLink.yaml
+      anyOf:
+        - $ref: ../Links/LinkSelf.yaml
+        - $ref: ../Links/LinkUser.yaml
 required:
   - rules
   - name
