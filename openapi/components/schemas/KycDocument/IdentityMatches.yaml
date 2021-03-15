@@ -22,19 +22,16 @@ properties:
     example: Doe
   dateOfBirth:
     description: The date of birth found on the document, null if not found.
-    readOnly: false
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    type: string
+    format: date-time
   expiryDate:
     description: The expiry date found on the document, null if not found.
-    readOnly: false
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    type: string
+    format: date-time
   issueDate:
     description: The issued date found on the document, null if not found.
-    readOnly: false
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    type: string
+    format: date-time
   hasMinimalAge:
     description: >-
       Checks the minimal age, 21+ for USA and 18+ for all other countries.
