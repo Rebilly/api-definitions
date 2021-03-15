@@ -1,7 +1,7 @@
 type: object
 required:
   - websiteId
-  - browserData
+  - riskMetadata
 properties:
   websiteId:
     description: The website identifier string.
@@ -12,8 +12,8 @@ properties:
     writeOnly: true
     allOf:
       - $ref: ../Contact/ContactObject.yaml
-  browserData:
-    $ref: ../PaymentTokens/BrowserData.yaml
+  riskMetadata:
+    $ref: ../RiskMetadata.yaml
 oneOf:
   - $ref: ReadyToPayAmount.yaml
   - $ref: ReadyToPayItems.yaml

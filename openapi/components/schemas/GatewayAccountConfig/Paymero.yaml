@@ -18,12 +18,24 @@ allOf:
       settings:
         type: object
         description: Paymero settings object.
+        required:
+          - tolerancePercentage
         properties:
           tolerancePercentage:
-            description: Tolerance percentage (from 1 to 100) for settled amount for crypto currency method.
             type: integer
+            description: Tolerance percentage for settled amount.
+            minimum: 0
+            maximum: 5
             example: 5
           targetCurrency:
             description: This will be the currency to which you want to auto-convert the received cryptocurrency in to.
-            allOf:
-              - $ref: ../CurrencyCode.yaml
+            type: string
+            minLength: 3
+            maxLength: 3
+            example: USD
+          mainCurrency:
+            description: This will be the blockchain on which currency runs.
+            type: string
+            enum:
+              - TRX
+              - ETH

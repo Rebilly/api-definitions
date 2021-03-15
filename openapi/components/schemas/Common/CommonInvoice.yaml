@@ -1,10 +1,15 @@
 type: object
 required:
   - currency
+  - websiteId
 properties:
   id:
     description: The invoice ID.
     readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  websiteId:
+    description: The website ID.
     allOf:
       - $ref: ../ResourceId.yaml
   invoiceNumber:
