@@ -64,15 +64,30 @@ properties:
     items:
       type: object
       required:
-        - planId
+        - plan
       properties:
         planId:
           description: Unique id for each plan.
+          deprecated: true
           allOf:
             - $ref: ./ResourceId.yaml
         quantity:
           description: Number of units of the product on the given plan.
           type: integer
+        plan:
+          $ref: ./Common/CommonPlan.yaml
+        revision:
+          type: integer
+          readOnly: true
+          description: Increments with each override change to this specific item.
+        isModified:
+          type: boolean
+          readOnly: true
+          description: Indicates if the plan information was modified for this subscription.
+        isGrandfathered:
+          type: boolean
+          readOnly: true
+          description: Indicates if the plan's current revision is greater than this item's plan revision.
   deliveryAddress:
     description: Delivery address.
     nullable: true
