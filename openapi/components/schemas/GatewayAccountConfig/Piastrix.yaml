@@ -19,5 +19,15 @@ allOf:
         required:
           - shopId
           - secretKey
+      settings:
+        type: object
+        description: Piastrix settings object.
+        properties:
+          tolerancePercentage:
+            type: integer
+            description: Tolerance percentage for settled amount.
+            minimum: 0
+            maximum: 5
+            example: 5
       threeDSecureServer:
         $ref: ../ThreeDSecureServers/Piastrix3dsServers/Piastrix3dsServers.yaml
