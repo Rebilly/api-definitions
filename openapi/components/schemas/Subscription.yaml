@@ -75,20 +75,7 @@ properties:
           description: Number of units of the product on the given plan.
           type: integer
         plan:
-          allOf:
-            - $ref: ./Common/CommonPlan.yaml
-          properties:
-            id:
-              readOnly: false
-              description: The Plan identifier.
-              allOf:
-                - $ref: ./ResourceId.yaml
-          required:
-            - id
-            - name
-            - currency
-            - productId
-            - pricing
+          $ref: ./Plans/FlexiblePlan.yaml
         revision:
           type: integer
           readOnly: true
