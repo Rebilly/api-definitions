@@ -1,0 +1,21 @@
+type: object
+description: Update a Transaction manually to completed status with given result with optional currency and amount.
+required:
+  - result
+properties:
+  result:
+    description: Transaction result.
+    type: string
+    enum:
+      - abandoned
+      - approved
+      - canceled
+      - declined
+  amount:
+    description: The transaction amount.
+    type: number
+    format: double
+  currency:
+    description: The transaction currency.
+    allOf:
+      - $ref: ../CurrencyCode.yaml
