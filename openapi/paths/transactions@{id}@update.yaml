@@ -1,0 +1,35 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  tags:
+    - Transactions
+  summary: Update a Transaction status
+  operationId: PostTransactionUpdate
+  description: Update a Transaction manually to completed status with given result with optional currency and amount.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Transactions/TransactionUpdate.yaml
+    required: true
+  responses:
+    '200':
+      description: Transaction was updated.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Transactions/Transaction.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
