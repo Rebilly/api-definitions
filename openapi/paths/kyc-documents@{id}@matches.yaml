@@ -1,0 +1,35 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  tags:
+    - KYC Documents
+  summary: Update a KYC document's documentMatches
+  operationId: PostKycDocumentMatches
+  description: >
+    Updates a KYC document's documentMatches. Intended to be used for manual overrides.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          anyOf:
+            - $ref: ../components/schemas/KycDocument/IdentityMatches.yaml
+            - $ref: ../components/schemas/KycDocument/AddressMatches.yaml
+    description: Kyc document resource.
+    required: true
+  responses:
+    '204':
+      description: KYC document's documentMatches were updated.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
