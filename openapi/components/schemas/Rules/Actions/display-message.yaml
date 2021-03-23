@@ -1,0 +1,21 @@
+description: Display Message.
+allOf:
+  - $ref: ../RuleAction.yaml
+  - type: object
+    properties:
+      messages:
+        type: array
+        minItems: 1
+        items:
+          type: object
+          properties:
+            langIso:
+              description: Language (two letter ISO 639-1 code).
+              type: string
+            content:
+              type: string
+          required:
+            - langIso
+            - content
+    required:
+      - messages

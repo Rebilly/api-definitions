@@ -13,46 +13,20 @@ allOf:
             format: double
             example: 0.75
           data:
-            type: object
-            properties:
-              containsImage:
-                description: Flag that indicates if there is an image that contains a face on it.
-                type: boolean
-                example: true
-              isIdentityDocument:
-                description: Flag that indicates if this looks like and ID.
-                type: boolean
-                example: true
-              isPublishedOnline:
-                description: If there is an exact match found online.
-                type: boolean
-                example: false
-              firstName:
-                description: The customer first name if it was matched, null otherwise.
-                type: string
-                example: John
-              lastName:
-                description: The customer last name if it was matched, null otherwise.
-                type: string
-                example: Doe
-              dateOfBirth:
-                description: The date of birth found on the document, null if not found.
-                allOf:
-                  - $ref: ../ServerTimestamp.yaml
-              expiryDate:
-                description: The expiry date found on the document, null if not found.
-                allOf:
-                  - $ref: ../ServerTimestamp.yaml
-              issueDate:
-                description: The issued date found on the document, null if not found.
-                allOf:
-                  - $ref: ../ServerTimestamp.yaml
-              hasMinimalAge:
-                description: >-
-                  Checks the minimal age, 21+ for USA and 18+ for all other countries.
-                  Null if dateOfBirth could not be determined.
-                type: boolean
-                example: true
+            $ref: ./IdentityMatches.yaml
+      parsedData:
+        type: object
+        readOnly: true
+        properties:
+          score:
+            description: >-
+              The calculated score that represents the % of confidence that this ID
+              represents the given customer.
+            type: number
+            format: double
+            example: 0.75
+          data:
+            $ref: ./IdentityMatches.yaml
       _links:
         type: array
         description: The links related to resource.
