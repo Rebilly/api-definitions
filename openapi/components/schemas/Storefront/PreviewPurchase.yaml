@@ -52,14 +52,20 @@ properties:
     items:
       type: object
       properties:
-        planId:
-          description: The item plan identifier string.
-          allOf:
-            - $ref: ../ResourceId.yaml
-        productId:
-          description: The item product identifier string.
-          allOf:
-            - $ref: ../ResourceId.yaml
+        type:
+          description: Type of the item.
+          type: string
+          enum:
+            - debit
+            - credit
+        description:
+          description: Description of the item.
+          type: string
+        unitPrice:
+          description: Unit price of the item.
+          type: number
+          format: double
+          example: 49.95
         quantity:
           description: The item total quantity.
           type: number
@@ -68,6 +74,14 @@ properties:
           description: The item total amount.
           type: number
           format: double
+        planId:
+          description: The item plan identifier string.
+          allOf:
+            - $ref: ../ResourceId.yaml
+        productId:
+          description: The item product identifier string.
+          allOf:
+            - $ref: ../ResourceId.yaml
   taxes:
     type: array
     description: Taxes applied to this purchase.

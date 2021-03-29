@@ -1,14 +1,20 @@
 allOf:
   - $ref: ../Common/CommonInvoice.yaml
+  - required:
+    - customerId
   - properties:
+      customerId:
+        description: The сustomer's ID.
+        allOf:
+          - $ref: ../ResourceId.yaml
       transactions:
         type: array
-        description: Invoice transactions array
+        description: Invoice transactions array.
         readOnly: true
         items:
           $ref: ../Transactions/Transaction.yaml
       retryInstruction:
-        description: The invoice retry instruction
+        description: The invoice retry instruction.
         type: object
         properties:
           attempts:
@@ -22,14 +28,14 @@ allOf:
               required:
                 - scheduleInstruction
           afterAttemptPolicies:
-            description: The policy on the attempt finishes
+            description: The policy on the attempt finishes.
             type: array
             items:
               type: string
               enum:
                 - change-subscription-renewal-time
           afterRetryEndPolicies:
-            description: The policy on the retry ends
+            description: The policy on the retry ends.
             type: array
             items:
               type: string
@@ -49,17 +55,26 @@ allOf:
         type: integer
         readOnly: true
       dueReminderTime:
-        description: Time past due reminder event will be triggered
+        description: Time past due reminder event will be triggered.
         nullable: true
         allOf:
           - $ref: ../ServerTimestamp.yaml
       dueReminderNumber:
-        description: Number of past due reminder events triggered
+        description: Number of past due reminder events triggered.
         type: integer
         readOnly: true
+      paymentFormUrl:
+        description: |
+          The URL customer should follow to pay the invoice. You can replace this URL with your own. To reset it to
+          Rebilly one – set `null`.
+
+          This URL will be available only if `status` is `unpaid` or `past-due`.
+        type: string
+        format: url
+        nullable: true
       _links:
         type: array
-        description: The links related to resource
+        description: The links related to resource.
         readOnly: true
         minItems: 1
         items:

@@ -1,0 +1,15 @@
+type: object
+required:
+  - mode
+properties:
+  mode:
+    description: |
+      The way how we will specify the countries.
+    type: string
+    enum:
+      - unknown
+      - all
+      - subset
+oneOf:
+  - $ref: ./PaymentMethodCountriesUnrestrictedMetadata.yaml
+  - $ref: ./PaymentMethodCountriesSubsetMetadata.yaml

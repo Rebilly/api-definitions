@@ -5,7 +5,7 @@ required:
   - prorated
 properties:
   planId:
-    description: The plan identifier string
+    description: The plan identifier string.
     allOf:
       - $ref: ./ResourceId.yaml
   quantity:
@@ -43,5 +43,11 @@ properties:
     description: >-
       If set to true, it will not change the subscription.  It allows for a way
       to preview the changes that would be made to a subscription.
+    type: boolean
+    default: false
+  keepTrial:
+    description: >-
+      If set to true and the subscription order has an active trial, it will use that trial further. Works with 'retain'
+      renewalPolicy only.
     type: boolean
     default: false

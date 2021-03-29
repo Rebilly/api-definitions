@@ -3,13 +3,14 @@ allOf:
   - properties:
       _links:
         type: array
-        description: The links related to resource
+        description: The links related to resource.
         readOnly: true
         minItems: 1
         items:
           anyOf:
             - $ref: ./Links/SelfLink.yaml
             - $ref: ./Links/CustomerLink.yaml
+            - $ref: ./Links/AuthTransactionLink.yaml
             - $ref: ./Links/ApprovalUrlLink.yaml
       _embedded:
         type: array
@@ -20,4 +21,5 @@ allOf:
         minItems: 1
         items:
           anyOf:
+            - $ref: ./Embeds/AuthTransactionEmbed.yaml
             - $ref: ./Embeds/CustomerEmbed.yaml

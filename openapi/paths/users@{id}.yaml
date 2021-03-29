@@ -7,10 +7,10 @@ get:
   summary: Retrieve user
   operationId: GetUser
   description: |
-    Retrieve user with specified identifier string
+    Retrieve user with specified identifier string.
   responses:
     '200':
-      description: User was retrieved successfully
+      description: User was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -41,12 +41,12 @@ put:
   summary: Create or update user with predefined ID
   operationId: PutUser
   description: |
-    Create or update user with predefined identifier string
+    Create or update user with predefined identifier string.
   requestBody:
     $ref: ../components/requestBodies/User.yaml
   responses:
     '200':
-      description: User was updated
+      description: User was updated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -59,7 +59,7 @@ put:
           schema:
             $ref: ../components/schemas/User.yaml
     '201':
-      description: User was created
+      description: User was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -92,10 +92,10 @@ delete:
   summary: Delete user
   operationId: DeleteUser
   description: |
-    Delete user with predefined identifier string
+    Delete user with predefined identifier string.
   responses:
     '204':
-      description: User was deleted
+      description: User was deleted.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -110,7 +110,7 @@ delete:
     '404':
       $ref: ../components/responses/NotFound.yaml
     '409':
-      description: User has related resources and cannot be deleted
+      description: User has related resources and cannot be deleted.
       content:
         application/json:
           schema:

@@ -1,0 +1,37 @@
+parameters:
+  - $ref: ../../components/parameters/organizationId.yaml
+post:
+  tags:
+    - Purchase
+  summary: Perform a payment
+  operationId: StorefrontPostPayment
+  security:
+    - CustomerJWT: []
+  description: |
+    Perform a payment for a transaction or an invoice.
+
+    If Customer JWT contains `transactionId` or `invoiceId` it will be used instead. `transactionId` has a higher
+    priority than `invoiceId`.
+  requestBody:
+    $ref: ../../components/requestBodies/storefront/PostPayment.yaml
+  responses:
+    200:
+      description: Transaction was created.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/StorefrontTransaction.yaml
+    201:
+      description: Transaction was updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/StorefrontTransaction.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml
+    422:
+      $ref: ../../components/responses/ValidationError.yaml
