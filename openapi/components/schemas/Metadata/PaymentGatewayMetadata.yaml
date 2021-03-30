@@ -136,6 +136,8 @@ properties:
     type: object
     description: |
       An object describing and IPN that a gateway supports. No value means IPN is not supported.
+    required:
+      - type
     properties:
       type:
         description: |
@@ -147,6 +149,7 @@ properties:
           A method that is used to verify that we can trust the data in the IPN call.
         type: string
         enum: ["query", "signature"]
+        default: "query"
   recommendedWaitingApprovalTtl:
     description: |
       The recommended TTL before abandoning the transaction.
