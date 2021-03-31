@@ -1,0 +1,80 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+  - $ref: ../components/parameters/systemEventType.yaml
+get:
+  tags:
+    - Rules
+  summary: Retrieve the list of rules drafts
+  operationId: GetEventRuleSetDraftCollection
+  description: |
+    Retrieve a collection of rules drafts.
+    The result is sorted by the updated time in reverse.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionFields.yaml
+    - $ref: ../components/parameters/collectionExpand.yaml
+  responses:
+    '200':
+      description: Rules drafts were retrieved successfully.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Rules/RuleSetDraft.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+post:
+  tags:
+    - Rules
+  summary: Create a rules draft for event
+  operationId: PostEventRuleSetDraft
+  responses:
+    '200':
+      description: Rules draft was created.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Rules/RuleSetDraft.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      description: Invalid data was sent.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InvalidError.yaml
+  requestBody:
+    $ref: ../components/requestBodies/RuleSetDraft.yaml

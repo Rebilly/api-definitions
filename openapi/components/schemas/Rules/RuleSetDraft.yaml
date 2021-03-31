@@ -1,0 +1,56 @@
+type: object
+description: Rules draft for a particular event.
+properties:
+  id:
+    type: string
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  baseVersion:
+    type: integer
+    minimum: 0
+    description: |
+      The rule set version which the rules draft is based on.
+      Normally it is copied from the other rule set which is being cloned.
+      This can be used to know how further the active rule set has advanced since the draft was created.
+      "0" means that the draft is created from scratch.
+      The field's value is only informational, it's not assigned to the active rule set.
+  binds:
+    type: array
+    description: All binds are executed regardless of other binds, there can't be a final bind.
+    items:
+      $ref: ./Bind.yaml
+  rules:
+    type: array
+    description: |
+      Rules are executed depending on other rules:
+      a final rule can stop the execution of following rules after execution.
+    items:
+      $ref: ./Rule.yaml
+  authorUserId:
+    readOnly: true
+    description: The user which has created the draft.
+    allOf:
+        - $ref: ../ResourceId.yaml
+  name:
+    type: string
+    description: Short name for the rules draft.
+  description:
+    type: string
+    description: Detailed description of the drafted rule set.
+  createdTime:
+    $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource.
+    readOnly: true
+    items:
+      anyOf:
+        - $ref: ../Links/LinkSelf.yaml
+        - $ref: ../Links/LinkUser.yaml
+required:
+  - rules
+  - name
+  - baseVersion
