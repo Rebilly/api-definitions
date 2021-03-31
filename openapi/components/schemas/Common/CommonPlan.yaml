@@ -6,7 +6,7 @@ required:
   - pricing
 properties:
   id:
-    description: The plan ID
+    description: The plan ID.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
@@ -14,7 +14,7 @@ properties:
     description: The plan name, displayed on invoices and receipts.
     type: string
   productId:
-    description: The related product ID
+    description: The related product ID.
     allOf:
       - $ref: ../ResourceId.yaml
   productOptions:
@@ -29,7 +29,7 @@ properties:
     allOf:
       - $ref: ../CurrencyCode.yaml
   currencySign:
-    description: Currency sign
+    description: Currency sign.
     readOnly: true
     type: string
   pricing:
@@ -42,8 +42,9 @@ properties:
         properties:
           limit:
             description: |
-              The number of invoices this subscription will generate (if 1, it will not generate any beyond the initial
-              subscription creation). For example, set this property to `12`, when the `periodUnit` is month and the
+              The number of invoices this subscription order will generate
+              (if 1, it will not generate any beyond the initial order creation).
+              For example, set this property to `12`, when the `periodUnit` is month and the
               `periodDuration` is 1, for a 1 year contract billed monthly.
             type: integer
           billingTiming:
@@ -61,6 +62,10 @@ properties:
         format: double
       period:
         $ref: ../Plans/PlanPeriod.yaml
+  isTrialOnly:
+    type: boolean
+    description: Whether a plan has a trial without recurring instructions.
+    readOnly: true
   setup:
     type: object
     description: The setup. Set `null` if no setup.
@@ -73,11 +78,17 @@ properties:
         format: double
   customFields:
     $ref: ../ResourceCustomFields.yaml
+  revision:
+    type: integer
+    readOnly: true
+    description: |
+      Increments when the plan is modified. 
+      Compare to materialized subscription items revision.
   createdTime:
-    description: Plan created time
+    description: Plan created time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
-    description: Plan updated time
+    description: Plan updated time.
     allOf:
       - $ref: ../ServerTimestamp.yaml

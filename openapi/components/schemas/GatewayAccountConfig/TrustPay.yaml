@@ -1,0 +1,19 @@
+description: TrustPay config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: TrustPay credentials object.
+        properties:
+          entityId:
+            type: string
+          accessToken:
+            type: string
+            format: password
+        required:
+          - entityId
+          - accessToken

@@ -3,7 +3,15 @@ allOf:
   - properties:
       transactions:
         type: array
-        description: Invoice transactions array
+        description: Invoice transactions array.
         readOnly: true
         items:
           $ref: StorefrontTransaction.yaml
+      _links:
+        type: array
+        description: The links related to resource.
+        readOnly: true
+        minItems: 1
+        items:
+          anyOf:
+            - $ref: ../Links/SelfLink.yaml

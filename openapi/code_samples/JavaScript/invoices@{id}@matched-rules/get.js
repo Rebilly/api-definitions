@@ -1,1 +1,0 @@
-const rules = await api.invoices.getAllMatchedRules({id: 'foobar-001'});

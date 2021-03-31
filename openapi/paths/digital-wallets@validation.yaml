@@ -10,8 +10,8 @@ post:
     content:
       application/json:
         schema:
-           $ref: ../components/schemas/PaymentTokens/DigitalWalletValidation.yaml
-    description: Digital wallet validation request
+           $ref: ../components/schemas/PaymentTokens/DigitalWalletValidation/DigitalWalletValidation.yaml
+    description: Digital wallet validation request.
     required: true
   security:
     - PublishableApiKey: []
@@ -19,7 +19,7 @@ post:
     - JWT: []
   responses:
     '201':
-      description: Digital wallet validation was made
+      description: Digital wallet validation was made.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -30,7 +30,7 @@ post:
       content:
         application/json:
           schema:
-             $ref: ../components/schemas/PaymentTokens/DigitalWalletValidation.yaml
+             $ref: ../components/schemas/PaymentTokens/DigitalWalletValidation/DigitalWalletValidation.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

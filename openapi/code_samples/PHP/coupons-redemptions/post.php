@@ -1,6 +1,6 @@
 $redemptionForm = new Rebilly\Entities\Coupons\Redemption();
 $redemptionForm->setCustomerId('customerId');
-$redemptionForm->setRedemptionCode('redemptionCode');
+$redemptionForm->setCouponId('couponId');
 
 $restrictionArray = [
     'type' => Rebilly\Entities\Coupons\Restriction::TYPE_DISCOUNTS_PER_REDEMPTION,

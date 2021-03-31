@@ -2,7 +2,7 @@ parameters:
   - $ref: ../components/parameters/customFieldResource.yaml
   - name: name
     in: path
-    description: The custom field's identifier string
+    description: The custom field's identifier string.
     required: true
     schema:
       type: string
@@ -15,10 +15,10 @@ get:
   summary: Retrieve a Custom Field
   operationId: GetCustomField
   description: |
-    Retrieve a schema of the given Custom Field for the given resource type
+    Retrieve a schema of the given Custom Field for the given resource type.
   responses:
     '200':
-      description: A schema of the Custom Field was retrieved successfully
+      description: A schema of the Custom Field was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -49,18 +49,18 @@ put:
   summary: Create or alter a Custom Field
   operationId: PutCustomField
   description: >
-    Create or alter a schema of the given Custom Field for the given resource
+    Create or alter a schema of the given Custom Field for the given resource.
     type.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/CustomField.yaml
-    description: Custom Fields schema of the given resource type
+    description: Custom Fields schema of the given resource type.
     required: true
   responses:
     '200':
-      description: The Custom Field was updated
+      description: The Custom Field was updated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -73,7 +73,7 @@ put:
           schema:
             $ref: ../components/schemas/CustomField.yaml
     '201':
-      description: The Custom Fields was created
+      description: The Custom Fields was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -90,7 +90,7 @@ put:
     '409':
       description: >
         The schema is in use: remove all the associated data in order to remove
-        or alter the schema
+        or alter the schema.
       content:
         application/json:
           schema:
