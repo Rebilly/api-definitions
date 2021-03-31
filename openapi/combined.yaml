@@ -350,6 +350,8 @@ paths:
     $ref: './paths/kyc-documents@{id}.yaml'
   '/kyc-documents/{id}/acceptance':
     $ref: './paths/kyc-documents@{id}@acceptance.yaml'
+  '/kyc-documents/{id}/matches':
+    $ref: './paths/kyc-documents@{id}@matches.yaml'
   '/kyc-documents/{id}/rejection':
     $ref: './paths/kyc-documents@{id}@rejection.yaml'
   '/kyc-documents/{id}/review':
@@ -376,6 +378,10 @@ paths:
     $ref: ./paths/payment-methods.yaml
   /payment-methods/{apiName}:
     $ref: './paths/payment-methods@{apiName}.yaml'
+  /payment-gateways-metadata:
+    $ref: ./paths/payment-gateways-metadata.yaml
+  /payment-gateways-metadata/{apiName}:
+    $ref: './paths/payment-gateways-metadata@{apiName}.yaml'
   /paypal-accounts:
     $ref: ./paths/paypal-accounts.yaml
   '/paypal-accounts/{id}':
@@ -534,6 +540,10 @@ paths:
     $ref: './paths/events@{eventType}@rules@history@{version}.yaml'
   '/events/{eventType}/rules/versions/{version}':
     $ref: './paths/events@{eventType}@rules@versions@{version}.yaml'
+  '/events/{eventType}/rules/drafts':
+    $ref: './paths/events@{eventType}@rules@drafts.yaml'
+  '/events/{eventType}/rules/drafts/{id}':
+    $ref: './paths/events@{eventType}@rules@drafts@{id}.yaml'
   /forgot-password:
     $ref: ./paths/forgot-password.yaml
   /gateway-accounts:
@@ -616,8 +626,6 @@ paths:
     $ref: ./paths/tracking@webhooks.yaml
   '/tracking/webhooks/{id}':
     $ref: './paths/tracking@webhooks@{id}.yaml'
-  '/tracking/webhooks/{id}/history':
-    $ref: './paths/tracking@webhooks@{id}@history.yaml'
   '/tracking/webhooks/{id}/resend':
     $ref: './paths/tracking@webhooks@{id}@resend.yaml'
   /users:

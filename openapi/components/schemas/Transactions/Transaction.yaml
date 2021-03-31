@@ -194,6 +194,24 @@ allOf:
         description: True if transaction is disputed.
         type: boolean
         readOnly: true
+      disputeTime:
+        description: Time the dispute was created, else null.
+        type: string
+        format: date-time
+        readOnly: true
+        nullable: true
+      disputeStatus:
+        description: The dispute's status, else null.
+        nullable: true
+        readOnly: true
+        type: string
+        enum:
+          - response-needed
+          - under-review
+          - forfeited
+          - won
+          - lost
+          - unknown
       isReconciled:
         description: True if the transaction has been verified with gateway batch data.
         type: boolean
@@ -243,8 +261,10 @@ allOf:
             - $ref: ../Links/ApprovalUrlLink.yaml
             - $ref: ../Links/CancelUrlLink.yaml
             - $ref: ../Links/RefundUrlLink.yaml
+            - $ref: ../Links/TransactionUpdateUrlLink.yaml
             - $ref: ../Links/DisputeLink.yaml
             - $ref: ../Links/InvoicesLink.yaml
+            - $ref: ../Links/QueryUrlLink.yaml
       _embedded:
         type: array
         description: >-

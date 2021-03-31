@@ -6,10 +6,14 @@ properties:
     readOnly: true
   binds:
     type: array
+    description: All binds are executed regardless of other binds, there can't be a final bind.
     items:
       $ref: ./Bind.yaml
   rules:
     type: array
+    description: |
+      Rules are executed depending on other rules:
+      a final rule can stop the execution of following rules after execution.
     items:
       $ref: ./Rule.yaml
   updatedTime:

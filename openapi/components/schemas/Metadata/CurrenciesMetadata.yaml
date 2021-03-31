@@ -1,0 +1,35 @@
+type: object
+required:
+  - mode
+properties:
+  mode:
+    description: |
+      The way how we will specify the countries.
+    type: string
+    enum:
+      - unknown
+      - all
+      - subset
+oneOf:
+  - title: Unrestricted
+    properties:
+      mode:
+        enum:
+          - unknown
+          - all
+  - title: Subset
+    required:
+      - values
+    properties:
+      mode:
+        enum:
+          - subset
+      values:
+        description: |
+          The list of supported countries.
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: ../CurrencyCode.yaml
+
