@@ -3,7 +3,7 @@ parameters:
 get:
   tags:
     - Organizations
-  summary: Retrieve a organization
+  summary: Retrieve an organization
   operationId: GetOrganization
   description: |
     Retrieve a organization with specified identifier string.
@@ -34,28 +34,16 @@ get:
 put:
   tags:
     - Organizations
-  summary: Create or update a organization with predefined ID
+  summary: Update an organization with predefined ID
   operationId: PutOrganization
+  deprecated: true
   description: |
-    Create or update a organization with predefined identifier string.
+    Update an organization with predefined identifier string.
   requestBody:
-    $ref: ../components/requestBodies/Organization.yaml
+    $ref: ../components/requestBodies/PatchOrganization.yaml
   responses:
     '200':
       description: Organization was updated.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Organization.yaml
-    '201':
-      description: Organization was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -71,23 +59,51 @@ put:
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-    '409':
-      description: The similar organization already exists.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Error.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
   x-code-samples:
     - lang: PHP
       source:
-        $ref: '../code_samples/PHP/organizations@{id}/put.php'
+        $ref: '../code_samples/PHP/organizations@{id}/patch.php'
+patch:
+  tags:
+    - Organizations
+  summary: Update an organization
+  operationId: PatchOrganization
+  description: |
+    Update an organization.
+  requestBody:
+    $ref: ../components/requestBodies/PatchOrganization.yaml
+  responses:
+    '200':
+      description: Organization was updated.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Organization.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/organizations@{id}/patch.php'
 delete:
   tags:
     - Organizations
   summary: Delete a organization
   operationId: DeleteOrganization
+  deprecated: true
   description: |
     Delete a organization with predefined identifier string.
   responses:
