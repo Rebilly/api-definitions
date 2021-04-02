@@ -3,6 +3,7 @@ get:
     - Organizations
   summary: Retrieve a list of organizations
   operationId: GetOrganizationCollection
+  deprecated: true
   description: |
     Retrieve a list of organizations.
   parameters:
@@ -34,19 +35,15 @@ get:
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-  x-code-samples:
-    - lang: PHP
-      source:
-        $ref: ../code_samples/PHP/organizations/get.php
 post:
   tags:
     - Organizations
   summary: Create a organization
   operationId: PostOrganization
   description: |
-    Create a organization.
+    Create an organization.
   requestBody:
-    $ref: ../components/requestBodies/Organization.yaml
+    $ref: ../components/requestBodies/PostOrganization.yaml
   responses:
     '201':
       description: Organization was created.
