@@ -1,0 +1,32 @@
+type: object
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  name:
+    type: string
+    description: The role name.
+  description:
+    type: string
+    description: The role description.
+  acl:
+    $ref: ./Acl.yaml
+  seniorIds:
+    type: array
+    description: The list of senior roles idenitifiers.
+    items:
+      type: string
+  juniorIds:
+    type: array
+    description: The list of junior roles idenitifiers.
+    items:
+      type: string
+  createdTime:
+    description: The role created time.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    description: The role updated time.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
