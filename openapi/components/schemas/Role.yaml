@@ -1,4 +1,7 @@
 type: object
+required:
+  - name
+  - acl
 properties:
   id:
     readOnly: true
@@ -34,3 +37,26 @@ properties:
     description: The role updated time.
     allOf:
       - $ref: ./ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to a resource.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Links/SelfLink.yaml
+        - $ref: ./Links/SeniorRolesLink.yaml
+        - $ref: ./Links/JuniorRolesLink.yaml
+  _embedded:
+    type: array
+    description: >-
+      Any embedded objects available that are requested by the `expand`
+      querystring parameter.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Embeds/SeniorRolesEmbed.yaml
+        - $ref: ./Embeds/JuniorRolesEmbed.yaml
+
+
