@@ -332,12 +332,20 @@ paths:
     $ref: './paths/events@{eventType}.yaml'
   '/events/{eventType}/rules':
     $ref: './paths/events@{eventType}@rules.yaml'
+  '/events/{eventType}/timeline':
+    $ref: './paths/events@{eventType}@timeline.yaml'
+  '/events/{eventType}/timeline/{messageId}':
+    $ref: './paths/events@{eventType}@timeline@{messageId}.yaml'
   '/events/{eventType}/rules/history':
     $ref: './paths/events@{eventType}@rules@history.yaml'
   '/events/{eventType}/rules/history/{version}':
     $ref: './paths/events@{eventType}@rules@history@{version}.yaml'
   '/events/{eventType}/rules/versions/{version}':
     $ref: './paths/events@{eventType}@rules@versions@{version}.yaml'
+  '/events/{eventType}/rules/drafts':
+    $ref: './paths/events@{eventType}@rules@drafts.yaml'
+  '/events/{eventType}/rules/drafts/{id}':
+    $ref: './paths/events@{eventType}@rules@drafts@{id}.yaml'
   /forgot-password:
     $ref: ./paths/forgot-password.yaml
   /gateway-accounts:
@@ -392,6 +400,10 @@ paths:
     $ref: ./paths/payment-methods.yaml
   /payment-methods/{apiName}:
     $ref: './paths/payment-methods@{apiName}.yaml'
+  /payment-gateways-metadata:
+    $ref: ./paths/payment-gateways-metadata.yaml
+  /payment-gateways-metadata/{apiName}:
+    $ref: './paths/payment-gateways-metadata@{apiName}.yaml'
   /permissions-emulation:
     $ref: ./paths/permissions-emulation.yaml
   /previews/rule-actions/send-email:
