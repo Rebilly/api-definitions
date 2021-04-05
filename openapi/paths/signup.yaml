@@ -4,17 +4,17 @@ post:
   summary: Register and create new profile
   operationId: PostSignupRequest
   description: |
-    Creates a new user and sends an email confirmation
+    Creates a new user and sends an email confirmation.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/Signup.yaml
-    description: Signup resource
+    description: Signup resource.
     required: true
   responses:
     '201':
-      description: User was created
+      description: User was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -27,7 +27,7 @@ post:
           schema:
             $ref: ../components/schemas/User.yaml
     '422':
-      description: Invalid data was sent
+      description: Invalid data was sent.
       content:
         application/json:
           schema:

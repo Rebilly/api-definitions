@@ -11,7 +11,7 @@ required:
   - items
 properties:
   id:
-    description: The Subscription identifier string
+    description: The Order identifier string.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
@@ -40,22 +40,21 @@ properties:
       - disputed
       - voided
   customerId:
-    description: Unique id for each customer
+    description: Unique id for each customer.
     allOf:
       - $ref: ./ResourceId.yaml
   websiteId:
-    description: Unique id for each website
+    description: Unique id for each website.
     allOf:
       - $ref: ./ResourceId.yaml
   initialInvoiceId:
-    description: Unique id for the initial invoice
+    description: Unique id for the initial invoice.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
   recentInvoiceId:
     description: >-
-      Unique id for the most recently issued invoice. It might not be `paid`
-      yet.
+      Unique id for the most recently issued invoice. It might not be `paid` yet.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
@@ -65,22 +64,50 @@ properties:
     items:
       type: object
       required:
-        - planId
+        - plan
       properties:
         planId:
-          description: Unique id for each plan
+          description: Unique id for each plan.
+          deprecated: true
           allOf:
             - $ref: ./ResourceId.yaml
         quantity:
-          description: Number of units of the product on the given plan
+          description: Number of units of the product on the given plan.
           type: integer
+        plan:
+          allOf:
+            - $ref: ./Common/CommonPlan.yaml
+          properties:
+            id:
+              readOnly: false
+              description: The Plan identifier.
+              allOf:
+                - $ref: ./ResourceId.yaml
+          required:
+            - id
+            - name
+            - currency
+            - productId
+            - pricing
+        revision:
+          type: integer
+          readOnly: true
+          description: Increments with each override change to this specific item.
+        isModified:
+          type: boolean
+          readOnly: true
+          description: Indicates if the plan information was modified for this subscription.
+        isGrandfathered:
+          type: boolean
+          readOnly: true
+          description: Indicates if the plan's current revision is greater than this item's plan revision.
   deliveryAddress:
-    description: Delivery address
+    description: Delivery address.
     nullable: true
     allOf:
       - $ref: ./Contact/ContactObject.yaml
   billingAddress:
-    description: Billing address
+    description: Billing address.
     nullable: true
     allOf:
       - $ref: ./Contact/ContactObject.yaml
@@ -93,7 +120,7 @@ properties:
     allOf:
       - $ref: ./RiskMetadata.yaml
   activationTime:
-    description: Subscription activation time
+    description: Order activation time.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   couponIds:
@@ -124,21 +151,21 @@ properties:
       passed list will be canceled.
 
 
-      If list of applied coupons on pending subscription will be changed due to
-      this param during update subscription,
-       Invoice for the subscription will be reissued.
+      If list of applied coupons on pending order will be changed due to
+      this param during update order,
+       Invoice for the order will be reissued.
     writeOnly: true
     items:
       type: string
-      description: Coupon ID
+      description: Coupon ID.
   poNumber:
-    description: 'Purchase order number, will be displayed on the issued invoices'
+    description: Purchase order number, will be displayed on the issued invoices.
     nullable: true
     example: PO123456
     type: string
   revision:
     description: >
-      The number of times the subscription data has been modified.
+      The number of times the order data has been modified.
 
       The revision is useful when analyzing webhook data to determine if the
       change takes precedence over the current representation.

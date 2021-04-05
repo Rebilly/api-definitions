@@ -9,14 +9,14 @@ get:
   security:
     - CustomerJWT: []
   description: |
-    Retrieve a KYC document with specified ID
+    Retrieve a KYC document with specified ID.
   responses:
     200:
-      description: KYC document was retrieved successfully
+      description: KYC document was retrieved successfully.
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/Common/CommonKycDocument.yaml
+            $ref: ../../components/schemas/Storefront/StorefrontKycDocument.yaml
     401:
       $ref: ../../components/responses/Unauthorized.yaml
     403:
@@ -31,21 +31,21 @@ patch:
   security:
     - CustomerJWT: []
   description: |
-    Update a KYC document with predefined ID
+    Update a KYC document with predefined ID.
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../../components/schemas/Common/CommonKycDocument.yaml
-    description: KYC document resource
+          $ref: ../../components/schemas/Storefront/StorefrontKycDocument.yaml
+    description: KYC document resource.
     required: true
   responses:
     200:
-      description: KYC document was updated
+      description: KYC document was updated.
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/Common/CommonKycDocument.yaml
+            $ref: ../../components/schemas/Storefront/StorefrontKycDocument.yaml
     401:
       $ref: ../../components/responses/Unauthorized.yaml
     403:

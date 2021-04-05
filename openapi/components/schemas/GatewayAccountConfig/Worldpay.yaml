@@ -1,4 +1,4 @@
-description: Worldpay Gateway config
+description: Worldpay Gateway config.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -10,11 +10,19 @@ allOf:
         properties:
           merchantCode:
             type: string
-            description: Worldpay Gateway merchant code
+            description: Worldpay Gateway merchant code.
             format: password
           merchantPassword:
             type: string
-            description: Worldpay Gateway merchant password
+            description: Worldpay Gateway merchant password.
+            format: password
+          payoutMerchantCode:
+            type: string
+            description: Optional alternate merchant code for payouts.
+            format: password
+          payoutMerchantPassword:
+            type: string
+            description: Optional alternate merchant password for payouts.
             format: password
         required:
           - merchantCode
@@ -24,9 +32,14 @@ allOf:
       settings:
         type: object
         properties:
+          delay:
+            type: integer
+            description: Auto Capture delay (in hours).
+            minimum: 0
+            default: 0
           enableStoredCredentials:
             type: boolean
-            description: True to enable Stored Credentials
+            description: True to enable Stored Credentials.
             default: false
           merchantInitiatedReason:
             type: string
