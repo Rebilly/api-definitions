@@ -64,14 +64,13 @@ allOf:
         type: integer
         readOnly: true
       paymentFormUrl:
-        description: |
-          The URL customer should follow to pay the invoice. You can replace this URL with your own. To reset it to
-          Rebilly one – set `null`.
-
-          This URL will be available only if `status` is `unpaid` or `past-due`.
         type: string
+        readOnly: true
         format: url
-        nullable: true
+        description: |
+          URL where the customer can be redirected to pay for the invoice
+          with one of the methods which are available for this customer.
+          It's an alternative to creating a new transaction with empty `methods`.
       _links:
         type: array
         description: The links related to resource.

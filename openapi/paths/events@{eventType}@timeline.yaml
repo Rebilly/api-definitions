@@ -1,17 +1,20 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+  - $ref: ../components/parameters/systemEventType.yaml
 get:
   tags:
-    - Organizations
-  summary: Retrieve a list of organizations
-  operationId: GetOrganizationCollection
-  deprecated: true
+    - Rules
+  summary: Retrieve a list of Rules Engine timeline messages
+  operationId: GetRulesEngineTimelineCollection
   description: |
-    Retrieve a list of organizations.
+    Retrieve a list of Rules Engine timeline messages.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
   responses:
     '200':
-      description: A list of organizations was retrieved successfully.
+      description: A list of Rules Engine timeline messages was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -30,23 +33,28 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/Organization.yaml
+              $ref: ../components/schemas/Timelines/RulesEngineTimeline.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
 post:
   tags:
-    - Organizations
-  summary: Create a organization
-  operationId: PostOrganization
+    - Rules
+  summary: Create Rules Engine Timeline comment
+  operationId: PostRulesEngineTimeline
   description: |
-    Create an organization.
+    Create a Rules Engine Timeline comment.
   requestBody:
-    $ref: ../components/requestBodies/PostOrganization.yaml
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Timelines/RulesEngineTimeline.yaml
+    description: Rules Engine Timeline resource.
+    required: true
   responses:
     '201':
-      description: Organization was created.
+      description: Rules Engine Timeline comment was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -57,20 +65,10 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Organization.yaml
+            $ref: ../components/schemas/Timelines/RulesEngineTimeline.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-    '409':
-      description: The similar organization already exists.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Error.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-code-samples:
-    - lang: PHP
-      source:
-        $ref: ../code_samples/PHP/organizations/post.php
