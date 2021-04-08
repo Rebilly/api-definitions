@@ -1,11 +1,8 @@
 type: object
 required:
   - gatewayName
-  - acquirerName
-  - merchantCategoryCode
-  - websites
+  - method
   - acceptedCurrencies
-  - organizationId
 discriminator:
   propertyName: gatewayName
   mapping:
@@ -170,12 +167,14 @@ properties:
   gatewayName:
     $ref: ./Gateways/GatewayName.yaml
   acquirerName:
-    $ref: ./Gateways/AcquirerName.yaml
+    default: Other
+    allOf:
+      - $ref: ./Gateways/AcquirerName.yaml
   merchantCategoryCode:
     description: The gateway account's merchant category code.
-    type: integer
-    minimum: 742
-    maximum: 9950
+    type: string
+    pattern: '^[0-9]{4}$'
+    default: 0000
   dccMarkup:
     description: Dynamic currency conversion markup in basis points.
     type: integer
@@ -220,6 +219,7 @@ properties:
       If a transaction is not reconciled within the `reconciliationWindowTtl` time,
       then the transaction is marked as `abandoned`.
     type: boolean
+    default: false
   reconciliationWindowTtl:
     description: >-
       The time window (in seconds) allotted for a reconciliation to occur.
@@ -230,11 +230,13 @@ properties:
   threeDSecure:
     description: True, if Gateway Account allows 3DSecure.
     type: boolean
+    default: false
   dynamicDescriptor:
     description: True, if Gateway Account allows dynamic descriptor.
     type: boolean
+    default: false
   acceptedCurrencies:
-    description: Accepted currencies (array of the currency three letter code).
+    description: Accepted currencies (array of the currency three letter codes).
     type: array
     items:
       type: string
@@ -273,6 +275,10 @@ properties:
     type: string
     readOnly: true
     example: TwiX3f92k4AiBE27BzTbQ38hHjicBz_w
+  sticky:
+    description: Customer's payment instrument will "stick" to the gateway account for future transactions when enabled.
+    type: boolean
+    default: true
   createdTime:
     description: Gateway Account created time.
     allOf:
