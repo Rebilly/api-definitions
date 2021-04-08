@@ -1,11 +1,8 @@
 type: object
 required:
   - gatewayName
-  - acquirerName
-  - merchantCategoryCode
-  - websites
+  - method
   - acceptedCurrencies
-  - organizationId
 discriminator:
   propertyName: gatewayName
   mapping:
@@ -158,6 +155,24 @@ properties:
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
+  gatewayName:
+    $ref: ./Gateways/GatewayName.yaml
+  acquirerName:
+    default: Other
+    allOf:
+      - $ref: ./Gateways/AcquirerName.yaml
+  method:
+    $ref: ./PaymentMethods/PaymentMethod.yaml
+  acceptedCurrencies:
+    description: Accepted currencies (array of the currency three letter codes).
+    type: array
+    items:
+      type: string
+  paymentCardSchemes:
+    description: Accepted payment card brands.
+    type: array
+    items:
+      $ref: ./PaymentCards/PaymentCardBrand.yaml
   status:
     description: The gateway account's status.
     readOnly: true
@@ -167,15 +182,11 @@ properties:
       - inactive
       - pending
       - closed
-  gatewayName:
-    $ref: ./Gateways/GatewayName.yaml
-  acquirerName:
-    $ref: ./Gateways/AcquirerName.yaml
   merchantCategoryCode:
     description: The gateway account's merchant category code.
-    type: integer
-    minimum: 742
-    maximum: 9950
+    type: string
+    pattern: '^[0-9]{4}$'
+    default: '0000'
   dccMarkup:
     description: Dynamic currency conversion markup in basis points.
     type: integer
@@ -192,11 +203,6 @@ properties:
   cityField:
     description: The gateway account's city field (also known as line 2 descriptor).
     type: string
-  organizationId:
-    deprecated: true
-    description: Organization ID.
-    allOf:
-      - $ref: ./ResourceId.yaml
   excludedDccQuoteCurrencies:
     description: Excluded Dynamic Currency Conversion Quote Currencies.
     type: array
@@ -220,6 +226,7 @@ properties:
       If a transaction is not reconciled within the `reconciliationWindowTtl` time,
       then the transaction is marked as `abandoned`.
     type: boolean
+    default: false
   reconciliationWindowTtl:
     description: >-
       The time window (in seconds) allotted for a reconciliation to occur.
@@ -230,21 +237,11 @@ properties:
   threeDSecure:
     description: True, if Gateway Account allows 3DSecure.
     type: boolean
+    default: false
   dynamicDescriptor:
     description: True, if Gateway Account allows dynamic descriptor.
     type: boolean
-  acceptedCurrencies:
-    description: Accepted currencies (array of the currency three letter code).
-    type: array
-    items:
-      type: string
-  method:
-    $ref: ./PaymentMethods/PaymentMethod.yaml
-  paymentCardSchemes:
-    description: Accepted payment card brands.
-    type: array
-    items:
-      $ref: ./PaymentCards/PaymentCardBrand.yaml
+    default: false
   digitalWallets:
     $ref: ./PaymentCards/DigitalWallets.yaml
   isDown:
@@ -273,6 +270,10 @@ properties:
     type: string
     readOnly: true
     example: TwiX3f92k4AiBE27BzTbQ38hHjicBz_w
+  sticky:
+    description: Customer's payment instrument will "stick" to the gateway account for future transactions when enabled.
+    type: boolean
+    default: true
   createdTime:
     description: Gateway Account created time.
     allOf:
@@ -281,6 +282,11 @@ properties:
     description: Gateway Account updated time.
     allOf:
       - $ref: ./ServerTimestamp.yaml
+  organizationId:
+    deprecated: true
+    description: Organization ID.
+    allOf:
+      - $ref: ./ResourceId.yaml
   _links:
     type: array
     description: The links related to resource.

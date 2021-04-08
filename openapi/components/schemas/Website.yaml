@@ -1,6 +1,5 @@
 type: object
 required:
-  - organizationId
   - name
   - url
   - servicePhone
@@ -9,11 +8,6 @@ properties:
   id:
     description: The website identifier string.
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
-  organizationId:
-    deprecated: true
-    description: Organization ID.
     allOf:
       - $ref: ./ResourceId.yaml
   name:
@@ -39,6 +33,11 @@ properties:
       - $ref: ./ServerTimestamp.yaml
   customFields:
     $ref: ./ResourceCustomFields.yaml
+  organizationId:
+    deprecated: true
+    description: Organization ID.
+    allOf:
+      - $ref: ./ResourceId.yaml
   _links:
     type: array
     description: The links related to resource.
