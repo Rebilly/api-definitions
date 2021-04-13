@@ -1,0 +1,166 @@
+type: object
+additionalProperties: false
+required:
+  - apiName
+  - logo
+  - paymentMethods
+  - merchantCountries
+  - currencies
+properties:
+  apiName:
+    $ref: ./PaymentGatewaName.yaml
+  otherNames:
+    description: |
+      The list of former names. From time to time gateways change their names or they also known by other names.
+      Tracking this list may help customer support and developers.
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required:
+        - name
+      properties:
+        name:
+          description: |
+            The alternative or former name of the gateway.
+          type: string
+        description:
+          description: |
+            Short description about this name.
+          type: string
+        logo:
+          description: |
+            The URL for the logo used with this name.
+          type: string
+          format: uri
+  logo:
+    description: |
+      The URL for the logo of the gateway.
+    type: string
+    format: uri
+  summary:
+    description: |
+      A short description of the gateway. (Markdown is supported).
+    type: string
+  homepage:
+    description: |
+      The URL of their home page.
+    type: string
+    format: uri
+  externalDocs:
+    description: |
+      List of links to the documentation.
+      For example: online API guides provided by gateways or a link to the documents in our Google Drive.
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required:
+        - url
+      properties:
+        url:
+          description: |
+            The URL for the target documentation. Value MUST be in the format of a URL.
+          type: string
+          format: uri
+        description:
+          description: |
+            A short description of the target documentation.
+          type: string
+  publishedPricing:
+    description: |
+      If they have published pricing, a description of it here.
+    type: string
+  setupInstructions:
+    description: |
+      Some special instructions for merchant to setup account for this gateway.
+      For example: After adding this gateway account,
+      you will need to set the IPN to `//example.com/ipns/{gateway-name}/{organization-id}` by contacting your account rep.
+    type: string
+  paymentMethods:
+    description: |
+      An array of the payment methods supported (e.g. payment-card, bitcoin).
+    type: array
+    items:
+      $ref: ./PaymentMethodApiName.yaml
+    minLength: 1
+  cardBrands:
+    description: |
+      An array of the card-brands supported, if payment-card is a value of paymentMethods.
+    type: array
+    items:
+      $ref: ../PaymentCards/PaymentCardBrand.yaml
+  merchantCountries:
+    $ref: ./CountriesMetadata.yaml
+  currencies:
+    $ref: ./CurrenciesMetadata.yaml
+  operations:
+    description: |
+      An array of the operations supported by gateway.
+    type: array
+    items:
+      type: string
+      enum:
+        - verify
+        - auth
+        - capture
+        - sale
+        - refund
+        - query
+        - credit
+        - 3DS1
+        - 3DS2
+        - checkCredentials
+  supported3dsServers:
+    description: |
+      An array of the 3DS-servers supported.
+    type: array
+    items:
+      type: string
+  reconciliationSupport:
+    description: |
+      A bool if we (can) reconcile.
+    type: boolean
+    default: false
+  disputeSupport:
+    description: |
+      If we can automate dispute data (chargeback, retrieval or TC-40 disputes) entry with an API or SFTP access.
+    type: boolean
+    default: false
+  offsite:
+    description: |
+      A bool if it may require offsite interaction (such as 3DS, PayPal login, or completing something in a store).
+    type: boolean
+    default: false
+  ipn:
+    type: object
+    description: |
+      An object describing and IPN that a gateway supports. No value means IPN is not supported.
+    required:
+      - type
+    properties:
+      type:
+        description: |
+          A type of supported IPN. No value means IPN is not supported.
+        type: string
+        enum: ["static", "dynamic"]
+      verificationMethod:
+        description: |
+          A method that is used to verify that we can trust the data in the IPN call.
+        type: string
+        enum: ["query", "signature"]
+        default: "query"
+  recommendedWaitingApprovalTtl:
+    description: |
+      The recommended TTL before abandoning the transaction.
+    type: integer
+    default: 3600
+    minimum: 299
+    maximum: 16777216
+  _links:
+    type: array
+    description: The links related to resource.
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml
