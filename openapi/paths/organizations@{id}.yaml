@@ -31,40 +31,6 @@ get:
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/organizations@{id}/get.php'
-put:
-  tags:
-    - Organizations
-  summary: Update an organization with predefined ID
-  operationId: PutOrganization
-  deprecated: true
-  description: |
-    Update an organization with predefined identifier string.
-  requestBody:
-    $ref: ../components/requestBodies/PatchOrganization.yaml
-  responses:
-    '200':
-      description: Organization was updated.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Organization.yaml
-    '401':
-      $ref: ../components/responses/Unauthorized.yaml
-    '403':
-      $ref: ../components/responses/Forbidden.yaml
-    '422':
-      $ref: ../components/responses/ValidationError.yaml
-  x-code-samples:
-    - lang: PHP
-      source:
-        $ref: '../code_samples/PHP/organizations@{id}/patch.php'
 patch:
   tags:
     - Organizations
@@ -98,33 +64,3 @@ patch:
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/organizations@{id}/patch.php'
-delete:
-  tags:
-    - Organizations
-  summary: Delete a organization
-  operationId: DeleteOrganization
-  deprecated: true
-  description: |
-    Delete a organization with predefined identifier string.
-  responses:
-    '204':
-      description: Organization was deleted.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
-    '401':
-      $ref: ../components/responses/Unauthorized.yaml
-    '403':
-      $ref: ../components/responses/Forbidden.yaml
-    '404':
-      $ref: ../components/responses/NotFound.yaml
-    '409':
-      description: Organization has related resources and cannot be deleted.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Error.yaml
