@@ -4,20 +4,16 @@ parameters:
 post:
   tags:
     - Orders
-  summary: Change an order's plan
-  operationId: PostSubscriptionPlanChange
+  summary: Change an order's items
+  operationId: PostSubscriptionItemsChange
   description: >
-    Change an order's plan and designate when and if there should be pro-rata credits given.
-
-    Only active subscription orders with a single plan can be changed.
-
-    Edit pending unpaid orders directly regardless the number of plans.
+    Change an order's items or quantities and designate when and if there should be pro-rata credits given.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/SubscriptionChange.yaml
-    description: Change the plan.
+    description: Change items request.
     required: true
   responses:
     '201':
@@ -39,10 +35,3 @@ post:
       $ref: ../components/responses/Forbidden.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-code-samples:
-    - lang: PHP
-      source:
-        $ref: '../code_samples/PHP/subscriptions@{id}@change-plan/post.php'
-    - lang: JavaScript
-      source:
-        $ref: '../code_samples/JavaScript/subscriptions@{id}@change-plan/post.js'
