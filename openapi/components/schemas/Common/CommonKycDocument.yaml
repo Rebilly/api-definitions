@@ -8,10 +8,6 @@ properties:
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
-  customerId:
-    description: The сustomer's ID.
-    allOf:
-      - $ref: ../ResourceId.yaml
   fileId:
     deprecated: true
     description: Linked file object id.
@@ -81,20 +77,11 @@ properties:
     description: Processing date/time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
-  reviewerId:
-    description: Reviewer's user ID.
-    type: string
-    nullable: true
+  _links:
+    type: array
+    description: The links related to resource.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
-  reviewerName:
-    description: Reviewer's first and last name.
-    type: string
-    nullable: true
-    readOnly: true
-  reviewTime:
-    description: Date and time of manual review.
-    nullable: true
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Links/SelfLink.yaml
