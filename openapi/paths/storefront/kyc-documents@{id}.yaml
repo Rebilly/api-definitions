@@ -6,6 +6,7 @@ get:
     - KYC Document
   summary: Retrieve a KYC Document
   operationId: StorefrontGetKycDocument
+  x-sdk-operation-name: get
   security:
     - CustomerJWT: []
   description: |
@@ -16,7 +17,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/Storefront/StorefrontKycDocument.yaml
+            $ref: ../../components/schemas/Common/CommonKycDocument.yaml
     401:
       $ref: ../../components/responses/Unauthorized.yaml
     403:
@@ -28,6 +29,7 @@ patch:
     - KYC Document
   summary: Update a KYC document
   operationId: StorefrontPatchKycDocument
+  x-sdk-operation-name: update
   security:
     - CustomerJWT: []
   description: |
@@ -36,7 +38,7 @@ patch:
     content:
       application/json:
         schema:
-          $ref: ../../components/schemas/Storefront/StorefrontKycDocument.yaml
+          $ref: ../../components/schemas/Common/CommonKycDocument.yaml
     description: KYC document resource.
     required: true
   responses:
@@ -45,7 +47,7 @@ patch:
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/Storefront/StorefrontKycDocument.yaml
+            $ref: ../../components/schemas/Common/CommonKycDocument.yaml
     401:
       $ref: ../../components/responses/Unauthorized.yaml
     403:
