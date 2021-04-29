@@ -1,0 +1,31 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: version
+    in: path
+    required: true
+    description: List version.
+    schema:
+      type: integer
+      minimum: 1
+get:
+  tags:
+    - Lists
+  summary: Retrieve values for the given list's version
+  operationId: GetListVersion
+  x-sdk-operation-name: getByVersion
+  responses:
+    '200':
+      description: List's values were retrieved successfully.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: string
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
