@@ -1,0 +1,16 @@
+description: Invoice shipping.
+type: object
+discriminator:
+  propertyName: calculator
+  mapping:
+    manual: ./ShippingTypes/manual.yaml
+    rebilly: ./ShippingTypes/rebilly.yaml
+properties:
+  calculator:
+    description: Shipping calculator.
+    type: string
+    enum:
+      - manual
+      - rebilly
+required:
+  - calculator
