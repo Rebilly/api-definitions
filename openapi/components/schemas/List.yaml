@@ -36,4 +36,15 @@ properties:
     readOnly: true
     minItems: 1
     items:
-      $ref: ./Links/SelfLink.yaml
+      - $ref: ./Links/SelfLink.yaml
+      - type: object
+        allOf:
+          - $ref: ./Links/Link.yaml
+        properties:
+          rel:
+            description: The link type.
+            type: string
+            enum:
+              - values
+        required:
+          - rel
