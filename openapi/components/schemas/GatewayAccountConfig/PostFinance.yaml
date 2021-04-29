@@ -1,0 +1,34 @@
+description: PostFinance config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: PostFinance credentials object.
+        properties:
+          pspId:
+            type: string
+          merchantId:
+            type: string
+          sftpUsername:
+            type: string
+          publicKey:
+            type: string
+            x-multiline: true
+          privateKey:
+            type: string
+            format: password
+            x-multiline: true
+          keyPassphrase:
+            type: string
+            format: password
+        required:
+          - pspId
+          - merchantId
+          - sftpUsername
+          - publicKey
+          - privateKey
+          - keyPassphrase
