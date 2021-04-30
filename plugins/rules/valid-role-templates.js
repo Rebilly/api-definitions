@@ -1,30 +1,23 @@
 module.exports = ValidRoleTemplates
 
 const seenOperations = new Set();
-let seenPermissions = new Set();
+
+const notRegisteredOperations = [
+    // Legacy operations
+    'PostSubscriptionLegacyCancellation',
+    'PostSubscriptionPlanChange',
+    //Not used
+    'GetEventRuleHistory',
+    // Not declared in combined.yaml  
+    'GetFileDownloadPermalink',
+    'PatchEmailDeliverySetting',
+    'VerifyEmailDeliverySetting',
+    'GetInvoiceItem'
+];
 
 function registerOperations() {
-    return (operation, {report}) => {
-        const validateOperationAppearsInPermissions = (operationId) => {
-            if (!seenPermissions.has(operationId)) {
-                report({message: `OperationId ${operationId} not found in x-roleTemplates`})
-            }
-        }
-        
+    return (operation) => {
         seenOperations.add(operation.operationId);
-        // validateOperationAppearsInPermissions(operation.operationId);
-    };
-}
-
-function registerPermissions() {
-    return (root) => {
-        const roleTemplates = root['x-roleTemplates'];
-        if (!roleTemplates) return
-
-        roleTemplates.forEach(role => {
-            const rolePermissions = new Set(role.permissions);
-            seenPermissions = new Set([...seenPermissions, ...rolePermissions]);
-        });
     };
 }
 
@@ -33,15 +26,16 @@ function hasValidRoleTemplates() {
         const roleTemplates = root['x-roleTemplates'];
         if (!roleTemplates) return
         roleTemplates.forEach(role => {
-            const roleId = role.id;
+            const roleValue = role.value;
             const permissions = role.permissions;
-            verifyAllPermissionsExist(roleId, permissions, seenOperations);
+            verifyAllPermissionsExist(roleValue, permissions, seenOperations);
         });
 
-        function verifyAllPermissionsExist(roleId, permissions, seenOperations) {
+        function verifyAllPermissionsExist(roleValue, permissions, seenOperations) {
             permissions.forEach(permission => {
+                if (notRegisteredOperations.includes(permission)) return;
                 if (!seenOperations.has(permission)) {
-                    const errorMessage = `Permission ${permission} in role ${roleId} was not found within operation IDs`
+                    const errorMessage = `Permission ${permission} in role ${roleValue} was not found within operation IDs`
                     report({message: errorMessage});
                 }
             });
@@ -54,7 +48,6 @@ function ValidRoleTemplates() {
     return {
         Operation:  registerOperations(),
         DefinitionRoot: {
-            enter: registerPermissions(),
             leave: hasValidRoleTemplates(),
         },
     }
