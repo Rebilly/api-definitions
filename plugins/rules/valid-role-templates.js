@@ -10,7 +10,25 @@ const notRegisteredOperations = [
     'GetFileDownloadPermalink',
     'PatchEmailDeliverySetting',
     'VerifyEmailDeliverySetting',
-    'GetInvoiceItem'
+    'GetInvoiceItem',
+    // Storefront does not added in `combined`
+    'StorefrontGetAccount',
+    'StorefrontPostRegister',
+    'StorefrontPostLogin',
+    'StorefrontPatchAccount',
+    'StorefrontPatchAccountPassword',
+    'StorefrontGetInvoiceCollection',
+    'StorefrontGetInvoice',
+    'StorefrontGetPlanCollection',
+    'StorefrontGetPlan',
+    'StorefrontGetProductCollection',
+    'StorefrontGetProduct',
+    'StorefrontGetTransactionCollection',
+    'StorefrontGetTransaction',
+    'StorefrontGetPlanCollection',
+    'StorefrontGetPlan',
+    'StorefrontGetProductCollection',
+    'StorefrontGetProduct',
 ];
 
 function registerOperations() {
