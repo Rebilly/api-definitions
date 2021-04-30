@@ -1,0 +1,13 @@
+description: Manually set tax items.
+allOf:
+  - $ref: ../InvoiceTax.yaml
+  - type: object
+    required:
+      - amount
+    properties:
+      items:
+        type: array
+        description: Taxes applied to this invoice.
+        items:
+          allOf:
+            - $ref: ../InvoiceTaxItem.yaml
