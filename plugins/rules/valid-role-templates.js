@@ -6,10 +6,6 @@ const notRegisteredOperations = [
     // Legacy operations
     'PostSubscriptionLegacyCancellation',
     'PostSubscriptionPlanChange',
-    // Not declared in combined.yaml
-    'GetFileDownloadPermalink',
-    'PatchEmailDeliverySetting',
-    'VerifyEmailDeliverySetting',
     'GetInvoiceItem',
     // Storefront does not added in `combined`
     'StorefrontGetAccount',
