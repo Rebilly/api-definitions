@@ -2,31 +2,6 @@ module.exports = ValidRoleTemplates
 
 const seenOperations = new Set();
 
-const notRegisteredOperations = [
-    // Legacy operations
-    'PostSubscriptionLegacyCancellation',
-    'PostSubscriptionPlanChange',
-    'GetInvoiceItem',
-    // Storefront does not added in `combined`
-    'StorefrontGetAccount',
-    'StorefrontPostRegister',
-    'StorefrontPostLogin',
-    'StorefrontPatchAccount',
-    'StorefrontPatchAccountPassword',
-    'StorefrontGetInvoiceCollection',
-    'StorefrontGetInvoice',
-    'StorefrontGetPlanCollection',
-    'StorefrontGetPlan',
-    'StorefrontGetProductCollection',
-    'StorefrontGetProduct',
-    'StorefrontGetTransactionCollection',
-    'StorefrontGetTransaction',
-    'StorefrontGetPlanCollection',
-    'StorefrontGetPlan',
-    'StorefrontGetProductCollection',
-    'StorefrontGetProduct',
-];
-
 function registerOperations() {
     return (operation) => {
         seenOperations.add(operation.operationId);
@@ -36,6 +11,7 @@ function registerOperations() {
 function hasValidRoleTemplates() {
     return (root, {report}) => {
         const roleTemplates = root['x-roleTemplates'];
+        const roleTemplatesExtraOperationIds = root['x-roleTemplatesExtraOperationIds'];
         if (!roleTemplates) return
         roleTemplates.forEach(role => {
             const roleValue = role.value;
@@ -45,7 +21,7 @@ function hasValidRoleTemplates() {
 
         function verifyAllPermissionsExist(roleValue, permissions, seenOperations) {
             permissions.forEach(permission => {
-                if (notRegisteredOperations.includes(permission)) return;
+                if (roleTemplatesExtraOperationIds.includes(permission)) return;
                 if (!seenOperations.has(permission)) {
                     const errorMessage = `Permission ${permission} in role ${roleValue} was not found within operation IDs`
                     report({message: errorMessage});
