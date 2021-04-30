@@ -15,7 +15,7 @@ function requiredSdkOperationName() {
         }
         if (seenOperationNames.has(operation['x-sdk-operation-name'])) {
             report({
-                message: 'Every operation must have a unique `operationId`.',
+                message: 'Every operation must have a unique `x-sdk-operation-name`.',
                 location: location.child([operation.operationId]),
             });
         }
