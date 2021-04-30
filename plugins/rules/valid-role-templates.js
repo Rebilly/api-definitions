@@ -6,9 +6,7 @@ const notRegisteredOperations = [
     // Legacy operations
     'PostSubscriptionLegacyCancellation',
     'PostSubscriptionPlanChange',
-    //Not used
-    'GetEventRuleHistory',
-    // Not declared in combined.yaml  
+    // Not declared in combined.yaml
     'GetFileDownloadPermalink',
     'PatchEmailDeliverySetting',
     'VerifyEmailDeliverySetting',
