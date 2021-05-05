@@ -12,7 +12,7 @@ properties:
     items:
       $ref: ../KycDocument/KycDocumentTypes.yaml
   documentSubtypes:
-    description: Document subtype submitted for validation.
+    description: Document subtype allowed for customer.
     type: array
     items:
       $ref: ../KycDocument/KycDocumentSubtypes.yaml
@@ -38,12 +38,3 @@ properties:
     description: Latest update date/time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
-  _links:
-    type: array
-    description: The links related to resource.
-    readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Links/SelfLink.yaml
-        - $ref: ../Links/KycDocumentsLink.yaml
