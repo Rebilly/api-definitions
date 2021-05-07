@@ -28,13 +28,13 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-put:
+patch:
   tags:
     - KYC Documents
-  summary: Create or update a KYC request with predefined ID
-  operationId: PutKycRequest
+  summary: Update a KYC request
+  operationId: PatchKycRequest
   x-sdk-operation-name: update
-  description: Create or update a KYC request with predefined identifier string.
+  description: Update a KYC request.
   requestBody:
     content:
       application/json:
@@ -45,19 +45,6 @@ put:
   responses:
     '200':
       description: KYC request was updated.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/KycRequest.yaml
-    '201':
-      description: KYC request was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
