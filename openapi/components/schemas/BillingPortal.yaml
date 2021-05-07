@@ -3,12 +3,20 @@ allOf:
   - type: object
     required:
       - name
+      - slug
     properties:
       name:
         description: >-
           Billing portal name, used for internal display to help you organize your
           various billing portals. Will not be displayed to your customers.
         type: string
+      slug:
+        description: >-
+          The url path segment that will be appended to the billing portal
+          url (e.g. https://rebilly.com/billing-portal/`{slug}`) to make it human-readable and simple.
+        type: string
+        minLength: 5
+        maxLength: 100
       status:
         description: If `inactive`, the billing portal url will result in a 404.
         type: string
