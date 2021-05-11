@@ -58,6 +58,8 @@ properties:
       - declined
       - unknown
   amount:
+    x-type: Money
+    x-sortable: true
     description: The transaction's amount.
     type: number
     format: double
@@ -158,6 +160,7 @@ properties:
     description: The transaction's request ID.  This ID must be unique within a 24 hour period.
       Use this field to prevent duplicated transactions.
     type: string
+    x-sortable: true
   hasAmountAdjustment:
     description: True if transaction has amount adjustment.
     type: boolean
@@ -166,6 +169,7 @@ properties:
     readOnly: true
     description: |
       Payment Gateway name, available only after the gateway is selected for the transaction.
+    x-label: Gateway account
     allOf:
       - $ref: ../Gateways/GatewayName.yaml
   customFields:
@@ -176,6 +180,8 @@ properties:
       - $ref: ../ServerTimestamp.yaml
   createdTime:
     description: Transaction created time.
+    x-label: Created On
+    x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
