@@ -99,6 +99,7 @@ allOf:
         nullable: true
       bin:
         description: Payment Card BIN.
+        x-label: BIN
         type: string
         format: bin
         readOnly: true
@@ -200,6 +201,7 @@ allOf:
         format: date-time
         readOnly: true
         nullable: true
+        x-sortable: true
       disputeStatus:
         description: The dispute's status, else null.
         nullable: true
@@ -234,7 +236,9 @@ allOf:
           The transaction's order ID.  This ID must be unique within a 24 hour
           period. This field was renamed to the `requestId`.
         type: string
+        x-sortable: true
       arn:
+        x-label: ARN
         type: string
         readOnly: true
         description: The acquirer reference number.
