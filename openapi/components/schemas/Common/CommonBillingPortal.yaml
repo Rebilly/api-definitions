@@ -1,12 +1,20 @@
 type: object
 required:
   - websiteId
+  - slug
 properties:
   id:
     description: The billing portal identifier string.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
+  slug:
+    description: >-
+      The url path segment that will be appended to the billing portal
+      url (e.g. `https://rebilly.com/billing-portal/{slug}`) to make it human-readable and simple.
+    type: string
+    minLength: 5
+    maxLength: 100
   websiteId:
     description: Billing portal website ID.
     allOf:
