@@ -23,6 +23,7 @@ tags:
   - name: Account management
   - name: Account
   - name: Authentication
+  - name: Billing Portals
   - name: Checkout Forms
   - name: Email verification
   - name: Password reset
@@ -42,6 +43,7 @@ x-tagGroups:
     tags:
       - Account
       - Authentication
+      - Billing Portals
       - Email verification
       - Password reset
       - KYC Document
@@ -83,6 +85,8 @@ paths:
     $ref: paths/storefront/account@reset-password@{token}.yaml
   '/account/verification/{token}':
     $ref: paths/storefront/account@verification@{token}.yaml
+  '/billing-portals/{slug}':
+    $ref: paths/storefront/billing-portals@{slug}.yaml
   '/checkout-forms/{id}':
     $ref: paths/storefront/checkout-forms@{id}.yaml
   '/invoices':

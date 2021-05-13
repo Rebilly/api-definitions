@@ -1,0 +1,31 @@
+parameters:
+  - name: slug
+    in: path
+    description: The resource slug.
+    required: true
+    schema:
+      type: string
+      maxLength: 100
+      pattern: '^[@~\-\.\w]+$'
+  - $ref: ../../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Billing Portals
+  summary: Retrieve a billing portal
+  operationId: StorefrontGetBillingPortal
+  x-sdk-operation-name: get
+  description: |
+    Retrieve a billing portal with a specified slug.
+  responses:
+    '200':
+      description: Billing portal was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/StorefrontBillingPortal.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../../components/responses/NotFound.yaml
