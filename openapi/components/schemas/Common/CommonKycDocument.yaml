@@ -27,12 +27,6 @@ properties:
      description: Document subtype submitted for validation.
      allOf:
        - $ref: ../KycDocument/KycDocumentSubtypes.yaml
-  matchLevel:
-    description: The level of strictness for the document matches.
-    type: integer
-    minimum: 1
-    maximum: 2
-    example: 2
   status:
     description: Status of the validation.
     type: string
@@ -42,11 +36,14 @@ properties:
       - in-progress
       - accepted
       - rejected
-  reason:
-    description: Reason for uploading.
-    type: string
   rejectionReason:
     $ref: ../KycDocument/KycDocumentRejection.yaml
+  requestId:
+    readOnly: true
+    nullable: true
+    description: KYC request identifier string.
+    allOf:
+      - $ref: ../ResourceId.yaml
   createdTime:
     description: Creation date/time.
     allOf:
