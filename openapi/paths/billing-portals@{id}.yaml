@@ -1,0 +1,96 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  tags:
+    - Billing Portals
+  summary: Retrieve a billing portal
+  operationId: GetBillingPortal
+  x-sdk-operation-name: get
+  description: |
+    Retrieve a billing portal with specified identifier string.
+  responses:
+    '200':
+      description: Billing portal was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/BillingPortal.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  tags:
+    - Billing Portals
+  summary: Create or update a billing portal
+  operationId: PutBillingPortal
+  x-sdk-operation-name: update
+  description: |
+    Create or update a billing portal with predefined identifier string.
+  responses:
+    '200':
+      description: Billing portal was updated.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/BillingPortal.yaml
+    '201':
+      description: Billing portal was created.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/BillingPortal.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/BillingPortal.yaml
+delete:
+  tags:
+    - Billing Portals
+  summary: Delete a billing portal
+  operationId: DeleteBillingPortal
+  x-sdk-operation-name: delete
+  description: |
+    Delete a billing portal with predefined identifier string.
+  responses:
+    '204':
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      description: Billing portal was deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
