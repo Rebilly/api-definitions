@@ -1,0 +1,95 @@
+type: object
+required:
+  - websiteId
+  - slug
+properties:
+  id:
+    description: The billing portal identifier string.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  slug:
+    description: >-
+      The url path segment that will be appended to the billing portal
+      url (e.g. `https://rebilly.com/billing-portal/{slug}`) to make it human-readable and simple.
+    type: string
+    minLength: 5
+    maxLength: 100
+  websiteId:
+    description: Billing portal website ID.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  features:
+    description: Various features that can be enabled for the billing portal.
+    type: object
+    properties:
+      authenticateWithPassword:
+        description: Enable or disable a customer ability to authenticate with a password.
+        type: boolean
+        default: true
+      orderCancel:
+        description: Enable or disable a customer ability to cancel an order.
+        type: boolean
+        default: true
+      orderAddressEdit:
+        description: Enable or disable a customer ability to change an order address.
+        type: boolean
+        default: true
+      paymentInstrumentAdd:
+        description: Enable or disable a customer ability to add a new payment instrument.
+        type: boolean
+        default: true
+      paymentInstrumentUpdate:
+        description: Enable or disable a customer ability to update their payment instruments.
+        type: boolean
+        default: true
+      paymentInstrumentDeactivate:
+        description: Enable or disable a customer ability to disable their payment instruments.
+        type: boolean
+        default: true
+  customization:
+    description: Visual customization options for the billing portal.
+    type: object
+    properties:
+      logoId:
+        description: Linked file object ID.
+        allOf:
+          - $ref: ../ResourceId.yaml
+      colors:
+        description: Various colors used in the billing portal.
+        type: object
+        properties:
+          primary:
+            description: Primary color for the billing portal in hexadecimal format.
+            type: string
+            maxLength: 6
+            default: '0044d4'
+          secondary:
+            description: Secondary color for the billing portal in hexadecimal format.
+            type: string
+            maxLength: 6
+            default: 'ffffff'
+      links:
+        description: Various urls that appear on the billing portal.
+        type: object
+        properties:
+          refundPolicy:
+            description: The url to the website refund policy.
+            type: string
+            format: url
+          privacyPolicy:
+            description: The url to the website privacy policy.
+            type: string
+            format: url
+          termsOfService:
+            description: The url to the website terms of service.
+            type: string
+            format: url
+  createdTime:
+    description: Billing portal created time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: Billing portal updated time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
