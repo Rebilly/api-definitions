@@ -24,3 +24,30 @@ get:
       $ref: ../../components/responses/Forbidden.yaml
     404:
       $ref: ../../components/responses/NotFound.yaml
+patch:
+  tags:
+    - Order
+  summary: Update an order
+  operationId: StorefrontPatchSubscription
+  x-sdk-operation-name: update
+  security:
+    - CustomerJWT: []
+  description: |
+    Update an order with predefined ID.
+  requestBody:
+    $ref: ../../components/requestBodies/storefront/PatchOrder.yaml
+  responses:
+    200:
+      description: Order was updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/StorefrontOrder.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml
+    422:
+      $ref: ../../components/responses/ValidationError.yaml
