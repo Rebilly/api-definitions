@@ -1,5 +1,13 @@
 type: object
 properties:
+  riskMetadata:
+    nullable: true
+    example: null
+    description: >-
+      Risk metadata. If null, the value would coalesce to the risk metadata
+      captured when creating the payment token.
+    allOf:
+      - $ref: ../RiskMetadata.yaml
   customFields:
     $ref: ../ResourceCustomFields.yaml
   createdTime:
