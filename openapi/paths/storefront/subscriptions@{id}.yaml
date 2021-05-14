@@ -1,0 +1,26 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+  - $ref: ../../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Order
+  summary: Retrieve an order
+  operationId: StorefrontGetSubscription
+  x-sdk-operation-name: get
+  security:
+    - CustomerJWT: []
+  description: |
+    Retrieve an order with specified identifier string.
+  responses:
+    200:
+      description: Order was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/StorefrontOrder.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml

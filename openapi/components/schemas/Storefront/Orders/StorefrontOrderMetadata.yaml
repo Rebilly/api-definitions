@@ -1,0 +1,20 @@
+type: object
+properties:
+  customFields:
+    $ref: ../../ResourceCustomFields.yaml
+  createdTime:
+    description: Order created time.
+    allOf:
+      - $ref: ../../ServerTimestamp.yaml
+  updatedTime:
+    description: Order updated time.
+    allOf:
+      - $ref: ../../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../../Links/SelfLink.yaml
