@@ -1,12 +1,12 @@
 type: object
-title: 'Instrument'
 required:
   - method
-  - paymentInstrumentId
 properties:
   method:
     $ref: ../../PaymentMethods/PaymentMethod.yaml
   paymentInstrumentId:
-    description: The payment instrument ID.
+    description: |
+      The payment instrument ID. It will be empty for alternative payment methods
+      if there is no billing address within the transaction or customer.
     allOf:
       - $ref: ../../ResourceId.yaml
