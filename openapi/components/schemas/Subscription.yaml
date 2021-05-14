@@ -11,7 +11,7 @@ required:
   - items
 properties:
   id:
-    description: The Order identifier string.
+    description: The order identifier string.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
@@ -40,21 +40,21 @@ properties:
       - disputed
       - voided
   customerId:
-    description: Unique id for each customer.
+    description: The customer identifier string.
     allOf:
       - $ref: ./ResourceId.yaml
   websiteId:
-    description: Unique id for each website.
+    description: The website identifier string.
     allOf:
       - $ref: ./ResourceId.yaml
   initialInvoiceId:
-    description: Unique id for the initial invoice.
+    description: The initial invoice identifier string.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
   recentInvoiceId:
     description: >-
-      Unique id for the most recently issued invoice. It might not be `paid` yet.
+      Most recently issued invoice identifier string. It might not be `paid` yet.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
@@ -67,7 +67,7 @@ properties:
         - plan
       properties:
         planId:
-          description: Unique id for each plan.
+          description: The plan identifier string.
           deprecated: true
           allOf:
             - $ref: ./ResourceId.yaml
