@@ -22,11 +22,14 @@ properties:
     allOf:
       - $ref: ../ResourceId.yaml
   currency:
+    x-sortable: true
     allOf:
       - $ref: ../CurrencyCode.yaml
   amount:
     description: The invoice's amount.
     type: number
+    x-type: Money
+    x-sortable: true
     format: double
     readOnly: true
   amountDue:
@@ -37,11 +40,13 @@ properties:
   subtotalAmount:
     description: The invoice's subtotal amount.
     type: number
+    x-type: Money
     format: double
     readOnly: true
   discountAmount:
     description: The invoice's discounts amount.
     type: number
+    x-type: Money
     format: double
     readOnly: true
   shipping:
@@ -119,6 +124,8 @@ properties:
     allOf:
       - $ref: ../ServerTimestamp.yaml
   paidTime:
+    x-label: Payment Date
+    x-sortable: true
     description: Invoice paid time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
@@ -128,6 +135,8 @@ properties:
       - $ref: ../ServerTimestamp.yaml
   issuedTime:
     description: Invoice issued time.
+    x-label: Date Issued
+    x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   createdTime:
