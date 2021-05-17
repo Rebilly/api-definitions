@@ -35,6 +35,8 @@ properties:
   amountDue:
     description: The invoice's due amount.
     type: number
+    x-type: Money
+    x-sortable: true
     format: double
     readOnly: true
   subtotalAmount:
@@ -85,11 +87,13 @@ properties:
   autopayScheduledTime:
     description: Invoice autopay scheduled time.
     type: string
+    x-sortable: true
     format: date-time
   autopayRetryNumber:
     description: Invoice autopay retry number.
     readOnly: true
     type: integer
+    x-sortable: true
     minimum: 0
     default: 0
   status:
@@ -110,17 +114,21 @@ properties:
   delinquentCollectionPeriod:
     type: integer
     description: Delinquent collection period - difference between paidTime and dueTime in days.
+    x-sortable: true
     readOnly: true
   collectionPeriod:
     type: integer
+    x-sortable: true
     description: Collection period - difference between paidTime and issuedTime in days.
     readOnly: true
   abandonedTime:
     description: Invoice abandoned time.
+    x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   voidedTime:
     description: Invoice voided time.
+    x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   paidTime:
@@ -131,6 +139,7 @@ properties:
       - $ref: ../ServerTimestamp.yaml
   dueTime:
     description: Invoice due time.
+    x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   issuedTime:
@@ -141,9 +150,11 @@ properties:
       - $ref: ../ServerTimestamp.yaml
   createdTime:
     description: Invoice created time.
+    x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
     description: Invoice updated time.
+    x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
