@@ -83,16 +83,19 @@ allOf:
           the current time. This value can't be in past more than one service
           period.
         nullable: true
+        x-sortable: true
         example: null
         type: string
         format: date-time
       endTime:
         description: Subscription end time.
+        x-sortable: true
         allOf:
           - $ref: ../../ServerTimestamp.yaml
       renewalTime:
         description: Subscription renewal time.
         type: string
+        x-sortable: true
         format: date-time
       rebillNumber:
         description: The current period number.
@@ -131,9 +134,13 @@ allOf:
           exceed debits, it will be a negative number.
         properties:
           currency:
+            x-label: Currency
+            x-sortable: true
             $ref: ../../CurrencyCode.yaml
           amount:
             type: number
+            x-type: Money
+            x-sortable: true
             format: double
             example: 49.95
   - $ref: ../SubscriptionCancellationState.yaml
