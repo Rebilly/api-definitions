@@ -1,0 +1,17 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+  - $ref: ../../components/parameters/organizationId.yaml
+get:
+  tags: [Fees]
+  summary: Retrieve a fee entry
+  operationId: GetFee
+  x-sdk-operation-name: get
+  responses:
+    '200':
+      $ref: ../../components/responses/Fees/GetFee-200.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../../components/responses/NotFound.yaml

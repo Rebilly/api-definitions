@@ -1,0 +1,20 @@
+type: object
+required:
+  - type
+  - name
+  - formula
+properties:
+  type:
+    type: string
+    enum: ["buy", "sell"]
+  name:
+    type: string
+    description: A fee name.
+    example: 'A gateway fee'
+  filter:
+    description: A filter which used to verify an applicaiton. The filter is based on transaction.
+    example: 'type:sale,capture;result:approved'
+    allOf:
+      - $ref: ../FilterString.yaml
+  formula:
+    $ref: ./FeeFormula.yaml

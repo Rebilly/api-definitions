@@ -200,6 +200,9 @@ tags:
       their granted permissions.  It has resources less commonly integrated by
 
       3rd parties.
+  - name: Fees
+    description: |
+      Buy and sell fees.
 x-tagGroups:
   - name: Customers
     tags:
@@ -238,6 +241,7 @@ x-tagGroups:
       - Reports
       - Search
       - Users
+      - Fees
 security:
   - SecretApiKey: []
   - JWT: []
@@ -610,3 +614,7 @@ x-webhooks:
   waiting-gateway-transaction-completed:
     post:
       $ref: ./webhooks/waiting-gateway-transaction-completed.yaml
+  /fees:
+    $ref: './paths/fees/fees.yaml'
+  '/fees/{id}':
+    $ref: './paths/fees/fees@{id}.yaml'

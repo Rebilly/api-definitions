@@ -1,0 +1,12 @@
+type: object
+discriminator:
+  propertyName: type
+  mapping:
+    fixed-fee: ./Formulas/FixedFeeFormula.yaml
+    percentage: ./Formulas/PercentageFormula.yaml
+required:
+  - type
+properties:
+  type:
+    type: string
+    enum: ["fixed-fee", "percentage"]

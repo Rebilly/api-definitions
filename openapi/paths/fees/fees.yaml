@@ -1,0 +1,37 @@
+parameters:
+  - $ref: ../../components/parameters/organizationId.yaml
+get:
+  tags: [Fees]
+  summary: Retrieve a list of Fees entries
+  operationId: GetFeeCollection
+  x-sdk-operation-name: getAll
+  parameters:
+    - $ref: ../../components/parameters/collectionLimit.yaml
+    - $ref: ../../components/parameters/collectionOffset.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/Fees/GetFeeCollection-200.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+post:
+  tags: [Fees]
+  summary: Create a fee entry
+  operationId: PostFee
+  x-sdk-operation-name: create
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/Fees/Fee.yaml
+  responses:
+    '201':
+      $ref: ../../components/responses/Fees/PostFee-201.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../../components/responses/ValidationError.yaml
