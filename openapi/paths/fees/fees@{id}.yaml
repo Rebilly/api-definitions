@@ -8,7 +8,18 @@ get:
   x-sdk-operation-name: get
   responses:
     '200':
-      $ref: ../../components/responses/Fees/GetFee-200.yaml
+      description: A fee was retrieved successfully.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Fees/Fee.yaml
     '401':
       $ref: ../../components/responses/Unauthorized.yaml
     '403':
