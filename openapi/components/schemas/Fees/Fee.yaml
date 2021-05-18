@@ -4,6 +4,11 @@ required:
   - name
   - formula
 properties:
+  id:
+    description: The fee identifier.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
   type:
     type: string
     enum: ["buy", "sell"]
@@ -18,3 +23,11 @@ properties:
       - $ref: ../FilterString.yaml
   formula:
     $ref: ./FeeFormula.yaml
+  _links:
+    type: array
+    description: The links related to resource.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Links/SelfLink.yaml
