@@ -15,9 +15,13 @@ properties:
   name:
     type: string
     description: A fee name.
+    minLength: 1
+    maxLength: 255
     example: 'A gateway fee'
   filter:
     description: A filter which used to verify an applicaiton. The filter is based on transaction.
+    minLength: 1
+    maxLength: 255
     example: 'type:sale,capture;result:approved'
     allOf:
       - $ref: ../FilterString.yaml
