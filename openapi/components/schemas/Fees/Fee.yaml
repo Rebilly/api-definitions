@@ -1,37 +1,7 @@
-type: object
-required:
-  - type
-  - name
-  - formula
-properties:
-  id:
-    description: The fee identifier.
-    readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
-  type:
-    type: string
-    enum: ["buy", "sell"]
-  name:
-    type: string
-    description: A fee name.
-    minLength: 1
-    maxLength: 255
-    example: 'A gateway fee'
-  filter:
-    description: A filter which used to verify an applicaiton. The filter is based on transaction.
-    minLength: 1
-    maxLength: 255
-    example: 'type:sale,capture;result:approved'
-    allOf:
-      - $ref: ../FilterString.yaml
-  formula:
-    $ref: ./FeeFormula.yaml
-  _links:
-    type: array
-    description: The links related to resource.
-    readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Links/SelfLink.yaml
+allOf:
+  - $ref: ./BaseFee.yaml
+  - type: object
+    required:
+      - type
+      - name
+      - formula
