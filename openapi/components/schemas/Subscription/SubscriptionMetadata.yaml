@@ -1,5 +1,21 @@
 type: object
 properties:
+  revision:
+    description: >
+      The number of times the order data has been modified.
+
+      The revision is useful when analyzing webhook data to determine if the
+      change takes precedence over the current representation.
+    type: integer
+    readOnly: true
+  riskMetadata:
+    nullable: true
+    example: null
+    description: >-
+      Risk metadata. If null, the value would coalesce to the risk metadata
+      captured when creating the payment token.
+    allOf:
+      - $ref: ../RiskMetadata.yaml
   customFields:
     $ref: ../ResourceCustomFields.yaml
   createdTime:
