@@ -1,0 +1,136 @@
+type: object
+properties:
+  id:
+    description: The order identifier string.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  orderType:
+    description: |
+      Specifies the type of order, a subscription or a one-time purchase.
+    type: string
+    enum:
+      - subscription-order
+      - one-time-order
+    default: subscription-order
+  billingStatus:
+    description: |
+      The billing status of the most recent invoice.  It may
+      help you determine if you should change the service status
+      such as suspending the service.
+    type: string
+    readOnly: true
+    enum:
+      - unpaid
+      - past-due
+      - delinquent
+      - paid
+      - voided
+      - refunded
+      - disputed
+      - voided
+  websiteId:
+    description: The website identifier string.
+    x-sortable: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  initialInvoiceId:
+    description: The initial invoice identifier string.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  recentInvoiceId:
+    description: >-
+      Most recently issued invoice identifier string. It might not be `paid` yet.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  items:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      required:
+        - plan
+      properties:
+        planId:
+          description: The plan identifier string.
+          deprecated: true
+          allOf:
+            - $ref: ../ResourceId.yaml
+        quantity:
+          description: Number of units of the product on the given plan.
+          type: integer
+        plan:
+          $ref: ../Plans/FlexiblePlan.yaml
+        revision:
+          type: integer
+          readOnly: true
+          description: Increments with each override change to this specific item.
+        isModified:
+          type: boolean
+          readOnly: true
+          description: Indicates if the plan information was modified for this subscription.
+        isGrandfathered:
+          type: boolean
+          readOnly: true
+          description: Indicates if the plan's current revision is greater than this item's plan revision.
+  deliveryAddress:
+    description: Order delivery address.
+    nullable: true
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  billingAddress:
+    description: Order billing address.
+    nullable: true
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  activationTime:
+    description: Order activation time.
+    x-sortable: true
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  voidTime:
+    description: Order void time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  couponIds:
+    type: array
+    nullable: true
+    description: >
+      A list of coupons to redeem on the customer and restrict to this
+      subscription.
+
+      Read more about [coupons
+      here](https://docs.rebilly.com/docs/dashboard/marketing/coupons-and-discounts/).
+
+
+      This parameter respects the following logic:
+
+
+      - When not passed then applied coupons will not be changed.
+
+
+      - When empty array passed then all applied coupon redemptions will be
+      canceled.
+
+
+      - When list of coupons is passed then not applied yet coupons will be
+      applied, already applied coupons
+
+      will not change their state, applied coupons that are not presented in
+      passed list will be canceled.
+
+
+      If list of applied coupons on pending order will be changed due to
+      this param during update order,
+       Invoice for the order will be reissued.
+    writeOnly: true
+    items:
+      type: string
+      description: Coupon ID.
+  poNumber:
+    description: Purchase order number, will be displayed on the issued invoices.
+    nullable: true
+    example: PO123456
+    type: string
