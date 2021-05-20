@@ -247,6 +247,17 @@ allOf:
         type: string
         description: The time the transaction is scheduled for collection.
         format: date-time
+      reportAmount:
+        description: Transaction amount converted to organization selected report currency.
+        type: number
+        x-type: Money
+        x-currency-field: reportCurrency
+        format: double
+        readOnly: true
+      reportCurrency:
+        readOnly: true
+        allOf:
+          - $ref: ../CurrencyCode.yaml
       _links:
         type: array
         description: The links related to resource.
