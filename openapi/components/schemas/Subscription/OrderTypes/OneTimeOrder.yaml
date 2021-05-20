@@ -1,0 +1,16 @@
+type: object
+required:
+  - orderType
+  - customerId
+  - websiteId
+  - items
+allOf:
+  - $ref: ../../Common/CommonOneTimeOrder.yaml
+  - properties:
+      customerId:
+        description: The customer identifier string.
+        allOf:
+          - $ref: ../../ResourceId.yaml
+  # Always keep the SubscriptionMetadata the latest merged schema,
+  # it contains _links and _embedded which is better to keep at the end of doc.
+  - $ref: ../SubscriptionMetadata.yaml

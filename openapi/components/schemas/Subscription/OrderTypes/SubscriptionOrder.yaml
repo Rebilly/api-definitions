@@ -1,0 +1,35 @@
+type: object
+required:
+  - orderType
+  - customerId
+  - websiteId
+  - items
+allOf:
+  - $ref: ../../Common/CommonSubscriptionOrder.yaml
+  - properties:
+      customerId:
+        description: The customer identifier string.
+        allOf:
+          - $ref: ../../ResourceId.yaml
+      renewalReminderTime:
+        description: Time renewal reminder event will be triggered.
+        nullable: true
+        allOf:
+          - $ref: ../../ServerTimestamp.yaml
+      renewalReminderNumber:
+        description: Number of renewal reminder events triggered.
+        type: integer
+        readOnly: true
+      trialReminderTime:
+        description: Time renewal reminder event will be triggered.
+        nullable: true
+        allOf:
+          - $ref: ../../ServerTimestamp.yaml
+      trialReminderNumber:
+        description: Number of renewal reminder events triggered.
+        type: integer
+        readOnly: true
+  - $ref: ../SubscriptionCancellationState.yaml
+  # Always keep the SubscriptionMetadata the latest merged schema,
+  # it contains _links and _embedded which is better to keep at the end of doc.
+  - $ref: ../SubscriptionMetadata.yaml

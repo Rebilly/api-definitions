@@ -1,5 +1,6 @@
+type: object
 allOf:
-  - $ref: ../../Subscription.yaml
+  - $ref: ./CommonSubscription.yaml
   - properties:
       status:
         description: |
@@ -57,7 +58,7 @@ allOf:
         nullable: true
         example: null
         allOf:
-          - $ref: ../../Invoices/InvoiceTimeShift.yaml
+          - $ref: ../Invoices/InvoiceTimeShift.yaml
       recurringInterval:
         type: object
         description: >
@@ -72,7 +73,7 @@ allOf:
         example: null
         properties:
           periodAnchorInstruction:
-            $ref: ../../Scheduling/ServicePeriodAnchorInstruction.yaml
+            $ref: ../Scheduling/ServicePeriodAnchorInstruction.yaml
       autopay:
         description: Autopay determines if a payment attempt will be automatic.
         type: boolean
@@ -91,7 +92,7 @@ allOf:
         description: Subscription end time.
         x-sortable: true
         allOf:
-          - $ref: ../../ServerTimestamp.yaml
+          - $ref: ../ServerTimestamp.yaml
       renewalTime:
         description: Subscription renewal time.
         type: string
@@ -101,31 +102,13 @@ allOf:
         description: The current period number.
         type: integer
         readOnly: true
-      renewalReminderTime:
-        description: Time renewal reminder event will be triggered.
-        nullable: true
-        allOf:
-          - $ref: ../../ServerTimestamp.yaml
-      renewalReminderNumber:
-        description: Number of renewal reminder events triggered.
-        type: integer
-        readOnly: true
-      trialReminderTime:
-        description: Time renewal reminder event will be triggered.
-        nullable: true
-        allOf:
-          - $ref: ../../ServerTimestamp.yaml
-      trialReminderNumber:
-        description: Number of renewal reminder events triggered.
-        type: integer
-        readOnly: true
       lineItems:
         description: >-
           Subscription line items which queue until the next renewal (or interim)
           invoice is issued for the subscription.
         readOnly: true
         allOf:
-          - $ref: ../UpcomingInvoiceItemCollection.yaml
+          - $ref: ../Subscription/UpcomingInvoiceItemCollection.yaml
       lineItemSubtotal:
         type: object
         readOnly: true
@@ -136,14 +119,10 @@ allOf:
           currency:
             x-label: Currency
             x-sortable: true
-            $ref: ../../CurrencyCode.yaml
+            $ref: ../CurrencyCode.yaml
           amount:
             type: number
             x-type: Money
             x-sortable: true
             format: double
             example: 49.95
-  - $ref: ../SubscriptionCancellationState.yaml
-  # Always keep the SubscriptionMetadata the latest merged schema,
-  # it contains _links and _embedded which is better to keep at the end of doc.
-  - $ref: ../SubscriptionMetadata.yaml

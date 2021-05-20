@@ -32,7 +32,7 @@ tags:
   - name: Payment Instrument
   - name: Purchase
   - name: Transaction
-  - name: Orders
+  - name: Order
   - name: Invoice
   - name: Product
   - name: Plan
@@ -55,6 +55,7 @@ x-tagGroups:
     tags:
       - Checkout Forms
       - Purchase
+      - Order
       - Invoice
       - Product
       - Plan
@@ -101,6 +102,12 @@ paths:
     $ref: paths/storefront/login.yaml
   '/logout':
     $ref: paths/storefront/logout.yaml
+  '/orders':
+    $ref: paths/storefront/orders.yaml
+  '/orders/{id}':
+    $ref: paths/storefront/orders@{id}.yaml
+  '/orders/{id}/cancellation':
+    $ref: paths/storefront/orders@{id}@cancellation.yaml
   '/payment':
     $ref: paths/storefront/payment.yaml
   '/payment-instruments':
