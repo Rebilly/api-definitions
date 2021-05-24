@@ -1,0 +1,20 @@
+description: MiFinity config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: MiFinity credentials object.
+        properties:
+          apiKey:
+            type: string
+            format: password
+          mifinityAccountNumber:
+            type: string
+            format: password
+        required:
+          - apiKey
+          - accountNumber
