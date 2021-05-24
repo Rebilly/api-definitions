@@ -5,12 +5,16 @@ get:
     - Orders
   summary: Retrieve a list of orders
   operationId: GetSubscriptionCollection
+  x-sdk-operation-name: getAll
   description: |
     Retrieve a list of orders.
   parameters:
-    - $ref: ../components/parameters/subscriptionExpand.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml   
+    - $ref: ../components/parameters/subscriptionExpand.yaml
   responses:
     '200':
       description: A list of subscriptions was retrieved successfully.
@@ -49,6 +53,7 @@ post:
     - Orders
   summary: Create an order
   operationId: PostSubscription
+  x-sdk-operation-name: create
   description: |
     Create an order. Consider using the upsert.
     operation to accomplish this task.

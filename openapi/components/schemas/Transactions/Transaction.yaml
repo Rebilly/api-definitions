@@ -99,6 +99,7 @@ allOf:
         nullable: true
       bin:
         description: Payment Card BIN.
+        x-label: BIN
         type: string
         format: bin
         readOnly: true
@@ -200,6 +201,7 @@ allOf:
         format: date-time
         readOnly: true
         nullable: true
+        x-sortable: true
       disputeStatus:
         description: The dispute's status, else null.
         nullable: true
@@ -234,7 +236,9 @@ allOf:
           The transaction's order ID.  This ID must be unique within a 24 hour
           period. This field was renamed to the `requestId`.
         type: string
+        x-sortable: true
       arn:
+        x-label: ARN
         type: string
         readOnly: true
         description: The acquirer reference number.
@@ -243,6 +247,17 @@ allOf:
         type: string
         description: The time the transaction is scheduled for collection.
         format: date-time
+      reportAmount:
+        description: Transaction amount converted to organization selected report currency.
+        type: number
+        x-type: Money
+        x-currency-field: reportCurrency
+        format: double
+        readOnly: true
+      reportCurrency:
+        readOnly: true
+        allOf:
+          - $ref: ../CurrencyCode.yaml
       _links:
         type: array
         description: The links related to resource.
@@ -259,7 +274,6 @@ allOf:
             - $ref: ../Links/RetriedTransactionLink.yaml
             - $ref: ../Links/LeadSourceLink.yaml
             - $ref: ../Links/ApprovalUrlLink.yaml
-            - $ref: ../Links/CancelUrlLink.yaml
             - $ref: ../Links/RefundUrlLink.yaml
             - $ref: ../Links/TransactionUpdateUrlLink.yaml
             - $ref: ../Links/DisputeLink.yaml

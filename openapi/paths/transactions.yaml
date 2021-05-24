@@ -5,6 +5,7 @@ post:
     - Transactions
   summary: Create a transaction
   operationId: PostTransaction
+  x-sdk-operation-name: create
   description: |
     Create a transaction of type `sale` or `authorize`.
     This endpoint supports two main styles of transactions:
@@ -29,6 +30,8 @@ post:
 
     In this case you would either open the `approvalUrl` in an
     iframe or in a pop (better workflow for mobile).
+  parameters:
+    - $ref: ../components/parameters/collectionExpand.yaml
   requestBody:
     $ref: ../components/requestBodies/TransactionRequest.yaml
   responses:
@@ -55,6 +58,7 @@ get:
     - Transactions
   summary: Retrieve a list of transactions
   operationId: GetTransactionCollection
+  x-sdk-operation-name: getAll
   description: |
     Retrieve a list of transactions.
   parameters:
@@ -63,6 +67,7 @@ get:
     - $ref: ../components/parameters/collectionFilter.yaml
     - $ref: ../components/parameters/collectionQuery.yaml
     - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
       description: A list of transactions was retrieved successfully.

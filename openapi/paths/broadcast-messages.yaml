@@ -5,8 +5,14 @@ get:
     - Broadcast Messages
   summary: Retrieve a list of broadcast messages
   operationId: GetBroadcastMessageCollection
+  x-sdk-operation-name: getAll
   description: |
     Retrieve a list of broadcast messages.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
   responses:
     '200':
       description: A list of broadcast messages was retrieved successfully.
@@ -38,6 +44,7 @@ post:
     - Broadcast Messages
   summary: Create a broadcast message
   operationId: PostBroadcastMessage
+  x-sdk-operation-name: create
   description: |
     Create a broadcast message.
   responses:
