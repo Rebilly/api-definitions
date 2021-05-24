@@ -158,3 +158,11 @@ properties:
     x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
+  paymentFormUrl:
+    type: string
+    readOnly: true
+    format: url
+    description: |
+      URL where the customer can be redirected to pay for the invoice
+      with one of the methods which are available for this customer.
+      It's an alternative to creating a new transaction with empty `methods`.
