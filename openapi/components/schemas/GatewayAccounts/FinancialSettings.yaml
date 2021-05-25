@@ -6,6 +6,10 @@ properties:
     type: array
     items:
       type: object
+      required:
+        - filter
+        - bips
+        - period
       properties:
         filter:
           description: A filter based on the transaction's properties which is used to determine when to apply the settings.
@@ -33,11 +37,15 @@ properties:
         description: The default settlement period for all transactions.
         allOf:
           - $ref: SettlementPeriod.yaml
-      filters:
-        description: The transactions filters and their specific settlement settings.
+      advancedSettings:
+        description: |
+          The advanced settings allows to override either default settlement currency, period or both
+          for the transactions matched a filter.
         type: array
         items:
           type: object
+          required:
+            - filter
           properties:
             filter:
               description: A filter based on the transaction's properties which is used to determine when to apply the settings.
