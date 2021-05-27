@@ -7,9 +7,11 @@ properties:
       - $ref: ../ResourceId.yaml
   status:
     type: integer
+    x-basic: true
     description: HTTP response code.
   url:
     type: string
+    x-basic: true
     description: API request address.
   route:
     type: string
@@ -25,6 +27,7 @@ properties:
       - PUT
       - DELETE
       - PATCH
+    x-basic: true
   request:
     type: string
     description: Request JSON-string.
@@ -58,6 +61,7 @@ properties:
         type: string
       ipAddress:
         type: string
+        x-basic: true
         deprecated: true
         description: Client IP address.
         format: ipv4
@@ -89,9 +93,11 @@ properties:
           - $ref: ../ResourceId.yaml
   duration:
     type: integer
+    x-basic: true
     description: Request duration in milliseconds.
   createdTime:
     description: The log created time.
+    x-basic: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   _links:
