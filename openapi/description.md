@@ -97,7 +97,7 @@ Here is filter format description:
 
 - You can create some [predefined values lists](https://user-api-docs.rebilly.com/#tag/Lists) and use them in filter: `?filter=firstName:@yourListName`. You can also exclude list values: `?filter=firstName:!@yourListName`.
 
-- Datetime-based should be formatted using RFC 3339 like this: `?filter=createdTime:2021-02-14T13:30:00Z`. 
+- Datetime-based fields accept values formatted using RFC 3339 like this: `?filter=createdTime:2021-02-14T13:30:00Z`. 
 
 # Expand to include embedded objects
 Rebilly provides the ability to pre-load additional 
