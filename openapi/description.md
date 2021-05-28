@@ -83,7 +83,7 @@ Here is filter format description:
 
 - Fields and values in filter are separated with `:`: `?filter=firstName:John`.
 
-- Sub-fields are separated with a `.`: `?filter=billingAddress.country:US`.
+- Sub-fields are separated with `.`: `?filter=billingAddress.country:US`.
 
 - Multiple filters are separated with `;`: `?filter=firstName:John;lastName:Doe`. They will be joined with `AND` logic. In this example: `firstName:John` AND `lastName:Doe`.
 
