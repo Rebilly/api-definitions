@@ -77,23 +77,27 @@ $client = new Rebilly\Client([
 ```
 
 # Using filter with collections
-Rebilly provides collections filtering. You can use `?filter` param on collection to define which records should be shown in the response.
+Rebilly provides collections filtering. You can use `?filter` param on collections to define which records should be shown in the response.
 
 Here is filter format description:
 
 - Fields and values in filter are separated with `:`: `?filter=firstName:John`.
 
-- Fields in filter are separated with `;`: `?filter=firstName:John;lastName:Doe`.
+- Sub-fields are separated with `.`: `?filter=billingAddress.country:US`.
 
-- You can use multiple values using `,` as values separator: `?filter=firstName:John,Bob`.
+- Multiple filters are separated with `;`: `?filter=firstName:John;lastName:Doe`. They will be joined with `AND` logic. In this example: `firstName:John` AND `lastName:Doe`.
 
-- To negate the filter use `!`: `?filter=firstName:!John`. Note that you can negate multiple values like this: `?filter=firstName:!John,Bob`. This filter rule will exclude all Johns and Bobs from the response.
+- You can use multiple values using `,` as values separator: `?filter=firstName:John,Bob`. Multiple values specified for a field will be joined with `OR` logic. In this example: `firstName:John` OR `firstName:Bob`.
+
+- To negate the filter use `!`: `?filter=firstName:!John`. Note that you can negate multiple values like this: `?filter=firstName:!John,!Bob`. This filter rule will exclude all Johns and Bobs from the response.
 
 - You can use range filters like this: `?filter=amount:1..10`.
 
-- You can use gte (greater than or equals) filter like this: `?filter=amount:1..`, or lte (less than or equals) than filter like this: `?filter=amount:..10`.
+- You can use gte (greater than or equals) filter like this: `?filter=amount:1..`, or lte (less than or equals) than filter like this: `?filter=amount:..10`. This also works for datetime-based fields.
 
-- You can create some [predefined values lists](https://user-api-docs.rebilly.com/#tag/Lists) and use them in filter: `?filter=firstName:@yourListName`. You can also exclude list values: `?filter=firstName:!@yourListName`
+- You can create some [predefined values lists](https://user-api-docs.rebilly.com/#tag/Lists) and use them in filter: `?filter=firstName:@yourListName`. You can also exclude list values: `?filter=firstName:!@yourListName`.
+
+- Datetime-based fields accept values formatted using RFC 3339 like this: `?filter=createdTime:2021-02-14T13:30:00Z`. 
 
 # Expand to include embedded objects
 Rebilly provides the ability to pre-load additional 
