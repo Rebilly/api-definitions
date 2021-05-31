@@ -1,0 +1,62 @@
+type: object
+required:
+  - name
+  - acl
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  name:
+    type: string
+    description: The role name.
+  description:
+    type: string
+    description: The role description.
+  acl:
+    $ref: ./Acl.yaml
+  seniorIds:
+    type: array
+    description: The list of senior roles idenitifiers.
+    readOnly: true
+    items:
+      type: string
+  juniorIds:
+    type: array
+    description: The list of junior roles idenitifiers.
+    items:
+      type: string
+  usersCount:
+    type: integer
+    readOnly: true
+    description: The number of users with this role assigned.
+  createdTime:
+    description: The role created time.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    description: The role updated time.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to a resource.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Links/SelfLink.yaml
+        - $ref: ./Links/SeniorRolesLink.yaml
+        - $ref: ./Links/JuniorRolesLink.yaml
+  _embedded:
+    type: array
+    description: >-
+      Any embedded objects available that are requested by the `expand`
+      querystring parameter.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Embeds/JuniorRolesEmbed.yaml
+
+

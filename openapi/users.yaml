@@ -193,6 +193,10 @@ tags:
     description: |
       Membership describe the relationships between organizations and users.
       For example, one user could have more than one organization.
+  - name: Roles
+    description: |
+      Roles are an implementation of the general hierarchical RBAC. A senior role inherits all of it's juniors' ACLs plus its own ACL.
+      Junior roles are not influenced by the senior role.
   - name: Integrations
   - name: Broadcast Messages
   - name: Email Delivery Settings
@@ -221,6 +225,8 @@ x-tagGroups:
     tags:
       - Profile
       - Users
+      - Memberships
+      - Roles
   - name: Webhooks
     tags:
       - Webhook Credentials
@@ -231,7 +237,6 @@ x-tagGroups:
       - Checkout Forms
       - Gateway Accounts
       - Payment Cards
-      - Memberships
       - Organizations
       - Segments
       - Status
@@ -431,6 +436,10 @@ paths:
     $ref: ./paths/profile@totp-reset.yaml
   '/reset-password/{token}':
     $ref: './paths/reset-password@{token}.yaml'
+  '/roles':
+    $ref: ./paths/roles.yaml
+  '/roles/{id}':
+    $ref: './paths/roles@{id}.yaml'
   '/send-through-attribution/{eventType}':
     $ref: './paths/send-through-attribution@{eventType}.yaml'
   /signin:

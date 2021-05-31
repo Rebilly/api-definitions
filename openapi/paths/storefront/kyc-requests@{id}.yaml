@@ -1,0 +1,26 @@
+parameters:
+  - $ref: ../../components/parameters/organizationId.yaml
+  - $ref: ../../components/parameters/resourceId.yaml
+get:
+  tags:
+    - KYC Document
+  summary: Retrieve a KYC request
+  operationId: StorefrontGetKycRequest
+  x-sdk-operation-name: get
+  security:
+    - CustomerJWT: []
+  description: |
+    Retrieve a KYC request with specified ID.
+  responses:
+    200:
+      description: KYC request was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/StorefrontKycRequest.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml

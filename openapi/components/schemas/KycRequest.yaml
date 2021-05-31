@@ -1,0 +1,28 @@
+allOf:
+  - $ref: ./Common/CommonKycRequest.yaml
+  - required:
+      - customerId
+    properties:
+      customerId:
+        description: The сustomer's ID.
+        allOf:
+          - $ref: ./ResourceId.yaml
+      reason:
+        description: Reason for uploading.
+        type: string
+      matchLevel:
+        description: The level of strictness for the document matches.
+        type: integer
+        minimum: 1
+        maximum: 2
+        example: 2
+      _links:
+        type: array
+        description: The links related to resource.
+        readOnly: true
+        minItems: 1
+        items:
+          anyOf:
+            - $ref: ./Links/SelfLink.yaml
+            - $ref: ./Links/KycDocumentsLink.yaml
+            - $ref: ./Links/KycGathererLink.yaml
