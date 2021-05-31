@@ -1,0 +1,85 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - KYC Documents
+  summary: Retrieve a KYC request
+  operationId: GetKycRequest
+  x-sdk-operation-name: get
+  description: Retrieve a KYC request with specified identifier string.
+  responses:
+    '200':
+      description: KYC request was retrieved successfully.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KycRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+patch:
+  tags:
+    - KYC Documents
+  summary: Update a KYC request
+  operationId: PatchKycRequest
+  x-sdk-operation-name: update
+  description: Update a KYC request.
+  requestBody:
+    $ref: ../components/requestBodies/PatchKycRequest.yaml
+    description: KYC document resource.
+    required: true
+  responses:
+    '200':
+      description: KYC request was updated.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KycRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+delete:
+  tags:
+    - KYC Documents
+  summary: Delete the KYC request
+  operationId: DeleteKycRequest
+  x-sdk-operation-name: delete
+  description: |
+    Delete the KYC request with the predefined identifier string.
+  responses:
+    '204':
+      description: The KYC request was deleted.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

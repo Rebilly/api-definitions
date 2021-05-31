@@ -1,0 +1,47 @@
+type: object
+required:
+  - documents
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  documents:
+    description: Documents to be requested from customer.
+    type: array
+    items:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          description: Document type to be requested from customer.
+          allOf:
+            - $ref: ../KycDocument/KycDocumentTypes.yaml
+        subtypes:
+          description: Document subtype allowed for customer.
+          type: array
+          items:
+            $ref: ../KycDocument/KycDocumentSubtypes.yaml
+        maxAttempts:
+          description: The number of document upload attempts. `0` treated as unlimited.
+          type: integer
+          default: 3
+          minimum: 0
+          maximum: 100
+  redirectUrl:
+    description: The URL to redirect the customer when an upload is completed.
+    type: string
+    format: uri
+  expirationTime:
+    description: Expiration date/time.
+    type: string
+    format: date-time
+  createdTime:
+    description: Creation date/time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: Latest update date/time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
