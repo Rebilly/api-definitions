@@ -1,27 +1,17 @@
 parameters:
-  - name: organizationId
-    in: path
-    required: true
-    description: Organization identifier.
-    schema:
-      $ref: ../components/schemas/ResourceId.yaml
-  - name: userId
-    in: path
-    required: true
-    description: User identifier.
-    schema:
-      $ref: ../components/schemas/ResourceId.yaml
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
 get:
   tags:
-    - Memberships
-  summary: Retrieve the membership
-  operationId: GetMembership
+    - Roles
+  summary: Retrieve a role
+  operationId: GetRole
   x-sdk-operation-name: get
   description: |
-    Retrieve the membership using organization and user identifiers.
+    Retrieve a role with specified identifier string.
   responses:
     '200':
-      description: Membership was retrieved successfully.
+      description: Role was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -32,7 +22,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Membership.yaml
+            $ref: ../components/schemas/Role.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -41,33 +31,15 @@ get:
       $ref: ../components/responses/NotFound.yaml
 put:
   tags:
-    - Memberships
-  summary: Create or update membership
-  operationId: PutMembership
+    - Roles
+  summary: Create a role with predefined ID
+  operationId: PutRole
   x-sdk-operation-name: update
   description: |
-    Create or update membership using organization and user identifiers.
-    Only membership's owner can add other users in the membership.
-  requestBody:
-    content:
-      application/json:
-        schema:
-          properties:
-            isOwner:
-              type: boolean
-            permissions:
-              description: The memberships's permissions. See the format in example. Use wildcard `*` for full access.
-              allOf:
-                - $ref: ../components/schemas/AclPermissions.yaml
-            roleIds:
-              type: array
-              description: The membership's roles identifiers.
-              items:
-                type: string
-    required: true
+    Create a role with predefined identifier string.
   responses:
     '200':
-      description: Membership was updated.
+      description: Role was updated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -78,9 +50,9 @@ put:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Membership.yaml
+            $ref: ../components/schemas/Role.yaml
     '201':
-      description: Membership was created.
+      description: Role was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -91,24 +63,31 @@ put:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Membership.yaml
+            $ref: ../components/schemas/Role.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-    '409':
-      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Role.yaml
+    description: Role resource.
+    required: true
 delete:
   tags:
-    - Memberships
-  summary: Delete the membership
-  operationId: DeleteMembership
+    - Roles
+  summary: Delete a role
+  operationId: DeleteRole
   x-sdk-operation-name: delete
   description: |
-    Delete the membership using organization and user identifiers.
+    Delete a role with predefined identifier string.
   responses:
     '204':
-      description: Membership message was deleted.
+      description: Role was deleted.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -122,5 +101,3 @@ delete:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-    '409':
-      $ref: ../components/responses/Conflict.yaml
