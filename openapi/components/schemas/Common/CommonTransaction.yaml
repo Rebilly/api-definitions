@@ -12,11 +12,13 @@ properties:
       - $ref: ../ResourceId.yaml
   customerId:
     description: The сustomer's ID.
+    x-basic: true
     allOf:
       - $ref: ../ResourceId.yaml
   type:
     description: Transaction type.
     type: string
+    x-basic: true
     readOnly: true
     enum:
       - 3ds-authentication
@@ -50,6 +52,7 @@ properties:
   result:
     description: Transaction result.
     type: string
+    x-basic: true
     readOnly: true
     enum:
       - abandoned
@@ -60,6 +63,7 @@ properties:
   amount:
     x-type: Money
     x-sortable: true
+    x-basic: true
     description: The transaction's amount.
     type: number
     format: double
@@ -175,6 +179,7 @@ properties:
     description: |
       Payment Gateway name, available only after the gateway is selected for the transaction.
     x-label: Gateway account
+    x-basic: true
     allOf:
       - $ref: ../Gateways/GatewayName.yaml
   customFields:
@@ -182,6 +187,7 @@ properties:
   processedTime:
     description: Transaction processed time.
     x-sortable: true
+    x-basic: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   createdTime:
