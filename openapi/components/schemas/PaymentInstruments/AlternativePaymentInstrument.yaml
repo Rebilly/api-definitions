@@ -1,0 +1,56 @@
+type: object
+title: 'Alternative instrument'
+properties:
+  id:
+    description: The payment instrument ID.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  method:
+    description: The method of payment instrument.
+    allOf:
+      - $ref: ../PaymentMethods/AlternativePaymentMethods.yaml
+  customerId:
+    description: Customer's ID.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  billingAddress:
+    description: The billing address.
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  status:
+    description: The payment instrument status.
+    type: string
+    enum:
+      - active
+      - deactivated
+  createdTime:
+    description: The payment instrument created time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: The payment instrument updated time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  customFields:
+    $ref: ../ResourceCustomFields.yaml
+  riskMetadata:
+    $ref: ../RiskMetadata.yaml
+  _links:
+    type: array
+    description: Links related to the resource.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Links/SelfLink.yaml
+        - $ref: ../Links/CustomerLink.yaml
+  _embedded:
+    type: array
+    description: >-
+      Any embedded objects available that are requested by the `expand`
+      querystring parameter.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Embeds/CustomerEmbed.yaml
