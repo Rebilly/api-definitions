@@ -16,6 +16,7 @@ properties:
     description: An auto-incrementing number based on the sequence of invoices for any particular customer.
     readOnly: true
     type: integer
+    x-basic: true
   subscriptionId:
     description: The related order's ID if available, otherwise null.
     readOnly: true
@@ -23,6 +24,7 @@ properties:
       - $ref: ../ResourceId.yaml
   currency:
     x-sortable: true
+    x-basic: true
     allOf:
       - $ref: ../CurrencyCode.yaml
   amount:
@@ -30,6 +32,7 @@ properties:
     type: number
     x-type: Money
     x-sortable: true
+    x-basic: true
     format: double
     readOnly: true
   amountDue:
@@ -99,6 +102,7 @@ properties:
   status:
     type: string
     description: Invoice status.
+    x-basic: true
     readOnly: true
     enum:
      - "draft"
@@ -134,6 +138,7 @@ properties:
   paidTime:
     x-label: Payment Date
     x-sortable: true
+    x-basic: true
     description: Invoice paid time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
@@ -146,6 +151,7 @@ properties:
     description: Invoice issued time.
     x-label: Date Issued
     x-sortable: true
+    x-basic: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   createdTime:
