@@ -142,5 +142,3 @@ too.
 
 Within 25 minutes, you'll have sent API requests (via our console)
 to create a subscription order.
-
-[Click here to visit our API Guide Tutorial](https://api-guides.rebilly.com/).
