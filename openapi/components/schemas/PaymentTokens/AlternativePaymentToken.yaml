@@ -7,7 +7,9 @@ required:
   - billingAddress
 properties:
   method:
-    $ref: ../PaymentMethods/TokenPaymentMethod.yaml
+    description: The token payment method.
+    allOf:
+      - $ref: ../PaymentMethods/AlternativePaymentMethods.yaml
   billingAddress:
     description: The billing address object.
     allOf:
