@@ -6,6 +6,7 @@ get:
     - Transaction
   summary: Retrieve a Transaction
   operationId: StorefrontGetTransaction
+  x-sdk-operation-name: get
   security:
     - CustomerJWT: []
   description: |
@@ -23,29 +24,3 @@ get:
       $ref: ../../components/responses/Forbidden.yaml
     404:
       $ref: ../../components/responses/NotFound.yaml
-patch:
-  tags:
-    - Transaction
-  summary: Update a Transaction's values
-  operationId: StorefrontPatchTransaction
-  security:
-    - CustomerJWT: []
-  description: |
-    Update transaction's payment instruction.
-  requestBody:
-    $ref: ../../components/requestBodies/storefront/PatchTransaction.yaml
-  responses:
-    200:
-      description: Transaction was updated.
-      content:
-        application/json:
-          schema:
-            $ref: ../../components/schemas/Storefront/StorefrontTransaction.yaml
-    401:
-      $ref: ../../components/responses/Unauthorized.yaml
-    403:
-      $ref: ../../components/responses/Forbidden.yaml
-    404:
-      $ref: ../../components/responses/NotFound.yaml
-    422:
-      $ref: ../../components/responses/ValidationError.yaml

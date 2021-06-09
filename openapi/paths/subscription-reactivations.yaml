@@ -5,10 +5,13 @@ get:
     - Orders
   summary: Retrieve a list of reactivations
   operationId: GetSubscriptionReactivationCollection
+  x-sdk-operation-name: getAll
   description: Retrieve a list of reactivations for all subscriptions.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
       description: A list of reactivations was retrieved successfully.
@@ -44,6 +47,7 @@ post:
     - Orders
   summary: Reactivate an order
   operationId: PostSubscriptionReactivation
+  x-sdk-operation-name: reactivate
   description: Reactivate a subscription.
   requestBody:
     content:

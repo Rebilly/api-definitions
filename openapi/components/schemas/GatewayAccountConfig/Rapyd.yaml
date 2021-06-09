@@ -1,0 +1,19 @@
+description: Rapyd config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Rapyd credentials object.
+        properties:
+          accessKey:
+            type: string
+          secretKey:
+            type: string
+            format: password
+        required:
+          - accessKey
+          - secretKey

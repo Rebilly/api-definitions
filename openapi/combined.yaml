@@ -223,12 +223,12 @@ tags:
   - name: Memberships
   - name: JWT Session
   - name: Lists
-  - name: Layouts
   - name: Segments
   - name: Gateway Accounts
   - name: Tracking
   - name: Email Credentials
   - name: Webhook Credentials
+  - name: Billing Portals
   - name: Checkout Forms
   - name: API Keys
   - name: Experian credentials
@@ -351,6 +351,8 @@ paths:
     $ref: './paths/kyc-documents@{id}.yaml'
   '/kyc-documents/{id}/acceptance':
     $ref: './paths/kyc-documents@{id}@acceptance.yaml'
+  '/kyc-documents/{id}/matches':
+    $ref: './paths/kyc-documents@{id}@matches.yaml'
   '/kyc-documents/{id}/rejection':
     $ref: './paths/kyc-documents@{id}@rejection.yaml'
   '/kyc-documents/{id}/review':
@@ -369,22 +371,24 @@ paths:
     $ref: ./paths/payment-cards.yaml
   '/payment-cards/{id}':
     $ref: './paths/payment-cards@{id}.yaml'
-  '/payment-cards/{id}/authorization':
-    $ref: './paths/payment-cards@{id}@authorization.yaml'
   '/payment-cards/{id}/deactivation':
     $ref: './paths/payment-cards@{id}@deactivation.yaml'
   /payment-methods:
     $ref: ./paths/payment-methods.yaml
   /payment-methods/{apiName}:
     $ref: './paths/payment-methods@{apiName}.yaml'
+  /payment-gateways-metadata:
+    $ref: ./paths/payment-gateways-metadata.yaml
+  /payment-gateways-metadata/{apiName}:
+    $ref: './paths/payment-gateways-metadata@{apiName}.yaml'
   /paypal-accounts:
     $ref: ./paths/paypal-accounts.yaml
   '/paypal-accounts/{id}':
     $ref: './paths/paypal-accounts@{id}.yaml'
-  '/paypal-accounts/{id}/activation':
-    $ref: './paths/paypal-accounts@{id}@activation.yaml'
   '/paypal-accounts/{id}/deactivation':
     $ref: './paths/paypal-accounts@{id}@deactivation.yaml'
+  /permissions-emulation:
+    $ref: ./paths/permissions-emulation.yaml
   /plans:
     $ref: ./paths/plans.yaml
   '/plans/{id}':
@@ -411,8 +415,8 @@ paths:
     $ref: ./paths/subscriptions.yaml
   '/subscriptions/{id}':
     $ref: './paths/subscriptions@{id}.yaml'
-  '/subscriptions/{id}/change-plan':
-    $ref: './paths/subscriptions@{id}@change-plan.yaml'
+  '/subscriptions/{id}/change-items':
+    $ref: './paths/subscriptions@{id}@change-items.yaml'
   '/subscriptions/{id}/interim-invoice':
     $ref: './paths/subscriptions@{id}@interim-invoice.yaml'
   '/subscriptions/{id}/timeline':
@@ -443,10 +447,6 @@ paths:
     $ref: './paths/transactions@{id}.yaml'
   /payouts:
     $ref: ./paths/payouts.yaml
-  '/transactions/{id}/cancel':
-    $ref: './paths/transactions@{id}@cancel.yaml'
-  '/transactions/{id}/gateway-logs':
-    $ref: './paths/transactions@{id}@gateway-logs.yaml'
   '/transactions/{id}/refund':
     $ref: './paths/transactions@{id}@refund.yaml'
   '/transactions/{id}/timeline':
@@ -461,6 +461,10 @@ paths:
     $ref: ./paths/api-keys.yaml
   '/api-keys/{id}':
     $ref: './paths/api-keys@{id}.yaml'
+  /billing-portals:
+    $ref: ./paths/billing-portals.yaml
+  /billing-portals/{id}:
+    $ref: './paths/billing-portals@{id}.yaml'
   /broadcast-messages:
     $ref: ./paths/broadcast-messages.yaml
   '/broadcast-messages/{id}':
@@ -533,6 +537,10 @@ paths:
     $ref: './paths/events@{eventType}@rules@history@{version}.yaml'
   '/events/{eventType}/rules/versions/{version}':
     $ref: './paths/events@{eventType}@rules@versions@{version}.yaml'
+  '/events/{eventType}/rules/drafts':
+    $ref: './paths/events@{eventType}@rules@drafts.yaml'
+  '/events/{eventType}/rules/drafts/{id}':
+    $ref: './paths/events@{eventType}@rules@drafts@{id}.yaml'
   /forgot-password:
     $ref: ./paths/forgot-password.yaml
   /gateway-accounts:
@@ -565,10 +573,6 @@ paths:
     $ref: ./paths/integrations.yaml
   '/integrations/{label}':
     $ref: './paths/integrations@{label}.yaml'
-  /layouts:
-    $ref: ./paths/layouts.yaml
-  '/layouts/{id}':
-    $ref: './paths/layouts@{id}.yaml'
   /lists:
     $ref: ./paths/lists.yaml
   '/lists/{id}':
@@ -619,8 +623,6 @@ paths:
     $ref: ./paths/tracking@webhooks.yaml
   '/tracking/webhooks/{id}':
     $ref: './paths/tracking@webhooks@{id}.yaml'
-  '/tracking/webhooks/{id}/history':
-    $ref: './paths/tracking@webhooks@{id}@history.yaml'
   '/tracking/webhooks/{id}/resend':
     $ref: './paths/tracking@webhooks@{id}@resend.yaml'
   /users:
@@ -649,10 +651,6 @@ paths:
     $ref: './paths/data-exports@{id}.yaml'
   /histograms/transactions:
     $ref: ./paths/histograms@transactions.yaml
-  /experimental/organizations:
-    $ref: ./paths/experimental-organizations.yaml
-  '/experimental/organizations/{id}':
-    $ref: './paths/experimental-organizations@{id}.yaml'
   /reports/api-log-summary:
     $ref: ./paths/reports@api-log-summary.yaml
   /reports/cumulative-subscriptions:

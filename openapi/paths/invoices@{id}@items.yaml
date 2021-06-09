@@ -6,11 +6,13 @@ get:
     - Invoices
   summary: Retrieve invoice items
   operationId: GetInvoiceItemCollection
+  x-sdk-operation-name: getAllInvoiceItems
   description: |
     Retrieve an invoice items with specified invoice identifier string.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
       description: Invoice items were retrieved successfully.
@@ -45,6 +47,7 @@ post:
     - Invoices
   summary: Create an invoice item
   operationId: PostInvoiceItem
+  x-sdk-operation-name: createInvoiceItem
   description: |
     Create an invoice item.
   requestBody:

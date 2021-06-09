@@ -16,6 +16,7 @@ get:
     - Memberships
   summary: Retrieve the membership
   operationId: GetMembership
+  x-sdk-operation-name: get
   description: |
     Retrieve the membership using organization and user identifiers.
   responses:
@@ -43,6 +44,7 @@ put:
     - Memberships
   summary: Create or update membership
   operationId: PutMembership
+  x-sdk-operation-name: update
   description: |
     Create or update membership using organization and user identifiers.
     Only membership's owner can add other users in the membership.
@@ -57,6 +59,11 @@ put:
               description: The memberships's permissions. See the format in example. Use wildcard `*` for full access.
               allOf:
                 - $ref: ../components/schemas/AclPermissions.yaml
+            roleIds:
+              type: array
+              description: The membership's roles identifiers.
+              items:
+                type: string
     required: true
   responses:
     '200':
@@ -96,6 +103,7 @@ delete:
     - Memberships
   summary: Delete the membership
   operationId: DeleteMembership
+  x-sdk-operation-name: delete
   description: |
     Delete the membership using organization and user identifiers.
   responses:

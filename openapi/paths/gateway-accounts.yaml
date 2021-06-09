@@ -5,11 +5,16 @@ get:
     - Gateway Accounts
   summary: Retrieve a list of gateway accounts
   operationId: GetGatewayAccountCollection
+  x-sdk-operation-name: getAll
   description: |
     Retrieve a list of gateway accounts.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionFields.yaml
   responses:
     '200':
       description: A list of Gateway Accounts was retrieved successfully.
@@ -48,6 +53,7 @@ post:
     - Gateway Accounts
   summary: Create a Gateway Account
   operationId: PostGatewayAccount
+  x-sdk-operation-name: create
   description: |
     Create a Gateway Account.
   requestBody:

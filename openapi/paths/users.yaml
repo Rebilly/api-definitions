@@ -5,11 +5,15 @@ get:
     - Users
   summary: Retrieve a list of users
   operationId: GetUserCollection
+  x-sdk-operation-name: getAll
   description: |
     Retrieve a list of users.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
       description: A list of users was retrieved successfully.
@@ -48,6 +52,7 @@ post:
     - Users
   summary: Create an user
   operationId: PostUser
+  x-sdk-operation-name: create
   description: |
     Create an user.
   requestBody:

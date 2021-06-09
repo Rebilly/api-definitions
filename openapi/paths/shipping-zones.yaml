@@ -5,11 +5,15 @@ get:
     - Shipping Zones
   summary: Retrieve a list of shipping zones
   operationId: GetShippingZoneCollection
+  x-sdk-operation-name: getAll
   description: |
     Retrieve a list of shipping zones.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
       description: A list of shipping zones was retrieved successfully.
@@ -45,6 +49,7 @@ post:
     - Shipping Zones
   summary: Create a Shipping Zone
   operationId: PostShippingZone
+  x-sdk-operation-name: create
   description: |
     Create a Shipping Zone.
   requestBody:

@@ -99,6 +99,7 @@ allOf:
         nullable: true
       bin:
         description: Payment Card BIN.
+        x-label: BIN
         type: string
         format: bin
         readOnly: true
@@ -194,10 +195,35 @@ allOf:
         description: True if transaction is disputed.
         type: boolean
         readOnly: true
+      disputeTime:
+        description: Time the dispute was created, else null.
+        type: string
+        format: date-time
+        readOnly: true
+        nullable: true
+        x-sortable: true
+      disputeStatus:
+        description: The dispute's status, else null.
+        nullable: true
+        readOnly: true
+        type: string
+        enum:
+          - response-needed
+          - under-review
+          - forfeited
+          - won
+          - lost
+          - unknown
       isReconciled:
         description: True if the transaction has been verified with gateway batch data.
         type: boolean
         readOnly: true
+      isProcessedOutside:
+        description: True if the transaction was processed outside of Rebilly.
+        type: boolean
+      isMerchantInitiated:
+        description: True if the transaction was initiated by the merchant.
+        type: boolean
       hadDiscrepancy:
         description: >-
           True if the transaction has been updated due to a discrepancy with its.
@@ -210,7 +236,9 @@ allOf:
           The transaction's order ID.  This ID must be unique within a 24 hour
           period. This field was renamed to the `requestId`.
         type: string
+        x-sortable: true
       arn:
+        x-label: ARN
         type: string
         readOnly: true
         description: The acquirer reference number.
@@ -219,6 +247,32 @@ allOf:
         type: string
         description: The time the transaction is scheduled for collection.
         format: date-time
+      reportAmount:
+        description: Transaction amount converted to organization selected report currency.
+        type: number
+        x-type: Money
+        x-sortable: true
+        x-currency-field: reportCurrency
+        format: double
+        readOnly: true
+      reportCurrency:
+        readOnly: true
+        allOf:
+          - $ref: ../CurrencyCode.yaml
+      settlementTime:
+        type: string
+        description: The time that the transaction was settled by the banking instuition.
+        format: date-time
+        readOnly: true
+        nullable: true
+        x-sortable: true
+      discrepancyTime:
+        type: string
+        description: The time of the most recent discrepancy on the transaction.
+        format: date-time
+        readOnly: true
+        nullable: true
+        x-sortable: true
       _links:
         type: array
         description: The links related to resource.
@@ -235,10 +289,11 @@ allOf:
             - $ref: ../Links/RetriedTransactionLink.yaml
             - $ref: ../Links/LeadSourceLink.yaml
             - $ref: ../Links/ApprovalUrlLink.yaml
-            - $ref: ../Links/CancelUrlLink.yaml
             - $ref: ../Links/RefundUrlLink.yaml
+            - $ref: ../Links/TransactionUpdateUrlLink.yaml
             - $ref: ../Links/DisputeLink.yaml
             - $ref: ../Links/InvoicesLink.yaml
+            - $ref: ../Links/QueryUrlLink.yaml
       _embedded:
         type: array
         description: >-

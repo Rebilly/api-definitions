@@ -1,18 +1,26 @@
 type: object
 required:
-  - planId
+  - items
   - renewalPolicy
   - prorated
 properties:
-  planId:
-    description: The plan identifier string.
-    allOf:
-      - $ref: ./ResourceId.yaml
-  quantity:
-    description: >-
-      Number of units of the product on the given plan. If null or omitted,
-      current quantity will not be changed.
-    type: integer
+  items:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      description: >-
+        A new set of items for the subscription.
+        To remove an item, you include the items array without the items you wish to remove.
+      required:
+        - plan
+        - quantity
+      properties:
+        plan:
+          $ref: ./Plans/FlexiblePlan.yaml
+        quantity:
+          description: Number of units of the product on the given plan.
+          type: integer
   renewalPolicy:
     description: >-
       The value determines whether the subscription retains its current

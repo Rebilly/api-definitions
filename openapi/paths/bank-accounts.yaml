@@ -5,6 +5,7 @@ post:
     - Bank Accounts
   summary: Create a Bank Account
   operationId: PostBankAccount
+  x-sdk-operation-name: create
   description: |
     Create a Bank Account.
   requestBody:
@@ -48,11 +49,16 @@ get:
     - Bank Accounts
   summary: Retrieve a list of bank accounts
   operationId: GetBankAccountCollection
+  x-sdk-operation-name: getAll
   description: |
     Retrieve a list of Bank Accounts.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
       description: A list of Bank Accounts was retrieved successfully.

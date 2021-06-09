@@ -1,0 +1,28 @@
+description: PayClub config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: PayClub credentials object.
+        properties:
+          merchantId:
+            type: string
+          accountNumber:
+            type: string
+          signKey:
+            type: string
+            format: password
+        required:
+          - apiKey
+          - accountNumber
+          - signKey
+      settings:
+        type: object
+        properties:
+          use3DSChannel:
+            type: boolean
+            description: Use 3DS channel.

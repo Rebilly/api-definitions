@@ -35,7 +35,14 @@ properties:
       A detailed information about the payment method. (Markdown is supported).
     type: string
   countries:
-    $ref: ./PaymentMethodCountriesMetadata.yaml
+    $ref: ./CountriesMetadata.yaml
   storefrontEnabled:
     type: boolean
     default: false
+  _links:
+    type: array
+    description: The links related to resource.
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml

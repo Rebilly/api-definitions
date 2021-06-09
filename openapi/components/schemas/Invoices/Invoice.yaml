@@ -2,14 +2,10 @@ allOf:
   - $ref: ../Common/CommonInvoice.yaml
   - required:
     - customerId
-    - websiteId
   - properties:
       customerId:
         description: The сustomer's ID.
-        allOf:
-          - $ref: ../ResourceId.yaml
-      websiteId:
-        description: The website ID.
+        x-basic: true
         allOf:
           - $ref: ../ResourceId.yaml
       transactions:
@@ -58,6 +54,18 @@ allOf:
           The revision is useful when analyzing webhook data to determine if the
           change takes precedence over the current representation.
         type: integer
+        readOnly: true
+      type:
+        description: Invoice type.
+        type: string
+        enum:
+          - initial
+          - renewal
+          - interim
+          - cancellation
+          - one-time
+          - refund
+          - charge
         readOnly: true
       dueReminderTime:
         description: Time past due reminder event will be triggered.

@@ -12,11 +12,13 @@ properties:
       - $ref: ../ResourceId.yaml
   customerId:
     description: The сustomer's ID.
+    x-basic: true
     allOf:
       - $ref: ../ResourceId.yaml
   type:
     description: Transaction type.
     type: string
+    x-basic: true
     readOnly: true
     enum:
       - 3ds-authentication
@@ -35,6 +37,7 @@ properties:
       - conn-error
       - disputed
       - never-sent
+      - offsite
       - partially-refunded
       - pending
       - refunded
@@ -49,6 +52,7 @@ properties:
   result:
     description: Transaction result.
     type: string
+    x-basic: true
     readOnly: true
     enum:
       - abandoned
@@ -57,6 +61,9 @@ properties:
       - declined
       - unknown
   amount:
+    x-type: Money
+    x-sortable: true
+    x-basic: true
     description: The transaction's amount.
     type: number
     format: double
@@ -69,6 +76,9 @@ properties:
     description: The amount actually purchased which may have differed from the originally requested amount in case of an adjustment.
     type: number
     format: double
+    x-type: Money
+    x-currency-field: purchaseCurrency
+    x-sortable: true
     readOnly: true
   purchaseCurrency:
     readOnly: true
@@ -77,6 +87,8 @@ properties:
   requestAmount:
     description: The amount in the payment request. If adjusted, the purchase amount and billing amount may vary from it.
     type: number
+    x-type: Money
+    x-currency-field: requestCurrency
     format: double
     readOnly: true
   requestCurrency:
@@ -120,7 +132,7 @@ properties:
     type: integer
     readOnly: true
   paymentInstrument:
-    $ref: ../Storefront/PaymentInstrumentReference.yaml
+    $ref: ../Storefront/PaymentInstruments/InstrumentReference.yaml
   billingAddress:
     description: Billing address.
     allOf:
@@ -157,6 +169,7 @@ properties:
     description: The transaction's request ID.  This ID must be unique within a 24 hour period.
       Use this field to prevent duplicated transactions.
     type: string
+    x-sortable: true
   hasAmountAdjustment:
     description: True if transaction has amount adjustment.
     type: boolean
@@ -165,19 +178,27 @@ properties:
     readOnly: true
     description: |
       Payment Gateway name, available only after the gateway is selected for the transaction.
+    x-label: Gateway account
+    x-basic: true
     allOf:
       - $ref: ../Gateways/GatewayName.yaml
   customFields:
     $ref: ../ResourceCustomFields.yaml
   processedTime:
     description: Transaction processed time.
+    x-sortable: true
+    x-basic: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   createdTime:
     description: Transaction created time.
+    x-label: Created On
+    x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
     description: Transaction updated time.
+    x-label: Last update time
+    x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml

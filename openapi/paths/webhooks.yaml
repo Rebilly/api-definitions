@@ -5,11 +5,13 @@ get:
     - Webhooks
   summary: Retrieve a list of webhooks
   operationId: GetWebhookCollection
+  x-sdk-operation-name: getAll
   description: |
     Retrieve a list of webhooks.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
   responses:
     '200':
       description: A list of Webhooks was retrieved successfully.
@@ -45,6 +47,7 @@ post:
     - Webhooks
   summary: Create a webhook
   operationId: PostWebhook
+  x-sdk-operation-name: create
   description: |
     Create a webhook.
   requestBody:

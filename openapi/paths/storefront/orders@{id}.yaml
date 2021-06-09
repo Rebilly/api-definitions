@@ -1,0 +1,53 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+  - $ref: ../../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Order
+  summary: Retrieve an order
+  operationId: StorefrontGetOrder
+  x-sdk-operation-name: get
+  security:
+    - CustomerJWT: []
+  description: |
+    Retrieve an order with specified identifier string.
+  responses:
+    200:
+      description: Order was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/StorefrontOrder.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml
+patch:
+  tags:
+    - Order
+  summary: Update an order
+  operationId: StorefrontPatchOrder
+  x-sdk-operation-name: update
+  security:
+    - CustomerJWT: []
+  description: |
+    Update an order with predefined ID.
+  requestBody:
+    $ref: ../../components/requestBodies/storefront/PatchOrder.yaml
+  responses:
+    200:
+      description: Order was updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/StorefrontOrder.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml
+    422:
+      $ref: ../../components/responses/ValidationError.yaml

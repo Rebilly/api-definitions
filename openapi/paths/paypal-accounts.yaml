@@ -5,11 +5,16 @@ get:
     - PayPal Accounts
   summary: Retrieve a list of PayPal accounts
   operationId: GetPayPalAccountCollection
+  x-sdk-operation-name: getAll
   description: |
     Retrieve a list of PayPal Accounts.
   parameters:
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml   
+    - $ref: ../components/parameters/collectionExpand.yaml   
   responses:
     '200':
       description: A list of PayPal Accounts was retrieved successfully.
@@ -35,6 +40,7 @@ post:
     - PayPal Accounts
   summary: Create a PayPal Account
   operationId: PostPayPalAccount
+  x-sdk-operation-name: create
   description: |
     Create a PayPal Account.
   requestBody:

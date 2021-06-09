@@ -47,7 +47,9 @@ allOf:
               title: Generic
               properties:
                 paymentMethod:
-                  $ref: ../../PaymentMethods/TokenPaymentMethod.yaml
+                  description: The payment method.
+                  allOf:
+                    - $ref: ../../PaymentMethods/AlternativePaymentMethods.yaml
                 feature:
                   nullable: true
           properties:
