@@ -2,21 +2,22 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
   - name: messageId
     in: path
-    description: The Order Timeline message ID
+    description: The Order Timeline message ID.
     required: true
     schema:
       type: string
   - $ref: ../components/parameters/organizationId.yaml
 get:
   tags:
-    - Subscriptions
+    - Orders
   summary: Retrieve an Order Timeline message
   operationId: GetSubscriptionTimeline
+  x-sdk-operation-name: getTimelineMessage
   description: |
-    Retrieve a order message with specified identifier string
+    Retrieve a order message with specified identifier string.
   responses:
     '200':
-      description: Order message was retrieved successfully
+      description: Order message was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -41,14 +42,15 @@ get:
           ../code_samples/JavaScript/subscriptions@{id}@timeline@{messageId}/get.js
 delete:
   tags:
-    - Subscriptions
+    - Orders
   summary: Delete an Order Timeline message
   operationId: DeleteSubscriptionTimeline
+  x-sdk-operation-name: deleteTimelineMessage
   description: |
-    Delete an Order Timeline message with predefined identifier string
+    Delete an Order Timeline message with predefined identifier string.
   responses:
     '204':
-      description: Order Timeline message was deleted
+      description: Order Timeline message was deleted.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

@@ -1,13 +1,18 @@
 type: object
 properties:
   id:
-    description: The account ID
+    description: The account ID.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  websiteId:
+    description: The website identifier string.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   username:
     type: string
-    description: Username
+    description: Username.
     readOnly: true
   primaryAddress:
     $ref: ../Contact/ContactObject.yaml
@@ -21,12 +26,22 @@ properties:
       in the case that both are supplied. The token may only be used once
       before it is expired.
   defaultPaymentInstrument:
-    $ref: PaymentInstrumentReference.yaml
+    $ref: PaymentInstruments/InstrumentReference.yaml
+  customFields:
+    $ref: ../ResourceCustomFields.yaml
   createdTime:
-    description: The customer created time
+    description: The customer created time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
-    description: The customer updated time
+    description: The customer updated time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Links/SelfLink.yaml

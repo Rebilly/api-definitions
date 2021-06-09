@@ -6,11 +6,12 @@ get:
     - Payment Cards
   summary: Retrieve a Payment Card
   operationId: GetPaymentCard
+  x-sdk-operation-name: get
   description: |
-    Retrieve a Payment Card with specified identifier string
+    Retrieve a Payment Card with specified identifier string.
   responses:
     '200':
-      description: Payment card was retrieved successfully
+      description: Payment card was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -40,37 +41,18 @@ patch:
     - Payment Cards
   summary: Update a payment card's values
   operationId: PatchPaymentCard
+  x-sdk-operation-name: patch
   description: |
-    Update any of the payment card's values except for the pan
+    Update any of the payment card's values except for the pan.
   requestBody:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            cvv:
-              description: Card's cvv (card verification value).
-              type: string
-            expMonth:
-              description: Card's expiry month
-              type: integer
-            expYear:
-              description: Card's expiry year
-              type: integer
-            billingAddress:
-              description: Card's billing address
-              allOf:
-                - $ref: ../components/schemas/Contact/ContactObject.yaml
-            stickyGatewayAccountId:
-              description: Sticky Gateway Account ID
-              allOf:
-                - $ref: ../components/schemas/ResourceId.yaml
-            customFields:
-              $ref: ../components/schemas/ResourceCustomFields.yaml
-    description: Payment card
+          $ref: ../components/schemas/PaymentCards/PaymentCardUpdatePlain.yaml
+    description: Payment card.
   responses:
     '200':
-      description: Payment card was updated
+      description: Payment card was updated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -95,6 +77,7 @@ put:
     - Payment Cards
   summary: Create a payment card with predefined ID
   operationId: PutPaymentCard
+  x-sdk-operation-name: update
   requestBody:
     content:
       application/json:
@@ -102,10 +85,10 @@ put:
           oneOf:
             - $ref: ../components/schemas/PaymentCards/PaymentCardCreateToken.yaml
             - $ref: ../components/schemas/PaymentCards/PaymentCardCreatePlain.yaml
-    description: Payment card
+    description: Payment card.
   responses:
     '200':
-      description: Payment card was updated
+      description: Payment card was updated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -118,7 +101,7 @@ put:
           schema:
             $ref: ../components/schemas/PaymentCards/PaymentCard.yaml
     '201':
-      description: Payment card was created
+      description: Payment card was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -135,7 +118,7 @@ put:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '409':
-      description: Payment card already exists and cannot be updated
+      description: Payment card already exists and cannot be updated.
       content:
         application/json:
           schema:

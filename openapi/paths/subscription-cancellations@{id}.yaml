@@ -3,13 +3,14 @@ parameters:
   - $ref: ../components/parameters/organizationId.yaml
 get:
   tags:
-    - Subscriptions
-  summary: Retrieve a subscription сancellation
+    - Orders
+  summary: Retrieve an order сancellation
   operationId: GetSubscriptionCancellation
-  description: Retrieve a subscription сancellation with specified identifier string
+  x-sdk-operation-name: get
+  description: Retrieve an order сancellation with specified identifier string.
   responses:
     '200':
-      description: Cancellation was retrieved successfully
+      description: Cancellation was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -29,15 +30,16 @@ get:
       $ref: ../components/responses/NotFound.yaml
 put:
   tags:
-    - Subscriptions
-  summary: Cancel a subscription
+    - Orders
+  summary: Cancel an order
   operationId: PutSubscriptionCancellation
-  description: Cancel a subscription
+  x-sdk-operation-name: update
+  description: Cancel a subscription.
   requestBody:
     $ref: ../components/requestBodies/SubscriptionCancellation.yaml
   responses:
     '200':
-      description: 'Cancellation was updated, subscription is or will be deactivated'
+      description: Cancellation was updated, the order is or will be deactivated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -50,7 +52,7 @@ put:
           schema:
             $ref: ../components/schemas/Subscription/SubscriptionCancellation.yaml
     '201':
-      description: 'Cancellation was created, subscription is or will be deactivated'
+      description: Cancellation was created, the order is or will be deactivated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -68,15 +70,20 @@ put:
       $ref: ../components/responses/Forbidden.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
+  x-code-samples:
+    - lang: JavaScript
+      source:
+        $ref: '../code_samples/JavaScript/subscription-cancellations@{id}/put.js'
 delete:
   tags:
-    - Subscriptions
+    - Orders
   summary: Delete a cancellation
   operationId: DeleteSubscriptionCancellation
-  description: Delete a subscription's cancellation. Only draft can be deleted.
+  x-sdk-operation-name: delete
+  description: Delete an order's cancellation. Only draft can be deleted.
   responses:
     '204':
-      description: Cancellaton was deleted
+      description: Cancellaton was deleted.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

@@ -5,16 +5,19 @@ get:
     - Lists
   summary: Retrieve a collection of Lists (latest version of each List)
   operationId: GetListCollection
+  x-sdk-operation-name: getAll
   description: |
-    Retrieve a collection of Lists
+    Retrieve a collection of Lists.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
     - $ref: ../components/parameters/collectionFilter.yaml
     - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionFields.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
-      description: A collection of Lists was retrieved successfully
+      description: A collection of Lists was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -47,11 +50,12 @@ post:
     - Lists
   summary: Create a List
   operationId: PostList
+  x-sdk-operation-name: create
   description: |
-    Create a List
+    Create a List.
   responses:
     '201':
-      description: List was created
+      description: List was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -68,7 +72,7 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent
+      description: Invalid data was sent.
       content:
         application/json:
           schema:

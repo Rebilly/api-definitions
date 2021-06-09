@@ -6,6 +6,7 @@ post:
     - KYC Documents
   summary: Reject a KYC document
   operationId: PostKycDocumentRejection
+  x-sdk-operation-name: reject
   description: >
     Marks that status of the document as `rejected`. Updates the review time and
     reviewer information. Intended to be used for manual overrides.
@@ -14,11 +15,11 @@ post:
       application/json:
         schema:
           $ref: ../components/schemas/KycDocument/KycDocumentRejection.yaml
-    description: KYC document resource
+    description: KYC document resource.
     required: true
   responses:
     '201':
-      description: KYC document rejection was created
+      description: KYC document rejection was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

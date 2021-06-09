@@ -1,0 +1,13 @@
+description: Taxjar-based taxes.
+allOf:
+  - $ref: ../InvoiceTax.yaml
+  - type: object
+    properties:
+      items:
+        type: array
+        description: |
+          Taxes applied to this invoice and calculated based on the related Product's `taxCategoryId`.
+        readOnly: true
+        items:
+          allOf:
+            - $ref: ../InvoiceTaxItem.yaml

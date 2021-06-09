@@ -1,12 +1,15 @@
+parameters:
+  - $ref: ../../components/parameters/organizationId.yaml
 get:
   tags:
     - Transaction
   summary: Retrieve a list of transactions
   operationId: StorefrontGetTransactionCollection
+  x-sdk-operation-name: getAll
   security:
     - CustomerJWT: []
   description: |
-    Retrieve a list of transactions
+    Retrieve a list of transactions.
   parameters:
     - $ref: ../../components/parameters/collectionLimit.yaml
     - $ref: ../../components/parameters/collectionOffset.yaml
@@ -15,7 +18,7 @@ get:
     - $ref: ../../components/parameters/collectionSort.yaml
   responses:
     200:
-      description: Transactions were retrieved successfuly
+      description: Transactions were retrieved successfuly.
       headers:
         Pagination-Total:
           $ref: ../../components/headers/Pagination-Total.yaml
@@ -28,7 +31,7 @@ get:
           schema:
             type: array
             items:
-              $ref: ../../components/schemas/Common/CommonTransaction.yaml
+              $ref: ../../components/schemas/Storefront/StorefrontTransaction.yaml
     401:
       $ref: ../../components/responses/Unauthorized.yaml
     403:

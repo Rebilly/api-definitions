@@ -6,11 +6,12 @@ get:
     - Bank Accounts
   summary: Retrieve a Bank Account
   operationId: GetBankAccount
+  x-sdk-operation-name: get
   description: |
-    Retrieve a Bank Account with specified identifier string
+    Retrieve a Bank Account with specified identifier string.
   responses:
     '200':
-      description: Bank Account was retrieved successfully
+      description: Bank Account was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -40,35 +41,19 @@ patch:
     - Bank Accounts
   summary: Update a bank account's values
   operationId: PatchBankAccount
+  x-sdk-operation-name: patch
   description: >
-    Update bank account's values except for the account number and routing
-    number
+    Update bank account's values except for the account number and routing.
+    number.
   requestBody:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            bankName:
-              description: Bank's name
-              type: string
-            accountType:
-              description: Bank's account type
-              type: string
-              enum:
-                - checking
-                - savings
-                - other
-            billingAddress:
-              description: The billing address
-              allOf:
-                - $ref: ../components/schemas/Contact/ContactObject.yaml
-            customFields:
-              $ref: ../components/schemas/ResourceCustomFields.yaml
-    description: Bank Account
+          $ref: ../components/schemas/BankAccounts/BankAccountUpdatePlain.yaml
+    description: Bank Account.
   responses:
     '200':
-      description: Bank Account was updated
+      description: Bank Account was updated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -97,8 +82,9 @@ put:
     - Bank Accounts
   summary: Create a Bank Account with predefined ID
   operationId: PutBankAccount
+  x-sdk-operation-name: update
   description: |
-    Create or update a BankAccount with predefined identifier string
+    Create or update a BankAccount with predefined identifier string.
   requestBody:
     content:
       application/json:
@@ -106,11 +92,11 @@ put:
           oneOf:
             - $ref: ../components/schemas/BankAccounts/BankAccountCreateToken.yaml
             - $ref: ../components/schemas/BankAccounts/BankAccountCreatePlain.yaml
-    description: BankAccount resource
+    description: BankAccount resource.
     required: true
   responses:
     '200':
-      description: BankAccount was updated
+      description: BankAccount was updated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -123,7 +109,7 @@ put:
           schema:
             $ref: ../components/schemas/BankAccounts/BankAccount.yaml
     '201':
-      description: BankAccount was created
+      description: BankAccount was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

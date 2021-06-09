@@ -3,7 +3,7 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
   - name: downtimeId
     in: path
-    description: The Gateway Account downtime schedule ID
+    description: The Gateway Account downtime schedule ID.
     required: true
     schema:
       type: string
@@ -12,11 +12,12 @@ get:
     - Gateway Accounts
   summary: Retrieve a Gateway Downtime schedule
   operationId: GetGatewayAccountDowntimeSchedule
+  x-sdk-operation-name: getDowntimeSchedule
   description: |
-    Retrieve a Gateway Downtime schedule with specified identifier string
+    Retrieve a Gateway Downtime schedule with specified identifier string.
   responses:
     '200':
-      description: Gateway Downtime schedule was retrieved successfully
+      description: Gateway Downtime schedule was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -44,11 +45,12 @@ put:
     - Gateway Accounts
   summary: Update a Gateway Account downtime schedule
   operationId: PutGatewayAccountDowntimeSchedule
+  x-sdk-operation-name: updateDowntimeSchedule
   description: |
-    Update a Gateway Account downtime schedule with predefined identifier string
+    Update a Gateway Account downtime schedule with predefined identifier string.
   responses:
     '200':
-      description: Gateway Account downtime schedule was updated
+      description: Gateway Account downtime schedule was updated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -69,7 +71,7 @@ put:
     '409':
       $ref: ../components/responses/Conflict.yaml
     '422':
-      description: Invalid data was sent
+      description: Invalid data was sent.
       content:
         application/json:
           schema:
@@ -86,11 +88,12 @@ delete:
     - Gateway Accounts
   summary: Delete a Gateway Account downtime schedule
   operationId: DeleteGatewayAccountDowntimeSchedule
+  x-sdk-operation-name: deleteDowntimeSchedule
   description: |
-    Delete a Gateway Account downtime schedule
+    Delete a Gateway Account downtime schedule.
   responses:
     '204':
-      description: Gateway Account downtime schedule was deleted
+      description: Gateway Account downtime schedule was deleted.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

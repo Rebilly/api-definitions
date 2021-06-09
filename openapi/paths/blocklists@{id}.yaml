@@ -1,0 +1,112 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Blocklists
+  summary: Retrieve a blocklist
+  operationId: GetBlocklist
+  x-sdk-operation-name: get
+  description: |
+    Retrieve a blocklist with specified identifier string.
+  responses:
+    '200':
+      description: Blocklist was retrieved successfully.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Blocklist.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/blocklists@{id}/get.php'
+    - lang: JavaScript
+      source:
+        $ref: '../code_samples/JavaScript/blocklists@{id}/get.js'
+put:
+  tags:
+    - Blocklists
+  summary: Create a blocklist with predefined ID
+  operationId: PutBlocklist
+  x-sdk-operation-name: update
+  description: |
+    Create a blocklist with predefined identifier string.
+  requestBody:
+    $ref: ../components/requestBodies/Blocklist.yaml
+  responses:
+    '201':
+      description: Blocklist was created.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Blocklist.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '409':
+      description: Blocklist exist and cannot be updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Error.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/blocklists@{id}/put.php'
+    - lang: JavaScript
+      source:
+        $ref: '../code_samples/JavaScript/blocklists@{id}/put.js'
+delete:
+  tags:
+    - Blocklists
+  summary: Delete a blocklist
+  operationId: DeleteBlocklist
+  x-sdk-operation-name: delete
+  description: |
+    Delete a blocklist with predefined identifier string.
+  responses:
+    '204':
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      description: Blocklist was deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/blocklists@{id}/delete.php'
+    - lang: JavaScript
+      source:
+        $ref: '../code_samples/JavaScript/blocklists@{id}/delete.js'

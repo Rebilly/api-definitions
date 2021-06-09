@@ -5,14 +5,19 @@ get:
     - Payment Cards
   summary: Retrieve a list of Payment Cards
   operationId: GetPaymentCardCollection
+  x-sdk-operation-name: getAll
   description: |
-    Retrieve a list of Payments Cards
+    Retrieve a list of Payments Cards.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: A list of Payment Card was retrieved successfully
+      description: A list of Payment Card was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -48,8 +53,9 @@ post:
     - Payment Cards
   summary: Create a Payment Card
   operationId: PostPaymentCard
+  x-sdk-operation-name: create
   description: |
-    Create a Payment Card
+    Create a Payment Card.
   requestBody:
     content:
       application/json:
@@ -57,11 +63,11 @@ post:
           oneOf:
             - $ref: ../components/schemas/PaymentCards/PaymentCardCreateToken.yaml
             - $ref: ../components/schemas/PaymentCards/PaymentCardCreatePlain.yaml
-    description: PaymentCard resource
+    description: PaymentCard resource.
     required: true
   responses:
     '200':
-      description: Payment Card was updated
+      description: Payment Card was updated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -74,7 +80,7 @@ post:
           schema:
             $ref: ../components/schemas/PaymentCards/PaymentCard.yaml
     '201':
-      description: Payment Card was created
+      description: Payment Card was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

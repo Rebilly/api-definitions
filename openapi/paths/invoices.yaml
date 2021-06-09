@@ -5,20 +5,19 @@ get:
     - Invoices
   summary: Retrieve a list of invoices
   operationId: GetInvoiceCollection
+  x-sdk-operation-name: getAll
   description: |
-    Retrieve a list of invoices
+    Retrieve a list of invoices.
   parameters:
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
-    - x-rebillyMerge:
-        - $ref: ../components/parameters/mediaType.yaml
-        - schema:
-            enum:
-              - application/json
-              - text/csv
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: A list of invoices was retrieved successfully
+      description: A list of invoices was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -34,11 +33,6 @@ get:
           $ref: ../components/headers/Pagination-Offset.yaml
       content:
         application/json:
-          schema:
-            type: array
-            items:
-              $ref: ../components/schemas/Invoices/Invoice.yaml
-        text/csv:
           schema:
             type: array
             items:
@@ -59,13 +53,14 @@ post:
     - Invoices
   summary: Create an invoice
   operationId: PostInvoice
+  x-sdk-operation-name: create
   description: |
-    Create an invoice
+    Create an invoice.
   requestBody:
     $ref: ../components/requestBodies/Invoice.yaml
   responses:
     '201':
-      description: Invoice was created
+      description: Invoice was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

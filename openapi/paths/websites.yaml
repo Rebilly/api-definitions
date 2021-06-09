@@ -5,20 +5,18 @@ get:
     - Websites
   summary: Retrieve a list of websites
   operationId: GetWebsiteCollection
+  x-sdk-operation-name: getAll
   description: |
-    Retrieve a list of websites
+    Retrieve a list of websites.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
-    - x-rebillyMerge:
-        - $ref: ../components/parameters/mediaType.yaml
-        - schema:
-            enum:
-              - application/json
-              - text/csv
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
-      description: A list of Websites was retrieved successfully
+      description: A list of Websites was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -34,11 +32,6 @@ get:
           $ref: ../components/headers/Pagination-Offset.yaml
       content:
         application/json:
-          schema:
-            type: array
-            items:
-              $ref: ../components/schemas/Website.yaml
-        text/csv:
           schema:
             type: array
             items:
@@ -59,13 +52,14 @@ post:
     - Websites
   summary: Create a website
   operationId: PostWebsite
+  x-sdk-operation-name: create
   description: |
-    Create a website
+    Create a website.
   requestBody:
     $ref: ../components/requestBodies/Website.yaml
   responses:
     '201':
-      description: Website was created
+      description: Website was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -82,7 +76,7 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent
+      description: Invalid data was sent.
       content:
         application/json:
           schema:

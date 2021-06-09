@@ -3,13 +3,17 @@ get:
     - Tracking
   summary: Retrieve a list of tracking API logs
   operationId: GetTrackingApiCollection
+  x-sdk-operation-name: getAllApiLogs
   parameters:
     - $ref: ../components/parameters/organizationId.yaml
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
     - name: Accept
       in: header
-      description: The response media type
+      description: The response media type.
       schema:
         type: string
         enum:
@@ -18,7 +22,7 @@ get:
         default: application/json
   responses:
     '200':
-      description: Tracking API logs was retrieved successfully
+      description: Tracking API logs was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

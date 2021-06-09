@@ -1,63 +1,47 @@
 type: object
 title: Payment Card Token
+allOf:
+  - $ref: ../Common/CommonPaymentToken.yaml
 required:
   - method
   - paymentInstrument
-  - billingAddress
 properties:
-  id:
-    description: The token identifier string
-    readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
-  isUsed:
-    description: Whether the token was already used
-    type: boolean
-    default: false
-    readOnly: true
   method:
-    description: The token payment method
+    description: The token payment method.
     type: string
-    enum:
-      - payment-card
+    enum: [payment-card]
   paymentInstrument:
-    description: The payment instrument details
-    allOf:
-      - $ref: ./TokenPaymentCardInstrument.yaml
-  fingerprint:
-    description: Device fingerprint hash
-    type: string
-    deprecated: true
-  browserData:
-    $ref: ./BrowserData.yaml
+    description: The payment card instrument details.
+    type: object
+    properties:
+      pan:
+        description: Payment Card PAN (Primary Account Number).
+        type: string
+        writeOnly: true
+      cvv:
+        description: Payment Card CVV/CVC.
+        type: string
+        writeOnly: true
+      expMonth:
+        description: Payment Card expiration month.
+        type: integer
+      expYear:
+        description: Payment Card expiration year.
+        type: integer
+      bin:
+        description: Payment Card BIN (the PAN's first 6 digits).
+        type: string
+        format: bin
+        readOnly: true
+      last4:
+        description: Payment Card PAN's last 4 digits.
+        type: string
+        readOnly: true
+      brand:
+        readOnly: true
+        allOf:
+          - $ref: ../PaymentCards/PaymentCardBrand.yaml
   billingAddress:
-    description: The billing address object
+    description: The billing address object.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
-  leadSource:
-    allOf:
-      - $ref: ../LeadSource.yaml
-    writeOnly: true
-  createdTime:
-    description: Token created time
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
-  updatedTime:
-    description: Token updated time
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
-  usageTime:
-    description: Token usage time
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
-  expirationTime:
-    description: Token expiration time
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
-  _links:
-    type: array
-    description: The links related to resource
-    readOnly: true
-    minItems: 1
-    items:
-      $ref: ../Links/SelfLink.yaml

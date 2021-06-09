@@ -1,19 +1,21 @@
 parameters:
+  - $ref: ../../components/parameters/organizationId.yaml
   - $ref: ../../components/parameters/resourceId.yaml
 get:
   tags:
     - Product
   summary: Retrieve a product
   operationId: StorefrontGetProduct
+  x-sdk-operation-name: get
   description: |
-    Retrieve a product with specified ID
+    Retrieve a product with specified ID.
   responses:
     200:
-      description: Product was retrieved successfully
+      description: Product was retrieved successfully.
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/Common/CommonProduct.yaml
+            $ref: ../../components/schemas/Storefront/StorefrontProduct.yaml
     401:
       $ref: ../../components/responses/Unauthorized.yaml
     403:

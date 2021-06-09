@@ -2,13 +2,13 @@ parameters:
   - name: organizationId
     in: path
     required: true
-    description: Organization identifier
+    description: Organization identifier.
     schema:
       $ref: ../components/schemas/ResourceId.yaml
   - name: userId
     in: path
     required: true
-    description: User identifier
+    description: User identifier.
     schema:
       $ref: ../components/schemas/ResourceId.yaml
 get:
@@ -16,11 +16,12 @@ get:
     - Memberships
   summary: Retrieve the membership
   operationId: GetMembership
+  x-sdk-operation-name: get
   description: |
-    Retrieve the membership using organization and user identifiers
+    Retrieve the membership using organization and user identifiers.
   responses:
     '200':
-      description: Membership was retrieved successfully
+      description: Membership was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -43,6 +44,7 @@ put:
     - Memberships
   summary: Create or update membership
   operationId: PutMembership
+  x-sdk-operation-name: update
   description: |
     Create or update membership using organization and user identifiers.
     Only membership's owner can add other users in the membership.
@@ -57,10 +59,15 @@ put:
               description: The memberships's permissions. See the format in example. Use wildcard `*` for full access.
               allOf:
                 - $ref: ../components/schemas/AclPermissions.yaml
+            roleIds:
+              type: array
+              description: The membership's roles identifiers.
+              items:
+                type: string
     required: true
   responses:
     '200':
-      description: Membership was updated
+      description: Membership was updated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -73,7 +80,7 @@ put:
           schema:
             $ref: ../components/schemas/Membership.yaml
     '201':
-      description: Membership was created
+      description: Membership was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -96,11 +103,12 @@ delete:
     - Memberships
   summary: Delete the membership
   operationId: DeleteMembership
+  x-sdk-operation-name: delete
   description: |
-    Delete the membership using organization and user identifiers
+    Delete the membership using organization and user identifiers.
   responses:
     '204':
-      description: Membership message was deleted
+      description: Membership message was deleted.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

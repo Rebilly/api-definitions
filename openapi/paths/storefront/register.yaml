@@ -1,17 +1,20 @@
+parameters:
+  - $ref: ../../components/parameters/organizationId.yaml
 post:
   tags:
     - Account
   summary: Register Account
   operationId: StorefrontPostRegister
+  x-sdk-operation-name: register
   security:
     - PublishableApiKey: []
   description: |
-    Register account
+    Register account.
   requestBody:
     $ref: ../../components/requestBodies/storefront/PostRegister.yaml
   responses:
     201:
-      description: Account registered
+      description: Account registered.
       content:
         application/json:
           schema:

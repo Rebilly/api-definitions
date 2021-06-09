@@ -1,0 +1,35 @@
+type: object
+title: Plaid Account Token
+allOf:
+  - $ref: ../Common/CommonPaymentToken.yaml
+required:
+  - method
+  - billingAddress
+  - paymentInstrument
+properties:
+  method:
+    description: The token method.
+    type: string
+    enum: [plaid-account]
+  paymentInstrument:
+    description: The Plaid payment instrument details.
+    type: object
+    required:
+      - credentialHash
+      - publicToken
+      - accountId
+    properties:
+      credentialHash:
+        description: The Plaid credentials hash.
+        allOf:
+          - $ref: ../ResourceId.yaml
+      publicToken:
+        type: string
+        description: The Plaid public token.
+      accountId:
+        type: string
+        description: The Plaid account ID.
+  billingAddress:
+    description: The billing address object.
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml

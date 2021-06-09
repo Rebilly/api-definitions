@@ -5,6 +5,7 @@ get:
     - Coupons
   summary: Retrieve a list of coupon redemptions
   operationId: GetCouponRedemptionCollection
+  x-sdk-operation-name: getAllRedemptions
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -13,7 +14,7 @@ get:
     - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
-      description: Coupons redemptions were retrieved successfully
+      description: Coupons redemptions were retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -49,18 +50,19 @@ post:
     - Coupons
   summary: Redeem a coupon
   operationId: PostCouponRedemption
+  x-sdk-operation-name: redeem
   description: |
-    Redeem a coupon
+    Redeem a coupon.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/Coupon/CouponRedemption.yaml
-    description: Redeem a coupon
+    description: Redeem a coupon.
     required: true
   responses:
     '201':
-      description: Coupon was redeemed
+      description: Coupon was redeemed.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

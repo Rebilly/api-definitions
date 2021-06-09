@@ -6,11 +6,12 @@ get:
     - PayPal Accounts
   summary: Retrieve a PayPal Account
   operationId: GetPayPalAccount
+  x-sdk-operation-name: get
   description: |
-    Retrieve a PayPal Account with specified identifier string
+    Retrieve a PayPal Account with specified identifier string.
   responses:
     '200':
-      description: PayPal Account was retrieved successfully
+      description: PayPal Account was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -40,16 +41,17 @@ put:
     - PayPal Accounts
   summary: Create a PayPal account with predefined ID
   operationId: PutPayPalAccount
+  x-sdk-operation-name: update
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/PayPalAccount.yaml
-    description: PayPal Account
+    description: PayPal Account.
     required: true
   responses:
     '201':
-      description: PayPal Account was created
+      description: PayPal Account was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -66,7 +68,7 @@ put:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '409':
-      description: PayPal Account exist and cannot be updated
+      description: PayPal Account exist and cannot be updated.
       content:
         application/json:
           schema:

@@ -7,17 +7,21 @@ properties:
       - $ref: ../ResourceId.yaml
   status:
     type: integer
-    description: HTTP response code
+    x-sortable: true
+    description: HTTP response code.
   url:
     type: string
-    description: API request address
+    x-basic: true
+    x-sortable: true
+    description: API request address.
   route:
     type: string
-    description: API request route
-    example: '/v2.1/customers/{param}'
+    x-sortable: true
+    description: API request route.
+    example: '/customers/{param}'
   method:
     type: string
-    description: HTTP method
+    description: HTTP method.
     enum:
       - HEAD
       - GET
@@ -25,64 +29,69 @@ properties:
       - PUT
       - DELETE
       - PATCH
+    x-basic: true
   request:
     type: string
-    description: Request JSON-string
+    x-sortable: true
+    description: Request JSON-string.
   response:
     type: string
-    description: Response JSON-string
+    x-sortable: true
+    description: Response JSON-string.
   requestHeaders:
-    type: object
-    additionalProperties:
-      type: string
-    example:
-      User-Agent: Mozilla/5.0
-      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    $ref: ../HttpHeaders.yaml
   responseHeaders:
-    type: object
-    additionalProperties:
-      type: string
-    example:
-      Rate-Limit-Limit: 5000
-      Rate-Limit-Remaining: 4999
-      Rate-Limit-Reset: 'Mon, 31 Jul 2017 04:16:00 +0000'
+    $ref: ../HttpHeaders.yaml
   user:
     type: object
-    description: The user who has made a request
+    description: The user who has made a request.
     readOnly: true
     properties:
       userId:
+        x-sortable: true
         allOf:
           - $ref: ../ResourceId.yaml
       apiKeyId:
         allOf:
           - $ref: ../ResourceId.yaml
       email:
-        description: The user email
+        description: The user email.
         type: string
         format: email
+        x-sortable: true
       firstName:
-        description: The user first name
+        description: The user first name.
         type: string
+        x-sortable: true
       lastName:
-        description: The user last name
+        description: The user last name.
         type: string
+        x-sortable: true
       ipAddress:
         type: string
-        description: Client IP address
+        x-sortable: true
+        deprecated: true
+        description: Client IP address.
         format: ipv4
       userAgent:
-        description: The software that is acting on behalf of a user
+        description: The software that is acting on behalf of a user.
         type: string
+        x-sortable: true
       fingerprint:
-        description: The user device fingerprint hash
+        description: The user device fingerprint hash.
         type: string
+        x-sortable: true
       isSupport:
-        description: If user from support
+        description: If user from support.
         type: boolean
+        x-sortable: true
+  ipAddress:
+    type: string
+    x-basic: true
+    description: Client IP address.
   relatedIds:
     type: object
-    description: The IDs of related resources
+    description: The IDs of related resources.
     readOnly: true
     properties:
       customerId:
@@ -96,14 +105,19 @@ properties:
           - $ref: ../ResourceId.yaml
   duration:
     type: integer
-    description: Request duration in milliseconds
+    x-sortable: true
+    x-basic: true
+    description: Request duration in milliseconds.
   createdTime:
-    description: The log created time
+    description: The log created time.
+    x-label: Creation time
+    x-sortable: true
+    x-basic: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   _links:
     type: array
-    description: The links related to resource
+    description: The links related to resource.
     readOnly: true
     minItems: 1
     items:

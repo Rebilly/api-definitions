@@ -1,17 +1,19 @@
 parameters:
+  - $ref: ../../components/parameters/organizationId.yaml
   - $ref: ../../components/parameters/resourceId.yaml
 get:
   tags:
     - KYC Document
   summary: Retrieve a KYC Document
   operationId: StorefrontGetKycDocument
+  x-sdk-operation-name: get
   security:
     - CustomerJWT: []
   description: |
-    Retrieve a KYC document with specified ID
+    Retrieve a KYC document with specified ID.
   responses:
     200:
-      description: KYC document was retrieved successfully
+      description: KYC document was retrieved successfully.
       content:
         application/json:
           schema:
@@ -27,20 +29,21 @@ patch:
     - KYC Document
   summary: Update a KYC document
   operationId: StorefrontPatchKycDocument
+  x-sdk-operation-name: update
   security:
     - CustomerJWT: []
   description: |
-    Update a KYC document with predefined ID
+    Update a KYC document with predefined ID.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../../components/schemas/Common/CommonKycDocument.yaml
-    description: KYC document resource
+    description: KYC document resource.
     required: true
   responses:
     200:
-      description: KYC document was updated
+      description: KYC document was updated.
       content:
         application/json:
           schema:

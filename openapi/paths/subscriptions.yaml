@@ -2,24 +2,22 @@ parameters:
   - $ref: ../components/parameters/organizationId.yaml
 get:
   tags:
-    - Subscriptions
-  summary: Retrieve a list of subscriptions
+    - Orders
+  summary: Retrieve a list of orders
   operationId: GetSubscriptionCollection
+  x-sdk-operation-name: getAll
   description: |
-    Retrieve a list of subscriptions
+    Retrieve a list of orders.
   parameters:
-    - $ref: ../components/parameters/subscriptionExpand.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
-    - x-rebillyMerge:
-        - $ref: ../components/parameters/mediaType.yaml
-        - schema:
-            enum:
-              - application/json
-              - text/csv
+    - $ref: ../components/parameters/collectionQuery.yaml   
+    - $ref: ../components/parameters/subscriptionExpand.yaml
   responses:
     '200':
-      description: A list of subscriptions was retrieved successfully
+      description: A list of subscriptions was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -39,11 +37,6 @@ get:
             type: array
             items:
               $ref: ../components/schemas/Subscription.yaml
-        text/csv:
-          schema:
-            type: array
-            items:
-              $ref: ../components/schemas/Subscription.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -57,11 +50,12 @@ get:
         $ref: ../code_samples/JavaScript/subscriptions/get.js
 post:
   tags:
-    - Subscriptions
-  summary: Create a subscription
+    - Orders
+  summary: Create an order
   operationId: PostSubscription
+  x-sdk-operation-name: create
   description: |
-    Create a subscription. Consider using the upsert
+    Create an order. Consider using the upsert.
     operation to accomplish this task.
   parameters:
     - $ref: ../components/parameters/subscriptionExpand.yaml
@@ -69,7 +63,7 @@ post:
     $ref: ../components/requestBodies/Subscription.yaml
   responses:
     '201':
-      description: Subscription was created
+      description: Order was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

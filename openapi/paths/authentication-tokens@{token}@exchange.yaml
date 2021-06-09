@@ -1,7 +1,7 @@
 parameters:
   - name: token
     in: path
-    description: The token identifier string
+    description: The token identifier string.
     required: true
     schema:
       type: string
@@ -11,8 +11,9 @@ post:
     - Customer Authentication
   summary: Exchange
   operationId: PostAuthenticationTokenExchange
+  x-sdk-operation-name: exchangeToken
   description: >
-    Exchange Authentication Token for JWT
+    Exchange Authentication Token for JWT.
 
 
     It will also invalidate an Authentication Token by default (so it can only
@@ -28,8 +29,8 @@ post:
           $ref: ../components/schemas/CustomerAuthentication/CustomerJWT.yaml
     required: true
   responses:
-    '200':
-      description: Authentication Token exchanged for JWT
+    '201':
+      description: Authentication Token exchanged for JWT.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

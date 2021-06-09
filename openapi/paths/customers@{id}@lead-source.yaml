@@ -6,11 +6,12 @@ get:
     - Customers
   summary: Retrieve a customer's Lead Source
   operationId: GetCustomerLeadSource
+  x-sdk-operation-name: getLeadSource
   description: |
-    Retrieve a Lead Source of given customer
+    Retrieve a Lead Source of given customer.
   responses:
     '200':
-      description: Lead Source was retrieved successfully
+      description: Lead Source was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -40,18 +41,19 @@ put:
     - Customers
   summary: Create a Lead Source for a customer
   operationId: PutCustomerLeadSource
+  x-sdk-operation-name: createLeadSource
   description: |
-    Create a Lead Source for a customer
+    Create a Lead Source for a customer.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/LeadSource.yaml
-    description: Lead Source resource
+    description: Lead Source resource.
     required: true
   responses:
     '201':
-      description: Lead Source was created
+      description: Lead Source was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -81,11 +83,12 @@ delete:
     - Customers
   summary: Delete a Lead Source for a customer
   operationId: DeleteCustomerLeadSource
+  x-sdk-operation-name: deleteLeadSource
   description: |
-    Delete a Lead Source that belongs to a certain customer
+    Delete a Lead Source that belongs to a certain customer.
   responses:
     '204':
-      description: Lead Source was deleted
+      description: Lead Source was deleted.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

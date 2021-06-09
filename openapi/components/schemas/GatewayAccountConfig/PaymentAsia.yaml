@@ -1,0 +1,16 @@
+description: PaymentAsia config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: PaymentAsia credentials object.
+        properties:
+          apiKey:
+            type: string
+            format: password
+        required:
+          - apiKey

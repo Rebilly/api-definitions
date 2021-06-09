@@ -6,11 +6,12 @@ get:
     - Gateway Accounts
   summary: Retrieve a Gateway Account
   operationId: GetGatewayAccount
+  x-sdk-operation-name: get
   description: |
-    Retrieve a Gateway Account with specified identifier string
+    Retrieve a Gateway Account with specified identifier string.
   responses:
     '200':
-      description: Gateway Account was retrieved successfully
+      description: Gateway Account was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -40,13 +41,14 @@ put:
     - Gateway Accounts
   summary: Create or update a Gateway Account with predefined ID
   operationId: PutGatewayAccount
+  x-sdk-operation-name: update
   description: |
-    Create or update a GatewayAccount with predefined identifier string
+    Create or update a GatewayAccount with predefined identifier string.
   requestBody:
     $ref: ../components/requestBodies/GatewayAccount.yaml
   responses:
     '200':
-      description: Gateway Account was updated
+      description: Gateway Account was updated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -59,7 +61,7 @@ put:
           schema:
             $ref: ../components/schemas/GatewayAccount.yaml
     '201':
-      description: Gateway Account was created
+      description: Gateway Account was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -78,7 +80,7 @@ put:
     '404':
       $ref: ../components/responses/NotFound.yaml
     '422':
-      description: Invalid data was sent
+      description: Invalid data was sent.
       content:
         application/json:
           schema:
@@ -95,13 +97,14 @@ patch:
     - Gateway Accounts
   summary: Update a Gateway Account with predefined ID
   operationId: PatchGatewayAccount
+  x-sdk-operation-name: update
   description: |
-    Update a GatewayAccount with predefined identifier string
+    Update a GatewayAccount with predefined identifier string.
   requestBody:
     $ref: ../components/requestBodies/GatewayAccount.yaml
   responses:
     '200':
-      description: Gateway Account was updated
+      description: Gateway Account was updated.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -120,7 +123,7 @@ patch:
     '404':
       $ref: ../components/responses/NotFound.yaml
     '422':
-      description: Invalid data was sent
+      description: Invalid data was sent.
       content:
         application/json:
           schema:
@@ -134,11 +137,12 @@ delete:
     - Gateway Accounts
   summary: Delete a Gateway Account
   operationId: DeleteGatewayAccount
+  x-sdk-operation-name: delete
   description: |
-    Delete a Gateway Account with predefined identifier string
+    Delete a Gateway Account with predefined identifier string.
   responses:
     '204':
-      description: Gateway Account was deleted
+      description: Gateway Account was deleted.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

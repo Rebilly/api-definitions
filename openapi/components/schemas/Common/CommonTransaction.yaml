@@ -1,24 +1,27 @@
 type: object
 properties:
   id:
-    description: The transaction ID
+    description: The transaction ID.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   websiteId:
-    description: The website ID
+    description: The website ID.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   customerId:
-    description: The сustomer's ID
+    description: The сustomer's ID.
+    x-basic: true
     allOf:
       - $ref: ../ResourceId.yaml
   type:
-    description: Transaction type
+    description: Transaction type.
     type: string
+    x-basic: true
     readOnly: true
     enum:
+      - 3ds-authentication
       - authorize
       - capture
       - credit
@@ -26,14 +29,15 @@ properties:
       - sale
       - void
   status:
-    description: Transaction status
+    description: Transaction status.
     type: string
     readOnly: true
     enum:
       - completed
-      - connection-error
+      - conn-error
       - disputed
       - never-sent
+      - offsite
       - partially-refunded
       - pending
       - refunded
@@ -41,11 +45,14 @@ properties:
       - suspended
       - timeout
       - voided
+      - waiting-approval
       - waiting-capture
+      - waiting-gateway
       - waiting-refund
   result:
-    description: Transaction result
+    description: Transaction result.
     type: string
+    x-basic: true
     readOnly: true
     enum:
       - abandoned
@@ -54,7 +61,10 @@ properties:
       - declined
       - unknown
   amount:
-    description: The transactions's amount
+    x-type: Money
+    x-sortable: true
+    x-basic: true
+    description: The transaction's amount.
     type: number
     format: double
     readOnly: true
@@ -66,6 +76,9 @@ properties:
     description: The amount actually purchased which may have differed from the originally requested amount in case of an adjustment.
     type: number
     format: double
+    x-type: Money
+    x-currency-field: purchaseCurrency
+    x-sortable: true
     readOnly: true
   purchaseCurrency:
     readOnly: true
@@ -74,6 +87,8 @@ properties:
   requestAmount:
     description: The amount in the payment request. If adjusted, the purchase amount and billing amount may vary from it.
     type: number
+    x-type: Money
+    x-currency-field: requestCurrency
     format: double
     readOnly: true
   requestCurrency:
@@ -81,30 +96,30 @@ properties:
     allOf:
       - $ref: ../CurrencyCode.yaml
   parentTransactionId:
-    description: The parent's transaction ID
+    description: The parent's transaction ID.
     allOf:
       - $ref: ../ResourceId.yaml
     readOnly: true
   childTransactions:
-    description: The child transaction IDs
+    description: The child transaction IDs.
     readOnly: true
     type: array
     items:
       $ref: ../ResourceId.yaml
   invoiceIds:
-    description: The invoice IDs related to transaction
+    description: The invoice IDs related to transaction.
     readOnly: true
     type: array
     items:
       $ref: ../ResourceId.yaml
   subscriptionIds:
-    description: The subscription IDs related to transaction's invoice(s)
+    description: The orders IDs related to transaction's invoice(s).
     readOnly: true
     type: array
     items:
       $ref: ../ResourceId.yaml
   planIds:
-    description: The plan IDs related to transaction's subscription(s)
+    description: The plan IDs related to transaction's order(s).
     readOnly: true
     type: array
     items:
@@ -113,13 +128,13 @@ properties:
     type: boolean
     readOnly: true
   rebillNumber:
-    description: The transactions's rebill number
+    description: The transaction's rebill number.
     type: integer
     readOnly: true
   paymentInstrument:
-    $ref: ../Storefront/PaymentInstrumentReference.yaml
+    $ref: ../Storefront/PaymentInstruments/InstrumentReference.yaml
   billingAddress:
-    description: Billing address
+    description: Billing address.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   has3ds:
@@ -135,7 +150,7 @@ properties:
   retryNumber:
     type: integer
     readOnly: true
-    description: The position in the sequence of retries
+    description: The position in the sequence of retries.
   isRetry:
     type: boolean
     readOnly: true
@@ -148,23 +163,42 @@ properties:
       12 or fewer characters for a credit card statement.
   description:
     type: string
-    description: The payment description
+    description: The payment description.
     maxLength: 255
   requestId:
     description: The transaction's request ID.  This ID must be unique within a 24 hour period.
       Use this field to prevent duplicated transactions.
     type: string
+    x-sortable: true
+  hasAmountAdjustment:
+    description: True if transaction has amount adjustment.
+    type: boolean
+    readOnly: true
+  gatewayName:
+    readOnly: true
+    description: |
+      Payment Gateway name, available only after the gateway is selected for the transaction.
+    x-label: Gateway account
+    x-basic: true
+    allOf:
+      - $ref: ../Gateways/GatewayName.yaml
   customFields:
     $ref: ../ResourceCustomFields.yaml
   processedTime:
-    description: Transaction processed time
+    description: Transaction processed time.
+    x-sortable: true
+    x-basic: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   createdTime:
-    description: Transaction created time
+    description: Transaction created time.
+    x-label: Created On
+    x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
-    description: Transaction updated time
+    description: Transaction updated time.
+    x-label: Last update time
+    x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml

@@ -1,17 +1,19 @@
 parameters:
+  - $ref: ../../components/parameters/organizationId.yaml
   - $ref: ../../components/parameters/resourceId.yaml
 post:
   tags:
     - Payment Instrument
   summary: Deactivate a Payment Instrument
   operationId: StorefrontPostPaymentInstrumentDeactivation
+  x-sdk-operation-name: deactivate
   security:
     - CustomerJWT: []
   description: |
-    Deactivate a payment instrument
+    Deactivate a payment instrument.
   responses:
     201:
-      description: Deactivation successful
+      description: Deactivation successful.
       content:
         application/json:
           schema:
@@ -24,3 +26,7 @@ post:
       $ref: ../../components/responses/NotFound.yaml
     422:
       $ref: ../../components/responses/ValidationError.yaml
+  x-code-samples:
+    - lang: JavaScript
+      source:
+        $ref: '../../code_samples/JavaScript/payment-instruments@{id}@deactivation/post.js'

@@ -1,7 +1,7 @@
 parameters:
   - name: token
     in: path
-    description: The token identifier string
+    description: The token identifier string.
     required: true
     schema:
       type: string
@@ -11,15 +11,16 @@ get:
     - Customer Authentication
   summary: Verify
   operationId: GetAuthenticationTokenVerification
+  x-sdk-operation-name: verify
   description: |
-    Verify an authentication token
+    Verify an authentication token.
   security:
     - SecretApiKey: []
     - JWT: []
     - PublishableApiKey: []
   responses:
     '200':
-      description: Authentication Token was verified
+      description: Authentication Token was verified.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -50,15 +51,16 @@ delete:
     - Customer Authentication
   summary: Logout a customer
   operationId: DeleteAuthenticationToken
+  x-sdk-operation-name: logout
   description: |
-    Logout a customer
+    Logout a customer.
   security:
     - SecretApiKey: []
     - JWT: []
     - PublishableApiKey: []
   responses:
     '204':
-      description: Customer was logged out
+      description: Customer was logged out.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

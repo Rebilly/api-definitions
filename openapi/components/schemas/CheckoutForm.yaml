@@ -1,0 +1,18 @@
+allOf:
+  - $ref: CheckoutForm/CommonCheckoutForm.yaml
+  - type: object
+    required:
+      - name
+    properties:
+      name:
+        description: >-
+          Checkout form name, used for internal display to help you organize your
+          various checkout forms. Will not be displayed to your customers.
+        type: string
+      status:
+        description: If `inactive`, the checkout form url will result in a 404.
+        type: string
+        enum:
+          - active
+          - inactive
+        default: active

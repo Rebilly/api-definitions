@@ -3,13 +3,14 @@ parameters:
   - $ref: ../components/parameters/organizationId.yaml
 get:
   tags:
-    - Subscriptions
-  summary: Retrieve a subscription reactivation
+    - Orders
+  summary: Retrieve an order reactivation
   operationId: GetSubscriptionReactivation
-  description: Retrieve a subscription reactivation with specified identifier string
+  x-sdk-operation-name: get
+  description: Retrieve an order reactivation with specified identifier string.
   responses:
     '200':
-      description: Reactivation was retrieved successfully
+      description: Reactivation was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -27,3 +28,7 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
+  x-code-samples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/subscription-reactivations@{id}/get.js

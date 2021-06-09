@@ -5,14 +5,19 @@ get:
     - Gateway Accounts
   summary: Retrieve a list of gateway accounts
   operationId: GetGatewayAccountCollection
+  x-sdk-operation-name: getAll
   description: |
-    Retrieve a list of gateway accounts
+    Retrieve a list of gateway accounts.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionFields.yaml
   responses:
     '200':
-      description: A list of Gateway Accounts was retrieved successfully
+      description: A list of Gateway Accounts was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -48,13 +53,14 @@ post:
     - Gateway Accounts
   summary: Create a Gateway Account
   operationId: PostGatewayAccount
+  x-sdk-operation-name: create
   description: |
-    Create a Gateway Account
+    Create a Gateway Account.
   requestBody:
     $ref: ../components/requestBodies/GatewayAccount.yaml
   responses:
     '201':
-      description: Gateway Account was created
+      description: Gateway Account was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -71,7 +77,7 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent
+      description: Invalid data was sent.
       content:
         application/json:
           schema:

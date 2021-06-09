@@ -1,23 +1,59 @@
 type: object
 properties:
+  revision:
+    description: >
+      The number of times the order data has been modified.
+
+      The revision is useful when analyzing webhook data to determine if the
+      change takes precedence over the current representation.
+    type: integer
+    readOnly: true
+  riskMetadata:
+    nullable: true
+    example: null
+    description: >-
+      Risk metadata. If null, the value would coalesce to the risk metadata
+      captured when creating the payment token.
+    allOf:
+      - $ref: ../RiskMetadata.yaml
   customFields:
     $ref: ../ResourceCustomFields.yaml
   createdTime:
-    description: Subscription created time
+    description: Order created time.
+    x-label: Creation time
+    x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
-    description: Subscription updated time
+    description: Order updated time.
+    x-label: Last update time
+    x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   _links:
     type: array
-    description: The links related to resource
+    description: The links related to resource.
     readOnly: true
     minItems: 1
     items:
       anyOf:
         - $ref: ../Links/SelfLink.yaml
         - $ref: ../Links/CustomerLink.yaml
+        - $ref: ../Links/InitialInvoiceLink.yaml
+        - $ref: ../Links/RecentInvoiceLink.yaml
         - $ref: ../Links/WebsiteLink.yaml
-        - $ref: ../Links/LeadSourceLink.yaml
+        - $ref: ../Links/ApprovalUrlLink.yaml
+  _embedded:
+    type: array
+    description: >-
+      Any embedded objects available that are requested by the `expand`
+      querystring parameter.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Embeds/RecentInvoiceEmbed.yaml
+        - $ref: ../Embeds/InitialInvoiceEmbed.yaml
+        - $ref: ../Embeds/CustomerEmbed.yaml
+        - $ref: ../Embeds/WebsiteEmbed.yaml
+        - $ref: ../Embeds/LeadSourceEmbed.yaml

@@ -5,14 +5,18 @@ get:
     - Users
   summary: Retrieve a list of users
   operationId: GetUserCollection
+  x-sdk-operation-name: getAll
   description: |
-    Retrieve a list of users
+    Retrieve a list of users.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
-      description: A list of users was retrieved successfully
+      description: A list of users was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -48,13 +52,14 @@ post:
     - Users
   summary: Create an user
   operationId: PostUser
+  x-sdk-operation-name: create
   description: |
-    Create an user
+    Create an user.
   requestBody:
     $ref: ../components/requestBodies/User.yaml
   responses:
     '201':
-      description: User was created
+      description: User was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -71,7 +76,7 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent
+      description: Invalid data was sent.
       content:
         application/json:
           schema:

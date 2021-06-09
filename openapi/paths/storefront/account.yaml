@@ -1,15 +1,18 @@
+parameters:
+  - $ref: ../../components/parameters/organizationId.yaml
 get:
   tags:
     - Account
   summary: Retrieve Account
   operationId: StorefrontGetAccount
+  x-sdk-operation-name: get
   security:
     - CustomerJWT: []
   description: |
-    Retrieve account
+    Retrieve account.
   responses:
     200:
-      description: Account was retrieved successfuly
+      description: Account was retrieved successfuly.
       content:
         application/json:
           schema:
@@ -23,10 +26,11 @@ patch:
     - Account
   summary: Update Account
   operationId: StorefrontPatchAccount
+  x-sdk-operation-name: update
   security:
     - CustomerJWT: []
   description: |
-    Register account
+    Register account.
   requestBody:
     content:
       application/json:
@@ -36,7 +40,7 @@ patch:
 
   responses:
     200:
-      description: Account updated
+      description: Account updated.
       content:
         application/json:
           schema:

@@ -1,12 +1,31 @@
 type: object
 properties:
   id:
-    description: The customer identifier string
+    description: The customer identifier string.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
+  email: 
+    description: The customer's email.
+    type: string
+    format: email
+    readOnly: true
+    x-sortable: true
+    x-basic: true
+  firstName:
+    description: The customer's first name.
+    type: string
+    x-basic: true
+    readOnly: true
+  lastName:
+    description: The customer's last name.
+    type: string
+    x-sortable: true
+    x-basic: true
+    readOnly: true
   websiteId:
-    description: The website's ID
+    x-sortable: true
+    description: The website's ID.
     allOf:
       - $ref: ./ResourceId.yaml
   paymentToken:
@@ -19,13 +38,17 @@ properties:
       in the case that both are supplied. The token may only be used once
       before it is expired.
   defaultPaymentInstrument:
-    $ref: ./PaymentInstrument.yaml
+    $ref: ./PaymentInstruments/ValueObjects/PaymentInstrument.yaml
   createdTime:
-    description: The customer created time
+    x-sortable: true
+    x-label: Creation Time
+    description: The customer created time.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   updatedTime:
-    description: The customer updated time
+    x-sortable: true
+    x-label: Last Update Time
+    description: The customer updated time.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   customFields:
@@ -35,23 +58,30 @@ properties:
   averageValue:
     $ref: ./CustomerAverageValue.yaml
   paymentCount:
-    description: The number of approved payments for the customer
+    x-label: Payments
+    x-sortable: true
+    x-basic: true
+    description: The number of approved payments for the customer.
     readOnly: true
     type: integer
   lastPaymentTime:
-    description: The most recent time of an approved payment for the customer
+    x-label: Last Payment
+    x-sortable: true
+    x-basic: true
+    description: The most recent time of an approved payment for the customer.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   lifetimeRevenue:
     $ref: ./CustomerLifetimeRevenue.yaml
   invoiceCount:
+    x-sortable: true
     description: >-
       An auto-incrementing number based on the sequence of invoices. If set to
-      0, then this record is a Lead, otherwise is a Customer
+      0, then this record is a Lead, otherwise is a Customer.
     readOnly: true
     type: integer
   tags:
-    description: A list of customer's tags
+    description: A list of customer's tags.
     readOnly: true
     type: array
     items:
@@ -66,7 +96,7 @@ properties:
     readOnly: true
   _links:
     type: array
-    description: The links related to resource
+    description: The links related to resource.
     readOnly: true
     minItems: 3
     items:

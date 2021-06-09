@@ -5,8 +5,9 @@ post:
     - Transactions
   summary: Create a transaction
   operationId: PostTransaction
+  x-sdk-operation-name: create
   description: |
-    Create a transactions of type `sale`, `authorize`, or `credit`.
+    Create a transaction of type `sale` or `authorize`.
     This endpoint supports two main styles of transactions:
       1. A real-time decision and response.
       2. User approval/interaction is required.
@@ -29,11 +30,13 @@ post:
 
     In this case you would either open the `approvalUrl` in an
     iframe or in a pop (better workflow for mobile).
+  parameters:
+    - $ref: ../components/parameters/collectionExpand.yaml
   requestBody:
     $ref: ../components/requestBodies/TransactionRequest.yaml
   responses:
     '201':
-      description: Transaction was created
+      description: Transaction was created.
       content:
         application/json:
           schema:
@@ -55,23 +58,19 @@ get:
     - Transactions
   summary: Retrieve a list of transactions
   operationId: GetTransactionCollection
+  x-sdk-operation-name: getAll
   description: |
-    Retrieve a list of transactions
+    Retrieve a list of transactions.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
     - $ref: ../components/parameters/collectionFilter.yaml
     - $ref: ../components/parameters/collectionQuery.yaml
     - $ref: ../components/parameters/collectionSort.yaml
-    - x-rebillyMerge:
-        - $ref: ../components/parameters/mediaType.yaml
-        - schema:
-            enum:
-              - application/json
-              - text/csv
+    - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: A list of transactions was retrieved successfully
+      description: A list of transactions was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -87,11 +86,6 @@ get:
           $ref: ../components/headers/Pagination-Offset.yaml
       content:
         application/json:
-          schema:
-            type: array
-            items:
-              $ref: ../components/schemas/Transactions/Transaction.yaml
-        text/csv:
           schema:
             type: array
             items:

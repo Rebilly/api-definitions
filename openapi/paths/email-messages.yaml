@@ -5,11 +5,18 @@ get:
     - Email Messages
   summary: Retrieve a list of email messages
   operationId: GetEmailMessageCollection
+  x-sdk-operation-name: getAll
   description: |
-    Retrieve a list of email messages
+    Retrieve a list of email messages.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
   responses:
     '200':
-      description: A list of email messages was retrieved successfully
+      description: A list of email messages was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -38,11 +45,12 @@ post:
     - Email Messages
   summary: Create an email message
   operationId: PostEmailMessage
+  x-sdk-operation-name: create
   description: |
-    Create an email message
+    Create an email message.
   responses:
     '201':
-      description: Email message was created
+      description: Email message was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -65,5 +73,5 @@ post:
       application/json:
         schema:
           $ref: ../components/schemas/EmailMessages/EmailMessage.yaml
-    description: Email message resource
+    description: Email message resource.
     required: true

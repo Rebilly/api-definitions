@@ -1,20 +1,22 @@
 parameters:
+  - $ref: ../../components/parameters/organizationId.yaml
   - $ref: ../../components/parameters/resourceId.yaml
 get:
   tags:
     - Payment Instrument
   summary: Retrieve a Payment Instrument
   operationId: StorefrontGetPaymentInstrument
+  x-sdk-operation-name: get
   security:
     - CustomerJWT: []
   description: |
-    Retrieve a payment instrument by ID
+    Retrieve a payment instrument by ID.
   parameters:
     - $ref: ../../components/parameters/collectionLimit.yaml
     - $ref: ../../components/parameters/collectionOffset.yaml
   responses:
     200:
-      description: Payment Instrument was retrieved successfully
+      description: Payment Instrument was retrieved successfully.
       headers:
         Pagination-Total:
           $ref: ../../components/headers/Pagination-Total.yaml
@@ -37,6 +39,7 @@ patch:
     - Payment Instrument
   summary: Update a Payment Instrument's values
   operationId: StorefrontPatchPaymentInstrument
+  x-sdk-operation-name: update
   security:
     - CustomerJWT: []
   description: |
@@ -47,7 +50,7 @@ patch:
     $ref: ../../components/requestBodies/storefront/PatchPaymentInstrument.yaml
   responses:
     200:
-      description: Payment instrument was updated
+      description: Payment instrument was updated.
       content:
         application/json:
           schema:

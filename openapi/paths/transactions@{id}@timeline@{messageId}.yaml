@@ -2,7 +2,7 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
   - name: messageId
     in: path
-    description: The Transaction Timeline message ID
+    description: The Transaction Timeline message ID.
     required: true
     schema:
       type: string
@@ -12,11 +12,12 @@ get:
     - Transactions
   summary: Retrieve a transaction Timeline message
   operationId: GetTransactionTimeline
+  x-sdk-operation-name: getTimelineMessage
   description: |
-    Retrieve a timeline message with specified identifier string
+    Retrieve a timeline message with specified identifier string.
   responses:
     '200':
-      description: Timeline message was retrieved successfully
+      description: Timeline message was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -44,11 +45,12 @@ delete:
     - Transactions
   summary: Delete a Transaction Timeline message
   operationId: DeleteTransactionTimeline
+  x-sdk-operation-name: deleteTimelineMessage
   description: |
-    Delete a Transaction Timeline message with predefined identifier string
+    Delete a Transaction Timeline message with predefined identifier string.
   responses:
     '204':
-      description: Transaction Timeline message was deleted
+      description: Transaction Timeline message was deleted.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml

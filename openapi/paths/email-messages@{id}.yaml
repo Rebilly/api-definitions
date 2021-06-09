@@ -6,11 +6,12 @@ get:
     - Email Messages
   summary: Retrieve an email message
   operationId: GetEmailMessage
+  x-sdk-operation-name: get
   description: |
-    Retrieve an email message
+    Retrieve an email message.
   responses:
     '200':
-      description: Email message with specified identifier was retrieved successfully
+      description: Email message with specified identifier was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -33,11 +34,12 @@ delete:
     - Email Messages
   summary: Delete an email message
   operationId: DeleteEmailMessage
+  x-sdk-operation-name: delete
   description: |
-    Delete an email message
+    Delete an email message.
   responses:
     '204':
-      description: Email message was deleted
+      description: Email message was deleted.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -52,11 +54,12 @@ patch:
     - Email Messages
   summary: Send an email message
   operationId: PatchEmailMessage
+  x-sdk-operation-name: send
   description: |
-    Send an email message
+    Send an email message.
   responses:
     '200':
-      description: Email message was accepted
+      description: Email message was accepted.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -85,9 +88,9 @@ patch:
             - status
           properties:
             status:
-              description: The email message's status
+              description: The email message's status.
               type: string
               enum:
                 - outbox
-    description: Email message status
+    description: Email message status.
     required: true

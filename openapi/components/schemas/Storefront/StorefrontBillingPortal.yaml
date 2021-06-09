@@ -1,0 +1,17 @@
+allOf:
+  - $ref: ../Common/CommonBillingPortal.yaml
+  - type: object
+    properties:
+      token:
+        description: The session's token used for authentication.
+        type: string
+        readOnly: true
+      _links:
+        type: array
+        description: The links related to resource.
+        readOnly: true
+        minItems: 1
+        items:
+          anyOf:
+            - $ref: ../Links/SelfLink.yaml
+            - $ref: ../Links/LogoUrlLink.yaml

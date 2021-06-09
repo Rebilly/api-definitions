@@ -5,6 +5,7 @@ post:
     - Payment Tokens
   summary: Create a payment token
   operationId: PostToken
+  x-sdk-operation-name: create
   description: |
     [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/)
     is the recommended way to
@@ -19,11 +20,8 @@ post:
     content:
       application/json:
         schema:
-          oneOf:
-            - $ref: ../components/schemas/PaymentTokens/PaymentCardToken.yaml
-            - $ref: ../components/schemas/PaymentTokens/BankAccountToken.yaml
-            - $ref: ../components/schemas/PaymentTokens/PaymentToken.yaml
-    description: PaymentToken resource
+          $ref: ../components/schemas/PaymentTokens/CompositeToken.yaml
+    description: PaymentToken resource.
     required: true
   security:
     - PublishableApiKey: []
@@ -31,7 +29,7 @@ post:
     - JWT: []
   responses:
     '201':
-      description: Token was created
+      description: Token was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -42,10 +40,7 @@ post:
       content:
         application/json:
           schema:
-            oneOf:
-              - $ref: ../components/schemas/PaymentTokens/PaymentCardToken.yaml
-              - $ref: ../components/schemas/PaymentTokens/BankAccountToken.yaml
-              - $ref: ../components/schemas/PaymentTokens/PaymentToken.yaml
+            $ref: ../components/schemas/PaymentTokens/CompositeToken.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -64,14 +59,15 @@ get:
     - Payment Tokens
   summary: Retrieve a list of tokens
   operationId: GetTokenCollection
+  x-sdk-operation-name: getAll
   description: |
-    Retrieve a list of tokens
+    Retrieve a list of tokens.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
   responses:
     '200':
-      description: A list of tokens was retrieved successfully
+      description: A list of tokens was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -90,7 +86,7 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/PaymentTokens/PaymentToken.yaml
+              $ref: ../components/schemas/PaymentTokens/CompositeToken.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

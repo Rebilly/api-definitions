@@ -2,16 +2,19 @@ parameters:
   - $ref: ../components/parameters/organizationId.yaml
 get:
   tags:
-    - Subscriptions
+    - Orders
   summary: Retrieve a list of reactivations
   operationId: GetSubscriptionReactivationCollection
-  description: Retrieve a list of reactivations for all subscriptions
+  x-sdk-operation-name: getAll
+  description: Retrieve a list of reactivations for all subscriptions.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
-      description: A list of reactivations was retrieved successfully
+      description: A list of reactivations was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -35,23 +38,28 @@ get:
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
+  x-code-samples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/subscription-reactivations/get.js
 post:
   tags:
-    - Subscriptions
-  summary: Reactivate a subscription
+    - Orders
+  summary: Reactivate an order
   operationId: PostSubscriptionReactivation
-  description: Reactivate a subscription
+  x-sdk-operation-name: reactivate
+  description: Reactivate a subscription.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/Subscription/SubscriptionReactivation.yaml
-    description: Reactivation resource
+    description: Reactivation resource.
     required: true
   responses:
     '201':
       description: >
-        Reactivation was created, subscription is active and won't be
+        Reactivation was created, the order is active and won't be.
         deactivated.
 
         If there was a cancellation with status "confirmed", it is revoked.
@@ -72,3 +80,7 @@ post:
       $ref: ../components/responses/Forbidden.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
+  x-code-samples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/subscription-reactivations/post.js

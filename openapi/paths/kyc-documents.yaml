@@ -5,28 +5,17 @@ get:
     - KYC Documents
   summary: Retrieve a list of KYC documents
   operationId: GetKycDocumentCollection
+  x-sdk-operation-name: getAll
   description: |
-    Retrieve a list of KYC documents
+    Retrieve a list of KYC documents.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
     - $ref: ../components/parameters/collectionFilter.yaml
-    - x-rebillyMerge:
-        - $ref: ../components/parameters/collectionSort.yaml
-        - schema:
-            items:
-              x-sortableEnum:
-                - id
-                - createdTime
-                - updatedTime
-    - x-rebillyMerge:
-        - $ref: ../components/parameters/mediaType.yaml
-        - schema:
-            enum:
-              - application/json
+    - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
-      description: A list of KYC documents was retrieved successfully
+      description: A list of KYC documents was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
@@ -59,18 +48,19 @@ post:
     - KYC Documents
   summary: Create a KYC Document
   operationId: PostKycDocument
+  x-sdk-operation-name: create
   description: |
-    Create a KYC Document
+    Create a KYC Document.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/KycDocument/KycDocument.yaml
-    description: Kyc document resource
+    description: Kyc document resource.
     required: true
   responses:
     '201':
-      description: Kyc document was created
+      description: Kyc document was created.
       headers:
         Rate-Limit-Limit:
           $ref: ../components/headers/Rate-Limit-Limit.yaml
