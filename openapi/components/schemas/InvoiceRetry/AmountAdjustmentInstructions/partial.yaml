@@ -1,0 +1,21 @@
+allOf:
+  - $ref: ../AmountAdjustment.yaml
+  - type: object
+    properties:
+      value:
+        description: The payment amount.
+        type: number
+        format: float
+      type:
+        description: The payment amount type.
+        type: string
+        enum:
+          - percent
+          - fixed
+      afterApprovalPolicy:
+        oneOf:
+          - $ref: ./Policies/None.yaml
+          - $ref: ./Policies/DiscountAmountRemaining.yaml
+    required:
+      - value
+      - type
