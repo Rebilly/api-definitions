@@ -21,43 +21,12 @@ properties:
         - $ref: ../ResourceId.yaml
   documentType:
     description: Document type submitted for validation, only identity-proof type is analyzed in an automated manner.
-    type: string
-    enum:
-      - identity-proof
-      - address-proof
-      - funds-proof
-      - purchase-proof
+    allOf:
+      - $ref: ../KycDocument/KycDocumentTypes.yaml
   documentSubtype:
      description: Document subtype submitted for validation.
-     type: string
-     enum:
-      - passport
-      - id-card
-      - driver-license
-      - birth-certificate
-      - utility-bill
-      - rental-receipt
-      - lease-agreement
-      - copy-credit-card
-      - credit-card-statement
-      - bank-statement
-      - inheritance-documentation
-      - tax-return
-      - salary-slip
-      - sale-of-assets
-      - public-health-card
-      - proof-of-age-card
-      - reverse-of-id
-      - public-service
-      - ewallet-holder-details
-      - ewallet-transaction-statement
-      - other
-  matchLevel:
-    description: The level of strictness for the document matches.
-    type: integer
-    minimum: 1
-    maximum: 2
-    example: 2
+     allOf:
+       - $ref: ../KycDocument/KycDocumentSubtypes.yaml
   status:
     description: Status of the validation.
     type: string
@@ -67,11 +36,14 @@ properties:
       - in-progress
       - accepted
       - rejected
-  reason:
-    description: Reason for uploading.
-    type: string
   rejectionReason:
     $ref: ../KycDocument/KycDocumentRejection.yaml
+  requestId:
+    readOnly: true
+    nullable: true
+    description: KYC request identifier string.
+    allOf:
+      - $ref: ../ResourceId.yaml
   createdTime:
     description: Creation date/time.
     allOf:
