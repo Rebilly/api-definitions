@@ -175,22 +175,6 @@ allOf:
           - $ref: ../RiskMetadata.yaml
       notificationUrl:
         $ref: ./TransactionNotificationUrl.yaml
-      retryInstruction:
-        $ref: ../PaymentRetry/PaymentRetry.yaml
-      retriedTransactionId:
-        readOnly: true
-        description: The retried transaction ID.
-        allOf:
-          - $ref: ../ResourceId.yaml
-      retriesResult:
-        type: string
-        readOnly: true
-        description: Retries sequence result.
-        enum:
-          - approved
-          - canceled
-          - declined
-          - scheduled
       isDisputed:
         description: True if transaction is disputed.
         type: boolean
@@ -243,10 +227,6 @@ allOf:
         readOnly: true
         description: The acquirer reference number.
         example: '74836950144358910018150'
-      scheduledTime:
-        type: string
-        description: The time the transaction is scheduled for collection.
-        format: date-time
       reportAmount:
         description: Transaction amount converted to organization selected report currency.
         type: number
@@ -286,7 +266,6 @@ allOf:
             - $ref: ../Links/GatewayAccountLink.yaml
             - $ref: ../Links/PaymentCardLink.yaml
             - $ref: ../Links/ParentTransactionLink.yaml
-            - $ref: ../Links/RetriedTransactionLink.yaml
             - $ref: ../Links/LeadSourceLink.yaml
             - $ref: ../Links/ApprovalUrlLink.yaml
             - $ref: ../Links/RefundUrlLink.yaml
@@ -304,7 +283,6 @@ allOf:
         items:
           anyOf:
             - $ref: ../Embeds/ParentTransactionEmbed.yaml
-            - $ref: ../Embeds/RetriedTransactionEmbed.yaml
             - $ref: ../Embeds/GatewayAccountEmbed.yaml
             - $ref: ../Embeds/CustomerEmbed.yaml
             - $ref: ../Embeds/LeadSourceEmbed.yaml
