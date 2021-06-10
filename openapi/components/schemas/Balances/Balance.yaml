@@ -1,0 +1,61 @@
+type: object
+title: "Balance"
+discriminator:
+  propertyName: type
+  mapping:
+    charge: ./Charge.yaml
+    refund: ./Refund.yaml
+    fee: ./Fee.yaml
+    risk-reserve: ./RiskReserve.yaml
+    risk-reserve-release: ./RiskReserveRelease.yaml
+properties:
+  id:
+    description: The ID of entry.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  type:
+    description: The type of entry.
+    type: string
+    readOnly: true
+    enum:
+      - charge
+      - refund
+      - fee
+      - risk-reserve
+      - risk-reserve-release
+  parentId:
+    description: The ID of the parent entry if exists.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  transactionId:
+    description: The ID of the related transaction.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  settlementCurrency:
+    allOf:
+      - $ref: ../CurrencyCode.yaml
+  settlementAmount:
+    x-type: Money
+    x-currency-field: settlementCurrency
+    x-sortable: true
+    x-basic: true
+    description: The settlement amount.
+    type: number
+    format: double
+  settlementTime:
+    description: The expected settlement time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  settlementRate:
+    description: The settlement exchange rate if settlement currency does not match transaction currency.
+    type: number
+    format: double
+  createdTime:
+    description: Entry created time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: Entry updated time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
