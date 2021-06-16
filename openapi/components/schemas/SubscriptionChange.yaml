@@ -17,7 +17,9 @@ properties:
         - quantity
       properties:
         plan:
-          $ref: ./Plans/FlexiblePlan.yaml
+          oneOf:
+            - $ref: ./Plans/OriginalPlan.yaml
+            - $ref: ./Plans/FlexiblePlan.yaml
         quantity:
           description: Number of units of the product on the given plan.
           type: integer
