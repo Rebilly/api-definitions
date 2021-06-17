@@ -86,6 +86,11 @@ tags:
       In addition to your API Keys, you may use
       JSON Web Tokens (JWT) to authenticate to the API.  See
       our [Sessions](https://user-api-docs.rebilly.com/#tag/JWT-Session) resource for more information.
+  - name: Balance transactions
+    description: |
+      Balance transactions API.
+
+      This API is experimental and not guaranteed to be backward compatible.
   - name: Billing Portals
     description: |
       Customer billing portals can be configured here. You can customize various
@@ -233,6 +238,7 @@ x-tagGroups:
       - Webhooks
   - name: Other
     tags:
+      - Balance
       - Billing Portals
       - Checkout Forms
       - Gateway Accounts
@@ -276,6 +282,10 @@ paths:
     $ref: ./paths/api-keys.yaml
   '/api-keys/{id}':
     $ref: './paths/api-keys@{id}.yaml'
+  /balance-transactions:
+    $ref: './paths/balance-transactions.yaml'
+  '/balance-transactions/{id}':
+    $ref: './paths/balance-transactions@{id}.yaml'
   /billing-portals:
     $ref: ./paths/billing-portals.yaml
   /billing-portals/{id}:
