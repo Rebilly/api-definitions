@@ -1,0 +1,34 @@
+type: object
+description: |
+  Instruction for calculating the settlement time.
+
+  This is used in conjunction with the **transaction processed time** to calculate the
+  time the amount settles.
+properties:
+  method:
+    type: string
+    enum:
+      - date-interval
+  duration:
+    type: integer
+    description: The number of the units.
+    minimum: 1
+  unit:
+    oneOf:
+      - $ref: ../TimeUnit.yaml
+      - $ref: ../TimePluralUnit.yaml
+  anchor:
+    $ref: SettlementPeriodAnchor.yaml
+required:
+  - method
+  - duration
+  - unit
+example:
+  method: "date-interval"
+  unit: "days"
+  duration: 14
+  anchor:
+    method: "day-of-week"
+    day: "Wednesday"
+    week: "next"
+    time: "08:00:00"

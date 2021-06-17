@@ -100,12 +100,36 @@ properties:
     description: True if the customer's name from billing address and from customer's primary address are not the same.
     type: boolean
     readOnly: true
+  hasFakeName:
+    description: True if the holder name seems fake.
+    type: boolean
+    readOnly: true
+  isHighRiskCountry:
+    description: True if geo-IP country or the customer's billing country is considered a high risk country.
+    type: boolean
+    readOnly: true
   paymentInstrumentVelocity:
     description: Number of transactions for this payment instrument (based on fingerprint) in the last 24 hours.
     type: integer
     readOnly: true
   deviceVelocity:
     description: Number of transactions for this device (based on fingerprint) in the last 24 hours.
+    type: integer
+    readOnly: true
+  ipVelocity:
+    description: Number of transactions for this ip address in the last 24 hours.
+    type: integer
+    readOnly: true
+  emailVelocity:
+    description: Number of transactions for this email address in the last 24 hours.
+    type: integer
+    readOnly: true
+  billingAddressVelocity:
+    description: Number of transactions for this billing address in the last 24 hours.
+    type: integer
+    readOnly: true
+  binVelocity:
+    description: Number of transactions for this bin in the last 24 hours.
     type: integer
     readOnly: true
   score:

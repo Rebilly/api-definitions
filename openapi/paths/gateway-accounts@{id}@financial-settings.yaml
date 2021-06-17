@@ -1,0 +1,71 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  tags:
+    - Gateway Accounts
+  summary: Retrieve financial settings
+  operationId: GetGatewayAccountFinancialSettings
+  x-sdk-operation-name: getFinancialSettings
+  description: >
+    Read financial settings of a gateway account.
+  responses:
+    '200':
+      description: The financial settings were retrieved successfully.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccounts/FinancialSettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+
+put:
+  tags:
+    - Gateway Accounts
+  summary: Set financial settings
+  operationId: PutGatewayAccountFinancialSettings
+  x-sdk-operation-name: setFinancialSettings
+  description: |
+    Set financial settings of a gateway account.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/GatewayAccounts/FinancialSettings.yaml
+  responses:
+    '200':
+      description: Gateway account financial settings were updated.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccounts/FinancialSettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      description: Invalid data was sent.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InvalidError.yaml

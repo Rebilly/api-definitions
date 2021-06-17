@@ -67,3 +67,35 @@ allOf:
           28 - Prepaid Activation and Load
 
           Identifies the type of transaction being authenticated.
+      use3dsForMerchantInitiated:
+        type: boolean
+        description: Use 3DS for merchant initiated transactions.
+        default: false
+      threeRIInd:
+        type: string
+        enum:
+          - '01'
+          - '02'
+          - '03'
+          - '04'
+          - '05'
+          - '06'
+          - '07'
+          - '08'
+          - '09'
+          - '10'
+          - '11'
+        description: |
+          01 - Recurring transaction
+          02 - Instalment transaction
+          03 - Add card
+          04 - Maintain card information
+          05 - Account verification
+          06 - Split/delayed shipment
+          07 - Top-up
+          08 - Mail Order
+          09 - Telephone Order
+          10 - Whitelist status check
+          11 - Other payment
+
+          Indicates the type of 3RI request. Values 06 - 11 are only supported in 3D2 2.2.0.
