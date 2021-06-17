@@ -33,6 +33,8 @@ properties:
       name:
         description: First and last name.
         type: string
+  allowedIps:
+    $ref: ./AllowedIps.yaml
   permissions:
     description: The user's permissions. See the format in example. Use wildcard `*` for full access.
     allOf:
@@ -44,6 +46,11 @@ properties:
     description: This organization is default for membership user.
     type: boolean
     readOnly: true
+  roleIds:
+    type: array
+    description: The membership's roles identifiers.
+    items:
+      type: string
   _links:
     type: array
     description: The links related to resource.

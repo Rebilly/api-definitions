@@ -10,10 +10,6 @@ const data = {
     currency: 'USD',
     amount: 12.99,
     description: 'manual transaction',
-
-    // optionally you can specify a scheduled time
-    // to process the transaction at a later date
-    // scheduledTime: '2017-09-28T16:13:44Z'
 };
 
 const transaction = await api.transactions.create({data});
