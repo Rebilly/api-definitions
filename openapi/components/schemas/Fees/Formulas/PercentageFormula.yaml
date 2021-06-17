@@ -1,0 +1,32 @@
+type: object
+required:
+  - type
+  - currency
+  - bips
+properties:
+  type:
+    type: string
+    enum: ["percentage"]
+  currency:
+    $ref: ../../CurrencyCode.yaml
+  bips:
+    $ref: ../../Bips.yaml
+  round:
+    type: string
+    enum: ["regular", "up", "down"]
+    description: >
+      A mode how the rounding should work: floor, ceiling, or regular rounding:
+      - "up" (ceiling) example: $0.011 becomes $0.02, $0.019 becomes $0.02;
+      - "down" (floor) example: $0.011 becomes $0.01, $0.019 becomes $0.01;
+      - "regular" example: $0.011 becomes $0.01, $0.019 becomes $0.02, $0.015 becomes 0.02 too;
+
+      Defaults to "regular".
+    default: "regular"
+  minAmount:
+    description: |
+      The amount applied, in case the calculated fee is less than the required minimum.
+    type: number
+    format: double
+    example: 10.0
+    x-type: Money
+

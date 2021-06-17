@@ -1,0 +1,115 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+  - $ref: ../../components/parameters/organizationId.yaml
+get:
+  tags: [Fees]
+  summary: Retrieve a fee entry
+  description: |
+    Retrieve a fee entry.
+
+    This operation is experimental and not guaranteed to be backward compatible.
+  operationId: GetFee
+  x-sdk-operation-name: get
+  responses:
+    '200':
+      description: A fee was retrieved successfully.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Fees/Fee.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../../components/responses/NotFound.yaml
+put:
+  tags: [Fees]
+  summary: Upsert a fee entry
+  description: |
+    Upsert a fee entry.
+
+    This operation is experimental and not guaranteed to be backward compatible.
+  operationId: PutFee
+  x-sdk-operation-name: upsert
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/Fees/Fee.yaml
+  responses:
+    '200':
+      description: Fee entry was updated successfully.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Fees/Fee.yaml
+    '201':
+      description: Fee entry was created successfully.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Fees/Fee.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../../components/responses/ValidationError.yaml
+patch:
+  tags: [Fees]
+  summary: Patch a fee entry
+  description: |
+    Patch a fee entry.
+
+    This operation is experimental and not guaranteed to be backward compatible.
+  operationId: PatchFee
+  x-sdk-operation-name: patch
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/Fees/FeePatch.yaml
+  responses:
+    '200':
+      description: Fee entry was patched successfully.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Fees/Fee.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../../components/responses/ValidationError.yaml
