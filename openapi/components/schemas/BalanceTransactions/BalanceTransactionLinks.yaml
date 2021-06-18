@@ -1,0 +1,20 @@
+type: object
+properties:
+  _links:
+    type: array
+    description: The links related to resource.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Links/SelfLink.yaml
+        - $ref: ../Links/ParentLink.yaml
+        - $ref: ../Links/TransactionLink.yaml
+  _embedded:
+    type: array
+    description: Any embedded objects available that are requested by the `expand` querystring parameter.
+    readOnly: true
+    items:
+      anyOf:
+        - $ref: ../Embeds/BalanceTransactionEmbed.yaml
+        - $ref: ../Embeds/TransactionEmbed.yaml
