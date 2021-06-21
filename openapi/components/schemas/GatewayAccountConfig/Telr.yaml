@@ -1,0 +1,30 @@
+description: Telr config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Telr credentials object.
+        properties:
+          storeId:
+            type: string
+            description: Hosted payment page V2 store identifier.
+          hostedPageAuthenticationKey:
+            type: string
+            description: Hosted payment page V2 authentication key.
+            format: password
+          merchantId:
+            type: string
+            description: Service API merchant identifier.
+          serviceApiKey:
+            type: string
+            description: Service API key.
+            format: password
+        required:
+          - storeId
+          - hostedPageAuthenticationKey
+          - merchantId
+          - serviceApiKey
