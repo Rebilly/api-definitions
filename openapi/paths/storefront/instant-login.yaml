@@ -9,7 +9,7 @@ post:
   security:
     - PublishableApiKey: []
   description: |
-    Create a session with username and SMS verification.
+    Trigger verification with username for existing account or with username and phone number for new account.  Supply SMS code to login.
   requestBody:
     content:
       application/json:
@@ -22,10 +22,10 @@ post:
               description: Username.
               type: string
             phoneNumber:
-              description: Phone number.
+              description: Phone number.  Supply to create account.
               type: string
             code:
-              description: 6-digit code.
+              description: 6-digit code.  Supply to verify and login.  If not supplied, code will be sent.
               type: string
   responses:
     201:
