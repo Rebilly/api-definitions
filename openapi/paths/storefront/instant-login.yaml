@@ -1,0 +1,48 @@
+parameters:
+  - $ref: ../../components/parameters/organizationId.yaml
+post:
+  tags:
+    - Authentication
+  summary: Create a session with username and SMS verification with 6-digit code
+  operationId: StorefrontPostInstantLogin
+  x-sdk-operation-name: instant-login
+  security:
+    - PublishableApiKey: []
+  description: |
+    Create a session with username and SMS verification.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - username
+          properties:
+            username:
+              description: Username.
+              type: string
+            phoneNumber:
+              description: Phone number.
+              type: string
+            code:
+              description: 6-digit code.
+              type: string
+  responses:
+    201:
+      description: SMS verification code sent.
+        content:
+          application/json:
+            schema:
+            type: object
+            properties:
+              status:
+                description: Status of SMS verification.
+                type: string
+    200:
+      description: Account logged in.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/CustomerJWT.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
