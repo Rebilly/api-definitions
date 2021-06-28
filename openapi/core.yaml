@@ -200,6 +200,11 @@ tags:
       their granted permissions.  It has resources less commonly integrated by
 
       3rd parties.
+  - name: Fees
+    description: |
+      Buy and sell fees.
+
+      This API is experimental and not guaranteed to be backward compatible.
 x-tagGroups:
   - name: Customers
     tags:
@@ -238,6 +243,7 @@ x-tagGroups:
       - Reports
       - Search
       - Users
+      - Fees
 security:
   - SecretApiKey: []
   - JWT: []
@@ -452,6 +458,10 @@ paths:
     $ref: './paths/transactions@{id}@timeline.yaml'
   '/transactions/{id}/timeline/{messageId}':
     $ref: './paths/transactions@{id}@timeline@{messageId}.yaml'
+  '/fees':
+    $ref: './paths/fees/fees.yaml'
+  '/fees/{id}':
+    $ref: './paths/fees/fees@{id}.yaml'
 components:
   securitySchemes:
     JWT:

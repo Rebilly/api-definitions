@@ -1,0 +1,41 @@
+type: object
+properties:
+  id:
+    description: The fee identifier.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  type:
+    type: string
+    enum: ["buy", "sell"]
+  name:
+    type: string
+    description: A fee name.
+    minLength: 1
+    maxLength: 255
+    example: 'A gateway fee'
+  filter:
+    description: A filter based on the transaction's properties which is used to determine when to apply the fee.
+    minLength: 1
+    maxLength: 255
+    example: 'type:sale,capture;result:approved'
+    allOf:
+      - $ref: ../FilterString.yaml
+  formula:
+    $ref: ./FeeFormula.yaml
+  createdTime:
+    description: Fee created time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: Fee updated time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Links/SelfLink.yaml

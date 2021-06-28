@@ -1,0 +1,64 @@
+type: object
+description: Financial settings.
+properties:
+  riskReserveSettings:
+    description: The settings to setup funds reserves before settlement.
+    type: array
+    items:
+      type: object
+      required:
+        - filter
+        - bips
+        - period
+      properties:
+        filter:
+          description: A filter based on the transaction's properties which is used to determine when to apply the settings.
+          minLength: 1
+          maxLength: 255
+          example: 'paymentInstrument.method:payment-card'
+          allOf:
+            - $ref: ../FilterString.yaml
+        bips:
+          $ref: ../Bips.yaml
+        period:
+          $ref: RiskReservePeriod.yaml
+  settlementSettings:
+    description: The settings to setup settlement accounts.
+    type: object
+    required:
+      - settlementCurrency
+      - settlementPeriod
+    properties:
+      settlementCurrency:
+        description: The default settlement currency for all transactions.
+        allOf:
+          - $ref: ../CurrencyCode.yaml
+      settlementPeriod:
+        description: The default settlement period for all transactions.
+        allOf:
+          - $ref: SettlementPeriod.yaml
+      advancedSettings:
+        description: |
+          The advanced settings allows to override either default settlement currency, period or both
+          for the transactions matched a filter.
+        type: array
+        items:
+          type: object
+          required:
+            - filter
+          properties:
+            filter:
+              description: A filter based on the transaction's properties which is used to determine when to apply the settings.
+              minLength: 1
+              maxLength: 255
+              example: 'currency:EUR,GBP'
+              allOf:
+                - $ref: ../FilterString.yaml
+            settlementCurrency:
+              $ref: ../CurrencyCode.yaml
+            settlementPeriod:
+              $ref: SettlementPeriod.yaml
+          example:
+            filter: 'currency:EUR,GBP'
+            settlementCurrency: "EUR"
+            settlementPeriod: null

@@ -1,0 +1,75 @@
+parameters:
+  - $ref: ../../components/parameters/organizationId.yaml
+get:
+  tags: [Fees]
+  summary: Retrieve a list of Fees entries
+  description: |
+    Retrieve a list of Fees entries.
+
+    This operation is experimental and not guaranteed to be backward compatible.
+  operationId: GetFeeCollection
+  x-sdk-operation-name: getAll
+  parameters:
+    - $ref: ../../components/parameters/collectionLimit.yaml
+    - $ref: ../../components/parameters/collectionOffset.yaml
+  responses:
+    '200':
+      description: A fees list was retrieved successfully.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../../components/headers/Rate-Limit-Reset.yaml
+        Pagination-Total:
+          $ref: ../../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../../components/schemas/Fees/Fee.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+post:
+  tags: [Fees]
+  summary: Create a fee entry
+  description: |
+    Create a fee entry.
+
+    This operation is experimental and not guaranteed to be backward compatible.
+  operationId: PostFee
+  x-sdk-operation-name: create
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/Fees/Fee.yaml
+  responses:
+    '201':
+      description: Fee entry was created successfully.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Fees/Fee.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../../components/responses/ValidationError.yaml
