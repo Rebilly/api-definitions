@@ -1,0 +1,31 @@
+title: array
+allOf:
+  - type: object
+    required:
+      - type
+      - options
+    properties:
+      type:
+        description: The property type.
+        type: string
+        enum:
+          - array
+      options:
+        description: Avaialble property options.
+        type: array
+        items:
+          type: object
+          required:
+            - value
+          properties:
+            value:
+              description: The option value.
+              type: string
+            description:
+              description: The option description. If not set – considered same as value.
+              type: string
+      multiple:
+        description: Allow multiple options to be chosen.
+        type: boolean
+        default: false
+  - $ref: ./CommonApplicationProperty.yaml

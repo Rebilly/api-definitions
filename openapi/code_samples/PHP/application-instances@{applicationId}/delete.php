@@ -1,0 +1,1 @@
+$client->applicationInstances()->delete('applicationId');

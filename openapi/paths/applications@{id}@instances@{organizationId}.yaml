@@ -1,0 +1,47 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationIdPathParam.yaml
+get:
+  tags:
+    - Applications
+  summary: Retrieve application instance
+  operationId: GetApplicationInstanceByOrganization
+  x-sdk-operation-name: getInstance
+  description: |
+    Retrieve application instance with predefined application and organization identifier strings.
+  responses:
+    '200':
+      description: Application instance was retrieved successfully.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            allOf:
+              - properties:
+                  organizationId:
+                    description: The organization identifier string.
+                    allOf:
+                        - $ref: ../components/schemas/ResourceId.yaml
+                  token:
+                    description: The application token used for authentication for a given instance.
+                    type: string
+              - $ref: ../components/schemas/Applications/ApplicationInstance.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/applications@{id}@instances@{organizationId}/get.php
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/applications@{id}@instances@{organizationId}/get.js
+
