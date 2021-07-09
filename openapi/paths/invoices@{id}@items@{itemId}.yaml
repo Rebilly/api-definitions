@@ -7,6 +7,39 @@ parameters:
     required: true
     schema:
       type: string
+get:
+  tags:
+    - Invoices
+  summary: Get an invoice item
+  operationId: GetInvoiceItem
+  x-sdk-operation-name: getInvoiceItem
+  description: |
+    Get an invoice item.
+  responses:
+    '200':
+      description: InvoiceItem was retrieved successfully.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Invoices/InvoiceItem.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/invoices@{id}@items@{itemId}/get.php'
+    - lang: JavaScript
+      source:
+        $ref: '../code_samples/JavaScript/invoices@{id}@items@{itemId}/get.js'
 put:
   tags:
     - Invoices
