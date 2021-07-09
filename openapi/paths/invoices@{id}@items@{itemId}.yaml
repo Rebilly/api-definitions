@@ -1,0 +1,78 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+  - name: itemId
+    in: path
+    description: The invoice item ID.
+    required: true
+    schema:
+      type: string
+put:
+  tags:
+    - Invoices
+  summary: Update an invoice item
+  operationId: PutInvoiceItem
+  x-sdk-operation-name: updateInvoiceItem
+  description: |
+    Update an invoice item.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Invoices/InvoiceItem.yaml
+    description: InvoiceItem resource.
+    required: true
+  responses:
+    '200':
+      description: InvoiceItem was updated.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Invoices/InvoiceItem.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/invoices@{id}@items@{itemId}/put.php'
+    - lang: JavaScript
+      source:
+        $ref: '../code_samples/JavaScript/invoices@{id}@items@{itemId}/put.js'
+delete:
+  tags:
+    - Invoices
+  summary: Delete an invoice item
+  operationId: DeleteInvoiceItem
+  x-sdk-operation-name: deleteInvoiceItem
+  description: |
+    Delete an invoice item.
+  responses:
+    '204':
+      description: Invoice item was deleted.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/invoices@{id}@items@{itemId}/delete.php'
+    - lang: JavaScript
+      source:
+        $ref: '../code_samples/JavaScript/invoices@{id}@items@{itemId}/delete.js'
