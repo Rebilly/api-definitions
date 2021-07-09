@@ -4,4 +4,4 @@ const data = {
     unitPrice: 5
 };
 
-const invoiceItem = await api.invoices.updateInvoiceItem({id: 'my-second-id', data});
+const invoiceItem = await api.invoices.updateInvoiceItem({id: 'id', itemId: 'itemId', data});
