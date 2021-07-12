@@ -1,0 +1,17 @@
+description: CheckoutCom config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: CheckoutCom credentials object.
+        properties:
+          apiKey:
+            type: string
+            format: password
+            description: Checkout.com secret API key.
+        required:
+          - apiKey
