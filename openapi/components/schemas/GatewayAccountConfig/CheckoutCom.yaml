@@ -1,0 +1,19 @@
+description: Checkout.com config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Checkout.com credentials object.
+        properties:
+          secretKey:
+            type: string
+            format: password
+            description: Checkout.com secret API key.
+        required:
+          - secretKey
+      threeDSecureServer:
+        $ref: ../ThreeDSecureServers/EMS3dsServers/EMS3dsServers.yaml
