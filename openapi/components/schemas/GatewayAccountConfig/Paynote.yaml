@@ -1,0 +1,18 @@
+description: Paynote Gateway config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          publicKey:
+            type: string
+          secretKey:
+            type: string
+            format: password
+        required:
+          - publicKey
+          - secretKey
