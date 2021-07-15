@@ -18,8 +18,10 @@ allOf:
         type: object
         properties:
           targetCurrency:
-            description: This will be the currency to which you want to auto-convert the received cryptocurrency in to.
+            description: This will be the currency to which you want to auto-convert the received cryptocurrency in to. Defaults to transaction currency.
             type: string
             minLength: 3
             maxLength: 3
             example: USD
+          tolerancePercentage:
+            $ref: ../Gateways/AmountAdjustmentTolerance.yaml
