@@ -1,0 +1,27 @@
+description: CoinGate Gateway config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+      - settings
+    properties:
+      credentials:
+        type: object
+        properties:
+          authToken:
+            type: string
+            format: password
+        required:
+          - authToken
+      settings:
+        type: object
+        properties:
+          targetCurrency:
+            description: Currency to convert received cryptocurrency to. Defaults to transaction currency.
+            type: string
+            minLength: 3
+            maxLength: 3
+            example: USD
+          tolerancePercentage:
+            $ref: ../Gateways/AmountAdjustmentTolerance.yaml

@@ -64,7 +64,9 @@ properties:
           description: Number of units of the product on the given plan.
           type: integer
         plan:
-          $ref: ../Plans/FlexiblePlan.yaml
+          oneOf:
+            - $ref: ../Plans/OriginalPlan.yaml
+            - $ref: ../Plans/FlexiblePlan.yaml
         revision:
           type: integer
           readOnly: true
