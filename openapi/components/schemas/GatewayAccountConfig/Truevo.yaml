@@ -1,0 +1,27 @@
+description: Truevo config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Truevo credentials object.
+        properties:
+          mid:
+            type: string
+            description: Truevo merchant identifier.
+          tid:
+            type: string
+            description: Truevo terminal identifier.
+          token:
+            type: string
+            description: Truevo authentication token.
+            format: password
+        required:
+          - mid
+          - tid
+          - token
+      threeDSecureServer:
+        $ref: ../ThreeDSecureServers/Truevo3dsServers/Truevo3dsServers.yaml
