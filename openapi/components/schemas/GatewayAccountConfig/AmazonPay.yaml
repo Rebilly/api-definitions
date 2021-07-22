@@ -1,0 +1,25 @@
+description: AmazonPay Gateway config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantId:
+            type: string
+          storeId:
+            type: string
+          publicKeyId:
+            type: string
+          privateKey:
+            type: string
+            format: password
+            x-multiline: true
+        required:
+          - privateKey
+          - storeId
+          - publicKeyId
+          - merchantId
