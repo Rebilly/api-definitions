@@ -5,6 +5,8 @@ discriminator:
     customers: ./resources/customers.yaml
     subscriptions: ./resources/subscriptions.yaml
     transactions: ./resources/transactions.yaml
+    invoices: ./resources/invoices.yaml
+    invoiceItems: ./resources/invoiceItems.yaml
 required:
   - name
   - format
@@ -25,6 +27,8 @@ properties:
       - transactions
       - customers
       - subscriptions
+      - invoices
+      - invoiceItems
   format:
     description: Export result format.
     type: string
@@ -33,6 +37,7 @@ properties:
       - json
       - json-api
       - xml
+      - pdf
   arguments:
     description: >-
       Export request arguments that can be passed to filter and/or sort the
