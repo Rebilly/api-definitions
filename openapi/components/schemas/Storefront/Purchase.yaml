@@ -73,3 +73,23 @@ properties:
     description: If set would be used to create customer account.
     writeOnly: true
     nullable: true
+  redirectUrl:
+    type: string
+    description: >-
+      The URL to redirect the end-user when an offsite transaction is completed.
+      If `Website.url` is `https://example.com` – `redirectUrl` could be set to any of these:
+
+      - `https://example.com`
+
+      - `https://example.com/some/path`
+
+      - `https://example.com/some/path?and=query`
+
+      - `https://example.com/some/path?and=query#and-fragment`
+
+
+      Defaults to the website's configured URL. You may use `{id}` or `{result}` as placeholders in the URL and we will
+      replace them with the transaction's id and result accordingly.
+    format: url
+    writeOnly: true
+    nullable: true
