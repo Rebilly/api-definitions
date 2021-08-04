@@ -12,13 +12,6 @@ get:
   responses:
     '200':
       description: Api key was retrieved successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -47,26 +40,12 @@ put:
   responses:
     '200':
       description: ApiKey was updated.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
             $ref: ../components/schemas/ApiKey.yaml
     '201':
       description: ApiKey was created.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -99,13 +78,6 @@ delete:
   responses:
     '204':
       description: ApiKey was deleted.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
