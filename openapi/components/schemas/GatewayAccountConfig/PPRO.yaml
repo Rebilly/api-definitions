@@ -1,0 +1,47 @@
+description: PPRO config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: PPRO credentials object.
+        properties:
+          login:
+            type: string
+            description: PPRO merchant's api username.
+          password:
+            type: string
+            description: PPRO merchant's api password.
+            format: password
+          privateKey:
+            type: string
+            format: password
+            description: Private Key.
+            x-multiline: true
+          privateKeyPassword:
+            type: string
+            format: password
+            description: Private key password.
+          clientCertificate:
+            type: string
+            description: Client Certificate.
+            x-multiline: true
+          clientCertificatePassword:
+            type: string
+            format: password
+            description: Client Certificate password.
+          serverCertificate:
+            type: string
+            description: Server Certificate.
+            x-multiline: true
+        required:
+          - username
+          - password
+          - privateKey
+          - privateKeyPassword
+          - clientCertificate
+          - clientCertificatePassword
+          - serverCertificate
