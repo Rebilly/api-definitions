@@ -21,11 +21,6 @@ servers:
   - url: 'https://api.rebilly.com'
     description: Live Server.
 tags:
-  - name: 3D Secure
-    description: |
-      3D Secure is a way to authenticate and protect transactions.  Typically,
-      it's only possible to protect the initial transaction in an order
-      with 3D Secure.
   - name: AML
     description: |
       AML, also known as Anti-Money-Laundering is an endpoint that searches multiple
@@ -224,7 +219,6 @@ x-tagGroups:
   - name: Payments
     tags:
       - Transactions
-      - 3D Secure
       - Disputes
       - Blocklists
   - name: Orders & Invoices
@@ -248,10 +242,6 @@ security:
   - SecretApiKey: []
   - JWT: []
 paths:
-  /3dsecure:
-    $ref: ./paths/3dsecure.yaml
-  '/3dsecure/{id}':
-    $ref: './paths/3dsecure@{id}.yaml'
   /aml:
     $ref: './paths/aml.yaml'
   /attachments:
