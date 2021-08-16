@@ -28,11 +28,6 @@ tags:
       purposes. Used during some transaction processing and on Contact creation, it helps
       determine whether someone is blocklisted or has political or economic sanctions against
       them.
-  - name: Bank Accounts
-    description: |
-      Bank Accounts are a type of payment instrument used to collect
-      ACH (echeck) payments, similar to how a payment
-      card would be used to for a credit card payment.
   - name: Blocklists
     description: |
       Your blocklists contains values of customerIds, email addresses,
@@ -97,21 +92,6 @@ tags:
   - name: Payment Instruments
     description: >
       The Payment Instrument allows you to accept a variety of payment methods through a single API.
-  - name: Payment Cards
-    description: >
-      Payment cards are a type of payment instrument used for credit and debit
-      card
-
-      sales.  Rebilly securely vaults the full payment card number, and can pass
-      it
-
-      onward securely to any gateway account to transact business.
-  - name: PayPal Accounts
-    description: >
-      PayPal Accounts are used for paying with PayPal.  We can generate a BAID
-      (billing
-
-      agreement id) which will allow for recurring billing.
   - name: Payment Tokens
     description: >
       Payment tokens are used to reduce the scope of PCI DSS compliance.  A
@@ -213,9 +193,6 @@ x-tagGroups:
     tags:
       - Payment Instruments
       - Payment Tokens
-      - Payment Cards
-      - Bank Accounts
-      - PayPal Accounts
   - name: Payments
     tags:
       - Transactions
@@ -256,12 +233,6 @@ paths:
     $ref: './paths/authentication-tokens@{token}.yaml'
   '/authentication-tokens/{token}/exchange':
     $ref: './paths/authentication-tokens@{token}@exchange.yaml'
-  /bank-accounts:
-    $ref: ./paths/bank-accounts.yaml
-  '/bank-accounts/{id}':
-    $ref: './paths/bank-accounts@{id}.yaml'
-  '/bank-accounts/{id}/deactivation':
-    $ref: './paths/bank-accounts@{id}@deactivation.yaml'
   /blocklists:
     $ref: ./paths/blocklists.yaml
   '/blocklists/{id}':
@@ -362,18 +333,6 @@ paths:
     $ref: ./paths/password-tokens.yaml
   '/password-tokens/{id}':
     $ref: './paths/password-tokens@{id}.yaml'
-  /payment-cards:
-    $ref: ./paths/payment-cards.yaml
-  '/payment-cards/{id}':
-    $ref: './paths/payment-cards@{id}.yaml'
-  '/payment-cards/{id}/deactivation':
-    $ref: './paths/payment-cards@{id}@deactivation.yaml'
-  /paypal-accounts:
-    $ref: ./paths/paypal-accounts.yaml
-  '/paypal-accounts/{id}':
-    $ref: './paths/paypal-accounts@{id}.yaml'
-  '/paypal-accounts/{id}/deactivation':
-    $ref: './paths/paypal-accounts@{id}@deactivation.yaml'
   '/payment-instruments':
     $ref: './paths/payment-instruments.yaml'
   '/payment-instruments/{id}':
