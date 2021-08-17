@@ -1,0 +1,31 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  tags:
+    - Transactions
+  summary: Setup a payment instrument
+  operationId: PostSetup
+  x-sdk-operation-name: create
+  description: |
+    Create a transaction (or series of transactions) according to the gateway accounts setup instructions.
+    Ideas of setup instructions:
+      - do a 3DS authentication, then $1 auth + void
+      - do a $0 verification
+      - do nothing (some gateways don't support special types like `auth` and `void`)
+  requestBody:
+    $ref: ../components/requestBodies/SetupRequest.yaml
+  responses:
+    '201':
+      description: Transaction was created.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Transactions/Transaction.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
