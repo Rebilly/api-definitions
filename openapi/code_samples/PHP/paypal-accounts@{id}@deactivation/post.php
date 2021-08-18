@@ -1,1 +1,0 @@
-$client->payPalAccounts()->deactivate('payPalAccountId');
