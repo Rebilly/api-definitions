@@ -16,30 +16,31 @@ allOf:
             type: string
             description: PPRO merchant's api password.
             format: password
+          contractId:
+            type: string
+            description: PPRO Contract id, used for api credentials.
           privateKey:
             type: string
             format: password
             description: Private Key.
             x-multiline: true
-          privateKeyPassword:
-            type: string
-            format: password
-            description: Private key password.
           clientCertificate:
             type: string
-            description: Client Certificate.
+            description: Public key.
             x-multiline: true
-          clientCertificatePassword:
+          notificationSecret:
             type: string
             format: password
-            description: Client Certificate password.
-          serverCertificate:
+            description: Secret used for IPN urls.
+          sharedSecret:
             type: string
-            description: Server Certificate.
-            x-multiline: true
+            format: password
+            description: Secret used for redirect urls.
         required:
-          - username
+          - login
           - password
+          - contractId
           - privateKey
           - clientCertificate
-          - serverCertificate
+          - notificationSecret
+          - sharedSecret
