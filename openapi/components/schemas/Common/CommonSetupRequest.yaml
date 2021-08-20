@@ -1,0 +1,68 @@
+type: object
+required:
+  - websiteId
+  - customerId
+  - currency
+properties:
+  websiteId:
+    description: The website identifier string.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  customerId:
+    description: The customer identifier string.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  currency:
+    allOf:
+      - $ref: ../CurrencyCode.yaml
+  amount:
+    description: The transaction amount.
+    type: number
+    format: double
+    example: 97.97
+  paymentInstruction:
+    description: >-
+      Payment instruction. If not supplied, customer's default payment instrument will be used.
+    allOf:
+      - $ref: ../PaymentInstruction.yaml
+  billingAddress:
+    description: >-
+      Billing address. If not supplied, we use the billing address associated
+      with the payment instrument, and then customer.
+    nullable: true
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  gatewayAccountId:
+    description: >-
+      Rebilly will select the appropriate payment gateway account for the transaction based on
+      the properties of the transaction and the `gateway-account-requested` event rules configurations.
+      If you wish to prevent Rebilly from making the gateway account selection, you may supply a
+      gateway account id here, and it will be used instead. Only use this field if you intend to override the settings.
+    nullable: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  description:
+    nullable: true
+    description: The setup description.
+    type: string
+    maxLength: 255
+  notificationUrl:
+    nullable: true
+    description: >
+      The URL where a server-to-server notification request type `POST` with a
+      transaction payload will be sent when the transaction's result is finalized. Do not trust the notification;
+      follow with a `GET` request to confirm the result of the transaction. Please respond with a `2xx`
+      HTTP status code, or we will reattempt the request again.
+      You may use `{id}` or `{result}` as placeholders in the URL and we will replace them with the transaction's id and result accordingly.
+    type: string
+    format: uri
+  redirectUrl:
+    nullable: true
+    description: >-
+      The URL to redirect the end-user when an offsite transaction is completed.
+      Defaults to the website's configured URL.
+      You may use `{id}` or `{result}` as placeholders in the URL and we will replace them with the transaction's id and result accordingly.
+    type: string
+    format: uri
+  riskMetadata:
+    $ref: ../RiskMetadata.yaml
