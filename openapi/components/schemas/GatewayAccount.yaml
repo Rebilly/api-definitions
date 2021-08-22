@@ -290,6 +290,42 @@ properties:
     description: Customer's payment instrument will "stick" to the gateway account for future transactions when enabled.
     type: boolean
     default: true
+  setupInstruction:
+    description: Instructions for processing a setup request.
+    type: object
+    properties:
+      continueOnFailure:
+        type: boolean
+        default: false
+        example: false
+        description: |
+          If set to continue on failure,
+          then it will proceed to execute the next step.
+          It will use the last step with a success in the result.
+      steps:
+        type: array
+        description: List of steps in the order they should execute.
+        items:
+          type: string
+          description: |
+              Many steps may ignore the amount from the request.
+              Most gateways will not support all of the types of steps.
+              In this case, check the gateway-specific definitions for available steps.
+              All gateways support `do-nothing`.
+          enum:
+              - authorize
+              - authorize-and-void
+              - gather-kyc
+              - use-sca
+              - get-billing-agreement
+              - do-nothing
+          x-enumDescriptions:
+            authorize: Will create an authorize transaction in the amount/currency of the request.
+            authorize-and-void: Will create an authorize transaction in the amount/currency of the request, followed by a void.
+            gather-kyc: Will collect proof of identity via the KYC document gatherer. Will ignore transaction amount/currency.
+            use-sca: Will use SCA (strong customer authentication) which includes 3dsv2, 3ds, and some specific wallets.
+            get-billing-agreement: Will get a billing agreement from a customer (for example, this is applicable to PayPal).
+            do-nothing: Will do nothing, and return an approved `setup` transaction. This is the default behavior.
   createdTime:
     description: Gateway Account created time.
     allOf:
