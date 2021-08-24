@@ -24,9 +24,17 @@ allOf:
             format: password
             description: Private Key.
             x-multiline: true
+          privateKeyPassword:
+            type: string
+            format: password
+            description: Private key password.
           clientCertificate:
             type: string
             description: Public key.
+            x-multiline: true
+          serverCertificate:
+            type: string
+            description: CA certificate provided by PPRO.
             x-multiline: true
           notificationSecret:
             type: string
@@ -41,6 +49,8 @@ allOf:
           - password
           - contractId
           - privateKey
+          - privateKeyPassword
           - clientCertificate
+          - serverCertificate
           - notificationSecret
           - sharedSecret
