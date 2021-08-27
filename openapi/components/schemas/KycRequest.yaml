@@ -7,6 +7,10 @@ allOf:
         description: The сustomer's ID.
         allOf:
           - $ref: ./ResourceId.yaml
+      transactionId:
+        description: The transaction's ID.
+        allOf:
+          - $ref: ./ResourceId.yaml
       reason:
         description: Reason for uploading.
         type: string
@@ -16,6 +20,11 @@ allOf:
         minimum: 1
         maximum: 2
         example: 2
+      _embedded:
+          type: object
+          properties:
+            transaction:
+              $ref: ../../schemas/Transactions/Transaction.yaml
       _links:
         type: array
         description: The links related to resource.
@@ -26,3 +35,4 @@ allOf:
             - $ref: ./Links/SelfLink.yaml
             - $ref: ./Links/KycDocumentsLink.yaml
             - $ref: ./Links/KycGathererLink.yaml
+            - $ref: ./Links/TransactionLink.yaml
