@@ -1,0 +1,68 @@
+title: Billing portal offer
+type: object
+required:
+  - filter
+  - addonPlans
+  - bumpPlans
+properties:
+  filter:
+    description: >-
+      The filter requires a special format. Use "," for
+      multiple allowed values. Use ";" for multiple fields.
+      This controls when these specific plans should be available.
+    type: string
+  addonPlans:
+    description: >-
+      The list of addons that will be offered to the user if the filter matches.
+    default: []
+    allOf:
+      - $ref: BillingPortalPlans.yaml
+  bumpPlans:
+    description: >-
+      The list of bump plans that will be offered to the user if the filter matches.
+    default: []
+    allOf:
+      - $ref: BillingPortalPlans.yaml
+  location:
+    description: Locations where these offers should be displayed to the user.
+    type: object
+    properties:
+      atCancel:
+        description: If `true` the plans would be shown during the cancel subscription journey.
+        type: boolean
+        default: false
+      atInvoice:
+        description: If `true` the plans would be shown during the pay invoice journey.
+        type: boolean
+        default: false
+  changeOrderOptions:
+    description: Options specifying how plans should be applied to the order if accepted.
+    type: object
+    required:
+      - renewalPolicy
+    properties:
+      renewalPolicy:
+        description: >-
+          The value determines whether the subscription retains its current
+          `renewalTime` or resets it to a newly calculated `renewalTime`.
+        type: string
+        enum:
+          - reset
+          - retain
+      prorated:
+        description: >-
+          Whether or not to give a pro rata credit for the amount of time remaining
+          between the `effectiveTime` and the end of the current period.
+
+          In addition, if the `renewalTime` is retained (by setting the
+          `renewalPolicy` to `retain`), then a pro rata debit will occur as well,
+
+          for the amount between the `effectiveTime` and the `renewalTime` as a
+          percentage of the normal period size.
+        type: boolean
+      keepTrial:
+        description: >-
+          If set to true and the subscription order has an active trial, it will use that trial further. Works with 'retain'
+          renewalPolicy only.
+        type: boolean
+        default: false

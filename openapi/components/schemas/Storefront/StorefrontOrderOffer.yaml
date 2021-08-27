@@ -1,0 +1,10 @@
+allOf:
+  - $ref: ../BillingPortal/BillingPortalOffer.yaml
+  - properties:
+      orders:
+        type: array
+        description: The orders which can have these offers applied.
+        readOnly: true
+        items:
+          anyOf:
+            - $ref: ../ResourceId.yaml
