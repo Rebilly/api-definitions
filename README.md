@@ -1,6 +1,6 @@
 # Rebilly OpenAPI Definitions
 
-TBD: Add Redocly validation status badge.
+TBD: Add Redocly validation status badge. 
 
 ## Links
 
