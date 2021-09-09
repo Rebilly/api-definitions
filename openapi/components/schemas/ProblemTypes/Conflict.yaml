@@ -1,0 +1,25 @@
+type: object
+allOf:
+  - $ref: ./Problem.yaml
+  - readOnly: true
+    description: Conflict with another resoure found.
+    properties:
+      type:
+        type: string
+        enum:
+          - 'https://api-reference.rebilly.com/#section/Errors/Conflict'
+        default: 'https://api-reference.rebilly.com/#section/Errors/Conflict'
+      status:
+        type: integer
+        enum:
+          - 409
+        default: 409
+      title:
+        type: string
+        enum:
+          - >-
+            The request could not be completed due to a conflict with the
+            current state of existing resources.
+        default: >-
+          The request could not be completed due to a conflict with the current
+          state of existing resources.
