@@ -1,0 +1,33 @@
+stripe-trx:
+  summary: Stripe transaction fees
+  description: The transaction fees for Stripe. Discount rate fees are a separate record.
+  value:
+    type: buy
+    name: Stripe transaction fees
+    filter: 'type:sale,capture;result:approved;gatewayAccountId:stripe'
+    formula:
+      type: fixed-fee
+      currency: USD
+      amount: 0.30
+stripe-us:
+  summary: Stripe US fees
+  description: The fees for Stripe in the US. Fees for outside of the US are a different fee record.
+  value:
+    type: buy
+    name: Stripe US fees
+    filter: 'type:sale,capture;result:approved;billingAddress.country:US;gatewayAccountId:stripe'
+    formula:
+      type: percentage
+      currency: USD
+      bips: 290
+stripe-intl:
+  summary: Stripe international fees
+  description: The fees for Stripe outside of the US.
+  value:
+    type: buy
+    name: Stripe international fees
+    filter: 'type:sale,capture;result:approved;billingAddress.country:!US;gatewayAccountId:stripe'
+    formula:
+      type: percentage
+      currency: USD
+      bips: 390
