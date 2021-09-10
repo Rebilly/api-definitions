@@ -1,0 +1,51 @@
+stripe-trx:
+  summary: Stripe transaction fees
+  description: The transaction fees for Stripe. Discount rate fees are a separate record.
+  value:
+    id: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+    type: buy
+    name: Stripe transaction fees
+    filter: 'type:sale,capture;result:approved;gatewayAccountId:stripe'
+    formula:
+      type: fixed-fee
+      currency: USD
+      amount: 0.30
+    createdTime: '2021-12-15T14:15:22Z'
+    updatedTime: '2021-12-15T14:15:22Z'
+    _links: 
+      - rel: self
+        href: "https://api-sandbox.rebilly.com/fees/4f6cf35x-2c4y-483z-a0a9-158621f77a21"
+stripe-us:
+  summary: Stripe US fees
+  description: The fees for Stripe in the US. Fees for outside of the US are a different fee record.
+  value:
+    id: 4f6cf35x-2c4y-483z-a0a9-158621f77a22
+    type: buy
+    name: Stripe US fees
+    filter: 'type:sale,capture;result:approved;billingAddress.country:US;gatewayAccountId:stripe'
+    formula:
+      type: percentage
+      currency: USD
+      bips: 290
+    createdTime: '2021-12-15T14:15:22Z'
+    updatedTime: '2021-12-15T14:15:22Z'
+    _links: 
+      - rel: self
+        href: "https://api-sandbox.rebilly.com/fees/4f6cf35x-2c4y-483z-a0a9-158621f77a21"
+stripe-intl:
+  summary: Stripe international fees
+  description: The fees for Stripe outside of the US.
+  value:
+    id: 4f6cf35x-2c4y-483z-a0a9-158621f77a23
+    type: buy
+    name: Stripe international fees
+    filter: 'type:sale,capture;result:approved;billingAddress.country:!US;gatewayAccountId:stripe'
+    formula:
+      type: percentage
+      currency: USD
+      bips: 390
+    createdTime: '2021-12-15T14:15:22Z'
+    updatedTime: '2021-12-15T14:15:22Z'
+    _links: 
+      - rel: self
+        href: "https://api-sandbox.rebilly.com/fees/4f6cf35x-2c4y-483z-a0a9-158621f77a21"

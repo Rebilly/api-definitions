@@ -1,14 +1,14 @@
 # Introduction
-The Rebilly API is built on HTTP.  Our API is RESTful.  It has predictable
-resource URLs.  It returns HTTP response codes to indicate errors.  It also
-accepts and returns JSON in the HTTP body.  You can use your favorite
+The Rebilly API is built on HTTP. Our API is RESTful. It has predictable
+resource URLs. It returns HTTP response codes to indicate errors. It also
+accepts and returns JSON in the HTTP body. You can use your favorite
 HTTP/REST library for your programming language to use Rebilly's API, or
 you can use one of our SDKs (currently available in [PHP](https://github.com/Rebilly/rebilly-php)
 and [Javascript](https://github.com/Rebilly/rebilly-js-sdk)).
 
-We have other APIs that are also available.  Every action from our [app](https://app.rebilly.com)
+We have other APIs that are also available. Every action from our [app](https://app.rebilly.com)
 is supported by an API which is documented and available for use so that you
-may automate any workflows necessary.  This document contains the most commonly
+may automate any workflows necessary. This document contains the most commonly
 integrated resources.
 
 # Authentication
@@ -57,7 +57,7 @@ the API.  However, no SDK is required to use the API.
 Rebilly also offers [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/),
  a client-side iFrame-based solution to help
 create payment tokens while minimizing PCI DSS compliance burdens
-and maximizing the customizability. [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/)
+and maximizing the customization ability. [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/)
 is interacting with the [payment tokens creation operation](#operation/PostToken).
 
 ## Javascript SDK
@@ -130,15 +130,12 @@ Expand may be utilitized not only on `GET` requests but also on `PATCH`, `POST`,
 
 # Getting started guide
 
-Rebilly's API has over 300 operations.  That's more than you'll 
+Rebilly's API has over 500 operations.  That's more than you'll 
 need to implement your use cases.  If you have a use 
 case you would like to implement, please consult us for
 feedback on the best API operations for the task.
 
-Our getting started guide will demonstrate a basic order form use
-case.  It will allow us to highlight core resources
+Our [getting started guides](https://www.rebilly.com/docs/content/dev-docs/concept/integrations/) will demonstrate a payment form use
+cases.  It will allow us to highlight core resources
 in Rebilly that will be helpful for many other use cases
 too.
-
-Within 25 minutes, you'll have sent API requests (via our console)
-to create a subscription order.
