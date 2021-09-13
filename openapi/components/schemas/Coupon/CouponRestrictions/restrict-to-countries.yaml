@@ -1,0 +1,14 @@
+description: restrict-to-countries restrictions.
+allOf:
+  - $ref: ../CouponRestriction.yaml
+  - $ref: ../RedemptionRestriction.yaml
+  - type: object
+    required:
+      - countries
+    properties:
+      countries:
+        type: array
+        description: Countries coupon can be applied to (using two-letter ISO alpha code).
+        items:
+          type: string
+          pattern: '^[A-Z]{2}$'
