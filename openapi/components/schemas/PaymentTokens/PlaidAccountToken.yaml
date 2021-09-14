@@ -15,14 +15,13 @@ properties:
     description: The Plaid payment instrument details.
     type: object
     required:
-      - credentialHash
+      - linkToken
       - publicToken
       - accountId
     properties:
-      credentialHash:
-        description: The Plaid credentials hash.
-        allOf:
-          - $ref: ../ResourceId.yaml
+      linkToken:
+        type: string
+        description: The Plaid link token.
       publicToken:
         type: string
         description: The Plaid public token.
