@@ -1,0 +1,41 @@
+content:
+  application/json:
+    schema:
+      properties:
+        transactionId:
+          description: The transaction ID.
+          type: string
+        redirectUrl:
+          description: Url customer was redirected to.
+          type: string
+          format: url
+        ipAddress:
+          description: Customer's IP address.
+          type: string
+        httpHeaders:
+          description: Customer browser's HTTP headers.
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            Content-Type: "application/json"
+            Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+        eventType:
+          description: Rebilly webhooks event type.
+          type: string
+          enum:
+            - customer-redirected-offsite
+            - customer-returned
+        _embedded:
+          type: object
+          properties:
+            transaction:
+              $ref: ../../schemas/Transactions/Transaction.yaml
+        _links:
+          type: array
+          description: The links related to resource.
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: ../../schemas/Links/TransactionLink.yaml
+description: Customer redirect webhook request body resource.
