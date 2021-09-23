@@ -21,7 +21,11 @@ content:
             Content-Type: "application/json"
             Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
         eventType:
-          $ref: ../../schemas/GlobalWebhookEventType.yaml
+          description: Rebilly webhooks event type.
+          type: string
+          enum:
+            - customer-redirected-offsite
+            - customer-returned
         _embedded:
           type: object
           properties:
