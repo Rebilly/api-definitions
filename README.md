@@ -1,5 +1,8 @@
 # Rebilly OpenAPI Definitions
 
+- Our website (www.rebilly.com) is powered by the [Redocly Portal](https://redoc.ly/developer-portal/).
+- Our API reference is powered by [Redocly Reference](https://redoc.ly/reference-docs/).
+
 TBD: Add Redocly validation status badge.
 
 ## Links
@@ -7,9 +10,11 @@ TBD: Add Redocly validation status badge.
 - [Core API docs](https://api-reference.rebilly.com/)
 - [Users API docs](https://user-api-docs.rebilly.com/)
 - [Reports API docs](https://reports-api-docs.rebilly.com/)
-- [Storefront API docs](https://storefront-api-docs.rebilly.com/)
+- [Storefront API docs](https://storefront-api-docs.rebilly.com/) (this API is in development and subject to change)
 
 ## Working on the API definitions
+
+If you use VS Code, use the [Redocly VS Code extension](https://marketplace.visualstudio.com/items?itemName=Redocly.openapi-vs-code) to edit this repo and get inline lint feedback and previews.
 
 ### Install
 
