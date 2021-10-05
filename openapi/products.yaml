@@ -532,8 +532,6 @@ paths:
     $ref: ./paths/customer-timeline-events.yaml
   /customers:
     $ref: ./paths/customers.yaml
-  '/customers/{customerId}/summary-metrics':
-    $ref: './paths/customers@{customerId}@summary-metrics.yaml'
   '/customers/{id}':
     $ref: './paths/customers@{id}.yaml'
   '/customers/{id}/lead-source':
@@ -544,10 +542,6 @@ paths:
     $ref: './paths/customers@{id}@timeline@{messageId}.yaml'
   '/customers/{id}/upcoming-invoices':
     $ref: './paths/customers@{id}@upcoming-invoices.yaml'
-  /data-exports:
-    $ref: ./paths/data-exports.yaml
-  '/data-exports/{id}':
-    $ref: './paths/data-exports@{id}.yaml'
   /digital-wallets/validation:
     $ref: ./paths/digital-wallets@validation.yaml
   /disputes:
@@ -588,6 +582,48 @@ paths:
     $ref: './paths/events@{eventType}@timeline.yaml'
   '/events/{eventType}/timeline/{messageId}':
     $ref: './paths/events@{eventType}@timeline@{messageId}.yaml'
+  '/experimental/customers/{customerId}/summary-metrics':
+    $ref: './paths/customers@{customerId}@summary-metrics.yaml'
+  /experimental/data-exports:
+    $ref: ./paths/data-exports.yaml
+  '/experimental/data-exports/{id}':
+    $ref: './paths/data-exports@{id}.yaml'
+  /experimental/histograms/transactions:
+    $ref: ./paths/histograms@transactions.yaml
+  /experimental/reports/api-log-summary:
+    $ref: ./paths/reports@api-log-summary.yaml
+  /experimental/reports/cumulative-subscriptions:
+    $ref: ./paths/reports@cumulative-subscriptions.yaml
+  /experimental/reports/dashboard:
+    $ref: ./paths/reports@dashboard.yaml
+  /experimental/reports/dcc-markup:
+    $ref: ./paths/reports@dcc-markup.yaml
+  /experimental/reports/disputes:
+    $ref: ./paths/reports@disputes.yaml
+  /experimental/reports/events-triggered:
+    $ref: ./paths/reports@events-triggered.yaml
+  '/experimental/reports/events-triggered/{eventType}/rules':
+    $ref: './paths/reports@events-triggered@{eventType}@rules.yaml'
+  /experimental/reports/future-renewals:
+    $ref: ./paths/reports@future-renewals.yaml
+  /experimental/reports/renewal-sales:
+    $ref: ./paths/reports@renewal-sales.yaml
+  /experimental/reports/retention-percentage:
+    $ref: ./paths/reports@retention-percentage.yaml
+  /experimental/reports/retention-value:
+    $ref: ./paths/reports@retention-value.yaml
+  /experimental/reports/subscription-cancellation:
+    $ref: ./paths/reports@subscription-cancellation.yaml
+  /experimental/reports/subscription-renewal:
+    $ref: ./paths/reports@subscription-renewal.yaml
+  /experimental/reports/time-series-transaction:
+    $ref: ./paths/reports@time-series-transaction.yaml
+  /experimental/reports/transactions:
+    $ref: ./paths/reports@transactions.yaml
+  /experimental/reports/transactions-time-dispute:
+    $ref: ./paths/reports@transactions-time-dispute.yaml
+  '/experimental/subscriptions/{subscriptionId}/summary-metrics':
+    $ref: './paths/subscriptions@{subscriptionId}@summary-metrics.yaml'
   /fees:
     $ref: ./paths/fees/fees.yaml
   '/fees/{id}':
@@ -632,8 +668,6 @@ paths:
     $ref: ./paths/grid-segments.yaml
   '/grid-segments/{id}':
     $ref: './paths/grid-segments@{id}.yaml'
-  /histograms/transactions:
-    $ref: ./paths/histograms@transactions.yaml
   /integrations:
     $ref: ./paths/integrations.yaml
   '/integrations/{label}':
@@ -742,38 +776,6 @@ paths:
     $ref: ./paths/profile@totp-reset.yaml
   /ready-to-pay:
     $ref: ./paths/ready-to-pay.yaml
-  /reports/api-log-summary:
-    $ref: ./paths/reports@api-log-summary.yaml
-  /reports/cumulative-subscriptions:
-    $ref: ./paths/reports@cumulative-subscriptions.yaml
-  /reports/dashboard:
-    $ref: ./paths/reports@dashboard.yaml
-  /reports/dcc-markup:
-    $ref: ./paths/reports@dcc-markup.yaml
-  /reports/disputes:
-    $ref: ./paths/reports@disputes.yaml
-  /reports/events-triggered:
-    $ref: ./paths/reports@events-triggered.yaml
-  '/reports/events-triggered/{eventType}/rules':
-    $ref: './paths/reports@events-triggered@{eventType}@rules.yaml'
-  /reports/future-renewals:
-    $ref: ./paths/reports@future-renewals.yaml
-  /reports/renewal-sales:
-    $ref: ./paths/reports@renewal-sales.yaml
-  /reports/retention-percentage:
-    $ref: ./paths/reports@retention-percentage.yaml
-  /reports/retention-value:
-    $ref: ./paths/reports@retention-value.yaml
-  /reports/subscription-cancellation:
-    $ref: ./paths/reports@subscription-cancellation.yaml
-  /reports/subscription-renewal:
-    $ref: ./paths/reports@subscription-renewal.yaml
-  /reports/time-series-transaction:
-    $ref: ./paths/reports@time-series-transaction.yaml
-  /reports/transactions:
-    $ref: ./paths/reports@transactions.yaml
-  /reports/transactions-time-dispute:
-    $ref: ./paths/reports@transactions-time-dispute.yaml
   '/reset-password/{token}':
     $ref: './paths/reset-password@{token}.yaml'
   /roles:
@@ -818,8 +820,6 @@ paths:
     $ref: './paths/subscriptions@{id}@upcoming-invoices.yaml'
   '/subscriptions/{id}/upcoming-invoices/{invoiceId}/issue':
     $ref: './paths/subscriptions@{id}@upcoming-invoices@{invoiceId}@issue.yaml'
-  '/subscriptions/{subscriptionId}/summary-metrics':
-    $ref: './paths/subscriptions@{subscriptionId}@summary-metrics.yaml'
   /tags:
     $ref: ./paths/tags.yaml
   '/tags/{tag}':
@@ -874,3 +874,4 @@ paths:
     $ref: ./paths/websites.yaml
   '/websites/{id}':
     $ref: './paths/websites@{id}.yaml'
+
