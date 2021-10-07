@@ -142,6 +142,81 @@ function getProductMappingToBundle() {
   })
 }
 
+function getNewTags(definitionRoot, tagsNamesToInclude) {
+  const newTags = [];
+  definitionRoot.tags.forEach((tag) => {
+    if (tagsNamesToInclude.indexOf(tag.name) !== -1) {
+      newTags.push(tag)
+    }
+  });
+  return newTags;
+}
+
+function getNewPaths(definitionRoot, ctx, tagsNamesToInclude) {
+  const newPaths = {};
+  const availableMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
+  for (const [path, definitionRef] of Object.entries(definitionRoot.paths)) {
+    let hasAtLeastOneOperation = false;
+    const definition = ctx.resolve(definitionRef).node;
+    availableMethods.forEach((method) => {
+      if (!(method in definition)) {
+        // Method not defined for path, skipping
+        return;
+      }
+
+      const operation = definition[method];
+      if (!('tags' in operation)) {
+        // Operation has no tags specified, excluding as tags must be defined explicitly
+        return;
+      }
+
+      const requiredTags = operation.tags.filter((tagName) => tagsNamesToInclude.indexOf(tagName) !== -1)
+      if (requiredTags.length !== 0) {
+        // Remove tags that are not participating in any of tag groups of a requested products
+        operation.tags = requiredTags;
+        hasAtLeastOneOperation = true;
+      } else {
+        delete definition[method];
+      }
+    });
+
+    if (hasAtLeastOneOperation) {
+      newPaths[path] = definition;
+    }
+  }
+  return newPaths;
+}
+
+function getNewWebhooks(definitionRoot, ctx, tagsNamesToInclude) {
+  if (!('x-webhooks' in definitionRoot)) {
+    return {};
+  }
+  const newWebhooks = {};
+  for (const [path, definitionRef] of Object.entries(definitionRoot['x-webhooks'])) {
+    let hasAtLeastOneTag = false;
+    const definition = ctx.resolve(definitionRef).node;
+    const webhook = definition.post;
+    if (!('tags' in webhook)) {
+      // Webhook has no tags specified, excluding as tags must be defined explicitly
+      return;
+    }
+
+    const requiredTags = webhook.tags.filter((tagName) => tagsNamesToInclude.indexOf(tagName) !== -1)
+    if (requiredTags.length !== 0) {
+      // Remove tags that are not participating in any of tag groups of a requested products
+      webhook.tags = requiredTags;
+      hasAtLeastOneTag = true;
+    } else {
+      delete definition['post'];
+    }
+
+    if (hasAtLeastOneTag) {
+      newWebhooks[path] = definition;
+    }
+  }
+  return newWebhooks;
+}
+
 /** @type {import('@redocly/openapi-cli').CustomRulesConfig} */
 const decorators = {
   oas3: {
@@ -162,53 +237,13 @@ const decorators = {
               tagsNamesToInclude = tagsNamesToInclude.concat(tagGroup.tags);
             });
 
-            // Determine tags definitions that should be included into result bundle of a requested product
-            const newTags = [];
-            definitionRoot.tags.forEach((tag) => {
-              if (tagsNamesToInclude.indexOf(tag.name) !== -1) {
-                newTags.push(tag)
-              }
-            });
-
-            // Determine paths that should be included into result bundle of a requested product
-            const newPaths = {};
-            const availableMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
-            for (const [path, definitionRef] of Object.entries(definitionRoot.paths)) {
-              let hasAtLeastOneOperation = false;
-              const definition = ctx.resolve(definitionRef).node;
-              availableMethods.forEach((method) => {
-                if (!(method in definition)) {
-                  // Method not defined for path, skipping
-                  return;
-                }
-
-                const operation = definition[method];
-                if (!('tags' in operation)) {
-                  // Operation has no tags specified, excluding as tags must be defined explicitly
-                  return;
-                }
-
-                const requiredTags = operation.tags.filter((tagName) => tagsNamesToInclude.indexOf(tagName) !== -1)
-                if (requiredTags.length !== 0) {
-                  // Remove tags that are not participating in any of tag groups of a requested products
-                  operation.tags = requiredTags;
-                  hasAtLeastOneOperation = true;
-                } else {
-                  delete definition[method];
-                }
-              });
-
-              if (hasAtLeastOneOperation) {
-                newPaths[path] = definition;
-              }
-            }
-
-            // TODO: do the same for x-webhooks
             // TODO: wind a way to filter schemas
 
+            // Override original definitions to include only elements with required tags
             definitionRoot['x-tagGroups'] = productMapping.tagGroups;
-            definitionRoot['tags'] = newTags;
-            definitionRoot['paths'] = newPaths;
+            definitionRoot['tags'] = getNewTags(definitionRoot, tagsNamesToInclude);
+            definitionRoot['paths'] = getNewPaths(definitionRoot, ctx, tagsNamesToInclude);
+            definitionRoot['x-webhooks'] = getNewWebhooks(definitionRoot, ctx, tagsNamesToInclude);
           }
         }
       }
