@@ -1,0 +1,17 @@
+description: minimum-item-quantity restrictions.
+allOf:
+  - $ref: ../CouponRestriction.yaml
+  - $ref: ../RedemptionRestriction.yaml
+  - type: object
+    required:
+      - quantity
+      - planIds
+    properties:
+      quantity:
+        type: integer
+        description: Minimum Invoice item quantity.
+      planIds:
+        type: array
+        description: Plan IDs coupon can be applied to.
+        items:
+          type: string
