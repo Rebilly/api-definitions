@@ -56,9 +56,10 @@ const PRODUCTS = [
         name: 'Orders and Invoices',
         description: 'Some custom description for Order And Invoices group',
         tags: [
-          'Payment Cards',
-          'Payment Instruments',
-          'Payment Tokens',
+          'Products',
+          'Plans',
+          'Orders',
+          'Invoices'
         ]
       },
       {
@@ -69,6 +70,26 @@ const PRODUCTS = [
           'Balance Transactions',
         ]
       }
+    ]
+  }, {
+    name: 'Risk Management',
+    tagGroups: [
+      {
+        name: 'Customers',
+        description: 'Some custom description for Customers group',
+        tags: [
+          'KYC Documents',
+          'AML',
+        ]
+      },
+      {
+        name: 'Payments',
+        description: 'Some custom description for Payments group',
+        tags: [
+          'Disputes',
+          'Blocklists',
+        ]
+      },
     ]
   }
 ];
