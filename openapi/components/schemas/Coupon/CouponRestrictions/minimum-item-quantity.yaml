@@ -1,16 +1,19 @@
-description: minimum-item-quantity restrictions.
+description: |
+  Minimum invoice item quantity restriction.
+  Specifying productIds will only apply the restriction to those invoice items.
+  If productIds is an empty array then it will apply to all invoice items.
 allOf:
   - $ref: ../CouponRestriction.yaml
   - $ref: ../RedemptionRestriction.yaml
   - type: object
     required:
       - quantity
-      - planIds
+      - productIds
     properties:
       quantity:
         type: integer
         description: Minimum Invoice item quantity.
-      planIds:
+      productIds:
         type: array
         description: Plan IDs coupon can be applied to.
         items:

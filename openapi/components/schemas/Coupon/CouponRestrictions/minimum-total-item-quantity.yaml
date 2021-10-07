@@ -1,11 +1,19 @@
-description: minimum-total-item-quantity restrictions.
+description: |
+  Minimum total invoice quantity restriction.
+  If productIds is not an empty array, the total quantity will only apply to the total quantity of the given productIds.
 allOf:
   - $ref: ../CouponRestriction.yaml
   - $ref: ../RedemptionRestriction.yaml
   - type: object
     required:
       - quantity
+      - productIds
     properties:
       quantity:
         type: integer
         description: Minimum Invoice quantity total.
+      productIds:
+        type: array
+        description: Plan IDs coupon can be applied to.
+        items:
+          type: string
