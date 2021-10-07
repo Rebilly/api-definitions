@@ -173,7 +173,7 @@ const decorators = {
               tagsNamesToInclude = tagsNamesToInclude.concat(tagGroup.tags);
             });
 
-            // TODO: wind a way to filter schemas
+            // TODO: find a way to filter schemas to reduce its' size, probably by using regexp to parse all the references to schemas
 
             // Override original definitions to include only elements with required tags
             definitionRoot['x-tagGroups'] = productMapping.tagGroups;
