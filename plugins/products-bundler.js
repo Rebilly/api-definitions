@@ -1,62 +1,5 @@
 const id = 'products-bundler';
 
-// AML
-// API Keys
-// Activity Feed
-// Balance transactions
-// Billing Portals
-// Blocklists
-// Broadcast Messages
-// Checkout Forms
-// Coupons
-// Custom Fields
-// Customer Authentication
-// Customers
-// Customers Timeline
-// Data Exports
-// Disputes
-// Email Credentials
-// Email Delivery Settings
-// Email Messages
-// Email Notifications
-// Experian credentials
-// Fees
-// Files
-// Gateway Accounts
-// Histograms
-// Integrations
-// Invoices
-// JWT Session
-// KYC Documents
-// Lists
-// Memberships
-// Metadata
-// Orders
-// Organizations
-// Payment Cards
-// Payment Instruments
-// Payment Tokens
-// Plans
-// Products
-// Profile
-// Reports
-// Reset password
-// Roles
-// Rules
-// Search
-// Segments
-// Shipping Zones
-// Status
-// Tags
-// TaxJar credentials
-// Taxes
-// Tracking
-// Transactions
-// Users
-// Webhook Credentials
-// Webhooks
-// Websites
-
 const PRODUCTS = [
   {
     name: 'Payments',
@@ -152,10 +95,12 @@ function getNewTags(definitionRoot, tagsNamesToInclude) {
   return newTags;
 }
 
-function getNewPaths(definitionRoot, ctx, tagsNamesToInclude) {
+function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods) {
+  if (!paths) {
+    return {};
+  }
   const newPaths = {};
-  const availableMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
-  for (const [path, definitionRef] of Object.entries(definitionRoot.paths)) {
+  for (const [path, definitionRef] of Object.entries(paths)) {
     let hasAtLeastOneOperation = false;
     const definition = ctx.resolve(definitionRef).node;
     availableMethods.forEach((method) => {
@@ -187,36 +132,6 @@ function getNewPaths(definitionRoot, ctx, tagsNamesToInclude) {
   return newPaths;
 }
 
-function getNewWebhooks(definitionRoot, ctx, tagsNamesToInclude) {
-  if (!('x-webhooks' in definitionRoot)) {
-    return {};
-  }
-  const newWebhooks = {};
-  for (const [path, definitionRef] of Object.entries(definitionRoot['x-webhooks'])) {
-    let hasAtLeastOneTag = false;
-    const definition = ctx.resolve(definitionRef).node;
-    const webhook = definition.post;
-    if (!('tags' in webhook)) {
-      // Webhook has no tags specified, excluding as tags must be defined explicitly
-      return;
-    }
-
-    const requiredTags = webhook.tags.filter((tagName) => tagsNamesToInclude.indexOf(tagName) !== -1)
-    if (requiredTags.length !== 0) {
-      // Remove tags that are not participating in any of tag groups of a requested products
-      webhook.tags = requiredTags;
-      hasAtLeastOneTag = true;
-    } else {
-      delete definition['post'];
-    }
-
-    if (hasAtLeastOneTag) {
-      newWebhooks[path] = definition;
-    }
-  }
-  return newWebhooks;
-}
-
 /** @type {import('@redocly/openapi-cli').CustomRulesConfig} */
 const decorators = {
   oas3: {
@@ -242,8 +157,9 @@ const decorators = {
             // Override original definitions to include only elements with required tags
             definitionRoot['x-tagGroups'] = productMapping.tagGroups;
             definitionRoot['tags'] = getNewTags(definitionRoot, tagsNamesToInclude);
-            definitionRoot['paths'] = getNewPaths(definitionRoot, ctx, tagsNamesToInclude);
-            definitionRoot['x-webhooks'] = getNewWebhooks(definitionRoot, ctx, tagsNamesToInclude);
+            const availableMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
+            definitionRoot['paths'] = getNewPaths(definitionRoot.paths, ctx, tagsNamesToInclude, availableMethods);
+            definitionRoot['x-webhooks'] = getNewPaths(definitionRoot['x-webhooks'], ctx, tagsNamesToInclude, ['post']);
           }
         }
       }
