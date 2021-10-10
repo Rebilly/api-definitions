@@ -156,7 +156,7 @@ function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods) {
 /** @type {import('@redocly/openapi-cli').CustomRulesConfig} */
 const decorators = {
   oas3: {
-    'bundle-product': () => {
+    'bundle': () => {
       return {
         DefinitionRoot: {
           leave(definitionRoot, ctx) {
