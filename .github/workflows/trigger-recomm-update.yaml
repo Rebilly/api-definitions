@@ -1,0 +1,48 @@
+name: Trigger Recomm update
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  trigger-recomm-update:
+    name: Trigger Recomm update
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Wait for Redocly to publish combined bundle
+        uses: Sibz/await-status-action@v1.0.1
+        with:
+          authToken: ${{ secrets.GITHUB_TOKEN }}
+          # Which status checks to wait for. We only care about the combined bundle.
+          contexts: 'Redocly Registry (combined/combined) bundle'
+          # How long to wait for the Redocly status to be posted, in seconds 
+          timeout: 600
+          notPresentTimeout: 600
+
+      # The commit message are multiline. Use a regex to split out
+      # just the first line, and the PR number into regex groups.
+      - name: Parse commit message
+        uses: actions-ecosystem/action-regex-match@v2
+        id: parse-commit
+        with:
+          text: ${{ github.event.head_commit.message }}
+          regex: '^(.*) \((\#\d*)\)'
+
+      # Use the regex above to create a trigger reason that links back to the
+      # api-definitions repository. For example:
+      # "commit message (#100)" expands into:
+      # "commit message Rebilly/api-definitions#100"
+      - name: Create trigger reason
+        id: reason
+        run: echo '::set-output name=value::${{steps.parse-commit.outputs.group1}} Rebilly/api-definitions${{steps.parse-commit.outputs.group2}}'
+
+      - name: Trigger update workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Update API definitions
+          ref: main
+          repo: Rebilly/frontend-recomm
+          token: ${{ secrets.MACHINE_USER_PAT }}
+          inputs: '{ "trigger-reason": "${{steps.reason.outputs.value}}" }'
