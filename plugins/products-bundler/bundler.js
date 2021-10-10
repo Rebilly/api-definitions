@@ -1,98 +1,8 @@
-const id = 'products-bundler';
+const yaml = require('js-yaml');
+const fs = require('fs');
+const path = require('path');
 
-const PRODUCTS = [
-  {
-    name: 'Payments',
-    tagGroups: [
-      {
-        name: 'Customers',
-        description: 'Some custom description for Customers group',
-        tags: [
-          'Customers',
-          'Customer Authentication',
-          'Customers Timeline',
-        ]
-      },
-      {
-        name: 'Payment Instruments',
-        description: 'Some custom description for Payment Instruments group',
-        tags: [
-          'Payment Cards',
-          'Payment Instruments',
-          'Payment Tokens',
-        ]
-      },
-      {
-        name: 'Payments',
-        description: 'Some custom description for Payment Payments group',
-        tags: [
-          'Transactions',
-          'Balance Transactions',
-        ]
-      }
-    ]
-  }, {
-    name: 'Billing',
-    tagGroups: [
-      {
-        name: 'Customers',
-        description: 'Some custom description for Customers group',
-        tags: [
-          'Customers',
-          'Customer Authentication',
-          'Customers Timeline',
-        ]
-      },
-      {
-        name: 'Payment Instruments',
-        description: 'Some custom description for Payment Instruments group',
-        tags: [
-          'Payment Cards',
-          'Payment Instruments',
-          'Payment Tokens',
-        ]
-      },
-      {
-        name: 'Orders and Invoices',
-        description: 'Some custom description for Order And Invoices group',
-        tags: [
-          'Products',
-          'Plans',
-          'Orders',
-          'Invoices'
-        ]
-      },
-      {
-        name: 'Payments',
-        description: 'Some custom description for Payments group',
-        tags: [
-          'Transactions',
-          'Balance Transactions',
-        ]
-      }
-    ]
-  }, {
-    name: 'Risk Management',
-    tagGroups: [
-      {
-        name: 'Customers',
-        description: 'Some custom description for Customers group',
-        tags: [
-          'KYC Documents',
-          'AML',
-        ]
-      },
-      {
-        name: 'Payments',
-        description: 'Some custom description for Payments group',
-        tags: [
-          'Disputes',
-          'Blocklists',
-        ]
-      },
-    ]
-  }
-];
+const id = 'products-bundler';
 
 function getProductMappingToBundle() {
   if (!('API_BUNDLED_PRODUCT' in process.env)) {
@@ -101,9 +11,7 @@ function getProductMappingToBundle() {
 
   const requestedProduct = process.env.API_BUNDLED_PRODUCT;
 
-  return PRODUCTS.find((productMapping) => {
-    return productMapping.name === requestedProduct;
-  })
+  return yaml.load(fs.readFileSync(path.resolve(__dirname, requestedProduct + '.yaml'), 'utf8'));
 }
 
 function getNewTags(definitionRoot, tagsNamesToInclude) {
