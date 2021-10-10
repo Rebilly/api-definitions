@@ -77,14 +77,14 @@ const decorators = {
 
             // Determine tags names participating in a result bundle of a requested product
             let tagsNamesToInclude = [];
-            productMapping.tagGroups.forEach((tagGroup) => {
+            productMapping['x-tagGroups'].forEach((tagGroup) => {
               tagsNamesToInclude = tagsNamesToInclude.concat(tagGroup.tags);
             });
 
             // TODO: find a way to filter schemas to reduce its' size, probably by using regexp to parse all the references to schemas
 
             // Override original definitions to include only elements with required tags
-            definitionRoot['x-tagGroups'] = productMapping.tagGroups;
+            definitionRoot['x-tagGroups'] = productMapping['x-tagGroups'];
             definitionRoot['tags'] = getNewTags(definitionRoot, tagsNamesToInclude);
             const availableMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
             definitionRoot['paths'] = getNewPaths(definitionRoot.paths, ctx, tagsNamesToInclude, availableMethods);
