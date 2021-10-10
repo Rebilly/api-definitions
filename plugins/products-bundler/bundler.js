@@ -5,7 +5,7 @@ const path = require('path');
 const id = 'products-bundler';
 
 function getProductMappingToBundle() {
-  if (!('API_BUNDLED_PRODUCT' in process.env)) {
+  if (!('API_BUNDLED_PRODUCT' in process.env) || !process.env.API_BUNDLED_PRODUCT) {
     return;
   }
 
