@@ -61,6 +61,16 @@ function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods) {
   return newPaths;
 }
 
+function getNewInfo(info, productMapping) {
+  if ('info' in productMapping) {
+    for (const [property, value] of Object.entries(productMapping.info)) {
+      info[property] = value;
+    }
+  }
+
+  return info;
+}
+
 /** @type {import('@redocly/openapi-cli').CustomRulesConfig} */
 const decorators = {
   oas3: {
@@ -89,6 +99,7 @@ const decorators = {
             const availableMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
             definitionRoot['paths'] = getNewPaths(definitionRoot.paths, ctx, tagsNamesToInclude, availableMethods);
             definitionRoot['x-webhooks'] = getNewPaths(definitionRoot['x-webhooks'], ctx, tagsNamesToInclude, ['post']);
+            definitionRoot['info'] = getNewInfo(definitionRoot['info'], productMapping);
           }
         }
       }
