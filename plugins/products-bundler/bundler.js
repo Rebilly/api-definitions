@@ -71,20 +71,20 @@ function getNewInfo(info, productMapping) {
   return info;
 }
 
-function fillUsedRefs(knownDefs, definitionRoot, element) {
+function findUsedComponents(knownComponents, definitionRoot, element) {
   const regexp = new RegExp('#/components/([-a-zA-Z0-9]+)/([-a-zA-Z0-9]+)', 'gim')
   const entries = [...JSON.stringify(element).matchAll(regexp)];
   entries.forEach((entry) => {
-    const group = entry[1];
-    const component = entry[2];
-    if (group in knownDefs && knownDefs[group].indexOf(component) !== -1) {
+    const componentType = entry[1];
+    const name = entry[2];
+    if (componentType in knownComponents && knownComponents[componentType].indexOf(name) !== -1) {
       return;
     }
-    if (!(group in knownDefs)) {
-      knownDefs[group] = [];
+    if (!(componentType in knownComponents)) {
+      knownComponents[componentType] = [];
     }
-    knownDefs[group].push(component);
-    fillUsedRefs(knownDefs, definitionRoot, definitionRoot['components'][group][component])
+    knownComponents[componentType].push(name);
+    findUsedComponents(knownComponents, definitionRoot, definitionRoot['components'][componentType][name])
   })
 }
 
@@ -94,7 +94,7 @@ const decorators = {
     'bundle': () => {
       return {
         DefinitionRoot: {
-          enter(definitionRoot, ctx) {
+          leave(definitionRoot, ctx) {
             const productMapping = getProductMappingToBundle();
 
             if (!productMapping) {
@@ -117,20 +117,20 @@ const decorators = {
             definitionRoot['info'] = getNewInfo(definitionRoot['info'], productMapping);
 
             // Clean up unused schemes
-            let usedRefs = {};
+            let usedComponents = {};
             Object.values(definitionRoot.paths).forEach((pathDefinition) => {
-              fillUsedRefs(usedRefs, definitionRoot, pathDefinition);
+              findUsedComponents(usedComponents, definitionRoot, pathDefinition);
             })
-            for (const [group, components] of Object.entries(definitionRoot['components'])) {
-              if(!(group in usedRefs)) {
+            for (const [componentType, componentNames] of Object.entries(definitionRoot['components'])) {
+              if(!(componentType in usedComponents)) {
                 // Remove entire section from components
-                delete definitionRoot['components'][group];
+                delete definitionRoot['components'][componentType];
 
                 return;
               }
-              Object.keys(components).forEach((component) => {
-                if (usedRefs[group].indexOf(component) === -1) {
-                  delete definitionRoot['components'][group][component];
+              Object.keys(componentNames).forEach((name) => {
+                if (usedComponents[componentType].indexOf(name) === -1) {
+                  delete definitionRoot['components'][componentType][name];
                 }
               })
             }
