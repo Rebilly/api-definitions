@@ -71,13 +71,30 @@ function getNewInfo(info, productMapping) {
   return info;
 }
 
+function fillUsedRefs(knownDefs, definitionRoot, element) {
+  const regexp = new RegExp('#/components/([-a-zA-Z0-9]+)/([-a-zA-Z0-9]+)', 'gim')
+  const entries = [...JSON.stringify(element).matchAll(regexp)];
+  entries.forEach((entry) => {
+    const group = entry[1];
+    const component = entry[2];
+    if (group in knownDefs && knownDefs[group].indexOf(component) !== -1) {
+      return;
+    }
+    if (!(group in knownDefs)) {
+      knownDefs[group] = [];
+    }
+    knownDefs[group].push(component);
+    fillUsedRefs(knownDefs, definitionRoot, definitionRoot['components'][group][component])
+  })
+}
+
 /** @type {import('@redocly/openapi-cli').CustomRulesConfig} */
 const decorators = {
   oas3: {
     'bundle': () => {
       return {
         DefinitionRoot: {
-          leave(definitionRoot, ctx) {
+          enter(definitionRoot, ctx) {
             const productMapping = getProductMappingToBundle();
 
             if (!productMapping) {
@@ -91,8 +108,6 @@ const decorators = {
               tagsNamesToInclude = tagsNamesToInclude.concat(tagGroup.tags);
             });
 
-            // TODO: find a way to filter schemas to reduce its' size, probably by using regexp to parse all the references to schemas
-
             // Override original definitions to include only elements with required tags
             definitionRoot['x-tagGroups'] = productMapping['x-tagGroups'];
             definitionRoot['tags'] = getNewTags(definitionRoot, tagsNamesToInclude);
@@ -100,6 +115,25 @@ const decorators = {
             definitionRoot['paths'] = getNewPaths(definitionRoot.paths, ctx, tagsNamesToInclude, availableMethods);
             definitionRoot['x-webhooks'] = getNewPaths(definitionRoot['x-webhooks'], ctx, tagsNamesToInclude, ['post']);
             definitionRoot['info'] = getNewInfo(definitionRoot['info'], productMapping);
+
+            // Clean up unused schemes
+            let usedRefs = {};
+            Object.values(definitionRoot.paths).forEach((pathDefinition) => {
+              fillUsedRefs(usedRefs, definitionRoot, pathDefinition);
+            })
+            for (const [group, components] of Object.entries(definitionRoot['components'])) {
+              if(!(group in usedRefs)) {
+                // Remove entire section from components
+                delete definitionRoot['components'][group];
+
+                return;
+              }
+              Object.keys(components).forEach((component) => {
+                if (usedRefs[group].indexOf(component) === -1) {
+                  delete definitionRoot['components'][group][component];
+                }
+              })
+            }
           }
         }
       }
