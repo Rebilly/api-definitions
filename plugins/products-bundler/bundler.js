@@ -112,13 +112,13 @@ const decorators = {
             definitionRoot['x-tagGroups'] = productMapping['x-tagGroups'];
             definitionRoot['tags'] = getNewTags(definitionRoot, tagsNamesToInclude);
             const availableMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
-            definitionRoot['paths'] = getNewPaths(definitionRoot.paths, ctx, tagsNamesToInclude, availableMethods);
+            definitionRoot['paths'] = getNewPaths(definitionRoot['paths'], ctx, tagsNamesToInclude, availableMethods);
             definitionRoot['x-webhooks'] = getNewPaths(definitionRoot['x-webhooks'], ctx, tagsNamesToInclude, ['post']);
             definitionRoot['info'] = getNewInfo(definitionRoot['info'], productMapping);
 
             // Clean up unused schemes
             let usedComponents = {};
-            Object.values(definitionRoot.paths).forEach((pathDefinition) => {
+            Object.values(definitionRoot['paths']).forEach((pathDefinition) => {
               findUsedComponents(usedComponents, definitionRoot, pathDefinition);
             })
             for (const [componentType, componentNames] of Object.entries(definitionRoot['components'])) {
