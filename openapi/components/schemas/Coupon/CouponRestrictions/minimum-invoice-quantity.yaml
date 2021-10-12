@@ -1,4 +1,4 @@
-description: Restricts a coupon redemption to an invoice where the sum of all item quantities is greater or equal to specified.
+description: Restricts a coupon redemption to invoice items with the quantity greater or equal to specified.
 allOf:
   - $ref: ../CouponRestriction.yaml
   - $ref: ../RedemptionRestriction.yaml
@@ -9,9 +9,9 @@ allOf:
     properties:
       quantity:
         type: integer
-        description: Minimum Invoice quantity total.
+        description: Minimum Invoice quantity.
       productIds:
         type: array
-        description: Product IDs on which to total item quantities. If empty, then all items.
+        description: Product IDs on which to filter the restriction and subsequent discount. If empty, then all items.
         items:
           type: string
