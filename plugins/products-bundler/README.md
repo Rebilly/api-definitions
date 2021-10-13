@@ -11,10 +11,10 @@ If the `API_BUNDLED_PRODUCT` is empty or not provided - entire file will be bund
 
 ## Bundle a product API
 
-To bundle the Storefront product bundle, for example, run the following command:
+To bundle the Billing product bundle, for example, run the following command:
 
 ```shell
- API_BUNDLED_PRODUCT=Storefront openapi bundle openapi -o storefront.yaml
+ API_BUNDLED_PRODUCT=Billing openapi bundle openapi -o billing.yaml
 ```
 
 ## API bundle configuration
