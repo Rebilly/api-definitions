@@ -121,22 +121,25 @@ const decorators = {
             Object.values(definitionRoot['paths']).forEach((pathDefinition) => {
               findUsedComponents(usedComponents, definitionRoot, pathDefinition);
             })
-            for (const [componentType, componentNames] of Object.entries(definitionRoot['components'])) {
+            findUsedComponents(usedComponents, definitionRoot, definitionRoot.info.description);
+
+            for (const [componentType, components] of Object.entries(definitionRoot['components'])) {
               if (componentType === 'securitySchemes') {
-                return;
+                continue;
               }
 
               if(!(componentType in usedComponents)) {
                 // Remove entire section from components
                 delete definitionRoot['components'][componentType];
 
-                return;
+                continue;
               }
-              Object.keys(componentNames).forEach((name) => {
+
+              Object.keys(components).forEach((name) => {
                 if (usedComponents[componentType].indexOf(name) === -1) {
                   delete definitionRoot['components'][componentType][name];
                 }
-              })
+              });
             }
           }
         }
