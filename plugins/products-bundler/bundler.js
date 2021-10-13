@@ -11,7 +11,7 @@ function getProductMappingToBundle() {
 
   const requestedProduct = process.env.API_BUNDLED_PRODUCT;
 
-  return yaml.load(fs.readFileSync(path.resolve(__dirname, requestedProduct + '.yaml'), 'utf8'));
+  return yaml.load(fs.readFileSync(path.resolve(__dirname, `mapping/${requestedProduct}.yaml`), 'utf8'));
 }
 
 function getNewTags(definitionRoot, tagsNamesToInclude) {
