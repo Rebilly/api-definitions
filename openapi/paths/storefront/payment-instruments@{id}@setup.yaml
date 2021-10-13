@@ -10,8 +10,7 @@ get:
   security:
     - CustomerJWT: []
   description: |
-    Retrieve the latest approved or waiting for approval setup transaction
-    for the given payment instrument.
+    Retrieve the latest setup transaction for the given payment instrument.
 
     More information about the related transaction is available at the Transaction endpoints.
   responses:
@@ -27,7 +26,7 @@ get:
       $ref: ../../components/responses/Forbidden.yaml
     404:
       description: |
-        The payment instrument doesn't have an approved or waiting setup transaction.
+        The payment instrument doesn't have any setup transaction.
       allOf:
         - $ref: ../../components/responses/NotFound.yaml
 post:
