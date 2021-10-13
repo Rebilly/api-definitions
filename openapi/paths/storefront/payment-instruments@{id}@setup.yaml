@@ -25,10 +25,11 @@ get:
     403:
       $ref: ../../components/responses/Forbidden.yaml
     404:
-      description: |
-        The payment instrument doesn't have any setup transaction.
-      allOf:
-        - $ref: ../../components/responses/NotFound.yaml
+      description: The payment instrument doesn't have any setup transaction.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Error.yaml
 post:
   tags:
     - Payment Instrument
@@ -41,8 +42,8 @@ post:
     Create the payment instrument's setup transaction.
 
     This effectively makes the payment instrument available for further payments.
-    The response should be treated as a general transaction,
-    e.g. the approval links should be followed until the transaction is completed.
+    The response should be treated as a regular transaction;
+    for example, the approval links should be followed until the transaction is completed.
   requestBody:
     $ref: ../../components/requestBodies/storefront/SetupPaymentInstrumentRequest.yaml
   responses:
