@@ -121,6 +121,11 @@ const decorators = {
             Object.values(definitionRoot['paths']).forEach((pathDefinition) => {
               findUsedComponents(usedComponents, definitionRoot, pathDefinition);
             })
+            if ('x-webhooks' in definitionRoot) {
+              Object.values(definitionRoot['x-webhooks']).forEach((pathDefinition) => {
+                findUsedComponents(usedComponents, definitionRoot, pathDefinition);
+              })
+            }
             findUsedComponents(usedComponents, definitionRoot, definitionRoot.info.description);
 
             for (const [componentType, components] of Object.entries(definitionRoot['components'])) {
