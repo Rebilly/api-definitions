@@ -19,6 +19,22 @@ info:
     This API is experimental and likely to change.  We would appreciate
     feedback.
 
+    # Authentication
+
+    When you sign up for an account, you are given your first API key.
+    You can generate additional API keys, and delete API keys (as you may
+    need to rotate your keys in the future). You authenticate to the
+    Rebilly API by providing your secret key in the request header.
+
+    Rebilly offers three forms of authentication:  secret key, publishable key, JSON Web Tokens, and public signature key.
+    - [Secret API key](#section/Authentication/SecretApiKey): used for requests made from the server side. Never share these keys. Keep them guarded and secure
+    - [Publishable API key](#section/Authentication/PublishableApiKey): used for requests from the client side.
+    - [JWT](#section/Authentication/JWT): short lifetime tokens that can be assigned a specific expiration time
+
+    Never share your secret keys. Keep them guarded and secure.
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+
     ## Javascript SDK
 
     The [Javascript SDK](https://github.com/Rebilly/rebilly-js-sdk) is maintained
@@ -26,32 +42,6 @@ info:
     SDK code examples are included in these docs.
 
 tags:
-  - name: Authentication
-    description: |
-      When you sign up for an account, you are given your first API key.
-      You can generate additional API keys, and delete API keys (as you may
-      need to rotate your keys in the future). You authenticate to the
-      Rebilly API by providing your secret key in the request header.
-
-      Rebilly offers three forms of authentication:  private key, JSON Web
-      Tokens, and public key.
-      - private key: authenticates each request by searching for the presence
-      of an HTTP header: REB-APIKEY.
-      - JWT: authenticates each request by the HTTP header: Authorization.
-      - public key: authenticates by the HTTP header: REB-AUTH (read more on
-      this below).
-
-      Rebilly also offers JSON Web Tokens (JWT) authentication, where you can
-      control the specific granular permissions and expiration for that JWT.  We call
-      our resource for generating JWT [Sessions](#tag/Sessions).
-
-      Rebilly also has a client-side authentication scheme that uses an
-      apiUser and HMAC-SHA1 signature (only for the Tokens resource), so
-      that you may safely create tokens from the client-side without
-      compromising your secret keys.
-
-      Never share your secret keys. Keep them guarded and secure.
-      The client-side authentication scheme uses one HTTP header named REB-AUTH.
   - name: Histograms
     description: |
       Histograms are for particular kinds of reports with cohorts and periods.
@@ -62,9 +52,6 @@ tags:
   - name: Data Exports
     description: |
       Data exports.
-  - name: Activity Feed
-    description: |
-      Activity Feed is holding various events that occurred in the app.
   - name: Orders
   - name: Customers
 security:
