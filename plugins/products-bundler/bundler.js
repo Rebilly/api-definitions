@@ -122,6 +122,10 @@ const decorators = {
               findUsedComponents(usedComponents, definitionRoot, pathDefinition);
             })
             for (const [componentType, componentNames] of Object.entries(definitionRoot['components'])) {
+              if (componentType === 'securitySchemes') {
+                return;
+              }
+
               if(!(componentType in usedComponents)) {
                 // Remove entire section from components
                 delete definitionRoot['components'][componentType];
