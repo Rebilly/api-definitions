@@ -5,11 +5,11 @@ const path = require('path');
 const availableMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
 
 function getProductMappingToBundle() {
-  if (!('API_BUNDLED_PRODUCT' in process.env) || !process.env.API_BUNDLED_PRODUCT) {
+  if (!('REBILLY_API_BUNDLED_PRODUCT' in process.env) || !process.env.REBILLY_API_BUNDLED_PRODUCT) {
     return;
   }
 
-  const requestedProduct = process.env.API_BUNDLED_PRODUCT;
+  const requestedProduct = process.env.REBILLY_API_BUNDLED_PRODUCT;
 
   return yaml.load(fs.readFileSync(path.resolve(__dirname, `mapping/${requestedProduct}.yaml`), 'utf8'));
 }
