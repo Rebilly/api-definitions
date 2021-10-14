@@ -2,7 +2,7 @@ const yaml = require('js-yaml');
 const fs = require('fs');
 const path = require('path');
 
-const id = 'products-bundler';
+const availableMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
 
 function getProductMappingToBundle() {
   if (!('API_BUNDLED_PRODUCT' in process.env) || !process.env.API_BUNDLED_PRODUCT) {
@@ -13,6 +13,39 @@ function getProductMappingToBundle() {
 
   return yaml.load(fs.readFileSync(path.resolve(__dirname, `mapping/${requestedProduct}.yaml`), 'utf8'));
 }
+
+/** @type {import('@redocly/openapi-cli').CustomRulesConfig} */
+const decorators = {
+  oas3: {
+    'bundle': () => {
+      return {
+        DefinitionRoot: {
+          leave(definitionRoot, ctx) {
+            const productMapping = getProductMappingToBundle();
+            if (!productMapping) {
+              // Use default bundling settings
+              return;
+            }
+
+            // Determine tags names participating in a result bundle of a requested product
+            let tagsNamesToInclude = [];
+            productMapping['x-tagGroups'].forEach((tagGroup) => {
+              tagsNamesToInclude = tagsNamesToInclude.concat(tagGroup.tags);
+            });
+
+            // Override original definitions with the requested product settings
+            definitionRoot['info'] = getNewInfo(definitionRoot['info'], productMapping);
+            definitionRoot['tags'] = getNewTags(definitionRoot, tagsNamesToInclude);
+            definitionRoot['x-tagGroups'] = productMapping['x-tagGroups'];
+            definitionRoot['paths'] = getNewPaths(definitionRoot['paths'], ctx, tagsNamesToInclude, availableMethods);
+            definitionRoot['x-webhooks'] = getNewPaths(definitionRoot['x-webhooks'], ctx, tagsNamesToInclude, ['post']);
+            definitionRoot['components'] = getNewComponents(definitionRoot);
+          }
+        }
+      }
+    },
+  },
+};
 
 function getNewTags(definitionRoot, tagsNamesToInclude) {
   const newTags = [];
@@ -58,6 +91,7 @@ function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods) {
       newPaths[path] = definition;
     }
   }
+
   return newPaths;
 }
 
@@ -71,89 +105,48 @@ function getNewInfo(info, productMapping) {
   return info;
 }
 
-function findUsedComponents(knownComponents, definitionRoot, element) {
-  const regexp = new RegExp('#/components/([-a-zA-Z0-9]+)/([-a-zA-Z0-9]+)', 'gim')
-  const entries = [...JSON.stringify(element).matchAll(regexp)];
-  entries.forEach((entry) => {
-    const componentType = entry[1];
-    const name = entry[2];
-    if (componentType in knownComponents && knownComponents[componentType].indexOf(name) !== -1) {
-      return;
-    }
-    if (!(componentType in knownComponents)) {
-      knownComponents[componentType] = [];
-    }
-    knownComponents[componentType].push(name);
-    findUsedComponents(knownComponents, definitionRoot, definitionRoot['components'][componentType][name])
+function getNewComponents(definitionRoot) {
+  function findUsedComponents(knownComponents, definitionRoot, element) {
+    const regexp = new RegExp('#/components/([-a-zA-Z0-9]+)/([-a-zA-Z0-9]+)', 'gim')
+    const entries = [...JSON.stringify(element).matchAll(regexp)];
+    entries.forEach((entry) => {
+      const componentType = entry[1];
+      const name = entry[2];
+      if (componentType in knownComponents && knownComponents[componentType].indexOf(name) !== -1) {
+        return;
+      }
+      if (!(componentType in knownComponents)) {
+        knownComponents[componentType] = [];
+      }
+      knownComponents[componentType].push(name);
+      findUsedComponents(knownComponents, definitionRoot, definitionRoot['components'][componentType][name])
+    })
+  }
+
+  const sectionsToCheck = [definitionRoot['paths'], definitionRoot['info']];
+  if ('x-webhooks' in definitionRoot) {
+    sectionsToCheck.push(definitionRoot['x-webhooks']);
+  }
+  let usedComponents = {};
+  sectionsToCheck.forEach((element) => {
+    findUsedComponents(usedComponents, definitionRoot, element);
   })
+
+  const newComponents = {
+    securitySchemes: definitionRoot.components.securitySchemes,
+  };
+
+  for (const [componentType, names] of Object.entries(usedComponents)) {
+    newComponents[componentType] = {};
+    names.forEach((name) => {
+      newComponents[componentType][name] = definitionRoot.components[componentType][name]
+    })
+  }
+
+  return newComponents;
 }
 
-/** @type {import('@redocly/openapi-cli').CustomRulesConfig} */
-const decorators = {
-  oas3: {
-    'bundle': () => {
-      return {
-        DefinitionRoot: {
-          leave(definitionRoot, ctx) {
-            const productMapping = getProductMappingToBundle();
-
-            if (!productMapping) {
-              // Use default bundling settings
-              return;
-            }
-
-            // Determine tags names participating in a result bundle of a requested product
-            let tagsNamesToInclude = [];
-            productMapping['x-tagGroups'].forEach((tagGroup) => {
-              tagsNamesToInclude = tagsNamesToInclude.concat(tagGroup.tags);
-            });
-
-            // Override original definitions to include only elements with required tags
-            definitionRoot['x-tagGroups'] = productMapping['x-tagGroups'];
-            definitionRoot['tags'] = getNewTags(definitionRoot, tagsNamesToInclude);
-            const availableMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
-            definitionRoot['paths'] = getNewPaths(definitionRoot['paths'], ctx, tagsNamesToInclude, availableMethods);
-            definitionRoot['x-webhooks'] = getNewPaths(definitionRoot['x-webhooks'], ctx, tagsNamesToInclude, ['post']);
-            definitionRoot['info'] = getNewInfo(definitionRoot['info'], productMapping);
-
-            // Clean up unused schemes
-            let usedComponents = {};
-            Object.values(definitionRoot['paths']).forEach((pathDefinition) => {
-              findUsedComponents(usedComponents, definitionRoot, pathDefinition);
-            })
-            if ('x-webhooks' in definitionRoot) {
-              Object.values(definitionRoot['x-webhooks']).forEach((pathDefinition) => {
-                findUsedComponents(usedComponents, definitionRoot, pathDefinition);
-              })
-            }
-            findUsedComponents(usedComponents, definitionRoot, definitionRoot.info.description);
-
-            for (const [componentType, components] of Object.entries(definitionRoot['components'])) {
-              if (componentType === 'securitySchemes') {
-                continue;
-              }
-
-              if(!(componentType in usedComponents)) {
-                // Remove entire section from components
-                delete definitionRoot['components'][componentType];
-
-                continue;
-              }
-
-              Object.keys(components).forEach((name) => {
-                if (usedComponents[componentType].indexOf(name) === -1) {
-                  delete definitionRoot['components'][componentType][name];
-                }
-              });
-            }
-          }
-        }
-      }
-    },
-  },
-};
-
 module.exports = {
-  id,
+  id: 'products-bundler',
   decorators,
 };
