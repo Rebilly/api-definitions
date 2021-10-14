@@ -5,6 +5,17 @@ allOf:
     required:
       - settings
     properties:
+      credentials:
+        type: object
+        description: Stripe Connect credentials object. The credentials object may be provided in order to control the Stripe Connect account under which the gateway account is connected.
+        properties:
+          stripeClientId:
+            type: string
+            description: The Client ID under which to connect the Stripe account.
+          stripeSecret:
+            type: string
+            description: The secret key of the Stripe Connect account under which to connect the Stripe account.
+            format: password
       settings:
         type: object
         description: Stripe settings object.
