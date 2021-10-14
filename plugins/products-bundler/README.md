@@ -22,3 +22,5 @@ To bundle the Billing product bundle, for example, run the following command:
 Available configuration is available in the `mapping` directory. Every file in this directory
 represents a configuration for bundling the result bundle. Use name of these files as a value
 for the `API_BUNDLED_PRODUCT` env variable during build.
+
+Add a new product bundle by adding a new YAML file in the `mapping` directory with a structure similar to the other files there. The env variable `API_BUNDLED_PRODUCT` value maps to the YAML file used during the `bundle` process.
