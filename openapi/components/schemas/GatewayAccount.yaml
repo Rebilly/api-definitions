@@ -292,6 +292,30 @@ properties:
     description: Customer's payment instrument will "stick" to the gateway account for future transactions when enabled.
     type: boolean
     default: true
+  setupInstruction:
+    type: string
+    default: do-nothing
+    description: |
+      Creates zero, one, or more child transactions such as `authorize` and `void`.
+      The transactions are linked to the `setup` transaction by the `parentTransactionId` relationship.
+    enum:
+      - authorize
+      - authorize-and-void
+      - sca
+      - do-nothing
+    x-enumDescriptions:
+      authorize: |
+        Creates an `authorize` transaction in the amount/currency of the request.
+        If the gateway account is configured for strong customer authentication, it will be used.
+      authorize-and-void: |
+        Creates an `authorize` transaction in the amount/currency of the request, followed by a `void` (if the `authorize` was approved).
+        If the gateway account is configured for strong customer authentication, it will be used.
+      sca: |
+        Uses strong customer authentication (SCA) without any `authorize` transaction.
+        SCA includes 3dsv2, 3ds, and some specific wallets behavior like setting up a billing agreement with PayPal.
+      do-nothing: |
+        Does nothing, and returns an approved `setup` transaction.
+        This is the default behavior.
   createdTime:
     description: Gateway Account created time.
     allOf:

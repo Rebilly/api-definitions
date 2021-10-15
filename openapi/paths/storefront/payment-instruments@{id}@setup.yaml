@@ -1,0 +1,63 @@
+parameters:
+  - $ref: ../../components/parameters/organizationId.yaml
+  - $ref: ../../components/parameters/resourceId.yaml
+get:
+  tags:
+    - Payment Instruments
+  summary: Retrieve the payment instrument's setup transaction.
+  operationId: StorefrontGetPaymentInstrumentSetup
+  x-sdk-operation-name: get
+  security:
+    - CustomerJWT: []
+  description: |
+    Retrieve the latest setup transaction for the given payment instrument.
+
+    More information about all the related setup transactions is available at the Transaction endpoints.
+  responses:
+    200:
+      description: Setup transaction was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/StorefrontTransaction.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      description: The payment instrument doesn't have any setup transaction.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Error.yaml
+post:
+  tags:
+    - Payment Instruments
+  summary: Create the payment instrument's setup transaction.
+  operationId: StorefrontPostPaymentInstrumentSetup
+  x-sdk-operation-name: create
+  security:
+    - CustomerJWT: []
+  description: |
+    Create the payment instrument's setup transaction.
+
+    This effectively makes the payment instrument available for further payments.
+    The response should be treated as a regular transaction;
+    for example, the approval links should be followed until the transaction is completed.
+  requestBody:
+    $ref: ../../components/requestBodies/storefront/SetupPaymentInstrumentRequest.yaml
+  responses:
+    201:
+      description: Setup transaction was created.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/StorefrontTransaction.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml
+    422:
+      $ref: ../../components/responses/ValidationError.yaml

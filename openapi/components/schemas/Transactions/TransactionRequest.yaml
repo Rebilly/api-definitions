@@ -15,8 +15,12 @@ allOf:
           To `capture` use the `sale` type. If any existing `authorize` transactions
           are eligible, then they will be captured and the `sale` will be converted
           to a `capture` type.
+
+          The `setup` type will set up the payment instrument by following the `setupInstruction` in the selected gateway account.
+          If the instruction is to `do-nothing`, a transaction with result `approved` of type `setup` will be returned.
         type: string
         enum:
           - 3ds-authentication
           - sale
           - authorize
+          - setup
