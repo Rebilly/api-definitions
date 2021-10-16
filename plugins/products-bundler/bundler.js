@@ -1,17 +1,28 @@
-const yaml = require('js-yaml');
-const fs = require('fs');
-const path = require('path');
-
 const availableMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
+const X_BUNDLES_KEY = 'x-bundles';
 
-function getProductMappingToBundle() {
+function getProductMappingToBundle(definitionRoot, resolve, report) {
   if (!('REBILLY_API_PRODUCT' in process.env) || !process.env.REBILLY_API_PRODUCT) {
     return;
   }
 
   const requestedProduct = process.env.REBILLY_API_PRODUCT;
 
-  return yaml.load(fs.readFileSync(path.resolve(__dirname, `mapping/${requestedProduct}.yaml`), 'utf8'));
+  if (!(X_BUNDLES_KEY in definitionRoot)) {
+    report({message: `"${X_BUNDLES_KEY}" is not set in the specification`});
+
+    return;
+  }
+
+  if (!(requestedProduct in definitionRoot[X_BUNDLES_KEY])) {
+    report({message: `Product "${requestedProduct}" is not set in the "${X_BUNDLES_KEY}" config`});
+
+    return;
+  }
+
+  const productConfiguration = definitionRoot[X_BUNDLES_KEY][requestedProduct];
+
+  return resolve(productConfiguration).node;
 }
 
 /** @type {import('@redocly/openapi-cli').CustomRulesConfig} */
@@ -20,8 +31,8 @@ const decorators = {
     'bundle': () => {
       return {
         DefinitionRoot: {
-          leave(definitionRoot, ctx) {
-            const productMapping = getProductMappingToBundle();
+          leave(definitionRoot, {report, resolve}) {
+            const productMapping = getProductMappingToBundle(definitionRoot, resolve, report);
             if (!productMapping) {
               // Use default bundling settings
               return;
@@ -37,9 +48,10 @@ const decorators = {
             definitionRoot['info'] = getNewInfo(definitionRoot['info'], productMapping);
             definitionRoot['tags'] = getNewTags(definitionRoot, tagsNamesToInclude);
             definitionRoot['x-tagGroups'] = productMapping['x-tagGroups'];
-            definitionRoot['paths'] = getNewPaths(definitionRoot['paths'], ctx, tagsNamesToInclude, availableMethods);
-            definitionRoot['x-webhooks'] = getNewPaths(definitionRoot['x-webhooks'], ctx, tagsNamesToInclude, ['post']);
+            definitionRoot['paths'] = getNewPaths(definitionRoot['paths'], resolve, tagsNamesToInclude, availableMethods);
+            definitionRoot['x-webhooks'] = getNewPaths(definitionRoot['x-webhooks'], resolve, tagsNamesToInclude, ['post']);
             definitionRoot['components'] = getNewComponents(definitionRoot);
+            delete definitionRoot[X_BUNDLES_KEY];
           }
         }
       }
@@ -57,14 +69,14 @@ function getNewTags(definitionRoot, tagsNamesToInclude) {
   return newTags;
 }
 
-function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods) {
+function getNewPaths(paths, resolve, tagsNamesToInclude, availableMethods) {
   if (!paths) {
     return {};
   }
   const newPaths = {};
   for (const [path, definitionRef] of Object.entries(paths)) {
     let hasAtLeastOneOperation = false;
-    const definition = ctx.resolve(definitionRef).node;
+    const definition = resolve(definitionRef).node;
     availableMethods.forEach((method) => {
       if (!(method in definition)) {
         // Method not defined for path, skipping

@@ -19,8 +19,11 @@ To bundle the Billing product bundle, for example, run the following command:
 
 ## API bundle configuration
 
-Available configuration is available in the `mapping` directory. Every file in this directory
+A product configuration is available in the `openapi/bundles` directory. Every file in this directory
 represents a configuration for bundling the result bundle. Use name of these files as a value
 for the `REBILLY_API_PRODUCT` env variable during build.
 
-Add a new product bundle by adding a new YAML file in the `mapping` directory with a structure similar to the other files there. The env variable `REBILLY_API_PRODUCT` value maps to the YAML file used during the `bundle` process.
+Add a new product bundle by adding a new YAML file in the `openapi/bundles` directory with a structure similar 
+to the other files there. Reference the file in the `x-bundles` property in `openapi/openapi.yaml` file.
+
+The env variable `REBILLY_API_PRODUCT` value maps to the `x-bundles` property used during the `bundle` process.
