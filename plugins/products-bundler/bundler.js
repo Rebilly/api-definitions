@@ -4,14 +4,18 @@ const path = require('path');
 
 const availableMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
 
-function getProductMappingToBundle() {
+function getRequestedProduct() {
   if (!('REBILLY_API_PRODUCT' in process.env) || !process.env.REBILLY_API_PRODUCT) {
     return;
   }
 
-  const requestedProduct = process.env.REBILLY_API_PRODUCT;
+  return process.env.REBILLY_API_PRODUCT;
+}
 
-  return yaml.load(fs.readFileSync(path.resolve(__dirname, `mapping/${requestedProduct}.yaml`), 'utf8'));
+function getProductMappingToBundle(requestedProduct) {
+  const filename = `mapping/${requestedProduct.replaceAll(' ', '')}.yaml`;
+
+  return yaml.load(fs.readFileSync(path.resolve(__dirname, filename), 'utf8'));
 }
 
 /** @type {import('@redocly/openapi-cli').CustomRulesConfig} */
@@ -21,11 +25,12 @@ const decorators = {
       return {
         DefinitionRoot: {
           leave(definitionRoot, ctx) {
-            const productMapping = getProductMappingToBundle();
-            if (!productMapping) {
+            const requestedProduct = getRequestedProduct();
+            if (!requestedProduct) {
               // Use default bundling settings
               return;
             }
+            const productMapping = getProductMappingToBundle(requestedProduct);
 
             // Determine tags names participating in a result bundle of a requested product
             let tagsNamesToInclude = [];
@@ -37,8 +42,11 @@ const decorators = {
             definitionRoot['info'] = getNewInfo(definitionRoot['info'], productMapping);
             definitionRoot['tags'] = getNewTags(definitionRoot, tagsNamesToInclude);
             definitionRoot['x-tagGroups'] = productMapping['x-tagGroups'];
-            definitionRoot['paths'] = getNewPaths(definitionRoot['paths'], ctx, tagsNamesToInclude, availableMethods);
-            definitionRoot['x-webhooks'] = getNewPaths(definitionRoot['x-webhooks'], ctx, tagsNamesToInclude, ['post']);
+            definitionRoot['paths'] = getNewPaths(definitionRoot['paths'], ctx, tagsNamesToInclude, availableMethods, requestedProduct);
+            definitionRoot['x-webhooks'] = getNewPaths(definitionRoot['x-webhooks'], ctx, tagsNamesToInclude, ['post'], requestedProduct);
+            if (Object.keys(definitionRoot['x-webhooks']).length === 0) {
+              delete definitionRoot['x-webhooks'];
+            }
             definitionRoot['components'] = getNewComponents(definitionRoot);
           }
         }
@@ -57,7 +65,7 @@ function getNewTags(definitionRoot, tagsNamesToInclude) {
   return newTags;
 }
 
-function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods) {
+function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods, requestedProduct) {
   if (!paths) {
     return {};
   }
@@ -77,13 +85,32 @@ function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods) {
         return;
       }
 
+      if (requestedProduct) {
+        if (!('x-products') in operation) {
+          // Operation has no products specified, excluding as products must be defined explicitly
+          return;
+        }
+
+        const hasProduct = operation['x-products'].some((product) => product === requestedProduct);
+        if(!hasProduct) {
+          // No required product included, excluding operation
+          delete definition[method];
+
+          return;
+        } else {
+          // Remove system information from the operation
+          delete operation['x-products'];
+        }
+      }
+
       const requiredTags = operation.tags.filter((tagName) => tagsNamesToInclude.indexOf(tagName) !== -1)
-      if (requiredTags.length !== 0) {
+      if (requiredTags.length === 0) {
+        // No required tags included, excluding operation
+        delete definition[method];
+      } else {
         // Remove tags that are not participating in any of tag groups of a requested products
         operation.tags = requiredTags;
         hasAtLeastOneOperation = true;
-      } else {
-        delete definition[method];
       }
     });
 
