@@ -26,6 +26,11 @@ const decorators = {
         DefinitionRoot: {
           leave(definitionRoot, ctx) {
             const requestedProduct = getRequestedProduct();
+
+            const type = typeof requestedProduct;
+            ctx.report({message: type+':'+JSON.stringify(requestedProduct)});
+            return;
+
             if (!requestedProduct) {
               // Use default bundling settings
               return;
