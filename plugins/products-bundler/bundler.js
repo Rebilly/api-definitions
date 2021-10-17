@@ -13,7 +13,7 @@ function getRequestedProduct() {
 }
 
 function getProductMappingToBundle(requestedProduct) {
-  const filename = `mapping/${requestedProduct.replaceAll(' ', '')}.yaml`;
+  const filename = `mapping/${requestedProduct.replace(/ /g, '')}.yaml`;
 
   return yaml.load(fs.readFileSync(path.resolve(__dirname, filename), 'utf8'));
 }
@@ -26,11 +26,6 @@ const decorators = {
         DefinitionRoot: {
           leave(definitionRoot, ctx) {
             const requestedProduct = getRequestedProduct();
-
-            const type = typeof requestedProduct;
-            ctx.report({message: type+':'+JSON.stringify(requestedProduct)});
-            return;
-
             if (!requestedProduct) {
               // Use default bundling settings
               return;
@@ -91,8 +86,10 @@ function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods, requested
       }
 
       if (requestedProduct) {
-        if (!('x-products') in operation) {
+        if (!('x-products' in operation)) {
           // Operation has no products specified, excluding as products must be defined explicitly
+          delete definition[method];
+
           return;
         }
 
