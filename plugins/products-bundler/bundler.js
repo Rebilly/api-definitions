@@ -31,6 +31,9 @@ const decorators = {
               return;
             }
             const productMapping = getProductMappingToBundle(requestedProduct);
+            const includedXProducts = ('x-products' in productMapping)
+              ? productMapping['x-products']
+              : [requestedProduct]
 
             // Determine tags names participating in a result bundle of a requested product
             let tagsNamesToInclude = [];
@@ -42,8 +45,8 @@ const decorators = {
             definitionRoot['info'] = getNewInfo(definitionRoot['info'], productMapping);
             definitionRoot['tags'] = getNewTags(definitionRoot, tagsNamesToInclude);
             definitionRoot['x-tagGroups'] = productMapping['x-tagGroups'];
-            definitionRoot['paths'] = getNewPaths(definitionRoot['paths'], ctx, tagsNamesToInclude, availableMethods, requestedProduct);
-            definitionRoot['x-webhooks'] = getNewPaths(definitionRoot['x-webhooks'], ctx, tagsNamesToInclude, ['post'], requestedProduct);
+            definitionRoot['paths'] = getNewPaths(definitionRoot['paths'], ctx, tagsNamesToInclude, availableMethods, includedXProducts);
+            definitionRoot['x-webhooks'] = getNewPaths(definitionRoot['x-webhooks'], ctx, tagsNamesToInclude, ['post'], includedXProducts);
             if (Object.keys(definitionRoot['x-webhooks']).length === 0) {
               delete definitionRoot['x-webhooks'];
             }
@@ -65,7 +68,7 @@ function getNewTags(definitionRoot, tagsNamesToInclude) {
   return newTags;
 }
 
-function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods, requestedProduct) {
+function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods, includedXProducts) {
   if (!paths) {
     return {};
   }
@@ -85,7 +88,7 @@ function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods, requested
         return;
       }
 
-      if (requestedProduct) {
+      if (includedXProducts && includedXProducts.length) {
         if (!('x-products' in operation)) {
           // Operation has no products specified, excluding as products must be defined explicitly
           delete definition[method];
@@ -93,16 +96,16 @@ function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods, requested
           return;
         }
 
-        const hasProduct = operation['x-products'].some((product) => product === requestedProduct);
-        if(!hasProduct) {
+        const requiredProducts = operation['x-products'].filter((product) => includedXProducts.indexOf(product) !== -1);
+        if(requiredProducts.length === 0) {
           // No required product included, excluding operation
           delete definition[method];
 
           return;
-        } else {
-          // Remove system information from the operation
-          delete operation['x-products'];
         }
+
+        // Remove system information from the operation
+        delete operation['x-products'];
       }
 
       const requiredTags = operation.tags.filter((tagName) => tagsNamesToInclude.indexOf(tagName) !== -1)
