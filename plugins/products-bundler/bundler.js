@@ -72,7 +72,7 @@ function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods, includedX
   if (!paths) {
     return {};
   }
-  const newPaths = {};
+  const newPathsEntries = [];
   for (const [path, definitionRef] of Object.entries(paths)) {
     let hasAtLeastOneOperation = false;
     const definition = ctx.resolve(definitionRef).node;
@@ -120,11 +120,11 @@ function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods, includedX
     });
 
     if (hasAtLeastOneOperation) {
-      newPaths[path] = definition;
+      newPathsEntries.push([path, definition]);
     }
   }
 
-  return newPaths;
+  return Object.fromEntries(newPathsEntries);
 }
 
 function getNewInfo(info, productMapping) {
