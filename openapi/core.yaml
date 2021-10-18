@@ -21,11 +21,6 @@ servers:
   - url: 'https://api.rebilly.com'
     description: Live Server.
 tags:
-  - name: 3D Secure
-    description: |
-      3D Secure is a way to authenticate and protect transactions.  Typically,
-      it's only possible to protect the initial transaction in an order
-      with 3D Secure.
   - name: AML
     description: |
       AML, also known as Anti-Money-Laundering is an endpoint that searches multiple
@@ -33,11 +28,6 @@ tags:
       purposes. Used during some transaction processing and on Contact creation, it helps
       determine whether someone is blocklisted or has political or economic sanctions against
       them.
-  - name: Bank Accounts
-    description: |
-      Bank Accounts are a type of payment instrument used to collect
-      ACH (echeck) payments, similar to how a payment
-      card would be used to for a credit card payment.
   - name: Blocklists
     description: |
       Your blocklists contains values of customerIds, email addresses,
@@ -102,21 +92,6 @@ tags:
   - name: Payment Instruments
     description: >
       The Payment Instrument allows you to accept a variety of payment methods through a single API.
-  - name: Payment Cards
-    description: >
-      Payment cards are a type of payment instrument used for credit and debit
-      card
-
-      sales.  Rebilly securely vaults the full payment card number, and can pass
-      it
-
-      onward securely to any gateway account to transact business.
-  - name: PayPal Accounts
-    description: >
-      PayPal Accounts are used for paying with PayPal.  We can generate a BAID
-      (billing
-
-      agreement id) which will allow for recurring billing.
   - name: Payment Tokens
     description: >
       Payment tokens are used to reduce the scope of PCI DSS compliance.  A
@@ -158,7 +133,7 @@ tags:
       A product determines how what you sell appears on invoices and receipts.
       The pricing for products is set in Plans.  One product can have many
       plans.
-  - name: Reports
+  - name: Reports API
     description: >
       The Rebilly Reporting API is currently experimental. You may see
 
@@ -180,14 +155,10 @@ tags:
   - name: Tags
     description: |
       Tag customers to better organize your data.
-  - name: Taxes
-    description: |
-      You can map a product to a tax category.  The tax category is used by
-      tax providers to calculate taxes for invoices.
   - name: Transactions
     description: |
       Get and refund transactions.
-  - name: Users
+  - name: Users API
     description: >
       The Rebilly User API is primarily for our GUI apps.  You may see
 
@@ -210,23 +181,17 @@ x-tagGroups:
     tags:
       - Customers
       - Customer Authentication
-      - KYC Documents
-      - AML
       - Tags
       - Customers Timeline
   - name: Payment Instruments
     tags:
       - Payment Instruments
       - Payment Tokens
-      - Payment Cards
-      - Bank Accounts
-      - PayPal Accounts
   - name: Payments
     tags:
       - Transactions
-      - 3D Secure
       - Disputes
-      - Blocklists
+      - Fees
   - name: Orders & Invoices
     tags:
       - Orders
@@ -236,22 +201,22 @@ x-tagGroups:
       - Coupons
       - Shipping Zones
       - Taxes
+  - name: Risk
+    tags:
+      - Blocklists
+      - KYC Documents
+      - AML
   - name: Misc
     tags:
       - Custom Fields
       - Files
-      - Reports
       - Search
       - Users
-      - Fees
+      - Reports
 security:
   - SecretApiKey: []
   - JWT: []
 paths:
-  /3dsecure:
-    $ref: ./paths/3dsecure.yaml
-  '/3dsecure/{id}':
-    $ref: './paths/3dsecure@{id}.yaml'
   /aml:
     $ref: './paths/aml.yaml'
   /attachments:
@@ -266,12 +231,6 @@ paths:
     $ref: './paths/authentication-tokens@{token}.yaml'
   '/authentication-tokens/{token}/exchange':
     $ref: './paths/authentication-tokens@{token}@exchange.yaml'
-  /bank-accounts:
-    $ref: ./paths/bank-accounts.yaml
-  '/bank-accounts/{id}':
-    $ref: './paths/bank-accounts@{id}.yaml'
-  '/bank-accounts/{id}/deactivation':
-    $ref: './paths/bank-accounts@{id}@deactivation.yaml'
   /blocklists:
     $ref: ./paths/blocklists.yaml
   '/blocklists/{id}':
@@ -330,6 +289,8 @@ paths:
     $ref: './paths/invoices@{id}.yaml'
   '/invoices/{id}/items':
     $ref: './paths/invoices@{id}@items.yaml'
+  '/invoices/{id}/items/{itemId}':
+    $ref: './paths/invoices@{id}@items@{itemId}.yaml'
   '/invoices/{id}/issue':
     $ref: './paths/invoices@{id}@issue.yaml'
   '/invoices/{id}/abandon':
@@ -370,18 +331,6 @@ paths:
     $ref: ./paths/password-tokens.yaml
   '/password-tokens/{id}':
     $ref: './paths/password-tokens@{id}.yaml'
-  /payment-cards:
-    $ref: ./paths/payment-cards.yaml
-  '/payment-cards/{id}':
-    $ref: './paths/payment-cards@{id}.yaml'
-  '/payment-cards/{id}/deactivation':
-    $ref: './paths/payment-cards@{id}@deactivation.yaml'
-  /paypal-accounts:
-    $ref: ./paths/paypal-accounts.yaml
-  '/paypal-accounts/{id}':
-    $ref: './paths/paypal-accounts@{id}.yaml'
-  '/paypal-accounts/{id}/deactivation':
-    $ref: './paths/paypal-accounts@{id}@deactivation.yaml'
   '/payment-instruments':
     $ref: './paths/payment-instruments.yaml'
   '/payment-instruments/{id}':
@@ -483,15 +432,27 @@ x-webhooks:
   customer-one-time-password-requested:
     post:
       $ref: ./webhooks/customer-one-time-password-requested.yaml
+  customer-redirected-offsite:
+    post:
+      $ref: ./webhooks/customer-redirected-offsite.yaml
+  customer-returned:
+    post:
+      $ref: ./webhooks/customer-returned.yaml
   customer-updated:
     post:
       $ref: ./webhooks/customer-updated.yaml
   dispute-created:
     post:
       $ref: ./webhooks/dispute-created.yaml
+  dispute-modified:
+    post:
+      $ref: ./webhooks/dispute-modified.yaml
   experian-check-performed:
     post:
       $ref: ./webhooks/experian-check-performed.yaml
+  invoice-tax-calculation-failed:
+    post:
+      $ref: ./webhooks/invoice-tax-calculation-failed.yaml
   gateway-account-downtime-ended:
     post:
       $ref: ./webhooks/gateway-account-downtime-ended.yaml
@@ -519,6 +480,15 @@ x-webhooks:
   invoice-paid:
     post:
       $ref: ./webhooks/invoice-paid.yaml
+  invoice-partially-paid:
+    post:
+      $ref: ./webhooks/invoice-partially-paid.yaml
+  invoice-refunded:
+    post:
+      $ref: ./webhooks/invoice-refunded.yaml
+  invoice-partially-refunded:
+    post:
+      $ref: ./webhooks/invoice-partially-refunded.yaml
   invoice-past-due:
     post:
       $ref: ./webhooks/invoice-past-due.yaml

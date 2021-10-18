@@ -21,16 +21,6 @@ servers:
   - url: 'https://api.rebilly.com'
     description: Live Server.
 tags:
-  - name: 3D Secure
-    description: |
-      3D Secure is a way to authenticate and protect transactions.  Typically,
-      it's only possible to protect the initial transaction in an order
-      with 3D Secure.
-  - name: Bank Accounts
-    description: |
-      Bank Accounts are a type of payment instrument used to collect
-      ACH (echeck) payments, similar to how a payment
-      card would be used to for a credit card payment.
   - name: Blocklists
     description: |
       Your blocklists contains values of customerIds, email addresses,
@@ -95,21 +85,6 @@ tags:
   - name: Payment Instruments
     description: >
       The Payment Instrument allows you to accept a variety of payment methods through a single API.
-  - name: Payment Cards
-    description: >
-      Payment cards are a type of payment instrument used for credit and debit
-      card
-
-      sales.  Rebilly securely vaults the full payment card number, and can pass
-      it
-
-      onward securely to any gateway account to transact business.
-  - name: PayPal Accounts
-    description: >
-      PayPal Accounts are used for paying with PayPal.  We can generate a BAID
-      (billing
-
-      agreement id) which will allow for recurring billing.
   - name: Payment Tokens
     description: >
       Payment tokens are used to reduce the scope of PCI DSS compliance.  A
@@ -170,10 +145,6 @@ tags:
       optionally at the appropriate scheduled intervals.
       A subscription order may also determine if the payment
       is collected automatically (with autopay set true).
-  - name: Taxes
-    description: |
-      You can map a product to a tax category.  The tax category is used by
-      tax providers to calculate taxes for invoices.
   - name: Transactions
     description: |
       Get and refund transactions.
@@ -206,9 +177,6 @@ tags:
   - name: Data Exports
     description: |
       Data exports.
-  - name: Activity Feed
-    description: |
-      Activity Feed is holding various events that occurred in the app.
   - name: Websites
   - name: Webhooks
   - name: Status
@@ -231,7 +199,9 @@ tags:
   - name: Billing Portals
   - name: Checkout Forms
   - name: API Keys
+  - name: Plaid credentials
   - name: Experian credentials
+  - name: TaxJar credentials
   - name: Metadata
 security:
   - SecretApiKey: []
@@ -247,10 +217,6 @@ components:
       $ref: components/securitySchemes/SecretApiKey.yaml
 
 paths:
-  /3dsecure:
-    $ref: ./paths/3dsecure.yaml
-  '/3dsecure/{id}':
-    $ref: './paths/3dsecure@{id}.yaml'
   /attachments:
     $ref: ./paths/attachments.yaml
   '/attachments/{id}':
@@ -263,12 +229,6 @@ paths:
     $ref: './paths/authentication-tokens@{token}.yaml'
   '/authentication-tokens/{token}/exchange':
     $ref: './paths/authentication-tokens@{token}@exchange.yaml'
-  /bank-accounts:
-    $ref: ./paths/bank-accounts.yaml
-  '/bank-accounts/{id}':
-    $ref: './paths/bank-accounts@{id}.yaml'
-  '/bank-accounts/{id}/deactivation':
-    $ref: './paths/bank-accounts@{id}@deactivation.yaml'
   /blocklists:
     $ref: ./paths/blocklists.yaml
   '/blocklists/{id}':
@@ -333,6 +293,8 @@ paths:
     $ref: './paths/invoices@{id}@issue.yaml'
   '/invoices/{id}/items':
     $ref: './paths/invoices@{id}@items.yaml'
+  '/invoices/{id}/items/{itemId}':
+    $ref: './paths/invoices@{id}@items@{itemId}.yaml'
   '/invoices/{id}/recalculate':
     $ref: './paths/invoices@{id}@recalculate.yaml'
   '/invoices/{id}/reissue':
@@ -367,12 +329,6 @@ paths:
     $ref: './paths/payment-instruments@{id}.yaml'
   '/payment-instruments/{id}/deactivation':
     $ref: './paths/payment-instruments@{id}@deactivation.yaml'
-  /payment-cards:
-    $ref: ./paths/payment-cards.yaml
-  '/payment-cards/{id}':
-    $ref: './paths/payment-cards@{id}.yaml'
-  '/payment-cards/{id}/deactivation':
-    $ref: './paths/payment-cards@{id}@deactivation.yaml'
   /payment-methods:
     $ref: ./paths/payment-methods.yaml
   /payment-methods/{apiName}:
@@ -381,12 +337,6 @@ paths:
     $ref: ./paths/payment-gateways-metadata.yaml
   /payment-gateways-metadata/{apiName}:
     $ref: './paths/payment-gateways-metadata@{apiName}.yaml'
-  /paypal-accounts:
-    $ref: ./paths/paypal-accounts.yaml
-  '/paypal-accounts/{id}':
-    $ref: './paths/paypal-accounts@{id}.yaml'
-  '/paypal-accounts/{id}/deactivation':
-    $ref: './paths/paypal-accounts@{id}@deactivation.yaml'
   /permissions-emulation:
     $ref: ./paths/permissions-emulation.yaml
   /plans:
@@ -511,6 +461,10 @@ paths:
     $ref: ./paths/credential-hashes@experian.yaml
   '/credential-hashes/experian/{hash}':
     $ref: './paths/credential-hashes@experian@{hash}.yaml'
+  /credential-hashes/taxjar:
+    $ref: ./paths/credential-hashes@taxjar.yaml
+  '/credential-hashes/taxjar/{hash}':
+    $ref: './paths/credential-hashes@taxjar@{hash}.yaml'
   '/email-delivery-setting-verifications/{token}':
     $ref: './paths/email-delivery-setting-verifications@{token}.yaml'
   /email-delivery-settings:

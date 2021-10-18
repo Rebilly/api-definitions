@@ -14,30 +14,32 @@ info:
     url: 'https://rebilly-core.redoc.ly/rb_apiLogo.svg'
     backgroundColor: '#0033A0'
   description: |
+    # Warning
+
+    The Rebilly Storefront API is experimental and subject to change.
+
     # Introduction
+
     The Rebilly Storefront API is built on HTTP.  Our API is RESTful.  It has predictable
     resource URLs.  It returns HTTP response codes to indicate errors.  It also
     accepts and returns JSON in the HTTP body. You can use your favorite
     HTTP/REST library for your programming language to use Rebilly's Storefront API.
 tags:
-  - name: Account management
   - name: Account
   - name: Authentication
   - name: Billing Portals
   - name: Checkout Forms
   - name: Email verification
   - name: Password reset
-  - name: KYC Document
-  - name: Payments
-  - name: Payment Instrument
-  - name: Purchase
-  - name: Transaction
-  - name: Order
-  - name: Invoice
-  - name: Product
-  - name: Plan
-  - name: System
-  - name: Website
+  - name: KYC Documents
+  - name: Payment Instruments
+  - name: Purchases
+  - name: Transactions
+  - name: Orders
+  - name: Invoices
+  - name: Products
+  - name: Plans
+  - name: Websites
 x-tagGroups:
   - name: Account management
     tags:
@@ -46,22 +48,22 @@ x-tagGroups:
       - Billing Portals
       - Email verification
       - Password reset
-      - KYC Document
+      - KYC Documents
   - name: Payments
     tags:
-      - Payment Instrument
-      - Transaction
+      - Payment Instruments
+      - Transactionss
   - name: Orders
     tags:
       - Checkout Forms
-      - Purchase
-      - Order
-      - Invoice
-      - Product
-      - Plan
+      - Purchases
+      - Orders
+      - Invoices
+      - Products
+      - Plans
   - name: System
     tags:
-      - Website
+      - Websites
 servers:
   - url: 'https://api-sandbox.rebilly.com/storefront'
     description: Sandbox Server.
@@ -118,6 +120,8 @@ paths:
     $ref: paths/storefront/payment-instruments@{id}.yaml
   '/payment-instruments/{id}/deactivation':
     $ref: paths/storefront/payment-instruments@{id}@deactivation.yaml
+  '/payment-instruments/{id}/setup':
+    $ref: paths/storefront/payment-instruments@{id}@setup.yaml
   '/plans':
     $ref: paths/storefront/plans.yaml
   '/plans/{id}':

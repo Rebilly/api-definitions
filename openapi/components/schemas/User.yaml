@@ -34,6 +34,11 @@ properties:
     description: The user's permissions. See the format in example. Use wildcard `*` for full access.
     allOf:
       - $ref: ./AclPermissions.yaml
+  computedPermissions:
+    description: The user's full permissions including roles. Use these permissions for emulation.
+    readOnly: true
+    allOf:
+      - $ref: ./AclPermissions.yaml
   createdTime:
     description: The user created time.
     allOf:
@@ -82,6 +87,13 @@ properties:
       User preferences like timezone, language and many more. This is an object
       with custom properties.
     type: object
+  roleIds:
+    type: array
+    description: The user's roles identifiers.
+    items:
+      type: string
+  allowedIps:
+    $ref: ./AllowedIps.yaml
   _links:
     type: array
     description: The links related to resource.

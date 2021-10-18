@@ -20,6 +20,10 @@ properties:
     readOnly: true
     allOf:
       - $ref: StorefrontTransaction.yaml
+  token:
+    description: The session's token used for authentication. It would allow to visit created order, invoice and transaction.
+    type: string
+    readOnly: true
   websiteId:
     description: The website identifier string.
     writeOnly: true
@@ -67,5 +71,25 @@ properties:
   password:
     type: string
     description: If set would be used to create customer account.
+    writeOnly: true
+    nullable: true
+  redirectUrl:
+    type: string
+    description: >-
+      The URL to redirect the end-user when an offsite transaction is completed.
+      If `website.url` is `https://example.com`, then the `redirectUrl` could be set to any of these:
+
+      - `https://example.com`
+
+      - `https://example.com/some/path`
+
+      - `https://example.com/some/path?and=query`
+
+      - `https://example.com/some/path?and=query#and-fragment`
+
+
+      Defaults to the website's configured URL. You may use `{id}` or `{result}` as placeholders in the URL and we will
+      replace them with the transaction's id and result accordingly.
+    format: url
     writeOnly: true
     nullable: true

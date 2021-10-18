@@ -13,17 +13,12 @@ get:
   responses:
     '200':
       description: A fee was retrieved successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
             $ref: ../../components/schemas/Fees/Fee.yaml
+          examples:
+            $ref: ../../components/examples/fee-response.yaml  
     '401':
       $ref: ../../components/responses/Unauthorized.yaml
     '403':
@@ -45,33 +40,25 @@ put:
       application/json:
         schema:
           $ref: ../../components/schemas/Fees/Fee.yaml
+        examples:
+          $ref: ../../components/examples/fee-request.yaml
   responses:
     '200':
       description: Fee entry was updated successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
             $ref: ../../components/schemas/Fees/Fee.yaml
+          examples:
+            $ref: ../../components/examples/fee-response.yaml
     '201':
       description: Fee entry was created successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
             $ref: ../../components/schemas/Fees/Fee.yaml
+          examples:
+            $ref: ../../components/examples/fee-response.yaml  
     '401':
       $ref: ../../components/responses/Unauthorized.yaml
     '403':
@@ -93,20 +80,17 @@ patch:
       application/json:
         schema:
           $ref: ../../components/schemas/Fees/FeePatch.yaml
+        examples:
+          $ref: ../../components/examples/fee-request.yaml
   responses:
     '200':
       description: Fee entry was patched successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
             $ref: ../../components/schemas/Fees/Fee.yaml
+          examples:
+            $ref: ../../components/examples/fee-response.yaml
     '401':
       $ref: ../../components/responses/Unauthorized.yaml
     '403':

@@ -4,11 +4,13 @@ apiDefinitions:
   reports: openapi/reports.yaml
   storefront: openapi/storefront.yaml
   combined: openapi/combined.yaml
+  openapi: openapi/openapi.yaml
 lint:
   extends:
     - recommended
   plugins:
     - ./plugins/custom-rules.js
+    - ./plugins/products-bundler/bundler.js
   rules:
     tag-description: off
     no-server-trailing-slash: error
@@ -25,8 +27,10 @@ lint:
     no-ambiguous-paths: error
     custom-rules/description-punctuation: error
     custom-rules/has-sdk-operation-name: error
+    custom-rules/no-unused-tags: warn
+  decorators:
+    products-bundler/bundle: error
 referenceDocs:
-  showConsole: true
   pagination: section
   theme:
     logo:
@@ -57,7 +61,6 @@ referenceDocs:
     links:
       color: '#6CC496'
   htmlTemplate: ./web/index.html
-  ctrlFHijack: true
   generateCodeSamples:
     languages:
       - lang: curl
@@ -65,3 +68,8 @@ referenceDocs:
       - lang: C#
       - lang: Python
       - lang: Java
+      - lang: Go
+      - lang: Ruby
+  schemaExpansionLevel: 2
+  maxDisplayedEnumValues: 10
+  showConsole: true

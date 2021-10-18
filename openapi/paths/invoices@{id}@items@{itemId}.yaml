@@ -1,0 +1,90 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+  - name: itemId
+    in: path
+    description: The invoice item ID.
+    required: true
+    schema:
+      type: string
+get:
+  tags:
+    - Invoices
+  summary: Get an invoice item
+  operationId: GetInvoiceItem
+  x-sdk-operation-name: getInvoiceItem
+  description: |
+    Get an invoice item.
+  responses:
+    '200':
+      description: InvoiceItem was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Invoices/InvoiceItem.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/invoices@{id}@items@{itemId}/get.php'
+    - lang: JavaScript
+      source:
+        $ref: '../code_samples/JavaScript/invoices@{id}@items@{itemId}/get.js'
+put:
+  tags:
+    - Invoices
+  summary: Update an invoice item
+  operationId: PutInvoiceItem
+  x-sdk-operation-name: updateInvoiceItem
+  description: |
+    Update an invoice item.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Invoices/InvoiceItem.yaml
+    description: InvoiceItem resource.
+    required: true
+  responses:
+    '200':
+      description: InvoiceItem was updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Invoices/InvoiceItem.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/invoices@{id}@items@{itemId}/put.php'
+    - lang: JavaScript
+      source:
+        $ref: '../code_samples/JavaScript/invoices@{id}@items@{itemId}/put.js'
+delete:
+  tags:
+    - Invoices
+  summary: Delete an invoice item
+  operationId: DeleteInvoiceItem
+  x-sdk-operation-name: deleteInvoiceItem
+  description: |
+    Delete an invoice item.
+  responses:
+    '204':
+      description: Invoice item was deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/invoices@{id}@items@{itemId}/delete.php'
+    - lang: JavaScript
+      source:
+        $ref: '../code_samples/JavaScript/invoices@{id}@items@{itemId}/delete.js'
