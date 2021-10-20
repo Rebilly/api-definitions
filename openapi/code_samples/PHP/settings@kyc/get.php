@@ -1,0 +1,1 @@
+$kycSettings = $client->kycSettings()->load();

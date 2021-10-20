@@ -1,0 +1,45 @@
+get:
+  tags:
+    - KYC settings
+  summary: Retrieve the organization's KYC settings
+  operationId: GetKycSettings
+  x-sdk-operation-name: GetKycSettings
+  responses:
+    '200':
+      description: A list of Plaid credentials was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KycSettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+patch:
+  tags:
+    - KYC settings
+  summary: Update the organization's KYC settings
+  operationId: PutKycSettings
+  x-sdk-operation-name: UpdateKycSettings
+  description: |
+    Update the organization's KYC settings
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/KycSettings.yaml
+    description: KYC settings resource.
+    required: true
+  responses:
+    '201':
+      description: KYC settings were updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KycSettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
