@@ -42,7 +42,7 @@ const decorators = {
             });
 
             // Override original definitions with the requested product settings
-            definitionRoot['info'] = getNewInfo(definitionRoot['info'], productMapping);
+            definitionRoot['info'] = getNewInfo(definitionRoot['info'], productMapping, ctx.resolve);
             definitionRoot['tags'] = getNewTags(definitionRoot, tagsNamesToInclude);
             definitionRoot['x-tagGroups'] = productMapping['x-tagGroups'];
             definitionRoot['paths'] = getNewPaths(definitionRoot['paths'], ctx, tagsNamesToInclude, availableMethods, includedXProducts);
@@ -127,12 +127,18 @@ function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods, includedX
   return Object.fromEntries(newPathsEntries);
 }
 
-function getNewInfo(info, productMapping) {
+function getNewInfo(info, productMapping, resolve) {
   if ('info' in productMapping) {
     for (const [property, value] of Object.entries(productMapping.info)) {
       info[property] = value;
     }
   }
+
+  const productDescriptionAddon = 'descriptionAddon' in productMapping ? productMapping['descriptionAddon'] : '';
+  info.description = resolve(info.description).node.replace(
+    '[comment]: <> (x-product-description-placeholder)',
+    productDescriptionAddon
+  );
 
   return info;
 }
