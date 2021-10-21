@@ -4,11 +4,13 @@ apiDefinitions:
   reports: openapi/reports.yaml
   storefront: openapi/storefront.yaml
   combined: openapi/combined.yaml
+  openapi: openapi/openapi.yaml
 lint:
   extends:
     - recommended
   plugins:
     - ./plugins/custom-rules.js
+    - ./plugins/products-bundler/bundler.js
   rules:
     tag-description: off
     no-server-trailing-slash: error
@@ -26,6 +28,8 @@ lint:
     custom-rules/description-punctuation: error
     custom-rules/has-sdk-operation-name: error
     custom-rules/no-unused-tags: warn
+  decorators:
+    products-bundler/bundle: error
 referenceDocs:
   pagination: section
   theme:
