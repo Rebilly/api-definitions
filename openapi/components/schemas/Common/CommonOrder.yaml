@@ -21,20 +21,27 @@ properties:
     type: string
     readOnly: true
     enum:
+      - draft
       - unpaid
       - past-due
-      - delinquent
+      - abandoned
       - paid
       - voided
       - refunded
       - disputed
-      - voided
+      - partially-refunded
+      - partially-paid
   websiteId:
     description: The website identifier string.
     x-sortable: true
     x-basic: true
     allOf:
       - $ref: ../ResourceId.yaml
+  currency:
+    description: The order's currency.
+    readOnly: true
+    allOf:
+      - $ref: ../../schemas/CurrencyCode.yaml
   initialInvoiceId:
     description: The initial invoice identifier string.
     readOnly: true
