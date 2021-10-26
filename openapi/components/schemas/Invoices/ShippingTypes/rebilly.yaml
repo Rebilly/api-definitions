@@ -3,6 +3,11 @@ allOf:
   - $ref: ../InvoiceShipping.yaml
   - type: object
     properties:
+      shippingRateId:
+        description: The shipping rate ID. If unset – cheapest shipping rate among applicable would be chosen.
+        nullable: true
+        allOf:
+          - $ref: ../../ResourceId.yaml
       amount:
         type: integer
         readOnly: true
