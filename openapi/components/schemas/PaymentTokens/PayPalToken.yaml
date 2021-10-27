@@ -1,0 +1,26 @@
+type: object
+title: PayPal Token
+allOf:
+  - $ref: ../Common/CommonPaymentToken.yaml
+required:
+  - method
+properties:
+  method:
+    description: The token payment method.
+    type: string
+    enum: [paypal]
+  paymentInstrument:
+    description: The paypal instrument details required for express checkout.
+    type: object
+    properties:
+      billingAgreementToken:
+        description: The PayPal billing agreement token.
+        type: string
+        writeOnly: true
+      merchantId:
+        description: The PayPal merchant ID.
+        type: string
+  billingAddress:
+    description: The billing address object.
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
