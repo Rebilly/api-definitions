@@ -6,20 +6,13 @@ on:
       - main
 
 jobs:
-  trigger-recomm-update:
-    name: Trigger Recomm update
+  generate-trigger-reason:
+    name: Generate the trigger reason
     runs-on: ubuntu-latest
+    # Map a step output to a job output
+    outputs:
+      reason: ${{ steps.reason.outputs.value }}
     steps:
-
-      - name: Wait for Redocly to publish combined bundle
-        uses: Sibz/await-status-action@v1.0.1
-        with:
-          authToken: ${{ secrets.GITHUB_TOKEN }}
-          # Which status checks to wait for. We only care about the combined bundle.
-          contexts: 'Redocly Registry (combined/combined) bundle'
-          # How long to wait for the Redocly status to be posted, in seconds 
-          timeout: 600
-          notPresentTimeout: 600
 
       # The commit message are multiline. Use a regex to split out
       # just the first line, and the PR number into regex groups.
@@ -38,6 +31,23 @@ jobs:
         id: reason
         run: echo '::set-output name=value::${{steps.parse-commit.outputs.group1}} Rebilly/api-definitions${{steps.parse-commit.outputs.group2}}'
 
+
+  trigger-recomm-update:
+    name: Trigger Recomm update
+    runs-on: ubuntu-latest
+    needs: generate-trigger-reason
+    steps:
+
+      - name: Wait for Redocly to publish combined bundle
+        uses: Sibz/await-status-action@v1.0.1
+        with:
+          authToken: ${{ secrets.GITHUB_TOKEN }}
+          # Which status checks to wait for. We only care about the combined bundle.
+          contexts: 'Redocly Registry (combined/combined) bundle'
+          # How long to wait for the Redocly status to be posted, in seconds
+          timeout: 600
+          notPresentTimeout: 600
+
       - name: Trigger update workflow
         uses: benc-uk/workflow-dispatch@v1
         with:
@@ -45,4 +55,19 @@ jobs:
           ref: main
           repo: Rebilly/frontend-recomm
           token: ${{ secrets.MACHINE_USER_PAT }}
-          inputs: '{ "trigger-reason": "${{steps.reason.outputs.value}}" }'
+          inputs: '{ "trigger-reason": "${{needs.generate-trigger-reason.outputs.reason}}" }'
+
+  trigger-rebilly-js-sdk-update:
+    name: Trigger JS SDK update
+    runs-on: ubuntu-latest
+    needs: generate-trigger-reason
+    steps:
+
+      - name: Trigger update workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Updates SDK resources based on api-definitions
+          ref: main
+          repo: Rebilly/rebilly-js-sdk
+          token: ${{ secrets.MACHINE_USER_PAT }}
+          inputs: '{ "trigger-reason": "${{needs.generate-trigger-reason.outputs.reason}}" }'
