@@ -1,0 +1,35 @@
+post:
+  tags:
+    - Gateway Accounts
+  summary: Onboard Apple Pay under Rebilly by registering a domain.
+  operationId: PostDigitalWalletOnboardingApplePay
+  x-sdk-operation-name: create
+  description: |
+    First you will need to download Rebilly's Apple Pay merchant domain verification file and
+    host it on your domain at https://{DOMAIN}/.well-known/apple-developer-merchantid-domain-association.
+    Then use this endpoint to register the domain, or check if it is already registered.
+    Once the domain is registered you will be able to use Apple Pay with FramePay.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/DigitalWalletOnboardingApplePay.yaml
+    description: Apple pay domain registration onboarding request.
+    required: true
+  security:
+    - PublishableApiKey: []
+    - SecretApiKey: []
+    - JWT: []
+  responses:
+    '201':
+      description: Apple Pay onboarding was successful.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DigitalWalletOnboardingApplePay.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
