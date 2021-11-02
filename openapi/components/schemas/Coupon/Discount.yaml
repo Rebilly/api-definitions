@@ -16,9 +16,11 @@ properties:
       - percent
   appliesTo:
     description: >-
-      To what the discount applies.
-      The coupon can not exceed this limit (eg. items cannot exceed total).
+      In what context the discount applies. This represents an upper bound.
+      The discount can not exceed this upper bound (eg. `items` cannot exceed `total`).
+      `shipping < items < total`
     type: string
+    default: total
     x-label: Applies To
     x-sortable: true
     x-basic: true
