@@ -4,7 +4,6 @@ discriminator:
   mapping:
     fixed: ./Discounts/fixed.yaml
     percent: ./Discounts/percent.yaml
-    shipping: ./Discounts/shipping.yaml
 properties:
   type:
     description: Discount type.
@@ -15,4 +14,15 @@ properties:
     enum:
       - fixed
       - percent
+  appliesTo:
+    description: >-
+      To what the discount applies.
+      The coupon can not exceed this limit (eg. items cannot exceed total).
+    type: string
+    x-label: Applies To
+    x-sortable: true
+    x-basic: true
+    enum:
+      - items
       - shipping
+      - total
