@@ -3,10 +3,12 @@ required:
   - domain
 properties:
   domain:
+    description: The fully qualified domain name.
     type: string
-    minLength: 5
-    maxLength: 100
+    maxLength: 255
+    pattern: '^[@~\-\.\w]+$'
   isVerified:
+    description: True if the domain was verified by Rebilly.
     type: boolean
     readOnly: true
   createdTime:
