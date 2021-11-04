@@ -1,6 +1,13 @@
 parameters:
+  - name: domain
+    in: path
+    description: The resource domain.
+    required: true
+    schema:
+      type: string
+      maxLength: 100
+      pattern: '^[@~\-\.\w]+$'
   - $ref: ../components/parameters/organizationId.yaml
-  - $ref: ../components/parameters/resourceId.yaml
 get:
   tags:
     - Custom domains
