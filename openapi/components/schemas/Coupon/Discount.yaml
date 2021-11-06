@@ -14,17 +14,16 @@ properties:
     enum:
       - fixed
       - percent
-  appliesTo:
+  context:
     description: >-
       The context in which the discount applies. This represents an upper bound.
-      The discount can not exceed this upper bound (eg. `items` cannot exceed `total`).
-      `shipping < items < total`.
+      `items` means a discount on things to be purchased.
+      `shipping` means a discount on shipping.
     type: string
-    default: total
+    default: items
     x-label: Applies To
     x-sortable: true
     x-basic: true
     enum:
       - items
       - shipping
-      - total
