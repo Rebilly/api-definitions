@@ -29,12 +29,9 @@ allOf:
         type: object
         description: eMerchantPay settings object.
         properties:
-          platform:
-            type: string
-            description: eMerchantPay platform to process payment.
-            enum:
-              - IPG
-              - Genesis
-            default: IPG
+          useGenesisPlatform:
+            type: boolean
+            description: Use Genesis platform on eMerchantPay.
+            default: false
       threeDSecureServer:
         $ref: ../ThreeDSecureServers/EMerchantPay3dsServers/eMerchantPay3dsServers.yaml
