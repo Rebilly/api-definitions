@@ -15,15 +15,5 @@ properties:
       - fixed
       - percent
   context:
-    description: >-
-      The context in which the discount applies.
-      `items` means a discount on things to be purchased.
-      `shipping` means a discount on shipping.
-    type: string
-    default: items
-    x-label: Context
-    x-sortable: true
-    x-basic: true
-    enum:
-      - items
-      - shipping
+    allOf:
+      - $ref: ./DiscountContext.yaml
