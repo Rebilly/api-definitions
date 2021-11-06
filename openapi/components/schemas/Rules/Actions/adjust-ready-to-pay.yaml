@@ -26,11 +26,10 @@ allOf:
                   enum:
                     - payment-card
                 feature:
-                  type: string
                   nullable: true
-                  enum:
-                    - Google Pay
-                    - Apple Pay
+                  oneOf:
+                    - $ref: ../../ReadyToPay/Features/ApplePayFeatureName.yaml
+                    - $ref: ../../ReadyToPay/Features/GooglePayFeatureName.yaml
             - type: object
               title: ACH
               properties:
@@ -39,10 +38,9 @@ allOf:
                   enum:
                     - ach
                 feature:
-                  type: string
                   nullable: true
-                  enum:
-                    - Plaid
+                  oneOf:
+                    - $ref: ../../ReadyToPay/Features/PlaidFeatureName.yaml
             - type: object
               title: Generic
               properties:
