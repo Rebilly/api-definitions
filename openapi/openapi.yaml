@@ -322,6 +322,7 @@ tags:
   - name: Experian credentials
   - name: TaxJar credentials
   - name: Metadata
+  - name: Custom domains
   - name: Histograms
     description: |
       Histograms are for particular kinds of reports with cohorts and periods.
@@ -429,6 +430,7 @@ x-tagGroups:
       - Experian credentials
       - TaxJar credentials
       - Metadata
+      - Custom domains
   - name: Account management
     tags:
       - Account
@@ -717,6 +719,10 @@ paths:
     $ref: ./paths/credential-hashes@taxjar.yaml
   '/credential-hashes/taxjar/{hash}':
     $ref: './paths/credential-hashes@taxjar@{hash}.yaml'
+  /custom-domains:
+    $ref: ./paths/custom-domains.yaml
+  '/custom-domains/{domain}':
+    $ref: './paths/custom-domains@{domain}.yaml'
   '/email-delivery-setting-verifications/{token}':
     $ref: './paths/email-delivery-setting-verifications@{token}.yaml'
   /email-delivery-settings:
