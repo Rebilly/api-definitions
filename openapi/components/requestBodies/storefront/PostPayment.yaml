@@ -26,4 +26,48 @@ content:
           oneOf:
             - $ref: ../../schemas/Storefront/PaymentInstructions/PaymentInstructionsToken.yaml
             - $ref: ../../schemas/Storefront/PaymentInstructions/PaymentInstructionsInstrument.yaml
+        - type: object
+          title: For amount+currency
+          required:
+            - amount
+            - currency
+            - websiteId
+          properties:
+            websiteId:
+              description: The website identifier string.
+              allOf:
+                - $ref: ../../schemas/ResourceId.yaml
+            currency:
+                $ref: ../../schemas/CurrencyCode.yaml
+            amount:
+                description: The transaction amount.
+                type: number
+                format: double
+                default: 0
+                example: 97.97
+            riskMetadata:
+              $ref: ../../schemas/RiskMetadata.yaml
+            redirectUrl:
+              type: string
+              description: >-
+                The URL to redirect the end-user when an offsite transaction is completed.
+                If `website.url` is `https://example.com`, then the `redirectUrl` could be set to any of these:
+
+                - `https://example.com`
+
+                - `https://example.com/some/path`
+
+                - `https://example.com/some/path?and=query`
+
+                - `https://example.com/some/path?and=query#and-fragment`
+
+
+                Defaults to the website's configured URL. You may use `{id}` or `{result}` as placeholders in the URL and we will
+                replace them with the transaction's id and result accordingly.
+              format: url
+              writeOnly: true
+              nullable: true
+          oneOf:
+            - $ref: ../../schemas/Storefront/PaymentInstructions/PaymentInstructionsToken.yaml
+            - $ref: ../../schemas/Storefront/PaymentInstructions/PaymentInstructionsInstrument.yaml
 required: true
