@@ -57,7 +57,20 @@ tags:
 security:
   - SecretApiKey: []
 servers:
+  - url: 'https://api-sandbox.rebilly.com/organizations/{organizationId}/experimental'
+    description: Sandbox server with organizationId.
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: 'https://api.rebilly.com/organizations/{organizationId}/experimental'
+    description: Live server with organizationId.
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
   - url: 'https://api.rebilly.com/experimental'
+  - url: 'https://api-sandbox.rebilly.com/experimental'
 
 
 components:
