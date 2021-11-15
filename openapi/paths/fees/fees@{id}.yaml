@@ -2,6 +2,11 @@ parameters:
   - $ref: ../../components/parameters/resourceId.yaml
   - $ref: ../../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Payments
+    - Billing
+    - Core
   tags: [Fees]
   summary: Retrieve a fee entry
   description: |
@@ -18,7 +23,7 @@ get:
           schema:
             $ref: ../../components/schemas/Fees/Fee.yaml
           examples:
-            $ref: ../../components/examples/fee-response.yaml  
+            $ref: ../../components/examples/fee-response.yaml
     '401':
       $ref: ../../components/responses/Unauthorized.yaml
     '403':
@@ -26,6 +31,11 @@ get:
     '404':
       $ref: ../../components/responses/NotFound.yaml
 put:
+  x-products:
+    - Full
+    - Payments
+    - Billing
+    - Core
   tags: [Fees]
   summary: Upsert a fee entry
   description: |
@@ -58,7 +68,7 @@ put:
           schema:
             $ref: ../../components/schemas/Fees/Fee.yaml
           examples:
-            $ref: ../../components/examples/fee-response.yaml  
+            $ref: ../../components/examples/fee-response.yaml
     '401':
       $ref: ../../components/responses/Unauthorized.yaml
     '403':
@@ -66,6 +76,11 @@ put:
     '422':
       $ref: ../../components/responses/ValidationError.yaml
 patch:
+  x-products:
+    - Full
+    - Payments
+    - Billing
+    - Core
   tags: [Fees]
   summary: Patch a fee entry
   description: |
