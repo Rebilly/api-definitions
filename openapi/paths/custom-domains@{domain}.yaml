@@ -1,0 +1,48 @@
+parameters:
+  - name: domain
+    in: path
+    description: The resource domain.
+    required: true
+    schema:
+      type: string
+      maxLength: 255
+      pattern: '^[@~\-\.\w]+$'
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Custom domains
+  summary: Retrieve a custom domain
+  operationId: GetCustomDomain
+  x-sdk-operation-name: get
+  description: |
+    Retrieve a custom domain with specified identifier string.
+  responses:
+    '200':
+      description: Custom domain was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CustomDomain.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+delete:
+  tags:
+    - Custom domains
+  summary: Delete a custom domain
+  operationId: DeleteCustomDomain
+  x-sdk-operation-name: delete
+  description: |
+    Delete a custom domain with predefined identifier string.
+  responses:
+    '204':
+      description: Custom domains was deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
