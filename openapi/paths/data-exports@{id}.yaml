@@ -1,10 +1,25 @@
 servers:
+  - url: 'https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}'
+    description: Sandbox server with organizationId.
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
+    description: Live server with organizationId.
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
   - url: 'https://api.rebilly.com/experimental'
   - url: 'https://api-sandbox.rebilly.com/experimental'
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
   - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Reports
   tags:
     - Data Exports
   summary: Retrieve a data export request
@@ -36,6 +51,9 @@ get:
       source:
         $ref: '../code_samples/JavaScript/data-exports@{id}/get.js'
 put:
+  x-products:
+    - Full
+    - Reports
   tags:
     - Data Exports
   summary: Modify a data export
@@ -68,6 +86,9 @@ put:
           schema:
             $ref: ../components/schemas/InvalidError.yaml
 delete:
+  x-products:
+    - Full
+    - Reports
   tags:
     - Data Exports
   summary: Delete a data export

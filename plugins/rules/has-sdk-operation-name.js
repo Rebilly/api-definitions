@@ -6,7 +6,7 @@ function requiredSdkOperationName() {
         if (location.source.absoluteRef.includes('/openapi/webhooks/') || location.pointer.includes('x-webhooks')) return;
 
         //Skip experimental operations validation
-        if (parent.servers && parent.servers[0].url === 'https://api.rebilly.com/experimental') return;
+        if (parent.servers && parent.servers.some(({url}) => url.includes('/experimental'))) return;
 
         if (!operation['x-sdk-operation-name']) {
             report({message: `${operation.operationId} operation is missing required x-sdk-operation-name property`});
