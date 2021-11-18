@@ -4,14 +4,18 @@ const path = require('path');
 
 const availableMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
 
-function getProductMappingToBundle() {
+function getRequestedProduct() {
   if (!('REBILLY_API_PRODUCT' in process.env) || !process.env.REBILLY_API_PRODUCT) {
     return;
   }
 
-  const requestedProduct = process.env.REBILLY_API_PRODUCT;
+  return process.env.REBILLY_API_PRODUCT;
+}
 
-  return yaml.load(fs.readFileSync(path.resolve(__dirname, `mapping/${requestedProduct}.yaml`), 'utf8'));
+function getProductMappingToBundle(requestedProduct) {
+  const filename = `mapping/${requestedProduct.replace(/ /g, '')}.yaml`;
+
+  return yaml.load(fs.readFileSync(path.resolve(__dirname, filename), 'utf8'));
 }
 
 /** @type {import('@redocly/openapi-cli').CustomRulesConfig} */
@@ -21,11 +25,15 @@ const decorators = {
       return {
         DefinitionRoot: {
           leave(definitionRoot, ctx) {
-            const productMapping = getProductMappingToBundle();
-            if (!productMapping) {
+            const requestedProduct = getRequestedProduct();
+            if (!requestedProduct) {
               // Use default bundling settings
               return;
             }
+            const productMapping = getProductMappingToBundle(requestedProduct);
+            const includedXProducts = ('x-products' in productMapping)
+              ? productMapping['x-products']
+              : [requestedProduct]
 
             // Determine tags names participating in a result bundle of a requested product
             let tagsNamesToInclude = [];
@@ -34,11 +42,14 @@ const decorators = {
             });
 
             // Override original definitions with the requested product settings
-            definitionRoot['info'] = getNewInfo(definitionRoot['info'], productMapping);
+            definitionRoot['info'] = getNewInfo(definitionRoot['info'], productMapping, ctx.resolve);
             definitionRoot['tags'] = getNewTags(definitionRoot, tagsNamesToInclude);
             definitionRoot['x-tagGroups'] = productMapping['x-tagGroups'];
-            definitionRoot['paths'] = getNewPaths(definitionRoot['paths'], ctx, tagsNamesToInclude, availableMethods);
-            definitionRoot['x-webhooks'] = getNewPaths(definitionRoot['x-webhooks'], ctx, tagsNamesToInclude, ['post']);
+            definitionRoot['paths'] = getNewPaths(definitionRoot['paths'], ctx, tagsNamesToInclude, availableMethods, includedXProducts);
+            definitionRoot['x-webhooks'] = getNewPaths(definitionRoot['x-webhooks'], ctx, tagsNamesToInclude, ['post'], includedXProducts);
+            if (Object.keys(definitionRoot['x-webhooks']).length === 0) {
+              delete definitionRoot['x-webhooks'];
+            }
             definitionRoot['components'] = getNewComponents(definitionRoot);
           }
         }
@@ -57,11 +68,11 @@ function getNewTags(definitionRoot, tagsNamesToInclude) {
   return newTags;
 }
 
-function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods) {
+function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods, includedXProducts) {
   if (!paths) {
     return {};
   }
-  const newPaths = {};
+  const newPathsEntries = [];
   for (const [path, definitionRef] of Object.entries(paths)) {
     let hasAtLeastOneOperation = false;
     const definition = ctx.resolve(definitionRef).node;
@@ -77,30 +88,57 @@ function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods) {
         return;
       }
 
+      if (includedXProducts && includedXProducts.length) {
+        if (!('x-products' in operation)) {
+          // Operation has no products specified, excluding as products must be defined explicitly
+          delete definition[method];
+
+          return;
+        }
+
+        const requiredProducts = operation['x-products'].filter((product) => includedXProducts.indexOf(product) !== -1);
+        if(requiredProducts.length === 0) {
+          // No required product included, excluding operation
+          delete definition[method];
+
+          return;
+        }
+
+        // Remove system information from the operation
+        delete operation['x-products'];
+      }
+
       const requiredTags = operation.tags.filter((tagName) => tagsNamesToInclude.indexOf(tagName) !== -1)
-      if (requiredTags.length !== 0) {
+      if (requiredTags.length === 0) {
+        // No required tags included, excluding operation
+        delete definition[method];
+      } else {
         // Remove tags that are not participating in any of tag groups of a requested products
         operation.tags = requiredTags;
         hasAtLeastOneOperation = true;
-      } else {
-        delete definition[method];
       }
     });
 
     if (hasAtLeastOneOperation) {
-      newPaths[path] = definition;
+      newPathsEntries.push([path, definition]);
     }
   }
 
-  return newPaths;
+  return Object.fromEntries(newPathsEntries);
 }
 
-function getNewInfo(info, productMapping) {
+function getNewInfo(info, productMapping, resolve) {
   if ('info' in productMapping) {
     for (const [property, value] of Object.entries(productMapping.info)) {
       info[property] = value;
     }
   }
+
+  const productDescriptionAddon = 'descriptionAddon' in productMapping ? productMapping['descriptionAddon'] : '';
+  info.description = resolve(info.description).node.replace(
+    '[comment]: <> (x-product-description-placeholder)',
+    productDescriptionAddon
+  );
 
   return info;
 }

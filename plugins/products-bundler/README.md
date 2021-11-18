@@ -1,7 +1,7 @@
 # Products bundler
 
 File `openapi/openapi.yaml` is a single entrypoint for every bundled API definition.
-All paths, tags and tag groups are listed there. It is a job of the `products-bundler`
+It should include all paths, tags and x-webhooks. It is a job of the `products-bundler`
 plugin to bundle specific API definition file for a product.
 
 This plugin uses the `REBILLY_API_PRODUCT` env variable to read a config for the product
@@ -17,9 +17,17 @@ To bundle the Billing product bundle, for example, run the following command:
  REBILLY_API_PRODUCT=Billing openapi bundle openapi -o billing.yaml
 ```
 
+## Preview a product API
+
+To preview the Billing product bundle, for example, run the following command:
+
+```shell
+ REBILLY_API_PRODUCT=Billing openapi preview-docs openapi
+```
+
 ## API bundle configuration
 
-Available configuration is available in the `mapping` directory. Every file in this directory
+All products' configuration is available in the `mapping` directory. Every file in this directory
 represents a configuration for bundling the result bundle. Use name of these files as a value
 for the `REBILLY_API_PRODUCT` env variable during build.
 

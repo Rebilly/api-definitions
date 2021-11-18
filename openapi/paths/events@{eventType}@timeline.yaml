@@ -2,8 +2,10 @@ parameters:
   - $ref: ../components/parameters/organizationId.yaml
   - $ref: ../components/parameters/systemEventType.yaml
 get:
+  x-products:
+    - Full
   tags:
-    - Rules
+    - Rules Timeline
   summary: Retrieve a list of Rules Engine timeline messages
   operationId: GetRulesEngineTimelineCollection
   x-sdk-operation-name: getAllTimelineMessages
@@ -36,8 +38,10 @@ get:
     '403':
       $ref: ../components/responses/Forbidden.yaml
 post:
+  x-products:
+    - Full
   tags:
-    - Rules
+    - Rules Timeline
   summary: Create Rules Engine Timeline comment
   operationId: PostRulesEngineTimeline
   x-sdk-operation-name: createTimelineComment
