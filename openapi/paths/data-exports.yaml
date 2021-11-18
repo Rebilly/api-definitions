@@ -1,9 +1,24 @@
 servers:
+  - url: 'https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}'
+    description: Sandbox server with organizationId.
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
+    description: Live server with organizationId.
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
   - url: 'https://api.rebilly.com/experimental'
   - url: 'https://api-sandbox.rebilly.com/experimental'
 parameters:
   - $ref: ../components/parameters/organizationId.yaml
 post:
+  x-products:
+    - Full
+    - Reports
   tags:
     - Data Exports
   summary: Request a data export of selected resource
@@ -34,6 +49,9 @@ post:
       source:
         $ref: ../code_samples/JavaScript/data-exports/post.js
 get:
+  x-products:
+    - Full
+    - Reports
   tags:
     - Data Exports
   summary: Retrieve a list of data export requests
