@@ -1,0 +1,31 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  x-products:
+    - Full
+    - Billing
+    - Core
+  tags:
+    - Orders
+  summary: Preview a purchase
+  operationId: PostPreviewOrder
+  x-sdk-operation-name: order
+  description: Use order preview before making an actual order.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/OrderPreview.yaml
+  responses:
+    200:
+      description: Order preview was retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OrderPreview.yaml
+    401:
+      $ref: ../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../components/responses/Forbidden.yaml
+    422:
+      $ref: ../components/responses/ValidationError.yaml
