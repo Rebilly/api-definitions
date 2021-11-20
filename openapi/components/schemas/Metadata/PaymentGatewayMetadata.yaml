@@ -117,6 +117,30 @@ properties:
     type: array
     items:
       type: string
+  supportedPaymentInstrumentSetupInstructions:
+    description: |
+      An array of the setup instructions supported by the gateway.
+    type: array
+    items:
+      type: string
+      enum:
+        - do-nothing
+        - authorize
+        - authorize-and-void
+        - sca
+      x-enumDescriptions:
+        authorize: |
+          Creates an `authorize` transaction in the amount/currency of the request.
+          If the gateway account is configured for strong customer authentication, it will be used.
+        authorize-and-void: |
+          Creates an `authorize` transaction in the amount/currency of the request, followed by a `void` (if the `authorize` was approved).
+          If the gateway account is configured for strong customer authentication, it will be used.
+        sca: |
+          Uses strong customer authentication (SCA) without any `authorize` transaction.
+          SCA includes 3dsv2, 3ds, and some specific wallets behavior like setting up a billing agreement with PayPal.
+        do-nothing: |
+          Does nothing, and returns an approved `setup` transaction.
+          This is the default behavior.
   reconciliationSupport:
     description: |
       A bool if we (can) reconcile.

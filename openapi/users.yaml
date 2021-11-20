@@ -209,6 +209,7 @@ tags:
   - name: Experian credentials
   - name: TaxJar credentials
   - name: Metadata
+  - name: Custom domains
 ################################################################################
 x-tagGroups:
   - name: Security
@@ -257,6 +258,7 @@ x-tagGroups:
       - Experian credentials
       - TaxJar credentials
       - Metadata
+      - Custom domains
   - name: Related docs
     tags:
       - Rebilly API
@@ -265,6 +267,18 @@ security:
   - SecretApiKey: []
   - JWT: []
 servers:
+  - url: 'https://api-sandbox.rebilly.com/organizations/{organizationId}'
+    description: Sandbox server with organizationId.
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: 'https://api.rebilly.com/organizations/{organizationId}'
+    description: Live server with organizationId.
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
   - url: 'https://api-sandbox.rebilly.com'
     description: Sandbox Server.
   - url: 'https://api.rebilly.com'
@@ -355,6 +369,10 @@ paths:
     $ref: ./paths/credential-hashes@taxjar.yaml
   '/credential-hashes/taxjar/{hash}':
     $ref: './paths/credential-hashes@taxjar@{hash}.yaml'
+  /custom-domains:
+    $ref: ./paths/custom-domains.yaml
+  '/custom-domains/{domain}':
+    $ref: './paths/custom-domains@{domain}.yaml'
   '/email-delivery-setting-verifications/{token}':
     $ref: './paths/email-delivery-setting-verifications@{token}.yaml'
   /email-delivery-settings:
