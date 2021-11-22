@@ -42,10 +42,20 @@ properties:
       - StorefrontGetKycDocument
       - StorefrontPostKycDocument
   properties:
-    description: The list of application properties.
-    type: array
-    items:
-      $ref: ./ApplicationProperty.yaml
+    description: >-
+      The list of application properties.
+      This is a JSON-schema object.
+    type: object
+    example: 
+      type: object
+      properties:
+        email:
+          type: "string"
+          required: true
+        max:
+          type: "integer"
+          minimum: 0
+          exclusiveMaximum: 100
   createdTime:
     description: Application created time.
     allOf:
