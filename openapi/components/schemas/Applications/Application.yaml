@@ -56,6 +56,7 @@ properties:
           type: "integer"
           minimum: 0
           exclusiveMaximum: 100
+      required: ["email"]
   createdTime:
     description: Application created time.
     allOf:
@@ -73,13 +74,3 @@ properties:
       anyOf:
         - $ref: ../Links/SelfLink.yaml
         - $ref: ../Links/ApplicationInstanceLink.yaml
-  _embedded:
-    type: array
-    description: >-
-      Any embedded objects available that are requested by the `expand`
-      querystring parameter.
-    readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Embeds/ApplicationInstanceEmbed.yaml
