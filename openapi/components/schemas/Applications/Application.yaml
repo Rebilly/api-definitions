@@ -1,8 +1,10 @@
 type: object
 required:
   - name
-  - description
   - logoId
+  - authorName
+  - tagline
+  - description
   - permissions
 properties:
   id:
@@ -12,6 +14,20 @@ properties:
       - $ref: ../ResourceId.yaml
   name:
     description: The application name.
+    type: string
+  logoId:
+    description: The application logo ID.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  authorName:
+    description: The author's name.
+    type: string
+  authorLogoId:
+    description: The author's logo ID.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  tagline:
+    description: The application's tagline.
     type: string
   description:
     description: The application description.
@@ -24,10 +40,6 @@ properties:
       - pending-approval
       - available
       - disabled
-  logoId:
-    description: The application logo ID.
-    allOf:
-      - $ref: ../ResourceId.yaml
   permissions:
     description: The list of permissions available to the application.
     type: array
