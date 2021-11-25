@@ -4,6 +4,7 @@ allOf:
   - $ref: ../Common/CommonPaymentToken.yaml
 required:
   - method
+  - paymentInstrument
 properties:
   method:
     description: The token payment method.
@@ -24,5 +25,6 @@ properties:
         type: string
   billingAddress:
     description: The billing address object.
+    nullable: true
     allOf:
       - $ref: ../Contact/ContactObject.yaml
