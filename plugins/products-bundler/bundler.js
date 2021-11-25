@@ -84,14 +84,15 @@ function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods, includedX
 
       const operation = definition[method];
       if (!('tags' in operation)) {
+        ctx.report({message: `Operation ${operation.operationId} has no tags specified`})
+
         // Operation has no tags specified, excluding as tags must be defined explicitly
         return;
       }
 
       if (includedXProducts && includedXProducts.length) {
         if (!('x-products' in operation)) {
-          // Operation has no products specified, excluding as products must be defined explicitly
-          delete definition[method];
+          ctx.report({message: `Operation ${operation.operationId} has no x-product specified`})
 
           return;
         }
