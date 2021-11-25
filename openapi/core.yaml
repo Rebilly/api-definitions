@@ -16,6 +16,18 @@ info:
   description:
     $ref: description.md
 servers:
+  - url: 'https://api-sandbox.rebilly.com/organizations/{organizationId}'
+    description: Sandbox server with organizationId.
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: 'https://api.rebilly.com/organizations/{organizationId}'
+    description: Live server with organizationId.
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
   - url: 'https://api-sandbox.rebilly.com'
     description: Sandbox Server.
   - url: 'https://api.rebilly.com'
@@ -323,6 +335,10 @@ paths:
     $ref: './paths/kyc-documents@{id}@rejection.yaml'
   '/kyc-documents/{id}/review':
     $ref: './paths/kyc-documents@{id}@review.yaml'
+  '/kyc-documents/{id}/start-review':
+    $ref: './paths/kyc-documents@{id}@start-review.yaml'
+  '/kyc-documents/{id}/stop-review':
+    $ref: './paths/kyc-documents@{id}@stop-review.yaml'
   /kyc-requests:
     $ref: ./paths/kyc-requests.yaml
   '/kyc-requests/{id}':
@@ -341,6 +357,8 @@ paths:
     $ref: ./paths/plans.yaml
   '/plans/{id}':
     $ref: './paths/plans@{id}.yaml'
+  /previews/orders:
+    $ref: './paths/previews@orders.yaml'
   /products:
     $ref: ./paths/products.yaml
   '/products/{id}':

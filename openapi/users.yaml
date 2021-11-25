@@ -226,7 +226,9 @@ x-tagGroups:
   - name: Rules
     tags:
       - Rules
+      - Email Notifications
       - Lists
+      - Rules Timeline
   - name: Users
     tags:
       - Profile
@@ -243,7 +245,9 @@ x-tagGroups:
       - Billing Portals
       - Checkout Forms
       - Gateway Accounts
+      - Gateway Accounts Timeline
       - Payment Cards
+      - Payment Instruments
       - Organizations
       - Segments
       - Status
@@ -263,6 +267,18 @@ security:
   - SecretApiKey: []
   - JWT: []
 servers:
+  - url: 'https://api-sandbox.rebilly.com/organizations/{organizationId}'
+    description: Sandbox server with organizationId.
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: 'https://api.rebilly.com/organizations/{organizationId}'
+    description: Live server with organizationId.
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
   - url: 'https://api-sandbox.rebilly.com'
     description: Sandbox Server.
   - url: 'https://api.rebilly.com'

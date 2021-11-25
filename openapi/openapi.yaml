@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   version: "2.1"
-  title: "Rebilly Products API"
+  title: Rebilly API
   contact:
     name: "Rebilly API Support"
     url: "https://www.rebilly.com/contact/"
@@ -21,6 +21,18 @@ security:
   - JWT: []
 
 servers:
+  - url: 'https://api-sandbox.rebilly.com/organizations/{organizationId}'
+    description: Sandbox server with organizationId.
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: 'https://api.rebilly.com/organizations/{organizationId}'
+    description: Live server with organizationId.
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
   - url: 'https://api-sandbox.rebilly.com'
     description: Sandbox Server.
   - url: 'https://api.rebilly.com'
@@ -342,111 +354,13 @@ tags:
       their granted permissions.  It has resources less commonly integrated by
 
       3rd parties.
+  - name: Account
+  - name: Authentication
+  - name: Email verification
+  - name: Password reset
+  - name: Purchases
 
-x-tagGroups:
-  - name: Customers
-    tags:
-      - Customers
-      - Customer Authentication
-      - Tags
-      - Customers Timeline
-  - name: Payment Instruments
-    tags:
-      - Payment Instruments
-      - Payment Tokens
-  - name: Payments
-    tags:
-      - Transactions
-      - Disputes
-      - Fees
-  - name: Orders & Invoices
-    tags:
-      - Orders
-      - Invoices
-      - Plans
-      - Products
-      - Coupons
-      - Shipping Zones
-  - name: Risk
-    tags:
-      - Blocklists
-      - KYC Documents
-      - AML
-  - name: Misc
-    tags:
-      - Custom Fields
-      - Files
-      - Search
-      - Reports
-  - name: Security
-    tags:
-      - JWT Session
-      - API Keys
-      - Reset password
-  - name: Email
-    tags:
-      - Broadcast Messages
-      - Email Credentials
-      - Email Delivery Settings
-      - Email Messages
-  - name: Rules
-    tags:
-      - Rules
-      - Lists
-  - name: Users
-    tags:
-      - Profile
-      - Users
-      - Memberships
-      - Roles
-  - name: Webhooks
-    tags:
-      - Webhook Credentials
-      - Webhooks
-  - name: Other
-    tags:
-      - Balance transactions
-      - Gateway Accounts
-      - Payment Cards
-      - Organizations
-      - Segments
-      - Status
-      - Tracking
-      - Websites
-      - Integrations
-      - Plaid credentials
-      - Experian credentials
-      - TaxJar credentials
-      - Metadata
-      - Custom domains
-  - name: Account management
-    tags:
-      - Account
-      - Authentication
-      - Billing Portals
-      - Email verification
-      - Password reset
-      - KYC Documents
-  - name: Payments
-    tags:
-      - Payment Instruments
-      - Transactions
-  - name: Orders
-    tags:
-      - Checkout Forms
-      - Purchases
-      - Orders
-      - Invoices
-      - Products
-      - Plans
-  - name: System
-    tags:
-      - Websites
-  - name: Related docs
-    tags:
-      - Rebilly API
-      - Reports API
-      - Users API
+x-tagGroups: []
 
 paths:
   /aml:
@@ -555,6 +469,10 @@ paths:
     $ref: './paths/kyc-documents@{id}@rejection.yaml'
   '/kyc-documents/{id}/review':
     $ref: './paths/kyc-documents@{id}@review.yaml'
+  '/kyc-documents/{id}/start-review':
+    $ref: './paths/kyc-documents@{id}@start-review.yaml'
+  '/kyc-documents/{id}/stop-review':
+    $ref: './paths/kyc-documents@{id}@stop-review.yaml'
   /kyc-requests:
     $ref: ./paths/kyc-requests.yaml
   '/kyc-requests/{id}':
@@ -809,6 +727,8 @@ paths:
     $ref: './paths/payment-gateways-metadata@{apiName}.yaml'
   /permissions-emulation:
     $ref: ./paths/permissions-emulation.yaml
+  /previews/orders:
+    $ref: ./paths/previews@orders.yaml
   /previews/rule-actions/send-email:
     $ref: ./paths/previews@rule-actions@send-email.yaml
   /previews/rule-actions/trigger-webhook:
@@ -905,6 +825,74 @@ paths:
     $ref: ./paths/reports@transactions.yaml
   '/experimental/subscriptions/{subscriptionId}/summary-metrics':
     $ref: ./paths/subscriptions@{subscriptionId}@summary-metrics.yaml
+  '/storefront/account':
+    $ref: paths/storefront/account.yaml
+  '/storefront/account/forgot-password':
+    $ref: paths/storefront/account@forgot-password.yaml
+  '/storefront/account/password':
+    $ref: paths/storefront/account@password.yaml
+  '/storefront/account/resend-verification':
+    $ref: paths/storefront/account@resend-verification.yaml
+  '/storefront/account/reset-password/{token}':
+    $ref: paths/storefront/account@reset-password@{token}.yaml
+  '/storefront/account/verification/{token}':
+    $ref: paths/storefront/account@verification@{token}.yaml
+  '/storefront/billing-portals/{slug}':
+    $ref: paths/storefront/billing-portals@{slug}.yaml
+  '/storefront/checkout-forms/{id}':
+    $ref: paths/storefront/checkout-forms@{id}.yaml
+  '/storefront/invoices':
+    $ref: paths/storefront/invoices.yaml
+  '/storefront/invoices/{id}':
+    $ref: paths/storefront/invoices@{id}.yaml
+  '/storefront/kyc-documents':
+    $ref: paths/storefront/kyc-documents.yaml
+  '/storefront/kyc-documents/{id}':
+    $ref: paths/storefront/kyc-documents@{id}.yaml
+  '/storefront/kyc-requests/{id}':
+    $ref: paths/storefront/kyc-requests@{id}.yaml
+  '/storefront/login':
+    $ref: paths/storefront/login.yaml
+  '/storefront/logout':
+    $ref: paths/storefront/logout.yaml
+  '/storefront/orders':
+    $ref: paths/storefront/orders.yaml
+  '/storefront/orders/{id}':
+    $ref: paths/storefront/orders@{id}.yaml
+  '/storefront/orders/{id}/cancellation':
+    $ref: paths/storefront/orders@{id}@cancellation.yaml
+  '/storefront/payment':
+    $ref: paths/storefront/payment.yaml
+  '/storefront/payment-instruments':
+    $ref: paths/storefront/payment-instruments.yaml
+  '/storefront/payment-instruments/{id}':
+    $ref: paths/storefront/payment-instruments@{id}.yaml
+  '/storefront/payment-instruments/{id}/deactivation':
+    $ref: paths/storefront/payment-instruments@{id}@deactivation.yaml
+  '/storefront/payment-instruments/{id}/setup':
+    $ref: paths/storefront/payment-instruments@{id}@setup.yaml
+  '/storefront/plans':
+    $ref: paths/storefront/plans.yaml
+  '/storefront/plans/{id}':
+    $ref: paths/storefront/plans@{id}.yaml
+  '/storefront/products':
+    $ref: paths/storefront/products.yaml
+  '/storefront/products/{id}':
+    $ref: paths/storefront/products@{id}.yaml
+  '/storefront/purchase':
+    $ref: paths/storefront/purchase.yaml
+  '/storefront/preview-purchase':
+    $ref: paths/storefront/preview-purchase.yaml
+  '/storefront/ready-to-pay':
+    $ref: paths/storefront/ready-to-pay.yaml
+  '/storefront/register':
+    $ref: paths/storefront/register.yaml
+  '/storefront/transactions':
+    $ref: paths/storefront/transactions.yaml
+  '/storefront/transactions/{id}':
+    $ref: paths/storefront/transactions@{id}.yaml
+  '/storefront/websites/{id}':
+    $ref: paths/storefront/websites@{id}.yaml
 
 x-webhooks:
   aml-list-possibly-matched:
