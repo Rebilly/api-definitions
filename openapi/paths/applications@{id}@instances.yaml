@@ -25,13 +25,7 @@ get:
       content:
         application/json:
           schema:
-            allOf:
-              - properties:
-                  organizationId:
-                    description: The organization identifier string.
-                    allOf:
-                        - $ref: ../components/schemas/ResourceId.yaml
-              - $ref: ../components/schemas/Applications/Owners/ApplicationInstance.yaml
+            $ref: ../components/schemas/Applications/Owners/ApplicationInstance.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

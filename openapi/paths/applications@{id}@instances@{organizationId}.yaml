@@ -26,16 +26,7 @@ get:
       content:
         application/json:
           schema:
-            allOf:
-              - properties:
-                  organizationId:
-                    description: The organization identifier string.
-                    allOf:
-                        - $ref: ../components/schemas/ResourceId.yaml
-                  token:
-                    description: The application token used for authentication for a given instance.
-                    type: string
-              - $ref: ../components/schemas/Applications/Owners/ApplicationInstance.yaml
+            $ref: ../components/schemas/Applications/Owners/ApplicationInstance.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
