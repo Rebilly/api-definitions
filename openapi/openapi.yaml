@@ -19,8 +19,6 @@ info:
 security:
   - SecretApiKey: []
   - JWT: []
-  - PublishableApiKey: []
-  - CustomerJWT: []
 
 servers:
   - url: 'https://api-sandbox.rebilly.com/organizations/{organizationId}'
@@ -471,6 +469,10 @@ paths:
     $ref: './paths/kyc-documents@{id}@rejection.yaml'
   '/kyc-documents/{id}/review':
     $ref: './paths/kyc-documents@{id}@review.yaml'
+  '/kyc-documents/{id}/start-review':
+    $ref: './paths/kyc-documents@{id}@start-review.yaml'
+  '/kyc-documents/{id}/stop-review':
+    $ref: './paths/kyc-documents@{id}@stop-review.yaml'
   /kyc-requests:
     $ref: ./paths/kyc-requests.yaml
   '/kyc-requests/{id}':
@@ -725,6 +727,8 @@ paths:
     $ref: './paths/payment-gateways-metadata@{apiName}.yaml'
   /permissions-emulation:
     $ref: ./paths/permissions-emulation.yaml
+  /previews/orders:
+    $ref: ./paths/previews@orders.yaml
   /previews/rule-actions/send-email:
     $ref: ./paths/previews@rule-actions@send-email.yaml
   /previews/rule-actions/trigger-webhook:
