@@ -1,9 +1,10 @@
 type: array
 items:
-  oneOf:
+  anyOf:
     - $ref: ./Methods/ReadyToPayPaymentCardMethod.yaml
     - $ref: ./Methods/ReadyToPayAchMethod.yaml
     - $ref: ./Methods/ReadyToPayGenericMethod.yaml
+    - $ref: ./Methods/ReadyToPayPayPalMethod.yaml
 example:
   - method: payment-card
     feature:
@@ -28,6 +29,10 @@ example:
     feature: null
     filters: []
   - method: paypal
+    feature:
+      name: PayPal billing agreement
+      paypalMerchantId: 123456abcd
+      billingAgreementToken: BA-XXXXXXXXXXXXXXXXX
     filters: []
   - method: Skrill
     filters: []
