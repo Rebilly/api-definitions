@@ -42,6 +42,17 @@ allOf:
                   oneOf:
                     - $ref: ../../ReadyToPay/Features/PlaidFeatureName.yaml
             - type: object
+              title: PayPal
+              properties:
+                paymentMethod:
+                  type: string
+                  enum:
+                    - paypal
+                feature:
+                  nullable: true
+                  oneOf:
+                    - $ref: ../../ReadyToPay/Features/PayPalBillingAgreementFeature.yaml
+            - type: object
               title: Generic
               properties:
                 paymentMethod:
