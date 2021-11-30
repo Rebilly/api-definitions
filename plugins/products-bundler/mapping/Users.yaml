@@ -1,0 +1,118 @@
+info:
+  title: Rebilly User API
+  description: |
+    # Introduction
+    This document covers APIs mostly intended for consumption by Rebilly's
+    Frontend GUI [app](https://app.rebilly.com).  However, any client is welcome
+    to use these APIs.  Our main API docs can be [found here](https://api-reference.rebilly.com/).
+
+    The Rebilly API is built on HTTP.  Our API is RESTful.  It has predictable
+    resource URLs.  It returns HTTP response codes to indicate errors.  It also
+    accepts and returns JSON in the HTTP body.  You can use your favorite
+    HTTP/REST library for your programming language to use Rebilly's API, or
+    you can use one of our SDKs (currently available in [PHP](https://github.com/Rebilly/rebilly-php)
+    or [Javascript](https://github.com/Rebilly/rebilly-js-sdk)).
+
+    # Authentication
+    When you sign up for an account, you are given your first API key.
+    You can generate additional API keys, and delete API keys (as you may
+    need to rotate your keys in the future). You authenticate to the
+    Rebilly API by providing your secret key in the request header.
+
+    Rebilly offers three forms of authentication:  secret key, publishable key, JSON Web Tokens, and public signature key.
+    - [Secret API key](#section/Authentication/SecretApiKey): used for requests made from the server side. Never share these keys. Keep them guarded and secure
+    - [Publishable API key](#section/Authentication/PublishableApiKey): used for requests from the client side.
+    - [JWT](#section/Authentication/JWT): short lifetime tokens that can be assigned a specific expiration time
+
+    Never share your secret keys. Keep them guarded and secure.
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+
+    # SDKs
+
+    ## Javascript SDK
+
+    Installation and usage instructions can be found [here](https://docs.rebilly.com/docs/developer-docs/sdks).
+    SDK code examples are included in these docs.
+
+    ## PHP SDK
+    For all PHP SDK examples provided in this spec you will need to configure `$client`.
+    You may do it like this:
+
+    ```php
+    $client = new Rebilly\Client([
+        'apiKey' => 'YourApiKeyHere',
+        'baseUrl' => 'https://api.rebilly.com',
+    ]);
+    ```
+
+    # Using filter with collections
+    Rebilly provides collections filtering. You can use `?filter` param on collection to define which records should be shown in the response.
+
+    Here is filter format description:
+
+    - Fields and values in filter are separated with `:`: `?filter=firstName:John`.
+
+    - Fields in filter are separated with `;`: `?filter=firstName:John;lastName:Doe`.
+
+    - You can use multiple values using `,` as values separator: `?filter=firstName:John,Bob`.
+
+    - To negate the filter use `!`: `?filter=firstName:!John`. Note that you can negate multiple values like this: `?filter=firstName:!John,Bob`. This filter rule will exclude all Johns and Bobs from the response.
+
+    - You can use range filters like this: `?filter=amount:1..10`.
+
+    - You can use gte (greater than or equals) filter like this: `?filter=amount:1..`, or lte (less than or equals) than filter like this: `?filter=amount:..10`.
+
+    - You can create some [predefined values lists](https://user-api-docs.rebilly.com/#tag/Lists) and use them in filter: `?filter=firstName:@yourListName`. You can also exclude list values: `?filter=firstName:!@yourListName`.
+x-tagGroups:
+  - name: Security
+    tags:
+      - JWT Session
+      - API Keys
+      - Reset password
+  - name: Email
+    tags:
+      - Broadcast Messages
+      - Email Credentials
+      - Email Delivery Settings
+      - Email Messages
+  - name: Rules
+    tags:
+      - Rules
+      - Lists
+      - Email Notifications
+      - Rules Timeline
+  - name: Users
+    tags:
+      - Profile
+      - Users
+      - Memberships
+      - Roles
+  - name: Webhooks
+    tags:
+      - Webhook Credentials
+      - Webhooks
+  - name: Other
+    tags:
+      - Balance transactions
+      - Billing Portals
+      - Checkout Forms
+      - Gateway Accounts
+      - Gateway Accounts Timeline
+      - Payment Cards
+      - Payment Instruments
+      - Organizations
+      - Segments
+      - Status
+      - Tracking
+      - Websites
+      - Custom domains
+      - Integrations
+      - Plaid credentials
+      - Experian credentials
+      - TaxJar credentials
+      - Metadata
+  - name: Related docs
+    tags:
+      - Rebilly API
+      - Reports API

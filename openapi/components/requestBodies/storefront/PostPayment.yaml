@@ -11,6 +11,8 @@ content:
               $ref: ../../schemas/ResourceId.yaml
             riskMetadata:
               $ref: ../../schemas/RiskMetadata.yaml
+            redirectUrl:
+              $ref: ../../schemas/Storefront/StorefrontTransactionRedirectUrl.yaml
           oneOf:
             - $ref: ../../schemas/Storefront/PaymentInstructions/PaymentInstructionsToken.yaml
             - $ref: ../../schemas/Storefront/PaymentInstructions/PaymentInstructionsInstrument.yaml
@@ -23,6 +25,34 @@ content:
               $ref: ../../schemas/ResourceId.yaml
             riskMetadata:
               $ref: ../../schemas/RiskMetadata.yaml
+            redirectUrl:
+              $ref: ../../schemas/Storefront/StorefrontTransactionRedirectUrl.yaml
+          oneOf:
+            - $ref: ../../schemas/Storefront/PaymentInstructions/PaymentInstructionsToken.yaml
+            - $ref: ../../schemas/Storefront/PaymentInstructions/PaymentInstructionsInstrument.yaml
+        - type: object
+          title: For amount+currency
+          required:
+            - amount
+            - currency
+            - websiteId
+          properties:
+            websiteId:
+              description: The website identifier string.
+              allOf:
+                - $ref: ../../schemas/ResourceId.yaml
+            currency:
+                $ref: ../../schemas/CurrencyCode.yaml
+            amount:
+                description: The transaction amount.
+                type: number
+                format: double
+                default: 0
+                example: 97.97
+            riskMetadata:
+              $ref: ../../schemas/RiskMetadata.yaml
+            redirectUrl:
+              $ref: ../../schemas/Storefront/StorefrontTransactionRedirectUrl.yaml
           oneOf:
             - $ref: ../../schemas/Storefront/PaymentInstructions/PaymentInstructionsToken.yaml
             - $ref: ../../schemas/Storefront/PaymentInstructions/PaymentInstructionsInstrument.yaml

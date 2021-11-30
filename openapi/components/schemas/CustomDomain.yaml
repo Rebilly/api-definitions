@@ -1,0 +1,20 @@
+type: object
+required:
+  - domain
+properties:
+  domain:
+    description: The fully qualified domain name.
+    type: string
+    maxLength: 255
+  isVerified:
+    description: True if the domain was verified by Rebilly.
+    type: boolean
+    readOnly: true
+  createdTime:
+    description: Custom domain created time.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    description: Custom domain updated time.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml

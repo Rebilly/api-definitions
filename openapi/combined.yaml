@@ -223,6 +223,7 @@ tags:
   - name: Experian credentials
   - name: TaxJar credentials
   - name: Metadata
+  - name: Custom domains
 security:
   - SecretApiKey: []
   - JWT: []
@@ -339,6 +340,10 @@ paths:
     $ref: './paths/kyc-documents@{id}@rejection.yaml'
   '/kyc-documents/{id}/review':
     $ref: './paths/kyc-documents@{id}@review.yaml'
+  '/kyc-documents/{id}/start-review':
+    $ref: './paths/kyc-documents@{id}@start-review.yaml'
+  '/kyc-documents/{id}/stop-review':
+    $ref: './paths/kyc-documents@{id}@stop-review.yaml'
   /password-tokens:
     $ref: ./paths/password-tokens.yaml
   '/password-tokens/{id}':
@@ -489,6 +494,10 @@ paths:
     $ref: ./paths/credential-hashes@taxjar.yaml
   '/credential-hashes/taxjar/{hash}':
     $ref: './paths/credential-hashes@taxjar@{hash}.yaml'
+  /custom-domains:
+    $ref: ./paths/custom-domains.yaml
+  '/custom-domains/{domain}':
+    $ref: './paths/custom-domains@{domain}.yaml'
   '/email-delivery-setting-verifications/{token}':
     $ref: './paths/email-delivery-setting-verifications@{token}.yaml'
   /email-delivery-settings:
@@ -569,6 +578,8 @@ paths:
     $ref: './paths/organizations@{id}.yaml'
   /payment-cards-bank-names:
     $ref: ./paths/payment-cards-bank-names.yaml
+  /previews/orders:
+    $ref: './paths/previews@orders.yaml'
   /previews/rule-actions/send-email:
     $ref: ./paths/previews@rule-actions@send-email.yaml
   /previews/rule-actions/trigger-webhook:
