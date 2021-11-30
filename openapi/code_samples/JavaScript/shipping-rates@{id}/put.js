@@ -13,7 +13,6 @@ const firstRate = await api.shippingRates.create({data});
 const secondRate = await api.shippingRates.create({id: 'my-second-key', data});
 
 
-
 // updating a shipping rate
 const data = {
   name: 'regular shipping',
