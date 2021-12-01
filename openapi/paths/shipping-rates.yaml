@@ -1,17 +1,13 @@
 parameters:
   - $ref: ../components/parameters/organizationId.yaml
 get:
-  x-products:
-    - Full
-    - Core
   tags:
-    - Shipping Zones
-  summary: Retrieve a list of shipping zones
-  operationId: GetShippingZoneCollection
-  deprecated: true
+    - Shipping Rates
+  summary: Retrieve a list of shipping rates
+  operationId: GetShippingRateCollection
   x-sdk-operation-name: getAll
   description: |
-    Retrieve a list of shipping zones.
+    Retrieve a list of shipping rates.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -20,7 +16,7 @@ get:
     - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
-      description: A list of shipping zones was retrieved successfully.
+      description: A list of shipping rates was retrieved successfully.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -33,7 +29,7 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/ShippingZone.yaml
+              $ref: ../components/schemas/ShippingRates/ShippingRate.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -41,33 +37,29 @@ get:
   x-codeSamples:
     - lang: JavaScript
       source:
-        $ref: ../code_samples/JavaScript/shipping-zones/get.js
+        $ref: ../code_samples/JavaScript/shipping-rates/get.js
 post:
-  x-products:
-    - Full
-    - Core
   tags:
-    - Shipping Zones
-  summary: Create a Shipping Zone
-  operationId: PostShippingZone
-  deprecated: true
+    - Shipping Rates
+  summary: Create a shipping rate
+  operationId: PostShippingRate
   x-sdk-operation-name: create
   description: |
-    Create a Shipping Zone.
+    Create a shipping rate.
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/ShippingZone.yaml
-    description: Shipping Zone resource.
+          $ref: ../components/schemas/ShippingRates/ShippingRate.yaml
+    description: Shipping rate resource.
     required: true
   responses:
     '201':
-      description: Shipping Zone was created.
+      description: Shipping rate was created.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/ShippingZone.yaml
+            $ref: ../components/schemas/ShippingRates/ShippingRate.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -77,4 +69,4 @@ post:
   x-codeSamples:
     - lang: JavaScript
       source:
-        $ref: ../code_samples/JavaScript/shipping-zones/post.js
+        $ref: ../code_samples/JavaScript/shipping-rates/post.js

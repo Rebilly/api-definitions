@@ -2,24 +2,20 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
   - $ref: ../components/parameters/organizationId.yaml
 get:
-  x-products:
-    - Full
-    - Core
   tags:
-    - Shipping Zones
-  summary: Retrieve a shipping zone
-  operationId: GetShippingZone
-  deprecated: true
+    - Shipping Rates
+  summary: Retrieve a shipping rate
+  operationId: GetShippingRate
   x-sdk-operation-name: get
   description: |
-    Retrieve a shipping zone with specified identifier string.
+    Retrieve a shipping rate with specified identifier string.
   responses:
     '200':
-      description: Shipping zone was retrieved successfully.
+      description: Shipping rate was retrieved successfully.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/ShippingZone.yaml
+            $ref: ../components/schemas/ShippingRates/ShippingRate.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -29,32 +25,28 @@ get:
   x-codeSamples:
     - lang: JavaScript
       source:
-        $ref: '../code_samples/JavaScript/shipping-zones@{id}/get.js'
+        $ref: '../code_samples/JavaScript/shipping-rates@{id}/get.js'
 put:
-  x-products:
-    - Full
-    - Core
   tags:
-    - Shipping Zones
-  summary: Create a shipping zone with predefined ID
-  operationId: PutShippingZone
-  deprecated: true
+    - Shipping Rates
+  summary: Create a shipping rate with predefined ID
+  operationId: PutShippingRate
   x-sdk-operation-name: update
   description: |
-    Create a shipping zone with predefined identifier string.
+    Create a shipping rate with predefined identifier string.
   responses:
     '200':
-      description: Shipping zone was updated.
+      description: Shipping rate was updated.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/ShippingZone.yaml
+            $ref: ../components/schemas/ShippingRates/ShippingRate.yaml
     '201':
-      description: Shipping zone was created.
+      description: Shipping rate was created.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/ShippingZone.yaml
+            $ref: ../components/schemas/ShippingRates/ShippingRate.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -65,28 +57,24 @@ put:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/ShippingZone.yaml
-    description: Shipping zone resource.
+          $ref: ../components/schemas/ShippingRates/ShippingRate.yaml
+    description: Shipping rate resource.
     required: true
   x-codeSamples:
     - lang: JavaScript
       source:
-        $ref: '../code_samples/JavaScript/shipping-zones@{id}/put.js'
+        $ref: '../code_samples/JavaScript/shipping-rates@{id}/put.js'
 delete:
-  x-products:
-    - Full
-    - Core
   tags:
-    - Shipping Zones
-  summary: Delete a shipping zone
-  operationId: DeleteShippingZone
-  deprecated: true
+    - Shipping Rates
+  summary: Delete a shipping rate
+  operationId: DeleteShippingRate
   x-sdk-operation-name: delete
   description: |
-    Delete a shipping zone with predefined identifier string.
+    Delete a shipping rate with predefined identifier string.
   responses:
     '204':
-      description: Shipping zone was deleted.
+      description: Shipping rate was deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -96,4 +84,4 @@ delete:
   x-codeSamples:
     - lang: JavaScript
       source:
-        $ref: '../code_samples/JavaScript/shipping-zones@{id}/delete.js'
+        $ref: '../code_samples/JavaScript/shipping-rates@{id}/delete.js'

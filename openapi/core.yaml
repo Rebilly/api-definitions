@@ -158,6 +158,11 @@ tags:
     description: >
       A shipping zone contains regions and countries that you ship to. Each
       shipping zone has its own shipping rates.
+
+      This API is deprecated, see Shipping rates.
+  - name: Shipping rates
+    description: >
+      A shipping rate contains a filter and a pricing for a specific destination you ship to.
   - name: Orders
     description: >
       An order applies a plan's template to create invoice(s) for a customer,
@@ -211,6 +216,7 @@ x-tagGroups:
       - Plans
       - Products
       - Coupons
+      - Shipping Rates
       - Shipping Zones
       - Taxes
   - name: Risk
@@ -335,6 +341,10 @@ paths:
     $ref: './paths/kyc-documents@{id}@rejection.yaml'
   '/kyc-documents/{id}/review':
     $ref: './paths/kyc-documents@{id}@review.yaml'
+  '/kyc-documents/{id}/start-review':
+    $ref: './paths/kyc-documents@{id}@start-review.yaml'
+  '/kyc-documents/{id}/stop-review':
+    $ref: './paths/kyc-documents@{id}@stop-review.yaml'
   /kyc-requests:
     $ref: ./paths/kyc-requests.yaml
   '/kyc-requests/{id}':
@@ -353,6 +363,8 @@ paths:
     $ref: ./paths/plans.yaml
   '/plans/{id}':
     $ref: './paths/plans@{id}.yaml'
+  /previews/orders:
+    $ref: './paths/previews@orders.yaml'
   /products:
     $ref: ./paths/products.yaml
   '/products/{id}':
@@ -361,6 +373,10 @@ paths:
     $ref: ./paths/ready-to-pay.yaml
   /search:
     $ref: ./paths/search.yaml
+  /shipping-rates:
+    $ref: ./paths/shipping-rates.yaml
+  '/shipping-rates/{id}':
+    $ref: './paths/shipping-rates@{id}.yaml'
   /shipping-zones:
     $ref: ./paths/shipping-zones.yaml
   '/shipping-zones/{id}':
