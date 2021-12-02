@@ -186,6 +186,11 @@ tags:
     description: >
       A shipping zone contains regions and countries that you ship to. Each
       shipping zone has its own shipping rates.
+
+      This API is deprecated, see Shipping rates.
+  - name: Shipping rates
+    description: >
+      A shipping rate contains a filter and a pricing for a specific destination you ship to.
   - name: Orders
     description: >
       An order applies a plan's template to create invoice(s) for a customer,
@@ -513,6 +518,10 @@ paths:
     $ref: ./paths/ready-to-pay.yaml
   /search:
     $ref: ./paths/search.yaml
+  /shipping-rates:
+    $ref: ./paths/shipping-rates.yaml
+  '/shipping-rates/{id}':
+    $ref: './paths/shipping-rates@{id}.yaml'
   /shipping-zones:
     $ref: ./paths/shipping-zones.yaml
   '/shipping-zones/{id}':

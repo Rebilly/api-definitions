@@ -1,0 +1,24 @@
+type: object
+required:
+  - name
+  - price
+  - currency
+properties:
+  id:
+    description: The shipping rate identifier string.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  name:
+    type: string
+    description: The shipping rate name.
+  descriptions:
+    type: string
+    description: The shipping rate description.
+  price:
+    description: The shipping rate price - 0 is a valid value (for free).
+    type: number
+    format: double
+  currency:
+    allOf:
+      - $ref: ../CurrencyCode.yaml
