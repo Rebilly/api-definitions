@@ -1,0 +1,39 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Users
+    - Full
+  tags:
+    - Application users
+  summary: Retrieve application
+  operationId: GetApplication
+  x-sdk-operation-name: get
+  description: |
+    Retrieve application with predefined identifier string.
+  responses:
+    '200':
+      description: Applications was retrieved successfully.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Applications/Users/Application.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/applications@{id}/get.php
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/applications@{id}/get.js

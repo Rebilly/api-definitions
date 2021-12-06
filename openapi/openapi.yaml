@@ -42,6 +42,8 @@ components:
   securitySchemes:
     JWT:
       $ref: components/securitySchemes/JWT.yaml
+    ApplicationJWT:
+      $ref: components/securitySchemes/ApplicationJWT.yaml
     PublishableApiKey:
       $ref: components/securitySchemes/PublishableApiKey.yaml
     SecretApiKey:
@@ -364,6 +366,8 @@ tags:
   - name: Email verification
   - name: Password reset
   - name: Purchases
+  - name: Application owners
+  - name: Application users
 
 x-tagGroups: []
 
@@ -434,6 +438,16 @@ paths:
     $ref: './paths/files@{id}@download.yaml'
   '/files/{id}/download{extension}':
     $ref: './paths/files@{id}@download{extension}.yaml'
+  '/application-instances/{applicationId}':
+    $ref: './paths/application-instances@{applicationId}.yaml'
+  '/applications':
+    $ref: './paths/applications.yaml'
+  '/applications/{id}':
+    $ref: './paths/applications@{id}.yaml'
+  '/applications/{id}/instances':
+    $ref: './paths/applications@{id}@instances.yaml'
+  '/applications/{id}/instances/{organizationId}':
+    $ref: './paths/applications@{id}@instances@{organizationId}.yaml'
   /invoices:
     $ref: ./paths/invoices.yaml
   '/invoices/{id}':
@@ -748,6 +762,8 @@ paths:
     $ref: ./paths/previews@webhooks.yaml
   /profile:
     $ref: ./paths/profile.yaml
+  /profile/mfa:
+    $ref: ./paths/profile@mfa.yaml
   /profile/password:
     $ref: ./paths/profile@password.yaml
   /profile/totp-reset:
@@ -906,6 +922,12 @@ paths:
     $ref: paths/storefront/websites@{id}.yaml
 
 x-webhooks:
+  application-instance-disabled:
+    post:
+      $ref: ./webhooks/application-instance-disabled.yaml
+  application-instance-enabled:
+    post:
+      $ref: ./webhooks/application-instance-enabled.yaml
   aml-list-possibly-matched:
     post:
       $ref: ./webhooks/aml-list-possibly-matched.yaml

@@ -224,6 +224,8 @@ tags:
   - name: TaxJar credentials
   - name: Metadata
   - name: Custom domains
+  - name: Application owners
+  - name: Application users
 security:
   - SecretApiKey: []
   - JWT: []
@@ -232,12 +234,24 @@ components:
   securitySchemes:
     JWT:
       $ref: components/securitySchemes/JWT.yaml
+    ApplicationJWT:
+      $ref: components/securitySchemes/ApplicationJWT.yaml
     PublishableApiKey:
       $ref: components/securitySchemes/PublishableApiKey.yaml
     SecretApiKey:
       $ref: components/securitySchemes/SecretApiKey.yaml
 
 paths:
+  '/application-instances/{applicationId}':
+    $ref: './paths/application-instances@{applicationId}.yaml'
+  '/applications':
+    $ref: './paths/applications.yaml'
+  '/applications/{id}':
+    $ref: './paths/applications@{id}.yaml'
+  '/applications/{id}/instances':
+    $ref: './paths/applications@{id}@instances.yaml'
+  '/applications/{id}/instances/{organizationId}':
+    $ref: './paths/applications@{id}@instances@{organizationId}.yaml'
   /attachments:
     $ref: ./paths/attachments.yaml
   '/attachments/{id}':
@@ -590,6 +604,8 @@ paths:
     $ref: ./paths/previews@webhooks.yaml
   /profile:
     $ref: ./paths/profile.yaml
+  /profile/mfa:
+    $ref: ./paths/profile@mfa.yaml
   /profile/password:
     $ref: ./paths/profile@password.yaml
   /profile/totp-reset:

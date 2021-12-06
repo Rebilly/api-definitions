@@ -1,0 +1,80 @@
+get:
+  x-products:
+    - Full
+    - Users
+  tags:
+    - Profile
+  summary: Retrieve user MFA status
+  operationId: GetProfileMfa
+  x-sdk-operation-name: getMfa
+  description: |
+    Retrieve user MFA status.
+  responses:
+    '200':
+      description: User MFA status was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ProfileMfa.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/profile@mfa/get.js
+post:
+  x-products:
+    - Full
+    - Users
+  tags:
+    - Profile
+  summary: Update user MFA
+  operationId: PostProfileMfa
+  x-sdk-operation-name: updateMfa
+  description: |
+    Update user MFA. Link with rel `enrollment` must be followed to verify existing or enroll new MFA.
+  responses:
+    '201':
+      description: User MFA update url was created successfuly.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ProfileMfa.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/profile@mfa/post.js
+delete:
+  x-products:
+    - Full
+    - Users
+  tags:
+    - Profile
+  summary: Delete user MFA
+  operationId: DeleteProfileMfa
+  x-sdk-operation-name: deleteMfa
+  description: |
+    Delete user MFA. To succed `lastAuthTime` must be no more than 10 minutes before this call.
+  responses:
+    '204':
+      description: User MFA was deleted successfuly.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/profile@mfa/delete.js

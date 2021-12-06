@@ -1,0 +1,1 @@
+await api.profile.deleteMfa();
