@@ -1,0 +1,42 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Users
+    - Full
+  tags:
+    - Application owners
+  summary: Retrieve application instances
+  operationId: GetApplicationInstanceCollection
+  x-sdk-operation-name: getInstances
+  description: |
+    Retrieve application instances with predefined application identifier string.
+  responses:
+    '200':
+      description: Application instances were retrieved successfully.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Applications/Owners/ApplicationInstance.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/applications@{id}@instances/get.php
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/applications@{id}@instances/get.js
+
