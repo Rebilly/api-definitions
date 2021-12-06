@@ -1,0 +1,107 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+  - $ref: ../components/parameters/applicationId.yaml
+get:
+  x-products:
+    - Users
+    - Full
+  tags:
+    - Application users
+  summary: Retrieve an application instance
+  operationId: GetApplicationInstance
+  x-sdk-operation-name: get
+  description: |
+    Retrieve a list of application instances.
+    You may sort by the id, name, status, createdTime, and updatedTime.
+  responses:
+    '200':
+      description: An application instance was retrieved successfully.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Applications/ApplicationInstance.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/application-instances@{applicationId}/get.php
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/application-instances@{applicationId}/get.js
+put:
+  tags:
+    - Application users
+  summary: Create or update an application instance
+  operationId: PutApplicationInstance
+  x-sdk-operation-name: upsert
+  description: |
+    Create or update an application instance.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Applications/ApplicationInstance.yaml
+  responses:
+    '200':
+      description: Application instance was updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Applications/ApplicationInstance.yaml
+    '201':
+      description: Application instance was created.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Applications/ApplicationInstance.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/application-instances@{applicationId}/put.php
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/application-instances@{applicationId}/put.js
+delete:
+  tags:
+    - Application users
+  summary: Delete application instance
+  operationId: DeleteApplicationInstance
+  x-sdk-operation-name: delete
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
+  description: |
+    Delete application instance with predefined identifier string.
+  responses:
+    '204':
+      description: Application instance was deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/application-instances@{applicationId}/delete.php
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/application-instances@{applicationId}/delete.js
