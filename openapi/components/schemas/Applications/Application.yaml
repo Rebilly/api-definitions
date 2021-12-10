@@ -16,21 +16,21 @@ properties:
     description: The application name.
     type: string
   logoId:
-    description: The application logo ID.
+    description: The file ID of the application logo.
     allOf:
       - $ref: ../ResourceId.yaml
   authorName:
     description: The author's name.
     type: string
   authorLogoId:
-    description: The author's logo ID.
+    description: The file ID of the author's logo.
     allOf:
       - $ref: ../ResourceId.yaml
   tagline:
     description: The application's tagline.
     type: string
   description:
-    description: The application description.
+    description: The application description. Accepts markdown or simple text.
     type: string
   status:
     description: The application status.
@@ -41,22 +41,43 @@ properties:
       - available
       - disabled
   permissions:
-    description: The list of permissions available to the application.
+    description: |
+      The list of permissions available to the application.
+      If you would like to add permissions, contact [Rebilly Support](mailto:info@rebilly.com).
     type: array
     items:
       type: string
       format: operationId
+      enum:
+        - PostWebhookCredentialHash
+        - PostWebhook
+        - GetWebhook
+        - GetCustomer
+        - GetCustomerCollection
+        - GetInvoice
+        - GetInvoiceCollection
+        - GetPlan
+        - GetPlanCollection
+        - GetProduct
+        - GetProductCollection
+        - GetSubscription
+        - GetSubscriptionCollection
+        - GetTransaction
+        - GetTransactionCollection
+        - GetWebsite
+        - GetWebsiteCollection
+        - PostCoupon
+        - PutCoupon
     example:
-      - PostFile
-      - StorefrontGetAccount
-      - StorefrontGetWebsite
-      - StorefrontGetKycDocumentCollection
-      - StorefrontGetKycDocument
-      - StorefrontPostKycDocument
+      - GetInvoice
+      - GetInvoiceCollection
+      - GetCustomer
+      - GetCustomerCollection
+
   properties:
     description: >-
-      The list of application properties.
-      This is a JSON-schema object.
+      Outlines the settings that app users can fill in when installing.
+      Accepts [JSON-schema](https://json-schema.org/) drafts 4, 6 and 7.
     type: object
     example: 
       type: object
