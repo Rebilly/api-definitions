@@ -1,0 +1,110 @@
+type: object
+required:
+  - name
+  - logoId
+  - authorName
+  - tagline
+  - description
+  - permissions
+properties:
+  id:
+    description: The application identifier string.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  name:
+    description: The application name.
+    type: string
+  logoId:
+    description: The file ID of the application logo.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  authorName:
+    description: The author's name.
+    type: string
+  authorLogoId:
+    description: The file ID of the author's logo.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  tagline:
+    description: The application's tagline.
+    type: string
+  description:
+    description: The application description. Accepts markdown or simple text.
+    type: string
+  status:
+    description: The application status.
+    readOnly: true
+    type: string
+    enum:
+      - pending-approval
+      - available
+      - disabled
+  permissions:
+    description: |
+      The list of permissions available to the application.
+      If you would like to add permissions, contact [Rebilly Support](mailto:info@rebilly.com).
+    type: array
+    items:
+      type: string
+      format: operationId
+      enum:
+        - PostWebhookCredentialHash
+        - PostWebhook
+        - GetWebhook
+        - GetCustomer
+        - GetCustomerCollection
+        - GetInvoice
+        - GetInvoiceCollection
+        - GetPlan
+        - GetPlanCollection
+        - GetProduct
+        - GetProductCollection
+        - GetSubscription
+        - GetSubscriptionCollection
+        - GetTransaction
+        - GetTransactionCollection
+        - GetWebsite
+        - GetWebsiteCollection
+        - PostCoupon
+        - PutCoupon
+    example:
+      - GetInvoice
+      - GetInvoiceCollection
+      - GetCustomer
+      - GetCustomerCollection
+
+  properties:
+    description: >-
+      Outlines the settings that app users can fill in when installing.
+      Accepts [JSON-schema](https://json-schema.org/) drafts 4, 6 and 7.
+    type: object
+    example: 
+      type: object
+      properties:
+        email:
+          type: "string"
+        max:
+          type: "integer"
+          minimum: 0
+          exclusiveMaximum: 100
+      required: ["email"]
+  createdTime:
+    description: Application created time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: Application updated time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Links/SelfLink.yaml
+        - $ref: ../Links/ApplicationInstanceLink.yaml
+        - $ref: ../Links/LogoUrlLink.yaml
+        - $ref: ../Links/AuthorLogoUrlLink.yaml
