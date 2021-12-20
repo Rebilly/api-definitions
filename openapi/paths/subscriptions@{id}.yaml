@@ -83,3 +83,26 @@ put:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/subscriptions@{id}/put.js'
+delete:
+  x-products:
+    - Full
+    - Billing
+    - Core
+  tags:
+    - Orders
+  summary: Void pending subscription
+  operationId: DeleteSubscription
+  x-sdk-operation-name: delete
+  description: |
+    Void a pending subscription with predefined identifier string.
+  responses:
+    '204':
+      description: Pending subscription was voided.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
