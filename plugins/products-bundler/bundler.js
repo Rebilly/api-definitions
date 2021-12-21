@@ -65,6 +65,7 @@ function getNewTags(definitionRoot, tagsNamesToInclude) {
       newTags.push(tag)
     }
   });
+
   return newTags;
 }
 
@@ -171,18 +172,25 @@ function getNewComponents(definitionRoot) {
     findUsedComponents(usedComponents, definitionRoot, element);
   })
 
-  const newComponents = {
-    securitySchemes: definitionRoot.components.securitySchemes,
-  };
+  for (const [componentType, components] of Object.entries(definitionRoot.components)) {
+    if (componentType === 'securitySchemes') {
+      // Use entire object
+      continue;
+    }
 
-  for (const [componentType, names] of Object.entries(usedComponents)) {
-    newComponents[componentType] = {};
-    names.forEach((name) => {
-      newComponents[componentType][name] = definitionRoot.components[componentType][name]
-    })
+    if (!(componentType in usedComponents)) {
+      delete definitionRoot.components[componentType];
+      continue;
+    }
+
+    Object.keys(components).forEach(name => {
+      if (usedComponents[componentType].indexOf(name) === -1) {
+        delete definitionRoot.components[componentType][name]
+      }
+    });
   }
 
-  return newComponents;
+  return definitionRoot.components;
 }
 
 module.exports = {
