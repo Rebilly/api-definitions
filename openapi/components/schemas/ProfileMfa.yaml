@@ -1,0 +1,27 @@
+type: object
+properties:
+  status:
+    description: MFA enrollment status.
+    type: string
+    enum:
+      - active
+      - inactive
+  type:
+    description: MFA enrollment type. Type `duo` can't be updated or deleted. Contact support if you need to reset your Duo MFA.
+    type: string
+    enum:
+      - duo
+      - guardian
+  lastAuthTime:
+    description: Last time MFA verification passed. To disable MFA it must be no more than 10 minutes before disable.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Links/SelfLink.yaml
+        - $ref: ./Links/EnrollmentLink.yaml

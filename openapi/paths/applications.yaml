@@ -1,0 +1,86 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  x-products:
+    - Users
+    - Full
+  tags:
+    - Application users
+  summary: Retrieve a list of applications
+  operationId: GetApplicationCollection
+  x-sdk-operation-name: getAll
+  description: |
+    Retrieve a list of applications.
+    You may sort by the id, name, status, createdTime, and updatedTime.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionExpand.yaml
+    - $ref: ../components/parameters/collectionFields.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+  responses:
+    '200':
+      description: A list of applications was retrieved successfully.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Applications/Users/Application.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/applications/get.php
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/applications/get.js
+post:
+  tags:
+    - Application owners
+  summary: Register an application
+  operationId: PostApplication
+  x-sdk-operation-name: create
+  description: |
+    Register an application. It will appear publicly in the [App Store](https://app.rebilly.com/app-store): \
+    ![An example app](/images/app-store-example.png) \
+    Before you submit an app, read the [App Store documentation](https://www.rebilly.com/docs/content/concepts-and-features/app-store/).
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Applications/Application.yaml
+  responses:
+    '201':
+      description: Application was registered.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Applications/Application.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-code-samples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/applications/post.php
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/applications/post.js

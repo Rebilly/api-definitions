@@ -1,0 +1,36 @@
+type: object
+required:
+  - settings
+properties:
+  status:
+    description: The application instance status.
+    readOnly: true
+    type: string
+    enum:
+      - enabling
+      - enabled
+      - disabling
+      - disabled
+  settings:
+    type: object
+    additionalProperties:
+      type: string
+    example:
+      color: red
+      limit: 5
+  createdTime:
+    description: Application instance created time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: Application instance updated time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Links/SelfLink.yaml

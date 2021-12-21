@@ -1,0 +1,34 @@
+content:
+  application/json:
+    schema:
+      properties:
+        organizationId:
+          description: The organization identifier string.
+          allOf:
+            - $ref: ../../schemas/ResourceId.yaml
+        applicationId:
+          description: The organization identifier string.
+          allOf:
+            - $ref: ../../schemas/ResourceId.yaml
+        eventType:
+          enum:
+            - application-instance-enabled
+          example: application-instance-enabled
+          allOf:
+            - $ref: ../../schemas/GlobalWebhookEventType.yaml
+        _embedded:
+          type: object
+          properties:
+            application:
+              $ref: ../../schemas/Applications/Application.yaml
+            applicationInstance:
+              $ref: ../../schemas/Applications/Owners/ApplicationInstance.yaml
+        _links:
+          type: array
+          description: The links related to resource.
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: ../../schemas/Links/ApplicationLink.yaml
+              - $ref: ../../schemas/Links/ApplicationInstanceLink.yaml
+description: Application instance enabled webhook request body resource.
