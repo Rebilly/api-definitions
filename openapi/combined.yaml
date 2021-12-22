@@ -224,6 +224,7 @@ tags:
   - name: TaxJar credentials
   - name: Metadata
   - name: Custom domains
+  - name: Certificates
   - name: Application owners
   - name: Application users
 security:
@@ -648,6 +649,9 @@ paths:
     $ref: ./paths/websites.yaml
   '/websites/{id}':
     $ref: './paths/websites@{id}.yaml'
+  /certificates:
+    $ref: ./paths/certificates.yaml
+
 
   # Reports
   '/customers/{customerId}/summary-metrics':
@@ -692,5 +696,3 @@ paths:
     $ref: ./paths/reports@transactions.yaml
   '/subscriptions/{subscriptionId}/summary-metrics':
     $ref: './paths/subscriptions@{subscriptionId}@summary-metrics.yaml'
-  /certificates:
-    $ref: ./paths/certificates.yaml
