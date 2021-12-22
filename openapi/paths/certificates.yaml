@@ -47,7 +47,7 @@ post:
   operationId: PostCertificate
   x-sdk-operation-name: create
   description: |
-    Create a certificate and receive a certificate signing request.  Optionally include signed pem.
+    Create a certificate and receive a certificate signing request.
   responses:
     '201':
       description: certificate was created.
@@ -61,3 +61,32 @@ post:
       $ref: ../components/responses/Forbidden.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
+PUT:
+  x-products:
+    - Users
+    - Full
+  tags:
+    - Certificates
+  summary: Update with signed certificate.
+  operationId: PutCertificate
+  x-sdk-operation-name: create
+  description: |
+    Patch a certificate.
+  responses:
+    '201':
+      description: certificate was updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Certificate.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Certificate.yaml
