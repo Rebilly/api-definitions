@@ -1,0 +1,92 @@
+parameters:
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  x-products:
+    - Users
+    - Full
+  tags:
+    - Certificates
+  summary: Retrieve a list of certificates
+  operationId: GetCertificateCollection
+  x-sdk-operation-name: getAll
+  description: |
+    Retrieve a list of certificates.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+  responses:
+    '200':
+      description: A list of certificates was retrieved successfully.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Certificate.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+post:
+  x-products:
+    - Users
+    - Full
+  tags:
+    - Certificates
+  summary: Create a certificate
+  operationId: PostCertificate
+  x-sdk-operation-name: create
+  description: |
+    Create a certificate and receive a certificate signing request.
+  responses:
+    '201':
+      description: certificate was created.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Certificate.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+patch:
+  x-products:
+    - Users
+    - Full
+  tags:
+    - Certificates
+  summary: Update with signed certificate.
+  operationId: PostCertificate
+  x-sdk-operation-name: create
+  description: |
+    Patch a certificate.
+  responses:
+    '201':
+      description: certificate was updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Certificate.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Certificate.yaml
