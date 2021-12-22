@@ -1,0 +1,19 @@
+type: object
+properties:  
+  id:
+    description: The session identifier string.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  pem:
+    description: The signed certificate in pem format.
+    type: string
+    maxLength: 255  
+  createdTime:
+    description: Certificate created time.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    description: Certificate updated time.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
