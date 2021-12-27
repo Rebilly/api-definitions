@@ -1,1 +1,1 @@
-const invoiceItem = await api.subscriptions.delete({id: 'id'});
+const subscriptionItem = await api.subscriptions.delete({id: 'id'});
