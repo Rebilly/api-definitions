@@ -14,8 +14,12 @@ post:
   description: >
     Void a pending order with predefined identifier string.
   responses:
-    '204':
+    '201':
       description: Order was voided.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Subscription.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
