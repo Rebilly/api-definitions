@@ -2,11 +2,18 @@ parameters:
   - $ref: ../components/parameters/organizationId.yaml
   - $ref: ../components/parameters/resourceId.yaml
 get:
+  x-products:
+    - Full
+    - Users
   tags:
     - Webhooks
   summary: Retrieve a webhook
   operationId: GetWebhook
   x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
   description: |
     Retrieve a webhook with specified identifier string.
   responses:
@@ -27,11 +34,18 @@ get:
       source:
         $ref: '../code_samples/JavaScript/webhooks@{id}/get.js'
 put:
+  x-products:
+    - Full
+    - Users
   tags:
     - Webhooks
   summary: Create or update a webhook with predefined ID
   operationId: PutWebhook
   x-sdk-operation-name: update
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
   description: |
     Create or update a webhook with predefined identifier string.
   requestBody:

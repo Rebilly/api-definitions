@@ -1,11 +1,19 @@
 parameters:
   - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Products
   summary: Retrieve a list of products
   operationId: GetProductCollection
   x-sdk-operation-name: getAll
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
   description: |
     Retrieve a list of products.
   parameters:
@@ -39,6 +47,10 @@ get:
       source:
         $ref: ../code_samples/JavaScript/products/get.js
 post:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Products
   summary: Create a Product

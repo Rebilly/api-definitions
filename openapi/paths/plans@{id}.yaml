@@ -2,11 +2,19 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
   - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Plans
   summary: Retrieve a plan
   operationId: GetPlan
   x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
   description: |
     Retrieve a plan with specified identifier string.
   responses:
@@ -30,6 +38,10 @@ get:
       source:
         $ref: '../code_samples/JavaScript/plans@{id}/get.js'
 put:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Plans
   summary: Create or update a Plan with predefined ID
@@ -68,6 +80,10 @@ put:
       source:
         $ref: '../code_samples/JavaScript/plans@{id}/put.js'
 delete:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Plans
   summary: Delete a Plan

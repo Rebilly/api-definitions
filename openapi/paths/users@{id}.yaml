@@ -2,6 +2,9 @@ parameters:
   - $ref: ../components/parameters/organizationId.yaml
   - $ref: ../components/parameters/resourceId.yaml
 get:
+  x-products:
+    - Full
+    - Users
   tags:
     - Users
   summary: Retrieve user
@@ -30,6 +33,9 @@ get:
       source:
         $ref: '../code_samples/JavaScript/users@{id}/get.js'
 put:
+  x-products:
+    - Full
+    - Users
   tags:
     - Users
   summary: Create or update user with predefined ID
@@ -67,33 +73,3 @@ put:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/users@{id}/put.js'
-delete:
-  tags:
-    - Users
-  summary: Delete user
-  operationId: DeleteUser
-  x-sdk-operation-name: delete
-  description: |
-    Delete user with predefined identifier string.
-  responses:
-    '204':
-      description: User was deleted.
-    '401':
-      $ref: ../components/responses/Unauthorized.yaml
-    '403':
-      $ref: ../components/responses/Forbidden.yaml
-    '404':
-      $ref: ../components/responses/NotFound.yaml
-    '409':
-      description: User has related resources and cannot be deleted.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Error.yaml
-  x-codeSamples:
-    - lang: PHP
-      source:
-        $ref: '../code_samples/PHP/users@{id}/delete.php'
-    - lang: JavaScript
-      source:
-        $ref: '../code_samples/JavaScript/users@{id}/delete.js'

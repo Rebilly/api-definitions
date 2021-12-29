@@ -2,11 +2,21 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
   - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Risk Management
+    - Payments
+    - Billing
+    - Core
   tags:
     - Customers
   summary: Retrieve a customer
   operationId: GetCustomer
   x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
   description: |
     Retrieve a customer with specified identifier string.
   parameters:
@@ -33,6 +43,12 @@ get:
       source:
         $ref: '../code_samples/JavaScript/customers@{id}/get.js'
 put:
+  x-products:
+    - Full
+    - Risk Management
+    - Payments
+    - Billing
+    - Core
   tags:
     - Customers
   summary: Upsert a customer with predefined ID
@@ -68,6 +84,12 @@ put:
       source:
         $ref: '../code_samples/JavaScript/customers@{id}/put.js'
 delete:
+  x-products:
+    - Full
+    - Risk Management
+    - Payments
+    - Billing
+    - Core
   parameters:
     - in: query
       name: targetCustomerId

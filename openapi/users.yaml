@@ -209,6 +209,7 @@ tags:
   - name: Experian credentials
   - name: TaxJar credentials
   - name: Metadata
+  - name: Custom domains
 ################################################################################
 x-tagGroups:
   - name: Security
@@ -225,7 +226,9 @@ x-tagGroups:
   - name: Rules
     tags:
       - Rules
+      - Email Notifications
       - Lists
+      - Rules Timeline
   - name: Users
     tags:
       - Profile
@@ -236,13 +239,19 @@ x-tagGroups:
     tags:
       - Webhook Credentials
       - Webhooks
+  - name: Applications
+    tags:
+      - Application owners
+      - Application users
   - name: Other
     tags:
       - Balance transactions
       - Billing Portals
       - Checkout Forms
       - Gateway Accounts
+      - Gateway Accounts Timeline
       - Payment Cards
+      - Payment Instruments
       - Organizations
       - Segments
       - Status
@@ -253,6 +262,7 @@ x-tagGroups:
       - Experian credentials
       - TaxJar credentials
       - Metadata
+      - Custom domains
   - name: Related docs
     tags:
       - Rebilly API
@@ -261,6 +271,18 @@ security:
   - SecretApiKey: []
   - JWT: []
 servers:
+  - url: 'https://api-sandbox.rebilly.com/organizations/{organizationId}'
+    description: Sandbox server with organizationId.
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: 'https://api.rebilly.com/organizations/{organizationId}'
+    description: Live server with organizationId.
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
   - url: 'https://api-sandbox.rebilly.com'
     description: Sandbox Server.
   - url: 'https://api.rebilly.com'
@@ -271,6 +293,8 @@ components:
   securitySchemes:
     JWT:
       $ref: components/securitySchemes/JWT.yaml
+    ApplicationJWT:
+      $ref: components/securitySchemes/ApplicationJWT.yaml
     PublishableApiKey:
       $ref: components/securitySchemes/PublishableApiKey.yaml
     SecretApiKey:
@@ -283,6 +307,16 @@ paths:
     $ref: ./paths/api-keys.yaml
   '/api-keys/{id}':
     $ref: './paths/api-keys@{id}.yaml'
+  '/application-instances/{applicationId}':
+    $ref: './paths/application-instances@{applicationId}.yaml'
+  '/applications':
+    $ref: './paths/applications.yaml'
+  '/applications/{id}':
+    $ref: './paths/applications@{id}.yaml'
+  '/applications/{id}/instances':
+    $ref: './paths/applications@{id}@instances.yaml'
+  '/applications/{id}/instances/{organizationId}':
+    $ref: './paths/applications@{id}@instances@{organizationId}.yaml'
   /balance-transactions:
     $ref: './paths/balance-transactions.yaml'
   '/balance-transactions/{id}':
@@ -341,6 +375,10 @@ paths:
     $ref: ./paths/credential-hashes@taxjar.yaml
   '/credential-hashes/taxjar/{hash}':
     $ref: './paths/credential-hashes@taxjar@{hash}.yaml'
+  /custom-domains:
+    $ref: ./paths/custom-domains.yaml
+  '/custom-domains/{domain}':
+    $ref: './paths/custom-domains@{domain}.yaml'
   '/email-delivery-setting-verifications/{token}':
     $ref: './paths/email-delivery-setting-verifications@{token}.yaml'
   /email-delivery-settings:
@@ -403,6 +441,8 @@ paths:
     $ref: './paths/gateway-accounts@{id}@check-credentials.yaml'
   '/gateway-accounts/{id}/financial-settings':
     $ref: './paths/gateway-accounts@{id}@financial-settings.yaml'
+  /digital-wallets/onboarding/apple-pay:
+    $ref: './paths/digital-wallets@onboarding@apple-pay.yaml'
   /grid-segments:
     $ref: ./paths/grid-segments.yaml
   '/grid-segments/{id}':
@@ -447,6 +487,8 @@ paths:
     $ref: ./paths/previews@webhooks.yaml
   /profile:
     $ref: ./paths/profile.yaml
+  /profile/mfa:
+    $ref: ./paths/profile@mfa.yaml
   /profile/password:
     $ref: ./paths/profile@password.yaml
   /profile/totp-reset:
@@ -495,6 +537,12 @@ paths:
     $ref: './paths/websites@{id}.yaml'
 
 x-webhooks:
+  application-instance-disabled:
+    post:
+      $ref: ./webhooks/application-instance-disabled.yaml
+  application-instance-enabled:
+    post:
+      $ref: ./webhooks/application-instance-enabled.yaml
   gateway-account-downtime-ended:
     post:
       $ref: ./webhooks/gateway-account-downtime-ended.yaml

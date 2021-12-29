@@ -2,11 +2,18 @@ parameters:
   - $ref: ../components/parameters/organizationId.yaml
   - $ref: ../components/parameters/resourceId.yaml
 get:
+  x-products:
+    - Full
+    - Users
   tags:
     - Websites
   summary: Retrieve a website
   operationId: GetWebsite
   x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
   description: |
     Retrieve a website with specified identifier string.
   responses:
@@ -30,6 +37,9 @@ get:
       source:
         $ref: '../code_samples/JavaScript/websites@{id}/get.js'
 put:
+  x-products:
+    - Full
+    - Users
   tags:
     - Websites
   summary: Create or update a website with predefined ID
@@ -72,6 +82,9 @@ put:
       source:
         $ref: '../code_samples/JavaScript/websites@{id}/put.js'
 delete:
+  x-products:
+    - Full
+    - Users
   tags:
     - Websites
   summary: Delete a website

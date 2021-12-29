@@ -26,11 +26,10 @@ allOf:
                   enum:
                     - payment-card
                 feature:
-                  type: string
                   nullable: true
-                  enum:
-                    - Google Pay
-                    - Apple Pay
+                  oneOf:
+                    - $ref: ../../ReadyToPay/Features/ApplePayFeatureName.yaml
+                    - $ref: ../../ReadyToPay/Features/GooglePayFeatureName.yaml
             - type: object
               title: ACH
               properties:
@@ -39,10 +38,20 @@ allOf:
                   enum:
                     - ach
                 feature:
-                  type: string
                   nullable: true
+                  oneOf:
+                    - $ref: ../../ReadyToPay/Features/PlaidFeatureName.yaml
+            - type: object
+              title: PayPal
+              properties:
+                paymentMethod:
+                  type: string
                   enum:
-                    - Plaid
+                    - paypal
+                feature:
+                  nullable: true
+                  oneOf:
+                    - $ref: ../../ReadyToPay/Features/PayPalBillingAgreementFeatureName.yaml
             - type: object
               title: Generic
               properties:
@@ -50,6 +59,9 @@ allOf:
                   description: The payment method.
                   allOf:
                     - $ref: ../../PaymentMethods/AlternativePaymentMethods.yaml
+                    - not:
+                        enum:
+                          - paypal
                 feature:
                   nullable: true
           properties:

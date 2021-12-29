@@ -1,11 +1,18 @@
 parameters:
   - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Users
   tags:
     - Websites
   summary: Retrieve a list of websites
   operationId: GetWebsiteCollection
   x-sdk-operation-name: getAll
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
   description: |
     Retrieve a list of websites.
   parameters:
@@ -42,6 +49,9 @@ get:
       source:
         $ref: ../code_samples/JavaScript/websites/get.js
 post:
+  x-products:
+    - Full
+    - Users
   tags:
     - Websites
   summary: Create a website

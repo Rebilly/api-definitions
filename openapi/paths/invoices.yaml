@@ -1,11 +1,19 @@
 parameters:
   - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Invoices
   summary: Retrieve a list of invoices
   operationId: GetInvoiceCollection
   x-sdk-operation-name: getAll
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
   description: |
     Retrieve a list of invoices.
   parameters:
@@ -43,6 +51,10 @@ get:
       source:
         $ref: ../code_samples/JavaScript/invoices/get.js
 post:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Invoices
   summary: Create an invoice

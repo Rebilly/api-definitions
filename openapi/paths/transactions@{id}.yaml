@@ -2,11 +2,20 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
   - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Payments
+    - Billing
+    - Core
   tags:
     - Transactions
   summary: Retrieve a Transaction
   operationId: GetTransaction
   x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
   description: |
     Retrieve a Transaction with specified identifier string.
   parameters:
@@ -32,6 +41,11 @@ get:
       source:
         $ref: '../code_samples/JavaScript/transactions@{id}/get.js'
 patch:
+  x-products:
+    - Full
+    - Payments
+    - Billing
+    - Core
   tags:
     - Transactions
   summary: Update a transaction

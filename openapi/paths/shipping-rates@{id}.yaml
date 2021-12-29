@@ -1,0 +1,87 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  tags:
+    - Shipping Rates
+  summary: Retrieve a shipping rate
+  operationId: GetShippingRate
+  x-sdk-operation-name: get
+  description: |
+    Retrieve a shipping rate with specified identifier string.
+  responses:
+    '200':
+      description: Shipping rate was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ShippingRates/ShippingRate.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: '../code_samples/JavaScript/shipping-rates@{id}/get.js'
+put:
+  tags:
+    - Shipping Rates
+  summary: Create a shipping rate with predefined ID
+  operationId: PutShippingRate
+  x-sdk-operation-name: update
+  description: |
+    Create a shipping rate with predefined identifier string.
+  responses:
+    '200':
+      description: Shipping rate was updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ShippingRates/ShippingRate.yaml
+    '201':
+      description: Shipping rate was created.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ShippingRates/ShippingRate.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ShippingRates/ShippingRate.yaml
+    description: Shipping rate resource.
+    required: true
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: '../code_samples/JavaScript/shipping-rates@{id}/put.js'
+delete:
+  tags:
+    - Shipping Rates
+  summary: Delete a shipping rate
+  operationId: DeleteShippingRate
+  x-sdk-operation-name: delete
+  description: |
+    Delete a shipping rate with predefined identifier string.
+  responses:
+    '204':
+      description: Shipping rate was deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: '../code_samples/JavaScript/shipping-rates@{id}/delete.js'

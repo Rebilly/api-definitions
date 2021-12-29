@@ -1,11 +1,19 @@
 parameters:
   - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Orders
   summary: Retrieve a list of orders
   operationId: GetSubscriptionCollection
   x-sdk-operation-name: getAll
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
   description: |
     Retrieve a list of orders.
   parameters:
@@ -43,6 +51,10 @@ get:
       source:
         $ref: ../code_samples/JavaScript/subscriptions/get.js
 post:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Orders
   summary: Create an order

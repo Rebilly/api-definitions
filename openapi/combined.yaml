@@ -154,6 +154,11 @@ tags:
     description: >
       A shipping zone contains regions and countries that you ship to. Each
       shipping zone has its own shipping rates.
+
+      This API is deprecated, see Shipping rates.
+  - name: Shipping rates
+    description: >
+      A shipping rate contains a filter and a pricing for a specific destination you ship to.
   - name: Orders
     description: >
       An order applies a plan's template to create invoice(s) for a customer,
@@ -218,6 +223,9 @@ tags:
   - name: Experian credentials
   - name: TaxJar credentials
   - name: Metadata
+  - name: Custom domains
+  - name: Application owners
+  - name: Application users
 security:
   - SecretApiKey: []
   - JWT: []
@@ -226,12 +234,24 @@ components:
   securitySchemes:
     JWT:
       $ref: components/securitySchemes/JWT.yaml
+    ApplicationJWT:
+      $ref: components/securitySchemes/ApplicationJWT.yaml
     PublishableApiKey:
       $ref: components/securitySchemes/PublishableApiKey.yaml
     SecretApiKey:
       $ref: components/securitySchemes/SecretApiKey.yaml
 
 paths:
+  '/application-instances/{applicationId}':
+    $ref: './paths/application-instances@{applicationId}.yaml'
+  '/applications':
+    $ref: './paths/applications.yaml'
+  '/applications/{id}':
+    $ref: './paths/applications@{id}.yaml'
+  '/applications/{id}/instances':
+    $ref: './paths/applications@{id}@instances.yaml'
+  '/applications/{id}/instances/{organizationId}':
+    $ref: './paths/applications@{id}@instances@{organizationId}.yaml'
   /attachments:
     $ref: ./paths/attachments.yaml
   '/attachments/{id}':
@@ -334,6 +354,10 @@ paths:
     $ref: './paths/kyc-documents@{id}@rejection.yaml'
   '/kyc-documents/{id}/review':
     $ref: './paths/kyc-documents@{id}@review.yaml'
+  '/kyc-documents/{id}/start-review':
+    $ref: './paths/kyc-documents@{id}@start-review.yaml'
+  '/kyc-documents/{id}/stop-review':
+    $ref: './paths/kyc-documents@{id}@stop-review.yaml'
   /password-tokens:
     $ref: ./paths/password-tokens.yaml
   '/password-tokens/{id}':
@@ -364,6 +388,10 @@ paths:
     $ref: './paths/products@{id}.yaml'
   /search:
     $ref: ./paths/search.yaml
+  /shipping-rates:
+    $ref: ./paths/shipping-rates.yaml
+  '/shipping-rates/{id}':
+    $ref: './paths/shipping-rates@{id}.yaml'
   /shipping-zones:
     $ref: ./paths/shipping-zones.yaml
   '/shipping-zones/{id}':
@@ -380,6 +408,8 @@ paths:
     $ref: ./paths/subscriptions.yaml
   '/subscriptions/{id}':
     $ref: './paths/subscriptions@{id}.yaml'
+  '/subscriptions/{id}/void':
+    $ref: './paths/subscriptions@{id}@void.yaml'
   '/subscriptions/{id}/change-items':
     $ref: './paths/subscriptions@{id}@change-items.yaml'
   '/subscriptions/{id}/interim-invoice':
@@ -404,8 +434,6 @@ paths:
     $ref: ./paths/tokens.yaml
   '/tokens/{token}':
     $ref: './paths/tokens@{token}.yaml'
-  /digital-wallets/validation:
-    $ref: './paths/digital-wallets@validation.yaml'
   /transactions:
     $ref: ./paths/transactions.yaml
   '/transactions/{id}':
@@ -480,8 +508,14 @@ paths:
     $ref: ./paths/credential-hashes@taxjar.yaml
   '/credential-hashes/taxjar/{hash}':
     $ref: './paths/credential-hashes@taxjar@{hash}.yaml'
+  /custom-domains:
+    $ref: ./paths/custom-domains.yaml
+  '/custom-domains/{domain}':
+    $ref: './paths/custom-domains@{domain}.yaml'
   '/email-delivery-setting-verifications/{token}':
     $ref: './paths/email-delivery-setting-verifications@{token}.yaml'
+  /digital-wallets/onboarding/apple-pay:
+    $ref: './paths/digital-wallets@onboarding@apple-pay.yaml'
   /email-delivery-settings:
     $ref: ./paths/email-delivery-settings.yaml
   '/email-delivery-settings/{id}':
@@ -534,6 +568,8 @@ paths:
     $ref: './paths/gateway-accounts@{id}@timeline.yaml'
   '/gateway-accounts/{id}/timeline/{messageId}':
     $ref: './paths/gateway-accounts@{id}@timeline@{messageId}.yaml'
+  /digital-wallets/validation:
+    $ref: './paths/digital-wallets@validation.yaml'
   /grid-segments:
     $ref: ./paths/grid-segments.yaml
   '/grid-segments/{id}':
@@ -560,6 +596,8 @@ paths:
     $ref: './paths/organizations@{id}.yaml'
   /payment-cards-bank-names:
     $ref: ./paths/payment-cards-bank-names.yaml
+  /previews/orders:
+    $ref: './paths/previews@orders.yaml'
   /previews/rule-actions/send-email:
     $ref: ./paths/previews@rule-actions@send-email.yaml
   /previews/rule-actions/trigger-webhook:
@@ -568,6 +606,8 @@ paths:
     $ref: ./paths/previews@webhooks.yaml
   /profile:
     $ref: ./paths/profile.yaml
+  /profile/mfa:
+    $ref: ./paths/profile@mfa.yaml
   /profile/password:
     $ref: ./paths/profile@password.yaml
   /profile/totp-reset:

@@ -2,11 +2,19 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
   - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Products
   summary: Retrieve a product
   operationId: GetProduct
   x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
   description: |
     Retrieve a product with specified identifier string.
   responses:
@@ -27,6 +35,10 @@ get:
       source:
         $ref: '../code_samples/JavaScript/products@{id}/get.js'
 put:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Products
   summary: Upsert a product with predefined ID
@@ -60,6 +72,10 @@ put:
       source:
         $ref: '../code_samples/JavaScript/products@{id}/put.js'
 delete:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Products
   summary: Delete a product
