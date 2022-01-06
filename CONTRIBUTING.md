@@ -30,7 +30,7 @@ Try to set up lint rules to enforce any design rules to keep this list to a mini
 
 ### Operations
 
-- Follow [path conventions](./paths/README.md)
+- Follow [path conventions](./openapi/paths/README.md)
 - Use appropriate HTTP methods.
     - POST to insert new Resource into another.
     - PUT to create with specified ID or replace existing Resource (must return 200 for updated and 201 for created).
@@ -42,10 +42,10 @@ Try to set up lint rules to enforce any design rules to keep this list to a mini
 
 - Add `"#/parameters/collectionLimit"` and `"#/parameters/collectionOffset"` to Resource collection, if pagination is needed.
 - Add `"#/parameters/collectionFields"` to Resource collection to allow return only specified fields.
-- Add `"#/parameters/collectionExpand"` to Resource collection if Resource contains embedded resources
-- Add `"#/parameters/collectionQuery"` to Resource collection if Resource support search by ‘?q=’ param
-- Add `"#/parameters/collectionFilter"` to Resource collection if Resource support search by ‘?filter=’ param
-- Add `"#/parameters/collectionCriteria"` to Resource collection if Resource support search by ‘?criteria=’ param
+- Add `"#/parameters/collectionExpand"` to Resource collection if Resource contains embedded resources.
+- Add `"#/parameters/collectionQuery"` to Resource collection if Resource support search by ‘?q=’ param.
+- Add `"#/parameters/collectionFilter"` to Resource collection if Resource support search by ‘?filter=’ param.
+- Add `"#/parameters/collectionCriteria"` to Resource collection if Resource support search by ‘?criteria=’ param.
 - Add `"#/parameters/collectionSort"` to Resource collection if Resource support sorting.
     - Define all sortable properties.
 
