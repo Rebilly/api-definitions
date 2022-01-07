@@ -12,7 +12,11 @@ TBD: Add Redocly validation status badge.
 - [Reports API docs](https://reports-api-docs.rebilly.com/)
 - [Storefront API docs](https://storefront-api-docs.rebilly.com/) (this API is in development and subject to change)
 
-## Working on the API definitions
+## Contributing
+
+[Read our contribution guide](./CONTRIBUTING.md).
+
+## Environment setup
 
 If you use VS Code, use the [Redocly VS Code extension](https://marketplace.visualstudio.com/items?itemName=Redocly.openapi-vs-code) to edit this repo and get inline lint feedback and previews.
 
