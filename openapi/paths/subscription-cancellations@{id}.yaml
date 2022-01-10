@@ -73,7 +73,20 @@ patch:
   x-sdk-operation-name: patch
   description: Update a subscription cancellation, used for updating cancellation reason and description.
   requestBody:
-    $ref: ../components/requestBodies/PatchSubscriptionCancellation.yaml
+    content:
+      application/json:
+        schema:
+          allOf:
+            - properties:
+                canceledBy:
+                  readOnly: true
+                status:
+                  readOnly: true
+                churnTime:
+                  readOnly: true
+            - $ref: ../schemas/Subscription/SubscriptionCancellation.yaml
+    description: Patch cancellation resource.
+    required: true
   responses:
     '200':
       description: Cancellation was updated.
