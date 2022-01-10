@@ -1,0 +1,24 @@
+description: WesternUnion config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: WesternUnion credentials object.
+        properties:
+          clientId:
+            type: string
+            description: WesternUnion client ID.
+          certificateCommonName:
+            type: string
+            description: WesternUnion certificate common name (CN).
+          certificateSerialNumber:
+            type: string
+            description: WesternUnion certificate serial number (SN).
+        required:
+          - clientId
+          - certificateCommonName
+          - certificateSerialNumber
