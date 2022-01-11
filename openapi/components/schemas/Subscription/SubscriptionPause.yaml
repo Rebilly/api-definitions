@@ -12,9 +12,9 @@ properties:
     allOf:
       - $ref: ../ResourceId.yaml
   status:
-    description: Who did the cancellation.
+    description: The pause status.
     type: string
-    default: customer
+    readOnly: true
     enum:
       - pending
       - ongoing
@@ -31,6 +31,7 @@ properties:
     description: Pause reason description in free form.
     type: string
     maxLength: 255
+    nullable: true
   effectiveTime:
     description: >
       The date from which the service period will pause.
@@ -40,6 +41,7 @@ properties:
       If omitted, it will default to the current time.
     type: string
     format: date-time
+    nullable: true
   endTime:
     description: >
       The time when the pause ends and the subscription resumes its billing.
@@ -48,6 +50,7 @@ properties:
       Empty endTime will result in indefinitely paused subscription.
     type: string
     format: date-time
+    nullable: true
   timeRemaining:
     description: >
       Time in seconds between the pause end time and the renewal time.
@@ -65,6 +68,11 @@ properties:
     minimum: 0
   createdTime:
     description: The time of resource creation (when it is posted).
+    type: string
+    format: date-time
+    readOnly: true
+  updatedTime:
+    description: The time of resource update.
     type: string
     format: date-time
     readOnly: true

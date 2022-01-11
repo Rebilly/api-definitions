@@ -8,10 +8,10 @@ get:
     - Core
   tags:
     - Orders
-  summary: Retrieve an order pause
+  summary: Retrieve a subscription pause
   operationId: GetSubscriptionPause
   x-sdk-operation-name: get
-  description: Retrieve an order pause with specified identifier string.
+  description: Retrieve a subscription pause with specified identifier string.
   responses:
     '200':
       description: Pause was retrieved successfully.
@@ -32,21 +32,24 @@ put:
     - Core
   tags:
     - Orders
-  summary: Pause an order
+  summary: Update a subscription pause
   operationId: PutSubscriptionPause
   x-sdk-operation-name: update
-  description: Pause a subscription.
+  description: Update a subscription pause.
   requestBody:
-    $ref: ../components/schemas/Subscription/SubscriptionPause.yaml
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Subscription/SubscriptionPause.yaml
   responses:
     '200':
-      description: Pause was updated, the order is or will be paused.
+      description: Pause was updated, the subscription is or will be paused.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Subscription/SubscriptionPause.yaml
     '201':
-      description: Pause was created, the order is or will be paused.
+      description: Pause was created, the subscription is or will be paused.
       content:
         application/json:
           schema:
