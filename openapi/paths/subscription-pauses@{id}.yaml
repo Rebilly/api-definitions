@@ -1,0 +1,59 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+get:
+  x-products:
+    - Full
+    - Billing
+    - Core
+  tags:
+    - Orders
+  summary: Retrieve an order pause
+  operationId: GetSubscriptionPause
+  x-sdk-operation-name: get
+  description: Retrieve an order pause with specified identifier string.
+  responses:
+    '200':
+      description: Pause was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Subscription/SubscriptionPause.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Full
+    - Billing
+    - Core
+  tags:
+    - Orders
+  summary: Pause an order
+  operationId: PutSubscriptionPause
+  x-sdk-operation-name: update
+  description: Pause a subscription.
+  requestBody:
+    $ref: ../components/schemas/Subscription/SubscriptionPause.yaml
+  responses:
+    '200':
+      description: Pause was updated, the order is or will be paused.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Subscription/SubscriptionPause.yaml
+    '201':
+      description: Pause was created, the order is or will be paused.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Subscription/SubscriptionPause.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
