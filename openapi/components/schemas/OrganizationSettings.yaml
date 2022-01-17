@@ -1,0 +1,19 @@
+type: object
+properties:
+  defaultTaxCalculator:
+    type: object
+    description: The settings for tax calculation.
+    required:
+      - type
+    properties:
+      type:
+        type: string
+        description: The type of the tax calculator.
+        enum:
+          - taxjar
+          - flat
+      integrationType:
+        type: number
+        nullable: true
+        format: float
+        description: The rate for flat tax calculation.
