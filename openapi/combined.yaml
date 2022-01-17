@@ -181,6 +181,11 @@ tags:
       their granted permissions.  It has resources less commonly integrated by
 
       3rd parties.
+  - name: Fees
+    description: |
+      Buy and sell fees.
+
+      This API is experimental and not guaranteed to be backward compatible.
   - name: Orders
   - name: Organizations
   - name: Customers
@@ -310,6 +315,10 @@ paths:
     $ref: ./paths/disputes.yaml
   '/disputes/{id}':
     $ref: './paths/disputes@{id}.yaml'
+  '/fees':
+    $ref: './paths/fees/fees.yaml'
+  '/fees/{id}':
+    $ref: './paths/fees/fees@{id}.yaml'
   /files:
     $ref: ./paths/files.yaml
   '/files/{id}':
@@ -408,6 +417,8 @@ paths:
     $ref: ./paths/subscriptions.yaml
   '/subscriptions/{id}':
     $ref: './paths/subscriptions@{id}.yaml'
+  '/subscriptions/{id}/void':
+    $ref: './paths/subscriptions@{id}@void.yaml'
   '/subscriptions/{id}/change-items':
     $ref: './paths/subscriptions@{id}@change-items.yaml'
   '/subscriptions/{id}/interim-invoice':
