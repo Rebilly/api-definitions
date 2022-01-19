@@ -39,6 +39,24 @@ properties:
     description: Organization ID.
     allOf:
       - $ref: ./ResourceId.yaml
+  customization:
+    description: Visual customization options for the website.
+    type: object
+    properties:
+      hostedPaymentFormTheme:
+        description: |
+          Hosted payment form
+          [theme](https://www.rebilly.com/docs/content/concepts-and-features/tutorial/customize-style-rebilly-instruments/#adjust-the-default-style) options.
+        type: object
+        additionalProperties:
+          type: string
+        example:
+          colorPrimary: '#504CCA'
+      hostedPaymentFormCss:
+        description: |
+          Hosted payment form
+          [css](https://www.rebilly.com/docs/content/concepts-and-features/tutorial/customize-style-rebilly-instruments/#2-use-css-property-to-override-any-styles) options.
+        type: string
   _links:
     type: array
     description: The links related to resource.
