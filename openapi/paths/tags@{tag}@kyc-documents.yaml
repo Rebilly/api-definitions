@@ -1,0 +1,79 @@
+parameters:
+  - $ref: ../components/parameters/tag.yaml
+  - $ref: ../components/parameters/organizationId.yaml
+post:
+  x-products:
+    - Full
+    - Core
+  tags:
+    - Tags
+  summary: Tag a list of kyc documents
+  operationId: PostTagKycDocumentCollection
+  x-sdk-operation-name: tagKycDocuments
+  description: |
+    Tag a list of kyc documents.
+    If the kyc document from the list is already tagged it will be ignored.
+    It's an asynchronous operation.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - kycDocumentIds
+          properties:
+            kycDocumentIds:
+              description: The list of kyc document IDs.
+              type: array
+              minItems: 1
+              maxItems: 1000
+              items:
+                type: string
+  responses:
+    '204':
+      description: KYC Documents were tagged.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+delete:
+  x-products:
+    - Full
+    - Core
+  tags:
+    - Tags
+  summary: Untag a list of kyc documents
+  operationId: DeleteTagKycDocumentCollection
+  x-sdk-operation-name: untagKycDocuments
+  description: |
+    Untag a list of kyc documents.
+    If the kyc document from the list is already untagged it will be ignored.
+    It's an asynchronous operation.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - kycDocumentIds
+          properties:
+            kycDocumentIds:
+              description: The list of kyc document IDs.
+              type: array
+              minItems: 1
+              maxItems: 1000
+              items:
+                type: string
+  responses:
+    '204':
+      description: KYC Documents were untagged.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
