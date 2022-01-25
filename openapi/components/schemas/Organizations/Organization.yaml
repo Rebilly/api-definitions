@@ -7,15 +7,15 @@ properties:
     description: The organization identifier string.
     readOnly: true
     allOf:
-      - $ref: ./ResourceId.yaml
+      - $ref: ../ResourceId.yaml
   createdTime:
     description: The organization created time.
     allOf:
-      - $ref: ./ServerTimestamp.yaml
+      - $ref: ../ServerTimestamp.yaml
   updatedTime:
     description: The organization updated time.
     allOf:
-      - $ref: ./ServerTimestamp.yaml
+      - $ref: ../ServerTimestamp.yaml
   name:
     description: The organization name.
     type: string
@@ -45,9 +45,9 @@ properties:
     type: string
     maxLength: 10
   phoneNumbers:
-    $ref: ./Contact/ContactPhoneNumbers.yaml
+    $ref: ../Contact/ContactPhoneNumbers.yaml
   emails:
-    $ref: ./Contact/ContactEmails.yaml
+    $ref: ../Contact/ContactEmails.yaml
   taxDescriptor:
     description: The organization's tax label. This will be displayed on the invoice.
     type: string
@@ -65,10 +65,12 @@ properties:
     type: boolean
   questionnaire:
     $ref: ./OrganizationQuestionnaire.yaml
+  settings:
+    $ref: ./OrganizationSettings.yaml
   _links:
     type: array
     description: The links related to resource.
     readOnly: true
     minItems: 1
     items:
-      $ref: ./Links/SelfLink.yaml
+      $ref: ../Links/SelfLink.yaml
