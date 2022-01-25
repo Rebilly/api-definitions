@@ -29,12 +29,17 @@ properties:
           default: 3
           minimum: 0
           maximum: 100
+        faceProofRequired:
+          description: If `true` uploading matching face photo (selfie) is required.
+          type: boolean
   status:
     description: Status of the request.
     type: string
     readOnly: true
     enum:
+      - unfulfilled
       - pending
+      - rejected
       - fulfilled
       - expired
   redirectUrl:
