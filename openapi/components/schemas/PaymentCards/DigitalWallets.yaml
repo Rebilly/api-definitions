@@ -16,6 +16,12 @@ properties:
         description: A string of 64 or fewer UTF-8 characters containing the canonical name for your store, suitable for display. Don’t localize the name.
         type: string
         example: "Test Merchant"
+      countryCode:
+        description: The ISO 3166 alpha-2 country code where the payment is processed. This is often the location for settling the payment. Consult with your payment service provider (PSP) to determine the appropriate country code.
+        maxLength: 2
+        type: string
+        readOnly: true
+        example: US
   googlePay:
     type: object
     description: The Google Pay™ digital wallet configuration. Skip if not using Google Pay™.
@@ -34,3 +40,9 @@ properties:
         description: The merchant origin in Google Pay. The fully qualified domain name.
         type: string
         example: "www.example.com"
+      countryCode:
+        description: The country where the payment is processed. This is often the location for settling the payment. Consult with your payment service provider (PSP) to determine the appropriate country code.
+        maxLength: 2
+        type: string
+        readOnly: true
+        example: US
