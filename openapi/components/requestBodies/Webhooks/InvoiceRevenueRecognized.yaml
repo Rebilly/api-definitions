@@ -1,0 +1,36 @@
+content:
+  application/json:
+    schema:
+      properties:
+        recognitionId:
+          description: The invoice revenue recognition ID.
+          type: string
+        invoiceId:
+          description: The invoice ID.
+          type: string
+        itemId:
+          description: The invoice item ID.
+          type: string
+        amount:
+          description: The recognized amount.
+          type: number
+          format: double
+        currency:
+          $ref: ../../schemas/CurrencyCode.yaml
+        eventType:
+          example: invoice-revenue-recognized
+          allOf:
+            - $ref: ../../schemas/GlobalWebhookEventType.yaml
+        _embedded:
+          type: object
+          properties:
+            invoice:
+              $ref: ../../schemas/Invoices/Invoice.yaml
+        _links:
+          type: array
+          description: The links related to resource.
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: ../../schemas/Links/InvoiceLink.yaml
+description: Invoice webhook request body resource.
