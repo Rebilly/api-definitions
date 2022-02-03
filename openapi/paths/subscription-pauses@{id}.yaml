@@ -60,3 +60,25 @@ put:
       $ref: ../components/responses/Forbidden.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
+delete:
+  x-products:
+    - Full
+    - Billing
+    - Core
+  tags:
+    - Orders
+  summary: Delete a subscription pause
+  operationId: DeleteSubscriptionPause
+  x-sdk-operation-name: delete
+  description: Delete a subscription's pause. Pending pause will be revoked, ongoing pause will be finished.
+  responses:
+    '204':
+      description: Subscription pause was revoked or finished.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
