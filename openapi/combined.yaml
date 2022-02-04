@@ -16,10 +16,18 @@ info:
   description:
     $ref: description.md
 servers:
-  - url: 'https://api-sandbox.rebilly.com'
-    description: Sandbox Server.
-  - url: 'https://api.rebilly.com'
-    description: Live Server.
+  - url: 'https://api-sandbox.rebilly.com/organizations/{organizationId}'
+    description: Sandbox server with organizationId
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: 'https://api.rebilly.com/organizations/{organizationId}'
+    description: Live server with organizationId
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
 tags:
   - name: Blocklists
     description: |
@@ -547,6 +555,10 @@ paths:
     $ref: './paths/events@{eventType}.yaml'
   '/events/{eventType}/rules':
     $ref: './paths/events@{eventType}@rules.yaml'
+  '/events/{eventType}/timeline':
+    $ref: './paths/events@{eventType}@timeline.yaml'
+  '/events/{eventType}/timeline/{messageId}':
+    $ref: './paths/events@{eventType}@timeline@{messageId}.yaml'
   '/events/{eventType}/rules/history':
     $ref: './paths/events@{eventType}@rules@history.yaml'
   '/events/{eventType}/rules/history/{version}':
