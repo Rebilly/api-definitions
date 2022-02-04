@@ -79,6 +79,12 @@ info:
     - You can create some [predefined values lists](https://user-api-docs.rebilly.com/#tag/Lists) and use them in filter: `?filter=firstName:@yourListName`. You can also exclude list values: `?filter=firstName:!@yourListName`.
 ################################################################################
 tags:
+  - name: Application owners
+    description: |
+      APIs to manage your applications.
+  - name: Application users
+    description: |
+      APIs for application users to manage their applications.
   - name: API Keys
     description: |
       Always keep your API Keys private. When creating your API keys,
@@ -105,6 +111,7 @@ tags:
   - name: Gateway Accounts
     description: |
       Gateway accounts connect payment request to third party networks and platforms.
+  - name: Gateway Accounts Timeline
   - name: Lists
     description: |
       Lists contain sets of values and may be referenced within Rules criteria.
@@ -146,6 +153,8 @@ tags:
       in order from top to bottom. If the condition is met, the corresponding actions are executed.
       The conditions continue to be checked until either all of the conditions have been executed,
       or a special "stop" action is executed.
+  - name: Rules Timeline
+
   - name: JWT Session
     description: |
       A session contains a token, which is a JSON Web Token.  The token is created
@@ -272,22 +281,17 @@ security:
   - JWT: []
 servers:
   - url: 'https://api-sandbox.rebilly.com/organizations/{organizationId}'
-    description: Sandbox server with organizationId.
+    description: Sandbox server
     variables:
       organizationId:
         default: unknown
         description: Your organization ID.
   - url: 'https://api.rebilly.com/organizations/{organizationId}'
-    description: Live server with organizationId.
+    description: Live server
     variables:
       organizationId:
         default: unknown
         description: Your organization ID.
-  - url: 'https://api-sandbox.rebilly.com'
-    description: Sandbox Server.
-  - url: 'https://api.rebilly.com'
-    description: Live Server.
-
 
 components:
   securitySchemes:
