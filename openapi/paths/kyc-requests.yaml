@@ -49,6 +49,9 @@ post:
   x-sdk-operation-name: create
   description: |
     Create a KYC Request.
+    Then, redirect the customer to the `kycGatherer` link.
+    After the customer completes the KYC process, they will be redirected back to the `redirectUrl`.
+    Corresponding webhooks (such as KYC document accepted, KYC document rejected) are sent to webhooks subscribers.
   requestBody:
     content:
       application/json:
