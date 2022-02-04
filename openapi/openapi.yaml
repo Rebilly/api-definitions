@@ -190,7 +190,7 @@ tags:
       This API is deprecated, see Shipping rates.
   - name: Shipping Rates
     description: >
-      A shipping rate contains a filter and a pricing for a specific destination you ship to.
+      A shipping rate contains a filter and a pricing for a specific shipping destination.
   - name: Orders
     description: >
       An order applies a plan's template to create invoice(s) for a customer,
@@ -530,6 +530,8 @@ paths:
     $ref: ./paths/subscriptions.yaml
   '/subscriptions/{id}':
     $ref: './paths/subscriptions@{id}.yaml'
+  '/subscriptions/{id}/void':
+    $ref: './paths/subscriptions@{id}@void.yaml'
   '/subscriptions/{id}/change-items':
     $ref: './paths/subscriptions@{id}@change-items.yaml'
   '/subscriptions/{id}/interim-invoice':
@@ -558,6 +560,10 @@ paths:
     $ref: './paths/tags@{tag}@customers.yaml'
   '/tags/{tag}/customers/{customerId}':
     $ref: './paths/tags@{tag}@customers@{customerId}.yaml'
+  '/tags/{tag}/kyc-documents':
+    $ref: './paths/tags@{tag}@kyc-documents.yaml'
+  '/tags/{tag}/kyc-documents/{kycDocumentId}':
+    $ref: './paths/tags@{tag}@kyc-documents@{kycDocumentId}.yaml'
   /tokens:
     $ref: ./paths/tokens.yaml
   '/tokens/{token}':
@@ -581,9 +587,9 @@ paths:
   '/transactions/{id}/timeline/{messageId}':
     $ref: './paths/transactions@{id}@timeline@{messageId}.yaml'
   '/fees':
-    $ref: './paths/fees/fees.yaml'
+    $ref: './paths/fees.yaml'
   '/fees/{id}':
-    $ref: './paths/fees/fees@{id}.yaml'
+    $ref: './paths/fees@{id}.yaml'
   '/activation/{token}':
     $ref: './paths/activation@{token}.yaml'
   /api-keys:
@@ -1057,6 +1063,9 @@ x-webhooks:
   subscription-canceled:
     post:
       $ref: ./webhooks/subscription-canceled.yaml
+  subscription-downgraded:
+    post:
+      $ref: ./webhooks/subscription-downgraded.yaml
   subscription-modified:
     post:
       $ref: ./webhooks/subscription-modified.yaml
@@ -1081,6 +1090,9 @@ x-webhooks:
   subscription-trial-end-changed:
     post:
       $ref: ./webhooks/subscription-trial-end-changed.yaml
+  subscription-upgraded:
+    post:
+      $ref: ./webhooks/subscription-upgraded.yaml
   transaction-amount-discrepancy-found:
     post:
       $ref: ./webhooks/transaction-amount-discrepancy-found.yaml
