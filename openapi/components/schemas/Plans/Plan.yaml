@@ -3,8 +3,31 @@ allOf:
   - properties:
       invoiceTimeShift:
         description: You can shift issue time and due time of invoices for this plan.
+        deprecated: true
         allOf:
           - $ref: ../Invoices/InvoiceTimeShift.yaml
+      invoiceIssueTimeShift:
+        description: >
+          The calculation instruction of billing time.
+
+          This is used in conjunction with the **service period anchor** to calculate
+          the time the invoice is issued.
+        example: P1DT1H
+        nullable: true
+        allOf:
+          - $ref: ../Duration.yaml
+      invoiceDueTimeShift:
+        description: >
+          The calculation instruction of due time.
+
+          This is used in conjunction with the **billing anchor** to calculate due time
+          of invoice.
+
+          The chronology of due time shift is always **after**.
+        example: PT1H
+        nullable: true
+        allOf:
+          - $ref: ../Duration.yaml
       _links:
         type: array
         description: The links related to resource.
