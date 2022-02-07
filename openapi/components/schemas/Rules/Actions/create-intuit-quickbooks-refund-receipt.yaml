@@ -1,0 +1,18 @@
+description: Create an Intuit Quickbooks refund receipt.
+allOf:
+  - $ref: ../RuleAction.yaml
+  - type: object
+    properties:
+      depositAccount:
+        description: The deposit Quickbooks account ID.
+        type: string
+      department:
+        description: The Quickbooks department ID.
+        type: string
+        nullable: true
+      credentialHash:
+        type: string
+        description: OAuth2 credential identifier string.
+    required:
+      - credentialHash
+      - depositAccount

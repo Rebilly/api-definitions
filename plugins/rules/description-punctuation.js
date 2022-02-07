@@ -23,7 +23,6 @@ function constraintPunctuation(message, attribute) {
 /** @type {import('@redocly/openapi-cli').OasRule} */
 function DescriptionPunctuation() {
     return {
-        Server: constraintPunctuation('The server description should end with punctuation.', 'description'),
         Tag: constraintPunctuation('The tag description should end with punctuation.', 'description'),
         Info: constraintPunctuation('The info description should end with punctuation.', 'description'),
         RequestBody: constraintPunctuation('The request body description should end with punctuation.', 'description'),
