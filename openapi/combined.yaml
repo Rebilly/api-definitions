@@ -16,10 +16,18 @@ info:
   description:
     $ref: description.md
 servers:
-  - url: 'https://api-sandbox.rebilly.com'
-    description: Sandbox Server.
-  - url: 'https://api.rebilly.com'
-    description: Live Server.
+  - url: 'https://api-sandbox.rebilly.com/organizations/{organizationId}'
+    description: Sandbox server with organizationId
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: 'https://api.rebilly.com/organizations/{organizationId}'
+    description: Live server with organizationId
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
 tags:
   - name: Blocklists
     description: |
@@ -181,6 +189,11 @@ tags:
       their granted permissions.  It has resources less commonly integrated by
 
       3rd parties.
+  - name: Fees
+    description: |
+      Buy and sell fees.
+
+      This API is experimental and not guaranteed to be backward compatible.
   - name: Orders
   - name: Organizations
   - name: Customers
@@ -310,6 +323,10 @@ paths:
     $ref: ./paths/disputes.yaml
   '/disputes/{id}':
     $ref: './paths/disputes@{id}.yaml'
+  '/fees':
+    $ref: './paths/fees.yaml'
+  '/fees/{id}':
+    $ref: './paths/fees@{id}.yaml'
   /files:
     $ref: ./paths/files.yaml
   '/files/{id}':
@@ -430,6 +447,10 @@ paths:
     $ref: './paths/tags@{tag}@customers.yaml'
   '/tags/{tag}/customers/{customerId}':
     $ref: './paths/tags@{tag}@customers@{customerId}.yaml'
+  '/tags/{tag}/kyc-documents':
+    $ref: './paths/tags@{tag}@kyc-documents.yaml'
+  '/tags/{tag}/kyc-documents/{kycDocumentId}':
+    $ref: './paths/tags@{tag}@kyc-documents@{kycDocumentId}.yaml'
   /tokens:
     $ref: ./paths/tokens.yaml
   '/tokens/{token}':
@@ -534,6 +555,10 @@ paths:
     $ref: './paths/events@{eventType}.yaml'
   '/events/{eventType}/rules':
     $ref: './paths/events@{eventType}@rules.yaml'
+  '/events/{eventType}/timeline':
+    $ref: './paths/events@{eventType}@timeline.yaml'
+  '/events/{eventType}/timeline/{messageId}':
+    $ref: './paths/events@{eventType}@timeline@{messageId}.yaml'
   '/events/{eventType}/rules/history':
     $ref: './paths/events@{eventType}@rules@history.yaml'
   '/events/{eventType}/rules/history/{version}':
