@@ -22,21 +22,17 @@ security:
 
 servers:
   - url: 'https://api-sandbox.rebilly.com/organizations/{organizationId}'
-    description: Sandbox server with organizationId.
+    description: Sandbox server
     variables:
       organizationId:
         default: unknown
         description: Your organization ID.
   - url: 'https://api.rebilly.com/organizations/{organizationId}'
-    description: Live server with organizationId.
+    description: Live server
     variables:
       organizationId:
         default: unknown
         description: Your organization ID.
-  - url: 'https://api-sandbox.rebilly.com'
-    description: Sandbox Server.
-  - url: 'https://api.rebilly.com'
-    description: Live Server.
 
 components:
   securitySchemes:
@@ -182,15 +178,9 @@ tags:
   - name: Search
     description: |
       Search data including customers, invoices, orders, transactions and more.
-  - name: Shipping Zones
-    description: >
-      A shipping zone contains regions and countries that you ship to. Each
-      shipping zone has its own shipping rates.
-
-      This API is deprecated, see Shipping rates.
   - name: Shipping rates
     description: >
-      A shipping rate contains a filter and a pricing for a specific destination you ship to.
+      A shipping rate contains a filter and a pricing for a specific shipping destination.
   - name: Orders
     description: >
       An order applies a plan's template to create invoice(s) for a customer,
@@ -522,10 +512,6 @@ paths:
     $ref: ./paths/shipping-rates.yaml
   '/shipping-rates/{id}':
     $ref: './paths/shipping-rates@{id}.yaml'
-  /shipping-zones:
-    $ref: ./paths/shipping-zones.yaml
-  '/shipping-zones/{id}':
-    $ref: './paths/shipping-zones@{id}.yaml'
   /subscriptions:
     $ref: ./paths/subscriptions.yaml
   '/subscriptions/{id}':
@@ -587,9 +573,9 @@ paths:
   '/transactions/{id}/timeline/{messageId}':
     $ref: './paths/transactions@{id}@timeline@{messageId}.yaml'
   '/fees':
-    $ref: './paths/fees/fees.yaml'
+    $ref: './paths/fees.yaml'
   '/fees/{id}':
-    $ref: './paths/fees/fees@{id}.yaml'
+    $ref: './paths/fees@{id}.yaml'
   '/activation/{token}':
     $ref: './paths/activation@{token}.yaml'
   /api-keys:

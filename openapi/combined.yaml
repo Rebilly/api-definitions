@@ -16,10 +16,18 @@ info:
   description:
     $ref: description.md
 servers:
-  - url: 'https://api-sandbox.rebilly.com'
-    description: Sandbox Server.
-  - url: 'https://api.rebilly.com'
-    description: Live Server.
+  - url: 'https://api-sandbox.rebilly.com/organizations/{organizationId}'
+    description: Sandbox server with organizationId
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: 'https://api.rebilly.com/organizations/{organizationId}'
+    description: Live server with organizationId
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
 tags:
   - name: Blocklists
     description: |
@@ -150,12 +158,6 @@ tags:
   - name: Search
     description: |
       Search data including customers, invoices, orders, transactions and more.
-  - name: Shipping Zones
-    description: >
-      A shipping zone contains regions and countries that you ship to. Each
-      shipping zone has its own shipping rates.
-
-      This API is deprecated, see Shipping rates.
   - name: Shipping rates
     description: >
       A shipping rate contains a filter and a pricing for a specific destination you ship to.
@@ -316,9 +318,9 @@ paths:
   '/disputes/{id}':
     $ref: './paths/disputes@{id}.yaml'
   '/fees':
-    $ref: './paths/fees/fees.yaml'
+    $ref: './paths/fees.yaml'
   '/fees/{id}':
-    $ref: './paths/fees/fees@{id}.yaml'
+    $ref: './paths/fees@{id}.yaml'
   /files:
     $ref: ./paths/files.yaml
   '/files/{id}':
@@ -401,10 +403,6 @@ paths:
     $ref: ./paths/shipping-rates.yaml
   '/shipping-rates/{id}':
     $ref: './paths/shipping-rates@{id}.yaml'
-  /shipping-zones:
-    $ref: ./paths/shipping-zones.yaml
-  '/shipping-zones/{id}':
-    $ref: './paths/shipping-zones@{id}.yaml'
   /subscription-cancellations:
     $ref: ./paths/subscription-cancellations.yaml
   '/subscription-cancellations/{id}':
@@ -547,6 +545,10 @@ paths:
     $ref: './paths/events@{eventType}.yaml'
   '/events/{eventType}/rules':
     $ref: './paths/events@{eventType}@rules.yaml'
+  '/events/{eventType}/timeline':
+    $ref: './paths/events@{eventType}@timeline.yaml'
+  '/events/{eventType}/timeline/{messageId}':
+    $ref: './paths/events@{eventType}@timeline@{messageId}.yaml'
   '/events/{eventType}/rules/history':
     $ref: './paths/events@{eventType}@rules@history.yaml'
   '/events/{eventType}/rules/history/{version}':

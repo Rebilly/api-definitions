@@ -17,21 +17,17 @@ info:
     $ref: description.md
 servers:
   - url: 'https://api-sandbox.rebilly.com/organizations/{organizationId}'
-    description: Sandbox server with organizationId.
+    description: Sandbox server
     variables:
       organizationId:
         default: unknown
         description: Your organization ID.
   - url: 'https://api.rebilly.com/organizations/{organizationId}'
-    description: Live server with organizationId.
+    description: Live server
     variables:
       organizationId:
         default: unknown
         description: Your organization ID.
-  - url: 'https://api-sandbox.rebilly.com'
-    description: Sandbox Server.
-  - url: 'https://api.rebilly.com'
-    description: Live Server.
 tags:
   - name: AML
     description: |
@@ -61,8 +57,8 @@ tags:
       The customers timeline keeps an audit trail of changes and activity for each customer.
   - name: KYC Documents
     description: >
-      Customer KYC files uploaded on behalf of a customer, tagged with a
-      document type and submitted for validation.
+      Create a KYC Request to generate a gatherer link for the customer to upload KYC documents.
+      Rebilly analyzes the documents and notifies webhook subscribers of the result.
   - name: Customer Authentication
     description: >
       Create authentication credentials, login, logout, and verify your
@@ -154,12 +150,6 @@ tags:
   - name: Search
     description: |
       Search data including customers, invoices, orders, transactions and more.
-  - name: Shipping Zones
-    description: >
-      A shipping zone contains regions and countries that you ship to. Each
-      shipping zone has its own shipping rates.
-
-      This API is deprecated, see Shipping rates.
   - name: Shipping rates
     description: >
       A shipping rate contains a filter and a pricing for a specific destination you ship to.
@@ -168,7 +158,7 @@ tags:
       An order applies a plan's template to create invoice(s) for a customer,
       optionally at the appropriate scheduled intervals.
       A subscription order may also determine if the payment
-      is collected automatically (with autopay set true).
+      is collected automatically (with `autopay` set true).
   - name: Tags
     description: |
       Tag customers to better organize your data.
@@ -216,8 +206,7 @@ x-tagGroups:
       - Plans
       - Products
       - Coupons
-      - Shipping Rates
-      - Shipping Zones
+      - Shipping rates
       - Taxes
   - name: Risk
     tags:
@@ -325,10 +314,10 @@ paths:
     $ref: './paths/invoices@{id}@transaction.yaml'
   '/customers/{id}/upcoming-invoices':
     $ref: './paths/customers@{id}@upcoming-invoices.yaml'
-  '/invoices/{id}/timeline':
-    $ref: './paths/invoices@{id}@timeline.yaml'
-  '/invoices/{id}/timeline/{messageId}':
-    $ref: './paths/invoices@{id}@timeline@{messageId}.yaml'
+  /kyc-requests:
+    $ref: ./paths/kyc-requests.yaml
+  '/kyc-requests/{id}':
+    $ref: './paths/kyc-requests@{id}.yaml'
   /kyc-documents:
     $ref: ./paths/kyc-documents.yaml
   '/kyc-documents/{id}':
@@ -345,10 +334,6 @@ paths:
     $ref: './paths/kyc-documents@{id}@start-review.yaml'
   '/kyc-documents/{id}/stop-review':
     $ref: './paths/kyc-documents@{id}@stop-review.yaml'
-  /kyc-requests:
-    $ref: ./paths/kyc-requests.yaml
-  '/kyc-requests/{id}':
-    $ref: './paths/kyc-requests@{id}.yaml'
   /password-tokens:
     $ref: ./paths/password-tokens.yaml
   '/password-tokens/{id}':
@@ -377,10 +362,6 @@ paths:
     $ref: ./paths/shipping-rates.yaml
   '/shipping-rates/{id}':
     $ref: './paths/shipping-rates@{id}.yaml'
-  /shipping-zones:
-    $ref: ./paths/shipping-zones.yaml
-  '/shipping-zones/{id}':
-    $ref: './paths/shipping-zones@{id}.yaml'
   /subscriptions:
     $ref: ./paths/subscriptions.yaml
   '/subscriptions/{id}':
@@ -403,10 +384,6 @@ paths:
     $ref: './paths/subscriptions@{id}@upcoming-invoices.yaml'
   '/subscriptions/{id}/upcoming-invoices/{invoiceId}/issue':
     $ref: './paths/subscriptions@{id}@upcoming-invoices@{invoiceId}@issue.yaml'
-  '/subscriptions/{id}/timeline':
-    $ref: './paths/subscriptions@{id}@timeline.yaml'
-  '/subscriptions/{id}/timeline/{messageId}':
-    $ref: './paths/subscriptions@{id}@timeline@{messageId}.yaml'
   /tags:
     $ref: ./paths/tags.yaml
   '/tags/{tag}':
@@ -437,14 +414,10 @@ paths:
     $ref: './paths/transactions@{id}@update.yaml'
   '/transactions/{id}/refund':
     $ref: './paths/transactions@{id}@refund.yaml'
-  '/transactions/{id}/timeline':
-    $ref: './paths/transactions@{id}@timeline.yaml'
-  '/transactions/{id}/timeline/{messageId}':
-    $ref: './paths/transactions@{id}@timeline@{messageId}.yaml'
   '/fees':
-    $ref: './paths/fees/fees.yaml'
+    $ref: './paths/fees.yaml'
   '/fees/{id}':
-    $ref: './paths/fees/fees@{id}.yaml'
+    $ref: './paths/fees@{id}.yaml'
 components:
   securitySchemes:
     JWT:
