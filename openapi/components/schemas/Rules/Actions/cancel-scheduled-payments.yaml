@@ -2,10 +2,7 @@ allOf:
   - $ref: ../RuleAction.yaml
   - type: object
     properties:
-      cancelPolicy:
-        type: string
-        description: Cancel policy for scheduled invoices.
-        enum:
-          - all
-          - exclude-started-service-period
-        default: exclude-started-service-period
+      skipStartedServicePeriod:
+        type: boolean
+        description: Skip invoices with started service period.
+        default: true
