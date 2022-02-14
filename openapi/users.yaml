@@ -111,7 +111,6 @@ tags:
   - name: Gateway Accounts
     description: |
       Gateway accounts connect payment request to third party networks and platforms.
-  - name: Gateway Accounts Timeline
   - name: Lists
     description: |
       Lists contain sets of values and may be referenced within Rules criteria.
@@ -219,6 +218,11 @@ tags:
   - name: TaxJar credentials
   - name: Metadata
   - name: Custom domains
+  - name: Customers Timeline
+  - name: Gateway Accounts Timeline
+  - name: Transactions Timeline
+  - name: Orders Timeline
+  - name: Invoices Timeline
 ################################################################################
 x-tagGroups:
   - name: Security
@@ -258,7 +262,6 @@ x-tagGroups:
       - Billing Portals
       - Checkout Forms
       - Gateway Accounts
-      - Gateway Accounts Timeline
       - Payment Cards
       - Payment Instruments
       - Organizations
@@ -272,6 +275,11 @@ x-tagGroups:
       - TaxJar credentials
       - Metadata
       - Custom domains
+      - Customers Timeline
+      - Gateway Accounts Timeline
+      - Transactions Timeline
+      - Orders Timeline
+      - Invoices Timeline
   - name: Related docs
     tags:
       - Rebilly API
@@ -383,6 +391,16 @@ paths:
     $ref: ./paths/custom-domains.yaml
   '/custom-domains/{domain}':
     $ref: './paths/custom-domains@{domain}.yaml'
+  /customer-timeline-custom-events:
+    $ref: ./paths/customer-timeline-custom-events.yaml
+  '/customer-timeline-custom-events/{id}':
+    $ref: './paths/customer-timeline-custom-events@{id}.yaml'
+  /customer-timeline-events:
+    $ref: ./paths/customer-timeline-events.yaml
+  '/customers/{id}/timeline':
+    $ref: './paths/customers@{id}@timeline.yaml'
+  '/customers/{id}/timeline/{messageId}':
+    $ref: './paths/customers@{id}@timeline@{messageId}.yaml'
   '/email-delivery-setting-verifications/{token}':
     $ref: './paths/email-delivery-setting-verifications@{token}.yaml'
   /email-delivery-settings:
