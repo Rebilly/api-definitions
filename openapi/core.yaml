@@ -52,9 +52,6 @@ tags:
     description: |
       Customers are your customers, sometimes known as accounts, clients,
       members, patrons, or players in other systems.
-  - name: Customers Timeline
-    description: |
-      The customers timeline keeps an audit trail of changes and activity for each customer.
   - name: KYC Documents
     description: >
       Create a KYC Request to generate a gatherer link for the customer to upload KYC documents.
@@ -189,7 +186,6 @@ x-tagGroups:
       - Customers
       - Customer Authentication
       - Tags
-      - Customers Timeline
   - name: Payment Instruments
     tags:
       - Payment Instruments
@@ -266,18 +262,8 @@ paths:
     $ref: ./paths/customers.yaml
   '/customers/{id}':
     $ref: './paths/customers@{id}.yaml'
-  /customer-timeline-custom-events:
-    $ref: ./paths/customer-timeline-custom-events.yaml
-  '/customer-timeline-custom-events/{id}':
-    $ref: './paths/customer-timeline-custom-events@{id}.yaml'
-  /customer-timeline-events:
-    $ref: ./paths/customer-timeline-events.yaml
   '/customers/{id}/lead-source':
     $ref: './paths/customers@{id}@lead-source.yaml'
-  '/customers/{id}/timeline':
-    $ref: './paths/customers@{id}@timeline.yaml'
-  '/customers/{id}/timeline/{messageId}':
-    $ref: './paths/customers@{id}@timeline@{messageId}.yaml'
   /disputes:
     $ref: ./paths/disputes.yaml
   '/disputes/{id}':
