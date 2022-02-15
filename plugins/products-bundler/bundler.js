@@ -65,6 +65,7 @@ function getNewTags(definitionRoot, tagsNamesToInclude) {
       newTags.push(tag)
     }
   });
+
   return newTags;
 }
 
@@ -84,14 +85,15 @@ function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods, includedX
 
       const operation = definition[method];
       if (!('tags' in operation)) {
+        ctx.report({message: `Operation ${operation.operationId} has no tags specified`})
+
         // Operation has no tags specified, excluding as tags must be defined explicitly
         return;
       }
 
       if (includedXProducts && includedXProducts.length) {
         if (!('x-products' in operation)) {
-          // Operation has no products specified, excluding as products must be defined explicitly
-          delete definition[method];
+          ctx.report({message: `Operation ${operation.operationId} has no x-product specified`})
 
           return;
         }
@@ -110,6 +112,7 @@ function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods, includedX
 
       const requiredTags = operation.tags.filter((tagName) => tagsNamesToInclude.indexOf(tagName) !== -1)
       if (requiredTags.length === 0) {
+        ctx.report({message: `Operation ${operation.operationId} has x-products set, but the product mapping does not include operation tags: ` + operation.tags.join(', ')})
         // No required tags included, excluding operation
         delete definition[method];
       } else {
@@ -170,18 +173,25 @@ function getNewComponents(definitionRoot) {
     findUsedComponents(usedComponents, definitionRoot, element);
   })
 
-  const newComponents = {
-    securitySchemes: definitionRoot.components.securitySchemes,
-  };
+  for (const [componentType, components] of Object.entries(definitionRoot.components)) {
+    if (componentType === 'securitySchemes') {
+      // Use entire object
+      continue;
+    }
 
-  for (const [componentType, names] of Object.entries(usedComponents)) {
-    newComponents[componentType] = {};
-    names.forEach((name) => {
-      newComponents[componentType][name] = definitionRoot.components[componentType][name]
-    })
+    if (!(componentType in usedComponents)) {
+      delete definitionRoot.components[componentType];
+      continue;
+    }
+
+    Object.keys(components).forEach(name => {
+      if (usedComponents[componentType].indexOf(name) === -1) {
+        delete definitionRoot.components[componentType][name]
+      }
+    });
   }
 
-  return newComponents;
+  return definitionRoot.components;
 }
 
 module.exports = {
