@@ -372,6 +372,10 @@ paths:
     $ref: './paths/subscriptions@{id}@change-items.yaml'
   '/subscriptions/{id}/interim-invoice':
     $ref: './paths/subscriptions@{id}@interim-invoice.yaml'
+  /subscription-pauses:
+    $ref: ./paths/subscription-pauses.yaml
+  '/subscription-pauses/{id}':
+    $ref: './paths/subscription-pauses@{id}.yaml'
   /subscription-cancellations:
     $ref: ./paths/subscription-cancellations.yaml
   '/subscription-cancellations/{id}':
@@ -591,6 +595,12 @@ x-webhooks:
   subscription-renewed:
     post:
       $ref: ./webhooks/subscription-renewed.yaml
+  subscription-paused:
+    post:
+      $ref: ./webhooks/subscription-paused.yaml
+  subscription-resumed:
+    post:
+      $ref: ./webhooks/subscription-resumed.yaml
   subscription-trial-converted:
     post:
       $ref: ./webhooks/subscription-trial-converted.yaml
