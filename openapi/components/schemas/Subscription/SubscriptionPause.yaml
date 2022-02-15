@@ -1,0 +1,85 @@
+type: object
+required:
+  - subscriptionId
+properties:
+  id:
+    description: Pause identifier.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  subscriptionId:
+    description: Identifier of the paused subscription.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  status:
+    description: The pause status.
+    type: string
+    readOnly: true
+    enum:
+      - pending
+      - ongoing
+      - revoked
+      - finished
+  pausedBy:
+    description: Who did the pause.
+    type: string
+    default: customer
+    enum:
+      - merchant
+      - customer
+  description:
+    description: Pause reason description.
+    type: string
+    maxLength: 255
+    nullable: true
+  effectiveTime:
+    description: >
+      The date from which the service period will pause.
+
+      This time should be later than now, if it is earlier then current time is taken.
+
+      If omitted, it will default to the current time.
+    type: string
+    format: date-time
+    nullable: true
+  endTime:
+    description: >
+      The time when the pause ends and the subscription resumes its billing.
+
+      In order to resume a subscription now, use current time or past time (will default to now).
+      Empty `endTime` will result in indefinitely paused subscription.
+    type: string
+    format: date-time
+    nullable: true
+  timeRemaining:
+    description: >
+      Time in seconds between the pause end time and the renewal time.
+      By default, it's computed as the time between the pause and the renewal.
+
+      For instance, you have a $30/month subscription and 30-day month.
+      If you pause on day 20 of the subscription, there are 10 days unused.
+      Therefore, the subscription would renew in 10 days after resuming.
+      The upcoming invoice would not change the amount for invoiced period, it remains $30.
+      There may be a billing anchor for the subscription,
+      the renewal time after a pause shift should behave as if the renewal time moved forward with Order API
+      (the billing anchor is ignored for that period then).
+    type: number
+    format: integer
+    minimum: 0
+  createdTime:
+    description: The time of resource creation (when it is posted).
+    type: string
+    format: date-time
+    readOnly: true
+  updatedTime:
+    description: The time of resource update.
+    type: string
+    format: date-time
+    readOnly: true
+  _links:
+    type: array
+    description: The links related to resource.
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml
