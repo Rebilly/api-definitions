@@ -112,6 +112,7 @@ function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods, includedX
 
       const requiredTags = operation.tags.filter((tagName) => tagsNamesToInclude.indexOf(tagName) !== -1)
       if (requiredTags.length === 0) {
+        ctx.report({message: `Operation ${operation.operationId} has x-products set, but the product mapping does not include operation tags: ` + operation.tags.join(', ')})
         // No required tags included, excluding operation
         delete definition[method];
       } else {
