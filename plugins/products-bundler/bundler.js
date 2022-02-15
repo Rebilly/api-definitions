@@ -45,6 +45,9 @@ const decorators = {
             definitionRoot['info'] = getNewInfo(definitionRoot['info'], productMapping, ctx.resolve);
             definitionRoot['tags'] = getNewTags(definitionRoot, tagsNamesToInclude);
             definitionRoot['x-tagGroups'] = productMapping['x-tagGroups'];
+            if ('servers' in productMapping) {
+              definitionRoot['servers'] = productMapping['servers'];
+            }
             definitionRoot['paths'] = getNewPaths(definitionRoot['paths'], ctx, tagsNamesToInclude, availableMethods, includedXProducts);
             definitionRoot['x-webhooks'] = getNewPaths(definitionRoot['x-webhooks'], ctx, tagsNamesToInclude, ['post'], includedXProducts);
             if (Object.keys(definitionRoot['x-webhooks']).length === 0) {
@@ -123,7 +126,11 @@ function getNewPaths(paths, ctx, tagsNamesToInclude, availableMethods, includedX
     });
 
     if (hasAtLeastOneOperation) {
-      newPathsEntries.push([path, definition]);
+      newPathsEntries.push([
+        // Temporary workaround for servers with organization parameters included
+        path.replace('/storefront/', '/').replace('/experimental/', '/'),
+        definition
+      ]);
     }
   }
 
