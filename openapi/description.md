@@ -60,7 +60,7 @@ Rebilly also offers [FramePay](https://docs.rebilly.com/docs/developer-docs/fram
  a client-side iFrame-based solution to help
 create payment tokens while minimizing PCI DSS compliance burdens
 and maximizing the customization ability. [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/)
-is interacting with the [payment tokens creation operation](https://www.rebilly.com/docs/billing/api/tag/Payment-Tokens/#tag/Payment-Tokens/operation/PostToken).
+is interacting with the [payment tokens creation operation](https://api-reference.rebilly.com/tag/Payment-Tokens#operation/PostToken).
 
 ## Javascript SDK
 
