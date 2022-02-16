@@ -55,6 +55,15 @@ tags:
   - name: Customers Timeline
     description: |
       The customers timeline keeps an audit trail of changes and activity for each customer.
+  - name: Transactions Timeline
+    description: |
+      The customers timeline keeps an audit trail of changes and activity for each transaction.
+  - name: Orders Timeline
+    description: |
+      The customers timeline keeps an audit trail of changes and activity for each order.
+  - name: Invoices Timeline
+    description: |
+      The customers timeline keeps an audit trail of changes and activity for each invoice.
   - name: KYC Documents
     description: >
       Create a KYC Request to generate a gatherer link for the customer to upload KYC documents.
@@ -152,7 +161,7 @@ tags:
       Search data including customers, invoices, orders, transactions and more.
   - name: Shipping rates
     description: >
-      A shipping rate contains a filter and a pricing for a specific destination you ship to.
+      A shipping rate contains a filter and a pricing for a specific shipping destination.
   - name: Orders
     description: >
       An order applies a plan's template to create invoice(s) for a customer,
@@ -199,6 +208,7 @@ x-tagGroups:
       - Transactions
       - Disputes
       - Fees
+      - Transactions Timeline
   - name: Orders & Invoices
     tags:
       - Orders
@@ -207,7 +217,8 @@ x-tagGroups:
       - Products
       - Coupons
       - Shipping rates
-      - Taxes
+      - Orders Timeline
+      - Invoices Timeline
   - name: Risk
     tags:
       - Blocklists
@@ -218,8 +229,10 @@ x-tagGroups:
       - Custom Fields
       - Files
       - Search
-      - Users
-      - Reports
+  - name: Related docs
+    tags:
+      - Users API
+      - Reports API
 security:
   - SecretApiKey: []
   - JWT: []
@@ -372,6 +385,10 @@ paths:
     $ref: './paths/subscriptions@{id}@change-items.yaml'
   '/subscriptions/{id}/interim-invoice':
     $ref: './paths/subscriptions@{id}@interim-invoice.yaml'
+  /subscription-pauses:
+    $ref: ./paths/subscription-pauses.yaml
+  '/subscription-pauses/{id}':
+    $ref: './paths/subscription-pauses@{id}.yaml'
   /subscription-cancellations:
     $ref: ./paths/subscription-cancellations.yaml
   '/subscription-cancellations/{id}':
@@ -418,6 +435,18 @@ paths:
     $ref: './paths/fees.yaml'
   '/fees/{id}':
     $ref: './paths/fees@{id}.yaml'
+  '/invoices/{id}/timeline':
+    $ref: './paths/invoices@{id}@timeline.yaml'
+  '/invoices/{id}/timeline/{messageId}':
+    $ref: './paths/invoices@{id}@timeline@{messageId}.yaml'
+  '/subscriptions/{id}/timeline':
+    $ref: './paths/subscriptions@{id}@timeline.yaml'
+  '/subscriptions/{id}/timeline/{messageId}':
+    $ref: './paths/subscriptions@{id}@timeline@{messageId}.yaml'
+  '/transactions/{id}/timeline':
+    $ref: './paths/transactions@{id}@timeline.yaml'
+  '/transactions/{id}/timeline/{messageId}':
+    $ref: './paths/transactions@{id}@timeline@{messageId}.yaml'
 components:
   securitySchemes:
     JWT:
@@ -450,9 +479,6 @@ x-webhooks:
   customer-updated:
     post:
       $ref: ./webhooks/customer-updated.yaml
-  balance-transaction-settled:
-    post:
-      $ref: ./webhooks/balance-transaction-settled.yaml
   dispute-created:
     post:
       $ref: ./webhooks/dispute-created.yaml
@@ -465,15 +491,6 @@ x-webhooks:
   invoice-tax-calculation-failed:
     post:
       $ref: ./webhooks/invoice-tax-calculation-failed.yaml
-  gateway-account-downtime-ended:
-    post:
-      $ref: ./webhooks/gateway-account-downtime-ended.yaml
-  gateway-account-downtime-started:
-    post:
-      $ref: ./webhooks/gateway-account-downtime-started.yaml
-  gateway-account-limit-reached:
-    post:
-      $ref: ./webhooks/gateway-account-limit-reached.yaml
   gateway-account-requested:
     post:
       $ref: ./webhooks/gateway-account-requested.yaml
@@ -579,6 +596,12 @@ x-webhooks:
   subscription-renewed:
     post:
       $ref: ./webhooks/subscription-renewed.yaml
+  subscription-paused:
+    post:
+      $ref: ./webhooks/subscription-paused.yaml
+  subscription-resumed:
+    post:
+      $ref: ./webhooks/subscription-resumed.yaml
   subscription-trial-converted:
     post:
       $ref: ./webhooks/subscription-trial-converted.yaml

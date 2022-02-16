@@ -522,6 +522,10 @@ paths:
     $ref: './paths/subscriptions@{id}@change-items.yaml'
   '/subscriptions/{id}/interim-invoice':
     $ref: './paths/subscriptions@{id}@interim-invoice.yaml'
+  /subscription-pauses:
+    $ref: ./paths/subscription-pauses.yaml
+  '/subscription-pauses/{id}':
+    $ref: './paths/subscription-pauses@{id}.yaml'
   /subscription-cancellations:
     $ref: ./paths/subscription-cancellations.yaml
   '/subscription-cancellations/{id}':
@@ -923,6 +927,9 @@ x-webhooks:
   aml-list-possibly-matched:
     post:
       $ref: ./webhooks/aml-list-possibly-matched.yaml
+  balance-transaction-settled:
+    post:
+      $ref: ./webhooks/balance-transaction-settled.yaml
   customer-created:
     post:
       $ref: ./webhooks/customer-created.yaml
@@ -1079,6 +1086,12 @@ x-webhooks:
   subscription-upgraded:
     post:
       $ref: ./webhooks/subscription-upgraded.yaml
+  subscription-paused:
+    post:
+      $ref: ./webhooks/subscription-paused.yaml
+  subscription-resumed:
+    post:
+      $ref: ./webhooks/subscription-resumed.yaml
   transaction-amount-discrepancy-found:
     post:
       $ref: ./webhooks/transaction-amount-discrepancy-found.yaml
