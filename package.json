@@ -8,8 +8,8 @@
   "scripts": {
     "start": "openapi preview-docs",
     "build": "npm run build-core && npm run build-users && npm run build-reports && npm run build-storefront && npm run build-combined",
+    "build-json": "npm run build-core -- --ext json && npm run build-users -- --ext json && npm run build-storefront -- --ext json",
     "test": "openapi lint",
-
     "build-core": "REBILLY_API_PRODUCT=Core openapi bundle -o dist/core",
     "build-users": "REBILLY_API_PRODUCT=Users openapi bundle -o dist/users",
     "build-reports": "REBILLY_API_PRODUCT=Reports openapi bundle -o dist/reports",
@@ -19,7 +19,6 @@
     "build-payments": "REBILLY_API_PRODUCT=Payments openapi bundle -o dist/payments",
     "build-risk-management": "REBILLY_API_PRODUCT=RiskManagement openapi bundle -o dist/risk-management",
     "build-full": "REBILLY_API_PRODUCT=Full openapi bundle -o dist/full",
-
     "serve-core": "REBILLY_API_PRODUCT=Core npm run start openapi",
     "serve-users": "REBILLY_API_PRODUCT=Users npm run start openapi",
     "serve-reports": "REBILLY_API_PRODUCT=Reports npm run start openapi",
