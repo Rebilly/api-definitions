@@ -8,6 +8,7 @@
   "scripts": {
     "start": "openapi preview-docs",
     "build": "npm run build-core && npm run build-users && npm run build-reports && npm run build-storefront && npm run build-combined",
+    "build-for-js-sdk": "npm run build-core -- --ext json && npm run build-users -- --ext json && npm run build-storefront -- --ext json",
     "test": "openapi lint",
 
     "build-core": "REBILLY_API_PRODUCT=Core openapi bundle -o dist/core",
