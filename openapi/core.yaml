@@ -55,6 +55,15 @@ tags:
   - name: Customers Timeline
     description: |
       The customers timeline keeps an audit trail of changes and activity for each customer.
+  - name: Transactions Timeline
+    description: |
+      The customers timeline keeps an audit trail of changes and activity for each transaction.
+  - name: Orders Timeline
+    description: |
+      The customers timeline keeps an audit trail of changes and activity for each order.
+  - name: Invoices Timeline
+    description: |
+      The customers timeline keeps an audit trail of changes and activity for each invoice.
   - name: KYC Documents
     description: >
       Create a KYC Request to generate a gatherer link for the customer to upload KYC documents.
@@ -199,6 +208,7 @@ x-tagGroups:
       - Transactions
       - Disputes
       - Fees
+      - Transactions Timeline
   - name: Orders & Invoices
     tags:
       - Orders
@@ -207,6 +217,8 @@ x-tagGroups:
       - Products
       - Coupons
       - Shipping rates
+      - Orders Timeline
+      - Invoices Timeline
   - name: Risk
     tags:
       - Blocklists
@@ -467,9 +479,6 @@ x-webhooks:
   customer-updated:
     post:
       $ref: ./webhooks/customer-updated.yaml
-  balance-transaction-settled:
-    post:
-      $ref: ./webhooks/balance-transaction-settled.yaml
   dispute-created:
     post:
       $ref: ./webhooks/dispute-created.yaml
@@ -482,15 +491,6 @@ x-webhooks:
   invoice-tax-calculation-failed:
     post:
       $ref: ./webhooks/invoice-tax-calculation-failed.yaml
-  gateway-account-downtime-ended:
-    post:
-      $ref: ./webhooks/gateway-account-downtime-ended.yaml
-  gateway-account-downtime-started:
-    post:
-      $ref: ./webhooks/gateway-account-downtime-started.yaml
-  gateway-account-limit-reached:
-    post:
-      $ref: ./webhooks/gateway-account-limit-reached.yaml
   gateway-account-requested:
     post:
       $ref: ./webhooks/gateway-account-requested.yaml
