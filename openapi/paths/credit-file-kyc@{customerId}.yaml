@@ -1,0 +1,54 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Full
+    - Risk Management
+    - Core
+  tags:
+    - AML
+  summary: Retrieve a list of credit file kyc belong to a customer.
+  operationId: GetCreditFileKyc
+  x-sdk-operation-name: getCreditFileKyc
+  description: |
+    Retrieve a list of credit file kyc belong to a customer with specified identifier string.
+  responses:
+    '200':
+      description: Credit file kyc was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CreditFileKyc.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+post:
+  x-products:
+    - Full
+    - Risk Management
+    - Core
+  tags:
+    - AML
+  summary: Trigger an API call to credit bureau and store the response.
+  operationId: PostCreditFileKyc
+  x-sdk-operation-name: postCreditFileKyc
+  description: |
+    Trigger an API call to credit bureau and store the response with predefined identifier string.
+  responses:
+    '200':
+      description: Credit file kyc was created.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/requestBodies/CreditFileKyc.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
