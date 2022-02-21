@@ -1,5 +1,3 @@
-parameters:
-  - $ref: ../components/parameters/customerId.yaml
 get:
   x-products:
     - Full
@@ -37,6 +35,8 @@ post:
   x-sdk-operation-name: postCreditFileKyc
   description: |
     Trigger an API call to credit bureau and store the response with predefined identifier string.
+  requestBody:
+    $ref: ../components/requestBodies/CreditFileKyc.yaml
   responses:
     '200':
       description: Credit file kyc was created.
