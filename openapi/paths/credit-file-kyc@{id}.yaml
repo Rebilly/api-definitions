@@ -1,26 +1,27 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-x-products:
-  - Full
-  - Risk Management
-  - Core
-  tags:
-    - AML
-  summary: Retrieve a credit file KYC report
-  operationId: GetCreditFileKyc
-  x-sdk-operation-name: getCreditFileKyc
-  description: |
-    Retrieve a credit file KYC report.
-  responses:
-    '200':
-      description: Credit file KYC report was retrieved successfully.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/CreditFileKyc.yaml
-    '401':
-      $ref: ../components/responses/Unauthorized.yaml
-    '403':
-      $ref: ../components/responses/Forbidden.yaml
-    '404':
-      $ref: ../components/responses/NotFound.yaml
+get:
+  x-products:
+    - Full
+    - Risk Management
+    - Core
+    tags:
+      - AML
+    summary: Retrieve a credit file KYC report
+    operationId: GetCreditFileKyc
+    x-sdk-operation-name: getCreditFileKyc
+    description: |
+      Retrieve a credit file KYC report.
+    responses:
+      '200':
+        description: Credit file KYC report was retrieved successfully.
+        content:
+          application/json:
+            schema:
+              $ref: ../components/schemas/CreditFileKyc.yaml
+      '401':
+        $ref: ../components/responses/Unauthorized.yaml
+      '403':
+        $ref: ../components/responses/Forbidden.yaml
+      '404':
+        $ref: ../components/responses/NotFound.yaml
