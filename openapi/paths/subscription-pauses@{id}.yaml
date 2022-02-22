@@ -1,0 +1,83 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Full
+    - Billing
+    - Core
+  tags:
+    - Orders
+  summary: Retrieve a subscription pause
+  operationId: GetSubscriptionPause
+  x-sdk-operation-name: get
+  description: Retrieve a subscription pause with specified identifier string.
+  responses:
+    '200':
+      description: Pause was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Subscription/SubscriptionPause.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Full
+    - Billing
+    - Core
+  tags:
+    - Orders
+  summary: Update a subscription pause
+  operationId: PutSubscriptionPause
+  x-sdk-operation-name: update
+  description: Update a subscription pause.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Subscription/SubscriptionPause.yaml
+  responses:
+    '200':
+      description: Pause was updated, the subscription is or will be paused.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Subscription/SubscriptionPause.yaml
+    '201':
+      description: Pause was created, the subscription is or will be paused.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Subscription/SubscriptionPause.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+delete:
+  x-products:
+    - Full
+    - Billing
+    - Core
+  tags:
+    - Orders
+  summary: Delete a subscription pause
+  operationId: DeleteSubscriptionPause
+  x-sdk-operation-name: delete
+  description: Delete a subscription's pause. Pending pause will be revoked, ongoing pause will be finished.
+  responses:
+    '204':
+      description: Subscription pause was revoked or finished.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
