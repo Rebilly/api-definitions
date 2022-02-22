@@ -16,18 +16,27 @@ get:
       in: query
       required: true
       description: First name of individual to search.
+      schema:
+        type: string
     - name: lastName
       in: query
       required: true
       description: Last name of individual to search.
+      schema:
+        type: string
     - name: dob
       in: query
       required: false
       description: Date of birth in format YYYY-MM-DD.
+      schema:
+        type: string
     - name: country
       in: query
       required: false
       description: Country of individual as an ISO Alpha-2 code.
+      schema:
+        $ref: ../components/schemas/Country.yaml
+
   responses:
     '200':
       description: An array of objects representing hits, or an empty array if none are found.
