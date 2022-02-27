@@ -1,0 +1,73 @@
+servers:
+  - url: 'https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}'
+    description: Sandbox server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
+    description: Live server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+get:
+  x-products:
+    - Full
+    - Reports
+  tags:
+    - Reports
+  summary: Retrieve a KYC acceptance summary report
+  operationId: GetKycAcceptanceSummaryReport
+  description: Retrieve a KYC acceptance summary report.
+  parameters:
+    - name: periodStart
+      in: query
+      description: Report start date.
+      required: true
+      schema:
+        type: string
+    - name: periodEnd
+      in: query
+      description: Report end date.
+      required: true
+      schema:
+        type: string
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+  responses:
+    '200':
+      description: Report was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  type: object
+                  description: Amount of accepted KYC documents.
+                  readOnly: true
+                  properties:
+                    documentType:
+                      type: string
+                      description: Type of KYC document
+                      example: 'address-proof'
+                    autoAccepted:
+                      type: integer
+                      description: Amount of documents that have been accepted automatically.
+                      example: 10
+                    total:
+                      type: integer
+                      description: Total documents amount
+                      example: 100
+                    autoAcceptedPercentage:
+                      type: float
+                      description: Percents of auto-accepted documents on total amount KYC documents.
+                      example: 10.00
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+
