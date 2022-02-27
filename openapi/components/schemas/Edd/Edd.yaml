@@ -1,0 +1,29 @@
+parsedScore:
+  allOf:
+    - $ref: ./EddScore.yaml
+    - type: object
+      properties:
+        occupationDetails:
+          allOf:
+            - $ref: ./EddScoreDetails.yaml
+        arrestDetails:
+          allOf:
+            - $ref: ./EddScoreDetails.yaml
+        bankruptcyDetails:
+          allOf:
+            - $ref: ./EddScoreDetails.yaml
+        fraudDetails:
+          allOf:
+            - $ref: ./EddScoreDetails.yaml
+score:
+  allOf:
+    - $ref: ./EddScore.yaml
+nextUpdateTime:
+  description: The EDD score next updated time.
+  type: string
+  format: date-time
+  nullable: true
+updatedTime:
+  description: The EDD score updated time.
+  allOf:
+    - $ref: ../ServerTimestamp.yaml

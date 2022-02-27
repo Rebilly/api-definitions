@@ -1,0 +1,28 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Full
+    - Risk Management
+    - Payments
+    - Core
+  tags:
+    - Customers
+  summary: Retrieve a customer's EDD score data.
+  operationId: GetCustomerEdd
+  x-sdk-operation-name: getCustomerEdd
+  description: |
+    Retrieve a EDD score of given customer.
+  responses:
+    '200':
+      description: EDD score was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Edd/Edd.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
