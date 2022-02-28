@@ -1,0 +1,32 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Full
+    - Risk Management
+    - Core
+  tags:
+    - AML
+  summary: Search Customer in PEP/Sanctions/Adverse Media lists
+  operationId: GetCustomerAmlEntryCollection
+  x-sdk-operation-name: getAml
+  description: |
+    Search customer in multiple PEP/Sanctions/Adverse Media lists to find any blocklisted identities.
+    Performs a fuzzy search including soundex. Not all fields are guaranteed to be filled.
+
+  responses:
+    '200':
+      description: An array of objects representing hits, or an empty array if none are found.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/AML.yaml
