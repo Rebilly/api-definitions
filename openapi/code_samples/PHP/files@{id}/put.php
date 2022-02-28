@@ -3,6 +3,6 @@ $fileForm->setDescription('This is a test file');
 
 try {
     $file = $client->files()->update('fileId', $fileForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }

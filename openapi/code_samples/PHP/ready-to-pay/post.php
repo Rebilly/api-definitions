@@ -10,6 +10,6 @@ $readyToPayForm->setRiskMetadata($riskMetadata);
 
 try {
     $transaction = $client->transactions()->create($readyToPayForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }
