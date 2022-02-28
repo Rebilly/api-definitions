@@ -8,6 +8,6 @@ $planForm->setProductId('test-product');
 
 try {
     $plan = $client->plans()->create($planForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }

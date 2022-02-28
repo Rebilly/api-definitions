@@ -4,6 +4,6 @@ $organizationForm->setCountry('US');
 
 try {
     $organization = $client->organizations()->update('organizationId', $organizationForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }

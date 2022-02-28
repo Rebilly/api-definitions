@@ -4,6 +4,6 @@ $apiKeyForm->setDatetimeFormat($apiKeyForm::DATETIME_FORMAT_MYSQL);
 
 try {
     $apiKey = $client->apiKeys()->create($apiKeyForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }

@@ -3,6 +3,6 @@ $applicationInstance->setSettings(['color' => 'red', 'limit' => 5]);
 
 try {
     $applicationInstance = $client->applicationInstances()->update('applicationId', $applicationInstance);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }

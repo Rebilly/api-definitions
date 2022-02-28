@@ -15,6 +15,6 @@ $redemptionForm->setAdditionalRestrictions($restrictionForm);
 
 try {
     $couponRedemption = $client->couponsRedemptions()->redeem($redemptionForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }
