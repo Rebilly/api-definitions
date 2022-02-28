@@ -26,3 +26,33 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Full
+    - Risk Management
+    - Payments
+    - Core
+  tags:
+    - Customers
+  summary: Update a customer's EDD score data.
+  operationId: PutCustomerEdd
+  x-sdk-operation-name: updateCustomerEdd
+  description: Update a customer's EDD score data.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Edd/EddData.yaml
+  responses:
+    '200':
+      description: EDD score was updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Edd/Edd.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
