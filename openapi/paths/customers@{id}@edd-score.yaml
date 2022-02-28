@@ -41,8 +41,11 @@ put:
   requestBody:
     content:
       application/json:
-        schema:
-          $ref: ../components/schemas/Edd/EddData.yaml
+        properties:
+          score:
+            description: Customer's EDD score.
+            allOf:
+              - $ref: ../components/schemas/Edd/EddData.yaml
   responses:
     '200':
       description: EDD score was updated.
