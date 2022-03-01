@@ -7,6 +7,6 @@ $signupForm->setPassword('1234');
 
 try {
     $client->users()->signup($signupForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }

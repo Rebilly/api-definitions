@@ -7,6 +7,6 @@ $planForm->setTrialPeriodLength(1);
 
 try {
     $plan = $client->plans()->update('planId', $planForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }

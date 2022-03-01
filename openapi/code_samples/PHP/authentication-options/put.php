@@ -4,6 +4,6 @@ $authenticationOptionsForm->setPasswordPattern('/^[a-zA-Z0-9]{6,}$/');
 
 try {
     $authenticationOptions = $client->authenticationOptions()->update($authenticationOptionsForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }
