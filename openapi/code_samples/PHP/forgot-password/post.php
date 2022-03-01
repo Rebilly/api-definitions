@@ -3,6 +3,6 @@ $forgotPasswordForm->setEmail('johndoe@test.com');
 
 try {
     $client->users()->forgotPassword($forgotPasswordForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }

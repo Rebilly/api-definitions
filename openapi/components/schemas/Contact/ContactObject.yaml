@@ -20,7 +20,7 @@ properties:
     pattern: '^[\w\s\-\pL,.''&]+$'
     maxLength: 255
     nullable: true
-    example: null
+    example: Rebilly
   address:
     description: The contact street address.
     type: string
@@ -66,6 +66,19 @@ properties:
     $ref: ./ContactPhoneNumbers.yaml
   emails:
     $ref: ./ContactEmails.yaml
+  dob:
+    description: The contact's date of birth in ISO-8601 format (yyyy-mm-dd).
+    type: string
+    format: date
+    nullable: true
+    example: 1980-04-01
+  jobTitle:
+    description: The contact's job title.
+    type: string
+    pattern: '^[\w\s\-\/\pL,.#;:()'']+$'
+    maxLength: 255
+    nullable: true
+    example: CEO
   hash:
     description: >-
       A hash that can be used to compare multiple contacts for identical

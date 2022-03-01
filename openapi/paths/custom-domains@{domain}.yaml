@@ -7,7 +7,6 @@ parameters:
       type: string
       maxLength: 255
       pattern: '^[@~\-\.\w]+$'
-  - $ref: ../components/parameters/organizationId.yaml
 get:
   x-products:
     - Users
@@ -33,6 +32,9 @@ get:
     '404':
       $ref: ../components/responses/NotFound.yaml
 delete:
+  x-products:
+    - Users
+    - Full
   tags:
     - Custom domains
   summary: Delete a custom domain

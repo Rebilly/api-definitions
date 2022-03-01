@@ -14,23 +14,24 @@ integrated resources.
 
 # Authentication
 
-When you sign up for an account, you are given your first secret API key.
-You can generate additional API keys, and delete API keys (as you may
-need to rotate your keys in the future). You authenticate to the
-Rebilly API by providing your secret key in the request header.
+This topic describes the different forms of authentication that are available in the Rebilly API, and how to use them.
 
-Rebilly offers three forms of authentication:  secret key, publishable key, JSON Web Tokens, and public signature key.
-- [Secret API key](#section/Authentication/SecretApiKey): used for requests made
-  from the server side. Never share these keys. Keep them guarded and secure.
-- [Publishable API key](#section/Authentication/PublishableApiKey): used for 
-  requests from the client side. For now can only be used to create 
-  a [Payment Token](#operation/PostToken) and 
-  a [File token](#operation/PostFile).
-- [JWT](#section/Authentication/JWT): short lifetime tokens that can be assigned a specific expiration time.
+Rebilly offers four forms of authentication: secret key, publishable key, JSON Web Tokens, and public signature key.
 
-Never share your secret keys. Keep them guarded and secure.
+- Secret API key: Use to make requests from the server side. Never share these keys. Keep them guarded and secure.
+- Publishable API key: Use in your client-side code to tokenize payment information.
+- JWT: Use to make short-life tokens that expire after a set period of time.
 
 <!-- ReDoc-Inject: <security-definitions> -->
+
+## Manage API keys
+
+To create or manage API keys, select one of the following:
+
+- Use the Rebilly UI: In the left navigation bar, click **Automations**, **Integrations**, **Custom integrations**, then click **API keys**.
+- Use the Rebilly API: go to [API Keys](https://user-api-docs.rebilly.com/#tag/API-Keys).
+
+For more information, see [API keys](https://www.rebilly.com/docs/concepts-and-features/concept/api-keys).
 
 # Errors
 Rebilly follow's the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs.  As with our normal API responses, your client must be prepared to gracefully handle additional members of the response.
@@ -59,7 +60,7 @@ Rebilly also offers [FramePay](https://docs.rebilly.com/docs/developer-docs/fram
  a client-side iFrame-based solution to help
 create payment tokens while minimizing PCI DSS compliance burdens
 and maximizing the customization ability. [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/)
-is interacting with the [payment tokens creation operation](#operation/PostToken).
+is interacting with the [payment tokens creation operation](https://api-reference.rebilly.com/tag/Payment-Tokens#operation/PostToken).
 
 ## Javascript SDK
 

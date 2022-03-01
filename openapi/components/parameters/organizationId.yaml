@@ -1,12 +1,8 @@
-name: Organization-Id
-in: header
-description: >-
-  Organization identifier in scope of which need to perform request (if not
-  specified, the default organization will be used).
-
-
-  It is deprecated. Use servers with `/organizations/{organizationId}` base path instead.
-deprecated: true
+name: organizationId
+in: path
+description: The organization identifier string.
+required: true
 schema:
-  $ref: ../schemas/ResourceId.yaml
-required: false
+  type: string
+  maxLength: 50
+  pattern: '^[@~\-\.\w]+$'
