@@ -39,7 +39,7 @@ $paymentInstrumentForm->setBillingAddress([
 
 try {
     $paymentInstrument = $client->paymentInstruments()->create($paymentInstrumentForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }
 
@@ -50,6 +50,6 @@ $paymentInstrumentForm->setToken('payment-token');
 
 try {
     $paymentInstrument = $client->paymentInstruments()->create($paymentInstrumentForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }

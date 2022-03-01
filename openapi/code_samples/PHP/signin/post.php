@@ -4,6 +4,6 @@ $loginForm->setPassword('1234');
 
 try {
     $user = $client->users()->signin($loginForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }
