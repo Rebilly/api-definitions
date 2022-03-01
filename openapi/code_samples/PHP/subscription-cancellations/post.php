@@ -3,6 +3,6 @@ $subscriptionCancelForm->setEffectiveTime(new DateTime());
 
 try {
     $subscription = $client->subscriptions()->cancel('subscriptionId', $subscriptionCancelForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }

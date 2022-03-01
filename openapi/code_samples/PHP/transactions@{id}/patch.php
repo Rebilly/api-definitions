@@ -1,5 +1,5 @@
 try {
     $transaction = $client->transactions()->patch($transactionId, $data);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }

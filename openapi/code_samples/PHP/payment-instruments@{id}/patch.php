@@ -8,7 +8,7 @@ $paymentInstrumentForm->setBillingAddress([
 
 try {
     $paymentInstrument = $client->paymentInstruments()->update('paymentInstrumentId', $paymentInstrumentForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }
 
@@ -21,6 +21,6 @@ $paymentInstrumentForm->setBillingAddress([
 
 try {
     $paymentInstrument = $client->paymentInstruments()->update('paymentInstrumentId', $paymentInstrumentForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }
