@@ -1,4 +1,3 @@
-<?
 $invoiceForm = new Rebilly\Entities\Invoice();
 $invoiceForm->setCustomerId('customerId');
 $invoiceForm->setWebsiteId('websiteId');
@@ -39,6 +38,6 @@ $invoiceForm->setBillingAddress([
 
 try {
     $invoice = $client->invoices()->create($invoiceForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }

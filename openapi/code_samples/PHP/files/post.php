@@ -3,6 +3,6 @@ $fileForm->setUrl('http://test.com/somefile.jpg');
 
 try {
     $file = $client->files()->create($fileForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }

@@ -41,6 +41,6 @@ $subscriptionForm->setBillingAddress([
 
 try {
     $subscription = $client->subscriptions()->update('subscriptionId', $subscriptionForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }
