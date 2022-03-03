@@ -1,10 +1,12 @@
 description: Invoice taxes.
 type: object
+required:
+  - calculator
 discriminator:
   propertyName: calculator
   mapping:
     manual: ./TaxTypes/manual.yaml
-    rebilly: ./TaxTypes/rebilly-taxjar.yaml
+    rebilly-taxjar: ./TaxTypes/rebilly-taxjar.yaml
 properties:
   calculator:
     description: Tax calculator.
@@ -17,6 +19,4 @@ properties:
     x-type: Money
     x-sortable: true
     description: A sum of all invoice taxes.
-required:
-  - calculator
-  
+    readOnly: true

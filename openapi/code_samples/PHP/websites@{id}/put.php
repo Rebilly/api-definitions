@@ -6,6 +6,6 @@ $websiteForm->setServiceEmail('test@testwebsite.com');
 
 try {
     $website = $client->websites()->update('websiteId', $websiteForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }

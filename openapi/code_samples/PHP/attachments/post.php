@@ -5,6 +5,6 @@ $attachmentForm->setRelatedId('customerId');
 
 try {
     $attachment = $client->attachments()->create($attachmentForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }

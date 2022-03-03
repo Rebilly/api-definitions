@@ -20,6 +20,6 @@ $couponForm->setRestrictions([$restrictionForm]);
 
 try {
     $coupon = $client->coupons()->create($couponForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }
