@@ -4,6 +4,6 @@ $updatePasswordForm->setNewPassword('5678');
 
 try {
     $user = $client->users()->updatePassword('userId', $updatePasswordForm);
-} catch (UnprocessableEntityException $e) {
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
     echo $e->getMessage();
 }
