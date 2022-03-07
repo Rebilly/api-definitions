@@ -48,12 +48,7 @@ put:
           schema:
             $ref: ../components/schemas/Segments/Segment.yaml
     '403':
-      description: |
-        This will be sent if the user is not the owner.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Error.yaml
+      $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
     '422':
@@ -79,11 +74,6 @@ delete:
     '204':
       description: Segment was deleted successfully.
     '403':
-      description: |
-        This will be sent if the user is not the owner.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Error.yaml
+      $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
