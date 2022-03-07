@@ -64,7 +64,7 @@ get:
                       type: integer
                       description: Amount of documents that have been accepted automatically and then rejected by user.
                       example: 5
-                    acceptAutoRejected:
+                    acceptedAutoRejected:
                       type: integer
                       description: Amount of documents that have been rejected automatically and then accepted by user.
                       example: 5
@@ -76,9 +76,13 @@ get:
                       type: integer
                       description: Total documents amount.
                       example: 200
-                    autoAcceptedPercentage:
+                    accuracyRate:
                       type: number
-                      description: Percents of auto-accepted documents on total accepted amount KYC documents.
+                      description: Percent of automatically accepted and rejected documents that remain in the same status after review.
+                      example: 10.00
+                    acceptanceRate:
+                      type: number
+                      description: Percent of accepted documents out of the total number of KYC documents.
                       example: 10.00
     '401':
       $ref: ../components/responses/Unauthorized.yaml
