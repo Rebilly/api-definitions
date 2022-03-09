@@ -5,7 +5,7 @@ properties:
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
-  email: 
+  email:
     description: The customer's email.
     type: string
     format: email
@@ -93,6 +93,12 @@ properties:
       The revision is useful when analyzing webhook data to determine if the
       change takes precedence over the current representation.
     type: integer
+    readOnly: true
+  hasFulfilledKyc:
+    description: >-
+      Whether the customer has fulfilled a KYC request by providing valid
+      identity and address documents.
+    type: boolean
     readOnly: true
   _links:
     type: array
