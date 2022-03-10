@@ -1,0 +1,21 @@
+description: ACI config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: ACI credentials object.
+        properties:
+          entityId:
+            type: string
+          accessToken:
+            type: string
+            format: password
+        required:
+          - entityId
+          - accessToken
+      threeDSecureServer:
+        $ref: ../ThreeDSecureServers/ACI3dsServers/ACI3dsServers.yaml
