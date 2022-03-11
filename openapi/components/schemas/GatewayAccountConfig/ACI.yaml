@@ -1,4 +1,4 @@
-description: TrustPay config.
+description: ACI config.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -7,7 +7,7 @@ allOf:
     properties:
       credentials:
         type: object
-        description: TrustPay credentials object.
+        description: ACI credentials object.
         properties:
           entityId:
             type: string
@@ -17,5 +17,12 @@ allOf:
         required:
           - entityId
           - accessToken
+      settings:
+        type: object
+        description: ACI settings object.
+        properties:
+          url:
+            type: string
+            description: ACI custom server URL.
       threeDSecureServer:
-        $ref: ../ThreeDSecureServers/TrustPay3dsServers/TrustPay3dsServers.yaml
+        $ref: ../ThreeDSecureServers/ACI3dsServers/ACI3dsServers.yaml
