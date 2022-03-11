@@ -37,11 +37,21 @@ properties:
     type: string
     readOnly: true
     enum:
-      - unfulfilled
-      - pending
-      - rejected
-      - fulfilled
+      - abandoned
       - expired
+      - pending
+      - fulfilled
+      - failed
+      - incomplete
+      - in-progress
+    x-enumDescriptions:
+      abandoned: Request expired and has at least one document uploaded
+      expired: Request expired without any document uploaded
+      pending: All requested documents are provided and have status either `accepted`, `pending` or `in-progress`
+      fulfilled: All requested documents are provided and `accepted`
+      failed: At least one requested document exhausted attempts and has no `accepted`, `pending` or `in-progress` document
+      incomplete: At least one requested document is `accepted`, but not all of them
+      in-progress: No requested documents are `accepted` and not all are uploaded in `pending` or `in-progress` statuses
   redirectUrl:
     description: |
       The URL to redirect the customer when an upload is completed.
