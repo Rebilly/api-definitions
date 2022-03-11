@@ -49,9 +49,10 @@ get:
                   readOnly: true
                   properties:
                     documentType:
-                      type: string
-                      description: Type of KYC document.
-                      example: 'address-proof'
+                      allOf:
+                        - description: Type of KYC document.
+                          example: 'address-proof'
+                        - $ref: '../components/schemas/KycDocument/KycDocumentTypes.yaml'
                     statusStatistics:
                       type: object
                       description: Statistics for each status.
