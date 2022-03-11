@@ -52,26 +52,58 @@ get:
                       type: string
                       description: Type of KYC document.
                       example: 'address-proof'
-                    autoAccepted:
-                      type: integer
-                      description: Amount of documents that have been accepted automatically.
-                      example: 10
-                    manuallyAccepted:
-                      type: integer
-                      description: Amount of documents that have been accepted by user.
-                      example: 30
-                    rejectedAutoAccepted:
-                      type: integer
-                      description: Amount of documents that have been accepted automatically and then rejected by user.
-                      example: 5
-                    acceptedAutoRejected:
-                      type: integer
-                      description: Amount of documents that have been rejected automatically and then accepted by user.
-                      example: 5
-                    totalAccepted:
-                      type: integer
-                      description: Total accepted documents amount.
-                      example: 100
+                    statusStatistics:
+                      type: object
+                      description: Statistics for each status.
+                      properties:
+                        accepted:
+                          type: object
+                          description: Statistics for `accepted` status.
+                          properties:
+                            total:
+                              type: integer
+                              description: Total amount of accepted documents.
+                              example: 6
+                            automatically:
+                              type: integer
+                              description: Amount of documents that have been accepted automatically.
+                              example: 4
+                            manually:
+                              type: integer
+                              description: Amount of documents that have been accepted by user.
+                              example: 2
+                            rejectedAutoAccepted:
+                              type: integer
+                              description: Amount of documents that have been accepted automatically and then rejected by user.
+                              example: 2
+                        rejected:
+                          type: object
+                          description: Statistics for `rejected` status.
+                          properties:
+                            total:
+                              type: integer
+                              description: Total amount of rejected documents.
+                              example: 2
+                            automatically:
+                              type: integer
+                              description: Amount of documents that have been rejected automatically.
+                              example: 1
+                            manually:
+                              type: integer
+                              description: Amount of documents that have been rejected by user.
+                              example: 1
+                            afterAutoAccepted:
+                              type: integer
+                              description: Amount of documents that have been rejected automatically and then accepted by user.
+                              example: 1
+                        pending:
+                          type: object
+                          description: Statistics for `pending` status.
+                          properties:
+                            total:
+                              type: integer
+                              description: Total amount of pending documents.
+                              example: 0
                     total:
                       type: integer
                       description: Total documents amount.
