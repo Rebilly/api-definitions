@@ -91,8 +91,19 @@ tags:
       The gateway accounts timeline keeps an audit trail of changes and activity for each gateway account.
   - name: KYC Documents
     description: >
-      Customer KYC files uploaded on behalf of a customer, tagged with a
-      document type and submitted for validation.
+      Request KYC documents from customers using the KYC request API which generates a signed link to the KYC document gatherer.
+      The types of documents to request:
+        - identity-proof
+        - address-proof
+        - purchase-proof
+        - funds-proof
+        - credit-file-proof
+
+      In the case that a `credit-file-proof` is requested in combination with `identity-proof` and `address-proof`, the `credit-file-proof` is attempted first.
+      If it is successful in validating the identity and address, then the KYC request is considered instantly fulfilled.
+      If it is not, or if you the `credit-file-proof` isn't requested, then redirect your customer to the KYC document gatherer to collect their KYC documents.
+      Rebilly parses and analyzes the documents and accepts or rejects them according to a configurable scoring algorithm.
+      When all of the document types in the KYC request are accepted, the status is considered fulfilled and the KYC request fulfilled webhook will be emitted.
   - name: Customer Authentication
     description: >
       Create authentication credentials, login, logout, and verify your
@@ -468,6 +479,10 @@ paths:
     $ref: './paths/invoices@{id}@timeline.yaml'
   '/invoices/{id}/timeline/{messageId}':
     $ref: './paths/invoices@{id}@timeline@{messageId}.yaml'
+  /kyc-requests:
+    $ref: ./paths/kyc-requests.yaml
+  '/kyc-requests/{id}':
+    $ref: './paths/kyc-requests@{id}.yaml'
   /kyc-documents:
     $ref: ./paths/kyc-documents.yaml
   '/kyc-documents/{id}':
@@ -484,10 +499,6 @@ paths:
     $ref: './paths/kyc-documents@{id}@start-review.yaml'
   '/kyc-documents/{id}/stop-review':
     $ref: './paths/kyc-documents@{id}@stop-review.yaml'
-  /kyc-requests:
-    $ref: ./paths/kyc-requests.yaml
-  '/kyc-requests/{id}':
-    $ref: './paths/kyc-requests@{id}.yaml'
   /password-tokens:
     $ref: ./paths/password-tokens.yaml
   '/password-tokens/{id}':
@@ -834,7 +845,7 @@ paths:
     $ref: ./paths/reports@future-renewals.yaml
   /experimental/reports/kyc-acceptance-summary:
     $ref: ./paths/reports@kyc-acceptance-summary.yaml
-  /experimental/reports/kyc-rejections-summary:
+  /experimental/reports/kyc-rejection-summary:
     $ref: ./paths/reports@kyc-rejection-summary.yaml
   /experimental/reports/renewal-sales:
     $ref: ./paths/reports@renewal-sales.yaml
