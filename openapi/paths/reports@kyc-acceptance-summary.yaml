@@ -105,6 +105,14 @@ get:
                               type: integer
                               description: Total amount of pending documents.
                               example: 0
+                        archived:
+                          type: object
+                          description: Statistics for `archived` status.
+                          properties:
+                            total:
+                              type: integer
+                              description: Total amount of archived documents.
+                              example: 0
                     total:
                       type: integer
                       description: Total documents amount.
@@ -113,11 +121,11 @@ get:
                       type: number
                       description: |
                         Percent of automatically accepted and rejected documents that remain in the same status after review.
-                        Calculated by the formula: `(total - accepted auto rejected - rejected auto accepted)/total`.
+                        Calculated by the formula: `(nonarchived total - accepted auto rejected - rejected auto accepted)/nonarchived total`.
                       example: 62.5
                     acceptanceRate:
                       type: number
-                      description: Percent of accepted documents out of the total number of KYC documents. Calculated by accepted total divided by the total.
+                      description: Percent of accepted documents out of the total number of KYC documents. Calculated by accepted total divided by the total of nonarchived documents.
                       example: 75
     '401':
       $ref: ../components/responses/Unauthorized.yaml
