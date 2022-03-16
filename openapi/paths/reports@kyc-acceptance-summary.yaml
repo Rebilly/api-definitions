@@ -49,21 +49,76 @@ get:
                   readOnly: true
                   properties:
                     documentType:
-                      type: string
-                      description: Type of KYC document.
-                      example: 'address-proof'
-                    autoAccepted:
-                      type: integer
-                      description: Amount of documents that have been accepted automatically.
-                      example: 10
+                      allOf:
+                        - description: Type of KYC document.
+                          example: 'address-proof'
+                        - $ref: '../components/schemas/KycDocument/KycDocumentTypes.yaml'
+                    statusStatistics:
+                      type: object
+                      description: Statistics for each status.
+                      properties:
+                        accepted:
+                          type: object
+                          description: Statistics for `accepted` status.
+                          properties:
+                            total:
+                              type: integer
+                              description: Total amount of accepted documents.
+                              example: 6
+                            automatically:
+                              type: integer
+                              description: Amount of documents that have been accepted automatically.
+                              example: 4
+                            manually:
+                              type: integer
+                              description: Amount of documents that have been accepted by reviewer.
+                              example: 2
+                            afterAutoRejected:
+                              type: integer
+                              description: Amount of documents that have been rejected automatically and then accepted by reviewer.
+                              example: 2
+                        rejected:
+                          type: object
+                          description: Statistics for `rejected` status.
+                          properties:
+                            total:
+                              type: integer
+                              description: Total amount of rejected documents.
+                              example: 2
+                            automatically:
+                              type: integer
+                              description: Amount of documents that have been rejected automatically.
+                              example: 1
+                            manually:
+                              type: integer
+                              description: Amount of documents that have been rejected by reviewer.
+                              example: 1
+                            afterAutoAccepted:
+                              type: integer
+                              description: Amount of documents that have been accepted automatically and then rejected by reviewer.
+                              example: 1
+                        pending:
+                          type: object
+                          description: Statistics for `pending` status.
+                          properties:
+                            total:
+                              type: integer
+                              description: Total amount of pending documents.
+                              example: 0
                     total:
                       type: integer
                       description: Total documents amount.
-                      example: 100
-                    autoAcceptedPercentage:
+                      example: 8
+                    accuracyRate:
                       type: number
-                      description: Percents of auto-accepted documents on total amount KYC documents.
-                      example: 10.00
+                      description: |
+                        Percent of automatically accepted and rejected documents that remain in the same status after review.
+                        Calculated by the formula: `(total - accepted auto rejected - rejected auto accepted)/total`.
+                      example: 62.5
+                    acceptanceRate:
+                      type: number
+                      description: Percent of accepted documents out of the total number of KYC documents. Calculated by accepted total divided by the total.
+                      example: 75
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
