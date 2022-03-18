@@ -1,4 +1,6 @@
-$couponForm = new Rebilly\Entities\Coupons\Coupon();
+$couponForm = new Rebilly\Entities\Coupons\Coupon([
+        'issuedTime' => '2022-01-01T00:00:00-04:00'
+]);
 
 $discountArray = [
     'type' => Rebilly\Entities\Coupons\Discount::TYPE_FIXED,
@@ -6,7 +8,7 @@ $discountArray = [
     'amount' => 1.99,
 ];
 
-$discountForm = new Rebilly\Entities\Coupons\Discount($discountArray);
+$discountForm = Rebilly\Entities\Coupons\Discount::createFromData($discountArray);
 $couponForm->setDiscount($discountForm);
 
 $restrictionArray = [
@@ -14,11 +16,9 @@ $restrictionArray = [
     'quantity' => 2,
 ];
 
-$restrictionForm = new Rebilly\Entities\Coupons\Restriction([
-    $restrictionArray,
-]);
+$restrictionForm = Restriction::createFromData($restrictionArray);
 
-$couponForm->setRestrictions($restrictionForm);
+$couponForm->setRestrictions([$restrictionForm]);
 
 try {
     $coupon = $client->coupons()->create($couponForm, 'couponId');
