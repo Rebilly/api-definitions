@@ -16,7 +16,7 @@ $restrictionArray = [
     'quantity' => 2,
 ];
 
-$restrictionForm = Restriction::createFromData($restrictionArray);
+$restrictionForm = Rebilly\Entities\Coupons\Restriction::createFromData($restrictionArray);
 
 $couponForm->setRestrictions([$restrictionForm]);
 
