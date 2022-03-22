@@ -1,5 +1,5 @@
 $couponForm = new Rebilly\Entities\Coupons\Coupon([
-        'issuedTime' => '2022-01-01T00:00:00-04:00'
+    'issuedTime' => '2022-01-01T00:00:00-04:00',
 ]);
 
 $discountArray = [
