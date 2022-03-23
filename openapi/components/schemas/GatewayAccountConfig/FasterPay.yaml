@@ -1,0 +1,20 @@
+description: FasterPay Gateway config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          publicKey:
+            type: string
+            description: FasterPay public key.
+          privateKey:
+            type: string
+            description: FasterPay secret key.
+            format: password
+        required:
+          - publicKey
+          - privateKey
