@@ -1,0 +1,32 @@
+put:
+  x-products:
+    - Full
+    - Risk Management
+    - Core
+  tags:
+    - KYC Documents
+  summary: Update KYC settings
+  operationId: PutKycSettings
+  x-sdk-operation-name: updateKycSettings
+  description: >
+    Update KYC settings.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/KycSettings.yaml
+    description: The settings for KYC analysis.
+    required: true
+  responses:
+    '200':
+      description: KYC settings were updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KycSettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
