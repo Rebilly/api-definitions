@@ -23,5 +23,5 @@ $couponForm->setRestrictions([$restrictionForm]);
 try {
     $coupon = $client->coupons()->create($couponForm, 'couponId');
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }

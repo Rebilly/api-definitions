@@ -7,5 +7,5 @@ $websiteForm->setServiceEmail('test@testwebsite.com');
 try {
     $website = $client->websites()->create($websiteForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }

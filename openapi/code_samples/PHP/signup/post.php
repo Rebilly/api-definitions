@@ -8,5 +8,5 @@ $signupForm->setPassword('1234');
 try {
     $client->users()->signup($signupForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }

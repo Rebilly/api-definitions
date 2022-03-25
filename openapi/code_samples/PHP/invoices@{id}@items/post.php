@@ -6,5 +6,5 @@ $invoiceItemForm->setQuantity(5);
 try {
     $invoiceItem = $client->invoiceItems()->create($invoiceItemForm, 'invoiceId');
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }
