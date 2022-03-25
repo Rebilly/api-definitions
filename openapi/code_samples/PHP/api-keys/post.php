@@ -1,6 +1,5 @@
 $apiKeyForm = new Rebilly\Entities\ApiKey();
-$apiKeyForm->setDescription('Test');
-$apiKeyForm->setDatetimeFormat($apiKeyForm::DATETIME_FORMAT_MYSQL);
+$apiKeyForm->setDescription('Test key');
 
 try {
     $apiKey = $client->apiKeys()->create($apiKeyForm);
