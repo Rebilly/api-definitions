@@ -1,5 +1,5 @@
 try {
     $client->gatewayAccounts()->delete('gatewayAccountId');
-} catch (ServerException $e) {
+} catch (Rebilly\Http\Exception\ClientException $e) {
     echo $e->getMessage();
 }
