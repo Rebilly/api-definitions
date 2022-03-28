@@ -42,5 +42,5 @@ $subscriptionForm->setBillingAddress([
 try {
     $subscription = $client->subscriptions()->update('subscriptionId', $subscriptionForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }

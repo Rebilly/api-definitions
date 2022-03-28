@@ -5,5 +5,5 @@ $leadSourceForm->setCampaign('TestCampaign');
 try {
     $customer = $client->customers()->updateLeadSource('myCustomerId', $leadSourceForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }
