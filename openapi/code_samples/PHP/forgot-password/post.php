@@ -4,5 +4,5 @@ $forgotPasswordForm->setEmail('johndoe@test.com');
 try {
     $client->users()->forgotPassword($forgotPasswordForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }

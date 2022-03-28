@@ -6,5 +6,5 @@ $userForm->setEmail('johndoe@test.com');
 try {
     $user = $client->users()->create($userForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }

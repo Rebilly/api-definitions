@@ -5,5 +5,5 @@ $authenticationForm->setPassword('test123');
 try {
     $authenticationToken = $client->authenticationTokens()->login($authenticationForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }
