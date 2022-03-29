@@ -24,5 +24,5 @@ $gatewayAccountForm->setGatewayConfig($gatewayConfig);
 try {
     $gatewayAccount = $client->gatewayAccounts()->create($gatewayAccountForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }

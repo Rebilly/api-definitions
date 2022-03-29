@@ -14,5 +14,5 @@ $redemptionForm->setAdditionalRestrictions([$restrictionForm]);
 try {
     $couponRedemption = $client->couponsRedemptions()->redeem($redemptionForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }

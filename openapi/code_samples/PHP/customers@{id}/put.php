@@ -36,5 +36,5 @@ $customerForm->setPrimaryAddress([
 try {
     $customer = $client->customers()->update('myCustomerId', $customerForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }

@@ -6,5 +6,5 @@ $attachmentForm->setRelatedId('customerId');
 try {
     $attachment = $client->attachments()->update('attachmentId', $attachmentForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }

@@ -1,8 +1,9 @@
-$subscriptionCancelForm = new Rebilly\Entities\SubscriptionCancel();
-$subscriptionCancelForm->setEffectiveTime(new DateTime());
+$subscriptionCancellationForm = new Rebilly\Entities\SubscriptionCancellation();
+$subscriptionCancellationForm->setSubscriptionId('subscription-1');
+$subscriptionCancellationForm->setChurnTime(date('c'));
 
 try {
-    $subscription = $client->subscriptions()->cancel('subscriptionId', $subscriptionCancelForm);
+    $subscription = $client->subscriptionCancellations()->create($subscriptionCancellationForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }

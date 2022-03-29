@@ -1,0 +1,23 @@
+type: object
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  type:
+    type: string
+    readOnly: true
+    enum:
+      - occupation
+      - arrest
+      - fraud
+      - bankruptcy
+  results:
+    type: array
+    readOnly: true
+    items:
+      $ref: ./EddScoreDetails.yaml
+  createdTime:
+    description: The EDD search result created time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml

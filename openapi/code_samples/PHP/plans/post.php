@@ -9,5 +9,5 @@ $planForm->setProductId('test-product');
 try {
     $plan = $client->plans()->create($planForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }
