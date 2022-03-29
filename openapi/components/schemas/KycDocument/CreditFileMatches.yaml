@@ -8,6 +8,7 @@ properties:
       - equifax
       - experian
       - transunion
+      - test-bureau
   creditFileNumber:
     description: The credit file number on credit bureau.
     type: string
@@ -42,6 +43,14 @@ properties:
     readOnly: true
   isDobMatched:
     description: Return true if date of birth is matched otherwise false.
+    type: boolean
+    readOnly: true
+  isAgeOfCreditFileThreeOrMoreYearsOld:
+    description: Return true if the age of credit file is more than 3 years.
+    type: boolean
+    readOnly: true
+  isFromMoreThanOneDistinctSource:
+    description: Return true if it's from more than one distinct source.
     type: boolean
     readOnly: true
   referenceData:
