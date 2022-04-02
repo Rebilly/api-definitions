@@ -2,15 +2,20 @@ content:
   application/json:
     schema:
       properties:
+        subscriptionId:
+          description: The order ID.
+          type: string
         subscriptionPauseId:
-          description: The subscription pause ID.
+          description: The pause ID.
           type: string
         eventType:
           $ref: ../../schemas/GlobalWebhookEventType.yaml
         _embedded:
           type: object
           properties:
-            subscriptionPause:
+            subscription:
+              $ref: ../../schemas/Subscription.yaml
+            pause:
               $ref: ../../schemas/Subscription/SubscriptionPause.yaml
         _links:
           type: array
@@ -18,5 +23,6 @@ content:
           minItems: 1
           items:
             anyOf:
+              - $ref: ../../schemas/Links/SubscriptionLink.yaml
               - $ref: ../../schemas/Links/SubscriptionPauseLink.yaml
-description: Subscripiton pause webhook request body resource.
+description: Subscription pause and Order webhook request body resource.
