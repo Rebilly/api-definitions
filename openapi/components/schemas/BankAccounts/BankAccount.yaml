@@ -1,6 +1,11 @@
 allOf:
   - $ref: ../Common/CommonBankAccount.yaml
   - properties:
+      stickyGatewayAccountId:
+        description: Sticky gateway account ID. All future payments will be processed by this gateway account.
+        type: string
+        nullable: true
+        readOnly: true
       _links:
         type: array
         description: The links related to resource.
