@@ -1,6 +1,10 @@
 allOf:
   - $ref: ../Common/CommonPaymentCard.yaml
   - properties:
+      customerId:
+        description: The customer ID.
+        allOf:
+          - $ref: ../ResourceId.yaml
       stickyGatewayAccountId:
         description: Sticky gateway account ID. All future payments will be processed by this gateway account.
         type: string
@@ -31,6 +35,8 @@ allOf:
         enum:
           - Apple Pay
           - Google Pay
+      riskMetadata:
+        $ref: ../RiskMetadata.yaml
       _links:
         type: array
         description: The links related to resource.
