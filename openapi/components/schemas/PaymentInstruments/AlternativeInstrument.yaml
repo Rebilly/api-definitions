@@ -1,7 +1,15 @@
 title: Alternative Instrument
+required:
+  - method
+  - customerId
+  - billingAddress
 allOf:
   - $ref: ../Common/CommonAlternativeInstrument.yaml
   - properties:
+      customerId:
+        description: Customer's ID.
+        allOf:
+          - $ref: ../ResourceId.yaml
       stickyGatewayAccountId:
         description: Sticky gateway account ID. All future payments will be processed by this gateway account.
         type: string
@@ -14,3 +22,24 @@ allOf:
           type: string
         example:
           gatewayTransactionId: GAT123
+      riskMetadata:
+        $ref: ../RiskMetadata.yaml
+      _links:
+        type: array
+        description: Links related to the resource.
+        readOnly: true
+        minItems: 1
+        items:
+          anyOf:
+            - $ref: ../Links/SelfLink.yaml
+            - $ref: ../Links/CustomerLink.yaml
+      _embedded:
+        type: array
+        description: >-
+          Any embedded objects available that are requested by the `expand`
+          querystring parameter.
+        readOnly: true
+        minItems: 1
+        items:
+          anyOf:
+            - $ref: ../Embeds/CustomerEmbed.yaml

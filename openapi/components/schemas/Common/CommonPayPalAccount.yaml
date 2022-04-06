@@ -1,8 +1,4 @@
 type: object
-required:
-  - method
-  - customerId
-  - billingAddress
 title: 'PayPal Account'
 properties:
   id:
@@ -15,10 +11,6 @@ properties:
     type: string
     enum:
       - paypal
-  customerId:
-    description: The customer's ID.
-    allOf:
-      - $ref: ../ResourceId.yaml
   billingAddress:
     description: The billing address.
     allOf:
@@ -49,5 +41,3 @@ properties:
       - $ref: ../ServerTimestamp.yaml
   customFields:
     $ref: ../ResourceCustomFields.yaml
-  riskMetadata:
-    $ref: ../RiskMetadata.yaml
