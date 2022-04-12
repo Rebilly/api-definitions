@@ -18,8 +18,9 @@ properties:
     type: string
     readOnly: true
   consultedDate:
-    description: Date to consult with credit file bureau.
+    description: Date to cosult with credit file bureaur.
     type: string
+    format: date-time
     readOnly: true
   decision:
     description: Value based on if the credit file can be used as a single source proof of identity decision, requires at least one more source (dual-source), or other for anything else.
@@ -29,6 +30,10 @@ properties:
       - dual-source
       - other
     readOnly: true
+  dualSourceData:
+    description: Contain 2 objects from different source like statements, letters, certificates, forms or other information sources.
+      type: object
+      readOnly: true
   referenceData:
     description: Extra data from credit bureau.
     type: object
