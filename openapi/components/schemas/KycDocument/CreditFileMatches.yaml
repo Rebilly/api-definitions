@@ -53,11 +53,14 @@ properties:
     description: Return true if it's from more than one distinct source.
     type: boolean
     readOnly: true
-  isSingleSourceDecision:
-    description: Return true if it's single source decision. Kyc document will be accepted.
-    type: boolean
+  decision:
+    description: Value based on if the credit file can be used as a single source proof of identity decision, requires at least one more source (dual-source), or other for anything else.
+    type: string
+    enum:
+      - single-source
+      - dual-source
+      - other
     readOnly: true
-  isDualSourceDecision:
     description: Return true if it's dual source decision. Can be used it with another source.
     type: boolean
     readOnly: true
