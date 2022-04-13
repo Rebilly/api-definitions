@@ -53,7 +53,7 @@ properties:
     nullable: true
   timeRemaining:
     description: >
-      Time in seconds between the pause end time and the renewal time.
+      Time period between the pause end time and the renewal time in ISO8601 Durations format.
       By default, it's computed as the time between the pause and the renewal.
 
       For instance, you have a $30/month subscription and 30-day month.
@@ -63,9 +63,8 @@ properties:
       There may be a billing anchor for the subscription,
       the renewal time after a pause shift should behave as if the renewal time moved forward with Order API
       (the billing anchor is ignored for that period then).
-    type: number
-    format: integer
-    minimum: 0
+    type: string
+    example: P3600S
   createdTime:
     description: The time of resource creation (when it is posted).
     type: string
