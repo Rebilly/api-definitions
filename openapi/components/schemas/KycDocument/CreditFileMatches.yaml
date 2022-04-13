@@ -30,9 +30,22 @@ properties:
       - dual-source
       - other
     readOnly: true
-  dualSourceData:
-    description: Contains 2 objects from different sources like statements, letters, certificates, forms or other information sources.
-    type: object
+  trades:
+    description: Contains information to support the dual process.
+    type: array
+    items:
+      - type: object
+         properties:
+           name:
+             type: string
+             description: The trade name.
+             example: Rogers
+           accountNumber:
+             type: string
+             example: '123-ABC-123'
+           dateOpened:
+             type: string
+             format: date
     readOnly: true
   referenceData:
     description: Extra data from credit bureau.
