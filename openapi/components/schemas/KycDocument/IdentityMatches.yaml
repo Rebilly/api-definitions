@@ -15,37 +15,50 @@ properties:
   firstName:
     description: The customer first name if it was matched, null otherwise.
     type: string
+    nullable: true
     example: John
   lastName:
     description: The customer last name if it was matched, null otherwise.
     type: string
+    nullable: true
     example: Doe
   dateOfBirth:
     description: The date of birth found on the document, null if not found.
     type: string
     format: date-time
+    nullable: true
   expiryDate:
     description: The expiry date found on the document, null if not found.
     type: string
     format: date-time
+    nullable: true
     deprecated: true
   expirationDate:
     description: The expiration date found on the document, null if not found.
     type: string
     format: date-time
+    nullable: true
   issueDate:
     description: The issued date found on the document, null if not found.
     type: string
     format: date-time
+    nullable: true
   hasMinimalAge:
     description: >-
       Checks the minimal age, 21+ for USA and 18+ for all other countries.
       Null if dateOfBirth could not be determined.
     type: boolean
+    nullable: true
     readOnly: true
     example: true
   nationality:
     description: The nationality found on the document, null otherwise.
     type: string
+    nullable: true
     example: US
     maxLength: 3
+  documentSubtype:
+    description: The interpreted subtype of the uploaded document.
+    type: string
+    nullable: true
+    example: passport
