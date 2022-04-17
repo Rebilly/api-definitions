@@ -5,5 +5,5 @@ $updatePasswordForm->setNewPassword('5678');
 try {
     $user = $client->users()->updatePassword('userId', $updatePasswordForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }

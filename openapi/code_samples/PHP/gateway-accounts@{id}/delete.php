@@ -1,5 +1,1 @@
-try {
-    $client->gatewayAccounts()->delete('gatewayAccountId');
-} catch (ServerException $e) {
-    echo $e->getMessage();
-}
+$client->gatewayAccounts()->delete('gatewayAccountId');

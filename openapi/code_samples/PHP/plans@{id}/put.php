@@ -8,5 +8,5 @@ $planForm->setTrialPeriodLength(1);
 try {
     $plan = $client->plans()->update('planId', $planForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }
