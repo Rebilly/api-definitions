@@ -8,6 +8,36 @@ lint:
     - ./plugins/custom-rules.js
     - ./plugins/products-bundler/bundler.js
   rules:
+    assertions:
+      - subject: Tag
+        property: description
+        message: Tag description must be at least 30 characters and end with a full stop.
+        severity: error
+        defined: true
+        minLength: 30
+        pattern: /\.$/
+      - subject: Operation
+        property: description
+        message: Operation description must be at least 30 characters and end with a full stop.
+        severity: error
+        defined: true
+        minLength: 30
+        pattern: /\.$/
+      - subject: Info
+        property: description
+        message: Info description must be at least 30 characters and end with a full stop.
+        severity: error
+        defined: true
+        minLength: 30
+        pattern: /\.$/
+      - subject: Operation
+        property: summary
+        message: Operation summary must be between 20 and 60 characters and not end with a full stop.
+        severity: error
+        defined: true
+        minLength: 20
+        maxLength: 60
+        pattern: /[^\.]$/
     no-ambiguous-paths: error
     no-unused-components: error
     operation-2xx-response: error
