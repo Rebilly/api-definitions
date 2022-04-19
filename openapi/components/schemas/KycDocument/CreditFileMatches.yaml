@@ -13,45 +13,39 @@ properties:
     description: The credit file number on credit bureau.
     type: string
     readOnly: true
-  isFirstNameMatched:
-    description: Return true if first name is matched otherwise false.
-    type: boolean
+  name:
+    description: Name of the person to consult the credit file.
+    type: string
     readOnly: true
-  isLastNameMatched:
-    description: Return true if last name is matched otherwise false.
-    type: boolean
+  consultedDate:
+    description: Date to consult with credit file bureau.
+    type: string
+    format: date-time
     readOnly: true
-  isCivicNumberMatched:
-    description: Return true if address civic number is matched otherwise false.
-    type: boolean
+  decision:
+    description: Value based on if the credit file can be used as a single source proof of identity decision, requires at least one more source (dual-source), or other for anything else.
+    type: string
+    enum:
+      - single-source
+      - dual-source
+      - other
     readOnly: true
-  isStreetMatched:
-    description: Return true if street address is matched otherwise false.
-    type: boolean
-    readOnly: true
-  isCityMatched:
-    description: Return true if city is matched otherwise false.
-    type: boolean
-    readOnly: true
-  isPostalCodeMatched:
-    description: Return true if postal code is matched otherwise false.
-    type: boolean
-    readOnly: true
-  isProvinceMatched:
-    description: Return true if province is matched otherwise false.
-    type: boolean
-    readOnly: true
-  isDobMatched:
-    description: Return true if date of birth is matched otherwise false.
-    type: boolean
-    readOnly: true
-  isAgeOfCreditFileThreeOrMoreYearsOld:
-    description: Return true if the age of credit file is more than 3 years.
-    type: boolean
-    readOnly: true
-  isFromMoreThanOneDistinctSource:
-    description: Return true if it's from more than one distinct source.
-    type: boolean
+  trades:
+    description: Contains information to support the dual process.
+    type: array
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The trade name.
+          example: Rogers
+        accountNumber:
+          type: string
+          example: '123-ABC-123'
+        dateOpened:
+          type: string
+          format: date
     readOnly: true
   referenceData:
     description: Extra data from credit bureau.
