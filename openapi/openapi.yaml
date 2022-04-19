@@ -443,8 +443,6 @@ paths:
     $ref: './paths/files@{id}.yaml'
   '/files/{id}/download':
     $ref: './paths/files@{id}@download.yaml'
-  '/files/{id}/download{extension}':
-    $ref: './paths/files@{id}@download{extension}.yaml'
   '/application-instances/{applicationId}':
     $ref: './paths/application-instances@{applicationId}.yaml'
   '/applications':
@@ -1049,9 +1047,18 @@ x-webhooks:
   kyc-document-reviewed:
     post:
       $ref: ./webhooks/kyc-document-reviewed.yaml
+  kyc-request-attempted:
+    post:
+      $ref: ./webhooks/kyc-request-attempted.yaml
+  kyc-request-failed:
+    post:
+      $ref: ./webhooks/kyc-request-failed.yaml
   kyc-request-fulfilled:
     post:
       $ref: ./webhooks/kyc-request-fulfilled.yaml
+  kyc-request-partially-fulfilled:
+    post:
+      $ref: ./webhooks/kyc-request-partially-fulfilled.yaml
   nsf-response-received:
     post:
       $ref: ./webhooks/nsf-response-received.yaml
