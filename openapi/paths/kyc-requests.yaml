@@ -14,7 +14,8 @@ post:
     After the customer completes the KYC process, they will be redirected back to the `redirectUrl`.
     Corresponding webhooks (such as KYC document accepted, KYC document rejected) are sent to webhooks subscribers.
     When the complete list of documents is received and accepted, the KYC request fulfilled webhook will be sent to subscribers.
-    If a `credit-file-proof` is successful with the dual process method, then corresponding `identity-proof` and `address-proof` documents are not requested.
+    If a `credit-file-proof` is successful with the decision `single-source`, then corresponding `identity-proof` and `address-proof` documents are not requested.
+    If a `credit-file-proof` is successful with the decision `dual-source`, then one of the corresponding `identity-proof` and `address-proof` documents are required.
   requestBody:
     content:
       application/json:
