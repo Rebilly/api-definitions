@@ -20,16 +20,21 @@ allOf:
 
           This is used in conjunction with the **service period anchor** to calculate
           the time the invoice is issued.
+
+          Time period between the invoice issue time shift and the invoice due time shift in ISO-8601 format.
         nullable: true
         default: '-P00Y00M00DT00H00M00S'
+        example: '-P7D'
       invoiceDueTimeShift:
         type: string
         description: >
           The calculation instruction of due time.
 
-          This is used in conjunction with the **billing anchor** to calculate due time
-          of invoice.
+          This is used in conjunction with the issue time to calculate due time of invoice.
 
           The chronology of due time shift is always **after**.
+
+          Time period between the invoice issue time shift and the invoice due time shift in ISO-8601 format.
         nullable: true
         default: '+P00Y00M00DT00H00M00S'
+        example: '+P7D'
