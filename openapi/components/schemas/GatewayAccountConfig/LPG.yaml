@@ -1,29 +1,27 @@
 description: LPG config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
+    description: LPG credentials object.
     properties:
-      credentials:
-        type: object
-        description: LPG credentials object.
-        properties:
-          publicKey:
-            type: string
-            description: LPG public API key.
-          secureKey:
-            type: string
-            description: LPG secure API key.
-            format: password
-          payoutUsername:
-            type: string
-            description: LPG payout account username.
-            format: password
-          payoutPassword:
-             type: string
-             description: LPG payout account password.
-             format: password
-        required:
-          - publicKey
-          - secureKey
+      publicKey:
+        type: string
+        description: LPG public API key.
+      secureKey:
+        type: string
+        description: LPG secure API key.
+        format: password
+      payoutUsername:
+        type: string
+        description: LPG payout account username.
+        format: password
+      payoutPassword:
+         type: string
+         description: LPG payout account password.
+         format: password
+    required:
+      - publicKey
+      - secureKey

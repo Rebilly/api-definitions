@@ -1,17 +1,15 @@
 description: ToditoCash config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
+    description: ToditoCash credentials object.
     properties:
-      credentials:
-        type: object
-        description: ToditoCash credentials object.
-        properties:
-          apiKey:
-            type: string
-            description: ToditoCash API key.
-            format: password
-        required:
-          - apiKey
+      apiKey:
+        type: string
+        description: ToditoCash API key.
+        format: password
+    required:
+      - apiKey

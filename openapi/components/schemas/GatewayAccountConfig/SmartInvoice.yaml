@@ -1,23 +1,21 @@
 description: SmartInvoice config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
+    description: SmartInvoice credentials object.
     properties:
-      credentials:
-        type: object
-        description: SmartInvoice credentials object.
-        properties:
-          merchantId:
-            type: string
-            description: SmartInvoice merchant account UID.
-          applicationId:
-            type: string
-            description: SmartInvoice application UID.
-            format: password
-        required:
-          - merchantId
-          - applicationId
-      threeDSecureServer:
-        $ref: ../ThreeDSecureServers/SmartInvoice3dsServers/SmartInvoice3dsServers.yaml
+      merchantId:
+        type: string
+        description: SmartInvoice merchant account UID.
+      applicationId:
+        type: string
+        description: SmartInvoice application UID.
+        format: password
+    required:
+      - merchantId
+      - applicationId
+  threeDSecureServer:
+    $ref: ../ThreeDSecureServers/SmartInvoice3dsServers/SmartInvoice3dsServers.yaml

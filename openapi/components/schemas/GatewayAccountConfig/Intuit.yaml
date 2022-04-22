@@ -1,20 +1,18 @@
 description: Intuit Gateway config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
     properties:
-      credentials:
-        type: object
-        properties:
-          clientId:
-            type: string
-            description: The Intuit client_id key.
-          clientSecret:
-            type: string
-            description: The Intuit client_secret key.
-            format: password
-        required:
-          - clientId
-          - clientSecret
+      clientId:
+        type: string
+        description: The Intuit client_id key.
+      clientSecret:
+        type: string
+        description: The Intuit client_secret key.
+        format: password
+    required:
+      - clientId
+      - clientSecret

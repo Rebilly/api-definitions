@@ -1,27 +1,25 @@
 description: Neteller Gateway config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
+    description: Neteller credentials object.
     properties:
-      credentials:
-        type: object
-        description: Neteller credentials object.
-        properties:
-          paysafePaymentsApiUsername:
-            type: string
-            description: Neteller App Paysafe Payments API Username for a private key.
-          paysafePaymentsApiPassword:
-            type: string
-            description: Neteller App Paysafe Payments API Password for a private key.
-            format: password
-        required:
-          - paysafePaymentsApiUsername
-          - paysafePaymentsApiPassword
-      settings:
-        type: object
-        properties:
-          populateCustomerEmail:
-            type: boolean
-            description: Populate customer email for payment.
+      paysafePaymentsApiUsername:
+        type: string
+        description: Neteller App Paysafe Payments API Username for a private key.
+      paysafePaymentsApiPassword:
+        type: string
+        description: Neteller App Paysafe Payments API Password for a private key.
+        format: password
+    required:
+      - paysafePaymentsApiUsername
+      - paysafePaymentsApiPassword
+  settings:
+    type: object
+    properties:
+      populateCustomerEmail:
+        type: boolean
+        description: Populate customer email for payment.

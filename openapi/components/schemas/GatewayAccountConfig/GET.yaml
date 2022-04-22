@@ -1,17 +1,15 @@
 description: GET Gateway config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
     properties:
-      credentials:
-        type: object
-        properties:
-          accountId:
-            type: string
-            description: GET Gateway account ID.
-        required:
-          - accountId
-      threeDSecureServer:
-        $ref: ../ThreeDSecureServers/GET3dsServers/GET3dsServers.yaml
+      accountId:
+        type: string
+        description: GET Gateway account ID.
+    required:
+      - accountId
+  threeDSecureServer:
+    $ref: ../ThreeDSecureServers/GET3dsServers/GET3dsServers.yaml

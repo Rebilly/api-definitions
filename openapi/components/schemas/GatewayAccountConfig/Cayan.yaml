@@ -1,24 +1,22 @@
 description: Cayan Gateway config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
     properties:
-      credentials:
-        type: object
-        properties:
-          merchantSiteId:
-            type: string
-            description: Cayan Gateway merchant site ID.
-          merchantName:
-            type: string
-            description: Cayan Gateway merchant name.
-          merchantKey:
-            type: string
-            description: Cayan Gateway merchant key.
-            format: password
-        required:
-          - merchantSiteId
-          - merchantName
-          - merchantKey
+      merchantSiteId:
+        type: string
+        description: Cayan Gateway merchant site ID.
+      merchantName:
+        type: string
+        description: Cayan Gateway merchant name.
+      merchantKey:
+        type: string
+        description: Cayan Gateway merchant key.
+        format: password
+    required:
+      - merchantSiteId
+      - merchantName
+      - merchantKey

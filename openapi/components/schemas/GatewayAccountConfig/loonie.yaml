@@ -1,19 +1,17 @@
 description: loonie config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
+    description: loonie credentials object.
     properties:
-      credentials:
-        type: object
-        description: loonie credentials object.
-        properties:
-          merchantId:
-            type: string
-          merchantToken:
-            type: string
-            format: password
-        required:
-          - merchantId
-          - merchantToken
+      merchantId:
+        type: string
+      merchantToken:
+        type: string
+        format: password
+    required:
+      - merchantId
+      - merchantToken

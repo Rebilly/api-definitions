@@ -1,27 +1,25 @@
 description: iDebit config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
+    description: iDebit credentials object.
     properties:
-      credentials:
-        type: object
-        description: iDebit credentials object.
-        properties:
-          merchantId:
-            type: string
-            description: iDebit merchant account number.
-          password:
-            type: string
-            description: iDebit merchant account password.
-            format: password
-        required:
-          - merchantId
-          - password
-      settings:
-        type: object
-        properties:
-          merchantSubId:
-            type: integer
-            description: Merchant or organization sub ID.
+      merchantId:
+        type: string
+        description: iDebit merchant account number.
+      password:
+        type: string
+        description: iDebit merchant account password.
+        format: password
+    required:
+      - merchantId
+      - password
+  settings:
+    type: object
+    properties:
+      merchantSubId:
+        type: integer
+        description: Merchant or organization sub ID.

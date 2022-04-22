@@ -1,33 +1,30 @@
-description: Adyen config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
-      - settings
+type: object
+required:
+  - credentials
+  - settings
+properties:
+  credentials:
+    type: object
+    description: Adyen credentials object.
     properties:
-      credentials:
-        type: object
-        description: Adyen credentials object.
-        properties:
-          merchantAccount:
-            type: string
-            description: Adyen merchant account.
-          apiKey:
-            type: string
-            description: Adyen api key.
-            format: password
-        required:
-          - merchantAccount
-          - apiKey
-      settings:
-        type: object
-        description: Adyen settings object.
-        properties:
-          url:
-            type: string
-            description: Adyen post URL.
-        required:
-          - url
-      threeDSecureServer:
-        $ref: ../ThreeDSecureServers/Adyen3dsServers/Adyen3dsServers.yaml
+      merchantAccount:
+        type: string
+        description: Adyen merchant account.
+      apiKey:
+        type: string
+        description: Adyen api key.
+        format: password
+    required:
+      - merchantAccount
+      - apiKey
+  settings:
+    type: object
+    description: Adyen settings object.
+    properties:
+      url:
+        type: string
+        description: Adyen post URL.
+    required:
+      - url
+  threeDSecureServer:
+    $ref: ../ThreeDSecureServers/Adyen3dsServers/Adyen3dsServers.yaml

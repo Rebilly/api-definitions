@@ -1,17 +1,15 @@
 description: EBANX config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
+    description: EBANX credentials object.
     properties:
-      credentials:
-        type: object
-        description: EBANX credentials object.
-        properties:
-          integrationKey:
-            type: string
-            description: EBANX integration key.
-            format: password
-        required:
-          - integrationKey
+      integrationKey:
+        type: string
+        description: EBANX integration key.
+        format: password
+    required:
+      - integrationKey

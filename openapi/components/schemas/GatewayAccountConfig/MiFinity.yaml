@@ -1,26 +1,24 @@
 description: MiFinity config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
+    description: MiFinity credentials object.
     properties:
-      credentials:
-        type: object
-        description: MiFinity credentials object.
-        properties:
-          apiKey:
-            type: string
-            format: password
-          mifinityAccountNumber:
-            type: string
-            format: password
-          accountHolderId:
-            type: string
-          brandId:
-            type: string
-            description: A 3-digit ID provided by MiFinity which indicates through which brand is the call being made.
-        required:
-          - apiKey
-          - mifinityAccountNumber
-          - accountHolderId
+      apiKey:
+        type: string
+        format: password
+      mifinityAccountNumber:
+        type: string
+        format: password
+      accountHolderId:
+        type: string
+      brandId:
+        type: string
+        description: A 3-digit ID provided by MiFinity which indicates through which brand is the call being made.
+    required:
+      - apiKey
+      - mifinityAccountNumber
+      - accountHolderId

@@ -1,20 +1,18 @@
 description: FundSend Gateway config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
     properties:
-      credentials:
-        type: object
-        properties:
-          clientId:
-            type: string
-            description: FundSend Gateway client ID.
-          secretWord:
-            type: string
-            description: FundSend Gateway secret word.
-            format: password
-        required:
-          - clientId
-          - secretWord
+      clientId:
+        type: string
+        description: FundSend Gateway client ID.
+      secretWord:
+        type: string
+        description: FundSend Gateway secret word.
+        format: password
+    required:
+      - clientId
+      - secretWord

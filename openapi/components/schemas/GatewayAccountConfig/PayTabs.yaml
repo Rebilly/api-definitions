@@ -1,22 +1,20 @@
 description: PayTabs config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
+    description: PayTabs credentials object.
     properties:
-      credentials:
-        type: object
-        description: PayTabs credentials object.
-        properties:
-          profileId:
-            type: string
-          clientKey:
-            type: string
-          serverKey:
-            type: string
-            format: password
-        required:
-          - profileId
-          - clientKey
-          - serverKey
+      profileId:
+        type: string
+      clientKey:
+        type: string
+      serverKey:
+        type: string
+        format: password
+    required:
+      - profileId
+      - clientKey
+      - serverKey

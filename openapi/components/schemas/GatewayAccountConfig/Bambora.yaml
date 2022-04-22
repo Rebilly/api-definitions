@@ -1,20 +1,18 @@
 description: Bambora Gateway config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
     properties:
-      credentials:
-        type: object
-        properties:
-          merchantId:
-            type: string
-            description: Bambora Gateway merchant ID.
-          apiPasscode:
-            type: string
-            description: Bambora Gateway API Passcode.
-            format: password
-        required:
-          - merchantId
-          - apiPasscode
+      merchantId:
+        type: string
+        description: Bambora Gateway merchant ID.
+      apiPasscode:
+        type: string
+        description: Bambora Gateway API Passcode.
+        format: password
+    required:
+      - merchantId
+      - apiPasscode

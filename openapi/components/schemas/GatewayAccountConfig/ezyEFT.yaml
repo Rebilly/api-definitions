@@ -1,19 +1,17 @@
 description: ezyEFT config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
+    description: ezyEFT credentials object.
     properties:
-      credentials:
-        type: object
-        description: ezyEFT credentials object.
-        properties:
-          merchantId:
-            type: string
-          merchantToken:
-            type: string
-            format: password
-        required:
-          - merchantId
-          - merchantToken
+      merchantId:
+        type: string
+      merchantToken:
+        type: string
+        format: password
+    required:
+      - merchantId
+      - merchantToken

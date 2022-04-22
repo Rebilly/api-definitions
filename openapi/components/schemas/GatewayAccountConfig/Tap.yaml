@@ -1,19 +1,17 @@
 description: Tap config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
+    description: Tap credentials object.
     properties:
-      credentials:
-        type: object
-        description: Tap credentials object.
-        properties:
-          apiKey:
-            type: string
-            description: Secret API key.
-            format: password
-        required:
-          - apiKey
-      threeDSecureServer:
-        $ref: ../ThreeDSecureServers/Tap3dsServers/Tap3dsServers.yaml
+      apiKey:
+        type: string
+        description: Secret API key.
+        format: password
+    required:
+      - apiKey
+  threeDSecureServer:
+    $ref: ../ThreeDSecureServers/Tap3dsServers/Tap3dsServers.yaml

@@ -1,20 +1,18 @@
 description: vegaaH Gateway config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
     properties:
-      credentials:
-        type: object
-        properties:
-          terminalId:
-            type: string
-            description: vegaaH Gateway terminal ID.
-          password:
-            type: string
-            description: vegaaH Gateway password.
-            format: password
-        required:
-          - terminalId
-          - password
+      terminalId:
+        type: string
+        description: vegaaH Gateway terminal ID.
+      password:
+        type: string
+        description: vegaaH Gateway password.
+        format: password
+    required:
+      - terminalId
+      - password

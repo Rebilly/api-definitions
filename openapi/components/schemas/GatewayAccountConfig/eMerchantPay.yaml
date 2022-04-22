@@ -1,37 +1,35 @@
 description: eMerchantPay Gateway config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
     properties:
-      credentials:
-        type: object
-        properties:
-          clientId:
-            type: string
-            description: eMerchantPay Gateway client ID.
-          apiKey:
-            type: string
-            description: eMerchantPay Gateway api key.
-            format: password
-          username:
-            type: string
-            description: eMerchantPay username for Genesis platform.
-          token:
-            type: string
-            description: eMerchantPay token for Genesis platform.
-          password:
-            type: string
-            description: eMerchantPay password for Genesis platform.
-            format: password
-      settings:
-        type: object
-        description: eMerchantPay settings object.
-        properties:
-          useGenesisPlatform:
-            type: boolean
-            description: Use Genesis platform on eMerchantPay.
-            default: false
-      threeDSecureServer:
-        $ref: ../ThreeDSecureServers/EMerchantPay3dsServers/eMerchantPay3dsServers.yaml
+      clientId:
+        type: string
+        description: eMerchantPay Gateway client ID.
+      apiKey:
+        type: string
+        description: eMerchantPay Gateway api key.
+        format: password
+      username:
+        type: string
+        description: eMerchantPay username for Genesis platform.
+      token:
+        type: string
+        description: eMerchantPay token for Genesis platform.
+      password:
+        type: string
+        description: eMerchantPay password for Genesis platform.
+        format: password
+  settings:
+    type: object
+    description: eMerchantPay settings object.
+    properties:
+      useGenesisPlatform:
+        type: boolean
+        description: Use Genesis platform on eMerchantPay.
+        default: false
+  threeDSecureServer:
+    $ref: ../ThreeDSecureServers/EMerchantPay3dsServers/eMerchantPay3dsServers.yaml

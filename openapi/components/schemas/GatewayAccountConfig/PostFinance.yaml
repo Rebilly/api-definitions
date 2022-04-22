@@ -1,52 +1,50 @@
 description: PostFinance config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
+    description: PostFinance credentials object.
     properties:
-      credentials:
-        type: object
-        description: PostFinance credentials object.
-        properties:
-          pspId:
-            type: string
-          merchantId:
-            type: string
-          sftpUsername:
-            type: string
-          publicKey:
-            type: string
-            x-multiline: true
-          privateKey:
-            type: string
-            format: password
-            x-multiline: true
-          keyPassphrase:
-            type: string
-            format: password
-          sftpPrivateKey:
-            type: string
-            format: password
-            x-multiline: true
-          sftpKeyPassphrase:
-            type: string
-            format: password
-        required:
-          - pspId
-          - merchantId
-          - sftpUsername
-          - publicKey
-          - privateKey
-          - keyPassphrase
-          - sftpPrivateKey
-          - sftpKeyPassphrase
-      settings:
-        type: object
-        properties:
-          skipPaymentFileUpload:
-            type: boolean
-            default: false
-          enableAliasAuthentication:
-            type: boolean
-            default: false
+      pspId:
+        type: string
+      merchantId:
+        type: string
+      sftpUsername:
+        type: string
+      publicKey:
+        type: string
+        x-multiline: true
+      privateKey:
+        type: string
+        format: password
+        x-multiline: true
+      keyPassphrase:
+        type: string
+        format: password
+      sftpPrivateKey:
+        type: string
+        format: password
+        x-multiline: true
+      sftpKeyPassphrase:
+        type: string
+        format: password
+    required:
+      - pspId
+      - merchantId
+      - sftpUsername
+      - publicKey
+      - privateKey
+      - keyPassphrase
+      - sftpPrivateKey
+      - sftpKeyPassphrase
+  settings:
+    type: object
+    properties:
+      skipPaymentFileUpload:
+        type: boolean
+        default: false
+      enableAliasAuthentication:
+        type: boolean
+        default: false

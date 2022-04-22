@@ -1,26 +1,24 @@
 description: Paysafe Gateway config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
     properties:
-      credentials:
-        type: object
-        properties:
-          storeId:
-            type: string
-            description: Paysafe Gateway store ID.
-          storePwd:
-            type: string
-            description: Paysafe Gateway store password.
-            format: password
-          accountNum:
-            type: string
-            description: Paysafe Gateway account number.
-        required:
-          - storeId
-          - storePwd
-          - accountNum
-      threeDSecureServer:
-        $ref: ../ThreeDSecureServers/Paysafe3dsServers/Paysafe3dsServers.yaml
+      storeId:
+        type: string
+        description: Paysafe Gateway store ID.
+      storePwd:
+        type: string
+        description: Paysafe Gateway store password.
+        format: password
+      accountNum:
+        type: string
+        description: Paysafe Gateway account number.
+    required:
+      - storeId
+      - storePwd
+      - accountNum
+  threeDSecureServer:
+    $ref: ../ThreeDSecureServers/Paysafe3dsServers/Paysafe3dsServers.yaml

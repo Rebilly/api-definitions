@@ -1,32 +1,30 @@
 description: CoinPayments config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
+    description: CoinPayments credentials object.
     required:
-      - credentials
+      - publicKey
+      - privateKey
+      - ipnSecret
     properties:
-      credentials:
-        type: object
-        description: CoinPayments credentials object.
-        required:
-          - publicKey
-          - privateKey
-          - ipnSecret
-        properties:
-          publicKey:
-            type: string
-          privateKey:
-            type: string
-            format: password
-          ipnSecret:
-            type: string
-            format: password
-          merchantId:
-            type: string
-            format: password
-      settings:
-        type: object
-        properties:
-          useCallbackAddress:
-            type: boolean
-            description: Use Callback Address payment type.
+      publicKey:
+        type: string
+      privateKey:
+        type: string
+        format: password
+      ipnSecret:
+        type: string
+        format: password
+      merchantId:
+        type: string
+        format: password
+  settings:
+    type: object
+    properties:
+      useCallbackAddress:
+        type: boolean
+        description: Use Callback Address payment type.

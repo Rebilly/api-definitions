@@ -1,26 +1,24 @@
 description: Checkout.com config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
+    description: Checkout.com credentials object.
     properties:
-      credentials:
-        type: object
-        description: Checkout.com credentials object.
-        properties:
-          secretKey:
-            type: string
-            format: password
-            description: Checkout.com secret API key.
-        required:
-          - secretKey
-      settings:
-        type: object
-        properties:
-          markAsWaitingGatewayOnPendingPayout:
-            type: boolean
-            description: Mark as waiting-gateway/unknown instead of approved on pending payout.
-            default: false
-      threeDSecureServer:
-        $ref: ../ThreeDSecureServers/CheckoutCom3dsServers/CheckoutCom3dsServers.yaml
+      secretKey:
+        type: string
+        format: password
+        description: Checkout.com secret API key.
+    required:
+      - secretKey
+  settings:
+    type: object
+    properties:
+      markAsWaitingGatewayOnPendingPayout:
+        type: boolean
+        description: Mark as waiting-gateway/unknown instead of approved on pending payout.
+        default: false
+  threeDSecureServer:
+    $ref: ../ThreeDSecureServers/CheckoutCom3dsServers/CheckoutCom3dsServers.yaml

@@ -1,15 +1,13 @@
 description: SMSVoucher Gateway config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
     properties:
-      credentials:
-        type: object
-        properties:
-          AppId:
-            type: string
-            description: SMSVoucher AppId.
-        required:
-          - AppId
+      AppId:
+        type: string
+        description: SMSVoucher AppId.
+    required:
+      - AppId

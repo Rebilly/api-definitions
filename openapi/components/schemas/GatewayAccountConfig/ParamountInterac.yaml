@@ -1,36 +1,34 @@
 description: ParamountInterac config.
-allOf:
-  - $ref: ../GatewayAccount.yaml
-  - type: object
-    required:
-      - credentials
+type: object
+required:
+  - credentials
+properties:
+  credentials:
+    type: object
+    description: ParamountInterac credentials object.
     properties:
-      credentials:
-        type: object
-        description: ParamountInterac credentials object.
-        properties:
-          merchantId:
-            type: string
-            description: ParamountInterac merchant ID.
-          encryptionKey:
-            type: string
-            description: ParamountInterac encryption key.
-            format: password
-          password:
-            type: string
-            description: ParamountInterac password for query.
-            format: password
-        required:
-          - merchantId
-          - encryptionKey
-          - password
-      settings:
-        type: object
-        properties:
-          sandbox:
-            type: boolean
-            description: True if gateway account is in sandbox mode.
-            default: false
-          merchantSubId:
-            type: integer
-            description: Merchant or organization sub ID.
+      merchantId:
+        type: string
+        description: ParamountInterac merchant ID.
+      encryptionKey:
+        type: string
+        description: ParamountInterac encryption key.
+        format: password
+      password:
+        type: string
+        description: ParamountInterac password for query.
+        format: password
+    required:
+      - merchantId
+      - encryptionKey
+      - password
+  settings:
+    type: object
+    properties:
+      sandbox:
+        type: boolean
+        description: True if gateway account is in sandbox mode.
+        default: false
+      merchantSubId:
+        type: integer
+        description: Merchant or organization sub ID.
