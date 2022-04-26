@@ -5,16 +5,21 @@ allOf:
   - $ref: ./EMS3dsServers/EMS3dsServers.yaml
   - type: object
     required:
-      - merchantId
+      - acquirerMerchantIdVisa
+      - acquirerMerchantIdMastercard
       - merchantName
       - merchantAcquirerBinVisa
       - merchantAcquirerBinMastercard
       - merchantCountry
       - merchantUrl
     properties:
-      merchantId:
+      acquirerMerchantIdVisa:
         type: string
-        description: Merchant Id.
+        description: Visa acquirer MID.
+        maxLength: 35
+      acquirerMerchantIdMastercard:
+        type: string
+        description: Mastercard acquirer MID.
         maxLength: 35
       merchantName:
         type: string
