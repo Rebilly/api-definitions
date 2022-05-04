@@ -5,10 +5,19 @@ properties:
     description: ID of the invoice where the credit memo is allocated to.
     allOf:
       - $ref: "#/components/schemas/ResourceId"
+  creditMemoId:
+    readOnly: true
+    description: ID of the credit memo that was allocated.
+    allOf:
+      - $ref: "#/components/schemas/ResourceId"
   amount:
     description: Amount of credit from the credit memo allocated to the given invoice.
     type: number
     format: double
+  currency:
+    readOnly: true
+    allOf:
+      - $ref: ../CurrencyCode.yaml
   _links:
     type: array
     description: The links related to the resource
@@ -16,3 +25,4 @@ properties:
     items:
       anyOf:
         - $ref: "#/components/schemas/InvoiceLink"
+        - $ref: "#/components/schemas/CreditMemoLink"
