@@ -1,0 +1,18 @@
+type: object
+properties:
+  invoiceId:
+    readOnly: true
+    description: ID of the invoice where the credit memo is allocated to.
+    allOf:
+      - $ref: "#/components/schemas/ResourceId"
+  amount:
+    description: Amount of credit from the credit memo allocated to the given invoice.
+    type: number
+    format: double
+  _links:
+    type: array
+    description: The links related to the resource
+    readOnly: true
+    items:
+      anyOf:
+        - $ref: "#/components/schemas/InvoiceLink"
