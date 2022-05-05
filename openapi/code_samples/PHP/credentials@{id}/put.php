@@ -6,5 +6,5 @@ $customerCredentialForm->setPassword('1234');
 try {
     $customerCredential = $client->customerCredentials()->update('credentialId', $customerCredentialForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }

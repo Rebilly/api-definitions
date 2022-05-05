@@ -1,5 +1,6 @@
-apiDefinitions:
-  openapi: openapi/openapi.yaml
+apis:
+  openapi:
+    root: openapi/openapi.yaml
 lint:
   extends:
     - recommended
@@ -7,26 +8,20 @@ lint:
     - ./plugins/custom-rules.js
     - ./plugins/products-bundler/bundler.js
   rules:
-    tag-description: off
-    no-server-trailing-slash: error
-    operation-summary: error
-    no-unresolved-refs: error
+    no-ambiguous-paths: error
     no-unused-components: error
     operation-2xx-response: error
     operation-operationId: error
     operation-singular-tag: error
-    no-enum-type-mismatch: error
-    no-path-trailing-slash: error
-    path-not-include-query: error
-    no-identical-paths: error
-    no-ambiguous-paths: error
+    operation-4xx-response: off
+    paths-kebab-case: error
+    tag-description: off
     custom-rules/description-punctuation: error
     custom-rules/has-sdk-operation-name: error
     custom-rules/no-unused-tags: warn
-    operation-4xx-response: off
   decorators:
     products-bundler/bundle: error
-referenceDocs:
+features.openapi:
   pagination: section
   theme:
     logo:
@@ -61,6 +56,8 @@ referenceDocs:
       - lang: Java
       - lang: Go
       - lang: Ruby
-  schemaExpansionLevel: 2
+      - lang: PHP
+  schemaExpansionLevel: '2'
   maxDisplayedEnumValues: 10
   showConsole: true
+  expandResponses: '200,201'

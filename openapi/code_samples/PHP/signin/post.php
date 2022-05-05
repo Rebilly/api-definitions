@@ -5,5 +5,5 @@ $loginForm->setPassword('1234');
 try {
     $user = $client->users()->signin($loginForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }

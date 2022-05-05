@@ -9,7 +9,14 @@ content:
           description: The pause ID.
           type: string
         eventType:
-          $ref: ../../schemas/GlobalWebhookEventType.yaml
+          type: string
+          description: Rebilly webhooks event type.
+          enum:
+            - subscription-pause-created
+            - subscription-pause-modified
+            - subscription-pause-revoked
+            - subscription-paused
+            - subscription-resumed
         _embedded:
           type: object
           properties:
@@ -25,4 +32,4 @@ content:
             anyOf:
               - $ref: ../../schemas/Links/SubscriptionLink.yaml
               - $ref: ../../schemas/Links/SubscriptionPauseLink.yaml
-description: Order webhook request body resource.
+description: Subscription pause and Order webhook request body resource.

@@ -40,7 +40,7 @@ $paymentInstrumentForm->setBillingAddress([
 try {
     $paymentInstrument = $client->paymentInstruments()->create($paymentInstrumentForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }
 
 // Alternatively you can specify a payment token
@@ -51,5 +51,5 @@ $paymentInstrumentForm->setToken('payment-token');
 try {
     $paymentInstrument = $client->paymentInstruments()->create($paymentInstrumentForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }

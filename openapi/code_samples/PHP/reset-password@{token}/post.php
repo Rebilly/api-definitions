@@ -4,5 +4,5 @@ $resetPasswordForm->setNewPassword('1234');
 try {
     $user = $client->users()->resetPassword('token', $resetPasswordForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }

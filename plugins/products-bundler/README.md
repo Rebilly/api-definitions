@@ -11,18 +11,18 @@ If the `REBILLY_API_PRODUCT` is empty or not provided - entire file will be bund
 
 ## Bundle a product API
 
-To bundle the Billing product bundle, for example, run the following command:
+To bundle the Core product bundle, for example, run the following command:
 
 ```shell
- REBILLY_API_PRODUCT=Billing openapi bundle openapi -o billing.yaml
+ REBILLY_API_PRODUCT=Core openapi bundle openapi -o core.yaml
 ```
 
 ## Preview a product API
 
-To preview the Billing product bundle, for example, run the following command:
+To preview the Core product bundle, for example, run the following command:
 
 ```shell
- REBILLY_API_PRODUCT=Billing openapi preview-docs openapi
+ REBILLY_API_PRODUCT=Core openapi preview-docs openapi
 ```
 
 ## API bundle configuration
