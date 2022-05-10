@@ -1,0 +1,29 @@
+description: Pin4Pay config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Credentials object.
+        required:
+          - username
+          - requestOrigin
+          - codigoCliente
+          - keyValue
+        properties:
+          username:
+            type: string
+            description: Pin4Pay API username.
+          requestOrigin:
+            type: string
+            description: Pin4Pay API requestOrigin.
+          codigoCliente:
+            type: string
+            description: Pin4Pay API codigoCliente.
+          keyValue:
+            type: string
+            description: Pin4Pay API password.
+            format: password
