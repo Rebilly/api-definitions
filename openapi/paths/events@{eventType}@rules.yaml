@@ -2,8 +2,6 @@ parameters:
   - $ref: ../components/parameters/systemEventType.yaml
 get:
   x-products:
-    - Full
-    - Risk Management
     - Users
   tags:
     - Rules
@@ -29,8 +27,6 @@ get:
         $ref: '../code_samples/JavaScript/events@{eventType}@rules/get.js'
 put:
   x-products:
-    - Full
-    - Risk Management
     - Users
   tags:
     - Rules
@@ -51,11 +47,7 @@ put:
     '404':
       $ref: ../components/responses/NotFound.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   requestBody:
     $ref: ../components/requestBodies/RuleSet.yaml
   x-codeSamples:

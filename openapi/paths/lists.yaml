@@ -1,7 +1,5 @@
 get:
   x-products:
-    - Full
-    - Risk Management
     - Users
   tags:
     - Lists
@@ -43,8 +41,6 @@ get:
         $ref: ../code_samples/JavaScript/lists/get.js
 post:
   x-products:
-    - Full
-    - Risk Management
     - Users
   tags:
     - Lists
@@ -65,11 +61,7 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   requestBody:
     $ref: ../components/requestBodies/List.yaml
   x-codeSamples:

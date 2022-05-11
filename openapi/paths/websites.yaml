@@ -1,6 +1,5 @@
 get:
   x-products:
-    - Full
     - Users
   tags:
     - Websites
@@ -48,7 +47,6 @@ get:
         $ref: ../code_samples/JavaScript/websites/get.js
 post:
   x-products:
-    - Full
     - Users
   tags:
     - Websites
@@ -71,11 +69,7 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
     - lang: PHP
       source:

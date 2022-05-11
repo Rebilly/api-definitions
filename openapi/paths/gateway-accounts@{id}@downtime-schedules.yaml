@@ -2,7 +2,6 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
     - Users
   tags:
     - Gateway Accounts
@@ -43,7 +42,6 @@ get:
           ../code_samples/JavaScript/gateway-accounts@{id}@downtime-schedules/get.js
 post:
   x-products:
-    - Full
     - Users
   tags:
     - Gateway Accounts
@@ -66,11 +64,7 @@ post:
     '409':
       $ref: ../components/responses/Conflict.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   requestBody:
     $ref: ../components/requestBodies/GatewayAccountDowntimeSchedule.yaml
   x-codeSamples:
