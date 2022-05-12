@@ -8,7 +8,6 @@ parameters:
       type: string
 get:
   x-products:
-    - Full
     - Users
   tags:
     - Gateway Accounts
@@ -37,7 +36,6 @@ get:
           ../code_samples/JavaScript/gateway-accounts@{id}@downtime-schedules@{downtimeId}/get.js
 put:
   x-products:
-    - Full
     - Users
   tags:
     - Gateway Accounts
@@ -62,11 +60,7 @@ put:
     '409':
       $ref: ../components/responses/Conflict.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   requestBody:
     $ref: ../components/requestBodies/GatewayAccountDowntimeSchedule.yaml
   x-codeSamples:
@@ -76,7 +70,6 @@ put:
           ../code_samples/JavaScript/gateway-accounts@{id}@downtime-schedules@{downtimeId}/put.js
 delete:
   x-products:
-    - Full
     - Users
   tags:
     - Gateway Accounts

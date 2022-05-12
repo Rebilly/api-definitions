@@ -13,7 +13,6 @@ parameters:
         - monthly-count
 get:
   x-products:
-    - Full
     - Users
   tags:
     - Gateway Accounts
@@ -37,7 +36,6 @@ get:
       $ref: ../components/responses/NotFound.yaml
 put:
   x-products:
-    - Full
     - Users
   tags:
     - Gateway Accounts
@@ -62,11 +60,7 @@ put:
     '409':
       $ref: ../components/responses/Conflict.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   requestBody:
     content:
       application/json:
@@ -74,7 +68,6 @@ put:
           $ref: ../components/schemas/GatewayAccountLimit.yaml
 delete:
   x-products:
-    - Full
     - Users
   tags:
     - Gateway Accounts

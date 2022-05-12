@@ -2,7 +2,6 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
     - Users
   tags:
     - Gateway Accounts Timeline
@@ -43,7 +42,6 @@ get:
         $ref: '../code_samples/JavaScript/gateway-accounts@{id}@timeline/get.js'
 post:
   x-products:
-    - Full
     - Users
   tags:
     - Gateway Accounts Timeline
@@ -71,11 +69,7 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
     - lang: JavaScript
       source:

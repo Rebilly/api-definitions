@@ -91,8 +91,19 @@ tags:
       The gateway accounts timeline keeps an audit trail of changes and activity for each gateway account.
   - name: KYC Documents
     description: >
-      Customer KYC files uploaded on behalf of a customer, tagged with a
-      document type and submitted for validation.
+      Request KYC documents from customers using the KYC request API which generates a signed link to the KYC document gatherer.
+      The types of documents to request:
+        - identity-proof
+        - address-proof
+        - purchase-proof
+        - funds-proof
+        - credit-file-proof
+
+      In the case that a `credit-file-proof` is requested in combination with `identity-proof` and `address-proof`, the `credit-file-proof` is attempted first.
+      If it is successful in validating the identity and address, then the KYC request is considered instantly fulfilled.
+      If it is not, or if you the `credit-file-proof` isn't requested, then redirect your customer to the KYC document gatherer to collect their KYC documents.
+      Rebilly parses and analyzes the documents and accepts or rejects them according to a configurable scoring algorithm.
+      When all of the document types in the KYC request are accepted, the status is considered fulfilled and the KYC request fulfilled webhook will be emitted.
   - name: Customer Authentication
     description: >
       Create authentication credentials, login, logout, and verify your
@@ -338,6 +349,10 @@ tags:
     description: |
       The Rebilly Reporting API is currently experimental.  You may see
       the [Reports API Documentation here](https://reports-api-docs.rebilly.com).
+  - name: Storefront API
+    description: |
+      The Rebilly Storefront API is currently experimental.  You may see
+      the [Storefront API Documentation here](https://storefront-api-docs.rebilly.com/).
   - name: Users API
     description: >
       The Rebilly User API is primarily for our GUI apps.  You may see
@@ -410,6 +425,8 @@ paths:
     $ref: './paths/customer-timeline-custom-events@{id}.yaml'
   /customer-timeline-events:
     $ref: ./paths/customer-timeline-events.yaml
+  '/customers/{id}/aml':
+    $ref: './paths/customers@{id}@aml.yaml'
   '/customers/{id}/lead-source':
     $ref: './paths/customers@{id}@lead-source.yaml'
   '/customers/{id}/timeline':
@@ -426,8 +443,6 @@ paths:
     $ref: './paths/files@{id}.yaml'
   '/files/{id}/download':
     $ref: './paths/files@{id}@download.yaml'
-  '/files/{id}/download{extension}':
-    $ref: './paths/files@{id}@download{extension}.yaml'
   '/application-instances/{applicationId}':
     $ref: './paths/application-instances@{applicationId}.yaml'
   '/applications':
@@ -466,6 +481,10 @@ paths:
     $ref: './paths/invoices@{id}@timeline.yaml'
   '/invoices/{id}/timeline/{messageId}':
     $ref: './paths/invoices@{id}@timeline@{messageId}.yaml'
+  /kyc-requests:
+    $ref: ./paths/kyc-requests.yaml
+  '/kyc-requests/{id}':
+    $ref: './paths/kyc-requests@{id}.yaml'
   /kyc-documents:
     $ref: ./paths/kyc-documents.yaml
   '/kyc-documents/{id}':
@@ -482,10 +501,8 @@ paths:
     $ref: './paths/kyc-documents@{id}@start-review.yaml'
   '/kyc-documents/{id}/stop-review':
     $ref: './paths/kyc-documents@{id}@stop-review.yaml'
-  /kyc-requests:
-    $ref: ./paths/kyc-requests.yaml
-  '/kyc-requests/{id}':
-    $ref: './paths/kyc-requests@{id}.yaml'
+  /kyc-settings:
+    $ref: ./paths/kyc-settings.yaml
   /password-tokens:
     $ref: ./paths/password-tokens.yaml
   '/password-tokens/{id}':
@@ -794,6 +811,8 @@ paths:
     $ref: ./paths/users.yaml
   '/users/{id}':
     $ref: './paths/users@{id}.yaml'
+  '/users/{id}/mfa':
+    $ref: './paths/users@{id}@mfa.yaml'
   '/users/{id}/password':
     $ref: './paths/users@{id}@password.yaml'
   '/users/{id}/totp-reset':
@@ -830,12 +849,18 @@ paths:
     $ref: ./paths/reports@events-triggered@{eventType}@rules.yaml
   /experimental/reports/future-renewals:
     $ref: ./paths/reports@future-renewals.yaml
+  /experimental/reports/kyc-acceptance-summary:
+    $ref: ./paths/reports@kyc-acceptance-summary.yaml
+  /experimental/reports/kyc-rejection-summary:
+    $ref: ./paths/reports@kyc-rejection-summary.yaml
   /experimental/reports/renewal-sales:
     $ref: ./paths/reports@renewal-sales.yaml
   /experimental/reports/retention-percentage:
     $ref: ./paths/reports@retention-percentage.yaml
   /experimental/reports/retention-value:
     $ref: ./paths/reports@retention-value.yaml
+  /experimental/reports/revenue-waterfall:
+    $ref: ./paths/reports@revenue-waterfall.yaml
   /experimental/reports/subscription-cancellation:
     $ref: ./paths/reports@subscription-cancellation.yaml
   /experimental/reports/subscription-renewal:
@@ -916,6 +941,12 @@ paths:
     $ref: paths/storefront/transactions@{id}.yaml
   '/storefront/websites/{id}':
     $ref: paths/storefront/websites@{id}.yaml
+  '/customers/{id}/edd-score':
+    $ref: paths/customers@{id}@edd-score.yaml
+  '/customers/{id}/edd-timeline':
+    $ref: paths/customers@{id}@edd-timeline.yaml
+  '/customers/{id}/edd-search-results':
+    $ref: paths/customers@{id}@edd-search-results.yaml
 
 x-webhooks:
   application-instance-disabled:
@@ -1020,6 +1051,18 @@ x-webhooks:
   kyc-document-reviewed:
     post:
       $ref: ./webhooks/kyc-document-reviewed.yaml
+  kyc-request-attempted:
+    post:
+      $ref: ./webhooks/kyc-request-attempted.yaml
+  kyc-request-failed:
+    post:
+      $ref: ./webhooks/kyc-request-failed.yaml
+  kyc-request-fulfilled:
+    post:
+      $ref: ./webhooks/kyc-request-fulfilled.yaml
+  kyc-request-partially-fulfilled:
+    post:
+      $ref: ./webhooks/kyc-request-partially-fulfilled.yaml
   nsf-response-received:
     post:
       $ref: ./webhooks/nsf-response-received.yaml
@@ -1089,6 +1132,15 @@ x-webhooks:
   subscription-paused:
     post:
       $ref: ./webhooks/subscription-paused.yaml
+  subscription-pause-created:
+    post:
+      $ref: ./webhooks/subscription-pause-created.yaml
+  subscription-pause-modified:
+    post:
+      $ref: ./webhooks/subscription-pause-modified.yaml
+  subscription-pause-revoked:
+    post:
+      $ref: ./webhooks/subscription-pause-revoked.yaml
   subscription-resumed:
     post:
       $ref: ./webhooks/subscription-resumed.yaml

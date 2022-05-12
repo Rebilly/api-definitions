@@ -13,7 +13,6 @@ servers:
         description: Your organization ID.
 post:
   x-products:
-    - Full
     - Reports
   tags:
     - Data Exports
@@ -35,18 +34,13 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/data-exports/post.js
 get:
   x-products:
-    - Full
     - Reports
   tags:
     - Data Exports

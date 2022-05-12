@@ -8,8 +8,8 @@ $paymentInstrumentForm->setBillingAddress([
 
 try {
     $paymentInstrument = $client->paymentInstruments()->update('paymentInstrumentId', $paymentInstrumentForm);
-} catch (UnprocessableEntityException $e) {
-    echo $e->getMessage();
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
 }
 
 // Alternatively you can specify a partial token
@@ -21,6 +21,6 @@ $paymentInstrumentForm->setBillingAddress([
 
 try {
     $paymentInstrument = $client->paymentInstruments()->update('paymentInstrumentId', $paymentInstrumentForm);
-} catch (UnprocessableEntityException $e) {
-    echo $e->getMessage();
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
 }
