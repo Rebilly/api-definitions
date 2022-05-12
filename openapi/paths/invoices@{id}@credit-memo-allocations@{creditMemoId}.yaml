@@ -39,6 +39,39 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Invoices
+  summary: Apply a credit memo to an invoice
+  operationId: PutInvoiceCreditMemoAllocation
+  x-sdk-operation-name: applyCreditMemo
+  description: >
+    Apply a credit memo to an invoice. The invoice must be unpaid.
+    The credit memo must have a non-zero unused amount (not fully applied to other invoices).
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CreditMemos/CreditMemoAllocation.yaml
+    description: CreditMemoAllocation resource.
+    required: true
+  responses:
+    '200':
+      description: Credit memo was applied to invoice successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Invoices/Invoice.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
 delete:
   x-products:
     - Core
