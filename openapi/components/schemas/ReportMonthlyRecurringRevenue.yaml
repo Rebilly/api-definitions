@@ -10,44 +10,44 @@ properties:
           type: string
           pattern: '^\d{4}-\d{2}$'
         total:
-          description: The total MRR amount.
+          description: Total Monthly Recurring Revenue (MRR) amount.
           type: number
           format: double
         currency:
           $ref: ./CurrencyCode.yaml
         breakdown:
           description: |
-            MRR could be broken down in several categories, described below.
-            The difference between current period MRR and previous period MRR would be equal to `new + reactivated + expanded - contracted - churned`.
+            MRR categories are described below.
+            The difference between current period MRR and previous period MRR is equal to `new + reactivated + expanded - contracted - churned`.
           type: object
           properties:
             new:
               description: |
-                MRR of new customers who didn't have revenue before they placed an order.
-                For example, Sally is a new customer who signed up and is at $40/month plan is $40 in new MRR.
+                MRR of new customers.
+                Example: A new customer signs up to a $40 per month plan. This is $40 in new MRR.
               type: number
               format: double
-            reactivated:
+            reactivation:
               description: |
-                Sally came back after previously being a customer (she churned in the past).
-                She purchases the $25/month plan. This is reactivation MRR, and is at $25.
+                A previous customer stops being a customer for a period.
+                The same customer signs up again and purchases a $25 per month plan. This is reactivation MRR of $25.
               type: number
               format: double
             churned:
               description: |
-                Sally decides to cancel.
-                When the subscription churns, she went from $80/month to $0/month, and that is $80 of churned MRR.
+                A customer decides to cancel.
+                The subscription churns, the customer goes from $80 per month to $0 per month. This is $80 of churned MRR.
               type: number
               format: double
-            contracted:
+            contraction:
               description: |
-                Existing customers who did a change items which resulted in a smaller MRR. The contraction MRR is the difference.
-                For example, Sally was at $100 in MRR, and changed to $80 in MRR. The contraction MRR is $20.
+                Existing customers who changed items which resulted in a smaller MRR. Contraction MRR is the difference.
+                Example: A customer at $100 in MRR changes to $80 in MRR. This contraction MRR is $20.
               type: number
               format: double
-            expanded:
+            expansion:
               description: |
-                Existing customers who did a change items which resulted in a bigger MRR.
-                Sally upgraded to a plan that's $100/month. She was at $40/month, so the expansions MRR is $60.
+                Existing customers who changed items which resulted in a bigger MRR.
+                Example: A customer upgrades from a plan that is $40 per month to a plan that is $100 per month. This is an expansion MRR of $60.
               type: number
               format: double
