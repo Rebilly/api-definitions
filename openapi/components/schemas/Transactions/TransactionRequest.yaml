@@ -32,18 +32,5 @@ allOf:
   - $ref: ../Common/CommonTransactionRequest.yaml
   - properties:
       limits:
-        title: AmountLimits
-        type: object
-        nullable: true
-        properties:
-          amount:
-            type: number
-            format: double
-            example: 275.35
-            description: The limit amount.
-          currency:
-            $ref: ../CurrencyCode.yaml
-          resetTime:
-            type: string
-            format: date-time
-            description: The time the limit resets which may be used for some user interfaces.
+        allOf:
+          - $ref: ../TransactionLimit.yaml
