@@ -1,11 +1,45 @@
 title: Payment Card
 type: object
 required:
+  - method
   - customerId
-allOf:
-  - properties:
-      customerId:
-        description: The Customer's ID.
-        allOf:
-          - $ref: ../ResourceId.yaml
-  - $ref: ../PaymentInstructions/PaymentCardInstruction.yaml
+  - pan
+  - expYear
+  - expMonth
+  - billingAddress
+properties:
+  method:
+    description: The method of payment instrument.
+    type: string
+    enum:
+      - payment-card
+  customerId:
+    description: The Customer's ID.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  pan:
+    description: The card PAN (Primary Account Number).
+    type: string
+    writeOnly: true
+  expYear:
+    description: Card's expiration year.
+    type: integer
+  expMonth:
+    description: Card's expiration month.
+    type: integer
+  cvv:
+    description: Card's cvv (card verification value).
+    type: string
+    writeOnly: true
+  billingAddress:
+    description: The billing address.
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  customFields:
+    $ref: ../ResourceCustomFields.yaml
+  riskMetadata:
+    $ref: ../RiskMetadata.yaml
+  useAsBackup:
+    description: Allow using this payment instrument as a backup for invoice payment retries.
+    type: boolean
+    default: false

@@ -1,25 +1,7 @@
 title: Bank Account
 anyOf:
-  - title: BBANType
-    required:
-      - customerId
-    allOf:
-      - properties:
-          customerId:
-            description: The Customer's ID.
-            allOf:
-              - $ref: ../ResourceId.yaml
-      - $ref: ./AccountNumberTypes/BBANType.yaml
-  - title: IBANType
-    required:
-      - customerId
-    allOf:
-      - properties:
-          customerId:
-            description: The Customer's ID.
-            allOf:
-              - $ref: ../ResourceId.yaml
-      - $ref: ./AccountNumberTypes/IBANType.yaml
+  - $ref: ./AccountNumberTypes/BBANType.yaml
+  - $ref: ./AccountNumberTypes/IBANType.yaml
 
 ## Preference is without the discriminator even if it is more accurate.
 # discriminator:

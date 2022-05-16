@@ -2,6 +2,7 @@ type: object
 description: BBAN type object.
 required:
   - method
+  - customerId
   - accountNumberType
   - accountNumber
   - routingNumber
@@ -13,6 +14,10 @@ properties:
     type: string
     enum:
       - ach
+  customerId:
+    description: Customer's ID.
+    allOf:
+      - $ref: ../../ResourceId.yaml
   accountNumberType:
     description: >-
       Bank's Account Number type. A valid value is basic bank account number
