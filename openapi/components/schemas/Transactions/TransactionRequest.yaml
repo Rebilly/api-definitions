@@ -1,4 +1,5 @@
 allOf:
+  - $ref: ../Common/CommonTransactionRequest.yaml
   - required:
     - type
   - properties:
@@ -6,7 +7,7 @@ allOf:
         type: boolean
         default: false
         writeOnly: true
-        description: If true it will upsert (create or update) a customer. If false the `customerId` must already exist.
+        description: If the value is `true`, this operation upserts (creates or updates) a customer. If the value is `false`, the `customerId` already exists, and the related customer is not updated.
       type:
         description: >
           The type of transaction requested.
@@ -27,4 +28,7 @@ allOf:
           - sale
           - authorize
           - setup
+      limits:
+        $ref: ../TransactionLimitAmount.yaml
   - $ref: ../Common/CommonTransactionRequest.yaml
+
