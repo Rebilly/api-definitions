@@ -1,0 +1,49 @@
+description: restrict-to-bxgy restrictions.
+allOf:
+  - $ref: ../CouponRestriction.yaml
+  - $ref: ../RedemptionRestriction.yaml
+  - type: object
+    required:
+      - buy
+      - get
+    properties:
+      buy:
+        type: array
+        description: >
+          One or more plan and quantity definitions to qualify for receiving all plans and quantity defined in `get`.
+          All of these pairs must be met for the `get` definition(s) to apply.
+        minItems: 1
+        items:
+          type: object
+          required:
+            - planId
+            - quantity
+          properties:
+            planId:
+              description: Plan ID of what is being purchased.
+              allOf:
+                - $ref: ../../ResourceId.yaml
+            quantity:
+              type: integer
+              minimum: 1
+              description: Total quantity of the associated plan ID that must be purchased for this restriction to apply.
+      get:
+        type: array
+        description: >
+          One or more plan and quantity definitions which will be added to a purchase if all of the definitions in `buy` are met.
+          All of these will be applied.
+        minItems: 1
+        items:
+          type: object
+          required:
+            - planId
+            - quantity
+          properties:
+            planId:
+              description: Plan ID of what is to be received.
+              allOf:
+                - $ref: ../../ResourceId.yaml
+            quantity:
+              type: integer
+              minimum: 1
+              description: Total quantity of the associated plan ID that will be received.
