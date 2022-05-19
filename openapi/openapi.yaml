@@ -104,6 +104,7 @@ tags:
       If it is not, or if you the `credit-file-proof` isn't requested, then redirect your customer to the KYC document gatherer to collect their KYC documents.
       Rebilly parses and analyzes the documents and accepts or rejects them according to a configurable scoring algorithm.
       When all of the document types in the KYC request are accepted, the status is considered fulfilled and the KYC request fulfilled webhook will be emitted.
+      If a document is accepted while unreviewed documents of the same type exist, these unreviewed documents will be archived and the archived webook will be emitted.
   - name: Customer Authentication
     description: >
       Create authentication credentials, login, logout, and verify your
