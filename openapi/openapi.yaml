@@ -103,7 +103,8 @@ tags:
       If it is successful in validating the identity and address, then the KYC request is considered instantly fulfilled.
       If it is not, or if you the `credit-file-proof` isn't requested, then redirect your customer to the KYC document gatherer to collect their KYC documents.
       Rebilly parses and analyzes the documents and accepts or rejects them according to a configurable scoring algorithm.
-      When all of the document types in the KYC request are accepted, the status is considered fulfilled and the KYC request fulfilled webhook will be emitted.
+      When all of the document types in the KYC request are accepted, the status is considered fulfilled and the KYC request fulfilled webhook will be triggered.
+      If a document is accepted while unreviewed documents of the same type exist, the unreviewed documents will be archived and the archived webhook will be triggered.
   - name: Customer Authentication
     description: >
       Create authentication credentials, login, logout, and verify your
@@ -1087,6 +1088,9 @@ x-webhooks:
   kyc-document-reviewed:
     post:
       $ref: ./webhooks/kyc-document-reviewed.yaml
+  kyc-document-archived:
+    post:
+      $ref: ./webhooks/kyc-document-archived.yaml
   kyc-request-attempted:
     post:
       $ref: ./webhooks/kyc-request-attempted.yaml
