@@ -1,0 +1,24 @@
+post:
+  x-products:
+    - Users
+  tags:
+    - Merchant data exports
+  summary: Request a merchant data export
+  operationId: PostMerchantExport
+  description: |
+    Request a merchant data export
+  requestBody:
+    $ref: ../components/requestBodies/MerchantExport.yaml
+  responses:
+    '201':
+      description: Merchant data export request received.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/MerchantExports/MerchantExport.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

@@ -1,0 +1,24 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Merchant data exports
+  summary: Retrieve a merchant data export request
+  operationId: GetMerchantExport
+  description: |
+    Retrieve a merchant data export request.
+  responses:
+    '200':
+      description: Merchant data export request.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/MerchantExports/MerchantExport.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
