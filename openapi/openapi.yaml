@@ -83,6 +83,9 @@ tags:
   - name: Transactions Timeline
     description: |
       The transactions timeline keeps an audit trail of changes and activity for each transaction.
+  - name: Credit memos Timeline
+    description: |
+      The credit memos timeline keeps an audit trail of changes and activity for each credit memo.
   - name: Rules Timeline
     description: |
       The rules timeline keeps an audit trail of changes and activity for each rule.
@@ -488,6 +491,8 @@ paths:
     $ref: ./paths/credit-memos.yaml
   /credit-memos/{id}:
     $ref: ./paths/credit-memos@{id}.yaml
+  /credit-memos/{id}/timeline:
+    $ref: ./paths/credit-memos@{id}@timeline.yaml
   /invoices/{id}/credit-memo-allocations:
     $ref: ./paths/invoices@{id}@credit-memo-allocations.yaml
   /invoices/{id}/credit-memo-allocations/{creditMemoId}:
