@@ -20,8 +20,11 @@ get:
     - Data Exports
   summary: Retrieve a data export request
   operationId: GetDataExport
+  x-sdk-operation-name: get
   description: |
     Retrieve a data export request.
+  parameters:
+    - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
       description: Data Export request.
@@ -53,8 +56,11 @@ put:
     - Data Exports
   summary: Modify a data export
   operationId: PutDataExport
+  x-sdk-operation-name: update
   description: |
     A data export may be changed as long as it is still pending.
+  parameters:
+    - $ref: ../components/parameters/collectionExpand.yaml
   requestBody:
     $ref: ../components/requestBodies/DataExport.yaml
   responses:
@@ -83,6 +89,7 @@ delete:
     - Data Exports
   summary: Delete a data export
   operationId: DeleteDataExport
+  x-sdk-operation-name: delete
   description: |
     Delete an existing data export.
   responses:
