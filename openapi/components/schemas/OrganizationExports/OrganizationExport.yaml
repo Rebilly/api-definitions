@@ -5,11 +5,11 @@ properties:
     allOf:
       - $ref: ../ResourceId.yaml
   userId:
-    description: The ID of the User who requested the merchant data export.
+    description: The ID of the User who requested the organization data export.
     readOnly: true
     type: string
   status:
-    description: Status of merchant data export request.
+    description: Status of organization data export request.
     readOnly: true
     type: string
     enum:
@@ -19,18 +19,18 @@ properties:
       - queued
       - failed
   items:
-    description: Merchant data export resources array.
+    description: Organization data export resources array.
     readOnly: true
     type: array
     items:
-      $ref: ../MerchantExports/MerchantExportResource.yaml
+      $ref: ../OrganizationExports/OrganizationExportResource.yaml
   createdTime:
-    description: The time the merchant data export was requested.
+    description: The time the organization data export was requested.
     readOnly: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
-    description: Merchant data export updated time.
+    description: Organization data export updated time.
     readOnly: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
