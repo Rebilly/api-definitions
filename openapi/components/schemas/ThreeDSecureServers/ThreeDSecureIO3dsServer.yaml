@@ -1,110 +1,112 @@
 description: ThreeDSecureIO3dsServer.
-allOf:
-  - $ref: ./WorldlineAtosFrankfurt3dsServers/WorldlineAtosFrankfurt3dsServers.yaml
-  - $ref: ./TestProcessor3dsServers/TestProcessor3dsServers.yaml
-  - $ref: ./EMS3dsServers/EMS3dsServers.yaml
-  - type: object
-    required:
-      - acquirerMerchantIdVisa
-      - acquirerMerchantIdMastercard
-      - merchantName
-      - merchantAcquirerBinVisa
-      - merchantAcquirerBinMastercard
-      - merchantCountry
-      - merchantUrl
-    properties:
-      acquirerMerchantIdVisa:
-        type: string
-        description: Visa acquirer merchant ID (MID).
-        maxLength: 35
-      acquirerMerchantIdMastercard:
-        type: string
-        description: Mastercard acquirer merchant ID (MID).
-        maxLength: 35
-      merchantName:
-        type: string
-        description: Merchant Name.
-        maxLength: 40
-      merchantAcquirerBinVisa:
-        type: string
-        description: Visa Acquirer BIN.
-        minLength: 6
-        maxLength: 11
-      merchantAcquirerBinMastercard:
-        type: string
-        description: Mastercard Acquirer BIN.
-        minLength: 6
-        maxLength: 11
-      merchantCountry:
-        type: string
-        description: Merchant Country ISO Alpha-2 Code.
-        maxLength: 2
-        example: US
-      merchantUrl:
-        type: string
-        description: Merchant URL.
-        maxLength: 2048
-      v1:
-        type: boolean
-        description: |
-          Value determines if requests can use version 1 of 3DS.
-          In case both v1 and v2 are enabled it will prefer v2.
-          If v2 is not supported for the issuer, it will coalesce to v1.
-      v2:
-        type: boolean
-        description: |
-          Value determines if requests will attempt version 2 of 3DS.
-          In case both v1 and v2 are enabled it will prefer v2.
-          If v2 is not supported for the issuer, it will coalesce to v1.
-      transactionType:
-        type: string
-        enum:
-          - '01'
-          - '03'
-          - '10'
-          - '11'
-          - '28'
-        description: |
-          01 - Goods/Service Purchase
-          03 - Check Acceptance
-          10 - Account Funding
-          11 - Quasi-Cash Transaction
-          28 - Prepaid Activation and Load
 
-          Identifies the type of transaction being authenticated.
-      declineNotEnrolled:
-        type: boolean
-        description: Set to true to decline transactions if a card is not enrolled instead of continuing without 3DS.
-        default: false
-      use3dsForMerchantInitiated:
-        type: boolean
-        description: Use 3DS for merchant initiated transactions.
-        default: false
-      threeRIInd:
-        type: string
-        enum:
-          - '01'
-          - '02'
-          - '03'
-          - '04'
-          - '05'
-          - '06'
-          - '07'
-          - '08'
-          - '09'
-          - '10'
-          - '11'
-        description: |
-          01 - Recurring transaction
-          02 - Instalment transaction
-          03 - Add card
-          04 - Maintain card information
-          05 - Account verification
-          06 - Split/delayed shipment
-          07 - Top-up
-          08 - Mail Order
-          09 - Telephone Order
-          10 - Whitelist status check
-          11 - Other payment
+required:
+  - name
+  - acquirerMerchantIdVisa
+  - acquirerMerchantIdMastercard
+  - merchantName
+  - merchantAcquirerBinVisa
+  - merchantAcquirerBinMastercard
+  - merchantCountry
+  - merchantUrl
+properties:
+  name:
+    allOf:
+      - $ref: ../Gateways/ThreeDSecureServerName.yaml
+    enum:
+      - ThreeDSecureIO3dsServer
+  acquirerMerchantIdVisa:
+    type: string
+    description: Visa acquirer merchant ID (MID).
+    maxLength: 35
+  acquirerMerchantIdMastercard:
+    type: string
+    description: Mastercard acquirer merchant ID (MID).
+    maxLength: 35
+  merchantName:
+    type: string
+    description: Merchant Name.
+    maxLength: 40
+  merchantAcquirerBinVisa:
+    type: string
+    description: Visa Acquirer BIN.
+    minLength: 6
+    maxLength: 11
+  merchantAcquirerBinMastercard:
+    type: string
+    description: Mastercard Acquirer BIN.
+    minLength: 6
+    maxLength: 11
+  merchantCountry:
+    type: string
+    description: Merchant Country ISO Alpha-2 Code.
+    maxLength: 2
+    example: US
+  merchantUrl:
+    type: string
+    description: Merchant URL.
+    maxLength: 2048
+  v1:
+    type: boolean
+    description: |
+      Value determines if requests can use version 1 of 3DS.
+      In case both v1 and v2 are enabled it will prefer v2.
+      If v2 is not supported for the issuer, it will coalesce to v1.
+  v2:
+    type: boolean
+    description: |
+      Value determines if requests will attempt version 2 of 3DS.
+      In case both v1 and v2 are enabled it will prefer v2.
+      If v2 is not supported for the issuer, it will coalesce to v1.
+  transactionType:
+    type: string
+    enum:
+      - '01'
+      - '03'
+      - '10'
+      - '11'
+      - '28'
+    description: |
+      01 - Goods/Service Purchase
+      03 - Check Acceptance
+      10 - Account Funding
+      11 - Quasi-Cash Transaction
+      28 - Prepaid Activation and Load
 
-          Indicates the type of 3RI request. Values 06 - 11 are only supported in 3D2 2.2.0.
+      Identifies the type of transaction being authenticated.
+  declineNotEnrolled:
+    type: boolean
+    description: Set to true to decline transactions if a card is not enrolled instead of continuing without 3DS.
+    default: false
+  use3dsForMerchantInitiated:
+    type: boolean
+    description: Use 3DS for merchant initiated transactions.
+    default: false
+  threeRIInd:
+    type: string
+    enum:
+      - '01'
+      - '02'
+      - '03'
+      - '04'
+      - '05'
+      - '06'
+      - '07'
+      - '08'
+      - '09'
+      - '10'
+      - '11'
+    description: |
+      01 - Recurring transaction
+      02 - Instalment transaction
+      03 - Add card
+      04 - Maintain card information
+      05 - Account verification
+      06 - Split/delayed shipment
+      07 - Top-up
+      08 - Mail Order
+      09 - Telephone Order
+      10 - Whitelist status check
+      11 - Other payment
+
+      Indicates the type of 3RI request. Values 06 - 11 are only supported in 3D2 2.2.0.
