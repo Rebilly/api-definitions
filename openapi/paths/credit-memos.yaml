@@ -2,18 +2,26 @@ get:
   x-products:
     - Core
   tags:
-    - Customer Authentication
-  summary: Retrieve a list of credentials
-  operationId: GetCredentialCollection
-  x-sdk-operation-name: getAllCredentials
+    - Credit memos
+  summary: Retrieve a list of credit memos
+  operationId: GetCreditMemoCollection
+  x-sdk-operation-name: getAll
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
   description: |
-    Retrieve a list of credentials.
+    Retrieve a list of credit memos.
   parameters:
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: A list of Credentials was retrieved successfully.
+      description: A list of credit memos was retrieved successfully.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -26,52 +34,37 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/CustomerCredential.yaml
+              $ref: ../components/schemas/CreditMemos/CreditMemo.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-  x-codeSamples:
-    - lang: PHP
-      source:
-        $ref: ../code_samples/PHP/credentials/get.php
-    - lang: JavaScript
-      source:
-        $ref: ../code_samples/JavaScript/credentials/get.js
 post:
   x-products:
     - Core
   tags:
-    - Customer Authentication
-  summary: Create a credential
-  operationId: PostCredential
-  x-sdk-operation-name: createCredential
+    - Credit memos
+  summary: Create a credit memo
+  operationId: PostCreditMemo
+  x-sdk-operation-name: create
   description: |
-    Create a credential.
+    Create a credit memo.
   requestBody:
+    required: true
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/CustomerCredential.yaml
-    description: Credential resource.
-    required: true
+          $ref: ../components/schemas/CreditMemos/CreditMemo.yaml
   responses:
     '201':
-      description: Credential was created.
+      description: CreditMemo was created.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/CustomerCredential.yaml
+            $ref: ../components/schemas/CreditMemos/CreditMemo.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-codeSamples:
-    - lang: PHP
-      source:
-        $ref: ../code_samples/PHP/credentials/post.php
-    - lang: JavaScript
-      source:
-        $ref: ../code_samples/JavaScript/credentials/post.js
