@@ -1,0 +1,25 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Credit memos
+  summary: Void a credit memo
+  operationId: PostCreditMemoVoid
+  x-sdk-operation-name: void
+  description: |
+    Void a credit memo with a specified identifier string.
+  responses:
+    '201':
+      description: Credit memo successfully voided .
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CreditMemos/CreditMemo.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
