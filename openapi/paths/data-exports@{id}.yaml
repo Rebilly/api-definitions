@@ -15,14 +15,16 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
     - Reports
   tags:
     - Data Exports
   summary: Retrieve a data export request
   operationId: GetDataExport
+  x-sdk-operation-name: get
   description: |
     Retrieve a data export request.
+  parameters:
+    - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
       description: Data Export request.
@@ -49,14 +51,16 @@ get:
         $ref: '../code_samples/JavaScript/data-exports@{id}/get.js'
 put:
   x-products:
-    - Full
     - Reports
   tags:
     - Data Exports
   summary: Modify a data export
   operationId: PutDataExport
+  x-sdk-operation-name: update
   description: |
     A data export may be changed as long as it is still pending.
+  parameters:
+    - $ref: ../components/parameters/collectionExpand.yaml
   requestBody:
     $ref: ../components/requestBodies/DataExport.yaml
   responses:
@@ -67,7 +71,7 @@ put:
           schema:
             $ref: ../components/schemas/DataExports/DataExport.yaml
     '201':
-      description: Data Export was created.
+      description: Data Export was updated.
       content:
         application/json:
           schema:
@@ -80,12 +84,12 @@ put:
       $ref: ../components/responses/ValidationError.yaml
 delete:
   x-products:
-    - Full
     - Reports
   tags:
     - Data Exports
   summary: Delete a data export
   operationId: DeleteDataExport
+  x-sdk-operation-name: delete
   description: |
     Delete an existing data export.
   responses:
