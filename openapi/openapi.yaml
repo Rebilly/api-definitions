@@ -147,8 +147,10 @@ tags:
       Invoices leave a record for both you and your customer of the products
       sold.
   - name: Credit memos
-    description: >-
-      Credit Memos leave a record of customers' credits.
+    description: >
+      A credit memo is a means of providing a customer with store credit.
+      A common use case for using a credit memo is to provide a customer with store credit, rather than a refund,
+      if the customer pays more than they owe or returns a product.
   - name: Payment Instruments
     description: >
       The Payment Instrument allows you to accept a variety of payment methods through a single API.
@@ -1020,6 +1022,21 @@ x-webhooks:
   balance-transaction-settled:
     post:
       $ref: ./webhooks/balance-transaction-settled.yaml
+  credit-memo-applied:
+    post:
+      $ref: ./webhooks/credit-memo-applied.yaml
+  credit-memo-created:
+    post:
+      $ref: ./webhooks/credit-memo-created.yaml
+  credit-memo-modified:
+    post:
+      $ref: ./webhooks/credit-memo-modified.yaml
+  credit-memo-partially-applied:
+    post:
+      $ref: ./webhooks/credit-memo-partially-applied.yaml
+  credit-memo-voided:
+    post:
+      $ref: ./webhooks/credit-memo-voided.yaml
   customer-created:
     post:
       $ref: ./webhooks/customer-created.yaml
