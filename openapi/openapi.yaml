@@ -83,6 +83,9 @@ tags:
   - name: Transactions Timeline
     description: |
       The transactions timeline keeps an audit trail of changes and activity for each transaction.
+  - name: Credit memos Timeline
+    description: |
+      The credit memos timeline keeps an audit trail of changes and activity for each credit memo.
   - name: Rules Timeline
     description: |
       The rules timeline keeps an audit trail of changes and activity for each rule.
@@ -143,6 +146,11 @@ tags:
     description: >
       Invoices leave a record for both you and your customer of the products
       sold.
+  - name: Credit memos
+    description: >
+      A credit memo is a means of providing a customer with store credit.
+      A common use case for using a credit memo is to provide a customer with store credit, rather than a refund,
+      if the customer pays more than they owe or returns a product.
   - name: Payment Instruments
     description: >
       The Payment Instrument allows you to accept a variety of payment methods through a single API.
@@ -516,6 +524,20 @@ paths:
     $ref: './paths/invoices@{id}@timeline.yaml'
   '/invoices/{id}/timeline/{messageId}':
     $ref: './paths/invoices@{id}@timeline@{messageId}.yaml'
+  /credit-memos:
+    $ref: ./paths/credit-memos.yaml
+  /credit-memos/{id}:
+    $ref: ./paths/credit-memos@{id}.yaml
+  /credit-memos/{id}/void:
+    $ref: ./paths/credit-memos@{id}@void.yaml
+  /credit-memos/{id}/timeline:
+    $ref: ./paths/credit-memos@{id}@timeline.yaml
+  /credit-memos/{id}/timeline/{messageId}:
+    $ref: ./paths/credit-memos@{id}@timeline@{messageId}.yaml
+  /invoices/{id}/credit-memo-allocations:
+    $ref: ./paths/invoices@{id}@credit-memo-allocations.yaml
+  /invoices/{id}/credit-memo-allocations/{creditMemoId}:
+    $ref: ./paths/invoices@{id}@credit-memo-allocations@{creditMemoId}.yaml
   /kyc-requests:
     $ref: ./paths/kyc-requests.yaml
   '/kyc-requests/{id}':
@@ -1000,6 +1022,21 @@ x-webhooks:
   balance-transaction-settled:
     post:
       $ref: ./webhooks/balance-transaction-settled.yaml
+  credit-memo-applied:
+    post:
+      $ref: ./webhooks/credit-memo-applied.yaml
+  credit-memo-created:
+    post:
+      $ref: ./webhooks/credit-memo-created.yaml
+  credit-memo-modified:
+    post:
+      $ref: ./webhooks/credit-memo-modified.yaml
+  credit-memo-partially-applied:
+    post:
+      $ref: ./webhooks/credit-memo-partially-applied.yaml
+  credit-memo-voided:
+    post:
+      $ref: ./webhooks/credit-memo-voided.yaml
   customer-created:
     post:
       $ref: ./webhooks/customer-created.yaml
