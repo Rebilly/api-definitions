@@ -4,11 +4,10 @@ required:
   - feature
 discriminator:
   propertyName: paymentMethod
-  mapping:
-    payment-card: ./AdjustReadyToPayPaymentCard.yaml
-    ach: ./AdjustReadyToPayAch.yaml
-    paypal: ./AdjustReadyToPayPaypal.yaml
   x-enum-mapping: 
+    - $ref: ./AdjustReadyToPayPaymentCard.yaml
+    - $ref: ./AdjustReadyToPayAch.yaml
+    - $ref: ./AdjustReadyToPayPaypal.yaml
     - $ref: ./AdjustReadyToPayGeneric.yaml
 properties:
   paymentMethod:

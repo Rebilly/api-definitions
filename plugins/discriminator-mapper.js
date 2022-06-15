@@ -1,44 +1,54 @@
-function getEnumValues(ctx, node, propertyName) {
-    return [].concat(...(traverse(ctx, node, `properties.${propertyName}.enum`) || []));
+const xEnumMapping = 'x-enum-mapping';
+
+function arrayMerge() {
+    return [].concat(...arguments);
 }
 
-function maybeResolve({resolve}, node) {
-    if (node && node.$ref) {
-        if (!resolve(node).node) {
-            console.error('Can\'t resolve node', node, resolve(node));
+function getEnumValues(ctx, pointer, propertyName) {
+    const possibleValues = traverse(ctx, pointer, `properties.${propertyName}.enum`);
+    const disallowedValues = traverse(ctx, pointer, `properties.${propertyName}.not.enum`);
+
+    return possibleValues.filter(val => disallowedValues.indexOf(val) === -1);
+}
+
+function resolve(ctx, pointer) {
+    if (pointer.node && pointer.node.$ref) {
+        const resolved = ctx.resolve(pointer.node, pointer.location.absolutePointer);
+        if (!resolved.node) {
+            throw `Can't resolve $ref ${pointer.node.$ref} from ${pointer.location.absolutePointer}`;
         }
-        return resolve(node).node;
+        return resolved;
     }
 
-    return node;
+    return pointer;
 }
 
-function traverse({resolve}, node, path) {
-    node = maybeResolve({resolve}, node);
-    console.log('traversing node', node, path);
+function traverse(ctx, pointer, path) {
+    pointer = resolve(ctx, pointer);
     path = path.split('.');
     let key;
     const targets = [];
     while(key = path.shift()) {
-        console.log('traversing key', node, key, path.join('.'));
-        node = maybeResolve({resolve}, node);
-        if (!node) {
+        pointer = resolve(ctx, pointer);
+        if (!pointer.node) {
             break;
         }
-        if (node.allOf) {
-            console.log('traversing allOf', node.allOf);
-            node.allOf.forEach(subnode => {
-                subnode = maybeResolve({resolve}, subnode);
-                targets.push(traverse({resolve}, subnode, path.join('.')));
+        if (pointer.node.allOf) {
+            pointer.node.allOf.forEach(subnode => {
+                subnode = resolve(ctx, {node: subnode, location: pointer.location});
+                targets.push(traverse(ctx, subnode, [key, ...path].join('.')));
             });
         }
-        if (!key in node) {
+        if (!key in pointer.node) {
             break;
         }
-        node = maybeResolve({resolve}, node[key]);
-        
+        pointer = resolve(ctx, {node: pointer.node[key], location: pointer.location});
     }
-    return [].concat(...targets);
+
+    return arrayMerge(
+        pointer.node && Array.isArray(pointer.node) ? pointer.node : [],
+        ...targets,
+    );
 }
 
 module.exports = {
@@ -47,30 +57,38 @@ module.exports = {
         oas3: {
             'enum': () => ({
                 Discriminator: {
-                    leave(discriminator, ctx) {
-                        const mappingSources = discriminator['x-enum-mapping'] || [];
-                        if (!Array.isArray(mappingSources) || mappingSources.length === 0) {
+                    enter(discriminator, ctx) {
+                        if (!discriminator.hasOwnProperty(xEnumMapping)) {
                             return;
                         }
-                        const test = ctx.resolve({$ref: '../../PaymentMethods/AlternativePaymentMethods.yaml'});
-                        console.log('Resolving ref that exists within the definition, but not at the discriminator location', test);
-                        mappingSources.forEach(mappingSource => {
-                            const {node} = ctx.resolve(mappingSource);
-                            if (!node || node.type !== 'object') {
-                                ctx.report({message: `Non-object source supplied for enum discriminator mapping`})
-                                return;
+                        const mappingSources = discriminator[xEnumMapping] || [];
+                        if (!Array.isArray(mappingSources) || mappingSources.length === 0) {
+                            ctx.report({message: `Non-array ${xEnumMapping} provided`, location: ctx.location.child(xEnumMapping)});
+                            return;
+                        }
+                        mappingSources.forEach((mappingSource, index) => {
+                            const location = ctx.location.child([xEnumMapping, index]);
+                            try {
+                                const mapping = ctx.resolve(mappingSource);
+                                if (!mapping.node || mapping.node.type !== 'object') {
+                                    throw 'Non-object source supplied for enum discriminator mapping';
+                                }
+                                const valueLists = getEnumValues(ctx, mapping, discriminator.propertyName);
+                                if (valueLists.length === 0) {
+                                    throw 'Empty discriminator enum mapping provided';
+                                }
+                                discriminator.mapping = discriminator.mapping || {};
+                                valueLists.forEach((enumValue) => {
+                                    discriminator.mapping[enumValue] = mappingSource.$ref;
+                                });
+                            } catch (message) {
+                                ctx.report({message, location});
                             }
-                            const valueLists = [
-                                getEnumValues(ctx, node, discriminator.propertyName),
-                            ];
-                            (node.allOf || []).forEach(allOfSchema => {
-                                valueLists.push(getEnumValues(ctx, allOfSchema, discriminator.propertyName));
-                            });
-                            ctx.report({message: `Found ${JSON.stringify(valueLists)}`});
                         });
+                        delete discriminator[xEnumMapping];
                     },
-                }
-            })
-        }
-    }
-}
+                },
+            }),
+        },
+    },
+};
