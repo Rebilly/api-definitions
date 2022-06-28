@@ -27,3 +27,21 @@ properties:
       Available only for US-based organizations.
     items:
       $ref: ./TaxLocation.yaml
+  notifications:
+    type: object
+    description: The settings for notifications.
+    properties:
+      notifyOnUserAccessChanges:
+        description: If a notification should be sent when there are changes in user access.
+        type: boolean
+        example: false
+      notifyOnApiKeyAccessChanges:
+        description: If a notification should be sent when there are changes in API key access.
+        type: boolean
+        example: false
+      notificationEmailAddresses:
+        description: List of email addresses to sent the notifications to
+        type: array
+        items:
+          type: string
+          format: email
