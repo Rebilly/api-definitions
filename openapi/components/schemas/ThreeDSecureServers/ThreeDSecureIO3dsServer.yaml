@@ -1,20 +1,22 @@
 description: ThreeDSecureIO3dsServer.
 allOf:
-  - $ref: ./WorldlineAtosFrankfurt3dsServers/WorldlineAtosFrankfurt3dsServers.yaml
-  - $ref: ./TestProcessor3dsServers/TestProcessor3dsServers.yaml
-  - $ref: ./EMS3dsServers/EMS3dsServers.yaml
   - type: object
     required:
-      - merchantId
+      - acquirerMerchantIdVisa
+      - acquirerMerchantIdMastercard
       - merchantName
       - merchantAcquirerBinVisa
       - merchantAcquirerBinMastercard
       - merchantCountry
       - merchantUrl
     properties:
-      merchantId:
+      acquirerMerchantIdVisa:
         type: string
-        description: Merchant Id.
+        description: Visa acquirer merchant ID (MID).
+        maxLength: 35
+      acquirerMerchantIdMastercard:
+        type: string
+        description: Mastercard acquirer merchant ID (MID).
         maxLength: 35
       merchantName:
         type: string
