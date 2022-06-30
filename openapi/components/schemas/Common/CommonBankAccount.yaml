@@ -12,10 +12,6 @@ properties:
     readOnly: true
     enum:
       - ach
-  customerId:
-    description: The customer's ID.
-    allOf:
-      - $ref: ../ResourceId.yaml
   bankName:
     description: Bank's name.
     type: string
@@ -61,6 +57,10 @@ properties:
     enum:
       - active
       - deactivated
+  useAsBackup:
+    description: Allow using this payment instrument as a backup for invoice payment retries.
+    type: boolean
+    default: false
   createdTime:
     description: Bank account created time.
     allOf:
@@ -71,5 +71,3 @@ properties:
       - $ref: ../ServerTimestamp.yaml
   customFields:
     $ref: ../ResourceCustomFields.yaml
-  riskMetadata:
-    $ref: ../RiskMetadata.yaml

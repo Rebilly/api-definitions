@@ -1,11 +1,8 @@
 parameters:
-  - $ref: ../components/parameters/organizationId.yaml
   - $ref: ../components/parameters/systemEventType.yaml
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
-    - Risk Management
     - Users
   tags:
     - Rules
@@ -31,8 +28,6 @@ get:
       $ref: ../components/responses/NotFound.yaml
 delete:
   x-products:
-    - Full
-    - Risk Management
     - Users
   tags:
     - Rules
@@ -50,8 +45,6 @@ delete:
       $ref: ../components/responses/NotFound.yaml
 put:
   x-products:
-    - Full
-    - Risk Management
     - Users
   tags:
     - Rules
@@ -72,10 +65,6 @@ put:
     '404':
       $ref: ../components/responses/NotFound.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   requestBody:
     $ref: ../components/requestBodies/RuleSetDraft.yaml

@@ -2,7 +2,6 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
     - Users
   tags:
     - Organizations
@@ -10,14 +9,14 @@ get:
   operationId: GetOrganization
   x-sdk-operation-name: get
   description: |
-    Retrieve a organization with specified identifier string.
+    Retrieve an organization with specified identifier string.
   responses:
     '200':
       description: Organization was retrieved successfully.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Organization.yaml
+            $ref: ../components/schemas/Organizations/Organization.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -30,7 +29,6 @@ get:
         $ref: '../code_samples/PHP/organizations@{id}/get.php'
 patch:
   x-products:
-    - Full
     - Users
   tags:
     - Organizations
@@ -47,7 +45,7 @@ patch:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Organization.yaml
+            $ref: ../components/schemas/Organizations/Organization.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

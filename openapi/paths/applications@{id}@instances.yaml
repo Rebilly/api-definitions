@@ -1,10 +1,8 @@
 parameters:
-  - $ref: ../components/parameters/organizationId.yaml
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
     - Users
-    - Full
   tags:
     - Application owners
   summary: Retrieve application instances
@@ -27,7 +25,7 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/Applications/Owners/ApplicationInstance.yaml
+              $ref: ../components/schemas/Applications/OwnerApplicationInstance.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

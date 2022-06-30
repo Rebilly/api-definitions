@@ -1,28 +1,24 @@
 servers:
   - url: 'https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}'
-    description: Sandbox server with organizationId.
+    description: Sandbox server
     variables:
       organizationId:
         default: unknown
         description: Your organization ID.
   - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
-    description: Live server with organizationId.
+    description: Live server
     variables:
       organizationId:
         default: unknown
         description: Your organization ID.
-  - url: 'https://api.rebilly.com/experimental'
-  - url: 'https://api-sandbox.rebilly.com/experimental'
-parameters:
-  - $ref: ../components/parameters/organizationId.yaml
 get:
   x-products:
-    - Full
     - Reports
   tags:
     - Reports
   summary: Retrieve a events triggered summary report
   operationId: GetTriggeredEventReport
+  x-sdk-operation-name: getEventsTriggeredSummary
   description: |
     Retrieve a events triggered summary report.
   parameters:

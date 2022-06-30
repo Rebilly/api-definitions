@@ -14,7 +14,11 @@ properties:
     allOf:
       - $ref: ../ResourceId.yaml
   fileIds:
-    description: Linked file object id's.
+    description: >-
+      Linked file object id's.
+
+
+      Files uploaded for identity-proof must have following corresponding tags attached `['kyc', 'id-front']`, `['kyc', 'id-back']`, `['kyc', 'face-proof']` in order to be properly recognized as identity-proof files.
     type: array
     items:
       allOf:
@@ -36,11 +40,13 @@ properties:
       - in-progress
       - accepted
       - rejected
+      - archived
     x-enumDescriptions:
       pending: Waiting to be reviewed or analyzed
       in-progress: Being analyzed by Rebilly's AI
       accepted: Accepted by AI or a human
       rejected: Rejected by AI or a human
+      archived: Archived by Rebilly's AI
   rejectionReason:
     $ref: ../KycDocument/KycDocumentRejection.yaml
   requestId:

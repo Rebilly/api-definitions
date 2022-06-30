@@ -1,6 +1,10 @@
+servers:
+  - url: 'https://api-sandbox.rebilly.com'
+    description: Sandbox server
+  - url: 'https://api.rebilly.com'
+    description: Live server
 post:
   x-products:
-    - Full
     - Users
   tags:
     - JWT Session
@@ -29,11 +33,7 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
     - lang: PHP
       source:

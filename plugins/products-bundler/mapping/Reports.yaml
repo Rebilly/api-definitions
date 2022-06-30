@@ -9,25 +9,45 @@ info:
 
     # Authentication
 
-    When you sign up for an account, you are given your first API key.
-    You can generate additional API keys, and delete API keys (as you may
-    need to rotate your keys in the future). You authenticate to the
-    Rebilly API by providing your secret key in the request header.
+    This topic describes the different forms of authentication that are available in the Rebilly API, and how to use them.
 
-    Rebilly offers three forms of authentication:  secret key, publishable key, JSON Web Tokens, and public signature key.
-    - [Secret API key](#section/Authentication/SecretApiKey): used for requests made from the server side. Never share these keys. Keep them guarded and secure
-    - [Publishable API key](#section/Authentication/PublishableApiKey): used for requests from the client side.
-    - [JWT](#section/Authentication/JWT): short lifetime tokens that can be assigned a specific expiration time
+    Rebilly offers four forms of authentication: secret key, publishable key,
+    JSON Web Tokens, and public signature key.
 
-    Never share your secret keys. Keep them guarded and secure.
+    - Secret API key: Use to make requests from the server side. Never share these keys. Keep them guarded and secure.
+    - Publishable API key: Use in your client-side code to tokenize payment information.
+    - JWT: Use to make short-life tokens that expire after a set period of time.
 
     <!-- ReDoc-Inject: <security-definitions> -->
+
+    ## Manage API keys
+
+    To create or manage API keys, select one of the following:
+
+    - Use the Rebilly UI: In the left navigation bar, **Automations**, **Integrations**, **Custom integrations**, then click **API keys**.
+    - Use the Rebilly API: go to [API Keys](https://user-api-docs.rebilly.com/#tag/API-Keys).
+
+    For more information, see [API keys](https://www.rebilly.com/docs/concepts-and-features/concept/api-keys).
 
     ## Javascript SDK
 
     The [Javascript SDK](https://github.com/Rebilly/rebilly-js-sdk) is maintained
     within Github, and contains the installation and usage instructions in the Readme file.
     SDK code examples are included in these docs.
+
+servers:
+  - url: 'https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}'
+    description: Sandbox server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
+    description: Live server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
 
 x-tagGroups:
   - name: Reports

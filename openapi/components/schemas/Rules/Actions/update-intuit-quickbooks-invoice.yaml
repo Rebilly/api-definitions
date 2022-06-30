@@ -1,0 +1,29 @@
+description: Update an Intuit Quickbooks invoice.
+allOf:
+  - $ref: ../RuleAction.yaml
+  - type: object
+    properties:
+      unearnedRevenueAccount:
+        description: The unearned revenue Quickbooks account ID.
+        type: string
+      taxesAccount:
+        description: The taxes Quickbooks account ID. If supplied taxes will be represented as separate line items instead of integrated tax field.
+        type: string
+        nullable: true
+      discountsAccount:
+        description: The discounts Quickbooks account ID. If not set `unearnedRevenueAccount` will be used for discounts.
+        type: string
+        nullable: true
+      department:
+        description: The Quickbooks department ID.
+        type: string
+        nullable: true
+      template:
+        $ref: ./QuickbooksTemplate.yaml
+      credentialHash:
+        type: string
+        description: OAuth2 credential identifier string.
+    required:
+      - credentialHash
+      - customerDisplayName
+      - unearnedRevenueAccount

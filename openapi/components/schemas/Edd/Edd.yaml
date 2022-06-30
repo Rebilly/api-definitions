@@ -1,0 +1,38 @@
+type: object
+properties:
+  parsedScore:
+    allOf:
+      - $ref: ./EddData.yaml
+      - type: object
+        properties:
+          occupationDetails:
+            $ref: ./EddScoreDetails.yaml
+          arrestDetails:
+            $ref: ./EddScoreDetails.yaml
+          bankruptcyDetails:
+            $ref: ./EddScoreDetails.yaml
+          fraudDetails:
+            $ref: ./EddScoreDetails.yaml
+  score:
+    $ref: ./EddData.yaml
+  nextUpdateTime:
+    description: The EDD score next update time.
+    type: string
+    format: date-time
+    nullable: true
+  updatedTime:
+    description: The EDD score updated time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Links/SelfLink.yaml
+        - $ref: ../Links/EddOccupationSearchResultLink.yaml
+        - $ref: ../Links/EddFraudSearchResultLink.yaml
+        - $ref: ../Links/EddArrestSearchResultLink.yaml
+        - $ref: ../Links/EddBankruptcySearchResultLink.yaml

@@ -23,6 +23,6 @@ $gatewayAccountForm->setGatewayConfig($gatewayConfig);
 
 try {
     $gatewayAccount = $client->gatewayAccounts()->update('gatewayAccountId', $gatewayAccountForm);
-} catch (UnprocessableEntityException $e) {
-    echo $e->getMessage();
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
 }

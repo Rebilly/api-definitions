@@ -1,8 +1,5 @@
-parameters:
-  - $ref: ../components/parameters/organizationId.yaml
 get:
   x-products:
-    - Full
     - Users
   tags:
     - Users
@@ -46,7 +43,6 @@ get:
         $ref: ../code_samples/JavaScript/users/get.js
 post:
   x-products:
-    - Full
     - Users
   tags:
     - Users
@@ -69,11 +65,7 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
     - lang: PHP
       source:

@@ -8,3 +8,7 @@ This document contains all OpenAPI extensions used in the Rebilly API definition
 | Field name    | Type    | Description                                              |
 | ------------- | ------- | -------------------------------------------------------- |
 | `x-multiline` | Boolean | Flag indicating whether a field expects multiline input  |
+
+* `x-product`
+  This property declares operations that must be included into the specific API definition bundle.
+  See more [here](plugins/products-bundler/README.md).

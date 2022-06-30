@@ -1,9 +1,8 @@
 $apiKeyForm = new Rebilly\Entities\ApiKey();
-$apiKeyForm->setDescription('Test');
-$apiKeyForm->setDatetimeFormat($apiKeyForm::DATETIME_FORMAT_MYSQL);
+$apiKeyForm->setDescription('Test key');
 
 try {
     $apiKey = $client->apiKeys()->create($apiKeyForm);
-} catch (UnprocessableEntityException $e) {
-    echo $e->getMessage();
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
 }

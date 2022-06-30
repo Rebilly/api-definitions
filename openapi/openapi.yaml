@@ -22,21 +22,17 @@ security:
 
 servers:
   - url: 'https://api-sandbox.rebilly.com/organizations/{organizationId}'
-    description: Sandbox server with organizationId.
+    description: Sandbox server
     variables:
       organizationId:
         default: unknown
         description: Your organization ID.
   - url: 'https://api.rebilly.com/organizations/{organizationId}'
-    description: Live server with organizationId.
+    description: Live server
     variables:
       organizationId:
         default: unknown
         description: Your organization ID.
-  - url: 'https://api-sandbox.rebilly.com'
-    description: Sandbox Server.
-  - url: 'https://api.rebilly.com'
-    description: Live Server.
 
 components:
   securitySchemes:
@@ -87,6 +83,9 @@ tags:
   - name: Transactions Timeline
     description: |
       The transactions timeline keeps an audit trail of changes and activity for each transaction.
+  - name: Credit memos Timeline
+    description: |
+      The credit memos timeline keeps an audit trail of changes and activity for each credit memo.
   - name: Rules Timeline
     description: |
       The rules timeline keeps an audit trail of changes and activity for each rule.
@@ -95,8 +94,20 @@ tags:
       The gateway accounts timeline keeps an audit trail of changes and activity for each gateway account.
   - name: KYC Documents
     description: >
-      Customer KYC files uploaded on behalf of a customer, tagged with a
-      document type and submitted for validation.
+      Request KYC documents from customers using the KYC request API which generates a signed link to the KYC document gatherer.
+      The types of documents to request:
+        - identity-proof
+        - address-proof
+        - purchase-proof
+        - funds-proof
+        - credit-file-proof
+
+      In the case that a `credit-file-proof` is requested in combination with `identity-proof` and `address-proof`, the `credit-file-proof` is attempted first.
+      If it is successful in validating the identity and address, then the KYC request is considered instantly fulfilled.
+      If it is not, or if you the `credit-file-proof` isn't requested, then redirect your customer to the KYC document gatherer to collect their KYC documents.
+      Rebilly parses and analyzes the documents and accepts or rejects them according to a configurable scoring algorithm.
+      When all of the document types in the KYC request are accepted, the status is considered fulfilled and the KYC request fulfilled webhook will be triggered.
+      If a document is accepted while unreviewed documents of the same type exist, the unreviewed documents will be archived and the archived webhook will be triggered.
   - name: Customer Authentication
     description: >
       Create authentication credentials, login, logout, and verify your
@@ -135,6 +146,11 @@ tags:
     description: >
       Invoices leave a record for both you and your customer of the products
       sold.
+  - name: Credit memos
+    description: >
+      A credit memo is a means of providing a customer with store credit.
+      A common use case for using a credit memo is to provide a customer with store credit, rather than a refund,
+      if the customer pays more than they owe or returns a product.
   - name: Payment Instruments
     description: >
       The Payment Instrument allows you to accept a variety of payment methods through a single API.
@@ -182,15 +198,9 @@ tags:
   - name: Search
     description: |
       Search data including customers, invoices, orders, transactions and more.
-  - name: Shipping Zones
-    description: >
-      A shipping zone contains regions and countries that you ship to. Each
-      shipping zone has its own shipping rates.
-
-      This API is deprecated, see Shipping rates.
   - name: Shipping rates
     description: >
-      A shipping rate contains a filter and a pricing for a specific destination you ship to.
+      A shipping rate contains a filter and a pricing for a specific shipping destination.
   - name: Orders
     description: >
       An order applies a plan's template to create invoice(s) for a customer,
@@ -270,7 +280,7 @@ tags:
   - name: JWT Session
     description: |
       A session contains a token, which is a JSON Web Token.  The token is created
-      with a user's signin credentials.
+      with a user's sign in credentials.
 
       This token can be used to authenticate to the API.  In addition, the session can be set to
       expire at a particular time. Use the token to then authenticate for further requests to the Rebilly API.
@@ -321,15 +331,35 @@ tags:
       Roles are an implementation of the general hierarchical RBAC. A senior role inherits all of it's juniors' ACLs plus its own ACL.
       Junior roles are not influenced by the senior role.
   - name: Integrations
+    description: |
+      Several applications can be integrated into Rebilly, such as: Google Sheets, Infusionsoft, Quickbooks Online, Wordpress, TaxJar, Plaid, Experian, MailChimp, Slack, Salesforce, and Xero. If you are PCI compliant, you can also integrate directly with Rebilly. For more information, see [Create a direct integration](https://www.rebilly.com/docs/billing/tutorial/create-a-direct-integration/#payment-integration).
   - name: Broadcast Messages
+    description: |
+      Broadcast messages are emails that are sent to a specific group of customers, or all customers. Use broadcast messages to notify customers and leads about upcoming promotions, service updates, and local events. For more information, see [Create a broadcast message](https://www.rebilly.com/docs/concepts-and-features/tutorial/email-notifications/#create-a-broadcast-messages).
   - name: Email Delivery Settings
+    description: |
+      Use email delivery settings to configure from which email address notifications and broadcast message are sent. In Rebilly, this email address is referred to as a "From address". Supported email service providers are: SMPT, Mailgun, SendGrid, AWS SES, Postmark, and Rebilly.
   - name: Email Messages
+    description: |
+      Use email messages to email customers directly. For more information, see [Email messages](https://user-api-docs.rebilly.com/tag/Email-Messages).
   - name: Email Notifications
+    description: |
+      Email notifications are targeted email messages that can be plain text or HTML. Use email notifications to keep customers informed on events, and to inform them of events that may require action on their end. For more information, see [Email notifications](https://www.rebilly.com/docs/concepts-and-features/tutorial/email-notifications/).
   - name: Plaid credentials
+    description: |
+      Plaid account credentials. Use the Plaid integration to verify a customer's bank credentials, and simplify the process of providing credentials for your customers. For more information, see [Plaid integration](enables merchants to verify a customer's bank credentials, and simplifies the process of providing these credentials for the customer).
   - name: Experian credentials
+    description: |
+      Experian account credentials. Use the Experian integration for identity verification. For more information, see [Experian integration](https://www.rebilly.com/docs/risk/tutorial/experian-integration/#experian-integration).
   - name: TaxJar credentials
+    description: |
+      TaxJar account credentials. Use the TaxJar integration to calculate taxes and create transactions for the Sales Tax AutoFile feature in your TaxJar account. For more information, see [TaxJar integration](https://www.rebilly.com/docs/billing/concept/taxes/#taxjar-integration).
   - name: Metadata
+    description: |
+      Metadata is data that provides structured information on other data.
   - name: Custom domains
+    description: |
+      Custom domains enable you to use your own domain for forms and billing portals instead the default Rebilly domain:`portal.secure-payments.app`. For more information, see [Configure a custom domain](https://www.rebilly.com/docs/concepts-and-features/organizations-and-websites#configure-a-custom-domain).
   - name: Histograms
     description: |
       Histograms are for particular kinds of reports with cohorts and periods.
@@ -340,6 +370,9 @@ tags:
   - name: Data Exports
     description: |
       Data exports.
+  - name: Organization data exports
+    description: |
+      Organization data exports.
   - name: Rebilly API
     description: |
       The Rebilly API is the main API commonly integrated by 3rd parties.  You may see
@@ -348,6 +381,10 @@ tags:
     description: |
       The Rebilly Reporting API is currently experimental.  You may see
       the [Reports API Documentation here](https://reports-api-docs.rebilly.com).
+  - name: Storefront API
+    description: |
+      The Rebilly Storefront API is currently experimental.  You may see
+      the [Storefront API Documentation here](https://storefront-api-docs.rebilly.com/).
   - name: Users API
     description: >
       The Rebilly User API is primarily for our GUI apps.  You may see
@@ -362,12 +399,26 @@ tags:
 
       3rd parties.
   - name: Account
+    description: >
+      An account in which you are subscribed to in order to use the Rebilly product.
   - name: Authentication
+    description: >
+      Process of confirming the identity of users that are attempting to access resources on a server.
   - name: Email verification
+    description: >
+      Process of confirming that an email address exists and is associated with an individual.
   - name: Password reset
+    description: >
+      Process of resetting a password for a user or organization.
   - name: Purchases
+    description: >
+      Transactions that have been executed related to the purchase of goods or services.
   - name: Application owners
+    description: |
+      Creators of an organizations and organization owners in Rebilly.
   - name: Application users
+    description: |
+      Users of an organization in Rebilly.
 
 x-tagGroups: []
 
@@ -420,6 +471,8 @@ paths:
     $ref: './paths/customer-timeline-custom-events@{id}.yaml'
   /customer-timeline-events:
     $ref: ./paths/customer-timeline-events.yaml
+  '/customers/{id}/aml':
+    $ref: './paths/customers@{id}@aml.yaml'
   '/customers/{id}/lead-source':
     $ref: './paths/customers@{id}@lead-source.yaml'
   '/customers/{id}/timeline':
@@ -436,8 +489,6 @@ paths:
     $ref: './paths/files@{id}.yaml'
   '/files/{id}/download':
     $ref: './paths/files@{id}@download.yaml'
-  '/files/{id}/download{extension}':
-    $ref: './paths/files@{id}@download{extension}.yaml'
   '/application-instances/{applicationId}':
     $ref: './paths/application-instances@{applicationId}.yaml'
   '/applications':
@@ -476,6 +527,24 @@ paths:
     $ref: './paths/invoices@{id}@timeline.yaml'
   '/invoices/{id}/timeline/{messageId}':
     $ref: './paths/invoices@{id}@timeline@{messageId}.yaml'
+  /credit-memos:
+    $ref: ./paths/credit-memos.yaml
+  /credit-memos/{id}:
+    $ref: ./paths/credit-memos@{id}.yaml
+  /credit-memos/{id}/void:
+    $ref: ./paths/credit-memos@{id}@void.yaml
+  /credit-memos/{id}/timeline:
+    $ref: ./paths/credit-memos@{id}@timeline.yaml
+  /credit-memos/{id}/timeline/{messageId}:
+    $ref: ./paths/credit-memos@{id}@timeline@{messageId}.yaml
+  /invoices/{id}/credit-memo-allocations:
+    $ref: ./paths/invoices@{id}@credit-memo-allocations.yaml
+  /invoices/{id}/credit-memo-allocations/{creditMemoId}:
+    $ref: ./paths/invoices@{id}@credit-memo-allocations@{creditMemoId}.yaml
+  /kyc-requests:
+    $ref: ./paths/kyc-requests.yaml
+  '/kyc-requests/{id}':
+    $ref: './paths/kyc-requests@{id}.yaml'
   /kyc-documents:
     $ref: ./paths/kyc-documents.yaml
   '/kyc-documents/{id}':
@@ -492,10 +561,8 @@ paths:
     $ref: './paths/kyc-documents@{id}@start-review.yaml'
   '/kyc-documents/{id}/stop-review':
     $ref: './paths/kyc-documents@{id}@stop-review.yaml'
-  /kyc-requests:
-    $ref: ./paths/kyc-requests.yaml
-  '/kyc-requests/{id}':
-    $ref: './paths/kyc-requests@{id}.yaml'
+  /kyc-settings:
+    $ref: ./paths/kyc-settings.yaml
   /password-tokens:
     $ref: ./paths/password-tokens.yaml
   '/password-tokens/{id}':
@@ -522,10 +589,6 @@ paths:
     $ref: ./paths/shipping-rates.yaml
   '/shipping-rates/{id}':
     $ref: './paths/shipping-rates@{id}.yaml'
-  /shipping-zones:
-    $ref: ./paths/shipping-zones.yaml
-  '/shipping-zones/{id}':
-    $ref: './paths/shipping-zones@{id}.yaml'
   /subscriptions:
     $ref: ./paths/subscriptions.yaml
   '/subscriptions/{id}':
@@ -536,6 +599,10 @@ paths:
     $ref: './paths/subscriptions@{id}@change-items.yaml'
   '/subscriptions/{id}/interim-invoice':
     $ref: './paths/subscriptions@{id}@interim-invoice.yaml'
+  /subscription-pauses:
+    $ref: ./paths/subscription-pauses.yaml
+  '/subscription-pauses/{id}':
+    $ref: './paths/subscription-pauses@{id}.yaml'
   /subscription-cancellations:
     $ref: ./paths/subscription-cancellations.yaml
   '/subscription-cancellations/{id}':
@@ -560,6 +627,10 @@ paths:
     $ref: './paths/tags@{tag}@customers.yaml'
   '/tags/{tag}/customers/{customerId}':
     $ref: './paths/tags@{tag}@customers@{customerId}.yaml'
+  '/tags/{tag}/kyc-documents':
+    $ref: './paths/tags@{tag}@kyc-documents.yaml'
+  '/tags/{tag}/kyc-documents/{kycDocumentId}':
+    $ref: './paths/tags@{tag}@kyc-documents@{kycDocumentId}.yaml'
   /tokens:
     $ref: ./paths/tokens.yaml
   '/tokens/{token}':
@@ -583,9 +654,9 @@ paths:
   '/transactions/{id}/timeline/{messageId}':
     $ref: './paths/transactions@{id}@timeline@{messageId}.yaml'
   '/fees':
-    $ref: './paths/fees/fees.yaml'
+    $ref: './paths/fees.yaml'
   '/fees/{id}':
-    $ref: './paths/fees/fees@{id}.yaml'
+    $ref: './paths/fees@{id}.yaml'
   '/activation/{token}':
     $ref: './paths/activation@{token}.yaml'
   /api-keys:
@@ -800,6 +871,8 @@ paths:
     $ref: ./paths/users.yaml
   '/users/{id}':
     $ref: './paths/users@{id}.yaml'
+  '/users/{id}/mfa':
+    $ref: './paths/users@{id}@mfa.yaml'
   '/users/{id}/password':
     $ref: './paths/users@{id}@password.yaml'
   '/users/{id}/totp-reset':
@@ -818,6 +891,10 @@ paths:
     $ref: ./paths/data-exports.yaml
   '/experimental/data-exports/{id}':
     $ref: './paths/data-exports@{id}.yaml'
+  /organization-exports:
+    $ref: ./paths/organization-exports.yaml
+  '/organization-exports/{id}':
+    $ref: './paths/organization-exports@{id}.yaml'
   /experimental/histograms/transactions:
     $ref: ./paths/histograms@transactions.yaml
   /experimental/reports/api-log-summary:
@@ -836,12 +913,22 @@ paths:
     $ref: ./paths/reports@events-triggered@{eventType}@rules.yaml
   /experimental/reports/future-renewals:
     $ref: ./paths/reports@future-renewals.yaml
+  /experimental/reports/kyc-acceptance-summary:
+    $ref: ./paths/reports@kyc-acceptance-summary.yaml
+  /experimental/reports/kyc-rejection-summary:
+    $ref: ./paths/reports@kyc-rejection-summary.yaml
+  /experimental/reports/kyc-request-summary:
+    $ref: ./paths/reports@kyc-request-summary.yaml
+  /experimental/reports/monthly-recurring-revenue:
+    $ref: ./paths/reports@monthly-recurring-revenue.yaml
   /experimental/reports/renewal-sales:
     $ref: ./paths/reports@renewal-sales.yaml
   /experimental/reports/retention-percentage:
     $ref: ./paths/reports@retention-percentage.yaml
   /experimental/reports/retention-value:
     $ref: ./paths/reports@retention-value.yaml
+  /experimental/reports/revenue-waterfall:
+    $ref: ./paths/reports@revenue-waterfall.yaml
   /experimental/reports/subscription-cancellation:
     $ref: ./paths/reports@subscription-cancellation.yaml
   /experimental/reports/subscription-renewal:
@@ -922,6 +1009,12 @@ paths:
     $ref: paths/storefront/transactions@{id}.yaml
   '/storefront/websites/{id}':
     $ref: paths/storefront/websites@{id}.yaml
+  '/customers/{id}/edd-score':
+    $ref: paths/customers@{id}@edd-score.yaml
+  '/customers/{id}/edd-timeline':
+    $ref: paths/customers@{id}@edd-timeline.yaml
+  '/customers/{id}/edd-search-results':
+    $ref: paths/customers@{id}@edd-search-results.yaml
 
 x-webhooks:
   application-instance-disabled:
@@ -933,6 +1026,24 @@ x-webhooks:
   aml-list-possibly-matched:
     post:
       $ref: ./webhooks/aml-list-possibly-matched.yaml
+  balance-transaction-settled:
+    post:
+      $ref: ./webhooks/balance-transaction-settled.yaml
+  credit-memo-applied:
+    post:
+      $ref: ./webhooks/credit-memo-applied.yaml
+  credit-memo-created:
+    post:
+      $ref: ./webhooks/credit-memo-created.yaml
+  credit-memo-modified:
+    post:
+      $ref: ./webhooks/credit-memo-modified.yaml
+  credit-memo-partially-applied:
+    post:
+      $ref: ./webhooks/credit-memo-partially-applied.yaml
+  credit-memo-voided:
+    post:
+      $ref: ./webhooks/credit-memo-voided.yaml
   customer-created:
     post:
       $ref: ./webhooks/customer-created.yaml
@@ -1023,6 +1134,21 @@ x-webhooks:
   kyc-document-reviewed:
     post:
       $ref: ./webhooks/kyc-document-reviewed.yaml
+  kyc-document-archived:
+    post:
+      $ref: ./webhooks/kyc-document-archived.yaml
+  kyc-request-attempted:
+    post:
+      $ref: ./webhooks/kyc-request-attempted.yaml
+  kyc-request-failed:
+    post:
+      $ref: ./webhooks/kyc-request-failed.yaml
+  kyc-request-fulfilled:
+    post:
+      $ref: ./webhooks/kyc-request-fulfilled.yaml
+  kyc-request-partially-fulfilled:
+    post:
+      $ref: ./webhooks/kyc-request-partially-fulfilled.yaml
   nsf-response-received:
     post:
       $ref: ./webhooks/nsf-response-received.yaml
@@ -1089,6 +1215,21 @@ x-webhooks:
   subscription-upgraded:
     post:
       $ref: ./webhooks/subscription-upgraded.yaml
+  subscription-paused:
+    post:
+      $ref: ./webhooks/subscription-paused.yaml
+  subscription-pause-created:
+    post:
+      $ref: ./webhooks/subscription-pause-created.yaml
+  subscription-pause-modified:
+    post:
+      $ref: ./webhooks/subscription-pause-modified.yaml
+  subscription-pause-revoked:
+    post:
+      $ref: ./webhooks/subscription-pause-revoked.yaml
+  subscription-resumed:
+    post:
+      $ref: ./webhooks/subscription-resumed.yaml
   transaction-amount-discrepancy-found:
     post:
       $ref: ./webhooks/transaction-amount-discrepancy-found.yaml

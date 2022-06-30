@@ -1,30 +1,28 @@
 servers:
   - url: 'https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}'
-    description: Sandbox server with organizationId.
+    description: Sandbox server
     variables:
       organizationId:
         default: unknown
         description: Your organization ID.
   - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
-    description: Live server with organizationId.
+    description: Live server
     variables:
       organizationId:
         default: unknown
         description: Your organization ID.
-  - url: 'https://api.rebilly.com/experimental'
-  - url: 'https://api-sandbox.rebilly.com/experimental'
-parameters:
-  - $ref: ../components/parameters/organizationId.yaml
 post:
   x-products:
-    - Full
     - Reports
   tags:
     - Data Exports
   summary: Request a data export of selected resource
   operationId: PostDataExport
+  x-sdk-operation-name: queue
   description: |
     Request a data export of selected resource.
+  parameters:
+    - $ref: ../components/parameters/collectionExpand.yaml
   requestBody:
     $ref: ../components/requestBodies/DataExport.yaml
   responses:
@@ -39,25 +37,29 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/data-exports/post.js
 get:
   x-products:
-    - Full
     - Reports
   tags:
     - Data Exports
   summary: Retrieve a list of data export requests
   operationId: GetDataExportCollection
+  x-sdk-operation-name: getAll
   description: |
     Retrieve a list of data export requests.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionExpand.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionCriteria.yaml
   responses:
     '200':
       description: A list of data export requests was retrieved successfully.

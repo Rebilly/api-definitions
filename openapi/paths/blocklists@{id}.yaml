@@ -1,10 +1,7 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-  - $ref: ../components/parameters/organizationId.yaml
 get:
   x-products:
-    - Full
-    - Risk Management
     - Core
   tags:
     - Blocklists
@@ -35,8 +32,6 @@ get:
         $ref: '../code_samples/JavaScript/blocklists@{id}/get.js'
 put:
   x-products:
-    - Full
-    - Risk Management
     - Core
   tags:
     - Blocklists
@@ -59,11 +54,7 @@ put:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '409':
-      description: Blocklist exist and cannot be updated.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Error.yaml
+      $ref: ../components/responses/Conflict.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
@@ -75,8 +66,6 @@ put:
         $ref: '../code_samples/JavaScript/blocklists@{id}/put.js'
 delete:
   x-products:
-    - Full
-    - Risk Management
     - Core
   tags:
     - Blocklists

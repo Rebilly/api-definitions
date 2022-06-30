@@ -1,10 +1,7 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-  - $ref: ../components/parameters/organizationId.yaml
 get:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Orders
@@ -27,8 +24,6 @@ get:
       $ref: ../components/responses/NotFound.yaml
 put:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Orders
@@ -61,10 +56,45 @@ put:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/subscription-cancellations@{id}/put.js'
+patch:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Update subscription cancellation
+  operationId: PatchSubscriptionCancellation
+  x-sdk-operation-name: patch
+  description: Update a subscription cancellation, used for updating cancellation reason and description.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          allOf:
+            - properties:
+                canceledBy:
+                  readOnly: true
+                status:
+                  readOnly: true
+                churnTime:
+                  readOnly: true
+            - $ref: ../components/schemas/Subscription/SubscriptionCancellation.yaml
+    description: Patch cancellation resource.
+    required: true
+  responses:
+    '200':
+      description: Cancellation was updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Subscription/SubscriptionCancellation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
 delete:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Orders

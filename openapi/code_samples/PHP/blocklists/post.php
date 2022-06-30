@@ -5,6 +5,6 @@ $blocklistForm->setExpiredTime('2025-01-01 05:00:00');
 
 try {
     $blocklist = $client->blocklists()->create($blocklistForm);
-} catch (UnprocessableEntityException $e) {
-    echo $e->getMessage();
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
 }

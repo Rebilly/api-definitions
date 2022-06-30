@@ -1,8 +1,5 @@
-parameters:
-  - $ref: ../components/parameters/organizationId.yaml
 get:
   x-products:
-    - Full
     - Users
   tags:
     - Websites
@@ -36,7 +33,7 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/Website.yaml
+              $ref: ../components/schemas/Websites/Website.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -50,7 +47,6 @@ get:
         $ref: ../code_samples/JavaScript/websites/get.js
 post:
   x-products:
-    - Full
     - Users
   tags:
     - Websites
@@ -67,17 +63,13 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Website.yaml
+            $ref: ../components/schemas/Websites/Website.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
     - lang: PHP
       source:

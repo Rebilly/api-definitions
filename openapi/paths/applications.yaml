@@ -1,9 +1,6 @@
-parameters:
-  - $ref: ../components/parameters/organizationId.yaml
 get:
   x-products:
     - Users
-    - Full
   tags:
     - Application users
   summary: Retrieve a list of applications
@@ -35,7 +32,7 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/Applications/Users/Application.yaml
+              $ref: ../components/schemas/Applications/UserApplication.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -48,15 +45,15 @@ get:
       source:
         $ref: ../code_samples/JavaScript/applications/get.js
 post:
+  x-products:
+    - Users
   tags:
     - Application owners
   summary: Register an application
   operationId: PostApplication
   x-sdk-operation-name: create
   description: |
-    Register an application. It will appear publicly in the [App Store](https://app.rebilly.com/app-store): \
-    ![An example app](/images/app-store-example.png) \
-    Before you submit an app, read the [App Store documentation](https://www.rebilly.com/docs/content/concepts-and-features/app-store/).
+    Register an application. It will appear publicly in the [App Store](https://app.rebilly.com/app-store). Before you submit an app, read the [App Store documentation](https://www.rebilly.com/docs/content/concepts-and-features/app-store/).
   requestBody:
     content:
       application/json:

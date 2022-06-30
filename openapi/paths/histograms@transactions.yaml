@@ -1,28 +1,24 @@
 servers:
   - url: 'https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}'
-    description: Sandbox server with organizationId.
+    description: Sandbox server
     variables:
       organizationId:
         default: unknown
         description: Your organization ID.
   - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
-    description: Live server with organizationId.
+    description: Live server
     variables:
       organizationId:
         default: unknown
         description: Your organization ID.
-  - url: 'https://api.rebilly.com/experimental'
-  - url: 'https://api-sandbox.rebilly.com/experimental'
-parameters:
-  - $ref: ../components/parameters/organizationId.yaml
 get:
   x-products:
-    - Full
     - Reports
   tags:
     - Histograms
   summary: Get Transaction histogram report data
   operationId: GetHistogramTransactionReport
+  x-sdk-operation-name: getTransactionHistogramReport
   description: |
     Get Transaction histogram report data.
   parameters:
@@ -87,6 +83,7 @@ get:
           - Sales
           - SalesCount
           - UnapprovedCount
+    - $ref: ../components/parameters/collectionFilter.yaml
   responses:
     '200':
       description: Transaction report was retrieved successfully.

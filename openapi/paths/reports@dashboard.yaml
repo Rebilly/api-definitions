@@ -1,28 +1,24 @@
 servers:
   - url: 'https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}'
-    description: Sandbox server with organizationId.
+    description: Sandbox server
     variables:
       organizationId:
         default: unknown
         description: Your organization ID.
   - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
-    description: Live server with organizationId.
+    description: Live server
     variables:
       organizationId:
         default: unknown
         description: Your organization ID.
-  - url: 'https://api.rebilly.com/experimental'
-  - url: 'https://api-sandbox.rebilly.com/experimental'
-parameters:
-  - $ref: ../components/parameters/organizationId.yaml
 get:
   x-products:
-    - Full
     - Reports
   tags:
     - Reports
   summary: Retrieve dashboard data
   operationId: GetDashboardReport
+  x-sdk-operation-name: getDashboardMetrics
   description: Retrieve dashboard data.
   parameters:
     - name: periodStart
@@ -50,7 +46,6 @@ get:
       description: Dashboard report segments as a JSON array.
       schema:
         type: string
-    - $ref: ../components/parameters/reportTimezone.yaml
   responses:
     '200':
       description: Report was retrieved successfully.

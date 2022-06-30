@@ -12,10 +12,6 @@ properties:
     readOnly: true
     enum:
       - payment-card
-  customerId:
-    description: The customer ID.
-    allOf:
-      - $ref: ../ResourceId.yaml
   status:
     type: string
     description: |
@@ -70,6 +66,14 @@ properties:
     description: The billing address.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
+  useAsBackup:
+    description: Allow using this payment instrument as a backup for invoice payment retries.
+    type: boolean
+    default: false
+  billingPortalUrl:
+    description: URL to the billing portal where the card can be updated.
+    type: string
+    readOnly: true
   createdTime:
     description: Payment instrument created time.
     allOf:
@@ -80,5 +84,3 @@ properties:
       - $ref: ../ServerTimestamp.yaml
   customFields:
     $ref: ../ResourceCustomFields.yaml
-  riskMetadata:
-    $ref: ../RiskMetadata.yaml

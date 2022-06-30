@@ -2,6 +2,7 @@ type: object
 description: Tag.
 required:
   - name
+  - type
 properties:
   id:
     description: The tag's identifier string.
@@ -14,6 +15,12 @@ properties:
     maxLength: 255
     pattern: '^[@~\-\.\w\s]+$'
     example: New
+  type:
+    description: The tag type. Tags of a specific type could only be used for the corresponding entity.
+    type: string
+    enum:
+      - customer
+      - kyc-document
   createdTime:
     description: The tag's created time.
     allOf:

@@ -1,5 +1,4 @@
 parameters:
-  - $ref: ../../components/parameters/organizationId.yaml
   - $ref: ../../components/parameters/resourceId.yaml
 get:
   x-products:
@@ -11,6 +10,8 @@ get:
   x-sdk-operation-name: get
   description: |
     Retrieve a plan with specified ID.
+  parameters:
+    - $ref: ../../components/parameters/collectionExpand.yaml
   responses:
     200:
       description: Plan was retrieved successfully.

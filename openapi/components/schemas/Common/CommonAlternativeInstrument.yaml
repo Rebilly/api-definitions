@@ -1,22 +1,15 @@
 type: object
 title: Alternative Instrument
-required:
-  - method
-  - billingAddress
-  - customerId
 properties:
   id:
     description: The payment instrument ID.
+    readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   method:
     description: The method of payment instrument.
     allOf:
       - $ref: ../PaymentMethods/AlternativePaymentMethods.yaml
-  customerId:
-    description: Customer's ID.
-    allOf:
-      - $ref: ../ResourceId.yaml
   billingAddress:
     description: The billing address.
     allOf:
@@ -28,6 +21,10 @@ properties:
     enum:
       - active
       - deactivated
+  useAsBackup:
+    description: Allow using this payment instrument as a backup for invoice payment retries.
+    type: boolean
+    default: false
   createdTime:
     description: The payment instrument created time.
     allOf:
@@ -38,24 +35,3 @@ properties:
       - $ref: ../ServerTimestamp.yaml
   customFields:
     $ref: ../ResourceCustomFields.yaml
-  riskMetadata:
-    $ref: ../RiskMetadata.yaml
-  _links:
-    type: array
-    description: Links related to the resource.
-    readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Links/SelfLink.yaml
-        - $ref: ../Links/CustomerLink.yaml
-  _embedded:
-    type: array
-    description: >-
-      Any embedded objects available that are requested by the `expand`
-      querystring parameter.
-    readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Embeds/CustomerEmbed.yaml
