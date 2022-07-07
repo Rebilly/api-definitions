@@ -24,10 +24,10 @@ properties:
       - scheduled
       - recognized
     x-enumDescriptions:
-      scheduled: The amount will be recognized in the end of month.
+      scheduled: The amount will be recognized at the end of month.
       recognized: The amount is recognized and final.
   estimatedAmount:
-    description: The amount which will be recognized unless it's changed by the recognition time.
+    description: Estimated amount which will be recognized unless it is changed before recognition time.
     type: number
     x-type: Money
     format: double
@@ -37,11 +37,11 @@ properties:
     x-type: Money
     format: double
   scheduledTime:
-    description: When the entry was created to be recognized.
+    description: Date and time at which the entry was created.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   recognizedTime:
-    description: When the entry was recognized.
+    description: Date and time at which the entry was recognized.
     nullable: true
     allOf:
       - $ref: ./ServerTimestamp.yaml

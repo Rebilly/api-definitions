@@ -6,7 +6,7 @@ servers:
         default: unknown
         description: Your organization ID.
   - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
-    description: Live server
+    description: Live server.
     variables:
       organizationId:
         default: unknown
@@ -16,14 +16,13 @@ get:
     - Reports
   tags:
     - Reports
-  summary: Retrieve a revenue audit report
+  summary: Retrieve a revenue audit report.
   operationId: GetRevenueAuditReport
   x-sdk-operation-name: getRevenueAudit
   description: Retrieve a revenue audit report.
   security:
     - SecretApiKey: []
     - JWT: []
-    - ApplicationJWT: []
   parameters:
     - $ref: ../components/parameters/collectionFilter.yaml
     - $ref: ../components/parameters/collectionSort.yaml
@@ -31,7 +30,7 @@ get:
     - $ref: ../components/parameters/collectionOffset.yaml
   responses:
     '200':
-      description: A revenue audit report was retrieved successfully.
+      description: Revenue audit report successfully retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
