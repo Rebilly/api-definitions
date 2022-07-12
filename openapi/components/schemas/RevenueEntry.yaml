@@ -2,20 +2,36 @@ type: object
 readOnly: true
 properties:
   customerId:
-    description: Identifier of the customer which generated the revenue.
+    description: ID of the customer which generated the revenue.
     allOf:
       - $ref: ./ResourceId.yaml
     type: string
   invoiceId:
-    description: Identifier of the invoice with the item which generated the revenue.
+    description: ID of the invoice with the item which generated the revenue.
     allOf:
       - $ref: ./ResourceId.yaml
     type: string
   invoiceItemId:
-    description: Identifier of the invoice item which generated the revenue.
+    description: ID of the invoice item which generated the revenue.
     allOf:
       - $ref: ./ResourceId.yaml
     type: string
+  productId:
+    description: ID of the product related to the invoice item.
+    nullable: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+    type: string
+  planId:
+    description: ID of the plan related to the invoice item.
+    nullable: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+    type: string
+  accountingCode:
+    description: The product accounting code.
+    type: string
+    example: '4010'
   status:
     description: The entry's recognition status.
     readOnly: true
