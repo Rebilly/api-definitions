@@ -1,14 +1,15 @@
+type: object
 allOf:
   - $ref: ../Common/CommonPlan.yaml
-properties:
-  id:
-    readOnly: false
-    description: The ID of plan to modify with given settings.
-    allOf:
-      - $ref: ../ResourceId.yaml
-required:
-  - id
-  - name
-  - currency
-  - productId
-  - pricing
+  - properties:
+      id:
+        readOnly: false
+        description: The ID of plan to modify with given settings.
+        allOf:
+          - $ref: ../ResourceId.yaml
+  - required:
+    - id
+    - name
+    - currency
+    - productId
+    - pricing
