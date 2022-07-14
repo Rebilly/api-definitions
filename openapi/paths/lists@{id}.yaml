@@ -16,7 +16,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/List.yaml
+            $ref: ../components/schemas/ValueList.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -38,20 +38,25 @@ put:
   description: |
     Create or update a list with predefined identifier string.
   requestBody:
-    $ref: ../components/requestBodies/List.yaml
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ValueList.yaml
+    description: List resource.
+    required: true
   responses:
     '200':
       description: List was updated.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/List.yaml
+            $ref: ../components/schemas/ValueList.yaml
     '201':
       description: List was created.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/List.yaml
+            $ref: ../components/schemas/ValueList.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
