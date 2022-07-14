@@ -1,7 +1,22 @@
 title: PayPal Account
+required:
+  - method
+  - customerId
+  - billingAddress
 allOf:
   - $ref: ./Common/CommonPayPalAccount.yaml
   - properties:
+      customerId:
+        description: The customer's ID.
+        allOf:
+          - $ref: ./ResourceId.yaml
+      stickyGatewayAccountId:
+        description: Sticky gateway account ID. All future payments will be processed by this gateway account.
+        type: string
+        nullable: true
+        readOnly: true
+      riskMetadata:
+        $ref: ./RiskMetadata.yaml
       _links:
         type: array
         description: The links related to resource.

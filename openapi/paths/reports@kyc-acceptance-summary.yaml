@@ -13,12 +13,12 @@ servers:
         description: Your organization ID.
 get:
   x-products:
-    - Full
     - Reports
   tags:
     - Reports
   summary: Retrieve a KYC acceptance summary report
   operationId: GetKycAcceptanceSummaryReport
+  x-sdk-operation-name: getKycAcceptanceSummary
   description: Retrieve a KYC acceptance summary report.
   parameters:
     - name: periodStart
@@ -127,8 +127,10 @@ get:
                       type: number
                       description: Percent of accepted documents out of the total number of KYC documents. Calculated by accepted total divided by the total of nonarchived documents.
                       example: 75
+                    manualReviewTime:
+                      type: number
+                      description: Median duration in minutes between review and created time for manually reviewed documents.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-

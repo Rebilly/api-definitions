@@ -13,12 +13,12 @@ servers:
         description: Your organization ID.
 get:
   x-products:
-    - Full
     - Reports
   tags:
     - Histograms
   summary: Get Transaction histogram report data
   operationId: GetHistogramTransactionReport
+  x-sdk-operation-name: getTransactionHistogramReport
   description: |
     Get Transaction histogram report data.
   parameters:
@@ -83,6 +83,7 @@ get:
           - Sales
           - SalesCount
           - UnapprovedCount
+    - $ref: ../components/parameters/collectionFilter.yaml
   responses:
     '200':
       description: Transaction report was retrieved successfully.

@@ -33,6 +33,9 @@ items:
         - newSubscriptionsCount
         - upgradesCount
         - downgradesCount
+        - monthlyRecurringRevenue
+        - averageRevenuePerCustomer
+        - customerLifetimeValue
         - addressProofAcceptanceRate
         - identityProofAcceptanceRate
         - fundsProofAcceptanceRate
@@ -68,21 +71,26 @@ items:
           value:
             type: number
             format: double
+            nullable: true
             description: Segment value for the given date range.
           previousValue:
             type: number
             format: double
+            nullable: true
             description: >-
               Segment value for the previous date range (relative to the given date range).
           humanValue:
             type: string
+            nullable: true
             description: Human readable segment value (formatted with a currency sign).
           changeRatio:
             type: number
             format: double
+            nullable: true
             description: Ratio of current value per previous value null is infinity.
           humanChangeRatio:
             type: string
+            nullable: true
             description: >-
               Human readable change ratio (formatted percentage with a "%"
               sign), null is infinity.
@@ -98,4 +106,5 @@ items:
                   description: Entry date-time.
                 value:
                   type: number
+                  nullable: true
                   description: Entry value.

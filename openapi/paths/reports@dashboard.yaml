@@ -13,12 +13,12 @@ servers:
         description: Your organization ID.
 get:
   x-products:
-    - Full
     - Reports
   tags:
     - Reports
   summary: Retrieve dashboard data
   operationId: GetDashboardReport
+  x-sdk-operation-name: getDashboardMetrics
   description: Retrieve dashboard data.
   parameters:
     - name: periodStart
@@ -46,7 +46,6 @@ get:
       description: Dashboard report segments as a JSON array.
       schema:
         type: string
-    - $ref: ../components/parameters/reportTimezone.yaml
   responses:
     '200':
       description: Report was retrieved successfully.

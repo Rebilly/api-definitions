@@ -1,0 +1,27 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Customers
+  summary: Retrieve a customer's EDD search results.
+  operationId: GetEddSearchResults
+  x-sdk-operation-name: GetEddSearchResults
+  description: |
+    Retrieve a EDD search results of given customer.
+  responses:
+    '200':
+      description: EDD search results were retrieved successfully.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Edd/EddSearchResult.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

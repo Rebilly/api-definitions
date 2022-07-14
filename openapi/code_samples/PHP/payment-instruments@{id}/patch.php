@@ -9,7 +9,7 @@ $paymentInstrumentForm->setBillingAddress([
 try {
     $paymentInstrument = $client->paymentInstruments()->update('paymentInstrumentId', $paymentInstrumentForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }
 
 // Alternatively you can specify a partial token
@@ -22,5 +22,5 @@ $paymentInstrumentForm->setBillingAddress([
 try {
     $paymentInstrument = $client->paymentInstruments()->update('paymentInstrumentId', $paymentInstrumentForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
-    echo $e->getMessage();
+    print_r($e->getValidationErrors());
 }
