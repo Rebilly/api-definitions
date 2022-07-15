@@ -12,20 +12,20 @@ allOf:
   - $ref: ../BankAccountCreatePlain.yaml
   - properties:
       method:
-        description: The method of payment instrument.
+        description: Payment method of the payment instrument.
         type: string
         enum:
           - ach
       customerId:
-        description: Customer's ID.
+        description: ID of the customer who is initiating the payment.
         allOf:
           - $ref: ../../ResourceId.yaml
       accountNumberType:
         description: >-
-          Bank's Account Number type. A valid value is basic bank account number
-          (BBAN) or international bank account number (IBAN).
+          Bank account number type. A valid value is Basic Bank Account Number
+          (BBAN) or International Bank Account Number (IBAN).
 
-          This is the object for the BBAN.
+          BBAN object.
         type: string
         default: BBAN
         enum:
@@ -47,13 +47,13 @@ allOf:
           - savings
           - other
       bankName:
-        description: Bank's name.
+        description: Bank name.
         type: string
       bic:
-        description: Bank Identifier Code.
+        description: Bank Identifier Code (BIC).
         type: string
       billingAddress:
-        description: The billing address.
+        description: The customer's billing address.
         allOf:
           - $ref: ../../Contact/ContactObject.yaml
       customFields:

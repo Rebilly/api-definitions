@@ -10,20 +10,20 @@ allOf:
   - $ref: ../BankAccountCreatePlain.yaml
   - properties:
       method:
-        description: The method of payment instrument.
+        description: Payment method of the payment instrument.
         type: string
         enum:
           - ach
       customerId:
-        description: Customer's ID.
+        description: ID of the customer who is initiating a payment.
         allOf:
           - $ref: ../../ResourceId.yaml
       accountNumberType:
         description: >-
-          Bank's Account Number type. A valid value is basic bank account number
-          (BBAN) or international bank account number (IBAN).
+          Customer's bank account number type. A valid value is a Basic Bank Account Number
+          (BBAN) or an International Bank Account Number (IBAN).
 
-          This is the object for the IBAN.
+          IBAN object.
         type: string
         default: BBAN
         enum:
@@ -31,18 +31,18 @@ allOf:
           - BBAN
       accountNumber:
         description: >
-          Bank's account number. Detailed information about all ISO
+          Customer's bank account number. Detailed information on all ISO
           13616-compliant national IBAN formats is available
           in the [SWIFT IBAN Registry](https://www.swift.com/standards/data-standards/iban).
         type: string
       bankName:
-        description: Bank's name.
+        description: Bank name.
         type: string
       bic:
-        description: Bank Identifier Code.
+        description: Bank Identifier Code (BIC).
         type: string
       billingAddress:
-        description: The billing address.
+        description: The customer's billing address.
         allOf:
           - $ref: ../../Contact/ContactObject.yaml
       customFields:
