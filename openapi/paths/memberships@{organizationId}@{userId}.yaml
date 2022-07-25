@@ -13,7 +13,6 @@ parameters:
       $ref: ../components/schemas/ResourceId.yaml
 get:
   x-products:
-    - Full
     - Users
   tags:
     - Memberships
@@ -37,7 +36,6 @@ get:
       $ref: ../components/responses/NotFound.yaml
 put:
   x-products:
-    - Full
     - Users
   tags:
     - Memberships
@@ -51,18 +49,7 @@ put:
     content:
       application/json:
         schema:
-          properties:
-            isOwner:
-              type: boolean
-            permissions:
-              description: The memberships's permissions. See the format in example. Use wildcard `*` for full access.
-              allOf:
-                - $ref: ../components/schemas/AclPermissions.yaml
-            roleIds:
-              type: array
-              description: The membership's roles identifiers.
-              items:
-                type: string
+          $ref: ../components/schemas/Membership.yaml
     required: true
   responses:
     '200':
@@ -85,7 +72,6 @@ put:
       $ref: ../components/responses/Conflict.yaml
 delete:
   x-products:
-    - Full
     - Users
   tags:
     - Memberships
