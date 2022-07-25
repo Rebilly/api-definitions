@@ -16,7 +16,7 @@ get:
     - Reports
   tags:
     - Reports
-  summary: Retrieve a journal report
+  summary: Retrieve a journal report.
   operationId: GetJournalReport
   x-sdk-operation-name: getJournal
   description: Retrieve a journal report.
@@ -29,21 +29,21 @@ get:
         $ref: ../components/schemas/CurrencyCode.yaml
     - name: bookedFrom
       in: query
-      description: Revenue booked from month. Omit to retrieve booked starting from the start.
+      description: Month from which revenue is booked. Omit this value to retrieve booked revenue starting from the first booked amount.
       schema:
         type: string
         pattern: '^\d{4}-\d{2}$'
         example: 2022-01
     - name: bookedTo
       in: query
-      description: Revenue booked to month. Omit to retrieve booked to the end.
+      description: Month in which revenue is booked until. Omit this value to retrieve booked revenue up until the most recently booked amount.
       schema:
         type: string
         pattern: '^\d{4}-\d{2}$'
         example: 2022-01
     - name: recognizedAt
       in: query
-      description: Revenue recognition month.
+      description: Month in which revenue was recognized.
       required: true
       schema:
         type: string
@@ -64,7 +64,7 @@ get:
     - $ref: ../components/parameters/collectionFilter.yaml
   responses:
     '200':
-      description: Report was retrieved successfully.
+      description: Report successfully retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
