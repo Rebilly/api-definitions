@@ -6,6 +6,7 @@ lint:
     - recommended
   plugins:
     - ./plugins/custom-rules.js
+    - ./plugins/discriminator-mapper.js
     - ./plugins/products-bundler/bundler.js
   rules:
     no-ambiguous-paths: error
@@ -21,6 +22,8 @@ lint:
     custom-rules/no-unused-tags: warn
   decorators:
     products-bundler/bundle: error
+  preprocessors: 
+    discriminator-mapper/enum: warn
 features.openapi:
   pagination: section
   theme:
@@ -59,5 +62,6 @@ features.openapi:
       - lang: PHP
   schemaExpansionLevel: '2'
   maxDisplayedEnumValues: 10
-  showConsole: true
+  hideTryItPanel: false
   expandResponses: '200,201'
+  requiredPropsFirst: true

@@ -19,6 +19,13 @@ allOf:
         minimum: 1
         maximum: 2
         default: 2
+      revision:
+        description: >
+          The number of times the KYC request data has been modified.
+          The revision is useful when analyzing webhook data to determine if the
+          change takes precedence over the current representation.
+        type: integer
+        readOnly: true
       _links:
         type: array
         description: The links related to the resource.
@@ -39,5 +46,5 @@ allOf:
           documents:
             type: array
             items:
-              $ref: ./KycDocument.yaml
+              $ref: ./KycDocument/KycDocument.yaml
 
