@@ -1,17 +1,17 @@
 allOf:
-  - $ref: ./Common/CommonKycDocument.yaml
+  - $ref: ../Common/CommonKycDocument.yaml
   - properties:
       customerId:
         description: The customer ID.
         allOf:
-          - $ref: ./ResourceId.yaml
+          - $ref: ../ResourceId.yaml
       reviewerId:
         description: Reviewer's user ID.
         type: string
         nullable: true
         readOnly: true
         allOf:
-          - $ref: ./ResourceId.yaml
+          - $ref: ../ResourceId.yaml
       reviewerName:
         description: Reviewer's first and last name.
         type: string
@@ -22,13 +22,13 @@ allOf:
         nullable: true
         type: string
         allOf:
-          - $ref: ./ServerTimestamp.yaml
+          - $ref: ../ServerTimestamp.yaml
       reviewTime:
         description: Date and time of manual review.
         type: string
         nullable: true
         allOf:
-          - $ref: ./ServerTimestamp.yaml
+          - $ref: ../ServerTimestamp.yaml
       notes:
         description: Reviewer notes.
         type: string
@@ -38,7 +38,7 @@ allOf:
         readOnly: true
         type: array
         items:
-          $ref: ./Tags/Tag.yaml
+          $ref: ../Tags/Tag.yaml
       reason:
         description: Reason for uploading.
         type: string
