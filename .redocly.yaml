@@ -42,6 +42,97 @@ lint:
       defined: true
       nonEmpty: true
 
+    no-unresolved-refs: error
+
+    assert/path-must-be-ref-file:
+      subject: PathItem
+      context:
+        - type: PathMap
+      ref: /^(.\/paths|paths)\/.*yaml$/
+
+    assert/operation-id-delete:
+      context:
+        - type: Operation
+          matchParentKeys:
+            - delete
+      subject: Operation
+      property: operationId
+      pattern: /Delete/
+      casing: PascalCase
+
+    assert/operation-id-get:
+      context:
+        - type: Operation
+          matchParentKeys:
+            - get
+      subject: Operation
+      property: operationId
+      pattern: /Get/
+      casing: PascalCase
+
+    assert/operation-id-patch:
+      context:
+        - type: Operation
+          matchParentKeys:
+            - patch
+      subject: Operation
+      property: operationId
+      pattern: /Patch/
+
+    assert/operation-id-post:
+      context:
+        - type: PathMap
+        - type: Operation
+          matchParentKeys:
+            - post
+      subject: Operation
+      property: operationId
+      pattern: /Post/
+      casing: PascalCase
+
+    assert/operation-id-put:
+      context:
+        - type: Operation
+          matchParentKeys:
+            - put
+      subject: Operation
+      property: operationId
+      pattern: /Put/
+      casing: PascalCase
+
+    assert/tag-description:
+      subject: Tag
+      property: description
+      message: Tag description must be at least 30 characters and end with a full stop.
+      severity: error
+      defined: true
+      minLength: 30
+      pattern: /(\.|\.\n)$/
+    # assert/operation-description:
+    #   subject: Operation
+    #   property: description
+    #   message: Operation description must be at least 30 characters and end with a full stop.
+    #   severity: error
+    #   defined: true
+    #   minLength: 30
+    #   pattern: /(\.|\.\n)$/
+    assert/info-description:
+      subject: Info
+      property: description
+      message: Info description must be at least 30 characters and end with a full stop.
+      severity: error
+      defined: true
+      minLength: 30
+      pattern: /(\.|\.\n)$/
+    assert/operation-summary:
+      subject: Operation
+      property: summary
+      message: Operation summary must be between 10 and 60 characters and not end with a full stop.
+      severity: error
+      defined: true
+      minLength: 10
+      maxLength: 60
+      pattern: /[^\.]$/
 
 
   decorators:
