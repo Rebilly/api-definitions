@@ -1,4 +1,4 @@
-description: Documents to be requested from customer.
+description: Documents to request from the customer.
 type: array
 items:
   type: object
@@ -6,20 +6,20 @@ items:
     - type
   properties:
     type:
-      description: Document type to be requested from customer.
+      description: Type of document to request from the customer.
       allOf:
         - $ref: ./KycDocument/KycDocumentTypes.yaml
     subtypes:
-      description: Document subtype allowed for customer.
+      description: Allowed document subtype.
       type: array
       items:
         $ref: ./KycDocument/KycDocumentSubtypes.yaml
     maxAttempts:
-      description: The number of document upload attempts. `0` treated as unlimited.
+      description: Total number of allowed document upload attempts. Use `0` to allow unlimited upload attempts.
       type: integer
       default: 3
       minimum: 0
       maximum: 100
     faceProofRequired:
-      description: If `true` uploading matching face photo (selfie) is required.
+      description: Specifies whether the customer must upload a photo of their face (selfie) that matches a provided KYC document.
       type: boolean
