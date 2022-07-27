@@ -14,11 +14,11 @@ lint:
     operation-2xx-response: error
     operation-operationId: error
     operation-singular-tag: error
+    operation-tag-defined: error
     operation-4xx-response: off
     paths-kebab-case: error
-    tag-description: off
+    tag-description: error
     custom-rules/description-punctuation: error
-    custom-rules/has-sdk-operation-name: error
     custom-rules/no-unused-tags: warn
 
     # newly proposed rules
@@ -49,6 +49,14 @@ lint:
       context:
         - type: PathMap
       ref: /^(.\/paths|paths)\/.*yaml$/
+
+    assert/x-sdk-operation-name:
+      context:
+        - type: PathMap
+      subject: Operation
+      property: x-sdk-operation-name
+      casing: camelCase
+      defined: true
 
     assert/operation-id-delete:
       context:
@@ -166,6 +174,13 @@ lint:
       severity: error
       disallowed:
         - x-internal
+
+        # Need to account for arrays, etc...
+    # assert/mediatype-schema-ref-pattern:
+    #   subject: MediaType
+    #   property: schema
+    #   message: Ref needs to point to components directory.
+    #   ref: /^(\.\.\/)?(components|schemas)\/.*\.yaml$/
 
 
   decorators:
