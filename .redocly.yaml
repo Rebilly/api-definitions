@@ -20,6 +20,30 @@ lint:
     custom-rules/description-punctuation: error
     custom-rules/has-sdk-operation-name: error
     custom-rules/no-unused-tags: warn
+
+    # newly proposed rules
+    # operation-description: warn
+    # scalar-property-missing-example: error
+    # no-invalid-schema-examples: error
+    no-invalid-parameter-examples: error
+    # assert/params-must-include-examples:
+    #   subject: Parameter
+    #   requireAny:
+    #     - example
+    #     - examples
+    #   mutuallyExclusive:
+    #     - example
+    #     - examples
+    #   message: Example XOR examples should be defined on a parameter.
+
+    assert/headers-include-example:
+      subject: Header
+      property: example
+      defined: true
+      nonEmpty: true
+
+
+
   decorators:
     products-bundler/bundle: error
   preprocessors:
