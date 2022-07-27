@@ -130,9 +130,42 @@ lint:
       message: Operation summary must be between 10 and 60 characters and not end with a full stop.
       severity: error
       defined: true
-      minLength: 20
+      minLength: 10
       maxLength: 60
       pattern: /[^\.]$/
+    # assert/schema-properties-both-created-time-and-updated-time:
+    #   subject: SchemaProperties
+    #   message: The createdTime and updatedTime properties are mutually required.
+    #   severity: error
+    #   mutuallyRequired:
+    #     - createdTime
+    #     - updatedTime
+
+    # assert/put-200-and-201:
+    #   subject: ResponsesMap
+    #   context:
+    #     - type: Operation
+    #       matchParentKeys:
+    #         - put
+    #   message: Must mutually define 200 and 201 responses for PUT requests.
+    #   severity: error
+    #   mutuallyRequired:
+    #     - '200'
+    #     - '201'
+
+    assert/no-x-code-samples:
+      subject: Operation
+      message: x-code-samples should be x-codeSamples
+      severity: error
+      disallowed:
+        - x-code-samples
+
+    assert/no-x-internal:
+      subject: Operation
+      message: This is in a public repository. Do not include internal APIs.
+      severity: error
+      disallowed:
+        - x-internal
 
 
   decorators:
