@@ -45,6 +45,3 @@ Run `npm run build` to bundle the definitions into a single file in the `dist` f
 
 Run `npm test` to validate the definitions.
 
-### Organization
-
-Each API definition has its own root document in the root of the `openapi` folder.

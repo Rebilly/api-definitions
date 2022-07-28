@@ -52,7 +52,13 @@ put:
     required: true
   responses:
     '200':
-      description: Credit memo was applied to invoice successfully.
+      description: Credit memo allocation was updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CreditMemos/CreditMemoAllocation.yaml
+    '201':
+      description: Credit memo allocation was created.
       content:
         application/json:
           schema:
