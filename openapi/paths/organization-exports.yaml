@@ -44,6 +44,17 @@ post:
   x-sdk-operation-name: create
   description: |
     Request an organization data export.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            includeFiles:
+              description: Sets the export to include organization files.
+              type: boolean
+              default: false
+              example: true
   responses:
     '201':
       description: Organization data export request received.
