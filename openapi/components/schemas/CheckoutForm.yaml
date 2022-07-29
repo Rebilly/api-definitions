@@ -16,3 +16,12 @@ allOf:
           - active
           - inactive
         default: active
+      _links:
+        type: array
+        description: Links associated with the resource.
+        readOnly: true
+        minItems: 1
+        items:
+          anyOf:
+            - $ref: ./Links/SelfLink.yaml
+            - $ref: ./Links/PreviewLink.yaml
