@@ -211,8 +211,12 @@ tags:
     description: |
       Tag customers to better organize your data.
   - name: Transactions
-    description: |
-      Get and refund transactions.
+    description: |-
+      Set up payment instruments for payments.
+      Authorize and hold funds.
+      Capture funds.
+      Make payments and payouts.
+      Refund transactions.
   - name: Fees
     description: |
       Buy and sell fees.
@@ -369,10 +373,11 @@ tags:
       transactions, and more.
   - name: Data Exports
     description: |
-      Data exports.
+      Data exports allows you to export and schedule exports for different types of data.
   - name: Organization data exports
     description: |
-      Organization data exports.
+      Organization data exports allows you to export your organization's data which you may want to do as a business continuity practice.
+      In addition, it allows you to export data if you decide to migrate to a different payments solution.
   - name: Rebilly API
     description: |
       The Rebilly API is the main API commonly integrated by 3rd parties.  You may see
@@ -469,8 +474,6 @@ paths:
     $ref: ./paths/customer-timeline-custom-events.yaml
   '/customer-timeline-custom-events/{id}':
     $ref: './paths/customer-timeline-custom-events@{id}.yaml'
-  /customer-timeline-events:
-    $ref: ./paths/customer-timeline-events.yaml
   '/customers/{id}/aml':
     $ref: './paths/customers@{id}@aml.yaml'
   '/customers/{id}/lead-source':
@@ -942,7 +945,7 @@ paths:
   '/experimental/subscriptions/{subscriptionId}/summary-metrics':
     $ref: ./paths/subscriptions@{subscriptionId}@summary-metrics.yaml
   '/storefront/account':
-    $ref: paths/storefront/account.yaml
+    $ref: ./paths/storefront/account.yaml
   '/storefront/account/forgot-password':
     $ref: paths/storefront/account@forgot-password.yaml
   '/storefront/account/password':
