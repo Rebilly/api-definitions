@@ -47,7 +47,10 @@ patch:
   description: |
     Update a transaction's custom fields.
   requestBody:
-    $ref: ../components/requestBodies/PatchTransactionRequest.yaml
+    content:
+      application/json:
+        schema:
+          $ref: ../components/requestBodies/PatchTransactionRequest.yaml
   responses:
     '200':
       description: Transaction was updated successfully.
@@ -55,6 +58,7 @@ patch:
         application/json:
           schema:
             $ref: ../components/schemas/Transactions/Transaction.yaml
+            required: true
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
