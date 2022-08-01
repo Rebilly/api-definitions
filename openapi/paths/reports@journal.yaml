@@ -31,21 +31,25 @@ get:
         $ref: ../components/schemas/CurrencyCode.yaml
     - name: bookedFrom
       in: query
-      description: Month from which revenue is booked. Omit this value to retrieve booked revenue starting from the first booked amount.
+      description: |
+        A year and month from which revenue is booked.
+        If omitted then booked revenue starts from the first booked amount.
       schema:
         type: string
         pattern: '^\d{4}-\d{2}$'
         example: 2022-01
     - name: bookedTo
       in: query
-      description: Month in which revenue is booked until. Omit this value to retrieve booked revenue up until the most recently booked amount.
+      description: |
+        A year and month in which revenue is booked until.
+        If omitted then booked revenue is taken until the most recently booked amount.
       schema:
         type: string
         pattern: '^\d{4}-\d{2}$'
         example: 2022-01
     - name: recognizedAt
       in: query
-      description: Month in which revenue was recognized.
+      description: A year and month in which revenue was recognized.
       required: true
       schema:
         type: string
