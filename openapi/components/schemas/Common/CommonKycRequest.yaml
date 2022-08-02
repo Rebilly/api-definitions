@@ -7,31 +7,7 @@ properties:
     allOf:
       - $ref: ../ResourceId.yaml
   documents:
-    description: Documents to be requested from customer.
-    type: array
-    items:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          description: Document type to be requested from customer.
-          allOf:
-            - $ref: ../KycDocument/KycDocumentTypes.yaml
-        subtypes:
-          description: Document subtype allowed for customer.
-          type: array
-          items:
-            $ref: ../KycDocument/KycDocumentSubtypes.yaml
-        maxAttempts:
-          description: The number of document upload attempts. `0` treated as unlimited.
-          type: integer
-          default: 3
-          minimum: 0
-          maximum: 100
-        faceProofRequired:
-          description: If `true` uploading matching face photo (selfie) is required.
-          type: boolean
+    $ref: ../KycRequestDocuments.yaml
   status:
     description: Status of the request.
     type: string

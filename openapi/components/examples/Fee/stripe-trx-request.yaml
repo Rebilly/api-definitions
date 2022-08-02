@@ -1,0 +1,10 @@
+summary: Stripe transaction fees
+description: The transaction fees for Stripe. Discount rate fees are a separate record.
+value:
+  type: buy
+  name: Stripe transaction fees
+  filter: 'type:sale,capture;result:approved;gatewayAccountId:stripe'
+  formula:
+    type: fixed-fee
+    currency: USD
+    amount: 0.30
