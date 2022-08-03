@@ -28,10 +28,9 @@ properties:
     example: '123456'
     writeOnly: true
   customerId:
-    description: The customer's ID.
     readOnly: true
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ../CustomerId.yaml
   acl:
     $ref: ../Acl.yaml
   customClaims:
@@ -48,9 +47,7 @@ properties:
     format: date-time
     readOnly: true
   updatedTime:
-    description: Session updated time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../UpdatedTime.yaml
   expiredTime:
     description: Session expired time. Defaults to one hour.
     type: string
