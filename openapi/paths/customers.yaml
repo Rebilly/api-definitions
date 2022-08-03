@@ -80,7 +80,14 @@ post:
     $ref: ../components/requestBodies/Customer.yaml
   responses:
     '201':
-      $ref: ../components/responses/Customer.yaml
+      description: A customer was created succesfully.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Customer.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
