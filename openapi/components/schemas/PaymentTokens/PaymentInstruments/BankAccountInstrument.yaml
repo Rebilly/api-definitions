@@ -4,9 +4,9 @@ required:
   - accountNumberType
 discriminator:
   propertyName: accountNumberType
-  mapping:
-    BBAN: ./BBANInstrument.yaml
-    IBAN: ./IBANInstrument.yaml
+  x-enum-mapping:
+    - $ref: ./BBANInstrument.yaml
+    - $ref: ./IBANInstrument.yaml
 properties:
   accountNumberType:
     description: >-

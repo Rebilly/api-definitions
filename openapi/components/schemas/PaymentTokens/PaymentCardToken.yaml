@@ -1,8 +1,11 @@
 type: object
-title: Partial Payment Card Token
-allOf:
-  - $ref: ../Common/CommonPaymentToken.yaml
-required:
+title: Payment Card Token
+allOf: 
+  - $ref: ./CompositeToken.yaml
+description: |
+  Provide billingAddress in order to generate a Full Payment Card Token.
+  If billingAddress is not provided the token can not be used for payments.
+required:  
   - method
   - paymentInstrument
 properties:
@@ -13,7 +16,14 @@ properties:
   paymentInstrument:
     description: The payment card instrument details.
     type: object
+    required:
+      - expMonth
+      - expYear
     properties:
+      pan:
+        description: Payment Card PAN (Primary Account Number). Required to perform a payment.
+        type: string
+        writeOnly: true
       cvv:
         description: Payment Card CVV/CVC.
         type: string
@@ -38,6 +48,7 @@ properties:
         allOf:
           - $ref: ../PaymentCards/PaymentCardBrand.yaml
   billingAddress:
-    description: The billing address object.
+    description: |
+      The billing address object. Required to perform payments. For payment-card updates billingAddress can be ignored.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
