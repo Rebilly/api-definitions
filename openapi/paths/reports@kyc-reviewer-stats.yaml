@@ -1,0 +1,54 @@
+servers:
+  - url: 'https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}'
+    description: Sandbox server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
+    description: Live server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+get:
+  x-products:
+    - Reports
+  tags:
+    - Reports
+  summary: Retrieve KYC reviewer stats for current session
+  operationId: GetKycReviewerStatsReport
+  x-sdk-operation-name: getKycReviewerStats
+  description: |
+    Retrieve KYC reviewer stats for current session.
+  parameters:
+    - name: sessionStartTime
+      in: query
+      description: Session start time.
+      required: true
+      schema:
+        type: string
+    - name: reviewerId
+      in: query
+      description: KYC reviewer user id.
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Report was retrieved successfully.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ReportKycReviewerStats.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
