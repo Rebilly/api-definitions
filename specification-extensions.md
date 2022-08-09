@@ -14,16 +14,16 @@ This document contains all OpenAPI extensions used in the Rebilly API definition
   See more [here](plugins/products-bundler/README.md).
 
 * `x-is-free-form`
-  This flag is currently used for the php sdk autogeneration. It indicates that the schema should not be generated as a model.
+  This flag is used for PHP SDK autogeneration. It indicates that the schema should not be generated as a model.
 
 * `x-enum-mapping`
   This property enumerates the mapping options for a custom discriminator schema. For example `openapi/components/schema/ReadyToPay/Adjust/AdjustPaymentMethod.yaml`.
 
 * `x-no-generate`
-  This flag is used for the php sdk autogeneration. It indicates that the schema should not be generated. Any updates in schemas with this flag requires a manual update of the sdk.
+  This flag is used for PHP SDK autogeneration. It indicates that the schema should not be generated. Updates to schemas with this flag require a manual update of the SDK.
 
 * `x-abstract-parent`
-  This property is used for the php sdk autogeneration. It indicates the parent abstract class in the case the generator is not able to properly define it.
+  This property is used for PHP SDK autogeneration. This property indicates the parent abstract class if the generator is unable to define it.
 
 * `x-no-abstract-methods`
-  This flag is used for the php sdk autogeneration. It indicates that the generated model will not implement getters nor setters.
+  This flag is used for PHP SDK autogeneration. It indicates that the generated model will not implement getters or setters.
