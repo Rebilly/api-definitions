@@ -1,0 +1,52 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: messageId
+    in: path
+    description: The Organization Timeline message ID.
+    required: true
+    schema:
+      type: string
+get:
+  x-products:
+    - Core
+  tags:
+    - Organization Timeline
+  summary: Retrieve an Organization Timeline message
+  operationId: GetOrganizationTimeline
+  x-sdk-operation-name: getTimelineMessage
+  description: |
+    Retrieve an organization message with specified identifier string.
+  responses:
+    '200':
+      description: Organization timeline message was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Timelines/OrganizationTimeline.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+delete:
+  x-products:
+    - Core
+  tags:
+    - Organization Timeline
+  summary: Delete an Organization Timeline message
+  operationId: DeleteOrganizationTimeline
+  x-sdk-operation-name: deleteTimelineMessage
+  description: |
+    Delete an Organization Timeline message with predefined identifier string.
+  responses:
+    '204':
+      description: Organization Timeline message was deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml

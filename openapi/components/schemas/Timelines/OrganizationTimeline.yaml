@@ -1,0 +1,51 @@
+type: object
+properties:
+  id:
+    description: The Timeline message identifier string.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  type:
+    description: Timeline message type.
+    type: string
+    readOnly: true
+    enum:
+      - api-key-added
+      - api-key-deleted
+      - api-key-permissions-changed
+      - api-key-updated
+      - timeline-comment-created
+      - user-2fa-disabled
+      - user-2fa-enabled
+      - user-activated
+      - user-added-to-organization
+      - user-created
+      - user-deactivated
+      - user-password-changed
+      - user-permissions-changed
+      - user-updated
+  triggeredBy:
+    description: Shows who or what triggered the Timeline event.
+    type: string
+    readOnly: true
+    enum:
+      - rebilly
+      - app
+      - direct-api
+  message:
+    description: The message that describes the message details.
+    type: string
+  extraData:
+    $ref: ./TimelineExtraData.yaml
+  occurredTime:
+    description: Timeline message time.
+    readOnly: true
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: The links related to resource.
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml
