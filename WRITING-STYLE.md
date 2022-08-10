@@ -28,7 +28,7 @@ Avoid this bias by describing information that may seem obvious to you when writ
 
 To understand what this ID value is, the reader must understand what an organization is in Rebilly. This is obvious to us because we have expert knowledge of the product. The reader may not.
 
-If the reader does not know what an organization is, they need to search the docs to find out, and then come back to API docs. This is frustrating for the reader. It's infuriating if they need to continually do this to understand an API. Overtime, if the reader is persistent, they will learn these concepts themselves. This is a major hurdle for new users to overcome. Many readers may simply quit, or may label the docs as "bad" and not use them, or our product.
+If the reader does not know what an organization is, they need to search the docs to find out, and then come back to API docs. This is frustrating for the reader. It's infuriating if they need to continually do this to understand an API. Over time, if the reader is persistent, they will learn these concepts themselves. This is a major hurdle for new users to overcome. Many readers may simply quit, or may label the docs as "bad" and not use them, or our product.
 
 ### Example which avoids knowledge bias
 
