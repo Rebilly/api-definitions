@@ -1,0 +1,14 @@
+type: object
+required: 
+  - username
+allOf:
+  - properties: 
+      username:
+        description: The token's username.
+        type: string
+      customerId:
+        readOnly: true
+        allOf:
+          - $ref: ../CustomerId.yaml
+  - $ref: ../Common/CommonAuthenticationToken.yaml
+  - $ref: ./AuthenticationTokenMetadata.yaml
