@@ -52,7 +52,7 @@ We use tags to group related operations. When searching operations, the reader m
 - name: Customers
   description: |-
     A customer is an entity that purchases goods or services
-    from a you (a merchant), and is the payee in any transaction
+    from you (a merchant), and is the payee in any transaction
     that is credited to you. Customers are associated with
     payment cards, subscriptions, invoices, and other miscellaneous
     relationship models.
@@ -114,7 +114,7 @@ Get a customer by ID:
 ```yaml
   operationId: GetCustomer
   description: |-
-    Retrieves customer information based on the customer's `id`.
+    Retrieves customer information based on the customer's ID.
 ```
 
 Create a new customer:
