@@ -104,7 +104,7 @@ allOf:
         format: bin
         readOnly: true
       paymentInstrument:
-        $ref: ../PaymentInstruments/ValueObjects/PaymentInstrument.yaml
+        $ref: ../PaymentInstruments/ValueObjects/PaymentInstrumentValueObject.yaml
       hasDcc:
         description: True if transaction has Dynamic Currency Conversion applied.
         type: boolean
@@ -253,6 +253,8 @@ allOf:
         readOnly: true
         nullable: true
         x-sortable: true
+      limits:
+        $ref: ../TransactionLimitAmount.yaml
       _links:
         type: array
         description: The links related to resource.

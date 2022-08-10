@@ -1,0 +1,17 @@
+allOf:
+  - $ref: ../CommonScheduleInstruction.yaml
+  - $ref: ../CustomEventScheduleInstruction.yaml
+  - $ref: ../InvoiceRetryScheduleInstruction.yaml
+  - type: object
+    properties:
+      duration:
+        type: integer
+        description: The number of the units.
+        minimum: 1
+      unit:
+        oneOf:
+          - $ref: ../../TimeUnit.yaml
+          - $ref: ../../TimePluralUnit.yaml
+    required:
+      - duration
+      - unit

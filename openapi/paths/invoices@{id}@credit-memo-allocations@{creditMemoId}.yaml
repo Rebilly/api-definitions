@@ -1,0 +1,98 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: creditMemoId
+    in: path
+    description: Credit memo ID.
+    required: true
+    schema:
+      type: string
+get:
+  x-products:
+    - Core
+  tags:
+    - Invoices
+  summary: Get credit memo's amount allocated to the invoice
+  operationId: GetInvoiceCreditMemoAllocation
+  x-sdk-operation-name: getCreditMemoAllocation
+  description: >
+    Get the allocation from the given credit memo to the given invoice with the credit amount.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+  responses:
+    '200':
+      description: The allocation was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CreditMemos/CreditMemoAllocation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Invoices
+  summary: Apply a credit memo to an invoice
+  operationId: PutInvoiceCreditMemoAllocation
+  x-sdk-operation-name: applyCreditMemo
+  description: >
+    Apply a credit memo to an invoice. The invoice must be unpaid.
+    The credit memo must have a non-zero unused amount (not fully applied to other invoices).
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CreditMemos/CreditMemoAllocation.yaml
+    description: CreditMemoAllocation resource.
+    required: true
+  responses:
+    '200':
+      description: Credit memo allocation was updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CreditMemos/CreditMemoAllocation.yaml
+    '201':
+      description: Credit memo allocation was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CreditMemos/CreditMemoAllocation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+delete:
+  x-products:
+    - Core
+  tags:
+    - Invoices
+  summary: Delete credit memo's allocation from the invoice
+  operationId: DeleteInvoiceCreditMemoAllocation
+  x-sdk-operation-name: deleteCreditMemoAllocation
+  description: |
+    Delete the allocation which is taken from the given credit memo to the given invoice.
+    Both invoice's and credit memo's total amounts change, possibly with their statuses.
+  responses:
+    '204':
+      description: Invoice's credit memo allocation was deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml

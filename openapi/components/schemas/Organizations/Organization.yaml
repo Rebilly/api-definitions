@@ -8,18 +8,15 @@ properties:
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
-  createdTime:
-    description: The organization created time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
-  updatedTime:
-    description: The organization updated time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
   name:
     description: The organization name.
     type: string
     maxLength: 60
+  website:
+    description: The organization website.
+    type: string
+    writeOnly: true
+    format: url
   address:
     description: The organization street address.
     type: string
@@ -67,6 +64,12 @@ properties:
     $ref: ./OrganizationQuestionnaire.yaml
   settings:
     $ref: ./OrganizationSettings.yaml
+  createdTime:
+    description: The organization created time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
   _links:
     type: array
     description: The links related to resource.

@@ -49,18 +49,7 @@ put:
     content:
       application/json:
         schema:
-          properties:
-            isOwner:
-              type: boolean
-            permissions:
-              description: The memberships's permissions. See the format in example. Use wildcard `*` for full access.
-              allOf:
-                - $ref: ../components/schemas/AclPermissions.yaml
-            roleIds:
-              type: array
-              description: The membership's roles identifiers.
-              items:
-                type: string
+          $ref: ../components/schemas/Membership.yaml
     required: true
   responses:
     '200':
@@ -71,6 +60,9 @@ put:
             $ref: ../components/schemas/Membership.yaml
     '201':
       description: Membership was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

@@ -10,7 +10,7 @@ get:
   x-sdk-operation-name: get
   description: |
     Retrieve a list of application instances.
-    You may sort by the id, name, status, createdTime, and updatedTime.
+    You may sort by the `id`, `name`, `status`, `createdTime`, and `updatedTime`.
   responses:
     '200':
       description: An application instance was retrieved successfully.
@@ -29,7 +29,7 @@ get:
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: ../code_samples/PHP/application-instances@{applicationId}/get.php
@@ -60,6 +60,9 @@ put:
             $ref: ../components/schemas/Applications/ApplicationInstance.yaml
     '201':
       description: Application instance was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -70,7 +73,7 @@ put:
       $ref: ../components/responses/Forbidden.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: ../code_samples/PHP/application-instances@{applicationId}/put.php
@@ -100,7 +103,7 @@ delete:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: ../code_samples/PHP/application-instances@{applicationId}/delete.php

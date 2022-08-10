@@ -221,7 +221,7 @@ tags:
       charge, the card issuer will typically rescind the sale and add
       fees on top of the charge. This process is called a chargeback.
   - name: Files
-    description: >
+    description: |-
       Use the file entity to store files and related metadata. Files
       can be sorted by size, MIME-type, user-defined tags, and
       description.
@@ -236,14 +236,22 @@ tags:
       order, plan, product, invoice, or note. Attachments enable you
       to quickly find and use files related to specific entities.
   - name: Invoices
-    description: >
+    description: |-
       An invoice is a bill for a list of goods or services provided.
       If your invoice includes subscription items, it also includes
       the corresponding service periods and prices. For information on
       the invoice resource, see
       [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
+  - name: Credit memos
+    description: |-
+      A credit memo is a means of providing a customer with store
+      credit. A common use case for using a credit memo is to provide
+      a customer with store credit, rather than a refund, if the
+      customer pays more than they owe or returns a product. For
+      information on the credit memo resource, see
+      [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
   - name: Payment instruments
-    description: >
+    description: |-
       Payment instrument is a term which describes any means of making
       a digital payment, such as: credit cards, debit cards,
       direct debits, payment service providers, and digital wallets.
@@ -325,8 +333,10 @@ tags:
       Use tags to organize and categorize customers or KYC documents
       based on keywords.
   - name: Transactions
-    description: >-
-      Use these operations to manage get and refund transactions.
+    description: |-
+      Use these operations to set up payment instruments for payments,
+      authorize and hold funds, capture funds, make payments, make
+      payouts, and refund transactions.
   - name: Fees
     description: |-
       Use fees to reconcile transactions with applicable fees and
@@ -418,9 +428,9 @@ tags:
       For information a list of events and related actions, see
       [Events](https://www.rebilly.com/docs/automations/event-types/).
   - name: JWT session
-    description: |-
-      A session contains a token, which is a JSON Web Token. The token
-      is created with a user's sign in credentials.
+    description: |
+      A session contains a token, which is a JSON Web Token.  The token is created
+      with a user's sign in credentials.
 
       This token can be used to authenticate to the API. In addition,
       the session can be set to expire at a particular time. Use the
@@ -562,6 +572,12 @@ tags:
 
       For detailed information on Rebilly resources, see
       [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
+  - name: Organization data exports
+    description: |-
+      Use organization data exports to export your organization's data
+      which you may want to do as a business continuity practice.
+      These may also be used to to export data if you decide to
+      migrate to a different payments solution.
   - name: Rebilly API
     description: |-
       The Rebilly API is a collection of the most commonly used
@@ -695,8 +711,6 @@ paths:
     $ref: ./paths/customer-timeline-custom-events.yaml
   '/customer-timeline-custom-events/{id}':
     $ref: './paths/customer-timeline-custom-events@{id}.yaml'
-  /customer-timeline-events:
-    $ref: ./paths/customer-timeline-events.yaml
   '/customers/{id}/aml':
     $ref: './paths/customers@{id}@aml.yaml'
   '/customers/{id}/lead-source':
@@ -753,6 +767,20 @@ paths:
     $ref: './paths/invoices@{id}@timeline.yaml'
   '/invoices/{id}/timeline/{messageId}':
     $ref: './paths/invoices@{id}@timeline@{messageId}.yaml'
+  /credit-memos:
+    $ref: ./paths/credit-memos.yaml
+  /credit-memos/{id}:
+    $ref: ./paths/credit-memos@{id}.yaml
+  /credit-memos/{id}/void:
+    $ref: ./paths/credit-memos@{id}@void.yaml
+  /credit-memos/{id}/timeline:
+    $ref: ./paths/credit-memos@{id}@timeline.yaml
+  /credit-memos/{id}/timeline/{messageId}:
+    $ref: ./paths/credit-memos@{id}@timeline@{messageId}.yaml
+  /invoices/{id}/credit-memo-allocations:
+    $ref: ./paths/invoices@{id}@credit-memo-allocations.yaml
+  /invoices/{id}/credit-memo-allocations/{creditMemoId}:
+    $ref: ./paths/invoices@{id}@credit-memo-allocations@{creditMemoId}.yaml
   /kyc-requests:
     $ref: ./paths/kyc-requests.yaml
   '/kyc-requests/{id}':
@@ -1103,6 +1131,10 @@ paths:
     $ref: ./paths/data-exports.yaml
   '/experimental/data-exports/{id}':
     $ref: './paths/data-exports@{id}.yaml'
+  /organization-exports:
+    $ref: ./paths/organization-exports.yaml
+  '/organization-exports/{id}':
+    $ref: './paths/organization-exports@{id}.yaml'
   /experimental/histograms/transactions:
     $ref: ./paths/histograms@transactions.yaml
   /experimental/reports/api-log-summary:
@@ -1121,10 +1153,14 @@ paths:
     $ref: ./paths/reports@events-triggered@{eventType}@rules.yaml
   /experimental/reports/future-renewals:
     $ref: ./paths/reports@future-renewals.yaml
+  /experimental/reports/journal:
+    $ref: ./paths/reports@journal.yaml
   /experimental/reports/kyc-acceptance-summary:
     $ref: ./paths/reports@kyc-acceptance-summary.yaml
   /experimental/reports/kyc-rejection-summary:
     $ref: ./paths/reports@kyc-rejection-summary.yaml
+  /experimental/reports/kyc-request-summary:
+    $ref: ./paths/reports@kyc-request-summary.yaml
   /experimental/reports/monthly-recurring-revenue:
     $ref: ./paths/reports@monthly-recurring-revenue.yaml
   /experimental/reports/renewal-sales:
@@ -1135,6 +1171,8 @@ paths:
     $ref: ./paths/reports@retention-value.yaml
   /experimental/reports/revenue-waterfall:
     $ref: ./paths/reports@revenue-waterfall.yaml
+  /experimental/reports/revenue-audit:
+    $ref: ./paths/reports@revenue-audit.yaml
   /experimental/reports/subscription-cancellation:
     $ref: ./paths/reports@subscription-cancellation.yaml
   /experimental/reports/subscription-renewal:
@@ -1148,7 +1186,7 @@ paths:
   '/experimental/subscriptions/{subscriptionId}/summary-metrics':
     $ref: ./paths/subscriptions@{subscriptionId}@summary-metrics.yaml
   '/storefront/account':
-    $ref: paths/storefront/account.yaml
+    $ref: ./paths/storefront/account.yaml
   '/storefront/account/forgot-password':
     $ref: paths/storefront/account@forgot-password.yaml
   '/storefront/account/password':
@@ -1235,6 +1273,21 @@ x-webhooks:
   balance-transaction-settled:
     post:
       $ref: ./webhooks/balance-transaction-settled.yaml
+  credit-memo-applied:
+    post:
+      $ref: ./webhooks/credit-memo-applied.yaml
+  credit-memo-created:
+    post:
+      $ref: ./webhooks/credit-memo-created.yaml
+  credit-memo-modified:
+    post:
+      $ref: ./webhooks/credit-memo-modified.yaml
+  credit-memo-partially-applied:
+    post:
+      $ref: ./webhooks/credit-memo-partially-applied.yaml
+  credit-memo-voided:
+    post:
+      $ref: ./webhooks/credit-memo-voided.yaml
   customer-created:
     post:
       $ref: ./webhooks/customer-created.yaml
@@ -1325,6 +1378,9 @@ x-webhooks:
   kyc-document-reviewed:
     post:
       $ref: ./webhooks/kyc-document-reviewed.yaml
+  kyc-document-archived:
+    post:
+      $ref: ./webhooks/kyc-document-archived.yaml
   kyc-request-attempted:
     post:
       $ref: ./webhooks/kyc-request-attempted.yaml

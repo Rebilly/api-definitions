@@ -30,7 +30,7 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/List.yaml
+              $ref: ../components/schemas/ValueList.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -52,10 +52,13 @@ post:
   responses:
     '201':
       description: List was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/List.yaml
+            $ref: ../components/schemas/ValueList.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -63,7 +66,10 @@ post:
     '422':
       $ref: ../components/responses/ValidationError.yaml
   requestBody:
-    $ref: ../components/requestBodies/List.yaml
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ValueList.yaml
   x-codeSamples:
     - lang: JavaScript
       source:

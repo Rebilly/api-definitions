@@ -41,11 +41,11 @@ post:
     - Core
   tags:
     - Customers
-  summary: Create a EDD Timeline comment.
+  summary: Create an EDD Timeline comment
   operationId: PostEddTimeline
   x-sdk-operation-name: createEddTimelineComment
   description: |
-    Create a EDD Timeline comment or custom defined event.
+    Create an EDD Timeline comment or custom defined event.
   requestBody:
     content:
       application/json:
@@ -56,6 +56,9 @@ post:
   responses:
     '201':
       description: EDD Timeline comment was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

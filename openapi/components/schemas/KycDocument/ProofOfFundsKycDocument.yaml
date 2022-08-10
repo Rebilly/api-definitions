@@ -1,0 +1,25 @@
+allOf:
+  - $ref: ./BaseKycDocument.yaml
+  - properties:
+      documentMatches:
+        type: object
+        readOnly: true
+        properties:
+          data:
+            $ref: ./FundsMatches.yaml
+      parsedData:
+        type: object
+        readOnly: true
+        properties:
+          data:
+            $ref: ./FundsMatches.yaml
+      _links:
+        type: array
+        description: The links related to resource.
+        readOnly: true
+        minItems: 3
+        items:
+          anyOf:
+            - $ref: ../Links/SelfLink.yaml
+            - $ref: ../Links/FileLink.yaml
+            - $ref: ../Links/CustomerLink.yaml

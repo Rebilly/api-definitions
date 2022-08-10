@@ -5,7 +5,7 @@ get:
     - Users
   tags:
     - Gateway Accounts
-  summary: Retrieve a list of gateway account downtime schedules
+  summary: List gateway account downtime schedules
   operationId: GetGatewayAccountDowntimeScheduleCollection
   x-sdk-operation-name: getAllDowntimeSchedules
   description: |
@@ -45,7 +45,7 @@ post:
     - Users
   tags:
     - Gateway Accounts
-  summary: Create a Gateway Account downtime schedule.
+  summary: Create a Gateway Account downtime schedule
   operationId: PostGatewayAccountDowntimeSchedule
   x-sdk-operation-name: createDowntimeSchedule
   description: |
@@ -53,6 +53,9 @@ post:
   responses:
     '201':
       description: Gateway Account downtime schedule was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

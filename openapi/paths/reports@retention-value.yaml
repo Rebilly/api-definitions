@@ -18,6 +18,7 @@ get:
     - Reports
   summary: Retrieve a retention value report
   operationId: GetRetentionValueReport
+  x-sdk-operation-name: getRetentionValue
   description: |
     The retention value report shows the count of new customers.
     per aggregation bucket and the corresponding per customer value over time.
@@ -74,15 +75,19 @@ get:
       required: true
       schema:
         type: string
+        format: date
     - name: periodEnd
       in: query
       description: Report end date.
       required: true
       schema:
         type: string
+        format: date
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
     - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionCriteria.yaml
   responses:
     '200':
       description: Report was retrieved successfully.

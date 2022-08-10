@@ -1,60 +1,60 @@
 type: object
 description: BBAN type object.
 required:
+  - accountNumberType
   - method
   - customerId
-  - accountNumberType
   - accountNumber
   - routingNumber
   - accountType
   - billingAddress
-properties:
-  method:
-    description: The method of payment instrument.
-    type: string
-    enum:
-      - ach
-  customerId:
-    description: Customer's ID.
-    allOf:
-      - $ref: ../../ResourceId.yaml
-  accountNumberType:
-    description: >-
-      Bank's Account Number type. A valid value is basic bank account number
-      (BBAN) or international bank account number (IBAN).
+allOf:
+  - $ref: ../BankAccountCreatePlain.yaml
+  - properties:
+      method:
+        description: Payment method of the payment instrument.
+        type: string
+        enum:
+          - ach
+      customerId:
+        $ref: ../../CustomerId.yaml
+      accountNumberType:
+        description: >-
+          Bank account number type. A valid value is Basic Bank Account Number
+          (BBAN) or International Bank Account Number (IBAN).
 
-      This is the object for the BBAN.
-    type: string
-    default: BBAN
-    enum:
-      - IBAN
-      - BBAN
-  accountNumber:
-    description: Bank's account number.
-    type: string
-    pattern: '^[0-9]+$'
-  routingNumber:
-    description: Bank's routing number.
-    type: string
-    pattern: '^[0-9]+$'
-  accountType:
-    description: Bank's account type.
-    type: string
-    enum:
-      - checking
-      - savings
-      - other
-  bankName:
-    description: Bank's name.
-    type: string
-  bic:
-    description: Bank Identifier Code.
-    type: string
-  billingAddress:
-    description: The billing address.
-    allOf:
-      - $ref: ../../Contact/ContactObject.yaml
-  customFields:
-    $ref: ../../ResourceCustomFields.yaml
-  riskMetadata:
-    $ref: ../../RiskMetadata.yaml
+          BBAN object.
+        type: string
+        default: BBAN
+        enum:
+          - IBAN
+          - BBAN
+      accountNumber:
+        description: Bank's account number.
+        type: string
+        pattern: '^[0-9]+$'
+      routingNumber:
+        description: Bank's routing number.
+        type: string
+        pattern: '^[0-9]+$'
+      accountType:
+        description: Bank's account type.
+        type: string
+        enum:
+          - checking
+          - savings
+          - other
+      bankName:
+        description: Bank name.
+        type: string
+      bic:
+        description: Bank Identifier Code (BIC).
+        type: string
+      billingAddress:
+        description: The customer's billing address.
+        allOf:
+          - $ref: ../../Contact/ContactObject.yaml
+      customFields:
+        $ref: ../../ResourceCustomFields.yaml
+      riskMetadata:
+        $ref: ../../RiskMetadata.yaml

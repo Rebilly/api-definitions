@@ -10,7 +10,7 @@ post:
     - Core
   tags:
     - Customer Authentication
-  summary: Exchange
+  summary: Exchange an authentication token
   operationId: PostAuthenticationTokenExchange
   x-sdk-operation-name: exchangeToken
   description: >
@@ -32,6 +32,9 @@ post:
   responses:
     '201':
       description: Authentication Token exchanged for JWT.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

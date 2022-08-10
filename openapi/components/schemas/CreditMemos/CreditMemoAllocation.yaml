@@ -1,0 +1,37 @@
+type: object
+required:
+  - amount
+properties:
+  invoiceId:
+    readOnly: true
+    description: ID of the invoice where the credit memo is allocated to.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  creditMemoId:
+    readOnly: true
+    description: ID of the credit memo that was allocated.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  amount:
+    description: Amount of credit from the credit memo allocated to the given invoice.
+    type: number
+    format: double
+  currency:
+    readOnly: true
+    allOf:
+      - $ref: ../CurrencyCode.yaml
+  createdTime:
+    description: Credit memo allocation time.
+    readOnly: true
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
+  _links:
+    type: array
+    description: The links related to the resource.
+    readOnly: true
+    items:
+      anyOf:
+        - $ref: ../../schemas/Links/InvoiceLink.yaml
+        - $ref: ../../schemas/Links/CreditMemoLink.yaml

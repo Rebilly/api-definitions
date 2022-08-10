@@ -7,6 +7,7 @@ discriminator:
     transactions: ./resources/transactions.yaml
     invoices: ./resources/invoices.yaml
     invoiceItems: ./resources/invoiceItems.yaml
+    revenueAudit: ./resources/revenueAudit.yaml
 required:
   - name
   - format
@@ -29,6 +30,7 @@ properties:
       - subscriptions
       - invoices
       - invoiceItems
+      - revenueAudit
   format:
     description: Export result format.
     type: string
@@ -59,32 +61,6 @@ properties:
       q:
         type: string
         description: The partial search of the text fields.
-  dateRange:
-    type: object
-    description: >-
-      The date range (can be in relative formats).  If omitted, all time will be
-      included. See the [Date Range
-      guide](https://docs-reconciliation.rebilly.com/getting-started/date-range)
-      for more options and examples.
-    properties:
-      start:
-        type: string
-        description: >-
-          Any valid datetime arguments including [relative datetime
-          arguments](http://php.net/manual/en/datetime.formats.php).
-        example: yesterday
-      end:
-        type: string
-        description: >-
-          Any valid datetime arguments including [relative datetime
-          arguments](http://php.net/manual/en/datetime.formats.php).
-        example: today
-      field:
-        type: string
-        description: The field to apply date range to.
-    required:
-      - start
-      - end
   emailNotification:
     description: List of emails to be notified when export is completed.
     type: array
@@ -130,9 +106,7 @@ properties:
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
-    description: Data export updated time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../UpdatedTime.yaml
   status:
     description: Status of export request.
     readOnly: true

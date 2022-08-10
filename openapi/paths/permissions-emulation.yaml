@@ -17,6 +17,7 @@ post:
       application/json:
         schema:
           type: object
+          title: PostPermissionsEmulationRequest
           required:
             - permissions
           properties:
@@ -29,6 +30,9 @@ post:
   responses:
     '201':
       description: Session was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -55,6 +59,9 @@ delete:
   responses:
     '201':
       description: Session was restored.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

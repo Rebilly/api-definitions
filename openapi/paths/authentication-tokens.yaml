@@ -44,7 +44,7 @@ post:
     - Core
   tags:
     - Customer Authentication
-  summary: Login
+  summary: Login a customer
   operationId: PostAuthenticationToken
   x-sdk-operation-name: login
   description: |
@@ -64,6 +64,9 @@ post:
   responses:
     '201':
       description: Login successful.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
