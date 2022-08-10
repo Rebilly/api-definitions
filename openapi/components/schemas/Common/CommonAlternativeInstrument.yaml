@@ -1,5 +1,6 @@
 type: object
 title: Alternative Instrument
+x-abstract-parent: PaymentInstrument
 properties:
   id:
     description: The payment instrument ID.
@@ -10,6 +11,13 @@ properties:
     description: The method of payment instrument.
     allOf:
       - $ref: ../PaymentMethods/AlternativePaymentMethods.yaml
+      - not: 
+          enum:
+            - payment-card
+            - paypal
+            - ach
+            - echeck
+            - Khelocard
   billingAddress:
     description: The billing address.
     allOf:
