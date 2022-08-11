@@ -1,8 +1,11 @@
 type: object
 discriminator:
   propertyName: mode
-  mapping:
-    password: ./TokenModes/password.yaml
-    passwordless: ./TokenModes/passwordless.yaml
-allOf: 
-  -  $ref: ../Common/CommonAuthenticationToken.yaml
+  x-enum-mapping:
+    - $ref: ./TokenModes/password.yaml
+    - $ref: ./TokenModes/passwordless.yaml
+properties:
+  mode:
+    description: The token's generation mode. A SecretApiKey must be used to login in passwordless mode.
+    default: password
+x-abstract-parent: CommonAuthenticationToken

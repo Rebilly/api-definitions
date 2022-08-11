@@ -2,22 +2,14 @@ type: object
 title: Authentication Token
 properties:
   token:
-    description: The token identifier string.
+    description: Authentication token identifier string.
     type: string
     readOnly: true
-  mode:
-    description: The token's generation mode. A SecretApiKey must be used to login in passwordless mode.
-    type: string
-    enum:
-      - password
-      - passwordless
-    writeOnly: true
-    default: password
   otpRequired:
-    description: Should OTP be required to exchange this token.
+    description: Specifies whether a One-Time Password (OTP) is required to exchange the authentication token.
     type: boolean
   credentialId:
-    description: The credential's ID.
+    description: ID of the user associated with the authentication token. 
     readOnly: true
     allOf: 
-      -  $ref: ../ResourceId.yaml
+      - $ref: ../ResourceId.yaml
