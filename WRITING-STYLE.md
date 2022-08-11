@@ -98,14 +98,11 @@ This section provides guidance on how to write operation, object, and parameter 
 - Avoid starting with "The" or "A". Omit articles for ease of reading.
 - Provide detail and link to related content if necessary.
 
-:::success Tip
-
-Place this imaginary text before your operation descriptions: _This operation..._.
-
-Example: _"This operation"_ Creates a new customer account. \
-Result: Creates a new customer account.
-
-:::
+**Tip:**
+> Place this imaginary text before your operation descriptions: _This operation..._.
+> 
+> Example: _"This operation"_ Creates a new customer account. \
+> Result: Creates a new customer account.
 
 #### Operation examples
 
