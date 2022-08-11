@@ -1,15 +1,52 @@
 type: object
 allOf:
   - $ref: ../Common/CommonPlan.yaml
-  - properties:
-      id:
-        readOnly: false
-        description: The ID of plan to modify with given settings.
-        allOf:
-          - $ref: ../ResourceId.yaml
-  - required:
-    - id
-    - name
-    - currency
-    - productId
-    - pricing
+properties:
+  id:
+    readOnly: false
+    description: The ID of plan to modify with given settings.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  isActive:
+    type: boolean
+    description: Whether a plan is active.
+  invoiceTimeShift:
+    description: You can shift issue time and due time of invoices for this plan.
+    nullable: true
+    allOf:
+      - $ref: ../Invoices/InvoiceTimeShift.yaml
+  description:
+    type: string
+    description: The plan's description.
+  richDescription:
+    type: string
+    description: The plan's description enhanced.
+  _links:
+    type: array
+    description: The links related to resource, including links provided by the list.
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml
+required:
+  - id
+  - name
+  - currency
+  - productId
+  - pricing
+x-bc-properties:
+  - setupAmount
+  - trialAmount
+  - trialPeriodUnit
+  - trialPeriodLength
+  - recurringAmount
+  - recurringPeriodUnit
+  - recurringPeriodLength
+  - recurringPeriodLimit
+  - contractTermUnit
+  - contractTermLength
+  - minQuantity
+  - maxQuantity
+  - expireTime
+  - expiredTime
+  - subscriptionCount
