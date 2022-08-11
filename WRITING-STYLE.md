@@ -26,7 +26,7 @@ Avoid this bias by describing information that may seem obvious to you when writ
     description: Organization ID.
 ```
 
-To understand what this ID value is, the reader must understand what an organization is in Rebilly. This is obvious to us because we have expert knowledge of the product. The reader may not.
+To understand what this ID value is, the reader must understand what an organization is in Rebilly. This may be obvious to you if you have expert knowledge of the product. The reader may not.
 
 If the reader does not know what an organization is, they need to search the docs to find out, and then come back to API docs. This is frustrating for the reader. It's infuriating if they need to continually do this to understand an API. Over time, if the reader is persistent, they will learn these concepts themselves. This is a major hurdle for new users to overcome. Many readers may simply quit, or may label the docs as "bad" and not use them, or our product.
 
@@ -129,7 +129,7 @@ Delete a customer by ID:
 ```yaml
   operationId: DeleteCustomer
   description: |-
-    Deletes a customer account based on the customer's `id`.
+    Deletes a customer account based on the customer's ID.
 ```
 
 ### ID fields
