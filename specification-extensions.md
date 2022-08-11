@@ -27,6 +27,3 @@ This document contains all OpenAPI extensions used in the Rebilly API definition
 
 * `x-no-abstract-methods`
   This flag is used for PHP SDK autogeneration. It indicates that the generated model will not implement getters or setters.
-
-* `x-bc-properties`
-  This property is used for PHP SDK autogeneration. Is a collection of properties returned by the API to keep backwards compatibility. This properties will be ignored in the modeling.
