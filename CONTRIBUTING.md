@@ -13,6 +13,10 @@ Rebilly follows a design-first approach to APIs.
 - Redocly CLI runs our `lint` and `bundle` command which are controlled through the `.redocly.yaml` configuration file when a pull request is opened (you will see the green checks or red x marks).
 - In terms of sequence, merge the API definitions before merging and releasing software to production.
 
+## API description writing guidance
+
+For guidance on how to write API descriptions when contributing to Rebilly APIs, see [Writing style](./WRITING-STYLE.md).
+
 ## API styleguide
 
 Rebilly uses the following automated lint rules in addition to the [Redocly recommended rules](https://redocly.com/docs/cli/rules/):
