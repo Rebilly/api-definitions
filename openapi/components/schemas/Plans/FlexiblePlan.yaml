@@ -4,26 +4,33 @@ allOf:
 properties:
   id:
     readOnly: false
-    description: The ID of plan to modify with given settings.
+    description: ID of a plan you wish to modify.
     allOf:
       - $ref: ../ResourceId.yaml
   isActive:
     type: boolean
-    description: Whether a plan is active.
+    description: Specifies whether a plan is active.
   invoiceTimeShift:
-    description: You can shift issue time and due time of invoices for this plan.
+    description: |-
+        Use invoice time shift to adjust the invoice issue and due date 
+        when billing must occur before the service period changes. 
+        For example, rent must be paid in advance, so the invoice must 
+        be in advance of the billing date. For more information, see 
+        [Service period anchor, and billing timing, and invoice time shift](https://www.rebilly.com/docs/dev-docs/concepts/#service-period-anchor-and-billing-timing-and-invoice-time-shift).
     nullable: true
     allOf:
       - $ref: ../Invoices/InvoiceTimeShift.yaml
   description:
     type: string
-    description: The plan's description.
+    description: Plain-text description of the plan. This field accepts plain-text only.
   richDescription:
     type: string
-    description: The plan's description enhanced.
+    description: >-
+         Rich-text description of the plan. This field accepts rich text formatting, 
+         such as: bold, underline, italic, and hyperlinks.
   _links:
     type: array
-    description: The links related to resource, including links provided by the list.
+    description: Related resource links.
     readOnly: true
     minItems: 1
     items:
