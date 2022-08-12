@@ -21,6 +21,15 @@ allOf:
         items:
           anyOf:
             - $ref: ../Links/SelfLink.yaml
-            - $ref: ../Links/FileLink.yaml
             - $ref: ../Links/CustomerLink.yaml
             - $ref: ../Links/PaymentInstrumentLink.yaml
+      _embedded:
+        type: array
+        description: |-
+          Any embedded objects available that are requested by the `expand`
+          querystring parameter.
+        readOnly: true
+        minItems: 1
+        items:
+          anyOf:
+            - $ref: ../Embeds/CustomerEmbed.yaml
