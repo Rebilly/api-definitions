@@ -16,7 +16,7 @@ $customerForm = Rebilly\Sdk\Model\Customer::from([])
     );
 
 try {
-    $customer = $service->customers()->create($customerForm);
+    $customer = $service->customers()->update('myCustomerId', $customerForm);
 } catch (Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }
