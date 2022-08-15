@@ -6,6 +6,6 @@ $authenticationOptionsForm->setPasswordPattern('/^[a-zA-Z0-9]{6,}$/');
 
 try {
     $authenticationOptions = $service->customerAuthentication()->updateAuthOptions($authenticationOptionsForm);
-}  catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }
