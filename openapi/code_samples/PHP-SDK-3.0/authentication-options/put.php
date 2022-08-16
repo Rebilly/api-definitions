@@ -1,6 +1,6 @@
 $service = new Rebilly\Sdk\Service($client);
 
-$authenticationOptionsForm = Rebilly\Sdk\Model\AuthenticationOptions::from([]);
+$authenticationOptionsForm = new Rebilly\Sdk\Model\AuthenticationOptions();
 // Regular expression below matches any password with 6+ length that contains alphabet symbols and/or numbers.
 $authenticationOptionsForm->setPasswordPattern('/^[a-zA-Z0-9]{6,}$/');
 
