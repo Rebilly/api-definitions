@@ -8,7 +8,7 @@ get:
   x-sdk-operation-name: getAllAttachments
   description: |
     Retrieve a list of attachments.
-    You may sort by the id, name, relatedId, relatedType, fileId, createdTime, and updatedTime.
+    You may sort by the `id`, `name`, `relatedId`, `relatedType`, `fileId`, `createdTime`, and `updatedTime`.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -59,6 +59,9 @@ post:
   responses:
     '201':
       description: Attachment was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

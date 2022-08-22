@@ -4,7 +4,7 @@ get:
   x-products:
     - Users
   tags:
-    - API Keys
+    - API keys
   summary: Retrieve API key
   operationId: GetApiKey
   x-sdk-operation-name: get
@@ -34,7 +34,7 @@ put:
   x-products:
     - Users
   tags:
-    - API Keys
+    - API keys
   summary: Create or update API key with predefined ID
   operationId: PutApiKey
   x-sdk-operation-name: update
@@ -49,6 +49,9 @@ put:
             $ref: ../components/schemas/ApiKey.yaml
     '201':
       description: API key was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -74,7 +77,7 @@ delete:
   x-products:
     - Users
   tags:
-    - API Keys
+    - API keys
   summary: Delete API key
   operationId: DeleteApiKey
   x-sdk-operation-name: delete

@@ -4,7 +4,7 @@ get:
   x-products:
     - Core
   tags:
-    - Credit memos Timeline
+    - Credit memos timeline
   summary: Retrieve a list of credit memo timeline messages
   operationId: GetCreditMemoTimelineCollection
   x-sdk-operation-name: getAllTimelineMessages
@@ -40,7 +40,7 @@ post:
   x-products:
     - Core
   tags:
-    - Credit memos Timeline
+    - Credit memos timeline
   summary: Create a credit memo timeline message
   operationId: PostCreditMemoTimeline
   x-sdk-operation-name: createTimelineComment
@@ -56,6 +56,9 @@ post:
   responses:
     '201':
       description: Credit memo timeline message was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

@@ -4,7 +4,7 @@ get:
   x-products:
     - Users
   tags:
-    - Checkout Forms
+    - Checkout forms
   summary: Retrieve a checkout form
   operationId: GetCheckoutForm
   x-sdk-operation-name: get
@@ -27,7 +27,7 @@ put:
   x-products:
     - Users
   tags:
-    - Checkout Forms
+    - Checkout forms
   summary: Create or update a checkout form
   operationId: PutCheckoutForm
   x-sdk-operation-name: update
@@ -42,6 +42,9 @@ put:
             $ref: ../components/schemas/CheckoutForm.yaml
     '201':
       description: Checkout form was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -63,7 +66,7 @@ delete:
   x-products:
     - Users
   tags:
-    - Checkout Forms
+    - Checkout forms
   summary: Delete a checkout form
   operationId: DeleteCheckoutForm
   x-sdk-operation-name: delete

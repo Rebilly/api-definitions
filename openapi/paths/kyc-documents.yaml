@@ -2,7 +2,7 @@ get:
   x-products:
     - Core
   tags:
-    - KYC Documents
+    - KYC documents
   summary: Retrieve a list of KYC documents
   operationId: GetKycDocumentCollection
   x-sdk-operation-name: getAll
@@ -13,6 +13,7 @@ get:
     - $ref: ../components/parameters/collectionOffset.yaml
     - $ref: ../components/parameters/collectionFilter.yaml
     - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
       description: A list of KYC documents was retrieved successfully.
@@ -41,7 +42,7 @@ post:
   x-products:
     - Core
   tags:
-    - KYC Documents
+    - KYC documents
   summary: Create a KYC Document
   operationId: PostKycDocument
   x-sdk-operation-name: create
@@ -57,6 +58,9 @@ post:
   responses:
     '201':
       description: Kyc document was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

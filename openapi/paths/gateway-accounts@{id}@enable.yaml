@@ -4,7 +4,7 @@ post:
   x-products:
     - Users
   tags:
-    - Gateway Accounts
+    - Gateway accounts
   summary: Enable a Gateway Account
   operationId: PostGatewayAccountEnablement
   x-sdk-operation-name: enable
@@ -16,6 +16,9 @@ post:
   responses:
     '201':
       description: Enabled successfully.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

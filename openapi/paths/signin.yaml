@@ -7,7 +7,7 @@ post:
   x-products:
     - Users
   tags:
-    - JWT Session
+    - JWT session
   summary: Create a session with email and password
   operationId: PostSigninRequest
   x-sdk-operation-name: signIn
@@ -24,6 +24,9 @@ post:
   responses:
     '201':
       description: Session was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

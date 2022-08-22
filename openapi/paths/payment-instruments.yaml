@@ -2,7 +2,7 @@ get:
   x-products:
     - Core
   tags:
-    - Payment Instruments
+    - Payment instruments
   summary: Retrieve a list of payment instruments
   operationId: GetPaymentInstrumentCollection
   x-sdk-operation-name: getAll
@@ -46,7 +46,7 @@ post:
   x-products:
     - Core
   tags:
-    - Payment Instruments
+    - Payment instruments
   summary: Create a Payment Instrument
   operationId: PostPaymentInstrument
   x-sdk-operation-name: create
@@ -59,6 +59,9 @@ post:
   responses:
     '201':
       description: Payment instrument was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

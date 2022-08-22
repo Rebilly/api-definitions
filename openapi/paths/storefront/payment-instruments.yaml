@@ -2,7 +2,7 @@ get:
   x-products:
     - Storefront
   tags:
-    - Payment Instruments
+    - Payment instruments
   summary: Retrieve a list of Payment Instruments
   operationId: StorefrontGetPaymentInstrumentCollection
   x-sdk-operation-name: getAll
@@ -40,7 +40,7 @@ post:
   x-products:
     - Storefront
   tags:
-    - Payment Instruments
+    - Payment instruments
   summary: Create a Payment Instrument
   operationId: StorefrontPostPaymentInstrument
   x-sdk-operation-name: create
@@ -57,6 +57,9 @@ post:
   responses:
     201:
       description: Payment instrument was created.
+      headers:
+        Location:
+          $ref: ../../components/headers/Location.yaml
       content:
         application/json:
           schema:

@@ -2,7 +2,7 @@ post:
   x-products:
     - Core
   tags:
-    - Payment Tokens
+    - Payment tokens
   summary: Validate a digital wallet session
   operationId: PostDigitalWalletValidation
   x-sdk-operation-name: validate
@@ -23,6 +23,9 @@ post:
   responses:
     '201':
       description: Digital wallet validation was made.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

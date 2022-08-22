@@ -4,7 +4,7 @@ get:
   x-products:
     - Storefront
   tags:
-    - Payment Instruments
+    - Payment instruments
   summary: Retrieve the payment instrument's setup transaction
   operationId: StorefrontGetPaymentInstrumentSetup
   x-sdk-operation-name: getSetupTransaction
@@ -31,7 +31,7 @@ post:
   x-products:
     - Storefront
   tags:
-    - Payment Instruments
+    - Payment instruments
   summary: Create the payment instrument's setup transaction
   operationId: StorefrontPostPaymentInstrumentSetup
   x-sdk-operation-name: setup
@@ -48,6 +48,9 @@ post:
   responses:
     201:
       description: Setup transaction was created.
+      headers:
+        Location:
+          $ref: ../../components/headers/Location.yaml
       content:
         application/json:
           schema:

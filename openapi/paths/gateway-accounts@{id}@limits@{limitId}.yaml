@@ -15,7 +15,7 @@ get:
   x-products:
     - Users
   tags:
-    - Gateway Accounts
+    - Gateway accounts
   summary: Retrieve a gateway account limit
   operationId: GetGatewayAccountLimit
   x-sdk-operation-name: getVolumeLimit
@@ -38,7 +38,7 @@ put:
   x-products:
     - Users
   tags:
-    - Gateway Accounts
+    - Gateway accounts
   summary: Update a gateway account limit
   operationId: PutGatewayAccountLimit
   x-sdk-operation-name: updateVolumeLimit
@@ -53,6 +53,9 @@ put:
             $ref: ../components/schemas/GatewayAccountLimit.yaml
     '201':
       description: Gateway account limit was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -76,7 +79,7 @@ delete:
   x-products:
     - Users
   tags:
-    - Gateway Accounts
+    - Gateway accounts
   summary: Delete a gateway account limit
   operationId: DeleteGatewayAccountLimit
   x-sdk-operation-name: deleteVolumeLimit

@@ -1,6 +1,12 @@
-oneOf:
-- $ref: ../PaymentCards/PaymentCard.yaml
-- $ref: ../BankAccounts/BankAccount.yaml
-- $ref: ../PayPalAccount.yaml
-- $ref: ../KhelocardCard.yaml
-- $ref: ./AlternativeInstrument.yaml
+type: object
+discriminator:
+  propertyName: method
+  x-enum-mapping:
+    - $ref: ../PaymentCards/PaymentCard.yaml
+    - $ref: ../BankAccounts/BankAccount.yaml
+    - $ref: ../PayPalAccount.yaml
+    - $ref: ../KhelocardCard.yaml
+    - $ref: ./AlternativeInstrument.yaml
+properties: 
+  method:
+    description: Payment method of the payment instrument.

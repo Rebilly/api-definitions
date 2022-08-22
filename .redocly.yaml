@@ -20,7 +20,13 @@ lint:
     tag-description: error
     custom-rules/description-punctuation: error
     custom-rules/no-unused-tags: warn
-
+    response-contains-header:
+      severity: error
+      names:
+        '201':
+          - Location
+        '303':
+          - Location
     # newly proposed rules
     # operation-description: warn
     # scalar-property-missing-example: error
@@ -41,8 +47,6 @@ lint:
       property: example
       defined: true
       nonEmpty: true
-
-    no-unresolved-refs: error
 
     assert/path-must-be-ref-file:
       subject: PathItem
