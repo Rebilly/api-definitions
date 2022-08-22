@@ -1,35 +1,44 @@
 description: Bank account BBAN instrument.
+type: object
 allOf:
   - $ref: ./BankAccountInstrument.yaml
   - type: object
     required:
+      - accountNumberType
       - accountNumber
       - routingNumber
       - accountType
     properties:
+      accountNumberType:
+        description: >-
+          Bank's Account Number type. A valid value is basic bank account number
+          (BBAN) or international bank account number (IBAN).
+        type: string
+        enum:
+          - BBAN
       accountNumber:
-        description: Bank Account Number.
+        description: Customer's bank account number.
         type: string
         pattern: '^[0-9]+$'
         writeOnly: true
       routingNumber:
-        description: Bank Routing Number.
+        description: Bank routing number.
         type: string
         pattern: '^[0-9]+$'
       accountType:
-        description: Bank Account Type.
+        description: Bank account type.
         type: string
         enum:
           - checking
           - savings
           - other
       bic:
-        description: Bank Identifier Code.
+        description: Bank Identifier Code (BIC).
         type: string
       bankName:
         description: Bank name.
         type: string
       last4:
-        description: Bank Account Number's last 4 digits.
+        description: Last 4 digits of the bank account number.
         type: string
         readOnly: true

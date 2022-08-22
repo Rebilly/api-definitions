@@ -4,7 +4,7 @@ get:
   x-products:
     - Core
   tags:
-    - KYC Documents
+    - KYC documents
   summary: Retrieve a KYC Document
   operationId: GetKycDocument
   x-sdk-operation-name: get
@@ -30,7 +30,7 @@ put:
   x-products:
     - Core
   tags:
-    - KYC Documents
+    - KYC documents
   summary: Create or update a KYC document with predefined ID
   operationId: PutKycDocument
   x-sdk-operation-name: update
@@ -51,6 +51,9 @@ put:
             $ref: ../components/schemas/KycDocument/KycDocument.yaml
     '201':
       description: KYC document was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

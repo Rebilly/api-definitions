@@ -2,7 +2,7 @@ get:
   x-products:
     - Users
   tags:
-    - Checkout Forms
+    - Checkout forms
   summary: Browse a list of checkout forms
   operationId: GetCheckoutFormCollection
   x-sdk-operation-name: getAll
@@ -38,7 +38,7 @@ post:
   x-products:
     - Users
   tags:
-    - Checkout Forms
+    - Checkout forms
   summary: Create a checkout form
   operationId: PostCheckoutForm
   x-sdk-operation-name: create
@@ -47,6 +47,9 @@ post:
   responses:
     '201':
       description: Checkout form was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

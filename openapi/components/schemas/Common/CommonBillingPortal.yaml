@@ -19,6 +19,11 @@ properties:
     description: Billing portal website ID.
     allOf:
       - $ref: ../ResourceId.yaml
+  customDomain:
+    description: Custom domain for the billing portal.
+    type: string
+    maxLength: 255
+    nullable: true
   features:
     description: Various features that can be enabled for the billing portal.
     type: object
@@ -90,6 +95,4 @@ properties:
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
-    description: Billing portal updated time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../UpdatedTime.yaml

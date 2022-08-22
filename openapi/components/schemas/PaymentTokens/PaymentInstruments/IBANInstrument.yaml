@@ -1,23 +1,32 @@
 description: Bank account IBAN instrument.
+type: object
 allOf:
   - $ref: ./BankAccountInstrument.yaml
   - type: object
     required:
+      - accountNumberType
       - accountNumber
     properties:
+      accountNumberType:
+        description: >-
+          Bank's Account Number type. A valid value is basic bank account number
+          (BBAN) or international bank account number (IBAN).
+        type: string
+        enum:
+          - IBAN    
       accountNumber:
         description: >
-          Bank Account Number. Detailed information about all ISO
-          13616-compliant national IBAN formats is available in [SWIFT IBAN Registry](https://www.swift.com/standards/data-standards/iban).
+          Bank account number. Detailed information about all ISO
+          13616-compliant national IBAN formats is available in the [SWIFT IBAN Registry](https://www.swift.com/standards/data-standards/iban).
         type: string
         writeOnly: true
       bic:
-        description: Bank Identifier Code.
+        description: Bank Identifier Code (BIC).
         type: string
       bankName:
         description: Bank name.
         type: string
       last4:
-        description: Bank Account Number's last 4 digits.
+        description: Last 4 digits of the bank account number.
         type: string
         readOnly: true

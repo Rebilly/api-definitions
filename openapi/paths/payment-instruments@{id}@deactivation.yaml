@@ -4,7 +4,7 @@ post:
   x-products:
     - Core
   tags:
-    - Payment Instruments
+    - Payment instruments
   summary: Deactivate a payment instrument
   operationId: PostPaymentInstrumentDeactivation
   x-sdk-operation-name: deactivate
@@ -13,6 +13,9 @@ post:
   responses:
     '201':
       description: Payment instrument was deactivated.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

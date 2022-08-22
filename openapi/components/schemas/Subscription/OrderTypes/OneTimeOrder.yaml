@@ -5,13 +5,13 @@ required:
   - websiteId
   - items
 allOf:
+  - $ref: ../../Subscription.yaml
   - $ref: ../../Common/CommonOneTimeOrder.yaml
   - properties:
       customerId:
-        description: The customer identifier string.
         x-basic: true
         allOf:
-          - $ref: ../../ResourceId.yaml
+          - $ref: ../../CustomerId.yaml
       organizationId:
         deprecated: true
         readOnly: true

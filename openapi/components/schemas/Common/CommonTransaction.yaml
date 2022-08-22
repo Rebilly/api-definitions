@@ -11,11 +11,10 @@ properties:
     allOf:
       - $ref: ../ResourceId.yaml
   customerId:
-    description: The customer ID.
     x-basic: true
     x-sortable: true
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ../CustomerId.yaml
   type:
     description: Transaction type.
     type: string
@@ -134,8 +133,6 @@ properties:
     type: integer
     readOnly: true
     x-sortable: true
-  paymentInstrument:
-    $ref: ../Storefront/PaymentInstruments/InstrumentReference.yaml
   billingAddress:
     description: Billing address.
     allOf:
@@ -201,8 +198,8 @@ properties:
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
-    description: Transaction updated time.
     x-label: Last update time
     x-sortable: true
     allOf:
-      - $ref: ../ServerTimestamp.yaml
+      - $ref: ../UpdatedTime.yaml
+

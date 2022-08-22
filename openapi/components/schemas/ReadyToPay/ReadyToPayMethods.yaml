@@ -1,11 +1,15 @@
-type: array
-items:
-  anyOf:
+type: object
+discriminator: 
+  propertyName: method
+  x-enum-mapping:
     - $ref: ./Methods/ReadyToPayPaymentCardMethod.yaml
     - $ref: ./Methods/ReadyToPayAchMethod.yaml
     - $ref: ./Methods/ReadyToPayGenericMethod.yaml
     - $ref: ./Methods/ReadyToPayPayPalMethod.yaml
     - $ref: ./Methods/ReadyToPayKlarnaMethod.yaml
+properties: 
+  method:
+    type: string
 example:
   - method: payment-card
     feature:
@@ -37,3 +41,4 @@ example:
     filters: []
   - method: Skrill
     filters: []
+x-no-abstract-methods: true

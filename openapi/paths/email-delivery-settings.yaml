@@ -2,7 +2,7 @@ get:
   x-products:
     - Users
   tags:
-    - Email Delivery Settings
+    - Email delivery settings
   summary: Retrieve a list of email delivery settings
   operationId: GetEmailDeliverySettingCollection
   x-sdk-operation-name: getAll
@@ -37,7 +37,7 @@ post:
   x-products:
     - Users
   tags:
-    - Email Delivery Settings
+    - Email delivery settings
   summary: Create an email delivery setting
   operationId: PostEmailDeliverySetting
   x-sdk-operation-name: create
@@ -47,6 +47,9 @@ post:
   responses:
     '201':
       description: Email delivery setting was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

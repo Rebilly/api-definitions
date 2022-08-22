@@ -4,7 +4,7 @@ get:
   x-products:
     - Core
   tags:
-    - Invoices Timeline
+    - Invoices timeline
   summary: Retrieve a list of invoice timeline messages
   operationId: GetInvoiceTimelineCollection
   x-sdk-operation-name: getAllTimelineMessages
@@ -44,7 +44,7 @@ post:
   x-products:
     - Core
   tags:
-    - Invoices Timeline
+    - Invoices timeline
   summary: Create an invoice Timeline comment
   operationId: PostInvoiceTimeline
   x-sdk-operation-name: createTimelineComment
@@ -60,6 +60,9 @@ post:
   responses:
     '201':
       description: Invoice Timeline comment was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

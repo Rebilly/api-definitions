@@ -4,7 +4,7 @@ get:
   x-products:
     - Core
   tags:
-    - Orders Timeline
+    - Orders timeline
   summary: Retrieve a list of order timeline messages
   operationId: GetSubscriptionTimelineCollection
   x-sdk-operation-name: getAllTimelineMessages
@@ -42,7 +42,7 @@ post:
   x-products:
     - Core
   tags:
-    - Orders Timeline
+    - Orders timeline
   summary: Create an order Timeline comment
   operationId: PostSubscriptionTimeline
   x-sdk-operation-name: createTimelineComment
@@ -58,6 +58,9 @@ post:
   responses:
     '201':
       description: Order Timeline comment was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

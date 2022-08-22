@@ -2,7 +2,7 @@ get:
   x-products:
     - Users
   tags:
-    - Gateway Accounts
+    - Gateway accounts
   summary: Retrieve a list of gateway accounts
   operationId: GetGatewayAccountCollection
   x-sdk-operation-name: getAll
@@ -46,7 +46,7 @@ post:
   x-products:
     - Users
   tags:
-    - Gateway Accounts
+    - Gateway accounts
   summary: Create a Gateway Account
   operationId: PostGatewayAccount
   x-sdk-operation-name: create
@@ -57,6 +57,9 @@ post:
   responses:
     '201':
       description: Gateway Account was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

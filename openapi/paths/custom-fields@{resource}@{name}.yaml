@@ -12,7 +12,7 @@ get:
   x-products:
     - Core
   tags:
-    - Custom Fields
+    - Custom fields
   summary: Retrieve a Custom Field
   operationId: GetCustomField
   x-sdk-operation-name: get
@@ -42,7 +42,7 @@ put:
   x-products:
     - Core
   tags:
-    - Custom Fields
+    - Custom fields
   summary: Create or alter a Custom Field
   operationId: PutCustomField
   x-sdk-operation-name: create
@@ -65,6 +65,9 @@ put:
             $ref: ../components/schemas/CustomField.yaml
     '201':
       description: The Custom Fields was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

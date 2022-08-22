@@ -4,7 +4,7 @@ get:
   x-products:
     - Users
   tags:
-    - Rules Timeline
+    - Rules timeline
   summary: Retrieve a list of Rules Engine timeline messages
   operationId: GetRulesEngineTimelineCollection
   x-sdk-operation-name: getAllTimelineMessages
@@ -40,7 +40,7 @@ post:
   x-products:
     - Users
   tags:
-    - Rules Timeline
+    - Rules timeline
   summary: Create Rules Engine Timeline comment
   operationId: PostRulesEngineTimeline
   x-sdk-operation-name: createTimelineComment
@@ -56,6 +56,9 @@ post:
   responses:
     '201':
       description: Rules Engine Timeline comment was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

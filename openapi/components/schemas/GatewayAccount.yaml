@@ -56,6 +56,7 @@ discriminator:
     EcorePay: ./GatewayAccountConfig/EcorePay.yaml
     Elavon: ./GatewayAccountConfig/Elavon.yaml
     EMS: ./GatewayAccountConfig/EMS.yaml
+    ePay: ./GatewayAccountConfig/ePay.yaml
     Euteller: ./GatewayAccountConfig/Euteller.yaml
     eZeeWallet: ./GatewayAccountConfig/eZeeWallet.yaml
     ezyEFT: ./GatewayAccountConfig/ezyEFT.yaml
@@ -335,9 +336,7 @@ properties:
     allOf:
       - $ref: ./ServerTimestamp.yaml
   updatedTime:
-    description: Gateway Account updated time.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    $ref: UpdatedTime.yaml
   organizationId:
     deprecated: true
     readOnly: true

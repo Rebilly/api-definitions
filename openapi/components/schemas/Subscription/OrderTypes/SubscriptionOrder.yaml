@@ -5,13 +5,13 @@ required:
   - websiteId
   - items
 allOf:
+  - $ref: ../../Subscription.yaml
   - $ref: ../../Common/CommonSubscriptionOrder.yaml
   - properties:
       customerId:
-        description: The customer identifier string.
         x-basic: true
         allOf:
-          - $ref: ../../ResourceId.yaml
+          - $ref: ../../CustomerId.yaml
       renewalReminderTime:
         description: Time renewal reminder event will be triggered.
         nullable: true

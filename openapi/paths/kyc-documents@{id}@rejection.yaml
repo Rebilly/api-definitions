@@ -4,7 +4,7 @@ post:
   x-products:
     - Core
   tags:
-    - KYC Documents
+    - KYC documents
   summary: Reject a KYC document
   operationId: PostKycDocumentRejection
   x-sdk-operation-name: reject
@@ -21,6 +21,9 @@ post:
   responses:
     '201':
       description: KYC document rejection was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
