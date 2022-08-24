@@ -1,0 +1,53 @@
+get:
+  x-products:
+    - Core
+  tags:
+    - Notification settings
+  summary: Get organization notification settings
+  operationId: getNotificationSettings
+  x-sdk-operation-name: getNotificationSettings
+  description: >
+    Retrieve organization notification settings.
+  responses:
+    '200':
+      description: Notification settings successfully retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/NotificationSettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Notification settings
+  summary: Update organization notification settings
+  operationId: PutNotificationSettings
+  x-sdk-operation-name: updateNotificationSettings
+  description: >
+    Update organization notification settings.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/NotificationSettings.yaml
+    description: The settings for organization notifications.
+    required: true
+  responses:
+    '200':
+      description: Notification settings were updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/NotificationSettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
