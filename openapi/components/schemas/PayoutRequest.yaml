@@ -1,0 +1,68 @@
+type: object
+required:
+  - paymentInstrumentId
+  - currency
+  - amount
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  customerId:
+    readOnly: true
+    allOf:
+      - $ref: ./CustomerId.yaml
+  paymentInstrumentId:
+    description: ID of the payment instrument to use for payout.
+    allOf:
+      - $ref: ./ResourceId.yaml
+  currency:
+    description: Payout currency.
+    allOf:
+      - $ref: ./CurrencyCode.yaml
+  amount:
+    description: Payout amount.
+    type: number
+    format: double
+  status:
+    description: Status of the request.
+    type: string
+    readOnly: true
+    enum:
+      - pending
+      - approved
+      - rejected
+  rejectionReason:
+    description: Rejection reason of the payout request.
+    type: string
+    readOnly: true
+  reviewerId:
+    description: ID of the reviewer user.
+    type: string
+    nullable: true
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  reviewTime:
+    description: Review time of the payout request.
+    type: string
+    nullable: true
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  createdTime:
+    description: Created time of the payout request.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    description: Updated time of the payout request.
+    allOf:
+      - $ref: ./UpdatedTime.yaml
+  _links:
+    type: array
+    description: The links related to resource.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Links/SelfLink.yaml
+
