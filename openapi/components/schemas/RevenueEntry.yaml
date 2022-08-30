@@ -27,6 +27,8 @@ properties:
     description: The product accounting code.
     type: string
     example: '4010'
+  currency:
+    $ref: ./CurrencyCode.yaml
   status:
     description: The entry's recognition status.
     readOnly: true
@@ -49,6 +51,10 @@ properties:
     format: double
   scheduledTime:
     description: Date and time at which the entry was created.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  issuedTime:
+    description: Date and time at which the related invoice was issued.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   recognizedTime:
