@@ -1,6 +1,6 @@
 $service = new Rebilly\Sdk\Service($client);
 
-$tagForm = Rebilly\Sdk\Model\Tag::from([]);
+$tagForm = new Rebilly\Sdk\Model\Tag();
 $tagForm->setName('tag-name')
 $tagForm->setType(Rebilly\Sdk\Model\Tag::TYPE_CUSTOMER);
 
