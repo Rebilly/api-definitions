@@ -11,8 +11,8 @@ $customerForm = Rebilly\Sdk\Model\Customer::from([])
                 Rebilly\Sdk\Model\ContactEmails::from([])
                     ->setLabel('main')
                     ->setValue('johndoe@email.com')
-                    ->setPrimary(true)
-            ])
+                    ->setPrimary(true),
+            ]),
     );
 
 try {

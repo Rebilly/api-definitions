@@ -1,6 +1,6 @@
 $service = new Rebilly\Sdk\Service($client);
 
-$resetPasswordTokenForm = Rebilly\Sdk\Model\ResetPasswordToken::from([]);
+$resetPasswordTokenForm = new Rebilly\Sdk\Model\ResetPasswordToken();
 $resetPasswordTokenForm->setUsername('username')
 
 try {

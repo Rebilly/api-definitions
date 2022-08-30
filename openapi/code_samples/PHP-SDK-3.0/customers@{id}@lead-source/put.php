@@ -1,8 +1,8 @@
 $service = new Rebilly\Sdk\Service($client);
 
-$leadSourceForm = Rebilly\Sdk\Model\LeadSource::from([]);
-$leadSourceForm->setSource('TestSource');
-$leadSourceForm->setCampaign('TestCampaign');
+$leadSourceForm = Rebilly\Sdk\Model\LeadSource::from([])
+    ->setSource('TestSource')
+    ->setCampaign('TestCampaign');
 
 try {
     $customer = $service->customers()->createLeadSource('myCustomerId', $leadSourceForm);

@@ -1,9 +1,9 @@
 $service = new Rebilly\Sdk\Service($client);
 
-$customerCredentialForm =Rebilly\Sdk\Model\CustomerCredential::from([]);
-$customerCredentialForm->setCustomerId('customerId');
-$customerCredentialForm->setUsername('test');
-$customerCredentialForm->setPassword('1234');
+$customerCredentialForm = Rebilly\Sdk\Model\CustomerCredential::from([])
+    ->setCustomerId('customerId')
+    ->setUsername('test')
+    ->setPassword('1234');
 
 try {
     $customerCredential = $service->customerAuthentication()->updateCredential('credentialId', $customerCredentialForm);
