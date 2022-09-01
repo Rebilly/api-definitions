@@ -1,14 +1,4 @@
-allOf:
-  - $ref: ../Common/CommonPlan.yaml
-  - properties:
-      invoiceTimeShift:
-        description: You can shift issue time and due time of invoices for this plan.
-        allOf:
-          - $ref: ../Invoices/InvoiceTimeShift.yaml
-      _links:
-        type: array
-        description: The links related to resource.
-        readOnly: true
-        minItems: 1
-        items:
-          $ref: ../Links/SelfLink.yaml
+oneOf:
+  - $ref: ./PlanTypes/OneTimeSalePlan.yaml
+  - $ref: ./PlanTypes/SubscriptionOrderPlan.yaml
+  - $ref: ./PlanTypes/TrialOnlyPlan.yaml
