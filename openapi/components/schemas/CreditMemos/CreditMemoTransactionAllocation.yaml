@@ -1,0 +1,41 @@
+type: object
+properties:
+  creditMemoId:
+    readOnly: true
+    description: ID of the credit memo that is allocated.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  transactionId:
+    readOnly: true
+    description: ID of the transaction that the credit memo is allocated to.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  amount:
+    description: |-
+      Amount of credit from the credit memo allocated to the transaction.
+      This can not exceed the unused amount of the credit memo or the amount of the transaction.
+
+      If amount is left empty, the lower of the following two values will be used:
+      - The unused amount of the credit memo.
+      - The amount of the transaction.
+    type: number
+    format: double
+  currency:
+    readOnly: true
+    allOf:
+      - $ref: ../CurrencyCode.yaml
+  createdTime:
+    description: Credit memo allocation time.
+    readOnly: true
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
+  _links:
+    type: array
+    description: The links related to the resource.
+    readOnly: true
+    items:
+      anyOf:
+        - $ref: ../../schemas/Links/TransactionLink.yaml
+        - $ref: ../../schemas/Links/CreditMemoLink.yaml

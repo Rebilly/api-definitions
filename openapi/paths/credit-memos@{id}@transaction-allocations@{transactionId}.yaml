@@ -1,0 +1,97 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: transactionId
+    in: path
+    description: Transaction ID.
+    required: true
+    schema:
+      type: string
+get:
+  x-products:
+    - Core
+  tags:
+    - Credit memos
+  summary: Get amount allocated from a credit memo to a transaction
+  operationId: GetCreditMemoTransactionAllocation
+  x-sdk-operation-name: getCreditMemoTransactionAllocation
+  description: >
+    Gets the amount allocated from the given credit memo to the given transaction.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+  responses:
+    '200':
+      description: Credit memo transaction allocation successfully retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CreditMemos/CreditMemoTransactionAllocation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Credit memos
+  summary: Allocate a credit memo to a transaction
+  operationId: PutCreditMemoTransactionAllocation
+  x-sdk-operation-name: applyCreditMemoTransactionAllocation
+  description: >
+    Allocates an amount from a credit memo to a transaction. The credit memo must have a non-zero unused amount.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CreditMemos/CreditMemoTransactionAllocation.yaml
+    description: CreditMemoAllocation resource.
+    required: true
+  responses:
+    '200':
+      description: Credit memo transaction allocation successfully updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CreditMemos/CreditMemo.yaml
+    '201':
+      description: Credit memo transaction allocation successfully created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CreditMemos/CreditMemo.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+delete:
+  x-products:
+    - Core
+  tags:
+    - Credit memos
+  summary: Delete the allocation from a credit memo to a transaction
+  operationId: DeleteCreditMemoTransactionAllocation
+  x-sdk-operation-name: deleteCreditMemoTransactionAllocation
+  description: |
+    Deletes the allocation from the given credit memo to the given transaction.
+    This changes the unused amount and the status of the credit memo accordingly.
+  responses:
+    '204':
+      description: Credit memo transaction allocation was deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
