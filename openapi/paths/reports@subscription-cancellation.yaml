@@ -16,10 +16,10 @@ get:
     - Reports
   tags:
     - Reports
-  summary: Retrieve transactions with their plan data
+  summary: Retrieve a subscription cancellation report
   operationId: GetSubscriptionCancellationReport
   x-sdk-operation-name: getSubscriptionCancellation
-  description: Retrieve transactions with their plan data.
+  description: Retrieve a subscription cancellation report.
   parameters:
     - name: periodStart
       in: query
@@ -27,12 +27,14 @@ get:
       required: true
       schema:
         type: string
+        format: date-time
     - name: periodEnd
       in: query
       description: Report end date.
       required: true
       schema:
         type: string
+        format: date-time
     - name: aggregationField
       in: query
       description: Report aggregation field.
