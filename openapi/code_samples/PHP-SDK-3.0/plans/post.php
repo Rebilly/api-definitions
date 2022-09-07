@@ -1,7 +1,7 @@
 $service = new Rebilly\Sdk\CoreService($client);
 
 $plan = Rebilly\Sdk\Model\SubscriptionOrderPlan::from([])
-    ->setProductId($product->getId())
+    ->setProductId('productId')
     ->setName('Test plan')
     ->setCurrency('USD')
     ->setPricing(new FlatRate(['price' => 9.99]))
