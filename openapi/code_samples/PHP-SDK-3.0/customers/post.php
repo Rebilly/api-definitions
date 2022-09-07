@@ -1,4 +1,4 @@
-$service = new Rebilly\Sdk\Service($client);
+$service = new Rebilly\Sdk\CoreService($client);
 
 $customerForm = Rebilly\Sdk\Model\Customer::from([])
     ->setWebsiteId('websiteId')

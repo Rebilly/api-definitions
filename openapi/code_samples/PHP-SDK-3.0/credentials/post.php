@@ -1,4 +1,4 @@
-$service = new Rebilly\Sdk\Service($client);
+$service = new Rebilly\Sdk\CoreService($client);
 
 $customerCredentialForm = Rebilly\Sdk\Model\CustomerCredential::from([])
     ->setCustomerId('customerId')
