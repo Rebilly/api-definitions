@@ -1,4 +1,4 @@
-$service = new Rebilly\Sdk\Service($client);
+$service = new Rebilly\Sdk\CoreService($client);
 
 $tagForm = new Rebilly\Sdk\Model\Tag();
 $tagForm->setName('tag-name')

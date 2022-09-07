@@ -1,4 +1,4 @@
-$service = new Rebilly\Sdk\Service($client);
+$service = new Rebilly\Sdk\CoreService($client);
 
 $authenticationOptionsForm = new Rebilly\Sdk\Model\AuthenticationOptions();
 // Regular expression below matches any password with 6+ length that contains alphabet symbols and/or numbers.

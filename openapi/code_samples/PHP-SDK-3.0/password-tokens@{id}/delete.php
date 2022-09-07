@@ -1,3 +1,3 @@
-$service = new Rebilly\Sdk\Service($client);
+$service = new Rebilly\Sdk\CoreService($client);
 
 $client->customerAuthentication()->deleteResetPasswordToken('tokenId');
