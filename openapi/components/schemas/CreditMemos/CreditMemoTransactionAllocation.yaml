@@ -2,7 +2,7 @@ type: object
 properties:
   creditMemoId:
     readOnly: true
-    description: ID of the credit memo that is allocated.
+    description: ID of the allocated credit memo.
     allOf:
       - $ref: ../ResourceId.yaml
   transactionId:
@@ -12,12 +12,12 @@ properties:
       - $ref: ../ResourceId.yaml
   amount:
     description: |-
-      Amount of credit from the credit memo allocated to the transaction.
-      This can not exceed the unused amount of the credit memo or the amount of the transaction.
+      Amount of credit that is allocated from the credit memo to the transaction.
+      This value can not exceed the unused amount of the credit memo or the transaction amount.
 
-      If amount is left empty, the lower of the following two values will be used:
+      If the `amount` value is not supplied, or is empty, the lesser of the following two values is used:
       - The unused amount of the credit memo.
-      - The amount of the transaction.
+      - The transaction amount.
     type: number
     format: double
   currency:
@@ -33,7 +33,7 @@ properties:
     $ref: ../UpdatedTime.yaml
   _links:
     type: array
-    description: The links related to the resource.
+    description: Related resource links.
     readOnly: true
     items:
       anyOf:

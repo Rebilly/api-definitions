@@ -2,7 +2,7 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
   - name: transactionId
     in: path
-    description: Transaction ID.
+    description: ID of a transaction on which a credit memo has been applied.
     required: true
     schema:
       type: string
@@ -15,7 +15,7 @@ get:
   operationId: GetCreditMemoTransactionAllocation
   x-sdk-operation-name: getCreditMemoTransactionAllocation
   description: >
-    Gets the amount allocated from the given credit memo to the given transaction.
+    Retrieves the amount allocated from the given credit memo to the given transaction.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -57,7 +57,7 @@ put:
           schema:
             $ref: ../components/schemas/CreditMemos/CreditMemo.yaml
     '201':
-      description: Credit memo transaction allocation successfully created.
+      description: Credit memo transaction allocation successfully completed.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
