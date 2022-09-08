@@ -34,12 +34,6 @@ properties:
     type: string
     format: date-time
     nullable: true
-  expiryDate:
-    description: The expiry date found on the document, null if not found.
-    type: string
-    format: date-time
-    nullable: true
-    deprecated: true
   expirationDate:
     description: The expiration date found on the document, null if not found.
     type: string
@@ -59,13 +53,38 @@ properties:
     readOnly: true
     example: true
   nationality:
-    description: The nationality found on the document, null otherwise.
+    description: The nationality found on a passport or citizenship document, null otherwise.
     type: string
     nullable: true
     example: US
     maxLength: 3
+  issuanceCountry:
+    description: Country where the document was issued.
+    type: string
+    nullable: true
+    example: CA
+    minLength: 2
+    maxLength: 2
+  issuanceRegion:
+    description: Region, state, province, or territory where the document was issued.
+    type: string
+    nullable: true
+    example: Ontario
+  documentNumber:
+    description: Unique number (it may have alphanumeric letters too depending on the document) on the identity document.
+    type: string
+    nullable: true
+    example: '1234567890'
   documentSubtype:
     description: The interpreted subtype of the uploaded document.
     type: string
     nullable: true
     example: passport
+
+  # deprecated
+  expiryDate:
+    description: The expiry date found on the document, null if not found.
+    type: string
+    format: date-time
+    nullable: true
+    deprecated: true
