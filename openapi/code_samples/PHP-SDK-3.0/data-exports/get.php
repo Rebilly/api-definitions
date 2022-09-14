@@ -4,7 +4,7 @@ $dataExportsPaginator = $service->dataExports()->getAllPaginator(limit: 5);
 foreach ($dataExportsPaginator as $dataExportPage) {
     printf("dataExports page %d/%d\n", $dataExportsPaginator->key() + 1, $dataExportsPaginator->count());
     foreach ($dataExportPage as $dataExport) {
-        printf("dataExport #%s: %s\n", $dataExport->getId(), $dataExport->getName());
+        printf("DataExport #%s: %s\n", $dataExport->getId(), $dataExport->getName());
     }
 }
 
