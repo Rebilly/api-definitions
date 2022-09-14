@@ -1,6 +1,6 @@
 $service = new Rebilly\Sdk\ReportsService($client);
 
-$service->reports()->getTimeSeriesTransaction(
+$report = $service->reports()->getTimeSeriesTransaction(
     'approval-rate',
     'leads.sales-agent',
     new DateTimeImmutable('2022-01-01'),

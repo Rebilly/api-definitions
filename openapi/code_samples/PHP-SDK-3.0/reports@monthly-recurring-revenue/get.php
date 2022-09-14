@@ -1,6 +1,6 @@
 $service = new Rebilly\Sdk\ReportsService($client);
 
-$service->reports()->getMonthlyRecurringRevenue(
+$report = $service->reports()->getMonthlyRecurringRevenue(
     'USD',
     '2022-01',
     '2022-03',

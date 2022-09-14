@@ -12,5 +12,5 @@ foreach ($dataExportsPaginator as $dataExportPage) {
 
 $dataExports = $service->dataExports()->getAll(limit: 100);
 foreach ($dataExports as $dataExport) {
-    printf("dataExport #%s: %s\n", $dataExport->getId(), $dataExport->getName());
+    printf("DataExport #%s: %s\n", $dataExport->getId(), $dataExport->getName());
 }

@@ -1,6 +1,6 @@
 $service = new Rebilly\Sdk\ReportsService($client);
 
-$service->reports()->getRetentionPercentage(
+$report = $service->reports()->getRetentionPercentage(
     'day',
     'month',
     new DateTimeImmutable('2022-01-01'),

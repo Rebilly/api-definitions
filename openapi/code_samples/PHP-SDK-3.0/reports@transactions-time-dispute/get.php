@@ -1,6 +1,6 @@
 $service = new Rebilly\Sdk\ReportsService($client);
 
-$service->reports()->getTransactionsTimeDispute(
+$report = $service->reports()->getTransactionsTimeDispute(
     'rebillNumber',
     new DateTimeImmutable('2022-01-01'),
     new DateTimeImmutable('now'),
