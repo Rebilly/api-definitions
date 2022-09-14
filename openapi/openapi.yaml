@@ -29,7 +29,7 @@ servers:
         description: |-
           Your organization ID.
           An organization is an entity that represents your company.
-          For more information, see [Obtain your organization ID](https://www.rebilly.com/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+          For more information, see [Obtain your organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
   - url: 'https://api.rebilly.com/organizations/{organizationId}'
     description: Live server
     variables:
@@ -38,7 +38,7 @@ servers:
         description: |-
           Your organization ID.
           An organization is an entity that represents your company.
-          For more information, see [Obtain your organization ID](https://www.rebilly.com/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+          For more information, see [Obtain your organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 
 components:
   securitySchemes:
@@ -100,6 +100,37 @@ tags:
       reuse the same coupon code. If you have a use case where you
       must reuse the same code,
       [contact Rebilly](https://www.rebilly.com/contact/).
+
+      ### Coupon restriction types
+
+      The following coupon description types are available:
+
+      - `restrict-to-countries`: Restricts a coupon for use in specific countries.
+      - `discounts-per-redemption`: Restricts the number of times that
+      the coupon can be applied by one redemption. For example, use this
+      restriction to configure a coupon that can only be applied to the
+      first subscription renewal of a particular product.
+      - `minimum-order-amount`: Sets a minimum order amount for a coupon
+      application. For example, if the restriction amount is $20, the
+      coupon is only applied to invoices with a total amount of $20 or more.
+      - `restrict-to-invoices`: Restricts a coupon to specific invoices.
+      - `restrict-to-plans`: Restricts a coupon to specific pricing plans.
+      - `restrict-to-subscriptions`: Restricts a coupon to specific
+      order subscriptions.
+      - `restrict-to-products`: Restricts a coupon to specific products.
+      - `paid-by-time`: Specifies a date and time at which a coupon
+      redemption will expire if not paid.
+      - `redemptions-per-customer`: Restricts the number of times that a
+      coupon can be redeemed by one customer. For example, use this
+      restriction to limit the number of redemptions to one per customer.
+      - `total-redemptions`: Restricts the number of times a coupon can
+      be redeemed by different customers.
+      - `restrict-to-bxgy`: Provides "buy X get Y" promotions. These
+      promotions incentivize new customers to buy and also reward
+      existing customers. This restriction type enables you to add
+      discounted plans to an invoice when a certain quantity of other
+      plans are purchased. For example, if a customer buys two or more
+      books, they get one free bookmark.
   - name: Customers
     description: |-
       Use these operations to manage customers. A customer is an
@@ -272,7 +303,7 @@ tags:
       sensitive cardholder info to your servers. We recommend using
       this with the FramePay library, which helps you set a form
       into this API resource and create payment tokens. For more
-      information, see the public key authentication scheme in the 
+      information, see the public key authentication scheme in the
       Authentication section.
   - name: Products
     description: |-
@@ -609,9 +640,9 @@ tags:
       [Storefront API](https://storefront-api-docs.rebilly.com/).
   - name: Users API
     description: |-
-      The Users API is a collection of user and Rebilly UI related 
-      endpoints and operations. A user represents a person who can 
-      log in to Rebilly, and take actions based on their granted 
+      The Users API is a collection of user and Rebilly UI related
+      endpoints and operations. A user represents a person who can
+      log in to Rebilly, and take actions based on their granted
       permissions, and role. For more information, see the
       [Rebilly User API](https://user-api-docs.rebilly.com).
   - name: Account
