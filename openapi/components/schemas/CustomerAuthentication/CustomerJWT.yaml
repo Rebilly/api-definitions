@@ -16,13 +16,17 @@ properties:
     type: string
     readOnly: true
   invalidate:
-    description: Whether to invalidate token after exchange or not.
+    description: |-
+      Specifies whether to invalidate a token after an exchange is
+      performed.
     type: boolean
     default: true
     example: true
     writeOnly: true
   oneTimePassword:
-    description: The one time password sent via an email. Should contain digits only.
+    description: |-
+      One time password that sent by email. This value must contain
+      digits only.
     type: string
     pattern: '^[0-9]{6}$'
     example: '123456'
@@ -42,19 +46,21 @@ properties:
         - address-proof
       redirectUrl: "https://mywebsite.com"
   createdTime:
-    description: Session created time.
+    description: Date and time at which the session was created.
     type: string
     format: date-time
     readOnly: true
   updatedTime:
     $ref: ../UpdatedTime.yaml
   expiredTime:
-    description: Session expired time. Defaults to one hour.
+    description: |-
+      Date and time at which the session expires. The default
+      value is one hour after the `createdTime` value.
     type: string
     format: date-time
   _links:
     type: array
-    description: The links related to resource.
+    description: Related resource links.
     readOnly: true
     minItems: 1
     items:
