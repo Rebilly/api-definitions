@@ -122,7 +122,7 @@ properties:
     items:
       $ref: ../ResourceId.yaml
   subscriptionIds:
-    description: Orders IDs of invoices that are related to the transaction.
+    description: Subscription IDs of invoices that are related to the transaction.
     readOnly: true
     type: array
     items:
@@ -161,7 +161,7 @@ properties:
       - $ref: ../Transactions/ThreeDSecureResult.yaml
   redirectUrl:
     description: |-
-      URL where the end-user is redirected when an offsite transaction
+      URL where the end-user is redirected to when an offsite transaction
       is completed. The default value is the website's configured URL.
     type: string
     format: uri
@@ -208,19 +208,19 @@ properties:
   customFields:
     $ref: ../ResourceCustomFields.yaml
   processedTime:
-    description: Date and time in which the transaction was processed.
+    description: Date and time at which the transaction was processed.
     x-sortable: true
     x-basic: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   createdTime:
-    description: Date and time in which the transaction was created.
+    description: Date and time at which the transaction was created.
     x-label: Created On
     x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
-    x-label: Date and time in which the transaction was last updated.
+    x-label: Date and time at which the transaction was last updated.
     x-sortable: true
     allOf:
       - $ref: ../UpdatedTime.yaml
