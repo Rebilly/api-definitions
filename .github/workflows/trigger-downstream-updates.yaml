@@ -55,7 +55,7 @@ jobs:
           ref: main
           repo: Rebilly/frontend-recomm
           token: ${{ secrets.MACHINE_USER_PAT }}
-          inputs: '{ "trigger-reason": "${{needs.generate-trigger-reason.outputs.reason}}" }'
+          inputs: '{ "trigger-reason": ${{toJSON(needs.generate-trigger-reason.outputs.reason)}} }'
 
   trigger-rebilly-js-sdk-update:
     name: Trigger JS SDK update
@@ -70,7 +70,7 @@ jobs:
           ref: main
           repo: Rebilly/rebilly-js-sdk
           token: ${{ secrets.MACHINE_USER_PAT }}
-          inputs: '{ "trigger-reason": "${{needs.generate-trigger-reason.outputs.reason}}" }'
+          inputs: '{ "trigger-reason": ${{toJSON(needs.generate-trigger-reason.outputs.reason)}} }'
 
   trigger-rebilly-php-sdk-update:
     name: Trigger PHP SDK update
@@ -85,4 +85,4 @@ jobs:
           ref: v3.x
           repo: Rebilly/rebilly-php
           token: ${{ secrets.MACHINE_USER_PAT }}
-          inputs: '{ "trigger-reason": "${{needs.generate-trigger-reason.outputs.reason}}" }'
+          inputs: '{ "trigger-reason": ${{toJSON(needs.generate-trigger-reason.outputs.reason)}} }'
