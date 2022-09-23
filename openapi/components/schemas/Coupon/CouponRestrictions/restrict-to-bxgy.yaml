@@ -1,4 +1,9 @@
-description: restrict-to-bxgy restrictions.
+description: |-
+  Provides "buy X get Y" promotions. These promotions incentivize new
+  customers to buy and also reward existing customers. This restriction
+  type enables you to add discounted plans to an invoice when a certain
+  quantity of other plans are purchased. For example, if a customer
+  buys two or more books, they get one free bookmark.
 allOf:
   - $ref: ../CouponRestriction.yaml
   - $ref: ../RedemptionRestriction.yaml
@@ -9,7 +14,10 @@ allOf:
     properties:
       buy:
         type: array
-        description: One or more plan and quantity definitions that must be purchased to receive all plans and quantities that are defined in the `get` operation.
+        description: |-
+          One or more plan and quantity definitions that must be
+          purchased to receive all plans and quantities that are
+          defined in the `get` operation.
         minItems: 1
         items:
           type: object
@@ -24,10 +32,15 @@ allOf:
             quantity:
               type: integer
               minimum: 1
-              description: Total quantity of the associated plan ID that must be purchased for this restriction to apply.
+              description: |-
+                Total quantity of the associated plan ID that must be
+                purchased for this restriction to apply.
       get:
         type: array
-        description: One or more plan and quantity definitions which will be added to a purchase if all of the definitions in the `buy` operation are met.
+        description: |-
+          One or more plan and quantity definitions which will be
+          added to a purchase if all definitions in the `buy` operation
+          are met.
         minItems: 1
         items:
           type: object
@@ -42,4 +55,6 @@ allOf:
             quantity:
               type: integer
               minimum: 1
-              description: Total quantity of the associated plan ID that will be received.
+              description: |-
+                Total quantity of the associated plan ID that will be
+                received.
