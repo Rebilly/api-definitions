@@ -156,7 +156,7 @@ Customer ID:
     description: ID of the invoiced customer.
 ```
 
-### Time stamp fields
+### Timestamp fields
 
 Use the following format to convey times.
 
