@@ -16,14 +16,17 @@ number:
   type: integer
 allocations:
   type: object
+  description: Allocations reduce the credit memo's unused amount.
   properties:
     transactions:
       type: array
+      description: |-
+        List of transactions (typically refunds, credits, and chargebacks) that are allocated to reducing the credit memo's unused amount. 
       items:
         type: object
         properties:
           transactionId:
-            description: ID of the transaction on which the credit memo is allocated.
+            description: ID of the transaction that the credit memo is allocated to.
             allOf:
               - $ref: ../ResourceId.yaml
           amount:
@@ -40,7 +43,7 @@ allocations:
             allOf:
               - $ref: ../CurrencyCode.yaml
           createdTime:
-            description: Date and time at which the credit memo is allocated.
+            description: Date and time at which a credit memo is allocated.
             allOf:
               - $ref: ../ServerTimestamp.yaml
           updatedTime:
