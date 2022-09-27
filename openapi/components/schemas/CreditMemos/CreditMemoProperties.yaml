@@ -15,39 +15,36 @@ number:
   readOnly: true
   type: integer
 allocations:
-  type: array
-  items:
-    type: object
-    properties:
-      transactions:
-        type: array
-        items:
-          type: object
-          properties:
-            transactionId:
-              description: ID of the transaction on which the credit memo is allocated.
-              allOf:
-                - $ref: ../ResourceId.yaml
-            amount:
-              description: |-
-                Amount of credit that is allocated from the credit memo to the transaction.
-                This value cannot exceed the unused amount of the credit memo or the transaction amount.
-                If the `amount` value is not supplied, the lesser of the following two values is used:
-                - The unused amount of the credit memo.
-                - The transaction amount.
-              type: number
-              format: double
-            currency:
-              readOnly: true
-              allOf:
-                - $ref: ../CurrencyCode.yaml
-            createdTime:
-              description: Date and time at which the credit memo is allocated.
-              readOnly: true
-              allOf:
-                - $ref: ../ServerTimestamp.yaml
-            updatedTime:
-              $ref: ../UpdatedTime.yaml
+  type: object
+  properties:
+    transactions:
+      type: array
+      items:
+        type: object
+        properties:
+          transactionId:
+            description: ID of the transaction on which the credit memo is allocated.
+            allOf:
+              - $ref: ../ResourceId.yaml
+          amount:
+            description: |-
+              Amount of credit that is allocated from the credit memo to the transaction.
+              This value cannot exceed the unused amount of the credit memo or the transaction amount.
+              If the `amount` value is not supplied, the lesser of the following two values is used:
+              - The unused amount of the credit memo.
+              - The transaction amount.
+            type: number
+            format: double
+          currency:
+            readOnly: true
+            allOf:
+              - $ref: ../CurrencyCode.yaml
+          createdTime:
+            description: Date and time at which the credit memo is allocated.
+            allOf:
+              - $ref: ../ServerTimestamp.yaml
+          updatedTime:
+            $ref: ../UpdatedTime.yaml
 items:
   type: array
   items:
