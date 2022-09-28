@@ -11,12 +11,12 @@ discriminator:
     risk-reserve-release: ./RiskReserveReleaseTransaction.yaml
 properties:
   id:
-    description: The ID of entry.
+    description: ID of the balance transaction.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   type:
-    description: The type of entry.
+    description: Type of balance transaction.
     type: string
     readOnly: true
     enum:
@@ -27,15 +27,16 @@ properties:
       - risk-reserve
       - risk-reserve-release
   parentId:
-    description: /
-      The ID of the parent entry if exists.
+    description: |-
+      ID of the parent entry if one exists.
 
-      Some types of transactions belong to the parent transactions.
-      For example, a `risk-reserve` belongs to a `charge`, while `risk-reserve-release` belongs to `risk-reserve`.
+      Some types of transactions relate to parent transactions.
+      For example, a `risk-reserve` relates to a `charge`, and a
+      `risk-reserve-release` relates a to `risk-reserve`.
     allOf:
       - $ref: ../ResourceId.yaml
   transactionId:
-    description: The ID of the related transaction.
+    description: ID of the related transaction.
     allOf:
       - $ref: ../ResourceId.yaml
   settlementCurrency:
@@ -46,19 +47,21 @@ properties:
     x-currency-field: settlementCurrency
     x-sortable: true
     x-basic: true
-    description: The settlement amount.
+    description: Amount of the settlement.
     type: number
     format: double
   settlementTime:
-    description: The expected settlement time.
+    description: Date and time of the expected settlement.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   settlementRate:
-    description: The settlement exchange rate if settlement currency does not match transaction currency.
+    description: |-
+      If the settlement currency does not match the transaction currency.
+      This field displays the exchange rate of the settlement.
     type: number
     format: double
   createdTime:
-    description: Entry created time.
+    description: Date and time at which the entry was created.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
