@@ -1,17 +1,20 @@
 type: object
 properties:
   currency:
-    description: Currency (three letter ISO 4217 alpha code).
+    description: |-
+      Currency code in ISO 4217 format.
+    minLength: 3
+    maxLength: 3
+    example: USD
     readOnly: true
     type: string
-    example: USD
   invoicedAmount:
-    description: Sum of all issued, past due, or paid invoices.
+    description: Total amount of all issued, past due, and paid invoices.
     readOnly: true
     type: number
     format: double
   collectedAmount:
-    description: Sum of all paid invoices.
+    description: Total amount of all paid invoices.
     readOnly: true
     type: number
     format: double
