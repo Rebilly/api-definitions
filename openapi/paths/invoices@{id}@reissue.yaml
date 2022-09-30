@@ -8,9 +8,9 @@ post:
   summary: Reissue an invoice
   operationId: PostInvoiceReissuance
   x-sdk-operation-name: reissue
-  description: >
-    Reissue an invoice with specified identifier string. It must be issued.
-    (status must be `unpaid` or `past-due`).
+  description: |-
+    Reissues an invoice with a specified identifier string. The status
+    of the invoice must be `unpaid` or `past-due`.
   requestBody:
     content:
       application/json:
@@ -20,7 +20,7 @@ post:
     required: true
   responses:
     '201':
-      description: Invoice was reissued.
+      description: Invoice reissued.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml

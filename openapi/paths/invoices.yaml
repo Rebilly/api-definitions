@@ -10,8 +10,7 @@ get:
     - SecretApiKey: []
     - JWT: []
     - ApplicationJWT: []
-  description: |
-    Retrieve a list of invoices.
+  description: Retrieves a list of invoices.
   parameters:
     - $ref: ../components/parameters/collectionFilter.yaml
     - $ref: ../components/parameters/collectionSort.yaml
@@ -21,7 +20,7 @@ get:
     - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: A list of invoices was retrieved.
+      description: List of invoices retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -58,13 +57,12 @@ post:
   summary: Create an invoice
   operationId: PostInvoice
   x-sdk-operation-name: create
-  description: |
-    Create an invoice.
+  description: Creates an invoice.
   requestBody:
     $ref: ../components/requestBodies/Invoice.yaml
   responses:
     '201':
-      description: Invoice was created.
+      description: Invoice created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
