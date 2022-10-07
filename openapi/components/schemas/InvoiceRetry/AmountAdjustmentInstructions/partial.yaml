@@ -3,16 +3,19 @@ allOf:
   - type: object
     properties:
       value:
-        description: The payment amount.
+        description: Amount of the payment.
         type: number
         format: float
       type:
-        description: The payment amount type.
+        description: Payment amount type.
         type: string
         enum:
           - percent
           - fixed
       afterApprovalPolicy:
+        description: |-
+          After an approved payment retry for an adjusted amount, this
+          field specifies whether to discount the remaining invoice amount.
         oneOf:
           - $ref: ./Policies/None.yaml
           - $ref: ./Policies/DiscountAmountRemaining.yaml
