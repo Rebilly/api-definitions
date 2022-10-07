@@ -2,8 +2,9 @@ allOf:
   - $ref: ./ApplicationInstance.yaml
   - properties:
       organizationId:
-        $ref: ../../schemas/Organizations/OrganizationId.yaml
         readOnly: true
+        allOf:
+          -  $ref: ../../schemas/Organizations/OrganizationId.yaml
       token:
         description: Session token used to authenticate an organization.
         type: string
