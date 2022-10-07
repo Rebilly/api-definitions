@@ -1,9 +1,10 @@
 type: object
-description: >
-  The calculation instruction of billing time.
+description: |-
+  Calculation instruction of the billing time.
 
-  This is used in conjunction with the **service period anchor** to calculate
-  the time the invoice is issued.
+  This is used in conjunction with the service period anchor to calculate
+  the time at which the invoice is issued. For more information, see
+  [Service period anchor, billing timing, and invoice time shift](https://www.rebilly.com/docs/dev-docs/concepts/#service-period-anchor-and-billing-timing-and-invoice-time-shift).
 required:
   - chronology
   - duration
@@ -11,12 +12,15 @@ required:
 properties:
   chronology:
     type: string
-    description: The chronology of the billing time relatively to the service period start.
+    description: |-
+      Sequential order of the billing time relative to the start of
+      the service period.
     enum:
       - before
   duration:
     type: integer
-    description: The number of the units.
+    description: |-
+      Amount of time by which to move the invoice issue time or date.
     minimum: 1
   unit:
     oneOf:

@@ -16,12 +16,11 @@ get:
     - Reports
   tags:
     - Reports
-  summary: Retrieve a dispute delays in days report
+  summary: Retrieve a transaction time dispute report
   operationId: GetTransactionTimeDisputeReport
   x-sdk-operation-name: getTransactionsTimeDispute
   description: >
-    Retrieve a dispute delays in days report, how much time between a.
-    transaction and a dispute.
+    Retrieve a dispute delays in days report, how much time between a transaction and a dispute.
   parameters:
     - name: aggregationField
       in: query
@@ -45,18 +44,20 @@ get:
       required: true
       schema:
         type: string
+        format: date-time
     - name: periodEnd
       in: query
       description: Report end date.
       required: true
       schema:
         type: string
+        format: date-time
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
     - $ref: ../components/parameters/collectionFilter.yaml
   responses:
     '200':
-      description: Report was retrieved successfully.
+      description: Report was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -76,3 +77,7 @@ get:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/reports@transactions-time-dispute/get.js
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/reports@transactions-time-dispute/get.php

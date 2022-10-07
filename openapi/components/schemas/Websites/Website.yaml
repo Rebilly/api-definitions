@@ -6,25 +6,29 @@ required:
   - serviceEmail
 properties:
   id:
-    description: The website identifier string.
+    description: |-
+      Unique website identifier string. A website is where an
+      organization obtains a customer through a subscription. For more
+      information, see
+      [Obtain an organization ID and website ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   name:
-    description: The website name.
+    description: Name of the website.
     type: string
   url:
-    description: The website domain address.
+    description: Domain address of the website.
     type: string
   servicePhone:
-    description: The website customer service phone number.
+    description: Customer service phone number of the website.
     type: string
   serviceEmail:
-    description: The website customer service email address.
+    description: Customer service email address of the website.
     type: string
     format: email
   createdTime:
-    description: Website created time.
+    description: Date and time at which the website was created.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
@@ -36,12 +40,15 @@ properties:
   organizationId:
     deprecated: true
     readOnly: true
-    description: Organization ID.
+    description: |-
+      Unique organization identifier.
+      An organization is an entity that represents a company.
+      For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
     allOf:
       - $ref: ../ResourceId.yaml
   _links:
     type: array
-    description: The links related to resource.
+    description: Related resource links.
     readOnly: true
     minItems: 1
     items:

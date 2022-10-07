@@ -9,32 +9,34 @@ required:
   - reasonCode
 properties:
   id:
-    description: The dispute identifier string.
+    description: Dispute identifier string.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
   customerId:
-    description: The dispute's customer ID.
+    description: |-
+      ID of the customer who is disputing a transaction.
     type: string
     readOnly: true
   transactionId:
-    description: The dispute's transaction ID.
+    description: ID of the disputed transaction.
     type: string
   currency:
     allOf:
       - $ref: ./CurrencyCode.yaml
   amount:
-    description: The dispute amount.
+    description: Dispute amount.
     type: number
     format: double
   acquirerReferenceNumber:
-    description: The dispute's acquirer reference number.
+    description: Acquirer reference number for the dispute.
     type: string
   caseId:
-    description: The case ID for the dispute.
+    description: Case ID of the dispute.
     type: string
   reasonCode:
-    description: The dispute's reason code.
+    description: |-
+      Code used in the chargeback that describes the reason for the dispute.
     type: string
     enum:
       - '1000'
@@ -205,7 +207,7 @@ properties:
       - 'B'
 
   category:
-    description: The dispute's category.
+    description: Category of dispute.
     type: string
     readOnly: true
     enum:
@@ -218,7 +220,7 @@ properties:
       - subscription-canceled
       - uncategorized
   type:
-    description: The dispute's type.
+    description: Type of dispute.
     type: string
     enum:
       - information-request
@@ -229,7 +231,7 @@ properties:
       - ethoca-alert
       - verifi-alert
   status:
-    description: The dispute's status.
+    description: Status of the dispute.
     type: string
     enum:
       - response-needed
@@ -239,30 +241,35 @@ properties:
       - lost
       - unknown
   postedTime:
-    description: Dispute posted time.
+    description: Date and time at which the dispute is posted.
     type: string
     format: date-time
   deadlineTime:
-    description: Dispute deadline time.
+    description: |-
+      Latest date and time by which a merchant must submit a
+      representment for a dispute. If the deadline is missed, the
+      merchant loses the dispute.
     type: string
     format: date-time
   rawResponse:
-    description: Dispute raw response from gateway.
+    description: |-
+      Raw response from the payment gateway that processed the disputed
+      transaction.
     type: string
     readOnly: true
   resolvedTime:
-    description: Dispute resolved time.
+    description: Date and time at which the dispute was resolved.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   createdTime:
-    description: Dispute created time.
+    description: Date and time at which the dispute was created.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   updatedTime:
     $ref: UpdatedTime.yaml
   _links:
     type: array
-    description: The links related to resource.
+    description: Related resource links.
     readOnly: true
     minItems: 1
     items:
@@ -271,9 +278,9 @@ properties:
         - $ref: ./Links/TransactionLink.yaml
   _embedded:
     type: array
-    description: >-
-      Any embedded objects available that are requested by the `expand`
-      querystring parameter.
+    description: |-
+      Embedded objects that are requested by the `expand`
+      query parameter.
     readOnly: true
     minItems: 1
     items:

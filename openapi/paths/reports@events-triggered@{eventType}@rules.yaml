@@ -35,17 +35,19 @@ get:
       required: true
       schema:
         type: string
+        format: date-time
     - name: periodEnd
       in: query
       description: Report end date.
       required: true
       schema:
         type: string
+        format: date-time
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
   responses:
     '200':
-      description: Report was retrieved successfully.
+      description: Report was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -64,5 +66,8 @@ get:
   x-codeSamples:
     - lang: JavaScript
       source:
-        $ref: >-
-          ../code_samples/JavaScript/reports@events-triggered@{eventType}@rules/get.js
+        $ref: ../code_samples/JavaScript/reports@events-triggered@{eventType}@rules/get.js
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/reports@events-triggered@{eventType}@rules/get.php

@@ -8,11 +8,11 @@ get:
   summary: Retrieve a dispute
   operationId: GetDispute
   x-sdk-operation-name: get
-  description: |
-    Retrieve a dispute with specified identifier string.
+  description: |-
+    Retrieves a dispute with specified identifier string.
   responses:
     '200':
-      description: Dispute was retrieved successfully.
+      description: Dispute retrieved.
       content:
         application/json:
           schema:
@@ -35,22 +35,22 @@ put:
     - Core
   tags:
     - Disputes
-  summary: Create or update a Dispute with predefined ID
+  summary: Upsert a dispute
   operationId: PutDispute
   x-sdk-operation-name: update
-  description: |
-    Create or update a Dispute with predefined identifier string.
+  description: |-
+    Creates or updates (upserts) a dispute with a specified identifier string.
   requestBody:
     $ref: ../components/requestBodies/Dispute.yaml
   responses:
     '200':
-      description: Dispute was updated.
+      description: Dispute updated.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Dispute.yaml
     '201':
-      description: Dispute was created.
+      description: Dispute created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml

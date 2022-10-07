@@ -5,14 +5,14 @@ get:
     - Core
   tags:
     - Files
-  summary: Retrieve a File Record
+  summary: Retrieve a file record
   operationId: GetFile
   x-sdk-operation-name: get
   description: |
-    Retrieve a File with specified identifier string.
+    Retrieves a file with a specified ID.
   responses:
     '200':
-      description: File was retrieved successfully.
+      description: File retrieved.
       content:
         application/json:
           schema:
@@ -35,12 +35,14 @@ put:
     - Core
   tags:
     - Files
-  summary: Update the File with predefined ID
+  summary: Update a file
   operationId: PutFile
   x-sdk-operation-name: update
-  description: >
-    Update the File with predefined ID. Note that file can be uploaded with POST.
-    only.
+  description: |-
+    Updates a file with a specified ID.
+
+    > **Note:** Files can only be uploaded by POST request.
+    For more information, see the Create a file operation.
   requestBody:
     content:
       application/json:
@@ -50,7 +52,7 @@ put:
     required: true
   responses:
     '200':
-      description: File was updated.
+      description: File updated.
       content:
         application/json:
           schema:
@@ -75,14 +77,14 @@ delete:
     - Core
   tags:
     - Files
-  summary: Delete a File
+  summary: Delete a file
   operationId: DeleteFile
   x-sdk-operation-name: delete
-  description: |
-    Delete the File with predefined identifier string.
+  description: |-
+    Deletes a file with a specified ID.
   responses:
     '204':
-      description: File was deleted.
+      description: File deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

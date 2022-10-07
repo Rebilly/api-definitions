@@ -2,7 +2,7 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
   - name: messageId
     in: path
-    description: The Transaction Timeline message ID.
+    description: ID of the transaction timeline message.
     required: true
     schema:
       type: string
@@ -14,11 +14,11 @@ get:
   summary: Retrieve a transaction Timeline message
   operationId: GetTransactionTimeline
   x-sdk-operation-name: getTimelineMessage
-  description: |
-    Retrieve a timeline message with specified identifier string.
+  description: |-
+    Retrieves a timeline message with a specified identifier string.
   responses:
     '200':
-      description: Timeline message was retrieved successfully.
+      description: Timeline message retrieved.
       content:
         application/json:
           schema:
@@ -39,14 +39,14 @@ delete:
     - Core
   tags:
     - Transactions timeline
-  summary: Delete a Transaction Timeline message
+  summary: Delete a transaction timeline message
   operationId: DeleteTransactionTimeline
   x-sdk-operation-name: deleteTimelineMessage
-  description: |
-    Delete a Transaction Timeline message with predefined identifier string.
+  description: |-
+    Deletes a transaction timeline message with a specified identifier string.
   responses:
     '204':
-      description: Transaction Timeline message was deleted.
+      description: Transaction timeline message deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

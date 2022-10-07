@@ -16,7 +16,7 @@ get:
     Retrieve a plan with specified identifier string.
   responses:
     '200':
-      description: Plan was retrieved successfully.
+      description: Plan was retrieved.
       content:
         application/json:
           schema:
@@ -34,16 +34,20 @@ get:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/plans@{id}/get.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/plans@{id}/get.php
 put:
   x-products:
     - Core
   tags:
     - Plans
-  summary: Create or update a Plan with predefined ID
+  summary: Upsert a plan
   operationId: PutPlan
   x-sdk-operation-name: update
   description: |
-    Create or update a Plan with predefined identifier string.
+    Create or update (upsert) a Plan with specified identifier string.
   requestBody:
     $ref: ../components/requestBodies/Plan.yaml
   responses:
@@ -77,6 +81,10 @@ put:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/plans@{id}/put.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/plans@{id}/put.php
 delete:
   x-products:
     - Core
@@ -86,7 +94,7 @@ delete:
   operationId: DeletePlan
   x-sdk-operation-name: delete
   description: |
-    Delete a Plan with predefined identifier string.
+    Delete a Plan with specified identifier string.
   responses:
     '204':
       description: Plan was deleted.
@@ -103,3 +111,7 @@ delete:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/plans@{id}/delete.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/plans@{id}/delete.php

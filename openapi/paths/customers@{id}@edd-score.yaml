@@ -5,14 +5,15 @@ get:
     - Core
   tags:
     - Customers
-  summary: Retrieve a customer's EDD score data
+  summary: Retrieve a customer's EDD score
   operationId: GetCustomerEddScore
   x-sdk-operation-name: getCustomerEddScore
-  description: |
-    Retrieve a EDD score of given customer.
+  description: |-
+    Retrieves an EDD score for a customer with a specified identifier
+    string.
   responses:
     '200':
-      description: EDD score was retrieved successfully.
+      description: EDD score retrieved.
       content:
         application/json:
           schema:
@@ -28,10 +29,11 @@ patch:
     - Core
   tags:
     - Customers
-  summary: Update a customer's EDD score data
+  summary: Update a customer's EDD score
   operationId: PatchCustomerEddScore
   x-sdk-operation-name: patchCustomerEddScore
-  description: Update customer's EDD score data.
+  description: |-
+    Updates an EDD score for a customer with a specified identifier string.
   requestBody:
     content:
       application/json:
@@ -47,7 +49,7 @@ patch:
                 - $ref: ../components/schemas/Edd/EddData.yaml
   responses:
     '200':
-      description: EDD score was updated.
+      description: EDD score updated.
       content:
         application/json:
           schema:
