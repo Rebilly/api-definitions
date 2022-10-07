@@ -34,7 +34,9 @@ allOf:
         readOnly: true
       organizationId:
         readOnly: true
-        $ref: ../../../schemas/OrganizationId.yaml
+        $ref: ../../../schemas/Organizations/OrganizationId.yaml
+        allOf:
+          - $ref: ../../../schemas/ResourceId.yaml
   - $ref: ../SubscriptionCancellationState.yaml
   # Always keep the SubscriptionMetadata the latest merged schema,
   # it contains _links and _embedded which is better to keep at the end of doc.

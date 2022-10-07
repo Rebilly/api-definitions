@@ -15,7 +15,9 @@ allOf:
       organizationId:
         deprecated: true
         readOnly: true
-        $ref: ../../../schemas/OrganizationId.yaml
+        $ref: ../../../schemas/Organizations/OrganizationId.yaml
+        allOf:
+          - $ref: ../../../schemas/ResourceId.yaml
   # Always keep the SubscriptionMetadata the latest merged schema,
   # it contains _links and _embedded which is better to keep at the end of doc.
   - $ref: ../SubscriptionMetadata.yaml

@@ -6,11 +6,7 @@ required:
   - serviceEmail
 properties:
   id:
-    description: |-
-      Unique website identifier string. A website is where an
-      organization obtains a customer through a subscription. For more
-      information, see
-      [Obtain an organization ID and website ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+    $ref: ../Websites/WebsiteId.yaml
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
@@ -40,7 +36,9 @@ properties:
   organizationId:
     deprecated: true
     readOnly: true
-    $ref: ../../schemas/OrganizationId.yaml
+    $ref: ../../schemas/Organizations/OrganizationId.yaml
+    allOf:
+      - $ref: ../../schemas/ResourceId.yaml
   _links:
     type: array
     description: Related resource links.
