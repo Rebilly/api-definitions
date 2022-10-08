@@ -9,33 +9,35 @@ properties:
     allOf:
       - $ref: ./ResourceId.yaml
   planId:
-    description: ID of the plan a usage of which is reported.
+    description: ID of the plan for which a usage is reported.
     allOf:
       - $ref: ./ResourceId.yaml
   invoiceId:
-    description: ID of the invoice where usage is considered. Filled when invoice with the usage is issued.
+    description: ID of the invoice for which usage is considered. This value is added when the invoice with usage is issued.
     readOnly: true
     nullable: true
     allOf:
       - $ref: ./ResourceId.yaml
   invoiceItemId:
-    description: ID of the invoice item where usage is considered. Filled when invoice with the usage is issued.
+    description: ID of the invoice item for which usage is considered. This value is added when the invoice with usage is issued.
     readOnly: true
     nullable: true
     allOf:
       - $ref: ./ResourceId.yaml
   quantity:
-    description: Number of of used units of a plan's product.
+    description: |-
+       Number of used product units of a plan. Products are the goods and services that 
+       your business sells. Plans describe how the customer must pay for products.
     type: number
     format: float
     minimum: 0
     exclusiveMinimum: true
   usageTime:
-    description: ISO 8601 date time formatted timestamp to which a usage belongs. When not provided or empty, date and time of the request is used as the default value.
+    description: Date and time, in ISO 8601 format, at which a usage occurred. If this value is not provided or is empty, the date and time of the request is used.
     type: string
     format: date-time
   createdTime:
-    description: Date and time when usage report submitted.
+    description: Date and time at which the usage report is submitted.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   updatedTime:
