@@ -214,7 +214,7 @@ Response example:
 ```yaml
 responses:
   '200':
-    description: Revenue audit report successfully retrieved.
+    description: Revenue audit report retrieved.
 ```
 
 Response example:
@@ -222,7 +222,7 @@ Response example:
 ```yaml
 responses:
   '200':
-    description: Report successfully retrieved.
+    description: Report retrieved.
 ```
 
 ### Objects, parameters, and properties descriptions examples
