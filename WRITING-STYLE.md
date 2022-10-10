@@ -198,7 +198,6 @@ Is OTP required:
     description: |-
       Specifies whether a One-Time Password (OTP) is required to
       exchange the authentication token.
-    
 ```
 
 is processed outside of Rebilly:
@@ -207,10 +206,8 @@ is processed outside of Rebilly:
   isProcessedOutside:
     type: boolean
     description: |-
-          Specifies whether the transaction was processed outside 
-          of Rebilly.
+      Specifies whether the transaction was processed outside of Rebilly.
 ```
-          of Rebilly.
 
 #### Website ID example
 
