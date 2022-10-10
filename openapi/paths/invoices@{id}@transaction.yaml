@@ -8,19 +8,19 @@ post:
   summary: Apply a transaction to an invoice
   operationId: PostInvoiceTransaction
   x-sdk-operation-name: applyTransaction
-  description: >
-    Apply a transaction to an invoice. The invoice must be unpaid.
-    The transaction must have a non-zero unused amount (not fully applied to other invoices).
+  description: |-
+    Applies a transaction to an invoice. The invoice status must be
+    `unpaid`, and the transaction must have a non-zero unused amount.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/Invoices/InvoiceTransaction.yaml
-    description: InvoiceTransaction resource.
+    description: Invoice transaction resource.
     required: true
   responses:
     '200':
-      description: Transaction was applied to invoice.
+      description: Transaction applied to invoice.
       content:
         application/json:
           schema:

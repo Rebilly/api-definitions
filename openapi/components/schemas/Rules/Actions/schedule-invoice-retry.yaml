@@ -5,6 +5,7 @@ allOf:
     properties:
       attempts:
         type: array
+        description: Describes the retry instruction.
         minItems: 1
         items:
           type: object
@@ -14,7 +15,9 @@ allOf:
             amountAdjustmentInstruction:
               $ref: ../../InvoiceRetry/InvoiceRetryAmountAdjustmentInstruction.yaml
             tryBackupInstruments:
-              description: Whether to use backup payment instruments on invoice payment retry or not.
+              description: |-
+                Specifies whether to use backup payment instruments
+                on an invoice payment retry.
               type: boolean
               default: false
           required:
