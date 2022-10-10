@@ -185,9 +185,9 @@ Use the following format to convey boolean times.
 Is Java enabled in a browser:
 
 ```yaml
-   isJavaEnabled:
-     type: boolean
-     description: Specifies whether Java is enabled in a browser.
+  isJavaEnabled:
+    type: boolean
+    description: Specifies whether Java is enabled in a browser.
 ```
 
 Is OTP required:
