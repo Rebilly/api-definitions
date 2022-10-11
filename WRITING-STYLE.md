@@ -200,7 +200,7 @@ Is OTP required:
       exchange the authentication token.
 ```
 
-is processed outside of Rebilly:
+Is processed outside of Rebilly:
 
 ```yaml
   isProcessedOutside:
