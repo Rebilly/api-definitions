@@ -2,8 +2,10 @@ $subscriptionForm = new Rebilly\Entities\Subscription();
 $subscriptionForm->setCustomerId('customerId');
 $subscriptionForm->setWebsiteId('websiteId');
 $subscriptionForm->setItems($subscriptionForm->createItems([
-    'planId' => 'my-plan',
-    'quantity' => 1,
+    [
+        'planId' => 'my-plan',
+        'quantity' => 1,
+    ],
 ]));
 $subscriptionForm->setBillingAddress([
     'firstName' => 'John',

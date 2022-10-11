@@ -4,54 +4,60 @@ required:
   - unitPrice
 properties:
   id:
-    description: The website identifier string.
+    description: |-
+      Unique website identifier string. A website is where an
+      organization obtains a customer through a subscription. For more
+      information, see
+      [Obtain an organization ID and website ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   type:
-    description: Invoice item's type.
+    description: Type of invoice item.
     type: string
     x-basic: true
     enum:
       - debit
       - credit
   description:
-    description: Invoice item's description.
+    description: Description of the invoice item.
     type: string
   unitPrice:
-    description: Invoice item's price.
+    description: Unit price of the invoice item.
     type: number
     format: double
   quantity:
-    description: Invoice item's quantity.
+    description: Quantity of the invoice item.
     type: integer
   price:
-    description: Invoice item's total price.
+    description: Total price of the invoice item.
     type: number
     format: double
     readOnly: true
   productId:
-    description: The product's ID.
+    description: ID of the product.
     allOf:
       - $ref: ../ResourceId.yaml
   discountAmount:
-    description: Invoice item discount amount.
+    description: Discount amount applied to the invoice item.
     type: number
     format: double
     readOnly: true
   periodStartTime:
-    description: Start time.
+    description: Date and time at which the billing period starts.
     type: string
     format: date-time
   periodEndTime:
-    description: End time.
+    description: Date and time at which the billing period ends.
     type: string
     format: date-time
   periodNumber:
-    description: Invoice item subscription order period number.
+    description: |-
+      Number of subscription order billing periods in which the invoice
+      item has been included.
     type: integer
   createdTime:
-    description: Invoice item created time.
+    description: Date and time at which the invoice item was created.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:

@@ -6,9 +6,13 @@ allOf:
     properties:
       duration:
         type: integer
-        description: The number of the units.
+        description: |-
+          Latest point in time at which the event should occur. The
+          event will occur at a random time between the initial time
+          and duration time.
         minimum: 1
       unit:
+        description: Unit of time.
         oneOf:
           - $ref: ../../TimeUnit.yaml
           - $ref: ../../TimePluralUnit.yaml
