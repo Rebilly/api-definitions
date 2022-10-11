@@ -4,4 +4,13 @@ required:
   - customerId
   - currency
 properties:
+  customerId:
+    $ref: ../CustomerId.yaml
+  currency:
+    $ref: ../CurrencyCode.yaml
+  invoiceId:
+    description: ID of the invoice on which the credit memo is issued.
+    nullable: true
+    allOf:
+      - $ref: ../ResourceId.yaml
   $ref: ./CreditMemoProperties.yaml
