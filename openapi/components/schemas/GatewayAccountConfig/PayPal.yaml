@@ -5,6 +5,23 @@ allOf:
     required:
       - settings
     properties:
+      credentials:
+        type: object
+        description: PayPal credentials object. This object specifies the PayPal Partner account from which a gateway account is registered.
+        properties:
+          partnerId:
+            type: string
+            description: ID of the PayPal Partner account.
+          partnerClientId:
+            type: string
+            description: ID of the PayPal Partner account API client.
+          partnerSecret:
+            type: string
+            description: Secret key for the PayPal Partner account API client.
+            format: password
+          partnerBnCode:
+            type: string
+            description: BN Code for the PayPal Partner account. This unique code tracks the source of API requests.
       settings:
         type: object
         description: PayPal settings object.
