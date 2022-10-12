@@ -1,6 +1,16 @@
 servers:
-  - $ref: ../components/servers/SandboxServer.yaml
-  - $ref: ../components/servers/LiveServer.yaml
+  - url: 'https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}'
+    description: Sandbox server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
+    description: Live server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
