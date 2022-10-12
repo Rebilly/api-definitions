@@ -1,0 +1,29 @@
+content:
+  application/json:
+    schema:
+      properties:
+        dataExportId:
+          description: ID of the data export.
+          type: string
+        fileId:
+          description: ID of the data export file.
+          type: string
+        eventType:
+          type: string
+          description: Rebilly webhooks event type.
+          enum:
+            - data-export-completed
+        _embedded:
+          type: object
+          properties:
+            dataExport:
+              $ref: ../../schemas/DataExports/DataExport.yaml
+        _links:
+          type: array
+          description: Related resource links.
+          minItems: 2
+          items:
+            anyOf:
+              - $ref: ../../schemas/Links/DataExportLink.yaml
+              - $ref: ../../schemas/Links/LinkFileDownload.yaml
+description: Data export webhook body resource.
