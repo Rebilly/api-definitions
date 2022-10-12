@@ -1,0 +1,47 @@
+post:
+  x-products:
+    - Core
+  tags:
+    - KYC documents
+  summary: Compare faces
+  operationId: PostKycFacesComparison
+  x-sdk-operation-name: compareFaces
+  description: |-
+    Compares faces in source and target images.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - sourceFileId
+            - targetFileId
+          properties:
+            sourceFileId:
+              allOf:
+                - $ref: ../ResourceId.yaml
+            targetFileId:
+              allOf:
+                - $ref: ../ResourceId.yaml
+  responses:
+    '201':
+      description: Faces compared.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              hasMatchingFace:
+                type: boolean
+                description: Specifies whether the source and target images have a matching face.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
