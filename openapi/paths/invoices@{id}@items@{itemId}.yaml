@@ -2,7 +2,7 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
   - name: itemId
     in: path
-    description: The invoice item ID.
+    description: ID of the invoice item.
     required: true
     schema:
       type: string
@@ -11,14 +11,14 @@ get:
     - Core
   tags:
     - Invoices
-  summary: Get an invoice item
+  summary: Retrieve an invoice item
   operationId: GetInvoiceItem
   x-sdk-operation-name: getInvoiceItem
-  description: |
-    Get an invoice item.
+  description: |-
+    Retrieves an invoice item.
   responses:
     '200':
-      description: InvoiceItem was retrieved successfully.
+      description: Invoice item retrieved.
       content:
         application/json:
           schema:
@@ -34,6 +34,10 @@ get:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/invoices@{id}@items@{itemId}/get.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/invoices@{id}@items@{itemId}/get.php
 put:
   x-products:
     - Core
@@ -42,18 +46,18 @@ put:
   summary: Update an invoice item
   operationId: PutInvoiceItem
   x-sdk-operation-name: updateInvoiceItem
-  description: |
-    Update an invoice item.
+  description: |-
+    Updates an invoice item.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/Invoices/InvoiceItem.yaml
-    description: InvoiceItem resource.
+    description: Invoice item resource.
     required: true
   responses:
     '200':
-      description: InvoiceItem was updated.
+      description: Invoice item updated.
       content:
         application/json:
           schema:
@@ -69,6 +73,10 @@ put:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/invoices@{id}@items@{itemId}/put.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/invoices@{id}@items@{itemId}/put.php
 delete:
   x-products:
     - Core
@@ -77,11 +85,11 @@ delete:
   summary: Delete an invoice item
   operationId: DeleteInvoiceItem
   x-sdk-operation-name: deleteInvoiceItem
-  description: |
-    Delete an invoice item.
+  description: |-
+    Deletes an invoice item.
   responses:
     '204':
-      description: Invoice item was deleted.
+      description: Invoice item deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '422':
@@ -93,3 +101,7 @@ delete:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/invoices@{id}@items@{itemId}/delete.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/invoices@{id}@items@{itemId}/delete.php

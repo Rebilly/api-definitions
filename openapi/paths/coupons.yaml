@@ -3,11 +3,10 @@ get:
     - Core
   tags:
     - Coupons
-  summary: Retrieve a list of coupons
+  summary: Retrieve coupons
   operationId: GetCouponCollection
   x-sdk-operation-name: getAll
-  description: |
-    Retrieve a list of coupons.
+  description: Retrieves a list of coupons.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -16,7 +15,7 @@ get:
     - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
-      description: A list of coupons was retrieved successfully.
+      description: List of coupons retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -49,13 +48,13 @@ post:
   summary: Create a coupon
   operationId: PostCoupon
   x-sdk-operation-name: create
-  description: |
-    Create a coupon.
+  description: |-
+    Creates a coupon.
   requestBody:
     $ref: ../components/requestBodies/Coupon.yaml
   responses:
     '201':
-      description: Coupon was created.
+      description: Coupon created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml

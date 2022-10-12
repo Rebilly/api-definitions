@@ -9,7 +9,7 @@ properties:
     allOf:
       - $ref: ./ResourceId.yaml
   fileId:
-    description: Linked File object id.
+    description: ID of the linked file object.
     type: string
   relatedType:
     description: Linked object type.
@@ -31,23 +31,23 @@ properties:
       - transaction
       - transaction-timeline-comment
   relatedId:
-    description: Linked object Id.
+    description: Linked object ID.
     type: string
   name:
-    description: The Original Attachment name.
+    description: Name of original attachment.
     type: string
   description:
-    description: The Attachment description.
+    description: Description of the attachment.
     type: string
   createdTime:
-    description: Creation date/time.
+    description: Date and time at which the attachment was created.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   updatedTime:
     $ref: UpdatedTime.yaml
   _links:
     type: array
-    description: The links related to resource.
+    description: Related resource links.
     readOnly: true
     minItems: 3
     items:
@@ -57,9 +57,9 @@ properties:
         - $ref: ./Links/AttachmentResourceLink.yaml
   _embedded:
     type: array
-    description: >-
-      Any embedded objects available that are requested by the `expand`
-      querystring parameter.
+    description: |-
+      Embedded objects that are requested by the `expand`
+      query parameter.
     readOnly: true
     minItems: 1
     items:

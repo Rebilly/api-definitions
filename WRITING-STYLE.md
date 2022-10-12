@@ -156,6 +156,26 @@ Customer ID:
     description: ID of the invoiced customer.
 ```
 
+### Timestamp fields
+
+Use the following format to convey times.
+
+#### Examples
+
+Coupon created time:
+
+```yaml
+  createdTime:
+    description: Date and time at which the coupon is created.
+```
+
+Coupon expired time:
+
+```yaml
+  expiredTime:
+    description: Date and time at which the coupon expires.
+```
+
 #### Website ID example
 
 This ID must be described in detail because the reader may not be aware of its context in the Rebilly product.
@@ -194,7 +214,7 @@ Response example:
 ```yaml
 responses:
   '200':
-    description: Revenue audit report successfully retrieved.
+    description: Revenue audit report retrieved.
 ```
 
 Response example:
@@ -202,7 +222,7 @@ Response example:
 ```yaml
 responses:
   '200':
-    description: Report successfully retrieved.
+    description: Report retrieved.
 ```
 
 ### Objects, parameters, and properties descriptions examples

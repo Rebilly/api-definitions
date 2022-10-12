@@ -12,7 +12,7 @@ get:
     Retrieve a Gateway Account with specified identifier string.
   responses:
     '200':
-      description: Gateway Account was retrieved successfully.
+      description: Gateway Account was retrieved.
       content:
         application/json:
           schema:
@@ -35,11 +35,11 @@ put:
     - Users
   tags:
     - Gateway accounts
-  summary: Create or update a Gateway Account with predefined ID
+  summary: Upsert a gateway account
   operationId: PutGatewayAccount
   x-sdk-operation-name: update
   description: |
-    Create or update a GatewayAccount with predefined identifier string.
+    Create or update (upsert) a GatewayAccount with specified identifier string.
   requestBody:
     $ref: ../components/requestBodies/GatewayAccount.yaml
   responses:
@@ -78,11 +78,11 @@ patch:
     - Users
   tags:
     - Gateway accounts
-  summary: Update a Gateway Account with predefined ID
+  summary: Update a Gateway Account with specified ID
   operationId: PatchGatewayAccount
   x-sdk-operation-name: update
   description: |
-    Update a GatewayAccount with predefined identifier string.
+    Update a GatewayAccount with specified identifier string.
   requestBody:
     $ref: ../components/requestBodies/GatewayAccount.yaml
   responses:
@@ -113,7 +113,7 @@ delete:
   operationId: DeleteGatewayAccount
   x-sdk-operation-name: delete
   description: |
-    Delete a Gateway Account with predefined identifier string.
+    Delete a Gateway Account with specified identifier string.
   responses:
     '204':
       description: Gateway Account was deleted.

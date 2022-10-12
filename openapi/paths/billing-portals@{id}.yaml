@@ -8,11 +8,10 @@ get:
   summary: Retrieve a billing portal
   operationId: GetBillingPortal
   x-sdk-operation-name: get
-  description: |
-    Retrieve a billing portal with specified identifier string.
+  description: Retrieves a billing portal with a specified identifier string.
   responses:
     '200':
-      description: Billing portal was retrieved successfully.
+      description: Billing portal retrieved.
       content:
         application/json:
           schema:
@@ -28,20 +27,19 @@ put:
     - Users
   tags:
     - Billing portals
-  summary: Create or update a billing portal
+  summary: Upsert a billing portal
   operationId: PutBillingPortal
   x-sdk-operation-name: update
-  description: |
-    Create or update a billing portal with predefined identifier string.
+  description: Creates or updates (upserts) a billing portal with a specified identifier string.
   responses:
     '200':
-      description: Billing portal was updated.
+      description: Billing portal updated.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/BillingPortal.yaml
     '201':
-      description: Billing portal was created.
+      description: Billing portal created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -70,11 +68,10 @@ delete:
   summary: Delete a billing portal
   operationId: DeleteBillingPortal
   x-sdk-operation-name: delete
-  description: |
-    Delete a billing portal with predefined identifier string.
+  description: Deletes a billing portal with a specified identifier string.
   responses:
     '204':
-      description: Billing portal was deleted.
+      description: Billing portal deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

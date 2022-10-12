@@ -3,20 +3,19 @@ get:
     - Core
   tags:
     - Customers timeline
-  summary: Retrieve a list of customer timeline custom event types
+  summary: Retrieve customer timeline custom event types
   operationId: GetCustomerTimelineCustomEventTypeCollection
   x-sdk-operation-name: getAll
-  description: |
-    Retrieve a list of customer timeline custom event types.
+  description: |-
+    Retrieves a list of customer timeline custom event types.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
     - $ref: ../components/parameters/collectionFilter.yaml
   responses:
     '200':
-      description: >-
-        A list of customer timeline custom event types was retrieved
-        successfully.
+      description: |-
+        List of customer timeline custom event types retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -39,21 +38,21 @@ post:
     - Core
   tags:
     - Customers timeline
-  summary: Create Customer Timeline custom event type
+  summary: Create customer timeline custom event type
   operationId: PostCustomerTimelineCustomEventType
   x-sdk-operation-name: create
-  description: |
-    Create Customer Timeline custom event type.
+  description: |-
+    Creates a customer timeline custom event type.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/Timelines/CustomerTimelineCustomEvent.yaml
-    description: Customer Timeline Custom Event Type resource.
+    description: Customer timeline custom event type resource.
     required: true
   responses:
     '201':
-      description: Customer Timeline Custom Event Type was created.
+      description: Customer timeline custom event type created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml

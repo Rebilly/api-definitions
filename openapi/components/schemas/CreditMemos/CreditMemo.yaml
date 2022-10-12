@@ -20,6 +20,39 @@ properties:
     description: An auto-incrementing number based on the sequence of credit memos for any particular customer.
     readOnly: true
     type: integer
+  allocations:
+    type: object
+    description: Allocations reduce the credit memo's unused amount.
+    properties:
+      transactions:
+        type: array
+        description: |-
+          List of transactions (typically refunds, credits, and chargebacks) that are allocated to reducing the credit memo's unused amount. 
+        items:
+          type: object
+          properties:
+            transactionId:
+              description: ID of the transaction that the credit memo is allocated to.
+              allOf:
+                - $ref: ../ResourceId.yaml
+            amount:
+              description: |-
+                Amount of credit that is allocated from the credit memo to the transaction.
+                If the `amount` value is not supplied or exceeds the unused amount of the credit memo or the transaction amount, the lesser of the following two values is used:
+                - The unused amount of the credit memo.
+                - The transaction amount.
+              type: number
+              format: double
+            currency:
+              readOnly: true
+              allOf:
+                - $ref: ../CurrencyCode.yaml
+            createdTime:
+              description: Date and time at which a credit memo is allocated.
+              allOf:
+                - $ref: ../ServerTimestamp.yaml
+            updatedTime:
+              $ref: ../UpdatedTime.yaml
   items:
     type: array
     items:
@@ -145,7 +178,7 @@ properties:
     $ref: ../UpdatedTime.yaml
   _links:
     type: array
-    description: The links related to resource.
+    description: Related resource links.
     readOnly: true
     items:
       anyOf:

@@ -3,14 +3,14 @@ get:
     - Core
   tags:
     - Customer authentication
-  summary: Read current authentication options
+  summary: Retrieve authentication options
   operationId: GetAuthenticationOption
   x-sdk-operation-name: getAuthOptions
-  description: |
-    Read current authentication options.
+  description: |-
+    Retrieves customer authentication options.
   responses:
     '200':
-      description: Current authentication options was retrieved successfully.
+      description: Authentication options retrieved.
       content:
         application/json:
           schema:
@@ -24,6 +24,10 @@ get:
     - lang: PHP
       source:
         $ref: ../code_samples/PHP/authentication-options/get.php
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/authentication-options/get.php
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/authentication-options/get.js
@@ -35,19 +39,19 @@ put:
   summary: Change authentication options
   operationId: PutAuthenticationOption
   x-sdk-operation-name: updateAuthOptions
-  description: |
-    Change options.
+  description: |-
+    Changes customer authentication options.
   requestBody:
     content:
       application/json:
         schema:
           $ref: >-
             ../components/schemas/CustomerAuthentication/AuthenticationOptions.yaml
-    description: Authentication Options resource.
+    description: Authentication options resource.
     required: true
   responses:
     '200':
-      description: Authentication Options were updated.
+      description: Authentication options updated.
       content:
         application/json:
           schema:
@@ -66,3 +70,7 @@ put:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/authentication-options/put.js
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/authentication-options/put.php

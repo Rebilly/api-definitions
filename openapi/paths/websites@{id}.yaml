@@ -16,7 +16,7 @@ get:
     Retrieve a website with specified identifier string.
   responses:
     '200':
-      description: Website was retrieved successfully.
+      description: Website was retrieved.
       content:
         application/json:
           schema:
@@ -39,11 +39,11 @@ put:
     - Users
   tags:
     - Websites
-  summary: Create or update a website with predefined ID
+  summary: Upsert a website
   operationId: PutWebsite
   x-sdk-operation-name: update
   description: |
-    Create or update a website with predefined identifier string.
+    Create or update (upsert) a website with specified identifier string.
   requestBody:
     $ref: ../components/requestBodies/Website.yaml
   responses:
@@ -86,7 +86,7 @@ delete:
   operationId: DeleteWebsite
   x-sdk-operation-name: delete
   description: |
-    Delete a website with predefined identifier string.
+    Delete a website with specified identifier string.
   responses:
     '204':
       description: Website was deleted.
