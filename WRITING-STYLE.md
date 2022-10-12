@@ -178,7 +178,7 @@ Coupon expired time:
 
 ### Boolean fields
 
-Use the following format to convey boolean times.
+Use the following format to convey boolean types.
 
 #### Examples
 
