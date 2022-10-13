@@ -57,7 +57,7 @@ People:
 Inanimate objects:
 
 - Update a subscription's invoice. ❌
-- Update a subscription invoice. ✅
+- Update an invoice for a subscription. ✅
 - Edit an invoice's items. ❌
 - Edit invoice items. ✅
 - Edit the items of an invoice. ✅
@@ -215,6 +215,39 @@ Coupon expired time:
 ```yaml
   expiredTime:
     description: Date and time at which the coupon expires.
+```
+
+### Boolean fields
+
+Use the following format to convey boolean types.
+
+#### Examples
+
+Is Java enabled in a browser:
+
+```yaml
+  isJavaEnabled:
+    type: boolean
+    description: Specifies whether Java is enabled in a browser.
+```
+
+Is OTP required:
+
+```yaml
+  otpRequired:
+    type: boolean
+    description: |-
+      Specifies whether a One-Time Password (OTP) is required to
+      exchange the authentication token.
+```
+
+Is processed outside of Rebilly:
+
+```yaml
+  isProcessedOutside:
+    type: boolean
+    description: |-
+      Specifies whether the transaction was processed outside of Rebilly.
 ```
 
 #### Website ID example
