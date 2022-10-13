@@ -6,6 +6,7 @@ This topic provides guidance on how to write API documentation descriptions.
 
 - Start all sentences with a capital letter and end them with a period (except summaries).
 - Add meaningful descriptions to all operations, objects, and parameters.
+- Avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
 - Avoid future (often includes "will") and past tense (often includes words ending in "ed").
 - Avoid [passive voice](https://developers.google.com/tech-writing/one/active-voice).
 - Avoid using ("should", "could", "can").
@@ -42,6 +43,43 @@ This description provides detail on what an organization is in the context of th
       or your company, as a merchant. For more information, see [Obtain your organization ID](https://www.rebilly.com/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 ```
 
+## Possessive apostrophes
+
+Possessive apostrophes (`'s`) indicate ownership. Do not assign ownership to inanimate objects.
+This is [anthropomorphic](https://www.oreilly.com/library/view/microsoft-manual-of/9780735669833/ch01s03.html), and in some instances, may infer a hierarchy.
+
+### Examples
+
+People:
+
+- Update a customer's email address. ✅
+
+Inanimate objects:
+
+- Update a subscription's invoice. ❌
+- Update an invoice for a subscription. ✅
+- Edit an invoice's items. ❌
+- Edit invoice items. ✅
+- Edit the items of an invoice. ✅
+
+Acronyms:
+
+- KYC's settings configure risk score threshold and weight options. ❌
+- Use KYC settings to configure risk score threshold and weight options. ✅
+
+Products:
+
+- Use Rebilly's data tables to view customer data. ❌
+- Use data tables in Rebilly to view customer data. ✅
+- To view customer data in Rebilly, use data tables. ✅
+
+Features:
+
+- Use revenue recognition's MRR report to view predictable recurring revenue. ❌
+- Use the revenue recognition MRR report to view predictable recurring revenue. ✅
+- Use the MRR report in revenue recognition to view predictable recurring revenue. ✅
+- To view predictable recurring revenue, use the MRR report in revenue recognition. ✅
+
 ## Tags
 
 We use tags to group related operations. When searching operations, the reader may look at the tag description for the context. It is important that we add detail to these descriptions and link to related content if required.
@@ -64,6 +102,7 @@ We use tags to group related operations. When searching operations, the reader m
 ## Summaries
 
 - Do not end a summary with a period.
+- Avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
 - Start with an imperative verb (Create, Retrieve, Merge, Delete ...)
 - Use sentence case capitalization, capitalize the first letter of the first word and use lowercase thereafter.
 
@@ -96,6 +135,7 @@ This section provides guidance on how to write operation, object, and parameter 
 - Start all operations with an active verb (Retrieves, Adds, Creates, Updates, Deletes, Sets, Specifies ...)
 - Do not start with an imperative (Create, Retrieve, Merge ...). The user may read this as a command.
 - Avoid starting with "The" or "A". Omit articles for ease of reading.
+- Avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
 - Provide detail and link to related content if necessary.
 
 **Tip:**
@@ -131,7 +171,8 @@ Delete a customer by ID:
 
 ### ID fields
 
-Avoid repeating the field name as the description. This provides no value to the reader.
+Avoid repeating the field name as the description. This provides no value to the reader. 
+Also, avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
 
 #### ID examples
 
@@ -176,6 +217,39 @@ Coupon expired time:
     description: Date and time at which the coupon expires.
 ```
 
+### Boolean fields
+
+Use the following format to convey boolean types.
+
+#### Examples
+
+Is Java enabled in a browser:
+
+```yaml
+  isJavaEnabled:
+    type: boolean
+    description: Specifies whether Java is enabled in a browser.
+```
+
+Is OTP required:
+
+```yaml
+  otpRequired:
+    type: boolean
+    description: |-
+      Specifies whether a One-Time Password (OTP) is required to
+      exchange the authentication token.
+```
+
+Is processed outside of Rebilly:
+
+```yaml
+  isProcessedOutside:
+    type: boolean
+    description: |-
+      Specifies whether the transaction was processed outside of Rebilly.
+```
+
 #### Website ID example
 
 This ID must be described in detail because the reader may not be aware of its context in the Rebilly product.
@@ -214,7 +288,7 @@ Response example:
 ```yaml
 responses:
   '200':
-    description: Revenue audit report successfully retrieved.
+    description: Revenue audit report retrieved.
 ```
 
 Response example:
@@ -222,12 +296,13 @@ Response example:
 ```yaml
 responses:
   '200':
-    description: Report successfully retrieved.
+    description: Report retrieved.
 ```
 
 ### Objects, parameters, and properties descriptions examples
 
-Provide as much detail as is necessary for the reader to understand what the value is, and how it relates to an operation.
+Provide as much detail as is necessary for the reader to understand what the value is, and how it relates to an operation. 
+Avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
 
 ```Markdown
 - Number of elements in a customer object.
