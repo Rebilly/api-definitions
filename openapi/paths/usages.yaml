@@ -1,0 +1,68 @@
+get:
+  x-products:
+    - Core
+  tags:
+    - Usage
+  summary: Retrieve usage records
+  operationId: GetUsageCollection
+  x-sdk-operation-name: getAll
+  description: |
+    Retrieves a list of usage records.
+  parameters:
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+  responses:
+    '200':
+      description: List of usage records retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Usage.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Usage
+  summary: Create a usage record
+  operationId: PostUsage
+  x-sdk-operation-name: create
+  description: |
+    Creates a usage report.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Usage.yaml
+  responses:
+    '201':
+      description: Usage record created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Usage.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
