@@ -69,3 +69,36 @@ put:
       $ref: ../components/responses/NotFound.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
+patch:
+  x-products:
+    - Core
+  tags:
+    - Credit memos
+  summary: Update credit memo, allocation, or both
+  operationId: PatchCreditMemo
+  x-sdk-operation-name: patch
+  description: |-
+    Updates a credit memo, credit memo allocation, or both credit memo and allocation with a specified ID.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            $ref: ../components/schemas/CreditMemos/CreditMemoProperties.yaml
+  responses:
+    '200':
+      description: Credit memo, credit memo allocation, or both credit memo and allocation updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CreditMemos/CreditMemo.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
