@@ -57,7 +57,7 @@ People:
 Inanimate objects:
 
 - Update a subscription's invoice. ❌
-- Update a subscription invoice. ✅
+- Update an invoice for a subscription. ✅
 - Edit an invoice's items. ❌
 - Edit invoice items. ✅
 - Edit the items of an invoice. ✅
