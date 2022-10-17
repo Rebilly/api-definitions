@@ -11,17 +11,16 @@ properties:
   filter:
     type: string
     description: |-
-      Use this filter to select customers during broadcast message
-      processing.
+      Use this filter to select customers during broadcast message processing.
 
-      This field uses the same syntax as the `query` filter, but without
-      the `filter=` prefix. Examples: `firstName:John`, `firstName:John;lastName:Doe`.
+      This field uses the same syntax as the `query` filter,
+      but without the `filter=` prefix. Examples: `firstName:John`, `firstName:John;lastName:Doe`.
 
       > **Important**: Do not URL encode the filter value.
     example: 'firstName:John;lastName:Doe'
   title:
     type: string
-    description: Title of the message. This title is displayed in reports.
+    description: Title of the message. This title displays in reports.
   messages:
     type: array
     description: List of messages.
@@ -36,19 +35,17 @@ properties:
         version:
           type: string
           description: |-
-            Version number of the message. Use this field to distinguish
-            between multiple messages by name and version number. If
-            there are no versions, this field is empty.
+            Version number of the message.
+            Use this field to distinguish between multiple messages by name and version number.
+            If there are no versions, this field is empty.
         weight:
           type: integer
           description: |-
-            Weight distribution value that is assigned to a template
-            for a split test. Each template in a split test can be
-            assigned a weight. The higher the weight value, the more likely
-            the message template will be used.
+            Weight distribution value that is assigned to a template for a split test.
+            Each template in a split test can be assigned a weight.
+            The higher the weight value, the more likely the message template will be used.
 
-            The split test algorithm does not assess locale when
-            making a weighted template selection.
+            The split test algorithm does not assess locale when making a weighted template selection.
           minimum: 0
           maximum: 100
           example: 75
@@ -58,9 +55,8 @@ properties:
             Split test templates.
 
             Use split tests to determine which content is most effective.
-            Split tests send variations of the same message to different
-            customers or leads. You can then send the winning message
-            to the remaining customers or leads.
+            Split tests send variations of the same message to different customers or leads.
+            You can then send the winning message to the remaining customers or leads.
           type: array
           minItems: 1
           items:
@@ -75,37 +71,35 @@ properties:
 
                   To verify an email address:
                     1. [Create an email delivery setting](../../Email-delivery-settings/operation/PostEmailDeliverySetting).
-                    In the response, you receive the email and a token.
-                    1. [Verify the email delivery](../../Email-delivery-settings/operation/PutEmailDeliverySettingsVerification) by passing the
-                    token as the path parameter.
+                      In the response, you receive the email and a token.
+                    1. [Verify the email delivery](../../Email-delivery-settings/operation/PutEmailDeliverySettingsVerification) by passing the token as the path parameter.
                 maxLength: 254
                 example: example@example.com
               subject:
                 type: string
                 description: |-
-                  Subject of the message. The use of template placeholders
-                  is permitted for this field.
+                  Subject of the message.
+                  The use of template placeholders is permitted for this field.
                 maxLength: 998
                 example: Sujet de démonstration
               text:
                 type: string
                 description: |-
-                  Text body of the message. To use content from the
-                  `html` field, leave this field empty. The use of
-                  template placeholders is permitted for this field.
+                  Text body of the message.
+                  To use content from the `html` field, leave this field empty.
+                  The use of template placeholders is permitted for this field.
                 example: Texte de démonstration
               html:
                 type: string
                 description: |-
-                  HTML body of the message. To use content from the
-                  `text` field, leave this field empty. The use of
-                  template placeholders is permitted for this field.
+                  HTML body of the message.
+                  To use content from the `text` field, leave this field empty.
+                  The use of template placeholders is permitted for this field.
                 example: <p>Texte de démonstration</p>
               locale:
                 type: string
                 description: |-
-                  Language locale identifier in [RFC
-                  5646](https://tools.ietf.org/html/rfc5646) format.
+                  Language locale identifier in [RFC 5646](https://tools.ietf.org/html/rfc5646) format.
                 example: fr-FR
             required:
               - from
@@ -120,11 +114,11 @@ properties:
     type: string
     format: date-time
     description: |-
-      Date and time at which the split test messages are schedule to send.
+      Date and time at which the split test messages are scheduled to send.
   startSendingTime:
     type: string
     format: date-time
-    description: Date and time at which the message is schedule to send.
+    description: Date and time at which the message is scheduled to send.
   status:
     readOnly: true
     type: string
