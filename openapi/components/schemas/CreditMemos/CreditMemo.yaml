@@ -1,16 +1,17 @@
 type: object
 description: Credit memo object.
-required:
-  - customerId
-  - currency
-properties:
-  customerId:
-    $ref: ../CustomerId.yaml
-  currency:
-    $ref: ../CurrencyCode.yaml
-  invoiceId:
-    description: ID of the invoice to which the credit memo is issued.
-    nullable: true
-    allOf:
-      - $ref: ../ResourceId.yaml
-  $ref: ./CreditMemoProperties.yaml
+allOf: 
+  - $ref: CommonCreditMemo.yaml
+  - required:
+      - customerId
+      - currency
+    properties:
+      customerId:
+        $ref: ../CustomerId.yaml
+      currency:
+        $ref: ../CurrencyCode.yaml
+      invoiceId:
+        description: ID of the invoice to which the credit memo is issued.
+        nullable: true
+        allOf:
+          - $ref: ../ResourceId.yaml
