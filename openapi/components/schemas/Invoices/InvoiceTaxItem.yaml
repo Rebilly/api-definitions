@@ -4,14 +4,14 @@ required:
   - description
 properties:
   amount:
-    description: Tax amount.
+    description: Amount of tax.
     type: number
     format: double
   description:
     type: string
-    description: Tax description.
+    description: Description of the tax.
   rate:
-    description: Tax rate.
+    description: Overall sales tax rate which includes state, county, city and district tax.
     type: number
     format: double
     readOnly: true
@@ -44,6 +44,30 @@ properties:
     readOnly: true
     nullable: true
     example: 0.38
+  stateRate:
+    description: State sales tax rate for given location.
+    type: number
+    format: double
+    readOnly: true
+    nullable: true
+  countyRate:
+    description: County sales tax rate for given location.
+    type: number
+    format: double
+    readOnly: true
+    nullable: true
+  cityRate:
+    description: City sales tax rate for given location.
+    type: number
+    format: double
+    readOnly: true
+    nullable: true
+  specialDistrictRate:
+    description: Special district sales tax rate for given location.
+    type: number
+    format: double
+    readOnly: true
+    nullable: true
   jurisdictions:
     description: Jurisdiction names for the invoice.
     type: object

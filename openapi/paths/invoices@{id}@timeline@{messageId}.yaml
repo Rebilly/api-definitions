@@ -2,7 +2,7 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
   - name: messageId
     in: path
-    description: The Invoice Timeline message ID.
+    description: ID of the invoice timeline message.
     required: true
     schema:
       type: string
@@ -11,14 +11,14 @@ get:
     - Core
   tags:
     - Invoices timeline
-  summary: Retrieve an Invoice Timeline message
+  summary: Retrieve an invoice timeline message
   operationId: GetInvoiceTimeline
   x-sdk-operation-name: getTimelineMessage
-  description: |
-    Retrieve a invoice message with specified identifier string.
+  description: |-
+    Retrieves an invoice timeline message with specified identifier string.
   responses:
     '200':
-      description: Invoice message was retrieved.
+      description: Invoice message retrieved.
       content:
         application/json:
           schema:
@@ -42,14 +42,14 @@ delete:
     - Core
   tags:
     - Invoices timeline
-  summary: Delete an Invoice Timeline message
+  summary: Delete an invoice timeline message
   operationId: DeleteInvoiceTimeline
   x-sdk-operation-name: deleteTimelineMessage
-  description: |
-    Delete an Invoice Timeline message with specified identifier string.
+  description: |-
+    Deletes an invoice timeline message with a specified identifier string.
   responses:
     '204':
-      description: Invoice Timeline message was deleted.
+      description: Invoice timeline message deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

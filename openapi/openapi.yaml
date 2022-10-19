@@ -359,6 +359,9 @@ tags:
       invoice for each service period.
       For more information, see
       [Orders](https://www.rebilly.com/docs/dev-docs/concepts/#orders).
+  - name: Usage
+    description: |-
+      Reports the product usage of a subscription item for metered billing purposes.
   - name: Tags
     description: >-
       Use tags to organize and categorize customers or KYC documents
@@ -780,8 +783,6 @@ paths:
     $ref: './paths/invoices@{id}@transaction-allocations.yaml'
   '/invoices/{id}/transaction':
     $ref: './paths/invoices@{id}@transaction.yaml'
-  '/customers/{id}/upcoming-invoices':
-    $ref: './paths/customers@{id}@upcoming-invoices.yaml'
   '/invoices/{id}/timeline':
     $ref: './paths/invoices@{id}@timeline.yaml'
   '/invoices/{id}/timeline/{messageId}':
@@ -878,6 +879,10 @@ paths:
     $ref: './paths/subscriptions@{id}@timeline.yaml'
   '/subscriptions/{id}/timeline/{messageId}':
     $ref: './paths/subscriptions@{id}@timeline@{messageId}.yaml'
+  '/usages':
+    $ref: './paths/usages.yaml'
+  '/usages/{id}':
+    $ref: './paths/usages@{id}.yaml'
   /tags:
     $ref: ./paths/tags.yaml
   '/tags/{tag}':
@@ -1514,3 +1519,6 @@ x-webhooks:
   waiting-gateway-transaction-completed:
     post:
       $ref: ./webhooks/waiting-gateway-transaction-completed.yaml
+  data-export-completed:
+    post:
+      $ref: ./webhooks/data-export-completed.yaml

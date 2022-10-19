@@ -1,21 +1,17 @@
 type: object
-description: >
-  The invoice time shift in conjunction with `billingTiming` allows to setup
-  different billing use cases such as:
+description: |-
+  Use invoice time shift to control the billing time.
 
-  - Bill immediately when the service period _starts_
+  Invoice time shift adjusts the invoice issue and due date when billing must occur before the service period changes.
 
-  - Bill immediately after the service period _ends_
+  Use invoice time shift in conjunction with `billingTiming` to:
 
-  - Bill _interval of time_ before the service period _starts_
-
-  - Bill _interval of time_ after the service period _starts_
-
-  - Bill _interval of time_ before the service period _ends_
-
-  - Bill _interval of time_ after the service period _ends_
-
-  It allows to control the billing time.
+  - Bill immediately when the service period starts.
+  - Bill immediately after the service period ends.
+  - Bill at an interval of time before the service period starts.
+  - Bill at an interval of time after the service period starts.
+  - Bill at an interval of time before the service period ends.
+  - Bill at an interval of time after the service period ends.
 properties:
   issueTimeShift:
     $ref: ../Scheduling/IssueTimeShiftInstruction.yaml

@@ -2,25 +2,21 @@ get:
   x-products:
     - Core
   tags:
-    - Invoices
-  summary: Retrieve invoices
-  operationId: GetInvoiceCollection
+    - Usage
+  summary: Retrieve usage records
+  operationId: GetUsageCollection
   x-sdk-operation-name: getAll
-  security:
-    - SecretApiKey: []
-    - JWT: []
-    - ApplicationJWT: []
-  description: Retrieves a list of invoices.
+  description: |
+    Retrieves a list of usage records.
   parameters:
     - $ref: ../components/parameters/collectionFilter.yaml
     - $ref: ../components/parameters/collectionSort.yaml
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
     - $ref: ../components/parameters/collectionQuery.yaml
-    - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: List of invoices retrieved.
+      description: List of usage records retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -33,57 +29,40 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/Invoices/Invoice.yaml
+              $ref: ../components/schemas/Usage.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-  x-codeSamples:
-    - lang: PHP
-      source:
-        $ref: ../code_samples/PHP/invoices/get.php
-    - lang: JavaScript
-      source:
-        $ref: ../code_samples/JavaScript/invoices/get.js
-    - lang: PHP
-      label: PHP-SDK-3.0
-      source:
-        $ref: ../code_samples/PHP-SDK-3.0/invoices/get.php
 post:
   x-products:
     - Core
   tags:
-    - Invoices
-  summary: Create an invoice
-  operationId: PostInvoice
+    - Usage
+  summary: Create a usage record
+  operationId: PostUsage
   x-sdk-operation-name: create
-  description: Creates an invoice.
+  description: |
+    Creates a usage report.
   requestBody:
-    $ref: ../components/requestBodies/Invoice.yaml
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Usage.yaml
   responses:
     '201':
-      description: Invoice created.
+      description: Usage record created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Invoices/Invoice.yaml
+            $ref: ../components/schemas/Usage.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-codeSamples:
-    - lang: PHP
-      source:
-        $ref: ../code_samples/PHP/invoices/post.php
-    - lang: JavaScript
-      source:
-        $ref: ../code_samples/JavaScript/invoices/post.js
-    - lang: PHP
-      label: PHP-SDK-3.0
-      source:
-        $ref: ../code_samples/PHP-SDK-3.0/invoices/post.php

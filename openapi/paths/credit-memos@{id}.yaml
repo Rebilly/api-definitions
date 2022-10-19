@@ -69,3 +69,34 @@ put:
       $ref: ../components/responses/NotFound.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
+patch:
+  x-products:
+    - Core
+  tags:
+    - Credit memos
+  summary: Partially update a credit memo
+  operationId: PatchCreditMemo
+  x-sdk-operation-name: patch
+  description: |-
+    Partially updates a credit memo with a specified identifier string.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CreditMemos/CommonCreditMemo.yaml
+  responses:
+    '200':
+      description: Credit memo updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CreditMemos/CreditMemo.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
