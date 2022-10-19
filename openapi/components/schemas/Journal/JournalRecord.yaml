@@ -1,0 +1,79 @@
+type: object
+required:
+  - type
+  - journalEntryId
+  - customerId
+  - invoiceId
+  - invoiceItemId
+  - debitAccount
+  - creditAccount
+properties:
+  id:
+    description: ID of the journal record.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  journalEntryId:
+    description: ID of the journal entry.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  customerId:
+    description: ID of the customer.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  invoiceId:
+    description: ID of the invoice.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  invoiceItemId:
+    description: ID of the invoice item.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  type:
+    type: string
+    readOnly: true
+    enum:
+      - automated
+      - manual
+  currency:
+    description: Currency of the journal record revenue.
+    allOf:
+      - $ref: ../CurrencyCode.yaml
+  estimatedAmount:
+    description: |-
+      Amount of revenue estimated to be recognized at the scheduling date.
+      
+      Value is ignored when updating a journal record with `type` of `automated`.
+    nullable: true
+    type: number
+    format: double
+  recognizedAmount:
+    description: Amount of revenue recognized at the journal period end.
+    nullable: true
+    type: number
+    format: double
+  debitAccountId:
+    description: ID of the debit journal account.
+    nullable: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  creditAccountId:
+    description: ID of the credit journal account.
+    nullable: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  _embedded:
+    type: array
+    description: |-
+      Embedded objects that are requested by the `expand`
+      query parameter.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Embeds/CustomerEmbed.yaml
+        - $ref: ../Embeds/InvoiceEmbed.yaml
+        - $ref: ../Embeds/InvoiceItemEmbed.yaml
+        - $ref: ../Embeds/JournalAccountDebitEmbed.yaml
+        - $ref: ../Embeds/JournalAccountCreditEmbed.yaml

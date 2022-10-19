@@ -1,0 +1,58 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Journal
+  summary: Retrieve journal account
+  operationId: GetJournalAccount
+  x-sdk-operation-name: getAccount
+  description: |
+    Retrieve a journal account with a predefined identifier.
+  responses:
+    '200':
+      description: A journal account was retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Journal/JournalAccount.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+patch:
+  x-products:
+    - Core
+  tags:
+    - Journal
+  summary: Update a journal account
+  operationId: PatchJournalAccount
+  x-sdk-operation-name: updateAccount
+  description: |
+    Update a journal account.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Journal/JournalAccount.yaml
+    description: Journal account resource.
+    required: true
+  responses:
+    '200':
+      description: Journal account was updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Journal/JournalAccount.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+      

@@ -1,0 +1,25 @@
+type: object
+properties:
+  id:
+    description: ID of the journal entry.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  period:
+    type: object
+    properties:
+      startDate:
+        type: string
+        format: date
+        example: 2022-09-01
+      endDate:
+        type: string
+        format: date
+        example: 2022-09-30
+  description:
+    type: string
+  references:
+    type: array
+    readOnly: true
+    items:
+      $ref: ../Integrations/IntegrationReference.yaml

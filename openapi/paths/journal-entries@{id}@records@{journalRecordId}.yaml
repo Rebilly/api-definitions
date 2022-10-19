@@ -1,0 +1,79 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/journalRecordId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Journal
+  summary: Retrieve journal record
+  operationId: GetJournalRecord
+  x-sdk-operation-name: getRecord
+  description: |
+    Retrieve a journal record with a predefined identifier.
+  responses:
+    '200':
+      description: A journal record was retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Journal/JournalRecord.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+patch:
+  x-products:
+    - Core
+  tags:
+    - Journal
+  summary: Update a journal record
+  operationId: PatchJournalRecord
+  x-sdk-operation-name: updateRecord
+  description: |
+    Update a journal record.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Journal/JournalRecord.yaml
+    description: Journal record resource.
+    required: true
+  responses:
+    '200':
+      description: Journal record was updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Journal/JournalRecord.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+delete:
+  x-products:
+    - Core
+  tags:
+    - Journal
+  summary: Delete a journal record
+  operationId: DeleteJournalRecord
+  x-sdk-operation-name: deleteRecord
+  description: |
+    Delete a journal record.
+  responses:
+    '204':
+      description: Journal record was deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

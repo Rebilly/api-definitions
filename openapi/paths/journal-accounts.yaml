@@ -1,0 +1,68 @@
+get:
+  x-products:
+    - Core
+  tags:
+    - Journal
+  summary: Retrieve journal accounts
+  operationId: GetJournalAccountCollection
+  x-sdk-operation-name: getAllAccounts
+  description: |
+    Retrieve a list of journal accounts.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+  responses:
+    '200':
+      description: A list of journal accounts was retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Journal/JournalAccount.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Journal
+  summary: Create a journal account
+  operationId: PostJournalAccount
+  x-sdk-operation-name: createAccount
+  description: |
+    Create a journal account.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Journal/JournalAccount.yaml
+    description: Journal account resource.
+    required: true
+  responses:
+    '201':
+      description: Journal account was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Journal/JournalAccount.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

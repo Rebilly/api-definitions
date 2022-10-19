@@ -280,6 +280,10 @@ tags:
       customer pays more than they owe or returns a product. For
       information on the credit memo resource, see
       [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
+  - name: Journal
+    description: |-
+      Use journal accounts, entries and records to provide track customer
+      generated revenue.
   - name: Payment instruments
     description: |-
       Use these operations to manage payment instruments. Payment
@@ -803,6 +807,18 @@ paths:
     $ref: ./paths/invoices@{id}@credit-memo-allocations.yaml
   /invoices/{id}/credit-memo-allocations/{creditMemoId}:
     $ref: ./paths/invoices@{id}@credit-memo-allocations@{creditMemoId}.yaml
+  /journal-accounts:
+    $ref: paths/journal-accounts.yaml
+  /journal-accounts/{id}:
+    $ref: paths/journal-accounts@{id}.yaml
+  /journal-entries:
+    $ref: paths/journal-entries.yaml
+  /journal-entries/{id}:
+    $ref: paths/journal-entries@{id}.yaml
+  /journal-entries/{id}/records:
+    $ref: paths/journal-entries@{id}@records.yaml
+  /journal-entries/{id}/records/{journalRecordId}:
+    $ref: paths/journal-entries@{id}@records@{journalRecordId}.yaml
   /kyc-requests:
     $ref: ./paths/kyc-requests.yaml
   '/kyc-requests/{id}':
