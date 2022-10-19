@@ -1,4 +1,7 @@
 type: object
+required: 
+  - period
+  - currency
 properties:
   id:
     description: ID of the journal entry.
@@ -16,6 +19,10 @@ properties:
         type: string
         format: date
         example: 2022-09-30
+  currency:
+    description: Currency of the journal record revenue.
+    allOf:
+      - $ref: ../CurrencyCode.yaml
   description:
     type: string
   references:
