@@ -48,17 +48,12 @@ properties:
             - filter
           properties:
             filter:
+              type: string
               description: A filter based on the transaction's properties which is used to determine when to apply the settings.
               minLength: 1
               maxLength: 255
               example: 'currency:EUR,GBP'
-              allOf:
-                - $ref: ../FilterString.yaml
             settlementCurrency:
               $ref: ../CurrencyCode.yaml
             settlementPeriod:
               $ref: SettlementPeriod.yaml
-          example:
-            filter: 'currency:EUR,GBP'
-            settlementCurrency: "EUR"
-            settlementPeriod: null
