@@ -6,15 +6,19 @@ required:
   - quantity
 properties:
   planId:
-    description: The plan identifier string.
+    description: ID of the plan.
     allOf:
       - $ref: ../ResourceId.yaml
   type:
-    description: If `variable` customers will be able to choose the quantity.
+    description: |-
+      Type of plan. If this value is set to `fixed`,
+      customers cannot choose the plan quantity.
+      If this value is set to `variable`,
+      customers can choose the plan quantity.
     type: string
     enum:
       - fixed
   quantity:
-    description: The quantity.
+    description: Quantity of the plan.
     type: integer
     minimum: 1
