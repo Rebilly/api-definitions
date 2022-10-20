@@ -1,12 +1,12 @@
 type: object
 properties:
   id:
-    description: The Timeline message identifier string.
+    description: ID of the timeline message.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   type:
-    description: Timeline message type.
+    description: Type of timeline message.
     type: string
     readOnly: true
     enum:
@@ -15,7 +15,7 @@ properties:
       - credit-memo-partially-applied
       - credit-memo-voided
   triggeredBy:
-    description: Shows who or what triggered the Timeline event.
+    description: Specifies who, or what, triggered the timeline event.
     type: string
     readOnly: true
     enum:
@@ -23,12 +23,12 @@ properties:
       - app
       - direct-api
   message:
-    description: The message that describes the message details.
+    description: Contents of the message.
     type: string
   extraData:
     $ref: ./TimelineExtraData.yaml
   occurredTime:
-    description: Timeline message time.
+    description: Date and time at which the timeline message occurred.
     readOnly: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
