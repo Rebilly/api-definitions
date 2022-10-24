@@ -6,31 +6,33 @@ post:
   summary: Register a domain for Apple Pay
   operationId: PostDigitalWalletOnboardingApplePay
   x-sdk-operation-name: create
-  description: |
-    First you will need to download
-    [Rebilly's Apple Pay merchant domain verification file](https://www.rebilly.com/.well-known/apple-developer-merchantid-domain-association)
-    and host it on your domain at https://{DOMAIN}/.well-known/apple-developer-merchantid-domain-association.
-    Then use this endpoint to register the domain, or check if it is already registered.
-    Once the domain is registered you will be able to use Apple Pay with FramePay.
+  description: |-
+    Registers a domain for Apple Pay.
+
+    To use this operation:
+      1. Download the [Rebilly Apple Pay merchant domain verification file](https://www.rebilly.com/.well-known/apple-developer-merchantid-domain-association), and host it on your domain at `https://{DOMAIN}/.well-known/apple-developer-merchantid-domain-association`.
+      1. Use this endpoint to register the domain with Apple Pay,
+      or to check if it is already registered.
+      When the domain is registered, you can use Apple Pay with FramePay.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/DigitalWalletOnboardingApplePay.yaml
-    description: Apple pay domain registration onboarding request.
+    description: Apple pay domain registration request.
     required: true
   security:
     - SecretApiKey: []
     - JWT: []
   responses:
     '200':
-      description: The action executed without error.
+      description: Action executed without error.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/DigitalWalletOnboardingApplePay.yaml
     '201':
-      description: Domain was registered with Apple Pay.
+      description: Domain registered with Apple Pay.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
