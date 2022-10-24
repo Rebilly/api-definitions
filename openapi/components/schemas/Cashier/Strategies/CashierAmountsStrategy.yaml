@@ -8,6 +8,7 @@ discriminator:
     none: ./CashierAmountsStrategyNone.yaml
     absolute: ./CashierAmountsStrategyAbsolute.yaml
     percent: ./CashierAmountsStrategyPercent.yaml
+    condition: ./CashierAmountsStrategyCondition.yaml
 properties:
   name:
     type: string
@@ -16,7 +17,9 @@ properties:
       - none
       - absolute
       - percent
+      - condition
     x-enumDescriptions:
       none: Amounts are required within the cashier request.
       absolute: Amounts are set starting with `baseAmount`, followed by absolute increments to `baseAmount`, defined in `increments`.
       percent: Amounts are set starting with `baseAmount`, followed by relative increments to `baseAmount`, defined in `increments`.
+      condition: Use `filter` to define distinctive cases and apply different strategies based on it.
