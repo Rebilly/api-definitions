@@ -29,11 +29,13 @@ properties:
     type: string
     readOnly: true
     enum:
+      - created
       - pending
       - completed
       - expired
     x-enumDescriptions:
-      pending: No funds have been deposited yet. Temporary state.
+      created: Created, but not visited by the customer. Temporary state.
+      pending: Visited, but no funds have been deposited yet. Temporary state.
       completed: Funds deposit transaction initiated. Permanent state.
       expired: Request expired without any deposit attempts. Permanent state.
   redirectUrl:
