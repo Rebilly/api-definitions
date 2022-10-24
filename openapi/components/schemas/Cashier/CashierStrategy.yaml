@@ -1,5 +1,6 @@
 type: object
 required:
+  - name
   - currencyStrategy
   - amountsStrategy
   - customAmountAllowanceStrategy
@@ -8,6 +9,9 @@ properties:
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
+  name:
+    type: string
+    description: The strategy name.
   currencyStrategy:
     $ref: ./Strategies/CashierCurrencyStrategy.yaml
   amountsStrategy:
