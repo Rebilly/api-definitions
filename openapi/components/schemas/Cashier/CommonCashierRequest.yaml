@@ -1,0 +1,96 @@
+type: object
+required:
+  - websiteId
+  - customerId
+  - strategy
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  websiteId:
+    description: Cashier website ID.
+    type: string
+    allOf:
+      - $ref: ../ResourceId.yaml
+  customerId:
+    $ref: ../CustomerId.yaml
+  strategy:
+    $ref: ./CashierStrategyReference.yaml
+  transactionId:
+    type: array
+    description: The transaction resource ID deposited towards the request.
+    readOnly: true
+    nullable: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  status:
+    description: Status of the request.
+    type: string
+    readOnly: true
+    enum:
+      - pending
+      - completed
+      - expired
+    x-enumDescriptions:
+      pending: No funds have been deposited yet. Temporary state.
+      completed: Funds deposit transaction initiated. Permanent state.
+      expired: Request expired without any deposit attempts. Permanent state.
+  redirectUrl:
+    description: The URL to redirect the customer when a deposit is completed. Defaults to the website ID.
+    type: string
+    format: uri
+  currency:
+    readOnly: true
+    nullable: true
+    allOf:
+      - $ref: ../CurrencyCode.yaml
+  amounts:
+    type: array
+    readOnly: true
+    nullable: true
+    description: The list of available deposit amounts.
+    items:
+      type: number
+      format: double
+  isCustomAmountAllowed:
+    type: boolean
+    readOnly: true
+    nullable: true
+    description: |-
+      Specifies whether the custom deposit amount is allowed.
+      If this value is `true`, the customer can deposit any custom amount using the cashier.
+  expirationTime:
+    description: Expiration date-time. Default value is one hour in the future.
+    type: string
+    format: date-time
+  riskMetadata:
+    $ref: ../RiskMetadata.yaml
+  createdTime:
+    description: Creation date-time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
+  _links:
+    type: array
+    description: The links related to the resource.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Links/SelfLink.yaml
+        - $ref: ../Links/CashierLink.yaml
+        - $ref: ../Links/TransactionLink.yaml
+  _embedded:
+    type: array
+    description: |-
+      Embedded objects that are requested by the `expand`
+      query parameter.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Embeds/CustomerEmbed.yaml
+        - $ref: ../Embeds/WebsiteEmbed.yaml
+        - $ref: ../Embeds/TransactionEmbed.yaml

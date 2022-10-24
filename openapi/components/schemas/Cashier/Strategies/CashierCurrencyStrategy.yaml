@@ -1,0 +1,28 @@
+type: object
+description: The currency selection strategy.
+required:
+  - name
+discriminator:
+  propertyName: name
+  mapping:
+    none: ./CashierCurrencyStrategyNone.yaml
+    static: ./CashierCurrencyStrategyValued.yaml
+    country: ./CashierCurrencyStrategyValued.yaml
+    language: ./CashierCurrencyStrategyValued.yaml
+    condition: ./CashierCurrencyStrategyCondition.yaml
+properties:
+  name:
+    type: string
+    description: The name of the strategy.
+    enum:
+      - none
+      - static
+      - country
+      - language
+      - condition
+    x-enumDescriptions:
+      none: Currency is required within the cashier request.
+      static: Currency is set by the `value` field.
+      country: Use primary country currency, defined by the `value` field.
+      language: Use currency, associated with the language set by `value` field.
+      condition: Use `filter` to define distinctive cases and apply different strategies based on it.

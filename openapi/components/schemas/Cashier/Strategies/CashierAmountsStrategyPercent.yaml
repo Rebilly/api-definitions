@@ -1,0 +1,29 @@
+type: object
+allOf:
+  - $ref: ./CashierAmountsStrategy.yaml
+  - required:
+      - baseAmount
+      - increments
+    properties:
+      baseAmount:
+        type: number
+        format: double
+        description: |-
+          The first amount available to customer.
+
+          Use mustache templates with `cashierRequest` variable or a constant value.
+      increments:
+        type: array
+        description: |-
+          The list of incremental percent amounts available to customer.
+
+          For example, when `baseAmount` is `10` and `increments` are `[20, 50, 150]` the available amounts are: `[10, 12, 15, 25]`.
+          Amounts less than or equal to 0 are ignorred.
+        items:
+          type: number
+      adjustBaseToLastDeposit:
+        type: boolean
+        default: false
+        description: |-
+          Specifies whether the base amount should be adjusted based on the last deposit or not.
+          If this value is `true`, the `baseAmount` would be changed to the last successful deposit amount.

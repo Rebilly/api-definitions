@@ -1,0 +1,22 @@
+type: object
+description: The amounts selection strategy.
+required:
+  - name
+discriminator:
+  propertyName: name
+  mapping:
+    none: ./CashierAmountsStrategyNone.yaml
+    absolute: ./CashierAmountsStrategyAbsolute.yaml
+    percent: ./CashierAmountsStrategyPercent.yaml
+properties:
+  name:
+    type: string
+    description: The name of the strategy.
+    enum:
+      - none
+      - absolute
+      - percent
+    x-enumDescriptions:
+      none: Amounts are required within the cashier request.
+      absolute: Amounts are set starting with `baseAmount`, followed by absolute increments to `baseAmount`, defined in `increments`.
+      percent: Amounts are set starting with `baseAmount`, followed by relative increments to `baseAmount`, defined in `increments`.

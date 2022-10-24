@@ -1,0 +1,22 @@
+type: object
+required:
+  - currencyStrategy
+  - amountsStrategy
+  - customAmountAllowanceStrategy
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  currencyStrategy:
+    $ref: ./Strategies/CashierCurrencyStrategy.yaml
+  amountsStrategy:
+    $ref: ./Strategies/CashierAmountsStrategy.yaml
+  customAmountAllowanceStrategy:
+    $ref: ./Strategies/CashierCustomAmountAllowanceStrategy.yaml
+  createdTime:
+    description: Creation date-time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml

@@ -1,0 +1,65 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Cashier
+  summary: Retrieve a cashier strategy
+  operationId: GetCashierStrategy
+  x-sdk-operation-name: get
+  description: Retrieve a cashier strategy with specified identifier string.
+  responses:
+    '200':
+      description: Cashier strategy was retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Cashier/CashierStrategy.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Cashier
+  summary: Upsert a cashier strategy
+  operationId: PutCashierStrategy
+  x-sdk-operation-name: update
+  description: |-
+    Create or update (upsert) cashier strategy with specified identifier string.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Cashier/CashierStrategy.yaml
+    description: Cashier strategy resource.
+    required: true
+  responses:
+    '200':
+      description: Cashier strategy updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Cashier/CashierStrategy.yaml
+    '201':
+      description: Cashier strategy created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Cashier/CashierStrategy.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

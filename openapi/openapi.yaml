@@ -409,6 +409,12 @@ tags:
       checkouts. Checkout forms are customizable, and use fully
       responsive design, built-in error messaging, validation, and
       expedited checkout for returning customers.
+  - name: Cashier
+    description: |-
+      Use these operations to create and manage cashier requests and strategies.
+      Rebilly hosted cashier provide secure and compliant way to
+      deposit funds. Cashier forms are customizable, and use fully
+      responsive design, built-in error messaging and validation.
   - name: Email credentials
     description: >-
       Use these operations to get, create, and manage SMTP credential
@@ -939,6 +945,14 @@ paths:
     $ref: ./paths/broadcast-messages.yaml
   '/broadcast-messages/{id}':
     $ref: './paths/broadcast-messages@{id}.yaml'
+  /cashier-requests:
+    $ref: ./paths/cashier-requests.yaml
+  /cashier-requests/{id}:
+    $ref: ./paths/cashier-requests@{id}.yaml
+  /cashier-strategies:
+    $ref: ./paths/cashier-strategies.yaml
+  /cashier-strategies/{id}:
+    $ref: ./paths/cashier-strategies@{id}.yaml
   /checkout-forms:
     $ref: ./paths/checkout-forms.yaml
   /checkout-forms/{id}:
@@ -1223,6 +1237,8 @@ paths:
     $ref: paths/storefront/account@verification@{token}.yaml
   '/storefront/billing-portals/{slug}':
     $ref: paths/storefront/billing-portals@{slug}.yaml
+  '/storefront/cashier-requests/{id}':
+    $ref: paths/storefront/cashier-requests@{id}.yaml
   '/storefront/checkout-forms/{id}':
     $ref: paths/storefront/checkout-forms@{id}.yaml
   '/storefront/invoices':

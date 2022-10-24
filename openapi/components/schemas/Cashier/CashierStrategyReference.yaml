@@ -1,0 +1,14 @@
+type: object
+required:
+  - type
+discriminator:
+  propertyName: type
+  mapping:
+    manual: ./Strategies/CashierManualStrategyReference.yaml
+    reference: ./Strategies/CashierReferenceStrategyReference.yaml
+properties:
+  type:
+    type: string
+    enum:
+      - manual
+      - reference
