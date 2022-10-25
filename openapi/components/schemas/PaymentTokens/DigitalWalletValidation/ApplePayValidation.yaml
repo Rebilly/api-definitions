@@ -8,24 +8,25 @@ allOf:
       type:
         type: string
       validationRequest:
-        description: The validation request.
+        description: Validation request.
         type: object
         properties:
           validationUrl:
             type: string
-            description: The URL provided by the Apple Pay SDK to perform the validation.
+            description: Apple Pay SDK URL that is used to perform validation.
           domainName:
             type: string
-            description: >
-              The domain where the client code like FramePay is executed.
-              Should be registered in the Apple Pay console by Rebilly before using.
+            description: |-
+              Domain where the client code, such as [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/), is executed.
+              The domain name must be registered in the Apple Pay console.
+              For more information, see [Register a domain for Apple Pay](../../PostDigitalWalletOnboardingApplePay).
             example: www.example.com
           displayName:
               type: string
-              description: A name of your store, suitable for display.
+              description: Display name of your store.
               example: My Store
         writeOnly: true
       validationResponse:
-        description: The validation response to use by the Apple Pay SDK to proceed.
+        description: Apple Pay SDK validation response.
         type: object
         readOnly: true
