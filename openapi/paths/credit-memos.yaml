@@ -10,8 +10,7 @@ get:
     - SecretApiKey: []
     - JWT: []
     - ApplicationJWT: []
-  description: |
-    Retrieve a list of credit memos.
+  description: Retrieves a list of credit memos.
   parameters:
     - $ref: ../components/parameters/collectionFilter.yaml
     - $ref: ../components/parameters/collectionSort.yaml
@@ -21,7 +20,7 @@ get:
     - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: A list of credit memos was retrieved.
+      description: List of credit memos retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -47,8 +46,7 @@ post:
   summary: Create a credit memo
   operationId: PostCreditMemo
   x-sdk-operation-name: create
-  description: |
-    Create a credit memo.
+  description: Creates a credit memo.
   requestBody:
     required: true
     content:
@@ -57,7 +55,7 @@ post:
           $ref: ../components/schemas/CreditMemos/CreditMemo.yaml
   responses:
     '201':
-      description: CreditMemo was created.
+      description: Credit memo created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
