@@ -5,7 +5,6 @@ required:
 discriminator:
   propertyName: name
   mapping:
-    none: ./CashierCustomAmountAllowanceStrategyNone.yaml
     static: ./CashierCustomAmountAllowanceStrategyStatic.yaml
     condition: ./CashierCustomAmountAllowanceStrategyCondition.yaml
 properties:
@@ -13,10 +12,8 @@ properties:
     type: string
     description: The name of the strategy.
     enum:
-      - none
       - static
       - condition
     x-enumDescriptions:
-      none: Custom amount flag is required within the cashier request.
       static: Custom amount flag is set by the `value` field.
       condition: Use `filter` to define distinctive cases and apply different strategies based on it.
