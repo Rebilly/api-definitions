@@ -1,6 +1,6 @@
-// define the attachment
+// Define the attachment
 const data = {
-    // previously uploaded file ID
+    // Previously uploaded file ID
     fileId: 'my-file-id',
     relatedType: 'customer',
     relatedId: 'my-customer-id',

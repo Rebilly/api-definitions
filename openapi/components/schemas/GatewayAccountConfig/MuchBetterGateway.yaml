@@ -1,0 +1,22 @@
+description: MuchBetterGateway config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: MuchBetterGateway credentials object.
+        properties:
+          apiKey:
+            type: string
+            description: MuchBetterGateway api key.
+            format: password
+          secretKey:
+            type: string
+            description: MuchBetterGateway secret key.
+            format: password
+        required:
+          - apiKey
+          - secretKey

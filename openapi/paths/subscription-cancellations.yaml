@@ -3,7 +3,7 @@ get:
     - Core
   tags:
     - Orders
-  summary: Retrieve a list of cancellations
+  summary: Retrieve cancellations
   operationId: GetSubscriptionCancellationCollection
   x-sdk-operation-name: getAll
   description: Retrieve a list of cancellations for all subscriptions.
@@ -14,7 +14,7 @@ get:
     - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
-      description: A list of cancellations was retrieved successfully.
+      description: A list of cancellations was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -32,6 +32,11 @@ get:
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/subscription-cancellations/get.php
 post:
   x-products:
     - Core
@@ -66,3 +71,7 @@ post:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/subscription-cancellations/post.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/subscription-cancellations/post.php

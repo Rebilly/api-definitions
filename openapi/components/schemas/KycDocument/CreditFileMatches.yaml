@@ -53,6 +53,42 @@ properties:
     readOnly: true
   referenceData:
     description: Extra data from credit bureau.
-    type: object
-    nullable: true
     readOnly: true
+    type: object
+    properties:
+      singleSourceHit:
+        description: Single source hit.
+        type: string
+        readOnly: true
+        example: Y
+      dualSourceHit:
+        description: Dual source hit.
+        type: string
+        readOnly: true
+        example: Y
+      waterfallProcess:
+        description: Waterfall process.
+        type: string
+        readOnly: true
+        example: Y
+      creditFileCreatedDate:
+        description: Credit file create date.
+        type: string
+        readOnly: true
+      numberOfTradesOnFile:
+        description: Number of trades on file.
+        type: string
+        readOnly: true
+        example: '001'
+      singleDecision:
+        description: Data related to single source decision.
+        nullable: false
+        allOf:
+          - $ref: CreditFileCommonDecisionData.yaml
+      dualDecision:
+        description: Data related to dual source decision.
+        nullable: true
+        type: array
+        items:
+          allOf:
+            - $ref: CreditFileCommonDecisionData.yaml

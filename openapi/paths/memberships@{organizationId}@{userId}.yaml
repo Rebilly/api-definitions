@@ -23,7 +23,7 @@ get:
     Retrieve the membership using organization and user identifiers.
   responses:
     '200':
-      description: Membership was retrieved successfully.
+      description: Membership was retrieved.
       content:
         application/json:
           schema:
@@ -39,11 +39,11 @@ put:
     - Users
   tags:
     - Memberships
-  summary: Create or update membership
+  summary: Upsert membership
   operationId: PutMembership
   x-sdk-operation-name: update
   description: |
-    Create or update membership using organization and user identifiers.
+    Create or update (upsert) membership using organization and user identifiers.
     Only membership's owner can add other users in the membership.
   requestBody:
     content:

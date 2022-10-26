@@ -12,6 +12,13 @@ properties:
     description: If there is an exact match found online.
     type: boolean
     example: false
+  matchingImages:
+    description: Contains urls to matching images found online.
+    type: array
+    readOnly: true
+    maxItems: 3
+    items:
+      type: string
   firstName:
     description: The customer first name if it was matched, null otherwise.
     type: string
@@ -27,14 +34,8 @@ properties:
     type: string
     format: date-time
     nullable: true
-  expiryDate:
-    description: The expiry date found on the document, null if not found.
-    type: string
-    format: date-time
-    nullable: true
-    deprecated: true
   expirationDate:
-    description: The expiration date found on the document, null if not found.
+    description: Expiration date detected on the document. If an expiration date is not detected, this value is null.
     type: string
     format: date-time
     nullable: true
@@ -44,7 +45,7 @@ properties:
     format: date-time
     nullable: true
   hasMinimalAge:
-    description: >-
+    description: |-
       Checks the minimal age, 21+ for USA and 18+ for all other countries.
       Null if dateOfBirth could not be determined.
     type: boolean
@@ -52,13 +53,42 @@ properties:
     readOnly: true
     example: true
   nationality:
-    description: The nationality found on the document, null otherwise.
+    description: Nationality detected on a passport or citizenship document. If a nationality is not detected, this value is null.
     type: string
     nullable: true
     example: US
     maxLength: 3
+  issuanceCountry:
+    description: Country where the document was issued.
+    type: string
+    nullable: true
+    example: CA
+    minLength: 2
+    maxLength: 2
+  issuanceRegion:
+    description: Region, state, province, or territory where the document was issued.
+    type: string
+    nullable: true
+    example: Ontario
+  documentNumber:
+    description: Unique number on the identity document. This value may contain alphanumeric characters.
+    type: string
+    nullable: true
+    example: '1234567890'
   documentSubtype:
     description: The interpreted subtype of the uploaded document.
     type: string
     nullable: true
     example: passport
+  hasMatchingFaceProof:
+    description: Specifies whether an identity document has a matching face proof.
+    type: boolean
+    example: false
+
+  # deprecated
+  expiryDate:
+    description: Expiry date detected on the document. If an expiry date is not detected, this value is null.
+    type: string
+    format: date-time
+    nullable: true
+    deprecated: true

@@ -50,6 +50,7 @@ discriminator:
     Dimoco: ./GatewayAccountConfig/Dimoco.yaml
     dLocal: ./GatewayAccountConfig/dLocal.yaml
     Dragonphoenix: ./GatewayAccountConfig/Dragonphoenix.yaml
+    Dropayment: ./GatewayAccountConfig/Dropayment.yaml
     Directa24: ./GatewayAccountConfig/Directa24.yaml
     EBANX: ./GatewayAccountConfig/EBANX.yaml
     EPG: ./GatewayAccountConfig/EPG.yaml
@@ -94,6 +95,7 @@ discriminator:
     Moneris: ./GatewayAccountConfig/Moneris.yaml
     MtaPay: ./GatewayAccountConfig/MtaPay.yaml
     MuchBetter: ./GatewayAccountConfig/MuchBetter.yaml
+    MuchBetterGateway: ./GatewayAccountConfig/MuchBetterGateway.yaml
     MyFatoorah: ./GatewayAccountConfig/MyFatoorah.yaml
     Neosurf: ./GatewayAccountConfig/Neosurf.yaml
     NMI: ./GatewayAccountConfig/NMI.yaml
@@ -185,7 +187,7 @@ discriminator:
     Zimpler: ./GatewayAccountConfig/Zimpler.yaml
 properties:
   id:
-    description: The gateway identifier string.
+    description: Gateway identifier string.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
@@ -198,7 +200,7 @@ properties:
   method:
     $ref: ./PaymentMethods/PaymentMethod.yaml
   acceptedCurrencies:
-    description: Accepted currencies (array of the currency three letter codes).
+    description: Accepted currencies. An array of ISO 4217 currency codes.
     type: array
     items:
       type: string
@@ -208,7 +210,7 @@ properties:
     items:
       $ref: ./PaymentCards/PaymentCardBrand.yaml
   status:
-    description: The gateway account's status.
+    description: Status of the gateway account.
     readOnly: true
     type: string
     enum:
@@ -217,7 +219,7 @@ properties:
       - pending
       - closed
   merchantCategoryCode:
-    description: The gateway account's merchant category code.
+    description: Gateway account merchant category code.
     type: string
     pattern: '^[0-9]{4}$'
     default: '0000'
@@ -228,112 +230,128 @@ properties:
     maximum: 10000
   dccForceCurrency:
     type: string
-    description: |
-      Force dynamic currency conversion to the specified currency on each sale.
-      Leave it empty to disable force DCC.
+    description: |-
+      Forces Dynamic Currency Conversion (DCC) to the specified
+      currency on each sale. To disable forced DCC, leave this field empty.
   descriptor:
-    description: The gateway account's descriptor.
+    description: Gateway account descriptor value.
     type: string
   cityField:
-    description: The gateway account's city field (also known as line 2 descriptor).
+    description: |-
+       Gateway account city field. This value is also known as a line 2
+       descriptor.
     type: string
   excludedDccQuoteCurrencies:
-    description: Excluded Dynamic Currency Conversion Quote Currencies.
+    description: Excluded Dynamic Currency Conversion (DCC) quote currencies.
     type: array
     items:
       type: string
   monthlyLimit:
-    description: Monthly Limit.
+    description: Monthly limit.
     type: number
     format: double
     minimum: 0
   approvalWindowTtl:
-    description: >-
-      The time window (in seconds) allotted for approving an offsite
-      transaction before it is automatically `abandoned`.
+    description: |-
+      Allotted time, in seconds, in which an offsite transaction must be
+      approved before it is automatically `abandoned`.
     type: integer
     default: 3600
     minimum: 300
     maximum: 16777215
   reconciliationWindowEnabled:
-    description: >-
-      If a transaction is not reconciled within the `reconciliationWindowTtl` time,
-      then the transaction is marked as `abandoned`.
+    description: |-
+      Specifies that if a transaction is not reconciled within the
+      `reconciliationWindowTtl` time, the transaction is marked as
+      `abandoned`.
     type: boolean
     default: false
   reconciliationWindowTtl:
-    description: >-
-      The time window (in seconds) allotted for a reconciliation to occur.
-      If it is not reconciled in that time, then the transaction is marked as `abandoned`.
+    description: |-
+      Allotted time, in seconds, in which a reconciliation must occur
+      before it is automatically `abandoned`.
     type: integer
     minimum: 300
     maximum: 16777215
   threeDSecure:
-    description: True, if Gateway Account allows 3DSecure.
+    description: Specifies whether a gateway account allows 3D Secure.
     type: boolean
     default: false
   dynamicDescriptor:
-    description: True, if Gateway Account allows dynamic descriptor.
+    description: Specifies whether a gateway allows dynamic descriptors.
     type: boolean
     default: false
   digitalWallets:
     $ref: ./GatewayAccounts/DigitalWallets.yaml
   isDown:
-    description: True if gateway is currently in downtime period.
+    description: |-
+      Specifies whether a gateway is in a downtime period.
     type: boolean
     readOnly: true
   additionalFilters:
-    description: >
-      The additional filters are used to determine whether the gateway account
-      can be selected for the transaction to be processed.
+    description: |-
+      Additional filters used to determine whether the gateway account
+      can be selected to process a transaction.
 
-      For example, the filter may put a maximum amount value.
-      If the transaction is above that amount, this gateway account wouldn't be used.
+      For example, the filter may place a maximum amount value on
+      transaction. If a transaction exceeds this value, the gateway
+      account is not used.
 
-      This follows our standard filter format.
+      For more information see,
+      [Using filters](https://api-reference.rebilly.com/#section/Using-filter-with-collections).
     type: string
     example: amount:1..100;bin:411111,444433
   timeout:
-    description: Gateway Account request timeout in seconds.
+    description: Gateway account request timeout, in seconds.
     type: integer
     nullable: true
     minimum: 10
     maximum: 120
   token:
-    description: Gateway Account token.
+    description: Gateway account token.
     type: string
     readOnly: true
     example: TwiX3f92k4AiBE27BzTbQ38hHjicBz_w
   sticky:
-    description: Customer's payment instrument will "stick" to the gateway account for future transactions when enabled.
+    description: |-
+      Specifies whether all future payments by the customer's payment
+      instrument will be processed by this gateway account.
+
+      For more information, see
+      [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
     type: boolean
     default: true
   setupInstruction:
     type: string
     default: do-nothing
-    description: |
-      Creates zero, one, or more child transactions such as `authorize` and `void`.
-      The transactions are linked to the `setup` transaction by the `parentTransactionId` relationship.
+    description: |-
+      Creates zero, one, or more child transactions such as `authorize`
+      and `void`. The transactions are linked to the `setup`
+      transaction by the `parentTransactionId` relationship.
     enum:
       - authorize
       - authorize-and-void
       - sca
       - do-nothing
     x-enumDescriptions:
-      authorize: |
-        Creates an `authorize` transaction in the amount/currency of the request.
-        If the gateway account is configured for strong customer authentication, it will be used.
-      authorize-and-void: |
-        Creates an `authorize` transaction in the amount/currency of the request, followed by a `void` (if the `authorize` was approved).
-        If the gateway account is configured for strong customer authentication, it will be used.
-      sca: |
-        Uses strong customer authentication (SCA) without any `authorize` transaction.
-        SCA includes 3dsv2, 3ds, and some specific wallets behavior like setting up a billing agreement with PayPal.
-      do-nothing: |
-        Does nothing, and returns an approved `setup` transaction.
+      authorize: |-
+        Creates an `authorize` transaction in the amount/currency of
+        the request. This is used when a gateway account is configured
+        for Strong Customer Authentication (SCA).
+      authorize-and-void: |-
+        Creates an `authorize` transaction in the amount/currency of
+        the request, followed by a `void`, if the `authorize` is approved.
+        This is used when a gateway account is configured for Strong
+        Customer Authentication (SCA).
+      sca: |-
+        Uses Strong Customer Authentication (SCA) without an `authorize`
+        transaction. SCA includes 3dsv2, 3ds, and some specific wallet
+        behavior, such as setting up a billing agreement with PayPal.
+      do-nothing: |-
+        Does nothing except return an approved `setup` transaction.
         This is the default behavior.
   createdTime:
-    description: Gateway Account created time.
+    description: Date and time at which the gateway account was created.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   updatedTime:
@@ -341,12 +359,15 @@ properties:
   organizationId:
     deprecated: true
     readOnly: true
-    description: Organization ID.
+    description: |-
+      Unique organization identifier string.
+      An organization is an entity that represents company.
+      For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
     allOf:
       - $ref: ./ResourceId.yaml
   _links:
     type: array
-    description: The links related to resource.
+    description: Related resource links.
     readOnly: true
     minItems: 1
     items:

@@ -12,7 +12,7 @@ get:
     Retrieve latest version of List with specified identifier string.
   responses:
     '200':
-      description: List was retrieved successfully.
+      description: List was retrieved.
       content:
         application/json:
           schema:
@@ -32,11 +32,11 @@ put:
     - Users
   tags:
     - Lists
-  summary: Create or update a list with predefined ID
+  summary: Upsert a list
   operationId: PutList
   x-sdk-operation-name: update
   description: |
-    Create or update a list with predefined identifier string.
+    Create or update (upsert) a list with specified identifier string.
   requestBody:
     content:
       application/json:
@@ -81,7 +81,7 @@ delete:
   operationId: DeleteList
   x-sdk-operation-name: delete
   description: |
-    Delete a list with predefined identifier string.
+    Delete a list with specified identifier string.
   responses:
     '204':
       description: List was deleted.

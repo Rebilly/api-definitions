@@ -13,7 +13,7 @@ get:
   x-sdk-operation-name: get
   responses:
     '200':
-      description: A fee was retrieved successfully.
+      description: A fee was retrieved.
       content:
         application/json:
           schema:
@@ -37,7 +37,7 @@ put:
   tags: [Fees]
   summary: Upsert a fee entry
   description: |
-    Upsert a fee entry.
+    Create or update (upsert) a fee entry.
 
     This operation is experimental and not guaranteed to be backward compatible.
   operationId: PutFee
@@ -57,7 +57,7 @@ put:
             $ref: ../components/examples/Fee/stripe-intl-request.yaml
   responses:
     '200':
-      description: Fee entry was updated successfully.
+      description: Fee entry was updated.
       content:
         application/json:
           schema:
@@ -70,7 +70,7 @@ put:
             stripe-intl:
               $ref: ../components/examples/Fee/stripe-intl-response.yaml
     '201':
-      description: Fee entry was created successfully.
+      description: Fee entry was created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -117,7 +117,7 @@ patch:
             $ref: ../components/examples/Fee/stripe-intl-request.yaml
   responses:
     '200':
-      description: Fee entry was patched successfully.
+      description: Fee entry was patched.
       content:
         application/json:
           schema:

@@ -3,9 +3,10 @@ get:
     - Core
   tags:
     - Coupons
-  summary: Retrieve a list of coupon redemptions
+  summary: Retrieve coupon redemptions
   operationId: GetCouponRedemptionCollection
   x-sdk-operation-name: getAllRedemptions
+  description: Retrieves a list of coupon redemptions.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -14,7 +15,7 @@ get:
     - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
-      description: Coupons redemptions were retrieved successfully.
+      description: List of coupon redemptions retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -47,18 +48,17 @@ post:
   summary: Redeem a coupon
   operationId: PostCouponRedemption
   x-sdk-operation-name: redeem
-  description: |
-    Redeem a coupon.
+  description: Redeems a coupon.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/Coupon/CouponRedemption.yaml
-    description: Redeem a coupon.
+    description: Coupon resource.
     required: true
   responses:
     '201':
-      description: Coupon was redeemed.
+      description: Coupon redeemed.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml

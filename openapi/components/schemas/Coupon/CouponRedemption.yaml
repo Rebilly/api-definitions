@@ -1,35 +1,35 @@
 type: object
-description: Coupons redemption log.
+description: Coupon redemption log.
 properties:
   id:
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   couponId:
-    description: Coupon's ID.
+    description: Coupon identifier string.
     allOf:
       - $ref: ../ResourceId.yaml
   customerId:
     $ref: ../CustomerId.yaml
   additionalRestrictions:
-    description: Additional restrictions for coupon's redemptions.
+    description: Additional coupon redemption restrictions.
     type: array
     items:
       $ref: ./RedemptionRestriction.yaml
   createdTime:
-    description: Coupon redeem time.
+    description: Date and time at which the coupon is redeemed.
     readOnly: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   canceledTime:
-    description: Coupon redemption canceled time.
+    description: Date and time at which the coupon was cancelled.
     readOnly: true
     x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   _links:
     type: array
-    description: The links related to resource.
+    description: Related resource links.
     readOnly: true
     minItems: 1
     items:

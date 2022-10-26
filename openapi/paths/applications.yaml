@@ -3,12 +3,13 @@ get:
     - Users
   tags:
     - Application users
-  summary: Retrieve a list of applications
+  summary: Retrieve applications
   operationId: GetApplicationCollection
   x-sdk-operation-name: getAll
-  description: |
-    Retrieve a list of applications.
-    You may sort by the `id`, `name`, `status`, `createdTime`, and `updatedTime`.
+  description: |-
+    Retrieves a list of all applications.
+    You may sort applications by: `id`, `name`, `status`, `createdTime`,
+    and `updatedTime`.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -19,7 +20,7 @@ get:
     - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
-      description: A list of applications was retrieved successfully.
+      description: List of applications retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -52,8 +53,9 @@ post:
   summary: Register an application
   operationId: PostApplication
   x-sdk-operation-name: create
-  description: |
-    Register an application. It will appear publicly in the [App Store](https://app.rebilly.com/app-store). Before you submit an app, read the [App Store documentation](https://www.rebilly.com/docs/content/concepts-and-features/app-store/).
+  description: |-
+    Registers an application and displays it publicly in the [App Store](https://app.rebilly.com/app-store). Before you submit an application, read the
+    [App Store documentation](https://www.rebilly.com/docs/content/concepts-and-features/app-store/).
   requestBody:
     content:
       application/json:
@@ -61,7 +63,7 @@ post:
           $ref: ../components/schemas/Applications/Application.yaml
   responses:
     '201':
-      description: Application was registered.
+      description: Application registered.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml

@@ -19,12 +19,18 @@ properties:
     description: Describes which list the result is from.
   sourceType:
     readOnly: true
-    description: Describes the type of list the result is from.
-    type: string
-    enum:
-      - pep
+    description: Describes the categories of the invidual or entity.
+    type: array
+    example:
       - sanctions
-      - adverse-media
+      - enforcements
+    items:
+      type: string
+      enum:
+        - pep
+        - sanctions
+        - adverse-media
+        - enforcements
   gender:
     type: string
     readOnly: true

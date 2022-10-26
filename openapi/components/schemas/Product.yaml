@@ -2,24 +2,19 @@ allOf:
   - $ref: Common/CommonProduct.yaml
   - properties:
       taxCategoryId:
-        description: The product's tax category identifier string.
+        description: |-
+          Tax category of the product.
+          For a complete list of supported tax categories, see [TaxJar sales tax API reference](https://developers.taxjar.com/api/reference/#get-list-tax-categories).
+          If none of the tax categories from the list are applicable for your product, use the general tax category `00000`.
         type: string
-        enum:
-          - '00000'
-          - '99999'
-          - '20010'
-          - '40030'
-          - '51020'
-          - '51010'
-          - '31000'
-          - '30070'
+        example: '00000'
       accountingCode:
-        description: The product accounting code.
+        description: Accounting code of the product.
         type: string
         example: '4010'
       _links:
         type: array
-        description: The links related to resource.
+        description: Related resource links.
         readOnly: true
         minItems: 1
         items:

@@ -1,12 +1,13 @@
 allOf:
   - required:
     - type
+  - type: object
   - properties:
       upsertCustomer:
         type: boolean
         default: false
         writeOnly: true
-        description: If the value is `true`, this operation upserts (creates or updates) a customer. If the value is `false`, the `customerId` already exists, and the related customer is not updated.
+        description: If the value is `true`, this operation creates or updates (upserts) a customer. If the value is `false`, the `customerId` already exists, and the related customer is not updated.
       type:
         description: >
           The type of transaction requested.

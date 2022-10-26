@@ -1,7 +1,7 @@
 parameters:
   - name: token
     in: path
-    description: The token identifier string.
+    description: Authentication token identifier string.
     required: true
     schema:
       type: string
@@ -13,12 +13,11 @@ post:
   summary: Exchange an authentication token
   operationId: PostAuthenticationTokenExchange
   x-sdk-operation-name: exchangeToken
-  description: >
-    Exchange Authentication Token for JWT.
+  description: |-
+    Exchanges an authentication token for a JWT.
 
 
-    It will also invalidate an Authentication Token by default (so it can only
-    be exchanged once).
+    By default, this operation invalidates the exchanged authentication token.
   security:
     - SecretApiKey: []
     - JWT: []
@@ -31,7 +30,7 @@ post:
     required: true
   responses:
     '201':
-      description: Authentication Token exchanged for JWT.
+      description: Authentication token exchanged for a JWT.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml

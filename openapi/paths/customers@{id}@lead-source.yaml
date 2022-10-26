@@ -5,14 +5,20 @@ get:
     - Core
   tags:
     - Customers
-  summary: Retrieve a customer's Lead Source
+  summary: Retrieve a customer's lead source
   operationId: GetCustomerLeadSource
   x-sdk-operation-name: getLeadSource
-  description: |
-    Retrieve a Lead Source of given customer.
+  description: |-
+    Retrieves lead source data for a customer with a specified
+    identifier string.
+
+    A lead source is the marketing campaign that
+    generates customer interaction, a sale, or a trial. For more
+    information, see
+    [Lead source attribution](https://www.rebilly.com/docs/dev-docs/concepts/#lead-source-attribution).
   responses:
     '200':
-      description: Lead Source was retrieved successfully.
+      description: Lead source retrieved.
       content:
         application/json:
           schema:
@@ -30,16 +36,25 @@ get:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/customers@{id}@lead-source/get.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: '../code_samples/PHP-SDK-3.0/customers@{id}@lead-source/get.php'
 put:
   x-products:
     - Core
   tags:
     - Customers
-  summary: Create a Lead Source for a customer
+  summary: Create a customer's lead source
   operationId: PutCustomerLeadSource
   x-sdk-operation-name: createLeadSource
-  description: |
-    Create a Lead Source for a customer.
+  description: |-
+    Creates a lead source for a customer with a specified identifier string.
+
+    A lead source is the marketing campaign that
+    generates customer interaction, a sale, or a trial. For more
+    information, see
+    [Lead source attribution](https://www.rebilly.com/docs/dev-docs/concepts/#lead-source-attribution).
   requestBody:
     content:
       application/json:
@@ -49,7 +64,7 @@ put:
     required: true
   responses:
     '201':
-      description: Lead Source was created.
+      description: Lead source created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -70,19 +85,24 @@ put:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/customers@{id}@lead-source/put.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: '../code_samples/PHP-SDK-3.0/customers@{id}@lead-source/put.php'
 delete:
   x-products:
     - Core
   tags:
     - Customers
-  summary: Delete a Lead Source for a customer
+  summary: Delete a customer's lead source
   operationId: DeleteCustomerLeadSource
   x-sdk-operation-name: deleteLeadSource
-  description: |
-    Delete a Lead Source that belongs to a certain customer.
+  description: |-
+    Deletes lead source data for a customer with a specified
+    identifier string.
   responses:
     '204':
-      description: Lead Source was deleted.
+      description: Lead source deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -98,3 +118,7 @@ delete:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/customers@{id}@lead-source/delete.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: '../code_samples/PHP-SDK-3.0/customers@{id}@lead-source/delete.php'

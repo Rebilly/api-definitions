@@ -1,6 +1,9 @@
 content:
   application/json:
     schema:
-      $ref: ../schemas/Plans/Plan.yaml
+      oneOf:
+        - $ref: ../schemas/Plans/PlanTypes/OneTimeSalePlan.yaml
+        - $ref: ../schemas/Plans/PlanTypes/SubscriptionOrderPlan.yaml
+        - $ref: ../schemas/Plans/PlanTypes/TrialOnlyPlan.yaml
 description: Plan resource.
 required: true

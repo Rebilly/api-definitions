@@ -16,10 +16,10 @@ get:
     - Reports
   tags:
     - Reports
-  summary: Retrieve transactions with their plan data
+  summary: Retrieve a subscription cancellation report
   operationId: GetSubscriptionCancellationReport
   x-sdk-operation-name: getSubscriptionCancellation
-  description: Retrieve transactions with their plan data.
+  description: Retrieve a subscription cancellation report.
   parameters:
     - name: periodStart
       in: query
@@ -27,12 +27,14 @@ get:
       required: true
       schema:
         type: string
+        format: date-time
     - name: periodEnd
       in: query
       description: Report end date.
       required: true
       schema:
         type: string
+        format: date-time
     - name: aggregationField
       in: query
       description: Report aggregation field.
@@ -57,7 +59,7 @@ get:
     - $ref: ../components/parameters/collectionFilter.yaml
   responses:
     '200':
-      description: Report was retrieved successfully.
+      description: Report was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -77,3 +79,7 @@ get:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/reports@subscription-cancellation/get.js
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/reports@subscription-cancellation/get.php

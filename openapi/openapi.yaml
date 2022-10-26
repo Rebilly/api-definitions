@@ -27,20 +27,18 @@ servers:
       organizationId:
         default: unknown
         description: |-
-          Your organization ID. The organization ID describes your
-          organization in Rebilly. For information on how to obtain
-          your organization ID, see
-          [Obtain your organization ID and website ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
   - url: 'https://api.rebilly.com/organizations/{organizationId}'
     description: Live server
     variables:
       organizationId:
         default: unknown
         description: |-
-          Your organization ID. The organization ID describes your
-          organization in Rebilly. For information on how to obtain
-          your organization ID, see
-          [Obtain your organization ID and website ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 
 components:
   securitySchemes:
@@ -102,6 +100,37 @@ tags:
       reuse the same coupon code. If you have a use case where you
       must reuse the same code,
       [contact Rebilly](https://www.rebilly.com/contact/).
+
+      ### Coupon restriction types
+
+      The following coupon description types are available:
+
+      - `restrict-to-countries`: Restricts a coupon for use in specific countries.
+      - `discounts-per-redemption`: Restricts the number of times that
+      the coupon can be applied by one redemption. For example, use this
+      restriction to configure a coupon that can only be applied to the
+      first subscription renewal of a particular product.
+      - `minimum-order-amount`: Sets a minimum order amount for a coupon
+      application. For example, if the restriction amount is $20, the
+      coupon is only applied to invoices with a total amount of $20 or more.
+      - `restrict-to-invoices`: Restricts a coupon to specific invoices.
+      - `restrict-to-plans`: Restricts a coupon to specific pricing plans.
+      - `restrict-to-subscriptions`: Restricts a coupon to specific
+      order subscriptions.
+      - `restrict-to-products`: Restricts a coupon to specific products.
+      - `paid-by-time`: Specifies a date and time at which a coupon
+      redemption will expire if not paid.
+      - `redemptions-per-customer`: Restricts the number of times that a
+      coupon can be redeemed by one customer. For example, use this
+      restriction to limit the number of redemptions to one per customer.
+      - `total-redemptions`: Restricts the number of times a coupon can
+      be redeemed by different customers.
+      - `restrict-to-bxgy`: Provides "buy X get Y" promotions. These
+      promotions incentivize new customers to buy and also reward
+      existing customers. This restriction type enables you to add
+      discounted plans to an invoice when a certain quantity of other
+      plans are purchased. For example, if a customer buys two or more
+      books, they get one free bookmark.
   - name: Customers
     description: |-
       Use these operations to manage customers. A customer is an
@@ -330,6 +359,9 @@ tags:
       invoice for each service period.
       For more information, see
       [Orders](https://www.rebilly.com/docs/dev-docs/concepts/#orders).
+  - name: Usage
+    description: |-
+      Reports the product usage of a subscription item for metered billing purposes.
   - name: Tags
     description: >-
       Use tags to organize and categorize customers or KYC documents
@@ -346,8 +378,7 @@ tags:
       amounts, they do not modify the transaction amount. Fees help to
       describe each part of the transaction amount.
 
-      This API is experimental and not guaranteed to be backward
-      compatible.
+      > **Important:** These operations are experimental and may change.
   - name: API keys
     description: |-
       Use API keys to identify and authenticate applications and users.
@@ -360,12 +391,11 @@ tags:
       to authenticate to the API. For more information, see
       [JWT session](https://user-api-docs.rebilly.com/#tag/JWT-Session).
   - name: Balance transactions
-    description: >-
+    description: |-
       Use these operations to view and manage balance
-      transactions
+      transactions.
 
-      This API is experimental and not guaranteed to be backward
-      compatible.
+      > **Important:** These operations are experimental and may change.
   - name: Billing portals
     description: |-
       Use these operations to create and manage billing portals.
@@ -753,8 +783,6 @@ paths:
     $ref: './paths/invoices@{id}@transaction-allocations.yaml'
   '/invoices/{id}/transaction':
     $ref: './paths/invoices@{id}@transaction.yaml'
-  '/customers/{id}/upcoming-invoices':
-    $ref: './paths/customers@{id}@upcoming-invoices.yaml'
   '/invoices/{id}/timeline':
     $ref: './paths/invoices@{id}@timeline.yaml'
   '/invoices/{id}/timeline/{messageId}':
@@ -851,6 +879,10 @@ paths:
     $ref: './paths/subscriptions@{id}@timeline.yaml'
   '/subscriptions/{id}/timeline/{messageId}':
     $ref: './paths/subscriptions@{id}@timeline@{messageId}.yaml'
+  '/usages':
+    $ref: './paths/usages.yaml'
+  '/usages/{id}':
+    $ref: './paths/usages@{id}.yaml'
   /tags:
     $ref: ./paths/tags.yaml
   '/tags/{tag}':
@@ -1499,3 +1531,6 @@ x-webhooks:
   waiting-gateway-transaction-completed:
     post:
       $ref: ./webhooks/waiting-gateway-transaction-completed.yaml
+  data-export-completed:
+    post:
+      $ref: ./webhooks/data-export-completed.yaml

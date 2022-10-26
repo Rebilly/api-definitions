@@ -4,18 +4,24 @@ servers:
     variables:
       organizationId:
         default: unknown
-        description: Your organization ID.
+        description: |-
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
   - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
     description: Live server
     variables:
       organizationId:
         default: unknown
-        description: Your organization ID.
+        description: |-
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 parameters:
   - name: customerId
     in: path
     required: true
-    description: Customer's ID.
+    description: Customer identifier string.
     schema:
       type: string
 get:
@@ -23,14 +29,15 @@ get:
     - Reports
   tags:
     - Customers
-  summary: Retrieve customer lifetime summary metrics
+  summary: Retrieve a customer's lifetime summary metrics
   operationId: GetCustomerSummaryMetricReport
   x-sdk-operation-name: getCustomerLifetimeSummaryMetrics
-  description: |
-    Retrieve customer lifetime summary metrics.
+  description: |-
+    Retrieves lifetime summary metrics for a customer with a specified
+    identifier string.
   responses:
     '200':
-      description: Metrics were retrieved successfully.
+      description: Metrics retrieved.
       content:
         application/json:
           schema:
@@ -42,5 +49,8 @@ get:
   x-codeSamples:
     - lang: JavaScript
       source:
-        $ref: >-
-          ../code_samples/JavaScript/customers@{customerId}@summary-metrics/get.js
+        $ref: ../code_samples/JavaScript/customers@{customerId}@summary-metrics/get.js
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/customers@{customerId}@summary-metrics/get.php

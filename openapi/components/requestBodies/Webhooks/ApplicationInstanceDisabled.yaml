@@ -3,11 +3,14 @@ content:
     schema:
       properties:
         organizationId:
-          description: The organization identifier string.
+          description: |-
+            Unique organization identifier.
+            An organization is an entity that represents a company.
+            For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
           allOf:
             - $ref: ../../schemas/ResourceId.yaml
         applicationId:
-          description: The organization identifier string.
+          description: Unique application identifier string.
           allOf:
             - $ref: ../../schemas/ResourceId.yaml
         eventType:
@@ -17,13 +20,16 @@ content:
           allOf:
             - $ref: ../../schemas/GlobalWebhookEventType.yaml
         _embedded:
+          description: |-
+            Embedded objects that are requested by the `expand`
+            query parameter.
           type: object
           properties:
             application:
               $ref: ../../schemas/Applications/Application.yaml
         _links:
           type: array
-          description: The links related to resource.
+          description: Related resource links.
           minItems: 1
           items:
             anyOf:

@@ -11,7 +11,7 @@ properties:
     description: Payment method of the payment instrument.
     allOf:
       - $ref: ../PaymentMethods/AlternativePaymentMethods.yaml
-      - not: 
+      - not:
           enum:
             - payment-card
             - paypal
@@ -30,9 +30,7 @@ properties:
       - active
       - deactivated
   useAsBackup:
-    description: Allow using this payment instrument as a backup for invoice payment retries.
-    type: boolean
-    default: false
+    $ref: ../UseAsBackup.yaml
   createdTime:
     description: The payment instrument created time.
     allOf:

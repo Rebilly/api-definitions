@@ -1,10 +1,10 @@
 allOf:
-  - title: Validation Error
+  - title: Validation error
   - type: object
     properties:
       status:
         type: integer
-        description: The HTTP status code.
+        description: HTTP status code.
         minimum: 422
         maximum: 422
   - $ref: ./BaseProblem.yaml
@@ -17,7 +17,9 @@ allOf:
           properties:
             field:
               type: string
-              description: The field name. Dot notation is used for nested object field names.
+              description: |-
+                The field name. Dot notation is used for nested object
+                field names.
             message:
               type: string
         example:

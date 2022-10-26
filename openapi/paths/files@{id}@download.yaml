@@ -10,27 +10,28 @@ get:
   operationId: GetFileDownload
   x-sdk-operation-name: download
   description: |
-    Download a file.
+    Downloads a file with a specified ID.
   responses:
     '200':
-      description: The file was retrieved successfully.
+      description: File retrieved.
       headers:
         Content-Length:
-          description: The number of bytes in the file.
+          description: Number of bytes in the file.
           schema:
             type: integer
           example: 48
         Content-Type:
-          description: The MIME type of the file.
+          description: MIME type of the file.
           schema:
             type: string
           example: image/png
       content:
-        application/json:
+        application/json, application/pdf, image/jpg, image/png, image/gif, audio/mpeg:
           schema:
             type: string
             readOnly: true
             format: binary
+
     '302':
       $ref: ../components/responses/Found.yaml
     '401':

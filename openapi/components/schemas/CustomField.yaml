@@ -1,28 +1,26 @@
-description: A separate Custom Field schema.
+description: A separate custom field schema.
 type: object
 required:
   - type
 properties:
   name:
-    description: The name of the custom field.
+    description: Name of the custom field.
     type: string
     readOnly: true
   type:
-    description: >
-      Type value    | Description
+    description: |-
+      |Type value | Description |
+      | --------- | ----------- |
+      | `array`   | An array of strings with up to 255 characters. Maximum size is 1000 elements. |
+      | `boolean` | `true` or `false` value. |
+      | `date`    | String in [full-date](https://www.rfc-editor.org/rfc/rfc3339) format (YYYY-MM-DD). |
+      | `datetime`| String in [date-time](https://www.rfc-editor.org/rfc/rfc3339) format (YYYY-MM-DDTHH:MM:SSZ). |
+      | `integer` | Cardinal value of between `-2^31` and `2^31-1`. |
+      | `number`  | Float value. This field also accepts cardinal values which are interpreted as float. |
+      | `string`  | Regular string of up to 255 characters. |
+      | `monetary`| A map of 3-letter currency, code, and amount. Example: `{"currency": "EUR", "amount": 25.30}` |
 
-      ------------- | -------------
-
-      array         | An array of strings up to 255 characters, maximum size is 1000 elements
-      boolean       | true or false
-      date          | String of format "full-date" (YYYY-MM-DD) from RFC-3339 (full-date)
-      datetime      | String of format "date-time" (YYYY-MM-DDTHH:MM:SSZ) from RFC-3339 (date-time)
-      integer       | Cardinal value of -2^31..2^31-1
-      number        | Float value. It can take cardinal values also which are interpreted as float
-      string        | Regular string up to 255 characters
-      monetary      | A map of 3-letters currency code and amount, e.g. {"currency": "EUR", "amount": 25.30}
-
-      The type cannot be changed.
+      > **Note:** The type value cannot be changed.
     type: string
     enum:
       - array
@@ -33,23 +31,21 @@ properties:
       - string
       - monetary
   description:
-    description: The custom field description.
+    description: Description of the custom field.
     type: string
   additionalSchema:
-    description: >
+    description: |-
+      Additional schema which adds additional values constrains.
+
       Additional parameters which can be added according to type:
 
-      Parameter Name | Types         | Description
-
-      -------------- | ------------- | -------------
-
-      allowedValues  | string, array | List of allowed values
-      maxLength      | string        | Maximum allowed length for the string, 255 by default, up to 4000
-
-      The additional schema adds additional constrains for values.
+      | Parameter name | Types         | Description |
+      | -------------- | ------------- | ----------- |
+      | `allowedValues`| string, array | List of allowed values. |
+      | `maxLength`    | string        | Maximum allowed length of a string. A maximum length of 4000 characters can be configured. By default, this value is set to 255.
   _links:
     type: array
-    description: The links related to resource.
+    description: Related resource links.
     readOnly: true
     minItems: 1
     items:

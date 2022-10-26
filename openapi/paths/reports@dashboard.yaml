@@ -40,7 +40,6 @@ get:
       description: Comma-separated list of metrics.
       schema:
         type: string
-        format: date-time
     - name: segments
       in: query
       description: Dashboard report segments as a JSON array.
@@ -48,7 +47,7 @@ get:
         type: string
   responses:
     '200':
-      description: Report was retrieved successfully.
+      description: Report was retrieved.
       content:
         application/json:
           schema:
@@ -57,3 +56,8 @@ get:
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/reports@dashboard/get.php

@@ -16,7 +16,7 @@ get:
     Retrieve a product with specified identifier string.
   responses:
     '200':
-      description: Product was retrieved successfully.
+      description: Product was retrieved.
       content:
         application/json:
           schema:
@@ -31,16 +31,20 @@ get:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/products@{id}/get.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/products@{id}/get.php
 put:
   x-products:
     - Core
   tags:
     - Products
-  summary: Upsert a product with predefined ID
+  summary: Upsert a product
   operationId: PutProduct
   x-sdk-operation-name: update
   description: |
-    Create or update a product with predefined identifier string.
+    Create or update (upsert) a product with specified identifier string.
   requestBody:
     $ref: ../components/requestBodies/Product.yaml
   responses:
@@ -69,6 +73,10 @@ put:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/products@{id}/put.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/products@{id}/put.php
 delete:
   x-products:
     - Core
@@ -78,7 +86,7 @@ delete:
   operationId: DeleteProduct
   x-sdk-operation-name: delete
   description: |
-    Delete a product with predefined identifier string.
+    Delete a product with specified identifier string.
   responses:
     '204':
       description: Product was deleted.
@@ -92,3 +100,7 @@ delete:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/products@{id}/delete.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/products@{id}/delete.php

@@ -3,11 +3,11 @@ get:
     - Core
   tags:
     - Files
-  summary: Retrieve a list of files
+  summary: Retrieve files
   operationId: GetFileCollection
   x-sdk-operation-name: getAll
-  description: |
-    Retrieve a list of files.
+  description: |-
+    Retrieves a list of files.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -18,7 +18,7 @@ get:
     - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
-      description: A list of Files was retrieved successfully.
+      description: List of files retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -55,23 +55,22 @@ post:
     - SecretApiKey: []
     - JWT: []
     - PublishableApiKey: []
-  description: >
-    Additionally, a file can be sent with:.
-     - multipart/form-data POST request: in this case all property names are the same as the JSON ones (`file` is an uploaded file)
-     - file body request: the file body is sent as the request body, with the appropriate `Content-Type`. No additional
-     properties can be set along the request data
+  description: |-
+    Creates a file.
 
-    The following file types only are allowed:
-     - jpg
-     - png
-     - gif
-     - pdf
-     - mp3
+    Additionally, a file can be sent by:
 
+     - Multipart/form-data POST request: In this request, the file is
+     uploaded and all property names are the same as the JSON names.
+     - File body request: In this request, the file body is sent as
+     the request body, with the appropriate `Content-Type`. No
+     additional properties can be set with the request data.
 
-    If using a Publishable Api Key, only private files can be created. The files
-    can later on be modified or used using
-     a secret API key.
+    Permitted file types: `.jpg`, `.png`, `.gif`, `.pdf`, and `.mp3`.
+
+    When using a publishable API key, only private files can be created.
+    The files can be modified at a later point or time, or can be
+    accessed using a secret API key.
   requestBody:
     content:
       application/json:
@@ -82,7 +81,7 @@ post:
     required: true
   responses:
     '201':
-      description: File was created.
+      description: File created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
