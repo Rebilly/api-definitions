@@ -14,11 +14,16 @@ get:
     - ApplicationJWT: []
   description: |
     Retrieve a quote with specified identifier string.
+  parameters:
+    - $ref: ../components/parameters/mediaTypeJsonPdf.yaml
   responses:
     '200':
       description: A quote was retrieved.
       content:
         application/json:
+          schema:
+            $ref: ../components/schemas/Quote/Quote.yaml
+        application/pdf:
           schema:
             $ref: ../components/schemas/Quote/Quote.yaml
     '401':
