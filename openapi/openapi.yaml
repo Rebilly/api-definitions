@@ -362,6 +362,15 @@ tags:
   - name: Usage
     description: |-
       Reports the product usage of a subscription item for metered billing purposes.
+  - name: Quotes
+    description: |-
+      A quote is an organization's suggestion to purchase items. It can
+      contain subscription and one-time sale items. When a quote
+      contains one or more subscription items, it is a subscription
+      order quote.
+
+      A quote contains an initial invoice preview and can be accepted to
+      become an actual order.
   - name: Tags
     description: >-
       Use tags to organize and categorize customers or KYC documents
@@ -841,6 +850,18 @@ paths:
     $ref: ./paths/products.yaml
   '/products/{id}':
     $ref: './paths/products@{id}.yaml'
+  /quotes:
+    $ref: ./paths/quotes.yaml
+  /quotes/{id}:
+    $ref: ./paths/quotes@{id}.yaml
+  /quotes/{id}/accept:
+    $ref: ./paths/quotes@{id}@accept.yaml
+  /quotes/{id}/cancel:
+    $ref: ./paths/quotes@{id}@cancel.yaml
+  /quotes/{id}/issue:
+    $ref: ./paths/quotes@{id}@issue.yaml
+  /quotes/{id}/reject:
+    $ref: ./paths/quotes@{id}@reject.yaml
   '/ready-to-pay':
     $ref: ./paths/ready-to-pay.yaml
   /search:

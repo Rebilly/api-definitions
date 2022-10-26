@@ -1,0 +1,62 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Quotes
+  summary: Retrieve a quote
+  operationId: GetQuote
+  x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
+  description: |
+    Retrieve a quote with specified identifier string.
+  responses:
+    '200':
+      description: A quote was retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Quote/Quote.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+patch:
+  x-products:
+    - Core
+  tags:
+    - Quotes
+  summary: Update a quote
+  operationId: PatchQuote
+  x-sdk-operation-name: update
+  description: |
+    Update a quote.
+
+    Available only for quotes with `status: draft`.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Quote/Quote.yaml
+    required: true
+  responses:
+    '200':
+      description: Quote was updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Quote/Quote.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

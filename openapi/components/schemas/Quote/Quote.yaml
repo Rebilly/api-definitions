@@ -1,0 +1,147 @@
+type: object
+required: 
+  - websiteId
+  - customerId
+  - items
+  - startTime
+properties:
+  id:
+    description: The quote identifier string.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  orderType:
+    description: |
+      Specifies the type of quote, a subscription or a one-time purchase.
+    type: string
+    readOnly: true
+    enum:
+      - subscription-order
+      - one-time-order
+  status:
+    description: The status of quote.
+    type: string
+    readOnly: true
+    enum:
+      - draft
+      - issued
+      - accepted
+      - rejected
+      - cancelled
+      - expired
+    x-enumDescriptions:
+      draft: Editing is allowed, can not be sent to the customer.
+      issued: Editing is not allowed, can be sent to customer.
+      accepted: Customer accepted the quote and created an order.
+      rejected: Customer rejected the quote.
+      cancelled: Organization cancelled the quote.
+      expired: Expired before customer or organization interaction.
+  websiteId:
+    description: The website identifier string.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  customerId:
+    $ref: ../CustomerId.yaml
+  orderId:
+    description: The order identifier string.
+    readOnly: true
+    nullable: true
+    allOf: 
+      - $ref: ../ResourceId.yaml
+  items:
+    type: array
+    minItems: 1
+    items:
+      $ref: ../Subscription/OrderItem.yaml
+  deliveryAddress:
+    description: Order delivery address.
+    nullable: true
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  billingAddress:
+    description: Order billing address.
+    nullable: true
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  invoicePreview:
+    type: object
+    description: The preview of initial quote invoice.
+    readOnly: true
+    properties:
+      currency:
+        description: Invoice currency.
+        allOf:
+          - $ref: ../../schemas/CurrencyCode.yaml
+      amount:
+        description: Amount of the invoice.
+        type: number
+        x-type: Money
+        format: double
+      amountDue:
+        description: Amount that is due on the invoice.
+        type: number
+        x-type: Money
+        format: double
+      subtotalAmount:
+        description: Subtotal amount of the invoice.
+        type: number
+        x-type: Money
+        format: double
+      discountAmount:
+        description: Discount amount that is applied to the invoice.
+        type: number
+        x-type: Money
+        format: double
+      tax:
+        $ref: ../Invoices/InvoiceTax.yaml
+      items:
+        type: array
+        description: Invoice items array.
+        readOnly: true
+        items:
+          $ref: ../Invoices/InvoiceItem.yaml
+      discounts:
+        type: array
+        description: Discounts applied.
+        readOnly: true
+        items:
+          allOf:
+            - $ref: ../Coupon/InvoiceDiscount.yaml
+  shipping:
+    $ref: ../Shipping.yaml
+  notes:
+    description: Notes for the customer which will be displayed on the quote.
+    type: string
+  startTime:
+    description: Order start date-time.
+    type: string
+    format: date-time
+  expirationTime:
+    description: Expiration date-time. Defaults to one month.
+    type: string
+    format: date-time
+  couponIds:
+    type: array
+    nullable: true
+    description: |-
+      A list of coupons to redeem on the customer and restrict to the accepted order.
+
+      Read more about [coupons
+      here](https://docs.rebilly.com/docs/dashboard/marketing/coupons-and-discounts/).
+
+      This parameter respects the following logic:
+
+      - When not passed then applied coupons will not be changed.
+
+      - When empty array passed then all applied coupon redemptions will be
+      canceled.
+
+      - When list of coupons is passed then not applied yet coupons will be
+      applied, already applied coupons will not change their state, applied
+      coupons that are not presented in passed list will be canceled.
+
+      If coupons will change before the quote is accepted the final discount
+      might differ.
+    items:
+      type: string
+      description: Coupon ID.

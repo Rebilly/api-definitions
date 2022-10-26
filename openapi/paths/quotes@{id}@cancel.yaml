@@ -1,0 +1,31 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Quotes
+  summary: Issue a quote
+  operationId: PostQuoteCancellation
+  x-sdk-operation-name: issue
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
+  description: |
+    Cancel a draft or an issued quote with specified identifier string.
+  responses:
+    '200':
+      description: A quote was canceled.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Quote/Quote.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
