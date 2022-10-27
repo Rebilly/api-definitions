@@ -1,0 +1,32 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Storefront
+  tags:
+    - Quotes
+  summary: Retrieve a quote
+  operationId: StorefrontGetQuote
+  x-sdk-operation-name: get
+  security:
+    - CustomerJWT: []
+  description: |
+    Retrieve a quote with specified identifier string.
+  parameters:
+    - $ref: ../../components/parameters/mediaTypeJsonPdf.yaml
+  responses:
+    '200':
+      description: A quote was retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Quote/CommonQuote.yaml
+        application/pdf:
+          schema:
+            $ref: ../../components/schemas/Quote/CommonQuote.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../../components/responses/NotFound.yaml
