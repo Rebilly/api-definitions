@@ -1,5 +1,97 @@
-allOf: 
-  - $ref: ./CommonCashierRequest.yaml
-  - properties:
-      riskMetadata:
-        readOnly: true
+type: object
+required:
+  - websiteId
+  - customerId
+  - currency
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  websiteId:
+    description: Cashier website ID.
+    type: string
+    allOf:
+      - $ref: ../ResourceId.yaml
+  customerId:
+    $ref: ../CustomerId.yaml
+  transactionId:
+    type: array
+    description: The transaction resource ID deposited towards the request.
+    readOnly: true
+    nullable: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  status:
+    description: Status of the request.
+    type: string
+    readOnly: true
+    enum:
+      - created
+      - pending
+      - completed
+      - expired
+    x-enumDescriptions:
+      created: Created, but not visited by the customer. Temporary state.
+      pending: Visited, but no funds have been deposited yet. Temporary state.
+      completed: Funds deposit transaction initiated. Permanent state.
+      expired: Request expired without any deposit attempts. Permanent state.
+  currency:
+    $ref: ../CurrencyCode.yaml
+  amounts:
+    type: array
+    description: |-
+      The list of available deposit amounts.
+
+      If not sent on creation will be determined based on the matching strategies.
+    items:
+      type: number
+      format: double
+      minimum: 0
+      exclusiveMinimum: true
+  customAmount:
+    description: |-
+      A custom amount restrictions.
+      
+      If `null` custom amounts are prohibited.
+
+      If not sent on creation will be determined based on the matching strategies.
+    nullable: true
+    allOf:
+      - $ref: ./CashierStrategyCustomAmount.yaml
+  redirectUrl:
+    description: The URL to redirect the customer when a deposit is completed. Defaults to the website URL.
+    type: string
+    format: uri
+  expirationTime:
+    description: Expiration date-time. Default value is one hour in the future.
+    type: string
+    format: date-time
+  createdTime:
+    description: Creation date-time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
+  _links:
+    type: array
+    description: The links related to the resource.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Links/SelfLink.yaml
+        - $ref: ../Links/CashierLink.yaml
+        - $ref: ../Links/TransactionLink.yaml
+  _embedded:
+    type: array
+    description: |-
+      Embedded objects that are requested by the `expand`
+      query parameter.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Embeds/CustomerEmbed.yaml
+        - $ref: ../Embeds/WebsiteEmbed.yaml
+        - $ref: ../Embeds/TransactionEmbed.yaml
