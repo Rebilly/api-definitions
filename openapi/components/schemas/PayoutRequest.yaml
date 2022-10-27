@@ -24,6 +24,11 @@ properties:
     description: Payout amount.
     type: number
     format: double
+  availableAmount:
+    description: Available payout request amount that has not been allocated.
+    readOnly: true
+    type: number
+    format: double
   status:
     description: Status of the request.
     type: string
@@ -32,8 +37,47 @@ properties:
       - pending
       - approved
       - rejected
+      - canceled
+      - partially-paid
+      - fulfilled
+    x-enumDescriptions:
+      pending: Request is awaiting review.
+      approved: Request is approved and awaiting processing.
+      rejected: Request is rejected.
+      canceled: Request is canceled by customer.
+      partially-paid: Request is partially paid when `availableAmount` is less than `amount`.
+      fulfilled: Request is fully paid when `availableAmount` reaches zero.
+  allocations:
+    type: array
+    description: List of credit transactions that are allocated to reduce the available amount of a payout request.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        transactionId:
+          description: ID of the transaction to which the payout request is allocated.
+          allOf:
+            - $ref: ../ResourceId.yaml
+        amount:
+          description: Payout amount that is allocated from the payout request to the credit transaction.
+          type: number
+          format: double
+        currency:
+          readOnly: true
+          allOf:
+            - $ref: ../CurrencyCode.yaml
+        createdTime:
+          description: Date and time at which a payout request is allocated.
+          allOf:
+            - $ref: ../ServerTimestamp.yaml
+        updatedTime:
+          $ref: ../UpdatedTime.yaml
   rejectionReason:
     description: Rejection reason of the payout request.
+    type: string
+    readOnly: true
+  cancellationReason:
+    description: Cancellation reason of the payout request.
     type: string
     readOnly: true
   reviewerId:

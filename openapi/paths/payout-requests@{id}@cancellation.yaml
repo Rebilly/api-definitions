@@ -1,0 +1,37 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Cancel a payout request
+  operationId: PostPayoutRequestCancellation
+  x-sdk-operation-name: cancel
+  description: |-
+    Marks payout request as `canceled` by customer.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PayoutRequestCancellation.yaml
+    description: Payout request resource.
+    required: true
+  responses:
+    '201':
+      description: Payout request canceled.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PayoutRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
