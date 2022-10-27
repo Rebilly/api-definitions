@@ -12,6 +12,22 @@ allOf:
         description: Accounting code of the product.
         type: string
         example: '4010'
+      recognition:
+        type: object
+        properties:
+          enabled:
+            type: boolean
+            default: false
+          debitAccountId:
+            description: ID of the debit journal account.
+            nullable: true
+            allOf:
+              - $ref: ./ResourceId.yaml
+          creditAccountId:
+            description: ID of the credit journal account.
+            nullable: true
+            allOf:
+              - $ref: ./ResourceId.yaml
       _links:
         type: array
         description: Related resource links.
