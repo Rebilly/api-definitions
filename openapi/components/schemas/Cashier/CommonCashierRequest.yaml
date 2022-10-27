@@ -2,7 +2,7 @@ type: object
 required:
   - websiteId
   - customerId
-  - strategy
+  - currency
 properties:
   id:
     readOnly: true
@@ -15,8 +15,6 @@ properties:
       - $ref: ../ResourceId.yaml
   customerId:
     $ref: ../CustomerId.yaml
-  strategy:
-    $ref: ./CashierStrategyReference.yaml
   transactionId:
     type: array
     description: The transaction resource ID deposited towards the request.
@@ -38,30 +36,33 @@ properties:
       pending: Visited, but no funds have been deposited yet. Temporary state.
       completed: Funds deposit transaction initiated. Permanent state.
       expired: Request expired without any deposit attempts. Permanent state.
-  redirectUrl:
-    description: The URL to redirect the customer when a deposit is completed. Defaults to the website ID.
-    type: string
-    format: uri
   currency:
-    readOnly: true
-    nullable: true
-    allOf:
-      - $ref: ../CurrencyCode.yaml
+    $ref: ../CurrencyCode.yaml
   amounts:
     type: array
-    readOnly: true
-    nullable: true
-    description: The list of available deposit amounts.
+    description: |-
+      The list of available deposit amounts.
+
+      If not sent on creation will be determined based on the matching strategies.
     items:
       type: number
       format: double
-  isCustomAmountAllowed:
-    type: boolean
-    readOnly: true
-    nullable: true
+      minimum: 0
+      exclusiveMinimum: true
+  customAmount:
     description: |-
-      Specifies whether the custom deposit amount is allowed.
-      If this value is `true`, the customer can deposit any custom amount using the cashier.
+      A custom amount restrictions.
+      
+      If `null` custom amounts are prohibited.
+
+      If not sent on creation will be determined based on the matching strategies.
+    nullable: true
+    allOf:
+      - $ref: ./CashierStrategyCustomAmount.yaml
+  redirectUrl:
+    description: The URL to redirect the customer when a deposit is completed. Defaults to the website URL.
+    type: string
+    format: uri
   expirationTime:
     description: Expiration date-time. Default value is one hour in the future.
     type: string

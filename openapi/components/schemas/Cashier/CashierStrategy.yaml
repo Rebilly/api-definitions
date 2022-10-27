@@ -12,12 +12,25 @@ properties:
   name:
     type: string
     description: The strategy name.
-  currencyStrategy:
-    $ref: ./Strategies/CashierCurrencyStrategy.yaml
-  amountsStrategy:
-    $ref: ./Strategies/CashierAmountsStrategy.yaml
-  customAmountAllowanceStrategy:
-    $ref: ./Strategies/CashierCustomAmountAllowanceStrategy.yaml
+  filter:
+    type: string
+    description: >-
+      A filter based on the cashier requests's properties which is used to determine when the strategy is applicable.
+      Empty filter will match any case.
+    default: ''
+    example: 'cashierRequest.currency:USD'
+    allOf:
+      - $ref: ../FilterString.yaml
+  amounts:
+    $ref: ./CashierStrategyAmounts.yaml
+  customAmount:
+    description: |-
+      A custom amount restrictions.
+      
+      If `null` custom amounts are prohibited.
+    nullable: true
+    allOf:
+      - $ref: ./CashierStrategyCustomAmount.yaml
   createdTime:
     description: Creation date-time.
     allOf:
