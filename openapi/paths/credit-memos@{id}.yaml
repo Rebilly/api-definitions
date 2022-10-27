@@ -12,13 +12,12 @@ get:
     - SecretApiKey: []
     - JWT: []
     - ApplicationJWT: []
-  description: |
-    Retrieve a credit memo with specified identifier string.
+  description: Retrieves a credit memo with a specified ID.
   parameters:
     - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: Credit memo was retrieved.
+      description: Credit memo retrieved.
       content:
         application/json:
           schema:
@@ -37,8 +36,8 @@ put:
   summary: Upsert a credit memo
   operationId: PutCreditMemo
   x-sdk-operation-name: update
-  description: |
-     Create or update (upsert) a credit memo with specified identifier string.
+  description: |-
+     Creates or updates (upserts) a credit memo with a specified ID.
   requestBody:
     required: true
     content:
@@ -47,13 +46,13 @@ put:
           $ref: ../components/schemas/CreditMemos/CreditMemo.yaml
   responses:
     '200':
-      description: CreditMemo was updated.
+      description: Credit memo updated.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/CreditMemos/CreditMemo.yaml
     '201':
-      description: CreditMemo was created.
+      description: Credit memo created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
