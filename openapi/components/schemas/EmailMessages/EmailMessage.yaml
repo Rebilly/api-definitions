@@ -7,12 +7,12 @@ required:
   - html
 properties:
   id:
-    description: The email message's identifier string.
+    description: ID of the email message.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   status:
-    description: The email message's status.
+    description: Status of the email message.
     type: string
     enum:
       - draft
@@ -22,7 +22,7 @@ properties:
       - failed
     default: draft
   metadata:
-    description: The email message's metadata.
+    description: Metadata associated with email message.
     type: object
     additionalProperties:
       type: string
@@ -30,16 +30,17 @@ properties:
       eventType: subscription-canceled
   credentialHash:
     type: string
-    description: SMTP or any Email Service Provider credential identifier string.
+    description: SMTP or Email Service Provider (ESP) credential ID.
     example: b120c2ca-6c2b-4690-9dff-3b0d87852dc7
   from:
-    description: The email message's sender address.
+    description: Email address of the sender.
+
     type: string
     format: email
     maxLength: 254
     example: from-example@rebilly.com
   to:
-    description: The email message's recipients address list.
+    description: List of email addresses to which the email message is sent.
     type: array
     minItems: 1
     items:
@@ -49,7 +50,7 @@ properties:
     example:
       - to-example@rebilly.com
   cc:
-    description: The email message's CC address list.
+    description: List of CC email addresses to which the email message is sent.
     type: array
     items:
       type: string
@@ -58,7 +59,7 @@ properties:
     example:
       - cc-example@rebilly.com
   bcc:
-    description: The email message's BCC address list.
+    description: List of BCC email addresses to which the email message is sent.
     type: array
     items:
       type: string
@@ -67,20 +68,20 @@ properties:
     example:
       - cc-example@rebilly.com
   subject:
-    description: The email message's subject.
+    description: Subject of the email message.
     type: string
     maxLength: 998
     example: Welcome dear customer!
   text:
-    description: The email message's text body.
+    description: Text body of the email message.
     type: string
     example: Email message text body
   html:
-    description: The email message's html body.
+    description: HTML body of the email message.
     type: string
     example: <p>Email message html body</p>
   attachments:
-    description: The email message's attachemnts.
+    description: Attachments of the email message.
     type: array
     items:
       type: object
@@ -89,23 +90,23 @@ properties:
         - resourceId
       properties:
         resourceType:
-          description: The attachment's resource type.
+          description: Resource type of the attachment.
           type: string
           example: invoice
         resourceId:
-          description: The attachment's resource identifier string.
+          description: ID of the attachment resource.
           example: INV-1
           allOf:
             - $ref: ../ResourceId.yaml
   createdTime:
-    description: The email message's created time.
+    description: Date and time at which the email message was created.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml
   _links:
     type: array
-    description: The links related to the resource.
+    description: Related links.
     readOnly: true
     minItems: 1
     items:
