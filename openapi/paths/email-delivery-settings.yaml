@@ -6,6 +6,7 @@ get:
   summary: Retrieve email delivery settings
   operationId: GetEmailDeliverySettingCollection
   x-sdk-operation-name: getAll
+  description: Retrieves email delivery settings.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -14,7 +15,7 @@ get:
     - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
-      description: A list of email delivery settings was retrieved.
+      description: List of email delivery settings retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -41,12 +42,13 @@ post:
   summary: Create an email delivery setting
   operationId: PostEmailDeliverySetting
   x-sdk-operation-name: create
-  description: >
-    Create an email delivery setting.  The email delivery setting is used in.
-    conjunction with email messages or templates to send emails.
+  description: |-
+    Creates an email delivery setting.
+    Email delivery settings are used together with email messages,
+    or templates, to send emails.
   responses:
     '201':
-      description: Email delivery setting was created.
+      description: Email delivery setting created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
