@@ -1,15 +1,15 @@
 type: object
-description: The rule.
+description: Rule information.
 properties:
   id:
-    description: |
-      The rule's unique identifier which defines whether an event is emitted
-      when the rule is created, updated or removed.
+    description: ID of the rule.
     allOf:
       - $ref: ../ResourceId.yaml
   name:
+    description: Name of the rule.
     type: string
   labels:
+    description: Labels of the rule.
     type: array
     uniqueItems: true
     example:
@@ -19,13 +19,18 @@ properties:
       type: string
       pattern: '[a-zA-Z][a-zA-Z0-9:-]*'
   status:
+    description: Status of the rule.
     $ref: ../OnOff.yaml
   filter:
-    description: >-
-      The filter requires a special format. Use "," for
-      multiple allowed values. Use ";" for multiple fields.
+    description: |-
+      Filters the collection items. This field requires
+      a special format. Use `,` for multiple allowed values.
+      Use `;` for multiple fields.
+
+      For more information, see [Using filter with collections](https://api-reference.rebilly.com/#section/Using-filter-with-collections).
     type: string
   actions:
+    description: Actions that execute when an event occurs.
     type: array
     uniqueItems: true
     items:

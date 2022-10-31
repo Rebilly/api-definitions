@@ -3,51 +3,40 @@ properties:
   id:
     type: string
     format: uuid
-    description: The message identifier string.
+    description: ID of the message.
   version:
     type: string
-    description: >-
-      The message version (useful for split tests). By default is empty, but if
-      you make multiple versions, you can name or number them to distinguish
-      them.
+    description: |-
+      Version number of the message.
+      Use this field to distinguish between multiple messages by name and version number.
+      If there are no versions, this field is empty.
   weight:
     type: integer
-    description: >
-      The value for random-weighted picking of a template in the case of a split
-      test.
+    description: |-
+      Weight distribution value that is assigned to a template for a split test.
+      Each template in a split test can be assigned a weight.
+      The higher the weight value, the more likely the message template will be used.
 
-      The split test algorithm does not factor localization when making a
-      weighted-random template selection.  Therefore, a version will be selected
-      first, and then after a version is selected a specific localization will
-      be selected.  Take the case where two versions have  different locale
-      content -- the locales of the content is not considered when selecting the
-      version.
+      The split test algorithm does not assess locale when making a weighted template selection.
     minimum: 0
     maximum: 100
     example: 75
     default: 100
   templates:
-    description: >
-      An array of message templates with the language locale identifiers
-      according to [RFC 5646](https://tools.ietf.org/html/rfc5646). A language
-      will be selected based on the customer's locale.
+    description: |-
+      An array of message templates with language locale identifiers in [RFC 5646](https://tools.ietf.org/html/rfc5646) format.
+      A language is selected based on the customer's locale.
 
+      If no locale is configured for the customer, `en-US` (US English) is used.
 
-      If there is no locale set for the customer, then `en-US` (US English) will
-      be used as the locale.
+      If no template is available in the customer's locale,
+      a template locale is selected using a closest match algorithm.
 
+      If your email message templates are localized into more than one language,
+      set a customer locale.
 
-      If there is no template with the customer's locale,  then a template
-      locale will be selected by Rebilly using a closest match algorithm (which
-      may be random at worst).
-
-
-      If your email message templates are localized into more than one
-      language,  you SHOULD set a customer locale.
-
-
-      An invalid placeholder will render to an empty string. For example, `Hello
-      {{invalid.placeholder}}!`  will be rendered to `Hello !`.
+      Invalid placeholders render as an empty strings. For example, `Hello
+      {{invalid.placeholder}}!` is rendered as `Hello !`.
     type: array
     minItems: 1
     items:
@@ -62,70 +51,82 @@ properties:
       properties:
         locale:
           type: string
-          description: >-
-            The language locale identifier according to [RFC
-            5646](https://tools.ietf.org/html/rfc5646).
+          description: |-
+            Language locale identifier in [RFC 5646](https://tools.ietf.org/html/rfc5646) format.
           example: fr-FR
         from:
           type: string
-          description: >
-            The sender address. Template placeholders are allowed.  If a
-            placeholder does not resolve to a **verified** from address, then
-            the default verified from address will be used instead.   # todo add
-            a link to help docs on how to verify an email address.
+          description: |-
+            Email address of the sender.
+
+            > **Important:** This value must be a verified email address.
+
+            To verify an email address:
+              1. [Create an email delivery setting](../../Email-delivery-settings/operation/PostEmailDeliverySetting).
+                In the response, you receive the email and a token.
+              1. [Verify the email delivery](../../Email-delivery-settings/operation/PutEmailDeliverySettingsVerification) by passing the token as the path parameter.
+
+            Template placeholders are permitted.
+            If a placeholder does not resolve to a verified `from` address,
+            the default verified `from` address is used.
           maxLength: 254
         to:
           type: array
-          description: >
-            The recipients addresses. Template placeholders are allowed. If a
-            placeholder does not resolve to an email address, then no email will
-            be sent.
+          description: |-
+            List of email addresses to which the email message is sent.
+            Template placeholders are permitted.
+            If a placeholder does not resolve to an email address,
+            the address is not added.
           minItems: 1
           items:
             type: string
             maxLength: 254
         cc:
           type: array
-          description: >
-            The recipients to be carbon copied addresses. Template placeholders
-            are allowed. If a placeholder does not resolve to an email address,
-            then they will not be added to the cc.
+          description: |-
+            List of CC email addresses to which the email message is sent.
+            Template placeholders are permitted.
+            If a placeholder does not resolve to an email address,
+            the address is not added.
           items:
             type: string
             maxLength: 254
         bcc:
           type: array
-          description: >
-            The blind carbon copy recipients addresses. Template placeholders
-            are allowed. If a placeholder does not resolve to an email address,
-            then they will not be added to the cc.
+          description: |-
+            List of BCC email addresses to which the email message is sent.
+            Template placeholders are permitted.
+            If a placeholder does not resolve to an email address,
+            the address is not added.
           items:
             type: string
             maxLength: 254
         subject:
           type: string
-          description: The message subject. Template placeholders are allowed.
+          description: |-
+            Subject of the message.
+            The use of template placeholders is permitted for this field.
           maxLength: 998
         text:
           type: string
-          description: |
-            The message's text body.
-            Leave empty to use content from "html".
-            Template placeholders are allowed.
+          description: |-
+            Text body of the message.
+            To use content from the `html` field, leave this field empty.
+            The use of template placeholders is permitted for this field.
         html:
           type: string
-          description: |
-            The message's html body.
-            Leave empty to use content from "text".
-            Template placeholders are allowed.
+          description: |-
+            HTML body of the message.
+            To use content from the `text` field, leave this field empty.
+            The use of template placeholders is permitted for this field.
         editor:
           type: string
-          description: |
-            The source of the message required for the email editor.
-            Not used for sending emails.
-            Used by the editor to reproduce the message for future updates.
+          description: |-
+            Source of the message. This value is required for the email editor.
+            This value is not used for sending emails.
+            It is used by the editor to reproduce the message for future updates.
         attachments:
-          description: The message's attachments.
+          description: Attachments of the email message.
           type: array
           items:
             type: object
@@ -134,13 +135,13 @@ properties:
               - resourceId
             properties:
               resourceType:
-                description: The attachment's resource type.
+                description: Type of attachment resource.
                 type: string
                 example: invoice
               resourceId:
-                description: >-
-                  The attachment's resource identifier string. Template
-                  placeholders are allowed.
+                description: |-
+                  ID of the attachment resource. Template
+                  placeholders are permitted.
                 type: string
                 maxLength: 255
                 example: INV-1
