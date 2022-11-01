@@ -1,5 +1,5 @@
 type: object
-required: 
+required:
   - minimum
   - multipleOf
   - maximum
@@ -11,13 +11,19 @@ properties:
     minimum: 0
     exclusiveMinimum: true
   multipleOf:
-    description: Multiple by which the custom amount increases.
+    description: |-
+      Multiple by which the custom amount increases.
+
+      For example, if `minimum` is equal 5.3, and `multipleOf` is 0.5 then valid custom amount would be 5.3, 5.8, 6.3, 6.8 etc.
+      Up until `maximum` value is reached.
+
+      In other words, valid Custom Amount must be equal `minimum` + X * `multipleOf`, where X is any non negative integer.
     type: number
     format: double
     minimum: 0
     exclusiveMinimum: true
   maximum:
-    description: Maximum custom amount.
+    description: Maximum custom amount. Must be equal `minimum` + X * `multipleOf`, where X is any positive integer.
     type: number
     format: double
     minimum: 0
