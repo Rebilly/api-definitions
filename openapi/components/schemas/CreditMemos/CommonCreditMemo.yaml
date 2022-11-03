@@ -1,7 +1,7 @@
 type: object
 properties:
   id:
-    description: Credit memo ID.
+    description: ID of the credit memo.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
@@ -44,6 +44,7 @@ properties:
               $ref: ../UpdatedTime.yaml
   items:
     type: array
+    description: Items of the credit memo.
     items:
       type: object
       required:
@@ -56,7 +57,7 @@ properties:
           allOf:
             - $ref: ../ResourceId.yaml
         invoiceItemId:
-          description: ID of the invoice item on which the the credit item is referenced.
+          description: ID of the invoice item to which the credit item is referenced.
           nullable: true
           allOf:
             - $ref: ../ResourceId.yaml
