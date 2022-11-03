@@ -29,10 +29,9 @@ properties:
   increments:
     type: array
     description: |-
-      The list of incremental percent amounts available to customer.
+      The list of incremental amounts available to customer.
 
-      For example, when `baseAmount` is `10` and `increments` are `[20, 50, 150]` the available amounts are: `[10, 12, 15, 25]`.
-      Amounts less than or equal to 0 are ignorred.
+      Check `calculator` property for use example.
     items:
       type: number
       format: double
@@ -44,6 +43,6 @@ properties:
     description: |-
       Specifies whether the base amount should be adjusted based on the last deposit or not.
 
-      If this value is `true`, the `baseAmount` would be changed to the last successful deposit amount.
+      If this value is `true`, the `baseAmount` would be changed to the last successful deposit amount on CashierRequest create.
 
-      If customer has no sucessful deposits `baseAmount` remains unchanged.
+      If customer has no successful deposits `baseAmount` remains unchanged.
