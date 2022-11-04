@@ -4,23 +4,25 @@ required:
   - name
 properties:
   id:
-    description: The email delivery setting's identifier string.
+    description: ID of the email delivery setting.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   from:
-    description: |
-      The sender's email address.  It must be unique within your account.
+    description: |-
+      Email address of the sender.
+
+      > **Important:** This email address must be unique within your account.
     type: string
     format: email
     maxLength: 254
     example: from-example@rebilly.com
   name:
-    description: The sender's name.
+    description: Name of the sender.
     type: string
     example: John Doe
   status:
-    description: The email message's status.
+    description: Status of the email message.
     readOnly: true
     type: string
     enum:
@@ -28,11 +30,11 @@ properties:
       - verified
   credentialId:
     type: string
-    description: SMTP or any Email Service Provider credential identifier string.
+    description: SMTP or Email Service Provider (ESP) credential ID.
     example: b120c2ca-6c2b-4690-9dff-3b0d87852dc7
   provider:
     readOnly: true
-    description: The service provider name.
+    description: Email service provider name.
     type: string
     enum:
       - rebilly
@@ -44,10 +46,10 @@ properties:
     example: rebilly
   isDefault:
     type: boolean
-    description: Whether this setting will be used by default or not.
+    description: Specifies whether the email delivery setting is used by default.
     default: false
   createdTime:
-    description: The created time.
+    description: Date and time at which the email delivery setting was created.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
