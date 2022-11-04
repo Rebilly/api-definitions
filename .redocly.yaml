@@ -42,141 +42,195 @@ rules:
   #   message: Example XOR examples should be defined on a parameter.
 
   assert/headers-include-example:
-    subject: Header
-    property: example
-    defined: true
-    nonEmpty: true
+    subject:
+      type: Header
+      property: example
+    assertions:
+      defined: true
+      nonEmpty: true
 
   assert/path-must-be-ref-file:
-    subject: PathItem
-    context:
-      - type: Paths
-    ref: /^(.\/paths|paths)\/.*yaml$/
+    subject:
+      type: PathItem
+    where:
+      - subject:
+          type: Paths
+        assertions:
+          defined: true
+    assertions:
+      ref: /^(.\/paths|paths)\/.*yaml$/
 
   assert/x-sdk-operation-name:
-    context:
-      - type: Paths
-    subject: Operation
-    property: x-sdk-operation-name
-    casing: camelCase
-    defined: true
+    where:
+      - subject:
+          type: Paths
+        assertions:
+          defined: true
+    subject:
+      type: Operation
+      property: x-sdk-operation-name
+    assertions:
+      casing: camelCase
+      defined: true
 
   assert/operation-id-delete:
-    context:
-      - type: Operation
-        matchParentKeys:
-          - delete
-    subject: Operation
-    property: operationId
-    pattern: /Delete/
-    casing: PascalCase
+    where:
+      - subject:
+          type: Operation
+          filterInParentKeys:
+            - delete
+        assertions:
+          defined: true
+    subject:
+      type: Operation
+      property: operationId
+    assertions:
+      pattern: /Delete/
+      casing: PascalCase
 
   assert/operation-id-get:
-    context:
-      - type: Operation
-        matchParentKeys:
-          - get
-    subject: Operation
-    property: operationId
-    pattern: /Get/
-    casing: PascalCase
+    where:
+      - subject:
+          type: Operation
+          filterInParentKeys:
+            - get
+        assertions:
+          defined: true
+    subject:
+      type: Operation
+      property: operationId
+    assertions:
+      pattern: /Get/
+      casing: PascalCase
 
   assert/operation-id-patch:
-    context:
-      - type: Operation
-        matchParentKeys:
-          - patch
-    subject: Operation
-    property: operationId
-    pattern: /Patch/
+    where:
+      - subject:
+          type: Operation
+          filterInParentKeys:
+            - patch
+        assertions:
+          defined: true
+    subject:
+      type: Operation
+      property: operationId
+    assertions:
+      pattern: /Patch/
 
   assert/operation-id-post:
-    context:
-      - type: Paths
-      - type: Operation
-        matchParentKeys:
-          - post
-    subject: Operation
-    property: operationId
-    pattern: /Post/
-    casing: PascalCase
+    where:
+      - subject:
+          type: Paths
+        assertions:
+          defined: true
+      - subject:
+          type: Operation
+          filterInParentKeys:
+            - post
+        assertions:
+          defined: true
+    subject:
+      type: Operation
+      property: operationId
+    assertions:
+      pattern: /Post/
+      casing: PascalCase
 
   assert/operation-id-put:
-    context:
-      - type: Operation
-        matchParentKeys:
-          - put
-    subject: Operation
-    property: operationId
-    pattern: /Put/
-    casing: PascalCase
+    where:
+      - subject:
+          type: Operation
+          filterInParentKeys:
+            - put
+        assertions:
+          defined: true
+    subject:
+      type: Operation
+      property: operationId
+    assertions:
+      pattern: /Put/
+      casing: PascalCase
 
   assert/tag-description:
-    subject: Tag
-    property: description
+    subject:
+      type: Tag
+      property: description
     message: Tag description must be at least 30 characters and end with a full stop.
-    severity: error
-    defined: true
-    minLength: 30
-    pattern: /(\.|\.\n)$/
-  # assert/operation-description:
-  #   subject: Operation
-  #   property: description
-  #   message: Operation description must be at least 30 characters and end with a full stop.
-  #   severity: error
-  #   defined: true
-  #   minLength: 30
-  #   pattern: /(\.|\.\n)$/
+    assertions:
+      defined: true
+      minLength: 30
+      pattern: /(\.|\.\n)$/
+  assert/operation-description:
+    subject:
+      type: Operation
+      property: description
+    message: Operation description must be at least 30 characters and end with a full stop.
+    severity: warn
+    assertions:
+      defined: true
+      minLength: 30
+      pattern: /(\.|\.\n)$/
   assert/info-description:
-    subject: Info
-    property: description
+    subject:
+      type: Info
+      property: description
     message: Info description must be at least 30 characters and end with a full stop.
-    severity: error
-    defined: true
-    minLength: 30
-    pattern: /(\.|\.\n)$/
+    assertions:
+      defined: true
+      minLength: 30
+      pattern: /(\.|\.\n)$/
   assert/operation-summary:
-    subject: Operation
-    property: summary
+    subject:
+      type: Operation
+      property: summary
     message: Operation summary must be between 10 and 60 characters and not end with a full stop.
-    severity: error
-    defined: true
-    minLength: 10
-    maxLength: 60
-    pattern: /[^\.]$/
-  # assert/schema-properties-both-created-time-and-updated-time:
-  #   subject: SchemaProperties
-  #   message: The createdTime and updatedTime properties are mutually required.
-  #   severity: error
-  #   mutuallyRequired:
-  #     - createdTime
-  #     - updatedTime
+    assertions:
+      defined: true
+      minLength: 10
+      maxLength: 60
+      pattern: /[^\.]$/
+  assert/schema-properties-both-created-time-and-updated-time:
+    subject:
+      type: SchemaProperties
+    message: The createdTime and updatedTime properties are mutually required.
+    severity: warn
+    assertions:
+      mutuallyRequired:
+        - createdTime
+        - updatedTime
 
-  # assert/put-200-and-201:
-  #   subject: ResponsesMap
-  #   context:
-  #     - type: Operation
-  #       matchParentKeys:
-  #         - put
-  #   message: Must mutually define 200 and 201 responses for PUT requests.
-  #   severity: error
-  #   mutuallyRequired:
-  #     - '200'
-  #     - '201'
+  assert/put-200-and-201:
+    subject:
+      type: Responses
+    where:
+      - subject:
+          type: Operation
+          filterInParentKeys:
+            - put
+        assertions:
+          defined: true
+    message: Must mutually define 200 and 201 responses for PUT requests.
+    severity: warn
+    assertions:
+      mutuallyRequired:
+        - '200'
+        - '201'
 
   assert/no-x-code-samples:
-    subject: Operation
+    subject:
+      type: Operation
     message: x-code-samples should be x-codeSamples
-    severity: error
-    disallowed:
-      - x-code-samples
+    assertions:
+      disallowed:
+        - x-code-samples
 
   assert/no-x-internal:
-    subject: Operation
+    subject:
+      type: Operation
     message: This is in a public repository. Do not include internal APIs.
-    severity: error
-    disallowed:
-      - x-internal
+    assertions:
+      disallowed:
+        - x-internal
 
       # Need to account for arrays, etc...
   # assert/mediatype-schema-ref-pattern:
@@ -184,7 +238,6 @@ rules:
   #   property: schema
   #   message: Ref needs to point to components directory.
   #   ref: /^(\.\.\/)?(components|schemas)\/.*\.yaml$/
-
 
 decorators:
   products-bundler/bundle: error
