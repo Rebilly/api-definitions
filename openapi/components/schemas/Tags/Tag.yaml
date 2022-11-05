@@ -1,8 +1,5 @@
 type: object
-description: |-
-  Use tags to organize and categorize customers or KYC documents based
-  on keywords. For more information, see
-  [Tags](https://www.rebilly.com/docs/dev-docs/api/tag/Tags/).
+description: Use tags to organize and categorize customers or KYC documents based on keywords.
 required:
   - name
   - type
@@ -10,8 +7,9 @@ properties:
   id:
     description: Unique tag identifier string.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    type: string
+    maxLength: 50
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
   name:
     description: Unique tag name. Tag names are not case-sensitive.
     type: string
@@ -28,8 +26,9 @@ properties:
       - kyc-document
   createdTime:
     description: Date and time at which the tag was created.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    type: string
+    format: date-time
+    readOnly: true
   updatedTime:
     $ref: ../UpdatedTime.yaml
   _links:
