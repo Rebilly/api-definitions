@@ -1,8 +1,8 @@
+type: object
 allOf:
   - $ref: ./BaseKycDocument.yaml
   - $ref: ./KycDocument.yaml
-  - type: object
-    properties:
+  - properties:
       documentMatches:
         type: object
         readOnly: true
@@ -26,8 +26,11 @@ allOf:
             - $ref: ../Links/CustomerLink.yaml
       _embedded:
         type: array
-        description: Embedded objects that are requested by the `expand` query parameter.
+        description: |-
+          Embedded objects that are requested by the `expand`
+          query parameter.
         readOnly: true
+        minItems: 1
         items:
           anyOf:
             - $ref: ../Embeds/CustomerEmbed.yaml

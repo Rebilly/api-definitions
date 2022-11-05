@@ -3,11 +3,9 @@ required:
   - documents
 properties:
   id:
-    type: string
-    description: Unique resource ID. Defaults to UUID v4.
-    maxLength: 50
-    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
     readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
   documents:
     $ref: ../KycRequestDocuments.yaml
   status:
@@ -34,7 +32,7 @@ properties:
       expired: Request expired without any document uploaded. Permanent state.
   redirectUrl:
     description: |
-      URL to redirect the customer when an upload is completed.
+      The URL to redirect the customer when an upload is completed.
       When the customer is redirected, Rebilly will append an `info` query parameter which may have one of the following values (example: `https://example.com?info=success`):
 
         - **back** - The customer clicked the `back to website` link;

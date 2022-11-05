@@ -1,7 +1,8 @@
+required: 
+  -  fieldIds
 allOf:
   - $ref: ../Common/CommonKycDocument.yaml
-  - type: object
-    properties:
+  - properties:
       customerId:
         $ref: ../CustomerId.yaml
       reviewerId:
@@ -9,8 +10,8 @@ allOf:
         type: string
         nullable: true
         readOnly: true
-        maxLength: 50
-        example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+        allOf:
+          - $ref: ../ResourceId.yaml
       reviewerName:
         description: Reviewer's first and last name.
         type: string
@@ -20,20 +21,20 @@ allOf:
         description: Date and time that manual review starts.
         nullable: true
         type: string
-        format: date-time
-        readOnly: true
+        allOf:
+          - $ref: ../ServerTimestamp.yaml
       reviewTime:
         description: Date and time of manual review.
         type: string
         nullable: true
-        format: date-time
-        readOnly: true
+        allOf:
+          - $ref: ../ServerTimestamp.yaml
       notes:
         description: Reviewer notes.
         type: string
         nullable: true
       tags:
-        description: List of KYC document tags.
+        description: A list of kyc document tags.
         readOnly: true
         type: array
         items:
@@ -42,18 +43,18 @@ allOf:
         description: Reason for uploading.
         type: string
       matchLevel:
-        description: Level of strictness for the document matches.
+        description: The level of strictness for the document matches.
         type: integer
         minimum: 1
         maximum: 2
         example: 2
       settings:
-        description: Used to score the document.
+        description: The settings used to score the document.
         type: object
         nullable: true
       revision:
-        description: |-
-          Number of times the KYC document data has been modified.
+        description: >
+          The number of times the KYC document data has been modified.
 
           The revision is useful when analyzing webhook data to determine if the
           change takes precedence over the current representation.
