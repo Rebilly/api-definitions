@@ -11,26 +11,21 @@ properties:
   fileId:
     deprecated: true
     description: Linked file object id.
-    allOf:
-      - $ref: ../ResourceId.yaml
+    type: string
+    maxLength: 50
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
   fileIds:
     description: >-
       Linked file object id's.
 
-
       Files uploaded for identity-proof must have following corresponding tags attached `['kyc', 'id-front']`, `['kyc', 'id-back']`, `['kyc', 'face-proof']` in order to be properly recognized as identity-proof files.
     type: array
     items:
-      allOf:
-        - $ref: ../ResourceId.yaml
+      - $ref: ../ResourceId.yaml
   documentType:
-    description: Document type submitted for validation, only identity-proof type is analyzed in an automated manner.
-    allOf:
-      - $ref: ../KycDocument/KycDocumentTypes.yaml
+    $ref: ../KycDocument/KycDocumentTypes.yaml
   documentSubtype:
-     description: Document subtype submitted for validation.
-     allOf:
-       - $ref: ../KycDocument/KycDocumentSubtypes.yaml
+    $ref: ../KycDocument/KycDocumentSubtypes.yaml
   status:
     description: Status of the validation.
     type: string
@@ -53,8 +48,9 @@ properties:
     readOnly: true
     nullable: true
     description: KYC request identifier string.
-    allOf:
-      - $ref: ../ResourceId.yaml
+    type: string
+    maxLength: 50
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
   createdTime:
     description: Creation date/time.
     allOf:

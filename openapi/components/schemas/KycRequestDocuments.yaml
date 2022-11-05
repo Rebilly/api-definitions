@@ -7,8 +7,13 @@ items:
   properties:
     type:
       description: Type of document to request from the customer.
-      allOf:
-        - $ref: ./KycDocument/KycDocumentTypes.yaml
+      type: string
+      enum:
+        - identity-proof
+        - address-proof
+        - funds-proof
+        - purchase-proof
+        - credit-file-proof
     subtypes:
       description: Allowed document subtype.
       type: array
