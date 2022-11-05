@@ -53,15 +53,15 @@ properties:
     readOnly: true
     nullable: true
     description: KYC request identifier string.
-    allOf:
-      - $ref: ../ResourceId.yaml
+    type: string
+    maxLength: 50
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
   createdTime:
-    description: Creation date/time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml
   processedTime:
     description: Processing date/time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    type: string
+    format: date-time
+    readOnly: true

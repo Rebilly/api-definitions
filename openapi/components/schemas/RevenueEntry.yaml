@@ -2,9 +2,7 @@ type: object
 readOnly: true
 properties:
   customerId:
-    description: ID of the customer which generated the revenue.
-    allOf:
-      - $ref: ./ResourceId.yaml
+    $ref: CustomerId.yaml
   invoiceId:
     description: ID of the invoice that contains the item which generated the revenue.
     allOf:
@@ -16,13 +14,15 @@ properties:
   productId:
     description: ID of the product related to the invoice item.
     nullable: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    type: string
+    maxLength: 50
+    example: product-123
   planId:
     description: ID of the plan related to the invoice item.
     nullable: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    type: string
+    maxLength: 50
+    example: gold-plan
   accountingCode:
     description: The product accounting code.
     type: string
@@ -51,14 +51,17 @@ properties:
     format: double
   scheduledTime:
     description: Date and time at which the entry was created.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    type: string
+    format: date-time
+    readOnly: true
   issuedTime:
     description: Date and time at which the related invoice was issued.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    type: string
+    format: date-time
+    readOnly: true
   recognizedTime:
     description: Date and time at which the entry was recognized.
     nullable: true
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    type: string
+    format: date-time
+    readOnly: true
