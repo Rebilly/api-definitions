@@ -6,7 +6,22 @@ content:
           description: The invoice ID.
           type: string
         eventType:
-          $ref: ../../schemas/GlobalWebhookEventType.yaml
+          type: string
+          description: Webhook event type.
+          enum:
+            - invoice-abandoned
+            - invoice-created
+            - invoice-issued
+            - invoice-modified
+            - invoice-paid
+            - invoice-partially-paid
+            - invoice-partially-refunded
+            - invoice-past-due
+            - invoice-past-due-reminder
+            - invoice-refunded
+            - invoice-reissued
+            - invoice-tax-calculation-failed
+            - invoice-voided
         _embedded:
           type: object
           description: |-

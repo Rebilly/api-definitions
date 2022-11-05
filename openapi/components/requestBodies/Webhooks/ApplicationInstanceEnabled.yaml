@@ -9,15 +9,12 @@ content:
           allOf:
             - $ref: ../../schemas/ResourceId.yaml
         eventType:
+          type: string
+          description: Webhook event type.
           enum:
             - application-instance-enabled
-          example: application-instance-enabled
-          allOf:
-            - $ref: ../../schemas/GlobalWebhookEventType.yaml
         _embedded:
-          description: |-
-            Embedded objects that are requested by the `expand`
-            query parameter.
+          description: Embedded objects.
           type: object
           properties:
             application:
