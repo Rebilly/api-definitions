@@ -1,8 +1,8 @@
 type: object
 properties:
   revision:
-    description: >
-      The number of times the order data has been modified.
+    description: |-
+      Number of times the order data has been modified.
 
       The revision is useful when analyzing webhook data to determine if the
       change takes precedence over the current representation.
@@ -10,10 +10,11 @@ properties:
     readOnly: true
   riskMetadata:
     nullable: true
+    type: object
     example: null
-    description: >-
-      Risk metadata. If null, the value would coalesce to the risk metadata
-      captured when creating the payment token.
+    description: |-
+      Risk metadata.
+      If null, the value would coalesce to the risk metadata captured when creating the payment token.
     allOf:
       - $ref: ../RiskMetadata.yaml
   customFields:
@@ -37,11 +38,8 @@ properties:
         - $ref: ../Links/ApprovalUrlLink.yaml
   _embedded:
     type: array
-    description: |-
-      Embedded objects that are requested by the `expand`
-      query parameter.
+    description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
-    minItems: 1
     items:
       anyOf:
         - $ref: ../Embeds/RecentInvoiceEmbed.yaml

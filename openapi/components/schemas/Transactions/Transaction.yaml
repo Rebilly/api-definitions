@@ -202,8 +202,8 @@ allOf:
         readOnly: true
       disputeTime:
         description: |-
-          Date and time at which the dispute was created. If the
-          transaction is not disputed, this value is `null`.
+          Date and time at which the dispute was created.
+          If the transaction is not disputed, this value is `null`.
         type: string
         format: date-time
         readOnly: true
@@ -223,30 +223,25 @@ allOf:
           - unknown
       isReconciled:
         description: |-
-          Specifies whether the transaction was verified with gateway
-          batch data. If the transaction is not disputed, this value
-          is `null`.
+          Specifies whether the transaction was verified with gateway batch data.
+          If the transaction is not disputed, this value is `null`.
         type: boolean
         readOnly: true
       isProcessedOutside:
-        description: |-
-          Specifies whether the transaction was processed outside of Rebilly.
+        description: Specifies whether the transaction was processed outside of Rebilly.
         type: boolean
       isMerchantInitiated:
-        description: |-
-          Specifies whether the transaction was initiated by the merchant.
+        description: Specifies whether the transaction was initiated by the merchant.
         type: boolean
       hadDiscrepancy:
-        description: |-
-          Specifies whether the transaction was updated due to a
-          discrepancy with its source of truth.
+        description: Specifies whether the transaction was updated due to a discrepancy with its source of truth.
         type: boolean
         readOnly: true
       orderId:
         deprecated: true
         description: |-
-          Order ID of the transaction. This ID must be unique within a
-          24 hour period.
+          Order ID of the transaction.
+          This ID must be unique within a 24 hour period.
 
           > **Note:** This field was renamed to `requestId`.
         type: string
@@ -258,9 +253,7 @@ allOf:
         description: Acquirer reference number.
         example: '74836950144358910018150'
       reportAmount:
-        description: |-
-          Transaction amount converted to the organization's selected
-          report currency.
+        description: Transaction amount converted to the report currency of the organization.
         type: number
         x-type: Money
         x-sortable: true
@@ -273,17 +266,14 @@ allOf:
           - $ref: ../CurrencyCode.yaml
       settlementTime:
         type: string
-        description: |-
-          Date and time in which the transaction was settled by the
-          banking institution.
+        description: Date and time in which the transaction was settled by the banking institution.
         format: date-time
         readOnly: true
         nullable: true
         x-sortable: true
       discrepancyTime:
         type: string
-        description: |-
-          Date and time of the most recent discrepancy on the transaction.
+        description: Date and time of the most recent discrepancy on the transaction.
         format: date-time
         readOnly: true
         nullable: true

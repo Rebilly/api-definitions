@@ -17,15 +17,16 @@ content:
           default: 0
           example: 97.97
         billingAddress:
-          description: >-
-            Billing address. If not supplied, it takes the billing address associated
-            with the payment instrument, and then customer's address.
+          description: |-
+            Billing address.
+            If not supplied, it takes the billing address associated with the payment instrument, and then customer's address.
           nullable: true
+          type: object
           allOf:
             - $ref: ../../schemas/Contact/ContactObject.yaml
         redirectUrl:
           nullable: true
-          description: >-
+          description: |-
             The URL to redirect the end-user when an offsite transaction is completed.
             Defaults to the website's configured URL.
             You may use `{id}` or `{result}` as placeholders in the URL and it will be replaced with the transaction's id and result accordingly.

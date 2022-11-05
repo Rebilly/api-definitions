@@ -49,12 +49,14 @@ properties:
     description: Billing address details.
     writeOnly: true
     nullable: true
+    type: object
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   deliveryAddress:
     description: Delivery address details.
     writeOnly: true
     nullable: true
+    type: object
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   shippingRateId:
@@ -100,6 +102,6 @@ properties:
       This field defaults to the configured website URL.
       You may use `{id}` or `{result}` as placeholders in the URL.
       These placeholders are replaced with the transaction ID and result.
-    format: url
+    format: uri
     writeOnly: true
     nullable: true

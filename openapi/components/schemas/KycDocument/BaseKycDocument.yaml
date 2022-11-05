@@ -1,4 +1,4 @@
-required: 
+required:
   -  fieldIds
 allOf:
   - $ref: ../Common/CommonKycDocument.yaml
@@ -10,8 +10,8 @@ allOf:
         type: string
         nullable: true
         readOnly: true
-        allOf:
-          - $ref: ../ResourceId.yaml
+        maxLength: 50
+        example: 44433322-2c4y-483z-a0a9-158621f77a21
       reviewerName:
         description: Reviewer's first and last name.
         type: string
@@ -21,14 +21,14 @@ allOf:
         description: Date and time that manual review starts.
         nullable: true
         type: string
-        allOf:
-          - $ref: ../ServerTimestamp.yaml
+        format: date-time
+        readOnly: true
       reviewTime:
         description: Date and time of manual review.
         type: string
         nullable: true
-        allOf:
-          - $ref: ../ServerTimestamp.yaml
+        format: date-time
+        readOnly: true
       notes:
         description: Reviewer notes.
         type: string
@@ -53,10 +53,9 @@ allOf:
         type: object
         nullable: true
       revision:
-        description: >
+        description: |-
           The number of times the KYC document data has been modified.
 
-          The revision is useful when analyzing webhook data to determine if the
-          change takes precedence over the current representation.
+          The revision is useful when analyzing webhook data to determine if the change takes precedence over the current representation.
         type: integer
         readOnly: true
