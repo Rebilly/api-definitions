@@ -6,7 +6,14 @@ content:
           description: The gateway account ID.
           type: string
         eventType:
-          $ref: ../../schemas/GlobalWebhookEventType.yaml
+          type: string
+          description: Webhook event type.
+          enum:
+            - gateway-account-downtime-ended
+            - gateway-account-downtime-started
+            # TODO: do these exist:
+            # - gateway-account-onboarding-completed
+            # - gateway-account-onboarding-failed
         _embedded:
           type: object
           properties:

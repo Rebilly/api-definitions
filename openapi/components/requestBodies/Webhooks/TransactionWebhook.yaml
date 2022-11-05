@@ -6,7 +6,20 @@ content:
           description: ID of the transaction.
           type: string
         eventType:
-          $ref: ../../schemas/GlobalWebhookEventType.yaml
+          type: string
+          description: Webhook event type.
+          enum:
+            - gateway-account-requested
+            - nsf-response-received
+            - offsite-payment-completed
+            - risk-score-changed
+            - transaction-amount-discrepancy-found
+            - transaction-declined
+            - transaction-discrepancy-found
+            - transaction-process-requested
+            - transaction-processed
+            - transaction-timeout-resolved
+            - waiting-gateway-transaction-completed
         _embedded:
           type: object
           properties:
