@@ -33,26 +33,26 @@ properties:
     maxLength: 255
     nullable: true
   effectiveTime:
-    description: >
-      The date from which the service period will pause.
+    description: |-
+      Date at which the service period pauses.
 
-      This time should be later than now, if it is earlier then current time is taken.
+      This time should be later than the current time, if it is earlier then current time is taken.
 
-      If omitted, it will default to the current time.
+      If omitted, it defaults to the current time.
     type: string
     format: date-time
     nullable: true
   endTime:
-    description: >
+    description: |-
       The time when the pause ends and the subscription resumes its billing.
 
-      In order to resume a subscription now, use current time or past time (will default to now).
-      Empty `endTime` will result in indefinitely paused subscription.
+      In order to resume a subscription now, use current time or past time (defaults to the current time).
+      Empty `endTime` results in an indefinitely paused subscription.
     type: string
     format: date-time
     nullable: true
   timeRemaining:
-    description: >
+    description: |-
       Time period between the pause end time and the renewal time in ISO-8601 durations format.
       By default, it's computed as the time between the pause and the renewal.
 

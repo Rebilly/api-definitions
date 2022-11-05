@@ -60,11 +60,13 @@ properties:
   deliveryAddress:
     description: Order delivery address.
     nullable: true
+    type: object
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   billingAddress:
     description: Order billing address.
     nullable: true
+    type: object
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   activationTime:
@@ -79,34 +81,19 @@ properties:
   couponIds:
     type: array
     nullable: true
-    description: >
-      A list of coupons to redeem on the customer and restrict to this
-      subscription.
+    description: |-
+      List of coupons to redeem on the customer and restrict to this order.
 
-      Read more about [coupons
-      here](https://docs.rebilly.com/docs/dashboard/marketing/coupons-and-discounts/).
-
+      Read more about [coupons here](https://docs.rebilly.com/docs/dashboard/marketing/coupons-and-discounts/).
 
       This parameter respects the following logic:
 
+      - When not passed then applied coupons are not changed.
+      - When empty array passed then all applied coupon redemptions are canceled.
+      - When list of coupons is passed then not applied yet coupons are applied, already applied coupons do not changed their state, applied coupons that are not presented in
+      passed list are canceled.
 
-      - When not passed then applied coupons will not be changed.
-
-
-      - When empty array passed then all applied coupon redemptions will be
-      canceled.
-
-
-      - When list of coupons is passed then not applied yet coupons will be
-      applied, already applied coupons
-
-      will not change their state, applied coupons that are not presented in
-      passed list will be canceled.
-
-
-      If list of applied coupons on pending order will be changed due to
-      this param during update order,
-       Invoice for the order will be reissued.
+      If list of applied coupons on pending order are changed due to this param during update order, the invoice for the order will be reissued.
     writeOnly: true
     items:
       type: string
