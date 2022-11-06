@@ -1,5 +1,5 @@
 type: object
-description: Rules draft for a particular event.
+description: Draft ruleset for specific event.
 properties:
   id:
     type: string
@@ -9,43 +9,45 @@ properties:
   baseVersion:
     type: integer
     minimum: 0
-    description: |
-      The rule set version which the rules draft is based on.
-      Normally it is copied from the other rule set which is being cloned.
-      This can be used to know how further the active rule set has advanced since the draft was created.
-      "0" means that the draft is created from scratch.
-      The field's value is only informational, it's not assigned to the active rule set.
+    description: |-
+      Ruleset version on which the draft ruleset is based.
+      Generally, a draft ruleset is cloned from an existing ruleset.
+      Use this field to determine how the active ruleset has changed since the draft was created.
+      `0` denotes a draft ruleset that was not created from an existing ruleset.
+      The value of this field is informational only, it is not assigned to the active ruleset.
   binds:
     type: array
-    description: All binds are executed regardless of other binds, there can't be a final bind.
+    description: |-
+      Binds always execute, regardless of rule based events.
+      A rule is a configuration of an event and one or more actions.
     items:
       $ref: ./Bind.yaml
   rules:
     type: array
-    description: |
-      Rules are executed depending on other rules:
-      a final rule can stop the execution of following rules after execution.
+    description: |-
+      A rule can be configured to stop subsequent rules in the event list from being executed.
+      A rule is a configuration of an event and one or more actions.
     items:
       $ref: ./Rule.yaml
   author:
-    description: The user which has created the draft.
+    description: Author of the draft.
     readOnly: true
     type: object
     properties:
       id:
-        description: User ID.
+        description: Author's user ID.
         type: string
         allOf:
           - $ref: ../ResourceId.yaml
       name:
-        description: First and last name.
+        description: Author's first and last name.
         type: string
   name:
     type: string
-    description: Short name for the rules draft.
+    description: Name of the draft.
   description:
     type: string
-    description: Detailed description of the drafted rule set.
+    description: Detailed description of the drafted ruleset.
   createdTime:
     $ref: ../CreatedTime.yaml
   updatedTime:
@@ -53,7 +55,7 @@ properties:
 
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
     items:
       anyOf:

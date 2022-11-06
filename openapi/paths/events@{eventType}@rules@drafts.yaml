@@ -5,12 +5,12 @@ get:
     - Users
   tags:
     - Rules
-  summary: Retrieve the list of rules drafts
+  summary: Retrieve draft rulesets
   operationId: GetEventRuleSetDraftCollection
   x-sdk-operation-name: getAllDraftRulesets
-  description: |
-    Retrieve a collection of rules drafts.
-    The result is sorted by the updated time in reverse.
+  description: |-
+    Retrieves a list of draft rulesets for a specified event type.
+    The result are sorted in descending order from the time they were last updated.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -21,7 +21,7 @@ get:
     - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: Rules drafts were retrieved.
+      description: Drafts rulesets retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -46,12 +46,13 @@ post:
     - Users
   tags:
     - Rules
-  summary: Create a rules draft for event
+  summary: Create a draft ruleset
   operationId: PostEventRuleSetDraft
   x-sdk-operation-name: createDraftRuleset
+  description: Creates a draft ruleset for a specified event type.
   responses:
     '200':
-      description: Rules draft was created.
+      description: Draft ruleset created.
       content:
         application/json:
           schema:
