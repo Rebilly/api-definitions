@@ -6,7 +6,12 @@ content:
           description: The payment card ID.
           type: string
         eventType:
-          $ref: ../../schemas/GlobalWebhookEventType.yaml
+          type: string
+          description: Webhook event type.
+          enum:
+            - payment-card-created
+            - payment-card-expiration-reminder
+            - payment-card-expired
         _embedded:
           type: object
           properties:

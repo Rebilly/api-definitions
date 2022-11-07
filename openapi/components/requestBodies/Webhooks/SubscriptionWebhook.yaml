@@ -6,7 +6,22 @@ content:
           description: The order ID.
           type: string
         eventType:
-          $ref: ../../schemas/GlobalWebhookEventType.yaml
+          type: string
+          description: Webhook event type.
+          enum:
+            - order-completed
+            - subscription-activated
+            - subscription-canceled
+            - subscription-downgraded
+            - subscription-modified
+            - subscription-reactivated
+            - subscription-renewal-reminder
+            - subscription-renewed
+            - subscription-trial-converted
+            - subscription-trial-end-changed
+            - subscription-trial-end-reminder
+            - subscription-trial-ended
+            - subscription-upgraded
         _embedded:
           type: object
           properties:

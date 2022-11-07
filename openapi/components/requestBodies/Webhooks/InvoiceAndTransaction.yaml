@@ -9,7 +9,11 @@ content:
           description: ID of the invoice.
           type: string
         eventType:
-          $ref: ../../schemas/GlobalWebhookEventType.yaml
+          type: string
+          description: Webhook event type.
+          enum:
+            - renewal-invoice-payment-canceled
+            - renewal-invoice-payment-declined
         _embedded:
           type: object
           properties:

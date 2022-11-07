@@ -8,11 +8,10 @@ get:
   summary: Retrieve an email message
   operationId: GetEmailMessage
   x-sdk-operation-name: get
-  description: |
-    Retrieve an email message.
+  description: Retrieves an email message with a specified ID.
   responses:
     '200':
-      description: Email message with specified identifier was retrieved.
+      description: Email message retrieved.
       content:
         application/json:
           schema:
@@ -31,11 +30,10 @@ delete:
   summary: Delete an email message
   operationId: DeleteEmailMessage
   x-sdk-operation-name: delete
-  description: |
-    Delete an email message.
+  description: Deletes an email message with a specified ID.
   responses:
     '204':
-      description: Email message was deleted.
+      description: Email message deleted.
     '409':
       $ref: ../components/responses/Conflict.yaml
 patch:
@@ -46,11 +44,10 @@ patch:
   summary: Send an email message
   operationId: PatchEmailMessage
   x-sdk-operation-name: send
-  description: |
-    Send an email message.
+  description: Sends an email message.
   responses:
     '200':
-      description: Email message was accepted.
+      description: Email message accepted.
       content:
         application/json:
           schema:
@@ -73,7 +70,7 @@ patch:
             - status
           properties:
             status:
-              description: The email message's status.
+              description: Status of the email message.
               type: string
               enum:
                 - outbox

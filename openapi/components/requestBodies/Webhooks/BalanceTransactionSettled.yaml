@@ -9,14 +9,13 @@ content:
           description: ID of the transaction.
           type: string
         eventType:
-          example: balance-transaction-settled
-          allOf:
-            - $ref: ../../schemas/GlobalWebhookEventType.yaml
+          type: string
+          description: Webhook event type.
+          enum:
+            - balance-transaction-settled
         _embedded:
           type: object
-          description: |-
-            Available embedded objects that are requested by the expand
-            query parameter.
+          description: Embedded objects.
           properties:
             balanceTransaction:
               $ref: ../../schemas/BalanceTransactions/BalanceTransaction.yaml
