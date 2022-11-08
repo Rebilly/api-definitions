@@ -2,7 +2,7 @@ type: object
 title: ACH
 required:
   - method
-allOf: 
+allOf:
   -  $ref: ../ReadyToPayMethods.yaml
 properties:
   method:
@@ -13,8 +13,9 @@ properties:
   feature:
     type: object
     nullable: true
-    description: |
-      The specific feature (for example, digital wallet or a processor) of this method. If method doesn't have any features it will be null.
+    description: |-
+      Specific feature (for example, a digital wallet) of this method.
+      If method doesn't have any features the value is null.
     oneOf:
       - $ref: ../Features/AchPlaidFeature.yaml
   filters:

@@ -6,20 +6,20 @@ allOf:
         $ref: ../CustomerId.yaml
       stickyGatewayAccountId:
         description: |-
-          Sticky gateway account ID. All future payments will be
-          processed by this gateway account.
+          Sticky gateway account ID.
+          All future payments are processed by this gateway account.
 
-          For more information, see
-          [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
+          For more information,
+          see [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
         type: string
         nullable: true
         readOnly: true
       expirationReminderTime:
-        description: |-
-          Date and time at which an expiration reminder event will be triggered.
+        description: Date and time at which an expiration reminder event is triggered.
         nullable: true
-        allOf:
-          - $ref: ../ServerTimestamp.yaml
+        type: string
+        format: date-time
+        readOnly: true
       expirationReminderNumber:
         description: Number of expiration reminder events that have triggered.
         nullable: true

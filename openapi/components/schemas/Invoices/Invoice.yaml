@@ -85,14 +85,13 @@ allOf:
           - one-time-sale
         readOnly: true
       dueReminderTime:
-        description: |-
-          Date and time at which a past due reminder event is triggered.
+        description: Date and time at which a past due reminder event is triggered.
         nullable: true
-        allOf:
-          - $ref: ../ServerTimestamp.yaml
+        type: string
+        format: date-time
+        readOnly: true
       dueReminderNumber:
-        description: |-
-          Number of past due reminder events that have been triggered.
+        description: Number of past due reminder events that have been triggered.
         nullable: true
         type: integer
         readOnly: true
@@ -113,9 +112,7 @@ allOf:
             - $ref: ../Links/SubscriptionLink.yaml
       _embedded:
         type: array
-        description: |-
-          Embedded objects that are requested by the `expand`
-          query parameter.
+        description: Embedded objects that are requested by the `expand` query parameter.
         readOnly: true
         minItems: 1
         items:
