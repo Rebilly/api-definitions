@@ -11,12 +11,12 @@ properties:
       - $ref: ../ResourceId.yaml
   name:
     type: string
-    description: The strategy name.
+    description: Name of the strategy.
   filter:
     type: string
     description: >-
-      A filter based on a cashier request properties which is used to determine if the strategy is applicable.
-      Empty filter matches any case.
+      Filter that uses cashier request properties to determine if a cashier strategy is applicable for the request.
+      If this field is empty, the strategy is applicable for any request.
     default: ''
     example: 'cashierRequest.currency:USD'
     allOf:
@@ -26,7 +26,7 @@ properties:
   customAmount:
     description: |-
       Custom amount restrictions.
-      
+
       If this value is `null,  custom amounts are prohibited.
     nullable: true
     allOf:

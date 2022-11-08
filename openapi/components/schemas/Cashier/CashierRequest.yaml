@@ -43,7 +43,7 @@ properties:
     description: |-
       List of available deposit amounts.
 
-      If `amounts` is not specified when a cashier is created, deposit amounts are determined based on your selected matching strategy.
+      If `amounts` is not specified when a cashier is created, amounts are determined from a randomly selected strategy with a matching `filter` value.
     items:
       type: number
       format: double
@@ -51,11 +51,11 @@ properties:
       exclusiveMinimum: true
   customAmount:
     description: |-
-      A custom amount restrictions.
-      
-      If `null` custom amounts are prohibited.
+      Custom amount restrictions.
 
-      If not sent on creation will be determined based on the matching strategies.
+      If this value is `null,  custom amounts are prohibited.
+
+      If `customAmount` is not specified when a cashier is created, amount restrictions are determined from a randomly selected strategy with a matching `filter` value.
     nullable: true
     allOf:
       - $ref: ./CashierStrategyCustomAmount.yaml
