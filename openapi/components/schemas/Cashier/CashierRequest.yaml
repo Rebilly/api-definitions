@@ -9,7 +9,7 @@ properties:
     allOf:
       - $ref: ../ResourceId.yaml
   websiteId:
-    description: Cashier website ID.
+    description: Website ID of the cashier. This value specifies the website with which the cashier is associated.
     type: string
     allOf:
       - $ref: ../ResourceId.yaml
@@ -17,7 +17,7 @@ properties:
     $ref: ../CustomerId.yaml
   transactionId:
     type: array
-    description: The transaction resource ID deposited towards the request.
+    description: ID of the transaction that is used in the cashier request.
     readOnly: true
     nullable: true
     allOf:
@@ -32,18 +32,18 @@ properties:
       - completed
       - expired
     x-enumDescriptions:
-      created: Created, but not visited by the customer. Temporary state.
-      pending: Visited, but no funds have been deposited yet. Temporary state.
-      completed: Funds deposit transaction initiated. Permanent state.
-      expired: Request expired without any deposit attempts. Permanent state.
+      created: Request is created, but it has not been visited by a customer. This is a temporary state.
+      pending: Request has been visited by a customer, but no funds have been deposited yet. This is a temporary state.
+      completed: A funds deposit transaction has been initiated. This is a permanent state.
+      expired: Request expired without a deposit attempt. This is a permanent state.
   currency:
     $ref: ../CurrencyCode.yaml
   amounts:
     type: array
     description: |-
-      The list of available deposit amounts.
+      List of available deposit amounts.
 
-      If not sent on creation will be determined based on the matching strategies.
+      If `amounts` is not specified when a cashier is created, deposit amounts are determined based on your selected matching strategy.
     items:
       type: number
       format: double
@@ -60,22 +60,22 @@ properties:
     allOf:
       - $ref: ./CashierStrategyCustomAmount.yaml
   redirectUrl:
-    description: The URL to redirect the customer when a deposit is completed. Defaults to the website URL.
+    description: URL to redirect the customer to when a deposit is completed. The default value is the website URL.
     type: string
     format: uri
   expirationTime:
-    description: Expiration date-time. Default value is one hour in the future.
+    description: Date and time at which the cashier request expires. The default expiration time is one hour from the time the request is created.
     type: string
     format: date-time
   createdTime:
-    description: Creation date-time.
+    description: Date and time at which the cashier request is created.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml
   _links:
     type: array
-    description: The links related to the resource.
+    description: Related links.
     readOnly: true
     minItems: 1
     items:

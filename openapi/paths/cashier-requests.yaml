@@ -6,10 +6,10 @@ post:
   summary: Create a cashier request
   operationId: PostCashierRequest
   x-sdk-operation-name: create
-  description: |
-    Create a cashier request.
-    Then redirect the customer to the `cashier` link.
-    After the customer completes the deposit, they will be redirected back to the `redirectUrl`.
+  description: |-
+    Creates a cashier request.
+    To complete the deposit, the customer is redirected to the `cashier` link.
+    After the deposit, the customer is redirected to the `redirectUrl`.
     Corresponding transaction webhooks are sent to webhooks subscribers.
   requestBody:
     content:
@@ -20,7 +20,7 @@ post:
     required: true
   responses:
     '201':
-      description: Cashier request was created.
+      description: Cashier request created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -42,8 +42,7 @@ get:
   summary: Retrieve cashier requests
   operationId: GetCashierRequestCollection
   x-sdk-operation-name: getAll
-  description: |
-    Retrieve a list of cashier requests.
+  description: Retrieves a list of cashier requests.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -51,7 +50,7 @@ get:
     - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
-      description: A list of cashier requests was retrieved.
+      description: List of cashier requests retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml

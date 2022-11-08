@@ -1,5 +1,5 @@
 type: object
-description: The amounts configuration.
+description: Cashier strategy amounts configuration.
 required:
   - calculator
   - baseAmount
@@ -8,15 +8,15 @@ properties:
   calculator:
     type: string
     description: |-
-      The amounts calculator.
+Cashier amounts calculator.
+This field specifies whether amounts are calculated using an absolute or percentage calculation.
 
-      Amounts are set starting with `baseAmount`, followed by increments to `baseAmount`, defined in `increments`.
+Amounts are specified in `baseAmount`, and increments are specified in `increments`.
 
-      For example, `baseAmount: 10` and `increments: [20, 50, 100]`.
+Example: `baseAmount: 10` and `increments: [20, 50, 100]`.
 
-      When calculator is `absolute` amounts presented to the customer are `[10, 30, 60, 110]`.
-
-      When calculator is `percent` amounts presented to the customer are `[10, 12, 15, 20]`.
+- If the calculator is set to `absolute`: the amounts displayed to the customer are `[10, 30, 60, 110]`.
+- If the calculator is set to `percent`: the amounts displayed to the customer are `[10, 12, 15, 20]`.
     enum:
       - absolute
       - percent
@@ -25,13 +25,13 @@ properties:
     format: double
     minimum: 0
     exclusiveMinimum: true
-    description: The first amount available to customer.
+    description: First amount that is displayed to customer.
   increments:
     type: array
     description: |-
-      The list of incremental amounts available to customer.
+      List of incremental amounts that are displayed to customer.
 
-      Check `calculator` property for use example.
+      For more information, see the [`calculator` property](../PostCashierStrategy#!path=amounts/calculator&t=request).
     items:
       type: number
       format: double
@@ -41,8 +41,7 @@ properties:
     type: boolean
     default: false
     description: |-
-      Specifies whether the base amount should be adjusted based on the last deposit or not.
+      Specifies whether the base amount must be adjusted based on the last deposit.
+      If this value is `true`, the `baseAmount` is changed to the last successful deposit amount that was made using [Create a cashier request](../PostCashierRequest).
 
-      If this value is `true`, the `baseAmount` would be changed to the last successful deposit amount on CashierRequest create.
-
-      If customer has no successful deposits `baseAmount` remains unchanged.
+      If the customer has no successful deposits, `baseAmount` is not adjusted.

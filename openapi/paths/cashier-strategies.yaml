@@ -6,10 +6,10 @@ post:
   summary: Create a cashier strategy
   operationId: PostCashierStrategy
   x-sdk-operation-name: create
-  description: |
-    Create a cashier strategy.
-    Then, redirect the customer to the `cashier` link.
-    After the customer completes the deposit, they will be redirected back to the `redirectUrl`.
+  description: |-
+    Creates a cashier strategy.
+    To complete the deposit, the customer is redirected to the `cashier` link.
+    After the deposit, the customer is redirected to the `redirectUrl`.
     Corresponding transaction webhooks are sent to webhooks subscribers.
   requestBody:
     content:
@@ -20,7 +20,7 @@ post:
     required: true
   responses:
     '201':
-      description: Cashier strategy was created.
+      description: Cashier strategy created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -42,8 +42,7 @@ get:
   summary: Retrieve cashier strategies
   operationId: GetCashierStrategyCollection
   x-sdk-operation-name: getAll
-  description: |
-    Retrieve a list of cashier strategies.
+  description: Retrieves a list of cashier strategies.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -51,7 +50,7 @@ get:
     - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
-      description: A list of cashier strategies was retrieved.
+      description: List of cashier strategies retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
