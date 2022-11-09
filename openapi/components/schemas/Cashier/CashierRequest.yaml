@@ -16,7 +16,7 @@ properties:
   customerId:
     $ref: ../CustomerId.yaml
   transactionId:
-    type: array
+    type: string
     description: ID of the transaction that is used in the cashier request.
     readOnly: true
     nullable: true
@@ -50,6 +50,7 @@ properties:
       minimum: 0
       exclusiveMinimum: true
   customAmount:
+    type: object
     description: |-
       Custom amount restrictions.
 
@@ -68,9 +69,7 @@ properties:
     type: string
     format: date-time
   createdTime:
-    description: Date and time at which the cashier request is created.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml
   _links:
@@ -87,7 +86,7 @@ properties:
     type: array
     description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
-    minItems: 1
+    minItems: 0
     items:
       anyOf:
         - $ref: ../Embeds/CustomerEmbed.yaml
