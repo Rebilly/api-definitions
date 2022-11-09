@@ -14,7 +14,7 @@ properties:
     description: Name of the strategy.
   filter:
     type: string
-    description: >-
+    description: |-
       Filter that uses cashier request properties to determine if a cashier strategy is applicable for the request.
       If this field is empty, the strategy is applicable for any request.
     default: ''
@@ -32,8 +32,6 @@ properties:
     allOf:
       - $ref: ./CashierStrategyCustomAmount.yaml
   createdTime:
-    description: Date and time at which the cashier strategy was created.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml
