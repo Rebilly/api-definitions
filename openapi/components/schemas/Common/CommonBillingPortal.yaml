@@ -16,17 +16,11 @@ properties:
     minLength: 5
     maxLength: 100
   websiteId:
-    description: |-
-      ID of the website that is associated with the billing portal. A
-      website is where your organization obtains a customer. It is
-      also the gateway account and billing descriptor used for payment
-      transactions.
-    allOf:
-      - $ref: ../ResourceId.yaml
+    $ref: ../Websites/WebsiteId.yaml
   customDomain:
     description: |-
-      Custom domain for the billing portal. The default domain is:
-      `portal.secure-payments.app`.
+      Custom domain for the billing portal.
+      The default domain is: `portal.secure-payments.app`.
     type: string
     maxLength: 255
     nullable: true
@@ -105,8 +99,6 @@ properties:
             type: string
             format: url
   createdTime:
-    description: Date and time at which the billing portal was created.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml
