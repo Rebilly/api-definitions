@@ -9,7 +9,10 @@ content:
           description: Error message explaining tax calculation failure.
           type: string
         eventType:
-          $ref: ../../schemas/GlobalWebhookEventType.yaml
+          type: string
+          description: Webhook event type.
+          enum:
+            - invoice-tax-calculation-failed
         _embedded:
           type: object
           description: Invoice object.

@@ -9,13 +9,7 @@ properties:
     allOf:
       - $ref: ../ResourceId.yaml
   websiteId:
-    description: |-
-        Unique website identifier string. A website is where an
-        organization obtains a customer through a subscription. For more
-        information, see
-        [Obtain an organization ID and website ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
-    allOf:
-      - $ref: ../ResourceId.yaml
+    $ref: ../Websites/WebsiteId.yaml
   invoiceNumber:
     description: |-
       An auto-incrementing number based on the sequence of invoices
@@ -170,14 +164,9 @@ properties:
     allOf:
       - $ref: ../ServerTimestamp.yaml
   createdTime:
-    description: Date and time at which the invoice is created.
-    x-sortable: true
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
-    x-sortable: true
-    allOf:
-      - $ref: ../UpdatedTime.yaml
+    $ref: ../UpdatedTime.yaml
   paymentFormUrl:
     type: string
     readOnly: true
