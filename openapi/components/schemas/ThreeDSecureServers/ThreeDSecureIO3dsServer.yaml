@@ -20,21 +20,21 @@ allOf:
         maxLength: 35
       merchantName:
         type: string
-        description: Merchant Name.
+        description: Merchant name.
         maxLength: 40
       merchantAcquirerBinVisa:
         type: string
-        description: Visa Acquirer BIN.
+        description: Visa acquirer BIN.
         minLength: 6
         maxLength: 11
       merchantAcquirerBinMastercard:
         type: string
-        description: Mastercard Acquirer BIN.
+        description: Mastercard acquirer BIN.
         minLength: 6
         maxLength: 11
       merchantCountry:
         type: string
-        description: Merchant Country ISO Alpha-2 Code.
+        description: Merchant country ISO Alpha-2 code format.
         maxLength: 2
         example: US
       merchantUrl:
@@ -43,16 +43,16 @@ allOf:
         maxLength: 2048
       v1:
         type: boolean
-        description: |
+        description: |-
           Value determines if requests can use version 1 of 3DS.
-          In case both v1 and v2 are enabled it will prefer v2.
-          If v2 is not supported for the issuer, it will coalesce to v1.
+          In case both v1 and v2 are enabled, v2 will be used.
+          If v2 is not supported for the issuer, v1 is used.
       v2:
         type: boolean
-        description: |
+        description: |-
           Value determines if requests will attempt version 2 of 3DS.
-          In case both v1 and v2 are enabled it will prefer v2.
-          If v2 is not supported for the issuer, it will coalesce to v1.
+          In case both v1 and v2 are enabled, v2 will be used.
+          If v2 is not supported for the issuer, v1 is used.
       transactionType:
         type: string
         enum:
@@ -61,17 +61,17 @@ allOf:
           - '10'
           - '11'
           - '28'
-        description: |
+        description: |-
+          Identifies the type of transaction that is being authenticated.
+
           01 - Goods/Service Purchase
           03 - Check Acceptance
           10 - Account Funding
           11 - Quasi-Cash Transaction
           28 - Prepaid Activation and Load
-
-          Identifies the type of transaction being authenticated.
       declineNotEnrolled:
         type: boolean
-        description: Set to true to decline transactions if a card is not enrolled instead of continuing without 3DS.
+        description: Specifies whether to decline transactions if a payment card is not enrolled.
         default: false
       use3dsForMerchantInitiated:
         type: boolean
@@ -91,7 +91,10 @@ allOf:
           - '09'
           - '10'
           - '11'
-        description: |
+        description: |-
+          Indicates the type of 3RI request.
+          Values 06 - 11 are only supported in 3D2 2.2.0.
+
           01 - Recurring transaction
           02 - Instalment transaction
           03 - Add card
@@ -103,5 +106,3 @@ allOf:
           09 - Telephone Order
           10 - Whitelist status check
           11 - Other payment
-
-          Indicates the type of 3RI request. Values 06 - 11 are only supported in 3D2 2.2.0.

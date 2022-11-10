@@ -1,4 +1,4 @@
-description: Skrill config.
+description: Skrill gateway configuration.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -18,7 +18,7 @@ allOf:
             format: password
           mqiPassword:
             type: string
-            description: Password used during MQI/API requests.
+            description: Password used during MQI or API requests.
             format: password
         required:
           - accountEmail
@@ -28,5 +28,6 @@ allOf:
         properties:
           merchantFields:
             type: string
-            description: >-
-              A comma-separated list of name-value merchant field pairs (key1:value1,key2:value2).
+            description: |-
+              A comma-separated list of name-value merchant field pairs.
+              Example: `key1:value1,key2:value2`.

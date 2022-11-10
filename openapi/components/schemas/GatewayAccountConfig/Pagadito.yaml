@@ -1,4 +1,4 @@
-description: Pagadito config.
+description: Pagadito gateway configuration.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -12,9 +12,11 @@ allOf:
           uid:
             type: string
             format: password
+            description: Pagadito UID.
           wsk:
             type: string
             format: password
+            description: Pagadito WSK.
         required:
           - uid
           - wsk
@@ -24,3 +26,4 @@ allOf:
           useRecurringApi:
             type: boolean
             default: false
+            description: Specifies whether to use the Pagadito API for reoccurring payments..

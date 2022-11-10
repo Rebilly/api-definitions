@@ -1,4 +1,4 @@
-description: CoinPayments config.
+description: CoinPayments gateway configuration.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -15,18 +15,22 @@ allOf:
         properties:
           publicKey:
             type: string
+            description: CoinPayments public key.
           privateKey:
             type: string
             format: password
+            description: CoinPayments private key.
           ipnSecret:
             type: string
             format: password
+            description: CoinPayments IPN secret.
           merchantId:
             type: string
             format: password
+            description: CoinPayments merchant ID.
       settings:
         type: object
         properties:
           useCallbackAddress:
             type: boolean
-            description: Use Callback Address payment type.
+            description: Specifies whether to use a callback address payment type.
