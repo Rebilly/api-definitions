@@ -17,7 +17,6 @@ rules:
   operation-4xx-response: off
   paths-kebab-case: error
   tag-description: error
-  custom-rules/description-punctuation: error
   custom-rules/no-unused-tags: warn
   response-contains-header:
     severity: error
@@ -26,20 +25,21 @@ rules:
         - Location
       '303':
         - Location
-  # newly proposed rules
-  # operation-description: warn
-  # scalar-property-missing-example: error
   no-invalid-schema-examples: error
   no-invalid-parameter-examples: error
-  # assert/params-must-include-examples:
-  #   subject: Parameter
-  #   requireAny:
-  #     - example
-  #     - examples
-  #   mutuallyExclusive:
-  #     - example
-  #     - examples
-  #   message: Example XOR examples should be defined on a parameter.
+
+  ## custom rules
+  assert/params-must-include-examples:
+    severity: off
+    subject:
+      type: Parameter
+    assertions:
+      requireAny:
+        - example
+        - examples
+      mutuallyExclusive:
+        - example
+        - examples
 
   assert/headers-include-example:
     subject:
@@ -58,7 +58,7 @@ rules:
         assertions:
           defined: true
     assertions:
-      ref: /^(.\/paths|paths)\/.*yaml$/
+      ref: /^(.\/paths|paths)\/[a-z].*yaml$/
 
   assert/x-sdk-operation-name:
     where:
@@ -155,24 +155,51 @@ rules:
     subject:
       type: Tag
       property: description
-    message: Tag description must be at least 30 characters and end with a full stop.
     assertions:
       defined: true
       minLength: 30
+      pattern: /(\.|\.\n)$/
+  assert/requestBody-description:
+    subject:
+      type: RequestBody
+      property: description
+    assertions:
+      pattern: /(\.|\.\n)$/
+  assert/schema-description:
+    subject:
+      type: Schema
+      property: description
+    assertions:
+      pattern: /(\.|\.\n)$/
+  assert/parameter-description:
+    subject:
+      type: Parameter
+      property: description
+    assertions:
+      pattern: /(\.|\.\n)$/
+  assert/header-description:
+    subject:
+      type: Header
+      property: description
+    assertions:
+      pattern: /(\.|\.\n)$/
+  assert/response-description:
+    subject:
+      type: Response
+      property: description
+    assertions:
       pattern: /(\.|\.\n)$/
   assert/operation-description:
     subject:
       type: Operation
       property: description
-    severity: off
     assertions:
-      defined: true
+      # defined: true # consider adding
       pattern: /(\.|\.\n)$/
   assert/info-description:
     subject:
       type: Info
       property: description
-    message: Info description must be at least 30 characters and end with a full stop.
     assertions:
       defined: true
       minLength: 30
@@ -181,12 +208,16 @@ rules:
     subject:
       type: Operation
       property: summary
-    message: Operation summary must be between 10 and 60 characters and not end with a full stop.
+    where:
+      - subject:
+          type: Paths
+        assertions:
+          defined: true
     assertions:
       defined: true
       minLength: 10
-      maxLength: 60
-      pattern: /[^\.]$/
+      maxLength: 50
+      pattern: /(Retrieve|Create|Delete|Upsert|Preview|Send|Update|Register|Destroy|Trigger|Start|Stop|Set|Check|Enable|Disable|Close|Request|Resend|Verify|List|Patch|Activate|Refund|Query|Validate|Tag|Untag|Issue|Reactivate|Cancel|Pause|Change|Void|Search|Get|Modify|Finish|Schedule|Read|Reset|Make|Deactivate|Perform|Review|Reject|Accept|Apply|Partially|Re|Abandon|Download|Merge|Specify|Redeem|Exchange|Log).*[^\.]$/
   assert/schema-properties-both-created-time-and-updated-time:
     subject:
       type: SchemaProperties
