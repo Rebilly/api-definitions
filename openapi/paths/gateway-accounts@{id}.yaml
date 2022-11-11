@@ -5,14 +5,13 @@ get:
     - Users
   tags:
     - Gateway accounts
-  summary: Retrieve a Gateway Account
+  summary: Retrieves a gateway account
   operationId: GetGatewayAccount
   x-sdk-operation-name: get
-  description: |
-    Retrieve a Gateway Account with specified identifier string.
+  description: Retrieves a gateway account with specified ID.
   responses:
     '200':
-      description: Gateway Account was retrieved.
+      description: Gateway account retrieved.
       content:
         application/json:
           schema:
@@ -38,19 +37,19 @@ put:
   summary: Upsert a gateway account
   operationId: PutGatewayAccount
   x-sdk-operation-name: update
-  description: |
-    Create or update (upsert) a GatewayAccount with specified identifier string.
+  description: |-
+    Creates or updates (upserts) a gateway account with a specified ID.
   requestBody:
     $ref: ../components/requestBodies/GatewayAccount.yaml
   responses:
     '200':
-      description: Gateway Account was updated.
+      description: Gateway account updated.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/GatewayAccount.yaml
     '201':
-      description: Gateway Account was created.
+      description: Gateway account created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -78,16 +77,15 @@ patch:
     - Users
   tags:
     - Gateway accounts
-  summary: Update a Gateway Account with specified ID
+  summary: Update a gateway account
   operationId: PatchGatewayAccount
   x-sdk-operation-name: update
-  description: |
-    Update a GatewayAccount with specified identifier string.
+  description: Updates a gateway account with specified ID.
   requestBody:
     $ref: ../components/requestBodies/GatewayAccount.yaml
   responses:
     '200':
-      description: Gateway Account was updated.
+      description: Gateway account updated.
       content:
         application/json:
           schema:
@@ -109,14 +107,13 @@ delete:
     - Users
   tags:
     - Gateway accounts
-  summary: Delete a Gateway Account
+  summary: Delete a gateway account
   operationId: DeleteGatewayAccount
   x-sdk-operation-name: delete
-  description: |
-    Delete a Gateway Account with specified identifier string.
+  description: Deletes a gateway account with specified ID.
   responses:
     '204':
-      description: Gateway Account was deleted.
+      description: Gateway account deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

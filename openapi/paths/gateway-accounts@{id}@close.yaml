@@ -5,16 +5,17 @@ post:
     - Users
   tags:
     - Gateway accounts
-  summary: Close a Gateway Account
+  summary: Close a gateway account
   operationId: PostGatewayAccountClosure
   x-sdk-operation-name: close
-  description: >
-    Close a gateway account with specified identifier string.
+  description: |-
+    Closes a gateway account with specified ID.
+    This process is also known as archiving.
 
-    Also known as archiving. Closing a Gateway Account cannot be undone, so use
-    with caution. It will no longer be able
+    When a gateway account is closed,
+    the gateway will not process transactions and the `status` attribute is set to `closed`.
 
-    to process transactions. The "status" attribute will be set to "closed".
+    >**Important:** Closing a gateway account cannot be undone. Do so with caution.
   responses:
     '201':
       description: Gateway account closed.

@@ -3,7 +3,7 @@ content:
     schema:
       properties:
         gatewayAccountId:
-          description: The gateway account ID.
+          description: ID of the gateway account.
           type: string
         eventType:
           type: string
@@ -15,6 +15,7 @@ content:
             - gateway-account-onboarding-failed
         _embedded:
           type: object
+          description: Embedded objects.
           properties:
             gatewayAccount:
               $ref: ../../schemas/GatewayAccount.yaml
@@ -25,4 +26,4 @@ content:
           items:
             anyOf:
               - $ref: ../../schemas/Links/GatewayAccountLink.yaml
-description: Gateway account limit was reached body resource.
+description: Gateway account limit reached body resource.

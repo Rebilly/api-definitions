@@ -1,3 +1,4 @@
+description: Gateway account details.
 type: object
 required:
   - gatewayName
@@ -187,7 +188,7 @@ discriminator:
     Zimpler: ./GatewayAccountConfig/Zimpler.yaml
 properties:
   id:
-    description: Gateway identifier string.
+    description: ID of the payment gateway account.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
@@ -219,7 +220,7 @@ properties:
       - pending
       - closed
   merchantCategoryCode:
-    description: Gateway account merchant category code.
+    description: Merchant category code of the payment gateway account.
     type: string
     pattern: '^[0-9]{4}$'
     default: '0000'
@@ -247,7 +248,7 @@ properties:
     items:
       type: string
   monthlyLimit:
-    description: Monthly limit.
+    description: Monthly limit on the amount money that the gateway account can process.
     type: number
     format: double
     minimum: 0
@@ -325,9 +326,8 @@ properties:
     type: string
     default: do-nothing
     description: |-
-      Creates zero, one, or more child transactions such as `authorize`
-      and `void`. The transactions are linked to the `setup`
-      transaction by the `parentTransactionId` relationship.
+      Creates zero, one, or more child transactions such as `authorize` and `void`.
+      The transactions are linked to the `setup` transaction by the `parentTransactionId` relationship.
     enum:
       - authorize
       - authorize-and-void
@@ -335,18 +335,16 @@ properties:
       - do-nothing
     x-enumDescriptions:
       authorize: |-
-        Creates an `authorize` transaction in the amount/currency of
-        the request. This is used when a gateway account is configured
-        for Strong Customer Authentication (SCA).
+        Creates an `authorize` transaction in the amount and currency of the request.
+        This is used when a gateway account is configured for Strong Customer Authentication (SCA).
       authorize-and-void: |-
-        Creates an `authorize` transaction in the amount/currency of
-        the request, followed by a `void`, if the `authorize` is approved.
-        This is used when a gateway account is configured for Strong
-        Customer Authentication (SCA).
+        Creates an `authorize` transaction in the amount and currency of the request,
+        followed by a `void`, if the `authorize` is approved.
+        This is used when a gateway account is configured for Strong Customer Authentication (SCA).
       sca: |-
-        Uses Strong Customer Authentication (SCA) without an `authorize`
-        transaction. SCA includes 3dsv2, 3ds, and some specific wallet
-        behavior, such as setting up a billing agreement with PayPal.
+        Uses Strong Customer Authentication (SCA) without an `authorize` transaction.
+        SCA includes 3DS v2, 3DS, and specific wallet behavior,
+        such as setting up a billing agreement with PayPal.
       do-nothing: |-
         Does nothing except return an approved `setup` transaction.
         This is the default behavior.
@@ -361,7 +359,7 @@ properties:
       - $ref: ./Organizations/OrganizationId.yaml
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
     minItems: 1
     items:
