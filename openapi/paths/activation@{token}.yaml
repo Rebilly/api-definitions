@@ -6,7 +6,7 @@ servers:
 parameters:
   - name: token
     in: path
-    description: The token string.
+    description: Token string.
     required: true
     schema:
       type: string
@@ -18,12 +18,11 @@ post:
   summary: Activate user
   operationId: PostActivation
   x-sdk-operation-name: activate
-  description: |
-    Sends a token to activate user account.
+  description: Sends a token to activate a user account.
   security: []
   responses:
     '204':
-      description: User account was activated.
+      description: User account activated.
     '422':
       $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
