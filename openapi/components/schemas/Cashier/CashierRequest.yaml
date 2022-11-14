@@ -50,16 +50,7 @@ properties:
       minimum: 0
       exclusiveMinimum: true
   customAmount:
-    type: object
-    description: |-
-      Custom amount restrictions.
-
-      If this value is `null,  custom amounts are prohibited.
-
-      If `customAmount` is not specified when a cashier is created, amount restrictions are determined from a randomly selected strategy with a matching `filter` value.
-    nullable: true
-    allOf:
-      - $ref: ./CashierStrategyCustomAmount.yaml
+    $ref: ./CashierStrategyCustomAmount.yaml
   redirectUrl:
     description: URL to redirect the customer to when a deposit is completed. The default value is the website URL.
     type: string
