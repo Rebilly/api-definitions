@@ -2,9 +2,6 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 post:
   x-products:
-    - Full
-    - Payments
-    - Billing
     - Core
   tags:
     - Transactions
@@ -25,7 +22,10 @@ post:
     required: true
   responses:
     '201':
-      description: Transaction was refunded successfully.
+      description: Transaction was refunded.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

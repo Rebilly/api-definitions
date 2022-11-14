@@ -2,11 +2,10 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
     - Users
   tags:
-    - Gateway Accounts Timeline
-  summary: Retrieve a list of gateway account timeline messages
+    - Gateway accounts timeline
+  summary: Retrieve gateway account timeline messages
   operationId: GetGatewayAccountTimelineCollection
   x-sdk-operation-name: getAllTimelineMessages
   description: |
@@ -19,7 +18,7 @@ get:
     - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
-      description: A list of Gateway Account timeline messages was retrieved successfully.
+      description: A list of Gateway Account timeline messages was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -43,10 +42,9 @@ get:
         $ref: '../code_samples/JavaScript/gateway-accounts@{id}@timeline/get.js'
 post:
   x-products:
-    - Full
     - Users
   tags:
-    - Gateway Accounts Timeline
+    - Gateway accounts timeline
   summary: Create a Gateway Account Timeline comment
   operationId: PostGatewayAccountTimeline
   x-sdk-operation-name: createTimelineComment
@@ -62,6 +60,9 @@ post:
   responses:
     '201':
       description: Gateway Account Timeline comment was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -71,11 +72,7 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
     - lang: JavaScript
       source:

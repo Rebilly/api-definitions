@@ -28,9 +28,12 @@ post:
   responses:
     201:
       description: Account logged in.
+      headers:
+        Location:
+          $ref: ../../components/headers/Location.yaml
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/Storefront/CustomerJWT.yaml
+            $ref: ../../components/schemas/Storefront/StorefrontCustomerJWT.yaml
     401:
       $ref: ../../components/responses/Unauthorized.yaml

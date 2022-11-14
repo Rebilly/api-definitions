@@ -1,0 +1,28 @@
+description: NOWPayments config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: NOWPayments credentials object.
+        properties:
+          apiKey:
+            type: string
+            format: password
+          ipnSecret:
+            type: string
+            format: password
+        required:
+          - apiKey
+          - ipnSecret
+      settings:
+        type: object
+        description: NOWPayments settings object.
+        required:
+          - tolerancePercentage
+        properties:
+          tolerancePercentage:
+            $ref: ../Gateways/AmountAdjustmentTolerance.yaml

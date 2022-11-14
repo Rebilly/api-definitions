@@ -4,28 +4,26 @@ required:
   - startSendingTime
 properties:
   id:
-    description: The broadcast message's identifier string.
+    description: ID of the broadcast message.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   filter:
     type: string
-    description: >
-      The filter that will be used on customer selection during the broadcast
-      message processing.
+    description: |-
+      Use this filter to select customers during broadcast message processing.
 
-      The syntax is the same as the `query` filter, without `filter=` prefix.
+      This field uses the same syntax as the `query` filter,
+      but without the `filter=` prefix. Examples: `firstName:John`, `firstName:John;lastName:Doe`.
 
-      For example: `firstName:John`, `firstName:John;lastName:Doe`, etc.
-
-      Attention: You should not URL encode the filter value.
+      > **Important**: Do not URL encode the filter value.
     example: 'firstName:John;lastName:Doe'
   title:
     type: string
-    description: The title of the messages (this title will appear in reports).
+    description: Title of the message. This title displays in reports.
   messages:
     type: array
-    description: The list of messages.
+    description: List of messages.
     minItems: 1
     items:
       type: object
@@ -33,39 +31,32 @@ properties:
         id:
           type: string
           format: uuid
-          description: The message identifier string.
+          description: ID of the message.
         version:
           type: string
-          description: >-
-            The message version (by default is empty, but if you make multiple
-            versions, you can name or number them to distinguish them).
+          description: |-
+            Version number of the message.
+            Use this field to distinguish between multiple messages by name and version number.
+            If there are no versions, this field is empty.
         weight:
           type: integer
-          description: >
-            The value for random-weighted picking of a template in the case of a
-            split test.
+          description: |-
+            Weight distribution value that is assigned to a template for a split test.
+            Each template in a split test can be assigned a weight.
+            The higher the weight value, the more likely the message template will be used.
 
-            The split test algorithm does not factor localization when making a
-            weighted-random template selection.  Therefore, a version will be
-            selected first, and then after a version is selected a specific
-            localization will be selected.  Take the case where two versions
-            have different locale content -- the locales of the content is not
-            considered when selecting the version.
+            The split test algorithm does not assess locale when making a weighted template selection.
           minimum: 0
           maximum: 100
           example: 75
           default: 100
         templates:
-          description: >
-            The value for random-weighted picking of a template in the case of a
-            split test.
+          description: |-
+            Split test templates.
 
-            The split test algorithm does not factor localization when making a
-            weighted-random template selection.  Therefore, a version will be
-            selected first, and then after a version is selected a specific
-            localization will be selected.  Take the case where two versions
-            have different locale content -- the locales of the content is not
-            considered when selecting the version.
+            Use split tests to determine which content is most effective.
+            Split tests send variations of the same message to different customers or leads.
+            You can then send the winning message to the remaining customers or leads.
           type: array
           minItems: 1
           items:
@@ -73,35 +64,42 @@ properties:
             properties:
               from:
                 type: string
-                description: >
-                  The sender address. It must be a **verified** address. # todo
-                  add a link to help docs on how to verify an email address.
+                description: |-
+                  Email address of the sender.
+
+                  > **Important:** This value must be a verified email address.
+
+                  To verify an email address:
+                    1. [Create an email delivery setting](../../Email-delivery-settings/operation/PostEmailDeliverySetting).
+                      In the response, you receive the email and a token.
+                    1. [Verify the email delivery](../../Email-delivery-settings/operation/PutEmailDeliverySettingsVerification) by passing the token as the path parameter.
                 maxLength: 254
                 example: example@example.com
               subject:
                 type: string
-                description: The message subject. The template placeholders are allowed.
+                description: |-
+                  Subject of the message.
+                  The use of template placeholders is permitted for this field.
                 maxLength: 998
                 example: Sujet de démonstration
               text:
                 type: string
-                description: |
-                  The message's text body.
-                  Leave empty to use content from "html".
-                  The template placeholders are allowed.
+                description: |-
+                  Text body of the message.
+                  To use content from the `html` field, leave this field empty.
+                  The use of template placeholders is permitted for this field.
                 example: Texte de démonstration
               html:
                 type: string
-                description: |
-                  The message's html body.
-                  Leave empty to use content from "text".
-                  The template placeholders are allowed.
+                description: |-
+                  HTML body of the message.
+                  To use content from the `text` field, leave this field empty.
+                  The use of template placeholders is permitted for this field.
                 example: <p>Texte de démonstration</p>
               locale:
                 type: string
-                description: >-
-                  The language locale identifier according to [RFC
-                  5646](https://tools.ietf.org/html/rfc5646).
+                description: |-
+                  Language locale identifier in [RFC 5646](https://tools.ietf.org/html/rfc5646) format.
                 example: fr-FR
             required:
               - from
@@ -115,31 +113,28 @@ properties:
     readOnly: true
     type: string
     format: date-time
-    description: The split test start time.
+    description: |-
+      Date and time at which the split test messages are scheduled to send.
   startSendingTime:
     type: string
     format: date-time
-    description: The start sending time.
+    description: Date and time at which the message is scheduled to send.
   status:
     readOnly: true
     type: string
-    description: The broadcast message's status.
+    description: Status of the broadcast message.
     enum:
       - draft
       - sending
       - sent
       - archived
   createdTime:
-    description: The broadcast message's created time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
-    description: The broadcast message's updated time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../UpdatedTime.yaml
   _links:
     type: array
-    description: The links related to the resource.
+    description: Related resource links.
     readOnly: true
     minItems: 1
     items:

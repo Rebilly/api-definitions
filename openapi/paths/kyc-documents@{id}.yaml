@@ -2,18 +2,16 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
-    - Risk Management
     - Core
   tags:
-    - KYC Documents
+    - KYC documents
   summary: Retrieve a KYC Document
   operationId: GetKycDocument
   x-sdk-operation-name: get
   description: Retrieve a KYC document with specified identifier string.
   responses:
     '200':
-      description: KYC document was retrieved successfully.
+      description: KYC document was retrieved.
       content:
         application/json:
           schema:
@@ -30,15 +28,13 @@ get:
         $ref: '../code_samples/JavaScript/kyc-documents@{id}/get.js'
 put:
   x-products:
-    - Full
-    - Risk Management
     - Core
   tags:
-    - KYC Documents
-  summary: Create or update a KYC document with predefined ID
+    - KYC documents
+  summary: Upsert a KYC document
   operationId: PutKycDocument
   x-sdk-operation-name: update
-  description: Create or update a KYC document with predefined identifier string.
+  description: Create or update (upsert) a KYC document with specified identifier string.
   requestBody:
     content:
       application/json:
@@ -55,6 +51,9 @@ put:
             $ref: ../components/schemas/KycDocument/KycDocument.yaml
     '201':
       description: KYC document was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

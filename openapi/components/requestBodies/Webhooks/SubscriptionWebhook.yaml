@@ -1,0 +1,37 @@
+content:
+  application/json:
+    schema:
+      properties:
+        subscriptionId:
+          description: The order ID.
+          type: string
+        eventType:
+          type: string
+          description: Webhook event type.
+          enum:
+            - order-completed
+            - subscription-activated
+            - subscription-canceled
+            - subscription-downgraded
+            - subscription-modified
+            - subscription-reactivated
+            - subscription-renewal-reminder
+            - subscription-renewed
+            - subscription-trial-converted
+            - subscription-trial-end-changed
+            - subscription-trial-end-reminder
+            - subscription-trial-ended
+            - subscription-upgraded
+        _embedded:
+          type: object
+          properties:
+            subscription:
+              $ref: ../../schemas/Subscription.yaml
+        _links:
+          type: array
+          description: Related resource links.
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: ../../schemas/Links/SubscriptionLink.yaml
+description: Order webhook request body resource.

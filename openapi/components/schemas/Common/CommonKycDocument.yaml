@@ -40,36 +40,28 @@ properties:
       - in-progress
       - accepted
       - rejected
+      - archived
     x-enumDescriptions:
       pending: Waiting to be reviewed or analyzed
       in-progress: Being analyzed by Rebilly's AI
       accepted: Accepted by AI or a human
       rejected: Rejected by AI or a human
+      archived: Archived by Rebilly's AI
   rejectionReason:
     $ref: ../KycDocument/KycDocumentRejection.yaml
   requestId:
     readOnly: true
     nullable: true
     description: KYC request identifier string.
-    allOf:
-      - $ref: ../ResourceId.yaml
+    type: string
+    maxLength: 50
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
   createdTime:
-    description: Creation date/time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
-    description: Latest update date/time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../UpdatedTime.yaml
   processedTime:
     description: Processing date/time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
-  _links:
-    type: array
-    description: The links related to resource.
+    type: string
+    format: date-time
     readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Links/SelfLink.yaml

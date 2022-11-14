@@ -1,0 +1,94 @@
+type: object
+properties:
+  creditBureau:
+    description: The credit bureau which is used to get credit file data.
+    type: string
+    readOnly: true
+    enum:
+      - equifax
+      - experian
+      - transunion
+      - test-bureau
+  creditFileNumber:
+    description: The credit file number on credit bureau.
+    type: string
+    readOnly: true
+  name:
+    description: Name of the person to consult the credit file.
+    type: string
+    readOnly: true
+  consultedDate:
+    description: Date to consult with credit file bureau.
+    type: string
+    format: date-time
+    readOnly: true
+  decision:
+    description: Value based on if the credit file can be used as a single source proof of identity decision, requires at least one more source (dual-source), or other for anything else.
+    type: string
+    enum:
+      - single-source
+      - dual-source
+      - other
+    x-enumDescriptions:
+      single-source: The credit file can be used as a single source of proof for identity decisions.
+      dual-source: The credit file can be used as a source of proof where the credit bureau agency found two reliable trade sources.
+      other: The credit file cannot be used for identity decisions.
+    readOnly: true
+  trades:
+    description: Contains information to support the dual process.
+    type: array
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The trade name.
+          example: Rogers
+        accountNumber:
+          type: string
+          example: '123-ABC-123'
+        dateOpened:
+          type: string
+          format: date
+    readOnly: true
+  referenceData:
+    description: Extra data from credit bureau.
+    readOnly: true
+    type: object
+    properties:
+      singleSourceHit:
+        description: Single source hit.
+        type: string
+        readOnly: true
+        example: Y
+      dualSourceHit:
+        description: Dual source hit.
+        type: string
+        readOnly: true
+        example: Y
+      waterfallProcess:
+        description: Waterfall process.
+        type: string
+        readOnly: true
+        example: Y
+      creditFileCreatedDate:
+        description: Credit file create date.
+        type: string
+        readOnly: true
+      numberOfTradesOnFile:
+        description: Number of trades on file.
+        type: string
+        readOnly: true
+        example: '001'
+      singleDecision:
+        description: Data related to single source decision.
+        type: object
+        allOf:
+          - $ref: CreditFileCommonDecisionData.yaml
+      dualDecision:
+        description: Data related to dual source decision.
+        nullable: true
+        type: array
+        items:
+          allOf:
+            - $ref: CreditFileCommonDecisionData.yaml

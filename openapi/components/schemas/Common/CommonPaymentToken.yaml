@@ -12,8 +12,6 @@ properties:
     type: boolean
     default: false
     readOnly: true
-  method:
-    type: string
   riskMetadata:
     allOf:
       - $ref: ../RiskMetadata.yaml
@@ -22,13 +20,9 @@ properties:
       - $ref: ../LeadSource.yaml
     writeOnly: true
   createdTime:
-    description: Token created time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
-    description: Token updated time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../UpdatedTime.yaml
   usageTime:
     description: Token usage time.
     allOf:
@@ -39,7 +33,7 @@ properties:
       - $ref: ../ServerTimestamp.yaml
   _links:
     type: array
-    description: The links related to resource.
+    description: Related resource links.
     readOnly: true
     minItems: 1
     items:

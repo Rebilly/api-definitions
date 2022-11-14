@@ -2,19 +2,20 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 post:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Invoices
   summary: Void an invoice
   operationId: PostInvoiceVoid
   x-sdk-operation-name: void
-  description: |
-    Void an invoice with specified identifier string.
+  description: |-
+    Voids an invoice with a specified identifier string.
   responses:
     '201':
-      description: Invoice was voided successfully.
+      description: Invoice voided.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -32,3 +33,7 @@ post:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/invoices@{id}@void/post.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/invoices@{id}@void/post.php

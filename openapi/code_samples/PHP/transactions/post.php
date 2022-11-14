@@ -46,6 +46,6 @@ $transactionForm->setBillingAddress([
 
 try {
     $transaction = $client->transactions()->create($transactionForm);
-} catch (UnprocessableEntityException $e) {
-    echo $e->getMessage();
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
 }

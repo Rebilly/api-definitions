@@ -5,7 +5,6 @@ servers:
     description: Live server
 post:
   x-products:
-    - Full
     - Users
   tags:
     - Profile
@@ -24,16 +23,15 @@ post:
   responses:
     '201':
       description: User was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
             $ref: ../components/schemas/User.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
     - lang: PHP
       source:

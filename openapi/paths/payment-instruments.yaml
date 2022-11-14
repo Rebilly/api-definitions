@@ -1,12 +1,9 @@
 get:
   x-products:
-    - Full
-    - Payments
-    - Billing
     - Core
   tags:
-    - Payment Instruments
-  summary: Retrieve a list of payment instruments
+    - Payment instruments
+  summary: Retrieve payment instruments
   operationId: GetPaymentInstrumentCollection
   x-sdk-operation-name: getAll
   description: |
@@ -20,7 +17,7 @@ get:
     - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: A list of payment instruments was retrieved successfully.
+      description: A list of payment instruments was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -47,12 +44,9 @@ get:
         $ref: ../code_samples/JavaScript/payment-instruments/get.js
 post:
   x-products:
-    - Full
-    - Payments
-    - Billing
     - Core
   tags:
-    - Payment Instruments
+    - Payment instruments
   summary: Create a Payment Instrument
   operationId: PostPaymentInstrument
   x-sdk-operation-name: create
@@ -65,6 +59,9 @@ post:
   responses:
     '201':
       description: Payment instrument was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

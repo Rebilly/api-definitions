@@ -1,0 +1,67 @@
+type: object
+readOnly: true
+properties:
+  customerId:
+    $ref: CustomerId.yaml
+  invoiceId:
+    description: ID of the invoice that contains the item which generated the revenue.
+    allOf:
+      - $ref: ./ResourceId.yaml
+  invoiceItemId:
+    description: ID of the invoice item which generated the revenue.
+    allOf:
+      - $ref: ./ResourceId.yaml
+  productId:
+    description: ID of the product related to the invoice item.
+    nullable: true
+    type: string
+    maxLength: 50
+    example: product-123
+  planId:
+    description: ID of the plan related to the invoice item.
+    nullable: true
+    type: string
+    maxLength: 50
+    example: gold-plan
+  accountingCode:
+    description: The product accounting code.
+    type: string
+    example: '4010'
+  currency:
+    $ref: ./CurrencyCode.yaml
+  status:
+    description: The entry's recognition status.
+    readOnly: true
+    type: string
+    enum:
+      - scheduled
+      - recognized
+    x-enumDescriptions:
+      scheduled: The amount will be recognized at the end of month.
+      recognized: The amount is recognized and final.
+  estimatedAmount:
+    description: Estimated amount which will be recognized unless it is changed before recognition time.
+    type: number
+    x-type: Money
+    format: double
+  recognizedAmount:
+    description: The recognized amount.
+    type: number
+    x-type: Money
+    format: double
+  scheduledTime:
+    description: Date and time at which the entry was created.
+    type: string
+    format: date-time
+    readOnly: true
+  issuedTime:
+    description: Date and time at which the related invoice was issued.
+    type: string
+    format: date-time
+    readOnly: true
+  recognizedTime:
+    description: Date and time at which the entry was recognized.
+    nullable: true
+    type: string
+    format: date-time
+    readOnly: true

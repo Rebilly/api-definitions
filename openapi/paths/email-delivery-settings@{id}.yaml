@@ -2,20 +2,17 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
     - Users
   tags:
-    - Email Delivery Settings
+    - Email delivery settings
   summary: Retrieve an email delivery setting
   operationId: GetEmailDeliverySetting
   x-sdk-operation-name: get
-  description: |
-    Retrieve an email delivery setting.
+  description: Retrieves an email delivery setting with a specified ID.
   responses:
     '200':
       description: >-
-        Email delivery setting with specified identifier was retrieved
-        successfully.
+        Email delivery setting retrieved.
       content:
         application/json:
           schema:
@@ -29,31 +26,27 @@ get:
       $ref: ../components/responses/NotFound.yaml
 delete:
   x-products:
-    - Full
     - Users
   tags:
-    - Email Delivery Settings
+    - Email delivery settings
   summary: Delete an email delivery setting
   operationId: DeleteEmailDeliverySetting
   x-sdk-operation-name: delete
-  description: |
-    Delete an email delivery setting.
+  description: Deletes an email delivery setting with a specified ID.
   responses:
     '204':
-      description: Email delivery setting was deleted.
+      description: Email delivery setting deleted.
     '409':
       $ref: ../components/responses/Conflict.yaml
 patch:
   x-products:
-    - Full
     - Users
   tags:
-    - Email Delivery Settings
+    - Email delivery settings
   summary: Update an email delivery setting
   operationId: PatchEmailDeliverySettings
   x-sdk-operation-name: update
-  description: |
-    Update an email delivery setting.
+  description: Updates an email delivery setting with a specified ID.
   requestBody:
     content:
       application/json:
@@ -64,7 +57,7 @@ patch:
     required: true
   responses:
     '200':
-      description: Email delivery setting was updated successfully.
+      description: Email delivery setting updated.
       content:
         application/json:
           schema:

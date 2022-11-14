@@ -1,20 +1,22 @@
 description: ThreeDSecureIO3dsServer.
 allOf:
-  - $ref: ./WorldlineAtosFrankfurt3dsServers/WorldlineAtosFrankfurt3dsServers.yaml
-  - $ref: ./TestProcessor3dsServers/TestProcessor3dsServers.yaml
-  - $ref: ./EMS3dsServers/EMS3dsServers.yaml
   - type: object
     required:
-      - merchantId
+      - acquirerMerchantIdVisa
+      - acquirerMerchantIdMastercard
       - merchantName
       - merchantAcquirerBinVisa
       - merchantAcquirerBinMastercard
       - merchantCountry
       - merchantUrl
     properties:
-      merchantId:
+      acquirerMerchantIdVisa:
         type: string
-        description: Merchant Id.
+        description: Visa acquirer merchant ID (MID).
+        maxLength: 35
+      acquirerMerchantIdMastercard:
+        type: string
+        description: Mastercard acquirer merchant ID (MID).
         maxLength: 35
       merchantName:
         type: string
@@ -67,6 +69,10 @@ allOf:
           28 - Prepaid Activation and Load
 
           Identifies the type of transaction being authenticated.
+      declineNotEnrolled:
+        type: boolean
+        description: Set to true to decline transactions if a card is not enrolled instead of continuing without 3DS.
+        default: false
       use3dsForMerchantInitiated:
         type: boolean
         description: Use 3DS for merchant initiated transactions.

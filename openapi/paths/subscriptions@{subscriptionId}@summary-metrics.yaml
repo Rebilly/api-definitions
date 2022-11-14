@@ -20,18 +20,17 @@ parameters:
       type: string
 get:
   x-products:
-    - Full
-    - Billing
     - Reports
   tags:
     - Orders
   summary: Retrieve subscription order summary metrics
   operationId: GetSubscriptionSummaryMetricReport
+  x-sdk-operation-name: getSubscriptionSummaryMetrics
   description: |
     Retrieve subscription order summary metrics.
   responses:
     '200':
-      description: Metrics were retrieved successfully.
+      description: Metrics were retrieved.
       content:
         application/json:
           schema:
@@ -40,3 +39,8 @@ get:
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/subscriptions@{subscriptionId}@summary-metrics/get.php

@@ -5,6 +5,6 @@ $invoiceItemForm->setQuantity(5);
 
 try {
     $invoiceItem = $client->invoiceItems()->create($invoiceItemForm, 'invoiceId');
-} catch (UnprocessableEntityException $e) {
-    echo $e->getMessage();
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
 }

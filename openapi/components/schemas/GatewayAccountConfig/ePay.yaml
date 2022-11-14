@@ -1,0 +1,19 @@
+description: ePay config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: ePay credentials object.
+        properties:
+          merchantId:
+            type: string
+          secretKey:
+            type: string
+            format: password
+        required:
+          - merchantId
+          - secretKey

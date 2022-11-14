@@ -35,6 +35,6 @@ $customerForm->setPrimaryAddress([
 
 try {
     $customer = $client->customers()->update('myCustomerId', $customerForm);
-} catch (UnprocessableEntityException $e) {
-    echo $e->getMessage();
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
 }

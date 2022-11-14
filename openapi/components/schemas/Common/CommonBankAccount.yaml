@@ -1,79 +1,69 @@
 type: object
 title: 'Bank Account'
+x-abstract-parent: PaymentInstrument
 properties:
   id:
-    description: The payment instrument ID.
+    description: ID of the payment instrument.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   method:
-    description: The method of payment instrument.
+    description: Method of payment instrument.
     type: string
     readOnly: true
     enum:
       - ach
-  customerId:
-    description: The customer's ID.
-    allOf:
-      - $ref: ../ResourceId.yaml
   bankName:
-    description: Bank's name.
+    description: Bank name.
     type: string
   routingNumber:
-    description: Bank's routing number.
+    description: Bank routing number.
     type: string
   accountNumberType:
-    description: >-
-      Bank's account number type. A valid value is basic bank account number
-      (BBAN) or international bank account number (IBAN).
+    description: |-
+      Bank account number type. A valid value is a Basic Bank Account
+      Number (BBAN) or an International Bank Account Number (IBAN).
     type: string
     default: BBAN
     enum:
       - BBAN
       - IBAN
   accountType:
-    description: Bank's account type.
+    description: Bank account type.
     type: string
     enum:
       - checking
       - savings
       - other
   bic:
-    description: Bank Identifier Code.
+    description: Bank Identifier Code (BIC).
     type: string
   billingAddress:
-    description: The billing address.
+    description: Customer's billing address.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   fingerprint:
-    description: >-
-      A unique value to identify the bank account. It contains alphanumeric values.
+    description: |-
+      Unique value which identifies the bank account. This value contains
+      alphanumeric characters.
     type: string
     readOnly: true
   last4:
-    description: The last 4 digits of the bank account.
+    description: Last 4 digits of the bank account number.
     type: string
     readOnly: true
   status:
-    description: Bank account status.
+    description: Status of the bank account.
     type: string
     readOnly: true
     enum:
       - active
       - deactivated
   useAsBackup:
-    description: Allow using this payment instrument as a backup for invoice payment retries.
-    type: boolean
-    default: false
+    $ref: ../UseAsBackup.yaml
   createdTime:
-    description: Bank account created time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
-    description: Bank account updated time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../UpdatedTime.yaml
   customFields:
     $ref: ../ResourceCustomFields.yaml
-  riskMetadata:
-    $ref: ../RiskMetadata.yaml

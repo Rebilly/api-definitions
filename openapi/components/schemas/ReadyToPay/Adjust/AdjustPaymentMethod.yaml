@@ -1,0 +1,20 @@
+type: object
+required:
+  - paymentMethod
+  - feature
+discriminator:
+  propertyName: paymentMethod
+  x-enum-mapping: 
+    - $ref: ./AdjustReadyToPayPaymentCard.yaml
+    - $ref: ./AdjustReadyToPayAch.yaml
+    - $ref: ./AdjustReadyToPayPaypal.yaml
+    - $ref: ./AdjustReadyToPayGeneric.yaml
+properties:
+  paymentMethod:
+    description: The payment method name.
+  feature:
+    description: |
+      The specific payment method feature like `Google Pay`, `Apple Pay` or `Plaid`.
+
+      If set to `null`, then there are no features. This applies to the payment method.
+x-no-abstract-methods: true

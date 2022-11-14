@@ -1,11 +1,8 @@
 post:
   x-products:
-    - Full
-    - Payments
-    - Billing
     - Core
   tags:
-    - Payment Tokens
+    - Payment tokens
   summary: Create a payment token
   operationId: PostToken
   x-sdk-operation-name: create
@@ -33,6 +30,9 @@ post:
   responses:
     '201':
       description: Token was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -52,13 +52,10 @@ post:
         $ref: ../code_samples/JavaScript/tokens/post.js
 get:
   x-products:
-    - Full
-    - Payments
-    - Billing
     - Core
   tags:
-    - Payment Tokens
-  summary: Retrieve a list of tokens
+    - Payment tokens
+  summary: Retrieve tokens
   operationId: GetTokenCollection
   x-sdk-operation-name: getAll
   description: |
@@ -68,7 +65,7 @@ get:
     - $ref: ../components/parameters/collectionOffset.yaml
   responses:
     '200':
-      description: A list of tokens was retrieved successfully.
+      description: A list of tokens was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml

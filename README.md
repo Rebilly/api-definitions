@@ -1,7 +1,7 @@
 # Rebilly OpenAPI Definitions
 
-- Our website (www.rebilly.com) is powered by the [Redocly Portal](https://redoc.ly/developer-portal/).
-- Our API reference is powered by [Redocly Reference](https://redoc.ly/reference-docs/).
+- Our website (www.rebilly.com) is powered by the [Redocly Portal](https://redocly.com/developer-portal/).
+- Our API reference is powered by [Redocly API docs](https://redocly.com/reference-docs/).
 
 TBD: Add Redocly validation status badge.
 
@@ -22,7 +22,7 @@ If you use VS Code, use the [Redocly VS Code extension](https://marketplace.visu
 
 ### Install
 
-1. Install [Node JS](https://nodejs.org/)
+1. Install [Node JS](https://nodejs.org/) (version 14 or more recent)
 2. Clone repo and run `npm ci` in the repo root
 
 ### Usage
@@ -43,8 +43,5 @@ Run `npm run build` to bundle the definitions into a single file in the `dist` f
 
 #### Validate
 
-Run `npm test` to validate the definitions.
+Run `npx redocly lint` to validate the definitions.
 
-### Organization
-
-Each API definition has its own root document in the root of the `openapi` folder.

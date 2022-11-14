@@ -1,15 +1,18 @@
 get:
   x-products:
-    - Full
     - Users
   tags:
-    - Email Notifications
-  summary: Retrieve a list of email notification events
+    - Email notifications
+  summary: Retrieve email notification events
   operationId: GetEmailNotificationCollection
   x-sdk-operation-name: getAll
+  description: Retrieves a list email notification events.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
   responses:
     '200':
-      description: A list of email notification events was retrieved successfully.
+      description: List of email notification events retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml

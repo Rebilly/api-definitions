@@ -1,17 +1,13 @@
 get:
   x-products:
-    - Full
-    - Risk Management
-    - Payments
-    - Billing
     - Core
   tags:
     - Disputes
-  summary: Retrieve a list of disputes
+  summary: Retrieve disputes
   operationId: GetDisputeCollection
   x-sdk-operation-name: getAll
-  description: |
-    Retrieve a list of disputes.
+  description: |-
+    Retrieves a list of all disputes.
   parameters:
     - $ref: ../components/parameters/collectionFilter.yaml
     - $ref: ../components/parameters/collectionSort.yaml
@@ -21,7 +17,7 @@ get:
     - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: A list of disputes was retrieved successfully.
+      description: List of disputes successfully retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -48,23 +44,22 @@ get:
         $ref: ../code_samples/JavaScript/disputes/get.js
 post:
   x-products:
-    - Full
-    - Risk Management
-    - Payments
-    - Billing
     - Core
   tags:
     - Disputes
   summary: Create a dispute
   operationId: PostDispute
   x-sdk-operation-name: create
-  description: |
-    Create a dispute.
+  description: |-
+    Creates a new dispute.
   requestBody:
     $ref: ../components/requestBodies/Dispute.yaml
   responses:
     '201':
-      description: Dispute was created.
+      description: Dispute created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

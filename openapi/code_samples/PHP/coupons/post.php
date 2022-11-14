@@ -8,7 +8,7 @@ $discountArray = [
 $discountForm = new \Rebilly\Entities\Coupons\Discounts\Fixed($discountArray);
 $couponForm->setDiscount($discountForm);
 // Coupon can be used right now
-$couponForm->setIssuedTime(date('Y-m-d H:i:s'));
+$couponForm->setIssuedTime(date('c'));
 
 $restrictionArray = [
     'quantity' => 2,
@@ -20,6 +20,6 @@ $couponForm->setRestrictions([$restrictionForm]);
 
 try {
     $coupon = $client->coupons()->create($couponForm);
-} catch (UnprocessableEntityException $e) {
-    echo $e->getMessage();
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
 }

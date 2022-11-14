@@ -2,18 +2,16 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
-    - Risk Management
     - Core
   tags:
-    - KYC Documents
+    - KYC documents
   summary: Retrieve a KYC request
   operationId: GetKycRequest
   x-sdk-operation-name: get
   description: Retrieve a KYC request with specified identifier string.
   responses:
     '200':
-      description: KYC request was retrieved successfully.
+      description: KYC request was retrieved.
       content:
         application/json:
           schema:
@@ -26,11 +24,9 @@ get:
       $ref: ../components/responses/NotFound.yaml
 patch:
   x-products:
-    - Full
-    - Risk Management
     - Core
   tags:
-    - KYC Documents
+    - KYC documents
   summary: Update a KYC request
   operationId: PatchKycRequest
   x-sdk-operation-name: update
@@ -56,16 +52,14 @@ patch:
       $ref: ../components/responses/ValidationError.yaml
 delete:
   x-products:
-    - Full
-    - Risk Management
     - Core
   tags:
-    - KYC Documents
+    - KYC documents
   summary: Delete the KYC request
   operationId: DeleteKycRequest
   x-sdk-operation-name: delete
   description: |
-    Delete the KYC request with the predefined identifier string.
+    Delete the KYC request with the specified identifier string.
   responses:
     '204':
       description: The KYC request was deleted.

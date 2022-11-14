@@ -1,12 +1,14 @@
-description: Orders resource type to export.
+description: Order resource to export.
 allOf:
   - $ref: ../DataExport.yaml
   - type: object
     properties:
       dateRange:
-        type: object
-        properties:
-          field:
-            type: string
-            default: createdTime
-            example: createdTime
+        allOf:
+          - $ref: ../DataExportDateRange.yaml
+          - type: object
+            properties:
+              field:
+                type: string
+                default: createdTime
+                example: createdTime

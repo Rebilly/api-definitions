@@ -4,7 +4,7 @@ get:
   x-products:
     - Storefront
   tags:
-    - KYC Documents
+    - KYC documents
   summary: Retrieve a KYC request
   operationId: StorefrontGetKycRequest
   x-sdk-operation-name: get
@@ -12,9 +12,11 @@ get:
     - CustomerJWT: []
   description: |
     Retrieve a KYC request with specified ID.
+  parameters:
+    - $ref: ../../components/parameters/collectionExpand.yaml
   responses:
     200:
-      description: KYC request was retrieved successfully.
+      description: KYC request was retrieved.
       content:
         application/json:
           schema:

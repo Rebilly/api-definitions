@@ -4,17 +4,17 @@ parameters:
 get:
   x-products:
     - Users
-    - Full
   tags:
     - Application owners
-  summary: Retrieve application instance
+  summary: Retrieve an application instance
   operationId: GetApplicationInstanceByOrganization
   x-sdk-operation-name: getInstance
-  description: |
-    Retrieve application instance with predefined application and organization identifier strings.
+  description: |-
+    Retrieves an application instance with specified application and
+    organization identifier strings.
   responses:
     '200':
-      description: Application instance was retrieved successfully.
+      description: Application instance retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -25,12 +25,12 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Applications/Owners/ApplicationInstance.yaml
+            $ref: ../components/schemas/Applications/OwnerApplicationInstance.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: ../code_samples/PHP/applications@{id}@instances@{organizationId}/get.php

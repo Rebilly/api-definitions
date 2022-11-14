@@ -1,0 +1,34 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: searchResultId
+    in: path
+    description: EDD search result ID.
+    required: true
+    schema:
+      type: string
+get:
+  x-products:
+    - Full
+    - Risk Management
+    - Core
+  tags:
+    - Customers
+  summary: Retrieve a customer's EDD search result
+  operationId: GetEddSearchResult
+  x-sdk-operation-name: getEddSearchResult
+  description: |-
+    Retrieves an EDD search result for a customer with a specified
+    identifier string.
+  responses:
+    '200':
+      description: EDD search result retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Edd/EddSearchResult.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

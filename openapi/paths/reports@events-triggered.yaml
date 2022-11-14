@@ -13,12 +13,12 @@ servers:
         description: Your organization ID.
 get:
   x-products:
-    - Full
     - Reports
   tags:
     - Reports
   summary: Retrieve a events triggered summary report
   operationId: GetTriggeredEventReport
+  x-sdk-operation-name: getEventsTriggeredSummary
   description: |
     Retrieve a events triggered summary report.
   parameters:
@@ -28,17 +28,19 @@ get:
       required: true
       schema:
         type: string
+        format: date-time
     - name: periodEnd
       in: query
       description: Report end date.
       required: true
       schema:
         type: string
+        format: date-time
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
   responses:
     '200':
-      description: Report was retrieved successfully.
+      description: Report was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -58,3 +60,7 @@ get:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/reports@events-triggered/get.js
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/reports@events-triggered/get.php

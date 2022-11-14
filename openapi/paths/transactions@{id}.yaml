@@ -2,9 +2,6 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
-    - Payments
-    - Billing
     - Core
   tags:
     - Transactions
@@ -21,7 +18,7 @@ get:
     - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: Transaction was retrieved successfully.
+      description: Transaction was retrieved.
       content:
         application/json:
           schema:
@@ -41,9 +38,6 @@ get:
         $ref: '../code_samples/JavaScript/transactions@{id}/get.js'
 patch:
   x-products:
-    - Full
-    - Payments
-    - Billing
     - Core
   tags:
     - Transactions
@@ -56,7 +50,7 @@ patch:
     $ref: ../components/requestBodies/PatchTransactionRequest.yaml
   responses:
     '200':
-      description: Transaction was updated successfully.
+      description: Transaction was updated.
       content:
         application/json:
           schema:

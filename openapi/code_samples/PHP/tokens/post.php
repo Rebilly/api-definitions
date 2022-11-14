@@ -43,6 +43,6 @@ $paymentCardTokenForm->setPaymentInstrument($paymentInstrumentForm);
 
 try {
     $paymentCardToken = $client->paymentCardTokens()->create($paymentCardTokenForm);
-} catch (UnprocessableEntityException $e) {
-    echo $e->getMessage();
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
 }

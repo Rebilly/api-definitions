@@ -1,13 +1,15 @@
-description: Transactions resource type to export.
+description: Transaction resource to export.
 allOf:
   - $ref: ../DataExport.yaml
   - type: object
     properties:
       dateRange:
-        type: object
-        properties:
-          field:
-            x-sortable: true 
-            type: string
-            default: processedTime
-            example: processedTime
+        allOf:
+          - $ref: ../DataExportDateRange.yaml
+          - type: object
+            properties:
+              field:
+                x-sorteable: true
+                type: string
+                default: processedTime
+                example: processedTime

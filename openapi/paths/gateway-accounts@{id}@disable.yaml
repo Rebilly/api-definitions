@@ -2,10 +2,9 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 post:
   x-products:
-    - Full
     - Users
   tags:
-    - Gateway Accounts
+    - Gateway accounts
   summary: Disable a Gateway Account
   operationId: PostGatewayAccountDisablement
   x-sdk-operation-name: disable
@@ -16,7 +15,10 @@ post:
     and cannot process transactions.
   responses:
     '201':
-      description: Disabled successfully.
+      description: Gateway account disabled.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

@@ -1,37 +1,38 @@
 type: object
-description: Tag.
+description: |-
+  Use tags to organize and categorize customers or KYC documents based
+  on keywords. For more information, see
+  [Tags](https://www.rebilly.com/docs/dev-docs/api/tag/Tags/).
 required:
   - name
   - type
 properties:
   id:
-    description: The tag's identifier string.
+    description: Unique tag identifier string.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   name:
-    description: The tag is unique name, which is case-insensitive.
+    description: Unique tag name. Tag names are not case-sensitive.
     type: string
     maxLength: 255
     pattern: '^[@~\-\.\w\s]+$'
     example: New
   type:
-    description: The tag type. Tags of a specific type could only be used for the corresponding entity.
+    description: |-
+      Type of tag. Tags of a specific type can only be
+      assigned to corresponding entity types. For example, you can only use customer tags on customers.
     type: string
     enum:
       - customer
       - kyc-document
   createdTime:
-    description: The tag's created time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
-    description: The tag's updated time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../UpdatedTime.yaml
   _links:
     type: array
-    description: The links related to resource.
+    description: Resource related links.
     readOnly: true
     minItems: 1
     items:

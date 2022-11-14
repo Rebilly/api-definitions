@@ -6,6 +6,6 @@ $application->setPermissions(['GetTransactionCollection']);
 
 try {
     $application = $client->applications()->create($application);
-} catch (UnprocessableEntityException $e) {
-    echo $e->getMessage();
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
 }

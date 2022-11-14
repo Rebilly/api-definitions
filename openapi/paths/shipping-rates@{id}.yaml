@@ -3,8 +3,6 @@ parameters:
 get:
   x-products:
     - Core
-    - Full
-    - Billing
   tags:
     - Shipping rates
   summary: Retrieve a shipping rate
@@ -14,7 +12,7 @@ get:
     Retrieve a shipping rate with specified identifier string.
   responses:
     '200':
-      description: Shipping rate was retrieved successfully.
+      description: Shipping rate was retrieved.
       content:
         application/json:
           schema:
@@ -32,15 +30,13 @@ get:
 put:
   x-products:
     - Core
-    - Full
-    - Billing
   tags:
     - Shipping rates
-  summary: Create a shipping rate with predefined ID
+  summary: Create a shipping rate with specified ID
   operationId: PutShippingRate
   x-sdk-operation-name: update
   description: |
-    Create a shipping rate with predefined identifier string.
+    Create a shipping rate with specified identifier string.
   responses:
     '200':
       description: Shipping rate was updated.
@@ -50,6 +46,9 @@ put:
             $ref: ../components/schemas/ShippingRates/ShippingRate.yaml
     '201':
       description: Shipping rate was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -74,15 +73,13 @@ put:
 delete:
   x-products:
     - Core
-    - Full
-    - Billing
   tags:
     - Shipping rates
   summary: Delete a shipping rate
   operationId: DeleteShippingRate
   x-sdk-operation-name: delete
   description: |
-    Delete a shipping rate with predefined identifier string.
+    Delete a shipping rate with specified identifier string.
   responses:
     '204':
       description: Shipping rate was deleted.

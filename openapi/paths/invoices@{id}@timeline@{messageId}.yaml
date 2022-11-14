@@ -2,24 +2,23 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
   - name: messageId
     in: path
-    description: The Invoice Timeline message ID.
+    description: ID of the invoice timeline message.
     required: true
     schema:
       type: string
 get:
   x-products:
-    - Full
     - Core
   tags:
-    - Invoices Timeline
-  summary: Retrieve an Invoice Timeline message
+    - Invoices timeline
+  summary: Retrieve an invoice timeline message
   operationId: GetInvoiceTimeline
   x-sdk-operation-name: getTimelineMessage
-  description: |
-    Retrieve a invoice message with specified identifier string.
+  description: |-
+    Retrieves an invoice timeline message with specified identifier string.
   responses:
     '200':
-      description: Invoice message was retrieved successfully.
+      description: Invoice message retrieved.
       content:
         application/json:
           schema:
@@ -34,20 +33,23 @@ get:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/invoices@{id}@timeline@{messageId}/get.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: '../code_samples/PHP-SDK-3.0/invoices@{id}@timeline@{messageId}/get.php'
 delete:
   x-products:
-    - Full
     - Core
   tags:
-    - Invoices Timeline
-  summary: Delete an Invoice Timeline message
+    - Invoices timeline
+  summary: Delete an invoice timeline message
   operationId: DeleteInvoiceTimeline
   x-sdk-operation-name: deleteTimelineMessage
-  description: |
-    Delete an Invoice Timeline message with predefined identifier string.
+  description: |-
+    Deletes an invoice timeline message with a specified identifier string.
   responses:
     '204':
-      description: Invoice Timeline message was deleted.
+      description: Invoice timeline message deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -59,5 +61,8 @@ delete:
   x-codeSamples:
     - lang: JavaScript
       source:
-        $ref: >-
-          ../code_samples/JavaScript/invoices@{id}@timeline@{messageId}/delete.js
+        $ref: '../code_samples/JavaScript/invoices@{id}@timeline@{messageId}/delete.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: '../code_samples/PHP-SDK-3.0/invoices@{id}@timeline@{messageId}/delete.php'

@@ -1,0 +1,32 @@
+type: object
+title: Klarna Token
+allOf:
+  - $ref: ./CompositeToken.yaml
+  - $ref: ../Common/CommonPaymentToken.yaml
+required:
+  - method
+  - paymentInstrument
+properties:
+  method:
+    description: The token payment method.
+    type: string
+    enum: [Klarna]
+  paymentInstrument:
+    description: The Klarna instrument details required for express checkout.
+    type: object
+    required:
+      - klarnaAuthorizationToken
+      - klarnaSessionId
+    properties:
+      klarnaAuthorizationToken:
+        description: The Klarna authorization token.
+        type: string
+      klarnaSessionId:
+        description: The Klarna session ID.
+        type: string
+  billingAddress:
+    description: The billing address object.
+    nullable: true
+    type: object
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml

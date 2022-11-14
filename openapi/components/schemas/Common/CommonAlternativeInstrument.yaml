@@ -1,24 +1,25 @@
 type: object
 title: Alternative Instrument
-required:
-  - method
-  - billingAddress
-  - customerId
+x-abstract-parent: PaymentInstrument
 properties:
   id:
-    description: The payment instrument ID.
+    description: ID of the payment instrument.
+    readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   method:
-    description: The method of payment instrument.
+    description: Payment method of the payment instrument.
     allOf:
       - $ref: ../PaymentMethods/AlternativePaymentMethods.yaml
-  customerId:
-    description: Customer's ID.
-    allOf:
-      - $ref: ../ResourceId.yaml
+      - not:
+          enum:
+            - payment-card
+            - paypal
+            - ach
+            - echeck
+            - Khelocard
   billingAddress:
-    description: The billing address.
+    description: Billing address of the user that is associated with the payment instrument.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   status:
@@ -29,37 +30,10 @@ properties:
       - active
       - deactivated
   useAsBackup:
-    description: Allow using this payment instrument as a backup for invoice payment retries.
-    type: boolean
-    default: false
+    $ref: ../UseAsBackup.yaml
   createdTime:
-    description: The payment instrument created time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
-    description: The payment instrument updated time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../UpdatedTime.yaml
   customFields:
     $ref: ../ResourceCustomFields.yaml
-  riskMetadata:
-    $ref: ../RiskMetadata.yaml
-  _links:
-    type: array
-    description: Links related to the resource.
-    readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Links/SelfLink.yaml
-        - $ref: ../Links/CustomerLink.yaml
-  _embedded:
-    type: array
-    description: >-
-      Any embedded objects available that are requested by the `expand`
-      querystring parameter.
-    readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Embeds/CustomerEmbed.yaml

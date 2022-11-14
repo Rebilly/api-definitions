@@ -1,8 +1,8 @@
 type: object
 properties:
   revision:
-    description: >
-      The number of times the order data has been modified.
+    description: |-
+      Number of times the order data has been modified.
 
       The revision is useful when analyzing webhook data to determine if the
       change takes precedence over the current representation.
@@ -10,29 +10,22 @@ properties:
     readOnly: true
   riskMetadata:
     nullable: true
+    type: object
     example: null
-    description: >-
-      Risk metadata. If null, the value would coalesce to the risk metadata
-      captured when creating the payment token.
+    description: |-
+      Risk metadata.
+      If null, the value would coalesce to the risk metadata captured when creating the payment token.
     allOf:
       - $ref: ../RiskMetadata.yaml
   customFields:
     $ref: ../ResourceCustomFields.yaml
   createdTime:
-    description: Order created time.
-    x-label: Creation time
-    x-sortable: true
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
-    description: Order updated time.
-    x-label: Last update time
-    x-sortable: true
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../UpdatedTime.yaml
   _links:
     type: array
-    description: The links related to resource.
+    description: Related resource links.
     readOnly: true
     minItems: 1
     items:
@@ -45,11 +38,8 @@ properties:
         - $ref: ../Links/ApprovalUrlLink.yaml
   _embedded:
     type: array
-    description: >-
-      Any embedded objects available that are requested by the `expand`
-      querystring parameter.
+    description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
-    minItems: 1
     items:
       anyOf:
         - $ref: ../Embeds/RecentInvoiceEmbed.yaml
@@ -58,3 +48,5 @@ properties:
         - $ref: ../Embeds/WebsiteEmbed.yaml
         - $ref: ../Embeds/LeadSourceEmbed.yaml
         - $ref: ../Embeds/ShippingRateEmbed.yaml
+        - $ref: ../Embeds/PaymentInstrumentEmbed.yaml
+        - $ref: ../Embeds/UpcomingInvoiceEmbed.yaml

@@ -5,29 +5,30 @@ required:
   - items
 properties:
   orderId:
-    description: The order identifier string.
+    description: ID of the order.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   invoice:
-    description: The initial invoice.
+    description: Initial invoice.
     readOnly: true
     allOf:
       - $ref: StorefrontInvoice.yaml
   transaction:
-    description: The initial transaction.
+    description: Initial transaction.
     readOnly: true
     allOf:
       - $ref: StorefrontTransaction.yaml
   token:
-    description: The session's token used for authentication. It would allow to visit created order, invoice and transaction.
+    description: |-
+      Session token that is used for authentication.
+      This token can be used to view the created order, invoice, and transaction.
     type: string
     readOnly: true
   websiteId:
-    description: The website identifier string.
     writeOnly: true
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ../Websites/WebsiteId.yaml
   items:
     type: array
     writeOnly: true
@@ -38,51 +39,57 @@ properties:
         - planId
       properties:
         planId:
-          description: The plan identifier string.
+          description: ID of the plan.
           allOf:
             - $ref: ../ResourceId.yaml
         quantity:
-          description: Number of units of the product on the given plan.
+          description: Number of product units in the specified plan.
           type: integer
   billingAddress:
-    description: The billing address.
+    description: Billing address details.
     writeOnly: true
     nullable: true
+    type: object
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   deliveryAddress:
-    description: The delivery address.
+    description: Delivery address details.
     writeOnly: true
     nullable: true
+    type: object
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   shippingRateId:
-    description: The shipping rate ID. If unset the cheapest applicable shipping rate is chosen.
+    description: |-
+      ID of the shipping rate. If this value is not set,
+      the cheapest applicable shipping rate is chosen.
     writeOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   paymentInstruction:
-    description: >-
-      The payment instruction to be used for purchasing.
+    description: Payment instruction for the purchase.
     writeOnly: true
     allOf:
       - $ref: ../PaymentInstruction.yaml
   couponIds:
     type: array
-    description: The list of coupons applied to the order.
+    description: List of coupons that are applied to the order.
     writeOnly: true
     items:
       type: string
   password:
     type: string
-    description: If set would be used to create customer account.
+    description: |-
+      Customer account password.
+      If this value is set, it is used to create a customer account.
     writeOnly: true
     nullable: true
   redirectUrl:
     type: string
-    description: >-
-      The URL to redirect the end-user when an offsite transaction is completed.
-      If `website.url` is `https://example.com`, then the `redirectUrl` could be set to any of these:
+    description: |-
+      URL to redirect the end-user when an offsite transaction is completed.
+      If `website.url` is `https://example.com`,
+      then the `redirectUrl` can be set to one the following:
 
       - `https://example.com`
 
@@ -92,9 +99,9 @@ properties:
 
       - `https://example.com/some/path?and=query#and-fragment`
 
-
-      Defaults to the website's configured URL. You may use `{id}` or `{result}` as placeholders in the URL and we will
-      replace them with the transaction's id and result accordingly.
-    format: url
+      This field defaults to the configured website URL.
+      You may use `{id}` or `{result}` as placeholders in the URL.
+      These placeholders are replaced with the transaction ID and result.
+    format: uri
     writeOnly: true
     nullable: true

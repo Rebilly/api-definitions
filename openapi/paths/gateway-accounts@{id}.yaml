@@ -2,10 +2,9 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
     - Users
   tags:
-    - Gateway Accounts
+    - Gateway accounts
   summary: Retrieve a Gateway Account
   operationId: GetGatewayAccount
   x-sdk-operation-name: get
@@ -13,7 +12,7 @@ get:
     Retrieve a Gateway Account with specified identifier string.
   responses:
     '200':
-      description: Gateway Account was retrieved successfully.
+      description: Gateway Account was retrieved.
       content:
         application/json:
           schema:
@@ -33,15 +32,14 @@ get:
         $ref: '../code_samples/JavaScript/gateway-accounts@{id}/get.js'
 put:
   x-products:
-    - Full
     - Users
   tags:
-    - Gateway Accounts
-  summary: Create or update a Gateway Account with predefined ID
+    - Gateway accounts
+  summary: Upsert a gateway account
   operationId: PutGatewayAccount
   x-sdk-operation-name: update
   description: |
-    Create or update a GatewayAccount with predefined identifier string.
+    Create or update (upsert) a GatewayAccount with specified identifier string.
   requestBody:
     $ref: ../components/requestBodies/GatewayAccount.yaml
   responses:
@@ -53,6 +51,9 @@ put:
             $ref: ../components/schemas/GatewayAccount.yaml
     '201':
       description: Gateway Account was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -64,11 +65,7 @@ put:
     '404':
       $ref: ../components/responses/NotFound.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
     - lang: PHP
       source:
@@ -78,15 +75,14 @@ put:
         $ref: '../code_samples/JavaScript/gateway-accounts@{id}/put.js'
 patch:
   x-products:
-    - Full
     - Users
   tags:
-    - Gateway Accounts
-  summary: Update a Gateway Account with predefined ID
+    - Gateway accounts
+  summary: Update a Gateway Account with specified ID
   operationId: PatchGatewayAccount
   x-sdk-operation-name: update
   description: |
-    Update a GatewayAccount with predefined identifier string.
+    Update a GatewayAccount with specified identifier string.
   requestBody:
     $ref: ../components/requestBodies/GatewayAccount.yaml
   responses:
@@ -103,26 +99,21 @@ patch:
     '404':
       $ref: ../components/responses/NotFound.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/gateway-accounts@{id}/patch.js'
 delete:
   x-products:
-    - Full
     - Users
   tags:
-    - Gateway Accounts
+    - Gateway accounts
   summary: Delete a Gateway Account
   operationId: DeleteGatewayAccount
   x-sdk-operation-name: delete
   description: |
-    Delete a Gateway Account with predefined identifier string.
+    Delete a Gateway Account with specified identifier string.
   responses:
     '204':
       description: Gateway Account was deleted.

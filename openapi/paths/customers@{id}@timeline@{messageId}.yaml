@@ -2,24 +2,23 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
   - name: messageId
     in: path
-    description: The Customer Timeline message ID.
+    description: Customer timeline message ID.
     required: true
     schema:
       type: string
 get:
   x-products:
-    - Full
     - Core
   tags:
-    - Customers Timeline
-  summary: Retrieve a customer Timeline message
+    - Customers timeline
+  summary: Retrieve a customer timeline message
   operationId: GetCustomerTimeline
   x-sdk-operation-name: getTimelineMessage
-  description: |
-    Retrieve a customer message with specified identifier string.
+  description: |-
+    Retrieves a customer message with specified identifier string.
   responses:
     '200':
-      description: Customer message was retrieved successfully.
+      description: Customer message retrieved.
       content:
         application/json:
           schema:
@@ -36,18 +35,17 @@ get:
         $ref: '../code_samples/JavaScript/customers@{id}@timeline@{messageId}/get.js'
 delete:
   x-products:
-    - Full
     - Core
   tags:
-    - Customers Timeline
-  summary: Delete a Customer Timeline message
+    - Customers timeline
+  summary: Delete a customer timeline message
   operationId: DeleteCustomerTimeline
   x-sdk-operation-name: deleteTimelineMessage
-  description: |
-    Delete a Customer Timeline message with predefined identifier string.
+  description: |-
+    Deletes a customer timeline message with specified identifier string.
   responses:
     '204':
-      description: Customer Timeline message was deleted.
+      description: Customer timeline message deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

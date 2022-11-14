@@ -1,10 +1,9 @@
 get:
   x-products:
-    - Full
     - Core
   tags:
     - Tags
-  summary: Retrieve a list of tags
+  summary: Retrieve tags
   operationId: GetTagCollection
   x-sdk-operation-name: getAll
   description: |
@@ -17,7 +16,7 @@ get:
     - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
-      description: A list of tags was retrieved successfully.
+      description: A list of tags was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -35,9 +34,13 @@ get:
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: '../code_samples/PHP-SDK-3.0/tags/get.php'
 post:
   x-products:
-    - Full
     - Core
   tags:
     - Tags
@@ -51,6 +54,9 @@ post:
   responses:
     '201':
       description: Tag was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -63,3 +69,8 @@ post:
       $ref: ../components/responses/Conflict.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: '../code_samples/PHP-SDK-3.0/tags/post.php'

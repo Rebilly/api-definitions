@@ -1,0 +1,35 @@
+content:
+  application/json:
+    schema:
+      properties:
+        subscriptionId:
+          description: The order ID.
+          type: string
+        subscriptionPauseId:
+          description: The pause ID.
+          type: string
+        eventType:
+          type: string
+          description: Webhook event type.
+          enum:
+            - subscription-pause-created
+            - subscription-pause-modified
+            - subscription-pause-revoked
+            - subscription-paused
+            - subscription-resumed
+        _embedded:
+          type: object
+          properties:
+            subscription:
+              $ref: ../../schemas/Subscription.yaml
+            pause:
+              $ref: ../../schemas/Subscription/SubscriptionPause.yaml
+        _links:
+          type: array
+          description: Related resource links.
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: ../../schemas/Links/SubscriptionLink.yaml
+              - $ref: ../../schemas/Links/SubscriptionPauseLink.yaml
+description: Subscription pause and Order webhook request body resource.

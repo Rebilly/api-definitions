@@ -2,13 +2,13 @@ type: object
 properties:
   defaultTaxCalculator:
     type: object
-    description: The settings for tax calculation.
+    description: Tax calculation settings.
     required:
       - type
     properties:
       type:
         type: string
-        description: The type of the tax calculator.
+        description: Type of tax calculator.
         enum:
           - taxjar
           - flat
@@ -16,12 +16,13 @@ properties:
         type: number
         nullable: true
         format: float
-        description: The rate for flat tax calculation.
-  kyc:
-    type: object
-    description: The settings for tax calculation.
-    properties:
-      identity-proof:
-        $ref: ../KycDocument/Settings/KycSettingsIdentity.yaml
-      address-proof:
-        $ref: ../KycDocument/Settings/KycSettingsAddress.yaml
+        description: Rate for flat tax calculation.
+  taxLocations:
+    type: array
+    description: |-
+      Additional organization addresses where a merchant may want to
+      collect taxes using the `taxjar` tax calculator.
+
+      Available only for US-based organizations.
+    items:
+      $ref: ./TaxLocation.yaml

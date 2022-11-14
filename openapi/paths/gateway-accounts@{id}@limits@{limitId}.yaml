@@ -13,10 +13,9 @@ parameters:
         - monthly-count
 get:
   x-products:
-    - Full
     - Users
   tags:
-    - Gateway Accounts
+    - Gateway accounts
   summary: Retrieve a gateway account limit
   operationId: GetGatewayAccountLimit
   x-sdk-operation-name: getVolumeLimit
@@ -24,7 +23,7 @@ get:
     Retrieve a gateway account limit with specified identifier string.
   responses:
     '200':
-      description: Gateway account limit was retrieved successfully.
+      description: Gateway account limit was retrieved.
       content:
         application/json:
           schema:
@@ -37,18 +36,26 @@ get:
       $ref: ../components/responses/NotFound.yaml
 put:
   x-products:
-    - Full
     - Users
   tags:
-    - Gateway Accounts
+    - Gateway accounts
   summary: Update a gateway account limit
   operationId: PutGatewayAccountLimit
   x-sdk-operation-name: updateVolumeLimit
   description: |
-    Update a gateway account limit with predefined identifier string.
+    Update a gateway account limit with specified identifier string.
   responses:
     '200':
       description: Gateway account limit was updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccountLimit.yaml
+    '201':
+      description: Gateway account limit was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -62,11 +69,7 @@ put:
     '409':
       $ref: ../components/responses/Conflict.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   requestBody:
     content:
       application/json:
@@ -74,10 +77,9 @@ put:
           $ref: ../components/schemas/GatewayAccountLimit.yaml
 delete:
   x-products:
-    - Full
     - Users
   tags:
-    - Gateway Accounts
+    - Gateway accounts
   summary: Delete a gateway account limit
   operationId: DeleteGatewayAccountLimit
   x-sdk-operation-name: deleteVolumeLimit

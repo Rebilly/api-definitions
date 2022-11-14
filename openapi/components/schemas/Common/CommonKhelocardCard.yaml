@@ -1,0 +1,46 @@
+type: object
+title: 'Khelocard Card'
+x-abstract-parent: PaymentInstrument
+properties:
+  id:
+    description: ID of the payment instrument.
+    allOf:
+      - $ref: ../ResourceId.yaml
+  method:
+    description: The method of payment instrument.
+    type: string
+    enum:
+      - Khelocard
+  fingerprint:
+    description: A unique value to identify the payment instrument regardless of variable values. It contains alphanumeric values.
+    type: string
+  number:
+    description: Khelocard card's masked number.
+    type: string
+  last4:
+    description: The number's last 4 digits.
+    type: string
+  expYear:
+    description: Khelocard card's expiration year.
+    type: integer
+  expMonth:
+    description: Khelocard card's expiration month.
+    type: integer
+  billingAddress:
+    description: The billing address.
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  status:
+    description: The payment instrument status.
+    type: string
+    enum:
+      - active
+      - deactivated
+  useAsBackup:
+    $ref: ../UseAsBackup.yaml
+  createdTime:
+    $ref: ../CreatedTime.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
+  customFields:
+    $ref: ../ResourceCustomFields.yaml

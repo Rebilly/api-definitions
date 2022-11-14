@@ -3,17 +3,19 @@ content:
     schema:
       properties:
         balanceTransactionId:
-          description: The balance transaction ID.
+          description: ID of the balance transaction.
           type: string
         transactionId:
-          description: The transaction ID.
+          description: ID of the transaction.
           type: string
         eventType:
-          example: balance-transaction-settled
-          allOf:
-            - $ref: ../../schemas/GlobalWebhookEventType.yaml
+          type: string
+          description: Webhook event type.
+          enum:
+            - balance-transaction-settled
         _embedded:
           type: object
+          description: Embedded objects.
           properties:
             balanceTransaction:
               $ref: ../../schemas/BalanceTransactions/BalanceTransaction.yaml
@@ -21,7 +23,7 @@ content:
               $ref: ../../schemas/Transactions/Transaction.yaml
         _links:
           type: array
-          description: The links related to resource.
+          description: Related resource links.
           minItems: 1
           items:
             anyOf:

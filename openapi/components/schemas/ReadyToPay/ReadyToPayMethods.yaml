@@ -1,38 +1,13 @@
-type: array
-items:
-  anyOf:
+type: object
+discriminator:
+  propertyName: method
+  x-enum-mapping:
     - $ref: ./Methods/ReadyToPayPaymentCardMethod.yaml
     - $ref: ./Methods/ReadyToPayAchMethod.yaml
     - $ref: ./Methods/ReadyToPayGenericMethod.yaml
     - $ref: ./Methods/ReadyToPayPayPalMethod.yaml
-example:
-  - method: payment-card
-    feature:
-      name: Google Pay
-    brands:
-      - Visa
-      - MasterCard
-    filters:
-      - "brand:Visa,MasterCard;bin:!411111"
-  - method: ach
-    feature:
-      name: Plaid
-      linkToken: "some-random-link_token-for-plaid"
-      expirationTime: "2006-01-02T15:04:05Z"
-  - method: payment-card
-    feature: null
-    brands:
-      - Visa
-    filters:
-      - "brand:Visa;bin:411111,444433"
-  - method: ach
-    feature: null
-    filters: []
-  - method: paypal
-    feature:
-      name: PayPal billing agreement
-      paypalMerchantId: 123456abcd
-      billingAgreementToken: BA-XXXXXXXXXXXXXXXXX
-    filters: []
-  - method: Skrill
-    filters: []
+    - $ref: ./Methods/ReadyToPayKlarnaMethod.yaml
+properties:
+  method:
+    type: string
+x-no-abstract-methods: true

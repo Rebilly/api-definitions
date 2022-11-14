@@ -1,0 +1,61 @@
+servers:
+  - url: 'https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}'
+    description: Sandbox server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
+    description: Live server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+get:
+  x-products:
+    - Reports
+  tags:
+    - Reports
+  summary: Retrieve a KYC requests report
+  operationId: GetKycRequestSummaryReport
+  x-sdk-operation-name: getKycRequestSummary
+  description: |
+    Retrieve a KYC request report by type and by rejection reasons.
+  parameters:
+    - name: periodStart
+      in: query
+      description: Report start date.
+      required: true
+      schema:
+        type: string
+        format: date-time
+    - name: periodEnd
+      in: query
+      description: Report end date.
+      required: true
+      schema:
+        type: string
+        format: date-time
+  responses:
+    '200':
+      description: Report retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ReportKycRequests.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/reports@kyc-request-summary/get.php

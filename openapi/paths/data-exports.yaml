@@ -13,19 +13,23 @@ servers:
         description: Your organization ID.
 post:
   x-products:
-    - Full
     - Reports
   tags:
-    - Data Exports
-  summary: Request a data export of selected resource
+    - Data exports
+  summary: Request the data export of a resource
   operationId: PostDataExport
-  description: |
-    Request a data export of selected resource.
+  x-sdk-operation-name: queue
+  description: Requests the export of a specific data resource.
+  parameters:
+    - $ref: ../components/parameters/collectionExpand.yaml
   requestBody:
     $ref: ../components/requestBodies/DataExport.yaml
   responses:
     '201':
       description: Data export request received.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -35,28 +39,35 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/data-exports/post.js
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/data-exports/post.php
 get:
   x-products:
-    - Full
     - Reports
   tags:
-    - Data Exports
-  summary: Retrieve a list of data export requests
+    - Data exports
+  summary: Retrieve data export requests
   operationId: GetDataExportCollection
-  description: |
-    Retrieve a list of data export requests.
+  x-sdk-operation-name: getAll
+  description: Retrieves a list of data export requests.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionExpand.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionCriteria.yaml
   responses:
     '200':
-      description: A list of data export requests was retrieved successfully.
+      description: List of data export requests retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -80,3 +91,7 @@ get:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/data-exports/get.js
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/data-exports/get.php

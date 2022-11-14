@@ -1,0 +1,26 @@
+content:
+  application/json:
+    schema:
+      properties:
+        disputeId:
+          description: Dispute identifier string.
+          type: string
+        eventType:
+          type: string
+          description: Webhook event type.
+          enum:
+            - dispute-created
+            - dispute-modified
+        _embedded:
+          type: object
+          properties:
+            dispute:
+              $ref: ../../schemas/Dispute.yaml
+        _links:
+          type: array
+          description: Related resource links.
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: ../../schemas/Links/DisputeLink.yaml
+description: Dispute webhook request body resource.

@@ -1,0 +1,18 @@
+type: object
+description: Credit memo object.
+allOf:
+  - $ref: CommonCreditMemo.yaml
+  - required:
+      - customerId
+      - currency
+    properties:
+      customerId:
+        $ref: ../CustomerId.yaml
+      currency:
+        $ref: ../CurrencyCode.yaml
+      invoiceId:
+        description: ID of the invoice to which the credit memo is issued.
+        nullable: true
+        type: string
+        maxLength: 50
+        example: 44433322-2c4y-483z-a0a9-158621f77a21

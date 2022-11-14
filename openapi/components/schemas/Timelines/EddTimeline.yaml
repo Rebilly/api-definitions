@@ -1,0 +1,41 @@
+type: object
+properties:
+  id:
+    description: ID of the timeline message.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  type:
+    description: Type of timeline message.
+    type: string
+    readOnly: true
+    enum:
+      - edd-search-performed
+      - edd-score-manually-updated
+      - timeline-comment-created
+  triggeredBy:
+    description: Specifies who, or what, triggered the timeline event.
+    type: string
+    readOnly: true
+    enum:
+      - rebilly
+      - app
+      - direct-api
+  message:
+    description: Detailed message description.
+    type: string
+  extraData:
+    $ref: ./TimelineExtraData.yaml
+  occurredTime:
+    description: |-
+      Date and time at which the customer timeline custom event was created.
+    readOnly: true
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: Related resource links.
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml

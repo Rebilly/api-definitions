@@ -1,0 +1,24 @@
+allOf:
+  - $ref: ../../Common/CommonKycDocument.yaml
+  - properties:
+      documentMatches:
+        type: object
+        readOnly: true
+        properties:
+          score:
+            description: >-
+              The calculated score that represents the % of confidence that this ID
+              represents the given customer.
+            type: number
+            format: double
+            example: 0.75
+          data:
+            $ref: ../../KycDocument/IdentityMatches.yaml
+      _links:
+        type: array
+        description: Related resource links.
+        readOnly: true
+        minItems: 1
+        items:
+          anyOf:
+            - $ref: ../../Links/SelfLink.yaml

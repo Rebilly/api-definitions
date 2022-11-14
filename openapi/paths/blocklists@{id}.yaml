@@ -2,19 +2,17 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
-    - Risk Management
     - Core
   tags:
     - Blocklists
   summary: Retrieve a blocklist
   operationId: GetBlocklist
   x-sdk-operation-name: get
-  description: |
-    Retrieve a blocklist with specified identifier string.
+  description: |-
+    Retrieves a blocklist with a specified ID.
   responses:
     '200':
-      description: Blocklist was retrieved successfully.
+      description: Blocklist retrieved.
       content:
         application/json:
           schema:
@@ -34,21 +32,22 @@ get:
         $ref: '../code_samples/JavaScript/blocklists@{id}/get.js'
 put:
   x-products:
-    - Full
-    - Risk Management
     - Core
   tags:
     - Blocklists
-  summary: Create a blocklist with predefined ID
+  summary: Create a blocklist with specified ID
   operationId: PutBlocklist
   x-sdk-operation-name: update
-  description: |
-    Create a blocklist with predefined identifier string.
+  description: |-
+    Creates a blocklist with a specified ID.
   requestBody:
     $ref: ../components/requestBodies/Blocklist.yaml
   responses:
     '201':
-      description: Blocklist was created.
+      description: Blocklist created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -58,11 +57,7 @@ put:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '409':
-      description: Blocklist exist and cannot be updated.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Error.yaml
+      $ref: ../components/responses/Conflict.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
@@ -74,19 +69,17 @@ put:
         $ref: '../code_samples/JavaScript/blocklists@{id}/put.js'
 delete:
   x-products:
-    - Full
-    - Risk Management
     - Core
   tags:
     - Blocklists
   summary: Delete a blocklist
   operationId: DeleteBlocklist
   x-sdk-operation-name: delete
-  description: |
-    Delete a blocklist with predefined identifier string.
+  description: |-
+    Deletes a blocklist with a specified ID.
   responses:
     '204':
-      description: Blocklist was deleted.
+      description: Blocklist deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

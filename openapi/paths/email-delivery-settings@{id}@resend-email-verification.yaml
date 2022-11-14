@@ -2,18 +2,17 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 post:
   x-products:
-    - Full
     - Users
   tags:
-    - Email Delivery Settings
-  summary: Resend verification email for an email delivery setting.
-  operationId: ResendEmailDeliverySettingVerification
+    - Email delivery settings
+  summary: Resend email delivery setting verification email
+  operationId: PostResendEmailDeliverySettingVerification
   x-sdk-operation-name: resendVerification
-  description: |
-    Resend verification email for an email delivery setting.
+  description: |-
+    Resends a verification email for an email delivery setting with a specified ID.
   responses:
     '200':
-      description: Verification email was sent successfully.
+      description: Verification email sent.
       content:
         application/json:
           schema:

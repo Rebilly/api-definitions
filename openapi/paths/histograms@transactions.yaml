@@ -13,12 +13,12 @@ servers:
         description: Your organization ID.
 get:
   x-products:
-    - Full
     - Reports
   tags:
     - Histograms
   summary: Get Transaction histogram report data
   operationId: GetHistogramTransactionReport
+  x-sdk-operation-name: getTransactionHistogramReport
   description: |
     Get Transaction histogram report data.
   parameters:
@@ -36,28 +36,6 @@ get:
       schema:
         type: string
         format: date-time
-    - name: aggregationField
-      in: query
-      description: Report aggregation field.
-      required: true
-      schema:
-        type: string
-        enum:
-          - website
-          - currency
-          - bin
-          - rebillNumber
-          - transactionResult
-          - transactionType
-          - gatewayAccount
-          - leadsAffiliate
-          - leadsCampaign
-          - leadsContent
-          - leadsMedium
-          - leadsSalesAgent
-          - leadsSource
-          - leadsSubAffiliate
-          - leadsTerm
     - name: aggregationPeriod
       in: query
       description: Report aggregation period.
@@ -75,17 +53,24 @@ get:
       schema:
         type: string
         enum:
-          - ApprovalThroughput
-          - AuthApprovalThroughput
-          - AvgSalesPrice
-          - Refunds
-          - RefundCount
-          - Sales
-          - SalesCount
-          - UnapprovedCount
+          - approval
+          - auth_approval
+          - avg_sales
+          - refunds
+          - refunds_count
+          - sales
+          - sales_count
+          - all_sales_count
+          - auth_approval_count
+          - disputes_count
+          - disputes_rate
+          - credits
+          - credits_count
+          - unapproved_count
+    - $ref: ../components/parameters/collectionFilter.yaml
   responses:
     '200':
-      description: Transaction report was retrieved successfully.
+      description: Transaction report was retrieved.
       content:
         application/json:
           schema:
@@ -96,3 +81,7 @@ get:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/histograms@transactions/get.js
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/histograms@transactions/get.php

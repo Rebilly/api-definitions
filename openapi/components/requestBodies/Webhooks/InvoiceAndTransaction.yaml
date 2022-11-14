@@ -3,13 +3,17 @@ content:
     schema:
       properties:
         transactionId:
-          description: The transaction ID.
+          description: ID of the transaction.
           type: string
         invoiceId:
-          description: The invoice ID.
+          description: ID of the invoice.
           type: string
         eventType:
-          $ref: ../../schemas/GlobalWebhookEventType.yaml
+          type: string
+          description: Webhook event type.
+          enum:
+            - renewal-invoice-payment-canceled
+            - renewal-invoice-payment-declined
         _embedded:
           type: object
           properties:
@@ -19,7 +23,7 @@ content:
               $ref: ../../schemas/Invoices/Invoice.yaml
         _links:
           type: array
-          description: The links related to resource.
+          description: Related resource links.
           minItems: 2
           items:
             anyOf:

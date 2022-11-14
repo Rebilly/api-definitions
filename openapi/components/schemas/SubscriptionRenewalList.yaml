@@ -17,33 +17,33 @@ items:
       allOf:
         - $ref: ./ResourceId.yaml
     customerId:
-      description: Customer ID.
-      allOf:
-        - $ref: ./ResourceId.yaml
+      $ref: CustomerId.yaml
     paymentId:
       description: Payment ID.
       allOf:
         - $ref: ./ResourceId.yaml
     createdTime:
-      description: Invoice created time.
-      allOf:
-        - $ref: ./ServerTimestamp.yaml
+      $ref: CreatedTime.yaml
     issuedTime:
       description: Invoice issuing time.
-      allOf:
-        - $ref: ./ServerTimestamp.yaml
+      type: string
+      format: date-time
+      readOnly: true
     dueTime:
       description: Invoice due time.
-      allOf:
-        - $ref: ./ServerTimestamp.yaml
+      type: string
+      format: date-time
+      readOnly: true
     closedTime:
       description: Invoice closing time.
-      allOf:
-        - $ref: ./ServerTimestamp.yaml
+      type: string
+      format: date-time
+      readOnly: true
     canceledTime:
       description: Invoice canceling time.
-      allOf:
-        - $ref: ./ServerTimestamp.yaml
+      type: string
+      format: date-time
+      readOnly: true
     recurringAmount:
       type: number
       format: double
@@ -70,9 +70,7 @@ items:
           allOf:
             - $ref: ./ResourceId.yaml
         transactionCreatedTime:
-          description: Refund transaction creation time.
-          allOf:
-            - $ref: ./ServerTimestamp.yaml
+          $ref: CreatedTime.yaml
     chargeback:
       type: object
       description: Contains data for the related chargeback (dispute) if it exists.
@@ -84,8 +82,9 @@ items:
             - $ref: ./ResourceId.yaml
         disputeCreatedTime:
           description: Dispute creation time.
-          allOf:
-            - $ref: ./ServerTimestamp.yaml
+          type: string
+          format: date-time
+          readOnly: true
     lead:
       type: object
       description: Related lead source if it exists.
@@ -116,6 +115,4 @@ items:
           type: string
           description: SalesAgent of the lead source.
         createdTime:
-          description: Lead source creation time.
-          allOf:
-            - $ref: ./ServerTimestamp.yaml
+          $ref: CreatedTime.yaml

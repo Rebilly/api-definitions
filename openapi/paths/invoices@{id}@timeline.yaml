@@ -2,15 +2,14 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
     - Core
   tags:
-    - Invoices Timeline
-  summary: Retrieve a list of invoice timeline messages
+    - Invoices timeline
+  summary: Retrieve invoice timeline messages
   operationId: GetInvoiceTimelineCollection
   x-sdk-operation-name: getAllTimelineMessages
-  description: |
-    Retrieve a list of invoice timeline messages.
+  description: |-
+    Retrieves a list of invoice timeline messages.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -19,7 +18,7 @@ get:
     - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
-      description: A list of invoice timeline messages was retrieved successfully.
+      description: List of invoice timeline messages retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -41,17 +40,20 @@ get:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/invoices@{id}@timeline/get.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: '../code_samples/PHP-SDK-3.0/invoices@{id}@timeline/get.php'
 post:
   x-products:
-    - Full
     - Core
   tags:
-    - Invoices Timeline
-  summary: Create an invoice Timeline comment
+    - Invoices timeline
+  summary: Create an invoice timeline comment
   operationId: PostInvoiceTimeline
   x-sdk-operation-name: createTimelineComment
-  description: |
-    Create an invoice Timeline comment.
+  description: |-
+    Creates an invoice timeline comment.
   requestBody:
     content:
       application/json:
@@ -61,7 +63,10 @@ post:
     required: true
   responses:
     '201':
-      description: Invoice Timeline comment was created.
+      description: Invoice timeline comment created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -76,3 +81,7 @@ post:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/invoices@{id}@timeline/post.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: '../code_samples/PHP-SDK-3.0/invoices@{id}@timeline/post.php'

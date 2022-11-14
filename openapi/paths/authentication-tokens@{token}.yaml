@@ -1,34 +1,32 @@
 parameters:
   - name: token
     in: path
-    description: The token identifier string.
+    description: Authentication token identifier string.
     required: true
     schema:
       type: string
 get:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
-    - Customer Authentication
-  summary: Verify
+    - Customer authentication
+  summary: Verify an authentication token
   operationId: GetAuthenticationTokenVerification
   x-sdk-operation-name: verify
-  description: |
-    Verify an authentication token.
+  description: |-
+    Verifies a customer's authentication token.
   security:
     - SecretApiKey: []
     - JWT: []
     - PublishableApiKey: []
   responses:
     '200':
-      description: Authentication Token was verified.
+      description: Authentication token verified.
       content:
         application/json:
           schema:
             $ref: >-
-              ../components/schemas/CustomerAuthentication/AuthenticationToken.yaml
+              ../components/schemas/CustomerAuthentication/AuthenticationTokenResponse.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -42,25 +40,27 @@ get:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/authentication-tokens@{token}/get.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: '../code_samples/PHP-SDK-3.0/authentication-tokens@{token}/get.php'
 delete:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
-    - Customer Authentication
+    - Customer authentication
   summary: Logout a customer
   operationId: DeleteAuthenticationToken
   x-sdk-operation-name: logout
-  description: |
-    Logout a customer.
+  description: |-
+    Logs out a customer.
   security:
     - SecretApiKey: []
     - JWT: []
     - PublishableApiKey: []
   responses:
     '204':
-      description: Customer was logged out.
+      description: Customer logged out.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '404':
@@ -72,3 +72,7 @@ delete:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/authentication-tokens@{token}/delete.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: '../code_samples/PHP-SDK-3.0/authentication-tokens@{token}/delete.php'

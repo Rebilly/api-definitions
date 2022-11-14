@@ -1,11 +1,9 @@
 get:
   x-products:
-    - Full
-    - Risk Management
     - Core
   tags:
-    - KYC Documents
-  summary: Retrieve a list of KYC documents
+    - KYC documents
+  summary: Retrieve KYC documents
   operationId: GetKycDocumentCollection
   x-sdk-operation-name: getAll
   description: |
@@ -15,9 +13,10 @@ get:
     - $ref: ../components/parameters/collectionOffset.yaml
     - $ref: ../components/parameters/collectionFilter.yaml
     - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: A list of KYC documents was retrieved successfully.
+      description: A list of KYC documents was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -41,11 +40,9 @@ get:
         $ref: ../code_samples/JavaScript/kyc-documents/get.js
 post:
   x-products:
-    - Full
-    - Risk Management
     - Core
   tags:
-    - KYC Documents
+    - KYC documents
   summary: Create a KYC Document
   operationId: PostKycDocument
   x-sdk-operation-name: create
@@ -61,6 +58,9 @@ post:
   responses:
     '201':
       description: Kyc document was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

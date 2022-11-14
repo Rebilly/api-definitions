@@ -5,18 +5,19 @@ required:
   - websiteId
   - items
 allOf:
+  - $ref: ../../Subscription.yaml
   - $ref: ../../Common/CommonSubscriptionOrder.yaml
   - properties:
       customerId:
-        description: The customer identifier string.
         x-basic: true
         allOf:
-          - $ref: ../../ResourceId.yaml
+          - $ref: ../../CustomerId.yaml
       renewalReminderTime:
         description: Time renewal reminder event will be triggered.
         nullable: true
-        allOf:
-          - $ref: ../../ServerTimestamp.yaml
+        type: string
+        format: date-time
+        readOnly: true
       renewalReminderNumber:
         description: Number of renewal reminder events triggered.
         nullable: true
@@ -25,13 +26,18 @@ allOf:
       trialReminderTime:
         description: Time renewal reminder event will be triggered.
         nullable: true
-        allOf:
-          - $ref: ../../ServerTimestamp.yaml
+        type: string
+        format: date-time
+        readOnly: true
       trialReminderNumber:
         description: Number of renewal reminder events triggered.
         nullable: true
         type: integer
         readOnly: true
+      organizationId:
+        readOnly: true
+        allOf:
+          - $ref: ../../Organizations/OrganizationId.yaml
   - $ref: ../SubscriptionCancellationState.yaml
   # Always keep the SubscriptionMetadata the latest merged schema,
   # it contains _links and _embedded which is better to keep at the end of doc.

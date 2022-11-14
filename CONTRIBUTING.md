@@ -10,9 +10,55 @@ Rebilly follows a design-first approach to APIs.
 
 - Set up [your environment](./README.md#environment-setup).
 - Use [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow) (open a pull request for any change).
-- Redocly OpenAPI-CLI runs our `lint` and `bundle` command which are controlled through the `.redocly.yaml` configuration file when a pull request is opened (you will see the green checks or red x marks). Merge here just before merging and releasing to production.
+- Redocly CLI runs our `lint` and `bundle` command which are controlled through the `.redocly.yaml` configuration file when a pull request is opened (you will see the green checks or red x marks).
+- In terms of sequence, merge the API definitions before merging and releasing software to production.
 
-Try to set up lint rules to enforce any design rules to keep this list to a minimum (and remove from this list as rules are enabled to automate these checks):
+## API description writing guidance
+
+For guidance on how to write API descriptions when contributing to Rebilly APIs, see [Writing style](./WRITING-STYLE.md).
+
+## API style guide
+
+Rebilly uses the following automated lint rules in addition to the [Redocly recommended rules](https://redocly.com/docs/cli/rules/):
+
+### Severity level `error`
+
+- [no-ambiguous-paths](https://redocly.com/docs/cli/rules/no-ambiguous-paths/)
+- [no-invalid-parameter-examples](https://redocly.com/docs/cli/rules/no-invalid-parameter-examples/)
+- [no-unused-components](https://redocly.com/docs/cli/rules/no-unused-components/)
+- [operation-2xx-response](https://redocly.com/docs/cli/rules/operation-2xx-response/)
+- [operation-operationId](https://redocly.com/docs/cli/rules/operation-operationId/)
+- [operation-singular-tag](https://redocly.com/docs/cli/rules/operation-singular-tag/)
+- [operation-tag-defined](https://redocly.com/docs/cli/rules/operation-tag-defined/)
+- [paths-kebab-case](https://redocly.com/docs/cli/rules/paths-kebab-case/)
+- [tag-description](https://redocly.com/docs/cli/rules/tag-description/)
+- [custom-rules/description-punctuation](./plugins/rules/description-punctuation.js)
+
+#### `assertions`
+
+- [assert/headers-include-example](https://redocly.com/docs/cli/rules/assertions/)
+- [assert/path-must-be-ref-file](https://redocly.com/docs/cli/rules/assertions/)
+- [assert/x-sdk-operation-name](https://redocly.com/docs/cli/rules/assertions/)
+- [assert/operation-id-delete]()
+- [assert/operation-id-get]()
+- [assert/operation-id-patch]()
+- [assert/operation-id-post]()
+- [assert/operation-id-put]()
+- [assert/tag-description]()
+- [assert/info-description]()
+- [assert/operation-summary]()
+- [assert/no-x-code-samples]()
+- [assert/no-x-internal]()
+
+### Severity level `warn`
+- [custom-rules/no-unused-tags](./plugins/rules/no-unused-tags.js)
+
+### Severity level `off`
+- [operation-4xx-response](https://redocly.com/docs/cli/rules/operation-4xx-response/)
+
+### Maintenance
+
+Set up lint rules to enforce any design rules to keep this list to a minimum (and remove from this list as rules are enabled to automate these checks).
 
 ### Schemas
 
@@ -24,7 +70,7 @@ Try to set up lint rules to enforce any design rules to keep this list to a mini
 - Re-use schemas by reference objects (`$ref`). Some commonly used include:
     - `ResourceId`
     - `ServerTimestamp`
-- Most APIs have a `_links` property (with at least "self").
+- Most APIs have a `_links` property (with at least "self" link).
 - If a resource has nested objects, consider separating them with the reference objects (`$ref`) if they have potential for reuse.
 - You may organize schemas into sub-folders when appropriate.
 

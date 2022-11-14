@@ -5,6 +5,6 @@ $customerCredentialForm->setPassword('1234');
 
 try {
     $customerCredential = $client->customerCredentials()->create($customerCredentialForm);
-} catch (UnprocessableEntityException $e) {
-    echo $e->getMessage();
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
 }

@@ -1,9 +1,10 @@
 type: object
+description: Application instance object.
 required:
   - settings
 properties:
   status:
-    description: The application instance status.
+    description: Status of the application instance.
     readOnly: true
     type: string
     enum:
@@ -12,23 +13,23 @@ properties:
       - disabling
       - disabled
   settings:
+    description: |-
+      Settings that are available for the user to complete when they
+      install the application. Use this object to describe fields
+      that are rendered during installation, in the settings form.
     type: object
     additionalProperties:
       type: string
     example:
       color: red
-      limit: 5
+      limit: '5'
   createdTime:
-    description: Application instance created time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
-    description: Application instance updated time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../UpdatedTime.yaml
   _links:
     type: array
-    description: The links related to resource.
+    description: Related resource links.
     readOnly: true
     minItems: 1
     items:

@@ -95,29 +95,21 @@ properties:
     readOnly: true
     properties:
       customerId:
-        allOf:
-          - $ref: ../ResourceId.yaml
+        $ref: ../CustomerId.yaml
       transactionId:
-        allOf:
-          - $ref: ../ResourceId.yaml
+        $ref: ../ResourceId.yaml
       tokenId:
-        allOf:
-          - $ref: ../ResourceId.yaml
+        $ref: ../ResourceId.yaml
   duration:
     type: integer
     x-sortable: true
     x-basic: true
     description: Request duration in milliseconds.
   createdTime:
-    description: The log created time.
-    x-label: Creation time
-    x-sortable: true
-    x-basic: true
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   _links:
     type: array
-    description: The links related to resource.
+    description: Related resource links.
     readOnly: true
     minItems: 1
     items:

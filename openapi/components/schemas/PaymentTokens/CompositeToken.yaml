@@ -1,9 +1,16 @@
-anyOf:
-  - $ref: ./FullPaymentCardToken.yaml
-  - $ref: ./PartialPaymentCardToken.yaml
-  - $ref: ./PayPalToken.yaml
-  - $ref: ./BankAccountToken.yaml
-  - $ref: ./DigitalWalletToken.yaml
-  - $ref: ./PlaidAccountToken.yaml
-  - $ref: ./KhelocardCardToken.yaml
-  - $ref: ./AlternativePaymentToken.yaml
+type: object
+discriminator:
+  propertyName: method
+  x-enum-mapping:
+    - $ref: ./PaymentCardToken.yaml
+    - $ref: ./PayPalToken.yaml
+    - $ref: ./BankAccountToken.yaml
+    - $ref: ./DigitalWalletToken.yaml
+    - $ref: ./PlaidAccountToken.yaml
+    - $ref: ./KhelocardCardToken.yaml
+    - $ref: ./KlarnaToken.yaml
+    - $ref: ./AlternativePaymentToken.yaml
+x-abstract-parent: CommonPaymentToken
+properties: 
+  method:
+    description: The token payment method.

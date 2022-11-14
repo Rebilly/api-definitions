@@ -1,16 +1,15 @@
 get:
   x-products:
-    - Full
-    - Risk Management
     - Core
   tags:
     - Files
-  summary: Retrieve a list of Attachments
+  summary: Retrieve attachments
   operationId: GetAttachmentCollection
   x-sdk-operation-name: getAllAttachments
-  description: |
-    Retrieve a list of attachments.
-    You may sort by the id, name, relatedId, relatedType, fileId, createdTime, and updatedTime.
+  description: |-
+    Retrieves a list of attachments. You may sort attachments by: `id`,
+    `name`, `relatedId`, `relatedType`, `fileId`, `createdTime`,
+    and `updatedTime`.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -21,7 +20,7 @@ get:
     - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
-      description: A list of Attachments was retrieved successfully.
+      description: List of attachments retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -48,21 +47,25 @@ get:
         $ref: ../code_samples/JavaScript/attachments/get.js
 post:
   x-products:
-    - Full
-    - Risk Management
     - Core
   tags:
     - Files
-  summary: Create an Attachment
+  summary: Create an attachment
   operationId: PostAttachment
   x-sdk-operation-name: attach
-  description: |
-    Create an Attachment.
+  description: |-
+    Attaches a file to one or multiple objects, such as: customer,
+    dispute, transaction, order, plan, product, invoice, or timeline
+    comment. Attachments enable you to quickly find and use files
+    related to specific entities.
   requestBody:
     $ref: ../components/requestBodies/Attachment.yaml
   responses:
     '201':
-      description: Attachment was created.
+      description: Attachment created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

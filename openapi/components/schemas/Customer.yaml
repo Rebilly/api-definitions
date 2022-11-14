@@ -1,56 +1,47 @@
 type: object
 properties:
   id:
-    description: The customer identifier string.
+    description: Unique customer identifier string.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
-  email: 
-    description: The customer's email.
+  email:
+    description: Customer's email address.
     type: string
     format: email
     readOnly: true
     x-sortable: true
     x-basic: true
   firstName:
-    description: The customer's first name.
+    description: Customer's first name.
     type: string
     x-basic: true
     readOnly: true
   lastName:
-    description: The customer's last name.
+    description: Customer's last name.
     type: string
     x-sortable: true
     x-basic: true
     readOnly: true
   websiteId:
     x-sortable: true
-    description: The website's ID.
     allOf:
-      - $ref: ./ResourceId.yaml
+      - $ref: ./Websites/WebsiteId.yaml
   paymentToken:
     type: string
     writeOnly: true
-    description: |
-      A write-only payment token; if supplied, it will be converted into a
-      payment instrument and be set as the `defaultPaymentInstrument`. The
-      value of this property will override the `defaultPaymentInstrument`
-      in the case that both are supplied. The token may only be used once
-      before it is expired.
+    description: |-
+      Write-only payment token. If supplied, the token is converted
+      into a payment instrument and set as the
+      `defaultPaymentInstrument` value. If both are supplied, the
+      value of this property overrides the `defaultPaymentInstrument`
+      value. The token expires after first use.
   defaultPaymentInstrument:
-    $ref: ./PaymentInstruments/ValueObjects/PaymentInstrument.yaml
+    $ref: ./PaymentInstruments/ValueObjects/PaymentInstrumentValueObject.yaml
   createdTime:
-    x-sortable: true
-    x-label: Creation Time
-    description: The customer created time.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    $ref: CreatedTime.yaml
   updatedTime:
-    x-sortable: true
-    x-label: Last Update Time
-    description: The customer updated time.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    $ref: UpdatedTime.yaml
   customFields:
     $ref: ./ResourceCustomFields.yaml
   primaryAddress:
@@ -61,23 +52,26 @@ properties:
     x-label: Payments
     x-sortable: true
     x-basic: true
-    description: The number of approved payments for the customer.
+    description: Total number of approved payments made by the customer.
     readOnly: true
     type: integer
   lastPaymentTime:
     x-label: Last Payment
     x-sortable: true
     x-basic: true
-    description: The most recent time of an approved payment for the customer.
+    description: Time and date of the customer's last approved payment.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   lifetimeRevenue:
     $ref: ./CustomerLifetimeRevenue.yaml
   invoiceCount:
     x-sortable: true
-    description: >-
-      An auto-incrementing number based on the sequence of invoices. If set to
-      0, then this record is a Lead, otherwise is a Customer.
+    description: |-
+      Total number of invoices issued to the customer. This value is
+      auto-incrementing. If this value is `0`, the record relates to
+      a lead. A lead is a customer who has not made a payment yet. If
+      this value is greater than or equal to `1` the record relates to
+      a customer.
     readOnly: true
     type: integer
   tags:
@@ -87,16 +81,30 @@ properties:
     items:
       $ref: ./Tags/Tag.yaml
   revision:
-    description: >
-      The number of times the customer data has been modified.
+    description: |-
+      Number of times the customer's data has been modified.
 
-      The revision is useful when analyzing webhook data to determine if the
-      change takes precedence over the current representation.
+      Use this value when analyzing webhook data to determine if a
+      change must take precedence over the current representation.
     type: integer
+    readOnly: true
+  isEddRequired:
+    description: |-
+      Specifies whether Enhanced Due Diligence (EDD) is enabled for
+      this customer. For more information, see
+      [Enhanced Due Diligence](https://www.rebilly.com/docs/kyc-and-aml/edd/).
+    type: boolean
+    default: false
+  hasFulfilledKyc:
+    description: |-
+      Specifies whether the customer has accepted and reviewed
+      identity and address documents, or an accepted credit file
+      document.
+    type: boolean
     readOnly: true
   _links:
     type: array
-    description: The links related to resource.
+    description: Related resource links.
     readOnly: true
     minItems: 3
     items:
@@ -107,9 +115,9 @@ properties:
         - $ref: ./Links/WebsiteLink.yaml
   _embedded:
     type: array
-    description: >-
-      Any embedded objects available that are requested by the `expand`
-      querystring parameter.
+    description: |-
+      Array of embedded objects that are requested using the `expand`
+      query string parameter.
     readOnly: true
     minItems: 1
     items:

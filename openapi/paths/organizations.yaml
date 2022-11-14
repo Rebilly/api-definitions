@@ -1,10 +1,9 @@
 get:
   x-products:
-    - Full
     - Users
   tags:
     - Organizations
-  summary: Retrieve a list of organizations
+  summary: Retrieve organizations
   operationId: GetOrganizationCollection
   x-sdk-operation-name: getAll
   description: |
@@ -16,7 +15,7 @@ get:
     - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
-      description: A list of organizations was retrieved successfully.
+      description: A list of organizations was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -36,11 +35,10 @@ get:
       $ref: ../components/responses/Forbidden.yaml
 post:
   x-products:
-    - Full
     - Users
   tags:
     - Organizations
-  summary: Create a organization
+  summary: Create an organization
   operationId: PostOrganization
   x-sdk-operation-name: create
   description: |
@@ -50,6 +48,9 @@ post:
   responses:
     '201':
       description: Organization was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -59,11 +60,7 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '409':
-      description: The similar organization already exists.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Error.yaml
+      $ref: ../components/responses/Conflict.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:

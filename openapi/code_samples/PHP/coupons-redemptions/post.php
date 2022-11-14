@@ -2,19 +2,17 @@ $redemptionForm = new Rebilly\Entities\Coupons\Redemption();
 $redemptionForm->setCustomerId('customerId');
 $redemptionForm->setCouponId('couponId');
 
-$restrictionArray = [
+$restrictionData = [
     'type' => Rebilly\Entities\Coupons\Restriction::TYPE_DISCOUNTS_PER_REDEMPTION,
     'quantity' => 2,
 ];
 
-$restrictionForm = new Rebilly\Entities\Coupons\Restriction([
-    $restrictionArray,
-]);
+$restrictionForm = Rebilly\Entities\Coupons\Restriction::createFromData($restrictionData);
 
-$redemptionForm->setAdditionalRestrictions($restrictionForm);
+$redemptionForm->setAdditionalRestrictions([$restrictionForm]);
 
 try {
     $couponRedemption = $client->couponsRedemptions()->redeem($redemptionForm);
-} catch (UnprocessableEntityException $e) {
-    echo $e->getMessage();
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
 }

@@ -4,10 +4,9 @@ allOf:
     - customerId
   - properties:
       customerId:
-        description: The customer ID.
         x-basic: true
         allOf:
-          - $ref: ../ResourceId.yaml
+          - $ref: ../CustomerId.yaml
       transactions:
         type: array
         description: Invoice transactions array.
@@ -15,11 +14,14 @@ allOf:
         items:
           $ref: ../Transactions/Transaction.yaml
       retryInstruction:
-        description: The invoice retry instruction.
+        description: |-
+          Invoice payment retry instruction. This object specifies how
+          to proceed if a payment related to the invoice fails.
         type: object
         properties:
           attempts:
             type: array
+            description: Describes the retry instruction.
             minItems: 1
             items:
               type: object
@@ -29,20 +31,27 @@ allOf:
                 amountAdjustmentInstruction:
                   $ref: ../InvoiceRetry/InvoiceRetryAmountAdjustmentInstruction.yaml
                 tryBackupInstruments:
-                  description: Whether to use backup payment instruments on invoice payment retry or not.
+                  description: |-
+                    Specifies whether to use backup payment instruments
+                    on an invoice payment retry.
                   type: boolean
                   default: false
               required:
                 - scheduleInstruction
           afterAttemptPolicies:
-            description: The policy on the attempt finishes.
+            description: |-
+              Describes the action to take when a payment attempt
+              concludes, and payment is not collected.
             type: array
             items:
               type: string
               enum:
                 - change-subscription-renewal-time
           afterRetryEndPolicies:
-            description: The policy on the retry ends.
+            description: |-
+              Describes the action to take when all scheduled payment
+              retries, in a retry instruction, have concluded and payment
+              is not collected.
             type: array
             items:
               type: string
@@ -54,15 +63,16 @@ allOf:
           - afterAttemptPolicies
           - afterRetryEndPolicies
       revision:
-        description: >
-          The number of times the invoice data has been modified.
+        description: |-
+          Number of times the invoice data has been modified.
 
-          The revision is useful when analyzing webhook data to determine if the
-          change takes precedence over the current representation.
+          Use the revision number when analyzing webhook data to
+          determine if a change should take precedence over the current
+          representation.
         type: integer
         readOnly: true
       type:
-        description: Invoice type.
+        description: Type of invoice.
         type: string
         enum:
           - initial
@@ -75,18 +85,19 @@ allOf:
           - one-time-sale
         readOnly: true
       dueReminderTime:
-        description: Time past due reminder event will be triggered.
+        description: Date and time at which a past due reminder event is triggered.
         nullable: true
-        allOf:
-          - $ref: ../ServerTimestamp.yaml
+        type: string
+        format: date-time
+        readOnly: true
       dueReminderNumber:
-        description: Number of past due reminder events triggered.
+        description: Number of past due reminder events that have been triggered.
         nullable: true
         type: integer
         readOnly: true
       _links:
         type: array
-        description: The links related to resource.
+        description: Related resource links.
         readOnly: true
         minItems: 1
         items:
@@ -101,9 +112,7 @@ allOf:
             - $ref: ../Links/SubscriptionLink.yaml
       _embedded:
         type: array
-        description: >-
-          Any embedded objects available that are requested by the `expand`
-          querystring parameter.
+        description: Embedded objects that are requested by the `expand` query parameter.
         readOnly: true
         minItems: 1
         items:

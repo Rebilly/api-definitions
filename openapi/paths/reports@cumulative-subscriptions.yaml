@@ -13,12 +13,12 @@ servers:
         description: Your organization ID.
 get:
   x-products:
-    - Full
     - Reports
   tags:
     - Reports
   summary: Retrieve a cumulative subscriptions report
   operationId: GetCumulativeSubscriptionReport
+  x-sdk-operation-name: getCumulativeSubscriptions
   description: Retrieve a cumulative subscriptions report.
   parameters:
     - name: aggregationField
@@ -36,18 +36,20 @@ get:
       required: true
       schema:
         type: string
+        format: date-time
     - name: periodEnd
       in: query
       description: Report end date.
       required: true
       schema:
         type: string
+        format: date-time
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
     - $ref: ../components/parameters/collectionFilter.yaml
   responses:
     '200':
-      description: Report was retrieved successfully.
+      description: Report was retrieved.
       content:
         application/json:
           schema:
@@ -60,3 +62,7 @@ get:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/reports@cumulative-subscriptions/get.js
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/reports@cumulative-subscriptions/get.php

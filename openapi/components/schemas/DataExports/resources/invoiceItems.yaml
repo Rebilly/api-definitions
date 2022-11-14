@@ -1,12 +1,14 @@
-description: Invoice items resource type to export.
+description: Invoice item resource to export.
 allOf:
   - $ref: ../DataExport.yaml
   - type: object
     properties:
       dateRange:
-        type: object
-        properties:
-          field:
-            type: string
-            default: issuedTime
-            example: issuedTime
+        allOf:
+          - $ref: ../DataExportDateRange.yaml
+          - type: object
+            properties:
+              field:
+                type: string
+                default: issuedTime
+                example: issuedTime

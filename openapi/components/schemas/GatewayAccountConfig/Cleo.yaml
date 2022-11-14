@@ -1,0 +1,17 @@
+description: Cleo config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Cleo credentials object.
+        properties:
+          accessToken:
+            type: string
+            description: Cleo access token.
+            format: password
+        required:
+          - accessToken

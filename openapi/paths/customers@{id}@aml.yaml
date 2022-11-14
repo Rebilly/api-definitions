@@ -2,21 +2,25 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
-    - Risk Management
     - Core
   tags:
     - AML
-  summary: Search Customer in PEP/Sanctions/Adverse Media lists
-  operationId: GetCustomerAmlEntryCollection
+  summary: Search by customer ID against AML lists
+  operationId: GetCustomerAmlHitCollection
   x-sdk-operation-name: getAml
-  description: |
-    Search customer in multiple PEP/Sanctions/Adverse Media lists to find any blocklisted identities.
-    Performs a fuzzy search including soundex. Not all fields are guaranteed to be filled.
+  description: |-
+    Searches a customer's information, by Rebilly customer ID, against
+    multiple Politically Exposed Person (PEP), sanction, or adverse
+    media lists to determine if the customer is blocklisted. Performs
+    a fuzzy search that uses Soundex. Note that some returned fields
+    may not contain values.
 
   responses:
     '200':
-      description: An array of objects representing hits, or an empty array if none are found.
+      description: |-
+        Results retrieved.
+        - - -
+        Returns an array of objects that represent hits, or an empty array if no hits are found.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml

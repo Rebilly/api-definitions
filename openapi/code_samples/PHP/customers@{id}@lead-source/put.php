@@ -4,6 +4,6 @@ $leadSourceForm->setCampaign('TestCampaign');
 
 try {
     $customer = $client->customers()->updateLeadSource('myCustomerId', $leadSourceForm);
-} catch (UnprocessableEntityException $e) {
-    echo $e->getMessage();
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
 }

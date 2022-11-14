@@ -13,12 +13,12 @@ servers:
         description: Your organization ID.
 get:
   x-products:
-    - Full
     - Reports
   tags:
     - Reports
   summary: Retrieve a API Log Summary Report
   operationId: GetApiLogSummaryReport
+  x-sdk-operation-name: getApiLogSummary
   description: Retrieve a API Log Summary Report.
   parameters:
     - name: periodStart
@@ -27,17 +27,19 @@ get:
       required: true
       schema:
         type: string
+        format: date-time
     - name: periodEnd
       in: query
       description: Report end date.
       required: true
       schema:
         type: string
+        format: date-time
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
   responses:
     '200':
-      description: Report was retrieved successfully.
+      description: Report was retrieved.
       content:
         application/json:
           schema:
@@ -50,3 +52,7 @@ get:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/reports@api-log-summary/get.js
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/reports@api-log-summary/get.php

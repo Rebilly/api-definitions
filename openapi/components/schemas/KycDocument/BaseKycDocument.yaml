@@ -1,0 +1,61 @@
+required:
+  -  fieldIds
+allOf:
+  - $ref: ../Common/CommonKycDocument.yaml
+  - properties:
+      customerId:
+        $ref: ../CustomerId.yaml
+      reviewerId:
+        description: Reviewer's user ID.
+        type: string
+        nullable: true
+        readOnly: true
+        maxLength: 50
+        example: 44433322-2c4y-483z-a0a9-158621f77a21
+      reviewerName:
+        description: Reviewer's first and last name.
+        type: string
+        nullable: true
+        readOnly: true
+      reviewStartTime:
+        description: Date and time that manual review starts.
+        nullable: true
+        type: string
+        format: date-time
+        readOnly: true
+      reviewTime:
+        description: Date and time of manual review.
+        type: string
+        nullable: true
+        format: date-time
+        readOnly: true
+      notes:
+        description: Reviewer notes.
+        type: string
+        nullable: true
+      tags:
+        description: A list of kyc document tags.
+        readOnly: true
+        type: array
+        items:
+          $ref: ../Tags/Tag.yaml
+      reason:
+        description: Reason for uploading.
+        type: string
+      matchLevel:
+        description: The level of strictness for the document matches.
+        type: integer
+        minimum: 1
+        maximum: 2
+        example: 2
+      settings:
+        description: The settings used to score the document.
+        type: object
+        nullable: true
+      revision:
+        description: |-
+          The number of times the KYC document data has been modified.
+
+          The revision is useful when analyzing webhook data to determine if the change takes precedence over the current representation.
+        type: integer
+        readOnly: true

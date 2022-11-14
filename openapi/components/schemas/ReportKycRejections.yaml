@@ -1,0 +1,21 @@
+type: object
+properties:
+  data:
+    type: array
+    items:
+      type: object
+      properties:
+        documentType:
+          $ref: ../schemas/KycDocument/KycDocumentTypes.yaml
+        rejectionReasons:
+          type: array
+          items:
+            type: object
+            properties:
+              rejectionReason:
+                $ref: ../schemas/KycDocument/KycDocumentRejectionReasonTypes.yaml
+              count:
+                type: integer
+                format: integer
+                minimum: 0
+                description: Number of related KYC documents.

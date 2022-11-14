@@ -2,8 +2,6 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Plans
@@ -18,7 +16,7 @@ get:
     Retrieve a plan with specified identifier string.
   responses:
     '200':
-      description: Plan was retrieved successfully.
+      description: Plan was retrieved.
       content:
         application/json:
           schema:
@@ -36,18 +34,20 @@ get:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/plans@{id}/get.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/plans@{id}/get.php
 put:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Plans
-  summary: Create or update a Plan with predefined ID
+  summary: Upsert a plan
   operationId: PutPlan
   x-sdk-operation-name: update
   description: |
-    Create or update a Plan with predefined identifier string.
+    Create or update (upsert) a Plan with specified identifier string.
   requestBody:
     $ref: ../components/requestBodies/Plan.yaml
   responses:
@@ -59,6 +59,9 @@ put:
             $ref: ../components/schemas/Plans/Plan.yaml
     '201':
       description: Plan was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -78,10 +81,12 @@ put:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/plans@{id}/put.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/plans@{id}/put.php
 delete:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Plans
@@ -89,7 +94,7 @@ delete:
   operationId: DeletePlan
   x-sdk-operation-name: delete
   description: |
-    Delete a Plan with predefined identifier string.
+    Delete a Plan with specified identifier string.
   responses:
     '204':
       description: Plan was deleted.
@@ -106,3 +111,7 @@ delete:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/plans@{id}/delete.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/plans@{id}/delete.php

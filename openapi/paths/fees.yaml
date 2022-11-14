@@ -1,15 +1,12 @@
 get:
   x-products:
-    - Full
-    - Payments
-    - Billing
     - Core
   tags: [Fees]
-  summary: Retrieve a list of Fees entries
-  description: |
-    Retrieve a list of Fees entries.
+  summary: Retrieve fee entries
+  description: |-
+    Retrieves a list of fee entries.
 
-    This operation is experimental and not guaranteed to be backward compatible.
+    > **Important:** This operation is experimental and may not be backward compatible.
   operationId: GetFeeCollection
   x-sdk-operation-name: getAll
   parameters:
@@ -17,7 +14,7 @@ get:
     - $ref: ../components/parameters/collectionOffset.yaml
   responses:
     '200':
-      description: A fees list was retrieved successfully.
+      description: List of fee entries retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -37,16 +34,13 @@ get:
       $ref: ../components/responses/Forbidden.yaml
 post:
   x-products:
-    - Full
-    - Payments
-    - Billing
     - Core
   tags: [Fees]
   summary: Create a fee entry
-  description: |
-    Create a fee entry.
+  description: |-
+    Creates a fee entry.
 
-    This operation is experimental and not guaranteed to be backward compatible.
+    > **Important:** This operation is experimental and may not be backward compatible.
   operationId: PostFee
   x-sdk-operation-name: create
   requestBody:
@@ -56,16 +50,29 @@ post:
         schema:
           $ref: ../components/schemas/Fees/Fee.yaml
         examples:
-          $ref: ../components/examples/fee-request.yaml
+          stripe-trx:
+            $ref: ../components/examples/Fee/stripe-trx-request.yaml
+          stripe-us:
+            $ref: ../components/examples/Fee/stripe-us-request.yaml
+          stripe-intl:
+            $ref: ../components/examples/Fee/stripe-intl-request.yaml
   responses:
     '201':
-      description: Fee entry was created successfully.
+      description: Fee entry created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Fees/Fee.yaml
           examples:
-            $ref: ../components/examples/fee-response.yaml
+            stripe-trx:
+              $ref: ../components/examples/Fee/stripe-trx-response.yaml
+            stripe-us:
+              $ref: ../components/examples/Fee/stripe-us-response.yaml
+            stripe-intl:
+              $ref: ../components/examples/Fee/stripe-intl-response.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

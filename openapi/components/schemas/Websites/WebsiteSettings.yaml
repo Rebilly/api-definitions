@@ -8,16 +8,23 @@ properties:
       - type
     properties:
       css:
-        description: |
-          Hosted payment form
-          [css](https://www.rebilly.com/docs/content/concepts-and-features/tutorial/customize-style-rebilly-instruments/#2-use-css-property-to-override-any-styles) options.
+        description: |-
+          [Hosted payment form CSS options](https://www.rebilly.com/docs/content/concepts-and-features/tutorial/customize-style-rebilly-instruments/#2-use-css-property-to-override-any-styles).
         type: string
       theme:
-        description: |
-          Hosted payment form
-          [theme](https://www.rebilly.com/docs/content/concepts-and-features/tutorial/customize-style-rebilly-instruments/#adjust-the-default-style) options.
+        description: |-
+          [Hosted payment form theme options](https://www.rebilly.com/docs/content/concepts-and-features/tutorial/customize-style-rebilly-instruments/#adjust-the-default-style).
         type: object
         additionalProperties:
           type: string
         example:
           colorPrimary: '#504CCA'
+      features:
+        description: Hosted payment form features.
+        type: object
+        properties:
+          showCoupons:
+            type: array
+            nullable: true
+            items:
+              type: string

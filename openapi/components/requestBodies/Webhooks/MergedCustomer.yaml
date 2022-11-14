@@ -3,10 +3,13 @@ content:
     schema:
       properties:
         targetCustomerId:
-          description: The ID of the customer containing the merged data.
+          description: ID of the customer that contains the merged data.
           type: string
         eventType:
-          $ref: ../../schemas/GlobalWebhookEventType.yaml
+          type: string
+          description: Webhook event type.
+          enum:
+            - customer-merged
         duplicatedCustomer:
           $ref: ../../schemas/Customer.yaml
         _embedded:
@@ -17,7 +20,7 @@ content:
               $ref: ../../schemas/Customer.yaml
         _links:
           type: array
-          description: The links related to resource.
+          description: Related resource links.
           minItems: 1
           items:
             anyOf:

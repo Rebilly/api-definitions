@@ -3,18 +3,18 @@ parameters:
 get:
   x-products:
     - Users
-    - Full
   tags:
     - Application users
   summary: Retrieve an application instance
   operationId: GetApplicationInstance
   x-sdk-operation-name: get
-  description: |
-    Retrieve a list of application instances.
-    You may sort by the id, name, status, createdTime, and updatedTime.
+  description: |-
+    Retrieves a list of application instances.
+    You may sort applications by: `id`, `name`, `status`, `createdTime`,
+    and `updatedTime`.
   responses:
     '200':
-      description: An application instance was retrieved successfully.
+      description: Application instance retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -30,7 +30,7 @@ get:
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: ../code_samples/PHP/application-instances@{applicationId}/get.php
@@ -40,14 +40,13 @@ get:
 put:
   x-products:
     - Users
-    - Full
   tags:
     - Application users
-  summary: Create or update an application instance
+  summary: Upsert an application instance
   operationId: PutApplicationInstance
   x-sdk-operation-name: upsert
-  description: |
-    Create or update an application instance.
+  description: |-
+    Creates or updates (upserts) an application instance.
   requestBody:
     content:
       application/json:
@@ -55,13 +54,16 @@ put:
           $ref: ../components/schemas/Applications/ApplicationInstance.yaml
   responses:
     '200':
-      description: Application instance was updated.
+      description: Application instance updated.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Applications/ApplicationInstance.yaml
     '201':
-      description: Application instance was created.
+      description: Application instance created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -72,7 +74,7 @@ put:
       $ref: ../components/responses/Forbidden.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: ../code_samples/PHP/application-instances@{applicationId}/put.php
@@ -82,7 +84,6 @@ put:
 delete:
   x-products:
     - Users
-    - Full
   tags:
     - Application users
   summary: Delete application instance
@@ -92,18 +93,18 @@ delete:
     - SecretApiKey: []
     - JWT: []
     - ApplicationJWT: []
-  description: |
-    Delete application instance with predefined identifier string.
+  description: |-
+    Deletes an application instance with a specific identifier string.
   responses:
     '204':
-      description: Application instance was deleted.
+      description: Application instance deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: ../code_samples/PHP/application-instances@{applicationId}/delete.php

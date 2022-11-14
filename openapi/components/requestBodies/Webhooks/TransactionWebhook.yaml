@@ -1,0 +1,35 @@
+content:
+  application/json:
+    schema:
+      properties:
+        transactionId:
+          description: ID of the transaction.
+          type: string
+        eventType:
+          type: string
+          description: Webhook event type.
+          enum:
+            - gateway-account-requested
+            - nsf-response-received
+            - offsite-payment-completed
+            - risk-score-changed
+            - transaction-amount-discrepancy-found
+            - transaction-declined
+            - transaction-discrepancy-found
+            - transaction-process-requested
+            - transaction-processed
+            - transaction-timeout-resolved
+            - waiting-gateway-transaction-completed
+        _embedded:
+          type: object
+          properties:
+            transaction:
+              $ref: ../../schemas/Transactions/Transaction.yaml
+        _links:
+          type: array
+          description: Related resource links.
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: ../../schemas/Links/TransactionLink.yaml
+description: Transaction webhook request body resource.

@@ -1,0 +1,31 @@
+content:
+  application/json:
+    schema:
+      properties:
+        subscriptionId:
+          description: The order ID.
+          type: string
+        invoiceId:
+          description: The invoice ID.
+          type: string
+        eventType:
+          type: string
+          description: Webhook event type.
+          enum:
+            - renewal-invoice-issued
+        _embedded:
+          type: object
+          properties:
+            subscription:
+              $ref: ../../schemas/Subscription.yaml
+            invoice:
+              $ref: ../../schemas/Invoices/Invoice.yaml
+        _links:
+          type: array
+          description: Related resource links.
+          minItems: 2
+          items:
+            anyOf:
+              - $ref: ../../schemas/Links/SubscriptionLink.yaml
+              - $ref: ../../schemas/Links/InvoiceLink.yaml
+description: Renewal invoice issued webhook request body resource.

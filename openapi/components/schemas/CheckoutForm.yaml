@@ -5,14 +5,26 @@ allOf:
       - name
     properties:
       name:
-        description: >-
-          Checkout form name, used for internal display to help you organize your
-          various checkout forms. Will not be displayed to your customers.
+        description: |-
+          Name of the checkout form.
+          This name value is for internal display, and is not visible to your customers.
+          Use this name to locate and organize your checkout forms.
         type: string
       status:
-        description: If `inactive`, the checkout form url will result in a 404.
+        description: |-
+          Status of the checkout form. If the `status` value is `inactive`,
+          the checkout form URL produces a 404 error.
         type: string
         enum:
           - active
           - inactive
         default: active
+      _links:
+        type: array
+        description: Related resource links.
+        readOnly: true
+        minItems: 1
+        items:
+          anyOf:
+            - $ref: ./Links/SelfLink.yaml
+            - $ref: ./Links/PreviewLink.yaml

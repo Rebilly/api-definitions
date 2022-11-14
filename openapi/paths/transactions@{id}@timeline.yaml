@@ -2,11 +2,10 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
     - Core
   tags:
-    - Transactions Timeline
-  summary: Retrieve a list of transaction timeline messages
+    - Transactions timeline
+  summary: Retrieve transaction timeline messages
   operationId: GetTransactionTimelineCollection
   x-sdk-operation-name: getAllTimelineMessages
   description: |
@@ -17,7 +16,7 @@ get:
     - $ref: ../components/parameters/collectionFilter.yaml
   responses:
     '200':
-      description: A list of transaction timeline messages was retrieved successfully.
+      description: A list of transaction timeline messages was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -41,10 +40,9 @@ get:
         $ref: '../code_samples/JavaScript/transactions@{id}@timeline/get.js'
 post:
   x-products:
-    - Full
     - Core
   tags:
-    - Transactions Timeline
+    - Transactions timeline
   summary: Create a transaction Timeline comment
   operationId: PostTransactionTimeline
   x-sdk-operation-name: createTimelineComment
@@ -60,6 +58,9 @@ post:
   responses:
     '201':
       description: Transaction Timeline comment was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

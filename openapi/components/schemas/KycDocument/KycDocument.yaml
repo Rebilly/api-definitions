@@ -1,12 +1,13 @@
-oneOf:
-  - $ref: ./ProofOfIdentity.yaml
-  - $ref: ./ProofOfAddress.yaml
-  - $ref: ./ProofOfFunds.yaml
-  - $ref: ./ProofOfPurchase.yaml
+type: object
 discriminator:
   propertyName: documentType
   mapping:
-    identity-proof: ./ProofOfIdentity.yaml
-    address-proof: ./ProofOfAddress.yaml
-    funds-proof: ./ProofOfFunds.yaml
-    purchase-proof: ./ProofOfPurchase.yaml
+    identity-proof: ./ProofOfIdentityKycDocument.yaml
+    address-proof: ./ProofOfAddressKycDocument.yaml
+    funds-proof: ./ProofOfFundsKycDocument.yaml
+    purchase-proof: ./ProofOfPurchaseKycDocument.yaml
+    credit-file-proof: ./ProofOfCreditFileKycDocument.yaml
+properties: 
+  documentType:
+    type: string
+x-no-abstract-methods: true

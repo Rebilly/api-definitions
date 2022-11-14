@@ -1,0 +1,101 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Credit memos
+  summary: Retrieve a credit memo
+  operationId: GetCreditMemo
+  x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
+  description: Retrieves a credit memo with a specified ID.
+  parameters:
+    - $ref: ../components/parameters/collectionExpand.yaml
+  responses:
+    '200':
+      description: Credit memo retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CreditMemos/CreditMemo.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Credit memos
+  summary: Upsert a credit memo
+  operationId: PutCreditMemo
+  x-sdk-operation-name: update
+  description: |-
+     Creates or updates (upserts) a credit memo with a specified ID.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CreditMemos/CreditMemo.yaml
+  responses:
+    '200':
+      description: Credit memo updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CreditMemos/CreditMemo.yaml
+    '201':
+      description: Credit memo created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CreditMemos/CreditMemo.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+patch:
+  x-products:
+    - Core
+  tags:
+    - Credit memos
+  summary: Partially update a credit memo
+  operationId: PatchCreditMemo
+  x-sdk-operation-name: patch
+  description: |-
+    Partially updates a credit memo with a specified identifier string.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CreditMemos/CommonCreditMemo.yaml
+  responses:
+    '200':
+      description: Credit memo updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CreditMemos/CreditMemo.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

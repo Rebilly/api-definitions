@@ -3,17 +3,16 @@ parameters:
 get:
   x-products:
     - Users
-    - Full
   tags:
     - Application users
   summary: Retrieve application
   operationId: GetApplication
   x-sdk-operation-name: get
-  description: |
-    Retrieve application with predefined identifier string.
+  description: |-
+    Retrieves an application with a specified identifier string.
   responses:
     '200':
-      description: Applications was retrieved successfully.
+      description: Applications retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -24,12 +23,12 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Applications/Users/Application.yaml
+            $ref: ../components/schemas/Applications/UserApplication.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: ../code_samples/PHP/applications@{id}/get.php

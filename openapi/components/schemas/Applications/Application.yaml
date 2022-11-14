@@ -1,4 +1,5 @@
 type: object
+description: Application object.
 required:
   - name
   - logoId
@@ -8,32 +9,34 @@ required:
   - permissions
 properties:
   id:
-    description: The application identifier string.
+    description: Application identifier string.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   name:
-    description: The application name.
+    description: Name of the application.
     type: string
   logoId:
-    description: The file ID of the application logo.
+    description: File ID of the application logo.
     allOf:
       - $ref: ../ResourceId.yaml
   authorName:
-    description: The author's name.
+    description: Name of the application author.
     type: string
   authorLogoId:
-    description: The file ID of the author's logo.
+    description: File ID of the author's logo.
     allOf:
       - $ref: ../ResourceId.yaml
   tagline:
-    description: The application's tagline.
+    description: Tagline of the application.
     type: string
   description:
-    description: The application description. Accepts markdown or simple text.
+    description: |-
+      Detailed application description. This field accepts markdown
+      and simple text.
     type: string
   status:
-    description: The application status.
+    description: Status of the application.
     readOnly: true
     type: string
     enum:
@@ -41,9 +44,10 @@ properties:
       - available
       - disabled
   permissions:
-    description: |
-      The list of permissions available to the application.
-      If you would like to add permissions, contact [Rebilly Support](mailto:info@rebilly.com).
+    description: |-
+      List of permissions that are available to the application.
+      If you would like to add permissions, contact
+      [Rebilly Support](mailto:info@rebilly.com).
     type: array
     items:
       type: string
@@ -75,11 +79,12 @@ properties:
       - GetCustomerCollection
 
   properties:
-    description: >-
-      Outlines the settings that app users can fill in when installing.
-      Accepts [JSON-schema](https://json-schema.org/) drafts 4, 6 and 7.
+    description: |-
+      Defines settings that users can complete when they install the
+      application. This field accepts [JSON-schema](https://json-schema.org/)
+      drafts 4, 6, and 7.
     type: object
-    example: 
+    example:
       type: object
       properties:
         email:
@@ -90,16 +95,12 @@ properties:
           exclusiveMaximum: 100
       required: ["email"]
   createdTime:
-    description: Application created time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
-    description: Application updated time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../UpdatedTime.yaml
   _links:
     type: array
-    description: The links related to resource.
+    description: Related resource links.
     readOnly: true
     minItems: 1
     items:

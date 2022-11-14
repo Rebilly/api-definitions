@@ -1,8 +1,13 @@
 allOf:
-  - $ref: ../Common/CommonTransactionRequest.yaml
   - required:
     - type
+  - type: object
   - properties:
+      upsertCustomer:
+        type: boolean
+        default: false
+        writeOnly: true
+        description: If the value is `true`, this operation creates or updates (upserts) a customer. If the value is `false`, the `customerId` already exists, and the related customer is not updated.
       type:
         description: >
           The type of transaction requested.
@@ -20,7 +25,9 @@ allOf:
           If the instruction is to `do-nothing`, a transaction with result `approved` of type `setup` will be returned.
         type: string
         enum:
-          - 3ds-authentication
           - sale
           - authorize
           - setup
+      limits:
+        $ref: ../TransactionLimitAmount.yaml
+  - $ref: ../Common/CommonTransactionRequest.yaml

@@ -2,27 +2,29 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
-    - Payments
-    - Billing
     - Core
   tags: [Fees]
   summary: Retrieve a fee entry
-  description: |
-    Retrieve a fee entry.
+  description: |-
+    Retrieves a fee entry.
 
-    This operation is experimental and not guaranteed to be backward compatible.
+    > **Important:** This operation is experimental and may not be backward compatible.
   operationId: GetFee
   x-sdk-operation-name: get
   responses:
     '200':
-      description: A fee was retrieved successfully.
+      description: Fee retrieved.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Fees/Fee.yaml
           examples:
-            $ref: ../components/examples/fee-response.yaml
+            stripe-trx:
+              $ref: ../components/examples/Fee/stripe-trx-response.yaml
+            stripe-us:
+              $ref: ../components/examples/Fee/stripe-us-response.yaml
+            stripe-intl:
+              $ref: ../components/examples/Fee/stripe-intl-response.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -31,16 +33,13 @@ get:
       $ref: ../components/responses/NotFound.yaml
 put:
   x-products:
-    - Full
-    - Payments
-    - Billing
     - Core
   tags: [Fees]
   summary: Upsert a fee entry
-  description: |
-    Upsert a fee entry.
+  description: |-
+    Creates or updates (upserts) a fee entry.
 
-    This operation is experimental and not guaranteed to be backward compatible.
+    > **Important:** This operation is experimental and may not be backward compatible.
   operationId: PutFee
   x-sdk-operation-name: upsert
   requestBody:
@@ -50,24 +49,42 @@ put:
         schema:
           $ref: ../components/schemas/Fees/Fee.yaml
         examples:
-          $ref: ../components/examples/fee-request.yaml
+          stripe-trx:
+            $ref: ../components/examples/Fee/stripe-trx-request.yaml
+          stripe-us:
+            $ref: ../components/examples/Fee/stripe-us-request.yaml
+          stripe-intl:
+            $ref: ../components/examples/Fee/stripe-intl-request.yaml
   responses:
     '200':
-      description: Fee entry was updated successfully.
+      description: Fee entry updated.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Fees/Fee.yaml
           examples:
-            $ref: ../components/examples/fee-response.yaml
+            stripe-trx:
+              $ref: ../components/examples/Fee/stripe-trx-response.yaml
+            stripe-us:
+              $ref: ../components/examples/Fee/stripe-us-response.yaml
+            stripe-intl:
+              $ref: ../components/examples/Fee/stripe-intl-response.yaml
     '201':
-      description: Fee entry was created successfully.
+      description: Fee entry created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Fees/Fee.yaml
           examples:
-            $ref: ../components/examples/fee-response.yaml
+            stripe-trx:
+              $ref: ../components/examples/Fee/stripe-trx-response.yaml
+            stripe-us:
+              $ref: ../components/examples/Fee/stripe-us-response.yaml
+            stripe-intl:
+              $ref: ../components/examples/Fee/stripe-intl-response.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -76,16 +93,13 @@ put:
       $ref: ../components/responses/ValidationError.yaml
 patch:
   x-products:
-    - Full
-    - Payments
-    - Billing
     - Core
   tags: [Fees]
   summary: Patch a fee entry
-  description: |
-    Patch a fee entry.
+  description: |-
+    Patches a fee entry.
 
-    This operation is experimental and not guaranteed to be backward compatible.
+    > **Important:** This operation is experimental and may not be backward compatible.
   operationId: PatchFee
   x-sdk-operation-name: patch
   requestBody:
@@ -95,16 +109,26 @@ patch:
         schema:
           $ref: ../components/schemas/Fees/FeePatch.yaml
         examples:
-          $ref: ../components/examples/fee-request.yaml
+          stripe-trx:
+            $ref: ../components/examples/Fee/stripe-trx-request.yaml
+          stripe-us:
+            $ref: ../components/examples/Fee/stripe-us-request.yaml
+          stripe-intl:
+            $ref: ../components/examples/Fee/stripe-intl-request.yaml
   responses:
     '200':
-      description: Fee entry was patched successfully.
+      description: Fee entry patched.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Fees/Fee.yaml
           examples:
-            $ref: ../components/examples/fee-response.yaml
+            stripe-trx:
+              $ref: ../components/examples/Fee/stripe-trx-response.yaml
+            stripe-us:
+              $ref: ../components/examples/Fee/stripe-us-response.yaml
+            stripe-intl:
+              $ref: ../components/examples/Fee/stripe-intl-response.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

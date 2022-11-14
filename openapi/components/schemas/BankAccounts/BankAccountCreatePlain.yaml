@@ -1,11 +1,19 @@
 title: Bank Account
-anyOf:
-  - $ref: ./AccountNumberTypes/BBANType.yaml
-  - $ref: ./AccountNumberTypes/IBANType.yaml
+type: object
+required:
+  -  accountNumberType
+## Discriminator is required for SDK generation
+discriminator:
+  propertyName: accountNumberType
+  mapping:
+    BBAN: ./AccountNumberTypes/BBANType.yaml
+    IBAN: ./AccountNumberTypes/IBANType.yaml
+properties:
+  accountNumberType:
+    nullable: false
+    type: string
+    enum:
+      - IBAN
+      - BBAN
+x-abstract-parent: PaymentInstruction
 
-## Preference is without the discriminator even if it is more accurate.
-# discriminator:
-#   propertyName: accountNumberType
-#   mapping:
-#     BBAN: ./AccountNumberTypes/BBANType.yaml
-#     IBAN: ./AccountNumberTypes/IBANType.yaml

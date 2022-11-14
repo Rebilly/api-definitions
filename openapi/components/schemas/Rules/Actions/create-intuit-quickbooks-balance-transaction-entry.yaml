@@ -1,0 +1,25 @@
+description: Create an Intuit QuickBooks balance transaction entry.
+allOf:
+  - $ref: ../RuleAction.yaml
+  - type: object
+    properties:
+      debitAccount:
+        description: The debit QuickBooks account ID.
+        type: string
+      creditAccount:
+        description: The credit QuickBooks account ID.
+        type: string
+      description:
+        description: |
+          The QuickBooks balance transaction entry description.
+
+          For example, `Balance transaction of type {{ balanceTransaction.type }} for transaction #{{ transaction.id }}`.
+        type: string
+      credentialHash:
+        type: string
+        description: OAuth2 credential identifier string.
+    required:
+      - credentialHash
+      - debitAccount
+      - creditAccount
+      - description

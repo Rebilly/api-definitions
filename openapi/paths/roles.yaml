@@ -1,10 +1,9 @@
 get:
   x-products:
-    - Full
     - Users
   tags:
     - Roles
-  summary: Retrieve a list of roles.
+  summary: Retrieve roles
   operationId: GetRoleCollection
   x-sdk-operation-name: getAll
   description: |
@@ -18,7 +17,7 @@ get:
     - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: A list of roles was retrieved successfully.
+      description: A list of roles was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -38,15 +37,14 @@ get:
       $ref: ../components/responses/Forbidden.yaml
 post:
   x-products:
-    - Full
     - Users
   tags:
     - Roles
   summary: Create a Role
   operationId: PostRole
   x-sdk-operation-name: create
-  description: |
-    Create a Role.
+  description: |-
+    Create a role to be used when assigning permissions to users.
   requestBody:
     content:
       application/json:
@@ -57,6 +55,9 @@ post:
   responses:
     '201':
       description: Role was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

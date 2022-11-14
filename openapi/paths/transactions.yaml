@@ -1,8 +1,5 @@
 post:
   x-products:
-    - Full
-    - Payments
-    - Billing
     - Core
   tags:
     - Transactions
@@ -44,6 +41,9 @@ post:
   responses:
     '201':
       description: Transaction was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -65,13 +65,10 @@ post:
         $ref: ../code_samples/JavaScript/transactions/post.js
 get:
   x-products:
-    - Full
-    - Payments
-    - Billing
     - Core
   tags:
     - Transactions
-  summary: Retrieve a list of transactions
+  summary: Retrieve transactions
   operationId: GetTransactionCollection
   x-sdk-operation-name: getAll
   description: |
@@ -85,7 +82,7 @@ get:
     - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: A list of transactions was retrieved successfully.
+      description: A list of transactions was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml

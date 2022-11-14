@@ -1,23 +1,21 @@
 type: object
 properties:
   id:
-    description: The transaction ID.
+    description: Unique transaction identifier string.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   websiteId:
-    description: The website ID.
     readOnly: true
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ../Websites/WebsiteId.yaml
   customerId:
-    description: The customer ID.
     x-basic: true
     x-sortable: true
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ../CustomerId.yaml
   type:
-    description: Transaction type.
+    description: Type of transaction.
     type: string
     x-basic: true
     readOnly: true
@@ -31,7 +29,7 @@ properties:
       - setup
       - void
   status:
-    description: Transaction status.
+    description: Status of a transaction.
     type: string
     readOnly: true
     enum:
@@ -52,7 +50,7 @@ properties:
       - waiting-gateway
       - waiting-refund
   result:
-    description: Transaction result.
+    description: Result of a transaction.
     type: string
     x-basic: true
     readOnly: true
@@ -66,7 +64,7 @@ properties:
     x-type: Money
     x-sortable: true
     x-basic: true
-    description: The transaction's amount.
+    description: Total amount of a transaction.
     type: number
     format: double
     readOnly: true
@@ -75,7 +73,9 @@ properties:
     allOf:
       - $ref: ../CurrencyCode.yaml
   purchaseAmount:
-    description: The amount actually purchased which may have differed from the originally requested amount in case of an adjustment.
+    description: |-
+      Amount by which the purchase is completed. If an adjustment
+      occurs, the purchased amount may differ from the requested amount.
     type: number
     format: double
     x-type: Money
@@ -87,7 +87,9 @@ properties:
     allOf:
       - $ref: ../CurrencyCode.yaml
   requestAmount:
-    description: The amount in the payment request. If adjusted, the purchase amount and billing amount may vary from it.
+    description: |-
+      Amount of the payment request. If an adjustment occurs, the
+      purchased amount may differ from the billing amount.
     type: number
     x-type: Money
     x-currency-field: requestCurrency
@@ -98,90 +100,102 @@ properties:
     allOf:
       - $ref: ../CurrencyCode.yaml
   parentTransactionId:
-    description: The parent's transaction ID.
+    description: ID of the parent transaction.
     allOf:
       - $ref: ../ResourceId.yaml
     readOnly: true
   childTransactions:
-    description: The child transaction IDs.
+    description: IDs of child transactions.
     readOnly: true
     type: array
     items:
       $ref: ../ResourceId.yaml
   invoiceIds:
-    description: The invoice IDs related to transaction.
+    description: Related invoice IDs.
     readOnly: true
     type: array
     items:
       $ref: ../ResourceId.yaml
   subscriptionIds:
-    description: The orders IDs related to transaction's invoice(s).
+    description: Subscription IDs of invoices that are related to the transaction.
     readOnly: true
     type: array
     items:
       $ref: ../ResourceId.yaml
   planIds:
-    description: The plan IDs related to transaction's order(s).
+    description: Plan IDs of orders that are related to the transaction.
     readOnly: true
     type: array
     items:
       $ref: ../ResourceId.yaml
   isRebill:
+    description: |-
+      Specifies whether the transaction is one of a number of recurring
+      payments in a subscription, excluding trials or setup fees.
     type: boolean
     readOnly: true
   rebillNumber:
-    description: The transaction's rebill number.
+    description: |-
+      Rebill number of the transaction. A rebill number is the number
+      of recurring payments in a subscription, excluding trials or
+      setup fees.
     type: integer
     readOnly: true
     x-sortable: true
-  paymentInstrument:
-    $ref: ../Storefront/PaymentInstruments/InstrumentReference.yaml
   billingAddress:
     description: Billing address.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   has3ds:
+    description: Specifies whether the transaction uses 3D Secure.
     type: boolean
     readOnly: true
   3ds:
+    description: 3D Secure object.
     allOf:
       - $ref: ../Transactions/ThreeDSecureResult.yaml
   redirectUrl:
-    description: The URL to redirect the end-user when an offsite transaction is completed. Defaults to the website's configured URL.
+    description: |-
+      URL where the end-user is redirected to when an offsite transaction
+      is completed. The default value is the website's configured URL.
     type: string
     format: uri
   retryNumber:
     type: integer
     readOnly: true
-    description: The position in the sequence of retries.
+    description: Position of the transaction in the sequence of retries.
     x-sortable: true
   isRetry:
     type: boolean
     readOnly: true
-    description: True if this transaction is retry.
+    description: Specifies whether a transaction is a retry.
   billingDescriptor:
     type: string
     readOnly: true
-    description: |
-      The billing descriptor that appears on the periodic billing statement. Commonly
-      12 or fewer characters for a credit card statement.
+    description: |-
+      Billing descriptor that appears on the periodic billing statement.
+      For a credit card statement, this field commonly contains 12 or
+      fewer characters.
   description:
     type: string
-    description: The payment description.
+    description: Description of the payment.
     maxLength: 255
   requestId:
-    description: The transaction's request ID.  This ID must be unique within a 24 hour period.
-      Use this field to prevent duplicated transactions.
+    description: |-
+      Request ID of the transaction. This ID must be unique within a
+      24 hour period. Use this field to prevent duplicated transactions.
     type: string
     x-sortable: true
   hasAmountAdjustment:
-    description: True if transaction has amount adjustment.
+    description: Specifies whether the transaction has amount adjustment.
     type: boolean
     readOnly: true
   gatewayName:
     readOnly: true
-    description: |
-      Payment Gateway name, available only after the gateway is selected for the transaction.
+    description: |-
+      Name of the payment gateway that processed, or is selected to
+      process, the transaction. This value is only available after a
+      gateway is selected for the transaction.
     x-label: Gateway account
     x-basic: true
     allOf:
@@ -189,20 +203,13 @@ properties:
   customFields:
     $ref: ../ResourceCustomFields.yaml
   processedTime:
-    description: Transaction processed time.
+    description: Date and time at which the transaction was processed.
     x-sortable: true
     x-basic: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   createdTime:
-    description: Transaction created time.
-    x-label: Created On
-    x-sortable: true
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
-    description: Transaction updated time.
-    x-label: Last update time
-    x-sortable: true
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../UpdatedTime.yaml
+

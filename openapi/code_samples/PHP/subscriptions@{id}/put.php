@@ -2,8 +2,10 @@ $subscriptionForm = new Rebilly\Entities\Subscription();
 $subscriptionForm->setCustomerId('customerId');
 $subscriptionForm->setWebsiteId('websiteId');
 $subscriptionForm->setItems($subscriptionForm->createItems([
-    'planId' => 'my-plan',
-    'quantity' => 1,
+    [
+        'planId' => 'my-plan',
+        'quantity' => 1,
+    ],
 ]));
 $subscriptionForm->setBillingAddress([
     'firstName' => 'John',
@@ -41,6 +43,6 @@ $subscriptionForm->setBillingAddress([
 
 try {
     $subscription = $client->subscriptions()->update('subscriptionId', $subscriptionForm);
-} catch (UnprocessableEntityException $e) {
-    echo $e->getMessage();
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
 }

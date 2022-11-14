@@ -13,7 +13,6 @@ parameters:
       $ref: ../components/schemas/ResourceId.yaml
 get:
   x-products:
-    - Full
     - Users
   tags:
     - Memberships
@@ -24,7 +23,7 @@ get:
     Retrieve the membership using organization and user identifiers.
   responses:
     '200':
-      description: Membership was retrieved successfully.
+      description: Membership was retrieved.
       content:
         application/json:
           schema:
@@ -37,32 +36,20 @@ get:
       $ref: ../components/responses/NotFound.yaml
 put:
   x-products:
-    - Full
     - Users
   tags:
     - Memberships
-  summary: Create or update membership
+  summary: Upsert membership
   operationId: PutMembership
   x-sdk-operation-name: update
   description: |
-    Create or update membership using organization and user identifiers.
+    Create or update (upsert) membership using organization and user identifiers.
     Only membership's owner can add other users in the membership.
   requestBody:
     content:
       application/json:
         schema:
-          properties:
-            isOwner:
-              type: boolean
-            permissions:
-              description: The memberships's permissions. See the format in example. Use wildcard `*` for full access.
-              allOf:
-                - $ref: ../components/schemas/AclPermissions.yaml
-            roleIds:
-              type: array
-              description: The membership's roles identifiers.
-              items:
-                type: string
+          $ref: ../components/schemas/Membership.yaml
     required: true
   responses:
     '200':
@@ -73,6 +60,9 @@ put:
             $ref: ../components/schemas/Membership.yaml
     '201':
       description: Membership was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -85,7 +75,6 @@ put:
       $ref: ../components/responses/Conflict.yaml
 delete:
   x-products:
-    - Full
     - Users
   tags:
     - Memberships

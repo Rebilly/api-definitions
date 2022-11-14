@@ -2,17 +2,19 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 post:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Coupons
   summary: Cancel a coupon redemption
   operationId: PostCouponRedemptionCancellation
   x-sdk-operation-name: cancelRedemption
+  description: Cancels a coupon redemption with a specified ID.
   responses:
     '201':
-      description: Cancel a coupon redemption.
+      description: Coupon redemption cancelled.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

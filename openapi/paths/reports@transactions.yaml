@@ -13,12 +13,12 @@ servers:
         description: Your organization ID.
 get:
   x-products:
-    - Full
     - Reports
   tags:
     - Reports
   summary: Retrieve a transactions report
   operationId: GetTransactionReport
+  x-sdk-operation-name: getTransactions
   description: Retrieve a transactions report.
   parameters:
     - name: periodStart
@@ -52,6 +52,7 @@ get:
           - gateway
           - retryNumber
           - plan
+          - cardBrand
           - leadSource.source
           - leadSource.medium
           - leadSource.campaign
@@ -65,7 +66,7 @@ get:
     - $ref: ../components/parameters/collectionFilter.yaml
   responses:
     '200':
-      description: Report was retrieved successfully.
+      description: Report was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -85,3 +86,7 @@ get:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/reports@transactions/get.js
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/reports@transactions/get.php

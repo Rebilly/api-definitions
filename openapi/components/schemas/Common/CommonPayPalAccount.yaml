@@ -1,12 +1,9 @@
 type: object
-required:
-  - method
-  - customerId
-  - billingAddress
 title: 'PayPal Account'
+x-abstract-parent: PaymentInstrument
 properties:
   id:
-    description: The payment instrument ID.
+    description: ID of the payment instrument.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
@@ -15,10 +12,6 @@ properties:
     type: string
     enum:
       - paypal
-  customerId:
-    description: The customer's ID.
-    allOf:
-      - $ref: ../ResourceId.yaml
   billingAddress:
     description: The billing address.
     allOf:
@@ -36,18 +29,10 @@ properties:
       - active
       - deactivated
   useAsBackup:
-    description: Allow using this payment instrument as a backup for invoice payment retries.
-    type: boolean
-    default: false
+    $ref: ../UseAsBackup.yaml
   createdTime:
-    description: PayPal account created time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
-    description: PayPal account updated time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../UpdatedTime.yaml
   customFields:
     $ref: ../ResourceCustomFields.yaml
-  riskMetadata:
-    $ref: ../RiskMetadata.yaml

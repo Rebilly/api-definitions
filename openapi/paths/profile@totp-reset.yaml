@@ -1,6 +1,5 @@
 post:
   x-products:
-    - Full
     - Users
   tags:
     - Profile
@@ -12,7 +11,10 @@ post:
   deprecated: true
   responses:
     '201':
-      description: totpSecret reset (renewed) successfully.
+      description: totpSecret reset (renewed).
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

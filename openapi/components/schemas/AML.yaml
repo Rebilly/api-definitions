@@ -2,37 +2,46 @@ type: object
 properties:
   firstName:
     type: string
-    description: First Name.
+    description: First name of the individual, or name of entity.
     readOnly: true
     example: Benjamin
   lastName:
     type: string
-    description: Last Name. `null` if it is a single-name entity.
+    description: |-
+      Last name of the individual. Returns a
+      `null` value for single-named entities.
     readOnly: true
     nullable: true
     example: Franklin
   source:
     type: string
     readOnly: true
-    description: Which list this came from.
+    description: Describes which list the result is from.
   sourceType:
     readOnly: true
-    description: The list type.
-    type: string
-    enum:
-      - pep
+    description: Describes the categories of the individual or entity.
+    type: array
+    example:
       - sanctions
-      - adverse-media
+      - enforcements
+    items:
+      type: string
+      enum:
+        - pep
+        - sanctions
+        - adverse-media
+        - enforcements
+        - state-owned-enterprise
   gender:
     type: string
     readOnly: true
     nullable: true
-    description: Gender of returned identity (if `type` is `individual`).
+    description: If `type`=`individual`, this field describes the gender of the individual.
   title:
     type: array
     readOnly: true
     nullable: true
-    description: The title of their position.
+    description: The individual's job title.
     example:
       - Postmaster General
       - Ambassador to France
@@ -43,25 +52,25 @@ properties:
   type:
     type: string
     readOnly: true
-    description: The record type.
+    description: Describes whether the source is an individual or an entity.
     enum:
       - individual
       - entity
   legalBasis:
     type: array
     readOnly: true
-    description: List of references to legal documents if they exist.
+    description: List of references to legal documents, if they exist.
     items:
       type: string
   regime:
     type: string
     readOnly: true
-    description: Regime.
+    description: Describes the government, administration, or political entity.
     nullable: true
     example: United States Government
   confidence:
     type: string
-    description: The source list's confidence in information.
+    description: Degree of confidence in the source list information.
     readOnly: true
     enum:
       - weak
@@ -71,11 +80,11 @@ properties:
   nationality:
     type: string
     readOnly: true
-    description: The nationality of the identity.
+    description: Nationality of the individual or entity.
   address:
     type: array
     readOnly: true
-    description: Addresses related to the identity.
+    description: Addresses associated with the individual or entity.
     items:
       type: object
       properties:
@@ -83,12 +92,12 @@ properties:
           type: string
           nullable: true
           readOnly: true
-          description: Street Address Line 1.
+          description: Street address line 1.
         address2:
           type: string
           nullable: true
           readOnly: true
-          description: Street Address Line 2.
+          description: Street address line 2.
         city:
           type: string
           nullable: true
@@ -98,7 +107,7 @@ properties:
           type: string
           nullable: true
           readOnly: true
-          description: State/Province/Region.
+          description: State, province, or region.
         country:
           type: string
           nullable: true
@@ -108,7 +117,7 @@ properties:
           type: boolean
           default: false
           readOnly: true
-          description: This address is their birth place.
+          description: Individual's place of birth.
   dob:
     type: array
     readOnly: true
@@ -136,7 +145,7 @@ properties:
           readOnly: true
         authenticity:
           type: string
-          description: The level of confidence in the alias.
+          description: Degree of confidence in the alias.
           readOnly: true
           enum:
             - strong
@@ -145,7 +154,7 @@ properties:
   passport:
     type: array
     readOnly: true
-    description: Passport information.
+    description: Individual's passport information.
     items:
       type: object
       properties:
@@ -162,10 +171,10 @@ properties:
     type: string
     readOnly: true
     nullable: true
-    description: Extra information (the content varies per list).
+    description: Additional information. This content varies per list.
   _links:
     type: array
-    description: The links related to resource, including links provided by the list.
+    description: Related resource links.
     readOnly: true
     minItems: 1
     items:

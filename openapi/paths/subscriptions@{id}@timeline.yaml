@@ -2,11 +2,10 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
     - Core
   tags:
-    - Orders Timeline
-  summary: Retrieve a list of order timeline messages
+    - Orders timeline
+  summary: Retrieve order timeline messages
   operationId: GetSubscriptionTimelineCollection
   x-sdk-operation-name: getAllTimelineMessages
   description: |
@@ -19,7 +18,7 @@ get:
     - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
-      description: A list of order timeline messages was retrieved successfully.
+      description: A list of order timeline messages was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -41,10 +40,9 @@ get:
         $ref: '../code_samples/JavaScript/subscriptions@{id}@timeline/get.js'
 post:
   x-products:
-    - Full
     - Core
   tags:
-    - Orders Timeline
+    - Orders timeline
   summary: Create an order Timeline comment
   operationId: PostSubscriptionTimeline
   x-sdk-operation-name: createTimelineComment
@@ -60,6 +58,9 @@ post:
   responses:
     '201':
       description: Order Timeline comment was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

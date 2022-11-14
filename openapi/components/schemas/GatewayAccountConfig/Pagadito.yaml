@@ -1,0 +1,26 @@
+description: Pagadito config.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Pagadito credentials object.
+        properties:
+          uid:
+            type: string
+            format: password
+          wsk:
+            type: string
+            format: password
+        required:
+          - uid
+          - wsk
+      settings:
+        type: object
+        properties:
+          useRecurringApi:
+            type: boolean
+            default: false

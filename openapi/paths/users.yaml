@@ -1,6 +1,5 @@
 get:
   x-products:
-    - Full
     - Users
   tags:
     - Users
@@ -17,7 +16,7 @@ get:
     - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
-      description: A list of users was retrieved successfully.
+      description: A list of users was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -44,7 +43,6 @@ get:
         $ref: ../code_samples/JavaScript/users/get.js
 post:
   x-products:
-    - Full
     - Users
   tags:
     - Users
@@ -58,6 +56,9 @@ post:
   responses:
     '201':
       description: User was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -67,11 +68,7 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
     - lang: PHP
       source:

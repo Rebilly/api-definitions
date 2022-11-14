@@ -2,8 +2,6 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
-    - Risk Management
     - Users
   tags:
     - Lists
@@ -14,11 +12,11 @@ get:
     Retrieve latest version of List with specified identifier string.
   responses:
     '200':
-      description: List was retrieved successfully.
+      description: List was retrieved.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/List.yaml
+            $ref: ../components/schemas/ValueList.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -31,31 +29,37 @@ get:
         $ref: '../code_samples/JavaScript/lists@{id}/get.js'
 put:
   x-products:
-    - Full
-    - Risk Management
     - Users
   tags:
     - Lists
-  summary: Create or update a list with predefined ID
+  summary: Upsert a list
   operationId: PutList
   x-sdk-operation-name: update
   description: |
-    Create or update a list with predefined identifier string.
+    Create or update (upsert) a list with specified identifier string.
   requestBody:
-    $ref: ../components/requestBodies/List.yaml
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ValueList.yaml
+    description: List resource.
+    required: true
   responses:
     '200':
       description: List was updated.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/List.yaml
+            $ref: ../components/schemas/ValueList.yaml
     '201':
       description: List was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/List.yaml
+            $ref: ../components/schemas/ValueList.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -70,8 +74,6 @@ put:
         $ref: '../code_samples/JavaScript/lists@{id}/put.js'
 delete:
   x-products:
-    - Full
-    - Risk Management
     - Users
   tags:
     - Lists
@@ -79,7 +81,7 @@ delete:
   operationId: DeleteList
   x-sdk-operation-name: delete
   description: |
-    Delete a list with predefined identifier string.
+    Delete a list with specified identifier string.
   responses:
     '204':
       description: List was deleted.

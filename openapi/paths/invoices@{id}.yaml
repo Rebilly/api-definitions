@@ -2,8 +2,6 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Invoices
@@ -14,14 +12,14 @@ get:
     - SecretApiKey: []
     - JWT: []
     - ApplicationJWT: []
-  description: |
-    Retrieve an invoice with specified identifier string.
+  description: |-
+    Retrieves an invoice with a specified identifier string.
   parameters:
     - $ref: ../components/parameters/mediaTypeJsonPdf.yaml
     - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: Invoice was retrieved successfully.
+      description: Invoice retrieved.
       content:
         application/json:
           schema:
@@ -42,29 +40,34 @@ get:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/invoices@{id}/get.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/invoices@{id}/get.php
 put:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Invoices
-  summary: Create or update an invoice with predefined ID
+  summary: Upsert an invoice
   operationId: PutInvoice
   x-sdk-operation-name: update
-  description: |
-    Create or update an invoice with predefined identifier string.
+  description: |-
+    Creates or updates (upserts) an invoice with a specified identifier string.
   requestBody:
     $ref: ../components/requestBodies/Invoice.yaml
   responses:
     '200':
-      description: Invoice was updated.
+      description: Invoice updated.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Invoices/Invoice.yaml
     '201':
-      description: Invoice was created.
+      description: Invoice created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -84,3 +87,7 @@ put:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/invoices@{id}/put.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/invoices@{id}/put.php

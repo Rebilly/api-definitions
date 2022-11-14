@@ -1,47 +1,58 @@
 type: object
 properties:
   medium:
-    description: Lead source medium (eg search, display).
+    description: |-
+      Category of the lead source traffic. For example, the
+      medium could be organic search, Google ads, Display ads, and so on.
     type: string
   source:
-    description: Lead source origin (eg google, yahoo).
+    description: |-
+      Domain, platform, or channel from which the lead
+      source originates.
     type: string
   campaign:
-    description: Lead source campaign (eg go-big-123).
+    description: Campaign name of the lead source.
     type: string
   term:
-    description: Lead source term (eg salt shakers).
+    description: Term associated with a lead source.
     type: string
   content:
-    description: Lead source content (eg smiley faces).
+    description: |-
+      Content contained in the lead source content.
+      For example, content could be graphics, video, and so on.
     type: string
   affiliate:
-    description: Lead source affiliate (eg 123, Bob Smith).
+    description: |-
+      Individual or entity that is affilated with the lead
+      source.
     type: string
   subAffiliate:
-    description: >-
-      Lead source sub-affiliate also called a sub-id or click id in some
-      circles (eg 123456).
+    description: |-
+      Individual or entity that is associated with a lead source
+      affiliate. In other products, this field may also be referred to
+      as sub ID or click ID in some.
     type: string
   salesAgent:
-    description: Lead source sales agent (eg James Bond).
+    description: Name of the sales agent associated with the lead source.
     type: string
   clickId:
-    description: Lead source click id (may come from an ad server).
+    description: |-
+      Lead source click ID. This value is passed in the ad
+      click URL for tracking and campaign attribution.
     type: string
   path:
-    description: Lead source path url (eg www.example.com/some/landing/path).
+    description: URL from which the lead source originates.
     type: string
   referrer:
-    description: Lead source [`referer` url](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer) as determined (eg www.example.com/some/landing/path).
+    description: |-
+      Lead source
+      [`referrer` URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer).
     type: string
   createdTime:
-    description: Lead source created time.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    $ref: CreatedTime.yaml
   _links:
     type: array
-    description: The links related to resource.
+    description: Related resource links.
     readOnly: true
     minItems: 1
     items:

@@ -1,26 +1,25 @@
 type: object
 title: 'Payment Card'
+x-abstract-parent: PaymentInstrument
 properties:
   id:
-    description: The payment instrument ID.
+    description: Payment instrument identifier string.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   method:
-    description: The method of payment instrument.
+    description: Method of payment instrument.
     type: string
     readOnly: true
     enum:
       - payment-card
-  customerId:
-    description: The customer ID.
-    allOf:
-      - $ref: ../ResourceId.yaml
   status:
     type: string
-    description: |
-      Payment instrument status. When an instrument is `active` it means it has been used at least once for an approved transaction.
-      To remove an instrument from being in use, set it as `deactivated` (see the deactivation endpoint).
+    description: |-
+      Status of the payment instrument. An `active` status means that
+      a payment instrument has been used at least once for an approved
+      transaction. To remove an instrument from use, set this value to
+      `deactivated`. For more information, see the deactivation endpoint.
     enum:
       - active
       - inactive
@@ -28,30 +27,37 @@ properties:
       - deactivated
       - verification-needed
   fingerprint:
-    description: A unique value to identify the payment instrument regardless of variable values. It contains alphanumeric values.
+    description: |-
+      A unique value that is used to identify the payment instrument
+      regardless of variable values. This value contains alphanumeric
+      characters.
     type: string
     readOnly: true
   bin:
-    description: The card's bin (the PAN's first 6 digits).
+    description: |-
+      Bank Identification Number (BIN) of the payment card. This value
+      is the same as the first 6 digits of the associated Primary
+      Account Number (PAN).
     type: string
     format: bin
     readOnly: true
   last4:
-    description: The PAN's last 4 digits.
+    description: |-
+      Last 4 digits of the associated Primary Account Number (PAN).
     type: string
     readOnly: true
   pan:
-    description: The card PAN (primary account number).
+    description: Primary Account Number (PAN) of the payment card.
     type: string
     writeOnly: true
   expYear:
-    description: Card's expiration year.
+    description: Year in which the payment card expires.
     type: integer
   expMonth:
-    description: Card's expiration month.
+    description: Month in which the payment card expires.
     type: integer
   cvv:
-    description: Card's cvv (card verification value).
+    description: Card Verification Value (CVV) of the payment card.
     type: string
     writeOnly: true
   brand:
@@ -67,22 +73,18 @@ properties:
     type: string
     readOnly: true
   billingAddress:
-    description: The billing address.
+    description: Contact's billing address.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   useAsBackup:
-    description: Allow using this payment instrument as a backup for invoice payment retries.
-    type: boolean
-    default: false
+    $ref: ../UseAsBackup.yaml
+  billingPortalUrl:
+    description: URL of the billing portal where the card can be updated.
+    type: string
+    readOnly: true
   createdTime:
-    description: Payment instrument created time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
-    description: Payment instrument updated time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../UpdatedTime.yaml
   customFields:
     $ref: ../ResourceCustomFields.yaml
-  riskMetadata:
-    $ref: ../RiskMetadata.yaml

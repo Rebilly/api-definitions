@@ -2,25 +2,24 @@ parameters:
   - $ref: ../components/parameters/customFieldResource.yaml
 get:
   x-products:
-    - Full
     - Core
   tags:
-    - Custom Fields
-  summary: Retrieve Custom Fields
+    - Custom fields
+  summary: Retrieve custom fields
   operationId: GetCustomFieldCollection
   x-sdk-operation-name: getAll
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
-  description: |
-    Retrieve a schema of Custom Fields for the given resource type.
+  description: |-
+    Retrieves a schema of custom fields for the specified resource type.
   responses:
     '200':
-      description: A schema of Custom Fields was retrieved successfully.
+      description: Schema of custom fields retrieved.
       content:
         application/json:
           schema:
-            description: The list of custom fields.
+            description: List of custom fields.
             type: array
             items:
               $ref: ../components/schemas/CustomField.yaml

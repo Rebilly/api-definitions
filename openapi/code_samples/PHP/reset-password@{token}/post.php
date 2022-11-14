@@ -3,6 +3,6 @@ $resetPasswordForm->setNewPassword('1234');
 
 try {
     $user = $client->users()->resetPassword('token', $resetPasswordForm);
-} catch (UnprocessableEntityException $e) {
-    echo $e->getMessage();
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
 }

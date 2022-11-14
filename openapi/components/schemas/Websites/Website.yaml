@@ -6,31 +6,26 @@ required:
   - serviceEmail
 properties:
   id:
-    description: The website identifier string.
     readOnly: true
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ../Websites/WebsiteId.yaml
   name:
-    description: The website name.
+    description: Name of the website.
     type: string
   url:
-    description: The website domain address.
+    description: Domain address of the website.
     type: string
   servicePhone:
-    description: The website customer service phone number.
+    description: Customer service phone number of the website.
     type: string
   serviceEmail:
-    description: The website customer service email address.
+    description: Customer service email address of the website.
     type: string
     format: email
   createdTime:
-    description: Website created time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
-    description: Website updated time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../UpdatedTime.yaml
   customFields:
     $ref: ../ResourceCustomFields.yaml
   settings:
@@ -38,12 +33,11 @@ properties:
   organizationId:
     deprecated: true
     readOnly: true
-    description: Organization ID.
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ../Organizations/OrganizationId.yaml
   _links:
     type: array
-    description: The links related to resource.
+    description: Related resource links.
     readOnly: true
     minItems: 1
     items:

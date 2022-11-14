@@ -1,0 +1,16 @@
+type: object
+title: Payment Card
+allOf:
+  - $ref: AdjustPaymentMethod.yaml
+  - properties:
+      paymentMethod:
+        type: string
+        enum:
+          - payment-card
+      feature:
+        nullable: true
+        type: string
+        description: The feature name.
+        enum:
+          - Apple Pay
+          - Google Pay

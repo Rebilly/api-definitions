@@ -1,0 +1,49 @@
+type: object
+description: Configure which digital wallets are enabled.
+title: Digital Wallets
+properties:
+  applePay:
+    type: object
+    description: |-
+      Apple Pay digital wallet configuration. If not using Apple Pay,
+      do not use this field.
+    required:
+        - isEnabled
+    properties:
+      isEnabled:
+        type: boolean
+        description: Specifies whether Apple Pay is enabled.
+        default: false
+      displayName:
+        description: |-
+          A string of 64, or fewer, UTF-8 characters containing the
+          canonical name for your store, which is suitable for display.
+          Do not localize this name.
+        type: string
+        example: "Test merchant"
+      country:
+        $ref: ../DigitalWalletCountry.yaml
+  googlePay:
+    type: object
+    description: |-
+      Google Pay™ digital wallet configuration. If not using Google Pay™,
+      do not use this field.
+    required:
+      - isEnabled
+    properties:
+      isEnabled:
+        type: boolean
+        description: Specifies whether Google Pay™ is enabled.
+        default: false
+      merchantName:
+        description: Merchant name in Google Pay™.
+        type: string
+        example: "Test merchant"
+      merchantOrigin:
+        description: |-
+          Merchant origin in Google Pay™. This uses the fully qualified
+          domain name.
+        type: string
+        example: "www.example.com"
+      country:
+        $ref: ../DigitalWalletCountry.yaml

@@ -4,19 +4,19 @@ get:
   x-products:
     - Storefront
   tags:
-    - Payment Instruments
-  summary: Retrieve the payment instrument's setup transaction.
+    - Payment instruments
+  summary: Retrieve the payment instrument setup transaction
   operationId: StorefrontGetPaymentInstrumentSetup
   x-sdk-operation-name: getSetupTransaction
   security:
     - CustomerJWT: []
-  description: |
+  description: |-
     Retrieve the latest setup transaction for the given payment instrument.
 
     More information about all the related setup transactions is available at the Transaction endpoints.
   responses:
     200:
-      description: Setup transaction was retrieved successfully.
+      description: Setup transaction was retrieved.
       content:
         application/json:
           schema:
@@ -26,22 +26,18 @@ get:
     403:
       $ref: ../../components/responses/Forbidden.yaml
     404:
-      description: The payment instrument doesn't have any setup transaction.
-      content:
-        application/json:
-          schema:
-            $ref: ../../components/schemas/Error.yaml
+      $ref: ../../components/responses/NotFound.yaml
 post:
   x-products:
     - Storefront
   tags:
-    - Payment Instruments
-  summary: Create the payment instrument's setup transaction.
+    - Payment instruments
+  summary: Create the payment instrument's setup transaction
   operationId: StorefrontPostPaymentInstrumentSetup
   x-sdk-operation-name: setup
   security:
     - CustomerJWT: []
-  description: |
+  description: |-
     Create the payment instrument's setup transaction.
 
     This effectively makes the payment instrument available for further payments.
@@ -52,6 +48,9 @@ post:
   responses:
     201:
       description: Setup transaction was created.
+      headers:
+        Location:
+          $ref: ../../components/headers/Location.yaml
       content:
         application/json:
           schema:

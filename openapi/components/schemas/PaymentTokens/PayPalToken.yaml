@@ -1,6 +1,7 @@
 type: object
 title: PayPal Token
 allOf:
+  - $ref: ./CompositeToken.yaml
   - $ref: ../Common/CommonPaymentToken.yaml
 required:
   - method
@@ -26,5 +27,6 @@ properties:
   billingAddress:
     description: The billing address object.
     nullable: true
+    type: object
     allOf:
       - $ref: ../Contact/ContactObject.yaml

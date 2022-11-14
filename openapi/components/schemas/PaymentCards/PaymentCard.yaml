@@ -1,17 +1,27 @@
+type: object
 allOf:
   - $ref: ../Common/CommonPaymentCard.yaml
   - properties:
+      customerId:
+        $ref: ../CustomerId.yaml
       stickyGatewayAccountId:
-        description: Default gateway account ID used for transactions.
+        description: |-
+          Sticky gateway account ID.
+          All future payments are processed by this gateway account.
+
+          For more information,
+          see [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
         type: string
+        nullable: true
         readOnly: true
       expirationReminderTime:
-        description: Time expiration reminder event will be triggered.
+        description: Date and time at which an expiration reminder event is triggered.
         nullable: true
-        allOf:
-          - $ref: ../ServerTimestamp.yaml
+        type: string
+        format: date-time
+        readOnly: true
       expirationReminderNumber:
-        description: Number of expiration reminder events triggered.
+        description: Number of expiration reminder events that have triggered.
         nullable: true
         type: integer
         readOnly: true
@@ -22,9 +32,19 @@ allOf:
           type: string
         example:
           gatewayTransactionId: GAT123
+      digitalWallet:
+        readOnly: true
+        description: Digital wallet type.
+        type: string
+        nullable: true
+        enum:
+          - Apple Pay
+          - Google Pay
+      riskMetadata:
+        $ref: ../RiskMetadata.yaml
       _links:
         type: array
-        description: The links related to resource.
+        description: Related resource links.
         readOnly: true
         minItems: 1
         items:
@@ -35,9 +55,9 @@ allOf:
             - $ref: ../Links/ApprovalUrlLink.yaml
       _embedded:
         type: array
-        description: >-
-          Any embedded objects available that are requested by the `expand`
-          querystring parameter.
+        description: |-
+          Embedded objects that are requested by the `expand`
+          query parameter.
         readOnly: true
         minItems: 1
         items:

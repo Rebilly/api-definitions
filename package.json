@@ -1,34 +1,24 @@
 {
   "name": "rebilly-openapi-spec",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "dependencies": {
-    "@redocly/openapi-cli": "1.0.0-beta.62"
+    "@redocly/cli": "1.0.0-beta.112"
   },
   "private": true,
   "scripts": {
-    "start": "openapi preview-docs",
+    "start": "redocly preview-docs",
     "build": "npm run build-core && npm run build-users && npm run build-reports && npm run build-storefront && npm run build-combined",
-    "build-for-js-sdk": "npm run build-core -- --ext json && npm run build-users -- --ext json && npm run build-storefront -- --ext json",
-    "test": "openapi lint",
-
-    "build-core": "REBILLY_API_PRODUCT=Core openapi bundle -o dist/core",
-    "build-users": "REBILLY_API_PRODUCT=Users openapi bundle -o dist/users",
-    "build-reports": "REBILLY_API_PRODUCT=Reports openapi bundle -o dist/reports",
-    "build-storefront": "REBILLY_API_PRODUCT=Storefront openapi bundle -o dist/storefront",
-    "build-combined": "REBILLY_API_PRODUCT=Combined openapi bundle -o dist/combined",
-    "build-billing": "REBILLY_API_PRODUCT=Billing openapi bundle -o dist/billing",
-    "build-payments": "REBILLY_API_PRODUCT=Payments openapi bundle -o dist/payments",
-    "build-risk-management": "REBILLY_API_PRODUCT=RiskManagement openapi bundle -o dist/risk-management",
-    "build-full": "REBILLY_API_PRODUCT=Full openapi bundle -o dist/full",
-
+    "build-for-js-sdk": "npm run build-core -- --ext json && npm run build-users -- --ext json && npm run build-reports -- --ext json && npm run build-storefront -- --ext json",
+    "test": "redocly lint",
+    "build-core": "REBILLY_API_PRODUCT=Core redocly bundle -o dist/core",
+    "build-users": "REBILLY_API_PRODUCT=Users redocly bundle -o dist/users",
+    "build-reports": "REBILLY_API_PRODUCT=Reports redocly bundle -o dist/reports",
+    "build-storefront": "REBILLY_API_PRODUCT=Storefront redocly bundle -o dist/storefront",
+    "build-combined": "REBILLY_API_PRODUCT=Combined redocly bundle -o dist/combined",
     "serve-core": "REBILLY_API_PRODUCT=Core npm run start openapi",
     "serve-users": "REBILLY_API_PRODUCT=Users npm run start openapi",
     "serve-reports": "REBILLY_API_PRODUCT=Reports npm run start openapi",
     "serve-storefront": "REBILLY_API_PRODUCT=Storefront npm run start openapi",
-    "serve-combined": "REBILLY_API_PRODUCT=Combined npm run start openapi",
-    "serve-billing": "REBILLY_API_PRODUCT=Billing npm run start openapi",
-    "serve-payments": "REBILLY_API_PRODUCT=Payments npm run start openapi",
-    "serve-risk-management": "REBILLY_API_PRODUCT=RiskManagement npm run start openapi",
-    "serve-full": "REBILLY_API_PRODUCT=Full npm run start openapi"
+    "serve-combined": "REBILLY_API_PRODUCT=Combined npm run start openapi"
   }
 }

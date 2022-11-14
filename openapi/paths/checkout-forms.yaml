@@ -1,14 +1,13 @@
 get:
   x-products:
-    - Full
     - Users
   tags:
-    - Checkout Forms
-  summary: Browse a list of checkout forms
+    - Checkout forms
+  summary: Retrieve checkout forms
   operationId: GetCheckoutFormCollection
   x-sdk-operation-name: getAll
-  description: |
-    Browse a list of checkout forms.
+  description: |-
+    Retrieves a list of checkout forms.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -17,7 +16,7 @@ get:
     - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
-      description: A list of checkout forms was retrieved successfully.
+      description: Checkout forms retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -37,18 +36,20 @@ get:
       $ref: ../components/responses/Forbidden.yaml
 post:
   x-products:
-    - Full
     - Users
   tags:
-    - Checkout Forms
+    - Checkout forms
   summary: Create a checkout form
   operationId: PostCheckoutForm
   x-sdk-operation-name: create
-  description: |
-    Create a checkout form.
+  description: |-
+    Creates a checkout form.
   responses:
     '201':
-      description: Checkout form was created.
+      description: Checkout form created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

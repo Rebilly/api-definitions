@@ -2,8 +2,6 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Orders
@@ -13,7 +11,7 @@ get:
   description: Retrieve an order cancellation with specified identifier string.
   responses:
     '200':
-      description: Cancellation was retrieved successfully.
+      description: Cancellation was retrieved.
       content:
         application/json:
           schema:
@@ -24,10 +22,13 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/subscription-cancellations@{id}/get.php
 put:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Orders
@@ -46,6 +47,9 @@ put:
             $ref: ../components/schemas/Subscription/SubscriptionCancellation.yaml
     '201':
       description: Cancellation was created, the order is or will be deactivated.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -60,10 +64,12 @@ put:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/subscription-cancellations@{id}/put.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/subscription-cancellations@{id}/put.php
 patch:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Orders
@@ -99,10 +105,13 @@ patch:
       $ref: ../components/responses/Forbidden.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/subscription-cancellations@{id}/patch.php
 delete:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Orders
@@ -121,3 +130,8 @@ delete:
       $ref: ../components/responses/NotFound.yaml
     '409':
       $ref: ../components/responses/Conflict.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/subscription-cancellations@{id}/delete.php

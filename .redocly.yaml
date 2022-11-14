@@ -1,33 +1,279 @@
-apiDefinitions:
-  openapi: openapi/openapi.yaml
-lint:
-  extends:
-    - recommended
-  plugins:
-    - ./plugins/custom-rules.js
-    - ./plugins/products-bundler/bundler.js
-  rules:
-    tag-description: off
-    no-server-trailing-slash: error
-    operation-summary: error
-    no-unresolved-refs: error
-    no-unused-components: error
-    operation-2xx-response: error
-    operation-operationId: error
-    operation-singular-tag: error
-    no-enum-type-mismatch: error
-    no-path-trailing-slash: error
-    path-not-include-query: error
-    no-identical-paths: error
-    no-ambiguous-paths: error
-    custom-rules/description-punctuation: error
-    custom-rules/has-sdk-operation-name: error
-    custom-rules/no-unused-tags: warn
-    operation-4xx-response: off
-  decorators:
-    products-bundler/bundle: error
-referenceDocs:
-  pagination: section
+apis:
+  openapi:
+    root: openapi/openapi.yaml
+extends:
+  - recommended
+plugins:
+  - ./plugins/custom-rules.js
+  - ./plugins/discriminator-mapper.js
+  - ./plugins/products-bundler/bundler.js
+rules:
+  no-ambiguous-paths: error
+  no-unused-components: error
+  operation-2xx-response: error
+  operation-operationId: error
+  operation-singular-tag: error
+  operation-tag-defined: error
+  operation-4xx-response: off
+  paths-kebab-case: error
+  tag-description: error
+  custom-rules/no-unused-tags: warn
+  response-contains-header:
+    severity: error
+    names:
+      '201':
+        - Location
+      '303':
+        - Location
+  no-invalid-schema-examples: error
+  no-invalid-parameter-examples: error
+
+  ## custom rules
+  assert/params-must-include-examples:
+    severity: off
+    subject:
+      type: Parameter
+    assertions:
+      requireAny:
+        - example
+        - examples
+      mutuallyExclusive:
+        - example
+        - examples
+
+  assert/headers-include-example:
+    subject:
+      type: Header
+      property: example
+    assertions:
+      defined: true
+      nonEmpty: true
+
+  assert/path-must-be-ref-file:
+    subject:
+      type: PathItem
+    where:
+      - subject:
+          type: Paths
+        assertions:
+          defined: true
+    assertions:
+      ref: /^(.\/paths|paths)\/[a-z].*yaml$/
+
+  assert/x-sdk-operation-name:
+    where:
+      - subject:
+          type: Paths
+        assertions:
+          defined: true
+    subject:
+      type: Operation
+      property: x-sdk-operation-name
+    assertions:
+      casing: camelCase
+      defined: true
+
+  assert/operation-id-delete:
+    where:
+      - subject:
+          type: Operation
+          filterInParentKeys:
+            - delete
+        assertions:
+          defined: true
+    subject:
+      type: Operation
+      property: operationId
+    assertions:
+      pattern: /Delete/
+      casing: PascalCase
+
+  assert/operation-id-get:
+    where:
+      - subject:
+          type: Operation
+          filterInParentKeys:
+            - get
+        assertions:
+          defined: true
+    subject:
+      type: Operation
+      property: operationId
+    assertions:
+      pattern: /Get/
+      casing: PascalCase
+
+  assert/operation-id-patch:
+    where:
+      - subject:
+          type: Operation
+          filterInParentKeys:
+            - patch
+        assertions:
+          defined: true
+    subject:
+      type: Operation
+      property: operationId
+    assertions:
+      pattern: /Patch/
+
+  assert/operation-id-post:
+    where:
+      - subject:
+          type: Paths
+        assertions:
+          defined: true
+      - subject:
+          type: Operation
+          filterInParentKeys:
+            - post
+        assertions:
+          defined: true
+    subject:
+      type: Operation
+      property: operationId
+    assertions:
+      pattern: /Post/
+      casing: PascalCase
+
+  assert/operation-id-put:
+    where:
+      - subject:
+          type: Operation
+          filterInParentKeys:
+            - put
+        assertions:
+          defined: true
+    subject:
+      type: Operation
+      property: operationId
+    assertions:
+      pattern: /Put/
+      casing: PascalCase
+
+  assert/tag-description:
+    subject:
+      type: Tag
+      property: description
+    assertions:
+      defined: true
+      minLength: 30
+      pattern: /(\.|\.\n)$/
+  assert/requestBody-description:
+    subject:
+      type: RequestBody
+      property: description
+    assertions:
+      pattern: /(\.|\.\n)$/
+  assert/schema-description:
+    subject:
+      type: Schema
+      property: description
+    assertions:
+      pattern: /(\.|\.\n)$/
+  assert/parameter-description:
+    subject:
+      type: Parameter
+      property: description
+    assertions:
+      pattern: /(\.|\.\n)$/
+  assert/header-description:
+    subject:
+      type: Header
+      property: description
+    assertions:
+      pattern: /(\.|\.\n)$/
+  assert/response-description:
+    subject:
+      type: Response
+      property: description
+    assertions:
+      pattern: /(\.|\.\n)$/
+  assert/operation-description:
+    subject:
+      type: Operation
+      property: description
+    assertions:
+      # defined: true # consider adding
+      pattern: /(\.|\.\n)$/
+  assert/info-description:
+    subject:
+      type: Info
+      property: description
+    assertions:
+      defined: true
+      minLength: 30
+      pattern: /(\.|\.\n)$/
+  assert/operation-summary:
+    subject:
+      type: Operation
+      property: summary
+    where:
+      - subject:
+          type: Paths
+        assertions:
+          defined: true
+    assertions:
+      defined: true
+      minLength: 10
+      maxLength: 50
+      pattern: /(Retrieve|Create|Delete|Upsert|Preview|Send|Update|Register|Destroy|Trigger|Start|Stop|Set|Check|Enable|Disable|Close|Request|Resend|Verify|List|Patch|Activate|Refund|Query|Validate|Tag|Untag|Issue|Reactivate|Cancel|Pause|Change|Void|Search|Get|Modify|Finish|Schedule|Read|Reset|Make|Deactivate|Perform|Review|Reject|Accept|Apply|Partially|Re|Abandon|Download|Merge|Specify|Redeem|Exchange|Log).*[^\.]$/
+  assert/schema-properties-both-created-time-and-updated-time:
+    subject:
+      type: SchemaProperties
+    message: The createdTime and updatedTime properties are mutually required.
+    severity: warn
+    assertions:
+      mutuallyRequired:
+        - createdTime
+        - updatedTime
+
+  assert/put-200-and-201:
+    subject:
+      type: Responses
+    where:
+      - subject:
+          type: Operation
+          filterInParentKeys:
+            - put
+        assertions:
+          defined: true
+    message: Must mutually define 200 and 201 responses for PUT requests.
+    severity: warn
+    assertions:
+      mutuallyRequired:
+        - '200'
+        - '201'
+
+  assert/no-x-code-samples:
+    subject:
+      type: Operation
+    message: x-code-samples should be x-codeSamples
+    assertions:
+      disallowed:
+        - x-code-samples
+
+  assert/no-x-internal:
+    subject:
+      type: Operation
+    message: This is in a public repository. Do not include internal APIs.
+    assertions:
+      disallowed:
+        - x-internal
+
+      # Need to account for arrays, etc...
+  # assert/mediatype-schema-ref-pattern:
+  #   subject: MediaType
+  #   property: schema
+  #   message: Ref needs to point to components directory.
+  #   ref: /^(\.\.\/)?(components|schemas)\/.*\.yaml$/
+
+decorators:
+  products-bundler/bundle: error
+preprocessors:
+  discriminator-mapper/enum: warn
+features.openapi:
+  pagination: item
   theme:
     logo:
       gutter: 20px 30px 14px 30px
@@ -61,6 +307,9 @@ referenceDocs:
       - lang: Java
       - lang: Go
       - lang: Ruby
-  schemaExpansionLevel: 2
+      - lang: PHP
+  schemaExpansionLevel: '2'
   maxDisplayedEnumValues: 10
-  showConsole: true
+  hideTryItPanel: false
+  expandResponses: '200,201'
+  requiredPropsFirst: true

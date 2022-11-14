@@ -1,45 +1,52 @@
 get:
   x-products:
-    - Full
-    - Risk Management
     - Core
   tags:
     - AML
-  summary: Search PEP/Sanctions/Adverse Media lists
-  operationId: GetAmlEntry
+  summary: Search an individual's details against AML lists
+  operationId: GetAmlHit
   x-sdk-operation-name: getAll
-  description: |
-    Search multiple PEP/Sanctions/Adverse Media lists with first and last name to find any blocklisted identities.
-    Performs a fuzzy search including soundex. Not all fields are guaranteed to be filled.
+  description: |-
+    Searches a individual's details against multiple
+    Politically Exposed Person (PEP), sanction, or
+    adverse media lists to determine if the customer is blocklisted.
+    Performs a fuzzy search that uses Soundex. Note that
+    some returned fields may not contain values.
   parameters:
     - name: firstName
       in: query
       required: true
-      description: First name of individual to search.
+      description: First name of the individual to search.
       schema:
         type: string
     - name: lastName
       in: query
       required: true
-      description: Last name of individual to search.
+      description: Last name of the individual to search.
       schema:
         type: string
     - name: dob
       in: query
       required: false
-      description: Date of birth in format YYYY-MM-DD.
+      description: Individual's date of birth in YYYY-MM-DD format.
       schema:
         type: string
     - name: country
       in: query
       required: false
-      description: Country of individual as an ISO Alpha-2 code.
+      description: |-
+        Country where the individual lives in
+        ISO Alpha-2 code format. For examples, see
+        [ISO.org](https://www.iso.org/obp/ui/#search/code/).
       schema:
         $ref: ../components/schemas/Country.yaml
 
   responses:
     '200':
-      description: An array of objects representing hits, or an empty array if none are found.
+      description: |-
+        Results retrieved.
+        - - -
+        Returns an array of objects that represent hits, or an empty array if no hits are found.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml

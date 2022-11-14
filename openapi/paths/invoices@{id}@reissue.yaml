@@ -2,17 +2,15 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 post:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Invoices
   summary: Reissue an invoice
   operationId: PostInvoiceReissuance
   x-sdk-operation-name: reissue
-  description: >
-    Reissue an invoice with specified identifier string. It must be issued.
-    (status must be `unpaid` or `past-due`).
+  description: |-
+    Reissues an invoice with a specified identifier string. The status
+    of the invoice must be `unpaid` or `past-due`.
   requestBody:
     content:
       application/json:
@@ -22,7 +20,10 @@ post:
     required: true
   responses:
     '201':
-      description: Invoice was reissued successfully.
+      description: Invoice reissued.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -35,3 +36,8 @@ post:
       $ref: ../components/responses/NotFound.yaml
     '409':
       $ref: ../components/responses/Conflict.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: '../code_samples/PHP-SDK-3.0/invoices@{id}@reissue/post.php'

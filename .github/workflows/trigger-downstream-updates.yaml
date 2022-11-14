@@ -71,3 +71,18 @@ jobs:
           repo: Rebilly/rebilly-js-sdk
           token: ${{ secrets.MACHINE_USER_PAT }}
           inputs: '{ "trigger-reason": "${{needs.generate-trigger-reason.outputs.reason}}" }'
+
+  trigger-rebilly-php-sdk-update:
+    name: Trigger PHP SDK update
+    runs-on: ubuntu-latest
+    needs: generate-trigger-reason
+    steps:
+
+      - name: Trigger update workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Updates SDK based on api-definitions
+          ref: v3.x
+          repo: Rebilly/rebilly-php
+          token: ${{ secrets.MACHINE_USER_PAT }}
+          inputs: '{ "trigger-reason": "${{needs.generate-trigger-reason.outputs.reason}}" }'

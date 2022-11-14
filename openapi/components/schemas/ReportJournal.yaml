@@ -1,0 +1,58 @@
+type: object
+properties:
+  aggregationField:
+    type: string
+    description: The report data is grouped by the aggregation field.
+    enum:
+      - product.accountingCode
+      - product.id
+      - plan.id
+  currency:
+    $ref: CurrencyCode.yaml
+  bookedFrom:
+    type: string
+    description: |
+      A year and month from which revenue is booked.
+      If empty then booked revenue starts from the first booked amount.
+    pattern: '^\d{4}-\d{2}$'
+    example: 2022-01
+  bookedTo:
+    type: string
+    description: |
+      A year and month in which revenue is booked until.
+      If empty then booked revenue is taken until the most recently booked amount.
+    pattern: '^\d{4}-\d{2}$'
+    example: 2022-01
+  recognizedAt:
+    type: string
+    description: A year and month in which revenue was recognized.
+    pattern: '^\d{4}-\d{2}$'
+    example: 2022-01
+  data:
+    type: array
+    items:
+      type: object
+      properties:
+        aggregationValue:
+          description: The aggregation field value.
+          type: string
+        bookedMonth:
+          description: Month in which revenue is booked.
+          type: string
+          pattern: '^\d{4}-\d{2}$'
+          example: 2022-02
+        bookedAmount:
+          description: Revenue amount which is booked for recognition.
+          type: number
+          format: double
+          example: 25.0
+        recognizedAmount:
+          description: Recognized revenue amount.
+          type: number
+          format: double
+          example: 20.0
+        remainingAmount:
+          description: Remaining revenue amount to be recognized.
+          type: number
+          format: double
+          example: 5.0

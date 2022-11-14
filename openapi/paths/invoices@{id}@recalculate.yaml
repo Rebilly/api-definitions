@@ -2,23 +2,24 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 post:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Invoices
   summary: Recalculate an invoice
   operationId: PostInvoiceRecalculation
   x-sdk-operation-name: recalculate
-  description: >
-    Recalculate an invoice with specified identifier string.
+  description: |-
+    Recalculates shipping rates, taxes, and discounts on an invoice
+    with a specified identifier string.
 
-    It will recalculate shipping rates, taxes, discounts. It is useful when
-    coupon was revoked or customer redeemed coupon after invoice was issued and
-    you want to apply it to this invoice.
+    One use case for this operation to apply a revoked coupon, or
+    coupon that was redeemed by a customer after the invoice was issued.
   responses:
     '201':
-      description: Invoice was recalculated successfully.
+      description: Invoice recalculated.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -31,3 +32,8 @@ post:
       $ref: ../components/responses/NotFound.yaml
     '409':
       $ref: ../components/responses/Conflict.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: '../code_samples/PHP-SDK-3.0/invoices@{id}@recalculate/post.php'

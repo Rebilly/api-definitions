@@ -3,6 +3,8 @@ allOf:
   - $ref: ../RuleAction.yaml
   - type: object
     properties:
+      documents:
+        $ref: ../../KycRequestDocuments.yaml
       excludePolicy:
         type: string
         description: Who should be excluded from the verification.
@@ -59,11 +61,8 @@ allOf:
           The currency three letter code to display on the bypass link, if optional.
         type: string
         default: USD
-      maxAttempts:
-        description: Maximum number of verification attempts per transaction.
-        type: integer
-        default: 3
     required:
+      - documents
       - excludePolicy
       - isMandatory
       - promptPolicy

@@ -2,7 +2,6 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
     - Users
   tags:
     - Segments
@@ -13,7 +12,7 @@ get:
     Retrieve a specific UI Segment.
   responses:
     '200':
-      description: Segment was retrieved successfully.
+      description: Segment was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -31,7 +30,6 @@ get:
       $ref: ../components/responses/NotFound.yaml
 put:
   x-products:
-    - Full
     - Users
   tags:
     - Segments
@@ -42,18 +40,13 @@ put:
     Update a Segment.
   responses:
     '200':
-      description: Segment was updated successfully.
+      description: Segment was updated.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Segments/Segment.yaml
     '403':
-      description: |
-        This will be sent if the user is not the owner.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Error.yaml
+      $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
     '422':
@@ -65,7 +58,6 @@ put:
           $ref: ../components/schemas/Segments/Segment.yaml
 delete:
   x-products:
-    - Full
     - Users
   tags:
     - Segments
@@ -77,13 +69,8 @@ delete:
     perform this.
   responses:
     '204':
-      description: Segment was deleted successfully.
+      description: Segment was deleted.
     '403':
-      description: |
-        This will be sent if the user is not the owner.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Error.yaml
+      $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml

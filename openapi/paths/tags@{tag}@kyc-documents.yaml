@@ -2,7 +2,6 @@ parameters:
   - $ref: ../components/parameters/tag.yaml
 post:
   x-products:
-    - Full
     - Core
   tags:
     - Tags
@@ -19,6 +18,7 @@ post:
       application/json:
         schema:
           type: object
+          title: PostTagKycDocumentCollectionRequest
           required:
             - kycDocumentIds
           properties:
@@ -40,7 +40,6 @@ post:
       $ref: ../components/responses/ValidationError.yaml
 delete:
   x-products:
-    - Full
     - Core
   tags:
     - Tags
@@ -57,6 +56,7 @@ delete:
       application/json:
         schema:
           type: object
+          title: DeleteTagKycDocumentCollectionRequest
           required:
             - kycDocumentIds
           properties:

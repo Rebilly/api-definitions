@@ -4,6 +4,6 @@ $authenticationForm->setPassword('test123');
 
 try {
     $authenticationToken = $client->authenticationTokens()->login($authenticationForm);
-} catch (UnprocessableEntityException $e) {
-    echo $e->getMessage();
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
 }

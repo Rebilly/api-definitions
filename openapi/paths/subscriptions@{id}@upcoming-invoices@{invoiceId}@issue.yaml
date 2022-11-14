@@ -8,8 +8,6 @@ parameters:
       type: string
 post:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Orders
@@ -27,7 +25,10 @@ post:
     required: true
   responses:
     '201':
-      description: Upcoming Invoice was issued successfully.
+      description: Upcoming Invoice was issued.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

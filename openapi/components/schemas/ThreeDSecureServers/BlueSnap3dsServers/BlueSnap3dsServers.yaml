@@ -1,0 +1,14 @@
+description: BlueSnap 3DS Servers.
+discriminator:
+  propertyName: name
+  mapping:
+    ThreeDSecureIO3dsServer: ./BlueSnapThreeDSecureIOServer.yaml
+type: object
+required:
+  - name
+properties:
+  name:
+    allOf:
+      - $ref: ../../Gateways/ThreeDSecureServerName.yaml
+    enum:
+      - ThreeDSecureIO3dsServer

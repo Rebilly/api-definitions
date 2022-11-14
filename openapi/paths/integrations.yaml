@@ -1,17 +1,19 @@
 get:
   x-products:
-    - Full
     - Users
   tags:
     - Integrations
-  summary: Retrieve a list of integrations
+  summary: Retrieve integrations
   operationId: GetIntegrationCollection
   x-sdk-operation-name: getAll
   description: |
     Retrieve a list of integrations.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
   responses:
     '200':
-      description: A list of integrations was retrieved successfully.
+      description: A list of integrations was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml

@@ -9,8 +9,6 @@ parameters:
       minimum: 1
 get:
   x-products:
-    - Full
-    - Risk Management
     - Users
   tags:
     - Lists
@@ -19,11 +17,11 @@ get:
   x-sdk-operation-name: getByVersion
   responses:
     '200':
-      description: List's exact version was retrieved successfully.
+      description: List's exact version was retrieved.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/List.yaml
+            $ref: ../components/schemas/ValueList.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

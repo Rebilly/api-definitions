@@ -2,8 +2,6 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Orders
@@ -20,7 +18,7 @@ get:
     Retrieve an order with specified identifier string.
   responses:
     '200':
-      description: Order was retrieved successfully.
+      description: Order was retrieved.
       content:
         application/json:
           schema:
@@ -38,18 +36,20 @@ get:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/subscriptions@{id}/get.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/subscriptions@{id}/get.php
 put:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Orders
-  summary: Upsert an order with predefined ID
+  summary: Upsert an order
   operationId: PutSubscription
   x-sdk-operation-name: update
   description: |
-    Create or update an order with predefined identifier string.
+    Create or update (upsert) an order with specified identifier string.
   parameters:
     - $ref: ../components/parameters/subscriptionExpand.yaml
   requestBody:
@@ -63,6 +63,9 @@ put:
             $ref: ../components/schemas/Subscription.yaml
     '201':
       description: Order was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -82,10 +85,12 @@ put:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/subscriptions@{id}/put.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/subscriptions@{id}/put.php
 delete:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Orders
@@ -93,7 +98,7 @@ delete:
   operationId: DeleteSubscription
   x-sdk-operation-name: delete
   description: |
-    Delete a pending order with predefined identifier string.
+    Delete a pending order with specified identifier string.
   responses:
     '204':
       description: Pending order was deleted.
@@ -105,3 +110,8 @@ delete:
       $ref: ../components/responses/NotFound.yaml
     '409':
       $ref: ../components/responses/Conflict.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/subscriptions@{id}/delete.php

@@ -3,23 +3,21 @@ parameters:
   - $ref: ../components/parameters/rulesVersion.yaml
 get:
   x-products:
-    - Full
-    - Risk Management
     - Users
   tags:
     - Rules
-  summary: Retrieve the version of the set of rules
+  summary: Retrieve a version of a ruleset
   operationId: GetEventRuleVersion
   x-sdk-operation-name: getRulesVersionDetail
-  description: |
-    Retrieve the version of the selected set of rules.
-    The versions are created each time you change the rules.
+  description: |-
+    Retrieves a version of a ruleset with a specified event type.
+    A new version is created each time you change a rule.
   parameters:
     - $ref: ../components/parameters/collectionFields.yaml
     - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: Rules version was retrieved successfully.
+      description: Ruleset version retrieved.
       content:
         application/json:
           schema:

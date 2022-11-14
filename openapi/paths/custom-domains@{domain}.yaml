@@ -10,7 +10,6 @@ parameters:
 get:
   x-products:
     - Users
-    - Full
   tags:
     - Custom domains
   summary: Retrieve a custom domain
@@ -20,7 +19,7 @@ get:
     Retrieve a custom domain with specified identifier string.
   responses:
     '200':
-      description: Custom domain was retrieved successfully.
+      description: Custom domain was retrieved.
       content:
         application/json:
           schema:
@@ -34,14 +33,13 @@ get:
 delete:
   x-products:
     - Users
-    - Full
   tags:
     - Custom domains
   summary: Delete a custom domain
   operationId: DeleteCustomDomain
   x-sdk-operation-name: delete
   description: |
-    Delete a custom domain with predefined identifier string.
+    Delete a custom domain with specified identifier string.
   responses:
     '204':
       description: Custom domains was deleted.

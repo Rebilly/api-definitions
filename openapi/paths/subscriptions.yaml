@@ -1,11 +1,9 @@
 get:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Orders
-  summary: Retrieve a list of orders
+  summary: Retrieve orders
   operationId: GetSubscriptionCollection
   x-sdk-operation-name: getAll
   security:
@@ -23,7 +21,7 @@ get:
     - $ref: ../components/parameters/subscriptionExpand.yaml
   responses:
     '200':
-      description: A list of subscriptions was retrieved successfully.
+      description: A list of subscriptions was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -48,10 +46,12 @@ get:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/subscriptions/get.js
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/subscriptions/get.php
 post:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Orders
@@ -59,8 +59,8 @@ post:
   operationId: PostSubscription
   x-sdk-operation-name: create
   description: |
-    Create an order. Consider using the upsert.
-    operation to accomplish this task.
+    Create an order. Consider using the [Create or update an order with specified ID](../PutSubscription) operation.
+    operation to complete this task.
   parameters:
     - $ref: ../components/parameters/subscriptionExpand.yaml
   requestBody:
@@ -68,6 +68,9 @@ post:
   responses:
     '201':
       description: Order was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -85,3 +88,7 @@ post:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/subscriptions/post.js
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/subscriptions/post.php

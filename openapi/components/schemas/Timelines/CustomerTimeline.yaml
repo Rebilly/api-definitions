@@ -1,12 +1,12 @@
 type: object
 properties:
   id:
-    description: The Timeline message identifier string.
+    description: ID of the customer timeline custom event.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   type:
-    description: Timeline message type.
+    description: Type of timeline message.
     type: string
     enum:
       - account-password-reset-requested
@@ -47,6 +47,7 @@ properties:
       - kyc-document-modified
       - kyc-document-rejected
       - kyc-document-reviewed
+      - kyc-request-fulfilled
       - lead-source-changed
       - order-activated
       - order-canceled
@@ -81,25 +82,26 @@ properties:
       - transaction-voided
       - transaction-waiting-gateway
   customEventType:
-    description: >-
-      Timeline custom event type. Used with `custom-event` type. Must be defined
-      using [Customer Timeline custom event
-      API](#operation/PostCustomerTimelineCustomEventType).
+    description: |-
+      Timeline custom event type.
+      Used with `custom-event` type.
+      This value must be defined using the [Create customer timeline custom event type](../PostCustomerTimeline) operation.
     type: string
     nullable: true
     minLength: 1
     maxLength: 255
   customData:
-    description: >-
-      Timeline custom event data. Used with `custom-event` type. Will be
-      transformed to `extraData` two-column table in response.
+    description: |-
+      Timeline custom event data.
+      Used with `custom-event` type.
+      Transforms to `extraData` two-column table in response.
     type: object
     writeOnly: true
     example:
       customAttribute: customValue
       otherAttribute: otherValue
   triggeredBy:
-    description: Shows who or what triggered the Timeline message.
+    description: Specifies who, or what, triggered the timeline event.
     type: string
     readOnly: true
     enum:
@@ -107,17 +109,17 @@ properties:
       - app
       - direct-api
   message:
-    description: The message that describes the message details.
+    description: Detailed message description.
     type: string
   extraData:
     $ref: ./TimelineExtraData.yaml
   occurredTime:
-    description: Timeline message time.
+    description: Date and time at which the timeline message occurred.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   _links:
     type: array
-    description: The links related to resource.
+    description: Related resource links.
     readOnly: true
     minItems: 1
     items:

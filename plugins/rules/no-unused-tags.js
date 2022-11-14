@@ -1,6 +1,6 @@
 module.exports = NoUnusedTag
 
-const ignoredTags = ['Rebilly API', 'Users API', 'Reports API'];
+const ignoredTags = ['Rebilly API', 'Users API', 'Reports API', 'Storefront API'];
 
 function validate() {
   return (definitionRoot, {report, location, resolve}) => {

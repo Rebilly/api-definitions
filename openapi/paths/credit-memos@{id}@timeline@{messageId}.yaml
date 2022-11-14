@@ -1,0 +1,53 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: messageId
+    in: path
+    description: ID of the credit memo timeline message.
+    required: true
+    schema:
+      type: string
+get:
+  x-products:
+    - Core
+  tags:
+    - Credit memos timeline
+  summary: Retrieve a credit memo timeline message
+  operationId: GetCreditMemoTimeline
+  x-sdk-operation-name: getTimelineMessage
+  description: |-
+    Retrieves a credit memo timeline message with a specified ID.
+  responses:
+    '200':
+      description: Credit memo timeline message retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Timelines/CreditMemoTimeline.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+
+delete:
+  x-products:
+    - Core
+  tags:
+    - Credit memos timeline
+  summary: Delete a credit memo timeline message
+  operationId: DeleteCreditMemoTimeline
+  x-sdk-operation-name: deleteTimelineMessage
+  description: |-
+    Deletes a credit memo timeline message with a specified ID.
+  responses:
+    '204':
+      description: Credit memo timeline message deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml

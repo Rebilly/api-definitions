@@ -1,8 +1,5 @@
 post:
   x-products:
-    - Full
-    - Payments
-    - Billing
     - Core
   tags:
     - Transactions
@@ -33,7 +30,9 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/ReadyToPay/ReadyToPayMethods.yaml
+            type: array
+            items:
+              $ref: ../components/schemas/ReadyToPay/ReadyToPayMethods.yaml
     401:
       $ref: ../components/responses/Unauthorized.yaml
     403:

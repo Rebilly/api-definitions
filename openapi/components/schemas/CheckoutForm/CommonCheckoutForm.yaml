@@ -4,64 +4,75 @@ required:
   - plans
 properties:
   id:
-    description: The checkout form identifier string.
+    description: ID of the checkout form.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   websiteId:
-    description: Checkout form website ID.
+    $ref: ../Websites/WebsiteId.yaml
+  customDomain:
+    description: Custom domain for the checkout form.
     type: string
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 255
+    nullable: true
   plans:
-    description: >-
-      The list of plans that would be applied to customer order by default.
+    description: |-
+      List of plans that are applied to a customer order by default.
+      Plans describe how the customer must pay for products. For more information, see [Plans](../../Plans).
     minItems: 1
     allOf:
       - $ref: CheckoutFormPlans.yaml
   addonPlans:
-    description: >-
-      The list of independent addons.
+    description: |-
+      List of add-on plans that are displayed to the customer on the payment screen.
+      Add-ons are plans that the customer has not already subscribed to.
 
-      Customer will be able to select whether to add the plans from the list or not.
+      The customer selects whether to add an add-on plan to their current order.
     default: []
     allOf:
       - $ref: CheckoutFormPlans.yaml
   bumpPlans:
-    description: >-
-      The list of plans that can be used instead of ones specified in `plans`.
+    description: |-
+      List of bump plans that are displayed to the customer on the payment screen.
+      Use bump plans to offer purchase bonuses, discounts, and deals to the customer.
 
-      Customer will be able to select whether to purchase bump plans or the regular ones.
+      The customer selects whether to purchase bump plans,
+      or to use the plans that are specified in their current order.
     default: []
     allOf:
       - $ref: CheckoutFormPlans.yaml
   accountsEnabled:
-    description: If `true` customer will be able to sign-up and sign-in using the form.
+    description: |-
+      Specifies whether the account is enabled.
+      If this value is `true`, the customer can sign-up and sign-in using the checkout form.
     type: boolean
     default: false
   couponsEnabled:
-    description: If `true` customer will be able to use coupons on the form.
+    description: |-
+      Specifies whether coupons are enabled in the checkout form.
+      If this value is `true`, the customer can use coupons in the checkout form.
+      Use coupons to reward customers, generate sales, or to test new pricing strategies.
     type: boolean
     default: false
   purchaseLimit:
-    description: >-
-      If the purchase limit is set, every purchase will decrease it. Zero
-      purchase limit will make form inactive.
+    description: |-
+      Limits the number of purchases that can be made using a specific checkout form.
+      If a purchase limit value is set, each purchase decreases this value.
+      When the purchases limit value reaches zero, the checkout form becomes inactive.
     type: integer
     minimum: 0
     nullable: true
     default: null
   paymentMethods:
-    description: >-
-      The list of available payment methods.
-      Only payment methods with at least one active gateway account are allowed.
-
-      If not specified all available payment methods will be displayed.
+    description: |-
+      List of available payment methods.
+      Payment methods must have at least one active gateway account.
+      If not specified, all available payment methods are displayed.
     type: array
     items:
       $ref: ../PaymentMethods/PaymentMethod.yaml
   customization:
-    description: Visual customization options for the form.
+    description: Visual customization options for the checkout form.
     type: object
     properties:
       logoId:
@@ -72,81 +83,79 @@ properties:
         description: Summary text.
         type: string
       buttonText:
-        description: You can use placeholder `{{amount}}` to substitute with the form total.
+        description: |-
+          Button text. Use the `{{amount}}` placeholder to display the checkout form total.
         type: string
         default: Pay {{amount}}
       colors:
-        description: Control the primary color used in the form and button text.
+        description: Primary color used in the checkout form and button text.
         type: object
         properties:
           primary:
-            description: Primary color for the form in hexadecimal format.
+            description: Primary color for the checkout form in hexadecimal format.
             type: string
             maxLength: 6
             default: '0044d4'
           buttonText:
-            description: Button text color for the form in hexadecimal format.
+            description: Button text color for the checkout form in hexadecimal format.
             type: string
             maxLength: 6
             default: 'ffffff'
       links:
-        description: Various urls that appear on the form.
+        description: URLs that are displayed on the checkout form.
         type: object
         properties:
           refundPolicy:
-            description: The url to the website refund policy.
+            description: Website refund policy URL.
             type: string
             format: url
           privacyPolicy:
-            description: The url to the website privacy policy.
+            description: Website privacy policy URL.
             type: string
             format: url
           termsOfService:
-            description: The url to the website terms of service.
+            description: Website terms of service URL.
             type: string
             format: url
       tracking:
-        description: Various tracking system identifier strings.
+        description: Tracking system identifier strings.
         type: object
         properties:
           googleAnalytics:
-            description: The Google Analytics tracking identifier string.
+            description: Google Analytics tracking identifier string.
             type: string
             example: UA-XXXXX-YY
           googleTagManager:
-            description: The Google Tag Manager tracking identifier string.
+            description: Google Tag Manager tracking identifier string.
             type: string
             example: GTM-XXXXX
           gtagJs:
-            description: The Google Analytics tracking identifier string for Google's Global Site Tag (gtag.js) service.
+            description: |-
+              Google Analytics tracking identifier string.
+              This value is used by Google Global Site Tag (gtag.js) service.
             type: string
             example: UA-XXXXX-YY
           facebookPixel:
-            description: The Facebook Pixel tracking identifier string.
+            description: Facebook Pixel tracking identifier string.
             type: string
-            example: 1234567890
+            example: '1234567890'
           segmentAnalytics:
-            description: The Segment Analytics tracking identifier string.
+            description: Segment Analytics tracking identifier string.
             type: string
-            example: 1234567890
+            example: '1234567890'
           heapIo:
-            description: The Heap.io tracking identifier string.
+            description: Heap.io tracking identifier string.
             type: string
-            example: 1234567890
+            example: '1234567890'
       requiredAdditionalFields:
-        description: The list of fields which are marked as required.
+        description: List of required fields.
         type: array
         items:
           type: string
-          example:
-            - information.companyName
-            - information.phoneNumber
+        example:
+          - information.companyName
+          - information.phoneNumber
   createdTime:
-    description: Checkout form created time.
-    x-label: Creation time
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
-    description: Checkout form updated time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../UpdatedTime.yaml

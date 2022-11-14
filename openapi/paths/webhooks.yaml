@@ -1,10 +1,9 @@
 get:
   x-products:
-    - Full
     - Users
   tags:
     - Webhooks
-  summary: Retrieve a list of webhooks
+  summary: Retrieve webhooks
   operationId: GetWebhookCollection
   x-sdk-operation-name: getAll
   description: |
@@ -15,7 +14,7 @@ get:
     - $ref: ../components/parameters/collectionFilter.yaml
   responses:
     '200':
-      description: A list of Webhooks was retrieved successfully.
+      description: A list of Webhooks was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -39,7 +38,6 @@ get:
         $ref: ../code_samples/JavaScript/webhooks/get.js
 post:
   x-products:
-    - Full
     - Users
   tags:
     - Webhooks
@@ -57,6 +55,9 @@ post:
   responses:
     '201':
       description: Webhook was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -66,11 +67,7 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
     - lang: JavaScript
       source:

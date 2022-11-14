@@ -8,10 +8,9 @@ parameters:
       type: string
 get:
   x-products:
-    - Full
     - Users
   tags:
-    - Gateway Accounts
+    - Gateway accounts
   summary: Retrieve a Gateway Downtime schedule
   operationId: GetGatewayAccountDowntimeSchedule
   x-sdk-operation-name: getDowntimeSchedule
@@ -19,7 +18,7 @@ get:
     Retrieve a Gateway Downtime schedule with specified identifier string.
   responses:
     '200':
-      description: Gateway Downtime schedule was retrieved successfully.
+      description: Gateway Downtime schedule was retrieved.
       content:
         application/json:
           schema:
@@ -37,15 +36,14 @@ get:
           ../code_samples/JavaScript/gateway-accounts@{id}@downtime-schedules@{downtimeId}/get.js
 put:
   x-products:
-    - Full
     - Users
   tags:
-    - Gateway Accounts
+    - Gateway accounts
   summary: Update a Gateway Account downtime schedule
   operationId: PutGatewayAccountDowntimeSchedule
   x-sdk-operation-name: updateDowntimeSchedule
   description: |
-    Update a Gateway Account downtime schedule with predefined identifier string.
+    Update a Gateway Account downtime schedule with specified identifier string.
   responses:
     '200':
       description: Gateway Account downtime schedule was updated.
@@ -62,11 +60,7 @@ put:
     '409':
       $ref: ../components/responses/Conflict.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   requestBody:
     $ref: ../components/requestBodies/GatewayAccountDowntimeSchedule.yaml
   x-codeSamples:
@@ -76,10 +70,9 @@ put:
           ../code_samples/JavaScript/gateway-accounts@{id}@downtime-schedules@{downtimeId}/put.js
 delete:
   x-products:
-    - Full
     - Users
   tags:
-    - Gateway Accounts
+    - Gateway accounts
   summary: Delete a Gateway Account downtime schedule
   operationId: DeleteGatewayAccountDowntimeSchedule
   x-sdk-operation-name: deleteDowntimeSchedule

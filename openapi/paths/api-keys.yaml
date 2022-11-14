@@ -1,10 +1,9 @@
 get:
   x-products:
-    - Full
     - Users
   tags:
-    - API Keys
-  summary: Retrieve a list of API keys
+    - API keys
+  summary: Retrieve API keys
   operationId: GetApiKeyCollection
   x-sdk-operation-name: getAll
   description: |
@@ -15,7 +14,7 @@ get:
     - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
-      description: A list of API keys was retrieved successfully.
+      description: A list of API keys was retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -42,10 +41,9 @@ get:
         $ref: ../code_samples/JavaScript/api-keys/get.js
 post:
   x-products:
-    - Full
     - Users
   tags:
-    - API Keys
+    - API keys
   summary: Create an API key
   operationId: PostApiKey
   x-sdk-operation-name: create
@@ -56,6 +54,9 @@ post:
   responses:
     '201':
       description: API key was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -65,11 +66,7 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
     - lang: PHP
       source:

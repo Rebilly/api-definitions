@@ -2,24 +2,23 @@ parameters:
   - $ref: ../components/parameters/systemEventType.yaml
   - name: messageId
     in: path
-    description: The Rules Engine Timeline message ID.
+    description: ID of the rules engine timeline message.
     required: true
     schema:
       type: string
 get:
   x-products:
-    - Full
     - Users
   tags:
-    - Rules Timeline
-  summary: Retrieve Rules Engine Timeline message
+    - Rules timeline
+  summary: Retrieve a rules engine timeline message
   operationId: GetRulesEngineTimeline
   x-sdk-operation-name: getTimelineMessage
-  description: |
-    Retrieve a Rules Engine timeline message with specified identifier string.
+  description: |-
+    Retrieves a rules engine timeline message with specified ID.
   responses:
     '200':
-      description: Rules Engine message was retrieved successfully.
+      description: Rules engine message retrieved.
       content:
         application/json:
           schema:
@@ -32,18 +31,17 @@ get:
       $ref: ../components/responses/NotFound.yaml
 delete:
   x-products:
-    - Full
     - Users
   tags:
-    - Rules Timeline
-  summary: Delete Rules Engine Timeline message
+    - Rules timeline
+  summary: Delete a rules engine timeline message
   operationId: DeleteRulesEngineTimeline
   x-sdk-operation-name: deleteTimelineMessage
-  description: |
-    Delete Rules Engine Timeline message with predefined identifier string.
+  description: |-
+    Deletes a rules engine timeline message with specified ID.
   responses:
     '204':
-      description: Rules Engine Timeline message was deleted.
+      description: Rules engine timeline message deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -52,4 +50,3 @@ delete:
       $ref: ../components/responses/NotFound.yaml
     '409':
       $ref: ../components/responses/Conflict.yaml
-

@@ -2,10 +2,9 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 post:
   x-products:
-    - Full
     - Users
   tags:
-    - Gateway Accounts
+    - Gateway accounts
   summary: Close a Gateway Account
   operationId: PostGatewayAccountClosure
   x-sdk-operation-name: close
@@ -18,7 +17,10 @@ post:
     to process transactions. The "status" attribute will be set to "closed".
   responses:
     '201':
-      description: Closed successfully.
+      description: Gateway account closed.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

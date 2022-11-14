@@ -1,0 +1,33 @@
+content:
+  application/json:
+    schema:
+      properties:
+        customerId:
+          $ref: ../../schemas/CustomerId.yaml
+        kycRequestId:
+          description: The KYC request ID.
+          type: string
+        eventType:
+          type: string
+          description: Rebilly webhooks event type.
+          enum:
+            - kyc-request-attempted
+            - kyc-request-failed
+            - kyc-request-fulfilled
+            - kyc-request-partially-fulfilled
+        _embedded:
+          type: object
+          properties:
+            customer:
+              $ref: ../../schemas/Customer.yaml
+            kycRequest:
+              $ref: ../../schemas/KycRequest.yaml
+        _links:
+          type: array
+          description: Related resource links.
+          minItems: 2
+          items:
+            anyOf:
+              - $ref: ../../schemas/Links/CustomerLink.yaml
+              - $ref: ../../schemas/Links/KycRequestLink.yaml
+description: KYC request webhook body resource.

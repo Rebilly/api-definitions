@@ -1,0 +1,27 @@
+content:
+  application/json:
+    schema:
+      properties:
+        paymentCardId:
+          description: The payment card ID.
+          type: string
+        eventType:
+          type: string
+          description: Webhook event type.
+          enum:
+            - payment-card-created
+            - payment-card-expiration-reminder
+            - payment-card-expired
+        _embedded:
+          type: object
+          properties:
+            paymentCard:
+              $ref: ../../schemas/PaymentCards/PaymentCard.yaml
+        _links:
+          type: array
+          description: Related resource links.
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: ../../schemas/Links/PaymentCardLink.yaml
+description: Payment card webhook request body resource.

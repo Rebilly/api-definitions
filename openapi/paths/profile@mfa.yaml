@@ -1,6 +1,5 @@
 get:
   x-products:
-    - Full
     - Users
   tags:
     - Profile
@@ -11,7 +10,7 @@ get:
     Retrieve user MFA status.
   responses:
     '200':
-      description: User MFA status was retrieved successfully.
+      description: User MFA status was retrieved.
       content:
         application/json:
           schema:
@@ -28,7 +27,6 @@ get:
         $ref: ../code_samples/JavaScript/profile@mfa/get.js
 post:
   x-products:
-    - Full
     - Users
   tags:
     - Profile
@@ -39,7 +37,10 @@ post:
     Update user MFA. Link with rel `enrollment` must be followed to verify existing or enroll new MFA.
   responses:
     '201':
-      description: User MFA update url was created successfuly.
+      description: User MFA update url was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -56,7 +57,6 @@ post:
         $ref: ../code_samples/JavaScript/profile@mfa/post.js
 delete:
   x-products:
-    - Full
     - Users
   tags:
     - Profile
@@ -67,7 +67,7 @@ delete:
     Delete user MFA. To succed `lastAuthTime` must be no more than 10 minutes before this call.
   responses:
     '204':
-      description: User MFA was deleted successfuly.
+      description: User MFA was deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

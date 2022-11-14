@@ -3,14 +3,21 @@ title: Billing agreement
 required:
   - name
   - paypalMerchantId
+  - paypalClientId
   - billingAgreementToken
   - expirationTime
 properties:
   name:
-    $ref: ./PayPalBillingAgreementFeatureName.yaml
+    type: string
+    description: The feature name.
+    enum:
+      - PayPal billing agreement
   paypalMerchantId:
     type: string
     description: PayPal merchant ID.
+  paypalClientId:
+    type: string
+    description: PayPal client ID.
   billingAgreementToken:
     type: string
     description: PayPal billing agreement token.

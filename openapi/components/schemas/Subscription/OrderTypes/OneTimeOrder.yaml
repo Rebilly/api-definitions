@@ -5,13 +5,18 @@ required:
   - websiteId
   - items
 allOf:
+  - $ref: ../../Subscription.yaml
   - $ref: ../../Common/CommonOneTimeOrder.yaml
   - properties:
       customerId:
-        description: The customer identifier string.
         x-basic: true
         allOf:
-          - $ref: ../../ResourceId.yaml
+          - $ref: ../../CustomerId.yaml
+      organizationId:
+        deprecated: true
+        readOnly: true
+        allOf:
+          - $ref: ../../Organizations/OrganizationId.yaml
   # Always keep the SubscriptionMetadata the latest merged schema,
   # it contains _links and _embedded which is better to keep at the end of doc.
   - $ref: ../SubscriptionMetadata.yaml

@@ -5,7 +5,6 @@ servers:
     description: Live server
 get:
   x-products:
-    - Full
     - Users
   tags:
     - Metadata
@@ -14,6 +13,9 @@ get:
   x-sdk-operation-name: getAll
   description: |
     Retrieve payment methods metadata.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
   security: []
   responses:
     '200':

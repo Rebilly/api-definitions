@@ -1,15 +1,14 @@
-description: >
-  The URL where a server-to-server POST notification will be sent.  It  will be
-  sent when the
+description: |-
+  URL where a server-to-server POST notification is sent. This
+  notification is sent when the transaction result is finalized after
+  a timeout or an offsite interaction.
 
-  transaction's result is finalized after a timeout or an offsite interaction.
-  Do not trust the
+  Do not trust this notification alone, complete a GET request to
+  confirm the result of the transaction. To ensure the request is not
+  reattempted, when the result is confirmed, respond with a 2xx HTTP
+  status code.
 
-  notification; follow with a GET request to confirm the result of the
-  transaction. Please
-
-  respond with a 2xx HTTP status code, or we will reattempt the request again.
-
-  The 2 placeholders are available to use in this URI: `{id}` and `{result}`.
+  The following placeholders are available to use in this URI: `{id}`
+  and `{result}`.
 type: string
 format: uri

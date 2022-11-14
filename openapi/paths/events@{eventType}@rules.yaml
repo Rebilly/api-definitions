@@ -2,17 +2,16 @@ parameters:
   - $ref: ../components/parameters/systemEventType.yaml
 get:
   x-products:
-    - Full
-    - Risk Management
     - Users
   tags:
     - Rules
-  summary: Retrieve a list of rules for event
+  summary: Retrieve event rules
   operationId: GetEventRuleCollection
   x-sdk-operation-name: getRules
+  description: Retrieves rules associated with a specified event type.
   responses:
     '200':
-      description: Rules were retrieved successfully.
+      description: Rules retrieved.
       content:
         application/json:
           schema:
@@ -29,17 +28,16 @@ get:
         $ref: '../code_samples/JavaScript/events@{eventType}@rules/get.js'
 put:
   x-products:
-    - Full
-    - Risk Management
     - Users
   tags:
     - Rules
-  summary: Update the rules for event
+  summary: Update event rules
   operationId: PutEventRule
   x-sdk-operation-name: createRules
+  description: Updates rules associated with a specified event type.
   responses:
     '200':
-      description: Rules were updated.
+      description: Rules updated.
       content:
         application/json:
           schema:
@@ -51,11 +49,7 @@ put:
     '404':
       $ref: ../components/responses/NotFound.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   requestBody:
     $ref: ../components/requestBodies/RuleSet.yaml
   x-codeSamples:

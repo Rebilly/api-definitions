@@ -27,8 +27,6 @@ allOf:
         description: >-
           To use plan defaults do not send the `trial` key, or send a `null`.
           value with it.
-        required:
-          - endTime
         properties:
           enabled:
             description: >-
@@ -36,7 +34,7 @@ allOf:
               plans without trial prices, the trial will be free.
             type: boolean
           endTime:
-            description: The time the trial should end.
+            description: Time and date at which the trial ends. If a trial is enabled on this subscription, a value must be provided.
             type: string
             format: date-time
       isTrialOnly:
@@ -44,30 +42,26 @@ allOf:
         type: boolean
         default: false
       invoiceTimeShift:
-        description: >
-          You can shift issue time and due time of invoices for this
-          subscription.
+        description: |-
+          You can shift issue time and due time of invoices for this subscription.
 
-          This setting overrides plan settings. To use plan settings, set
-          `null`.
+          This setting overrides plan settings.
+          To use plan settings, set `null`.
 
-          To use multiple plans in one subscription they all must have the same
-          billing period,
-
+          To use multiple plans in one subscription they all must have the same billing period,
           this property allows to subscribe to different plans.
         nullable: true
+        type: object
         example: null
         allOf:
           - $ref: ../Invoices/InvoiceTimeShift.yaml
       recurringInterval:
         type: object
-        description: >
-          The recurring interval to override plan settings. To use plan
-          settings, set `null`.
+        description: |-
+          The recurring interval to override plan settings.
+          To use plan settings, set `null`.
 
-          To use multiple plans in one subscription they all must have the same
-          recurring period length,
-
+          To use multiple plans in one subscription they all must have the same recurring period length,
           this property allows to subscribe to different plans.
         nullable: true
         example: null
@@ -79,10 +73,10 @@ allOf:
         type: boolean
         default: true
       startTime:
-        description: >-
-          Subscription start time.  When the value is sent as null, it will use
-          the current time. This value can't be in past more than one service
-          period.
+        description: |-
+          Subscription start time.
+          When the value is sent as `null`, it uses the current time.
+          This value can't be in past more than one service period.
         nullable: true
         x-sortable: true
         x-basic: true
@@ -92,8 +86,9 @@ allOf:
       endTime:
         description: Subscription end time.
         x-sortable: true
-        allOf:
-          - $ref: ../ServerTimestamp.yaml
+        type: string
+        format: date-time
+        readOnly: true
       renewalTime:
         description: Subscription renewal time.
         type: string
@@ -106,18 +101,16 @@ allOf:
         readOnly: true
         x-sortable: true
       lineItems:
-        description: >-
-          Subscription line items which queue until the next renewal (or interim)
-          invoice is issued for the subscription.
+        description: Subscription line items which queue until the next renewal (or interim) invoice is issued for the subscription.
         readOnly: true
         allOf:
           - $ref: ../Subscription/UpcomingInvoiceItemCollection.yaml
       lineItemSubtotal:
         type: object
         readOnly: true
-        description: >-
-          Subtotal of line items in this subscription (signed value). If credits
-          exceed debits, it will be a negative number.
+        description: |-
+          Subtotal of line items in this subscription (signed value).
+          If credits exceed debits, it is a negative number.
         properties:
           currency:
             x-label: Currency
@@ -129,3 +122,11 @@ allOf:
             x-sortable: true
             format: double
             example: 49.95
+      paymentInstrumentId:
+        description: |-
+          ID of the payment instrument to use for autopay.
+          If not provided or inactive, the customer's default payment instrument is used.
+        nullable: true
+        type: string
+        maxLength: 50
+        example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21

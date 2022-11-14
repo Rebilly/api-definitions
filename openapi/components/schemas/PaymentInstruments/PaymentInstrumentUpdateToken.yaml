@@ -7,9 +7,11 @@ properties:
     description: The billing address (if supplied, overrides billing address from token).
     allOf:
       - $ref: ../Contact/ContactObject.yaml
+  stickyGatewayAccountId:
+    description: Sticky gateway account ID.
+    allOf:
+      - $ref: ../ResourceId.yaml
   customFields:
     $ref: ../ResourceCustomFields.yaml
   useAsBackup:
-    description: Allow using this payment instrument as a backup for invoice payment retries.
-    type: boolean
-    default: false
+    $ref: ../UseAsBackup.yaml

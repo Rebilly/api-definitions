@@ -4,21 +4,23 @@ required:
   - websiteId
 properties:
   id:
-    description: The invoice ID.
+    description: ID of the invoice.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   websiteId:
-    description: The website ID.
-    allOf:
-      - $ref: ../ResourceId.yaml
+    $ref: ../Websites/WebsiteId.yaml
   invoiceNumber:
-    description: An auto-incrementing number based on the sequence of invoices for any particular customer.
+    description: |-
+      An auto-incrementing number based on the sequence of invoices
+      for any particular customer.
     readOnly: true
     type: integer
     x-basic: true
   subscriptionId:
-    description: The related order's ID if available, otherwise null.
+    description: |-
+      ID of the related subscription order, if available. This field
+      will be `null` if there are no related subscription orders.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
@@ -28,7 +30,7 @@ properties:
     allOf:
       - $ref: ../CurrencyCode.yaml
   amount:
-    description: The invoice's amount.
+    description: Amount of the invoice.
     type: number
     x-type: Money
     x-sortable: true
@@ -36,20 +38,20 @@ properties:
     format: double
     readOnly: true
   amountDue:
-    description: The invoice's due amount.
+    description: Amount that is due on the invoice.
     type: number
     x-type: Money
     x-sortable: true
     format: double
     readOnly: true
   subtotalAmount:
-    description: The invoice's subtotal amount.
+    description: Subtotal amount of the invoice.
     type: number
     x-type: Money
     format: double
     readOnly: true
   discountAmount:
-    description: The invoice's discounts amount.
+    description: Discount amount that is applied to the invoice.
     type: number
     x-type: Money
     format: double
@@ -59,20 +61,20 @@ properties:
   tax:
     $ref: ../Invoices/InvoiceTax.yaml
   billingAddress:
-    description: Invoice's billing address.
+    description: Billing address of the invoice.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   deliveryAddress:
-    description: Invoice's delivery address.
+    description: Delivery address of the invoice.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   poNumber:
-    description: Purchase order number which will be displayed on the invoice.
+    description: Purchase order number that is displayed on the invoice.
     nullable: true
     example: PO123456
     type: string
   notes:
-    description: Notes for the customer which will be displayed on the invoice.
+    description: Notes for the customer that are displayed on the invoice.
     type: string
   items:
     type: array
@@ -88,12 +90,15 @@ properties:
       allOf:
         - $ref: ../Coupon/InvoiceDiscount.yaml
   autopayScheduledTime:
-    description: Invoice autopay scheduled time.
+    description: |-
+      Date and time at which an automatic payment (autopay) is scheduled.
     type: string
     x-sortable: true
     format: date-time
   autopayRetryNumber:
-    description: Invoice autopay retry number.
+    description: |-
+      Number of times that an automatic payment (autopay) has been attempted on an
+      invoice.
     readOnly: true
     type: integer
     x-sortable: true
@@ -101,15 +106,15 @@ properties:
     default: 0
   status:
     type: string
-    description: Invoice status.
+    description: Status of the invoice.
     x-basic: true
     readOnly: true
     enum:
      - "draft"
      - "unpaid"
      - "paid"
+     - "partially-paid"
      - "past-due"
-     - "delinquent"
      - "abandoned"
      - "voided"
      - "partially-refunded"
@@ -117,21 +122,25 @@ properties:
      - "disputed"
   delinquentCollectionPeriod:
     type: integer
-    description: Delinquent collection period - difference between paidTime and dueTime in days.
+    description: |-
+      Length of time, in days, between when the invoice is
+      due and when the invoice is paid.
     x-sortable: true
     readOnly: true
   collectionPeriod:
     type: integer
     x-sortable: true
-    description: Collection period - difference between paidTime and issuedTime in days.
+    description: |-
+      Length of time, in days, between when the invoice is issued and
+      when the invoice is paid.
     readOnly: true
   abandonedTime:
-    description: Invoice abandoned time.
+    description: Date and time at which the invoice is abandoned.
     x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   voidedTime:
-    description: Invoice voided time.
+    description: Date and time at which the invoice is voided.
     x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
@@ -139,36 +148,31 @@ properties:
     x-label: Payment Date
     x-sortable: true
     x-basic: true
-    description: Invoice paid time.
+    description: Date and time at which the invoice is paid.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   dueTime:
-    description: Invoice due time.
+    description: Date and time at which the invoice is due for payment.
     type: string
     x-sortable: true
     format: date-time
   issuedTime:
-    description: Invoice issued time.
+    description: Date and time at which the invoice is issued.
     x-label: Date Issued
     x-sortable: true
     x-basic: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   createdTime:
-    description: Invoice created time.
-    x-sortable: true
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
-    description: Invoice updated time.
-    x-sortable: true
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../UpdatedTime.yaml
   paymentFormUrl:
     type: string
     readOnly: true
     format: url
-    description: |
-      URL where the customer can be redirected to pay for the invoice
-      with one of the methods which are available for this customer.
-      It's an alternative to creating a new transaction with empty `methods`.
+    description: |-
+      URL where the customer is redirected to pay the invoice
+      using one of the methods which are available to the customer.
+      This is an alternative to creating a new transaction with empty
+      `methods`.

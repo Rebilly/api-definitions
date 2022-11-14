@@ -1,6 +1,7 @@
 type: object
 title: Alternative payment token
 allOf:
+  - $ref: ./CompositeToken.yaml
   - $ref: ../Common/CommonPaymentToken.yaml
 required:
   - method
@@ -8,8 +9,19 @@ required:
 properties:
   method:
     description: The token payment method.
+    type: string
     allOf:
       - $ref: ../PaymentMethods/AlternativePaymentMethods.yaml
+      - not: 
+          enum:
+            - payment-card
+            - paypal
+            - ach
+            - echeck
+            - digital-wallet
+            - plaid-account
+            - Khelocard
+            - Klarna
   billingAddress:
     description: The billing address object.
     allOf:

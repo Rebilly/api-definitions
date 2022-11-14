@@ -1,0 +1,21 @@
+type: object
+title: Klarna
+required:
+  - method
+allOf: 
+  -  $ref: ../ReadyToPayMethods.yaml
+properties:
+  method:
+    type: string
+    description: The payment method.
+    enum:
+      - Klarna
+  feature:
+    type: object
+    nullable: true
+    description: |
+      The specific feature of this method. For example, a digital wallet or a processor. If the method does not have any features, this value will be null.
+    oneOf:
+      - $ref: ../Features/KlarnaFeature.yaml
+  filters:
+    $ref: ../ReadyToPayMethodFilters.yaml

@@ -2,27 +2,28 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 post:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Invoices
   summary: Issue an invoice
   operationId: PostInvoiceIssuance
   x-sdk-operation-name: issue
-  description: >
-    Issue an invoice with specified identifier string. It must be in `draft`
-    status.
+  description: |-
+    Issues an invoice with a specified identifier string. The invoice
+    must be in `draft` status.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/Invoices/InvoiceIssue.yaml
-    description: InvoiceIssue resource.
+    description: Invoice issue resource.
     required: true
   responses:
     '201':
-      description: Invoice was issued successfully.
+      description: Invoice issued.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
@@ -42,3 +43,7 @@ post:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/invoices@{id}@issue/post.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/invoices@{id}@issue/post.php

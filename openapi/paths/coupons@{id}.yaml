@@ -2,19 +2,17 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Coupons
   summary: Retrieve a coupon
   operationId: GetCoupon
   x-sdk-operation-name: get
-  description: |
-    Retrieve a coupon with specified coupon ID string.
+  description: |-
+    Retrieves a coupon with a specified ID.
   responses:
     '200':
-      description: Coupon was retrieved successfully.
+      description: Coupon retrieved.
       content:
         application/json:
           schema:
@@ -34,27 +32,28 @@ get:
         $ref: '../code_samples/JavaScript/coupons@{id}/get.js'
 put:
   x-products:
-    - Full
-    - Billing
     - Core
   tags:
     - Coupons
-  summary: Create or update a coupon with predefined coupon ID
+  summary: Upsert a coupon
   operationId: PutCoupon
   x-sdk-operation-name: update
-  description: |
-    Create or update a coupon with predefined coupon ID.
+  description: |-
+    Creates or updates (upserts) a coupon with a specified coupon ID.
   requestBody:
     $ref: ../components/requestBodies/Coupon.yaml
   responses:
     '200':
-      description: Coupon was updated.
+      description: Coupon updated.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Coupon/Coupon.yaml
     '201':
-      description: Coupon was created.
+      description: Coupon created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

@@ -1,15 +1,12 @@
 post:
   x-products:
-    - Full
-    - Risk Management
     - Users
   tags:
     - Rules
   summary: Trigger a test webhook
   operationId: PostPreviewRuleActionWebhookTrigger
   x-sdk-operation-name: triggerWebhookRuleAction
-  description: |
-    Trigger a test webhook.
+  description: Triggers a test webhook.
   requestBody:
     content:
       application/json:
@@ -19,7 +16,7 @@ post:
     required: true
   responses:
     '200':
-      description: Test webhook was triggered.
+      description: Test webhook triggered.
       content:
         application/json:
           schema:
@@ -29,11 +26,7 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
     - lang: JavaScript
       source:

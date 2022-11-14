@@ -2,7 +2,6 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
     - Users
   tags:
     - Users
@@ -13,7 +12,7 @@ get:
     Retrieve user with specified identifier string.
   responses:
     '200':
-      description: User was retrieved successfully.
+      description: User was retrieved.
       content:
         application/json:
           schema:
@@ -33,15 +32,14 @@ get:
         $ref: '../code_samples/JavaScript/users@{id}/get.js'
 put:
   x-products:
-    - Full
     - Users
   tags:
     - Users
-  summary: Create or update user with predefined ID
+  summary: Upsert a user
   operationId: PutUser
   x-sdk-operation-name: update
   description: |
-    Create or update user with predefined identifier string.
+    Create or update (upsert) user with specified identifier string.
   requestBody:
     $ref: ../components/requestBodies/User.yaml
   responses:
@@ -53,6 +51,9 @@ put:
             $ref: ../components/schemas/User.yaml
     '201':
       description: User was created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

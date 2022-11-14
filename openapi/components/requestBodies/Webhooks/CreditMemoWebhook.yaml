@@ -1,0 +1,29 @@
+content:
+  application/json:
+    schema:
+      properties:
+        creditMemoId:
+          description: ID of the credit memo.
+          type: string
+        eventType:
+          type: string
+          description: Rebilly webhooks event type.
+          enum:
+            - credit-memo-applied
+            - credit-memo-created
+            - credit-memo-modified
+            - credit-memo-partially-applied
+            - credit-memo-voided
+        _embedded:
+          type: object
+          properties:
+            creditMemo:
+              $ref: ../../schemas/CreditMemos/CreditMemo.yaml
+        _links:
+          type: array
+          description: Related resource links.
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: ../../schemas/Links/CreditMemoLink.yaml
+description: Credit memo webhook request body resource.

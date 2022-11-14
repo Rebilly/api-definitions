@@ -1,4 +1,6 @@
-description: paid-by-time restrictions.
+description: |-
+  Specifies a date and time at which a coupon redemption will expire
+  if not paid.
 allOf:
   - $ref: ../CouponRestriction.yaml
   - $ref: ../RedemptionRestriction.yaml
@@ -9,7 +11,9 @@ allOf:
       time:
         type: string
         format: date-time
-        description: >-
-          The time when the coupon's redemption is no longer valid and removed
-          from unpaid invoices if applied. Note that this datetime cannot be
-          changed.
+        description: |-
+          Date and time at which a coupon redemption is no longer
+          valid, and the coupon is removed from unpaid invoices if
+          applied.
+
+          > **Note:** This date-time cannot be changed.

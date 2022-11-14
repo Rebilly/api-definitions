@@ -5,6 +5,6 @@ $userForm->setEmail('johndoe@test.com');
 
 try {
     $user = $client->users()->update('userId', $userForm);
-} catch (UnprocessableEntityException $e) {
-    echo $e->getMessage();
+} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
 }

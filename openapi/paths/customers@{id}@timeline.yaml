@@ -2,15 +2,13 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
-    - Full
     - Core
   tags:
-    - Customers Timeline
-  summary: Retrieve a list of customer timeline messages
+    - Customers timeline
+  summary: Retrieve customer timeline messages
   operationId: GetCustomerTimelineCollection
   x-sdk-operation-name: getAllTimelineMessages
-  description: |
-    Retrieve a list of customer timeline messages.
+  description: Retrieves customer timeline messages.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -19,7 +17,7 @@ get:
     - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
-      description: A list of customer timeline messages was retrieved successfully.
+      description: List of customer timeline messages retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -43,25 +41,27 @@ get:
         $ref: '../code_samples/JavaScript/customers@{id}@timeline/get.js'
 post:
   x-products:
-    - Full
     - Core
   tags:
-    - Customers Timeline
-  summary: Create a customer Timeline comment or custom defined event
+    - Customers timeline
+  summary: Create a customer timeline comment
   operationId: PostCustomerTimeline
   x-sdk-operation-name: createTimelineComment
-  description: |
-    Create a customer Timeline comment or custom defined event.
+  description: |-
+    Creates a customer timeline comment or custom defined event.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/Timelines/CustomerTimeline.yaml
-    description: Customer Timeline resource.
+    description: Customer timeline resource.
     required: true
   responses:
     '201':
-      description: Customer Timeline comment or custom defined event was created.
+      description: Customer timeline comment or custom defined event created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
