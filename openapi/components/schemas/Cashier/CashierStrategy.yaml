@@ -24,10 +24,11 @@ properties:
   amounts:
     $ref: ./CashierStrategyAmounts.yaml
   customAmount:
-    description: |-
-      Custom amount restrictions.
-      If this value is `null`,  custom amounts are prohibited.
-    $ref: ./CashierStrategyCustomAmount.yaml
+    allOf:
+      - $ref: ./CashierStrategyCustomAmount.yaml
+      - description: |-
+          Custom amount restrictions.
+          If this value is `null`,  custom amounts are prohibited.
   createdTime:
     $ref: ../CreatedTime.yaml
   updatedTime:
