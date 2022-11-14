@@ -35,16 +35,13 @@ properties:
       - daily
       - monthly
   type:
-    description: |-
-      Type of gateway account limit.
-      - `money`: Limits the amount of money that a transaction can process on a gateway account.
-         If `money` is chosen, the currency is the report currency.
-      - `count`: Limits the total number of transaction can be processed on a gateway account.
+    description: Type of gateway account limit.
     type: string
     readOnly: true
-    enum:
-      - count
-      - money
+    x-enumDescriptions:
+      money: Limits the amount of money that a transaction can process on a gateway account.
+         If `money` is chosen, the currency is the report currency.
+      count: Limits the total number of transaction can be processed on a gateway account.
   cap:
     description: |-
       Limits the maximum allowed value.
