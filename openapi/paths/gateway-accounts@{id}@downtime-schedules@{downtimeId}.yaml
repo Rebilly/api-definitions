@@ -2,7 +2,7 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
   - name: downtimeId
     in: path
-    description: The Gateway Account downtime schedule ID.
+    description: ID of the gateway account downtime.
     required: true
     schema:
       type: string
@@ -11,14 +11,14 @@ get:
     - Users
   tags:
     - Gateway accounts
-  summary: Retrieve a Gateway Downtime schedule
+  summary: Retrieve a gateway account downtime schedule
   operationId: GetGatewayAccountDowntimeSchedule
   x-sdk-operation-name: getDowntimeSchedule
-  description: |
-    Retrieve a Gateway Downtime schedule with specified identifier string.
+  description: |-
+    Retrieves a gateway account downtime schedule with a specified ID.
   responses:
     '200':
-      description: Gateway Downtime schedule was retrieved.
+      description: Gateway downtime schedule retrieved.
       content:
         application/json:
           schema:
@@ -39,14 +39,13 @@ put:
     - Users
   tags:
     - Gateway accounts
-  summary: Update a Gateway Account downtime schedule
+  summary: Update a gateway account downtime schedule
   operationId: PutGatewayAccountDowntimeSchedule
   x-sdk-operation-name: updateDowntimeSchedule
-  description: |
-    Update a Gateway Account downtime schedule with specified identifier string.
+  description: Updates a gateway account downtime schedule with a specified ID.
   responses:
     '200':
-      description: Gateway Account downtime schedule was updated.
+      description: Gateway account downtime schedule updated.
       content:
         application/json:
           schema:
@@ -73,14 +72,14 @@ delete:
     - Users
   tags:
     - Gateway accounts
-  summary: Delete a Gateway Account downtime schedule
+  summary: Delete a gateway account downtime schedule
   operationId: DeleteGatewayAccountDowntimeSchedule
   x-sdk-operation-name: deleteDowntimeSchedule
-  description: |
-    Delete a Gateway Account downtime schedule.
+  description: |-
+    Deletes a gateway account downtime schedule with a specified ID.
   responses:
     '204':
-      description: Gateway Account downtime schedule was deleted.
+      description: Gateway account downtime schedule deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

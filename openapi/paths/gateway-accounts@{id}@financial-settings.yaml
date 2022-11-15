@@ -5,16 +5,16 @@ get:
     - Users
   tags:
     - Gateway accounts
-  summary: Retrieve financial settings
+  summary: Retrieve financial settings of a gateway account
   operationId: GetGatewayAccountFinancialSettings
   x-sdk-operation-name: getFinancialSettings
-  description: >
-    Read financial settings of a gateway account.
+  description: |-
+    Retrieves the financial settings of a gateway account with a specified ID.
 
-    This operation is experimental and not guaranteed to be backward compatible.
+    > **Important:** This operation is experimental and may not be backward compatible.
   responses:
     '200':
-      description: The financial settings were retrieved.
+      description: Financial settings retrieved.
       content:
         application/json:
           schema:
@@ -34,10 +34,10 @@ put:
   summary: Set financial settings
   operationId: PutGatewayAccountFinancialSettings
   x-sdk-operation-name: setFinancialSettings
-  description: |
-    Set financial settings of a gateway account.
+  description: |-
+    Sets financial settings for a gateway account with a specified ID.
 
-    This operation is experimental and not guaranteed to be backward compatible.
+    > **Important:** This operation is experimental and may not be backward compatible.
   requestBody:
     content:
       application/json:
@@ -45,7 +45,7 @@ put:
           $ref: ../components/schemas/GatewayAccounts/FinancialSettings.yaml
   responses:
     '200':
-      description: Gateway account financial settings were updated.
+      description: Gateway account financial settings updated.
       content:
         application/json:
           schema:

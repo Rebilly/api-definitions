@@ -1,4 +1,4 @@
-description: Worldpay Gateway config.
+description: Worldpay gateway configuration.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -10,11 +10,11 @@ allOf:
         properties:
           merchantCode:
             type: string
-            description: Worldpay Gateway merchant code.
+            description: Worldpay merchant code.
             format: password
           merchantPassword:
             type: string
-            description: Worldpay Gateway merchant password.
+            description: Worldpay merchant password.
             format: password
           payoutMerchantCode:
             type: string
@@ -26,10 +26,10 @@ allOf:
             format: password
           alternativePaymentsUsername:
             type: string
-            description: Optional API username for alternative payments platform.
+            description: Optional API username for an alternative payments platform.
           alternativePaymentsPassword:
             type: string
-            description: Optional API password for alternative payments platform.
+            description: Optional API password for an alternative payments platform.
             format: password
         required:
           - merchantCode
@@ -41,16 +41,16 @@ allOf:
         properties:
           delay:
             type: integer
-            description: Auto Capture delay (in hours).
+            description: Automatic capture delay in hours.
             minimum: 0
             default: 0
           enableStoredCredentials:
             type: boolean
-            description: True to enable Stored Credentials.
+            description: Specifies whether to enable stored credentials.
             default: false
           merchantInitiatedReason:
             type: string
-            description: The value of merchantInitiatedReason to send with merchant-initiated transactions.
+            description: Value to send with merchant-initiated transactions.
             enum:
               - UNSCHEDULED
               - RECURRING
