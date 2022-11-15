@@ -5,44 +5,46 @@ required:
   - scope
 properties:
   id:
-    description: ID of current Segment.
+    description: ID of the segment.
     readOnly: true
     type: string
     allOf:
       - $ref: ../ResourceId.yaml
   owner:
-    description: Owner (creator) of Segment.
+    description: Creator of segment.
     readOnly: true
     type: object
     properties:
       id:
-        description: User ID.
+        description: User ID of the creator.
         type: string
         allOf:
           - $ref: ../ResourceId.yaml
       name:
-        description: First and last name.
+        description: First and last name of the creator.
         type: string
   data:
-    description: >
-      An object containing schema to set up the UI for the segment. This schema
-      is built
-
-      and consumed by the frontend. It includes such information as Segment
-      name, UI settings, etc.
+    description: |-
+      An object that contains a schema that is used to set up the UI for the segment.
+      This schema is built and consumed by the frontend.
+      It includes information such as: segment name, UI settings, and so on.
     type: object
   isStarred:
-    description: Toggle whether this Segment is starred by the current user.
+    description: |-
+      Specifies whether this segment is starred by the current user.
+      Starring a segment marks it as a favorite segment,
+      and also adds the segment to a starred folder in the UI.
     type: boolean
   isVisible:
-    description: Toggle whether this Segment is visible to the current user.
+    description: Specifies whether the segment is visible to the current user.
     type: boolean
   userIds:
     type: array
     uniqueItems: true
     writeOnly: true
-    description: |
-      A list of user id's with whom to share, used if scope is set to `shared`.
+    description: |-
+      List of user IDs with which the segment is shared.
+      This field is used when the `scope` field is set to `shared`.
     items:
       description: User ID.
       allOf:
@@ -50,13 +52,11 @@ properties:
   users:
     type: array
     uniqueItems: true
-    description: |
-      A list of user's id and first and last names with whom this Segment
-      is shared.
+    description: List of user details with which this segment is shared.
     readOnly: true
     items:
       type: object
-      description: User person.
+      description: User details.
       properties:
         id:
           description: User ID.
@@ -67,25 +67,21 @@ properties:
           description: First and last name.
           type: string
   scope:
-    description: >
-      If `private`, then only the owner/creator can view this Segment. If set
-
-      to `public`, then it's shared with anyone in the owner's organization.
-
-      If set to `shared`, then it is only shared with specific users as
-      specified
-
-      in the `userIds` field.
+    description: |-
+      Controls the visibility of the segment.
     type: string
     enum:
       - private
       - public
       - shared
+    x-enumDescriptions:
+      private: Visible only to the owner the segment.
+      public: Visible to all in the owner's organization.
+      shared: Visible to a specific group of users that are specified in the `userIds` field.
   systemId:
-    description: >
-      If the Segment is based off of a system Segment, this will be the id of
-      the system Segment from which it was
-
-      derived. The scope must be `private` when providing this in the request.
+    description: |-
+      If the segment is derived from a system segment,
+      this field contains the ID of the related system segment.
+      To provide this field in a request, the `scope` field must be set to `private` .
     writeOnly: true
     type: string
