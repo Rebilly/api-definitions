@@ -1,4 +1,4 @@
-description: MiFinity config.
+description: MiFinity gateway configuration.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -12,14 +12,17 @@ allOf:
           apiKey:
             type: string
             format: password
+            description: MiFinity API key.
           mifinityAccountNumber:
             type: string
             format: password
+            description: MiFinity account number.
           accountHolderId:
             type: string
+            description: MiFinity account holder ID.
           brandId:
             type: string
-            description: A 3-digit ID provided by MiFinity which indicates through which brand is the call being made.
+            description: 3-digit ID provided by MiFinity which indicates through which brand the call made.
         required:
           - apiKey
           - mifinityAccountNumber
