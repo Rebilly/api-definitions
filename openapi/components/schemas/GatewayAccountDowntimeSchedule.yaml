@@ -4,12 +4,12 @@ required:
   - endTime
 properties:
   id:
-    description: The gateway account downtime schedule identifier string.
+    description: ID of the gateway account downtime schedule.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
   status:
-    description: The gateway account downtime schedule status.
+    description: Status of the gateway account downtime schedule.
     readOnly: true
     type: string
     enum:
@@ -17,7 +17,7 @@ properties:
       - ongoing
       - finished
   reason:
-    description: The gateway account downtime schedule reason.
+    description: Reason for the gateway account downtime schedule.
     readOnly: true
     type: string
     enum:
@@ -25,11 +25,11 @@ properties:
       - daily-limit-reached
       - monthly-limit-reached
   startTime:
-    description: The gateway account scheduled downtime start time.
+    description: Date and time at which the gateway account scheduled downtime starts.
     type: string
     format: date-time
   endTime:
-    description: The gateway account scheduled downtime end time.
+    description: Date and time at which the gateway account scheduled downtime ends.
     type: string
     format: date-time
   createdTime:
@@ -38,7 +38,7 @@ properties:
     $ref: UpdatedTime.yaml
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
     minItems: 1
     items:
