@@ -17,7 +17,7 @@ Rebilly follows a design-first approach to APIs.
 
 For guidance on how to write API descriptions when contributing to Rebilly APIs, see [Writing style](./WRITING-STYLE.md).
 
-## API styleguide
+## API style guide
 
 Rebilly uses the following automated lint rules in addition to the [Redocly recommended rules](https://redocly.com/docs/cli/rules/):
 
