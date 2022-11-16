@@ -6,8 +6,7 @@ get:
   summary: Retrieve gateway accounts
   operationId: GetGatewayAccountCollection
   x-sdk-operation-name: getAll
-  description: |
-    Retrieve a list of gateway accounts.
+  description: Retrieves a list of gateway accounts.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -17,7 +16,7 @@ get:
     - $ref: ../components/parameters/collectionFields.yaml
   responses:
     '200':
-      description: A list of Gateway Accounts was retrieved.
+      description: List of gateway accounts retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -47,16 +46,15 @@ post:
     - Users
   tags:
     - Gateway accounts
-  summary: Create a Gateway Account
+  summary: Create a gateway account
   operationId: PostGatewayAccount
   x-sdk-operation-name: create
-  description: |
-    Create a Gateway Account.
+  description: Creates a gateway account.
   requestBody:
     $ref: ../components/requestBodies/GatewayAccount.yaml
   responses:
     '201':
-      description: Gateway Account was created.
+      description: Gateway account created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -69,7 +67,7 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent.
+      description: Invalid data sent.
       content:
         application/json:
           schema:

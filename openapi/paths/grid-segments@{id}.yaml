@@ -5,14 +5,13 @@ get:
     - Users
   tags:
     - Segments
-  summary: Retrieve a specific Segment
+  summary: Retrieve a segment
   operationId: GetGridSegment
   x-sdk-operation-name: get
-  description: |
-    Retrieve a specific UI Segment.
+  description: Retrieves a UI segment with a specified ID.
   responses:
     '200':
-      description: Segment was retrieved.
+      description: Segment retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -33,14 +32,13 @@ put:
     - Users
   tags:
     - Segments
-  summary: Update a Segment
+  summary: Update a segment
   operationId: PutGridSegment
   x-sdk-operation-name: update
-  description: |
-    Update a Segment.
+  description: Updates a segment with a specified ID.
   responses:
     '200':
-      description: Segment was updated.
+      description: Segment updated.
       content:
         application/json:
           schema:
@@ -61,15 +59,17 @@ delete:
     - Users
   tags:
     - Segments
-  summary: Delete a Segment
+  summary: Delete a segment
   operationId: DeleteGridSegment
   x-sdk-operation-name: delete
-  description: >
-    Delete a Segment. This will also remove all shares. Only the owner may.
-    perform this.
+  description: |-
+    Deletes a segment with a specified ID.
+    This operation also removes all shares of the deleted segment.
+
+    > **Important:** This operation can only be performed by the segment owner.
   responses:
     '204':
-      description: Segment was deleted.
+      description: Segment deleted.
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '404':
