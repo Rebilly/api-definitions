@@ -57,29 +57,28 @@ properties:
           country:
             type: string
             readOnly: true
-            description: Customer's country.
+            description: Customer's country of residence.
           organization:
             type: string
             readOnly: true
             nullable: true
             description: Customer's organization.
       tags:
-        description: A list of customer's tags.
+        description: List of tags that have been assigned to the customer.
         readOnly: true
         type: array
         items:
           $ref: ./Tags/Tag.yaml
   hits:
     readOnly: true
-    description: A list of the hits returned during the AML check.
+    description: List of hits returned during the AML check.
     type: array
     items:
       $ref: ./AML.yaml
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
     minItems: 1
     items:
       $ref: ./Links/SelfLink.yaml
-
