@@ -3,12 +3,12 @@ get:
     - Core
   tags:
     - AML
-  summary: Retrieve a collection of Customer AML checks
+  summary: Retrieve results of a Customer's AML check
   operationId: GetAmlCheckCollection
-  x-sdk-operation-name: getAll
+  x-sdk-operation-name: get
   description: |-
-    Retrieve a collection of recorded AML checks against Customers.
-    These checks are records of Customer data and potentially matching data in our AML list.
+    Retrieve the results of a Customer's AML check.
+    Customer metadata and an array of matching AML hits is returned.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -26,6 +26,4 @@ get:
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: ../components/schemas/AmlCheck.yaml
+            $ref: ../components/schemas/AmlCheck.yaml
