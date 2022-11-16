@@ -1,0 +1,84 @@
+type: object
+description: AML check result.
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  createdTime:
+    $ref: CreatedTime.yaml
+  websiteId:
+    readOnly: true
+    description: Website ID associated with this Customer.
+    allOf:
+      - $ref: ./ResourceId.yaml
+  reviewerId:
+    readOnly: true
+    nullable: true
+    description: User ID of the associated reviewer for this check.
+    allOf:
+      - $ref: ./ResourceId.yaml
+  reviewTime:
+    type: date-time
+    readOnly: true
+    nullable: true
+    description: Time when the check was reviewed.
+  customer:
+    type: object
+    readOnly: true
+    properties:
+      id:
+        readOnly: true
+        description: Customer ID.
+        allOf:
+          - $ref: ./ResourceId.yaml
+      primaryAddress:
+        type: object
+        readOnly: true
+        description: Customer's data at the time of recording the AML check.
+        properties:
+          firstName:
+            type: string
+            readOnly: true
+            description: Customer's first name at the time of the AML check.
+          lastName:
+            type: string
+            readOnly: true
+            description: Customer's last name at the time of the AML check.
+          dob:
+            type: string
+            format: date
+            readOnly: true
+            # Is this truly going to be nullable?
+            nullable: true
+            description: Customer's date of birth.
+            example: 1971-02-14
+          country:
+            type: string
+            readOnly: true
+            description: Customer's country.
+          organization:
+            type: string
+            readOnly: true
+            nullable: true
+            description: Customer's organization.
+      tags:
+        description: A list of customer's tags.
+        readOnly: true
+        type: array
+        items:
+          $ref: ./Tags/Tag.yaml
+  hits:
+    readOnly: true
+    description: A list of the hits returned during the AML check.
+    type: array
+    items:
+      $ref: ./AML.yaml
+  _links:
+    type: array
+    description: Related resource links.
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ./Links/SelfLink.yaml
+
