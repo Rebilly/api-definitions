@@ -9,13 +9,13 @@ properties:
     $ref: CreatedTime.yaml
   websiteId:
     readOnly: true
-    description: Website ID associated with this Customer.
+    description: Website ID associated with the customer.
     allOf:
       - $ref: ./ResourceId.yaml
   reviewerId:
     readOnly: true
     nullable: true
-    description: User ID of the associated reviewer for this check.
+    description: User ID of the person who reviewed the AML check.
     allOf:
       - $ref: ./ResourceId.yaml
   reviewTime:
@@ -23,20 +23,20 @@ properties:
     format: date-time
     readOnly: true
     nullable: true
-    description: Time when the check was reviewed.
+    description: Date and time at which the AML check was reviewed.
   customer:
     type: object
     readOnly: true
     properties:
       id:
         readOnly: true
-        description: Customer ID.
+        description: ID of the customer.
         allOf:
           - $ref: ./ResourceId.yaml
       primaryAddress:
         type: object
         readOnly: true
-        description: Customer's data at the time of recording the AML check.
+        description: Customer's data at the time of the AML check.
         properties:
           firstName:
             type: string
