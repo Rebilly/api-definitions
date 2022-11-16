@@ -13,6 +13,8 @@ get:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
     - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
       description: List of AML checks retrieved.
@@ -29,3 +31,7 @@ get:
             type: array
             items:
               $ref: ../components/schemas/AmlCheck.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
