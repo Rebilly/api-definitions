@@ -5,12 +5,12 @@ required:
   - lastName
 properties:
   id:
-    description: The user identifier string.
+    description: ID of the user.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
   email:
-    description: The user email.
+    description: Email address of the user.
     type: string
     format: email
     maxLength: 100
@@ -21,21 +21,25 @@ properties:
     description: User's last name.
     type: string
   businessPhone:
-    description: The user business phone number.
+    description: User's business phone number.
     type: string
   mobilePhone:
-    description: The user mobile phone number.
+    description: User's mobile phone number.
     type: string
   password:
-    description: User's password. If not provided, password reset email will be sent.
+    description: |-
+      User's password.
+      If this value is not provided, a password reset email is sent.
     type: string
     format: password
   permissions:
-    description: The user's permissions. See the format in example. Use wildcard `*` for full access.
+    description: |-
+      Permissions that the user has within organizations.
+      Use the wildcard character `*` for full access.
     allOf:
       - $ref: ./AclPermissions.yaml
   computedPermissions:
-    description: The user's full permissions including roles. Use these permissions for emulation.
+    description: All user permissions and roles. Use these permissions to emulate the user.
     readOnly: true
     allOf:
       - $ref: ./AclPermissions.yaml
@@ -44,31 +48,33 @@ properties:
   updatedTime:
     $ref: UpdatedTime.yaml
   loginTime:
-    description: The user last login time.
+    description: Date and time at which the user last logged in.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   reportingCurrency:
-    description: The user's ISO Alpha-3 code used for reports.
+    description: |-
+      User's currency code in ISO 4217 format.
+      This value is used for reports.
     readOnly: true
     type: string
   availableCurrencies:
     type: array
-    description: An array of reporting currencies enabled for the merchant.
+    description: Array of reporting currencies that are enabled for the merchant.
     readOnly: true
     items:
       type: string
   totpRequired:
-    description: The user setting of two-factor authentification.
+    description: Specifies whether two-factor authentification is enabled for the user.
     type: boolean
   totpSecret:
-    description: The user TOTP key for authentification app (if TOTP enabled).
+    description: User's Time-based One-Time Password (TOTP) key for the authentification application, if TOTP is enabled..
     type: string
   totpUrl:
-    description: The user link to QR-code for TOTP authentification app (if TOTP enabled).
+    description: QR-code link that redirects the user to the authentification application, if TOTP is enabled.
     type: string
     format: url
   status:
-    description: The user status.
+    description: Status of the user's account.
     type: string
     enum:
       - active
@@ -76,23 +82,28 @@ properties:
       - pending-confirmation
     readOnly: true
   country:
-    description: The user country setting - two letter code.
+    description: |-
+      User's country of residence in ISO 3166 alpha-2 country code.
+      For examples, see [ISO.org](https://www.iso.org/obp/ui/#search/code/).
     type: string
   preferences:
-    description: >-
-      User preferences like timezone, language and many more. This is an object
-      with custom properties.
+    description: |-
+      User preferences, such as: timezone, language, and more.
+      This is an object with custom properties.
     type: object
   roleIds:
     type: array
-    description: The user's roles identifiers.
+    description: |-
+      Role IDs associated with the user.
+      Role IDs specify the roles that the user performs within the organization.
+      For example, the user may be an organization admin.
     items:
       type: string
   allowedIps:
     $ref: ./AllowedIps.yaml
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
     minItems: 1
     items:

@@ -1,4 +1,4 @@
-description: PPRO config.
+description: PPRO gateway configuration.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -11,39 +11,39 @@ allOf:
         properties:
           login:
             type: string
-            description: PPRO merchant's api username.
+            description: PPRO merchant API username.
           password:
             type: string
-            description: PPRO merchant's api password.
+            description: PPRO merchant API password.
             format: password
           contractId:
             type: string
-            description: PPRO Contract id, used for api credentials.
+            description: PPRO contract ID. This value is used for API credentials.
           privateKey:
             type: string
             format: password
-            description: Private Key.
+            description: PPRO private key.
             x-multiline: true
           privateKeyPassword:
             type: string
             format: password
-            description: Private key password.
+            description: PPRO private key password.
           clientCertificate:
             type: string
             description: Public key.
             x-multiline: true
           serverCertificate:
             type: string
-            description: CA certificate provided by PPRO.
+            description: PPRO CA certificate.
             x-multiline: true
           notificationSecret:
             type: string
             format: password
-            description: Secret used for IPN urls.
+            description: Secret used for IPN URLs.
           sharedSecret:
             type: string
             format: password
-            description: Secret used for redirect urls.
+            description: Secret used for redirect URLs.
         required:
           - login
           - password

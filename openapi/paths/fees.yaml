@@ -2,11 +2,11 @@ get:
   x-products:
     - Core
   tags: [Fees]
-  summary: Retrieve fees entries
-  description: |
-    Retrieve a list of Fees entries.
+  summary: Retrieve fee entries
+  description: |-
+    Retrieves a list of fee entries.
 
-    This operation is experimental and not guaranteed to be backward compatible.
+    > **Important:** This operation is experimental and may not be backward compatible.
   operationId: GetFeeCollection
   x-sdk-operation-name: getAll
   parameters:
@@ -14,7 +14,7 @@ get:
     - $ref: ../components/parameters/collectionOffset.yaml
   responses:
     '200':
-      description: A fees list was retrieved.
+      description: List of fee entries retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -37,10 +37,10 @@ post:
     - Core
   tags: [Fees]
   summary: Create a fee entry
-  description: |
-    Create a fee entry.
+  description: |-
+    Creates a fee entry.
 
-    This operation is experimental and not guaranteed to be backward compatible.
+    > **Important:** This operation is experimental and may not be backward compatible.
   operationId: PostFee
   x-sdk-operation-name: create
   requestBody:
@@ -58,7 +58,7 @@ post:
             $ref: ../components/examples/Fee/stripe-intl-request.yaml
   responses:
     '201':
-      description: Fee entry was created.
+      description: Fee entry created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
