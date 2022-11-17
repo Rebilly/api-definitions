@@ -54,6 +54,9 @@ properties:
             amount:
               description: |-
                 Amount of credit that is allocated from the credit memo to the invoice.
+                If the `amount` value is not supplied or exceeds the unused amount of the credit memo or the invoice due amount, the lesser of the following two values is used:
+                - The unused amount of the credit memo.
+                - The invoice due amount.
               type: number
               format: double
             currency:
