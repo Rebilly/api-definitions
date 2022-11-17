@@ -10,7 +10,7 @@ allOf:
   - $ref: ../../Common/CommonPlan.yaml
 properties:
   recurringInterval:
-    description: The service interval. For a one-time item, use `null`.
+    description: Service interval. For a one-time item, use `null`.
     allOf:
       - $ref: ../PlanPeriod.yaml
       - type: object
@@ -26,13 +26,13 @@ properties:
             $ref: ../PlanBillingTiming.yaml
   trial:
     type: object
-    description: The trial configuration. Set `null` if no trial.
+    description: Trial configuration. Set `null` if no trial.
     required:
       - price
       - period
     properties:
       price:
-        description: The price of the trial. For a free trial, use `0`.
+        description: Price of the trial. For a free trial, use `0`.
         type: number
         format: double
       period:
