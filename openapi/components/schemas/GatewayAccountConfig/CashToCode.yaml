@@ -1,4 +1,4 @@
-description: CashToCode config.
+description: CashToCode gateway configuration.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -11,21 +11,21 @@ allOf:
         properties:
           cashToCodeUsername:
             type: string
-            description: CashToCode credentials Username.
+            description: CashToCode credentials username.
           cashToCodePassword:
             type: string
             description: CashToCode credentials password.
             format: password
           merchantUsername:
             type: string
-            description: Merchant credentials Username.
+            description: Merchant credentials username.
           merchantPassword:
             type: string
             description: Merchant credentials password.
             format: password
           mid:
             type: string
-            description: CashToCode MID (brand name).
+            description: CashToCode Merchant Identifier Number (MID) or brand name.
         required:
           - cashToCodeUsername
           - cashToCodePassword
@@ -39,11 +39,11 @@ allOf:
             description: Base API URL.
           skipAmountSelection:
             type: boolean
-            description: Skip amount selection screen.
+            description: Specifies whether to skip the amount selection screen.
             default: false
           amounts:
             type: array
-            description: Amounts for which to allow transactions.
+            description: Amounts for which transactions are processed.
             items:
               type: number
               format: double

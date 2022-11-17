@@ -1,4 +1,4 @@
-description: PostFinance config.
+description: PostFinance gateway configuration.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -11,27 +11,35 @@ allOf:
         properties:
           pspId:
             type: string
+            description: PostFinance PSP ID.
           merchantId:
             type: string
+            description: PostFinance merchant ID.
           sftpUsername:
             type: string
+            description: PostFinance SFTP username.
           publicKey:
             type: string
             x-multiline: true
+            description: PostFinance public key.
           privateKey:
             type: string
             format: password
             x-multiline: true
+            description: PostFinance private key.
           keyPassphrase:
             type: string
             format: password
+            description: PostFinance key passphrase.
           sftpPrivateKey:
             type: string
             format: password
             x-multiline: true
+            description: PostFinance SFTP private key.
           sftpKeyPassphrase:
             type: string
             format: password
+            description: PostFinance SFTP key passphrase.
         required:
           - pspId
           - merchantId
@@ -47,6 +55,8 @@ allOf:
           skipPaymentFileUpload:
             type: boolean
             default: false
+            description: Specifies whether to skip the payment file upload screen.
           enableAliasAuthentication:
             type: boolean
             default: false
+            description: Specifies whether to enable alias authentication.
