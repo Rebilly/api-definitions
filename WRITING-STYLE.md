@@ -132,7 +132,7 @@ This section provides guidance on how to write operation, object, and parameter 
 
 ### Operations
 
-- Start all operations with an active verb (Retrieves, Adds, Creates, Updates, Deletes, Sets, Specifies ...)
+- Start all operation descriptions with an active verb (Retrieves, Adds, Creates, Updates, Deletes, Sets, Specifies ...)
 - Do not start with an imperative (Create, Retrieve, Merge ...). The user may read this as a command.
 - Avoid starting with "The" or "A". Omit articles for ease of reading.
 - Avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
