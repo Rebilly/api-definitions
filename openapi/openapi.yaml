@@ -174,47 +174,37 @@ tags:
       changes and activity for each gateway account.
   - name: KYC documents
     description: |-
-      Use Know Your Customer (KYC) documents to verify your customers
-      identity. The KYC document operations generate a signed link to
-      the Rebilly
-      [KYC document gatherer](https://www.rebilly.com/docs/kyc-and-aml/kyc-document-gatherer/).
+      Use Know Your Customer (KYC) documents to verify your customers identity.
+      The KYC document operations generate a signed link to the Rebilly [KYC document gatherer](https://www.rebilly.com/docs/kyc-and-aml/kyc-document-gatherer/).
 
       Document types:
         - `identity-proof`: Validates a customer's identity.
         - `address-proof`: Validates a customer's address.
         - `purchase-proof`: Validates a customer's purchase.
         - `funds-proof`: Validates that a customer has funds.
-        - `credit-file-proof`: Verifies that there is an existing
-        credit file with two sources that match the customer's name,
-        DOB, and address.
+        - `credit-file-proof`: Verifies that there is an existing credit file with two sources that match the customer's name,
+          DOB, and address.
 
-      Rebilly parses and analyzes the documents and accepts or
-      rejects them according to a configurable scoring algorithm.
-      When all document types in a KYC request are accepted,
-      the status is fulfilled, and the
-      [KYC request fulfilled webhook](https://www.rebilly.com/docs/dev-docs/api/operation/kyc-request-fulfilled/)
-      is emitted.
+      Rebilly parses and analyzes the documents and accepts or rejects them according to a configurable scoring algorithm.
+      When all document types in a KYC request are accepted, the status is fulfilled,
+      and the [KYC request fulfilled webhook](/kyc-request-fulfilled/) is emitted.
 
       ### Credit file proof
 
-      The `credit-file-proof` KYC document request type is only
-      available in the API, this option is not available in the
-      [KYC document gatherer](https://www.rebilly.com/docs/kyc-and-aml/kyc-document-gatherer/).
-      This request verifies that there is an existing credit
-      file with two sources that match the person's name, date of birth, and
-      address.
+      The `credit-file-proof` KYC document request type is only available in the API,
+      this option is not available in the [KYC document gatherer](https://www.rebilly.com/docs/kyc-and-aml/kyc-document-gatherer/).
+      This request verifies that there is an existing credit file with two sources that match the person's name,
+      date of birth, and address.
 
-      In Canada, to meet FINTRAC requirements, the `credit-file-proof`
-      KYC document request verifies the customer's name, address,
-      and date of birth with a credit agency.
+      In Canada, to meet FINTRAC requirements, the `credit-file-proof` KYC document request verifies the customer's name,
+      address, and date of birth with a credit agency.
 
-      If `credit-file-proof` is requested in combination with
-      `identity-proof` and `address-proof`, `credit-file-proof` is
-      attempted first. If `credit-file-proof` validates the identity
-      and address, the KYC request is considered fulfilled. If the
-      request is not fulfilled, redirect your customer to the KYC
-      document gatherer to collect their KYC documents.
-
+      If `credit-file-proof` is requested in combination with `identity-proof` and `address-proof`,
+      `credit-file-proof` is attempted first.
+      If `credit-file-proof` validates the identity and address,
+      the KYC request is considered fulfilled.
+      If the request is not fulfilled,
+      redirect your customer to the KYC document gatherer to collect their KYC documents.
   - name: Customer authentication
     description: >-
       Use these operations to validate the identity of users and
