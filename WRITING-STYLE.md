@@ -98,6 +98,28 @@ Use sentence-style capitalization for all descriptions. Capitalize the first let
 - 1 GB of cloud storage.
 - Available for Microsoft partners.
 
+## Line breaks
+
+Use [semantic line breaks](https://sembr.org/). This standard specifies that you must add a line break after each substantial unit of thought. A written unit of thought ends with punctuation. Only add a new line after a period, or a comma.
+
+### Examples
+
+```yaml
+   description: |-
+     Total number of allowed document upload attempts.
+     Use `0` to allow unlimited upload attempts.
+```
+
+```yaml
+  description: |-
+    Property weights that are used for the KYC document verification process.
+
+    All KYC documents start the verification process with a score of 100.
+    If a check fails, the score is reduced by the corresponding weight.
+    For example, if the `firstName` check weight is set to `5`, and the check fails,
+    the KYC document score becomes `95`.
+```
+
 ## Tags
 
 We use tags to group related operations. When searching operations, the reader may look at the tag description for the context. It is important that we add detail to these descriptions and link to related content if required.
