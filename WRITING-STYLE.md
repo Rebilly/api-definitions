@@ -81,6 +81,23 @@ Features:
 - Use the MRR report in revenue recognition to view predictable recurring revenue. ✅
 - To view predictable recurring revenue, use the MRR report in revenue recognition. ✅
 
+## Capitalization
+
+Use sentence-style capitalization for all descriptions. Capitalize the first letter of the first word and use lowercase thereafter.
+
+### Exceptions
+
+[Proper nouns](https://www.gingersoftware.com/content/grammar-rules/nouns/proper-noun/), including brand, product, and service names, must always be capitalized.
+
+### Examples
+
+- Installs the application.
+- Tests your system.
+- Checks system settings.
+- Retrieves HD movies, TV shows, and more.
+- 1 GB of cloud storage.
+- Available for Microsoft partners.
+
 ## Tags
 
 We use tags to group related operations. When searching operations, the reader may look at the tag description for the context. It is important that we add detail to these descriptions and link to related content if required.
