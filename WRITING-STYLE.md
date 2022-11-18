@@ -11,7 +11,6 @@ This topic provides guidance on how to write API documentation descriptions.
 - Avoid [passive voice](https://developers.google.com/tech-writing/one/active-voice).
 - Avoid using ("should", "could", "can").
 - To add multi-lined descriptions, after a `description:`, add one space, then insert `|-`. This escapes the YAML formatting and enables the use of Markdown.
-- Use [semantic line breaks](https://sembr.org/).
 
 ## Avoid knowledge bias
 
