@@ -5,13 +5,13 @@ allOf:
     properties:
       contactBody:
         description: >-
-          The list of contact attributes that will be used during Keap
+          List of contact attributes that will be used during Keap
           Infusionsoft creation process.
         type: object
         properties:
           email_addresses:
             description: >-
-              The contact email addresses that will be used during Keap
+              Contact email addresses that will be used during Keap
               Infusionsoft creation process.
             type: array
             minItems: 1
@@ -20,13 +20,13 @@ allOf:
               properties:
                 email:
                   description: >-
-                    The contact email address that will be used during Keap
+                    Contact email address that will be used during Keap
                     Infusionsoft creation process.
                   type: string
                   example: '{{ invoice.customer.email }}'
                 field:
                   description: >-
-                    The contact email field type that will be used during Keap
+                    Contact email field type that will be used during Keap
                     Infusionsoft creation process.
                   type: string
                   enum:
@@ -36,7 +36,7 @@ allOf:
                   example: EMAIL1
           phone_numbers:
             description: >-
-              The contact phone numbers that will be used during Keap
+              Contact phone numbers that will be used during Keap
               Infusionsoft creation process.
             type: array
             minItems: 1
@@ -45,13 +45,13 @@ allOf:
               properties:
                 number:
                   description: >-
-                    The contact phone number that will be used during Keap
+                    Contact phone number that will be used during Keap
                     Infusionsoft creation process.
                   type: string
                   example: '{{ invoice.customer.customFields.phoneNumber }}'
                 field:
                   description: >-
-                    The contact phone field type that will be used during Keap
+                    Contact phone field type that will be used during Keap
                     Infusionsoft creation process.
                   type: string
                   enum:
@@ -63,23 +63,23 @@ allOf:
                   example: PHONE1
       orderBody:
         description: >-
-          The list of order attributes that will be used during Keap
+          List of order attributes that will be used during Keap
           Infusionsoft creation process except `contact_id`.
         type: object
         properties:
           order_date:
             description: >-
-              The order date that will be used during Keap Infusionsoft creation process.
+              Order date that will be used during Keap Infusionsoft creation process.
             type: string
             example: '{{ invoice.issuedTime }}'
           order_title:
             description: >-
-              The order title that will be used during Keap Infusionsoft creation process.
+              Order title that will be used during Keap Infusionsoft creation process.
             type: string
             example: '{{ invoice.id }}'
           order_type:
             description: >-
-              The order type that will be used during Keap Infusionsoft creation process.
+              Order type that will be used during Keap Infusionsoft creation process.
             type: string
             enum:
               - Offline

@@ -11,7 +11,7 @@ get:
   description: Retrieve a subscription pause with specified identifier string.
   responses:
     '200':
-      description: Pause was retrieved.
+      description: Pause retrieved.
       content:
         application/json:
           schema:
@@ -38,13 +38,13 @@ put:
           $ref: ../components/schemas/Subscription/SubscriptionPause.yaml
   responses:
     '200':
-      description: Pause was updated, the subscription is or will be paused.
+      description: Pause updated, the subscription is or will be paused.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Subscription/SubscriptionPause.yaml
     '201':
-      description: Pause was created, the subscription is or will be paused.
+      description: Pause created, the subscription is or will be paused.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -69,7 +69,7 @@ delete:
   description: Delete a subscription's pause. Pending pause will be revoked, ongoing pause will be finished.
   responses:
     '204':
-      description: Subscription pause was revoked or finished.
+      description: Subscription pause revoked or finished.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
