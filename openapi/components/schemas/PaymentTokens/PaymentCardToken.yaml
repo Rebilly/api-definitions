@@ -1,24 +1,24 @@
 type: object
 title: Payment Card Token
-allOf: 
+allOf:
   - $ref: ./CompositeToken.yaml
   - $ref: ../Common/CommonPaymentToken.yaml
 description: |
-  Creates a payment card token. A payment card token is a string that 
-  represents a customer's payment card details. It can be used once, 
+  Creates a payment card token. A payment card token is a string that
+  represents a customer's payment card details. It can be used once,
   and expires upon first use or within 30 minutes of token creation.
   To generate a full payment card token, you must provide the `billingAddress`.
   If `billingAddress` is not provided, the token can not be used for payments.
-required:  
+required:
   - method
   - paymentInstrument
 properties:
   method:
-    description: The token payment method.
+    description: Token payment method.
     type: string
     enum: [payment-card]
   paymentInstrument:
-    description: The payment card instrument details.
+    description: Payment card instrument details.
     type: object
     required:
       - expMonth
@@ -53,6 +53,6 @@ properties:
           - $ref: ../PaymentCards/PaymentCardBrand.yaml
   billingAddress:
     description: |
-      The billing address object. Required to perform payments. For payment-card updates, `billingAddress` can be ignored.
+      Billing address object. Required to perform payments. For payment-card updates, `billingAddress` can be ignored.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
