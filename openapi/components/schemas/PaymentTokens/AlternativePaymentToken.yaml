@@ -8,11 +8,11 @@ required:
   - billingAddress
 properties:
   method:
-    description: The token payment method.
+    description: Token payment method.
     type: string
     allOf:
       - $ref: ../PaymentMethods/AlternativePaymentMethods.yaml
-      - not: 
+      - not:
           enum:
             - payment-card
             - paypal
@@ -23,6 +23,6 @@ properties:
             - Khelocard
             - Klarna
   billingAddress:
-    description: The billing address object.
+    description: Billing address object.
     allOf:
       - $ref: ../Contact/ContactObject.yaml

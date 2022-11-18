@@ -9,11 +9,11 @@ required:
   - paymentInstrument
 properties:
   method:
-    description: The token method.
+    description: Token method.
     type: string
     enum: [plaid-account]
   paymentInstrument:
-    description: The Plaid payment instrument details.
+    description: Plaid payment instrument details.
     type: object
     required:
       - linkToken
@@ -22,14 +22,14 @@ properties:
     properties:
       linkToken:
         type: string
-        description: The Plaid link token.
+        description: Plaid link token.
       publicToken:
         type: string
-        description: The Plaid public token.
+        description: Plaid public token.
       accountId:
         type: string
-        description: The Plaid account ID.
+        description: Plaid account ID.
   billingAddress:
-    description: The billing address object.
+    description: Billing address object.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
