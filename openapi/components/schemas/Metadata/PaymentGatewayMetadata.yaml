@@ -11,7 +11,7 @@ properties:
     $ref: ./PaymentGatewaName.yaml
   otherNames:
     description: |
-      The list of former names. From time to time gateways change their names or they also known by other names.
+      List of former names. From time to time gateways change their names or they also known by other names.
       Tracking this list may help customer support and developers.
     type: array
     items:
@@ -22,7 +22,7 @@ properties:
       properties:
         name:
           description: |
-            The alternative or former name of the gateway.
+            Alternative or former name of the gateway.
           type: string
         description:
           description: |
@@ -30,21 +30,21 @@ properties:
           type: string
         logo:
           description: |
-            The URL for the logo used with this name.
+            URL for the logo used with this name.
           type: string
           format: uri
   logo:
     description: |
-      The URL for the logo of the gateway.
+      URL for the logo of the gateway.
     type: string
     format: uri
   summary:
     description: |
-      A short description of the gateway. (Markdown is supported).
+      Short description of the gateway. (Markdown is supported).
     type: string
   homepage:
     description: |
-      The URL of their home page.
+      URL of their home page.
     type: string
     format: uri
   externalDocs:
@@ -60,12 +60,12 @@ properties:
       properties:
         url:
           description: |
-            The URL for the target documentation. Value MUST be in the format of a URL.
+            URL for the target documentation. Value MUST be in the format of a URL.
           type: string
           format: uri
         description:
           description: |
-            A short description of the target documentation.
+            Short description of the target documentation.
           type: string
   publishedPricing:
     description: |
@@ -79,14 +79,14 @@ properties:
     type: string
   paymentMethods:
     description: |
-      An array of the payment methods supported (e.g. payment-card, bitcoin).
+      Array of the payment methods supported (e.g. payment-card, bitcoin).
     type: array
     items:
       $ref: ./PaymentMethodApiName.yaml
     minLength: 1
   cardBrands:
     description: |
-      An array of the card-brands supported, if payment-card is a value of paymentMethods.
+      Array of the card-brands supported, if payment-card is a value of paymentMethods.
     type: array
     items:
       $ref: ../PaymentCards/PaymentCardBrand.yaml
@@ -96,7 +96,7 @@ properties:
     $ref: ./CurrenciesMetadata.yaml
   operations:
     description: |
-      An array of the operations supported by gateway.
+      Array of the operations supported by gateway.
     type: array
     items:
       type: string
@@ -113,13 +113,13 @@ properties:
         - checkCredentials
   supported3dsServers:
     description: |
-      An array of the 3DS-servers supported.
+      Array of the 3DS-servers supported.
     type: array
     items:
       type: string
   supportedPaymentInstrumentSetupInstructions:
     description: |
-      An array of the setup instructions supported by the gateway.
+      Array of the setup instructions supported by the gateway.
     type: array
     items:
       type: string
@@ -143,7 +143,7 @@ properties:
           This is the default behavior.
   reconciliationSupport:
     description: |
-      A bool if we (can) reconcile.
+      Bool if we (can) reconcile.
     type: boolean
     default: false
   disputeSupport:
@@ -153,30 +153,30 @@ properties:
     default: false
   offsite:
     description: |
-      A bool if it may require offsite interaction (such as 3DS, PayPal login, or completing something in a store).
+      Bool if it may require offsite interaction (such as 3DS, PayPal login, or completing something in a store).
     type: boolean
     default: false
   ipn:
     type: object
     description: |
-      An object describing and IPN that a gateway supports. No value means IPN is not supported.
+      Object describing and IPN that a gateway supports. No value means IPN is not supported.
     required:
       - type
     properties:
       type:
         description: |
-          A type of supported IPN. No value means IPN is not supported.
+          Type of supported IPN. No value means IPN is not supported.
         type: string
         enum: ["static", "dynamic"]
       verificationMethod:
         description: |
-          A method that is used to verify that we can trust the data in the IPN call.
+          Method that is used to verify that we can trust the data in the IPN call.
         type: string
         enum: ["query", "signature"]
         default: "query"
   recommendedWaitingApprovalTtl:
     description: |
-      The recommended TTL before abandoning the transaction.
+      Recommended TTL before abandoning the transaction.
     type: integer
     default: 3600
     minimum: 299
