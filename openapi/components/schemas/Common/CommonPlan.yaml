@@ -6,12 +6,12 @@ required:
   - pricing
 properties:
   id:
-    description: The plan ID.
+    description: Plan ID.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   name:
-    description: The plan name, displayed on invoices and receipts.
+    description: Plan name, displayed on invoices and receipts.
     type: string
   description:
     type: string
@@ -22,7 +22,7 @@ properties:
       Rich-text description of the plan. This field accepts rich text formatting,
       such as: bold, underline, italic, and hyperlinks.
   productId:
-    description: The related product ID.
+    description: Related product ID.
     allOf:
       - $ref: ../ResourceId.yaml
   productOptions:
@@ -44,12 +44,12 @@ properties:
     $ref: ../Plans/PlanPriceFormula.yaml
   setup:
     type: object
-    description: The setup. Set `null` if no setup.
+    description: Setup. Set `null` if no setup.
     required:
       - price
     properties:
       price:
-        description: The price of a setup - 0 is a valid value (for free).
+        description: Price of a setup - 0 is a valid value (for free).
         type: number
         format: double
   customFields:
@@ -64,9 +64,7 @@ properties:
       Increments when the plan is modified.
       Compare to materialized subscription items revision.
   createdTime:
-    description: Plan created time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml
   isTrialOnly:

@@ -9,24 +9,24 @@ description: |
   variations are set within Plans.
 properties:
   id:
-    description: The product ID.
+    description: Product ID.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
     example: membership
   name:
-    description: The product name.
+    description: Product name.
     type: string
     maxLength: 255
     example: Premium membership
   unitLabel:
-    description: The unit label, such as per `seat` or per `unit`.
+    description: Unit label, such as per `seat` or per `unit`.
     type: string
     maxLength: 50
     example: seat
     default: unit
   description:
-    description: The product description.
+    description: Product description.
     type: string
     maxLength: 512
   requiresShipping:
@@ -35,7 +35,7 @@ properties:
     example: false
   options:
     description: |
-      The product options such as color, size, etc. The product options definition does
+      Product options such as color, size, etc. The product options definition does
       not include option values. Those are defined within the plans.
     type: array
     items:
@@ -43,8 +43,6 @@ properties:
   customFields:
     $ref: ../ResourceCustomFields.yaml
   createdTime:
-    description: The product created time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml

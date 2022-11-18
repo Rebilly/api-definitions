@@ -1,4 +1,4 @@
-description: STP Mexico config.
+description: STP Mexico gateway configuration.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -14,13 +14,15 @@ allOf:
             description: STP Mexico account company name.
           beneficiaryName:
             type: string
-            description: The name of the bank account holder receiving payments.
+            description: Name of the bank account holder that is receiving payments.
           bankId:
-            description: The ID of the bank receiving payments. A list of bank IDs can be found in STP Mexico integration documentation.
+            description: |-
+              ID of the bank receiving payments.
+              A list of bank IDs can be found in STP Mexico integration documentation.
             $ref: ../STPMexicoBanks.yaml
           bankAccountNumber:
             type: string
-            description: The account number of the bank account receiving payments.
+            description: Bank account number of the payments recipient.
           privateKey:
             type: string
             description: STP Mexico private key.

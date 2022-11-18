@@ -3,13 +3,16 @@ content:
     schema:
       properties:
         subscriptionId:
-          description: The order ID.
+          description: Order ID.
           type: string
         invoiceId:
-          description: The invoice ID.
+          description: Invoice ID.
           type: string
         eventType:
-          $ref: ../../schemas/GlobalWebhookEventType.yaml
+          type: string
+          description: Webhook event type.
+          enum:
+            - renewal-invoice-issued
         _embedded:
           type: object
           properties:
@@ -25,4 +28,4 @@ content:
             anyOf:
               - $ref: ../../schemas/Links/SubscriptionLink.yaml
               - $ref: ../../schemas/Links/InvoiceLink.yaml
-description: Invoice and Order webhook request body resource.
+description: Renewal invoice issued webhook request body resource.

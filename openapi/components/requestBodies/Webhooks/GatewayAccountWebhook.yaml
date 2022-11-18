@@ -3,12 +3,19 @@ content:
     schema:
       properties:
         gatewayAccountId:
-          description: The gateway account ID.
+          description: ID of the gateway account.
           type: string
         eventType:
-          $ref: ../../schemas/GlobalWebhookEventType.yaml
+          type: string
+          description: Webhook event type.
+          enum:
+            - gateway-account-downtime-ended
+            - gateway-account-downtime-started
+            - gateway-account-onboarding-completed
+            - gateway-account-onboarding-failed
         _embedded:
           type: object
+          description: Embedded objects.
           properties:
             gatewayAccount:
               $ref: ../../schemas/GatewayAccount.yaml
@@ -19,4 +26,4 @@ content:
           items:
             anyOf:
               - $ref: ../../schemas/Links/GatewayAccountLink.yaml
-description: Gateway account limit was reached body resource.
+description: Gateway account limit reached body resource.

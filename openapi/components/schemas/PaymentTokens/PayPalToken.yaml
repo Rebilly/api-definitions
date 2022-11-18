@@ -8,24 +8,25 @@ required:
   - paymentInstrument
 properties:
   method:
-    description: The token payment method.
+    description: Token payment method.
     type: string
     enum: [paypal]
   paymentInstrument:
-    description: The paypal instrument details required for express checkout.
+    description: Paypal instrument details required for express checkout.
     type: object
     required:
       - billingAgreementToken
       - paypalMerchantId
     properties:
       paypalMerchantId:
-        description: The PayPal merchant ID.
+        description: PayPal merchant ID.
         type: string
       billingAgreementToken:
-        description: The PayPal billing agreement token.
+        description: PayPal billing agreement token.
         type: string
   billingAddress:
-    description: The billing address object.
+    description: Billing address object.
     nullable: true
+    type: object
     allOf:
       - $ref: ../Contact/ContactObject.yaml

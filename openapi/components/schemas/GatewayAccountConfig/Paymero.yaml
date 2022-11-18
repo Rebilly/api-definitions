@@ -1,4 +1,4 @@
-description: Paymero config.
+description: Paymero gateway configuration.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -20,18 +20,19 @@ allOf:
         description: Paymero settings object.
         properties:
           targetCurrency:
-            description: This will be the currency to which you want to auto-convert the received cryptocurrency in to.
+            description: |-
+              Currency to which the received cryptocurrency is converted.
             type: string
             minLength: 3
             maxLength: 3
             example: USD
           mainCurrency:
-            description: This will be the blockchain on which currency runs.
+            description: Blockchain on which the currency is processed.
             type: string
             enum:
               - TRX
               - ETH
           amountExceeded:
-            description: Decline transactions when the amount received exceeds the amount requested.
+            description: Specifies whether to decline transactions when the amount received exceeds the amount requested.
             type: boolean
             default: false

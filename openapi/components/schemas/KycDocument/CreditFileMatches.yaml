@@ -1,7 +1,7 @@
 type: object
 properties:
   creditBureau:
-    description: The credit bureau which is used to get credit file data.
+    description: Credit bureau which is used to get credit file data.
     type: string
     readOnly: true
     enum:
@@ -10,7 +10,7 @@ properties:
       - transunion
       - test-bureau
   creditFileNumber:
-    description: The credit file number on credit bureau.
+    description: Credit file number on credit bureau.
     type: string
     readOnly: true
   name:
@@ -42,7 +42,7 @@ properties:
       properties:
         name:
           type: string
-          description: The trade name.
+          description: Trade name.
           example: Rogers
         accountNumber:
           type: string
@@ -82,7 +82,7 @@ properties:
         example: '001'
       singleDecision:
         description: Data related to single source decision.
-        nullable: false
+        type: object
         allOf:
           - $ref: CreditFileCommonDecisionData.yaml
       dualDecision:

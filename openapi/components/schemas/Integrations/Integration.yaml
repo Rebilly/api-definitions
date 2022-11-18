@@ -2,24 +2,24 @@ type: object
 properties:
   service:
     readOnly: true
-    description: The integration service.
+    description: Name of the integration service.
     allOf:
       - $ref: ../Credentials/OAuth2Credentials/OAuth2CredentialService.yaml
   count:
     readOnly: true
     type: integer
     minimum: 1
-    description: The number of available rule sets.
+    description: Total number of available rule sets.
   configurations:
     readOnly: true
     type: array
     minItems: 1
-    description: The list of configurations.
+    description: List of configurations.
     items:
       type: object
       properties:
         labels:
-          description: The configuration labels.
+          description: Labels of the configuration.
           type: array
           minItems: 1
           items:
@@ -28,10 +28,10 @@ properties:
           $ref: ../EventType.yaml
         title:
           type: string
-          description: The configuration title.
+          description: Title of the configuration.
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
     minItems: 1
     items:

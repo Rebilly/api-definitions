@@ -22,7 +22,7 @@ properties:
     maxLength: 255
   effectiveTime:
     description: >
-      The date from which the service period would start, unless the
+      Date from which the service period would start, unless the
       subscription is canceled but still active.
 
       In case the subscription is still active, the subscription will continue
@@ -33,7 +33,7 @@ properties:
     format: date-time
   renewalTime:
     description: >
-      The time of the next subscription renewal. If omitted then it is computed
+      Time of the next subscription renewal. If omitted then it is computed
       from the effective time.
 
       If the subscription is canceled but active it is ignored, so the next
@@ -41,10 +41,9 @@ properties:
     type: string
     format: date-time
   createdTime:
-    description: The time of resource creation (when it is posted).
-    type: string
-    format: date-time
-    readOnly: true
+    $ref: ../CreatedTime.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
   _links:
     type: array
     description: Related resource links.

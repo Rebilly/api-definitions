@@ -1,6 +1,6 @@
 title: Bank Account
 type: object
-required: 
+required:
   -  accountNumberType
 ## Discriminator is required for SDK generation
 discriminator:
@@ -8,10 +8,11 @@ discriminator:
   mapping:
     BBAN: ./AccountNumberTypes/BBANType.yaml
     IBAN: ./AccountNumberTypes/IBANType.yaml
-properties: 
+properties:
   accountNumberType:
     nullable: false
-    enum: 
+    type: string
+    enum:
       - IBAN
       - BBAN
 x-abstract-parent: PaymentInstruction

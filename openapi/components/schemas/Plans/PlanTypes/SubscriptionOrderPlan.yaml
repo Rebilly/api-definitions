@@ -10,14 +10,14 @@ allOf:
   - $ref: ../../Common/CommonPlan.yaml
 properties:
   recurringInterval:
-    description: The service interval. For a one-time item, use `null`.
+    description: Service interval. For a one-time item, use `null`.
     allOf:
       - $ref: ../PlanPeriod.yaml
       - type: object
         properties:
           limit:
             description: |
-              The number of invoices this subscription order will generate
+              Number of invoices this subscription order will generate
               (if 1, it will not generate any beyond the initial order creation).
               For example, set this property to `12`, when the `periodUnit` is month and the
               `periodDuration` is 1, for a 1 year contract billed monthly.
@@ -26,13 +26,13 @@ properties:
             $ref: ../PlanBillingTiming.yaml
   trial:
     type: object
-    description: The trial configuration. Set `null` if no trial.
+    description: Trial configuration. Set `null` if no trial.
     required:
       - price
       - period
     properties:
       price:
-        description: The price of the trial. For a free trial, use `0`.
+        description: Price of the trial. For a free trial, use `0`.
         type: number
         format: double
       period:
@@ -56,27 +56,18 @@ properties:
           sum: Total amount of reported invoice item quantity usage
           last: Last reported invoice item quantity usage
       min:
-        description: |-
-          Minimum quantity that is charged at the end of a service period regardless of reported usage.
+        description: Minimum quantity that is charged at the end of a service period regardless of reported usage.
         type: number
         format: float
         nullable: true
         minimum: 0
         exclusiveMinimum: true
       max:
-        description: |-
-          Maximum quantity that is charged at the end of a service period regardless of reported usage.
+        description: Maximum quantity that is charged at the end of a service period regardless of reported usage.
         type: number
         format: float
         nullable: true
         minimum: 0
         exclusiveMinimum: true
   invoiceTimeShift:
-    description: |-
-      Use invoice time shift to adjust the invoice issue and due date
-      when billing must occur before the service period changes.
-      For example, rent must be paid in advance, so the invoice must
-      be in advance of the billing date. For more information, see
-      [Service period anchor, and billing timing, and invoice time shift](https://www.rebilly.com/docs/dev-docs/concepts/#service-period-anchor-and-billing-timing-and-invoice-time-shift).
-    allOf:
-      - $ref: ../../Invoices/InvoiceTimeShift.yaml
+    $ref: ../../Invoices/InvoiceTimeShift.yaml

@@ -1,4 +1,4 @@
-description: PaymentsOS config.
+description: PaymentsOS gateway configuration.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -10,11 +10,14 @@ allOf:
         properties:
           appId:
             type: string
+            description: PaymentsOS application ID.
           publicKey:
             type: string
+            description: PaymentsOS public key.
           privateKey:
             type: string
             format: password
+            description: PaymentsOS private key.
         required:
           - appId
           - privateKey

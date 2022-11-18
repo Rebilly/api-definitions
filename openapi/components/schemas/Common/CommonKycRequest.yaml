@@ -32,7 +32,7 @@ properties:
       expired: Request expired without any document uploaded. Permanent state.
   redirectUrl:
     description: |
-      The URL to redirect the customer when an upload is completed.
+      URL to redirect the customer when an upload is completed.
       When the customer is redirected, Rebilly will append an `info` query parameter which may have one of the following values (example: `https://example.com?info=success`):
 
         - **back** - The customer clicked the `back to website` link;
@@ -47,8 +47,6 @@ properties:
     type: string
     format: date-time
   createdTime:
-    description: Creation date-time.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml

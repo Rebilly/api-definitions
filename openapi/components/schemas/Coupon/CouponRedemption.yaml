@@ -17,16 +17,15 @@ properties:
     items:
       $ref: ./RedemptionRestriction.yaml
   createdTime:
-    description: Date and time at which the coupon is redeemed.
-    readOnly: true
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
   canceledTime:
-    description: Date and time at which the coupon was cancelled.
+    description: Date and time at which the coupon was canceled.
     readOnly: true
     x-sortable: true
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    type: string
+    format: date-time
   _links:
     type: array
     description: Related resource links.

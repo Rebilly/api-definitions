@@ -4,11 +4,12 @@ allOf:
   - $ref: AdjustPaymentMethod.yaml
   - properties:
       paymentMethod:
-        description: The payment method.
+        description: Payment method.
         allOf:
           - $ref: ../../PaymentMethods/AlternativePaymentMethods.yaml
           - not:
               enum:
                 - paypal
       feature:
+        type: string
         nullable: true

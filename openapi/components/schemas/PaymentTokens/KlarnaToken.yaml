@@ -8,24 +8,25 @@ required:
   - paymentInstrument
 properties:
   method:
-    description: The token payment method.
+    description: Token payment method.
     type: string
     enum: [Klarna]
   paymentInstrument:
-    description: The Klarna instrument details required for express checkout.
+    description: Klarna instrument details required for express checkout.
     type: object
     required:
       - klarnaAuthorizationToken
       - klarnaSessionId
     properties:
       klarnaAuthorizationToken:
-        description: The Klarna authorization token.
+        description: Klarna authorization token.
         type: string
       klarnaSessionId:
-        description: The Klarna session ID.
+        description: Klarna session ID.
         type: string
   billingAddress:
-    description: The billing address object.
+    description: Billing address object.
     nullable: true
+    type: object
     allOf:
       - $ref: ../Contact/ContactObject.yaml

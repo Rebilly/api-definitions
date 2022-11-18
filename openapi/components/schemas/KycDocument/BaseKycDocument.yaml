@@ -1,4 +1,4 @@
-required: 
+required:
   -  fieldIds
 allOf:
   - $ref: ../Common/CommonKycDocument.yaml
@@ -10,8 +10,8 @@ allOf:
         type: string
         nullable: true
         readOnly: true
-        allOf:
-          - $ref: ../ResourceId.yaml
+        maxLength: 50
+        example: 44433322-2c4y-483z-a0a9-158621f77a21
       reviewerName:
         description: Reviewer's first and last name.
         type: string
@@ -21,20 +21,20 @@ allOf:
         description: Date and time that manual review starts.
         nullable: true
         type: string
-        allOf:
-          - $ref: ../ServerTimestamp.yaml
+        format: date-time
+        readOnly: true
       reviewTime:
         description: Date and time of manual review.
         type: string
         nullable: true
-        allOf:
-          - $ref: ../ServerTimestamp.yaml
+        format: date-time
+        readOnly: true
       notes:
         description: Reviewer notes.
         type: string
         nullable: true
       tags:
-        description: A list of kyc document tags.
+        description: List of kyc document tags.
         readOnly: true
         type: array
         items:
@@ -43,20 +43,19 @@ allOf:
         description: Reason for uploading.
         type: string
       matchLevel:
-        description: The level of strictness for the document matches.
+        description: Level of strictness for the document matches.
         type: integer
         minimum: 1
         maximum: 2
         example: 2
       settings:
-        description: The settings used to score the document.
+        description: Settings used to score the document.
         type: object
         nullable: true
       revision:
-        description: >
-          The number of times the KYC document data has been modified.
+        description: |-
+          Number of times the KYC document data has been modified.
 
-          The revision is useful when analyzing webhook data to determine if the
-          change takes precedence over the current representation.
+          The revision is useful when analyzing webhook data to determine if the change takes precedence over the current representation.
         type: integer
         readOnly: true

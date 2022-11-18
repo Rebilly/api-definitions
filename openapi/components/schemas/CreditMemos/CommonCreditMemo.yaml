@@ -6,7 +6,7 @@ properties:
     allOf:
       - $ref: ../ResourceId.yaml
   number:
-    description: An auto-incrementing number based on the sequence of credit memos for any particular customer.
+    description: Auto-incrementing number based on the sequence of credit memos for any particular customer.
     readOnly: true
     type: integer
   allocations:
@@ -37,9 +37,7 @@ properties:
               allOf:
                 - $ref: ../CurrencyCode.yaml
             createdTime:
-              description: Date and time at which a credit memo is allocated.
-              allOf:
-                - $ref: ../ServerTimestamp.yaml
+              $ref: ../CreatedTime.yaml
             updatedTime:
               $ref: ../UpdatedTime.yaml
   items:
@@ -59,8 +57,9 @@ properties:
         invoiceItemId:
           description: ID of the invoice item to which the credit item is referenced.
           nullable: true
-          allOf:
-            - $ref: ../ResourceId.yaml
+          type: string
+          maxLength: 50
+          example: 44433322-2c4y-483z-a0a9-158621f77a21
         description:
           description: Description of the credit memo item.
           type: string
@@ -78,14 +77,14 @@ properties:
           readOnly: true
         productId:
           description: ID of the related product.
-          nullable: true
-          allOf:
-            - $ref: ../ResourceId.yaml
+          type: string
+          maxLength: 50
+          example: product-123
         planId:
           description: ID of the related plan.
-          nullable: true
-          allOf:
-            - $ref: ../ResourceId.yaml
+          type: string
+          maxLength: 50
+          example: gold-plan
         taxAmount:
           description: Tax amount of the credit memo item.
           type: number
@@ -158,10 +157,7 @@ properties:
     readOnly: true
     description: Number of times the credit memo has been modified.
   createdTime:
-    description: Date and time at which the credit memo was created.
-    x-sortable: true
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml
   _links:

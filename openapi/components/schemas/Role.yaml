@@ -9,38 +9,36 @@ properties:
       - $ref: ./ResourceId.yaml
   name:
     type: string
-    description: The role name.
+    description: Role name.
   description:
     type: string
-    description: The role description.
+    description: Role description.
   acl:
     $ref: ./Acl.yaml
   allowedIps:
     $ref: ./AllowedIps.yaml
   seniorIds:
     type: array
-    description: The list of senior roles identifiers.
+    description: List of senior roles identifiers.
     readOnly: true
     items:
       type: string
   juniorIds:
     type: array
-    description: The list of junior roles identifiers.
+    description: List of junior roles identifiers.
     items:
       type: string
   usersCount:
     type: integer
     readOnly: true
-    description: The number of users with this role assigned.
+    description: Number of users with this role assigned.
   createdTime:
-    description: The role created time.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    $ref: CreatedTime.yaml
   updatedTime:
     $ref: UpdatedTime.yaml
   _links:
     type: array
-    description: The links related to a resource.
+    description: Links related to a resource.
     readOnly: true
     minItems: 1
     items:
