@@ -8,10 +8,10 @@ get:
   summary: Retrieve a KYC request
   operationId: GetKycRequest
   x-sdk-operation-name: get
-  description: Retrieve a KYC request with specified identifier string.
+  description: Retrieves a KYC request with a specified ID.
   responses:
     '200':
-      description: KYC request was retrieved.
+      description: KYC request retrieved.
       content:
         application/json:
           schema:
@@ -30,14 +30,14 @@ patch:
   summary: Update a KYC request
   operationId: PatchKycRequest
   x-sdk-operation-name: update
-  description: Update a KYC request.
+  description: Updates a KYC request with a specified ID.
   requestBody:
     $ref: ../components/requestBodies/PatchKycRequest.yaml
     description: KYC document resource.
     required: true
   responses:
     '200':
-      description: KYC request was updated.
+      description: KYC request updated.
       content:
         application/json:
           schema:
@@ -58,11 +58,10 @@ delete:
   summary: Delete the KYC request
   operationId: DeleteKycRequest
   x-sdk-operation-name: delete
-  description: |
-    Delete the KYC request with the specified identifier string.
+  description: Deletes a KYC request with a specified ID.
   responses:
     '204':
-      description: The KYC request was deleted.
+      description: KYC request deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '404':

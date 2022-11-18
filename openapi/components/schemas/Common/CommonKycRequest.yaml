@@ -22,28 +22,55 @@ properties:
       - abandoned
       - expired
     x-enumDescriptions:
-      gathering: No documents have been provided yet. Temporary state.
-      attempted: At least one document has been provided but is not `accepted`. Temporary state.
-      partial: At least one requested document has the `accepted` status, but not all of them. Temporary state.
-      pending-review: At least one document type has a document with the `pending` status and no documents with the `accepted` status. Temporary state (until reviewed or another `accepted` document is provided).
-      fulfilled: All requested documents are provided and `accepted`. Permanent state.
-      failed: At least one requested document exhausted all attempts and does not have the status `accepted`, `pending` or `in-progress`. Permanent state.
-      abandoned: Request expired and has at least one document provided. Permanent state.
-      expired: Request expired without any document uploaded. Permanent state.
+      gathering: |-
+        No documents have been provided yet.
+        This is a temporary state.
+      attempted: |-
+        At least one document has been provided but none were assigned the `accepted` status.
+        This is a temporary state.
+      partial: |-
+        At least one requested document has the `accepted` status,
+        but not all requested documents have been assigned the `accepted` status.
+        This is a temporary state.
+      pending-review: |-
+        At least one requested document has the `pending` status,
+        and no requested documents have been assigned the `accepted` status.
+        This is a temporary state, until the document is reviewed,
+        or another `accepted` document is provided.
+      fulfilled: |-
+        All requested documents are provided and have been assigned the `accepted` status.
+        This is a permanent state.
+      failed: |-
+        At least one requested document has exhausted all attempts,
+        and has not been assigned a `accepted`, `pending`, or `in-progress` status.
+        This is a permanent state.
+      abandoned: |-
+        One or more documents provided but the request expired.
+        This is a permanent state.
+      expired: |-
+        No documents were provided and the request expired.
+        This is a permanent state permanent state.
   redirectUrl:
-    description: |
-      The URL to redirect the customer when an upload is completed.
-      When the customer is redirected, Rebilly will append an `info` query parameter which may have one of the following values (example: `https://example.com?info=success`):
+    description: |-
+      URL to redirect the customer when a KYC document upload is completed.
+      When the customer is redirected,
+      Rebilly appends an `info` query parameter that has one of the following values:
 
-        - **back** - The customer clicked the `back to website` link;
-        - **token_expired** - The customer's token expired;
-        - **success** - The customer uploaded docs that were successfully analyzed;
-        - **manual** - The customer uploaded docs that will require manual review because the analyzer rejected them or couldn't process them;
-        - **partial** - The customer had success with some doc type but not with other (for example, successful proof of address but skipped proof of id).
+        - **back**: Customer clicked the `back to website` link.
+        - **token_expired**: Customer's token expired.
+        - **success**: Customer uploaded KYC documents that were successfully analyzed.
+        - **manual**: Customer uploaded KYC documents that will require a manual review.
+          This is because the analyzer rejected the documents or could not process them.
+        - **partial**: Some of the customer's KYC documents where successfully analyzed,
+          but other documents were not.
+          For example, the proof of address document was successfully analyzed but proof of ID was not.
+    example: https://example.com?info=success
     type: string
     format: uri
   expirationTime:
-    description: Expiration date-time. Default value is one hour in the future.
+    description: |-
+      Date and time at which the request expires.
+      The default value is one hour in the future.
     type: string
     format: date-time
   createdTime:

@@ -8,12 +8,14 @@ post:
   summary: Review a KYC document
   operationId: PostKycDocumentReview
   x-sdk-operation-name: review
-  description: >-
-    Mark the KYC document as reviewed. Updates the review time and reviewer.
-    information.
+  description: |-
+    Updates the `status` of a KYC document with a specified ID to `reviewed`.
+    The review time and reviewer information is also updated.
+
+    > **Note:** Use this operation for manual overrides.
   responses:
     '201':
-      description: KYC document was reviewed.
+      description: KYC document reviewed.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml

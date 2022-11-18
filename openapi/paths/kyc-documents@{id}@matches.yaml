@@ -5,11 +5,13 @@ post:
     - Core
   tags:
     - KYC documents
-  summary: Update a KYC document's documentMatches
+  summary: Update KYC document matches
   operationId: PostKycDocumentMatches
   x-sdk-operation-name: matches
-  description: >
-    Updates a KYC document's documentMatches. Intended to be used for manual overrides.
+  description: |-
+    Updates the document matches of a KYC document with a specified ID.
+
+    > **Note:** Use this operation for manual overrides.
   requestBody:
     content:
       application/json:
@@ -21,7 +23,7 @@ post:
     required: true
   responses:
     '204':
-      description: KYC document's documentMatches were updated.
+      description: Document matches updated.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

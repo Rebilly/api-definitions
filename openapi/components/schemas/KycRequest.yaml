@@ -1,3 +1,4 @@
+description: KYC request information.
 allOf:
   - $ref: ./Common/CommonKycRequest.yaml
   - required:
@@ -10,23 +11,23 @@ allOf:
         example: spend limit
         type: string
       matchLevel:
-        description: |
-          The level of strictness for the document matches.
-          The value of `1` is less strict and `2` is strict.
+        description: |-
+          Tolerance level setting for document matches.
+          The value of `1` is more tolerant and `2` is strict.
         type: integer
         minimum: 1
         maximum: 2
         default: 2
       revision:
-        description: >
-          The number of times the KYC request data has been modified.
-          The revision is useful when analyzing webhook data to determine if the
-          change takes precedence over the current representation.
+        description: |-
+          Number of times the KYC request data has been modified.
+
+          Use this value when analyzing webhook data to determine if a change must take precedence over the current representation.
         type: integer
         readOnly: true
       _links:
         type: array
-        description: The links related to the resource.
+        description: Related links.
         readOnly: true
         minItems: 1
         items:
@@ -36,9 +37,7 @@ allOf:
             - $ref: ./Links/KycGathererLink.yaml
       _embedded:
         type: object
-        description: |-
-          Embedded objects that are requested by the `expand`
-          query parameter.
+        description: Embedded objects that are requested by the `expand` query parameter.
         readOnly: true
         properties:
           documents:

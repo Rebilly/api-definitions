@@ -1,59 +1,73 @@
 type: object
+description: Matched identity data.
 properties:
   containsImage:
-    description: Flag that indicates if there is an image that contains a face on it.
+    description: Specifies whether the document includes an image that contains a face.
     type: boolean
     example: true
   isIdentityDocument:
-    description: Flag that indicates if this looks like and ID.
+    description: Specifies whether the document resembles an ID.
     type: boolean
     example: true
   isPublishedOnline:
-    description: If there is an exact match found online.
+    description: Specifies whether an exact match of the document has been found online.
     type: boolean
     example: false
   matchingImages:
-    description: Contains urls to matching images found online.
+    description: URLs where matching images have been found online.
     type: array
     readOnly: true
     maxItems: 3
     items:
       type: string
   firstName:
-    description: The customer first name if it was matched, null otherwise.
+    description: |-
+      First name of the customer.
+      This value is null if no match is found.
     type: string
     nullable: true
     example: John
   lastName:
-    description: The customer last name if it was matched, null otherwise.
+    description: |-
+      Last name of the customer.
+      This value is null if no match is found.
     type: string
     nullable: true
     example: Doe
   dateOfBirth:
-    description: The date of birth found on the document, null if not found.
+    description: |-
+      Date of birth detected on the document.
+      This value is null if no match is detected.
     type: string
     format: date-time
     nullable: true
   expirationDate:
-    description: Expiration date detected on the document. If an expiration date is not detected, this value is null.
+    description: |-
+      Expiration date detected on the document.
+      This value is null if no expiration date is detected.
     type: string
     format: date-time
     nullable: true
   issueDate:
-    description: The issued date found on the document, null if not found.
+    description: |-
+      Issue date detected on the document.
+      This value is null if no issue date is detected.
     type: string
     format: date-time
     nullable: true
   hasMinimalAge:
     description: |-
-      Checks the minimal age, 21+ for USA and 18+ for all other countries.
-      Null if dateOfBirth could not be determined.
+      Specifies that the individual is older than the minimal age limit.
+      The minimal age is 21+ the for USA and 18+ for all other countries.
+      This value is null if `dateOfBirth` was not determined.
     type: boolean
     nullable: true
     readOnly: true
     example: true
   nationality:
-    description: Nationality detected on a passport or citizenship document. If a nationality is not detected, this value is null.
+    description: |-
+      Nationality detected on a passport or citizenship document.
+      This value is null if no nationality is detected.
     type: string
     nullable: true
     example: US
@@ -71,23 +85,29 @@ properties:
     nullable: true
     example: Ontario
   documentNumber:
-    description: Unique number on the identity document. This value may contain alphanumeric characters.
+    description: |-
+      Unique number on the identity document.
+      This value may contain alphanumeric characters.
     type: string
     nullable: true
     example: '1234567890'
   documentSubtype:
-    description: The interpreted subtype of the uploaded document.
+    description: |-
+      Interpreted subtype of the uploaded document.
+      For a list of available subtypes, see [KycDocumentSubtypes](https://github.com/Rebilly/api-definitions/blob/main/openapi/components/schemas/KycDocument/KycDocumentSubtypes.yaml).
     type: string
     nullable: true
     example: passport
   hasMatchingFaceProof:
-    description: Specifies whether an identity document has a matching face proof.
+    description: Specifies whether an identity document has matching face proof.
     type: boolean
     example: false
 
   # deprecated
   expiryDate:
-    description: Expiry date detected on the document. If an expiry date is not detected, this value is null.
+    description: |-
+      Expiry date detected on the document.
+      This value is null if no expiry date is detected.
     type: string
     format: date-time
     nullable: true

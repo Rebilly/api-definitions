@@ -3,16 +3,25 @@ post:
     - Core
   tags:
     - KYC documents
-  summary: Create a KYC Request
+  summary: Create a KYC request
   operationId: PostKycRequest
   x-sdk-operation-name: create
-  description: |
-    Create a KYC Request.
-    Then, redirect the customer to the `kycGatherer` link.
-    After the customer completes the KYC process, they will be redirected back to the `redirectUrl`.
-    Corresponding webhooks (such as KYC document accepted, KYC document rejected) are sent to webhooks subscribers.
-    When the complete list of documents is received and accepted, the KYC request fulfilled webhook will be sent to subscribers.
-    If a `credit-file-proof` is successful with the decision `single-source` or `dual-source`, then corresponding `identity-proof` and `address-proof` documents are not requested.
+  description: |-
+    Creates a KYC request.
+
+    The customer is redirected to the `kycGatherer` link.
+    After the customer completes the KYC process,
+    they are redirected back to the `redirectUrl` link.
+
+    Corresponding webhooks, such as: KYC document accepted and KYC document rejected,
+    are sent to the subscribers.
+
+    When the complete list of documents is received and accepted,
+    the KYC request fulfilled webhook is sent to subscribers.
+
+    If a `credit-file-proof` request is successful,
+    it returns a `decision` value of `single-source` or `dual-source`.
+    The corresponding `identity-proof` and `address-proof` documents are not requested.
   requestBody:
     content:
       application/json:
@@ -20,7 +29,11 @@ post:
           $ref: ../components/schemas/KycRequest.yaml
         examples:
           credit-file-identity-address:
-            summary: Credit file with fallback. In the sandbox environment pass the customer first name `accept` to mark `credit-file-proof` KYC document as `accepted`, and any other first name to reject the document.
+            summary: |-
+              Credit file with fallback.
+              In the sandbox environment, to mark a `credit-file-proof` KYC document as `accepted`,
+              pass the customer's first name to the `accept` field.
+              If an incorrect first name is passed, the document is rejected.
             value:
               customerId: '123_456789'
               redirectUrl: https://example.com/return-here/
@@ -52,7 +65,7 @@ post:
     required: true
   responses:
     '201':
-      description: KYC request was created.
+      description: KYC request created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -74,8 +87,7 @@ get:
   summary: Retrieve KYC requests
   operationId: GetKycRequestCollection
   x-sdk-operation-name: getAll
-  description: |
-    Retrieve a list of KYC requests.
+  description: Retrieves a list of KYC requests.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -83,7 +95,7 @@ get:
     - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
-      description: A list of KYC requests was retrieved.
+      description: List of KYC requests retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml

@@ -1,85 +1,96 @@
 type: object
+description: Identity proof settings.
 properties:
   weights:
     type: object
-    description: The weights of all matched properties.
+    description: |-
+      Property weights that are used for the KYC document verification process.
+
+      All KYC documents start the verification process with a score of 100.
+      If a check fails, the score is reduced by the corresponding weight.
+      For example, if the `firstName` check weight is set to `5`, and the check fails,
+      the KYC document score becomes `95`.
     properties:
       containsImage:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of containsImage.
+        description: Weight added if the document does not include an image that contains a face.
       isIdentityDocument:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of isIdentityDocument.
+        description: Weight added if the document does not resemble an ID.
       isPublishedOnline:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of isPublishedOnline.
+        description: Weight added if an exact match of the document is not found online.
       firstName:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of firstName.
+        description: Weight added if the customer's first name is not matched.
       lastName:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of lastName.
+        description: Weight added if the customer's last name is not matched.
       expirationDate:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of `expirationDate`.
+        description: Weight added if an expiration date is not detected on the document.
       dateOfBirth:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of dateOfBirth.
+        description: Weight added if a date of birth is not detected on the document.
       matchesDateOfBirth:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of matchesDateOfBirth.
+        description: Weight added if an identity document does not have a matching date of birth.
       issueDate:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of issueDate.
+        description: Weight added if an issue date is not detected on the document.
       hasMinimalAge:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of hasMinimalAge.
+        description: |-
+          Weight added if the document does not verify the minimal age limit.
+          Minimal age is 21+ the for USA and 18+ for all other countries.
       hasMatchingFaceProof:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of hasMatchingFaceProof.
+        description: Weight added if an identity document does not have matching face proof.
       nationality:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of nationality.
+        description: Weight added if a nationality is not detected on the document.
       documentSubtype:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of documentSubtype.
+        description: |-
+          Weight added if the document is not one of the recognized document subtypes.
+          For a list of available subtypes, see [KycDocumentSubtypes](https://github.com/Rebilly/api-definitions/blob/main/openapi/components/schemas/KycDocument/KycDocumentSubtypes.yaml).
   thresholds:
     type: object
-    description: The thresholds to determine the document status.
+    description: Pass and fail threshold definition for the document verification process.
     properties:
       rejectBelow:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of rejectBelow.
+        description: Overall score by which an identity proof document fails the verification process.
       acceptAbove:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of acceptAbove.
+        description: Overall score by which an identity proof document passes the verification process.
