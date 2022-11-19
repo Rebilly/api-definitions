@@ -132,10 +132,9 @@ And in the response, you would see:
 ```
 Expand may be used not only on `GET` requests but also on `PATCH`, `POST`, `PUT` requests too.
 
-
 # Getting started guide
 
-This API has over 500 operations.
+This API has over [500 operations](https://api-reference-all.rebilly.com).
 That's more than you need to implement your use cases.
 If you have a use case you would like to implement,
 please consult us for feedback on the best API operations for the task.
