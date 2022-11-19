@@ -159,44 +159,50 @@ rules:
       defined: true
       minLength: 30
       pattern: /(\.)$/
+      notPattern: /(Rebilly's)/
   assert/requestBody-description:
     subject:
       type: RequestBody
       property: description
     assertions:
       pattern: /(\.)$/
+      notPattern: /(Rebilly's)/
   assert/schema-description:
     subject:
       type: Schema
       property: description
     assertions:
       pattern: /(\.)$/
+      notPattern: /(Rebilly's)/
   assert/parameter-description:
     subject:
       type: Parameter
       property: description
     assertions:
-      pattern: /(\.|\.\n)$/
+      pattern: /(\.)$/
+      notPattern: /(Rebilly's)/
   assert/header-description:
     subject:
       type: Header
       property: description
     assertions:
-      pattern: /(\.|\.\n)$/
+      pattern: /(\.)$/
+      notPattern: /(Rebilly's)/
   assert/response-description:
     subject:
       type: Response
       property: description
     assertions:
       pattern: /(\.)$/
-      notPattern: /(was|will)/i
+      notPattern: /(was|will|were|Rebilly's)/i
   assert/operation-description:
     subject:
       type: Operation
       property: description
     assertions:
       # defined: true # consider adding
-      pattern: /^((?!The\b|A\b|An\b|[a-z]).*[,.\s])+$/m
+      pattern: /^(([A-Z]).*[,.\s])+$/m
+      notPattern: ^(The\g|A\g|An\g)
   assert/info-description:
     subject:
       type: Info
@@ -205,6 +211,7 @@ rules:
       defined: true
       minLength: 30
       pattern: /(\.|\.\n)$/
+      notPattern: /(Rebilly's)/
   assert/operation-summary:
     subject:
       type: Operation
