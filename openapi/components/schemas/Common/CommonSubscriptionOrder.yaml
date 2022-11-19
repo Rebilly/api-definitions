@@ -3,10 +3,9 @@ allOf:
   - $ref: ./CommonOrder.yaml
   - properties:
       status:
-        description: |
-          Status of the subscription service. A subscription starts
-          in the `pending` status, and will become `active` when the
-          service period begins.
+        description: |-
+          Status of the subscription service.
+          A subscription starts in the `pending` status, and becomes `active` when the service period begins.
         type: string
         readOnly: true
         enum:
@@ -24,14 +23,12 @@ allOf:
         readOnly: true
       trial:
         type: object
-        description: >-
-          To use plan defaults do not send the `trial` key, or send a `null`.
-          value with it.
+        description: To use plan defaults do not send the `trial` key, or send a `null` value.
         properties:
           enabled:
-            description: >-
-              Enable or disable the trial for this subscription. If enabled for
-              plans without trial prices, the trial will be free.
+            description: |-
+              Specifies if there is a trial for this subscription.
+              For plans without trial prices the trial is free.
             type: boolean
           endTime:
             description: Time and date at which the trial ends. If a trial is enabled on this subscription, a value must be provided.

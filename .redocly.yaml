@@ -158,19 +158,19 @@ rules:
     assertions:
       defined: true
       minLength: 30
-      pattern: /(\.|\.\n)$/
+      pattern: /(\.)$/
   assert/requestBody-description:
     subject:
       type: RequestBody
       property: description
     assertions:
-      pattern: /(\.|\.\n)$/
+      pattern: /(\.)$/
   assert/schema-description:
     subject:
       type: Schema
       property: description
     assertions:
-      pattern: /(\.|\.\n)$/
+      pattern: /(\.)$/
   assert/parameter-description:
     subject:
       type: Parameter
@@ -183,12 +183,13 @@ rules:
       property: description
     assertions:
       pattern: /(\.|\.\n)$/
-  assert/response-description:
-    subject:
-      type: Response
-      property: description
-    assertions:
-      pattern: /(\.|\.\n)$/
+  # assert/response-description:
+  #   subject:
+  #     type: Response
+  #     property: description
+  #   assertions:
+  #     # pattern: /^((?!was|will).)*$/m
+  #     notPattern: /(was|will)/i
   assert/operation-description:
     subject:
       type: Operation
@@ -222,7 +223,7 @@ rules:
     subject:
       type: SchemaProperties
     message: The createdTime and updatedTime properties are mutually required.
-    severity: warn
+    severity: error
     assertions:
       mutuallyRequired:
         - createdTime
