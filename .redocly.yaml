@@ -159,7 +159,7 @@ rules:
       defined: true
       minLength: 30
       pattern: /(\.)$/
-      notPattern: /(Rebilly's)/
+      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
   assert/requestBody-description:
     subject:
       type: RequestBody
@@ -172,7 +172,7 @@ rules:
       type: Schema
       property: description
     assertions:
-      pattern: /^([A-Z]|dLocal|ecoPayz|eMerchantPay|ePay|eZeeWallet|ezyEFT|iCanPay|iCheque|iDebit|loonie|vegaaH)(.|\n)*(\.|\n)$/
+      pattern: /^([A-Z]|dLocal|ecoPayz|eMerchantPay|ePay|eZeeWallet|ezyEFT|iCanPay|iCheque|iDebit|loonie|vegaaH)(.|\n)*(\.)$/
       notPattern: /(Rebilly's|subscription's|invoice's|item's)/
   assert/parameter-description:
     subject:
