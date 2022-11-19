@@ -3,15 +3,15 @@ allOf:
   - properties:
       filter:
         type: string
-        description: >-
-          Filter based on the invoice's properties which is used to determine when the rate is applicable.
-          Empty filter will match any case.
+        description: |-
+          Filter based on the invoice properties used to determine when the rate is applicable.
+          Empty filters means the rate is always applicable.
         default: ''
         example: 'deliveryAddress.country:US,CA,RU;amount:100..1000'
         allOf:
           - $ref: ../FilterString.yaml
       status:
-        description: If `inactive`, the shipping rate will not be matched in any case.
+        description: If `inactive` then the shipping rate never applies.
         type: string
         enum:
           - active

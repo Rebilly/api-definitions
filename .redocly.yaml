@@ -158,44 +158,63 @@ rules:
     assertions:
       defined: true
       minLength: 30
-      pattern: /(\.|\.\n)$/
+      pattern: /(\.)$/
+      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
   assert/requestBody-description:
     subject:
       type: RequestBody
       property: description
     assertions:
-      pattern: /(\.|\.\n)$/
+      pattern: /(\.)$/
+      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
   assert/schema-description:
     subject:
       type: Schema
       property: description
     assertions:
-      pattern: /(\.|\.\n)$/
+      pattern: /^([A-Z]|dLocal|ecoPayz|eMerchantPay|ePay|eZeeWallet|ezyEFT|iCanPay|iCheque|iDebit|loonie|vegaaH)(.|\n)*(\.)$/
+      notPattern: /(Rebilly's|subscription's|invoice's|item's)/
   assert/parameter-description:
     subject:
       type: Parameter
       property: description
     assertions:
-      pattern: /(\.|\.\n)$/
+      pattern: /(\.)$/
+      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
   assert/header-description:
     subject:
       type: Header
       property: description
     assertions:
-      pattern: /(\.|\.\n)$/
+      pattern: /(\.)$/
+      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
   assert/response-description:
     subject:
       type: Response
       property: description
     assertions:
-      pattern: /(\.|\.\n)$/
+      pattern: /(\.)$/
+      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
   assert/operation-description:
     subject:
       type: Operation
       property: description
     assertions:
       # defined: true # consider adding
-      pattern: /^((?!The\b|A\b|An\b|[a-z]).*[,.\s])+$/m
+      pattern: /^(([A-Z]).*[,.\s])+$/m
+      notPattern: /^(The\s|A\s|An\s)/
+  assert/operation-description-possessives-future-past:
+    subject:
+      type: Operation
+      property: description
+    assertions:
+      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
+  assert/schema-properties-description-possessives-future-past:
+    subject:
+      type: Schema
+      property: description
+    assertions:
+      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
   assert/info-description:
     subject:
       type: Info
@@ -204,6 +223,7 @@ rules:
       defined: true
       minLength: 30
       pattern: /(\.|\.\n)$/
+      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
   assert/operation-summary:
     subject:
       type: Operation
@@ -222,7 +242,7 @@ rules:
     subject:
       type: SchemaProperties
     message: The createdTime and updatedTime properties are mutually required.
-    severity: warn
+    severity: error
     assertions:
       mutuallyRequired:
         - createdTime

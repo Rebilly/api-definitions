@@ -1,4 +1,4 @@
-description: ThreeDSecureIO3dsServer.
+description: ThreeDSecureIO 3DS Server.
 allOf:
   - type: object
     required:
@@ -45,13 +45,16 @@ allOf:
         type: boolean
         description: |-
           Value determines if requests can use version 1 of 3DS.
-          In case both v1 and v2 are enabled, v2 will be used.
+          In case both v1 and v2 are enabled, v2 is used.
           If v2 is not supported for the issuer, v1 is used.
+
+          Version 1 has been deprecated by both Visa and Mastercard.
+        deprecated: true
       v2:
         type: boolean
         description: |-
-          Value determines if requests will attempt version 2 of 3DS.
-          In case both v1 and v2 are enabled, v2 will be used.
+          Value determines if requests attempt version 2 of 3DS.
+          In case both v1 and v2 are enabled, v2 is used.
           If v2 is not supported for the issuer, v1 is used.
       transactionType:
         type: string
@@ -94,14 +97,14 @@ allOf:
           Indicates the type of 3RI request.
           Values 06 - 11 are only supported in 3D2 2.2.0.
         x-enumDescriptions:
-          01: Recurring transaction.
-          02: Instalment transaction.
-          03: Add card.
-          04: Maintain card information.
-          05: Account verification.
-          06: Split/delayed shipment.
-          07: Top-up.
-          08: Mail order.
-          09: Telephone order.
-          10: Whitelist status check.
-          11: Other payment.
+          '01': Recurring transaction.
+          '02': Instalment transaction.
+          '03': Add card.
+          '04': Maintain card information.
+          '05': Account verification.
+          '06': Split/delayed shipment.
+          '07': Top-up.
+          '08': Mail order.
+          '09': Telephone order.
+          '10': Whitelist status check.
+          '11': Other payment.
