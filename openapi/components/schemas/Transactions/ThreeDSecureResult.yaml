@@ -1,11 +1,12 @@
 type: object
+description: Authentication object.
 readOnly: true
 properties:
   server:
     description: Name of the 3D Secure server.
     type: string
   version:
-    description: 3D Secure version.
+    description: Version of 3D Secure.
     type: string
     enum:
       - '1.0.2'
@@ -20,7 +21,7 @@ properties:
       - invalid card/timeout
       - unavailable
   authenticated:
-    description: 3D Secure authentication response status.
+    description: Authentication response status for 3D Secure.
     type: string
     enum:
       - yes
@@ -34,14 +35,12 @@ properties:
       - not protected
       - protected (attempt)
   flow:
-    description: 3D Secure 2 authentication flow.
+    description: Authentication flow for 3D Secure 2.
     type: string
     enum:
       - frictionless
       - challenge
   isDowngraded:
-    description: |-
-      Specifies whether 3D Secure 2 was attempted but downgraded to
-      3D Secure 1.
+    description: Specifies whether 3D Secure 2 was attempted but downgraded to 3D Secure 1.
     type: boolean
     default: false
