@@ -1,16 +1,16 @@
 # Introduction
 [comment]: <> (x-product-description-placeholder)
-The Rebilly API is built on HTTP. Our API is RESTful. It has predictable
-resource URLs. It returns HTTP response codes to indicate errors. It also
-accepts and returns JSON in the HTTP body. You can use your favorite
-HTTP/REST library for your programming language to use Rebilly's API, or
-you can use one of our SDKs (currently available in [PHP](https://github.com/Rebilly/rebilly-php)
-and [Javascript](https://github.com/Rebilly/rebilly-js-sdk)).
+The Rebilly API is built on HTTP.
+Our API is RESTful.
+It has predictable resource URLs.
+It returns HTTP response codes to indicate errors.
+It also accepts and returns JSON in the HTTP body.
+You can use your favorite HTTP/REST library for your programming language to use the API,
+or you can use one of our SDKs (currently available in [PHP](https://github.com/Rebilly/rebilly-php) and [Javascript](https://github.com/Rebilly/rebilly-js-sdk)).
 
-We have other APIs that are also available. Every action from our [app](https://app.rebilly.com)
-is supported by an API which is documented and available for use so that you
-may automate any workflows necessary. This document contains the most commonly
-integrated resources.
+We have other APIs that are also available.
+Every action from our [app](https://app.rebilly.com) is supported by an API which is documented and available for use so that you may automate any workflows necessary.
+This document contains the most commonly integrated resources.
 
 # Authentication
 
@@ -102,12 +102,9 @@ Here is filter format description:
 - Datetime-based fields accept values formatted using RFC 3339 like this: `?filter=createdTime:2021-02-14T13:30:00Z`. 
 
 # Expand to include embedded objects
-Rebilly provides the ability to pre-load additional 
-objects with a request. 
+Rebilly provides the ability to pre-load additional objects with a request. 
 
-You can use `?expand` param on most requests to expand
-and include embedded objects within the
-`_embedded` property of the response.
+You can use `?expand` param on most requests to expand and include embedded objects within the `_embedded` property of the response.
 
 The `_embedded` property contains an array of 
 objects keyed by the expand parameter value(s).
@@ -127,17 +124,15 @@ And in the response, you would see:
     "customer": {...}
 ]
 ```
-Expand may be utilitized not only on `GET` requests but also on `PATCH`, `POST`, `PUT` requests too.
+Expand may be used not only on `GET` requests but also on `PATCH`, `POST`, `PUT` requests too.
 
 
 # Getting started guide
 
-Rebilly's API has over 500 operations.  That's more than you'll 
-need to implement your use cases.  If you have a use 
-case you would like to implement, please consult us for
-feedback on the best API operations for the task.
+This API has over 500 operations.
+That's more than you'll need to implement your use cases.
+If you have a use case you would like to implement,
+please consult us for feedback on the best API operations for the task.
 
-Our [getting started guides](https://www.rebilly.com/docs/content/dev-docs/concept/integrations/) will demonstrate a payment form use
-cases.  It will allow us to highlight core resources
-in Rebilly that will be helpful for many other use cases
-too.
+Our [getting started guides](https://www.rebilly.com/docs/content/dev-docs/concept/integrations/) will demonstrate a payment form use cases.
+It allows us to highlight core resources in Rebilly that are helpful for many other use cases too.

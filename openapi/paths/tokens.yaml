@@ -6,16 +6,11 @@ post:
   summary: Create a payment token
   operationId: PostToken
   x-sdk-operation-name: create
-  description: |
-    [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/)
-    is the recommended way to
-    create a payment token because it minimizes
-    PCI DSS compliance.  Once a payment token
-    is created, it can only be used once.
+  description: |-
+    [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/) is the recommended way to create a payment token because it minimizes PCI DSS compliance.
+    Once a payment token is created, it can only be used once.
 
-    A payment token expires upon first use
-    or within 30 minutes of the token creation
-    (whichever comes first).
+    A payment token expires upon first use or within 30 minutes of the token creation (whichever comes first).
   requestBody:
     content:
       application/json:
@@ -58,8 +53,7 @@ get:
   summary: Retrieve tokens
   operationId: GetTokenCollection
   x-sdk-operation-name: getAll
-  description: |
-    Retrieve a list of tokens.
+  description: Retrieve a list of tokens.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
