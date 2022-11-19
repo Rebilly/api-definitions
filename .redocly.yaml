@@ -1,10 +1,23 @@
 apis:
+  core@latest:
+    root: openapi/openapi.yaml
+    decorators:
+      filter-in:
+        property: x-products
+        value:
+          - Core
+  all@latest:
+    root: openapi/openapi.yaml
+    decorators:
+      plugin/remove-tag-groups: on
+  # The original bundler
   openapi:
     root: openapi/openapi.yaml
 extends:
   - recommended
 plugins:
   - ./plugins/custom-rules.js
+  - ./plugins/decorators.js
   - ./plugins/discriminator-mapper.js
   - ./plugins/products-bundler/bundler.js
 rules:
