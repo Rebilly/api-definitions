@@ -166,35 +166,35 @@ rules:
       property: description
     assertions:
       pattern: /(\.)$/
-      notPattern: /(Rebilly's)/
+      notPattern: /(Rebilly's|subscription's|invoice's|item's)/
   assert/schema-description:
     subject:
       type: Schema
       property: description
     assertions:
       pattern: /^([A-Z]|dLocal|ecoPayz|eMerchantPay|ePay|eZeeWallet|ezyEFT|iCanPay|iCheque|iDebit|loonie|vegaaH)(.|\n)*(\.|\n)$/
-      notPattern: /(Rebilly's)/
+      notPattern: /(Rebilly's|subscription's|invoice's|item's)/
   assert/parameter-description:
     subject:
       type: Parameter
       property: description
     assertions:
       pattern: /(\.)$/
-      notPattern: /(Rebilly's)/
+      notPattern: /(Rebilly's|subscription's|invoice's|item's)/
   assert/header-description:
     subject:
       type: Header
       property: description
     assertions:
       pattern: /(\.)$/
-      notPattern: /(Rebilly's)/
+      notPattern: /(Rebilly's|subscription's|invoice's|item's)/
   assert/response-description:
     subject:
       type: Response
       property: description
     assertions:
       pattern: /(\.)$/
-      notPattern: /(was|will|were|Rebilly's)/i
+      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
   assert/operation-description:
     subject:
       type: Operation
@@ -202,7 +202,19 @@ rules:
     assertions:
       # defined: true # consider adding
       pattern: /^(([A-Z]).*[,.\s])+$/m
-      notPattern: ^(The\g|A\g|An\g)
+      notPattern: /^(The\s|A\s|An\s)/
+  assert/operation-description-possessives-future-past:
+    subject:
+      type: Operation
+      property: description
+    assertions:
+      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
+  assert/schema-properties-description-possessives-future-past:
+    subject:
+      type: Schema
+      property: description
+    assertions:
+      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
   assert/info-description:
     subject:
       type: Info

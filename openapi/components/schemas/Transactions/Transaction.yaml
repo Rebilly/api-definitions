@@ -2,8 +2,7 @@ allOf:
   - $ref: ../Common/CommonTransaction.yaml
   - properties:
       gatewayAccountId:
-        description: |-
-          ID of the gateway account that processed the transaction.
+        description: ID of the gateway account that processed the transaction.
         allOf:
           - $ref: ../ResourceId.yaml
         readOnly: true
@@ -53,8 +52,7 @@ allOf:
                 description: Raw response message.
                 type: string
           cvvResponse:
-            description: |-
-              Gateway Card Verification Value (CVV) response.
+            description: Gateway Card Verification Value (CVV) response.
             type: object
             properties:
               code:
@@ -72,9 +70,9 @@ allOf:
       acquirerName:
         readOnly: true
         description: |-
-          Acquirer name. This value is only available when a
-          transaction uses a payment gateway. If a transaction does
-          not use a payment gateway, this value is `null`.
+          Acquirer name.
+          This value is only available when a transaction uses a payment gateway.
+          If a transaction does not use a payment gateway, this value is `null`.
         allOf:
           - $ref: ../Gateways/AcquirerName.yaml
       method:
@@ -86,16 +84,13 @@ allOf:
         allOf:
           - $ref: ../PaymentMethods/PaymentMethod.yaml
       velocity:
-        description: |-
-          Number of transactions by the same customer in the past 24 hours.
+        description: Number of transactions by the same customer in the past 24 hours.
         type: integer
       revision:
         description: |-
           Number of times the transaction data has been modified.
 
-          This revision number is useful when analyzing webhook data
-          to determine if the change takes precedence over the current
-          representation.
+          This revision number is useful when analyzing webhook data to determine if the change takes precedence over the current representation.
         type: integer
         readOnly: true
       referenceData:
@@ -116,15 +111,13 @@ allOf:
       paymentInstrument:
         $ref: ../PaymentInstruments/ValueObjects/PaymentInstrumentValueObject.yaml
       hasDcc:
-        description: |-
-          Specifies whether Dynamic Currency Conversion (DCC)
-          was applied to the transaction.
+        description: Specifies whether Dynamic Currency Conversion (DCC) applies to the transaction.
         type: boolean
         readOnly: true
       dcc:
         description: |-
-          Detailed Dynamic currency conversion (DCC). If DCC is not
-          applied to the transaction, this value is `null`.
+          Detailed Dynamic currency conversion (DCC).
+          If DCC is not applied to the transaction, this value is `null`.
         type: object
         readOnly: true
         properties:
@@ -153,8 +146,8 @@ allOf:
         readOnly: true
       bumpOffer:
         description: |-
-          Bump offer information. If the transaction
-          does not have an associated bump offer, this value is `null`.
+          Bump offer information.
+          If the transaction does not have an associated bump offer, this value is `null`.
         type: object
         readOnly: true
         properties:
@@ -164,14 +157,14 @@ allOf:
               - $ref: ../Money.yaml
           version:
             description: |-
-              Name of the version that was selected. This field is
-              useful when measuring split tests.
+              Name of the version selected.
+              This field is useful to measure split tests.
             allOf:
               - $ref: ../PurchaseBumps/PurchaseBumpSplitVersionName.yaml
           language:
             description: |-
-              Language in which the bump offer was displayed to the user.
-              This field in useful when finding any translation issues.
+              Language in which the bump offer displays to the user.
+              This field in useful to find translation issues.
             allOf:
               - $ref: ../LanguageIsoCode.yaml
           outcome:
@@ -182,8 +175,8 @@ allOf:
               - $ref: ../PurchaseBumps/PurchaseBumpOfferList.yaml
           selectedOffer:
             description: |-
-              Offer selected by a customer. If a
-              bump offer outcome is not `selected`, this value is `null`.
+              Offer selected by a customer.
+              If a bump offer outcome is not `selected`, this value is `null`.
             allOf:
               - $ref: ../PurchaseBumps/PurchaseBumpOffer.yaml
       riskScore:
@@ -202,7 +195,7 @@ allOf:
         readOnly: true
       disputeTime:
         description: |-
-          Date and time at which the dispute was created.
+          Date and time when the dispute is created.
           If the transaction is not disputed, this value is `null`.
         type: string
         format: date-time
@@ -223,18 +216,18 @@ allOf:
           - unknown
       isReconciled:
         description: |-
-          Specifies whether the transaction was verified with gateway batch data.
+          Specifies whether the transaction is verified with gateway batch data.
           If the transaction is not disputed, this value is `null`.
         type: boolean
         readOnly: true
       isProcessedOutside:
-        description: Specifies whether the transaction was processed outside of Rebilly.
+        description: Specifies whether the transaction is processed outside of Rebilly.
         type: boolean
       isMerchantInitiated:
-        description: Specifies whether the transaction was initiated by the merchant.
+        description: Specifies whether the transaction is initiated by the merchant.
         type: boolean
       hadDiscrepancy:
-        description: Specifies whether the transaction was updated due to a discrepancy with its source of truth.
+        description: Specifies whether the transaction is updated due to a discrepancy with its source of truth.
         type: boolean
         readOnly: true
       orderId:
@@ -243,7 +236,7 @@ allOf:
           Order ID of the transaction.
           This ID must be unique within a 24 hour period.
 
-          > **Note:** This field was renamed to `requestId`.
+          > **Note:** Use the `requestId` field instead.
         type: string
         x-sortable: true
       arn:
@@ -266,7 +259,7 @@ allOf:
           - $ref: ../CurrencyCode.yaml
       settlementTime:
         type: string
-        description: Date and time in which the transaction was settled by the banking institution.
+        description: Date and time when the transaction is settled by the banking institution.
         format: date-time
         readOnly: true
         nullable: true

@@ -75,18 +75,17 @@ properties:
     description: |-
       Some special instructions for merchant to setup account for this gateway.
       For example: After adding this gateway account,
-      you will need to set the IPN to `//example.com/ipns/{gateway-name}/{organization-id}` by contacting your account rep.
+      set the IPN to `//example.com/ipns/{gateway-name}/{organization-id}` by contacting your account rep.
     type: string
   paymentMethods:
     description: |-
-      Array of the payment methods supported (e.g. payment-card, bitcoin).
+      Array of the payment methods supported (for example, `payment-card`, `bitcoin`).
     type: array
     items:
       $ref: ./PaymentMethodApiName.yaml
     minLength: 1
   cardBrands:
-    description: |-
-      Array of the card-brands supported, if payment-card is a value of paymentMethods.
+    description: Array of the card-brands supported, if `payment-card` is a value of paymentMethods.
     type: array
     items:
       $ref: ../PaymentCards/PaymentCardBrand.yaml
@@ -95,8 +94,7 @@ properties:
   currencies:
     $ref: ./CurrenciesMetadata.yaml
   operations:
-    description: |-
-      Array of the operations supported by gateway.
+    description: Array of the operations supported by gateway.
     type: array
     items:
       type: string
@@ -112,14 +110,12 @@ properties:
         - 3DS2
         - checkCredentials
   supported3dsServers:
-    description: |-
-      Array of the 3DS-servers supported.
+    description: Array of the 3DS-servers supported.
     type: array
     items:
       type: string
   supportedPaymentInstrumentSetupInstructions:
-    description: |-
-      Array of the setup instructions supported by the gateway.
+    description: Array of the setup instructions supported by the gateway.
     type: array
     items:
       type: string
@@ -131,10 +127,10 @@ properties:
       x-enumDescriptions:
         authorize: |-
           Creates an `authorize` transaction in the amount/currency of the request.
-          If the gateway account is configured for strong customer authentication, it will be used.
+          If the gateway account is configured for strong customer authentication, it is used.
         authorize-and-void: |-
           Creates an `authorize` transaction in the amount/currency of the request, followed by a `void` (if the `authorize` was approved).
-          If the gateway account is configured for strong customer authentication, it will be used.
+          If the gateway account is configured for strong customer authentication, it is used.
         sca: |-
           Uses strong customer authentication (SCA) without any `authorize` transaction.
           SCA includes 3dsv2, 3ds, and some specific wallets behavior like setting up a billing agreement with PayPal.
@@ -142,41 +138,34 @@ properties:
           Does nothing, and returns an approved `setup` transaction.
           This is the default behavior.
   reconciliationSupport:
-    description: |-
-      Bool if we (can) reconcile.
+    description: Specifies if we can reconcile transactions.
     type: boolean
     default: false
   disputeSupport:
-    description: |-
-      If we can automate dispute data (chargeback, retrieval or TC-40 disputes) entry with an API or SFTP access.
+    description: Specifies if we can automate dispute data (chargeback, retrieval or TC-40 disputes) entry with an API or SFTP access.
     type: boolean
     default: false
   offsite:
-    description: |-
-      Bool if it may require offsite interaction (such as 3DS, PayPal login, or completing something in a store).
+    description: Specifies if it may require offsite interaction (such as 3DS, PayPal login, or completing something in a store).
     type: boolean
     default: false
   ipn:
     type: object
-    description: |-
-      Object describing and IPN that a gateway supports. No value means IPN is not supported.
+    description: Describes the IPN that a gateway supports. No value means IPN is not supported.
     required:
       - type
     properties:
       type:
-        description: |-
-          Type of supported IPN. No value means IPN is not supported.
+        description: Type of supported IPN. No value means IPN is not supported.
         type: string
         enum: ["static", "dynamic"]
       verificationMethod:
-        description: |-
-          Method that is used to verify that we can trust the data in the IPN call.
+        description: Method that is used to verify that we can trust the data in the IPN call.
         type: string
         enum: ["query", "signature"]
         default: "query"
   recommendedWaitingApprovalTtl:
-    description: |-
-      Recommended TTL before abandoning the transaction.
+    description: Recommended TTL before abandoning the transaction.
     type: integer
     default: 3600
     minimum: 299
