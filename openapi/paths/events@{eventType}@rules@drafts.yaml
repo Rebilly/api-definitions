@@ -51,8 +51,11 @@ post:
   x-sdk-operation-name: createDraftRuleset
   description: Creates a draft ruleset for a specified event type.
   responses:
-    '200':
+    '201':
       description: Draft ruleset created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
