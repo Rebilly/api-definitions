@@ -43,15 +43,52 @@ servers:
 components:
   securitySchemes:
     JWT:
-      $ref: components/securitySchemes/JWT.yaml
+      description: |-
+        JWT is a short lifetime token that can be assigned a specific expiration time.
+        To create a JWT session, see [JWT session resource](https://user-api-docs.rebilly.com/tag/JWT-Session#operation/PostSigninRequest).
+
+        Usage format: `Bearer <JWT>`.
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
     ApplicationJWT:
-      $ref: components/securitySchemes/ApplicationJWT.yaml
+      description: |-
+        Applications in our App Store can create a JSON Web Token (JWT) by [fetching an user's instance](https://user-api-docs.rebilly.com/tag/Application-owners#operation/GetApplicationInstanceByOrganization).
+
+        Usage format: `Bearer <JWT>`.
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
     PublishableApiKey:
-      $ref: components/securitySchemes/PublishableApiKey.yaml
+      description: |-
+        Only for the Tokens resource.
+
+        You can create a Publishable API Key via our [API Keys resource](https://user-api-docs.rebilly.com/#tag/API-Keys),
+        by specifying the type as `publishable`.
+      name: Authorization
+      type: apiKey
+      in: header
+
     SecretApiKey:
-      $ref: components/securitySchemes/SecretApiKey.yaml
+      description: |-
+        **Never** share your secret keys.
+        Keep them guarded and secure.
+
+        Use your secret API key only to make requests from the server side.
+        To authenticate, provide your secret key in the request header.
+      name: REB-APIKEY
+      type: apiKey
+      in: header
+
     CustomerJWT:
-      $ref: components/securitySchemes/CustomerJWT.yaml
+      description: |-
+        You can create a JSON Web Token (JWT) via [Storefront Authentication](https://storefront-api-docs.rebilly.com/#operation/StorefrontPostLogin).
+
+        Usage format: `Bearer <JWT>`.
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 
 tags:
   - name: AML

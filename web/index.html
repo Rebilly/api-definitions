@@ -29,11 +29,18 @@
     {{redocHead}}
   </head>
   <body>
-    <!-- <script>
+    <script>
       window.REFERENCE_DOCS_OPTIONS = {
-        BeforeOperationSummary: (operation) => ({ html: `<i>ID: ${operation.operationId}</i>` }),
-      }
-    </script> -->
+        hooks: {
+          BeforeOperationSummary: ({ operation }) =>
+            operation.operationDefinition["x-badge"]
+              ? {
+                  html: `<span style="background: #505A6F;border-radius: 5px;margin-left: 2px;padding: 2px 10px;font-size: 28px;color: white; vertical-align: middle;">${operation.operationDefinition["x-badge"]}</span> `,
+                }
+              : null,
+        },
+      };
+    </script>
     {{redocBody}}
   </body>
 </html>
