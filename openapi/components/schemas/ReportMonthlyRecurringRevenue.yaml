@@ -16,41 +16,41 @@ properties:
           format: double
           example: 245.0
         breakdown:
-          description: |
+          description: |-
             MRR categories are described below.
             The difference between current period MRR and previous period MRR is equal to `new + reactivated + expanded - contracted - churned`.
           type: object
           properties:
             new:
-              description: |
+              description: |-
                 MRR of new customers.
                 Example: A new customer signs up to a $40 per month plan. This is $40 in new MRR.
               type: number
               format: double
               example: 40.0
             reactivation:
-              description: |
+              description: |-
                 Previous customer stops being a customer for a period.
                 The same customer signs up again and purchases a $25 per month plan. This is reactivation MRR of $25.
               type: number
               format: double
               example: 25.0
             churned:
-              description: |
+              description: |-
                 Customer decides to cancel.
                 The subscription churns, the customer goes from $80 per month to $0 per month. This is $80 of churned MRR.
               type: number
               format: double
               example: 80.0
             contraction:
-              description: |
+              description: |-
                 Existing customers who changed items which resulted in a smaller MRR. Contraction MRR is the difference.
                 Example: A customer at $100 in MRR changes to $80 in MRR. This contraction MRR is $20.
               type: number
               format: double
               example: 20.0
             expansion:
-              description: |
+              description: |-
                 Existing customers who changed items which resulted in a bigger MRR.
                 Example: A customer upgrades from a plan that is $40 per month to a plan that is $100 per month. This is an expansion MRR of $60.
               type: number

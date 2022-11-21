@@ -48,11 +48,11 @@ properties:
     properties:
       filter:
         description: |-
-          Filters the collection items. This field requires
-          a special format. Use `,` for multiple allowed values. Use `;` for multiple fields.
+          Filters the collection items.
+          This field requires a special format.
+          Use `,` for multiple allowed values. Use `;` for multiple fields.
 
-          For more information, see
-          [Using filter with collections](#section/Using-filter-with-collections).
+          For more information, see [Using filter with collections](#section/Using-filter-with-collections).
         type: string
       sort:
         type: string
@@ -83,14 +83,13 @@ properties:
     properties:
       instruction:
         type: string
-        description: |-
-          Schedule instruction in [Recurrence Rule RFC 5545](https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html) format.
+        description: Schedule instruction in [Recurrence Rule RFC 5545](https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html) format.
       start:
         type: string
         format: date-time
         description: |-
-          Date and time at which the first scheduled recurring export will
-          occur. The default value is `now`.
+          Date and time when the first scheduled recurring export occurs.
+          The default value is `now`.
   userId:
     description: ID of the user who requested the data export.
     readOnly: true
@@ -100,7 +99,7 @@ properties:
     readOnly: true
     type: integer
   scheduledTime:
-    description: Date and time at which the data export is scheduled to generate a file.
+    description: Date and time when the data export is scheduled to generate a file.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   createdTime:
