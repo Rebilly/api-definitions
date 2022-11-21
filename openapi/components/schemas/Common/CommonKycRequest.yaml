@@ -52,17 +52,17 @@ properties:
         This is a permanent state permanent state.
   redirectUrl:
     description: |-
-      URL to redirect the customer when a KYC document upload is completed.
+      URL to redirect the customer when a KYC document upload is complete.
       When the customer is redirected,
       Rebilly appends an `info` query parameter that has one of the following values:
         - `back`: Customer clicked the `back to website` link.
         - `token_expired`: Customer's token expired.
-        - `success`: Customer uploaded KYC documents that were successfully analyzed.
-        - `manual`: Customer uploaded KYC documents that will require a manual review.
+        - `success`: Customer uploaded KYC documents that have been analyzed.
+        - `manual`: Customer uploaded KYC documents that require a manual review.
           This is because the analyzer rejected the documents or could not process them.
-        - `partial`: Some of the customer's KYC documents where successfully analyzed,
+        - `partial`: Some of the customer's KYC documents where analyzed,
           but other documents were not.
-          For example, the proof of address document was successfully analyzed but proof of ID was not.
+          For example, this may occurs when a proof of address document is analyzed but proof of ID is not.
     example: https://example.com?info=success
     type: string
     format: uri
