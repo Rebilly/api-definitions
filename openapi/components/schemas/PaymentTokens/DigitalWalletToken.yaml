@@ -1,8 +1,5 @@
 type: object
 title: Digital Wallet Token
-allOf:
-  - $ref: ./CompositeToken.yaml
-  - $ref: ../Common/CommonPaymentToken.yaml
 required:
   - method
   - paymentInstrument
@@ -40,12 +37,12 @@ properties:
         description: Descriptor for a payment.
         type: string
       bin:
-        description: Payment Card BIN (the PAN's first 6 digits).
+        description: Payment card BIN (the PAN first 6 digits).
         type: string
         format: bin
         readOnly: true
       last4:
-        description: Payment Card PAN's last 4 digits.
+        description: Payment card PAN last 4 digits.
         type: string
         readOnly: true
       brand:
@@ -54,11 +51,11 @@ properties:
           - $ref: ../PaymentCards/PaymentCardBrand.yaml
       expMonth:
         readOnly: true
-        description: Payment Card expiration month.
+        description: Payment card expiration month.
         type: integer
       expYear:
         readOnly: true
-        description: Payment Card expiration year.
+        description: Payment card expiration year.
         type: integer
       payload:
         writeOnly: true
