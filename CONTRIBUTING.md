@@ -1,17 +1,21 @@
-# Contributing to Rebilly's API definitions
+# Contributing to the Rebilly API definitions
 
 👍🎉 Welcome! And thanks for taking the time to contribute! 🎉👍
 
-**Important note:** we are designing in public (this repository is open for the world to see and contribute if they want). Do not post any confidential information in this repository (whether as a commit or a comment on a PR). See Rebilly's security policies for more information about data classification.
+**Important note:** we are designing in public (this repository is open for the world to see and contribute if they want). Do not post any confidential information in this repository (whether as a commit or a comment on a PR). See Rebilly security policies for more information about data classification.
 
 ## Design APIs
 
 Rebilly follows a design-first approach to APIs.
 
-- Set up [your environment](./README.md#environment-setup).
-- Use [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow) (open a pull request for any change).
-- Redocly CLI runs our `lint` and `bundle` command which are controlled through the `.redocly.yaml` configuration file when a pull request is opened (you will see the green checks or red x marks).
+- Use OpenAPI 3.0 to describe APIs according to below.
+- Use [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow) (create a branch and open a pull request for any change).
+- Check your work with Redocly CLI which runs `lint` and `bundle` commands controlled through the `.redocly.yaml` configuration file when a pull request is opened (you will see the green checks or red x marks).
 - In terms of sequence, merge the API definitions before merging and releasing software to production.
+
+To get started:
+- Set up [your environment](./README.md#environment-setup).
+- Read the remainder of this page to understand how we design APIs and write API definitions.
 
 ## API description writing guidance
 
@@ -19,42 +23,108 @@ For guidance on how to write API descriptions when contributing to Rebilly APIs,
 
 ## API style guide
 
-Rebilly uses the following automated lint rules in addition to the [Redocly recommended rules](https://redocly.com/docs/cli/rules/):
+Rebilly uses the following lint rules:
+- The Redocly `recommended` configuration denoted as "recommended"
+- Additional available [Redocly rules](https://redocly.com/docs/cli/rules/) denoted as "Redocly additional rules"
+- Custom rules denoted as "custom rules".
 
-### Severity level `error`
+### General
 
-- [no-ambiguous-paths](https://redocly.com/docs/cli/rules/no-ambiguous-paths/)
-- [no-invalid-parameter-examples](https://redocly.com/docs/cli/rules/no-invalid-parameter-examples/)
-- [no-unused-components](https://redocly.com/docs/cli/rules/no-unused-components/)
-- [operation-2xx-response](https://redocly.com/docs/cli/rules/operation-2xx-response/)
-- [operation-operationId](https://redocly.com/docs/cli/rules/operation-operationId/)
-- [operation-singular-tag](https://redocly.com/docs/cli/rules/operation-singular-tag/)
-- [operation-tag-defined](https://redocly.com/docs/cli/rules/operation-tag-defined/)
-- [paths-kebab-case](https://redocly.com/docs/cli/rules/paths-kebab-case/)
+- [no-unresolved-refs](https://redocly.com/docs/cli/rules/no-unresolved-refs/) (recommended)
+- [no-unused-components](https://redocly.com/docs/cli/rules/no-unused-components/) (Redocly additional rules)
+- [security-defined](https://redocly.com/docs/cli/rules/security-defined/) (recommended)
+- [spec](https://redocly.com/docs/cli/rules/spec/) (recommended)
+- [spec-components-invalid-map-name](https://redocly.com/docs/cli/rules/spec-components-invalid-map-name/) (recommended)
+
+### Info
+
+- [info-contact](https://redocly.com/docs/cli/rules/info-contact/)
+- [info-license](https://redocly.com/docs/cli/rules/info-license/)
+- [info-license-url](https://redocly.com/docs/cli/rules/info-license-url/)
+
+### Operations
+
+- [operation-2xx-response](https://redocly.com/docs/cli/rules/operation-2xx-response/) (Redocly additional rules)
+- [operation-4xx-response](https://redocly.com/docs/cli/rules/operation-4xx-response/) (turned off due to webhooks)
+- [operation-4xx-problem-details-rfc7807](https://redocly.com/docs/cli/rules/operation-4xx-problem-details-rfc7807/) (not used)
+- [operation-description](https://redocly.com/docs/cli/rules/operation-description/) (use custom rules instead)
+- [operation-operationId](https://redocly.com/docs/cli/rules/operation-operationId/) (Redocly additional rules)
+- [operation-operationId-unique](https://redocly.com/docs/cli/rules/operation-operationId-unique/) (recommended)
+- [operation-operationId-url-safe](https://redocly.com/docs/cli/rules/operation-operationId-url-safe/) (recommended)
+- [operation-summary](https://redocly.com/docs/cli/rules/operation-summary/) (recommended)
+- [assert/x-sdk-operation-name](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [assert/operation-id-delete](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [assert/operation-id-get](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [assert/operation-id-patch](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [assert/operation-id-post](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [assert/operation-id-put](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [assert/no-x-code-samples](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [assert/no-x-internal](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+
+### Parameters
+
+- [boolean-parameter-prefixes](https://redocly.com/docs/cli/rules/boolean-parameter-prefixes/) (Redocly additional rules)
+- [no-invalid-parameter-examples](https://redocly.com/docs/cli/rules/no-invalid-parameter-examples/) (Redocly additional rules)
+- [operation-parameters-unique](https://redocly.com/docs/cli/rules/operation-parameters-unique/) (recommended)
+- [parameter-description](https://redocly.com/docs/cli/rules/parameter-description/) (Redocly additional rules)
+- [path-declaration-must-exist](https://redocly.com/docs/cli/rules/path-declaration-must-exist/) (recommended)
+- [path-not-include-query](https://redocly.com/docs/cli/rules/path-not-include-query/) (recommended)
+- [path-parameters-defined](https://redocly.com/docs/cli/rules/path-parameters-defined/) (recommended)
+- [assert/params-must-include-examples](.redocly.yaml) (custom rules)
+
+### Paths
+
+- [no-ambiguous-paths](https://redocly.com/docs/cli/rules/no-ambiguous-paths/) (Redocly additional rules)
+- [no-http-verbs-in-paths](https://redocly.com/docs/cli/rules/no-http-verbs-in-paths/) (Redocly additional rules) (1 exception)
+- [no-identical-paths](https://redocly.com/docs/cli/rules/no-identical-paths/) (recommended)
+- [no-path-trailing-slash](https://redocly.com/docs/cli/rules/no-path-trailing-slash/) (recommended)
+- [path-excludes-patterns](https://redocly.com/docs/cli/rules/path-excludes-patterns/)
+- [path-segment-plural](https://redocly.com/docs/cli/rules/path-segment-plural/) (Redocly additional rules)
+- [paths-kebab-case](https://redocly.com/docs/cli/rules/paths-kebab-case/) (Redocly additional rules)
+- [assert/path-must-be-ref-file](.redocly.yaml) (custom rules)
+
+### Requests, Responses, and Schemas
+
+- [no-enum-type-mismatch](https://redocly.com/docs/cli/rules/no-enum-type-mismatch/) (recommended)
+- [no-example-value-and-externalValue](https://redocly.com/docs/cli/rules/no-example-value-and-externalValue/) (recommended)
+- [no-invalid-media-type-examples](https://redocly.com/docs/cli/rules/no-invalid-media-type-examples/) (Redocly additional rules)
+- [no-invalid-schema-examples](https://redocly.com/docs/cli/rules/no-invalid-schema-examples/) (Redocly additional rules)
+- [request-mime-type](https://redocly.com/docs/cli/rules/request-mime-type/) (Redocly additional rules)
+- [response-mime-type](https://redocly.com/docs/cli/rules/response-mime-type/) (Redocly additional rules)
+- [response-contains-header](https://redocly.com/docs/cli/rules/response-contains-header/) (Redocly additional rules)
+- [response-contains-property](https://redocly.com/docs/cli/rules/response-contains-property/)
+- [scalar-property-missing-example](https://redocly.com/docs/cli/rules/scalar-property-missing-example/)
+- [assert/headers-include-example](.redocly.yaml) (custom rules)
+- [assert/schema-properties-both-created-time-and-updated-time](.redocly.yaml) (custom rules)
+- [assert/put-200-and-201](.redocly.yaml) (custom rules) (this has some exceptions)
+
+### Servers
+
+- [no-empty-servers](https://redocly.com/docs/cli/rules/no-empty-servers/) (recommended)
+- [no-server-example.com](https://redocly.com/docs/cli/rules/no-server-example-com/) (Redocly additional rules)
+- [no-server-trailing-slash](https://redocly.com/docs/cli/rules/no-server-trailing-slash/) (recommended)
+- [no-server-variables-empty-enum](https://redocly.com/docs/cli/rules/no-server-variables-empty-enum/) (recommended)
+- [no-undefined-server-variable](https://redocly.com/docs/cli/rules/no-undefined-server-variable/) (recommended)
+
+### Tags
+
+- [operation-singular-tag](https://redocly.com/docs/cli/rules/operation-singular-tag/) (Redocly additional rules)
+- [operation-tag-defined](https://redocly.com/docs/cli/rules/operation-tag-defined/) (Redocly additional rules)
 - [tag-description](https://redocly.com/docs/cli/rules/tag-description/)
-- [custom-rules/description-punctuation](./plugins/rules/description-punctuation.js)
+- [tags-alphabetical](https://redocly.com/docs/cli/rules/tags-alphabetical/)
+- [custom-rules/no-unused-tags](.redocly.yaml) (custom rules)
 
-#### `assertions`
 
-- [assert/headers-include-example](https://redocly.com/docs/cli/rules/assertions/)
-- [assert/path-must-be-ref-file](https://redocly.com/docs/cli/rules/assertions/)
-- [assert/x-sdk-operation-name](https://redocly.com/docs/cli/rules/assertions/)
-- [assert/operation-id-delete]()
-- [assert/operation-id-get]()
-- [assert/operation-id-patch]()
-- [assert/operation-id-post]()
-- [assert/operation-id-put]()
-- [assert/tag-description]()
-- [assert/info-description]()
-- [assert/operation-summary]()
-- [assert/no-x-code-samples]()
-- [assert/no-x-internal]()
+### Writing style
 
-### Severity level `warn`
-- [custom-rules/no-unused-tags](./plugins/rules/no-unused-tags.js)
+- [assert/operation-summary](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [assert/tag-description](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [assert/info-description](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
 
-### Severity level `off`
-- [operation-4xx-response](https://redocly.com/docs/cli/rules/operation-4xx-response/)
+<!-- TODO: adjust pending any support: https://github.com/Redocly/redocly-cli/issues/946 -->
+- assert/no-anthropmorphic-possessives
+- assert/no-past-future
+- assert/description-sentence-casing
 
 ### Maintenance
 
@@ -69,19 +139,20 @@ Set up lint rules to enforce any design rules to keep this list to a minimum (an
 - Mark properties read or write only when appropriate.
 - Re-use schemas by reference objects (`$ref`). Some commonly used include:
     - `ResourceId`
-    - `ServerTimestamp`
+    - `CreatedTime`
+    - `UpdatedTime`
 - Most APIs have a `_links` property (with at least "self" link).
 - If a resource has nested objects, consider separating them with the reference objects (`$ref`) if they have potential for reuse.
 - You may organize schemas into sub-folders when appropriate.
 
 ### Operations
 
-- Follow [path conventions](./openapi/paths/README.md)
+- Follow [path conventions](./openapi/paths/README/)
 - Use appropriate HTTP methods.
-    - POST to insert new Resource into another.
+    - POST to insert a new resource.
     - PUT to create with specified ID or replace existing Resource (must return 200 for updated and 201 for created).
-    - GET to get Resource or Collection.
-    - DELETE to delete Resource.
+    - GET to get a resource or a collection.
+    - DELETE to delete a resource.
 - Response must contain http header `Location` of the newly created resource; if the status is 201, the `Location` header must exist.
 
 #### Collections
@@ -99,12 +170,12 @@ Set up lint rules to enforce any design rules to keep this list to a minimum (an
 
 When a draft pull request is opened, there is a change being proposed. It may be a new API proposal, enhancing or fixing documentation for an existing API.
 
-Taking the time to review and provide feedback on APIs helps you manyfold by better understanding the entire collection of Rebilly's APIs.
+Taking the time to review and provide feedback on APIs helps you manyfold by better understanding the entire collection of APIs.
 
 While not a requirement, we have a preference to use [conventional comments](https://conventionalcomments.org/) for pull request comments.
 
 ## Helpful resources
 
-- [OpenAPI CLI documentation](https://redoc.ly/docs/cli/)
+- [Redocly CLI documentation](https://redoc.ly/docs/cli/)
 - [Redocly VS Code extension](https://marketplace.visualstudio.com/items?itemName=Redocly.openapi-vs-code)
-- [OpenAPI specification](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md)
+- [OpenAPI specification](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3/)
