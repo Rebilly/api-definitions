@@ -10,11 +10,6 @@ required:
   - method
   - paymentInstrument
 properties:
-  id:
-    description: Token identifier string.
-    readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
   method:
     description: Token payment method.
     type: string
@@ -60,6 +55,11 @@ properties:
       For payment-card updates, `billingAddress` can be ignored.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
+  id:
+    description: Token identifier string.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
   isUsed:
     description: Whether the token is already used.
     type: boolean
@@ -68,7 +68,8 @@ properties:
   riskMetadata:
     $ref: ../RiskMetadata.yaml
   leadSource:
-    $ref: ../LeadSource.yaml
+    allOf:
+      - $ref: ../LeadSource.yaml
     writeOnly: true
   createdTime:
     $ref: ../CreatedTime.yaml
