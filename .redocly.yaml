@@ -49,15 +49,60 @@ rules:
   # response-contains-property:
   #   severity: error
   #   names:
-  #     - '2XX':
-  #       - createdTime
-  #       - updatedTime
-  #       - id
-  #       - _links
-  #     - '4XX':
-  #       - type
-  #       - status
-  #       - title
+      # '2XX':
+      #   - createdTime
+      #   - updatedTime
+      #   - id
+      #   - _links
+      # '4XX':
+      #   - type
+      #   - status
+      #   - title
+  assert/response-contains-property:
+    severity: off
+    subject:
+      type: SchemaProperties
+    where:
+      - subject:
+          type: Response
+          filterInParentKeys:
+            - '200'
+            - '201'
+            - '202'
+        assertions:
+          defined: true
+      - subject:
+          type: Schema
+          property: type
+        assertions:
+          const: object
+    assertions:
+      required:
+        - id
+        - _links
+  assert/response-error-contains-property:
+    severity: off
+    subject:
+      type: SchemaProperties
+    where:
+      - subject:
+          type: Response
+          filterInParentKeys:
+            - '422'
+            - '400'
+            - '409'
+        assertions:
+          defined: true
+      - subject:
+          type: Schema
+          property: type
+        assertions:
+          const: object
+    assertions:
+      required:
+        - type
+        - status
+        - title
 
   path-segment-plural:
     severity: error

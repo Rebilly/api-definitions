@@ -2,13 +2,9 @@ type: object
 description: Bank account BBAN or IBAN instrument.
 discriminator:
   propertyName: accountNumberType
-  x-enum-mapping:
-    - $ref: ./BBANInstrument.yaml
-    - $ref: ./IBANInstrument.yaml
-properties:
-  accountNumberType:
-    description: >-
-      Bank's Account Number type. A valid value is basic bank account number
-      (BBAN) or international bank account number (IBAN).
-    default: BBAN
-    type: string
+  mapping:
+    BBAN: ./BBANInstrument.yaml
+    IBAN: ./IBANInstrument.yaml
+anyOf:
+  - $ref: ./BBANInstrument.yaml
+  - $ref: ./IBANInstrument.yaml
