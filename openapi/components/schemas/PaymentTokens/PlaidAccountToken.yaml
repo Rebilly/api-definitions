@@ -1,8 +1,5 @@
 type: object
 title: Plaid Account Token
-allOf:
-  - $ref: ./CompositeToken.yaml
-  - $ref: ../Common/CommonPaymentToken.yaml
 required:
   - method
   - billingAddress
@@ -33,3 +30,38 @@ properties:
     description: Billing address object.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
+  id:
+    description: Token identifier string.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  isUsed:
+    description: Whether the token is already used.
+    type: boolean
+    default: false
+    readOnly: true
+  riskMetadata:
+    $ref: ../RiskMetadata.yaml
+  leadSource:
+    allOf:
+      - $ref: ../LeadSource.yaml
+    writeOnly: true
+  createdTime:
+    $ref: ../CreatedTime.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
+  usageTime:
+    description: Token usage time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  expirationTime:
+    description: Token expiration time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: Related resource links.
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml
