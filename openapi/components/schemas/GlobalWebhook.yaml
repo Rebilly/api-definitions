@@ -38,6 +38,21 @@ properties:
   credentialHash:
     type: string
     description: Hash from credentials to use for authentication by the given URL.
+  body:
+    description: |-
+      Webhook request body.
+      If null, the default payload for the given event will be used.
+    type: string
+    nullable: true
+  filter:
+    description: |-
+      Filter used to determine whether the webhook will be sent.
+      This field requires a special format. Use `,` for multiple allowed values.
+      Use `;` for multiple fields.
+
+      For more information see,
+      [Using filters](https://api-reference.rebilly.com/#section/Using-filter-with-collections).
+    type: string
   createdTime:
     $ref: CreatedTime.yaml
   updatedTime:
