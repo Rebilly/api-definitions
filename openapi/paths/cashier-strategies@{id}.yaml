@@ -62,3 +62,21 @@ put:
       $ref: ../components/responses/Conflict.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
+delete:
+  x-products:
+    - Core
+  tags:
+    - Cashier
+  summary: Delete a cashier strategy
+  operationId: DeleteCashierStrategy
+  x-sdk-operation-name: delete
+  description: Deletes a cashier strategy with specified ID.
+  responses:
+    '204':
+      description: Cashier strategy deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
