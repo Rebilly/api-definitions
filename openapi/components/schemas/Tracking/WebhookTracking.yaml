@@ -1,7 +1,7 @@
 type: object
-description: >
+description: |-
   Webhook tracking lists up to the 1,000 most-recent webhooks delivered.
-  Filters are limited to only the id or the entityId (the core related-entity's id).
+  Filters are limited to only the id or the entityId (the core related-entity id).
   The results are sorted in reverse chronological order.
   Sort order may not be further controlled.
 readOnly: true
@@ -13,17 +13,17 @@ properties:
     $ref: ../EventType.yaml
   entityId:
     type: string
-    description: The id of the main entity related to the event type.
+    description: ID of the main entity related to the event type.
   url:
     type: string
-    description: Url where webhook was sent.
+    description: URL where webhook is sent.
   method:
     type: string
-    description: HTTP method which was used to send webhook.
+    description: HTTP method used to send webhook.
     example: POST
   headers:
     type: object
-    description: HTTP headers which were used to send webhook.
+    description: HTTP headers used to send webhook.
     additionalProperties:
       type: string
     example:
@@ -36,16 +36,16 @@ properties:
     description: Response body received.
   payload:
     type: string
-    description: Webhook's payload.
+    description: Webhook payload.
   source:
     type: string
-    description: The Webhook's source.
+    description: Webhook source.
     enum:
       - webhooks
       - rules
   attempt:
     type: integer
-    description: The Webhook's attempt number.
+    description: Webhook attempt number.
   sentTime:
     description: Sent time.
     allOf:
@@ -56,6 +56,8 @@ properties:
       - $ref: ../ServerTimestamp.yaml
   createdTime:
     $ref: ../CreatedTime.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
   _links:
     type: array
     description: Related resource links.

@@ -6,19 +6,18 @@ post:
   summary: Ready to Pay
   operationId: PostReadyToPay
   x-sdk-operation-name: readyToPay
-  description: |
+  description: |-
     Get available payment methods for a specific transaction or a purchase.
 
     The payment methods order shown to a customer **SHOULD** be the same as the order in the response.
 
     The list of available methods is generated from available [Gateway Accounts](https://user-api-docs.rebilly.com/tag/Gateway-Accounts)
     intersected with the last matched [Rules Engine](https://user-api-docs.rebilly.com/tag/Rules#operation/PutEventRule)
-    `adjust-ready-to-pay` action on `ready-to-pay-requested` event.
+    `adjust-ready-to-pay` action on the `ready-to-pay-requested` event.
 
-    If there were no actions matched for the specific request, then all methods supported by the Gateway Accounts are sent.
+    If no rules match for the specific request, then all methods supported by the gateway accounts are sent.
 
-    To invert this behavior place an all-matching rule at the very end of the `ready-to-pay-requested` event in
-    Rules Engine with an empty `paymentMethods` property of the `adjust-ready-to-pay` action.
+    To invert this behavior place an all-matching rule at the very end of the `ready-to-pay-requested` event in Rules Engine with an empty `paymentMethods` property of the `adjust-ready-to-pay` action.
   requestBody:
     content:
       application/json:

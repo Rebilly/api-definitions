@@ -9,24 +9,21 @@ properties:
     allOf:
       - $ref: ../ResourceId.yaml
   subscriptionId:
-    description: Identifier of the canceled subscription order.
+    description: ID of the canceled subscription order.
     allOf:
       - $ref: ../ResourceId.yaml
   proratedInvoiceId:
-    description: >-
-      Identifier of the invoice on which the cancellation proration is
-      calculated.
+    description: ID of the invoice on which the cancellation proration is calculated.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   appliedInvoiceId:
-    description: >-
-      The identifier of the invoice where the cancellation fees or credits are applied.
+    description: ID of the invoice where the cancellation fees or credits are applied.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   canceledBy:
-    description: Who did the cancellation.
+    description: Specifies who initiated the cancellation.
     type: string
     default: customer
     enum:
@@ -52,28 +49,11 @@ properties:
     type: string
     maxLength: 255
   prorated:
-    description: >
-      Defines if the customer gets a pro-rata credit for the time remaining
-      between `churnTime` and
-
-      subscription's next renewal time.
+    description: Specifies if the customer gets a pro-rata credit for the time remaining between `churnTime` and subscription next renewal time.
     type: boolean
     default: false
   status:
-    description: >
-      "draft" defines that the cancellation isn't applied on an invoice and
-      subscription but
-
-      can be inspected to see the charge.
-
-      "confirmed" will set a subscription to be canceled when the `churnTime` is
-      reached.
-
-      "completed" is a read-only status which is set by the system when the
-      churnTime is reached.
-
-      The cancellation may not be changed or deleted when the status is
-      "completed".
+    description: Status of the subscription order.
     type: string
     default: confirmed
     enum:
@@ -81,28 +61,34 @@ properties:
       - confirmed
       - completed
       - revoked
+    x-enumDescriptions:
+      draft: Cancellation isn't applied on an invoice and subscription but can be inspected to preview the charge.
+      confirmed: Sets a subscription to be canceled when the `churnTime` is reached.
+      completed: |-
+        Read-only status set by the system when the `churnTime` is reached.
+        The cancellation may not be changed or deleted when the status is "completed".
+      revoked: Cancellation is revoked.
   canceledTime:
-    description: >-
-      The cancellation time (when the status is confirmed which is by default
-      unless specified "draft").
+    description: Cancellation time (when the status is confirmed which is by default unless specified "draft").
     type: string
     format: date-time
     readOnly: true
   createdTime:
     $ref: ../CreatedTime.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
   churnTime:
-    description: The time when the subscription will be deactivated.
+    description: Time when the subscription is deactivated.
     type: string
     format: date-time
   lineItems:
-    description: >-
-      Items to be added to the new invoice. Proration item is generated and
-      added automatically.
+    description: |-
+      Items to be added to the new invoice.
+      Proration item is generated and added automatically.
     allOf:
       - $ref: ./UpcomingInvoiceItemCollection.yaml
   lineItemSubtotal:
-    description: >-
-      Subtotal of the line items which will be added after the subscription's cancellation.
+    description: Subtotal of the line items added after the subscription cancellation.
     readOnly: true
     type: number
     example: 49.95

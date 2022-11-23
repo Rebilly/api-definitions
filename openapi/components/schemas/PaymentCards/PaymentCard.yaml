@@ -1,7 +1,7 @@
-type: object
 allOf:
   - $ref: ../Common/CommonPaymentCard.yaml
-  - properties:
+  - type: object
+    properties:
       customerId:
         $ref: ../CustomerId.yaml
       stickyGatewayAccountId:
@@ -55,9 +55,7 @@ allOf:
             - $ref: ../Links/ApprovalUrlLink.yaml
       _embedded:
         type: array
-        description: |-
-          Embedded objects that are requested by the `expand`
-          query parameter.
+        description: Embedded objects that are requested by the `expand` query parameter.
         readOnly: true
         minItems: 1
         items:

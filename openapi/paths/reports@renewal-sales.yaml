@@ -12,6 +12,7 @@ servers:
         default: unknown
         description: Your organization ID.
 get:
+  x-badge: Experimental
   x-products:
     - Reports
   tags:
@@ -19,8 +20,7 @@ get:
   summary: Retrieve a renewal sales report
   operationId: GetRenewalSaleReport
   x-sdk-operation-name: getRenewalSales
-  description: |
-    Retrieve a renewal sales report.
+  description: Retrieve a renewal sales report.
   parameters:
     - name: periodStart
       in: query
@@ -42,7 +42,7 @@ get:
     - $ref: ../components/parameters/collectionOffset.yaml
   responses:
     '200':
-      description: Report was retrieved.
+      description: Report retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml

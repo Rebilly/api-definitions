@@ -40,7 +40,8 @@ This description provides detail on what an organization is in the context of th
     description: |-
       Your organization ID.
       An organization is an entity that represents you,
-      or your company, as a merchant. For more information, see [Obtain your organization ID](https://www.rebilly.com/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+      or your company, as a merchant.
+      For more information, see [Obtain your organization ID](https://www.rebilly.com/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 ```
 
 ## Possessive apostrophes
@@ -80,6 +81,45 @@ Features:
 - Use the MRR report in revenue recognition to view predictable recurring revenue. ✅
 - To view predictable recurring revenue, use the MRR report in revenue recognition. ✅
 
+## Capitalization
+
+Use sentence-style capitalization for all descriptions. Capitalize the first letter of the first word and use lowercase thereafter.
+
+### Exceptions
+
+[Proper nouns](https://www.gingersoftware.com/content/grammar-rules/nouns/proper-noun/), including brand, product, and service names, must always be capitalized.
+
+### Examples
+
+- Installs the application.
+- Tests your system.
+- Checks system settings.
+- Retrieves HD movies, TV shows, and more.
+- 1 GB of cloud storage.
+- Available for Microsoft partners.
+
+## Line breaks
+
+Use [semantic line breaks](https://sembr.org/). This standard specifies that you must add a line break after each substantial unit of thought. A written unit of thought ends with punctuation. Only add a new line after a period, or a comma.
+
+### Examples
+
+```yaml
+   description: |-
+     Total number of allowed document upload attempts.
+     Use `0` to allow unlimited upload attempts.
+```
+
+```yaml
+  description: |-
+    Property weights that are used for the KYC document verification process.
+
+    All KYC documents start the verification process with a score of 100.
+    If a check fails, the score is reduced by the corresponding weight.
+    For example, if the `firstName` check weight is set to `5`, and the check fails,
+    the KYC document score becomes `95`.
+```
+
 ## Tags
 
 We use tags to group related operations. When searching operations, the reader may look at the tag description for the context. It is important that we add detail to these descriptions and link to related content if required.
@@ -89,14 +129,12 @@ We use tags to group related operations. When searching operations, the reader m
 ```yaml
 - name: Customers
   description: |-
-    A customer is an entity that purchases goods or services
-    from you (a merchant), and is the payee in any transaction
-    that is credited to you. Customers are associated with
-    payment cards, subscriptions, invoices, and other miscellaneous
-    relationship models.
+    A customer is an entity that purchases goods or services from you (a merchant),
+    and is the payee in any transaction that is credited to you.
+    Customers are associated with payment cards, subscriptions, invoices,
+    and other miscellaneous relationship models.
 
-    In other systems, customers may be referred to as accounts, clients,
-    members, patrons, or players.
+    In other systems, customers may be referred to as accounts, clients, members, patrons, or players.
 ```
 
 ## Summaries
@@ -132,7 +170,7 @@ This section provides guidance on how to write operation, object, and parameter 
 
 ### Operations
 
-- Start all operations with an active verb (Retrieves, Adds, Creates, Updates, Deletes, Sets, Specifies ...)
+- Start all operation descriptions with an active verb (Retrieves, Adds, Creates, Updates, Deletes, Sets, Specifies ...)
 - Do not start with an imperative (Create, Retrieve, Merge ...). The user may read this as a command.
 - Avoid starting with "The" or "A". Omit articles for ease of reading.
 - Avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
@@ -150,8 +188,7 @@ Get a customer by ID:
 
 ```yaml
   operationId: GetCustomer
-  description: |-
-    Retrieves customer information based on the customer's ID.
+  description: Retrieves customer information based on the customer's ID.
 ```
 
 Create a new customer:
@@ -165,8 +202,7 @@ Delete a customer by ID:
 
 ```yaml
   operationId: DeleteCustomer
-  description: |-
-    Deletes a customer account based on the customer's ID.
+  description: Deletes a customer account based on the customer's ID.
 ```
 
 ### ID fields
@@ -207,14 +243,14 @@ Coupon created time:
 
 ```yaml
   createdTime:
-    description: Date and time at which the coupon is created.
+    description: Date and time when the coupon is created.
 ```
 
 Coupon expired time:
 
 ```yaml
   expiredTime:
-    description: Date and time at which the coupon expires.
+    description: Date and time when the coupon expires.
 ```
 
 ### Boolean fields
@@ -236,9 +272,7 @@ Is OTP required:
 ```yaml
   otpRequired:
     type: boolean
-    description: |-
-      Specifies whether a One-Time Password (OTP) is required to
-      exchange the authentication token.
+    description: Specifies whether a One-Time Password (OTP) is required to exchange the authentication token.
 ```
 
 Is processed outside of Rebilly:
@@ -246,8 +280,7 @@ Is processed outside of Rebilly:
 ```yaml
   isProcessedOutside:
     type: boolean
-    description: |-
-      Specifies whether the transaction was processed outside of Rebilly.
+    description: Specifies whether the transaction was processed outside of Rebilly.
 ```
 
 #### Website ID example
@@ -258,12 +291,9 @@ This ID must be described in detail because the reader may not be aware of its c
   websiteId:
     description: |-
       Your website ID.
-      This value is a unique identifier which
-      describes your website or websites in Rebilly.
-      A website is where your organization obtains a
-      customer through a subscription.
-      For more information, see
-      [Obtain your organization ID and website ID](https://www.rebilly.com/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+      This value is a unique identifier which describes your website or websites in Rebilly.
+      A website is where your organization obtains a customer through a subscription.
+      For more information, see [Obtain your organization ID and website ID](https://www.rebilly.com/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 ```
 
 #### Organization ID example
@@ -274,9 +304,8 @@ This ID must be described in detail because the reader may not be aware of its c
   organizationId:
     description: |-
       Your organization ID.
-      An organization is an entity that represents you,
-      or your company, as a merchant. For more information,
-      see [Obtain your organization ID and website ID](https://www.rebilly.com/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+      An organization is an entity that represents you, or your company, as a merchant.
+      For more information, see [Obtain your organization ID and website ID](https://www.rebilly.com/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 ```
 
 ### Response objects

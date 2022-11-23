@@ -1,10 +1,23 @@
 apis:
+  core@latest:
+    root: openapi/openapi.yaml
+    decorators:
+      filter-in:
+        property: x-products
+        value:
+          - Core
+  all@latest:
+    root: openapi/openapi.yaml
+    decorators:
+      plugin/remove-tag-groups: on
+  # The original bundler
   openapi:
     root: openapi/openapi.yaml
 extends:
   - recommended
 plugins:
   - ./plugins/custom-rules.js
+  - ./plugins/decorators.js
   - ./plugins/discriminator-mapper.js
   - ./plugins/products-bundler/bundler.js
 rules:
@@ -16,8 +29,116 @@ rules:
   operation-tag-defined: error
   operation-4xx-response: off
   paths-kebab-case: error
-  tag-description: error
-  custom-rules/no-unused-tags: warn
+
+  request-mime-type:
+    severity: error
+    allowedValues:
+      - application/json
+  response-mime-type:
+    severity: error
+    allowedValues:
+      - application/json
+      - application/pdf
+      - application/zip
+      - image/jpg
+      - image/png
+      - image/gif
+      - audio/mpeg
+      - text/csv
+  # Opened a ticket:
+  # response-contains-property:
+  #   severity: error
+  #   names:
+      # '2XX':
+      #   - createdTime
+      #   - updatedTime
+      #   - id
+      #   - _links
+      # '4XX':
+      #   - type
+      #   - status
+      #   - title
+  assert/response-contains-property:
+    severity: off
+    subject:
+      type: SchemaProperties
+    where:
+      - subject:
+          type: Response
+          filterInParentKeys:
+            - '200'
+            - '201'
+            - '202'
+        assertions:
+          defined: true
+      - subject:
+          type: Schema
+          property: type
+        assertions:
+          const: object
+    assertions:
+      required:
+        - id
+        - _links
+  assert/response-error-contains-property:
+    severity: off
+    subject:
+      type: SchemaProperties
+    where:
+      - subject:
+          type: Response
+          filterInParentKeys:
+            - '422'
+            - '400'
+            - '409'
+        assertions:
+          defined: true
+      - subject:
+          type: Schema
+          property: type
+        assertions:
+          const: object
+    assertions:
+      required:
+        - type
+        - status
+        - title
+
+  path-segment-plural:
+    severity: error
+    ignoreLastPathSegment: true
+    exceptions:
+      - storefront
+      - experimental
+      - tracking
+      - profile
+      - verification
+      - reset-password
+      - account
+      - events-triggered
+      - status
+      - signup
+      - signin
+      - send-through-attribution
+      - permissions-emulation
+      - logout
+      - onboarding
+      - timeline
+      - forgot-password
+      - history
+      - taxjar
+      - experian
+      - sendgrid
+      - oauth2
+      - mailgun
+      - plaid
+      - postmark
+      - activation
+      - search
+      - ready-to-pay
+      - aml
+      - api
+  custom-rules/no-unused-tags: error
   response-contains-header:
     severity: error
     names:
@@ -26,9 +147,16 @@ rules:
       '303':
         - Location
   no-invalid-schema-examples: error
+  no-invalid-media-type-examples: error
   no-invalid-parameter-examples: error
-
+  no-server-example.com: error
+  no-http-verbs-in-paths:
+    severity: error
+    splitIntoWords: true
+  boolean-parameter-prefixes: error
+  parameter-description: error
   ## custom rules
+  ### Examples
   assert/params-must-include-examples:
     severity: off
     subject:
@@ -151,59 +279,6 @@ rules:
       pattern: /Put/
       casing: PascalCase
 
-  assert/tag-description:
-    subject:
-      type: Tag
-      property: description
-    assertions:
-      defined: true
-      minLength: 30
-      pattern: /(\.|\.\n)$/
-  assert/requestBody-description:
-    subject:
-      type: RequestBody
-      property: description
-    assertions:
-      pattern: /(\.|\.\n)$/
-  assert/schema-description:
-    subject:
-      type: Schema
-      property: description
-    assertions:
-      pattern: /(\.|\.\n)$/
-  assert/parameter-description:
-    subject:
-      type: Parameter
-      property: description
-    assertions:
-      pattern: /(\.|\.\n)$/
-  assert/header-description:
-    subject:
-      type: Header
-      property: description
-    assertions:
-      pattern: /(\.|\.\n)$/
-  assert/response-description:
-    subject:
-      type: Response
-      property: description
-    assertions:
-      pattern: /(\.|\.\n)$/
-  assert/operation-description:
-    subject:
-      type: Operation
-      property: description
-    assertions:
-      # defined: true # consider adding
-      pattern: /(\.|\.\n)$/
-  assert/info-description:
-    subject:
-      type: Info
-      property: description
-    assertions:
-      defined: true
-      minLength: 30
-      pattern: /(\.|\.\n)$/
   assert/operation-summary:
     subject:
       type: Operation
@@ -217,12 +292,88 @@ rules:
       defined: true
       minLength: 10
       maxLength: 50
-      pattern: /(Retrieve|Create|Delete|Upsert|Preview|Send|Update|Register|Destroy|Trigger|Start|Stop|Set|Check|Enable|Disable|Close|Request|Resend|Verify|List|Patch|Activate|Refund|Query|Validate|Tag|Untag|Issue|Reactivate|Cancel|Pause|Change|Void|Search|Get|Modify|Finish|Schedule|Read|Reset|Make|Deactivate|Perform|Review|Reject|Accept|Apply|Partially|Re|Abandon|Download|Merge|Specify|Redeem|Exchange|Log).*[^\.]$/
+      pattern: /^(Retrieve|Create|Delete|Upsert|Preview|Send|Update|Register|Destroy|Trigger|Start|Stop|Set|Check|Enable|Disable|Close|Request|Resend|Verify|List|Patch|Activate|Refund|Query|Validate|Tag|Untag|Issue|Reactivate|Cancel|Pause|Change|Void|Search|Get|Modify|Finish|Schedule|Read|Reset|Make|Deactivate|Perform|Review|Reject|Accept|Apply|Partially|Re|Abandon|Download|Merge|Specify|Redeem|Exchange|Log).*[^\.]$/
+
+  ### Description rules
+  assert/tag-description:
+    subject:
+      type: Tag
+      property: description
+    assertions:
+      defined: true
+      minLength: 30
+      pattern: /(\.)$/
+      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
+  assert/requestBody-description:
+    subject:
+      type: RequestBody
+      property: description
+    assertions:
+      pattern: /(\.)$/
+      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
+  assert/schema-description:
+    subject:
+      type: Schema
+      property: description
+    assertions:
+      pattern: /^([A-Z]|dLocal|ecoPayz|eMerchantPay|ePay|eZeeWallet|ezyEFT|iCanPay|iCheque|iDebit|loonie|vegaaH)(.|\n)*(\.)$/
+      notPattern: /(Rebilly's|subscription's|invoice's|item's)/
+  assert/parameter-description:
+    subject:
+      type: Parameter
+      property: description
+    assertions:
+      pattern: /(\.)$/
+      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
+  assert/header-description:
+    subject:
+      type: Header
+      property: description
+    assertions:
+      pattern: /(\.)$/
+      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
+  assert/response-description:
+    subject:
+      type: Response
+      property: description
+    assertions:
+      pattern: /(\.)$/
+      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
+  assert/operation-description:
+    subject:
+      type: Operation
+      property: description
+    assertions:
+      # defined: true # consider adding
+      pattern: /^(([A-Z]).*[,.\s])+$/m
+      notPattern: /^(The\s|A\s|An\s)/
+  assert/operation-description-possessives-future-past:
+    subject:
+      type: Operation
+      property: description
+    assertions:
+      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
+  assert/schema-properties-description-possessives-future-past:
+    subject:
+      type: Schema
+      property: description
+    assertions:
+      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
+  assert/info-description:
+    subject:
+      type: Info
+      property: description
+    assertions:
+      defined: true
+      minLength: 30
+      pattern: /(\.|\.\n)$/
+      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
+
   assert/schema-properties-both-created-time-and-updated-time:
     subject:
       type: SchemaProperties
     message: The createdTime and updatedTime properties are mutually required.
-    severity: warn
+    severity: error
     assertions:
       mutuallyRequired:
         - createdTime

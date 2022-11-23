@@ -8,9 +8,9 @@ post:
   summary: Tag a list of customers
   operationId: PostTagCustomerCollection
   x-sdk-operation-name: tagCustomers
-  description: |
+  description: |-
     Tag a list of customers.
-    If the customer from the list is already tagged it will be ignored.
+    If the customer from the list is already tagged it is ignored.
     It's an asynchronous operation.
   requestBody:
     required: true
@@ -23,7 +23,7 @@ post:
             - customerIds
           properties:
             customerIds:
-              description: The list of customer IDs.
+              description: List of customer IDs.
               type: array
               minItems: 1
               maxItems: 1000
@@ -31,7 +31,7 @@ post:
                 type: string
   responses:
     '204':
-      description: Customers was tagged.
+      description: Customers tagged.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -48,7 +48,7 @@ delete:
   x-sdk-operation-name: untagCustomers
   description: |
     Untag a list of customers.
-    If the customer from the list is already untagged it will be ignored.
+    If the customer from the list is already untagged it is ignored.
     It's an asynchronous operation.
   requestBody:
     required: true
@@ -61,7 +61,7 @@ delete:
             - customerIds
           properties:
             customerIds:
-              description: The list of customer IDs.
+              description: List of customer IDs.
               type: array
               minItems: 1
               maxItems: 1000
@@ -69,7 +69,7 @@ delete:
                 type: string
   responses:
     '204':
-      description: Customers was untagged.
+      description: Customers untagged.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

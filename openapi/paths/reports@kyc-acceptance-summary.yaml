@@ -12,6 +12,7 @@ servers:
         default: unknown
         description: Your organization ID.
 get:
+  x-badge: Experimental
   x-products:
     - Reports
   tags:
@@ -37,7 +38,7 @@ get:
         format: date-time
   responses:
     '200':
-      description: Report was retrieved.
+      description: Report retrieved.
       content:
         application/json:
           schema:
@@ -122,7 +123,7 @@ get:
                       example: 8
                     accuracyRate:
                       type: number
-                      description: |
+                      description: |-
                         Percent of automatically accepted and rejected documents that remain in the same status after review.
                         Calculated by the formula: `(nonarchived total - accepted auto rejected - rejected auto accepted)/nonarchived total`.
                       example: 62.5
