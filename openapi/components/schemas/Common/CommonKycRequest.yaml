@@ -31,15 +31,16 @@ properties:
       abandoned: Request expired and has at least one document provided. Permanent state.
       expired: Request expired without any document uploaded. Permanent state.
   redirectUrl:
-    description: |
-      The URL to redirect the customer when an upload is completed.
-      When the customer is redirected, Rebilly will append an `info` query parameter which may have one of the following values (example: `https://example.com?info=success`):
+    description: |-
+      URL to redirect the customer when an upload is completed.
+      When the customer is redirected,
+      Rebilly appends an `info` query parameter which may have one of the following values (example: `https://example.com?info=success`):
 
         - **back** - The customer clicked the `back to website` link;
         - **token_expired** - The customer's token expired;
-        - **success** - The customer uploaded docs that were successfully analyzed;
-        - **manual** - The customer uploaded docs that will require manual review because the analyzer rejected them or couldn't process them;
-        - **partial** - The customer had success with some doc type but not with other (for example, successful proof of address but skipped proof of id).
+        - **success** - The customer uploaded docs are successfully analyzed;
+        - **manual** - The customer uploaded docs that requires manual review because the analyzer rejected them or couldn't process them;
+        - **partial** - The customer had success with some doc type but not with another (for example, successful proof of address but skipped proof of id).
     type: string
     format: uri
   expirationTime:

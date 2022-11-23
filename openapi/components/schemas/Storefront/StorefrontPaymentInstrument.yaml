@@ -1,20 +1,22 @@
-oneOf:
-  - $ref: ../Common/CommonPaymentCard.yaml
-  - $ref: ../Common/CommonBankAccount.yaml
-  - $ref: ../Common/CommonPayPalAccount.yaml
-  - $ref: ../Common/CommonKhelocardCard.yaml
-  - $ref: ../Common/CommonAlternativeInstrument.yaml
-properties:
-    token:
-      description: New customer JWT for further requests. Will be null if customer is already authenticated.
-      type: string
-      readOnly: true
-      nullable: true
-    _links:
-      type: array
-      description: Related resource links.
-      readOnly: true
-      minItems: 1
-      items:
-        anyOf:
-          - $ref: ../Links/SelfLink.yaml
+allOf:
+  - oneOf:
+    - $ref: ../Common/CommonPaymentCard.yaml
+    - $ref: ../Common/CommonBankAccount.yaml
+    - $ref: ../Common/CommonPayPalAccount.yaml
+    - $ref: ../Common/CommonKhelocardCard.yaml
+    - $ref: ../Common/CommonAlternativeInstrument.yaml
+  - type: object
+    properties:
+      token:
+        description: New customer JWT for further requests. It is null if the customer is already authenticated.
+        type: string
+        readOnly: true
+        nullable: true
+      _links:
+        type: array
+        description: Related resource links.
+        readOnly: true
+        minItems: 1
+        items:
+          anyOf:
+            - $ref: ../Links/SelfLink.yaml

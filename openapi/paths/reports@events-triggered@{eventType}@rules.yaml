@@ -15,10 +15,11 @@ parameters:
   - name: eventType
     in: path
     required: true
-    description: The system event type.
+    description: System event type.
     schema:
       $ref: ../components/schemas/EventType.yaml
 get:
+  x-badge: Experimental
   x-products:
     - Reports
   tags:
@@ -47,7 +48,7 @@ get:
     - $ref: ../components/parameters/collectionOffset.yaml
   responses:
     '200':
-      description: Report was retrieved.
+      description: Report retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml

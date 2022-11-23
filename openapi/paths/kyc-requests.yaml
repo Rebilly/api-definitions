@@ -6,12 +6,12 @@ post:
   summary: Create a KYC Request
   operationId: PostKycRequest
   x-sdk-operation-name: create
-  description: |
+  description: |-
     Create a KYC Request.
     Then, redirect the customer to the `kycGatherer` link.
-    After the customer completes the KYC process, they will be redirected back to the `redirectUrl`.
+    After the customer completes the KYC process, the browser redirects back to the `redirectUrl`.
     Corresponding webhooks (such as KYC document accepted, KYC document rejected) are sent to webhooks subscribers.
-    When the complete list of documents is received and accepted, the KYC request fulfilled webhook will be sent to subscribers.
+    When the complete list of documents is received and accepted, the KYC request fulfilled webhook is sent to subscribers.
     If a `credit-file-proof` is successful with the decision `single-source` or `dual-source`, then corresponding `identity-proof` and `address-proof` documents are not requested.
   requestBody:
     content:
@@ -52,7 +52,7 @@ post:
     required: true
   responses:
     '201':
-      description: KYC request was created.
+      description: KYC request created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -83,7 +83,7 @@ get:
     - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
-      description: A list of KYC requests was retrieved.
+      description: List of KYC requests retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml

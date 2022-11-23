@@ -4,6 +4,10 @@ required:
   - planId
   - quantity
 properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
   subscriptionId:
     description: ID of the subscription for which a usage is reported.
     allOf:
@@ -43,4 +47,12 @@ properties:
     $ref: CreatedTime.yaml
   updatedTime:
     $ref: UpdatedTime.yaml
+  _links:
+    type: array
+    description: Related resource links.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Links/SelfLink.yaml
 

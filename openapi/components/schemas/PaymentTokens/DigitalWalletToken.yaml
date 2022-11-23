@@ -8,12 +8,12 @@ required:
   - paymentInstrument
 properties:
   method:
-    description: The token payment method.
+    description: Token payment method.
     type: string
     enum:
       - digital-wallet
   paymentInstrument:
-    description: The payment instrument details.
+    description: Payment instrument details.
     type: object
     required:
       - type
@@ -23,7 +23,7 @@ properties:
       - payload
     properties:
       type:
-        description: The digital wallet type.
+        description: Digital wallet type.
         type: string
         enum:
           - Apple Pay
@@ -37,7 +37,7 @@ properties:
         allOf:
           - $ref: ../CurrencyCode.yaml
       descriptor:
-        description: The descriptor for a payment.
+        description: Descriptor for a payment.
         type: string
       bin:
         description: Payment Card BIN (the PAN's first 6 digits).
@@ -62,10 +62,10 @@ properties:
         type: integer
       payload:
         writeOnly: true
-        description: The digital wallet encoded data. May contain the digital wallet billing address.
+        description: Digital wallet encoded data. May contain the digital wallet billing address.
         type: object
   billingAddress:
     readOnly: true
-    description: The billing address object.
+    description: Billing address object.
     allOf:
       - $ref: ../Contact/ContactObject.yaml

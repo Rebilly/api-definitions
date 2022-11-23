@@ -10,37 +10,30 @@ post:
     - SecretApiKey: []
     - JWT: []
     - ApplicationJWT: []
-  description: |
+  description: |-
     Create a transaction of type `sale` or `authorize`.
     This endpoint supports two main styles of transactions:
       1. A real-time decision and response.
       2. User approval/interaction is required.
 
-    A real-time decision is very familiar.  You send a request, and
-    inspect the `result` of the response for `approved` or `declined`.
+    A real-time decision is very familiar.
+    You send a request, and inspect the `result` of the response for `approved` or `declined`.
 
-    However, many transactions, especially those for alternative
-    methods, require the user to interact with a 3rd party.  You
-    may be able to envision PayPal, for example, the user must
-    give permission to complete the payment (or accept the
-    billing agreement).
+    However, many transactions, especially those for alternative methods, require the user to interact with a 3rd party.
+    You may be able to envision PayPal, for example, the user must give permission to complete the payment (or accept the billing agreement).
 
-    Even payment cards may require user approval in the case of
-    3D secure authentication.  In the event that approval is
-    required, you will receive a response back and notice
-    that the `result` is `unknown`.  You will find that the
-    `status` is `waiting-approval`. And you will find in the
-    `_links` section of the response a link for the `approvalUrl`.
+    Even payment cards may require user approval in the case of 3D secure authentication.
+    In the event that approval is required, you receive a response with a `result` value `unknown` and `status` value `waiting-approval`.
+    The `_links` property of the response has a link for the `approvalUrl`.
 
-    In this case you would either open the `approvalUrl` in an
-    iframe or in a pop (better workflow for mobile).
+    In this case you would either open the `approvalUrl` in an iframe or in a pop (better workflow for mobile).
   parameters:
     - $ref: ../components/parameters/collectionExpand.yaml
   requestBody:
     $ref: ../components/requestBodies/TransactionRequest.yaml
   responses:
     '201':
-      description: Transaction was created.
+      description: Transaction created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -71,8 +64,7 @@ get:
   summary: Retrieve transactions
   operationId: GetTransactionCollection
   x-sdk-operation-name: getAll
-  description: |
-    Retrieve a list of transactions.
+  description: Retrieve a list of transactions.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -82,7 +74,7 @@ get:
     - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: A list of transactions was retrieved.
+      description: List of transactions retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml

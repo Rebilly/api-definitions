@@ -11,7 +11,7 @@ get:
   description: Retrieve an order cancellation with specified identifier string.
   responses:
     '200':
-      description: Cancellation was retrieved.
+      description: Cancellation retrieved.
       content:
         application/json:
           schema:
@@ -40,13 +40,13 @@ put:
     $ref: ../components/requestBodies/SubscriptionCancellation.yaml
   responses:
     '200':
-      description: Cancellation was updated, the order is or will be deactivated.
+      description: Cancellation updated.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Subscription/SubscriptionCancellation.yaml
     '201':
-      description: Cancellation was created, the order is or will be deactivated.
+      description: Cancellation created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -94,7 +94,7 @@ patch:
     required: true
   responses:
     '200':
-      description: Cancellation was updated.
+      description: Cancellation updated.
       content:
         application/json:
           schema:
@@ -121,7 +121,7 @@ delete:
   description: Delete an order's cancellation. Only draft can be deleted.
   responses:
     '204':
-      description: Cancellaton was deleted.
+      description: Cancellaton deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
