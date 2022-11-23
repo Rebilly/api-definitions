@@ -60,11 +60,11 @@ properties:
             type: string
             readOnly: true
             description: Customer's country of residence.
-          organization:
-            type: string
+          organizationId:
             readOnly: true
-            nullable: true
-            description: Customer's organization.
+            description: ID of the customer's organization.
+            allOf:
+              - $ref: ./ResourceId.yaml
       tags:
         description: List of tags that have been assigned to the customer.
         readOnly: true
