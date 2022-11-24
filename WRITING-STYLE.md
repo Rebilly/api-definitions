@@ -243,14 +243,14 @@ Coupon created time:
 
 ```yaml
   createdTime:
-    description: Date and time at which the coupon is created.
+    description: Date and time when the coupon is created.
 ```
 
 Coupon expired time:
 
 ```yaml
   expiredTime:
-    description: Date and time at which the coupon expires.
+    description: Date and time when the coupon expires.
 ```
 
 ### Boolean fields
