@@ -1,12 +1,9 @@
 type: object
 title: Payment Card Token
-allOf:
-  - $ref: ./CompositeToken.yaml
-  - $ref: ../Common/CommonPaymentToken.yaml
-description: |
-  Creates a payment card token. A payment card token is a string that
-  represents a customer's payment card details. It can be used once,
-  and expires upon first use or within 30 minutes of token creation.
+description: |-
+  Creates a payment card token.
+  A payment card token is a string that represents a customer's payment card details.
+  It can be used once, and expires upon first use or within 30 minutes of token creation.
   To generate a full payment card token, you must provide the `billingAddress`.
   If `billingAddress` is not provided, the token can not be used for payments.
 required:
@@ -39,12 +36,12 @@ properties:
         description: Payment Card expiration year.
         type: integer
       bin:
-        description: Payment Card BIN (the PAN's first 6 digits).
+        description: Payment Card BIN (the PAN first 6 digits).
         type: string
         format: bin
         readOnly: true
       last4:
-        description: Payment Card PAN's last 4 digits.
+        description: Payment Card PAN last 4 digits.
         type: string
         readOnly: true
       brand:
@@ -52,7 +49,44 @@ properties:
         allOf:
           - $ref: ../PaymentCards/PaymentCardBrand.yaml
   billingAddress:
-    description: |
-      Billing address object. Required to perform payments. For payment-card updates, `billingAddress` can be ignored.
+    description: |-
+      Billing address object.
+      Required to perform payments.
+      For payment-card updates, `billingAddress` can be ignored.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
+  id:
+    description: Token identifier string.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  isUsed:
+    description: Whether the token is already used.
+    type: boolean
+    default: false
+    readOnly: true
+  riskMetadata:
+    $ref: ../RiskMetadata.yaml
+  leadSource:
+    allOf:
+      - $ref: ../LeadSource.yaml
+    writeOnly: true
+  createdTime:
+    $ref: ../CreatedTime.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
+  usageTime:
+    description: Token usage time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  expirationTime:
+    description: Token expiration time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: Related resource links.
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml

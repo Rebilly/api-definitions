@@ -1,8 +1,5 @@
 type: object
 title: Khelocard card token
-allOf:
-  - $ref: ./CompositeToken.yaml
-  - $ref: ../Common/CommonPaymentToken.yaml
 required:
   - method
   - billingAddress
@@ -30,7 +27,7 @@ properties:
         type: string
         writeOnly: true
       last4:
-        description: Khelocard card number's last 4 digits.
+        description: Khelocard card number last 4 digits.
         type: string
         readOnly: true
       expMonth:
@@ -43,3 +40,38 @@ properties:
     description: Billing address object.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
+  id:
+    description: Token identifier string.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  isUsed:
+    description: Whether the token is already used.
+    type: boolean
+    default: false
+    readOnly: true
+  riskMetadata:
+    $ref: ../RiskMetadata.yaml
+  leadSource:
+    allOf:
+      - $ref: ../LeadSource.yaml
+    writeOnly: true
+  createdTime:
+    $ref: ../CreatedTime.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
+  usageTime:
+    description: Token usage time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  expirationTime:
+    description: Token expiration time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  _links:
+    type: array
+    description: Related resource links.
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml

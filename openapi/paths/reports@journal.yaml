@@ -12,6 +12,7 @@ servers:
         default: unknown
         description: Your organization ID.
 get:
+  x-badge: Experimental
   x-products:
     - Reports
   tags:
@@ -31,7 +32,7 @@ get:
         $ref: ../components/schemas/CurrencyCode.yaml
     - name: bookedFrom
       in: query
-      description: |
+      description: |-
         Year and month from which revenue is booked.
         If omitted then booked revenue starts from the first booked amount.
       schema:
@@ -40,7 +41,7 @@ get:
         example: 2022-01
     - name: bookedTo
       in: query
-      description: |
+      description: |-
         Year and month in which revenue is booked until.
         If omitted then booked revenue is taken until the most recently booked amount.
       schema:

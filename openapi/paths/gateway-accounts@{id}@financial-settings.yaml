@@ -1,6 +1,7 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
+  x-badge: Experimental
   x-products:
     - Users
   tags:
@@ -27,6 +28,7 @@ get:
       $ref: ../components/responses/NotFound.yaml
 
 put:
+  x-badge: Experimental
   x-products:
     - Users
   tags:
@@ -46,6 +48,15 @@ put:
   responses:
     '200':
       description: Gateway account financial settings updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccounts/FinancialSettings.yaml
+    '201':
+      description: Gateway account financial settings created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
