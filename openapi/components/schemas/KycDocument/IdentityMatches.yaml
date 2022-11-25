@@ -92,12 +92,11 @@ properties:
     nullable: true
     example: '1234567890'
   documentSubtype:
-    description: |-
-      Interpreted subtype of the uploaded document.
-      For a list of available subtypes, see [KycDocumentSubtypes](https://github.com/Rebilly/api-definitions/blob/main/openapi/components/schemas/KycDocument/KycDocumentSubtypes.yaml).
+    description: Interpreted subtype of the uploaded document.
     type: string
     nullable: true
-    example: passport
+    allOf:
+      - $ref: ./KycDocumentSubtypes.yaml
   hasMatchingFaceProof:
     description: Specifies whether an identity document has matching face proof.
     type: boolean
