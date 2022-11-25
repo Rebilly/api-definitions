@@ -3,24 +3,27 @@ required:
   - permissions
 properties:
   id:
-    description: Session identifier string.
+    description: ID of the session.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
   token:
-    description: Session's token used for authentication.
+    description: Authentication token of the session.
     type: string
   permissions:
-    description: Session's permissions. See the format in example. Use wildcard `*` for full access.
+    description: |-
+      Permissions of the session.
+      See the format in example.
+      Use wildcard `*` for full access.
     allOf:
       - $ref: ./AclPermissions.yaml
   memberships:
-    description: User memberships.
+    description: Organizations of which the user is a member.
     type: array
     items:
       $ref: ./Membership.yaml
   userId:
-    description: User identifier string.
+    description: ID of the user.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
@@ -29,12 +32,12 @@ properties:
   updatedTime:
     $ref: UpdatedTime.yaml
   expiredTime:
-    description: Session expired time. Defaults to one hour.
+    description: Date and time when the session expired. Defaults to one hour.
     type: string
     format: date-time
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
     minItems: 1
     items:
