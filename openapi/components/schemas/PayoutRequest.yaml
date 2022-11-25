@@ -58,6 +58,27 @@ properties:
           description: ID of the transaction to which the payout request is allocated.
           allOf:
             - $ref: ./ResourceId.yaml
+        transactionResult:
+          description: Result of a transaction.
+          type: string
+          x-basic: true
+          readOnly: true
+          enum:
+            - abandoned
+            - approved
+            - canceled
+            - declined
+            - unknown
+        gatewayName:
+          description: Name of the payment gateway that processed, or is selected to process, the transaction.
+          x-label: Gateway account
+          x-basic: true
+          allOf:
+            - $ref: ./Gateways/GatewayName.yaml
+        paymentInstrumentId:
+          description: Identifier of the selected payment instrument for the transaction.
+          allOf:
+            - $ref: ./ResourceId.yaml
         amount:
           description: Payout amount that is allocated from the payout request to the credit transaction.
           type: number

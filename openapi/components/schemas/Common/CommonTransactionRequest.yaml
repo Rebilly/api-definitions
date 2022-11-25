@@ -97,9 +97,8 @@ properties:
       Time the transaction is processed.
       Can be specified only if the transaction is processed outside Rebilly.
     format: date-time
-  requestIds:
-    description: The array of payout request identifiers.
+  payoutRequestId:
+    description: The payout request identifier for which the transaction will be allocated.
     nullable: true
-    type: array
-    items:
-      $ref: ../ResourceId.yaml
+    allOf:
+      - $ref: ../ResourceId.yaml
