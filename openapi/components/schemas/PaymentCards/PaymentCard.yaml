@@ -1,7 +1,7 @@
-type: object
 allOf:
   - $ref: ../Common/CommonPaymentCard.yaml
-  - properties:
+  - type: object
+    properties:
       customerId:
         $ref: ../CustomerId.yaml
       stickyGatewayAccountId:
@@ -15,7 +15,7 @@ allOf:
         nullable: true
         readOnly: true
       expirationReminderTime:
-        description: Date and time at which an expiration reminder event is triggered.
+        description: Date and time when an expiration reminder event is triggered.
         nullable: true
         type: string
         format: date-time
@@ -55,9 +55,7 @@ allOf:
             - $ref: ../Links/ApprovalUrlLink.yaml
       _embedded:
         type: array
-        description: |-
-          Embedded objects that are requested by the `expand`
-          query parameter.
+        description: Embedded objects that are requested by the `expand` query parameter.
         readOnly: true
         minItems: 1
         items:

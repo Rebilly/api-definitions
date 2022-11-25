@@ -1,3 +1,4 @@
+description: Gateway account details.
 type: object
 required:
   - gatewayName
@@ -187,7 +188,7 @@ discriminator:
     Zimpler: ./GatewayAccountConfig/Zimpler.yaml
 properties:
   id:
-    description: Gateway identifier string.
+    description: ID of the payment gateway account.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
@@ -219,7 +220,7 @@ properties:
       - pending
       - closed
   merchantCategoryCode:
-    description: Gateway account merchant category code.
+    description: Merchant category code of the payment gateway account.
     type: string
     pattern: '^[0-9]{4}$'
     default: '0000'
@@ -237,9 +238,7 @@ properties:
     description: Gateway account descriptor value.
     type: string
   cityField:
-    description: |-
-       Gateway account city field. This value is also known as a line 2
-       descriptor.
+    description: Gateway account city field. This value is also known as a line 2 descriptor.
     type: string
   excludedDccQuoteCurrencies:
     description: Excluded Dynamic Currency Conversion (DCC) quote currencies.
@@ -247,7 +246,7 @@ properties:
     items:
       type: string
   monthlyLimit:
-    description: Monthly limit.
+    description: Monthly limit on the amount money that the gateway account can process.
     type: number
     format: double
     minimum: 0
@@ -267,9 +266,7 @@ properties:
     type: boolean
     default: false
   reconciliationWindowTtl:
-    description: |-
-      Allotted time, in seconds, in which a reconciliation must occur
-      before it is automatically `abandoned`.
+    description: Allotted time, in seconds, in which a reconciliation must occur before it is automatically `abandoned`.
     type: integer
     minimum: 300
     maximum: 16777215
@@ -284,8 +281,7 @@ properties:
   digitalWallets:
     $ref: ./GatewayAccounts/DigitalWallets.yaml
   isDown:
-    description: |-
-      Specifies whether a gateway is in a downtime period.
+    description: Specifies whether a gateway is in a downtime period.
     type: boolean
     readOnly: true
   additionalFilters:
@@ -314,20 +310,17 @@ properties:
     example: TwiX3f92k4AiBE27BzTbQ38hHjicBz_w
   sticky:
     description: |-
-      Specifies whether all future payments by the customer's payment
-      instrument will be processed by this gateway account.
+      Specifies whether all future payments by the customer's payment instrument are processed by this gateway account.
 
-      For more information, see
-      [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
+      For more information, see [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
     type: boolean
     default: true
   setupInstruction:
     type: string
     default: do-nothing
     description: |-
-      Creates zero, one, or more child transactions such as `authorize`
-      and `void`. The transactions are linked to the `setup`
-      transaction by the `parentTransactionId` relationship.
+      Creates zero, one, or more child transactions such as `authorize` and `void`.
+      The transactions are linked to the `setup` transaction by the `parentTransactionId` relationship.
     enum:
       - authorize
       - authorize-and-void
@@ -335,18 +328,16 @@ properties:
       - do-nothing
     x-enumDescriptions:
       authorize: |-
-        Creates an `authorize` transaction in the amount/currency of
-        the request. This is used when a gateway account is configured
-        for Strong Customer Authentication (SCA).
+        Creates an `authorize` transaction in the amount and currency of the request.
+        This is used when a gateway account is configured for Strong Customer Authentication (SCA).
       authorize-and-void: |-
-        Creates an `authorize` transaction in the amount/currency of
-        the request, followed by a `void`, if the `authorize` is approved.
-        This is used when a gateway account is configured for Strong
-        Customer Authentication (SCA).
+        Creates an `authorize` transaction in the amount and currency of the request,
+        followed by a `void`, if the `authorize` is approved.
+        This is used when a gateway account is configured for Strong Customer Authentication (SCA).
       sca: |-
-        Uses Strong Customer Authentication (SCA) without an `authorize`
-        transaction. SCA includes 3dsv2, 3ds, and some specific wallet
-        behavior, such as setting up a billing agreement with PayPal.
+        Uses Strong Customer Authentication (SCA) without an `authorize` transaction.
+        SCA includes 3DS, and specific wallet behavior,
+        such as setting up a billing agreement with PayPal.
       do-nothing: |-
         Does nothing except return an approved `setup` transaction.
         This is the default behavior.
@@ -361,7 +352,7 @@ properties:
       - $ref: ./Organizations/OrganizationId.yaml
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
     minItems: 1
     items:

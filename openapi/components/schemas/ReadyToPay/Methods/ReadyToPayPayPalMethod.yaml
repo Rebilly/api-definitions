@@ -2,19 +2,16 @@ type: object
 title: PayPal
 required:
   - method
-allOf:
-  -  $ref: ../ReadyToPayMethods.yaml
 properties:
   method:
     type: string
-    description: The payment method.
+    description: Payment method.
     enum:
       - paypal
   feature:
     type: object
     nullable: true
-    description: |-
-      Specific features of PayPal.
+    description: Specific features of PayPal.
     oneOf:
       - $ref: ../Features/PayPalBillingAgreementFeature.yaml
   filters:

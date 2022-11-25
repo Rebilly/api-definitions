@@ -12,6 +12,7 @@ servers:
         default: unknown
         description: Your organization ID.
 get:
+  x-badge: Experimental
   x-products:
     - Reports
   tags:
@@ -19,8 +20,7 @@ get:
   summary: Retrieve a monthly recurring revenue report
   operationId: GetMonthlyRecurringRevenueReport
   x-sdk-operation-name: getMonthlyRecurringRevenue
-  description: |
-    Retrieve a monthly recurring revenue report.
+  description: Retrieve a monthly recurring revenue report.
   parameters:
     - name: currency
       in: query
@@ -48,7 +48,7 @@ get:
     - $ref: ../components/parameters/collectionOffset.yaml
   responses:
     '200':
-      description: Report was retrieved.
+      description: Report retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml

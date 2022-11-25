@@ -17,21 +17,18 @@ allOf:
       customerId:
         $ref: ../../CustomerId.yaml
       accountNumberType:
-        description: >-
-          Customer's bank account number type. A valid value is a Basic Bank Account Number
-          (BBAN) or an International Bank Account Number (IBAN).
-
-          IBAN object.
+        description: |-
+          Customer's bank account number type.
+          A valid value is a Basic Bank Account Number (BBAN) or an International Bank Account Number (IBAN).
         type: string
         default: BBAN
         enum:
           - IBAN
           - BBAN
       accountNumber:
-        description: >
-          Customer's bank account number. Detailed information on all ISO
-          13616-compliant national IBAN formats is available
-          in the [SWIFT IBAN Registry](https://www.swift.com/standards/data-standards/iban).
+        description: |-
+          Customer's bank account number.
+          Detailed information on all ISO 13616-compliant national IBAN formats is available in the [SWIFT IBAN Registry](https://www.swift.com/standards/data-standards/iban).
         type: string
       bankName:
         description: Bank name.
@@ -40,10 +37,12 @@ allOf:
         description: Bank Identifier Code (BIC).
         type: string
       billingAddress:
-        description: The customer's billing address.
+        description: Customer's billing address.
         allOf:
           - $ref: ../../Contact/ContactObject.yaml
       customFields:
         $ref: ../../ResourceCustomFields.yaml
       riskMetadata:
         $ref: ../../RiskMetadata.yaml
+      useAsBackup:
+        $ref: ../../UseAsBackup.yaml

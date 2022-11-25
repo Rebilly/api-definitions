@@ -9,9 +9,9 @@ post:
   description: |
     Start permissions emulation.
 
-    Emulation during emulation is not supported. If request sent during an ongoing emulation 403 sent in response.
+    Emulation during emulation is not supported. If request sent during an ongoing emulation then 403 is sent in response.
 
-    Escalation is also not supported.
+    Escalation is not supported.
   requestBody:
     content:
       application/json:
@@ -22,14 +22,13 @@ post:
             - permissions
           properties:
             permissions:
-              description: >-
-                The list of permissions to be emulated.
+              description: List of permissions to be emulated.
               allOf:
                 - $ref: ../components/schemas/AclPermissions.yaml
     required: true
   responses:
     '201':
-      description: Session was created.
+      description: Session created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -51,14 +50,14 @@ delete:
   summary: Stop permissions emulation
   operationId: DeletePermissionsEmulation
   x-sdk-operation-name: stopPermissionsEmulation
-  description: |
+  description: |-
     Stop permissions emulation.
 
-    Session permissions would be restored to the state before emulation started.
-    If emulations was not started `403` is sent in response.
+    Session permissions are restored to the state before emulation began.
+    If emulations have not started then `403` is sent in response.
   responses:
     '201':
-      description: Session was restored.
+      description: Session restored.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml

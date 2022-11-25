@@ -2,7 +2,7 @@ type: object
 properties:
   aggregationField:
     type: string
-    description: The report data is grouped by the aggregation field.
+    description: Report data is grouped by the aggregation field.
     enum:
       - product.accountingCode
       - product.id
@@ -11,21 +11,21 @@ properties:
     $ref: CurrencyCode.yaml
   bookedFrom:
     type: string
-    description: |
-      A year and month from which revenue is booked.
+    description: |-
+      Year and month when revenue is booked.
       If empty then booked revenue starts from the first booked amount.
     pattern: '^\d{4}-\d{2}$'
     example: 2022-01
   bookedTo:
     type: string
-    description: |
-      A year and month in which revenue is booked until.
+    description: |-
+      Year and month when revenue is booked until.
       If empty then booked revenue is taken until the most recently booked amount.
     pattern: '^\d{4}-\d{2}$'
     example: 2022-01
   recognizedAt:
     type: string
-    description: A year and month in which revenue was recognized.
+    description: Year and month when revenue is recognized.
     pattern: '^\d{4}-\d{2}$'
     example: 2022-01
   data:
@@ -34,7 +34,7 @@ properties:
       type: object
       properties:
         aggregationValue:
-          description: The aggregation field value.
+          description: Aggregation field value.
           type: string
         bookedMonth:
           description: Month in which revenue is booked.

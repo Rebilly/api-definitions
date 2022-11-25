@@ -1,54 +1,59 @@
+description: Gateway account limit details.
 type: object
 required:
   - cap
 properties:
   id:
-    description: The gateway account limit identifier.
+    description: ID of the gateway account limit.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
   status:
-    description: The gateway account limit status.
+    description: Status of the gateway account limit.
     readOnly: true
     type: string
     enum:
       - monitoring
       - reached
   startTime:
-    description: The limit's current period start time.
+    description: Date and time when the gateway account limit starts.
     type: string
     format: date-time
     readOnly: true
   endTime:
-    description: The limit's current period end time. At this time, the limit will reset.
+    description: |-
+      Date and time when the gateway account limit ends.
+      When a gateway account limit ends the limit resets.
     type: string
     format: date-time
     readOnly: true
   frequency:
-    description: The limit's period will reset according to the frequency.
+    description: Frequency at which the gateway account limit period resets.
     type: string
     readOnly: true
     enum:
       - daily
       - monthly
   type:
-    description: |
-      The limit can be on `money` or `count` of transactions.
-      If `money` is chosen, the currency is the report currency.
+    description: Type of gateway account limit.
     type: string
     readOnly: true
     enum:
-      - count
       - money
+      - count
+    x-enumDescriptions:
+      money: Limits the amount of money that a transaction can process on a gateway account.
+         If `money` is chosen, the currency is the report currency.
+      count: Limits the total number of transaction can be processed on a gateway account.
   cap:
-    description: |
-      The limit's value cap is the maximum desired value.
-      If type is money, the currency is the report currency.
-      The cap only applies to approved transactions of type `authorize` or `sale`.
+    description: |-
+      Limits the maximum allowed value.
+      If `type` is set to `money`, the currency is the report currency.
+      `cap` only applies to approved transactions of type `authorize` or `sale`.
     type: integer
     example: 1000
   usage:
-    description: The limit's actual usage during this period.
+    description: Usage of the gateway account limit during this period.
     type: integer
     example: 375
     readOnly: true
@@ -58,7 +63,7 @@ properties:
     $ref: UpdatedTime.yaml
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
     minItems: 1
     items:

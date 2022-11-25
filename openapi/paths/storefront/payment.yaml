@@ -9,22 +9,22 @@ post:
   security:
     - CustomerJWT: []
     - PublishableApiKey: []
-  description: |
+  description: |-
     Perform a payment for a transaction or an invoice.
 
-    If Customer JWT contains `transactionId` or `invoiceId` it will be used instead. `transactionId` has a higher
-    priority than `invoiceId`.
+    If Customer JWT contains `transactionId` or `invoiceId` it is used instead.
+    The `transactionId` has a higher priority than the `invoiceId`.
   requestBody:
     $ref: ../../components/requestBodies/storefront/PostPayment.yaml
   responses:
     200:
-      description: Transaction was created.
+      description: Transaction created.
       content:
         application/json:
           schema:
             $ref: ../../components/schemas/Storefront/StorefrontTransaction.yaml
     201:
-      description: Transaction was updated.
+      description: Transaction updated.
       headers:
         Location:
           $ref: ../../components/headers/Location.yaml

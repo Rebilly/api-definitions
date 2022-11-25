@@ -1,4 +1,4 @@
-description: NMI Gateway config.
+description: NMI gateway configuration.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -10,10 +10,10 @@ allOf:
         properties:
           username:
             type: string
-            description: NMI Gateway api token.
+            description: NMI API token.
           password:
             type: string
-            description: NMI Gateway store ID.
+            description: NMI store ID.
             format: password
         required:
           - username
@@ -22,7 +22,7 @@ allOf:
         type: object
         properties:
           disableStoredCredentials:
-            description: Disable NMI Stored Credentials (CIT/MIT).
+            description: Specifies whether to disable NMI stored credentials for Customer Initiated Transactions (CIT) and Merchant Initiated Transactions (MIT).
             type: boolean
             default: false
       threeDSecureServer:

@@ -8,14 +8,14 @@ post:
   summary: Issue an interim invoice for a subscription order
   operationId: PostSubscriptionInterimInvoice
   x-sdk-operation-name: createInterimInvoice
-  description: >
-    Issue an interim invoice for a subscription, typically used in conjunction.
-    with plan changes and pro rata adjustments.
+  description: |-
+    Issues an interim invoice for a subscription, typically used with plan changes and pro rata adjustments.
 
-    This process creates an invoice, adds the subscription's line items to the
-    invoice, and issues the invoice, and applies
-
-    payment to it if a transaction id is supplied.
+    This process:
+      - creates an invoice
+      - adds the subscription line items to the invoice
+      - issues the invoice
+      - optionally applies payment to the invoice if a `transactionId` is supplied.
   requestBody:
     content:
       application/json:
@@ -25,7 +25,7 @@ post:
     required: true
   responses:
     '201':
-      description: Invoice was created.
+      description: Invoice created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml

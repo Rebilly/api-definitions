@@ -1,23 +1,21 @@
 type: object
 properties:
   id:
-    description: The order identifier string.
+    description: Order identifier string.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   orderType:
-    description: |
-      Specifies the type of order, a subscription or a one-time purchase.
+    description: Specifies the type of order, a subscription or a one-time purchase.
     type: string
     enum:
       - subscription-order
       - one-time-order
     default: subscription-order
   billingStatus:
-    description: |
-      The billing status of the most recent invoice.  It may
-      help you determine if you should change the service status
-      such as suspending the service.
+    description: |-
+      Billing status of the most recent invoice.
+      It may help you determine if you should change the service status such as suspending the service.
     type: string
     readOnly: true
     enum:
@@ -37,18 +35,19 @@ properties:
     allOf:
       - $ref: ../Websites/WebsiteId.yaml
   currency:
-    description: The order's currency.
+    description: Order's currency.
     readOnly: true
     allOf:
       - $ref: ../../schemas/CurrencyCode.yaml
   initialInvoiceId:
-    description: The initial invoice identifier string.
+    description: Initial invoice identifier string.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   recentInvoiceId:
-    description: >-
-      Most recently issued invoice identifier string. It might not be `paid` yet.
+    description: |-
+      Most recently issued invoice identifier string.
+      It might not be `paid` yet.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
@@ -93,18 +92,18 @@ properties:
       - When list of coupons is passed then not applied yet coupons are applied, already applied coupons do not changed their state, applied coupons that are not presented in
       passed list are canceled.
 
-      If list of applied coupons on pending order are changed due to this param during update order, the invoice for the order will be reissued.
+      If list of applied coupons on pending order are changed due to this param during update order, the invoice for the order is reissued.
     writeOnly: true
     items:
       type: string
       description: Coupon ID.
   poNumber:
-    description: Purchase order number, will be displayed on the issued invoices.
+    description: Purchase order number displayed on the issued invoices.
     nullable: true
     example: PO123456
     type: string
   shipping:
     $ref: ../Shipping.yaml
   notes:
-    description: Notes for the customer which will be displayed on the order invoice.
+    description: Notes for the customer displayed on the order invoice.
     type: string

@@ -2,7 +2,9 @@ type: object
 description: Financial settings.
 properties:
   riskReserveSettings:
-    description: The settings to setup funds reserves before settlement.
+    description: |-
+      Risk reserve settings.
+      Use these settings to set up funds reserves before settlement.
     type: array
     items:
       type: object
@@ -12,35 +14,37 @@ properties:
         - period
       properties:
         filter:
-          description: A filter based on the transaction's properties which is used to determine when to apply the settings.
+          description: Filter that is based on the properties of the transaction and used to determine when to apply the settings.
           minLength: 1
           maxLength: 255
           example: 'paymentInstrument.method:payment-card'
-          allOf:
-            - $ref: ../FilterString.yaml
+          type: string
         bips:
           $ref: ../Bips.yaml
         period:
           $ref: RiskReservePeriod.yaml
   settlementSettings:
-    description: The settings to setup settlement accounts.
+    description: |-
+      Settlement settings.
+      Use these settings to set up settlement accounts.
     type: object
     required:
       - settlementCurrency
       - settlementPeriod
     properties:
       settlementCurrency:
-        description: The default settlement currency for all transactions.
+        description: Default settlement currency for all transactions.
         allOf:
           - $ref: ../CurrencyCode.yaml
       settlementPeriod:
-        description: The default settlement period for all transactions.
+        description: Default settlement period for all transactions.
         allOf:
           - $ref: SettlementPeriod.yaml
       advancedSettings:
-        description: |
-          The advanced settings allows to override either default settlement currency, period or both
-          for the transactions matched a filter.
+        description: |-
+          Advanced settlement settings.
+          Use these settings to override either default settlement currency,
+          period, or both for the transactions matched a filter.
         type: array
         items:
           type: object
@@ -49,7 +53,7 @@ properties:
           properties:
             filter:
               type: string
-              description: A filter based on the transaction's properties which is used to determine when to apply the settings.
+              description: Filter that is based on transaction properties and is used to determine when to apply the settings.
               minLength: 1
               maxLength: 255
               example: 'currency:EUR,GBP'

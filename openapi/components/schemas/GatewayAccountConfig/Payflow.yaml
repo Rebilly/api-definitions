@@ -1,4 +1,4 @@
-description: Payflow config.
+description: Payflow gateway configuration.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -11,19 +11,18 @@ allOf:
         properties:
           user:
             type: string
-            description: >-
-              If you set up one or more additional users on the account, this
-              value is the ID of the user authorized to process transactions.
-              If, however, you have not set up additional users, USER has the
-              same value as VENDOR.
+            description: |-
+              Payflow user.
+              If you set up one or more additional users on the account,
+              this value is the ID of the user that is authorized to process transactions.
+              If do not set up additional users on the account,
+              `user` has the same value as `vendor`.
           vendor:
             type: string
-            description: >-
-              Your merchant login ID created when you registered for the
-              account.
+            description: Payflow merchant login ID.
           password:
             type: string
-            description: The password you defined while registering for the account.
+            description: Payflow merchant password.
             format: password
         required:
           - user
