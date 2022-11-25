@@ -15,9 +15,8 @@ properties:
     nullable: true
     example: Doe
   documentSubtype:
-    description: |-
-      Interpreted subtype of the uploaded document.
-      For a list of available subtypes, see [KycDocumentSubtypes](https://github.com/Rebilly/api-definitions/blob/main/openapi/components/schemas/KycDocument/KycDocumentSubtypes.yaml).
+    description: Interpreted subtype of the uploaded document.
     type: string
     nullable: true
-    example: bank-statement
+    allOf:
+      - $ref: ./KycDocumentSubtypes.yaml

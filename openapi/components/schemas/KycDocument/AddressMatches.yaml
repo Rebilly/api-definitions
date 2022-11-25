@@ -65,9 +65,8 @@ properties:
     nullable: true
     example: (123) 456-7890
   documentSubtype:
-    description: |-
-      Interpreted subtype of the uploaded document.
-      For a list of available subtypes, see [KycDocumentSubtypes](https://github.com/Rebilly/api-definitions/blob/main/openapi/components/schemas/KycDocument/KycDocumentSubtypes.yaml).
+    description: Interpreted subtype of the uploaded document.
     type: string
     nullable: true
-    example: utility-bill
+    allOf:
+      - $ref: ./KycDocumentSubtypes.yaml
