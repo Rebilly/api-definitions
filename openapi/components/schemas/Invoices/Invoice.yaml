@@ -15,8 +15,8 @@ allOf:
           $ref: ../Transactions/Transaction.yaml
       retryInstruction:
         description: |-
-          Invoice payment retry instruction. This object specifies how
-          to proceed if a payment related to the invoice fails.
+          Invoice payment retry instruction.
+          This object specifies how to proceed if a payment related to the invoice fails.
         type: object
         properties:
           attempts:
@@ -31,17 +31,13 @@ allOf:
                 amountAdjustmentInstruction:
                   $ref: ../InvoiceRetry/InvoiceRetryAmountAdjustmentInstruction.yaml
                 tryBackupInstruments:
-                  description: |-
-                    Specifies whether to use backup payment instruments
-                    on an invoice payment retry.
+                  description: Specifies whether to use backup payment instruments on an invoice payment retry.
                   type: boolean
                   default: false
               required:
                 - scheduleInstruction
           afterAttemptPolicies:
-            description: |-
-              Describes the action to take when a payment attempt
-              concludes, and payment is not collected.
+            description: Describes the action to take when a payment attempt concludes, and payment is not collected.
             type: array
             items:
               type: string
@@ -49,9 +45,8 @@ allOf:
                 - change-subscription-renewal-time
           afterRetryEndPolicies:
             description: |-
-              Describes the action to take when all scheduled payment
-              retries, in a retry instruction, have concluded and payment
-              is not collected.
+              Describes the action to take when all scheduled payment retries, in a retry instruction,
+              have concluded and payment is not collected.
             type: array
             items:
               type: string
