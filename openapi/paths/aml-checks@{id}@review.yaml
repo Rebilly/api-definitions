@@ -1,0 +1,36 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - core
+  tags:
+    - AML
+  summary: Review an AML check
+  operationId: PostAmlCheckReview
+  x-sdk-operation-name: review
+  description: |-
+    Reviews an AML check.
+    The AML check can be either confirmed or marked as a false positive with a customer tag.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/AmlCheckReview.yaml
+  responses:
+    '201':
+      description: AML check reviewed.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/AmlCheck.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
