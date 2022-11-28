@@ -1,0 +1,54 @@
+get:
+  x-products:
+    - Core
+  tags:
+    - Risk Score
+  summary: Retrieve risk score configuration
+  operationId: GetRiskScoreConfiguration
+  x-sdk-operation-name: getAll
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
+  description: |
+    Retrieve risk score configuration.
+  responses:
+    '200':
+      description: Risk score configuration retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RiskScore/RiskScoreConfiguration.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Risk Score
+  summary: Set Risk Score configuration.
+  operationId: PostRiskScoreConfiguration
+  x-sdk-operation-name: updateRiskScoreConfiguration
+  description: Set Risk Score configuration.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/RiskScore/RiskScoreConfiguration.yaml
+    description: Risk Score configuration.
+    required: true
+  responses:
+    '200':
+      description: Risk Score configuration set.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RiskScore/RiskScoreConfiguration.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
