@@ -232,15 +232,13 @@ properties:
   dccForceCurrency:
     type: string
     description: |-
-      Forces Dynamic Currency Conversion (DCC) to the specified
-      currency on each sale. To disable forced DCC, leave this field empty.
+      Forces Dynamic Currency Conversion (DCC) to the specified currency on each sale.
+      To disable forced DCC, leave this field empty.
   descriptor:
     description: Gateway account descriptor value.
     type: string
   cityField:
-    description: |-
-       Gateway account city field. This value is also known as a line 2
-       descriptor.
+    description: Gateway account city field. This value is also known as a line 2 descriptor.
     type: string
   excludedDccQuoteCurrencies:
     description: Excluded Dynamic Currency Conversion (DCC) quote currencies.
@@ -254,23 +252,20 @@ properties:
     minimum: 0
   approvalWindowTtl:
     description: |-
-      Allotted time, in seconds, in which an offsite transaction must be
-      approved before it is automatically `abandoned`.
+      Allotted time, in seconds,
+      in which an offsite transaction must be approved before it is automatically `abandoned`.
     type: integer
     default: 3600
     minimum: 300
     maximum: 16777215
   reconciliationWindowEnabled:
     description: |-
-      Specifies that if a transaction is not reconciled within the
-      `reconciliationWindowTtl` time, the transaction is marked as
-      `abandoned`.
+      Specifies that if a transaction is not reconciled within the `reconciliationWindowTtl` time,
+      the transaction is marked as `abandoned`.
     type: boolean
     default: false
   reconciliationWindowTtl:
-    description: |-
-      Allotted time, in seconds, in which a reconciliation must occur
-      before it is automatically `abandoned`.
+    description: Allotted time, in seconds, in which a reconciliation must occur before it is automatically `abandoned`.
     type: integer
     minimum: 300
     maximum: 16777215
@@ -285,18 +280,15 @@ properties:
   digitalWallets:
     $ref: ./GatewayAccounts/DigitalWallets.yaml
   isDown:
-    description: |-
-      Specifies whether a gateway is in a downtime period.
+    description: Specifies whether a gateway is in a downtime period.
     type: boolean
     readOnly: true
   additionalFilters:
     description: |-
-      Additional filters used to determine whether the gateway account
-      can be selected to process a transaction.
+      Additional filters used to determine whether the gateway account can be selected to process a transaction.
 
-      For example, the filter may place a maximum amount value on
-      transaction. If a transaction exceeds this value, the gateway
-      account is not used.
+      For example, the filter may place a maximum amount value on transaction.
+      If a transaction exceeds this value, the gateway account is not used.
 
       For more information see,
       [Using filters](https://api-reference.rebilly.com/#section/Using-filter-with-collections).

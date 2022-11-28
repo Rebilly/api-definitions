@@ -40,6 +40,34 @@ properties:
               $ref: ../CreatedTime.yaml
             updatedTime:
               $ref: ../UpdatedTime.yaml
+      invoices:
+        type: array
+        description: List of invoices that the credit memo is allocated to.
+        items:
+          type: object
+          properties:
+            invoiceId:
+              description: ID of invoice to which the credit memo is allocated.
+              allOf:
+                - $ref: ../ResourceId.yaml
+            amount:
+              description: |-
+                Amount of credit that is allocated from the credit memo to the invoice.
+                If the `amount` value is not supplied or exceeds the unused amount of the credit memo or the invoice due amount, the lesser of the following two values is used:
+                - The unused amount of the credit memo.
+                - The invoice due amount.
+              type: number
+              format: double
+            currency:
+              readOnly: true
+              allOf:
+                - $ref: ../CurrencyCode.yaml
+            createdTime:
+              description: Date and time at which a credit memo is allocated.
+              allOf:
+                - $ref: ../ServerTimestamp.yaml
+            updatedTime:
+              $ref: ../UpdatedTime.yaml
   items:
     type: array
     description: Items of the credit memo.
@@ -138,8 +166,7 @@ properties:
     default: 0.00
     x-type: Money
   totalAmount:
-    description: |-
-      Total amount of all credits in the credit memo, including: items, shipping, and tax.
+    description: Total amount of all credits in the credit memo, including items, shipping, and tax.
     readOnly: true
     type: number
     format: double
