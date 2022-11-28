@@ -1,0 +1,24 @@
+type: object
+required:
+  - type
+  - value
+properties:
+  id:
+    description: Unique tax number identifier.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  type:
+    type: string
+    description: Type of the tax number.
+    enum:
+      - eu-vat
+    example: eu-vat
+  value:
+    type: string
+    description: Value of the tax number.
+    example: GB980780684
+  default:
+    type: boolean
+    description: Determines if the tax number is selected as default to display on invoices.
+    example: true
