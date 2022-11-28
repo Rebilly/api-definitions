@@ -60,17 +60,17 @@ properties:
             type: string
             readOnly: true
             description: Customer's country of residence.
-          organization:
-            type: string
-            readOnly: true
-            nullable: true
-            description: Customer's organization.
       tags:
         description: List of tags that have been assigned to the customer.
         readOnly: true
         type: array
         items:
           $ref: ./Tags/Tag.yaml
+      organizationId:
+        readOnly: true
+        description: ID of the customer's organization.
+        allOf:
+          - $ref: ./ResourceId.yaml
   hits:
     readOnly: true
     description: List of hits returned during the AML check.

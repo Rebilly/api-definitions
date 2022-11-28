@@ -8,8 +8,7 @@ post:
   x-sdk-operation-name: login
   security:
     - PublishableApiKey: []
-  description: |
-    Create a session with username and password.
+  description: Creates a session with a specified username and password.
   requestBody:
     content:
       application/json:
@@ -20,14 +19,14 @@ post:
             - password
           properties:
             username:
-              description: Username.
+              description: User's username.
               type: string
             password:
-              description: Password.
+              description: User's current password.
               type: string
   responses:
     201:
-      description: Account logged in.
+      description: Logged into account.
       headers:
         Location:
           $ref: ../../components/headers/Location.yaml
