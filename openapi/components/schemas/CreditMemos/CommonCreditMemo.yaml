@@ -17,6 +17,8 @@ properties:
         type: array
         description: |-
           List of transactions (typically refunds, credits, and chargebacks) that are allocated to reduce the unused amount of a credit memo.
+
+          To delete transaction allocations, send an empty transaction allocation array.
         items:
           type: object
           properties:
@@ -42,7 +44,11 @@ properties:
               $ref: ../UpdatedTime.yaml
       invoices:
         type: array
-        description: List of invoices that the credit memo is allocated to.
+        description: |-
+          List of invoices that the credit memo is allocated to.
+
+          To delete invoice allocations, send an empty invoice allocation array.
+          Paid invoices cannot be modified or deleted.
         items:
           type: object
           properties:
