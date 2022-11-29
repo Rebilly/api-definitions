@@ -6,7 +6,7 @@ servers:
 parameters:
   - name: apiName
     in: path
-    description: Payment method API name.
+    description: Name of the payment method API.
     required: true
     schema:
       $ref: ../components/schemas/Metadata/PaymentMethodApiName.yaml
@@ -15,11 +15,10 @@ get:
     - Users
   tags:
     - Metadata
-  summary: Retrieve a specified payment method metadata
+  summary: Retrieve metadata of a payment method
   operationId: GetPaymentMethod
   x-sdk-operation-name: get
-  description: |
-    Retrieve a specified payment method metadata.
+  description: Retrieves metadata of a payment method with a specified ID.
   security: []
   responses:
     '200':

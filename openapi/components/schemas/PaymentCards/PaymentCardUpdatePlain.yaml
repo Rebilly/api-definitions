@@ -1,20 +1,25 @@
 type: object
 properties:
   cvv:
-    description: Card cvv (card verification value).
+    description: Card Verification V (CVV) of the payment card.
     type: string
   expMonth:
-    description: Card expiration month.
+    description: Expiration month of the payment card.
     type: integer
   expYear:
-    description: Card expiration year.
+    description: Expiration year of the payment card.
     type: integer
   billingAddress:
     description: Billing address.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   stickyGatewayAccountId:
-    description: Sticky gateway account ID.
+    description: |-
+      Sticky gateway account ID.
+      All future payments are processed by this gateway account.
+
+      For more information,
+      see [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
     allOf:
       - $ref: ../ResourceId.yaml
   customFields:

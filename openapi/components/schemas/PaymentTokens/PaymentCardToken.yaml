@@ -1,5 +1,5 @@
 type: object
-title: Payment Card Token
+title: Payment card token
 description: |-
   Creates a payment card token.
   A payment card token is a string that represents a customer's payment card details.
@@ -22,26 +22,32 @@ properties:
       - expYear
     properties:
       pan:
-        description: Payment Card PAN (Primary Account Number). Required to perform a payment.
+        description: |-
+          Primary Account Number (PAN) of the payment card.
+          This value is required to perform a payment.
         type: string
         writeOnly: true
       cvv:
-        description: Payment Card CVV/CVC.
+        description: Card Verification Value (CVV/CVC) of the payment card.
         type: string
         writeOnly: true
       expMonth:
-        description: Payment Card expiration month.
+        description: Expiration month of the payment card.
         type: integer
       expYear:
-        description: Payment Card expiration year.
+        description: Expiration year of the payment card.
         type: integer
       bin:
-        description: Payment Card BIN (the PAN first 6 digits).
+        description: |-
+          Bank Identification Number (BIN) of the payment card.
+          This is usually the first 6 digits of the payment card number.
         type: string
         format: bin
         readOnly: true
       last4:
-        description: Payment Card PAN last 4 digits.
+        description: |-
+          Permanent Account Number (PAN) of the payment card.
+          This is usually the last 4 digits of the payment card number.
         type: string
         readOnly: true
       brand:
@@ -51,17 +57,17 @@ properties:
   billingAddress:
     description: |-
       Billing address object.
-      Required to perform payments.
+      This value is required to perform payments.
       For payment-card updates, `billingAddress` can be ignored.
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   id:
-    description: Token identifier string.
+    description: ID of the token.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   isUsed:
-    description: Whether the token is already used.
+    description: Specifies whether the token has been used.
     type: boolean
     default: false
     readOnly: true
@@ -76,16 +82,16 @@ properties:
   updatedTime:
     $ref: ../UpdatedTime.yaml
   usageTime:
-    description: Token usage time.
+    description: Date and time when the token was used.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   expirationTime:
-    description: Token expiration time.
+    description: Date and time when the token expires.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
     minItems: 1
     items:

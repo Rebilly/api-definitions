@@ -1,7 +1,8 @@
 type: object
+description: Transaction details.
 properties:
   id:
-    description: Unique transaction identifier string.
+    description: ID of the transaction.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
@@ -29,7 +30,7 @@ properties:
       - setup
       - void
   status:
-    description: Status of a transaction.
+    description: Status of the transaction.
     type: string
     readOnly: true
     enum:
@@ -50,7 +51,7 @@ properties:
       - waiting-gateway
       - waiting-refund
   result:
-    description: Result of a transaction.
+    description: Result of the transaction.
     type: string
     x-basic: true
     readOnly: true
@@ -64,7 +65,7 @@ properties:
     x-type: Money
     x-sortable: true
     x-basic: true
-    description: Total amount of a transaction.
+    description: Total amount of the transaction.
     type: number
     format: double
     readOnly: true
@@ -88,7 +89,9 @@ properties:
       - $ref: ../CurrencyCode.yaml
   requestAmount:
     description: |-
-      Amount of the payment request. If an adjustment occurs, the purchased amount may differ from the billing amount.
+      Amount of the payment request.
+      If an adjustment occurs,
+      the purchased amount may differ from the billing amount.
     type: number
     x-type: Money
     x-currency-field: requestCurrency

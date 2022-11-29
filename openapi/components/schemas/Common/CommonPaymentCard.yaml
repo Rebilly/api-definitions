@@ -1,9 +1,9 @@
 type: object
-title: 'Payment Card'
+title: Payment card
 x-abstract-parent: PaymentInstrument
 properties:
   id:
-    description: Payment instrument identifier string.
+    description: ID of the payment instrument.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
@@ -16,10 +16,11 @@ properties:
   status:
     type: string
     description: |-
-      Status of the payment instrument. 
-      An `active` status means that a payment instrument has been used at least once for an approved transaction. 
-      To remove an instrument from use, set this value to `deactivated`. 
-      For more information, see the deactivation endpoint.
+      Status of the payment instrument.
+      An `active` status means that a payment instrument has been used at least once for an approved transaction.
+      To remove an instrument from use, set this value to `deactivated`.
+
+      For more information, see [Deactivate a payment instrument](../PostPaymentInstrumentDeactivation).
     enum:
       - active
       - inactive
@@ -48,10 +49,10 @@ properties:
     type: string
     writeOnly: true
   expYear:
-    description: Year in which the payment card expires.
+    description: Expiration year of the payment card.
     type: integer
   expMonth:
-    description: Month in which the payment card expires.
+    description: Expiration month of the payment card.
     type: integer
   cvv:
     description: Card Verification Value (CVV) of the payment card.
@@ -62,11 +63,11 @@ properties:
     allOf:
       - $ref: ../PaymentCards/PaymentCardBrand.yaml
   bankCountry:
-    description: Payment instrument bank country.
+    description: Bank country of the payment instrument.
     type: string
     readOnly: true
   bankName:
-    description: Payment instrument bank name.
+    description: Bank name of the payment instrument.
     type: string
     readOnly: true
   billingAddress:
