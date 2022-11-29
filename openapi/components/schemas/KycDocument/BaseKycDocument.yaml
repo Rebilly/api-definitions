@@ -6,19 +6,19 @@ allOf:
       customerId:
         $ref: ../CustomerId.yaml
       reviewerId:
-        description: Reviewer's user ID.
+        description: ID of the KYC document reviewer.
         type: string
         nullable: true
         readOnly: true
         maxLength: 50
         example: 44433322-2c4y-483z-a0a9-158621f77a21
       reviewerName:
-        description: Reviewer's first and last name.
+        description: First and last name of the KYC document reviewer.
         type: string
         nullable: true
         readOnly: true
       reviewStartTime:
-        description: Date and time that manual review starts.
+        description: Date and time when the manual review starts.
         nullable: true
         type: string
         format: date-time
@@ -34,7 +34,7 @@ allOf:
         type: string
         nullable: true
       tags:
-        description: List of kyc document tags.
+        description: List of KYC document tags.
         readOnly: true
         type: array
         items:
@@ -43,7 +43,7 @@ allOf:
         description: Reason for uploading.
         type: string
       matchLevel:
-        description: Level of strictness for the document matches.
+        description: Tolerance level setting for document matches.
         type: integer
         minimum: 1
         maximum: 2
@@ -56,6 +56,6 @@ allOf:
         description: |-
           Number of times the KYC document data has been modified.
 
-          The revision is useful when analyzing webhook data to determine if the change takes precedence over the current representation.
+          Use this value when analyzing webhook data to determine if a change must take precedence over the current representation.
         type: integer
         readOnly: true
