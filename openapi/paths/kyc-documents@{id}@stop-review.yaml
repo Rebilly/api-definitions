@@ -5,12 +5,15 @@ post:
     - Core
   tags:
     - KYC documents
-  summary: Stop review for a KYC document
+  summary: Stop review of a KYC document
   operationId: PostKycDocumentStopReview
   x-sdk-operation-name: stopReview
-  description: >-
-    Sets the KYC document `reviewStartTime` to null, along with the reviewer information to null too.
-    Use this when the reviewer decides to stop, take a break, or ends a shift.
+  description: |-
+    Stops the review of a KYC document with a specified ID.
+
+    This operation also sets the KYC document `reviewStartTime` and the reviewer information to null.
+    Use this operation when the reviewer must stop the review.
+    For example, if the reviewer must take a break, or ends a shift.
   responses:
     '201':
       description: KYC document review stopped.

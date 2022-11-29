@@ -4,25 +4,28 @@ post:
   x-products:
     - Core
   tags:
-    - KYC documents
-  summary: Start review of a KYC document
-  operationId: PostKycDocumentStartReview
-  x-sdk-operation-name: startReview
+    - AML
+  summary: Review an AML check
+  operationId: PostAmlCheckReview
+  x-sdk-operation-name: review
   description: |-
-    Starts the review process of a KYC document with a specified ID.
-
-    This operation also sets the KYC document `reviewStartTime` to the current date-time,
-    and updates the review information.
+    Reviews an AML check.
+    The AML check can be either confirmed or marked as a false positive with a customer tag.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/AmlCheckReview.yaml
   responses:
     '201':
-      description: KYC document review started.
+      description: AML check reviewed.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/KycDocument/KycDocument.yaml
+            $ref: ../components/schemas/AmlCheck.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

@@ -5,11 +5,10 @@ get:
     - Users
   tags:
     - Lists
-  summary: Retrieve list's latest version
+  summary: Retrieve latest list version
   operationId: GetList
   x-sdk-operation-name: getLatestVersion
-  description: |
-    Retrieve latest version of List with specified identifier string.
+  description: Retrieves the latest version of a list with a specified ID.
   responses:
     '200':
       description: List retrieved.
@@ -35,8 +34,7 @@ put:
   summary: Upsert a list
   operationId: PutList
   x-sdk-operation-name: update
-  description: |
-    Create or update (upsert) a list with specified identifier string.
+  description: Creates or updates (upserts) a list with a specified ID.
   requestBody:
     content:
       application/json:
@@ -80,8 +78,7 @@ delete:
   summary: Delete a list
   operationId: DeleteList
   x-sdk-operation-name: delete
-  description: |
-    Delete a list with specified identifier string.
+  description: Deletes a list with a specified ID.
   responses:
     '204':
       description: List deleted.
@@ -92,7 +89,7 @@ delete:
     '404':
       $ref: ../components/responses/NotFound.yaml
     '409':
-      description: List is used in Rules and cannot be deleted.
+      description: Specified list is in use in a rule and cannot be deleted.
   x-codeSamples:
     - lang: JavaScript
       source:

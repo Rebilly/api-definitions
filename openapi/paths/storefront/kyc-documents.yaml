@@ -8,8 +8,7 @@ get:
   x-sdk-operation-name: getAll
   security:
     - CustomerJWT: []
-  description: |
-    Retrieve a list of KYC documents.
+  description: Retrieves a list of KYC documents.
   parameters:
     - $ref: ../../components/parameters/collectionLimit.yaml
     - $ref: ../../components/parameters/collectionOffset.yaml
@@ -38,23 +37,22 @@ post:
     - Storefront
   tags:
     - KYC documents
-  summary: Create a KYC Document
+  summary: Create a KYC document
   operationId: StorefrontPostKycDocument
   x-sdk-operation-name: create
   security:
     - CustomerJWT: []
-  description: |
-    Create a KYC document.
+  description: Creates a KYC document.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../../components/schemas/Storefront/StorefrontKycDocument.yaml
-    description: Kyc document resource.
+    description: KYC document resource.
     required: true
   responses:
     201:
-      description: Kyc document created.
+      description: KYC document created.
       headers:
         Location:
           $ref: ../../components/headers/Location.yaml
