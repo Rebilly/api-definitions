@@ -33,18 +33,7 @@ get:
           schema:
             type: array
             items:
-              allOf:
-                - properties:
-                    allocations:
-                      type: object
-                      properties:
-                        transactions:
-                          type: array
-                          description: List of transactions (typically refunds, credits, and chargebacks) that are allocated to reduce the unused amount of a credit memo.
-                        invoices:
-                          type: array
-                          description: List of invoices that the credit memo is allocated to.
-                - $ref: ../components/schemas/CreditMemos/CreditMemo.yaml
+              $ref: ../components/schemas/CreditMemos/CreditMemo.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
