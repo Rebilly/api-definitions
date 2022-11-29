@@ -18,9 +18,9 @@ properties:
         description: |-
           List of transactions (typically refunds, credits, and chargebacks) that are allocated to reduce the unused amount of a credit memo.
 
-            - To delete transaction allocations, send an empty transaction allocation array.
-            - To modify transaction allocations, do send a modified transaction allocation array.
-            - Not to modify transaction allocations, do not send a transaction allocation array.
+            - To delete transaction allocations, send an empty transaction allocation array in the request.
+            - To modify transaction allocations, send a modified transaction allocation array in the request.
+            - If you do not want to modify transaction allocations, do not send a transaction allocation array in the request.
         items:
           type: object
           properties:
@@ -49,10 +49,10 @@ properties:
         description: |-
           List of invoices that the credit memo is allocated to.
 
-          - To delete invoice allocations, send an empty invoice allocation array.
+          - To delete invoice allocations, send an empty invoice allocation array in the request.
             Paid invoices cannot be modified or deleted.
-          - To modify invoice allocations, do send a modified invoice allocation array.
-          - Not to modify invoice allocations, do not send an invoice allocation array.
+          - To modify invoice allocations, send a modified invoice allocation array in the request.
+          - If you do not want to modify invoice allocations, do not send an invoice allocation array in the request.
         items:
           type: object
           properties:
