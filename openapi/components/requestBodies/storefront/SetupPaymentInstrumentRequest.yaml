@@ -11,7 +11,7 @@ content:
         currency:
           $ref: ../../schemas/CurrencyCode.yaml
         amount:
-          description: Transaction amount.
+          description: Amount of the transaction.
           type: number
           format: double
           default: 0
@@ -19,7 +19,9 @@ content:
         billingAddress:
           description: |-
             Billing address.
-            If not supplied, it takes the billing address associated with the payment instrument, and then customer's address.
+            If a billing address is not supplied the address associated with the payment instrument is used.
+            If no address is associated with the payment instrument,
+            the customer's address is used.
           nullable: true
           type: object
           allOf:
@@ -28,11 +30,13 @@ content:
           nullable: true
           description: |-
             URL to redirect the end-user when an offsite transaction is completed.
-            Defaults to the configured website URL.
-            You may use `{id}` or `{result}` as placeholders in the URL which are replaced with the transaction id and result during redirection.
+            This field defaults to the configured website URL.
+            You may use `{id}` or `{result}` as placeholders in the URL.
+            These placeholders are replaced with the transaction ID and result.
+            For more information, see [Placeholders](https://www.rebilly.com/docs/automations/email-notifications/#placeholders).
           type: string
           format: uri
         riskMetadata:
           $ref: ../../schemas/RiskMetadata.yaml
-description: Setup Transaction resource.
+description: Set up transaction resource.
 required: true

@@ -5,19 +5,18 @@ get:
     - Storefront
   tags:
     - Payment instruments
-  summary: Retrieve a Payment Instrument
+  summary: Retrieve a payment instrument
   operationId: StorefrontGetPaymentInstrument
   x-sdk-operation-name: get
   security:
     - CustomerJWT: []
-  description: |
-    Retrieve a payment instrument by ID.
+  description: Retrieves a payment instrument with a specified ID.
   parameters:
     - $ref: ../../components/parameters/collectionLimit.yaml
     - $ref: ../../components/parameters/collectionOffset.yaml
   responses:
     200:
-      description: Payment Instrument retrieved.
+      description: Payment instrument retrieved.
       headers:
         Pagination-Total:
           $ref: ../../components/headers/Pagination-Total.yaml
@@ -40,15 +39,16 @@ patch:
     - Storefront
   tags:
     - Payment instruments
-  summary: Update a Payment Instrument's values
+  summary: Update payment instrument values
   operationId: StorefrontPatchPaymentInstrument
   x-sdk-operation-name: update
   security:
     - CustomerJWT: []
-  description: |
-    Update any of the payment instrument's values.
+  description: |-
+    Updates the values of a payment instrument with a specified ID.
 
-    Use Framepay payment token to update desired values.
+    Use the Framepay payment token ID to update values.
+    For more information, see [FramePay](https://www.rebilly.com/docs/dev-docs/framepay/).
   requestBody:
     $ref: ../../components/requestBodies/storefront/StorefrontPatchPaymentInstrument.yaml
   responses:
