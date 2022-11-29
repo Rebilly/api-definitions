@@ -31,8 +31,7 @@ properties:
       ID of the parent entry if one exists.
 
       Some types of transactions relate to parent transactions.
-      For example, a `risk-reserve` relates to a `charge`, and a
-      `risk-reserve-release` relates a to `risk-reserve`.
+      For example, a `risk-reserve` relates to a `charge`, and a `risk-reserve-release` relates a to `risk-reserve`.
     allOf:
       - $ref: ../ResourceId.yaml
   transactionId:
@@ -64,3 +63,10 @@ properties:
     $ref: ../CreatedTime.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml
+  _links:
+    type: array
+    description: Related resource links.
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml
