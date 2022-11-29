@@ -19,11 +19,11 @@ properties:
     allOf:
       - $ref: ./ResourceId.yaml
   currency:
-    description: Payout currency.
+    description: Currency of the payout.
     allOf:
       - $ref: ./CurrencyCode.yaml
   amount:
-    description: Payout amount.
+    description: Amount of the payout.
     type: number
     format: double
   availableAmount:
@@ -86,40 +86,41 @@ properties:
           type: number
           format: double
         createdTime:
-          description: Date and time at which a payout request is allocated.
+          description: Date and time when a payout request is allocated.
           allOf:
             - $ref: ./ServerTimestamp.yaml
         updatedTime:
           $ref: ./UpdatedTime.yaml
   reason:
     description: |-
-      Rejection or cancellation reason of the payout request for "rejected" or "canceled" status appropriately.
+      Rejection or cancellation reason of the payout request.
+      This value is supplied when a payout request returns a `rejected` or `canceled` status.
     type: string
     readOnly: true
   reviewerId:
-    description: ID of the reviewer user.
+    description: ID of the reviewer.
     type: string
     nullable: true
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
   reviewTime:
-    description: Review time of the payout request.
+    description: Date and time when the payout request is reviewed.
     type: string
     nullable: true
     allOf:
       - $ref: ./ServerTimestamp.yaml
   createdTime:
-    description: Created time of the payout request.
+    description: Date and time when the payout request is created.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   updatedTime:
-    description: Updated time of the payout request.
+    description: Date and time when the payout request is updated.
     allOf:
       - $ref: ./UpdatedTime.yaml
   _links:
     type: array
-    description: The links related to resource.
+    description: Related links.
     readOnly: true
     minItems: 1
     items:
