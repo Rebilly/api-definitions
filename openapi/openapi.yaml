@@ -201,10 +201,12 @@ tags:
 
       In Canada, to meet FINTRAC requirements, the `credit-file-proof` KYC document request verifies the customer's name, address, and date of birth with a credit agency.
 
-      If `credit-file-proof` is requested in combination with `identity-proof` and `address-proof`, `credit-file-proof` is attempted first.
-      If `credit-file-proof` validates the identity and address, the KYC request is considered fulfilled.
-      If the request is not fulfilled, redirect your customer to the KYC document gatherer to collect their KYC documents.
-
+      If `credit-file-proof` is requested in combination with `identity-proof` and `address-proof`,
+      `credit-file-proof` is attempted first.
+      If `credit-file-proof` validates the identity and address,
+      the KYC request is considered fulfilled.
+      If the request is not fulfilled,
+      redirect your customer to the KYC document gatherer to collect their KYC documents.
   - name: Customer authentication
     description: |-
       Use these operations to validate the identity of users and manage authentication credentials.
@@ -747,10 +749,6 @@ paths:
     $ref: ./paths/credit-memos@{id}@timeline.yaml
   /credit-memos/{id}/timeline/{messageId}:
     $ref: ./paths/credit-memos@{id}@timeline@{messageId}.yaml
-  /invoices/{id}/credit-memo-allocations:
-    $ref: ./paths/invoices@{id}@credit-memo-allocations.yaml
-  /invoices/{id}/credit-memo-allocations/{creditMemoId}:
-    $ref: ./paths/invoices@{id}@credit-memo-allocations@{creditMemoId}.yaml
   /kyc-requests:
     $ref: ./paths/kyc-requests.yaml
   '/kyc-requests/{id}':
