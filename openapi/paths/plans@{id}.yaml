@@ -12,11 +12,10 @@ get:
     - SecretApiKey: []
     - JWT: []
     - ApplicationJWT: []
-  description: |
-    Retrieve a plan with specified identifier string.
+  description: Retrieve a plan with specified identifier string.
   responses:
     '200':
-      description: Plan was retrieved.
+      description: Plan retrieved.
       content:
         application/json:
           schema:
@@ -46,19 +45,18 @@ put:
   summary: Upsert a plan
   operationId: PutPlan
   x-sdk-operation-name: update
-  description: |
-    Create or update (upsert) a Plan with specified identifier string.
+  description: Create or update (upsert) a Plan with specified identifier string.
   requestBody:
     $ref: ../components/requestBodies/Plan.yaml
   responses:
     '200':
-      description: Plan was updated.
+      description: Plan updated.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Plans/Plan.yaml
     '201':
-      description: Plan was created.
+      description: Plan created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -93,11 +91,10 @@ delete:
   summary: Delete a Plan
   operationId: DeletePlan
   x-sdk-operation-name: delete
-  description: |
-    Delete a Plan with specified identifier string.
+  description: Delete a Plan with specified identifier string.
   responses:
     '204':
-      description: Plan was deleted.
+      description: Plan deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '404':

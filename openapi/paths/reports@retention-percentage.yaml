@@ -12,6 +12,7 @@ servers:
         default: unknown
         description: Your organization ID.
 get:
+  x-badge: Experimental
   x-products:
     - Reports
   tags:
@@ -19,8 +20,7 @@ get:
   summary: Retrieve a retention percentage report
   operationId: GetRetentionPercentageReport
   x-sdk-operation-name: getRetentionPercentage
-  description: |
-    Retrieve a retention percentage report.
+  description: Retrieve a retention percentage report.
   parameters:
     - name: aggregationField
       in: query
@@ -73,7 +73,7 @@ get:
     - $ref: ../components/parameters/collectionCriteria.yaml
   responses:
     '200':
-      description: Report was retrieved.
+      description: Report retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml

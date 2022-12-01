@@ -15,8 +15,8 @@ allOf:
           $ref: ../Transactions/Transaction.yaml
       retryInstruction:
         description: |-
-          Invoice payment retry instruction. This object specifies how
-          to proceed if a payment related to the invoice fails.
+          Invoice payment retry instruction.
+          This object specifies how to proceed if a payment related to the invoice fails.
         type: object
         properties:
           attempts:
@@ -31,27 +31,20 @@ allOf:
                 amountAdjustmentInstruction:
                   $ref: ../InvoiceRetry/InvoiceRetryAmountAdjustmentInstruction.yaml
                 tryBackupInstruments:
-                  description: |-
-                    Specifies whether to use backup payment instruments
-                    on an invoice payment retry.
+                  description: Specifies whether to use backup payment instruments on an invoice payment retry.
                   type: boolean
                   default: false
               required:
                 - scheduleInstruction
           afterAttemptPolicies:
-            description: |-
-              Describes the action to take when a payment attempt
-              concludes, and payment is not collected.
+            description: Describes the action to take when a payment attempt concludes, and payment is not collected.
             type: array
             items:
               type: string
               enum:
                 - change-subscription-renewal-time
           afterRetryEndPolicies:
-            description: |-
-              Describes the action to take when all scheduled payment
-              retries, in a retry instruction, have concluded and payment
-              is not collected.
+            description: Describes the action to take when all scheduled payment retries, in a retry instruction, have concluded and payment is not collected.
             type: array
             items:
               type: string
@@ -85,14 +78,13 @@ allOf:
           - one-time-sale
         readOnly: true
       dueReminderTime:
-        description: |-
-          Date and time at which a past due reminder event is triggered.
+        description: Date and time when a past due reminder event is triggered.
         nullable: true
-        allOf:
-          - $ref: ../ServerTimestamp.yaml
+        type: string
+        format: date-time
+        readOnly: true
       dueReminderNumber:
-        description: |-
-          Number of past due reminder events that have been triggered.
+        description: Number of past due reminder events that have been triggered.
         nullable: true
         type: integer
         readOnly: true
@@ -113,9 +105,7 @@ allOf:
             - $ref: ../Links/SubscriptionLink.yaml
       _embedded:
         type: array
-        description: |-
-          Embedded objects that are requested by the `expand`
-          query parameter.
+        description: Embedded objects that are requested by the `expand` query parameter.
         readOnly: true
         minItems: 1
         items:

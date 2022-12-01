@@ -1,0 +1,88 @@
+type: object
+description: AML check result.
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  createdTime:
+    $ref: CreatedTime.yaml
+  updatedTime:
+    $ref: UpdatedTime.yaml
+  websiteId:
+    readOnly: true
+    description: Website ID associated with the customer.
+    allOf:
+      - $ref: ./ResourceId.yaml
+  reviewerId:
+    readOnly: true
+    type: string
+    nullable: true
+    maxLength: 50
+    description: User ID of the person who reviewed the AML check.
+    example: 44433322-2c4y-483z-a0a9-158621f77a21
+  reviewTime:
+    type: string
+    format: date-time
+    readOnly: true
+    nullable: true
+    description: Date and time when the AML check review is completed.
+  customer:
+    type: object
+    readOnly: true
+    properties:
+      id:
+        readOnly: true
+        description: ID of the customer.
+        allOf:
+          - $ref: ./ResourceId.yaml
+      primaryAddress:
+        type: object
+        readOnly: true
+        description: Customer's data at the time of the AML check.
+        properties:
+          firstName:
+            type: string
+            readOnly: true
+            description: Customer's first name at the time of the AML check.
+          lastName:
+            type: string
+            readOnly: true
+            description: Customer's last name at the time of the AML check.
+          dob:
+            type: string
+            format: date
+            readOnly: true
+            nullable: true
+            description: Customer's date of birth.
+            example: 1971-02-14
+          country:
+            type: string
+            readOnly: true
+            description: Customer's country of residence.
+      tags:
+        description: List of tags that have been assigned to the customer.
+        readOnly: true
+        type: array
+        items:
+          $ref: ./Tags/Tag.yaml
+      organizationId:
+        readOnly: true
+        description: ID of the customer's organization.
+        allOf:
+          - $ref: ./ResourceId.yaml
+  hits:
+    readOnly: true
+    description: List of hits returned during the AML check.
+    type: array
+    items:
+      $ref: ./AML.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Links/SelfLink.yaml
+        - $ref: ./Links/CustomerLink.yaml

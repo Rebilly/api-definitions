@@ -1,22 +1,29 @@
 type: object
 properties:
   firstName:
-    description: The customer first name if it was matched, null otherwise.
+    description: |-
+      First name of the customer if it is matched.
+      This value is null if no match is found.
     type: string
     nullable: true
     example: John
   lastName:
-    description: The customer last name if it was matched, null otherwise.
+    description: |-
+      Last name of the customer if it is matched.
+      This value is null if no match is found.
     type: string
     nullable: true
     example: Doe
   paymentInstrumentId:
-    description: The payment instrument related to the document, null otherwise.
+    description: |-
+      ID of the payment instrument related to the document.
+      This value is null if no match is found.
     type: string
     nullable: true
     example: a751a6c8-e56f-4d2a-86bb-9545dccb489c
   documentSubtype:
-    description: The interpreted subtype of the uploaded document.
+    description: Interpreted subtype of the uploaded document.
     type: string
     nullable: true
-    example: receipt
+    allOf:
+      - $ref: ./KycDocumentSubtypes.yaml

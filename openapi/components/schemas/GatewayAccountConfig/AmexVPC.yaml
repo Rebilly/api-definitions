@@ -1,4 +1,4 @@
-description: AmexVPC config.
+description: AmexVPC gateway configuration.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -12,17 +12,17 @@ allOf:
         properties:
           merchantId:
             type: string
-            description: Merchant ID.
+            description: AmexVPC merchant ID.
           accessCode:
             type: string
-            description: Access Code.
+            description: AmexVPC access Code.
             format: password
           user:
             type: string
-            description: User (used for refund, void and capture).
+            description: AmexVPC account user. This field is used for refund, void, and capture transactions.
           password:
             type: string
-            description: Password (used for refund, void and capture).
+            description: AmexVPC account password. This field is used for refund, void, and capture transactions.
             format: password
         required:
           - merchantId
@@ -35,6 +35,6 @@ allOf:
         properties:
           url:
             type: string
-            description: Virtual Payment Client URL.
+            description: Virtual payment client URL.
         required:
           - url

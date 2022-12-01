@@ -8,13 +8,13 @@ properties:
     description: Original file name.
     type: string
   extension:
-    description: The file extension.
+    description: File extension.
     type: string
   description:
     description: Description of the file.
     type: string
   sourceType:
-    description: The source of the file.
+    description: Source of the file.
     type: string
     nullable: true
     enum:
@@ -37,7 +37,6 @@ properties:
       - image/jpeg
       - image/gif
       - application/pdf
-      - audio/mpeg
   size:
     description: File size, in bytes.
     type: integer
@@ -55,16 +54,13 @@ properties:
     type: string
     readOnly: true
   createdTime:
-    description: Date and time at which the file was uploaded.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml
   isPublic:
     description: |-
-      Specifies whether the file is available publicly without
-      authentication. If this value is `true`, the
-      permalink in the `_links` section contains the public URL.
+      Specifies whether the file is available publicly without authentication.
+      If this value is `true`, the permalink in the `_links` section contains the public URL.
     type: boolean
   _links:
     type: array

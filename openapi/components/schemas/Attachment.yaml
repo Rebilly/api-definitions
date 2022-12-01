@@ -40,9 +40,7 @@ properties:
     description: Description of the attachment.
     type: string
   createdTime:
-    description: Date and time at which the attachment was created.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    $ref: CreatedTime.yaml
   updatedTime:
     $ref: UpdatedTime.yaml
   _links:
@@ -57,9 +55,7 @@ properties:
         - $ref: ./Links/AttachmentResourceLink.yaml
   _embedded:
     type: array
-    description: |-
-      Embedded objects that are requested by the `expand`
-      query parameter.
+    description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
     minItems: 1
     items:

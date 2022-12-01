@@ -4,22 +4,22 @@ required:
   - user
 properties:
   organization:
-    description: Membership organization.
+    description: Organization membership.
     readOnly: true
     type: object
     properties:
       id:
-        description: Organization ID.
+        description: ID of the organization.
         type: string
         allOf:
           - $ref: ./ResourceId.yaml
       name:
-        description: Organization name.
+        description: Name of the organization.
         type: string
       createdTime:
-        description: The organization created time.
-        allOf:
-          - $ref: ./ServerTimestamp.yaml
+        $ref: CreatedTime.yaml
+      updatedTime:
+        $ref: UpdatedTime.yaml
   user:
     description: Membership user.
     readOnly: true
@@ -31,29 +31,34 @@ properties:
         allOf:
           - $ref: ./ResourceId.yaml
       name:
-        description: First and last name.
+        description: First and last name of the user.
         type: string
   allowedIps:
     $ref: ./AllowedIps.yaml
   permissions:
-    description: The user's permissions. See the format in example. Use wildcard `*` for full access.
+    description: |-
+      Permissions that the user has within the organization.
+      Use the wildcard character `*` for full access.
     allOf:
       - $ref: ./AclPermissions.yaml
   isOwner:
-    description: User is owner of organization.
+    description: Specifies whether the user is the owner of the organization.
     type: boolean
   isDefault:
-    description: This organization is default for membership user.
+    description: Specifies whether the organization is the default organization for the user.
     type: boolean
     readOnly: true
   roleIds:
     type: array
-    description: The membership's roles identifiers.
+    description: |-
+      Role IDs associated with the user.
+      Role IDs specify the roles that the user performs within the organization.
+      For example, the user may be an organization admin.
     items:
       type: string
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
     minItems: 1
     items:

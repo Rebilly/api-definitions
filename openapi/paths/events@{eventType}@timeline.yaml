@@ -8,8 +8,7 @@ get:
   summary: Retrieve rules engine timeline messages
   operationId: GetRulesEngineTimelineCollection
   x-sdk-operation-name: getAllTimelineMessages
-  description: |
-    Retrieve a list of Rules Engine timeline messages.
+  description: Retrieves a list of rules engine timeline messages.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -18,7 +17,7 @@ get:
     - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
-      description: A list of Rules Engine timeline messages was retrieved.
+      description: List of rules engine timeline messages retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -41,21 +40,20 @@ post:
     - Users
   tags:
     - Rules timeline
-  summary: Create Rules Engine Timeline comment
+  summary: Create a rules engine timeline comment
   operationId: PostRulesEngineTimeline
   x-sdk-operation-name: createTimelineComment
-  description: |
-    Create a Rules Engine Timeline comment.
+  description: Creates a rules engine timeline comment.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/Timelines/RulesEngineTimeline.yaml
-    description: Rules Engine Timeline resource.
+    description: Rules engine timeline resource.
     required: true
   responses:
     '201':
-      description: Rules Engine Timeline comment was created.
+      description: Rules engine timeline comment created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml

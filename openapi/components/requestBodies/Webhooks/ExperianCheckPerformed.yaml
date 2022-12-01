@@ -4,10 +4,8 @@ content:
       properties:
         customerId:
           $ref: ../../schemas/CustomerId.yaml
-          description: The ID of the checked customer.
-          type: string
         outcome:
-          description: The check decision where `1` - record matches, `0` - no matches found, `-1` - record mismatches.
+          description: Check decision where `1` - record matches, `0` - no matches found, `-1` - record mismatches.
           type: integer
           enum:
             - -1
@@ -15,7 +13,7 @@ content:
             - 1
           example: 1
         reason:
-          description: The text representation of the outcome.
+          description: Text representation of the outcome.
           type: string
           example: Individual has a 90 percent or greater match to forename surname premise postcode with ID verified and DOB
         errorCode:
@@ -27,10 +25,13 @@ content:
           type: string
           example: 'Authentication Error: Bad Username or Password'
         eventType:
-          $ref: ../../schemas/GlobalWebhookEventType.yaml
+          type: string
+          description: Webhook event type.
+          enum:
+            - experian-check-performed
         _embedded:
           type: object
-          description: Customer object.
+          description: Embedded object.
           properties:
             customer:
               $ref: ../../schemas/Customer.yaml

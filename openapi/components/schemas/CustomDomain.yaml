@@ -2,17 +2,27 @@ type: object
 required:
   - domain
 properties:
+  id:
+    description: ID of the custom domain.
+    type: string
+    maxLength: 255
+    readOnly: true
   domain:
-    description: The fully qualified domain name.
+    description: Fully qualified domain name.
     type: string
     maxLength: 255
   isVerified:
-    description: True if the domain was verified by Rebilly.
+    description: True if the domain is verified by Rebilly.
     type: boolean
     readOnly: true
   createdTime:
-    description: Custom domain created time.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    $ref: CreatedTime.yaml
   updatedTime:
     $ref: UpdatedTime.yaml
+  _links:
+    type: array
+    description: Related resource links.
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ./Links/SelfLink.yaml

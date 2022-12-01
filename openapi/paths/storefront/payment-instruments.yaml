@@ -8,8 +8,7 @@ get:
   x-sdk-operation-name: getAll
   security:
     - CustomerJWT: []
-  description: |
-    Retrieve a list of payment instruments.
+  description: Retrieve a list of payment instruments.
   parameters:
     - $ref: ../../components/parameters/collectionFilter.yaml
     - $ref: ../../components/parameters/collectionSort.yaml
@@ -18,7 +17,7 @@ get:
     - $ref: ../../components/parameters/collectionQuery.yaml
   responses:
     200:
-      description: A list of payment instrument was retrieved.
+      description: List of payment instrument retrieved.
       headers:
         Pagination-Total:
           $ref: ../../components/headers/Pagination-Total.yaml
@@ -47,7 +46,7 @@ post:
   security:
     - CustomerJWT: []
     - PublishableApiKey: []
-  description: |
+  description: |-
     Create a payment instrument.
 
     The only way to create a payment instrument is using a payment instrument
@@ -56,7 +55,7 @@ post:
     $ref: ../../components/requestBodies/storefront/StorefrontPostPaymentInstrument.yaml
   responses:
     201:
-      description: Payment instrument was created.
+      description: Payment instrument created.
       headers:
         Location:
           $ref: ../../components/headers/Location.yaml

@@ -3,11 +3,12 @@ get:
     - Users
   tags:
     - Lists
-  summary: Retrieve a collection of Lists (latest version of each List)
+  summary: Retrieve lists
   operationId: GetListCollection
   x-sdk-operation-name: getAll
-  description: |
-    Retrieve a collection of Lists.
+  description: |-
+    Retrieves a collection of lists.
+    This operation returns the most recent version of each list.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -17,7 +18,7 @@ get:
     - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
-      description: A collection of Lists was retrieved.
+      description: Collection of lists retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -44,14 +45,13 @@ post:
     - Users
   tags:
     - Lists
-  summary: Create a List
+  summary: Create a list
   operationId: PostList
   x-sdk-operation-name: create
-  description: |
-    Create a List.
+  description: Creates a new list.
   responses:
     '201':
-      description: List was created.
+      description: List created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml

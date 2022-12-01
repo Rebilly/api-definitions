@@ -5,13 +5,13 @@ get:
     - Core
   tags:
     - KYC documents
-  summary: Retrieve a KYC Document
+  summary: Retrieve a KYC document
   operationId: GetKycDocument
   x-sdk-operation-name: get
-  description: Retrieve a KYC document with specified identifier string.
+  description: Retrieves a KYC document with a specified ID.
   responses:
     '200':
-      description: KYC document was retrieved.
+      description: KYC document retrieved.
       content:
         application/json:
           schema:
@@ -34,7 +34,7 @@ put:
   summary: Upsert a KYC document
   operationId: PutKycDocument
   x-sdk-operation-name: update
-  description: Create or update (upsert) a KYC document with specified identifier string.
+  description: Creates or updates (upserts) a KYC document with a specified ID.
   requestBody:
     content:
       application/json:
@@ -44,13 +44,13 @@ put:
     required: true
   responses:
     '200':
-      description: KYC document was updated.
+      description: KYC document updated.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/KycDocument/KycDocument.yaml
     '201':
-      description: KYC document was created.
+      description: KYC document created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml

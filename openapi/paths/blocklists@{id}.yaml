@@ -8,8 +8,7 @@ get:
   summary: Retrieve a blocklist
   operationId: GetBlocklist
   x-sdk-operation-name: get
-  description: |-
-    Retrieves a blocklist with a specified ID.
+  description: Retrieves a blocklist with a specified ID.
   responses:
     '200':
       description: Blocklist retrieved.
@@ -38,11 +37,16 @@ put:
   summary: Create a blocklist with specified ID
   operationId: PutBlocklist
   x-sdk-operation-name: update
-  description: |-
-    Creates a blocklist with a specified ID.
+  description: Creates a blocklist with a specified ID.
   requestBody:
     $ref: ../components/requestBodies/Blocklist.yaml
   responses:
+    '200':
+      description: Blocklist updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Blocklist.yaml
     '201':
       description: Blocklist created.
       headers:
@@ -75,8 +79,7 @@ delete:
   summary: Delete a blocklist
   operationId: DeleteBlocklist
   x-sdk-operation-name: delete
-  description: |-
-    Deletes a blocklist with a specified ID.
+  description: Deletes a blocklist with a specified ID.
   responses:
     '204':
       description: Blocklist deleted.

@@ -1,13 +1,13 @@
 type: object
 title: ACH
-allOf:
-  - $ref: AdjustPaymentMethod.yaml
-  - properties:
-      paymentMethod:
-        type: string
-        enum:
-          - ach
-      feature:
-        nullable: true
-        allOf:
-          - $ref: ../Features/PlaidFeatureName.yaml
+properties:
+  paymentMethod:
+    type: string
+    enum:
+      - ach
+  feature:
+    nullable: true
+    type: string
+    description: Feature name.
+    enum:
+      - Plaid

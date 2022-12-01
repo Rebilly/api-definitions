@@ -8,11 +8,10 @@ post:
   summary: Refund a Transaction
   operationId: PostTransactionRefund
   x-sdk-operation-name: refund
-  description: >
-    Refund a Transaction with specified identifier string.
+  description: |-
+    Refunds a transaction with a specified identifier string.
 
-    Note that the refund will be in the same currency as the original
-    transaction.
+    The refund is in the same currency as the original transaction.
   requestBody:
     content:
       application/json:
@@ -22,7 +21,7 @@ post:
     required: true
   responses:
     '201':
-      description: Transaction was refunded.
+      description: Transaction refunded.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml

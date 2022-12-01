@@ -15,10 +15,11 @@ parameters:
   - name: eventType
     in: path
     required: true
-    description: The system event type.
+    description: System event type.
     schema:
       $ref: ../components/schemas/EventType.yaml
 get:
+  x-badge: Experimental
   x-products:
     - Reports
   tags:
@@ -26,8 +27,7 @@ get:
   summary: Retrieve a rules matched summary report
   operationId: GetTriggeredEventRuleReport
   x-sdk-operation-name: getTriggeredEventRuleReport
-  description: |
-    Retrieve a rules matched summary report by events triggered.
+  description: Retrieve a rules matched summary report by events triggered.
   parameters:
     - name: periodStart
       in: query
@@ -47,7 +47,7 @@ get:
     - $ref: ../components/parameters/collectionOffset.yaml
   responses:
     '200':
-      description: Report was retrieved.
+      description: Report retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml

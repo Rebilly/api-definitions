@@ -1,13 +1,13 @@
 type: object
 title: PayPal
-allOf:
-  - $ref: AdjustPaymentMethod.yaml
-  - properties:
-      paymentMethod:
-        type: string
-        enum:
-          - paypal
-      feature:
-        nullable: true
-        allOf:
-          - $ref: ../Features/PayPalBillingAgreementFeatureName.yaml
+properties:
+  paymentMethod:
+    type: string
+    enum:
+      - paypal
+  feature:
+    nullable: true
+    type: string
+    description: Feature name.
+    enum:
+      - PayPal billing agreement

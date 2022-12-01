@@ -6,11 +6,10 @@ get:
   summary: Retrieve user MFA status
   operationId: GetProfileMfa
   x-sdk-operation-name: getMfa
-  description: |
-    Retrieve user MFA status.
+  description: Retrieve user MFA status.
   responses:
     '200':
-      description: User MFA status was retrieved.
+      description: User MFA status retrieved.
       content:
         application/json:
           schema:
@@ -33,11 +32,11 @@ post:
   summary: Update user MFA
   operationId: PostProfileMfa
   x-sdk-operation-name: updateMfa
-  description: |
+  description: |-
     Update user MFA. Link with rel `enrollment` must be followed to verify existing or enroll new MFA.
   responses:
     '201':
-      description: User MFA update url was created.
+      description: User MFA update url created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -63,11 +62,11 @@ delete:
   summary: Delete user MFA
   operationId: DeleteProfileMfa
   x-sdk-operation-name: deleteMfa
-  description: |
+  description: |-
     Delete user MFA. To succed `lastAuthTime` must be no more than 10 minutes before this call.
   responses:
     '204':
-      description: User MFA was deleted.
+      description: User MFA deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

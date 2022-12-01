@@ -1,4 +1,4 @@
-description: PayPal Gateway config.
+description: PayPal gateway configuration.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -7,7 +7,9 @@ allOf:
     properties:
       credentials:
         type: object
-        description: PayPal credentials object. This object specifies the PayPal Partner account from which a gateway account is registered.
+        description: |-
+          PayPal credentials object.
+          This object specifies the PayPal Partner account from which a gateway account is registered.
         properties:
           partnerId:
             type: string
@@ -21,7 +23,9 @@ allOf:
             format: password
           partnerBnCode:
             type: string
-            description: BN Code for the PayPal Partner account. This unique code tracks the source of API requests.
+            description: |-
+              BN Code for the PayPal Partner account.
+              This unique code tracks the source of API requests.
       settings:
         type: object
         description: PayPal settings object.
@@ -30,17 +34,21 @@ allOf:
         properties:
           redirectUrl:
             type: string
-            description: The URL where the user will be redirected after authorizing the account on PayPal.
+            description: URL where the user is redirected after authorizing the account on PayPal.
             format: url
           enableGuestCheckout:
             type: boolean
             default: false
-            description: Allow users without PayPal accounts to pay using credit or debit cards.
+            description: Specifies whether to allow users without PayPal accounts to pay using credit or debit cards.
           useHostedCheckoutForm:
             type: boolean
             default: false
-            description: Use Rebilly's hosted PayPal form instead of redirecting customers to PayPal.
+            description: |-
+              Specifies whether to use a Rebilly hosted PayPal form instead of redirecting customers to PayPal.
+              For more information, see [Create a payment form using the Rebilly API](https://www.rebilly.com/docs/dev-docs/create-a-hosted-payment-form/).
           forceGuestCheckout:
             type: boolean
             default: false
-            description: Suppress PayPal payment method when Guest Checkout is available. Only applicable when useHostedCheckoutForm is enabled.
+            description: |-
+              Specifies whether to suppress the PayPal payment method when a guest checkout is available.
+              This option is only applicable when `useHostedCheckoutForm` is enabled.

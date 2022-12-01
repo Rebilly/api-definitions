@@ -4,16 +4,16 @@ required:
 properties:
   invoiceId:
     readOnly: true
-    description: ID of the invoice where the credit memo is allocated to.
+    description: ID of the invoice to which the credit memo is allocated.
     allOf:
       - $ref: ../ResourceId.yaml
   creditMemoId:
     readOnly: true
-    description: ID of the credit memo that was allocated.
+    description: ID of the allocated credit memo.
     allOf:
       - $ref: ../ResourceId.yaml
   amount:
-    description: Amount of credit from the credit memo allocated to the given invoice.
+    description: Amount of credit, from the credit memo, that is allocated to a specified invoice.
     type: number
     format: double
   currency:
@@ -21,15 +21,12 @@ properties:
     allOf:
       - $ref: ../CurrencyCode.yaml
   createdTime:
-    description: Credit memo allocation time.
-    readOnly: true
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml
   _links:
     type: array
-    description: The links related to the resource.
+    description: Related links.
     readOnly: true
     items:
       anyOf:

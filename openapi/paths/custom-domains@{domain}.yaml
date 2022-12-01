@@ -1,7 +1,7 @@
 parameters:
   - name: domain
     in: path
-    description: The resource domain.
+    description: Resource domain.
     required: true
     schema:
       type: string
@@ -15,11 +15,10 @@ get:
   summary: Retrieve a custom domain
   operationId: GetCustomDomain
   x-sdk-operation-name: get
-  description: |
-    Retrieve a custom domain with specified identifier string.
+  description: Retrieve a custom domain with specified identifier string.
   responses:
     '200':
-      description: Custom domain was retrieved.
+      description: Custom domain retrieved.
       content:
         application/json:
           schema:
@@ -38,11 +37,10 @@ delete:
   summary: Delete a custom domain
   operationId: DeleteCustomDomain
   x-sdk-operation-name: delete
-  description: |
-    Delete a custom domain with specified identifier string.
+  description: Delete a custom domain with specified identifier string.
   responses:
     '204':
-      description: Custom domains was deleted.
+      description: Custom domains deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

@@ -2,7 +2,7 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
   - name: messageId
     in: path
-    description: The Order Timeline message ID.
+    description: Order Timeline message ID.
     required: true
     schema:
       type: string
@@ -14,11 +14,10 @@ get:
   summary: Retrieve an Order Timeline message
   operationId: GetSubscriptionTimeline
   x-sdk-operation-name: getTimelineMessage
-  description: |
-    Retrieve a order message with specified identifier string.
+  description: Retrieve a order message with specified identifier string.
   responses:
     '200':
-      description: Order message was retrieved.
+      description: Order message retrieved.
       content:
         application/json:
           schema:
@@ -42,11 +41,10 @@ delete:
   summary: Delete an Order Timeline message
   operationId: DeleteSubscriptionTimeline
   x-sdk-operation-name: deleteTimelineMessage
-  description: |
-    Delete an Order Timeline message with specified identifier string.
+  description: Delete an Order Timeline message with specified identifier string.
   responses:
     '204':
-      description: Order Timeline message was deleted.
+      description: Order Timeline message deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

@@ -3,7 +3,7 @@ parameters:
   - name: version
     in: path
     required: true
-    description: List version.
+    description: Version of the list.
     schema:
       type: integer
       minimum: 1
@@ -12,12 +12,13 @@ get:
     - Users
   tags:
     - Lists
-  summary: Retrieve List's exact version
+  summary: Retrieve specific list version
   operationId: GetListVersion
   x-sdk-operation-name: getByVersion
+  description: Retrieves a specified version of a list with a specified ID.
   responses:
     '200':
-      description: List's exact version was retrieved.
+      description: List version retrieved.
       content:
         application/json:
           schema:

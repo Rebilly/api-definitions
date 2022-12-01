@@ -14,8 +14,7 @@ properties:
     allOf:
       - $ref: ./ResourceId.yaml
   customerId:
-    description: |-
-      ID of the customer who is disputing a transaction.
+    description: ID of the customer who is disputing a transaction.
     type: string
     readOnly: true
   transactionId:
@@ -35,8 +34,7 @@ properties:
     description: Case ID of the dispute.
     type: string
   reasonCode:
-    description: |-
-      Code used in the chargeback that describes the reason for the dispute.
+    description: Code used in the chargeback that describes the reason for the dispute.
     type: string
     enum:
       - '1000'
@@ -241,30 +239,25 @@ properties:
       - lost
       - unknown
   postedTime:
-    description: Date and time at which the dispute is posted.
+    description: Date and time when the dispute is posted.
     type: string
     format: date-time
   deadlineTime:
     description: |-
-      Latest date and time by which a merchant must submit a
-      representment for a dispute. If the deadline is missed, the
-      merchant loses the dispute.
+      Latest date and time by when a merchant must submit a representment for a dispute.
+      If the deadline is missed, the merchant loses the dispute.
     type: string
     format: date-time
   rawResponse:
-    description: |-
-      Raw response from the payment gateway that processed the disputed
-      transaction.
+    description: Raw response from the payment gateway that processed the disputed transaction.
     type: string
     readOnly: true
   resolvedTime:
-    description: Date and time at which the dispute was resolved.
+    description: Date and time when the dispute is resolved.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   createdTime:
-    description: Date and time at which the dispute was created.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    $ref: CreatedTime.yaml
   updatedTime:
     $ref: UpdatedTime.yaml
   _links:
@@ -278,9 +271,7 @@ properties:
         - $ref: ./Links/TransactionLink.yaml
   _embedded:
     type: array
-    description: |-
-      Embedded objects that are requested by the `expand`
-      query parameter.
+    description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
     minItems: 1
     items:

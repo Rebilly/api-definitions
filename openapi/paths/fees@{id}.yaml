@@ -1,19 +1,20 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
+  x-badge: Experimental
   x-products:
     - Core
   tags: [Fees]
   summary: Retrieve a fee entry
-  description: |
-    Retrieve a fee entry.
+  description: |-
+    Retrieves a fee entry.
 
-    This operation is experimental and not guaranteed to be backward compatible.
+    > **Important:** This operation is experimental and may not be backward compatible.
   operationId: GetFee
   x-sdk-operation-name: get
   responses:
     '200':
-      description: A fee was retrieved.
+      description: Fee retrieved.
       content:
         application/json:
           schema:
@@ -32,14 +33,15 @@ get:
     '404':
       $ref: ../components/responses/NotFound.yaml
 put:
+  x-badge: Experimental
   x-products:
     - Core
   tags: [Fees]
   summary: Upsert a fee entry
-  description: |
-    Create or update (upsert) a fee entry.
+  description: |-
+    Creates or updates (upserts) a fee entry.
 
-    This operation is experimental and not guaranteed to be backward compatible.
+    > **Important:** This operation is experimental and may not be backward compatible.
   operationId: PutFee
   x-sdk-operation-name: upsert
   requestBody:
@@ -57,7 +59,7 @@ put:
             $ref: ../components/examples/Fee/stripe-intl-request.yaml
   responses:
     '200':
-      description: Fee entry was updated.
+      description: Fee entry updated.
       content:
         application/json:
           schema:
@@ -70,7 +72,7 @@ put:
             stripe-intl:
               $ref: ../components/examples/Fee/stripe-intl-response.yaml
     '201':
-      description: Fee entry was created.
+      description: Fee entry created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -92,14 +94,15 @@ put:
     '422':
       $ref: ../components/responses/ValidationError.yaml
 patch:
+  x-badge: Experimental
   x-products:
     - Core
   tags: [Fees]
   summary: Patch a fee entry
-  description: |
-    Patch a fee entry.
+  description: |-
+    Patches a fee entry.
 
-    This operation is experimental and not guaranteed to be backward compatible.
+    > **Important:** This operation is experimental and may not be backward compatible.
   operationId: PatchFee
   x-sdk-operation-name: patch
   requestBody:
@@ -117,7 +120,7 @@ patch:
             $ref: ../components/examples/Fee/stripe-intl-request.yaml
   responses:
     '200':
-      description: Fee entry was patched.
+      description: Fee entry patched.
       content:
         application/json:
           schema:

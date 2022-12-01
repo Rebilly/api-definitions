@@ -6,16 +6,16 @@ get:
     - Users
   tags:
     - Rules
-  summary: Retrieve the rules draft
+  summary: Retrieve a draft ruleset
   operationId: GetEventRuleSetDraft
   x-sdk-operation-name: getDraftRuleset
-  description: Retrieve the selected rules draft.
+  description: Retrieves a draft ruleset with a specified ID and event type.
   parameters:
     - $ref: ../components/parameters/collectionFields.yaml
     - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: Rules draft was retrieved.
+      description: Draft ruleset retrieved.
       content:
         application/json:
           schema:
@@ -31,14 +31,13 @@ delete:
     - Users
   tags:
     - Rules
-  summary: Delete the rules draft
+  summary: Delete a draft ruleset
   operationId: DeleteEventRuleSetDraft
   x-sdk-operation-name: deleteDraftRuleset
-  description: |
-    Delete the rules draft with the specified identifier string.
+  description: Deletes a draft ruleset with a specified ID and event type.
   responses:
     '204':
-      description: The draft was deleted.
+      description: Draft ruleset deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '404':
@@ -48,12 +47,22 @@ put:
     - Users
   tags:
     - Rules
-  summary: Update the rules draft for event
+  summary: Update a draft ruleset
   operationId: PutEventRuleSetDraft
   x-sdk-operation-name: updateDraftRuleset
+  description: Updates a draft ruleset for a specified event type.
   responses:
     '200':
-      description: Rules draft was updated.
+      description: Draft ruleset updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Rules/RuleSetDraft.yaml
+    '201':
+      description: Draft ruleset created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:

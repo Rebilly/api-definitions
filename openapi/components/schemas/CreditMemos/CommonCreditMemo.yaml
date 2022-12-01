@@ -1,12 +1,12 @@
 type: object
 properties:
   id:
-    description: Credit memo ID.
+    description: ID of the credit memo.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   number:
-    description: An auto-incrementing number based on the sequence of credit memos for any particular customer.
+    description: Auto-incrementing number based on the sequence of credit memos for any particular customer.
     readOnly: true
     type: integer
   allocations:
@@ -17,6 +17,10 @@ properties:
         type: array
         description: |-
           List of transactions (typically refunds, credits, and chargebacks) that are allocated to reduce the unused amount of a credit memo.
+
+            - To delete transaction allocations, send an empty transaction allocation array in the request.
+            - To modify transaction allocations, send a modified transaction allocation array in the request.
+            - If you do not want to modify or delete transaction allocations, do not send a transaction allocation array in the request.
         items:
           type: object
           properties:
@@ -37,6 +41,38 @@ properties:
               allOf:
                 - $ref: ../CurrencyCode.yaml
             createdTime:
+              $ref: ../CreatedTime.yaml
+            updatedTime:
+              $ref: ../UpdatedTime.yaml
+      invoices:
+        type: array
+        description: |-
+          List of invoices that the credit memo is allocated to.
+
+          - To delete invoice allocations, send an empty invoice allocation array in the request.
+            Paid invoices cannot be modified or deleted.
+          - To modify invoice allocations, send a modified invoice allocation array in the request.
+          - If you do not want to modify or delete invoice allocations, do not send an invoice allocation array in the request.
+        items:
+          type: object
+          properties:
+            invoiceId:
+              description: ID of invoice to which the credit memo is allocated.
+              allOf:
+                - $ref: ../ResourceId.yaml
+            amount:
+              description: |-
+                Amount of credit that is allocated from the credit memo to the invoice.
+                If the `amount` value is not supplied or exceeds the unused amount of the credit memo or the invoice due amount, the lesser of the following two values is used:
+                - The unused amount of the credit memo.
+                - The invoice due amount.
+              type: number
+              format: double
+            currency:
+              readOnly: true
+              allOf:
+                - $ref: ../CurrencyCode.yaml
+            createdTime:
               description: Date and time at which a credit memo is allocated.
               allOf:
                 - $ref: ../ServerTimestamp.yaml
@@ -44,6 +80,7 @@ properties:
               $ref: ../UpdatedTime.yaml
   items:
     type: array
+    description: Items of the credit memo.
     items:
       type: object
       required:
@@ -56,10 +93,11 @@ properties:
           allOf:
             - $ref: ../ResourceId.yaml
         invoiceItemId:
-          description: ID of the invoice item on which the the credit item is referenced.
+          description: ID of the invoice item to which the credit item is referenced.
           nullable: true
-          allOf:
-            - $ref: ../ResourceId.yaml
+          type: string
+          maxLength: 50
+          example: 44433322-2c4y-483z-a0a9-158621f77a21
         description:
           description: Description of the credit memo item.
           type: string
@@ -77,14 +115,14 @@ properties:
           readOnly: true
         productId:
           description: ID of the related product.
-          nullable: true
-          allOf:
-            - $ref: ../ResourceId.yaml
+          type: string
+          maxLength: 50
+          example: product-123
         planId:
           description: ID of the related plan.
-          nullable: true
-          allOf:
-            - $ref: ../ResourceId.yaml
+          type: string
+          maxLength: 50
+          example: gold-plan
         taxAmount:
           description: Tax amount of the credit memo item.
           type: number
@@ -138,8 +176,7 @@ properties:
     default: 0.00
     x-type: Money
   totalAmount:
-    description: |-
-      Total amount of all credits in the credit memo, including: items, shipping, and tax.
+    description: Total amount of all credits in the credit memo, including items, shipping, and tax.
     readOnly: true
     type: number
     format: double
@@ -157,10 +194,7 @@ properties:
     readOnly: true
     description: Number of times the credit memo has been modified.
   createdTime:
-    description: Date and time at which the credit memo was created.
-    x-sortable: true
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml
   _links:

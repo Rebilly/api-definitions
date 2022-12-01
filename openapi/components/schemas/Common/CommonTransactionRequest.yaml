@@ -6,78 +6,76 @@ required:
   - amount
 properties:
   websiteId:
-    description: The website identifier string.
-    allOf:
-      - $ref: ../ResourceId.yaml
+    $ref: ../Websites/WebsiteId.yaml
   customerId:
     $ref: ../CustomerId.yaml
   currency:
     $ref: ../CurrencyCode.yaml
   amount:
-    description: The transaction amount.
+    description: Transaction amount.
     type: number
     format: double
     example: 97.97
   invoiceIds:
-    description: The array of invoice identifiers.
+    description: Array of invoice identifiers.
     nullable: true
     type: array
     items:
       $ref: ../ResourceId.yaml
   paymentInstruction:
-    description: >-
-      Payment instruction. If not supplied, customer's default payment instrument will be used.
+    description: Payment instruction. If not supplied, customer's default payment instrument is used.
     allOf:
       - $ref: ../PaymentInstruction.yaml
   billingAddress:
-    description: >-
-      Billing address. If not supplied, we use the billing address associated
-      with the payment instrument, and then customer.
+    description: |-
+      Billing address.
+      If not supplied, the billing address associated with the payment instrument is used, and then customer.
     nullable: true
+    type: object
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   requestId:
-    description: >-
-      The request id is **recommended**. It prevents duplicate transaction
-      requests within a short period of time. If a duplicate request is sent
-      with the same `requestId` it will be ignored to prevent double-billing
-      anyone.  It must be unique within a 24-hour period.  We recommend
-      generating a UUID v4 as its value.
+    description: |-
+      Request id is **recommended**.
+      It prevents duplicate transaction requests within a short period of time.
+      If a duplicate request is sent with the same `requestId` it is ignored to prevent double-billing.
+      It must be unique within a 24-hour period.
+      We recommend generating a UUID v4 as its value.
     type: string
     nullable: true
     maxLength: 50
     pattern: '^[\-\w]+$'
     example: 44433322-2c4y-483z-a0a9-158621f77a21
   gatewayAccountId:
-    description: >-
-      Rebilly will select the appropriate payment gateway account for the transaction based on
-      the properties of the transaction and the `gateway-account-requested` event rules configurations.
-      If you wish to prevent Rebilly from making the gateway account selection, you may supply a
-      gateway account id here, and it will be used instead. Only use this field if you intend to override the settings.
+    description: |-
+      Rebilly selects the appropriate payment gateway account for the transaction based on the properties of the transaction and the `gateway-account-requested` event rules configurations.
+      If you wish to prevent Rebilly from making the gateway account selection,
+      you may supply a gateway account id here to be used instead.
+      Only use this field if you intend to override the settings.
     nullable: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    type: string
+    maxLength: 50
+    example: 44433322-2c4y-483z-a0a9-158621f77a21
   description:
     nullable: true
-    description: The payment description.
+    description: Payment description.
     type: string
     maxLength: 255
   notificationUrl:
     nullable: true
-    description: >
-      The URL where a server-to-server notification request type `POST` with a
-      transaction payload will be sent when the transaction's result is finalized. Do not trust the notification;
-      follow with a `GET` request to confirm the result of the transaction. Please respond with a `2xx`
-      HTTP status code, or we will reattempt the request again.
-      You may use `{id}` or `{result}` as placeholders in the URL and we will replace them with the transaction's id and result accordingly.
+    description: |-
+      URL where a server-to-server notification request type `POST` with a transaction payload is sent when the transaction result is finalized.
+      Do not trust the notification; follow with a `GET` request to confirm the result of the transaction.
+      Please respond with a `2xx` HTTP status code, or the request is reattempted.
+      You may use `{id}` or `{result}` as placeholders in the URL and we replace them with the transaction id and result accordingly.
     type: string
     format: uri
   redirectUrl:
     nullable: true
-    description: >-
-      The URL to redirect the end-user when an offsite transaction is completed.
+    description: |-
+      URL to redirect the end-user when an offsite transaction is completed.
       Defaults to the website's configured URL.
-      You may use `{id}` or `{result}` as placeholders in the URL and we will replace them with the transaction's id and result accordingly.
+      You may use `{id}` or `{result}` as placeholders in the URL and we replace them with the transaction id and result accordingly.
     type: string
     format: uri
   customFields:
@@ -85,16 +83,16 @@ properties:
   riskMetadata:
     $ref: ../RiskMetadata.yaml
   isProcessedOutside:
-    description: True if transaction was processed outside Rebilly.
+    description: Specified when the transaction is processed outside Rebilly.
     type: boolean
     default: false
   isMerchantInitiated:
-    description: True if the transaction was initiated by the merchant.
+    description: Specified when the transaction is initiated by the merchant.
     type: boolean
     default: false
   processedTime:
     type: string
-    description: >-
-      The time the transaction was processed. Can be specified only if
-      transaction was processed outside Rebilly.
+    description: |-
+      Time the transaction is processed.
+      Can be specified only if the transaction is processed outside Rebilly.
     format: date-time

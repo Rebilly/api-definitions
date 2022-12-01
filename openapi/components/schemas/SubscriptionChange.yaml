@@ -9,8 +9,8 @@ properties:
     minItems: 1
     items:
       type: object
-      description: >-
-        A new set of items for the subscription.
+      description: |-
+        New set of items for the subscription.
         To remove an item, you include the items array without the items you wish to remove.
       required:
         - plan
@@ -24,40 +24,34 @@ properties:
           description: Number of units of the product on the given plan.
           type: integer
   renewalPolicy:
-    description: >-
-      The value determines whether the subscription retains its current
-      `renewalTime` or resets it to a newly calculated `renewalTime`.
+    description: Specifies if the subscription retains its current `renewalTime` or resets it to a newly calculated `renewalTime`.
     type: string
     enum:
       - reset
       - retain
   prorated:
-    description: >
-      Whether or not to give a pro rata credit for the amount of time remaining
-      between the `effectiveTime` and the end of the current period.
+    description: |-
+      Whether or not to give a pro rata credit for the amount of time remaining between the `effectiveTime` and the end of the current period.
 
-      In addition, if the `renewalTime` is retained (by setting the
-      `renewalPolicy` to `retain`), then a pro rata debit will occur as well,
-
-      for the amount between the `effectiveTime` and the `renewalTime` as a
-      percentage of the normal period size.
+      In addition, if the `renewalTime` is retained (by setting the `renewalPolicy` to `retain`),
+      then a pro rata debit occurs too,
+      for the amount between the `effectiveTime` and the `renewalTime` as a percentage of the normal period size.
     type: boolean
   effectiveTime:
-    description: >-
-      The date from which the renewal time (for `reset` operations) and
-      proration calculations are made.  If omitted, it will default to the
-      current time.
+    description: |-
+      Date from which the renewal time (for `reset` operations) and proration calculations are made.
+      If omitted, it defaults to the current time.
     type: string
     format: date-time
   preview:
-    description: >-
-      If set to true, it will not change the subscription.  It allows for a way
-      to preview the changes that would be made to a subscription.
+    description: |-
+      If set to true, it does not change the subscription.
+      It allows for a way to preview changes to a subscription.
     type: boolean
     default: false
   keepTrial:
-    description: >-
-      If set to true and the subscription order has an active trial, it will use that trial further. Works with 'retain'
-      renewalPolicy only.
+    description: |-
+      Specifies if the subscription order should retain its active trial.
+      Works with the `retain` `renewalPolicy` only.
     type: boolean
     default: false

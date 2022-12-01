@@ -15,22 +15,20 @@ allOf:
             amountAdjustmentInstruction:
               $ref: ../../InvoiceRetry/InvoiceRetryAmountAdjustmentInstruction.yaml
             tryBackupInstruments:
-              description: |-
-                Specifies whether to use backup payment instruments
-                on an invoice payment retry.
+              description: Specifies whether to use backup payment instruments on an invoice payment retry.
               type: boolean
               default: false
           required:
             - scheduleInstruction
       afterAttemptPolicies:
-        description: The policy on the attempt finishes.
+        description: Policy on the attempt finishes.
         type: array
         items:
           type: string
           enum:
             - change-subscription-renewal-time
       afterRetryEndPolicies:
-        description: The policy on the retry ends.
+        description: Policy on the retry ends.
         type: array
         items:
           type: string

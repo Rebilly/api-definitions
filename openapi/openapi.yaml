@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: "2.1"
+  version: "latest"
   title: Rebilly API
   contact:
     name: "Rebilly API Support"
@@ -12,7 +12,7 @@ info:
   termsOfService: 'https://www.rebilly.com/terms-of-use/'
   x-logo:
     url: 'https://rebilly-core.redoc.ly/rb_apiLogo.svg'
-    backgroundColor: '#0033A0'
+    backgroundColor: '#0044d4'
   description:
     $ref: description.md
 
@@ -43,27 +43,60 @@ servers:
 components:
   securitySchemes:
     JWT:
-      $ref: components/securitySchemes/JWT.yaml
+      description: |-
+        JWT is a short lifetime token that can be assigned a specific expiration time.
+        To create a JWT session, see [JWT session resource](https://user-api-docs.rebilly.com/tag/JWT-Session#operation/PostSigninRequest).
+
+        Usage format: `Bearer <JWT>`.
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
     ApplicationJWT:
-      $ref: components/securitySchemes/ApplicationJWT.yaml
+      description: |-
+        Applications in our App Store can create a JSON Web Token (JWT) by [fetching an user's instance](https://user-api-docs.rebilly.com/tag/Application-owners#operation/GetApplicationInstanceByOrganization).
+
+        Usage format: `Bearer <JWT>`.
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
     PublishableApiKey:
-      $ref: components/securitySchemes/PublishableApiKey.yaml
+      description: |-
+        Only for the Tokens resource.
+
+        You can create a Publishable API Key via our [API Keys resource](https://user-api-docs.rebilly.com/#tag/API-Keys),
+        by specifying the type as `publishable`.
+      name: Authorization
+      type: apiKey
+      in: header
+
     SecretApiKey:
-      $ref: components/securitySchemes/SecretApiKey.yaml
+      description: |-
+        **Never** share your secret keys.
+        Keep them guarded and secure.
+
+        Use your secret API key only to make requests from the server side.
+        To authenticate, provide your secret key in the request header.
+      name: REB-APIKEY
+      type: apiKey
+      in: header
+
     CustomerJWT:
-      $ref: components/securitySchemes/CustomerJWT.yaml
+      description: |-
+        You can create a JSON Web Token (JWT) via [Storefront Authentication](https://storefront-api-docs.rebilly.com/#operation/StorefrontPostLogin).
+
+        Usage format: `Bearer <JWT>`.
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 
 tags:
   - name: AML
     description: |-
-      Use Anti-Money Laundering (AML) operations to screen customers
-      and help prevent your business from becoming directly or
-      indirectly involved in criminal activity.
+      Use Anti-Money Laundering (AML) operations to screen customers and help prevent your business from becoming directly or indirectly involved in criminal activity.
 
-      Use AML operations during customer creation, and some
-      transaction processing, to help determine if a potential
-      customer (lead), or customer, has political or economic sanctions
-      against them.
+      Use AML operations during customer creation, and some transaction processing,
+      to help determine if a potential customer (lead), or customer, has political or economic sanctions against them.
 
       AML operations search the following for screening purposes:
       Politically Exposed Persons (PEPs) lists, sanction lists,
@@ -72,163 +105,111 @@ tags:
     description: |-
       Use blocklists to prevent fraud and criminal activity.
 
-      Blocklists are lists of customer attribute values that are
-      blocked from buying from you. For example, if a customer
-      attempts to make a purchase from you with a credit card that is
-      in a blocklist, the transaction is blocked and will not be
-      processed.
+      Blocklists are lists of customer attribute values that are blocked from buying from you.
+      For example, if a customer attempts to make a purchase from you with a credit card that is in a blocklist, the transaction is blocked and is not processed.
 
-      Before a new transaction is processed in Rebilly, blocklists
-      are examined to check for attributes related to the entity.
-      If a match is detected, the operation is aborted. A blocklist
-      that expires after a period of time is called a greylist.
+      Before a new transaction is processed in Rebilly, blocklists are examined to check for attributes related to the entity.
+      If a match is detected, the operation is aborted.
+      A blocklist that expires after a period of time is called a greylist.
   - name: Coupons
     description: |-
-      Use coupons to reward customers, generate sales, or to test
-      new pricing strategies. Coupons enable you to apply different
-      types of discounts to invoices, subscriptions, and pricing
-      plans.
+      Use coupons to reward customers, generate sales, or to test new pricing strategies.
+      Coupons enable you to apply different types of discounts to invoices, subscriptions, and pricing plans.
 
       Redeemed coupons are attached to a customer's account.
-      Depending on the coupon's restrictions, the redeemed coupons
-      are then applied from the customer's account to subsequent
-      invoices or subscriptions. Redeemed coupons can only be applied
-      to invoices of the same currency.
+      Depending on the coupon restrictions, the redeemed coupons are then applied from the customer's account to subsequent invoices or subscriptions.
+      Redeemed coupons can only be applied to invoices of the same currency.
 
-      Once a coupon is redeemed it cannot be modified. You may
-      deactivate a coupon or create a new coupon, but you cannot
-      reuse the same coupon code. If you have a use case where you
-      must reuse the same code,
-      [contact Rebilly](https://www.rebilly.com/contact/).
+      Once a coupon is redeemed it cannot be modified.
+      You may deactivate a coupon or create a new coupon, but you cannot reuse the same coupon code.
+      If you have a use case where you must reuse the same code, [contact Rebilly](https://www.rebilly.com/contact/).
 
       ### Coupon restriction types
 
       The following coupon description types are available:
 
       - `restrict-to-countries`: Restricts a coupon for use in specific countries.
-      - `discounts-per-redemption`: Restricts the number of times that
-      the coupon can be applied by one redemption. For example, use this
-      restriction to configure a coupon that can only be applied to the
-      first subscription renewal of a particular product.
-      - `minimum-order-amount`: Sets a minimum order amount for a coupon
-      application. For example, if the restriction amount is $20, the
-      coupon is only applied to invoices with a total amount of $20 or more.
+      - `discounts-per-redemption`: Restricts the number of times that the coupon can be applied by one redemption.
+        For example, use this restriction to configure a coupon that can only be applied to the first subscription renewal of a particular product.
+      - `minimum-order-amount`: Sets a minimum order amount for a coupon application.
+        For example, if the restriction amount is $20, the coupon is only applied to invoices with a total amount of $20 or more.
       - `restrict-to-invoices`: Restricts a coupon to specific invoices.
       - `restrict-to-plans`: Restricts a coupon to specific pricing plans.
-      - `restrict-to-subscriptions`: Restricts a coupon to specific
-      order subscriptions.
+      - `restrict-to-subscriptions`: Restricts a coupon to specific order subscriptions.
       - `restrict-to-products`: Restricts a coupon to specific products.
-      - `paid-by-time`: Specifies a date and time at which a coupon
-      redemption will expire if not paid.
-      - `redemptions-per-customer`: Restricts the number of times that a
-      coupon can be redeemed by one customer. For example, use this
-      restriction to limit the number of redemptions to one per customer.
-      - `total-redemptions`: Restricts the number of times a coupon can
-      be redeemed by different customers.
-      - `restrict-to-bxgy`: Provides "buy X get Y" promotions. These
-      promotions incentivize new customers to buy and also reward
-      existing customers. This restriction type enables you to add
-      discounted plans to an invoice when a certain quantity of other
-      plans are purchased. For example, if a customer buys two or more
-      books, they get one free bookmark.
+      - `paid-by-time`: Specifies a date and time at which a coupon redemption expires if not paid.
+      - `redemptions-per-customer`: Restricts the number of times that a coupon can be redeemed by one customer.
+        For example, use this restriction to limit the number of redemptions to one per customer.
+      - `total-redemptions`: Restricts the number of times a coupon can be redeemed by different customers.
+      - `restrict-to-bxgy`: Provides "buy X get Y" promotions.
+        These promotions incentivize new customers to buy and also reward existing customers.
+        This restriction type enables you to add discounted plans to an invoice when a certain quantity of other plans are purchased.
+        For example, if a customer buys two or more books, they get one free bookmark.
   - name: Customers
     description: |-
-      Use these operations to manage customers. A customer is an
-      entity that purchases goods or services from you (a merchant),
+      Use these operations to manage customers.
+      A customer is an entity that purchases goods or services from you (a merchant),
       and is the payee in any transaction that is credited to you.
       Customers are associated with payment instruments,
       subscriptions, invoices, and other related resources.
 
       In other systems, customers may be referred to as accounts,
-      clients, members, patrons, or players. For information on the
-      customer resource, see
-      [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
+      clients, members, patrons, or players.
+      For information on the customer resource, see [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
   - name: Customers timeline
-    description: >-
-      Use customer timelines to maintain an audit trail of changes and
-      activity for each customer.
+    description: Use customer timelines to maintain an audit trail of changes and activity for each customer.
   - name: Orders timeline
-    description: >-
-      Use order timelines to maintain an audit trail of changes and
-      activity for each order.
+    description: Use order timelines to maintain an audit trail of changes and activity for each order.
   - name: Invoices timeline
-    description: >-
-      Use invoice timelines to maintain an audit trail of changes and
-      activity for each invoice.
+    description: Use invoice timelines to maintain an audit trail of changes and activity for each invoice.
   - name: Transactions timeline
-    description: >-
-      Use transaction timelines to maintain an audit trail of changes
-      and activity for each transaction.
+    description: Use transaction timelines to maintain an audit trail of changes and activity for each transaction.
   - name: Credit memos timeline
-    description: >-
-      Use credit memo timelines to maintain an audit trail of changes
-      and activity for each credit memo. Credit memos are a means of
-      providing a customer with store credit.
+    description: |-
+      Use credit memo timelines to maintain an audit trail of changes and activity for each credit memo.
+      Credit memos are a means of providing a customer with store credit.
   - name: Rules timeline
-    description: >-
-      Use rule timelines to maintain an audit trail of changes and
-      activity for each rule.
+    description: Use rule timelines to maintain an audit trail of changes and activity for each rule.
   - name: Gateway accounts timeline
-    description: >-
-      Use gateway account timelines to maintain an audit trail of
-      changes and activity for each gateway account.
+    description: Use gateway account timelines to maintain an audit trail of changes and activity for each gateway account.
   - name: KYC documents
     description: |-
-      Use Know Your Customer (KYC) documents to verify your customers
-      identity. The KYC document operations generate a signed link to
-      the Rebilly
-      [KYC document gatherer](https://www.rebilly.com/docs/kyc-and-aml/kyc-document-gatherer/).
+      Use Know Your Customer (KYC) documents to verify your customers identity.
+      The KYC document operations generate a signed link to the Rebilly [KYC document gatherer](https://www.rebilly.com/docs/kyc-and-aml/kyc-document-gatherer/).
 
       Document types:
         - `identity-proof`: Validates a customer's identity.
         - `address-proof`: Validates a customer's address.
         - `purchase-proof`: Validates a customer's purchase.
         - `funds-proof`: Validates that a customer has funds.
-        - `credit-file-proof`: Verifies that there is an existing
-        credit file with two sources that match the customer's name,
-        DOB, and address.
+        - `credit-file-proof`: Verifies that there is an existing credit file with two sources that match the customer's name, DOB, and address.
 
-      Rebilly parses and analyzes the documents and accepts or
-      rejects them according to a configurable scoring algorithm.
-      When all document types in a KYC request are accepted,
-      the status is fulfilled, and the
-      [KYC request fulfilled webhook](https://www.rebilly.com/docs/dev-docs/api/operation/kyc-request-fulfilled/)
-      is emitted.
+      Rebilly parses and analyzes the documents and accepts or rejects them according to a configurable scoring algorithm.
+      When all document types in a KYC request are accepted, the status is fulfilled, and the [KYC request fulfilled webhook](https://www.rebilly.com/docs/dev-docs/api/operation/kyc-request-fulfilled/) is emitted.
 
       ### Credit file proof
 
-      The `credit-file-proof` KYC document request type is only
-      available in the API, this option is not available in the
-      [KYC document gatherer](https://www.rebilly.com/docs/kyc-and-aml/kyc-document-gatherer/).
-      This request verifies that there is an existing credit
-      file with two sources that match the person's name, date of birth, and
-      address.
+      The `credit-file-proof` KYC document request type is only available in the API,
+      this option is not available in the [KYC document gatherer](https://www.rebilly.com/docs/kyc-and-aml/kyc-document-gatherer/).
+      This request verifies that there is an existing credit file with two sources that match the person's name, date of birth, and address.
 
-      In Canada, to meet FINTRAC requirements, the `credit-file-proof`
-      KYC document request verifies the customer's name, address,
-      and date of birth with a credit agency.
+      In Canada, to meet FINTRAC requirements, the `credit-file-proof` KYC document request verifies the customer's name, address, and date of birth with a credit agency.
 
-      If `credit-file-proof` is requested in combination with
-      `identity-proof` and `address-proof`, `credit-file-proof` is
-      attempted first. If `credit-file-proof` validates the identity
-      and address, the KYC request is considered fulfilled. If the
-      request is not fulfilled, redirect your customer to the KYC
-      document gatherer to collect their KYC documents.
-
+      If `credit-file-proof` is requested in combination with `identity-proof` and `address-proof`,
+      `credit-file-proof` is attempted first.
+      If `credit-file-proof` validates the identity and address,
+      the KYC request is considered fulfilled.
+      If the request is not fulfilled,
+      redirect your customer to the KYC document gatherer to collect their KYC documents.
   - name: Customer authentication
-    description: >-
-      Use these operations to validate the identity of users and
-      manage authentication credentials.
+    description: Use these operations to validate the identity of users and manage authentication credentials.
   - name: Custom fields
     description: |-
-      Use custom fields to extend a resource scheme to include custom
-      data that is not provided as a common field. Depending on the
-      resource on which the custom field is added, it will be
-      available in the Rebilly UI.
+      Use custom fields to extend a resource scheme to include custom data that is not provided as a common field.
+      Depending on the resource on which the custom field is added, it may be available in the Rebilly UI.
 
-      Example: A custom field called `preferredCommunicationChannel`
-      is added to the customer resource. It has two allowed values,
-      which are 'email' and 'phone'.
+      Example: A custom field called `preferredCommunicationChannel` is added to the customer resource.
+      It has two allowed values, which are 'email' and 'phone'.
 
       ```js
       {
@@ -238,460 +219,414 @@ tags:
       }
       ```
 
-      For detailed information on Rebilly resources, see
-      [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
+      For detailed information on Rebilly resources, see [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
   - name: Disputes
     description: |-
-      Use these operations to manage disputes. A dispute occurs when a
-      customer contests a charge to their account. The dispute and
-      related information is made available to the merchant by the
-      bank or credit card company. The merchant then has the option to
-      represent the charge and win the case. This process is called
-      dispute resolution. If the merchant is unable to represent the
-      charge, the card issuer will typically reverse the sale and add
-      fees on top of the charge. This process is called a chargeback.
+      Use these operations to manage disputes.
+      A dispute occurs when a customer contests a charge to their account.
+      The dispute and related information is made available to the merchant by the bank or credit card company.
+      The merchant then has the option to represent the charge and win the case.
+      This process is called dispute resolution.
+      If the merchant is unable to represent the charge, the card issuer typically reverses the sale and adds fees on top of the charge.
+      This process is called a chargeback.
   - name: Files
     description: |-
-      Use the file entity to store files and related metadata. Files
-      can be sorted by size, MIME-type, user-defined tags, and
-      description.
+      Use the file entity to store files and related metadata.
+      Files can be sorted by size, MIME-type, user-defined tags, and description.
 
       The following methods are available to upload files:
-      multipart/form-data encoded form, RAW POST &mdash; by sending
-      the file contents as the POST body, and fetching from URL
-      &mdash; by providing the file URL using the 'url' parameter.
+      multipart/form-data encoded form, RAW POST &mdash;
+      by sending the file contents as the POST body, and fetching from URL &mdash;
+      by providing the file URL using the 'url' parameter.
 
-      Use the attachments entity to link a file to one or multiple
-      objects, such as: customer, dispute, transaction,
-      order, plan, product, invoice, or timeline comment. Attachments enable you
-      to quickly find and use files related to specific entities.
+      Use the attachments entity to link a file to one or multiple objects, such as:
+      customer, dispute, transaction, order, plan, product, invoice, or timeline comment.
+      Attachments enable you to quickly find and use files related to specific entities.
   - name: Invoices
     description: |-
       Use invoices to bill for the goods or services that you provide.
-      If your invoice includes subscription items, it also includes
-      the corresponding service periods and prices. For information on
-      the invoice resource, see
-      [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
+      If your invoice includes subscription items, it also includes the corresponding service periods and prices.
+      For information on the invoice resource, see [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
   - name: Credit memos
     description: |-
-      Use credit memos to provide a customer with store
-      credit. A common use case for using a credit memo is to provide
-      a customer with store credit, rather than a refund, if the
-      customer pays more than they owe or returns a product. For
-      information on the credit memo resource, see
-      [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
+      Use credit memos to provide a customer with store credit.
+      A common use case for using a credit memo is to provide a customer with store credit,
+      rather than a refund, if the customer pays more than they owe or returns a product.
+      For information on the credit memo resource, see [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
   - name: Journal
     description: |-
       Use journal accounts, entries and records to track and recognize revenue.
   - name: Payment instruments
     description: |-
-      Use these operations to manage payment instruments. Payment
-      instrument is a term which describes any means of making
-      a digital payment, such as: credit cards, debit cards,
-      direct debits, payment service providers, and digital wallets.
+      Use these operations to manage payment instruments.
+      Payment instrument is a term which describes any means of making a digital payment, such as:
+      credit cards, debit cards, direct debits, payment service providers, and digital wallets.
 
-      A payment instrument is not a resource. It is a term used to
-      describe a specific set of resources, such as payment cards
-      and bank accounts. For more information on payment
-      instruments, see
-      [Payment instruments](https://www.rebilly.com/docs/dev-docs/concepts/#payment-instruments).
+      For more information on payment instruments, see [Payment instruments](https://www.rebilly.com/docs/dev-docs/concepts/#payment-instruments).
   - name: Payment tokens
     description: |-
-      Use payment tokens to reduce the scope of
-      [PCI DSS compliance](https://www.rebilly.com/docs/pci-compliance/).
+      Use payment tokens to reduce the scope of [PCI DSS compliance](https://www.rebilly.com/docs/pci-compliance/).
 
-      A payment token can be made using a different authentication
-      scheme, which enables you to create a payment token directly
-      from the browser, and bypasses the need to send
-      sensitive cardholder info to your servers. We recommend using
-      this with the FramePay library, which helps you set a form
-      into this API resource and create payment tokens. For more
-      information, see the public key authentication scheme in the
-      Authentication section.
+      A payment token can be made using a different authentication scheme (public key authentication), which enables you to create a payment token directly from the browser.
+      This bypasses the need to send sensitive cardholder info to your servers.
+      We recommend using this with the FramePay library, which helps you integrate a form into this API resource and create payment tokens.
   - name: Products
     description: |-
-      Use products to describe the goods and services that your
-      business sells. A product also describes sales items on invoices
-      and receipts. Product pricing is defined in
-      [plans](https://www.rebilly.com/docs/dev-docs/api/tag/Plans/).
+      Use products to describe the goods and services that your business sells.
+      A product also describes sales items on invoices and receipts.
+      Product pricing is defined in [plans](https://www.rebilly.com/docs/dev-docs/api/tag/Plans/).
       A product may have one or many plans.
 
-      For information on the product resource, see
-      [Product](https://www.rebilly.com/docs/dev-docs/concepts/#products).
+      For information on the product resource, see [Product](https://www.rebilly.com/docs/dev-docs/concepts/#products).
   - name: Plans
     description: |-
-      Use pricing plans to describe how the customer must pay for
-      [products](https://www.rebilly.com/docs/dev-docs/api/tag/Products/).
+      Use pricing plans to describe how the customer must pay for [products](https://www.rebilly.com/docs/dev-docs/api/tag/Products/).
 
       Rebilly provides the following plan types:
 
-      - Trial only: Use this plan to create and offer a free or
-      discounted trial period for your product. For example, a free 2
-      week trail of an internet service. After the trial, the customer
-      can choose to sign up for a paid subscription, or stop using the
-      service.
-      - Recurring: Use this plan to create and offer a subscription
-      for your product. For example, a monthly subscription to an
-      internet service that is charged at 20 USD per month.
-      - One time sale: Use this plan to create and offer a one-off
-      sale for your products. For example, a one time purchase of two
-      bags of coffee.
+      - Trial only: Use this plan to create and offer a free or discounted trial period for your product.
+        For example, a free 2 week trial of an internet service.
+        After the trial, the customer can choose to sign up for a paid subscription, or stop using the service.
+      - Recurring: Use this plan to create and offer a subscription for your product.
+        For example, a monthly subscription to an internet service that is charged at 20 USD per month.
+      - One time sale: Use this plan to create and offer a one-off sale for your products.
+        For example, a one time purchase of two bags of coffee.
 
-      For information on the plans resource, see
-      [Plans](https://www.rebilly.com/docs/dev-docs/concepts/#plans).
+      For information on the plans resource, see [Plans](https://www.rebilly.com/docs/dev-docs/concepts/#plans).
 
-      For information on plan pricing, see
-      [Pricing formulas](https://www.rebilly.com/docs/settings/pricing-formulas/).
+      For information on plan pricing, see [Pricing formulas](https://www.rebilly.com/docs/settings/pricing-formulas/).
   - name: Search
-    description: >-
-      Use search operations to search data on customers, invoices,
-      orders, transactions and more.
+    description: Use search operations to search data on customers, invoices, orders, transactions and more.
   - name: Shipping rates
-    description: >-
-      Use these operations to manage shipping rates. A shipping rate
-      contains a filter and a pricing for a specific shipping
-      destination.
+    description: |-
+      Use these operations to manage shipping rates.
+      A shipping rate contains a filter and a pricing for a specific shipping destination.
   - name: Orders
     description: |-
-      An order is a customer's request to purchase items. It can
-      contain subscription and one-time sale items. When an order
-      contains one or more subscription items, it is a subscription
-      order.
+      Order is a customer's request to purchase items.
+      It can contain subscription and one-time sale items.
+      When an order contains one or more subscription items, it is a subscription order.
 
-      An order generates an invoice. A subscription order generates an
-      invoice for each service period.
-      For more information, see
-      [Orders](https://www.rebilly.com/docs/dev-docs/concepts/#orders).
+      An order generates an invoice.
+      A subscription order generates an invoice for each service period.
+      For more information, see [Orders](https://www.rebilly.com/docs/dev-docs/concepts/#orders).
   - name: Usage
-    description: |-
-      Reports the product usage of a subscription item for metered billing purposes.
+    description: Reports the product usage of a subscription item for metered billing purposes.
   - name: Tags
-    description: >-
-      Use tags to organize and categorize customers or KYC documents
-      based on keywords.
+    description: Use tags to organize and categorize customers or KYC documents based on keywords.
   - name: Transactions
     description: |-
-      Use these operations to set up payment instruments for payments,
-      authorize and hold funds, capture funds, make payments, make
-      payouts, and refund transactions.
+      Use these operations to:
+        - set up payment instruments for payments
+        - authorize and hold funds
+        - capture funds
+        - make payments
+        - make payouts
+        - refund transactions.
   - name: Fees
     description: |-
-      Use fees to reconcile transactions with applicable fees and
-      discount rates. Fees are not applied directly to transaction
-      amounts, they do not modify the transaction amount. Fees help to
-      describe each part of the transaction amount.
+      Use fees to reconcile transactions with applicable fees and discount rates.
+      Fees are not applied directly to transaction amounts, they do not modify the transaction amount.
+      Fees help to describe each part of the transaction amount.
 
       > **Important:** These operations are experimental and may change.
   - name: API keys
     description: |-
       Use API keys to identify and authenticate applications and users.
-      Always keep your API keys private. When creating API keys,
-      you can restrict them to a given set of permissions.
-      For information on how to create and manage API keys,
-      see [API keys](https://www.rebilly.com/docs/dev-docs/api-keys/).
+      Always keep your API keys private.
+      When creating API keys, you can restrict them to a given set of permissions.
+      For information on how to create and manage API keys, see [API keys](https://www.rebilly.com/docs/dev-docs/api-keys/).
 
-      In addition to API keys, you may use JSON Web Tokens (JWT)
-      to authenticate to the API. For more information, see
-      [JWT session](https://user-api-docs.rebilly.com/#tag/JWT-Session).
+      In addition to API keys, you may use JSON Web Tokens (JWT) to authenticate to the API.
+      For more information, see [JWT session](https://user-api-docs.rebilly.com/#tag/JWT-Session).
   - name: Balance transactions
     description: |-
-      Use these operations to view and manage balance
-      transactions.
+      Use these operations to view and manage balance transactions.
 
       > **Important:** These operations are experimental and may change.
   - name: Billing portals
     description: |-
       Use these operations to create and manage billing portals.
-      Rebilly hosted billing portals provide secure, Rebilly hosted
-      pages, where customers can: view invoices, cancel subscriptions,
-      update payment instruments, and update their address.
+      Rebilly hosted billing portals provide secure, Rebilly hosted pages, where customers can:
+      view invoices, cancel subscriptions, update payment instruments, and update their address.
   - name: Checkout forms
     description: |-
       Use these operations to create and manage checkout forms.
-      Rebilly hosted checkout forms provide secure and compliant
-      checkouts. Checkout forms are customizable, and use fully
-      responsive design, built-in error messaging, validation, and
-      expedited checkout for returning customers.
+      Rebilly hosted checkout forms provide secure and compliant checkouts.
+      Checkout forms are customizable, and use fully responsive design,
+      built-in error messaging, validation, and expedited checkout for returning customers.
   - name: Email credentials
-    description: >-
-      Use these operations to get, create, and manage SMTP credential
-      hashes.
+    description: Use these operations to get, create, and manage SMTP credential hashes.
   - name: Gateway accounts
     description: |-
-      Use these operations to manage payment gateway accounts. A
-      payment gateway is a service which enables merchants to
-      receive payments from their customers to their merchant account.
-      A merchant account is a bank account that enables businesses to
-      receive payments. Use payment gateway accounts to connect
-      payment requests to third party networks and platforms.
+      Use these operations to manage payment gateway accounts.
+      A payment gateway is a service which enables merchants to receive payments from their customers to their merchant account.
+      A merchant account is a bank account that enables businesses to receive payments.
+      Use payment gateway accounts to connect payment requests to third party networks and platforms.
   - name: Lists
     description: |-
-      Use lists to create and maintain sets of values that may be
-      referenced in rule conditions. Commonly used lists contain
-      values related to conditions that target specific properties
-      such as: customers, transactions, or BINs.
+      Use lists to create and maintain sets of values that may be referenced in rule conditions.
+      Commonly used lists contain values related to conditions that target specific properties such as: customers, transactions, or BINs.
 
-      You may grant list edit permissions to members of your team
-      without enabling them to edit rules. This may be useful if your
-      workflow involves frequent updates to value sets that are used
-      in rule or bind conditions. List order may not be maintained and
-      duplicates may be removed.
+      You may grant list edit permissions to members of your team without enabling them to edit rules.
+      This may be useful if your workflow involves frequent updates to value sets that are used in rule or bind conditions.
+      List order may not be maintained and duplicates may be removed.
 
-      For more information, see
-      [Value lists](https://www.rebilly.com/docs/automations/create-a-value-list/#value-lists).
+      For more information, see [Value lists](https://www.rebilly.com/docs/automations/create-a-value-list/#value-lists).
   - name: Organizations
     description: |-
       Use these operations to manage your organizations in Rebilly.
-      An organization is an entity that represents you, or your
-      company, as a merchant. You can have multiple organizations.
-      For more information, see
-      [My organizations and websites](https://www.rebilly.com/docs/settings/organizations-and-websites/).
+      An organization is an entity that represents you, or your company, as a merchant.
+      You can have multiple organizations.
+      For more information, see [My organizations and websites](https://www.rebilly.com/docs/settings/organizations-and-websites/).
 
-      Note: Organizations are shared between the live and sandbox
-      environments.
+      Note: Organizations are shared between the live and sandbox environments.
   - name: Profile
-    description: >-
-      Use these operations to manage user profiles. A profile
-      represents the person that is signed in to Rebilly.
+    description: |-
+      Use these operations to manage user profiles.
+      A profile represents the person that is signed in to Rebilly.
   - name: Reset password
-    description: >-
-      Use these operations to manage password resets. When a password
-      reset is requested, an email with a token is sent. In the email
-      the user must click a reset link, and then create a new password.
+    description: |-
+      Use these operations to manage password resets.
+      When a password reset is requested, an email with a token is sent.
+      In the email the user must click a reset link, and then create a new password.
   - name: Rules
     description: |-
-      Use rules to automate. In the Rebilly rules engine, an action
-      is an operation that executes when an event occurs. Action and
-      event conditions are defined in rules. Rulesets are collections
-      of rules that are associated with an event. The order in which
-      the rules are placed within a ruleset specifies the execution order.
+      Use rules to automate.
+      In the Rebilly rules engine, an action is an operation that executes when an event occurs.
+      Action and event conditions are defined in rules.
+      Rulesets are collections of rules that are associated with an event.
+      The order in which the rules are placed within a ruleset specifies the execution order.
 
-      For a list of events and related actions, see
-      [Events](https://www.rebilly.com/docs/automations/event-types/).
+      For a list of events and related actions, see [Events](https://www.rebilly.com/docs/automations/event-types/).
   - name: JWT session
-    description: |
-      Use these operations to manage JWT sessions. A session contains
-      a token, which is a JSON Web Token. The token is created  with a
-      user's sign in credentials.
+    description: |-
+      Use these operations to manage JWT sessions.
+      A session contains a token, which is a JSON Web Token.
+      The token is created with a user's sign in credentials.
 
-      This token can be used to authenticate to the API. In addition,
-      the session can be set to expire at a particular time. Use the
-      token to authenticate further requests to the Rebilly API.
+      This token can be used to authenticate to the API.
+      In addition, the session can be set to expire at a particular time.
+      Use the token to authenticate further requests to the Rebilly API.
 
-      The token must be kept private, but can be stored on the
-      user's browser client to simulate a "session".
+      The token must be kept private, but can be stored on the user's browser client to simulate a "session".
   - name: Status
-    description: >-
-      Use this operation to check the status of the Rebilly API. No
-      authentication is required.
+    description: |-
+      Use this operation to check the status of the Rebilly API.
+      No authentication is required.
   - name: Tracking
-    description: >-
-      Use tracking when debugging and auditing issues. Tracking is a
-      layer for accessing all activity such as: API requests,
-      subscriptions, webhooks, events, and more.
+    description: |-
+      Use tracking when debugging and auditing issues.
+      Tracking is a layer for accessing all activity such as:
+      API requests, subscriptions, webhooks, events, and more.
   - name: Users
-    description: >-
-      Use these operations to manage users. A user is a person who
-      can login to Rebilly, and take actions based on their granted
-      permissions.
+    description: |-
+      Use these operations to manage users.
+      A user is a person who can login to Rebilly, and take actions based on their granted permissions.
   - name: Websites
     description: |-
-      Use these operations to manage websites. A website is where
-      your organization obtains a customer. It is also the processor
-      account and billing descriptor used for payment transactions.
+      Use these operations to manage websites.
+      A website is where your organization obtains a customer.
+      It is also the processor account and billing descriptor used for payment transactions.
       You can create multiple websites.
 
-      Websites are related to each invoice and each payment
-      gateway account. This enables you to associate gateway accounts
-      with multiple websites, or make them exclusive to particular
-      websites. For more information, see
-      [My organizations and websites](https://www.rebilly.com/docs/settings/organizations-and-websites/).
+      Websites are related to each invoice and each payment gateway account.
+      This enables you to associate gateway accounts with multiple websites,
+      or make them exclusive to particular websites.
+      For more information, see [My organizations and websites](https://www.rebilly.com/docs/settings/organizations-and-websites/).
   - name: Webhook credentials
-    description: >-
-      Use these operations to manage webhook credential hashes.
+    description: Use these operations to manage webhook credential hashes.
   - name: Webhooks
     description: |-
-      Use these operations to manage webhooks. Webhooks notify your
-      systems in real-time when certain events occur. For example,
-      when a new transaction occurs or a new subscription is created.
-      Webhooks enable you to collect information about events. Rebilly
-      can send this information by HTTP POST request to a defined URL of
-      your choice.
+      Use these operations to manage webhooks.
+      Webhooks notify your systems in real-time when certain events occur.
+      For example, when a new transaction occurs or a new subscription is created.
+      Webhooks enable you to collect information about events.
+      Rebilly can send this information by HTTP POST request to a defined URL of your choice.
   - name: Segments
     description: |-
-      Use these operations to manage UI segments. A segment is a
-      filtered view of a data set that can be shared with other users.
-      For example, you may create a transactions segment that displays
-      specific columns that are filtered and sorted based on certain
-      criteria, and share it with others in your organization.
+      Use these operations to manage UI segments.
+      A segment is a filtered view of a data set that can be shared with other users.
+      For example, you may create a transactions segment that displays specific columns that are filtered and sorted based on certain criteria,
+      and share it with others in your organization.
   - name: Memberships
     description: |-
-      Use these operations to manage user membership within your
-      organizations. Membership describes the relationship between
-      organizations and users. For example, one user could be a member
-      of more than one organization.
+      Use these operations to manage user membership within your organizations.
+      Membership describes the relationship between organizations and users.
+      For example, one user could be a member of more than one organization.
   - name: Roles
     description: |-
-      Use these operations to manage user roles within your team or
-      organization. Roles are an implementation of the general
-      hierarchical (Role Based Access Control) RBAC. A senior role
-      inherits all of its juniors' Access Control Lists (ACLs) and its
-      own ACL. Junior roles are not influenced by the senior role.
+      Use these operations to manage user roles within your team or organization.
+      Roles are an implementation of the general hierarchical (Role Based Access Control) RBAC.
+      A senior role inherits all of its juniors' Access Control Lists (ACLs) and its own ACL.
+      Junior roles are not influenced by the senior role.
   - name: Integrations
     description: |-
-      Use these operations to manage third-party apps that are
-      integrated to your Rebilly account. For more information on
-      third-party apps, and how to integrate them, see
-      [Integrations](https://www.rebilly.com/docs/automations/integrations/).
+      Use these operations to manage third-party apps that are integrated to your Rebilly account.
+      For more information on third-party apps, and how to integrate them,
+      see [Integrations](https://www.rebilly.com/docs/automations/integrations/).
   - name: Broadcast messages
     description: |-
-      Use broadcast messages to notify customers and leads about
-      upcoming promotions, service updates, and events.
-      Broadcast messages are emails that are sent to a specific group
-      of customers, or all customers. For more information, see
-      [Create a broadcast message](https://www.rebilly.com/docs/automations/email-notifications/#create-a-broadcast-messages).
+      Use broadcast messages to notify customers and leads about upcoming promotions, service updates, and events.
+      Broadcast messages are emails that are sent to a specific group of customers, or all customers.
+      For more information, see [Create a broadcast message](https://www.rebilly.com/docs/automations/email-notifications/#create-a-broadcast-messages).
   - name: Email delivery settings
     description: |-
-      Use email delivery settings to configure from which email
-      address notifications and broadcast message are sent. In
-      Rebilly, this email address is referred to as a "From address".
-      Supported email service providers are: SMTP, Mailgun, SendGrid,
-      AWS SES, Postmark, and Rebilly.
+      Use email delivery settings to configure from which email address notifications and broadcast message are sent.
+      In Rebilly, this email address is referred to as a "From address".
+      Supported email service providers are:
+      SMTP, Mailgun, SendGrid, AWS SES, Postmark, and Rebilly.
   - name: Email messages
-    description: >-
-      Use email messages to email customers directly.
+    description: Use email messages to email customers directly.
   - name: Email notifications
     description: |-
-      Use email notifications to keep customers
-      informed on events, and to inform them of events that may
-      require action on their end. Email notifications are targeted
-      email messages that can be plain text or HTML.
+      Use email notifications to keep customers informed on events,
+      and to inform them of events that may require action on their end.
+      Email notifications are targeted email messages that can be plain text or HTML.
 
-      Email notifications can also be used to notify teammates about
-      new customers, blocklist matches, risk score changes, and more.
-      For more information, see
-      [Email notifications](https://www.rebilly.com/docs/automations/email-notifications/).
+      Email notifications can also be used to notify teammates about new customers, blocklist matches, risk score changes, and more.
+      For more information, see [Email notifications](https://www.rebilly.com/docs/automations/email-notifications/).
   - name: Plaid credentials
     description: |-
       Use these operations to manage your Plaid account credentials.
-      The Plaid integration provides customer bank credential
-      verification, and simplifies the process of providing
-      credentials for your customers. For more information, see
-      [Plaid integration](https://www.rebilly.com/docs/automations/plaid-integration/).
+      The Plaid integration provides customer bank credential verification,
+      and simplifies the process of providing credentials for your customers.
+      For more information, see [Plaid integration](https://www.rebilly.com/docs/automations/plaid-integration/).
   - name: Experian credentials
     description: |-
-      Use these operations to manage your Experian account
-      credentials. The Experian integration provides identity
-      verification. For more information, see
-      [Experian integration](https://www.rebilly.com/docs/automations/experian-integration/#experian-integration).
+      Use these operations to manage your Experian account credentials.
+      The Experian integration provides identity verification.
+      For more information, see [Experian integration](https://www.rebilly.com/docs/automations/experian-integration/#experian-integration).
   - name: TaxJar credentials
     description: |-
       Use these operations to manage your TaxJar account credentials.
-      The TaxJar integration enables you to calculate taxes and create
-      transactions for the Sales Tax AutoFile feature in your TaxJar
-      account. For more information, see
-      [TaxJar integration](https://www.rebilly.com/docs/automations/tax-jar-integration/#taxjar-integration).
+      The TaxJar integration enables you to calculate taxes and create transactions for the Sales Tax AutoFile feature in your TaxJar account.
+      For more information, see [TaxJar integration](https://www.rebilly.com/docs/automations/tax-jar-integration/#taxjar-integration).
   - name: Metadata
-    description: >-
-      Use these operations to retrieve and manage metadata. Metadata
-      is structured information on other data.
+    description: |-
+      Use these operations to retrieve and manage metadata.
+      Metadata is structured information on other data.
   - name: Custom domains
     description: |-
-      Use custom domains to configure and use your own domain for
-      forms and billing portals, instead of the default Rebilly
-      domain:`portal.secure-payments.app`. For more information, see
-      [Configure a custom domain](https://www.rebilly.com/docs/settings/organizations-and-websites#configure-a-custom-domain).
+      Use custom domains to configure and use your own domain for forms and billing portals,
+      instead of the default Rebilly domain:`portal.secure-payments.app`.
+      For more information, see [Configure a custom domain](https://www.rebilly.com/docs/settings/organizations-and-websites#configure-a-custom-domain).
   - name: Histograms
-    description: >-
-      Use histograms operations to generate transaction histogram reports
-      with cohorts and periods.
+    description: Use histograms operations to generate transaction histogram reports with cohorts and periods.
   - name: Reports
-    description: >-
-      Use reports operations to retrieve summary information about
-      your customers, subscriptions, transactions, and more.
+    description: Use reports operations to retrieve summary information about your customers, subscriptions, transactions, and more.
   - name: Data exports
     description: |-
-      Use data export operations to manage the export of resource
-      data, such as: transactions, customers, subscriptions, invoices,
-      invoice item data, or revenue audit. Common data export use
-      cases are: accounting, data analysis, reporting, or importing
-      into other databases.
+      Use data export operations to manage the export of resource data, such as:
+      transactions, customers, subscriptions, invoices, invoice item data, or revenue audit.
+      Common data export use cases are:
+      accounting, data analysis, reporting, or importing into other databases.
 
-      For detailed information on Rebilly resources, see
-      [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
+      For detailed information on Rebilly resources,
+      see [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
+
+      For information on how manage reconciliation, see [Transaction reconciliation](https://www.rebilly.com/docs/dev-docs/transaction-reconciliation).
   - name: Organization data exports
     description: |-
-      Use organization data exports to export your organization's data
-      which you may want to do as a business continuity practice.
-      These may also be used to to export data if you decide to
-      migrate to a different payments solution.
+      Use organization data exports to export your organization data which you may want to do as a business continuity practice.
+      These may also be used to to export data if you decide to migrate to a different payments solution.
   - name: Rebilly API
     description: |-
-      The Rebilly API is a collection of the most commonly used
-      endpoints and operations. For more information, see the
-      [Rebilly API](https://api-reference.rebilly.com).
+      Rebilly API is a collection of the most commonly used endpoints and operations.
+      For more information, see the [Rebilly API](https://api-reference.rebilly.com).
   - name: Reports API
     description: |-
-      The Reports API is a collection of report related
-      endpoints and operations. This API is currently experimental.
-      For more information, see the
-      [Reports API](https://reports-api-docs.rebilly.com).
+      Reports API is a collection of report related endpoints and operations.
+      This API is currently experimental.
+      For more information, see the [Reports API](https://reports-api-docs.rebilly.com).
   - name: Storefront API
     description: |-
-      The Storefront API is a collection of customer related
-      endpoints and operations. This API is currently experimental.
-      For more information, see the
-      [Storefront API](https://storefront-api-docs.rebilly.com/).
+      Storefront API is a collection of customer related endpoints and operations.
+      This API is currently experimental.
+      For more information, see the [Storefront API](https://storefront-api-docs.rebilly.com/).
   - name: Users API
     description: |-
-      The Users API is a collection of user and Rebilly UI related
-      endpoints and operations. A user represents a person who can
-      log in to Rebilly, and take actions based on their granted
-      permissions, and role. For more information, see the
-      [Rebilly User API](https://user-api-docs.rebilly.com).
+      Users API is a collection of user and Rebilly UI related endpoints and operations.
+      A user represents a person who can log in to Rebilly, and take actions based on their granted permissions, and role.
+      For more information, see the [Rebilly User API](https://user-api-docs.rebilly.com).
   - name: Account
-    description: >-
-      Use these operations to manage Rebilly accounts. An account in
-      which you are subscribed to in order to use the Rebilly product.
+    description: |-
+      Use these operations to manage Rebilly accounts.
+      An account in which you are subscribed to in order to use the Rebilly product.
   - name: Authentication
-    description: >-
-      Use these operations to manage the process of confirming the
-      identity of users that are attempting to access resources.
+    description: Use these operations to manage the process of confirming the identity of users that are attempting to access resources.
   - name: Email verification
-    description: >
-      Use these operations to manage email verification. Email
-      verification is the process of confirming that an email address
-      exists and is associated with an individual.
+    description: |-
+      Use these operations to manage email verification.
+      Email verification is the process of confirming that an email address exists and is associated with an individual.
   - name: Password reset
-    description: >-
-      Use these operations to manage password resets for a user or
-      organization.
+    description: Use these operations to manage password resets for a user or organization.
   - name: Purchases
-    description: >-
-      Use these operations to manage purchases. Purchases are
-      transactions that have been executed related to the purchase of
-      goods or services.
+    description: |-
+      Use these operations to manage purchases.
+      Purchases are transactions that have been executed related to the purchase of goods or services.
   - name: Application owners
     description: |-
-      Use these operations to register applications to the Rebilly
-      Apps Store and manage application instances. An application
-      owner is a person or organization that has submitted an app to
-      the Rebilly App Store. For more information, see
-      [Submit an app](https://www.rebilly.com/docs/dev-docs/submit-a-rebilly-app/).
+      Use these operations to register applications to the Rebilly Apps Store and manage application instances.
+      An application owner is a person or organization that has submitted an app to the Rebilly App Store.
+      For more information, see [Submit an app](https://www.rebilly.com/docs/dev-docs/submit-a-rebilly-app/).
   - name: Application users
     description: |-
-      Use these operations to install or uninstall apps from the
-      Rebilly App Store to your Rebilly account, and to manage
-      application instances. An application user is a person or
-      organization that uses an app that is installed from the
-      Rebilly App Store. For more information, see
-      [Install or uninstall an app](https://www.rebilly.com/docs/dev-docs/install-an-app/).
+      Use these operations to install or uninstall apps from the Rebilly App Store to your Rebilly account, and to manage application instances.
+      An application user is a person or organization that uses an app that is installed from the Rebilly App Store.
+      For more information, see [Install or uninstall an app](https://www.rebilly.com/docs/dev-docs/install-an-app/).
 
-x-tagGroups: []
+x-tagGroups:
+  - name: Customers
+    tags:
+      - Customers
+      - Customer authentication
+      - Tags
+      - Customers timeline
+  - name: Payment Instruments
+    tags:
+      - Payment instruments
+      - Payment tokens
+  - name: Payments
+    tags:
+      - Transactions
+      - Disputes
+      - Fees
+      - Transactions timeline
+  - name: Orders & Invoices
+    tags:
+      - Orders
+      - Invoices
+      - Usage
+      - Credit memos
+      - Plans
+      - Products
+      - Coupons
+      - Shipping rates
+      - Orders timeline
+      - Invoices timeline
+      - Credit memos timeline
+  - name: Risk
+    tags:
+      - Blocklists
+      - KYC documents
+      - AML
+  - name: Misc
+    tags:
+      - Custom fields
+      - Files
+      - Search
+
 
 paths:
   /aml:
     $ref: './paths/aml.yaml'
+  /aml-checks:
+    $ref: './paths/aml-checks.yaml'
+  '/aml-checks/{id}':
+    $ref: './paths/aml-checks@{id}.yaml'
+  '/aml-checks/{id}/review':
+    $ref: './paths/aml-checks@{id}@review.yaml'
   /attachments:
     $ref: ./paths/attachments.yaml
   '/attachments/{id}':
@@ -800,10 +735,6 @@ paths:
     $ref: ./paths/credit-memos@{id}@timeline.yaml
   /credit-memos/{id}/timeline/{messageId}:
     $ref: ./paths/credit-memos@{id}@timeline@{messageId}.yaml
-  /invoices/{id}/credit-memo-allocations:
-    $ref: ./paths/invoices@{id}@credit-memo-allocations.yaml
-  /invoices/{id}/credit-memo-allocations/{creditMemoId}:
-    $ref: ./paths/invoices@{id}@credit-memo-allocations@{creditMemoId}.yaml
   /journal-accounts:
     $ref: paths/journal-accounts.yaml
   /journal-accounts/{id}:
@@ -888,6 +819,8 @@ paths:
     $ref: './paths/subscription-reactivations@{id}.yaml'
   '/subscriptions/{id}/upcoming-invoices':
     $ref: './paths/subscriptions@{id}@upcoming-invoices.yaml'
+  '/subscriptions/{id}/upcoming-invoice':
+    $ref: './paths/subscriptions@{id}@upcoming-invoice.yaml'
   '/subscriptions/{id}/upcoming-invoices/{invoiceId}/issue':
     $ref: './paths/subscriptions@{id}@upcoming-invoices@{invoiceId}@issue.yaml'
   '/subscriptions/{id}/timeline':

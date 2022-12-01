@@ -3,13 +3,13 @@ required:
   - plan
 properties:
   planId:
-    description: The plan identifier string.
+    description: ID of the plan.
     deprecated: true
     x-basic: true
     allOf:
       - $ref: ../ResourceId.yaml
   quantity:
-    description: Number of units of the product on the given plan.
+    description: Number of product units in the specified plan.
     type: integer
   plan:
     oneOf:
@@ -18,20 +18,18 @@ properties:
   revision:
     type: integer
     readOnly: true
-    description: Increments with each override change to this specific item.
+    description: Revision number that increments with each overriding change to this specific plan item.
   isModified:
     type: boolean
     readOnly: true
-    description: Indicates if the plan information was modified for this subscription.
+    description: Specifies whether the plan information is modified for this subscription.
   isGrandfathered:
     type: boolean
     readOnly: true
-    description: Indicates if the plan's current revision is greater than this item's plan revision.
+    description: Specifies whether the current plan revision number is greater than the plan item revision number.
   _embedded:
     type: array
-    description: |-
-      Embedded objects that are requested by the `expand`
-      query parameter.
+    description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
     minItems: 1
     items:

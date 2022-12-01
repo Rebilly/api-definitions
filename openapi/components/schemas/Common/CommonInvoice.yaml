@@ -9,24 +9,16 @@ properties:
     allOf:
       - $ref: ../ResourceId.yaml
   websiteId:
-    description: |-
-        Unique website identifier string. A website is where an
-        organization obtains a customer through a subscription. For more
-        information, see
-        [Obtain an organization ID and website ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
-    allOf:
-      - $ref: ../ResourceId.yaml
+    $ref: ../Websites/WebsiteId.yaml
   invoiceNumber:
-    description: |-
-      An auto-incrementing number based on the sequence of invoices
-      for any particular customer.
+    description: Auto-incrementing number based on the sequence of invoices for any particular customer.
     readOnly: true
     type: integer
     x-basic: true
   subscriptionId:
     description: |-
-      ID of the related subscription order, if available. This field
-      will be `null` if there are no related subscription orders.
+      ID of the related subscription order, if available.
+      This field is `null` if there are no related subscription orders.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
@@ -96,15 +88,12 @@ properties:
       allOf:
         - $ref: ../Coupon/InvoiceDiscount.yaml
   autopayScheduledTime:
-    description: |-
-      Date and time at which an automatic payment (autopay) is scheduled.
+    description: Date and time when an automatic payment (autopay) is scheduled.
     type: string
     x-sortable: true
     format: date-time
   autopayRetryNumber:
-    description: |-
-      Number of times that an automatic payment (autopay) has been attempted on an
-      invoice.
+    description: Number of times that an automatic payment (autopay) has been attempted on an invoice.
     readOnly: true
     type: integer
     x-sortable: true
@@ -128,25 +117,21 @@ properties:
      - "disputed"
   delinquentCollectionPeriod:
     type: integer
-    description: |-
-      Length of time, in days, between when the invoice is
-      due and when the invoice is paid.
+    description: Length of time, in days, between when the invoice is due and when the invoice is paid.
     x-sortable: true
     readOnly: true
   collectionPeriod:
     type: integer
     x-sortable: true
-    description: |-
-      Length of time, in days, between when the invoice is issued and
-      when the invoice is paid.
+    description: Length of time, in days, between when the invoice is issued and when the invoice is paid.
     readOnly: true
   abandonedTime:
-    description: Date and time at which the invoice is abandoned.
+    description: Date and time when the invoice is abandoned.
     x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   voidedTime:
-    description: Date and time at which the invoice is voided.
+    description: Date and time when the invoice is voided.
     x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
@@ -154,30 +139,25 @@ properties:
     x-label: Payment Date
     x-sortable: true
     x-basic: true
-    description: Date and time at which the invoice is paid.
+    description: Date and time when the invoice is paid.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   dueTime:
-    description: Date and time at which the invoice is due for payment.
+    description: Date and time when the invoice is due for payment.
     type: string
     x-sortable: true
     format: date-time
   issuedTime:
-    description: Date and time at which the invoice is issued.
+    description: Date and time when the invoice is issued.
     x-label: Date Issued
     x-sortable: true
     x-basic: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   createdTime:
-    description: Date and time at which the invoice is created.
-    x-sortable: true
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
-    x-sortable: true
-    allOf:
-      - $ref: ../UpdatedTime.yaml
+    $ref: ../UpdatedTime.yaml
   paymentFormUrl:
     type: string
     readOnly: true

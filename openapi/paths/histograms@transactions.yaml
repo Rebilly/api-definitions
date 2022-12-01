@@ -4,41 +4,47 @@ servers:
     variables:
       organizationId:
         default: unknown
-        description: Your organization ID.
+        description: |-
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
   - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
     description: Live server
     variables:
       organizationId:
         default: unknown
-        description: Your organization ID.
+        description: |-
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 get:
+  x-badge: Experimental
   x-products:
     - Reports
   tags:
     - Histograms
-  summary: Get Transaction histogram report data
+  summary: Retrieve transaction histogram report data
   operationId: GetHistogramTransactionReport
   x-sdk-operation-name: getTransactionHistogramReport
-  description: |
-    Get Transaction histogram report data.
+  description: Retrieves transaction histogram report data.
   parameters:
     - name: periodStart
       in: query
-      description: Report start day.
+      description: Date and time when the report starts.
       required: true
       schema:
         type: string
         format: date-time
     - name: periodEnd
       in: query
-      description: Report end day.
+      description: Date and time when the report ends.
       required: true
       schema:
         type: string
         format: date-time
     - name: aggregationPeriod
       in: query
-      description: Report aggregation period.
+      description: Aggregation period of the report.
       required: true
       schema:
         type: string
@@ -48,7 +54,7 @@ get:
           - month
     - name: metric
       in: query
-      description: Report metric.
+      description: Metric on which the report is based.
       required: true
       schema:
         type: string
@@ -70,7 +76,7 @@ get:
     - $ref: ../components/parameters/collectionFilter.yaml
   responses:
     '200':
-      description: Transaction report was retrieved.
+      description: Transaction report retrieved.
       content:
         application/json:
           schema:

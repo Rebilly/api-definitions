@@ -14,6 +14,7 @@ discriminator:
     create-keap-infusionsoft-order: ./Actions/create-infusionsoft-order.yaml
     create-keap-infusionsoft-payment: ./Actions/create-infusionsoft-payment.yaml
     decline-transaction: ./Actions/decline-transaction.yaml
+    check-ontario-restriction: ./Actions/check-ontario-restriction.yaml
     display-message: ./Actions/display-message.yaml
     display-other-choices: ./Actions/display-other-choices.yaml
     guess-payment-card-expiration: ./Actions/guess-payment-card-expiration.yaml
@@ -35,7 +36,7 @@ discriminator:
 properties:
   name:
     type: string
-    description: The action name.
+    description: Name of the action.
     enum:
       - add-risk-score
       - adjust-ready-to-pay
@@ -49,6 +50,7 @@ properties:
       - create-keap-infusionsoft-order
       - create-keap-infusionsoft-payment
       - decline-transaction
+      - check-ontario-restriction
       - display-message
       - display-other-choices
       - guess-payment-card-expiration
@@ -68,6 +70,7 @@ properties:
       - update-intuit-quickbooks-invoice
       - void-intuit-quickbooks-invoice
   status:
+    description: Status of the action.
     $ref: ../OnOff.yaml
 required:
   - name

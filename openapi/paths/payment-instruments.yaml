@@ -6,8 +6,7 @@ get:
   summary: Retrieve payment instruments
   operationId: GetPaymentInstrumentCollection
   x-sdk-operation-name: getAll
-  description: |
-    Retrieve a list of payment instruments.
+  description: Retrieve a list of payment instruments.
   parameters:
     - $ref: ../components/parameters/collectionFilter.yaml
     - $ref: ../components/parameters/collectionSort.yaml
@@ -17,7 +16,7 @@ get:
     - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
-      description: A list of payment instruments was retrieved.
+      description: List of payment instruments retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -50,7 +49,7 @@ post:
   summary: Create a Payment Instrument
   operationId: PostPaymentInstrument
   x-sdk-operation-name: create
-  description: |
+  description: |-
     Create a payment instrument.
     If such payment card, bank account or alternative payment instrument already exists
     then it is updated instead.
@@ -58,7 +57,7 @@ post:
     $ref: ../components/requestBodies/PostPaymentInstrument.yaml
   responses:
     '201':
-      description: Payment instrument was created.
+      description: Payment instrument created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -67,7 +66,7 @@ post:
           schema:
             $ref: ../components/schemas/PaymentInstruments/PaymentInstrument.yaml
     '303':
-      description: Payment instrument was updated.
+      description: Payment instrument updated.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml

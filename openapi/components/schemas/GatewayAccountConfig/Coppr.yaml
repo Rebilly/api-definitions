@@ -1,4 +1,4 @@
-description: Coppr config.
+description: Coppr gateway configuration.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -11,10 +11,10 @@ allOf:
         properties:
           organizationId:
             type: string
-            description: Coppr Organization's ID.
+            description: Coppr organization ID.
           apiKey:
             type: string
-            description: Coppr api key.
+            description: Coppr API key.
             format: password
         required:
           - organizationId
@@ -25,4 +25,7 @@ allOf:
         properties:
           rebillyPublishableKey:
             type: string
-            description: Rebilly publishable api key. If provided a payment token will be created for each transaction.
+            description: |-
+              Rebilly publishable API key.
+              If this value is provided, a payment token is created for each transaction.
+              To obtain an API key, see [Manage API keys](https://www.rebilly.com/docs/dev-docs/api-keys/#manage-api-keys).

@@ -1,4 +1,4 @@
-description: dLocal config.
+description: dLocal gateway configuration.
 allOf:
   - $ref: ../GatewayAccount.yaml
   - type: object
@@ -10,18 +10,24 @@ allOf:
         properties:
           xLogin:
             type: string
+            description: dLocal login.
           xTransKey:
             type: string
+            description: dLocal transKey.
           secretKey:
             type: string
             format: password
+            description: dLocal secret key.
           xPayoutLogin:
             type: string
+            description: dLocal payout login.
           xPayoutTransKey:
             type: string
+            description: dLocal payout transKey.
           payoutSecretKey:
             type: string
             format: password
+            description: dLocal payout secret key.
         required:
           - xLogin
           - xTransKey
@@ -33,4 +39,4 @@ allOf:
           createInstallmentPlan:
             type: boolean
             default: false
-            description: Create installment plan and use it for payment.
+            description: Specifies whether to create an installment plan and use it for payment.

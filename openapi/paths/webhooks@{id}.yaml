@@ -12,11 +12,10 @@ get:
     - SecretApiKey: []
     - JWT: []
     - ApplicationJWT: []
-  description: |
-    Retrieve a webhook with specified identifier string.
+  description: Retrieve a webhook with specified identifier string.
   responses:
     '200':
-      description: Webhook was retrieved.
+      description: Webhook retrieved.
       content:
         application/json:
           schema:
@@ -43,19 +42,18 @@ put:
     - SecretApiKey: []
     - JWT: []
     - ApplicationJWT: []
-  description: |
-    Create or update (upsert) a webhook with specified identifier string.
+  description: Create or update (upsert) a webhook with specified identifier string.
   requestBody:
     $ref: ../components/requestBodies/GlobalWebhook.yaml
   responses:
     '200':
-      description: Webhook was updated.
+      description: Webhook updated.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/GlobalWebhook.yaml
     '201':
-      description: Webhook was created.
+      description: Webhook created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -68,7 +66,7 @@ put:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent.
+      description: Invalid data sent.
       content:
         application/json:
           schema:

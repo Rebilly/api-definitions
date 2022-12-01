@@ -2,13 +2,16 @@ parameters:
   - name: organizationId
     in: path
     required: true
-    description: Organization identifier.
+    description: |-
+      Unique organization identifier.
+      An organization is an entity that represents a company.
+      For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
     schema:
       $ref: ../components/schemas/ResourceId.yaml
   - name: userId
     in: path
     required: true
-    description: User identifier.
+    description: ID of the user.
     schema:
       $ref: ../components/schemas/ResourceId.yaml
 get:
@@ -16,14 +19,13 @@ get:
     - Users
   tags:
     - Memberships
-  summary: Retrieve the membership
+  summary: Retrieve a membership
   operationId: GetMembership
   x-sdk-operation-name: get
-  description: |
-    Retrieve the membership using organization and user identifiers.
+  description: Retrieves a membership with a specified organization ID and user ID.
   responses:
     '200':
-      description: Membership was retrieved.
+      description: Membership retrieved.
       content:
         application/json:
           schema:
@@ -42,9 +44,9 @@ put:
   summary: Upsert membership
   operationId: PutMembership
   x-sdk-operation-name: update
-  description: |
-    Create or update (upsert) membership using organization and user identifiers.
-    Only membership's owner can add other users in the membership.
+  description: |-
+    Creates or updates (upserts) a membership with a specified organization ID and user ID.
+    Only the organization owner can grant organization membership to new users.
   requestBody:
     content:
       application/json:
@@ -53,13 +55,13 @@ put:
     required: true
   responses:
     '200':
-      description: Membership was updated.
+      description: Membership updated.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Membership.yaml
     '201':
-      description: Membership was created.
+      description: Membership created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -78,14 +80,13 @@ delete:
     - Users
   tags:
     - Memberships
-  summary: Delete the membership
+  summary: Delete a membership
   operationId: DeleteMembership
   x-sdk-operation-name: delete
-  description: |
-    Delete the membership using organization and user identifiers.
+  description: Deletes a membership with a specified organization ID and user ID.
   responses:
     '204':
-      description: Membership message was deleted.
+      description: Membership deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

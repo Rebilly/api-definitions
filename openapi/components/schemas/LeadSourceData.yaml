@@ -2,13 +2,11 @@ type: object
 properties:
   medium:
     description: |-
-      Category of the lead source traffic. For example, the
-      medium could be organic search, Google ads, Display ads, and so on.
+      Category of the lead source traffic.
+      For example, the medium could be organic search, Google ads, Display ads, and so on.
     type: string
   source:
-    description: |-
-      Domain, platform, or channel from which the lead
-      source originates.
+    description: Domain, platform, or channel from which the lead source originates.
     type: string
   campaign:
     description: Campaign name of the lead source.
@@ -22,36 +20,29 @@ properties:
       For example, content could be graphics, video, and so on.
     type: string
   affiliate:
-    description: |-
-      Individual or entity that is affilated with the lead
-      source.
+    description: Individual or entity that is affilated with the lead source.
     type: string
   subAffiliate:
     description: |-
-      Individual or entity that is associated with a lead source
-      affiliate. In other products, this field may also be referred to
-      as sub ID or click ID in some.
+      Individual or entity that is associated with a lead source affiliate.
+      In other products, this field may also be referred to as sub ID or click ID in some.
     type: string
   salesAgent:
     description: Name of the sales agent associated with the lead source.
     type: string
   clickId:
-    description: |-
-      Lead source click ID. This value is passed in the ad
-      click URL for tracking and campaign attribution.
+    description: Lead source click ID. This value is passed in the ad click URL for tracking and campaign attribution.
     type: string
   path:
     description: URL from which the lead source originates.
     type: string
   referrer:
-    description: |-
-      Lead source
-      [`referrer` URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer).
+    description: Lead source [`referrer` URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer).
     type: string
   createdTime:
-    description: Date and time at which the lead source was created.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    $ref: CreatedTime.yaml
+  updatedTime:
+    $ref: UpdatedTime.yaml
   _links:
     type: array
     description: Related resource links.

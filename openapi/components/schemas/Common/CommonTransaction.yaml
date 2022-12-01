@@ -6,14 +6,9 @@ properties:
     allOf:
       - $ref: ../ResourceId.yaml
   websiteId:
-    description: |-
-      Unique website identifier string. A website is where an
-      organization obtains a customer through a subscription. For more
-      information, see
-      [Obtain an organization ID and website ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
     readOnly: true
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ../Websites/WebsiteId.yaml
   customerId:
     x-basic: true
     x-sortable: true
@@ -79,8 +74,8 @@ properties:
       - $ref: ../CurrencyCode.yaml
   purchaseAmount:
     description: |-
-      Amount by which the purchase is completed. If an adjustment
-      occurs, the purchased amount may differ from the requested amount.
+      Amount by which the purchase is completed.
+      If an adjustment occurs, the purchased amount may differ from the requested amount.
     type: number
     format: double
     x-type: Money
@@ -92,9 +87,7 @@ properties:
     allOf:
       - $ref: ../CurrencyCode.yaml
   requestAmount:
-    description: |-
-      Amount of the payment request. If an adjustment occurs, the
-      purchased amount may differ from the billing amount.
+    description: Amount of the payment request. If an adjustment occurs, the purchased amount may differ from the billing amount.
     type: number
     x-type: Money
     x-currency-field: requestCurrency
@@ -134,16 +127,13 @@ properties:
     items:
       $ref: ../ResourceId.yaml
   isRebill:
-    description: |-
-      Specifies whether the transaction is one of a number of recurring
-      payments in a subscription, excluding trials or setup fees.
+    description: Specifies whether the transaction is one of a number of recurring payments in a subscription, excluding trials or setup fees.
     type: boolean
     readOnly: true
   rebillNumber:
     description: |-
-      Rebill number of the transaction. A rebill number is the number
-      of recurring payments in a subscription, excluding trials or
-      setup fees.
+      Rebill number of the transaction.
+      A rebill number is the number of recurring payments in a subscription, excluding trials or setup fees.
     type: integer
     readOnly: true
     x-sortable: true
@@ -156,13 +146,11 @@ properties:
     type: boolean
     readOnly: true
   3ds:
-    description: 3D Secure object.
-    allOf:
-      - $ref: ../Transactions/ThreeDSecureResult.yaml
+    $ref: ../Transactions/ThreeDSecureResult.yaml
   redirectUrl:
     description: |-
-      URL where the end-user is redirected to when an offsite transaction
-      is completed. The default value is the website's configured URL.
+      URL where the end-user is redirected to when an offsite transaction is completed.
+      The default value is the website's configured URL.
     type: string
     format: uri
   retryNumber:
@@ -179,16 +167,15 @@ properties:
     readOnly: true
     description: |-
       Billing descriptor that appears on the periodic billing statement.
-      For a credit card statement, this field commonly contains 12 or
-      fewer characters.
+      For a credit card statement, this field commonly contains 12 or fewer characters.
   description:
     type: string
     description: Description of the payment.
     maxLength: 255
   requestId:
     description: |-
-      Request ID of the transaction. This ID must be unique within a
-      24 hour period. Use this field to prevent duplicated transactions.
+      Request ID of the transaction. This ID must be unique within a 24 hour period.
+      Use this field to prevent duplicated transactions.
     type: string
     x-sortable: true
   hasAmountAdjustment:
@@ -198,9 +185,8 @@ properties:
   gatewayName:
     readOnly: true
     description: |-
-      Name of the payment gateway that processed, or is selected to
-      process, the transaction. This value is only available after a
-      gateway is selected for the transaction.
+      Name of the payment gateway that processed, or is selected to process, the transaction.
+      This value is only available after a gateway is selected for the transaction.
     x-label: Gateway account
     x-basic: true
     allOf:
@@ -208,21 +194,13 @@ properties:
   customFields:
     $ref: ../ResourceCustomFields.yaml
   processedTime:
-    description: Date and time at which the transaction was processed.
+    description: Date and time when the transaction is processed.
     x-sortable: true
     x-basic: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   createdTime:
-    description: Date and time at which the transaction was created.
-    x-label: Created On
-    x-sortable: true
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
-    description: Date and time at which the transaction was last updated.
-    x-label: Last update time
-    x-sortable: true
-    allOf:
-      - $ref: ../UpdatedTime.yaml
+    $ref: ../UpdatedTime.yaml
 

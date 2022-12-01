@@ -1,66 +1,72 @@
 type: object
+description: Address proof settings.
 properties:
   weights:
     type: object
-    description: The weights of all matched properties.
+    description: |-
+      Property weights that are used for the KYC document verification process.
+
+      All KYC documents start the verification process with a score of 100.
+      If a check fails, the score is reduced by the corresponding weight.
+      For example, if the `firstName` check weight is set to `5`, and the check fails,
+      the KYC document score becomes `95`.
     properties:
       firstName:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of firstName.
+        description: Weight added if the customer's first name is not matched.
       lastName:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of lastName.
+        description: Weight added if the customer's last name is not matched.
       line1:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of line1.
+        description: Weight added if the customer's address is not matched.
       city:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of city.
+        description: Weight added if the customer's city is not matched.
       region:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of region.
+        description: Weight added if the customer's region is not matched.
       postalCode:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of postalCode.
+        description: Weight added if the customer's postal code is not matched.
       date:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of date.
+        description: Weight added if a date is not detected on the document.
       phone:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of phone.
+        description: Weight added if a phone number is not detected on the document.
       documentSubtype:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of documentSubtype.
+        description: Weight added if the document is not one of the recognized document subtypes.
   thresholds:
     type: object
-    description: The thresholds to determine the document status.
+    description: Pass and fail threshold definition for the document verification process.
     properties:
       rejectBelow:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of rejectBelow.
+        description: Overall score by which an identity proof document fails the verification process.
       acceptAbove:
         type: integer
         minimum: 0
         maximum: 100
-        description: The weight of acceptAbove.
-
+        description: Overall score by which an identity proof document passes the verification process.

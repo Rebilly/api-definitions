@@ -1,4 +1,5 @@
 type: object
+description: Contact's information.
 properties:
   firstName:
     description: Contact's first name.
@@ -15,7 +16,7 @@ properties:
     example: Franklin
     nullable: true
   organization:
-    description: The contact's organization.
+    description: Contact's organization.
     type: string
     pattern: '^[\w\s\-\p{L},.''&]+$'
     maxLength: 255
@@ -50,9 +51,8 @@ properties:
     example: Texas
   country:
     description: |-
-      Contact's country of residence in ISO 3166 alpha-2 country
-      code. For examples, see
-      [ISO.org](https://www.iso.org/obp/ui/#search/code/).
+      Contact's country of residence in ISO 3166 alpha-2 country code.
+      For examples, see [ISO.org](https://www.iso.org/obp/ui/#search/code/).
     type: string
     pattern: '^[A-Z]{2}$'
     maxLength: 2
@@ -76,16 +76,14 @@ properties:
     nullable: true
     example: 1980-04-01
   jobTitle:
-    description: The contact's job title.
+    description: Contact's job title.
     type: string
     pattern: '^[\w\s\-\/\p{L},.#;:()'']+$'
     maxLength: 255
     nullable: true
     example: CEO
   hash:
-    description: |-
-      Use this value to compare contacts for identical
-      attribute values.
+    description: Use this value to compare contacts for identical attribute values.
     type: string
     maxLength: 40
     example: 056ae6d97c788b9e98b049ebafd7b229bf852221

@@ -1,22 +1,23 @@
-parameters:
-  - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
     - Core
   tags:
-    - Invoices
-  summary: Retrieve credit memo invoice allocations
-  operationId: GetInvoiceCreditMemoAllocationCollection
-  x-sdk-operation-name: getAllCreditMemoAllocations
+    - AML
+  summary: Retrieve AML checks
+  operationId: GetAmlCheckCollection
+  x-sdk-operation-name: getAll
   description: |-
-    Retrieves the amounts that have been allocated from a
-    credit memo to invoices.
+    Retrieves a list of AML checks.
+    These checks are records of customer data and potentially matching data in AML lists.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
-      description: List of allocations retrieved.
+      description: List of AML checks retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -29,10 +30,8 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/CreditMemos/CreditMemoAllocation.yaml
+              $ref: ../components/schemas/AmlCheck.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-    '404':
-      $ref: ../components/responses/NotFound.yaml

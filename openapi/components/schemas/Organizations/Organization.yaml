@@ -16,7 +16,7 @@ properties:
     type: string
     maxLength: 60
   website:
-    description: The organization's website.
+    description: Organization's website.
     type: string
     writeOnly: true
     format: url
@@ -37,9 +37,7 @@ properties:
     type: string
     maxLength: 45
   country:
-    description: |-
-      Country where the organization is located, in
-      [ISO Alpha-2 code format](https://www.iso.org/obp/ui/#search/code/).
+    description: Country where the organization is located, in [ISO Alpha-2 code format](https://www.iso.org/obp/ui/#search/code/).
     type: string
     pattern: '^[A-Z]{2}$'
   postalCode:
@@ -51,25 +49,20 @@ properties:
   emails:
     $ref: ../Contact/ContactEmails.yaml
   taxDescriptor:
-    description: |-
-      Tax label of the organization. This information is displayed on
-      the invoice.
+    description: Tax label of the organization. This information is displayed on the invoice.
     type: string
     maxLength: 255
   invoiceTimeZone:
-    description: |-
-      Specifies the time zone to display on an invoice. UTC is used by
-      default. Example: `America/New_York`.
+    description: Specifies the time zone to display on an invoice. UTC is used by default.
     type: string
     maxLength: 50
+    example: America/New_York
   questionnaire:
     $ref: ./OrganizationQuestionnaire.yaml
   settings:
     $ref: ./OrganizationSettings.yaml
   createdTime:
-    description: Date and time at which the organization was created.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml
   _links:

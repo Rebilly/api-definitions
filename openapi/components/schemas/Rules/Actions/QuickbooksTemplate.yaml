@@ -1,34 +1,34 @@
 type: object
 properties:
   itemName:
-    description: The line item name.
+    description: Line item name.
     type: string
     default: '{{ item.plan.id | default: item.product.id | default: item.description }}'
   itemDescription:
-    description: The line item description.
+    description: Line item description.
     type: string
     default: '{{ item.product.description | default: item.description }}'
   itemSku:
-    description: The line item SKU.
+    description: Line item SKU.
     type: string
     default: '{{ item.plan.id | default: item.product.id | default: item.id }}'
   itemLineDescription:
-    description: The item line description.
+    description: Item line description.
     type: string
     default: '{{ item.plan.id | default: item.product.id | default: item.description }}{% if item.periodStartTime and item.periodEndTime %} ({{ item.periodStartTime | datetime: "M jS, Y" }} – {{ item.periodEndTime | datetime: "M jS, Y" }}){% endif %}'
   taxName:
-    description: The tax item name. Used when `taxesAccount` is set.
+    description: Tax item name. Used when `taxesAccount` is set.
     type: string
     default: '{{ tax.description }}'
   taxDescription:
-    description: The tax item description.
+    description: Tax item description.
     type: string
     default: '{{ tax.description }} Used when `taxesAccount` is set.'
   taxSku:
-    description: The tax item SKU.
+    description: Tax item SKU.
     type: string
     default: tax
   taxLineDescription:
-    description: The tax line description.  Used when `taxesAccount` is set.
+    description: Tax line description.  Used when `taxesAccount` is set.
     type: string
     default: '{{ tax.description }}{% if item %} for {{ item.plan.id | default: item.description }}{% if item.periodStartTime and item.periodEndTime %} ({{ item.periodStartTime | datetime: "M jS, Y" }} – {{ item.periodEndTime | datetime: "M jS, Y" }}){% else %} for multiple items{% endif %}{% endif %}'

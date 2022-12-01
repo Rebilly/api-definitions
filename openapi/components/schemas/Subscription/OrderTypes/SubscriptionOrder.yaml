@@ -13,30 +13,31 @@ allOf:
         allOf:
           - $ref: ../../CustomerId.yaml
       renewalReminderTime:
-        description: Time renewal reminder event will be triggered.
+        description: Time when the renewal reminder event triggers.
         nullable: true
-        allOf:
-          - $ref: ../../ServerTimestamp.yaml
+        type: string
+        format: date-time
+        readOnly: true
       renewalReminderNumber:
         description: Number of renewal reminder events triggered.
         nullable: true
         type: integer
         readOnly: true
       trialReminderTime:
-        description: Time renewal reminder event will be triggered.
+        description: Time when the trial reminder event triggers.
         nullable: true
-        allOf:
-          - $ref: ../../ServerTimestamp.yaml
+        type: string
+        format: date-time
+        readOnly: true
       trialReminderNumber:
-        description: Number of renewal reminder events triggered.
+        description: Number of trial reminder events triggered.
         nullable: true
         type: integer
         readOnly: true
       organizationId:
         readOnly: true
-        description: Organization ID.
         allOf:
-          - $ref: ../../ResourceId.yaml
+          - $ref: ../../Organizations/OrganizationId.yaml
   - $ref: ../SubscriptionCancellationState.yaml
   # Always keep the SubscriptionMetadata the latest merged schema,
   # it contains _links and _embedded which is better to keep at the end of doc.
