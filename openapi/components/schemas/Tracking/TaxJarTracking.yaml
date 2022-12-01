@@ -1,0 +1,56 @@
+type: object
+description: |-
+  TaxJar logs lists up to the 1,000 most-recent TaxJar HTTP requests.
+  Filters are limited to only the id or the entityId (the core related-entity id).
+  The results are sorted in reverse chronological order.
+  Sort order may not be further controlled.
+readOnly: true
+properties:
+  id:
+    allOf:
+      - $ref: ../ResourceId.yaml
+  time:
+    type: integer
+    description: Duration of the HTTP request in milliseconds.
+  initiatedTime:
+    description: Initiated time of the HTTP request.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  url:
+    type: string
+    description: URL of the TaxJar endpoint.
+  method:
+    type: string
+    description: Method of the HTTP request.
+    example: POST
+  responseCode:
+    type: integer
+    description: Response code of the HTTP request.
+  responseBody:
+    type: string
+    description: Response body of the HTTP request.
+  headers:
+    type: array
+    $ref: ../HttpHeaders.yaml
+  payload:
+    type: string
+    description: Request payload of the HTTP request.
+  merchantId:
+    type: string
+    description: ID of the merchant associated with the transaction.
+  taxJarCredentialSource:
+    type: string
+    description: Credentials used to send or retrieve data. Can be specified by the merchant or default.
+  invoiceId:
+    type: string
+    description: ID of the invoice sent to TaxJar.
+  customerId:
+    type: string
+    description: ID of the customer associated with the transaction.
+  _links:
+    type: array
+    description: Related resource links.
+    readOnly: true
+    minItems: 1
+    items:
+      $ref: ../Links/SelfLink.yaml

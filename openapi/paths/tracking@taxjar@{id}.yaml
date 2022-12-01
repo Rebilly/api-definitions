@@ -1,0 +1,27 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Tracking
+  summary: Retrieve TaxJar log
+  operationId: GetTaxJarLog
+  x-sdk-operation-name: getTaxJarLog
+  responses:
+    '200':
+      description: TaxJar log retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Tracking/TaxJarTracking.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: '../code_samples/JavaScript/tracking@taxjar@{id}/get.js'
