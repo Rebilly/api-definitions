@@ -10,28 +10,37 @@ allOf:
   - $ref: ../../Common/CommonPlan.yaml
 properties:
   recurringInterval:
-    description: Service interval. For a one-time item, use `null`.
+    description: |-
+      Service interval settings.
+      For a one-time sales, set this value to `null`.
     allOf:
       - $ref: ../PlanPeriod.yaml
       - type: object
         properties:
           limit:
             description: |-
-              Number of invoices this subscription order generates (if 1, it does not generate any beyond the initial order creation).
-              For example, set this property to `12`, when the `periodUnit` is month and the `periodDuration` is 1,
-              for a 1 year contract billed monthly.
+              Number of invoices the subscription order generates.
+              If this value is `1`, only the initial order creation is generated.
+
+              Example: For a 1 year contract that is billed monthly,
+              where the `periodUnit` is `month` and the `periodDuration` is `1`,
+              set this field to `12`,
             type: integer
           billingTiming:
             $ref: ../PlanBillingTiming.yaml
   trial:
     type: object
-    description: Trial configuration. Set `null` if no trial.
+    description: |-
+      Trial configuration setting.
+      If you do not want to offer a trial, set this value to `null`.
     required:
       - price
       - period
     properties:
       price:
-        description: Price of the trial. For a free trial, use `0`.
+        description: |-
+          Price of the trial.
+          For a free trial, set this value to `0`.
         type: number
         format: double
       period:
@@ -52,8 +61,8 @@ properties:
           - sum
           - last
         x-enumDescriptions:
-          sum: Total amount of reported invoice item quantity usage
-          last: Last reported invoice item quantity usage
+          sum: Total amount of reported invoice item quantity usage.
+          last: Last reported invoice item quantity usage.
       min:
         description: Minimum quantity that is charged at the end of a service period regardless of reported usage.
         type: number
