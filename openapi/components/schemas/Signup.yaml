@@ -9,7 +9,7 @@ required:
   - website
 properties:
   email:
-    description: User email.
+    description: Email address of the user.
     type: string
     format: email
     maxLength: 100
@@ -17,28 +17,32 @@ properties:
     description: User company name.
     type: string
   firstName:
-    description: User first name.
+    description: User's first name.
     type: string
   lastName:
-    description: User last name.
+    description: User's last name.
     type: string
   businessPhone:
-    description: User business phone number.
+    description: User's business phone number.
     type: string
   password:
-    description: User password.
+    description: User's password.
     type: string
     format: password
   website:
-    description: User website address.
+    description: User's website address.
     type: string
   country:
-    description: User country (ISO Alpha-2 code).
+    description: |-
+      User's country of residence in ISO 3166 alpha-2 country code.
+      For examples, see [ISO.org](https://www.iso.org/obp/ui/#search/code/).
     type: string
     pattern: '^[A-Z]{2}$'
     default: US
   reportingCurrency:
-    description: Currency to use for conversion in reports. Cannot change.
+    description: |-
+      Currency to use for conversion in reports.
+      This value cannot be changed.
     type: string
     pattern: '^[A-Z]{3}$'
     default: USD
