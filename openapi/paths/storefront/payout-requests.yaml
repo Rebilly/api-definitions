@@ -1,3 +1,40 @@
+get:
+  x-products:
+    - Storefront
+  tags:
+    - Transactions
+  summary: Retrieve payout requests
+  operationId: StorefrontGetPayoutRequestCollection
+  x-sdk-operation-name: getAll
+  security:
+    - CustomerJWT: []
+  description: Retrieves a list of payout requests.
+  parameters:
+    - $ref: ../../components/parameters/collectionFilter.yaml
+    - $ref: ../../components/parameters/collectionSort.yaml
+    - $ref: ../../components/parameters/collectionLimit.yaml
+    - $ref: ../../components/parameters/collectionOffset.yaml
+    - $ref: ../../components/parameters/collectionQuery.yaml
+  responses:
+    200:
+      description: List of payout requests retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../../components/schemas/PayoutRequest.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
 post:
   x-products:
     - Storefront
