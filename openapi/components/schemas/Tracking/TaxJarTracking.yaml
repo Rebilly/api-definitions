@@ -1,9 +1,9 @@
 type: object
 description: |-
-  TaxJar logs lists up to the 1,000 most-recent TaxJar HTTP requests.
-  Filters are limited to only the id or the entityId (the core related-entity id).
-  The results are sorted in reverse chronological order.
-  Sort order may not be further controlled.
+  TaxJar logs can list up to a thousand of the most-recent TaxJar HTTP requests.
+  Results can only be filtered by `id` or `entityId` (the core related-entity ID).
+  Results are sorted in reverse chronological order.
+  The sort order cannot adjusted.
 readOnly: true
 properties:
   id:
@@ -40,7 +40,9 @@ properties:
     description: ID of the merchant associated with the transaction.
   taxJarCredentialSource:
     type: string
-    description: Credentials used to send or retrieve data. Can be specified by the merchant or default.
+    description: |-
+        Credentials used to send or retrieve data. 
+        This field can be specified by the merchant or by a default value.
   invoiceId:
     type: string
     description: ID of the invoice sent to TaxJar.
