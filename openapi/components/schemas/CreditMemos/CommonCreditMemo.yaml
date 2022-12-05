@@ -129,6 +129,78 @@ properties:
           format: double
           default: 0.00
           x-type: Money
+        tax:
+          type: object
+          description: Rich tax object.
+          nullable: true
+          required:
+            - amount
+            - description
+          properties:
+            amount:
+              type: number
+              description: Amount of tax.
+            description:
+              type: string
+              description: Description of the tax.
+              nullable: true
+            rate:
+              type: number
+              description: Overall sales tax rate which includes state, county, city and district tax.
+              nullable: true
+            stateAmount:
+              type: number
+              description: Amount of sales tax to collect for the state.
+              nullable: true
+            countyAmount:
+              type: number
+              description: Amount of sales tax to collect for the county.
+              nullable: true
+            cityAmount:
+              type: number
+              description: Amount of sales tax to collect for the city.
+              nullable: true
+            specialDistrictAmount:
+              type: number
+              description: Amount of sales tax to collect for the special district.
+              nullable: true
+            stateRate:
+              type: number
+              description: State sales tax rate for given location.
+              nullable: true
+            countyRate:
+              type: number
+              description: County sales tax rate for given location.
+              nullable: true
+            cityRate:
+              type: number
+              description: City sales tax rate for given location.
+              nullable: true
+            specialDistrictRate:
+              type: number
+              description: Special district sales tax rate for given location.
+              nullable: true
+            jurisdictions:
+              type: object
+              description: Jurisdiction names for the invoice.
+              nullable: true
+              properties:
+                country:
+                  type: string
+                  description: Two-letter ISO country code for the provided location.
+                  nullable: true
+                state:
+                  type: string
+                  description: Postal abbreviated state name for the provided location.
+                  nullable: true
+                county:
+                  type: string
+                  description: County name for the provided location.
+                  nullable: true
+                city:
+                  type: string
+                  description: City name for the provided location.
+                  nullable: true
   status:
     type: string
     description: Status of the credit memo.
