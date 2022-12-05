@@ -1,7 +1,7 @@
 type: object
 properties:
   creditBureau:
-    description: Credit bureau which is used to get credit file data.
+    description: Credit bureau from which the credit file data is sourced.
     type: string
     readOnly: true
     enum:
@@ -10,29 +10,31 @@ properties:
       - transunion
       - test-bureau
   creditFileNumber:
-    description: Credit file number on credit bureau.
+    description: Credit file number from the credit bureau.
     type: string
     readOnly: true
   name:
-    description: Name of the person to consult the credit file.
+    description: Name of the person to consult about the credit file.
     type: string
     readOnly: true
   consultedDate:
-    description: Date to consult with credit file bureau.
+    description: Date to consult with the credit bureau about the credit file.
     type: string
     format: date-time
     readOnly: true
   decision:
-    description: Value based on if the credit file can be used as a single source proof of identity decision, requires at least one more source (dual-source), or other for anything else.
+    description: Specifies whether the credit file is used in a single source, or as part of a dual source, proof of identity decision.
     type: string
     enum:
       - single-source
       - dual-source
       - other
     x-enumDescriptions:
-      single-source: The credit file can be used as a single source of proof for identity decisions.
-      dual-source: The credit file can be used as a source of proof where the credit bureau agency found two reliable trade sources.
-      other: The credit file cannot be used for identity decisions.
+      single-source: Credit file used as a single source of proof for an identity decisions.
+      dual-source: |-
+        Credit file used as a source of proof where the credit bureau agency found two reliable trade sources.
+        At least two sources are required for a dual-source proof of identity decision.
+      other: Credit file cannot be used for KYC decisions.
     readOnly: true
   trades:
     description: Contains information to support the dual process.
@@ -52,7 +54,7 @@ properties:
           format: date
     readOnly: true
   referenceData:
-    description: Extra data from credit bureau.
+    description: Extra data from the credit bureau.
     readOnly: true
     type: object
     properties:
@@ -72,7 +74,7 @@ properties:
         readOnly: true
         example: Y
       creditFileCreatedDate:
-        description: Credit file create date.
+        description: Date when the credit file is created.
         type: string
         readOnly: true
       numberOfTradesOnFile:
@@ -81,12 +83,12 @@ properties:
         readOnly: true
         example: '001'
       singleDecision:
-        description: Data related to single source decision.
+        description: Data related to a single source decision.
         type: object
         allOf:
           - $ref: CreditFileCommonDecisionData.yaml
       dualDecision:
-        description: Data related to dual source decision.
+        description: Data related to a dual source decision.
         nullable: true
         type: array
         items:
