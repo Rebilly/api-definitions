@@ -38,6 +38,29 @@ properties:
   credentialHash:
     type: string
     description: Hash from credentials to use for authentication by the given URL.
+  body:
+    description: |-
+      Webhook request body.
+      If null, the default payload for the given event is used.
+      Template placeholders are permitted.
+
+      Invalid placeholders render as an empty strings.
+      For example, `Hello {{invalid.placeholder}}!` is rendered as `Hello !`.
+
+      For more information,
+      see [Placeholders](https://www.rebilly.com/docs/automations/email-notifications/#placeholders).
+    type: string
+    nullable: true
+  filter:
+    description: |-
+      Filter that determines whether to send the webhook.
+      This field requires a special format.
+      Use `,` for multiple allowed values.
+      Use `;` for multiple fields.
+
+      For more information,
+      see [Using filters](https://api-reference.rebilly.com/#section/Using-filter-with-collections).
+    type: string
   createdTime:
     $ref: CreatedTime.yaml
   updatedTime:
