@@ -1,0 +1,45 @@
+type: object
+description: Cashier strategy amounts configuration.
+required:
+  - calculator
+  - baseAmount
+  - increments
+properties:
+  calculator:
+    type: string
+    description: |-
+      Cashier amounts calculator.
+      This field specifies whether amounts are calculated using an absolute or percentage calculation.
+
+      Amounts are specified in `baseAmount`, and increments are specified in `increments`.
+
+      Example: `baseAmount: 10` and `increments: [20, 50, 100]`.
+
+      - If the calculator is set to `absolute`: the amounts displayed to the customer are `[10, 30, 60, 110]`.
+      - If the calculator is set to `percent`: the amounts displayed to the customer are `[10, 12, 15, 20]`.
+    enum:
+      - absolute
+      - percent
+  baseAmount:
+    type: number
+    format: double
+    minimum: 0.01
+    description: First amount that is displayed to customer.
+  increments:
+    type: array
+    description: |-
+      List of incremental amounts that are displayed to customer.
+
+      For more information, see the [`calculator` property](../PostCashierStrategy#!path=amounts/calculator&t=request).
+    items:
+      type: number
+      format: double
+      minimum: 0.01
+  adjustBaseToLastDeposit:
+    type: boolean
+    default: false
+    description: |-
+      Specifies whether the base amount must be adjusted based on the last deposit.
+      If this value is `true`, the `baseAmount` is changed to the last successful deposit amount made using [Create a cashier request](../PostCashierRequest).
+
+      If the customer has no successful deposits, `baseAmount` is not adjusted.
