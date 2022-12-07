@@ -3,9 +3,9 @@ get:
     - Users
   tags:
     - Tracking
-  summary: Retrieve TaxJar logs collection
-  operationId: GetTaxJarLogCollection
-  x-sdk-operation-name: getAllTaxJarLogs
+  summary: Retrieve tax logs
+  operationId: GetTaxLogCollection
+  x-sdk-operation-name: getAllTaxLogs
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -14,7 +14,7 @@ get:
     - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
-      description: TaxJar logs collection retrieved.
+      description: Tax logs retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -27,7 +27,7 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/Tracking/TaxJarTracking.yaml
+              $ref: ../components/schemas/Tracking/TaxTracking.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -35,4 +35,4 @@ get:
   x-codeSamples:
     - lang: JavaScript
       source:
-        $ref: ../code_samples/JavaScript/tracking@taxjar/get.js
+        $ref: ../code_samples/JavaScript/tracking@taxes/get.js
