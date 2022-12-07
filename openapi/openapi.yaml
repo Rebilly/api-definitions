@@ -352,6 +352,11 @@ tags:
       Rebilly hosted checkout forms provide secure and compliant checkouts.
       Checkout forms are customizable, and use fully responsive design,
       built-in error messaging, validation, and expedited checkout for returning customers.
+  - name: Cashier
+    description: |-
+      Create and manage cashier requests and manage strategies that determine the deposit amounts to display on the page.
+      Rebilly hosted cashiers provide a secure and compliant way to deposit funds.
+      Cashier forms are customizable, and use fully responsive design, built-in error messaging and validation.
   - name: Email credentials
     description: Use these operations to get, create, and manage SMTP credential hashes.
   - name: Gateway accounts
@@ -872,6 +877,14 @@ paths:
     $ref: ./paths/broadcast-messages.yaml
   '/broadcast-messages/{id}':
     $ref: './paths/broadcast-messages@{id}.yaml'
+  /cashier-requests:
+    $ref: ./paths/cashier-requests.yaml
+  /cashier-requests/{id}:
+    $ref: ./paths/cashier-requests@{id}.yaml
+  /cashier-strategies:
+    $ref: ./paths/cashier-strategies.yaml
+  /cashier-strategies/{id}:
+    $ref: ./paths/cashier-strategies@{id}.yaml
   /checkout-forms:
     $ref: ./paths/checkout-forms.yaml
   /checkout-forms/{id}:
@@ -1160,6 +1173,10 @@ paths:
     $ref: paths/storefront/account@verification@{token}.yaml
   '/storefront/billing-portals/{slug}':
     $ref: paths/storefront/billing-portals@{slug}.yaml
+  '/storefront/cashier-requests/{id}':
+    $ref: paths/storefront/cashier-requests@{id}.yaml
+  '/storefront/cashier-deposit':
+    $ref: paths/storefront/cashier-deposit.yaml
   '/storefront/checkout-forms/{id}':
     $ref: paths/storefront/checkout-forms@{id}.yaml
   '/storefront/invoices':
@@ -1390,6 +1407,9 @@ x-webhooks:
   subscription-canceled:
     post:
       $ref: ./webhooks/subscription-canceled.yaml
+  subscription-churned:
+    post:
+      $ref: ./webhooks/subscription-churned.yaml
   subscription-downgraded:
     post:
       $ref: ./webhooks/subscription-downgraded.yaml
