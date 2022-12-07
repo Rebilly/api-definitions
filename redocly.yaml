@@ -311,7 +311,7 @@ rules:
       property: description
     assertions:
       pattern: /(\.|server)$/
-  assert/no-description-anthro-possessives:
+  assert/no-anthropmorphic-possessives:
     subject:
       type: any
       property: description
@@ -323,8 +323,14 @@ rules:
       type: any
       property: description
     assertions:
-      # defined: true # consider adding
       notPattern: /^(The\s|A\s|An\s)/
+  assert/no-past-future:
+    subject:
+      type: any
+      property: description
+    assertions:
+      notPattern: /(was\s|were\s|will\s)/
+  
   assert/info-description:
     subject:
       type: Info
@@ -336,11 +342,18 @@ rules:
   assert/schema-properties-both-created-time-and-updated-time:
     subject:
       type: SchemaProperties
-    severity: error
     assertions:
       mutuallyRequired:
         - createdTime
         - updatedTime
+
+  assert/schema-properties-camelCase:
+    # Need to exclude _links and _embedded properties
+    severity: off
+    subject:
+      type: SchemaProperties
+    assertions:
+      casing: camelCase
 
   assert/put-200-and-201:
     subject:
