@@ -97,6 +97,7 @@ Rebilly uses the following lint rules:
 - [assert/headers-include-example](.redocly.yaml) (custom rules)
 - [assert/schema-properties-both-created-time-and-updated-time](.redocly.yaml) (custom rules)
 - [assert/put-200-and-201](.redocly.yaml) (custom rules) (this has some exceptions)
+- [assert/schema-properties-camelCase]](.redocly.yaml) (custom rules) (turned off)
 
 ### Servers
 
@@ -120,11 +121,11 @@ Rebilly uses the following lint rules:
 - [assert/operation-summary](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
 - [assert/tag-description](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
 - [assert/info-description](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
-
-<!-- TODO: adjust pending any support: https://github.com/Redocly/redocly-cli/issues/946 -->
-- assert/no-anthropmorphic-possessives
-- assert/no-past-future
-- assert/description-sentence-casing
+- [assert/description-capitalization](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [assert/description-punctuation](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [assert/no-anthropmorphic-possessives](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [assert/no-past-future](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [assert/no-description-start-with-the-a-an](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
 
 ### Maintenance
 
