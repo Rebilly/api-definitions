@@ -23,15 +23,15 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-patch:
+put:
   x-products:
     - Core
   tags:
     - Journal
-  summary: Update a journal record
-  operationId: PatchJournalRecord
+  summary: Upsert a journal record
+  operationId: PutJournalRecord
   x-sdk-operation-name: updateRecord
-  description: Updates a journal record.
+  description: Creates or updates (upsert) a journal record.
   requestBody:
     content:
       application/json:
