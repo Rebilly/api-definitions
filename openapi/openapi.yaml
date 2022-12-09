@@ -64,7 +64,7 @@ components:
       description: |-
         Only for the Tokens resource.
 
-        You can create a Publishable API Key via our [API Keys resource](https://user-api-docs.rebilly.com/#tag/API-Keys),
+        You can create a Publishable API Key via our [API Keys resource](https://all-rebilly.redoc.ly/tag/API-keys/operation/PostApiKey),
         by specifying the type as `publishable`.
       name: Authorization
       type: apiKey
@@ -72,7 +72,7 @@ components:
 
     SecretApiKey:
       description: |-
-        **Never** share your secret keys.
+        Never share your secret keys.
         Keep them guarded and secure.
 
         Use your secret API key only to make requests from the server side.
@@ -83,7 +83,7 @@ components:
 
     CustomerJWT:
       description: |-
-        You can create a JSON Web Token (JWT) via [Storefront Authentication](https://storefront-api-docs.rebilly.com/#operation/StorefrontPostLogin).
+        You can create a JSON Web Token (JWT) via [Storefront Authentication](https://all-rebilly.redoc.ly/tag/Authentication/operation/StorefrontPostLogin).
 
         Usage format: `Bearer <JWT>`.
       type: http
@@ -157,27 +157,21 @@ tags:
       clients, members, patrons, or players.
       For information on the customer resource, see [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
   - name: Customers timeline
-    description: |-
-      Use customer timelines to maintain an audit trail of changes and activity for each customer.
+    description: Use customer timelines to maintain an audit trail of changes and activity for each customer.
   - name: Orders timeline
-    description: |-
-      Use order timelines to maintain an audit trail of changes and activity for each order.
+    description: Use order timelines to maintain an audit trail of changes and activity for each order.
   - name: Invoices timeline
-    description: |-
-      Use invoice timelines to maintain an audit trail of changes and activity for each invoice.
+    description: Use invoice timelines to maintain an audit trail of changes and activity for each invoice.
   - name: Transactions timeline
-    description: |-
-      Use transaction timelines to maintain an audit trail of changes and activity for each transaction.
+    description: Use transaction timelines to maintain an audit trail of changes and activity for each transaction.
   - name: Credit memos timeline
     description: |-
       Use credit memo timelines to maintain an audit trail of changes and activity for each credit memo.
       Credit memos are a means of providing a customer with store credit.
   - name: Rules timeline
-    description: |-
-      Use rule timelines to maintain an audit trail of changes and activity for each rule.
+    description: Use rule timelines to maintain an audit trail of changes and activity for each rule.
   - name: Gateway accounts timeline
-    description: |-
-      Use gateway account timelines to maintain an audit trail of changes and activity for each gateway account.
+    description: Use gateway account timelines to maintain an audit trail of changes and activity for each gateway account.
   - name: KYC documents
     description: |-
       Use Know Your Customer (KYC) documents to verify your customers identity.
@@ -201,13 +195,14 @@ tags:
 
       In Canada, to meet FINTRAC requirements, the `credit-file-proof` KYC document request verifies the customer's name, address, and date of birth with a credit agency.
 
-      If `credit-file-proof` is requested in combination with `identity-proof` and `address-proof`, `credit-file-proof` is attempted first.
-      If `credit-file-proof` validates the identity and address, the KYC request is considered fulfilled.
-      If the request is not fulfilled, redirect your customer to the KYC document gatherer to collect their KYC documents.
-
+      If `credit-file-proof` is requested in combination with `identity-proof` and `address-proof`,
+      `credit-file-proof` is attempted first.
+      If `credit-file-proof` validates the identity and address,
+      the KYC request is considered fulfilled.
+      If the request is not fulfilled,
+      redirect your customer to the KYC document gatherer to collect their KYC documents.
   - name: Customer authentication
-    description: |-
-      Use these operations to validate the identity of users and manage authentication credentials.
+    description: Use these operations to validate the identity of users and manage authentication credentials.
   - name: Custom fields
     description: |-
       Use custom fields to extend a resource scheme to include custom data that is not provided as a common field.
@@ -298,8 +293,7 @@ tags:
 
       For information on plan pricing, see [Pricing formulas](https://www.rebilly.com/docs/settings/pricing-formulas/).
   - name: Search
-    description: |-
-      Use search operations to search data on customers, invoices, orders, transactions and more.
+    description: Use search operations to search data on customers, invoices, orders, transactions and more.
   - name: Shipping rates
     description: |-
       Use these operations to manage shipping rates.
@@ -314,11 +308,9 @@ tags:
       A subscription order generates an invoice for each service period.
       For more information, see [Orders](https://www.rebilly.com/docs/dev-docs/concepts/#orders).
   - name: Usage
-    description: |-
-      Reports the product usage of a subscription item for metered billing purposes.
+    description: Reports the product usage of a subscription item for metered billing purposes.
   - name: Tags
-    description: |-
-      Use tags to organize and categorize customers or KYC documents based on keywords.
+    description: Use tags to organize and categorize customers or KYC documents based on keywords.
   - name: Transactions
     description: |-
       Use these operations to:
@@ -360,9 +352,13 @@ tags:
       Rebilly hosted checkout forms provide secure and compliant checkouts.
       Checkout forms are customizable, and use fully responsive design,
       built-in error messaging, validation, and expedited checkout for returning customers.
-  - name: Email credentials
+  - name: Cashier
     description: |-
-      Use these operations to get, create, and manage SMTP credential hashes.
+      Create and manage cashier requests and manage strategies that determine the deposit amounts to display on the page.
+      Rebilly hosted cashiers provide a secure and compliant way to deposit funds.
+      Cashier forms are customizable, and use fully responsive design, built-in error messaging and validation.
+  - name: Email credentials
+    description: Use these operations to get, create, and manage SMTP credential hashes.
   - name: Gateway accounts
     description: |-
       Use these operations to manage payment gateway accounts.
@@ -441,8 +437,7 @@ tags:
       or make them exclusive to particular websites.
       For more information, see [My organizations and websites](https://www.rebilly.com/docs/settings/organizations-and-websites/).
   - name: Webhook credentials
-    description: |-
-      Use these operations to manage webhook credential hashes.
+    description: Use these operations to manage webhook credential hashes.
   - name: Webhooks
     description: |-
       Use these operations to manage webhooks.
@@ -484,8 +479,7 @@ tags:
       Supported email service providers are:
       SMTP, Mailgun, SendGrid, AWS SES, Postmark, and Rebilly.
   - name: Email messages
-    description: |-
-      Use email messages to email customers directly.
+    description: Use email messages to email customers directly.
   - name: Email notifications
     description: |-
       Use email notifications to keep customers informed on events,
@@ -524,11 +518,9 @@ tags:
       instead of the default Rebilly domain:`portal.secure-payments.app`.
       For more information, see [Configure a custom domain](https://www.rebilly.com/docs/settings/organizations-and-websites#configure-a-custom-domain).
   - name: Histograms
-    description: |-
-      Use histograms operations to generate transaction histogram reports with cohorts and periods.
+    description: Use histograms operations to generate transaction histogram reports with cohorts and periods.
   - name: Reports
-    description: |-
-      Use reports operations to retrieve summary information about your customers, subscriptions, transactions, and more.
+    description: Use reports operations to retrieve summary information about your customers, subscriptions, transactions, and more.
   - name: Data exports
     description: |-
       Use data export operations to manage the export of resource data, such as:
@@ -568,15 +560,13 @@ tags:
       Use these operations to manage Rebilly accounts.
       An account in which you are subscribed to in order to use the Rebilly product.
   - name: Authentication
-    description: |-
-      Use these operations to manage the process of confirming the identity of users that are attempting to access resources.
+    description: Use these operations to manage the process of confirming the identity of users that are attempting to access resources.
   - name: Email verification
     description: |-
       Use these operations to manage email verification.
       Email verification is the process of confirming that an email address exists and is associated with an individual.
   - name: Password reset
-    description: |-
-      Use these operations to manage password resets for a user or organization.
+    description: Use these operations to manage password resets for a user or organization.
   - name: Purchases
     description: |-
       Use these operations to manage purchases.
@@ -641,6 +631,8 @@ paths:
     $ref: './paths/aml-checks.yaml'
   '/aml-checks/{id}':
     $ref: './paths/aml-checks@{id}.yaml'
+  '/aml-checks/{id}/review':
+    $ref: './paths/aml-checks@{id}@review.yaml'
   /attachments:
     $ref: ./paths/attachments.yaml
   '/attachments/{id}':
@@ -749,10 +741,6 @@ paths:
     $ref: ./paths/credit-memos@{id}@timeline.yaml
   /credit-memos/{id}/timeline/{messageId}:
     $ref: ./paths/credit-memos@{id}@timeline@{messageId}.yaml
-  /invoices/{id}/credit-memo-allocations:
-    $ref: ./paths/invoices@{id}@credit-memo-allocations.yaml
-  /invoices/{id}/credit-memo-allocations/{creditMemoId}:
-    $ref: ./paths/invoices@{id}@credit-memo-allocations@{creditMemoId}.yaml
   /kyc-requests:
     $ref: ./paths/kyc-requests.yaml
   '/kyc-requests/{id}':
@@ -893,6 +881,14 @@ paths:
     $ref: ./paths/broadcast-messages.yaml
   '/broadcast-messages/{id}':
     $ref: './paths/broadcast-messages@{id}.yaml'
+  /cashier-requests:
+    $ref: ./paths/cashier-requests.yaml
+  /cashier-requests/{id}:
+    $ref: ./paths/cashier-requests@{id}.yaml
+  /cashier-strategies:
+    $ref: ./paths/cashier-strategies.yaml
+  /cashier-strategies/{id}:
+    $ref: ./paths/cashier-strategies@{id}.yaml
   /checkout-forms:
     $ref: ./paths/checkout-forms.yaml
   /checkout-forms/{id}:
@@ -1045,6 +1041,16 @@ paths:
     $ref: ./paths/payment-gateways-metadata.yaml
   /payment-gateways-metadata/{apiName}:
     $ref: './paths/payment-gateways-metadata@{apiName}.yaml'
+  /payout-requests:
+    $ref: ./paths/payout-requests.yaml
+  '/payout-requests/{id}':
+    $ref: './paths/payout-requests@{id}.yaml'
+  '/payout-requests/{id}/accept':
+    $ref: './paths/payout-requests@{id}@accept.yaml'
+  '/payout-requests/{id}/reject':
+    $ref: './paths/payout-requests@{id}@reject.yaml'
+  '/payout-requests/{id}/payment-instruments':
+    $ref: './paths/payout-requests@{id}@payment-instruments.yaml'
   /permissions-emulation:
     $ref: ./paths/permissions-emulation.yaml
   /previews/orders:
@@ -1181,6 +1187,10 @@ paths:
     $ref: paths/storefront/account@verification@{token}.yaml
   '/storefront/billing-portals/{slug}':
     $ref: paths/storefront/billing-portals@{slug}.yaml
+  '/storefront/cashier-requests/{id}':
+    $ref: paths/storefront/cashier-requests@{id}.yaml
+  '/storefront/cashier-deposit':
+    $ref: paths/storefront/cashier-deposit.yaml
   '/storefront/checkout-forms/{id}':
     $ref: paths/storefront/checkout-forms@{id}.yaml
   '/storefront/invoices':
@@ -1213,6 +1223,12 @@ paths:
     $ref: paths/storefront/payment-instruments@{id}@deactivation.yaml
   '/storefront/payment-instruments/{id}/setup':
     $ref: paths/storefront/payment-instruments@{id}@setup.yaml
+  '/storefront/payout-requests':
+    $ref: ./paths/storefront/payout-requests.yaml
+  '/storefront/payout-requests/{id}':
+    $ref: paths/storefront/payout-requests@{id}.yaml
+  '/storefront/payout-requests/{id}/cancel':
+    $ref: paths/storefront/payout-requests@{id}@cancel.yaml
   '/storefront/plans':
     $ref: paths/storefront/plans.yaml
   '/storefront/plans/{id}':
@@ -1411,6 +1427,9 @@ x-webhooks:
   subscription-canceled:
     post:
       $ref: ./webhooks/subscription-canceled.yaml
+  subscription-churned:
+    post:
+      $ref: ./webhooks/subscription-churned.yaml
   subscription-downgraded:
     post:
       $ref: ./webhooks/subscription-downgraded.yaml

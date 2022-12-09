@@ -299,64 +299,38 @@ rules:
       property: description
     assertions:
       defined: true
-      minLength: 30
-      pattern: /(\.)$/
-      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
-  assert/requestBody-description:
+  assert/description-capitalization:
     subject:
-      type: RequestBody
+      type: any
       property: description
     assertions:
-      pattern: /(\.)$/
-      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
-  assert/schema-description:
+      pattern: /^([A-Z]|dLocal|ecoPayz|eMerchantPay|ePay|eZeeWallet|ezyEFT|iCanPay|iCheque|iDebit|loonie|vegaaH)/
+  assert/description-punctuation:
     subject:
-      type: Schema
+      type: any
       property: description
     assertions:
-      pattern: /^([A-Z]|dLocal|ecoPayz|eMerchantPay|ePay|eZeeWallet|ezyEFT|iCanPay|iCheque|iDebit|loonie|vegaaH)(.|\n)*(\.)$/
-      notPattern: /(Rebilly's|subscription's|invoice's|item's)/
-  assert/parameter-description:
+      pattern: /(\.|server)$/
+  assert/no-anthropmorphic-possessives:
     subject:
-      type: Parameter
+      type: any
       property: description
     assertions:
-      pattern: /(\.)$/
-      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
-  assert/header-description:
+      notPattern: /(Rebilly's|subscription's|invoice's|item's|order's|product's|transaction's|document's|payment's|payout's|card's|instrument's)/i
+
+  assert/no-description-start-with-the-a-an:
     subject:
-      type: Header
+      type: any
       property: description
     assertions:
-      pattern: /(\.)$/
-      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
-  assert/response-description:
-    subject:
-      type: Response
-      property: description
-    assertions:
-      pattern: /(\.)$/
-      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
-  assert/operation-description:
-    subject:
-      type: Operation
-      property: description
-    assertions:
-      # defined: true # consider adding
-      pattern: /^(([A-Z]).*[,.\s])+$/m
       notPattern: /^(The\s|A\s|An\s)/
-  assert/operation-description-possessives-future-past:
+  assert/no-past-future:
     subject:
-      type: Operation
+      type: any
       property: description
     assertions:
-      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
-  assert/schema-properties-description-possessives-future-past:
-    subject:
-      type: Schema
-      property: description
-    assertions:
-      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
+      notPattern: /(was\s|were\s|will\s)/
+  
   assert/info-description:
     subject:
       type: Info
@@ -364,18 +338,22 @@ rules:
     assertions:
       defined: true
       minLength: 30
-      pattern: /(\.|\.\n)$/
-      notPattern: /(was|will|were|Rebilly's|subscription's|invoice's|item's)/i
 
   assert/schema-properties-both-created-time-and-updated-time:
     subject:
       type: SchemaProperties
-    message: The createdTime and updatedTime properties are mutually required.
-    severity: error
     assertions:
       mutuallyRequired:
         - createdTime
         - updatedTime
+
+  assert/schema-properties-camelCase:
+    # Need to exclude _links and _embedded properties
+    severity: off
+    subject:
+      type: SchemaProperties
+    assertions:
+      casing: camelCase
 
   assert/put-200-and-201:
     subject:
@@ -397,7 +375,6 @@ rules:
   assert/no-x-code-samples:
     subject:
       type: Operation
-    message: x-code-samples should be x-codeSamples
     assertions:
       disallowed:
         - x-code-samples

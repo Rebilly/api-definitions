@@ -11,8 +11,8 @@ allOf:
         type: string
       matchLevel:
         description: |-
-          Level of strictness for the document matches.
-          The value of `1` is less strict and `2` is strict.
+          Tolerance level setting for document matches.
+          The value of `1` is more tolerant and `2` is strict.
         type: integer
         minimum: 1
         maximum: 2
@@ -20,12 +20,13 @@ allOf:
       revision:
         description: |-
           Number of times the KYC request data has been modified.
-          The revision is useful when analyzing webhook data to determine if the change takes precedence over the current representation.
+
+          Use this value when analyzing webhook data to determine if a change must take precedence over the current representation.
         type: integer
         readOnly: true
       _links:
         type: array
-        description: Links related to the resource.
+        description: Related links.
         readOnly: true
         minItems: 1
         items:

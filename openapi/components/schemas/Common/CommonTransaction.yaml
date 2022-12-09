@@ -74,8 +74,8 @@ properties:
       - $ref: ../CurrencyCode.yaml
   purchaseAmount:
     description: |-
-      Amount by which the purchase is completed. If an adjustment
-      occurs, the purchased amount may differ from the requested amount.
+      Amount by which the purchase is completed.
+      If an adjustment occurs, the purchased amount may differ from the requested amount.
     type: number
     format: double
     x-type: Money
@@ -87,8 +87,7 @@ properties:
     allOf:
       - $ref: ../CurrencyCode.yaml
   requestAmount:
-    description: |-
-      Amount of the payment request. If an adjustment occurs, the purchased amount may differ from the billing amount.
+    description: Amount of the payment request. If an adjustment occurs, the purchased amount may differ from the billing amount.
     type: number
     x-type: Money
     x-currency-field: requestCurrency
@@ -128,16 +127,13 @@ properties:
     items:
       $ref: ../ResourceId.yaml
   isRebill:
-    description: |-
-      Specifies whether the transaction is one of a number of recurring
-      payments in a subscription, excluding trials or setup fees.
+    description: Specifies whether the transaction is one of a number of recurring payments in a subscription, excluding trials or setup fees.
     type: boolean
     readOnly: true
   rebillNumber:
     description: |-
-      Rebill number of the transaction. A rebill number is the number
-      of recurring payments in a subscription, excluding trials or
-      setup fees.
+      Rebill number of the transaction.
+      A rebill number is the number of recurring payments in a subscription, excluding trials or setup fees.
     type: integer
     readOnly: true
     x-sortable: true
@@ -153,8 +149,8 @@ properties:
     $ref: ../Transactions/ThreeDSecureResult.yaml
   redirectUrl:
     description: |-
-      URL where the end-user is redirected to when an offsite transaction
-      is completed. The default value is the website's configured URL.
+      URL where the end-user is redirected to when an offsite transaction is completed.
+      The default value is the website's configured URL.
     type: string
     format: uri
   retryNumber:
@@ -178,8 +174,8 @@ properties:
     maxLength: 255
   requestId:
     description: |-
-      Request ID of the transaction. This ID must be unique within a
-      24 hour period. Use this field to prevent duplicated transactions.
+      Request ID of the transaction. This ID must be unique within a 24 hour period.
+      Use this field to prevent duplicated transactions.
     type: string
     x-sortable: true
   hasAmountAdjustment:
@@ -189,9 +185,8 @@ properties:
   gatewayName:
     readOnly: true
     description: |-
-      Name of the payment gateway that processed, or is selected to
-      process, the transaction. This value is only available after a
-      gateway is selected for the transaction.
+      Name of the payment gateway that processed, or is selected to process, the transaction.
+      This value is only available after a gateway is selected for the transaction.
     x-label: Gateway account
     x-basic: true
     allOf:
