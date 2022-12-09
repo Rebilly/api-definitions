@@ -34,7 +34,7 @@ To create or manage API keys, select one of the following:
 For more information, see [API keys](https://www.rebilly.com/docs/concepts-and-features/concept/api-keys).
 
 # Errors
-Rebilly follow's the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs.  As with our normal API responses, your client must be prepared to gracefully handle additional members of the response.
+Rebilly follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs.  As with our normal API responses, your client must be prepared to gracefully handle additional members of the response.
 
 ## Forbidden
 <RedocResponse pointer={"#/components/responses/Forbidden"} />
@@ -134,7 +134,7 @@ Expand may be used not only on `GET` requests but also on `PATCH`, `POST`, `PUT`
 
 # Getting started guide
 
-This API has over [500 operations](https://api-reference-all.rebilly.com).
+This API has over [500 operations](https://all-rebilly.redoc.ly/).
 That's more than you need to implement your use cases.
 If you have a use case you would like to implement,
 please consult us for feedback on the best API operations for the task.
