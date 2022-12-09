@@ -1,6 +1,7 @@
 type: object
 properties:
   data:
+    description: Subscription renewal data.
     type: array
     items:
       type: object
@@ -8,35 +9,54 @@ properties:
       readOnly: true
       properties:
         planId:
-          description: Plan identifier for which subscriptions are counted.
+          description: Plan ID for which subscriptions are counted.
           allOf:
             - $ref: ./ResourceId.yaml
         allRenewalCount:
           type: integer
-          description: All renewed subscriptions number.
+          description: Total number of renewed subscriptions.
         allDunningCount:
           type: integer
-          description: All dunned subscriptions number.
+          description: Total number of dunned subscriptions.
         abandonedCount:
           type: integer
-          description: Abandon subscriptions number.
+          description: Total number of abandoned subscriptions.
         paidRenewalCount:
           type: integer
-          description: Number of paid renewed subscriptions. Divide by allRenewalCount to know the renewal success rate.
+          description: |-
+            Total number of paid renewed subscriptions.
+            To determine the renewal rate,
+            divide the value of this field by the `allRenewalCount` value.
         paidDunningCount:
           type: integer
-          description: Number of paid dunned subscriptions. Divide by allDunningCount to know the dun success rate.
+          description: |-
+            Total number of paid dunned subscriptions.
+            Dunning is the process of retrying unsuccessful payment transactions.
+            To determine the dunning success rate,
+            divide the value of this field by the `allDunningCount` value.
         refundedRenewalCount:
           type: integer
-          description: Number of paid renewed subscriptions. Divide by allRenewalCount to know the renewal refund rate.
+          description: |-
+            Total number of paid renewed subscriptions.
+            To determine the renewal refund rate,
+            divide the value of this field by the `allRenewalCount` value.
         refundedDunningCount:
           type: integer
-          description: Number of paid dunned subscriptions. Divide by allDunningCount to know the dun refund rate.
+          description: |-
+            Total number of paid dunned subscriptions.
+            Dunning is the process of retrying unsuccessful payment transactions.
+            To determine the dunning refund rate,
+            divide the value of this field by the `allDunningCount` value.
         chargebackRenewalCount:
           type: integer
-          description: >-
-            Number of paid renewed subscriptions.
-            Divide by allRenewalCount to know the renewal chargeback rate.
+          description: |-
+            Total number of paid renewed subscriptions.
+            To determine the renewal chargeback rate,
+            divide the value of this field by the `allRenewalCount` value.
         chargebackDunningCount:
           type: integer
-          description: Number of paid dunned subscriptions. Divide by allDunningCount to know the dun chargeback rate.
+          description: |-
+            Total number of paid dunned subscriptions.
+            Dunning is the process of retrying unsuccessful payment transactions.
+            To determine the dunning chargeback rate,
+            divide the value of this field by the `allDunningCount` value.

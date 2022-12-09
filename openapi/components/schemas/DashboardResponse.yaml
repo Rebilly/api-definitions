@@ -4,7 +4,7 @@ items:
   properties:
     metric:
       type: string
-      description: Metric type.
+      description: Type of metric.
       enum:
         - approvalRate
         - salesCount
@@ -54,42 +54,53 @@ items:
         - kycRequestExpirationRate
     humanName:
       type: string
-      description: Metric name to display.
+      description: Display name of the metric.
     increaseIsGood:
       type: boolean
-      description: True when the higher value means a better performance thus positive for a merchant, false otherwise.
+      description: Specifies whether a higher value is a positive result for the merchant.
     segments:
       type: array
+      description: Segment data.
       items:
         type: object
         properties:
           name:
             type: string
-            description: Segment name.
+            description: Name of the segment.
           value:
             type: number
             format: double
             nullable: true
-            description: Segment value for the given date range.
+            description: Segment value for the specified date range.
           previousValue:
             type: number
             format: double
             nullable: true
-            description: Segment value for the previous date range (relative to the given date range).
+            description: |-
+              Segment value for the previous date range.
+              This value is relative to the specified date range.
           humanValue:
             type: string
             nullable: true
-            description: Human readable segment value (formatted with a currency sign).
+            description: |-
+              Human readable segment value.
+              This field is formatted with a currency sign.
           changeRatio:
             type: number
             format: double
             nullable: true
-            description: Ratio of current value per previous value null is infinity.
+            description: |-
+              Ratio of the current value for each previous value.
+              A null value represents infinity.
           humanChangeRatio:
             type: string
             nullable: true
-            description: Human readable change ratio (formatted percentage with a "%" sign), null is infinity.
+            description: |-
+              Human readable change ratio.
+              This field is formatted percentage with a percentage sign.
+              A null value represents infinity.
           timeseries:
+            description: Time series.
             type: array
             items:
               type: object

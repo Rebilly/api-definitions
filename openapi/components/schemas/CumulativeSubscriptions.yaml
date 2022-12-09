@@ -1,6 +1,7 @@
 type: object
 properties:
   data:
+    description: Report data.
     type: array
     items:
       type: object
@@ -9,7 +10,7 @@ properties:
       properties:
         aggregationValue:
           type: string
-          description: Date in format YYYY-MM (monthly aggregation) or YYYY-MM-DD (daily aggregation).
+          description: Date in `YYYY-MM` format for monthly aggregation, or `YYYY-MM-DD` for daily aggregation.
         newCount:
           type: integer
           description: Number of new subscriptions within the aggregation.
@@ -18,4 +19,7 @@ properties:
           description: Number of canceled subscriptions within the aggregation.
         cumulativeCount:
           type: integer
-          description: Number of cumulative subscriptions from the previous aggregation + number of new subscriptions - number of canceled subscriptions within the aggregation.
+          description: |-
+            Total number of cumulative subscriptions.
+
+            This field is calculated based on: the number of cumulative subscriptions from the previous aggregation period plus `newCount` minus `canceledCount`.
