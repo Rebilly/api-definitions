@@ -1,0 +1,129 @@
+type: object
+required:
+  - websiteId
+  - currency
+  - amount
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  websiteId:
+    $ref: ./Websites/WebsiteId.yaml
+  customerId:
+    readOnly: true
+    allOf:
+      - $ref: ./CustomerId.yaml
+  paymentInstrumentId:
+    description: ID of the requested payment instrument to offer for the payout.
+    allOf:
+      - $ref: ./ResourceId.yaml
+  currency:
+    description: Currency of the payout.
+    allOf:
+      - $ref: ./CurrencyCode.yaml
+  amount:
+    description: Amount of the payout.
+    type: number
+    format: double
+  unallocatedAmount:
+    description: Available payout request amount that has not been allocated.
+    readOnly: true
+    type: number
+    format: double
+  status:
+    description: Status of the request.
+    type: string
+    readOnly: true
+    enum:
+      - pending
+      - accepted
+      - rejected
+      - canceled
+      - partially-fulfilled
+      - fulfilled
+    x-enumDescriptions:
+      pending: Request is awaiting review.
+      accepted: Request is accepted and awaiting processing.
+      rejected: Request is rejected.
+      canceled: Request is canceled by customer.
+      partially-fulfilled: Request is partially paid out when `availableAmount` is less than `amount`.
+      fulfilled: Request is fully paid out when `availableAmount` reaches zero.
+  allocations:
+    type: array
+    description: List of credit transactions that are allocated to reduce the available amount of a payout request.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        transactionId:
+          description: ID of the transaction to which the payout request is allocated.
+          allOf:
+            - $ref: ./ResourceId.yaml
+        transactionResult:
+          description: Result of a transaction.
+          type: string
+          x-basic: true
+          readOnly: true
+          enum:
+            - abandoned
+            - approved
+            - canceled
+            - declined
+            - unknown
+        gatewayName:
+          description: Name of the payment gateway that processed, or is selected to process, the transaction.
+          x-label: Gateway account
+          x-basic: true
+          allOf:
+            - $ref: ./Gateways/GatewayName.yaml
+        paymentInstrumentId:
+          description: ID of the selected payment instrument for the transaction.
+          allOf:
+            - $ref: ./ResourceId.yaml
+        amount:
+          description: Payout amount that is allocated from the payout request to the credit transaction.
+          type: number
+          format: double
+        createdTime:
+          description: Date and time when a payout request is allocated.
+          allOf:
+            - $ref: ./ServerTimestamp.yaml
+        updatedTime:
+          $ref: ./UpdatedTime.yaml
+  reason:
+    description: |-
+      Rejection or cancellation reason of the payout request.
+      This value is supplied when a payout request returns a `rejected` or `canceled` status.
+    type: string
+    readOnly: true
+  reviewerId:
+    description: ID of the reviewer.
+    type: string
+    nullable: true
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  reviewTime:
+    description: Date and time when the payout request is reviewed.
+    type: string
+    nullable: true
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  createdTime:
+    description: Date and time when the payout request is created.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    description: Date and time when the payout request is updated.
+    allOf:
+      - $ref: ./UpdatedTime.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Links/SelfLink.yaml
+
