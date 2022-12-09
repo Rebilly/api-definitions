@@ -64,7 +64,7 @@ components:
       description: |-
         Only for the Tokens resource.
 
-        You can create a Publishable API Key via our [API Keys resource](https://user-api-docs.rebilly.com/#tag/API-Keys),
+        You can create a Publishable API Key via our [API Keys resource](https://all-rebilly.redoc.ly/tag/API-keys/operation/PostApiKey),
         by specifying the type as `publishable`.
       name: Authorization
       type: apiKey
@@ -72,7 +72,7 @@ components:
 
     SecretApiKey:
       description: |-
-        **Never** share your secret keys.
+        Never share your secret keys.
         Keep them guarded and secure.
 
         Use your secret API key only to make requests from the server side.
@@ -83,7 +83,7 @@ components:
 
     CustomerJWT:
       description: |-
-        You can create a JSON Web Token (JWT) via [Storefront Authentication](https://storefront-api-docs.rebilly.com/#operation/StorefrontPostLogin).
+        You can create a JSON Web Token (JWT) via [Storefront Authentication](https://all-rebilly.redoc.ly/tag/Authentication/operation/StorefrontPostLogin).
 
         Usage format: `Bearer <JWT>`.
       type: http
@@ -352,6 +352,11 @@ tags:
       Rebilly hosted checkout forms provide secure and compliant checkouts.
       Checkout forms are customizable, and use fully responsive design,
       built-in error messaging, validation, and expedited checkout for returning customers.
+  - name: Cashier
+    description: |-
+      Create and manage cashier requests and manage strategies that determine the deposit amounts to display on the page.
+      Rebilly hosted cashiers provide a secure and compliant way to deposit funds.
+      Cashier forms are customizable, and use fully responsive design, built-in error messaging and validation.
   - name: Email credentials
     description: Use these operations to get, create, and manage SMTP credential hashes.
   - name: Gateway accounts
@@ -872,6 +877,14 @@ paths:
     $ref: ./paths/broadcast-messages.yaml
   '/broadcast-messages/{id}':
     $ref: './paths/broadcast-messages@{id}.yaml'
+  /cashier-requests:
+    $ref: ./paths/cashier-requests.yaml
+  /cashier-requests/{id}:
+    $ref: ./paths/cashier-requests@{id}.yaml
+  /cashier-strategies:
+    $ref: ./paths/cashier-strategies.yaml
+  /cashier-strategies/{id}:
+    $ref: ./paths/cashier-strategies@{id}.yaml
   /checkout-forms:
     $ref: ./paths/checkout-forms.yaml
   /checkout-forms/{id}:
@@ -1020,6 +1033,16 @@ paths:
     $ref: ./paths/payment-gateways-metadata.yaml
   /payment-gateways-metadata/{apiName}:
     $ref: './paths/payment-gateways-metadata@{apiName}.yaml'
+  /payout-requests:
+    $ref: ./paths/payout-requests.yaml
+  '/payout-requests/{id}':
+    $ref: './paths/payout-requests@{id}.yaml'
+  '/payout-requests/{id}/accept':
+    $ref: './paths/payout-requests@{id}@accept.yaml'
+  '/payout-requests/{id}/reject':
+    $ref: './paths/payout-requests@{id}@reject.yaml'
+  '/payout-requests/{id}/payment-instruments':
+    $ref: './paths/payout-requests@{id}@payment-instruments.yaml'
   /permissions-emulation:
     $ref: ./paths/permissions-emulation.yaml
   /previews/orders:
@@ -1156,6 +1179,10 @@ paths:
     $ref: paths/storefront/account@verification@{token}.yaml
   '/storefront/billing-portals/{slug}':
     $ref: paths/storefront/billing-portals@{slug}.yaml
+  '/storefront/cashier-requests/{id}':
+    $ref: paths/storefront/cashier-requests@{id}.yaml
+  '/storefront/cashier-deposit':
+    $ref: paths/storefront/cashier-deposit.yaml
   '/storefront/checkout-forms/{id}':
     $ref: paths/storefront/checkout-forms@{id}.yaml
   '/storefront/invoices':
@@ -1188,6 +1215,12 @@ paths:
     $ref: paths/storefront/payment-instruments@{id}@deactivation.yaml
   '/storefront/payment-instruments/{id}/setup':
     $ref: paths/storefront/payment-instruments@{id}@setup.yaml
+  '/storefront/payout-requests':
+    $ref: ./paths/storefront/payout-requests.yaml
+  '/storefront/payout-requests/{id}':
+    $ref: paths/storefront/payout-requests@{id}.yaml
+  '/storefront/payout-requests/{id}/cancel':
+    $ref: paths/storefront/payout-requests@{id}@cancel.yaml
   '/storefront/plans':
     $ref: paths/storefront/plans.yaml
   '/storefront/plans/{id}':
@@ -1386,6 +1419,9 @@ x-webhooks:
   subscription-canceled:
     post:
       $ref: ./webhooks/subscription-canceled.yaml
+  subscription-churned:
+    post:
+      $ref: ./webhooks/subscription-churned.yaml
   subscription-downgraded:
     post:
       $ref: ./webhooks/subscription-downgraded.yaml
