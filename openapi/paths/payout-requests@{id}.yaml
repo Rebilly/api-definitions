@@ -1,0 +1,26 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Retrieve a payout request
+  operationId: GetPayoutRequest
+  x-sdk-operation-name: get
+  description: Retrieves a payout request with a specified ID.
+  parameters:
+    - $ref: ../components/parameters/collectionExpand.yaml
+  responses:
+    200:
+      description: Payout request retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PayoutRequest.yaml
+    401:
+      $ref: ../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../components/responses/Forbidden.yaml
+    404:
+      $ref: ../components/responses/NotFound.yaml
