@@ -330,7 +330,7 @@ rules:
       property: description
     assertions:
       notPattern: /(was\s|were\s|will\s)/
-  
+
   assert/info-description:
     subject:
       type: Info
@@ -348,8 +348,16 @@ rules:
         - updatedTime
 
   assert/schema-properties-camelCase:
-    # Need to exclude _links and _embedded properties
-    severity: off
+    where:
+      - subject:
+          type: SchemaProperties
+          property: credentials
+        assertions:
+          defined: false
+      - subject:
+          type: SchemaProperties
+        assertions:
+          notPattern: ^(_embedded|_links|q|25th|50th|75th|3ds)$
     subject:
       type: SchemaProperties
     assertions:
