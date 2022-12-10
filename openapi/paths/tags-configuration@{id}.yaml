@@ -1,0 +1,80 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Tags
+  summary: Retrieve a tags configuration
+  operationId: GetTagsConfiguration
+  x-sdk-operation-name: get
+  description: Retrieve a tags configuration with specified identifier string.
+  responses:
+    '200':
+      description: Tags configuration retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TagUntag/TagUntagRule.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Tags
+  summary: Create a tags configuration with specified ID
+  operationId: PutTagsConfiguration
+  x-sdk-operation-name: update
+  description: Create a tags configuration with specified identifier string.
+  responses:
+    '200':
+      description: Tags configuration updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TagUntag/TagUntagRule.yaml
+    '201':
+      description: Tags configuration created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TagUntag/TagUntagRule.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/TagUntag/TagUntagRule.yaml
+    description: Tags configuration resource.
+    required: true
+delete:
+  x-products:
+    - Core
+  tags:
+    - Tags
+  summary: Delete tags configuration
+  operationId: DeleteTagsConfiguration
+  x-sdk-operation-name: delete
+  description: Delete tags configuration with specified identifier string.
+  responses:
+    '204':
+      description: Tags configuration deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

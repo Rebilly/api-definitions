@@ -1,0 +1,54 @@
+get:
+  x-products:
+    - Core
+  tags:
+    - Tags
+  summary: Retrieve tags configuration list
+  operationId: GetTagsConfigurationCollection
+  x-sdk-operation-name: getAll
+  description: Retrieve a list of tags configuration.
+  responses:
+    '200':
+      description: List of tags configuration retrieved.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/TagUntag/TagUntagRule.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Tags
+  summary: Create tags configuration
+  operationId: PostTagConfiguration
+  x-sdk-operation-name: create
+  description: Create tags configuration.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/TagUntag/TagUntagRule.yaml
+    description: Tags configuration resource.
+    required: true
+  responses:
+    '201':
+      description: Tags configuration created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TagUntag/TagUntagRule.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
