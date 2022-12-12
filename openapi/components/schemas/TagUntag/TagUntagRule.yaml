@@ -7,15 +7,15 @@ required:
   - removingTags
 properties:
   id:
-    description: Unique rule identifier string.
+    description: ID of the rule.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   name:
-    description: Rule's name.
+    description: Name of the rule.
     type: string
   eventType:
-    description: Rebilly event type.
+    description: Type of Rebilly event.
     type: string
     enum:
       - account-password-reset-requested
@@ -68,14 +68,14 @@ properties:
     type: string
     nullable: true
   addingTags:
-    description: List of tag ID customer should be tagged with.
+    description: List of tag IDs with which the customer must be tagged.
     type: array
     minItems: 0
     maxItems: 1000
     items:
       type: string
   removingTags:
-    description: List of tag ID customer should be untagged from.
+    description: List of tag IDs from which the customer must be untagged.
     type: array
     minItems: 0
     maxItems: 1000
