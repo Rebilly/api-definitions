@@ -1,10 +1,13 @@
-description: Manually set tax items.
 allOf:
   - $ref: ../InvoiceTax.yaml
   - type: object
     required:
+      - calculator
       - items
     properties:
+      calculator:
+        description: Type of tax calculator.
+        type: string
       items:
         type: array
         description: Taxes applied to this invoice.
