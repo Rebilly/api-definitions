@@ -18,6 +18,18 @@ properties:
         nullable: true
         format: float
         description: Rate for flat tax calculation.
+  billing:
+    description: Global organization settings for billing.
+    type: object
+    nullable: true
+    properties:
+      pendingOrderTtl:
+        description: TTL in seconds before pending order is automatically voided.
+        type: integer
+        nullable: true
+        default: null
+        minimum: 8640
+        maximum: 31536000
   taxLocations:
     type: array
     description: |-

@@ -77,6 +77,14 @@ properties:
     description: Order void time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
+  voidingTime:
+    type: string
+    description: |-
+      Date and time when pending order is automatically voided if the value is set.
+      When the property is not passed during creation then uses a [pending order TTL](https://user-api-docs.rebilly.com/tag/Organizations/operation/PatchOrganization#!path=settings/billing/pendingOrderTtl&t=request)
+      setting to calculate value.
+    format: date-time
+    nullable: true
   couponIds:
     type: array
     nullable: true
