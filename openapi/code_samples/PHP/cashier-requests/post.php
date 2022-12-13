@@ -12,7 +12,7 @@ $customAmount = Rebilly\Entities\Cashier\CustomAmount::createFromData([
     ]);
 
 
-$cashierRequestForm->setCustomAmount([$customAmount]);
+$cashierRequestForm->setCustomAmount($customAmount);
 
 try {
     $cashierRequest = $client->cashierRequest()->create($cashierRequestForm);

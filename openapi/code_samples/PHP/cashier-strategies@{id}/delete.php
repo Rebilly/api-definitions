@@ -1,0 +1,1 @@
+$client->cashierStrategies()->delete('cashierStrategyId');
