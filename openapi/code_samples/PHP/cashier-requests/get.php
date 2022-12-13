@@ -1,3 +1,3 @@
-$cashierRequest = $client->cashierRequest()->search([
+$cashierRequests = $client->cashierRequest()->search([
     'filter' => 'customerId:testCustomer',
 ]);
