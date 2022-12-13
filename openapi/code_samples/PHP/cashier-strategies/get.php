@@ -1,3 +1,3 @@
-$cashierStrategy = $client->cashierStrategies()->filter([
+$cashierStrategies = $client->cashierStrategies()->search([
     'filter' => 'name:testName',
 ]);

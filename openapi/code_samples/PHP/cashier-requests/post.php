@@ -15,7 +15,7 @@ $customAmount = Rebilly\Entities\Cashier\CustomAmount::createFromData([
 $cashierRequestForm->setCustomAmount($customAmount);
 
 try {
-    $cashierRequest = $client->cashierRequest()->create($cashierRequestForm);
+    $cashierRequest = $client->cashierRequests()->create($cashierRequestForm);
 } catch (Rebilly\Http\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

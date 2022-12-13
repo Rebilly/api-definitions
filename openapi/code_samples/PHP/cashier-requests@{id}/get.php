@@ -1,1 +1,1 @@
-$cashierRequest = $client->cashierRequest()->load('cashierRequestId');
+$cashierRequest = $client->cashierRequests()->load('cashierRequestId');
