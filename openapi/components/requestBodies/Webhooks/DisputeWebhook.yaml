@@ -19,8 +19,15 @@ content:
         _links:
           type: array
           description: Related resource links.
-          minItems: 1
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/DisputeLink.yaml
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - dispute
 description: Dispute webhook request body resource.

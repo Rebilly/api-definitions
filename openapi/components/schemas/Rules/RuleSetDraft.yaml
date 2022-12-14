@@ -52,15 +52,22 @@ properties:
     $ref: ../CreatedTime.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml
-
   _links:
     type: array
-    description: Related links.
+    description: Related resource links.
     readOnly: true
     items:
-      anyOf:
-        - $ref: ../Links/LinkSelf.yaml
-        - $ref: ../Links/LinkUser.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - user
 required:
   - rules
   - name

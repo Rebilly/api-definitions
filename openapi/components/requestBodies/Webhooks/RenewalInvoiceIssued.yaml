@@ -23,9 +23,16 @@ content:
         _links:
           type: array
           description: Related resource links.
-          minItems: 2
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/SubscriptionLink.yaml
-              - $ref: ../../schemas/Links/InvoiceLink.yaml
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - subscription
+                  - invoice
 description: Renewal invoice issued webhook request body resource.

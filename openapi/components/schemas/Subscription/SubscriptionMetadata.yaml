@@ -27,15 +27,22 @@ properties:
     type: array
     description: Related resource links.
     readOnly: true
-    minItems: 1
     items:
-      anyOf:
-        - $ref: ../Links/SelfLink.yaml
-        - $ref: ../Links/CustomerLink.yaml
-        - $ref: ../Links/InitialInvoiceLink.yaml
-        - $ref: ../Links/RecentInvoiceLink.yaml
-        - $ref: ../Links/WebsiteLink.yaml
-        - $ref: ../Links/ApprovalUrlLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - website
+            - customer
+            - initialInvoice
+            - recentInvoice
+            - approvalUrl
   _embedded:
     type: array
     description: Embedded objects that are requested by the `expand` query parameter.

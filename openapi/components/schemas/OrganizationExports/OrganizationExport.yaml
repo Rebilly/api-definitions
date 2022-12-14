@@ -44,12 +44,18 @@ properties:
     format: date-time
   _links:
     type: array
-    description: Related links.
+    description: Related resource links.
     readOnly: true
-    minItems: 1
-    maxItems: 3
     items:
-      anyOf:
-        - $ref: ../Links/LinkSelf.yaml
-        - $ref: ../Links/LinkUser.yaml
-        - $ref: ../Links/LinkSignedLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - user
+            - signedLink

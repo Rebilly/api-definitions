@@ -119,11 +119,17 @@ properties:
     type: array
     description: Related resource links.
     readOnly: true
-    minItems: 1
-    maxItems: 4
     items:
-      anyOf:
-        - $ref: ../Links/LinkSelf.yaml
-        - $ref: ../Links/LinkUser.yaml
-        - $ref: ../Links/LinkFileDownload.yaml
-        - $ref: ../Links/LinkSignedLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - user
+            - download
+            - signedLink

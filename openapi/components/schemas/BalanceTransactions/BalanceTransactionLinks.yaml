@@ -4,12 +4,19 @@ properties:
     type: array
     description: Related resource links.
     readOnly: true
-    minItems: 1
     items:
-      anyOf:
-        - $ref: ../Links/SelfLink.yaml
-        - $ref: ../Links/ParentLink.yaml
-        - $ref: ../Links/TransactionLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - parent
+            - transaction
   _embedded:
     type: array
     description: Embedded objects that are requested by the `expand` query parameter.

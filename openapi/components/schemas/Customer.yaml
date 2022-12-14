@@ -111,15 +111,22 @@ properties:
     readOnly: true
   _links:
     type: array
-    description: Related links.
+    description: Related resource links.
     readOnly: true
-    minItems: 3
     items:
-      anyOf:
-        - $ref: ./Links/SelfLink.yaml
-        - $ref: ./Links/DefaultPaymentInstrumentLink.yaml
-        - $ref: ./Links/LeadSourceLink.yaml
-        - $ref: ./Links/WebsiteLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - defaultPaymentInstrument
+            - leadSource
+            - website
   _embedded:
     type: array
     description: Array of embedded objects that are requested using the `expand` query string parameter.

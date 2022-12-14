@@ -13,9 +13,15 @@ properties:
     type: array
     description: Related resource links.
     readOnly: true
-    minItems: 2
-    maxItems: 2
     items:
-      anyOf:
-        - $ref: ../Links/InvoiceLink.yaml
-        - $ref: ../Links/TransactionLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - invoice
+            - transaction

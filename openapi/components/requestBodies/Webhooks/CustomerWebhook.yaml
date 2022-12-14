@@ -23,8 +23,15 @@ content:
         _links:
           type: array
           description: Related resource links.
-          minItems: 1
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/CustomerLink.yaml
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - customer
 description: Customer webhook request body resource.

@@ -5,11 +5,18 @@ allOf:
         type: array
         description: Related resource links.
         readOnly: true
-        minItems: 1
         items:
-          anyOf:
-            - $ref: ../Links/SelfLink.yaml
-            - $ref: ../Links/KycDocumentsLink.yaml
+          type: object
+          properties:
+            href:
+              description: Link URL.
+              type: string
+            rel:
+              description: Type of link.
+              type: string
+              enum:
+                - self
+                - kycDocuments
       _embedded:
         type: object
         description: Embedded objects that are requested by the `expand` query parameter..

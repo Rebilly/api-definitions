@@ -25,10 +25,17 @@ content:
               $ref: ../../schemas/KycRequest.yaml
         _links:
           type: array
-          description: Related links.
-          minItems: 2
+          description: Related resource links.
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/CustomerLink.yaml
-              - $ref: ../../schemas/Links/KycRequestLink.yaml
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - customer
+                  - kycRequest
 description: KYC request webhook body resource.
