@@ -1,19 +1,16 @@
 description: Invoice taxes.
 type: object
-required:
-  - calculator
 discriminator:
   propertyName: calculator
   mapping:
     manual: ./TaxTypes/manual.yaml
     rebilly-taxjar: ./TaxTypes/rebilly-taxjar.yaml
+    rebilly-avalara: ./TaxTypes/rebilly-avalara.yaml
+anyOf:
+  - $ref: ./TaxTypes/manual.yaml
+  - $ref: ./TaxTypes/rebilly-taxjar.yaml
+  - $ref: ./TaxTypes/rebilly-avalara.yaml
 properties:
-  calculator:
-    description: Type of tax calculator.
-    type: string
-    enum:
-      - manual
-      - rebilly-taxjar
   amount:
     type: integer
     x-type: Money
