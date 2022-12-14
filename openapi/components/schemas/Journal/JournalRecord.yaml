@@ -59,7 +59,6 @@ properties:
       Embedded objects that are requested by the `expand`
       query parameter.
     readOnly: true
-    minItems: 1
     items:
       anyOf:
         - $ref: ../Embeds/CustomerEmbed.yaml
@@ -67,3 +66,24 @@ properties:
         - $ref: ../Embeds/InvoiceItemEmbed.yaml
         - $ref: ../Embeds/JournalAccountDebitEmbed.yaml
         - $ref: ../Embeds/JournalAccountCreditEmbed.yaml
+  _links:
+    type: array
+    description: Related resource links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - customer
+            - invoice
+            - invoiceItem
+            - journalEntry
+            - creditAccount
+            - debitAccount
