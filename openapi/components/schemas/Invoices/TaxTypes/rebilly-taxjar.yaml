@@ -1,16 +1,14 @@
-allOf:
-  - $ref: ../InvoiceTax.yaml
-  - type: object
-    required:
-      - calculator
-    properties:
-      calculator:
-        description: Type of tax calculator.
-        type: string
-      items:
-        type: array
-        description: Taxes that are applied to this invoice and calculated based on the related product `taxCategoryId`.
-        readOnly: true
-        items:
-          allOf:
-            - $ref: ../InvoiceTaxItem.yaml
+type: object
+description: TaxJar tax calculator.
+required:
+- calculator
+properties:
+  calculator:
+    description: Type of tax calculator.
+    type: string
+  items:
+    type: array
+    description: Taxes that are applied to this invoice and calculated based on the related product `taxCategoryId`.
+    items:
+      allOf:
+        - $ref: ../InvoiceTaxItem.yaml
