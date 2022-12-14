@@ -54,18 +54,20 @@ properties:
   updatedTime:
     $ref: ../UpdatedTime.yaml
   _embedded:
-    type: array
-    description: |-
-      Embedded objects that are requested by the `expand`
-      query parameter.
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
-    items:
-      anyOf:
-        - $ref: ../Embeds/CustomerEmbed.yaml
-        - $ref: ../Embeds/InvoiceEmbed.yaml
-        - $ref: ../Embeds/InvoiceItemEmbed.yaml
-        - $ref: ../Embeds/JournalAccountDebitEmbed.yaml
-        - $ref: ../Embeds/JournalAccountCreditEmbed.yaml
+    properties:
+      customer:
+        $ref: ../Customer.yaml
+      invoice:
+        $ref: ../Invoices/Invoice.yaml
+      invoiceItem:
+        $ref: ../Invoices/InvoiceItem.yaml
+      debitAccount:
+        $ref: ./JournalAccount.yaml
+      creditAccount:
+        $ref: ./JournalAccount.yaml
   _links:
     type: array
     description: Related resource links.
