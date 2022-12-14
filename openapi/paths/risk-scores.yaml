@@ -3,21 +3,21 @@ get:
     - Core
   tags:
     - Risk Score
-  summary: Retrieve risk score configuration
-  operationId: GetRiskScoreConfiguration
+  summary: Retrieve risk score rules
+  operationId: GetRiskScoreRules
   x-sdk-operation-name: getAll
   security:
     - SecretApiKey: []
     - JWT: []
     - ApplicationJWT: []
-  description: Retrieve risk score configuration.
+  description: Retrieve risk score rule.
   responses:
     '200':
-      description: Risk score configuration retrieved.
+      description: Risk score rules retrieved.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/RiskScore/RiskScoreConfiguration.yaml
+            $ref: ../components/schemas/RiskScore/RiskScoreRules.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -27,33 +27,33 @@ put:
     - Core
   tags:
     - Risk Score
-  summary: Change Risk Score configuration
-  operationId: PutRiskScoreConfiguration
-  x-sdk-operation-name: updateRiskScoreConfiguration
-  description: Modify Risk Score configuration.
+  summary: Change Risk Score rules
+  operationId: PutRiskScoreRules
+  x-sdk-operation-name: updateRiskScoreRules
+  description: Modify Risk Score rules.
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/RiskScore/RiskScoreConfiguration.yaml
-    description: Risk Score configuration.
+          $ref: ../components/schemas/RiskScore/RiskScoreRules.yaml
+    description: Risk Score rules.
     required: true
   responses:
     '200':
-      description: Risk Score configuration set.
+      description: Risk Score rules set.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/RiskScore/RiskScoreConfiguration.yaml
+            $ref: ../components/schemas/RiskScore/RiskScoreRules.yaml
     '201':
-      description: Risk Score configuration set.
+      description: Risk Score rules set.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/RiskScore/RiskScoreConfiguration.yaml
+            $ref: ../components/schemas/RiskScore/RiskScoreRules.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
