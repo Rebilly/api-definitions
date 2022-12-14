@@ -86,9 +86,16 @@ properties:
     $ref: ../OnOff.yaml
   _links:
     type: array
-    description: Related links.
+    description: Related resource links.
     readOnly: true
-    minItems: 1
     items:
-      anyOf:
-        - $ref: ../Links/SelfLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
