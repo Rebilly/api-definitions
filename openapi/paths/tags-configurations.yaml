@@ -3,13 +3,13 @@ get:
     - Core
   tags:
     - Tags
-  summary: Retrieve tags configuration list
-  operationId: GetTagsConfigurationCollection
+  summary: Retrieve tags rules list
+  operationId: GetTagsRulesCollection
   x-sdk-operation-name: getAll
-  description: Retrieves a list of tags configuration.
+  description: Retrieves a list of tags rules.
   responses:
     '200':
-      description: List of tags configurations retrieved.
+      description: List of tags rules retrieved.
       content:
         application/json:
           schema:
@@ -25,20 +25,20 @@ post:
     - Core
   tags:
     - Tags
-  summary: Create tags configuration
-  operationId: PostTagConfiguration
+  summary: Create tags rule
+  operationId: PostTagRules
   x-sdk-operation-name: create
-  description: Creates a tags configuration.
+  description: Creates a tags rule.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/TagUntag/TagUntagRule.yaml
-    description: Tags configuration resource.
+    description: Tags rule resource.
     required: true
   responses:
     '201':
-      description: Tags configuration created.
+      description: Tags rule created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml

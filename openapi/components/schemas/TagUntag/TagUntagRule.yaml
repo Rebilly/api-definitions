@@ -3,8 +3,8 @@ description: Tag / Untag rule.
 required:
   - name
   - eventType
-  - addingTags
-  - removingTags
+  - addTags
+  - removeTags
 properties:
   id:
     description: ID of the rule.
@@ -58,7 +58,7 @@ properties:
       - transaction-processed
   filter:
     description: |-
-      Filter that determines whether to send the webhook.
+      Filter that determines whether to tag or untag.
       This field requires a special format.
       Use `,` for multiple allowed values.
       Use `;` for multiple fields.
@@ -67,15 +67,15 @@ properties:
       see [Using filters](https://api-reference.rebilly.com/#section/Using-filter-with-collections).
     type: string
     nullable: true
-  addingTags:
-    description: List of tag IDs with which the customer must be tagged.
+  addTags:
+    description: List of tags to add to the customer.
     type: array
     minItems: 0
     maxItems: 1000
     items:
       type: string
-  removingTags:
-    description: List of tag IDs from which the customer must be untagged.
+  removeTags:
+    description: List of tags to remove for the customer.
     type: array
     minItems: 0
     maxItems: 1000
