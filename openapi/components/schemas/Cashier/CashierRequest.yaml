@@ -15,6 +15,12 @@ properties:
     example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
   customerId:
     $ref: ../CustomerId.yaml
+  cashierStrategyId:
+    description: Strategy ID of a strategy to be applied for this request for empty `amounts` and `customAmount`.
+    type: string
+    maxLength: 50
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+    writeOnly: true
   transactionId:
     type: string
     description: ID of the transaction that is used in the cashier request.
@@ -43,7 +49,7 @@ properties:
     description: |-
       List of available deposit amounts.
 
-      If `amounts` is not specified when a cashier is created, amounts are determined from a randomly selected strategy with a matching `filter` value.
+      If `amounts` is not specified when a cashier is created, amounts are determined from a strategy specified with `cashierStrategyId`. Otherwise randomly selected strategy with a matching `filter` value is applied.
     items:
       type: number
       format: double
