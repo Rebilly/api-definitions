@@ -2,34 +2,66 @@ type: object
 description: Risk score rules.
 properties:
   isProxy:
-    $ref: "./RiskScoreBoolean.yaml"
+    description: Specifies whether the customer's IP address is related to a proxy.
+    allOf:
+      - "./RiskScoreBoolean.yaml"
   isVpn:
-    $ref: "./RiskScoreBoolean.yaml"
+    description: Specifies whether the customer's IP address is related to a VPN.
+    allOf:
+      - "./RiskScoreBoolean.yaml"
   isTor:
-    $ref: "./RiskScoreBoolean.yaml"
+    description: Specifies whether the customer's IP address is related to TOR.
+    allOf:
+      - "./RiskScoreBoolean.yaml"
   isHosting:
-    $ref: "./RiskScoreBoolean.yaml"
+    description: Specifies whether the customer's IP address is related to hosting.
+    allOf:
+      - "./RiskScoreBoolean.yaml"
   hasMismatchedBillingAddressCountry:
-    $ref: "./RiskScoreBoolean.yaml"
+    description: Specifies whether the customer's billing address country and geo-IP address are not the same.
+    allOf:
+      - "./RiskScoreBoolean.yaml"
   hasMismatchedBankCountry:
-    $ref: "./RiskScoreBoolean.yaml"
+    description: Specifies whether the customer's bank country and geo-IP address are not the same.
+    allOf:
+      - "./RiskScoreBoolean.yaml"
   hasMismatchedTimeZone:
-    $ref: "./RiskScoreBoolean.yaml"
+    description: Specifies whether the customer's browser time zone and the IP address associated time zone are not the same.
+    allOf:
+      - "./RiskScoreBoolean.yaml"
   hasMismatchedHolderName:
-    $ref: "./RiskScoreBoolean.yaml"
+    description: Specifies whether the customer's billing address name and primary address name are not the same.
+    allOf:
+      - "./RiskScoreBoolean.yaml"
   hasFakeName:
-    $ref: "./RiskScoreBoolean.yaml"
+    description: Specifies whether the holder name seems fake.
+    allOf:
+      - "./RiskScoreBoolean.yaml"
   isHighRiskCountry:
-    $ref: "./RiskScoreBoolean.yaml"
+    description: Specifies whether the geo-IP country, or the customer's billing country, is considered a high risk country.
+    allOf:
+      - "./RiskScoreBoolean.yaml"
   paymentInstrumentVelocity:
-    $ref: "./RiskScoreInteger.yaml"
+    description: Number of transactions for this payment instrument, based on fingerprint, in the last 24 hours.
+    allOf:
+      - "./RiskScoreInteger.yaml"
   declinedPaymentInstrumentVelocity:
-    $ref: "./RiskScoreInteger.yaml"
+    description: Number of declined transactions for this payment instrument fingerprint in the last 24 hours.
+    allOf:
+      - "./RiskScoreInteger.yaml"
   deviceVelocity:
-    $ref: "./RiskScoreInteger.yaml"
+    description: Number of transactions for this device, based on fingerprint, in the last 24 hours.
+    allOf:
+      - "./RiskScoreInteger.yaml"
   ipVelocity:
-    $ref: "./RiskScoreInteger.yaml"
+    description:  Number of transactions for this IP address in the last 24 hours.
+    allOf:
+      - "./RiskScoreInteger.yaml"
   emailVelocity:
-    $ref: "./RiskScoreInteger.yaml"
+    description: Number of transactions for this email address in the last 24 hours.
+    allOf:
+      - "./RiskScoreInteger.yaml"
   billingAddressVelocity:
-    $ref: "./RiskScoreInteger.yaml"
+    description: Number of transactions for this billing address in the last 24 hours.
+    allOf:
+      - "./RiskScoreInteger.yaml"
