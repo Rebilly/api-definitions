@@ -10,7 +10,7 @@ get:
     - SecretApiKey: []
     - JWT: []
     - ApplicationJWT: []
-  description: Retrieve risk score rule.
+  description: Retrieves risk score rules.
   responses:
     '200':
       description: Risk score rules retrieved.
@@ -27,26 +27,26 @@ put:
     - Core
   tags:
     - Risk Score
-  summary: Change Risk Score rules
+  summary: Modify risk score rules
   operationId: PutRiskScoreRules
   x-sdk-operation-name: updateRiskScoreRules
-  description: Modify Risk Score rules.
+  description: Modifies risk score rules.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/RiskScore/RiskScoreRules.yaml
-    description: Risk Score rules.
+    description: Risk score rules.
     required: true
   responses:
     '200':
-      description: Risk Score rules set.
+      description: Risk score rules set.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/RiskScore/RiskScoreRules.yaml
     '201':
-      description: Risk Score rules set.
+      description: Risk score rules set.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
