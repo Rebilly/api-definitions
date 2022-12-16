@@ -8,16 +8,26 @@ allOf:
         description: |-
           Use this formula to charge for units that are sold in specific quantity ranges.
 
-          For example, a company sells units in two specific quantity ranges
-          — in quantities of 12, and 6 units.
-          In this scenario, a customer can only buy units in quantities of 12, or 6 units.
+          For example, a company sells units in the following ranges.
+
+          Price total | Max quantity | Description
+          ------------|--------------|------------
+          $5          | 1            | 1
+          $13         | 5            | 2 to 5
+          $30         | null         | 6 or more
+
+          If a customer buys one unit, they pay $5.
+          If a customer buys four units, they pay $13.
+          If a customer buys six or more units, they pay $30.
         type: array
         minItems: 1
         items:
           type: object
           properties:
             price:
-              description: Price of the quantity range.
+              description: |-
+                Price of the quantity range.
+                If the value of this field is `0`, the product is free.
               type: number
               format: double
               example: 99.95

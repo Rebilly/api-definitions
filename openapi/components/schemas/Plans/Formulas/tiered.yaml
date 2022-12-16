@@ -8,36 +8,37 @@ allOf:
         description: |-
           Use this formula to charge for units that are sold within defined quantity ranges, or tiers.
 
-          For example, a software company charges $15 per user,
-          for a basic plan which provides 0 to 3 user licenses.
-          If a customer adds one more user, the fee for this user is $20,
-          because this new user exceeds the range of the basic plan.
-          Additionally, if the customer adds a total of 6 or more users,
-          the fee for the sixth user, and each user after that point, is $25.
+          For example, a software company charges $15 for an individual user,
+          and $20 per user for a basic plan which provides 2 to 5 user licenses.
+          If the customer adds a total of 6 or more users,
+          the fee for the sixth user, and each user after that point is $25.
 
-          Price per user | Tiers     |
-          ---------------|-----------|
-          $15            | 0 to 3    |
-          $20            | 4 to 5    |
-          $25            | 6 or more |
+          Price per user  | Max quantity | Description
+          ----------------|--------------|------------
+          $15             | 1            | 1
+          $20             | 5            | 2 to 5
+          $25             | null         | 6 or more
 
           If a customer buys 6 user licenses on the tiered pricing plan, the pricing is as follows:
 
           - User #1: $15
-          - User #2: $15
-          - User #3: $15
+          - User #2: $20
+          - User #3: $20
           - User #4: $20
           - User #5: $20
           - User #6: $25
+          - User #7: $25
 
-          Total cost: $110.
+          Total cost: $145.
         type: array
         minItems: 1
         items:
           type: object
           properties:
             price:
-              description: Price of the quantity range.
+              description: |-
+                Price of the quantity range.
+                If the value of this field is `0`, the product is free.
               type: number
               format: double
               example: 99.95
