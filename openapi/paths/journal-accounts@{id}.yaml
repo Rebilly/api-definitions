@@ -1,0 +1,64 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Journal
+  summary: Retrieve journal account
+  operationId: GetJournalAccount
+  x-sdk-operation-name: getAccount
+  description: Retrieves a journal account with a specified ID.
+  responses:
+    '200':
+      description: Journal account retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Journal/JournalAccount.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Journal
+  summary: Upsert a journal account
+  operationId: PutJournalAccount
+  x-sdk-operation-name: updateAccount
+  description: Creates or updates (upsert) a journal account.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Journal/JournalAccount.yaml
+    description: Journal account resource.
+    required: true
+  responses:
+    '200':
+      description: Journal account updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Journal/JournalAccount.yaml
+    '201':
+      description: Journal account created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Journal/JournalAccount.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
