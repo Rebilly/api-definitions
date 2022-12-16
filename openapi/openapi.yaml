@@ -352,6 +352,8 @@ tags:
       redirect your customer to the KYC document gatherer to collect their KYC documents.
   - name: Invoices timeline
     description: Use invoice timelines to maintain an audit trail of changes and activity for each invoice.
+  - name: Journal
+    description: Use journal accounts, entries and records to track and recognize revenue.
   - name: JWT session
     description: |-
       Use these operations to manage JWT sessions.
@@ -519,6 +521,10 @@ tags:
       Use these operations to manage your TaxJar account credentials.
       The TaxJar integration enables you to calculate taxes and create transactions for the Sales Tax AutoFile feature in your TaxJar account.
       For more information, see [TaxJar integration](https://www.rebilly.com/docs/automations/tax-jar-integration/#taxjar-integration).
+  - name: Avalara credentials
+    description: |-
+      Use these operations to manage your Avalara account credentials.
+      The Avalara integration enables you to calculate taxes and create transactions in your Avalara account.
   - name: Tracking
     description: |-
       Use tracking when debugging and auditing issues.
@@ -728,6 +734,18 @@ paths:
     $ref: ./paths/credit-memos@{id}@timeline.yaml
   /credit-memos/{id}/timeline/{messageId}:
     $ref: ./paths/credit-memos@{id}@timeline@{messageId}.yaml
+  /journal-accounts:
+    $ref: paths/journal-accounts.yaml
+  /journal-accounts/{id}:
+    $ref: paths/journal-accounts@{id}.yaml
+  /journal-entries:
+    $ref: paths/journal-entries.yaml
+  /journal-entries/{id}:
+    $ref: paths/journal-entries@{id}.yaml
+  /journal-entries/{id}/records:
+    $ref: paths/journal-entries@{id}@records.yaml
+  /journal-entries/{id}/records/{journalRecordId}:
+    $ref: paths/journal-entries@{id}@records@{journalRecordId}.yaml
   /kyc-requests:
     $ref: ./paths/kyc-requests.yaml
   '/kyc-requests/{id}':
@@ -922,6 +940,10 @@ paths:
     $ref: ./paths/credential-hashes@taxjar.yaml
   '/credential-hashes/taxjar/{hash}':
     $ref: './paths/credential-hashes@taxjar@{hash}.yaml'
+  /credential-hashes/avalara:
+    $ref: ./paths/credential-hashes@avalara.yaml
+  '/credential-hashes/avalara/{hash}':
+    $ref: './paths/credential-hashes@avalara@{hash}.yaml'
   /custom-domains:
     $ref: ./paths/custom-domains.yaml
   '/custom-domains/{domain}':
