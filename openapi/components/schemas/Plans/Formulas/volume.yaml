@@ -7,19 +7,20 @@ allOf:
       brackets:
         description: |-
           Use this formula to charge for units that are sold in bulk, or volume ranges.
-          In general, this formula means that a customer pays less per unit when they buy a large volume of units.
+          This formula enables customers to pays less per unit when they buy a large volume of units.
+          Unit cost is based on the highest volume range, and does not include lower volume range pricing.
 
-          For example, based on the table below,
-          if a customer buys 6 units, they pay $3 per unit.
-          If a customer buys 1 unit, they pay $5.
-          If a customer buys 3 units, they pay $4 per unit.
+          For example, a company sells t-shirts in the following volume ranges:
 
-          Price per apple | Max quantity | Description
-          ----------------|--------------|------------
-          $5              | 1            | 1
-          $4              | 5            | 2 to 5
-          $3              | null         | 6 or more.
+          Price per unit| Max quantity | Description
+          --------------|--------------|------------
+          $10           | 1            | 1 t-shirt
+          $8            | 5            | 2 to 5 t-shirts
+          $4            | null         | 6 or more t-shirts
 
+          - If a customer buys 1 unit, they pay $10.
+          - If a customer buys 3 units, they pay $24 per unit, which is $8 per unit.
+          - If a customer buys 10 units, they pay $40, which is $4 per unit.
         type: array
         minItems: 1
         items:

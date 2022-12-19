@@ -8,17 +8,19 @@ allOf:
         description: |-
           Use this formula to charge for units that are sold in specific quantity ranges.
 
-          For example, a company sells units in the following ranges.
+          For example, a bank charges a merchant based on the number of transactions they complete each month.
 
           Price total | Max quantity | Description
           ------------|--------------|------------
-          $5          | 1            | 1
-          $13         | 5            | 2 to 5
-          $30         | null         | 6 or more
+          $50         | 1000         | Up to 1000 transactions
+          $100        | 1500         | Between 1000 and 1500 transactions
+          $200        | 3000         | Between 1500 and 3000 transactions
+          $500        | null         | More than 3000 transactions
 
-          If a customer buys one unit, they pay $5.
-          If a customer buys four units, they pay $13.
-          If a customer buys six or more units, they pay $30.
+          - If the merchant completes 900 transaction in a month, they are charged $50.
+          - If the merchant completes 1001 transaction in a month, they are charged $100.
+          - If the merchant completes 2500  transaction in a month, they are charged $200.
+          - If the merchant completes more than 3000 transaction in a month, they are charged $500.
         type: array
         minItems: 1
         items:
