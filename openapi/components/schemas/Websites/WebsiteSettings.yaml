@@ -33,32 +33,39 @@ properties:
       enabled:
         type: boolean
         description: Specifies whether Shippo is enabled.
+        example: true
       credentialHash:
         type: string
         description: Shippo credential hash.
+        example: foo-bar-baz
       filter:
         type: string
         description: Shippo filter.
+        example: deliveryAddress.country:US,UK,CA
       weight:
         type: string
         description: |-
           Shippo weight.
           Supports mustache templates within the invoice context.
           Must evaluate to a positive decimal.
+        example: {{ customFields.weight }}
       weightUnit:
         type: string
         description: |-
           Shippo weight unit.
           Supports mustache templates within the invoice context.
           Must evaluate to a valid Shippo weight unit: `g`, `oz`, `lb` or `kg`.
+        example: kg
       manufactureCountry:
         type: string
         description: |-
           Shippo manufacture country.
           Supports mustache templates within the invoice context.
           Must evaluate to a valid ISO 3166 alpha-2 country code.
+        example: US
       sku:
         type: string
         description: |-
           Shippo accounting code.
           Supports mustache templates within the invoice context.
+        example: {{ accountingCode }}
