@@ -3,38 +3,38 @@ items:
   type: object
   properties:
     issuedMonth:
-      description: Revenue invoice issue month.
+      description: Month when the revenue invoice is issued.
       type: string
       pattern: '^\d{4}-\d{2}$'
       example: 2022-02
     booked:
-      description: Revenue amount booked at issue month.
+      description: Month when the revenue amount is booked.
       type: number
       format: double
       example: 25.0
     recognized:
-      description: Recognized revenue amount up to, and including, the `recognizedTo` month.
+      description: Amount of recognized revenue amount up to, and including, the `recognizedTo` month.
       type: number
       format: double
       example: 20.0
     remaining:
-      description: Revenue amount remaining to be recognized after `recognizedTo` month.
+      description: Amount of revenue that remains to be recognized after the `recognizedTo` month.
       type: number
       format: double
       example: 5.0
     waterfall:
       type: array
-      description: Per month recognized revenue waterfall.
+      description: Recognized revenue waterfall for each month.
       items:
         type: object
         properties:
           recognizedMonth:
-            description: Revenue recognition month.
+            description: Month when revenue is recognized.
             type: string
             pattern: '^\d{4}-\d{2}$'
             example: 2022-04
           amount:
-            description: Revenue amount recognized at `recognizedMonth`.
+            description: Amount of revenue recognized at the `recognizedMonth`.
             type: number
             format: double
       example:
