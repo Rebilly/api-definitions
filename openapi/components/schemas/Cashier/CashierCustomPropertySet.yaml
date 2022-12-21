@@ -1,0 +1,25 @@
+type: object
+required:
+  - name
+  - properties
+
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  properties:
+    description: |-
+      Defines properties the user can complete when they use the hosted cashier app..
+      This field accepts [JSON-schema](https://json-schema.org/) drafts 4, 6, and 7.
+    type: object
+    example:
+      type: object
+      properties:
+        email:
+          type: "string"
+        max:
+          type: "integer"
+          minimum: 0
+          exclusiveMaximum: 100
+      required: ["email"]

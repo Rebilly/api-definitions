@@ -1,0 +1,69 @@
+post:
+  x-products:
+    - Core
+  tags:
+    - Cashier
+  summary: Create a cashier custom property set
+  operationId: PostCashierCustomPropertySet
+  x-sdk-operation-name: create
+  description: |-
+    Creates a cashier custom property set.
+    A custom property set is a JSON-schema to extend the hosted cashier deposit reuqest form with extra form fields.
+    The collected information will be stored at the cashier deposit request.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Cashier/CashierCustomPropertySet.yaml
+    description: Cashier custom property set resource.
+    required: true
+  responses:
+    '201':
+      description: Cashier custom property set created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Cashier/CashierCustomPropertySet.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Cashier
+  summary: Retrieve cashier custom properties sets.
+  operationId: GetCashierCustomPropertySetCollection
+  x-sdk-operation-name: getAll
+  description: Retrieves a list of cashier custom property sets.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+  responses:
+    '200':
+      description: List of cashier custom property set retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Cashier/CashierCustomPropertySet.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml

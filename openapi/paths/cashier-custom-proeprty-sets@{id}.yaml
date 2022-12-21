@@ -1,0 +1,82 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Cashier
+  summary: Retrieve a cashier custom property set
+  operationId: GetCashierCustomPropertySet
+  x-sdk-operation-name: get
+  description: Retrieves a cashier custom property set with a specified ID.
+  responses:
+    '200':
+      description: Cashier custom property set retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Cashier/CashierCustomPropertySet.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Cashier
+  summary: Upsert a cashier custom property set
+  operationId: PutCashierCustomPropertySet
+  x-sdk-operation-name: update
+  description: Creates or updates (upserts) a cashier custom property set with specified ID.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Cashier/CashierCustomPropertySet.yaml
+    description: Cashier custom property set resource.
+    required: true
+  responses:
+    '200':
+      description: Cashier custom property updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Cashier/CashierCustomPropertySet.yaml
+    '201':
+      description: Cashier custom property set created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Cashier/CashierCustomPropertySet.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+delete:
+  x-products:
+    - Core
+  tags:
+    - Cashier
+  summary: Delete a cashier custom property set
+  operationId: DeleteCashierCustomPropertySet
+  x-sdk-operation-name: delete
+  description: Deletes a cashier custom property set with specified ID.
+  responses:
+    '204':
+      description: Cashier custom property set deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
