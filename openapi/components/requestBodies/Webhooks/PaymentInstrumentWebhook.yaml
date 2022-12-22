@@ -17,9 +17,17 @@ content:
               $ref: ../../schemas/PaymentInstruments/PaymentInstrument.yaml
         _links:
           type: array
-          description: Related resource links.
-          minItems: 1
+          description: Related links.
+          readOnly: true
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/PaymentInstrumentLink.yaml
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - paymentInstrument
 description: Payment instrument webhook request body resource.
