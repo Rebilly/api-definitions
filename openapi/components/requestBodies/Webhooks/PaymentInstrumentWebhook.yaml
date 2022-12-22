@@ -1,0 +1,25 @@
+content:
+  application/json:
+    schema:
+      properties:
+        paymentInstrumentId:
+          description: ID of the payment instrument.
+          type: string
+        eventType:
+          type: string
+          description: Webhook event type.
+          enum:
+            - payment-instrument-modified
+        _embedded:
+          type: object
+          properties:
+            paymentInstrument:
+              $ref: ../../schemas/PaymentInstruments/PaymentInstrument.yaml
+        _links:
+          type: array
+          description: Related resource links.
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: ../../schemas/Links/PaymentInstrumentLink.yaml
+description: Payment instrument webhook request body resource.
