@@ -38,14 +38,21 @@ properties:
     $ref: UpdatedTime.yaml
   _links:
     type: array
-    description: Links related to a resource.
+    description: Related links.
     readOnly: true
-    minItems: 1
     items:
-      anyOf:
-        - $ref: ./Links/SelfLink.yaml
-        - $ref: ./Links/SeniorRolesLink.yaml
-        - $ref: ./Links/JuniorRolesLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - seniorRoles
+            - juniorRoles
   _embedded:
     type: array
     description: Embedded objects that are requested by the `expand` query parameter.
