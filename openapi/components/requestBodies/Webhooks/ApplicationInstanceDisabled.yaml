@@ -21,9 +21,16 @@ content:
               $ref: ../../schemas/Applications/Application.yaml
         _links:
           type: array
-          description: Related resource links.
-          minItems: 1
+          description: Related links.
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/ApplicationLink.yaml
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - application
 description: Application instance disabled webhook request body resource.

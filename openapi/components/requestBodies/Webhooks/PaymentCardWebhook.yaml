@@ -19,9 +19,16 @@ content:
               $ref: ../../schemas/PaymentCards/PaymentCard.yaml
         _links:
           type: array
-          description: Related resource links.
-          minItems: 1
+          description: Related links.
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/PaymentCardLink.yaml
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - paymentCard
 description: Payment card webhook request body resource.

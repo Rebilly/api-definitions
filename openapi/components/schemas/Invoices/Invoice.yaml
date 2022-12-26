@@ -90,19 +90,26 @@ allOf:
         readOnly: true
       _links:
         type: array
-        description: Related resource links.
+        description: Related links.
         readOnly: true
-        minItems: 1
         items:
-          anyOf:
-            - $ref: ../Links/SelfLink.yaml
-            - $ref: ../Links/CustomerLink.yaml
-            - $ref: ../Links/WebsiteLink.yaml
-            - $ref: ../Links/OrganizationLink.yaml
-            - $ref: ../Links/LeadSourceLink.yaml
-            - $ref: ../Links/TransactionAllocationsLink.yaml
-            - $ref: ../Links/RecalculateInvoiceLink.yaml
-            - $ref: ../Links/SubscriptionLink.yaml
+          type: object
+          properties:
+            href:
+              description: Link URL.
+              type: string
+            rel:
+              description: Type of link.
+              type: string
+              enum:
+                - self
+                - website
+                - customer
+                - organization
+                - leadSource
+                - transactionAllocations
+                - recalculateInvoice
+                - subscription
       _embedded:
         type: array
         description: Embedded objects that are requested by the `expand` query parameter.
