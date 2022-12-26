@@ -4,13 +4,19 @@ servers:
     variables:
       organizationId:
         default: unknown
-        description: Your organization ID.
+        description: |-
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
   - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
     description: Live server
     variables:
       organizationId:
         default: unknown
-        description: Your organization ID.
+        description: |-
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 get:
   x-badge: Experimental
   x-products:
@@ -20,11 +26,11 @@ get:
   summary: Retrieve a disputes report
   operationId: GetDisputeReport
   x-sdk-operation-name: getDisputes
-  description: Retrieve a disputes report.
+  description: Retrieves a disputes report.
   parameters:
     - name: aggregationField
       in: query
-      description: Report is aggregated by this field.
+      description: Report aggregation field.
       required: true
       schema:
         type: string
@@ -40,7 +46,7 @@ get:
           - transactionAmount
     - name: periodMonth
       in: query
-      description: Report month in format YYYY-MM.
+      description: Report month in `YYYY-MM` format.
       required: true
       schema:
         type: string
