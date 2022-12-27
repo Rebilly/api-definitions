@@ -1,0 +1,85 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/journalRecordId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Journal
+  summary: Retrieve journal record
+  operationId: GetJournalRecord
+  x-sdk-operation-name: getRecord
+  description: Retrieves a journal record with a specified ID.
+  responses:
+    '200':
+      description: Journal record retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Journal/JournalRecord.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Journal
+  summary: Upsert a journal record
+  operationId: PutJournalRecord
+  x-sdk-operation-name: updateRecord
+  description: Creates or updates (upsert) a journal record.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Journal/JournalRecord.yaml
+    description: Journal record resource.
+    required: true
+  responses:
+    '200':
+      description: Journal record updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Journal/JournalRecord.yaml
+    '201':
+      description: Journal record created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Journal/JournalRecord.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+delete:
+  x-products:
+    - Core
+  tags:
+    - Journal
+  summary: Delete a journal record
+  operationId: DeleteJournalRecord
+  x-sdk-operation-name: deleteRecord
+  description: Deletes a journal record.
+  responses:
+    '204':
+      description: Journal record deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

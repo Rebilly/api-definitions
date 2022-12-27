@@ -129,6 +129,13 @@ properties:
           format: double
           default: 0.00
           x-type: Money
+          deprecated: true
+        tax:
+          type: object
+          description: Credit memo item tax.
+          nullable: true
+          allOf:
+            - $ref: ../Invoices/TaxItem.yaml
   status:
     type: string
     description: Status of the credit memo.
@@ -199,10 +206,18 @@ properties:
     $ref: ../UpdatedTime.yaml
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
     items:
-      anyOf:
-        - $ref: ../../schemas/Links/SelfLink.yaml
-        - $ref: ../../schemas/Links/CustomerLink.yaml
-        - $ref: ../../schemas/Links/InvoiceLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - customer
+            - invoice

@@ -21,9 +21,16 @@ content:
               $ref: ../../schemas/GatewayAccount.yaml
         _links:
           type: array
-          description: Related resource links.
-          minItems: 1
+          description: Related links.
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/GatewayAccountLink.yaml
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - gatewayAccount
 description: Gateway account limit reached body resource.

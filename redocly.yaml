@@ -1,0 +1,457 @@
+apis:
+  core@latest:
+    root: openapi/openapi.yaml
+    decorators:
+      filter-in:
+        property: x-products
+        value:
+          - Core
+  all@latest:
+    root: openapi/openapi.yaml
+    decorators:
+      plugin/remove-tag-groups: on
+  # The original bundler
+  openapi:
+    root: openapi/openapi.yaml
+extends:
+  - recommended
+plugins:
+  - ./plugins/custom-rules.js
+  - ./plugins/decorators.js
+  - ./plugins/products-bundler/bundler.js
+rules:
+  no-ambiguous-paths: error
+  no-unused-components: error
+  operation-2xx-response: error
+  operation-operationId: error
+  operation-singular-tag: error
+  operation-tag-defined: error
+  operation-4xx-response: off
+  paths-kebab-case: error
+
+  request-mime-type:
+    severity: error
+    allowedValues:
+      - application/json
+  response-mime-type:
+    severity: error
+    allowedValues:
+      - application/json
+      - application/pdf
+      - application/zip
+      - image/jpg
+      - image/png
+      - image/gif
+      - text/csv
+  # Opened a ticket:
+  # response-contains-property:
+  #   severity: error
+  #   names:
+      # '2XX':
+      #   - createdTime
+      #   - updatedTime
+      #   - id
+      #   - _links
+      # '4XX':
+      #   - type
+      #   - status
+      #   - title
+  assert/response-contains-property:
+    severity: off
+    subject:
+      type: SchemaProperties
+    where:
+      - subject:
+          type: Response
+          filterInParentKeys:
+            - '200'
+            - '201'
+            - '202'
+        assertions:
+          defined: true
+      - subject:
+          type: Schema
+          property: type
+        assertions:
+          const: object
+    assertions:
+      required:
+        - id
+        - _links
+  assert/response-error-contains-property:
+    severity: off
+    subject:
+      type: SchemaProperties
+    where:
+      - subject:
+          type: Response
+          filterInParentKeys:
+            - '422'
+            - '400'
+            - '409'
+        assertions:
+          defined: true
+      - subject:
+          type: Schema
+          property: type
+        assertions:
+          const: object
+    assertions:
+      required:
+        - type
+        - status
+        - title
+
+  path-segment-plural:
+    severity: error
+    ignoreLastPathSegment: true
+    exceptions:
+      - storefront
+      - experimental
+      - tracking
+      - profile
+      - verification
+      - reset-password
+      - account
+      - events-triggered
+      - status
+      - signup
+      - signin
+      - send-through-attribution
+      - permissions-emulation
+      - logout
+      - onboarding
+      - timeline
+      - forgot-password
+      - history
+      - taxjar
+      - experian
+      - sendgrid
+      - oauth2
+      - mailgun
+      - plaid
+      - postmark
+      - activation
+      - search
+      - ready-to-pay
+      - aml
+      - api
+  custom-rules/no-unused-tags: error
+  response-contains-header:
+    severity: error
+    names:
+      '201':
+        - Location
+      '303':
+        - Location
+  no-invalid-schema-examples: error
+  no-invalid-media-type-examples: error
+  no-invalid-parameter-examples: error
+  no-server-example.com: error
+  no-http-verbs-in-paths:
+    severity: error
+    splitIntoWords: true
+  boolean-parameter-prefixes: error
+  parameter-description: error
+  ## custom rules
+  ### Examples
+  assert/params-must-include-examples:
+    severity: off
+    subject:
+      type: Parameter
+    assertions:
+      requireAny:
+        - example
+        - examples
+      mutuallyExclusive:
+        - example
+        - examples
+
+  assert/tags-alphabetical:
+    subject:
+      type: Root
+      property: tags
+    assertions:
+      sortOrder:
+        direction: asc
+        property: name
+    severity: warn
+
+  assert/headers-include-example:
+    subject:
+      type: Header
+      property: example
+    assertions:
+      defined: true
+      nonEmpty: true
+
+  assert/path-must-be-ref-file:
+    subject:
+      type: PathItem
+    where:
+      - subject:
+          type: Paths
+        assertions:
+          defined: true
+    assertions:
+      ref: /^(.\/paths|paths)\/[a-z].*yaml$/
+
+  assert/x-sdk-operation-name:
+    where:
+      - subject:
+          type: Paths
+        assertions:
+          defined: true
+    subject:
+      type: Operation
+      property: x-sdk-operation-name
+    assertions:
+      casing: camelCase
+      defined: true
+
+  assert/operation-id-delete:
+    where:
+      - subject:
+          type: Operation
+          filterInParentKeys:
+            - delete
+        assertions:
+          defined: true
+    subject:
+      type: Operation
+      property: operationId
+    assertions:
+      pattern: /Delete/
+      casing: PascalCase
+
+  assert/operation-id-get:
+    where:
+      - subject:
+          type: Operation
+          filterInParentKeys:
+            - get
+        assertions:
+          defined: true
+    subject:
+      type: Operation
+      property: operationId
+    assertions:
+      pattern: /Get/
+      casing: PascalCase
+
+  assert/operation-id-patch:
+    where:
+      - subject:
+          type: Operation
+          filterInParentKeys:
+            - patch
+        assertions:
+          defined: true
+    subject:
+      type: Operation
+      property: operationId
+    assertions:
+      pattern: /Patch/
+
+  assert/operation-id-post:
+    where:
+      - subject:
+          type: Paths
+        assertions:
+          defined: true
+      - subject:
+          type: Operation
+          filterInParentKeys:
+            - post
+        assertions:
+          defined: true
+    subject:
+      type: Operation
+      property: operationId
+    assertions:
+      pattern: /Post/
+      casing: PascalCase
+
+  assert/operation-id-put:
+    where:
+      - subject:
+          type: Operation
+          filterInParentKeys:
+            - put
+        assertions:
+          defined: true
+    subject:
+      type: Operation
+      property: operationId
+    assertions:
+      pattern: /Put/
+      casing: PascalCase
+
+  assert/operation-summary:
+    subject:
+      type: Operation
+      property: summary
+    where:
+      - subject:
+          type: Paths
+        assertions:
+          defined: true
+    assertions:
+      defined: true
+      minLength: 10
+      maxLength: 50
+      pattern: /^(Retrieve|Create|Delete|Upsert|Preview|Send|Update|Register|Destroy|Trigger|Start|Stop|Set|Check|Enable|Disable|Close|Request|Resend|Verify|List|Patch|Activate|Refund|Query|Validate|Tag|Untag|Issue|Reactivate|Cancel|Pause|Change|Void|Search|Get|Modify|Finish|Schedule|Read|Reset|Make|Deactivate|Perform|Review|Reject|Accept|Apply|Partially|Re|Abandon|Download|Merge|Specify|Redeem|Exchange|Log).*[^\.]$/
+
+  ### Description rules
+  assert/tag-description:
+    subject:
+      type: Tag
+      property: description
+    assertions:
+      defined: true
+  assert/description-capitalization:
+    subject:
+      type: any
+      property: description
+    assertions:
+      pattern: /^([A-Z]|dLocal|ecoPayz|eMerchantPay|ePay|eZeeWallet|ezyEFT|iCanPay|iCheque|iDebit|loonie|vegaaH)/
+  assert/description-punctuation:
+    subject:
+      type: any
+      property: description
+    assertions:
+      pattern: /(\.|server)$/
+  assert/no-anthropmorphic-possessives:
+    subject:
+      type: any
+      property: description
+    assertions:
+      notPattern: /(Rebilly's|subscription's|invoice's|item's|order's|product's|transaction's|document's|payment's|payout's|card's|instrument's)/i
+
+  assert/no-description-start-with-the-a-an:
+    subject:
+      type: any
+      property: description
+    assertions:
+      notPattern: /^(The\s|A\s|An\s)/
+  assert/no-past-future:
+    subject:
+      type: any
+      property: description
+    assertions:
+      notPattern: /(was\s|were\s|will\s)/
+
+  assert/info-description:
+    subject:
+      type: Info
+      property: description
+    assertions:
+      defined: true
+      minLength: 30
+
+  assert/schema-properties-both-created-time-and-updated-time:
+    subject:
+      type: SchemaProperties
+    assertions:
+      mutuallyRequired:
+        - createdTime
+        - updatedTime
+
+  assert/schema-properties-camelCase:
+    where:
+      - subject:
+          type: SchemaProperties
+          property: credentials
+        assertions:
+          defined: false
+      - subject:
+          type: SchemaProperties
+        assertions:
+          notPattern: ^(_embedded|_links|q|25th|50th|75th|3ds)$
+    subject:
+      type: SchemaProperties
+    assertions:
+      casing: camelCase
+
+  assert/put-200-and-201:
+    subject:
+      type: Responses
+    where:
+      - subject:
+          type: Operation
+          filterInParentKeys:
+            - put
+        assertions:
+          defined: true
+    message: Must mutually define 200 and 201 responses for PUT requests.
+    severity: warn
+    assertions:
+      mutuallyRequired:
+        - '200'
+        - '201'
+
+  assert/no-x-code-samples:
+    subject:
+      type: Operation
+    assertions:
+      disallowed:
+        - x-code-samples
+
+  assert/no-x-internal:
+    subject:
+      type: Operation
+    message: This is in a public repository. Do not include internal APIs.
+    assertions:
+      disallowed:
+        - x-internal
+
+      # Need to account for arrays, etc...
+  # assert/mediatype-schema-ref-pattern:
+  #   subject: MediaType
+  #   property: schema
+  #   message: Ref needs to point to components directory.
+  #   ref: /^(\.\.\/)?(components|schemas)\/.*\.yaml$/
+
+decorators:
+  products-bundler/bundle: error
+features.openapi:
+  pagination: item
+  theme:
+    logo:
+      gutter: 20px 30px 14px 30px
+    colors:
+      primary:
+        main: '#0044D4'
+      text:
+        primary: '#0D2B3E'
+    typography:
+      headings:
+        fontFamily: Roboto
+      fontFamily: 'Roboto, Verdana, Geneva, sans-serif'
+      fontSize: 14px
+      code:
+        fontFamily: '"Courier New",monospace'
+      rightPanelHeading:
+        color: white
+    rightPanel:
+      backgroundColor: '#505A6F'
+    codeBlock:
+      backgroundColor: '#0D2B3E'
+    links:
+      color: '#6CC496'
+  htmlTemplate: ./web/index.html
+  generateCodeSamples:
+    languages:
+      - lang: curl
+      - lang: Node.js
+      - lang: C#
+      - lang: Python
+      - lang: Java
+      - lang: Go
+      - lang: Ruby
+      - lang: PHP
+  schemaExpansionLevel: '2'
+  maxDisplayedEnumValues: 10
+  hideTryItPanel: false
+  expandResponses: '200,201'
+  requiredPropsFirst: true

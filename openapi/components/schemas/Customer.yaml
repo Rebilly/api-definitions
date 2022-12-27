@@ -10,17 +10,20 @@ properties:
     description: Customer's email address.
     type: string
     format: email
+    nullable: true
     readOnly: true
     x-sortable: true
     x-basic: true
   firstName:
     description: Customer's first name.
     type: string
+    nullable: true
     x-basic: true
     readOnly: true
   lastName:
     description: Customer's last name.
     type: string
+    nullable: true
     x-sortable: true
     x-basic: true
     readOnly: true
@@ -37,7 +40,10 @@ properties:
       If both are supplied, the value of this property overrides the `defaultPaymentInstrument` value.
       The token expires after first use.
   defaultPaymentInstrument:
-    $ref: ./PaymentInstruments/ValueObjects/PaymentInstrumentValueObject.yaml
+    type: object
+    nullable: true
+    allOf:
+      - $ref: ./PaymentInstruments/ValueObjects/PaymentInstrumentValueObject.yaml
   createdTime:
     $ref: CreatedTime.yaml
   updatedTime:
@@ -45,7 +51,11 @@ properties:
   customFields:
     $ref: ./ResourceCustomFields.yaml
   primaryAddress:
-    $ref: ./Contact/ContactObject.yaml
+    description: Customer's primary address.
+    type: object
+    nullable: true
+    allOf:
+      - $ref: ./Contact/ContactObject.yaml
   averageValue:
     $ref: ./CustomerAverageValue.yaml
   paymentCount:
@@ -60,8 +70,10 @@ properties:
     x-sortable: true
     x-basic: true
     description: Time and date of the customer's last approved payment.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    type: string
+    format: date-time
+    readOnly: true
+    nullable: true
   lifetimeRevenue:
     $ref: ./CustomerLifetimeRevenue.yaml
   invoiceCount:
@@ -101,13 +113,20 @@ properties:
     type: array
     description: Related links.
     readOnly: true
-    minItems: 3
     items:
-      anyOf:
-        - $ref: ./Links/SelfLink.yaml
-        - $ref: ./Links/DefaultPaymentInstrumentLink.yaml
-        - $ref: ./Links/LeadSourceLink.yaml
-        - $ref: ./Links/WebsiteLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - defaultPaymentInstrument
+            - leadSource
+            - website
   _embedded:
     type: array
     description: Array of embedded objects that are requested using the `expand` query string parameter.
