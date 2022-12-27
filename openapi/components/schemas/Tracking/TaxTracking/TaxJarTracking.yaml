@@ -3,8 +3,7 @@ title: TaxJar
 readOnly: true
 properties:
   id:
-    allOf:
-      - $ref: ../../ResourceId.yaml
+    $ref: ../../ResourceId.yaml
   time:
     type: integer
     description: Duration of the HTTP request in milliseconds.
@@ -28,9 +27,9 @@ properties:
   headers:
     type: array
     $ref: ../../HttpHeaders.yaml
-  payload:
+  requestBody:
     type: string
-    description: Request payload of the HTTP request.
+    description: Request body of the HTTP request.
   merchantId:
     type: string
     description: ID of the merchant associated with the transaction.
@@ -44,18 +43,24 @@ properties:
     description: |-
         Credentials used to send or retrieve data.
         This field can be specified by the merchant or by a default value.
-  invoiceId:
+  entityId:
     type: string
-    description: ID of the invoice sent to tax service.
+    description: ID of the main entity related to the event type.
   customerId:
     type: string
     description: ID of the customer associated with the transaction.
   _links:
     type: array
-    description: Related resource links.
-    readOnly: true
-    minItems: 1
+    description: Related links.
     items:
-      anyOf:
-        - $ref: ../../Links/SelfLink.yaml
-        - $ref: ../../Links/InvoiceLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - invoice
