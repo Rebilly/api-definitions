@@ -34,9 +34,16 @@ content:
               $ref: ../../schemas/Transactions/Transaction.yaml
         _links:
           type: array
-          description: Related resource links.
-          minItems: 1
+          description: Related links.
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/TransactionLink.yaml
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - transaction
 description: Customer redirect webhook request body resource.

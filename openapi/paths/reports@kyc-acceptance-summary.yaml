@@ -4,13 +4,19 @@ servers:
     variables:
       organizationId:
         default: unknown
-        description: Your organization ID.
+        description: |-
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
   - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
     description: Live server
     variables:
       organizationId:
         default: unknown
-        description: Your organization ID.
+        description: |-
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 get:
   x-badge: Experimental
   x-products:
@@ -20,18 +26,18 @@ get:
   summary: Retrieve a KYC acceptance summary report
   operationId: GetKycAcceptanceSummaryReport
   x-sdk-operation-name: getKycAcceptanceSummary
-  description: Retrieve a KYC acceptance summary report.
+  description: Retrieves a Know Your Customer (KYC) acceptance summary report.
   parameters:
     - name: periodStart
       in: query
-      description: Report start date.
+      description: Date and time when the report starts.
       required: true
       schema:
         type: string
         format: date-time
     - name: periodEnd
       in: query
-      description: Report end date.
+      description: Date and time when the report ends.
       required: true
       schema:
         type: string
@@ -46,6 +52,7 @@ get:
             title: GetKycAcceptanceSummaryResponse
             properties:
               data:
+                description: KYC acceptance data.
                 type: array
                 items:
                   type: object
@@ -63,7 +70,7 @@ get:
                       properties:
                         accepted:
                           type: object
-                          description: Statistics for `accepted` status.
+                          description: Statistics for the `accepted` status.
                           properties:
                             total:
                               type: integer
@@ -83,7 +90,7 @@ get:
                               example: 2
                         rejected:
                           type: object
-                          description: Statistics for `rejected` status.
+                          description: Statistics for the `rejected` status.
                           properties:
                             total:
                               type: integer
@@ -103,7 +110,7 @@ get:
                               example: 1
                         pending:
                           type: object
-                          description: Statistics for `pending` status.
+                          description: Statistics for the `pending` status.
                           properties:
                             total:
                               type: integer
@@ -111,7 +118,7 @@ get:
                               example: 0
                         archived:
                           type: object
-                          description: Statistics for `archived` status.
+                          description: Statistics for the `archived` status.
                           properties:
                             total:
                               type: integer
@@ -119,17 +126,19 @@ get:
                               example: 0
                     total:
                       type: integer
-                      description: Total documents amount.
+                      description: Total amount of documents.
                       example: 8
                     accuracyRate:
                       type: number
                       description: |-
-                        Percent of automatically accepted and rejected documents that remain in the same status after review.
-                        Calculated by the formula: `(nonarchived total - accepted auto rejected - rejected auto accepted)/nonarchived total`.
+                        Percentage of automatically accepted and rejected documents that remain in the same status after review.
+                        Calculated based on the following: `(non-archived total - accepted auto rejected - rejected auto accepted)/non-archived total`.
                       example: 62.5
                     acceptanceRate:
                       type: number
-                      description: Percent of accepted documents out of the total number of KYC documents. Calculated by accepted total divided by the total of nonarchived documents.
+                      description: |-
+                        Percentage of accepted documents from the total number of KYC documents.
+                        Calculated based on the following: `accepted total / total of non-archived documents`.
                       example: 75
                     manualReviewTime:
                       type: number
