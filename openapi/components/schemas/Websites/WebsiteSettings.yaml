@@ -1,6 +1,34 @@
 type: object
 description: Website settings.
 properties:
+  cashierForm:
+    type: object
+    description: Cashier form settings.
+    properties:
+      logoId:
+        type: string
+        description: ID of the linked file object.
+        maxLength: 50
+        example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+      theme:
+        description: Various theme settings used in the cashier form.
+        type: object
+        properties:
+          colorPrimary:
+            description: Primary color for the cashier form in hexadecimal format.
+            type: string
+            maxLength: 6
+            default: '0044d4'
+          colorSecondary:
+            description: Secondary color for the cashier form in hexadecimal format.
+            type: string
+            maxLength: 6
+            default: 'ffffff'
+          buttonTemplate:
+            description: Submit button template. {{amount}} can be used as a placeholder for amount and currency.
+            type: string
+            maxLength: 20
+            example: Pay {{amount}}
   paymentForm:
     type: object
     description: Payment form settings.
