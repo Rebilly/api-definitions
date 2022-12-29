@@ -5,15 +5,15 @@ get:
     - Storefront
   tags:
     - Payment instruments
-  summary: Retrieve payment instrument setup transaction
+  summary: Retrieve a payment instrument setup transaction
   operationId: StorefrontGetPaymentInstrumentSetup
   x-sdk-operation-name: getSetupTransaction
   security:
     - CustomerJWT: []
   description: |-
-    Retrieve the latest setup transaction for the given payment instrument.
+    Retrieves the latest setup transaction for a payment instrument with a specified ID.
 
-    More information about all the related setup transactions is available at the Transaction endpoints.
+    For more information, see [Transactions](#Transactions).
   responses:
     200:
       description: Setup transaction retrieved.
@@ -32,17 +32,17 @@ post:
     - Storefront
   tags:
     - Payment instruments
-  summary: Create payment instrument setup transaction
+  summary: Create a setup payment instrument transaction
   operationId: StorefrontPostPaymentInstrumentSetup
   x-sdk-operation-name: setup
   security:
     - CustomerJWT: []
   description: |-
-    Creates the payment instrument setup transaction.
+    Creates a setup payment instrument transaction.
 
-    This effectively makes the payment instrument available for further payments.
-    The response should be treated as a regular transaction;
-    for example, the approval links should be followed until the transaction is completed.
+    This operation makes the payment instrument available for further payments.
+    Treat the response as a regular transaction.
+    For example, approval links must be followed until the transaction is completed.
   requestBody:
     $ref: ../../components/requestBodies/storefront/SetupPaymentInstrumentRequest.yaml
   responses:

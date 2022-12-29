@@ -11,7 +11,8 @@ properties:
     $ref: ./PaymentGatewayName.yaml
   otherNames:
     description: |-
-      List of former names. From time to time gateways change their names or they also known by other names.
+      List of former names associated with the payment gateway.
+      Gateways may change their names or may also be known by other names.
       Tracking this list may help customer support and developers.
     type: array
     items:
@@ -21,7 +22,7 @@ properties:
         - name
       properties:
         name:
-          description: Alternative or former name of the gateway.
+          description: Alternative or former name of the payment gateway.
           type: string
         description:
           description: Short description about this name.
@@ -35,16 +36,18 @@ properties:
     type: string
     format: uri
   summary:
-    description: Short description of the gateway. (Markdown is supported).
+    description: |-
+      Short description of the payment gateway.
+      This field supports Markdown.
     type: string
   homepage:
-    description: URL of their home page.
+    description: URL of the payment gateway home page.
     type: string
     format: uri
   externalDocs:
     description: |-
-      List of links to the documentation.
-      For example: online API guides provided by gateways or a link to the documents in our Google Drive.
+      List of links to the documentation of the payment gateway.
+      For example, online API guides provided by gateways or a link to the documents in Google Drive.
     type: array
     items:
       type: object
@@ -53,29 +56,33 @@ properties:
         - url
       properties:
         url:
-          description: URL for the target documentation. Value MUST be in the format of a URL.
+          description: |-
+            URL of the target documentation.
+            This value must be in URL format.
           type: string
           format: uri
         description:
           description: Short description of the target documentation.
           type: string
   publishedPricing:
-    description: If they have published pricing, a description of it here.
+    description: Pricing description for the payment gateway, if pricing is published.
     type: string
   setupInstructions:
     description: |-
-      Some special instructions for merchant to setup account for this gateway.
+      Special gateway account set up instructions for merchants.
       For example: After adding this gateway account,
       set the IPN to `//example.com/ipns/{gateway-name}/{organization-id}` by contacting your account rep.
     type: string
   paymentMethods:
-    description: Array of the payment methods supported (for example, `payment-card`, `bitcoin`).
+    description: Array of supported payment methods. For example, `payment-card` and `bitcoin`.
     type: array
     items:
       $ref: ./PaymentMethodApiName.yaml
     minLength: 1
   cardBrands:
-    description: Array of the card-brands supported, if `payment-card` is a value of paymentMethods.
+    description: |-
+      Array of supported card-brands.
+      If the payment gateway supports payment cards.
     type: array
     items:
       $ref: ../PaymentCards/PaymentCardBrand.yaml
@@ -84,7 +91,7 @@ properties:
   currencies:
     $ref: ./CurrenciesMetadata.yaml
   operations:
-    description: Array of the operations supported by gateway.
+    description: Array of operations that are supported by the payment gateway.
     type: array
     items:
       type: string
@@ -100,12 +107,12 @@ properties:
         - 3DS2
         - checkCredentials
   supported3dsServers:
-    description: Array of the 3DS-servers supported.
+    description: Array of supported 3DS-servers.
     type: array
     items:
       type: string
   supportedPaymentInstrumentSetupInstructions:
-    description: Array of the setup instructions supported by the gateway.
+    description: Array of set up instructions that are supported by the payment gateway.
     type: array
     items:
       type: string
@@ -116,46 +123,56 @@ properties:
         - sca
       x-enumDescriptions:
         authorize: |-
-          Creates an `authorize` transaction in the amount/currency of the request.
-          If the gateway account is configured for strong customer authentication, it is used.
+          Creates an `authorize` transaction in the amount or currency of the request.
+          This is used when a gateway account is configured for Strong Customer Authentication (SCA).
         authorize-and-void: |-
-          Creates an `authorize` transaction in the amount/currency of the request, followed by a `void` (if the `authorize` was approved).
-          If the gateway account is configured for strong customer authentication, it is used.
+          Creates an `authorize` transaction in the amount and currency of the request,
+          followed by a `void`, if the `authorize` is approved.
+          This is used when a gateway account is configured for Strong Customer Authentication (SCA).
         sca: |-
-          Uses strong customer authentication (SCA) without any `authorize` transaction.
-          SCA includes 3dsv2, 3ds, and some specific wallets behavior like setting up a billing agreement with PayPal.
+          Uses Strong Customer Authentication (SCA) without an `authorize` transaction.
+          SCA includes 3DS, and specific wallet behavior,
+          such as setting up a billing agreement with PayPal.
         do-nothing: |-
-          Does nothing, and returns an approved `setup` transaction.
+          Does nothing except return an approved `setup` transaction.
           This is the default behavior.
   reconciliationSupport:
-    description: Specifies if we can reconcile transactions.
+    description: Specifies whether transactions can be reconciled.
     type: boolean
     default: false
   disputeSupport:
-    description: Specifies if we can automate dispute data (chargeback, retrieval or TC-40 disputes) entry with an API or SFTP access.
+    description: |-
+      Specifies whether dispute data entry can be automated with an API or SFTP access.
+      For example, chargeback, retrieval, or TC-40 disputes.
     type: boolean
     default: false
   offsite:
-    description: Specifies if it may require offsite interaction (such as 3DS, PayPal login, or completing something in a store).
+    description: |-
+      Specifies whether offsite interaction is required.
+      For example, 3DS, PayPal login, or completing something in a store.
     type: boolean
     default: false
   ipn:
     type: object
-    description: Describes the IPN that a gateway supports. No value means IPN is not supported.
+    description: |-
+      Describes the Instant Payment Notification (IPN) that a payment gateway supports.
+      If this value is null, IPN is not supported.
     required:
       - type
     properties:
       type:
-        description: Type of supported IPN. No value means IPN is not supported.
+        description: |-
+          Type of supported Instant Payment Notification (IPN).
+          If this value is null, IPN is not supported.
         type: string
         enum: ["static", "dynamic"]
       verificationMethod:
-        description: Method that is used to verify that we can trust the data in the IPN call.
+        description: Method used to verify that the data in the IPN call can be trusted.
         type: string
         enum: ["query", "signature"]
         default: "query"
   recommendedWaitingApprovalTtl:
-    description: Recommended TTL before abandoning the transaction.
+    description: Recommended Time To Live (TTL) before abandoning the transaction.
     type: integer
     default: 3600
     minimum: 299
