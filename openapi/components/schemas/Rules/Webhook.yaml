@@ -1,7 +1,7 @@
 type: object
 properties:
   method:
-    description: HTTP request method.
+    description: Method of the HTTP request.
     type: string
     enum:
       - GET
@@ -15,7 +15,7 @@ properties:
     description: URL of the webhook endpoint.
   query:
     type: object
-    description: URI query parameters.
+    description: Query parameters of the URI.
     additionalProperties:
       description: Name of additional property.
       type: string
@@ -27,10 +27,10 @@ properties:
     description: Body of the request.
   credentialHash:
     type: string
-    description: Webhook credential identifier string.
+    description: ID of the webhook credential.
   headers:
     type: array
-    description: HTTP request headers.
+    description: Headers of the HTTP request.
     items:
       $ref: ./WebhookHeader.yaml
 required:
