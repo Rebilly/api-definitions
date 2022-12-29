@@ -39,14 +39,12 @@ properties:
       - pending
       - accepted
       - rejected
-      - canceled
       - partially-fulfilled
       - fulfilled
     x-enumDescriptions:
       pending: Request is awaiting review.
       accepted: Request is accepted and awaiting processing.
       rejected: Request is rejected.
-      canceled: Request is canceled by customer.
       partially-fulfilled: Request is partially paid out when `availableAmount` is less than `amount`.
       fulfilled: Request is fully paid out when `availableAmount` reaches zero.
   allocations:
@@ -93,8 +91,8 @@ properties:
           $ref: ./UpdatedTime.yaml
   reason:
     description: |-
-      Rejection or cancellation reason of the payout request.
-      This value is supplied when a payout request returns a `rejected` or `canceled` status.
+      Rejection reason of the payout request.
+      This value is supplied when a payout request returns a `rejected` status.
     type: string
     readOnly: true
   reviewerId:
