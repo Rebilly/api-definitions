@@ -19,24 +19,26 @@ allOf:
       customerId:
         $ref: ../../CustomerId.yaml
       accountNumberType:
-        description: >-
+        description: |-
           Bank account number type.
-          A valid value is Basic Bank Account Number (BBAN) or International Bank Account Number (IBAN).
+          A valid value is a Basic Bank Account Number (BBAN) or an International Bank Account Number (IBAN).
         type: string
         default: BBAN
         enum:
           - IBAN
           - BBAN
       accountNumber:
-        description: Bank's account number.
+        description: |-
+          Customer's bank account number.
+          Detailed information on all ISO 13616-compliant national IBAN formats is available in the [SWIFT IBAN Registry](https://www.swift.com/standards/data-standards/iban).
         type: string
         pattern: '^[0-9]+$'
       routingNumber:
-        description: Bank's routing number.
+        description: Bank routing number.
         type: string
         pattern: '^[0-9]+$'
       accountType:
-        description: Bank's account type.
+        description: Bank account type.
         type: string
         enum:
           - checking
