@@ -37,14 +37,10 @@ properties:
     readOnly: true
     enum:
       - pending
-      - accepted
-      - rejected
       - partially-fulfilled
       - fulfilled
     x-enumDescriptions:
       pending: Request is awaiting review.
-      accepted: Request is accepted and awaiting processing.
-      rejected: Request is rejected.
       partially-fulfilled: Request is partially paid out when `availableAmount` is less than `amount`.
       fulfilled: Request is fully paid out when `availableAmount` reaches zero.
   allocations:
@@ -95,19 +91,6 @@ properties:
       This value is supplied when a payout request returns a `rejected` status.
     type: string
     readOnly: true
-  reviewerId:
-    description: ID of the reviewer.
-    type: string
-    nullable: true
-    readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
-  reviewTime:
-    description: Date and time when the payout request is reviewed.
-    type: string
-    nullable: true
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
   createdTime:
     description: Date and time when the payout request is created.
     allOf:
