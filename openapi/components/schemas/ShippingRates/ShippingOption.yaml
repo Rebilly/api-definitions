@@ -5,18 +5,20 @@ required:
   - currency
 properties:
   id:
-    description: Shipping rate identifier string.
+    description: ID of the shipping rate.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   name:
     type: string
-    description: Shipping rate name.
+    description: Name of the shipping rate.
   descriptions:
     type: string
-    description: Shipping rate description.
+    description: Description of the shipping rate.
   price:
-    description: Shipping rate price - 0 is a valid value (for free).
+    description: |-
+      Price of the shipping rate price.
+      If `price` is `0`, shipping is free.
     type: number
     format: double
   currency:
