@@ -25,14 +25,22 @@ content:
             - subscription-upgraded
         _embedded:
           type: object
+          description: Embedded objects.
           properties:
             subscription:
               $ref: ../../schemas/Subscription.yaml
         _links:
           type: array
-          description: Related resource links.
-          minItems: 1
+          description: Related links.
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/SubscriptionLink.yaml
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - subscription
 description: Order webhook request body resource.

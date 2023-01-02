@@ -1,4 +1,5 @@
 type: object
+description: Pricing information.
 discriminator:
   propertyName: formula
   mapping:
@@ -13,17 +14,17 @@ properties:
   formula:
     type: string
     description: |-
-      Price formula determines what algorithm is used to calculate the
-      invoice price based on a few factors,
+      Price formula that determines which algorithm is used to calculate the invoice price based on the following factors:
 
-      - the quantity in the order (which may be variable if usage
-      pricing, otherwise determined when creating the order)
+      - Quantity in the order.
+        This value may be variable if you are charging based on usage.
+        If you are not charging based on usage,
+        this value is determined when an order is created.
 
-      - the price brackets data
+      - Price of the quantity range.
+        Some formulas set a price based on defined product quantity ranges.
 
-
-      To determine which formula is correct, please [see the price formula
-      documentation](https://www.rebilly.com/docs/billing/pricing-formulas/).
+      For more information, see [Price formulas](https://www.rebilly.com/docs/billing/pricing-formulas/).
     enum:
       - fixed-fee
       - flat-rate
