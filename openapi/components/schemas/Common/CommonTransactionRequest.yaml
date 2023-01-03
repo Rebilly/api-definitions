@@ -12,35 +12,43 @@ properties:
   currency:
     $ref: ../CurrencyCode.yaml
   amount:
-    description: Transaction amount.
+    description: Amount of the transaction.
     type: number
     format: double
     example: 97.97
   invoiceIds:
-    description: Array of invoice identifiers.
+    description: Array of invoice IDs.
     nullable: true
     type: array
     items:
       $ref: ../ResourceId.yaml
   paymentInstruction:
-    description: Payment instruction. If not supplied, customer's default payment instrument is used.
+    description: |-
+      Payment instruction for the purchase.
+      If this value is not supplied,
+      the customer's default payment instrument is used.
     allOf:
       - $ref: ../PaymentInstruction.yaml
   billingAddress:
     description: |-
       Billing address.
-      If not supplied, the billing address associated with the payment instrument is used, and then customer.
+      If this value is not supplied,
+      the billing address associated with the payment instrument is used.
+      If no billing address is associated with the payment instrument,
+      the customer's billing address is used.
     nullable: true
     type: object
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   requestId:
     description: |-
-      Request id is **recommended**.
-      It prevents duplicate transaction requests within a short period of time.
-      If a duplicate request is sent with the same `requestId` it is ignored to prevent double-billing.
-      It must be unique within a 24-hour period.
-      We recommend generating a UUID v4 as its value.
+      Use this field to prevent duplicate transaction requests that may occur within a short period of time.
+      If a duplicate request is sent with the same `requestId`,
+      it is ignored to prevent double-billing.
+      This value must be unique within a 24-hour period.
+      We recommend generating a UUID V4 as its value.
+
+      > **Important:** This field is recommended.
     type: string
     nullable: true
     maxLength: 50
