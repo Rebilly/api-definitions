@@ -264,7 +264,7 @@ Is Java enabled in a browser:
 ```yaml
   isJavaEnabled:
     type: boolean
-    description: Specifies whether Java is enabled in a browser.
+    description: Specifies if Java is enabled in a browser.
 ```
 
 Is OTP required:
@@ -272,7 +272,7 @@ Is OTP required:
 ```yaml
   otpRequired:
     type: boolean
-    description: Specifies whether a One-Time Password (OTP) is required to exchange the authentication token.
+    description: Specifies if a One-Time Password (OTP) is required to exchange the authentication token.
 ```
 
 Is processed outside of Rebilly:
@@ -280,7 +280,7 @@ Is processed outside of Rebilly:
 ```yaml
   isProcessedOutside:
     type: boolean
-    description: Specifies whether the transaction was processed outside of Rebilly.
+    description: Specifies if the transaction was processed outside of Rebilly.
 ```
 
 #### Website ID example

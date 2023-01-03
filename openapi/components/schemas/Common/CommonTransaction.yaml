@@ -1,7 +1,8 @@
 type: object
+description: Transaction information.
 properties:
   id:
-    description: Unique transaction identifier string.
+    description: ID of the transaction.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
@@ -29,7 +30,7 @@ properties:
       - setup
       - void
   status:
-    description: Status of a transaction.
+    description: Status of the transaction.
     type: string
     readOnly: true
     enum:
@@ -50,7 +51,7 @@ properties:
       - waiting-gateway
       - waiting-refund
   result:
-    description: Result of a transaction.
+    description: Result of the transaction.
     type: string
     x-basic: true
     readOnly: true
@@ -64,7 +65,7 @@ properties:
     x-type: Money
     x-sortable: true
     x-basic: true
-    description: Total amount of a transaction.
+    description: Total amount of the transaction.
     type: number
     format: double
     readOnly: true
@@ -87,7 +88,10 @@ properties:
     allOf:
       - $ref: ../CurrencyCode.yaml
   requestAmount:
-    description: Amount of the payment request. If an adjustment occurs, the purchased amount may differ from the billing amount.
+    description: |-
+      Amount of the payment request.
+      If an adjustment occurs,
+      the purchase amount may differ from the billing amount.
     type: number
     x-type: Money
     x-currency-field: requestCurrency
@@ -127,7 +131,7 @@ properties:
     items:
       $ref: ../ResourceId.yaml
   isRebill:
-    description: Specifies whether the transaction is one of a number of recurring payments in a subscription, excluding trials or setup fees.
+    description: Specifies if the transaction is one of a number of recurring payments in a subscription, excluding trials or setup fees.
     type: boolean
     readOnly: true
   rebillNumber:
@@ -142,7 +146,7 @@ properties:
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   has3ds:
-    description: Specifies whether the transaction uses 3D Secure.
+    description: Specifies if the transaction uses 3D Secure.
     type: boolean
     readOnly: true
   3ds:
@@ -161,7 +165,7 @@ properties:
   isRetry:
     type: boolean
     readOnly: true
-    description: Specifies whether a transaction is a retry.
+    description: Specifies if a transaction is a retry.
   billingDescriptor:
     type: string
     readOnly: true
@@ -179,7 +183,7 @@ properties:
     type: string
     x-sortable: true
   hasAmountAdjustment:
-    description: Specifies whether the transaction has amount adjustment.
+    description: Specifies if the transaction has amount adjustment.
     type: boolean
     readOnly: true
   gatewayName:
