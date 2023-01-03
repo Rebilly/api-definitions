@@ -23,22 +23,12 @@ properties:
     readOnly: true
     enum:
       - pending
-      - accepted
-      - rejected
       - partially-fulfilled
       - fulfilled
     x-enumDescriptions:
-      pending: Request is awaiting review.
-      accepted: Request is accepted and awaiting processing.
-      rejected: Request is rejected.
+      pending: Request is awaiting fulfillment.
       partially-fulfilled: Request is partially paid out when `availableAmount` is less than `amount`.
       fulfilled: Request is fully paid out when `availableAmount` reaches zero.
-  reason:
-    description: |-
-      Rejection reason of the payout request.
-      This value is supplied when a payout request returns a `rejected` status.
-    type: string
-    readOnly: true
   createdTime:
     description: Date and time when the payout request is created.
     allOf:
