@@ -6,19 +6,19 @@ get:
   summary: Search merchant data
   operationId: GetSearch
   x-sdk-operation-name: get
-  description: Search merchant data to return resources such as customers, invoices, orders, transactions.
+  description: Searches merchant data to return resources such as customers, invoices, orders, transactions.
   parameters:
     - $ref: ../components/parameters/collectionSort.yaml
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
     - name: q
       in: query
-      description: Default search. It searches across resources and many fields.
+      description: Default search. Searches across resources and fields.
       schema:
         type: string
   responses:
     '200':
-      description: Results keyed by resource.
+      description: Results keyed by a resource.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
