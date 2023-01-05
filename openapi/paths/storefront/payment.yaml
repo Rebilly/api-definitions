@@ -10,9 +10,10 @@ post:
     - CustomerJWT: []
     - PublishableApiKey: []
   description: |-
-    Perform a payment for a transaction or an invoice.
+    Performs a payment for a transaction or an invoice.
 
-    If Customer JWT contains `transactionId` or `invoiceId` it is used instead.
+    If the customer's JSON Web Token (JWT) contains a `transactionId`, or `invoiceId` value,
+    these values are used instead of the JWT value.
     The `transactionId` has a higher priority than the `invoiceId`.
   requestBody:
     $ref: ../../components/requestBodies/storefront/PostPayment.yaml

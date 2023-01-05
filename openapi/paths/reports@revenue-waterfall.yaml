@@ -4,13 +4,19 @@ servers:
     variables:
       organizationId:
         default: unknown
-        description: Your organization ID.
+        description: |-
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
   - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
     description: Live server
     variables:
       organizationId:
         default: unknown
-        description: Your organization ID.
+        description: |-
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 get:
   x-badge: Experimental
   x-products:
@@ -20,7 +26,13 @@ get:
   summary: Retrieve a revenue waterfall report
   operationId: GetRevenueWaterfallReport
   x-sdk-operation-name: getRevenueWaterfall
-  description: Retrieve a revenue waterfall report.
+  description: |-
+    Retrieves a revenue waterfall report.
+
+    Use revenue waterfall reports to view revenue that is recognized up to a given month.
+    Revenue waterfall reports contain information on booked revenue,
+    recognized revenue for the months in the issued period,
+    and the remaining revenue up to the specified month.
   parameters:
     - name: currency
       in: query
@@ -30,7 +42,7 @@ get:
         $ref: ../components/schemas/CurrencyCode.yaml
     - name: issuedFrom
       in: query
-      description: Revenue invoice issued from month.
+      description: Date from which revenue invoice is issued.
       required: true
       schema:
         type: string
@@ -38,7 +50,7 @@ get:
         example: 2022-01
     - name: issuedTo
       in: query
-      description: Revenue invoice issued to month.
+      description: Date to which revenue invoice is issued.
       required: true
       schema:
         type: string
@@ -46,7 +58,7 @@ get:
         example: 2022-04
     - name: recognizedTo
       in: query
-      description: Revenue recognized up to month.
+      description: Month up to which revenue is recognized.
       required: true
       schema:
         type: string

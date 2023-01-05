@@ -7,20 +7,28 @@ content:
           type: string
         eventType:
           type: string
-          description: Webhook event type.
+          description: Type of webhook event.
           enum:
             - dispute-created
             - dispute-modified
         _embedded:
           type: object
+          description: Embedded objects.
           properties:
             dispute:
               $ref: ../../schemas/Dispute.yaml
         _links:
           type: array
-          description: Related resource links.
-          minItems: 1
+          description: Related links.
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/DisputeLink.yaml
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - dispute
 description: Dispute webhook request body resource.

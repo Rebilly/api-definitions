@@ -1,27 +1,39 @@
 type: object
 properties:
   status:
-    description: MFA enrollment status.
+    description: Status of MFA enrollment.
     type: string
     enum:
       - active
       - inactive
   type:
-    description: MFA enrollment type. Type `duo` can't be updated or deleted. Contact support if you need to reset your Duo MFA.
+    description: |-
+      Type of MFA enrollment.
+      Type `duo` cannot be updated or deleted.
+      If you need to reset your Duo MFA, [Contact support](https://www.rebilly.com/support/).
     type: string
     enum:
       - duo
       - guardian
   lastAuthTime:
-    description: Last time MFA verification passed. To disable MFA it must be no more than 10 minutes before disable.
+    description: |-
+      Date and time when MFA verification is most recently passed.
+      To disable MFA, no more than 10 minutes must elapse between this value and the request to disable MFA.
     allOf:
       - $ref: ./ServerTimestamp.yaml
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
-    minItems: 1
     items:
-      anyOf:
-        - $ref: ./Links/SelfLink.yaml
-        - $ref: ./Links/EnrollmentLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - enrollment
