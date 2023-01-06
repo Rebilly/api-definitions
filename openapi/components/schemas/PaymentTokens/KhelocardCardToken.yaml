@@ -6,7 +6,7 @@ required:
   - paymentInstrument
 properties:
   method:
-    description: Token method.
+    description: Payment method of the token.
     type: string
     enum: [Khelocard]
   paymentInstrument:
@@ -23,11 +23,11 @@ properties:
         type: string
         writeOnly: true
       cvv:
-        description: Khelocard card CVV.
+        description: Khelocard Card Verification Value (CVV).
         type: string
         writeOnly: true
       last4:
-        description: Khelocard card number last 4 digits.
+        description: Last 4 difits of the Khelocard card number.
         type: string
         readOnly: true
       expMonth:
@@ -41,7 +41,7 @@ properties:
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   id:
-    description: Token identifier string.
+    description: ID of the token.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
@@ -61,11 +61,11 @@ properties:
   updatedTime:
     $ref: ../UpdatedTime.yaml
   usageTime:
-    description: Token usage time.
+    description: Date and time when the token is used.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   expirationTime:
-    description: Token expiration time.
+    description: Date and time when the token is expired.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   _links:

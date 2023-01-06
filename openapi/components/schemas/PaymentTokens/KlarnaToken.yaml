@@ -1,11 +1,11 @@
 type: object
-title: Klarna Token
+title: Klarna token
 required:
   - method
   - paymentInstrument
 properties:
   method:
-    description: Token payment method.
+    description: Payment method of the token.
     type: string
     enum: [Klarna]
   paymentInstrument:
@@ -19,7 +19,7 @@ properties:
         description: Klarna authorization token.
         type: string
       klarnaSessionId:
-        description: Klarna session ID.
+        description: ID of the Klarna.
         type: string
   billingAddress:
     description: Billing address object.
@@ -28,7 +28,7 @@ properties:
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   id:
-    description: Token identifier string.
+    description: ID of the token.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
@@ -48,11 +48,11 @@ properties:
   updatedTime:
     $ref: ../UpdatedTime.yaml
   usageTime:
-    description: Token usage time.
+    description: Date and time when the token is used.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   expirationTime:
-    description: Token expiration time.
+    description: Date and time when the token is expired.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   _links:
