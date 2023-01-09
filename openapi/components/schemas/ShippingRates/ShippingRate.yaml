@@ -4,14 +4,16 @@ allOf:
       filter:
         type: string
         description: |-
-          Filter based on the invoice properties used to determine when the rate is applicable.
-          Empty filters means the rate is always applicable.
+          Filter based on invoice properties that is used to determine when the rate is applicable.
+          If no filters are used, the rate is always applicable.
         default: ''
         example: 'deliveryAddress.country:US,CA,RU;amount:100..1000'
         allOf:
           - $ref: ../FilterString.yaml
       status:
-        description: If `inactive` then the shipping rate never applies.
+        description: |-
+          Status of the shipping rate.
+          If `status` is `inactive` the shipping rate is not applied.
         type: string
         enum:
           - active
