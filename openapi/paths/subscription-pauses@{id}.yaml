@@ -8,7 +8,7 @@ get:
   summary: Retrieve a subscription pause
   operationId: GetSubscriptionPause
   x-sdk-operation-name: get
-  description: Retrieve a subscription pause with specified identifier string.
+  description: Retrieves a subscription pause with a specified ID.
   responses:
     '200':
       description: Pause retrieved.
@@ -30,7 +30,7 @@ put:
   summary: Update a subscription pause
   operationId: PutSubscriptionPause
   x-sdk-operation-name: update
-  description: Update a subscription pause.
+  description: Updates a subscription pause.
   requestBody:
     content:
       application/json:
@@ -66,7 +66,10 @@ delete:
   summary: Delete a subscription pause
   operationId: DeleteSubscriptionPause
   x-sdk-operation-name: delete
-  description: Delete a subscription pause. Pending pause is revoked, and ongoing pause is finished.
+  description: |-
+    Deletes a subscription pause with a specified ID.
+    If the specified pause is `pending`, it is `revoked`.
+    If the specified pause is `ongoing`, it is `finished`.
   responses:
     '204':
       description: Subscription pause revoked or finished.
