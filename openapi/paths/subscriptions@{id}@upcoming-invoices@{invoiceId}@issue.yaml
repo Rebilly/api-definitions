@@ -2,7 +2,7 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
   - name: invoiceId
     in: path
-    description: Upcoming Invoice ID.
+    description: ID of the upcoming invoice.
     required: true
     schema:
       type: string
@@ -14,7 +14,7 @@ post:
   summary: Issue an upcoming invoice for early pay
   operationId: PostUpcomingInvoiceIssuance
   x-sdk-operation-name: issueUpcomingInvoice
-  description: Issue an upcoming invoice with specified identifier string for early pay.
+  description: Issues an upcoming invoice with a specified ID for early pay.
   requestBody:
     content:
       application/json:
@@ -24,7 +24,7 @@ post:
     required: true
   responses:
     '201':
-      description: Upcoming Invoice issued.
+      description: Upcoming invoice issued.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
