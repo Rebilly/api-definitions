@@ -4,18 +4,24 @@ servers:
     variables:
       organizationId:
         default: unknown
-        description: Your organization ID.
+        description: |-
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
   - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
     description: Live server
     variables:
       organizationId:
         default: unknown
-        description: Your organization ID.
+        description: |-
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 parameters:
   - name: subscriptionId
     in: path
     required: true
-    description: ID of the order.
+    description: ID of the subscription order.
     schema:
       type: string
 get:
@@ -27,7 +33,7 @@ get:
   summary: Retrieve subscription order summary metrics
   operationId: GetSubscriptionSummaryMetricReport
   x-sdk-operation-name: getSubscriptionSummaryMetrics
-  description: Retrieve subscription order summary metrics.
+  description: Retrieves summary metrics for a subscription order with a specified ID.
   responses:
     '200':
       description: Metrics retrieved.
