@@ -11,22 +11,25 @@ post:
     - JWT: []
     - ApplicationJWT: []
   description: |-
-    Create a transaction of type `sale` or `authorize`.
-    This endpoint supports two main styles of transactions:
-      1. A real-time decision and response.
-      2. User approval/interaction is required.
+    Creates a transaction of type `sale` or `authorize`.
 
-    A real-time decision is very familiar.
-    You send a request, and inspect the `result` of the response for `approved` or `declined`.
+    Use this operation for the following transactions.
 
-    However, many transactions, especially those for alternative methods, require the user to interact with a 3rd party.
-    You may be able to envision PayPal, for example, the user must give permission to complete the payment (or accept the billing agreement).
+    #### Real-time decision and response
 
-    Even payment cards may require user approval in the case of 3D secure authentication.
-    In the event that approval is required, you receive a response with a `result` value `unknown` and `status` value `waiting-approval`.
+    In this transaction, you send a request and inspect the `result` of the response for `approved` or `declined`.
+
+    #### User approval/interaction required
+
+    In this transaction, user approval is required to complete the transaction.
+    User approval generally requires the user to interact with a third party,
+    and is common in many transactions for alternative methods.
+    For example, PayPal requires user permission to complete a payment or to accept a billing agreement.
+    Payment cards may also require user approval for 3D secure authentication.
+
+    If approval is required, you receive a response with a `result` value of `unknown` and a `status` value of `waiting-approval`.
     The `_links` property of the response has a link for the `approvalUrl`.
-
-    In this case you would either open the `approvalUrl` in an iframe or in a pop (better workflow for mobile).
+    Open the `approvalUrl` in an iframe or in a pop. A pop is a better workflow for mobile devices.
   parameters:
     - $ref: ../components/parameters/collectionExpand.yaml
   requestBody:
@@ -64,7 +67,7 @@ get:
   summary: Retrieve transactions
   operationId: GetTransactionCollection
   x-sdk-operation-name: getAll
-  description: Retrieve a list of transactions.
+  description: Retrieves a list of transactions.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
