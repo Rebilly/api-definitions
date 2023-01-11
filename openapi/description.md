@@ -1,16 +1,14 @@
 # Introduction
 [comment]: <> (x-product-description-placeholder)
-The Rebilly API is built on HTTP.
-Our API is RESTful.
-It has predictable resource URLs.
-It returns HTTP response codes to indicate errors.
+The Rebilly API is built on HTTP and is RESTful.
+It has predictable resource URLs and returns HTTP response codes to indicate errors.
 It also accepts and returns JSON in the HTTP body.
-You can use your favorite HTTP/REST library for your programming language to use the API,
-or you can use one of our SDKs (currently available in [PHP](https://github.com/Rebilly/rebilly-php) and [Javascript](https://github.com/Rebilly/rebilly-js-sdk)).
+Use your favorite HTTP/REST library in your programming language when using this API,
+or use one of the Rebilly SDKs,
+which are available in [PHP](https://github.com/Rebilly/rebilly-php) and [Javascript](https://github.com/Rebilly/rebilly-js-sdk).
 
-We have other APIs that are also available.
-Every action from our [app](https://app.rebilly.com) is supported by an API which is documented and available for use so that you may automate any workflows necessary.
-This document contains the most commonly integrated resources.
+Every action in the [Rebilly UI](https://app.rebilly.com) is supported by an API which is documented and available for use, so that you may automate any necessary workflows or processes.
+This API reference documentation contains the most commonly integrated resources.
 
 # Authentication
 
@@ -28,13 +26,13 @@ Rebilly offers four forms of authentication: secret key, publishable key, JSON W
 
 To create or manage API keys, select one of the following:
 
-- Use the Rebilly UI: In the left navigation bar, click **Automations**, **Integrations**, **Custom integrations**, then click **API keys**.
-- Use the Rebilly API: go to [API Keys](https://user-api-docs.rebilly.com/#tag/API-Keys).
+- Use the Rebilly UI: see [Manage API keys](https://www.rebilly.com/docs/dev-docs/api-keys/#manage-api-keys)
+- Use the Rebilly API: see the [API key operations](https://all-rebilly.redoc.ly/tag/API-keys).
 
-For more information, see [API keys](https://www.rebilly.com/docs/concepts-and-features/concept/api-keys).
+For more information on API keys, see [API keys](https://www.rebilly.com/docs/concepts-and-features/concept/api-keys).
 
 # Errors
-Rebilly follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs.  As with our normal API responses, your client must be prepared to gracefully handle additional members of the response.
+Rebilly follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807), which is also known as Problem Details for HTTP APIs. As with any API responses, your client must be prepared to gracefully handle additional members of the response. The following section describes common error types.
 
 ## Forbidden
 <RedocResponse pointer={"#/components/responses/Forbidden"} />
@@ -53,23 +51,24 @@ Rebilly follows the error response format proposed in [RFC 7807](https://tools.i
 
 # SDKs
 
-Rebilly offers a Javascript SDK and a PHP SDK to help interact with
-the API.  However, no SDK is required to use the API.
+Rebilly provides a JavaScript SDK and a PHP SDK to help interact with the Rebilly API.
+However, no SDK is required to use the API.
 
-Rebilly also offers [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/),
- a client-side iFrame-based solution to help
-create payment tokens while minimizing PCI DSS compliance burdens
-and maximizing the customization ability. [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/)
-is interacting with the [payment tokens creation operation](https://api-reference.rebilly.com/tag/Payment-Tokens#operation/PostToken).
+Rebilly also provides [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/),
+a client-side iFrame-based solution, to help create payment tokens while minimizing PCI DSS compliance burdens
+and maximizing your customization ability.
+[FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/) interacts with the [payment tokens creation operation](https://all-rebilly.redoc.ly/tag/Payment-tokens/operation/PostToken).
 
-## Javascript SDK
+## JavaScript SDK
 
-Installation and usage instructions can be found [here](https://docs.rebilly.com/docs/developer-docs/sdks).
-SDK code examples are included in these docs.
+For installation and usage instructions, see [SDKs](https://www.rebilly.com/docs/dev-docs/sdks/).
+All JavaScript SDK code examples are included in the API reference documentation.
 
 ## PHP SDK
-For all PHP SDK examples provided in these docs you need to configure the `$client`.
-You may do it like this:
+
+For installation and usage instructions, see [SDKs](https://www.rebilly.com/docs/dev-docs/sdks/).
+All SDK code examples are included in the API reference documentation.
+To use them, you must configure the `$client` as follows:
 
 ```php
 $client = new Rebilly\Client([
@@ -79,50 +78,55 @@ $client = new Rebilly\Client([
 ```
 
 # Using filter with collections
-Rebilly provides collections filtering. You can use `?filter` param on collections to define which records should be shown in the response.
 
-Here is filter format description:
+Rebilly provides collections filtering. Use the `?filter` parameter on collections to define which records should be shown in the response.
 
-- Fields and values in filter are separated with `:`: `?filter=firstName:John`.
+The following is the filter format description:
+
+- Fields and values in the filter are separated with `:`: `?filter=firstName:John`.
 
 - Sub-fields are separated with `.`: `?filter=billingAddress.country:US`.
 
-- Multiple filters are separated with `;`: `?filter=firstName:John;lastName:Doe`.
-  They are joined with `AND` logic. In this example: `firstName:John` AND `lastName:Doe`.
+- Multiple filters are separated with `;`: `?filter=firstName:John;lastName:Doe`. \
+  They are joined with `AND` logic. Example: `firstName:John` AND `lastName:Doe`.
 
-- You can use multiple values using `,` as values separator: `?filter=firstName:John,Bob`.
-  Multiple values specified for a field are joined with `OR` logic. In this example: `firstName:John` OR `firstName:Bob`.
+- You can use multiple values using `,` as values separator: `?filter=firstName:John,Bob`. \
+  Multiple values specified for a field are joined with `OR` logic. Example: `firstName:John` OR `firstName:Bob`.
 
-- To negate the filter use `!`: `?filter=firstName:!John`.
-  Note that you can negate multiple values like this: `?filter=firstName:!John,!Bob`.
-  This filter rule excludes all Johns and Bobs from the response.
+- To negate the filter, use `!`: `?filter=firstName:!John`.
+- To negate multiple values, use the following: `?filter=firstName:!John,!Bob`.
+  This filter rule excludes all `Johns` and `Bobs` from the response.
 
-- You can use range filters like this: `?filter=amount:1..10`.
+- To use range filters, use this: `?filter=amount:1..10`.
 
-- You can use gte (greater than or equals) filter like this: `?filter=amount:1..`, or lte (less than or equals) than filter like this: `?filter=amount:..10`.
+- To use a gte (greater than or equals) filter, use: `?filter=amount:1..`.
+  This also works for datetime-based fields.
+- To use a lte (less than or equals) filter, use: `?filter=amount:..10`.
   This also works for datetime-based fields.
 
-- You can create some [specified values lists](https://user-api-docs.rebilly.com/#tag/Lists) and use them in filter: `?filter=firstName:@yourListName`.
-  You can also exclude list values: `?filter=firstName:!@yourListName`.
+- You can also create [specified values lists](https://user-api-docs.rebilly.com/#tag/Lists) and use them in filters. Example: `?filter=firstName:@yourListName`. \
+  You can also exclude list values: `?filter=firstName:!@yourListName`. \
+  Use value lists to compare against a list of data when setting conditions for rules or binds,
+  or applying filters to data table segments.
+  Commonly used lists contain values related to conditions that target specific properties such as: customers, transactions, or BINs.
 
-- Datetime-based fields accept values formatted using RFC 3339 like this: `?filter=createdTime:2021-02-14T13:30:00Z`. 
+- Datetime-based fields accept values formatted using RFC 3339. Example: `?filter=createdTime:2021-02-14T13:30:00Z`.
 
 # Expand to include embedded objects
-Rebilly provides the ability to pre-load additional objects with a request. 
 
-You can use `?expand` param on most requests to expand and include embedded objects within the `_embedded` property of the response.
+Rebilly provides the ability to pre-load additional objects with a request.
 
-The `_embedded` property contains an array of 
-objects keyed by the expand parameter value(s).
+You can use the `?expand` parameter on most requests to expand and include embedded objects within the `_embedded` property of the response.
+The `_embedded` property contains an array of objects keyed by the expand parameter values.
+To expand multiple objects, pass them as a comma-separated list of objects.
 
-You may expand multiple objects by passing them
-as comma-separated to the expand value like so:
+Example request containing multiple objects:
 
 ```
 ?expand=recentInvoice,customer
 ```
 
-And in the response, you would see:
+Example response:
 
 ```
 "_embedded": [
@@ -130,14 +134,15 @@ And in the response, you would see:
     "customer": {...}
 ]
 ```
-Expand may be used not only on `GET` requests but also on `PATCH`, `POST`, `PUT` requests too.
 
-# Getting started guide
+Expand may be used on `GET`, `PATCH`, `POST`, `PUT` requests.
 
-This API has over [500 operations](https://all-rebilly.redoc.ly/).
-That's more than you need to implement your use cases.
-If you have a use case you would like to implement,
-please consult us for feedback on the best API operations for the task.
+# Get started
 
-Our [getting started guides](https://www.rebilly.com/docs/content/dev-docs/concept/integrations/) demonstrates payment form use cases.
-It allows us to highlight core resources in Rebilly that are helpful for many other use cases too.
+The full [Rebilly API](https://all-rebilly.redoc.ly/) has over 500 operations.
+This is likely more than you may need to implement your use cases.
+If you would like to implement a particular use case,
+[contact Rebilly](https://www.rebilly.com/support/) for guidance and feedback on the best API operations to use for the task.
+
+To integrate Rebilly, and learn about related resources and concepts,
+see [Get started](https://www.rebilly.com/docs/dev-docs/get-started/).
