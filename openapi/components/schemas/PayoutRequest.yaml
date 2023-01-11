@@ -37,10 +37,12 @@ properties:
     readOnly: true
     enum:
       - pending
+      - instrument-selected
       - partially-fulfilled
       - fulfilled
     x-enumDescriptions:
-      pending: Request is awaiting fulfillment.
+      pending: Request is awaiting customer's selection of the payment instrument or fulfillment.
+      instrument-selected: Request has a selected payment instrument and is awaiting fulfillment.
       partially-fulfilled: Request is partially paid out when `availableAmount` is less than `amount`.
       fulfilled: Request is fully paid out when `availableAmount` reaches zero.
   selectPaymentInstrumentUrl:
