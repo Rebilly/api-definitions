@@ -81,7 +81,7 @@ $client = new Rebilly\Client([
 
 Rebilly provides collections filtering. Use the `?filter` parameter on collections to define which records should be shown in the response.
 
-The following is the filter format description:
+Format description:
 
 - Fields and values in the filter are separated with `:`: `?filter=firstName:John`.
 
@@ -90,15 +90,15 @@ The following is the filter format description:
 - Multiple filters are separated with `;`: `?filter=firstName:John;lastName:Doe`. \
   They are joined with `AND` logic. Example: `firstName:John` AND `lastName:Doe`.
 
-- You can use multiple values using `,` as values separator: `?filter=firstName:John,Bob`. \
+- To use multiple values, use `,` as values separators: `?filter=firstName:John,Bob`. \
   Multiple values specified for a field are joined with `OR` logic. Example: `firstName:John` OR `firstName:Bob`.
 
 - To negate the filter, use `!`: `?filter=firstName:!John`.
 
-- To negate multiple values, use the following: `?filter=firstName:!John,!Bob`.
+- To negate multiple values, use: `?filter=firstName:!John,!Bob`.
   This filter rule excludes all `Johns` and `Bobs` from the response.
 
-- To use range filters, use this: `?filter=amount:1..10`.
+- To use range filters, use: `?filter=amount:1..10`.
 
 - To use a gte (greater than or equals) filter, use: `?filter=amount:1..`.
   This also works for datetime-based fields.
@@ -106,7 +106,7 @@ The following is the filter format description:
 - To use a lte (less than or equals) filter, use: `?filter=amount:..10`.
   This also works for datetime-based fields.
 
-- You can also create [specified values lists](https://user-api-docs.rebilly.com/#tag/Lists) and use them in filters. Example: `?filter=firstName:@yourListName`. \
+- To create [specified values lists](https://user-api-docs.rebilly.com/#tag/Lists) and use them in filters, use: `?filter=firstName:@yourListName`. \
   You can also exclude list values: `?filter=firstName:!@yourListName`. \
   Use value lists to compare against a list of data when setting conditions for rules or binds,
   or applying filters to data table segments.
