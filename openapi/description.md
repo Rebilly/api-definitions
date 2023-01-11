@@ -94,6 +94,7 @@ The following is the filter format description:
   Multiple values specified for a field are joined with `OR` logic. Example: `firstName:John` OR `firstName:Bob`.
 
 - To negate the filter, use `!`: `?filter=firstName:!John`.
+
 - To negate multiple values, use the following: `?filter=firstName:!John,!Bob`.
   This filter rule excludes all `Johns` and `Bobs` from the response.
 
@@ -101,6 +102,7 @@ The following is the filter format description:
 
 - To use a gte (greater than or equals) filter, use: `?filter=amount:1..`.
   This also works for datetime-based fields.
+  
 - To use a lte (less than or equals) filter, use: `?filter=amount:..10`.
   This also works for datetime-based fields.
 
