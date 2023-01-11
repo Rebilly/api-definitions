@@ -5,7 +5,7 @@ It has predictable resource URLs and returns HTTP response codes to indicate err
 It also accepts and returns JSON in the HTTP body.
 Use your favorite HTTP/REST library in your programming language when using this API,
 or use one of the Rebilly SDKs,
-which are available in [PHP](https://github.com/Rebilly/rebilly-php) and [Javascript](https://github.com/Rebilly/rebilly-js-sdk).
+which are available in [PHP](https://github.com/Rebilly/rebilly-php) and [JavaScript](https://github.com/Rebilly/rebilly-js-sdk).
 
 Every action in the [Rebilly UI](https://app.rebilly.com) is supported by an API which is documented and available for use, so that you may automate any necessary workflows or processes.
 This API reference documentation contains the most commonly integrated resources.
