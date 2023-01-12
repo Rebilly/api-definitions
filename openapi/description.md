@@ -29,7 +29,7 @@ Rebilly offers four forms of authentication: secret key, publishable key, JSON W
 To create or manage API keys, select one of the following:
 
 - Use the Rebilly UI: In the left navigation bar, click **Automations**, **Integrations**, **Custom integrations**, then click **API keys**.
-- Use the Rebilly API: go to [API Keys](https://user-api-docs.rebilly.com/#tag/API-Keys).
+- Use the Rebilly API: go to [API Keys](https://all-rebilly.redoc.ly/#tag/API-Keys).
 
 For more information, see [API keys](https://www.rebilly.com/docs/concepts-and-features/concept/api-keys).
 
@@ -60,7 +60,7 @@ Rebilly also offers [FramePay](https://docs.rebilly.com/docs/developer-docs/fram
  a client-side iFrame-based solution to help
 create payment tokens while minimizing PCI DSS compliance burdens
 and maximizing the customization ability. [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/)
-is interacting with the [payment tokens creation operation](https://api-reference.rebilly.com/tag/Payment-Tokens#operation/PostToken).
+is interacting with the [payment tokens creation operation](https://all-rebilly.redoc.ly/tag/Payment-tokens/operation/PostToken/).
 
 ## Javascript SDK
 
@@ -102,7 +102,7 @@ Here is filter format description:
 - You can use gte (greater than or equals) filter like this: `?filter=amount:1..`, or lte (less than or equals) than filter like this: `?filter=amount:..10`.
   This also works for datetime-based fields.
 
-- You can create some [specified values lists](https://user-api-docs.rebilly.com/#tag/Lists) and use them in filter: `?filter=firstName:@yourListName`.
+- You can create some [specified values lists](https://all-rebilly.redoc.ly/#tag/Lists) and use them in filter: `?filter=firstName:@yourListName`.
   You can also exclude list values: `?filter=firstName:!@yourListName`.
 
 - Datetime-based fields accept values formatted using RFC 3339 like this: `?filter=createdTime:2021-02-14T13:30:00Z`. 
