@@ -4,23 +4,32 @@ servers:
     variables:
       organizationId:
         default: unknown
-        description: Your organization ID.
+        description: |-
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
   - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
     description: Live server
     variables:
       organizationId:
         default: unknown
-        description: Your organization ID.
+        description: |-
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 get:
   x-badge: Experimental
   x-products:
     - Reports
   tags:
     - Reports
-  summary: Retrieve a monthly recurring revenue report
+  summary: Retrieve a MRR report
   operationId: GetMonthlyRecurringRevenueReport
   x-sdk-operation-name: getMonthlyRecurringRevenue
-  description: Retrieve a monthly recurring revenue report.
+  description: |-
+    Retrieves a Monthly Recurring Revenue (MRR) report.
+
+    Use MRR reports to view information on the predictable recurring revenue for your business over a period of months.
   parameters:
     - name: currency
       in: query
@@ -30,7 +39,7 @@ get:
         $ref: ../components/schemas/CurrencyCode.yaml
     - name: periodStart
       in: query
-      description: Report start date.
+      description: Date and time when the report starts.
       required: true
       schema:
         type: string
@@ -38,7 +47,7 @@ get:
         example: 2022-01
     - name: periodEnd
       in: query
-      description: Report end date.
+      description: Date and time when the report ends.
       required: true
       schema:
         type: string

@@ -21,6 +21,7 @@ properties:
   description:
     description: Description of the invoice item.
     type: string
+    maxLength: 1000
   unitPrice:
     description: Unit price of the invoice item.
     type: number
@@ -64,13 +65,20 @@ properties:
       - $ref: ./InvoiceTaxItem.yaml
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
-    minItems: 1
     items:
-      anyOf:
-        - $ref: ../Links/SelfLink.yaml
-        - $ref: ../Links/ProductLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - product
   _embedded:
     type: array
     description: Embedded objects that are requested by the `expand` query parameter.

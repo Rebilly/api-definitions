@@ -59,17 +59,24 @@ properties:
     $ref: ../UpdatedTime.yaml
   isPublic:
     description: |-
-      Specifies whether the file is available publicly without authentication.
+      Specifies if the file is available publicly without authentication.
       If this value is `true`, the permalink in the `_links` section contains the public URL.
     type: boolean
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
-    minItems: 3
     items:
-      anyOf:
-        - $ref: ../Links/SelfLink.yaml
-        - $ref: ../Links/FileDownloadLink.yaml
-        - $ref: ../Links/SignedLinkLink.yaml
-        - $ref: ../Links/PermalinkLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - download
+            - signedLink
+            - permalink

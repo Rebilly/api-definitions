@@ -101,25 +101,36 @@ properties:
     readOnly: true
   isEddRequired:
     description: |-
-      Specifies whether Enhanced Due Diligence (EDD) is enabled for this customer.
+      Specifies if Enhanced Due Diligence (EDD) is enabled for this customer.
       For more information, see [Enhanced Due Diligence](https://www.rebilly.com/docs/kyc-and-aml/edd/).
     type: boolean
     default: false
   hasFulfilledKyc:
-    description: Specifies whether the customer has accepted and reviewed identity and address documents, or an accepted credit file document.
+    description: Specifies if the customer has accepted and reviewed identity and address documents, or an accepted credit file document.
     type: boolean
     readOnly: true
+  organizationId:
+    readOnly: true
+    allOf:
+      - $ref: ./Organizations/OrganizationId.yaml
   _links:
     type: array
     description: Related links.
     readOnly: true
-    minItems: 3
     items:
-      anyOf:
-        - $ref: ./Links/SelfLink.yaml
-        - $ref: ./Links/DefaultPaymentInstrumentLink.yaml
-        - $ref: ./Links/LeadSourceLink.yaml
-        - $ref: ./Links/WebsiteLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - defaultPaymentInstrument
+            - leadSource
+            - website
   _embedded:
     type: array
     description: Array of embedded objects that are requested using the `expand` query string parameter.

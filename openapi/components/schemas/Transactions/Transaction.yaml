@@ -111,7 +111,7 @@ allOf:
       paymentInstrument:
         $ref: ../PaymentInstruments/ValueObjects/PaymentInstrumentValueObject.yaml
       hasDcc:
-        description: Specifies whether Dynamic Currency Conversion (DCC) applies to the transaction.
+        description: Specifies if Dynamic Currency Conversion (DCC) applies to the transaction.
         type: boolean
         readOnly: true
       dcc:
@@ -141,7 +141,7 @@ allOf:
               - selected
               - unknown
       hasBumpOffer:
-        description: Specifies whether a transaction has a bump offer.
+        description: Specifies if a transaction has a bump offer.
         type: boolean
         readOnly: true
       bumpOffer:
@@ -190,7 +190,7 @@ allOf:
       notificationUrl:
         $ref: ./TransactionNotificationUrl.yaml
       isDisputed:
-        description: Specifies whether a transaction is disputed.
+        description: Specifies if a transaction is disputed.
         type: boolean
         readOnly: true
       disputeTime:
@@ -216,18 +216,18 @@ allOf:
           - unknown
       isReconciled:
         description: |-
-          Specifies whether the transaction is verified with gateway batch data.
+          Specifies if the transaction is verified with gateway batch data.
           If the transaction is not disputed, this value is `null`.
         type: boolean
         readOnly: true
       isProcessedOutside:
-        description: Specifies whether the transaction is processed outside of Rebilly.
+        description: Specifies if the transaction is processed outside of Rebilly.
         type: boolean
       isMerchantInitiated:
-        description: Specifies whether the transaction is initiated by the merchant.
+        description: Specifies if the transaction is initiated by the merchant.
         type: boolean
       hadDiscrepancy:
-        description: Specifies whether the transaction is updated due to a discrepancy with its source of truth.
+        description: Specifies if the transaction is updated due to a discrepancy with its source of truth.
         type: boolean
         readOnly: true
       orderId:
@@ -273,27 +273,38 @@ allOf:
         x-sortable: true
       limits:
         $ref: ../TransactionLimitAmount.yaml
+      organizationId:
+        readOnly: true
+        allOf:
+          - $ref: ../Organizations/OrganizationId.yaml
       _links:
         type: array
-        description: Related resource links.
+        description: Related links.
         readOnly: true
-        minItems: 1
         items:
-          anyOf:
-            - $ref: ../Links/SelfLink.yaml
-            - $ref: ../Links/WebsiteLink.yaml
-            - $ref: ../Links/CustomerLink.yaml
-            - $ref: ../Links/GatewayAccountLink.yaml
-            - $ref: ../Links/PaymentCardLink.yaml
-            - $ref: ../Links/ParentTransactionLink.yaml
-            - $ref: ../Links/LeadSourceLink.yaml
-            - $ref: ../Links/ApprovalUrlLink.yaml
-            - $ref: ../Links/RefundUrlLink.yaml
-            - $ref: ../Links/TransactionUpdateUrlLink.yaml
-            - $ref: ../Links/DisputeLink.yaml
-            - $ref: ../Links/InvoicesLink.yaml
-            - $ref: ../Links/QueryUrlLink.yaml
-            - $ref: ../Links/TransactionRedirectUrlLink.yaml
+          type: object
+          properties:
+            href:
+              description: Link URL.
+              type: string
+            rel:
+              description: Type of link.
+              type: string
+              enum:
+                - self
+                - website
+                - customer
+                - gatewayAccount
+                - paymentCard
+                - parentTransaction
+                - leadSource
+                - approvalUrl
+                - refundUrl
+                - updateUrl
+                - dispute
+                - invoices
+                - queryUrl
+                - redirectUrl
       _embedded:
         type: array
         description: Embedded objects that are requested by the `expand` query parameter.
