@@ -1,14 +1,27 @@
 type: object
 nullable: true
 required:
-  - scoreValue
-  - threshold
+  - brackets
 properties:
-  scoreValue:
-    type: integer
-    description: Value added to the risk score of the transaction.
-  threshold:
-    type: integer
-    description: |-
-      Threshold of the risk score.
-      If this value is exceeded by a risk factor, the risk score of the related transaction is increased.
+  brackets:
+    description: Risk factor values range with corresponding risk score increment value. First matched bracket will be applied.
+    type: array
+    minItems: 1
+    items:
+      type: object
+      required:
+        - start
+        - end
+        - scoreValue
+      properties:
+        start:
+          description: Minimal risk factor value when condition is applied.
+          type: integer
+          min: 0
+        end:
+          description: Maximal risk factor value when condition is applied.
+          type: integer
+          min: 0
+        scoreValue:
+          type: integer
+          description: Value added to the risk score of the transaction.
