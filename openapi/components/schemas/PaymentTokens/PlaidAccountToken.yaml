@@ -1,12 +1,12 @@
 type: object
-title: Plaid Account Token
+title: Plaid account token
 required:
   - method
   - billingAddress
   - paymentInstrument
 properties:
   method:
-    description: Token method.
+    description: Payment method of the token.
     type: string
     enum: [plaid-account]
   paymentInstrument:
@@ -51,11 +51,11 @@ properties:
   updatedTime:
     $ref: ../UpdatedTime.yaml
   usageTime:
-    description: Token usage time.
+    description: Date and time when the token is used.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   expirationTime:
-    description: Token expiration time.
+    description: Date and time when the token expired.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   _links:
