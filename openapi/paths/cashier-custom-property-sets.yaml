@@ -7,7 +7,7 @@ post:
   operationId: PostCashierCustomPropertySet
   x-sdk-operation-name: create
   description: |-
-    Create a cashier custom property set.
+    Creates a custom cashier property set.
     A custom property set is a JSON-schema to extend the hosted cashier deposit request form with extra form fields.
     The collected information is stored at the cashier deposit request.
   requestBody:
@@ -15,11 +15,11 @@ post:
       application/json:
         schema:
           $ref: ../components/schemas/Cashier/CashierCustomPropertySet.yaml
-    description: Cashier custom property set resource.
+    description: Custom cashier property set resource.
     required: true
   responses:
     '201':
-      description: Cashier custom property set created.
+      description: Custom cashier property set created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -38,10 +38,10 @@ get:
     - Core
   tags:
     - Cashier
-  summary: Retrieve cashier custom properties sets
+  summary: Retrieve custom cashier properties sets
   operationId: GetCashierCustomPropertySetCollection
   x-sdk-operation-name: getAll
-  description: Retrieves a list of cashier custom property sets.
+  description: Retrieves a list of custom cashier property sets.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -49,7 +49,7 @@ get:
     - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
-      description: List of cashier custom property set retrieved.
+      description: List of custom cashier property sets retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
