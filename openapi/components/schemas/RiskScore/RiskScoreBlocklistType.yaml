@@ -1,5 +1,8 @@
 type: object
 nullable: true
+required:
+  - riskScoreThreshold
+  - ttl
 properties:
   riskScoreThreshold:
     type: integer
@@ -7,5 +10,4 @@ properties:
     type: integer
     description: |-
       Length of time a blocklist exists before it expires.
-      The default field value for this field is `0`, which means that the blocklist record never expires.
-    default: 0
+      If value for this field is `0` then blocklist record never expires.
