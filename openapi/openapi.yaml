@@ -127,6 +127,10 @@ tags:
       For more information, see [Install or uninstall an app](https://www.rebilly.com/docs/dev-docs/install-an-app/).
   - name: Authentication
     description: Use these operations to manage the process of confirming the identity of users that are attempting to access resources.
+  - name: Avalara credentials
+    description: |-
+      Use these operations to manage your Avalara account credentials.
+      The Avalara integration enables you to calculate taxes and create transactions in your Avalara account.
   - name: Balance transactions
     description: |-
       Use these operations to view and manage balance transactions.
@@ -331,26 +335,6 @@ tags:
     description: |-
       Use invoices to bill for the goods or services that you provide.
       If your invoice includes subscription items, it also includes the corresponding service periods and prices.
-        - `funds-proof`: Validates that a customer has funds.
-        - `credit-file-proof`: Verifies that there is an existing credit file with two sources that match the customer's name, DOB, and address.
-
-      Rebilly parses and analyzes the documents and accepts or rejects them according to a configurable scoring algorithm.
-      When all document types in a KYC request are accepted, the status is fulfilled, and the [KYC request fulfilled webhook](https://www.rebilly.com/docs/dev-docs/api/operation/kyc-request-fulfilled/) is emitted.
-
-      ### Credit file proof
-
-      The `credit-file-proof` KYC document request type is only available in the API,
-      this option is not available in the [KYC document gatherer](https://www.rebilly.com/docs/kyc-and-aml/kyc-document-gatherer/).
-      This request verifies that there is an existing credit file with two sources that match the person's name, date of birth, and address.
-
-      In Canada, to meet FINTRAC requirements, the `credit-file-proof` KYC document request verifies the customer's name, address, and date of birth with a credit agency.
-
-      If `credit-file-proof` is requested in combination with `identity-proof` and `address-proof`,
-      `credit-file-proof` is attempted first.
-      If `credit-file-proof` validates the identity and address,
-      the KYC request is considered fulfilled.
-      If the request is not fulfilled,
-      redirect your customer to the KYC document gatherer to collect their KYC documents.
   - name: Invoices timeline
     description: Use invoice timelines to maintain an audit trail of changes and activity for each invoice.
   - name: Journal
@@ -375,6 +359,26 @@ tags:
         - `identity-proof`: Validates a customer's identity.
         - `address-proof`: Validates a customer's address.
         - `purchase-proof`: Validates a customer's purchase.
+        - `funds-proof`: Validates that a customer has funds.
+        - `credit-file-proof`: Verifies that there is an existing credit file with two sources that match the customer's name, DOB, and address.
+
+      Rebilly parses and analyzes the documents and accepts or rejects them according to a configurable scoring algorithm.
+      When all document types in a KYC request are accepted, the status is fulfilled, and the [KYC request fulfilled webhook](https://www.rebilly.com/docs/dev-docs/api/operation/kyc-request-fulfilled/) is sent.
+
+      ### Credit file proof
+
+      The `credit-file-proof` KYC document request type is only available in the API,
+      this option is not available in the [KYC document gatherer](https://www.rebilly.com/docs/kyc-and-aml/kyc-document-gatherer/).
+      This request verifies that there is an existing credit file with two sources that match the person's name, date of birth, and address.
+
+      In Canada, to meet FINTRAC requirements, the `credit-file-proof` KYC document request verifies the customer's name, address, and date of birth with a credit agency.
+
+      If `credit-file-proof` is requested in combination with `identity-proof` and `address-proof`,
+      `credit-file-proof` is attempted first.
+      If `credit-file-proof` validates the identity and address,
+      the KYC request is considered fulfilled.
+      If the request is not fulfilled,
+      redirect your customer to the KYC document gatherer to collect their KYC documents.
 
   - name: Lists
     description: |-
@@ -522,10 +526,6 @@ tags:
       Use these operations to manage your TaxJar account credentials.
       The TaxJar integration enables you to calculate taxes and create transactions for the Sales Tax AutoFile feature in your TaxJar account.
       For more information, see [TaxJar integration](https://www.rebilly.com/docs/automations/tax-jar-integration/#taxjar-integration).
-  - name: Avalara credentials
-    description: |-
-      Use these operations to manage your Avalara account credentials.
-      The Avalara integration enables you to calculate taxes and create transactions in your Avalara account.
   - name: Tracking
     description: |-
       Use tracking when debugging and auditing issues.
