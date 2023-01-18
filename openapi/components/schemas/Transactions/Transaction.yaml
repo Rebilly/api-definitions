@@ -151,6 +151,7 @@ allOf:
           Bump offer information.
           If the transaction does not have an associated bump offer, this value is `null`.
         type: object
+        nullable: true
         readOnly: true
         properties:
           order:
@@ -158,11 +159,10 @@ allOf:
             allOf:
               - $ref: ../Money.yaml
           version:
+            type: string
             description: |-
               Name of the version selected.
               This field is useful to measure split tests.
-            allOf:
-              - $ref: ../PurchaseBumps/PurchaseBumpSplitVersionName.yaml
           language:
             description: |-
               Language in which the bump offer displays to the user.
@@ -170,12 +170,23 @@ allOf:
             allOf:
               - $ref: ../LanguageIsoCode.yaml
           outcome:
-            $ref: ../PurchaseBumps/PurchaseBumpStatus.yaml
+            type: string
+            readOnly: true
+            description: Status of the bump offer.
+            enum:
+              - presented
+              - rejected
+              - selected
+              - unknown
           presentedOffers:
+            type: array
+            readOnly: true
             description: Offers presented to a customer.
-            allOf:
-              - $ref: ../PurchaseBumps/PurchaseBumpOfferList.yaml
+            minItems: 1
+            items:
+              $ref: ../PurchaseBumps/PurchaseBumpOffer.yaml
           selectedOffer:
+            readOnly: true
             description: |-
               Offer selected by a customer.
               If a bump offer outcome is not `selected`, this value is `null`.
@@ -186,11 +197,20 @@ allOf:
         type: integer
         readOnly: true
       riskMetadata:
-        description: Risk metadata.
-        allOf:
-          - $ref: ../RiskMetadata.yaml
+        $ref: ../RiskMetadata.yaml
       notificationUrl:
-        $ref: ./TransactionNotificationUrl.yaml
+        description: |-
+          URL where a server-to-server POST notification is sent.
+          This notification is sent when the transaction result is finalized after a timeout or an offsite interaction.
+
+          Do not trust this notification alone,
+          complete a GET request to confirm the result of the transaction.
+          To ensure the request is not reattempted,
+          when the result is confirmed, respond with a 2xx HTTP status code.
+
+          The following placeholders are available to use in this URI: `{id}` and `{result}`.
+        type: string
+        format: uri
       isDisputed:
         description: Specifies if a transaction is disputed.
         type: boolean
@@ -217,9 +237,7 @@ allOf:
           - lost
           - unknown
       isReconciled:
-        description: |-
-          Specifies if the transaction is verified with gateway batch data.
-          If the transaction is not disputed, this value is `null`.
+        description: Specifies if the transaction is verified with gateway batch data.
         type: boolean
         readOnly: true
       isProcessedOutside:
@@ -311,7 +329,6 @@ allOf:
         type: array
         description: Embedded objects that are requested by the `expand` query parameter.
         readOnly: true
-        minItems: 1
         items:
           anyOf:
             - $ref: ../Embeds/ParentTransactionEmbed.yaml
