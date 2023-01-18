@@ -54,10 +54,10 @@ Rebilly follows the error response format proposed in [RFC 7807](https://tools.i
 Rebilly provides a JavaScript SDK and a PHP SDK to help interact with the Rebilly API.
 However, no SDK is required to use the API.
 
-Rebilly also provides [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/),
+Rebilly also provides [FramePay](https://www.rebilly.com/docs/developer-docs/framepay/),
 a client-side iFrame-based solution, to help create payment tokens while minimizing PCI DSS compliance burdens
 and maximizing your customization ability.
-[FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/) interacts with the [payment tokens creation operation](https://all-rebilly.redoc.ly/tag/Payment-tokens/operation/PostToken).
+[FramePay](https://www.rebilly.com/docs/developer-docs/framepay/) interacts with the [payment tokens creation operation](https://all-rebilly.redoc.ly/tag/Payment-tokens/operation/PostToken).
 
 ## JavaScript SDK
 
@@ -106,7 +106,7 @@ Format description:
 - To use a lte (less than or equals) filter, use: `?filter=amount:..10`.
   This also works for datetime-based fields.
 
-- To create [specified values lists](https://user-api-docs.rebilly.com/#tag/Lists) and use them in filters, use: `?filter=firstName:@yourListName`. \
+- To create [specified values lists](https://all-rebilly.redoc.ly/#tag/Lists) and use them in filters, use: `?filter=firstName:@yourListName`. \
   You can also exclude list values: `?filter=firstName:!@yourListName`. \
   Use value lists to compare against a list of data when setting conditions for rules or binds,
   or applying filters to data table segments.
