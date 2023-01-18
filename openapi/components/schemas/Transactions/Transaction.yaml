@@ -23,18 +23,23 @@ allOf:
               code:
                 description: Gateway response code.
                 type: string
+                nullable: true
               message:
                 description: Gateway response message.
                 type: string
+                nullable: true
               type:
                 description: Gateway response type.
                 type: string
+                nullable: true
               originalCode:
                 description: Raw, unmapped gateway response code.
                 type: string
+                nullable: true
               originalMessage:
                 description: Raw, unmapped gateway response message.
                 type: string
+                nullable: true
           avsResponse:
             description: Gateway Address Verification System (AVS) response.
             type: object
@@ -42,15 +47,19 @@ allOf:
               code:
                 description: Response code.
                 type: string
+                nullable: true
               message:
                 description: Response message.
                 type: string
+                nullable: true
               originalCode:
                 description: Raw response code.
                 type: string
+                nullable: true
               originalMessage:
                 description: Raw response message.
                 type: string
+                nullable: true
           cvvResponse:
             description: Gateway Card Verification Value (CVV) response.
             type: object
@@ -58,15 +67,19 @@ allOf:
               code:
                 description: Response code.
                 type: string
+                nullable: true
               message:
                 description: Response message.
                 type: string
+                nullable: true
               originalCode:
                 description: Raw response code.
                 type: string
+                nullable: true
               originalMessage:
                 description: Raw response message.
                 type: string
+                nullable: true
       acquirerName:
         readOnly: true
         description: |-
@@ -119,6 +132,7 @@ allOf:
           Detailed Dynamic currency conversion (DCC).
           If DCC is not applied to the transaction, this value is `null`.
         type: object
+        nullable: true
         readOnly: true
         properties:
           base:
@@ -197,7 +211,10 @@ allOf:
         type: integer
         readOnly: true
       riskMetadata:
-        $ref: ../RiskMetadata.yaml
+        type: object
+        nullable: true
+        allOf:
+          - $ref: ../RiskMetadata.yaml
       notificationUrl:
         description: |-
           URL where a server-to-server POST notification is sent.
@@ -210,6 +227,7 @@ allOf:
 
           The following placeholders are available to use in this URI: `{id}` and `{result}`.
         type: string
+        nullable: true
         format: uri
       isDisputed:
         description: Specifies if a transaction is disputed.
@@ -230,6 +248,7 @@ allOf:
         readOnly: true
         type: string
         enum:
+          - null
           - response-needed
           - under-review
           - forfeited
@@ -262,6 +281,7 @@ allOf:
       arn:
         x-label: ARN
         type: string
+        nullable: true
         readOnly: true
         description: Acquirer reference number.
         example: '74836950144358910018150'
@@ -312,6 +332,7 @@ allOf:
               type: string
               enum:
                 - self
+                - attachments
                 - website
                 - customer
                 - gatewayAccount
