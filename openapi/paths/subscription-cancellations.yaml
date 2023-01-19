@@ -6,7 +6,7 @@ get:
   summary: Retrieve cancellations
   operationId: GetSubscriptionCancellationCollection
   x-sdk-operation-name: getAll
-  description: Retrieve a list of cancellations for all subscriptions.
+  description: Retrieves a list of canceled subscriptions.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -14,7 +14,7 @@ get:
     - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
-      description: List of cancellations retrieved.
+      description: List of cancelled subscriptions retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -42,10 +42,10 @@ post:
     - Core
   tags:
     - Orders
-  summary: Cancel an order
+  summary: Preview an order cancellation
   operationId: PostSubscriptionCancellation
   x-sdk-operation-name: create
-  description: Cancel an order or preview the cancellation parameters before that.
+  description: Previews order cancellation parameters before canceling an order.
   requestBody:
     $ref: ../components/requestBodies/SubscriptionCancellation.yaml
   responses:

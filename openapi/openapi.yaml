@@ -45,7 +45,7 @@ components:
     JWT:
       description: |-
         JWT is a short lifetime token that can be assigned a specific expiration time.
-        To create a JWT session, see [JWT session resource](https://user-api-docs.rebilly.com/tag/JWT-Session#operation/PostSigninRequest).
+        To create a JWT session, see [JWT session resource](https://all-rebilly.redoc.ly/tag/JWT-session/operation/PostSigninRequest).
 
         Usage format: `Bearer <JWT>`.
       type: http
@@ -53,7 +53,8 @@ components:
       bearerFormat: JWT
     ApplicationJWT:
       description: |-
-        Applications in our App Store can create a JSON Web Token (JWT) by [fetching an user's instance](https://user-api-docs.rebilly.com/tag/Application-owners#operation/GetApplicationInstanceByOrganization).
+        Applications in the Rebilly App Store can create a JSON Web Token (JWT) by fetching an user's instance.
+        For more information, see [Retrieve an application instance](https://all-rebilly.redoc.ly/tag/Application-owners#operation/GetApplicationInstanceByOrganization).
 
         Usage format: `Bearer <JWT>`.
       type: http
@@ -62,10 +63,9 @@ components:
 
     PublishableApiKey:
       description: |-
-        Only for the Tokens resource.
+        Only for the tokens resource.
 
-        You can create a Publishable API Key via our [API Keys resource](https://all-rebilly.redoc.ly/tag/API-keys/operation/PostApiKey),
-        by specifying the type as `publishable`.
+        To create a publishable API key, see [Create an API key](https://all-rebilly.redoc.ly/tag/API-keys/operation/PostApiKey).
       name: Authorization
       type: apiKey
       in: header
@@ -83,7 +83,8 @@ components:
 
     CustomerJWT:
       description: |-
-        You can create a JSON Web Token (JWT) via [Storefront Authentication](https://all-rebilly.redoc.ly/tag/Authentication/operation/StorefrontPostLogin).
+        To create a JSON Web Token (JWT) using Storefront authentication,
+        see [Create a session with username and password](https://all-rebilly.redoc.ly/tag/Authentication/operation/StorefrontPostLogin).
 
         Usage format: `Bearer <JWT>`.
       type: http
@@ -113,7 +114,7 @@ tags:
       For information on how to create and manage API keys, see [API keys](https://www.rebilly.com/docs/dev-docs/api-keys/).
 
       In addition to API keys, you may use JSON Web Tokens (JWT) to authenticate to the API.
-      For more information, see [JWT session](https://user-api-docs.rebilly.com/#tag/JWT-Session).
+      For more information, see [JWT session](https://all-rebilly.redoc.ly/#tag/JWT-Session).
   - name: Application owners
     description: |-
       Use these operations to register applications to the Rebilly Apps Store and manage application instances.
@@ -126,6 +127,10 @@ tags:
       For more information, see [Install or uninstall an app](https://www.rebilly.com/docs/dev-docs/install-an-app/).
   - name: Authentication
     description: Use these operations to manage the process of confirming the identity of users that are attempting to access resources.
+  - name: Avalara credentials
+    description: |-
+      Use these operations to manage your Avalara account credentials.
+      The Avalara integration enables you to calculate taxes and create transactions in your Avalara account.
   - name: Balance transactions
     description: |-
       Use these operations to view and manage balance transactions.
@@ -330,26 +335,6 @@ tags:
     description: |-
       Use invoices to bill for the goods or services that you provide.
       If your invoice includes subscription items, it also includes the corresponding service periods and prices.
-        - `funds-proof`: Validates that a customer has funds.
-        - `credit-file-proof`: Verifies that there is an existing credit file with two sources that match the customer's name, DOB, and address.
-
-      Rebilly parses and analyzes the documents and accepts or rejects them according to a configurable scoring algorithm.
-      When all document types in a KYC request are accepted, the status is fulfilled, and the [KYC request fulfilled webhook](https://www.rebilly.com/docs/dev-docs/api/operation/kyc-request-fulfilled/) is emitted.
-
-      ### Credit file proof
-
-      The `credit-file-proof` KYC document request type is only available in the API,
-      this option is not available in the [KYC document gatherer](https://www.rebilly.com/docs/kyc-and-aml/kyc-document-gatherer/).
-      This request verifies that there is an existing credit file with two sources that match the person's name, date of birth, and address.
-
-      In Canada, to meet FINTRAC requirements, the `credit-file-proof` KYC document request verifies the customer's name, address, and date of birth with a credit agency.
-
-      If `credit-file-proof` is requested in combination with `identity-proof` and `address-proof`,
-      `credit-file-proof` is attempted first.
-      If `credit-file-proof` validates the identity and address,
-      the KYC request is considered fulfilled.
-      If the request is not fulfilled,
-      redirect your customer to the KYC document gatherer to collect their KYC documents.
   - name: Invoices timeline
     description: Use invoice timelines to maintain an audit trail of changes and activity for each invoice.
   - name: Journal
@@ -374,6 +359,26 @@ tags:
         - `identity-proof`: Validates a customer's identity.
         - `address-proof`: Validates a customer's address.
         - `purchase-proof`: Validates a customer's purchase.
+        - `funds-proof`: Validates that a customer has funds.
+        - `credit-file-proof`: Verifies that there is an existing credit file with two sources that match the customer's name, DOB, and address.
+
+      Rebilly parses and analyzes the documents and accepts or rejects them according to a configurable scoring algorithm.
+      When all document types in a KYC request are accepted, the status is fulfilled, and the [KYC request fulfilled webhook](https://www.rebilly.com/docs/dev-docs/api/operation/kyc-request-fulfilled/) is sent.
+
+      ### Credit file proof
+
+      The `credit-file-proof` KYC document request type is only available in the API,
+      this option is not available in the [KYC document gatherer](https://www.rebilly.com/docs/kyc-and-aml/kyc-document-gatherer/).
+      This request verifies that there is an existing credit file with two sources that match the person's name, date of birth, and address.
+
+      In Canada, to meet FINTRAC requirements, the `credit-file-proof` KYC document request verifies the customer's name, address, and date of birth with a credit agency.
+
+      If `credit-file-proof` is requested in combination with `identity-proof` and `address-proof`,
+      `credit-file-proof` is attempted first.
+      If `credit-file-proof` validates the identity and address,
+      the KYC request is considered fulfilled.
+      If the request is not fulfilled,
+      redirect your customer to the KYC document gatherer to collect their KYC documents.
 
   - name: Lists
     description: |-
@@ -521,10 +526,6 @@ tags:
       Use these operations to manage your TaxJar account credentials.
       The TaxJar integration enables you to calculate taxes and create transactions for the Sales Tax AutoFile feature in your TaxJar account.
       For more information, see [TaxJar integration](https://www.rebilly.com/docs/automations/tax-jar-integration/#taxjar-integration).
-  - name: Avalara credentials
-    description: |-
-      Use these operations to manage your Avalara account credentials.
-      The Avalara integration enables you to calculate taxes and create transactions in your Avalara account.
   - name: Tracking
     description: |-
       Use tracking when debugging and auditing issues.
