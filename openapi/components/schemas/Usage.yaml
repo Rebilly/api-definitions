@@ -40,7 +40,9 @@ properties:
     minimum: 0
     exclusiveMinimum: true
   usageTime:
-    description: Date and time, in ISO 8601 format, at which a usage occurred. If this value is not provided or is empty, the date and time of the request is used.
+    description: |-
+      Date and time, in ISO 8601 format, when a usage occurred.
+      If this value is not provided or is empty, the date and time of the request is used.
     type: string
     format: date-time
   createdTime:
@@ -48,11 +50,5 @@ properties:
   updatedTime:
     $ref: UpdatedTime.yaml
   _links:
-    type: array
-    description: Related resource links.
-    readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ./Links/SelfLink.yaml
+    $ref: ./SelfLink.yaml
 

@@ -3,25 +3,25 @@ post:
     - Storefront
   tags:
     - Purchases
-  summary: Ready to Pay
+  summary: Ready to pay
   operationId: StorefrontPostReadyToPay
   x-sdk-operation-name: readyToPay
   security:
     - PublishableApiKey: []
   description: |-
-    Get available payment methods for a specific transaction or a purchase.
+    Retrieves available payment methods for a specific transaction or purchase.
 
-    The payment methods order shown to a customer **SHOULD** be the same as the order in the response.
+    The order in which the payment methods are displayed to the customer must be the same as the order in the response.
 
-    The list of available methods is generated from available [Gateway Accounts](https://user-api-docs.rebilly.com/tag/Gateway-Accounts)
-    intersected with the last matched [Rules Engine](https://user-api-docs.rebilly.com/tag/Rules#operation/PutEventRule)
-    `adjust-ready-to-pay` action on `ready-to-pay-requested` event.
+    The list of payment methods is generated from available gateway accounts and the last matched `adjust-ready-to-pay` action on the `ready-to-pay-requested` event.
+    If no rules match for the specific request, all methods supported by the gateway accounts are sent.
 
-    If there are no matches for the specific request, then all methods supported by the Gateway Accounts are sent.
+    To invert this behavior, place an all matching rule at the end of the `ready-to-pay-requested` event in the rules engine,
+    and include an empty `paymentMethods` property for the `adjust-ready-to-pay` action.
 
-    To invert this behavior place an all-matching rule at the very end of the `ready-to-pay-requested` event in the rules engine with an empty `paymentMethods` property of the `adjust-ready-to-pay` action.
+    For more information, see [Update event rules](https://all-rebilly.redoc.ly/tag/Rules#operation/PutEventRule) and [Gateway accounts](https://all-rebilly.redoc.ly/tag/Gateway-accounts).
 
-    If ready to pay is used with Transaction-scoped JWT all fields are ignored except the `riskMetadata`.
+    If this operation to pay is used with a transaction-scoped JSON Web Token (JWT), all fields are ignored except `riskMetadata`.
   requestBody:
     content:
       application/json:

@@ -1,59 +1,62 @@
 type: object
 properties:
   data:
+    description: Transaction data.
     type: array
     readOnly: true
     items:
       type: object
       properties:
         aggregationFieldValue:
-          description: Selected aggregation field value.
+          description: Aggregation field value.
           type: string
         authApprovedThroughput:
-          description: Approved auth transactions to all transactions percentage.
+          description: Percentage of approved authentication transactions.
           type: number
           format: double
         approvedThroughput:
-          description: Approved sale transactions to all transactions percentage.
+          description: Percentage of approved sale transactions.
           type: number
           format: double
         authApprovalCount:
-          description: Approved auth transactions count.
+          description: Total number of approved authentication transactions.
           type: integer
         disputesRate:
-          description: Disputed transactions to all approved sale and capture transactions percentage.
+          description: Percentage of disputed sale and capture transactions.
           type: number
           format: double
         disputesCount:
-          description: Disputed transactions to all approved sale and capture transactions count.
+          description: Total number of disputed sale and capture transactions.
           type: integer
         salesCount:
-          description: Sales count.
+          description: Total number of sales.
           type: integer
         salesValue:
-          description: Sales value.
+          description: Total sales value.
           type: number
           format: double
         salesAverage:
-          description: Sales average value.
+          description: Average sales value.
           type: number
           format: double
         refundsCount:
-          description: Refunds count.
+          description: Total number of refunds.
           type: integer
         refundsValue:
-          description: Refunds value.
+          description: Total value of refunds.
           type: number
           format: double
         amount:
-          description: Amount.
+          description: |-
+            Amount of revenue.
+            This value is the result of `salesValue` minus `refundsValue`.
           type: number
           format: double
         count:
-          description: Transactions count.
+          description: Total number of transactions.
           type: number
           format: double
         unapprovedCount:
-          description: Unapproved transactions count.
+          description: Total number of unapproved transactions.
           type: number
           format: double

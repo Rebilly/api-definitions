@@ -4,13 +4,19 @@ servers:
     variables:
       organizationId:
         default: unknown
-        description: Your organization ID.
+        description: |-
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
   - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
     description: Live server
     variables:
       organizationId:
         default: unknown
-        description: Your organization ID.
+        description: |-
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 get:
   x-badge: Experimental
   x-products:
@@ -20,18 +26,18 @@ get:
   summary: Retrieve a KYC rejections report
   operationId: GetKycRejectionSummaryReport
   x-sdk-operation-name: getKycRejectionSummary
-  description: Retrieve a KYC rejection report by type and by rejection reasons.
+  description: Retrieves a Know Your Customer (KYC) rejection report by type and by rejection reasons.
   parameters:
     - name: periodStart
       in: query
-      description: Report start date.
+      description: Date and time when the report starts.
       required: true
       schema:
         type: string
         format: date-time
     - name: periodEnd
       in: query
-      description: Report end date.
+      description: Date and time when the report ends.
       required: true
       schema:
         type: string

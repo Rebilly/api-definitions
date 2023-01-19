@@ -6,7 +6,7 @@ get:
   summary: Retrieve reactivations
   operationId: GetSubscriptionReactivationCollection
   x-sdk-operation-name: getAll
-  description: Retrieve a list of reactivations for all subscriptions.
+  description: Retrieves a list of subscription reactivations.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -44,7 +44,7 @@ post:
   summary: Reactivate an order
   operationId: PostSubscriptionReactivation
   x-sdk-operation-name: reactivate
-  description: Reactivate a subscription.
+  description: Reactivates a subscription with a specified ID.
   requestBody:
     content:
       application/json:
@@ -55,9 +55,8 @@ post:
   responses:
     '201':
       description: |-
-        Reactivation created.
-        The order is active and won't be deactivated.
-        If there is a cancellation with status "confirmed", it is revoked.
+        Reactivation created. The order is now active.
+        If the order had a related cancellation with a `status` of `confirmed`, it is revoked.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml

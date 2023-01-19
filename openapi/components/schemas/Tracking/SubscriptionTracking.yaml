@@ -13,7 +13,7 @@ properties:
       - $ref: ../ResourceId.yaml
   result:
     type: string
-    description: Order's result.
+    description: Result of the order.
     enum:
       - created
       - postponed
@@ -21,13 +21,8 @@ properties:
       - error
   message:
     type: string
-    description: It contains the transaction number and renewal time.
+    description: Contains the transaction number and renewal time.
   createdTime:
     $ref: ../CreatedTime.yaml
   _links:
-    type: array
-    description: Related resource links.
-    readOnly: true
-    minItems: 1
-    items:
-      $ref: ../Links/SelfLink.yaml
+    $ref: ../SelfLink.yaml

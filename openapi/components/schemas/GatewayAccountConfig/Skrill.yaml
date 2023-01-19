@@ -16,10 +16,12 @@ allOf:
             type: string
             description: Secret word used for MD5 signature verifications.
             format: password
+            writeOnly: true
           mqiPassword:
             type: string
             description: Password used during MQI or API requests.
             format: password
+            writeOnly: true
         required:
           - accountEmail
           - secretWord
@@ -31,3 +33,7 @@ allOf:
             description: |-
               Comma-separated list of name-value merchant field pairs.
               Example: `key1:value1,key2:value2`.
+          useSPX:
+            type: boolean
+            description: Specifies whether to use SPX code for PIX payment method.
+            default: false
