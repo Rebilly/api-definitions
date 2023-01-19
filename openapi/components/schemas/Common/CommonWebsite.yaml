@@ -1,0 +1,53 @@
+type: object
+required:
+  - name
+  - url
+  - servicePhone
+  - serviceEmail
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ../Websites/WebsiteId.yaml
+  name:
+    description: Name of the website.
+    type: string
+  url:
+    description: Domain address of the website.
+    type: string
+  servicePhone:
+    description: Customer service phone number of the website.
+    type: string
+  serviceEmail:
+    description: Customer service email address of the website.
+    type: string
+    format: email
+  createdTime:
+    $ref: ../CreatedTime.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
+  customFields:
+    $ref: ../ResourceCustomFields.yaml
+  settings:
+    $ref: ../Websites/WebsiteSettings.yaml
+  organizationId:
+    deprecated: true
+    readOnly: true
+    allOf:
+      - $ref: ../Organizations/OrganizationId.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - organization
