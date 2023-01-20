@@ -5,16 +5,14 @@ post:
     - Core
   tags:
     - Transactions
-  summary: Query a Transaction
+  summary: Query a transaction
   operationId: PostTransactionQuery
   x-sdk-operation-name: query
   description: |-
-    Query a Transaction with a specified identifier string.
+    Queries a transaction with a specified ID.
 
-    The query contacts the gateway account to find the result, amount, and currency.
-
-    The response should be analyzed.
-    If deemed appropriate, the transaction can be updated using the Transaction Update API.
+    The query interacts with the related gateway account to obtain the result, amount, and currency.
+    If after analysis, the transaction must be updated, see [Update a transaction status](../PostTransactionUpdate).
   responses:
     '201':
       description: Transaction queried.
