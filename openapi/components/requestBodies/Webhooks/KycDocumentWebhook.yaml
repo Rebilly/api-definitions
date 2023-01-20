@@ -12,7 +12,7 @@ content:
           type: string
         eventType:
           type: string
-          description: Webhook event type.
+          description: Type of webhook event.
           enum:
             - kyc-document-accepted
             - kyc-document-created
@@ -31,10 +31,17 @@ content:
         _links:
           type: array
           description: Related links.
-          minItems: 3
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/CustomerLink.yaml
-              - $ref: ../../schemas/Links/FileLink.yaml
-              - $ref: ../../schemas/Links/KycDocumentLink.yaml
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - customer
+                  - file
+                  - kycDocument
 description: KYC document webhook request body resource.

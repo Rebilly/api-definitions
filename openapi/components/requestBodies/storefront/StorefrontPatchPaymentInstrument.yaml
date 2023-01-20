@@ -4,10 +4,13 @@ content:
       type: object
       properties:
         token:
-          description: Payment instrument token ID.
+          description: Token ID of the payment instrument.
           type: string
         billingAddress:
-          description: Billing address (if supplied, overrides billing address from token).
+          description: |-
+            Billing address.
+            If this field is supplied,
+            it overrides the billing address obtained from the token.
           allOf:
             - $ref: ../../schemas/Contact/ContactObject.yaml
         customFields:

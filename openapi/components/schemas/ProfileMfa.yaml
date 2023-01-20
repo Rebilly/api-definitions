@@ -1,7 +1,7 @@
 type: object
 properties:
   status:
-    description: Status of MFA enrollment.
+    description: Status of Multi-Factor Authentication (MFA) enrollment.
     type: string
     enum:
       - active
@@ -25,8 +25,15 @@ properties:
     type: array
     description: Related links.
     readOnly: true
-    minItems: 1
     items:
-      anyOf:
-        - $ref: ./Links/SelfLink.yaml
-        - $ref: ./Links/EnrollmentLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - enrollment

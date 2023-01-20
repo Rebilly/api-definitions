@@ -1,11 +1,11 @@
 type: object
-title: PayPal Token
+title: PayPal token
 required:
   - method
   - paymentInstrument
 properties:
   method:
-    description: Token payment method.
+    description: Payment method of the token.
     type: string
     enum: [paypal]
   paymentInstrument:
@@ -28,12 +28,12 @@ properties:
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   id:
-    description: Token identifier string.
+    description: ID of the token.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   isUsed:
-    description: Whether the token is already used.
+    description: Specifies if the token is already used.
     type: boolean
     default: false
     readOnly: true
@@ -48,17 +48,12 @@ properties:
   updatedTime:
     $ref: ../UpdatedTime.yaml
   usageTime:
-    description: Token usage time.
+    description: Date and time when the token is used.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   expirationTime:
-    description: Token expiration time.
+    description: Date and time when the token expires.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   _links:
-    type: array
-    description: Related resource links.
-    readOnly: true
-    minItems: 1
-    items:
-      $ref: ../Links/SelfLink.yaml
+    $ref: ../SelfLink.yaml

@@ -11,13 +11,13 @@ post:
     [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/) is the recommended way to create a payment token because it minimizes PCI DSS compliance.
     Once a payment token is created, it can only be used once.
 
-    A payment token expires upon first use or within 30 minutes of the token creation (whichever comes first).
+    A payment token expires upon first use or within 30 minutes of the token creation, whichever comes first.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/PaymentTokens/CompositeToken.yaml
-    description: PaymentToken resource.
+    description: Payment token resource.
     required: true
   security:
     - PublishableApiKey: []

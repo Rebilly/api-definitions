@@ -266,28 +266,28 @@ properties:
     minimum: 300
     maximum: 16777215
   threeDSecure:
-    description: Specifies whether a gateway account allows 3D Secure.
+    description: Specifies if a gateway account allows 3D Secure.
     type: boolean
     default: false
   dynamicDescriptor:
-    description: Specifies whether a gateway allows dynamic descriptors.
+    description: Specifies if a gateway allows dynamic descriptors.
     type: boolean
     default: false
   digitalWallets:
     $ref: ./GatewayAccounts/DigitalWallets.yaml
   isDown:
-    description: Specifies whether a gateway is in a downtime period.
+    description: Specifies if a gateway is in a downtime period.
     type: boolean
     readOnly: true
   additionalFilters:
     description: |-
-      Additional filters used to determine whether the gateway account can be selected to process a transaction.
+      Additional filters used to determine if the gateway account can be selected to process a transaction.
 
       For example, the filter may place a maximum amount value on transaction.
       If a transaction exceeds this value, the gateway account is not used.
 
       For more information see,
-      [Using filters](https://api-reference.rebilly.com/#section/Using-filter-with-collections).
+      [Using filters](https://all-rebilly.redoc.ly/#section/Using-filter-with-collections).
     type: string
     example: amount:1..100;bin:411111,444433
   timeout:
@@ -303,7 +303,7 @@ properties:
     example: TwiX3f92k4AiBE27BzTbQ38hHjicBz_w
   sticky:
     description: |-
-      Specifies whether all future payments by the customer's payment instrument are processed by this gateway account.
+      Specifies if all future payments by the customer's payment instrument are processed by this gateway account.
 
       For more information, see [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
     type: boolean
@@ -347,10 +347,17 @@ properties:
     type: array
     description: Related links.
     readOnly: true
-    minItems: 1
     items:
-      anyOf:
-        - $ref: ./Links/SelfLink.yaml
-        - $ref: ./Links/OnBoardingUrlLink.yaml
-        - $ref: ./Links/DynamicIpnLink.yaml
-        - $ref: ./Links/StaticIpnLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - onBoardingUrl
+            - dynamicIpnUrl
+            - staticIpnUrl

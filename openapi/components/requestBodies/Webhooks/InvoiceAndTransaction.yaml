@@ -10,12 +10,13 @@ content:
           type: string
         eventType:
           type: string
-          description: Webhook event type.
+          description: Type of webhook event.
           enum:
             - renewal-invoice-payment-canceled
             - renewal-invoice-payment-declined
         _embedded:
           type: object
+          description: Embedded objects.
           properties:
             transaction:
               $ref: ../../schemas/Transactions/Transaction.yaml
@@ -23,10 +24,17 @@ content:
               $ref: ../../schemas/Invoices/Invoice.yaml
         _links:
           type: array
-          description: Related resource links.
-          minItems: 2
+          description: Related links.
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/TransactionLink.yaml
-              - $ref: ../../schemas/Links/InvoiceLink.yaml
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - transaction
+                  - invoice
 description: Invoice and Transaction webhook request body resource.

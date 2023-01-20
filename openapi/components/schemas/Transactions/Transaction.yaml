@@ -23,18 +23,23 @@ allOf:
               code:
                 description: Gateway response code.
                 type: string
+                nullable: true
               message:
                 description: Gateway response message.
                 type: string
+                nullable: true
               type:
                 description: Gateway response type.
                 type: string
+                nullable: true
               originalCode:
                 description: Raw, unmapped gateway response code.
                 type: string
+                nullable: true
               originalMessage:
                 description: Raw, unmapped gateway response message.
                 type: string
+                nullable: true
           avsResponse:
             description: Gateway Address Verification System (AVS) response.
             type: object
@@ -42,15 +47,19 @@ allOf:
               code:
                 description: Response code.
                 type: string
+                nullable: true
               message:
                 description: Response message.
                 type: string
+                nullable: true
               originalCode:
                 description: Raw response code.
                 type: string
+                nullable: true
               originalMessage:
                 description: Raw response message.
                 type: string
+                nullable: true
           cvvResponse:
             description: Gateway Card Verification Value (CVV) response.
             type: object
@@ -58,15 +67,19 @@ allOf:
               code:
                 description: Response code.
                 type: string
+                nullable: true
               message:
                 description: Response message.
                 type: string
+                nullable: true
               originalCode:
                 description: Raw response code.
                 type: string
+                nullable: true
               originalMessage:
                 description: Raw response message.
                 type: string
+                nullable: true
       acquirerName:
         readOnly: true
         description: |-
@@ -103,7 +116,7 @@ allOf:
         readOnly: true
         nullable: true
       bin:
-        description: Payment card BIN.
+        description: Payment card Bank Identification Number (BIN).
         x-label: BIN
         type: string
         format: bin
@@ -111,7 +124,7 @@ allOf:
       paymentInstrument:
         $ref: ../PaymentInstruments/ValueObjects/PaymentInstrumentValueObject.yaml
       hasDcc:
-        description: Specifies whether Dynamic Currency Conversion (DCC) applies to the transaction.
+        description: Specifies if Dynamic Currency Conversion (DCC) applies to the transaction.
         type: boolean
         readOnly: true
       dcc:
@@ -119,6 +132,7 @@ allOf:
           Detailed Dynamic currency conversion (DCC).
           If DCC is not applied to the transaction, this value is `null`.
         type: object
+        nullable: true
         readOnly: true
         properties:
           base:
@@ -141,7 +155,9 @@ allOf:
               - selected
               - unknown
       hasBumpOffer:
-        description: Specifies whether a transaction has a bump offer.
+        description: |-
+          Specifies if the transaction has a bump offer.
+          A bump offer is a discount, purchase bonus, deal, that is offered to the customer during checkout.
         type: boolean
         readOnly: true
       bumpOffer:
@@ -149,6 +165,7 @@ allOf:
           Bump offer information.
           If the transaction does not have an associated bump offer, this value is `null`.
         type: object
+        nullable: true
         readOnly: true
         properties:
           order:
@@ -156,11 +173,10 @@ allOf:
             allOf:
               - $ref: ../Money.yaml
           version:
+            type: string
             description: |-
               Name of the version selected.
               This field is useful to measure split tests.
-            allOf:
-              - $ref: ../PurchaseBumps/PurchaseBumpSplitVersionName.yaml
           language:
             description: |-
               Language in which the bump offer displays to the user.
@@ -168,12 +184,23 @@ allOf:
             allOf:
               - $ref: ../LanguageIsoCode.yaml
           outcome:
-            $ref: ../PurchaseBumps/PurchaseBumpStatus.yaml
+            type: string
+            readOnly: true
+            description: Status of the bump offer.
+            enum:
+              - presented
+              - rejected
+              - selected
+              - unknown
           presentedOffers:
+            type: array
+            readOnly: true
             description: Offers presented to a customer.
-            allOf:
-              - $ref: ../PurchaseBumps/PurchaseBumpOfferList.yaml
+            minItems: 1
+            items:
+              $ref: ../PurchaseBumps/PurchaseBumpOffer.yaml
           selectedOffer:
+            readOnly: true
             description: |-
               Offer selected by a customer.
               If a bump offer outcome is not `selected`, this value is `null`.
@@ -184,13 +211,26 @@ allOf:
         type: integer
         readOnly: true
       riskMetadata:
-        description: Risk metadata.
+        type: object
+        nullable: true
         allOf:
           - $ref: ../RiskMetadata.yaml
       notificationUrl:
-        $ref: ./TransactionNotificationUrl.yaml
+        description: |-
+          URL where a server-to-server POST notification is sent.
+          This notification is sent when the transaction result is finalized after a timeout or an offsite interaction.
+
+          Do not trust this notification alone,
+          complete a GET request to confirm the result of the transaction.
+          To ensure the request is not reattempted,
+          when the result is confirmed, respond with a 2xx HTTP status code.
+
+          The following placeholders are available to use in this URI: `{id}` and `{result}`.
+        type: string
+        nullable: true
+        format: uri
       isDisputed:
-        description: Specifies whether a transaction is disputed.
+        description: Specifies if a transaction is disputed.
         type: boolean
         readOnly: true
       disputeTime:
@@ -208,6 +248,7 @@ allOf:
         readOnly: true
         type: string
         enum:
+          - null
           - response-needed
           - under-review
           - forfeited
@@ -215,19 +256,17 @@ allOf:
           - lost
           - unknown
       isReconciled:
-        description: |-
-          Specifies whether the transaction is verified with gateway batch data.
-          If the transaction is not disputed, this value is `null`.
+        description: Specifies if the transaction is verified with gateway batch data.
         type: boolean
         readOnly: true
       isProcessedOutside:
-        description: Specifies whether the transaction is processed outside of Rebilly.
+        description: Specifies if the transaction is processed outside of Rebilly.
         type: boolean
       isMerchantInitiated:
-        description: Specifies whether the transaction is initiated by the merchant.
+        description: Specifies if the transaction is initiated by the merchant.
         type: boolean
       hadDiscrepancy:
-        description: Specifies whether the transaction is updated due to a discrepancy with its source of truth.
+        description: Specifies if the transaction is updated due to a discrepancy with its source of truth.
         type: boolean
         readOnly: true
       orderId:
@@ -242,6 +281,7 @@ allOf:
       arn:
         x-label: ARN
         type: string
+        nullable: true
         readOnly: true
         description: Acquirer reference number.
         example: '74836950144358910018150'
@@ -273,32 +313,43 @@ allOf:
         x-sortable: true
       limits:
         $ref: ../TransactionLimitAmount.yaml
+      organizationId:
+        readOnly: true
+        allOf:
+          - $ref: ../Organizations/OrganizationId.yaml
       _links:
         type: array
-        description: Related resource links.
+        description: Related links.
         readOnly: true
-        minItems: 1
         items:
-          anyOf:
-            - $ref: ../Links/SelfLink.yaml
-            - $ref: ../Links/WebsiteLink.yaml
-            - $ref: ../Links/CustomerLink.yaml
-            - $ref: ../Links/GatewayAccountLink.yaml
-            - $ref: ../Links/PaymentCardLink.yaml
-            - $ref: ../Links/ParentTransactionLink.yaml
-            - $ref: ../Links/LeadSourceLink.yaml
-            - $ref: ../Links/ApprovalUrlLink.yaml
-            - $ref: ../Links/RefundUrlLink.yaml
-            - $ref: ../Links/TransactionUpdateUrlLink.yaml
-            - $ref: ../Links/DisputeLink.yaml
-            - $ref: ../Links/InvoicesLink.yaml
-            - $ref: ../Links/QueryUrlLink.yaml
-            - $ref: ../Links/TransactionRedirectUrlLink.yaml
+          type: object
+          properties:
+            href:
+              description: Link URL.
+              type: string
+            rel:
+              description: Type of link.
+              type: string
+              enum:
+                - self
+                - attachments
+                - website
+                - customer
+                - gatewayAccount
+                - paymentCard
+                - parentTransaction
+                - leadSource
+                - approvalUrl
+                - refundUrl
+                - updateUrl
+                - dispute
+                - invoices
+                - queryUrl
+                - redirectUrl
       _embedded:
         type: array
         description: Embedded objects that are requested by the `expand` query parameter.
         readOnly: true
-        minItems: 1
         items:
           anyOf:
             - $ref: ../Embeds/ParentTransactionEmbed.yaml

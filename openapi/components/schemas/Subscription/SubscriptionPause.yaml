@@ -1,18 +1,19 @@
 type: object
+description: Subscription pause details.
 required:
   - subscriptionId
 properties:
   id:
-    description: Pause identifier.
+    description: ID of the subscription pause.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   subscriptionId:
-    description: Identifier of the paused subscription.
+    description: ID of the paused subscription.
     allOf:
       - $ref: ../ResourceId.yaml
   status:
-    description: Pause status.
+    description: Status of the subscription pause.
     type: string
     readOnly: true
     enum:
@@ -21,48 +22,53 @@ properties:
       - revoked
       - finished
   pausedBy:
-    description: Who did the pause.
+    description: Specifies who initiated the pause.
     type: string
     default: customer
     enum:
       - merchant
       - customer
   description:
-    description: Pause reason description.
+    description: Description of the pause reason in free form.
     type: string
     maxLength: 255
     nullable: true
   effectiveTime:
     description: |-
-      Date at which the service period pauses.
+      Date when the service period pauses.
 
-      This time should be later than the current time, if it is earlier then current time is taken.
+      This time should be later than the current time.
+      If this time is earlier then the current time, the current time is used.
 
-      If omitted, it defaults to the current time.
+      If this field is omitted, this value defaults to the current time.
     type: string
     format: date-time
     nullable: true
   endTime:
     description: |-
-      Time when the pause ends and the subscription resumes its billing.
+      Time when the pause ends and the subscription resumes billing.
 
-      In order to resume a subscription now, use current time or past time (defaults to the current time).
-      Empty `endTime` results in an indefinitely paused subscription.
+      To resume a subscription from this point in time,
+      use the current time or an earlier time.
+      If `endTime` is earlier then the current time, the current time is used.
+      If this field is empty, the subscription is indefinitely paused.
     type: string
     format: date-time
     nullable: true
   timeRemaining:
     description: |-
-      Time period between the pause end time and the renewal time in ISO-8601 durations format.
-      By default, it's computed as the time between the pause and the renewal.
+      Amount of time between the pause end time and the renewal time in ISO-8601 durations format.
+      By default, this value is computed as the time between the pause and the renewal.
 
-      For instance, you have a $30/month subscription and 30-day month.
-      If you pause on day 20 of the subscription, there are 10 days unused.
-      Therefore, the subscription would renew in 10 days after resuming.
-      The upcoming invoice would not change the amount for invoiced period, it remains $30.
-      There may be a billing anchor for the subscription,
-      the renewal time after a pause shift should behave as if the renewal time moved forward with Order API
-      (the billing anchor is ignored for that period then).
+      Example: A $30 per month subscription on a 30-day month is paused on day 20 of the subscription.
+      There are 10 unused days on the subscription.
+      Therefore, the subscription renews in 10 days after it is resumed.
+      The upcoming invoice does not change the amount for the invoiced period, it remains at $30.
+      If the subscription uses a billing anchor,
+      the renewal time after a pause shift behaves as though the renewal time is moved forward by an [Order API operation](../../tag/Orders),
+      and the billing anchor is ignored for that period.
+
+      For more information, see [Service period anchor, billing timing, and invoice time shift](https://www.rebilly.com/docs/dev-docs/concepts/#service-period-anchor-and-billing-timing-and-invoice-time-shift).
     type: string
     example: P3600S
   createdTime:
@@ -70,9 +76,4 @@ properties:
   updatedTime:
     $ref: ../UpdatedTime.yaml
   _links:
-    type: array
-    description: Related resource links.
-    readOnly: true
-    minItems: 1
-    items:
-      $ref: ../Links/SelfLink.yaml
+    $ref: ../SelfLink.yaml
