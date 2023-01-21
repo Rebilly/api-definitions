@@ -89,12 +89,13 @@ properties:
             - cashier
             - transaction
   _embedded:
-    type: array
+    type: object
     description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
-    minItems: 0
-    items:
-      anyOf:
-        - $ref: ../Embeds/CustomerEmbed.yaml
-        - $ref: ../Embeds/WebsiteEmbed.yaml
-        - $ref: ../Embeds/TransactionEmbed.yaml
+    properties:
+      customer:
+        type: object
+      website:
+        type: object
+      transaction:
+        type: object

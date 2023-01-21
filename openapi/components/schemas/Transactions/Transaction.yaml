@@ -347,17 +347,31 @@ allOf:
                 - queryUrl
                 - redirectUrl
       _embedded:
-        type: array
+        type: object
         description: Embedded objects that are requested by the `expand` query parameter.
         readOnly: true
-        items:
-          anyOf:
-            - $ref: ../Embeds/ParentTransactionEmbed.yaml
-            - $ref: ../Embeds/GatewayAccountEmbed.yaml
-            - $ref: ../Embeds/CustomerEmbed.yaml
-            - $ref: ../Embeds/LeadSourceEmbed.yaml
-            - $ref: ../Embeds/WebsiteEmbed.yaml
-            - $ref: ../Embeds/PaymentCardEmbed.yaml
-            - $ref: ../Embeds/BankAccountEmbed.yaml
-            - $ref: ../Embeds/InvoicesEmbed.yaml
-            - $ref: ../Embeds/ChildTransactionsEmbed.yaml
+        properties:
+          parentTransaction:
+            type: object
+          childTransactions:
+            type: array
+            maxItems: 10
+            description: Most recent child transactions.
+          gatewayAccount:
+            type: object
+          customer:
+            type: object
+          leadSource:
+            type: object
+          website:
+            type: object
+          invoices:
+            type: array
+            maxItems: 10
+            description: Most recent related invoices.
+          paymentCard:
+            type: object
+            # TODO: should this be replaced by `paymentInstrument`?
+          bankAccount:
+            type: object
+            # TODO: should this be replaced by `paymentInstrument`?
