@@ -1,11 +1,15 @@
 description: Manually set shipping amount.
-allOf:
-  - $ref: ../Shipping.yaml
-  - type: object
-    required:
-      - amount
-    properties:
-      amount:
-        x-type: Money
-        type: integer
-        description: Shipping amount.
+type: object
+required:
+  - amount
+  - calculator
+properties:
+  amount:
+    x-type: Money
+    type: integer
+    description: Shipping amount.
+  calculator:
+    description: Shipping calculator.
+    type: string
+    enum:
+      - manual

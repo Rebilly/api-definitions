@@ -1,20 +1,29 @@
-allOf:
-  - $ref: ../CommonScheduleInstruction.yaml
-  - $ref: ../CustomEventScheduleInstruction.yaml
-  - $ref: ../ServicePeriodAnchorInstruction.yaml
-  - $ref: ../InvoiceRetryScheduleInstruction.yaml
-  - type: object
-    properties:
-      day:
-        $ref: ../../DayOfWeekLong.yaml
-      week:
-        type: string
-        default: next
-        enum:
-          - next
-          - first-in-month
-          - last-in-month
-      time:
-        $ref: ../../TimeIso8601Extended.yaml
-    required:
-      - day
+type: object
+properties:
+  method:
+    type: string
+    enum:
+      - day-of-week
+  day:
+    description: Day of the week when the event occurs.
+    type: string
+    enum:
+      - Sunday
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      - Saturday
+  week:
+    type: string
+    default: next
+    enum:
+      - next
+      - first-in-month
+      - last-in-month
+  time:
+    $ref: ../../TimeIso8601Extended.yaml
+required:
+  - day
+  - method
