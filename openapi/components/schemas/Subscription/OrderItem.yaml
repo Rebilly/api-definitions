@@ -29,10 +29,9 @@ properties:
     readOnly: true
     description: Specifies if the current plan revision number is greater than the plan item revision number.
   _embedded:
-    type: array
+    type: object
     description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Embeds/ProductEmbed.yaml
+    properties:
+      product:
+        type: object

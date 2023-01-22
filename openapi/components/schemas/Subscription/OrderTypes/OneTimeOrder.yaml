@@ -4,19 +4,26 @@ required:
   - customerId
   - websiteId
   - items
+properties:
+  orderType:
+    description: |-
+      Specifies the type of order.
+      An order may be a subscription or a one-time purchase.
+    type: string
+    x-basic: true
+    enum:
+      - one-time-order
+  customerId:
+    x-basic: true
+    allOf:
+      - $ref: ../../CustomerId.yaml
+  organizationId:
+    deprecated: true
+    readOnly: true
+    allOf:
+      - $ref: ../../Organizations/OrganizationId.yaml
 allOf:
-  - $ref: ../../Subscription.yaml
   - $ref: ../../Common/CommonOneTimeOrder.yaml
-  - properties:
-      customerId:
-        x-basic: true
-        allOf:
-          - $ref: ../../CustomerId.yaml
-      organizationId:
-        deprecated: true
-        readOnly: true
-        allOf:
-          - $ref: ../../Organizations/OrganizationId.yaml
   # Always keep the SubscriptionMetadata the latest merged schema,
   # it contains _links and _embedded which is better to keep at the end of doc.
   - $ref: ../SubscriptionMetadata.yaml

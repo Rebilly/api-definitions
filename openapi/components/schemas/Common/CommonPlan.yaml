@@ -33,6 +33,7 @@ properties:
       - $ref: ../ResourceId.yaml
   productOptions:
     type: object
+    nullable: true
     description: Name-value pairs that specify the product options.
     additionalProperties:
       type: string
@@ -40,8 +41,7 @@ properties:
       color: red
       size: xxl
   currency:
-    allOf:
-      - $ref: ../CurrencyCode.yaml
+    $ref: ../CurrencyCode.yaml
   currencySign:
     description: Currency sign.
     readOnly: true
@@ -50,6 +50,7 @@ properties:
     $ref: ../Plans/PlanPriceFormula.yaml
   setup:
     type: object
+    nullable: true
     description: Set up information of the plan.
     required:
       - price
