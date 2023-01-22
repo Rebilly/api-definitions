@@ -8,26 +8,9 @@ discriminator:
     stairstep: ./Formulas/stairstep.yaml
     tiered: ./Formulas/tiered.yaml
     volume: ./Formulas/volume.yaml
-required:
-  - formula
-properties:
-  formula:
-    type: string
-    description: |-
-      Price formula that determines which algorithm is used to calculate the invoice price based on the following factors:
-
-      - Quantity in the order.
-        This value may be variable if you are charging based on usage.
-        If you are not charging based on usage,
-        this value is determined when an order is created.
-
-      - Price of the quantity range.
-        Some formulas set a price based on defined product quantity ranges.
-
-      For more information, see [Price formulas](https://www.rebilly.com/docs/billing/pricing-formulas/).
-    enum:
-      - fixed-fee
-      - flat-rate
-      - stairstep
-      - tiered
-      - volume
+oneOf:
+  - $ref: ./Formulas/fixed-fee.yaml
+  - $ref: ./Formulas/flat-rate.yaml
+  - $ref: ./Formulas/stairstep.yaml
+  - $ref: ./Formulas/tiered.yaml
+  - $ref: ./Formulas/volume.yaml
