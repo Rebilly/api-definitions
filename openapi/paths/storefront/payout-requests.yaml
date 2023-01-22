@@ -30,42 +30,8 @@ get:
           schema:
             type: array
             items:
-              $ref: ../../components/schemas/PayoutRequest.yaml
+              $ref: ../../components/schemas/Storefront/StorefrontPayoutRequest.yaml
     401:
       $ref: ../../components/responses/Unauthorized.yaml
     403:
       $ref: ../../components/responses/Forbidden.yaml
-post:
-  x-products:
-    - Storefront
-  tags:
-    - Transactions
-  summary: Create a payout request
-  operationId: StorefrontPostPayoutRequest
-  x-sdk-operation-name: create
-  security:
-    - CustomerJWT: []
-  description: Creates a payout request.
-  requestBody:
-    content:
-      application/json:
-        schema:
-          $ref: ../../components/schemas/PayoutRequest.yaml
-    description: Payout request resource.
-    required: true
-  responses:
-    201:
-      description: Payout request created.
-      headers:
-        Location:
-          $ref: ../../components/headers/Location.yaml
-      content:
-        application/json:
-          schema:
-            $ref: ../../components/schemas/PayoutRequest.yaml
-    401:
-      $ref: ../../components/responses/Unauthorized.yaml
-    403:
-      $ref: ../../components/responses/Forbidden.yaml
-    422:
-      $ref: ../../components/responses/ValidationError.yaml

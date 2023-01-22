@@ -80,11 +80,11 @@ properties:
             - self
             - product
   _embedded:
-    type: array
+    type: object
     description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Embeds/ProductEmbed.yaml
-        - $ref: ../Embeds/PlanEmbed.yaml
+    properties:
+      product:
+        type: object
+      plan:
+        type: object
