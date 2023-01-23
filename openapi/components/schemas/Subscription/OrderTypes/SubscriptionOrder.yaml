@@ -4,40 +4,58 @@ required:
   - customerId
   - websiteId
   - items
+properties:
+  orderType:
+    description: |-
+      Specifies the type of order.
+      An order may be a subscription or a one-time purchase.
+    type: string
+    x-basic: true
+    enum:
+      - subscription-order
+  customerId:
+    x-basic: true
+    allOf:
+      - $ref: ../../CustomerId.yaml
+  renewalReminderTime:
+    description: Date and time when the renewal reminder event triggers.
+    nullable: true
+    type: string
+    format: date-time
+    readOnly: true
+  renewalReminderNumber:
+    description: Number of triggered renewal reminder events.
+    nullable: true
+    type: integer
+    readOnly: true
+  trialReminderTime:
+    description: Date and time when the trial reminder event triggers.
+    nullable: true
+    type: string
+    format: date-time
+    readOnly: true
+  trialReminderNumber:
+    description: Number of triggered trial reminder events.
+    nullable: true
+    type: integer
+    readOnly: true
+  abandonReminderTime:
+    description: Date and time when the abandon order reminder event triggers.
+    nullable: true
+    type: string
+    format: date-time
+    readOnly: true
+  abandonReminderNumber:
+    description: Number of abandon order reminder events that are triggered.
+    nullable: true
+    type: integer
+    readOnly: true
+  organizationId:
+    readOnly: true
+    allOf:
+      - $ref: ../../Organizations/OrganizationId.yaml
 allOf:
-  - $ref: ../../Subscription.yaml
   - $ref: ../../Common/CommonSubscriptionOrder.yaml
-  - properties:
-      customerId:
-        x-basic: true
-        allOf:
-          - $ref: ../../CustomerId.yaml
-      renewalReminderTime:
-        description: Date and time when the renewal reminder event triggers.
-        nullable: true
-        type: string
-        format: date-time
-        readOnly: true
-      renewalReminderNumber:
-        description: Number of triggered renewal reminder events.
-        nullable: true
-        type: integer
-        readOnly: true
-      trialReminderTime:
-        description: Date and time when the trial reminder event triggers.
-        nullable: true
-        type: string
-        format: date-time
-        readOnly: true
-      trialReminderNumber:
-        description: Number of triggered trial reminder events.
-        nullable: true
-        type: integer
-        readOnly: true
-      organizationId:
-        readOnly: true
-        allOf:
-          - $ref: ../../Organizations/OrganizationId.yaml
   - $ref: ../SubscriptionCancellationState.yaml
   # Always keep the SubscriptionMetadata the latest merged schema,
   # it contains _links and _embedded which is better to keep at the end of doc.
