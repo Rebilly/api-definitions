@@ -15,7 +15,45 @@ properties:
     description: Name of the rule.
     type: string
   eventType:
-    $ref: ../GlobalEventType.yaml
+    allOf:
+      - $ref: ../GlobalEventType.yaml
+      - not:
+          enum:
+            - application-instance-disabled
+            - application-instance-enabled
+            - balance-transaction-settled
+            - credit-memo-applied
+            - credit-memo-created
+            - credit-memo-modified
+            - credit-memo-partially-applied
+            - credit-memo-voided
+            - dispute-created
+            - dispute-modified
+            - gateway-account-downtime-ended
+            - gateway-account-downtime-started
+            - gateway-account-limit-reached
+            - gateway-account-onboarding-completed
+            - gateway-account-onboarding-failed
+            - gateway-account-requested
+            - invoice-tax-calculation-failed
+            - nsf-response-received
+            - offsite-payment-completed
+            - payment-card-created
+            - payment-card-expiration-reminder
+            - payment-instrument-modified
+            - renewal-invoice-payment-canceled
+            - renewal-invoice-payment-declined
+            - risk-score-changed
+            - subscription-trial-converted
+            - subscription-trial-end-changed
+            - subscription-trial-end-reminder
+            - subscription-trial-ended
+            - transaction-process-requested
+            - transaction-processed
+            - transaction-reconciled
+            - transaction-timeout-resolved
+            - waiting-gateway-transaction-completed
+            - data-export-completed
   filter:
     description: |-
       Filter that determines whether to tag or untag.
