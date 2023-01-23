@@ -3,6 +3,7 @@ required:
   - websiteId
   - currency
   - amount
+  - customerId
 properties:
   id:
     readOnly: true
@@ -11,7 +12,6 @@ properties:
   websiteId:
     $ref: ./Websites/WebsiteId.yaml
   customerId:
-    readOnly: true
     allOf:
       - $ref: ./CustomerId.yaml
   paymentInstrumentId:
@@ -46,6 +46,7 @@ properties:
       partially-fulfilled: Request is partially paid out when `availableAmount` is less than `amount`.
       fulfilled: Request is fully paid out when `availableAmount` reaches zero.
   selectPaymentInstrumentUrl:
+    readOnly: true
     type: string
     format: uri
     description: URL for the customer to select a preferred payment instrument.
