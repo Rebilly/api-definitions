@@ -90,8 +90,9 @@ properties:
     description: |-
       Items to be added to the new invoice.
       Proration item is generated and added automatically.
-    allOf:
-      - $ref: ./UpcomingInvoiceItemCollection.yaml
+    type: array
+    items:
+      $ref: UpcomingInvoiceItem.yaml
   lineItemSubtotal:
     description: Subtotal of the line items added after the subscription cancellation.
     readOnly: true

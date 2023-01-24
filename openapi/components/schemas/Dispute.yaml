@@ -9,7 +9,7 @@ required:
   - reasonCode
 properties:
   id:
-    description: Dispute identifier string.
+    description: ID of the dispute.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
@@ -277,10 +277,9 @@ properties:
             - self
             - transaction
   _embedded:
-    type: array
+    type: object
     description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ./Embeds/TransactionEmbed.yaml
+    properties:
+      transaction:
+        type: object

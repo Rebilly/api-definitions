@@ -39,11 +39,11 @@ allOf:
                 - authTransaction
                 - approvalUrl
       _embedded:
-        type: array
+        type: object
         description: Embedded objects that are requested by the `expand` query parameter.
         readOnly: true
-        minItems: 1
-        items:
-          anyOf:
-            - $ref: ./Embeds/AuthTransactionEmbed.yaml
-            - $ref: ./Embeds/CustomerEmbed.yaml
+        properties:
+          authTransaction:
+            type: object
+          customer:
+            type: object

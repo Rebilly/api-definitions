@@ -2,7 +2,7 @@ type: object
 description: Customer information.
 properties:
   id:
-    description: Unique customer identifier string.
+    description: ID of the customer.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
@@ -133,10 +133,9 @@ properties:
             - leadSource
             - website
   _embedded:
-    type: array
-    description: Array of embedded objects that are requested using the `expand` query string parameter.
+    type: object
+    description: Embedded objects that are requested using the `expand` query string parameter.
     readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ./Embeds/LeadSourceEmbed.yaml
+    properties:
+      leadSource:
+        type: object

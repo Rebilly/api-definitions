@@ -63,7 +63,7 @@ components:
 
     PublishableApiKey:
       description: |-
-        Only for the tokens resource.
+        This authentication method is applicable to specific operations.
 
         To create a publishable API key, see [Create an API key](https://all-rebilly.redoc.ly/tag/API-keys/operation/PostApiKey).
       name: Authorization
@@ -1055,10 +1055,6 @@ paths:
     $ref: ./paths/payout-requests.yaml
   '/payout-requests/{id}':
     $ref: './paths/payout-requests@{id}.yaml'
-  '/payout-requests/{id}/accept':
-    $ref: './paths/payout-requests@{id}@accept.yaml'
-  '/payout-requests/{id}/reject':
-    $ref: './paths/payout-requests@{id}@reject.yaml'
   '/payout-requests/{id}/payment-instruments':
     $ref: './paths/payout-requests@{id}@payment-instruments.yaml'
   /permissions-emulation:
@@ -1237,8 +1233,6 @@ paths:
     $ref: ./paths/storefront/payout-requests.yaml
   '/storefront/payout-requests/{id}':
     $ref: paths/storefront/payout-requests@{id}.yaml
-  '/storefront/payout-requests/{id}/cancel':
-    $ref: paths/storefront/payout-requests@{id}@cancel.yaml
   '/storefront/plans':
     $ref: paths/storefront/plans.yaml
   '/storefront/plans/{id}':
@@ -1411,6 +1405,9 @@ x-webhooks:
   offsite-payment-completed:
     post:
       $ref: ./webhooks/offsite-payment-completed.yaml
+  order-abandoned:
+    post:
+      $ref: ./webhooks/order-abandoned.yaml
   order-completed:
     post:
       $ref: ./webhooks/order-completed.yaml

@@ -12,7 +12,7 @@ get:
     - SecretApiKey: []
     - JWT: []
     - ApplicationJWT: []
-  description: Retrieves a customer with a specified identifier string.
+  description: Retrieves a customer with a specified ID.
   parameters:
     - $ref: ../components/parameters/collectionExpand.yaml
     - $ref: ../components/parameters/collectionFields.yaml
@@ -49,7 +49,7 @@ put:
   operationId: PutCustomer
   x-sdk-operation-name: update
   description: |-
-    Creates or updates (upserts) a customer with specified identifier string.
+    Creates or updates (upserts) a customer with a specified ID.
 
     If the customer already has an identifier within your system,
     and you want to create a customer with a specified ID &mdash; use this operation to prevent duplicate customers.
@@ -60,7 +60,7 @@ put:
     '200':
       $ref: ../components/responses/Customer.yaml
     '201':
-      description: Customer with specified ID created.
+      description: Customer with a specified ID created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
