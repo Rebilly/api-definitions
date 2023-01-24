@@ -1,4 +1,24 @@
 type: object
+discriminator:
+  propertyName: relatedType
+  mapping:
+    customer: ./Attachments/CustomerRelatedType.yaml
+    customer-timeline-comment: ./Attachments/EntityRelatedType.yaml
+    customer-edd-timeline-comment: ./Attachments/EntityRelatedType.yaml
+    dispute: ./Attachments/EntityRelatedType.yaml
+    gateway-timeline-comment: ./Attachments/EntityRelatedType.yaml
+    invoice: ./Attachments/EntityRelatedType.yaml
+    invoice-timeline-comment: ./Attachments/EntityRelatedType.yaml
+    kyc-document: ./Attachments/KycDocumentRelatedType.yaml
+    order-timeline-comment: ./Attachments/EntityRelatedType.yaml
+    organization: ./Attachments/EntityRelatedType.yaml
+    payment: ./Attachments/EntityRelatedType.yaml
+    plan: ./Attachments/EntityRelatedType.yaml
+    product: ./Attachments/EntityRelatedType.yaml
+    subscription: ./Attachments/EntityRelatedType.yaml
+    transaction: ./Attachments/EntityRelatedType.yaml
+    transaction-timeline-comment: ./Attachments/EntityRelatedType.yaml
+    website: ./Attachments/WebsiteRelatedType.yaml
 required:
   - fileId
   - relatedId
@@ -14,22 +34,9 @@ properties:
   relatedType:
     description: Linked object type.
     type: string
-    enum:
-      - customer
-      - customer-timeline-comment
-      - customer-edd-timeline-comment
-      - dispute
-      - gateway-timeline-comment
-      - invoice
-      - invoice-timeline-comment
-      - order-timeline-comment
-      - organization
-      - payment
-      - plan
-      - product
-      - subscription
-      - transaction
-      - transaction-timeline-comment
+  type:
+    type: string
+    description: Attachment type. Depends on `relatedType`.
   relatedId:
     description: Linked object ID.
     type: string
