@@ -1,0 +1,44 @@
+type: object
+properties:
+  status:
+    description: Status of Multi-Factor Authentication (MFA) enrollment.
+    type: string
+    enum:
+      - active
+      - inactive
+  type:
+    description: >-
+      Type of MFA enrollment.
+
+      Type `duo` cannot be updated or deleted.
+
+      If you need to reset your Duo MFA, [Contact
+      support](https://www.rebilly.com/support/).
+    type: string
+    enum:
+      - duo
+      - guardian
+  lastAuthTime:
+    description: >-
+      Date and time when MFA verification is most recently passed.
+
+      To disable MFA, no more than 10 minutes must elapse between this value and
+      the request to disable MFA.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - enrollment

@@ -1,0 +1,29 @@
+post:
+  x-products:
+    - Storefront
+  tags:
+    - Account
+  summary: Register Account
+  operationId: StorefrontPostRegister
+  x-sdk-operation-name: register
+  security:
+    - PublishableApiKey: []
+  description: Register account.
+  requestBody:
+    $ref: ../components/requestBodies/PostRegister.yaml
+  responses:
+    '201':
+      description: Account registered.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Account.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

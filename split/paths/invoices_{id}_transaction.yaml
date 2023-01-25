@@ -1,0 +1,45 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Invoices
+  summary: Apply a transaction to an invoice
+  operationId: PostInvoiceTransaction
+  x-sdk-operation-name: applyTransaction
+  description: >-
+    Applies a transaction to an invoice.
+
+    The invoice status must be `unpaid`, and the transaction must have a
+    non-zero unused amount.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/InvoiceTransaction.yaml
+    description: Invoice transaction resource.
+    required: true
+  responses:
+    '200':
+      description: Transaction applied to invoice.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Invoice.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/invoices_{id}_transaction/postundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/invoices_{id}_transaction/postundefined

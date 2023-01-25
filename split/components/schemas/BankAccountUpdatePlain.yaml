@@ -1,0 +1,33 @@
+type: object
+properties:
+  bankName:
+    description: Name of the bank.
+    type: string
+  accountType:
+    description: Bank account type.
+    type: string
+    enum:
+      - checking
+      - savings
+      - other
+  billingAddress:
+    description: Billing address.
+    allOf:
+      - $ref: ./ContactObject.yaml
+  stickyGatewayAccountId:
+    description: >-
+      Sticky gateway account ID.
+
+      All future payments are processed by this gateway account.
+
+
+      For more information,
+
+      see [Gateway
+      routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
+    allOf:
+      - $ref: ./ResourceId.yaml
+  customFields:
+    $ref: ./ResourceCustomFields.yaml
+  useAsBackup:
+    $ref: ./UseAsBackup.yaml

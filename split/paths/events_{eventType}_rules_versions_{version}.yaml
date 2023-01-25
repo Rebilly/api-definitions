@@ -1,0 +1,34 @@
+parameters:
+  - $ref: ../components/parameters/systemEventType.yaml
+  - $ref: ../components/parameters/rulesVersion.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Rules
+  summary: Retrieve a version of a ruleset
+  operationId: GetEventRuleVersion
+  x-sdk-operation-name: getRulesVersionDetail
+  description: |-
+    Retrieves a version of a ruleset with a specified event type.
+    A new version is created each time you change a rule.
+  parameters:
+    - $ref: ../components/parameters/collectionFields.yaml
+  responses:
+    '200':
+      description: Ruleset version retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RuleSetVersion.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: >-
+          ../code_samples/JavaScript/events_{eventType}_rules_versions_{version}/getundefined

@@ -1,0 +1,31 @@
+type: object
+required:
+  - name
+  - filter
+  - amounts
+  - customAmount
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  name:
+    type: string
+    description: Name of the strategy.
+  filter:
+    type: string
+    description: >-
+      Filter that uses cashier request properties to determine if a cashier
+      strategy is applicable for the request.
+
+      If this field is empty, the strategy is applicable for any request.
+    default: ''
+    example: cashierRequest.currency:USD
+  amounts:
+    $ref: ./CashierStrategyAmounts.yaml
+  customAmount:
+    $ref: ./CashierStrategyCustomAmount.yaml
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml

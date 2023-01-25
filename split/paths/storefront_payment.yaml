@@ -1,0 +1,47 @@
+post:
+  x-products:
+    - Storefront
+  tags:
+    - Purchases
+  summary: Perform a payment
+  operationId: StorefrontPostPayment
+  x-sdk-operation-name: payment
+  security:
+    - CustomerJWT: []
+    - PublishableApiKey: []
+  description: >-
+    Performs a payment for a transaction or an invoice.
+
+
+    If the customer's JSON Web Token (JWT) contains a `transactionId`, or
+    `invoiceId` value,
+
+    these values are used instead of the JWT value.
+
+    The `transactionId` has a higher priority than the `invoiceId`.
+  requestBody:
+    $ref: ../components/requestBodies/PostPayment.yaml
+  responses:
+    '200':
+      description: Transaction created.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/StorefrontTransaction.yaml
+    '201':
+      description: Transaction updated.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/StorefrontTransaction.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

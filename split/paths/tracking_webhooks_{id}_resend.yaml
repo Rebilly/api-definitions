@@ -1,0 +1,22 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Users
+  tags:
+    - Tracking
+  summary: Schedule a resend webhook attempt
+  description: |-
+    Schedules a resend attempt for a specified webhook tracking ID.
+    Webhooks are processed asynchronously.
+  operationId: PostTrackingWebhookResendRequest
+  x-sdk-operation-name: resendWebhook
+  responses:
+    '204':
+      description: Webhook resend attempt scheduled.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

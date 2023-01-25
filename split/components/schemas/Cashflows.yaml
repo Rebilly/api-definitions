@@ -1,0 +1,21 @@
+description: Cashflows gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          authenticationId:
+            type: string
+            description: Cashflows authentication ID.
+          authPassword:
+            type: string
+            description: Cashflows authentication password.
+            format: password
+            writeOnly: true
+        required:
+          - authPassword
+          - authId

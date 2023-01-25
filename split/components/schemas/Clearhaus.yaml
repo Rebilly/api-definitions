@@ -1,0 +1,19 @@
+description: Clearhaus gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          apiKey:
+            type: string
+            description: Clearhaus API key.
+            format: password
+            writeOnly: true
+        required:
+          - apiKey
+      threeDSecureServer:
+        $ref: ./Clearhaus3dsServers.yaml

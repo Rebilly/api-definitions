@@ -1,0 +1,58 @@
+type: object
+required:
+  - subscriptionId
+  - planId
+  - quantity
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  subscriptionId:
+    description: ID of the subscription for which a usage is reported.
+    allOf:
+      - $ref: ./ResourceId.yaml
+  planId:
+    description: ID of the plan for which a usage is reported.
+    allOf:
+      - $ref: ./ResourceId.yaml
+  invoiceId:
+    description: >-
+      ID of the invoice to which usage is applied. This value is populated when
+      the invoice is issued.
+    readOnly: true
+    nullable: true
+    type: string
+    maxLength: 50
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+  invoiceItemId:
+    description: >-
+      ID of the invoice item to which usage is applied. This value is populated
+      when the invoice is issued.
+    readOnly: true
+    nullable: true
+    type: string
+    maxLength: 50
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+  quantity:
+    description: |-
+      Number of used product units of a plan.
+      Products are the goods and services that your business sells.
+      Plans describe how the customer must pay for products.
+    type: number
+    format: float
+    minimum: 0.01
+  usageTime:
+    description: >-
+      Date and time, in ISO 8601 format, when a usage occurred.
+
+      If this value is not provided or is empty, the date and time of the
+      request is used.
+    type: string
+    format: date-time
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml

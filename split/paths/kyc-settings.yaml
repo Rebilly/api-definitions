@@ -1,0 +1,51 @@
+get:
+  x-products:
+    - Core
+  tags:
+    - KYC documents
+  summary: Retrieve KYC settings
+  operationId: GetKycSettings
+  x-sdk-operation-name: getKycSettings
+  description: Retrieves KYC settings.
+  responses:
+    '200':
+      description: KYC settings retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KycSettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - KYC documents
+  summary: Update KYC settings
+  operationId: PutKycSettings
+  x-sdk-operation-name: updateKycSettings
+  description: Updates KYC settings.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/KycSettings.yaml
+    description: Settings for KYC analysis.
+    required: true
+  responses:
+    '200':
+      description: KYC settings updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KycSettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

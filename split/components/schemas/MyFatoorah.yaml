@@ -1,0 +1,18 @@
+description: MyFatoorah gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: MyFatoorah credentials object.
+        properties:
+          apiKey:
+            type: string
+            description: MyFatoorah API key.
+            format: password
+            writeOnly: true
+        required:
+          - apiKey

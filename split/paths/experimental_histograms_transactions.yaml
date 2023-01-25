@@ -1,0 +1,101 @@
+servers:
+  - url: >-
+      https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}
+    description: Sandbox server
+    variables:
+      organizationId:
+        default: unknown
+        description: >-
+          Unique organization identifier.
+
+          An organization is an entity that represents a company.
+
+          For more information, see [Obtain an organization
+          ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+  - url: https://api.rebilly.com/experimental/organizations/{organizationId}
+    description: Live server
+    variables:
+      organizationId:
+        default: unknown
+        description: >-
+          Unique organization identifier.
+
+          An organization is an entity that represents a company.
+
+          For more information, see [Obtain an organization
+          ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+get:
+  x-badge: Experimental
+  x-products:
+    - Reports
+  tags:
+    - Histograms
+  summary: Retrieve transaction histogram report data
+  operationId: GetHistogramTransactionReport
+  x-sdk-operation-name: getTransactionHistogramReport
+  description: Retrieves transaction histogram report data.
+  parameters:
+    - name: periodStart
+      in: query
+      description: Date and time when the report starts.
+      required: true
+      schema:
+        type: string
+        format: date-time
+    - name: periodEnd
+      in: query
+      description: Date and time when the report ends.
+      required: true
+      schema:
+        type: string
+        format: date-time
+    - name: aggregationPeriod
+      in: query
+      description: Aggregation period of the report.
+      required: true
+      schema:
+        type: string
+        enum:
+          - hour
+          - day
+          - month
+    - name: metric
+      in: query
+      description: Metric on which the report is based.
+      required: true
+      schema:
+        type: string
+        enum:
+          - approval
+          - auth_approval
+          - avg_sales
+          - refunds
+          - refunds_count
+          - sales
+          - sales_count
+          - all_sales_count
+          - auth_approval_count
+          - disputes_count
+          - disputes_rate
+          - credits
+          - credits_count
+          - unapproved_count
+    - $ref: ../components/parameters/collectionFilter.yaml
+  responses:
+    '200':
+      description: Transaction report retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HistogramData.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: >-
+          ../code_samples/JavaScript/experimental_histograms_transactions/getundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/experimental_histograms_transactions/getundefined

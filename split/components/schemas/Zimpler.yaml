@@ -1,0 +1,22 @@
+description: Zimpler configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Zimpler credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: Zimpler merchant ID.
+          apiKey:
+            type: string
+            description: Zimpler API key.
+            format: password
+            writeOnly: true
+        required:
+          - merchantId
+          - apiKey

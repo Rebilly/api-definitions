@@ -1,0 +1,177 @@
+type: object
+required:
+  - currency
+  - websiteId
+properties:
+  id:
+    description: ID of the invoice.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  websiteId:
+    $ref: ./WebsiteId.yaml
+  invoiceNumber:
+    description: >-
+      Auto-incrementing number based on the sequence of invoices for any
+      particular customer.
+    readOnly: true
+    type: integer
+    x-basic: true
+  subscriptionId:
+    description: |-
+      ID of the related subscription order, if available.
+      This field is `null` if there are no related subscription orders.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  currency:
+    x-sortable: true
+    x-basic: true
+    allOf:
+      - $ref: ./CurrencyCode.yaml
+  amount:
+    description: Amount of the invoice.
+    type: number
+    x-type: Money
+    x-sortable: true
+    x-basic: true
+    format: double
+    readOnly: true
+  amountDue:
+    description: Amount that is due on the invoice.
+    type: number
+    x-type: Money
+    x-sortable: true
+    format: double
+    readOnly: true
+  subtotalAmount:
+    description: Subtotal amount of the invoice.
+    type: number
+    x-type: Money
+    format: double
+    readOnly: true
+  discountAmount:
+    description: Discount amount that is applied to the invoice.
+    type: number
+    x-type: Money
+    format: double
+    readOnly: true
+  shipping:
+    $ref: ./Shipping.yaml
+  tax:
+    $ref: ./InvoiceTax.yaml
+  billingAddress:
+    description: Billing address of the invoice.
+    allOf:
+      - $ref: ./ContactObject.yaml
+  deliveryAddress:
+    description: Delivery address of the invoice.
+    allOf:
+      - $ref: ./ContactObject.yaml
+  poNumber:
+    description: Purchase order number that is displayed on the invoice.
+    nullable: true
+    example: PO123456
+    type: string
+  notes:
+    description: Notes for the customer that are displayed on the invoice.
+    type: string
+  items:
+    type: array
+    description: Invoice items array.
+    readOnly: true
+    items:
+      $ref: ./InvoiceItem.yaml
+  discounts:
+    type: array
+    description: Discounts applied.
+    readOnly: true
+    items:
+      allOf:
+        - $ref: ./InvoiceDiscount.yaml
+  autopayScheduledTime:
+    description: Date and time when an automatic payment (autopay) is scheduled.
+    type: string
+    x-sortable: true
+    format: date-time
+  autopayRetryNumber:
+    description: >-
+      Number of times that an automatic payment (autopay) has been attempted on
+      an invoice.
+    readOnly: true
+    type: integer
+    x-sortable: true
+    minimum: 0
+    default: 0
+  status:
+    type: string
+    description: Status of the invoice.
+    x-basic: true
+    readOnly: true
+    enum:
+      - draft
+      - unpaid
+      - paid
+      - partially-paid
+      - past-due
+      - abandoned
+      - voided
+      - partially-refunded
+      - refunded
+      - disputed
+  delinquentCollectionPeriod:
+    type: integer
+    description: >-
+      Length of time, in days, between when the invoice is due and when the
+      invoice is paid.
+    x-sortable: true
+    readOnly: true
+  collectionPeriod:
+    type: integer
+    x-sortable: true
+    description: >-
+      Length of time, in days, between when the invoice is issued and when the
+      invoice is paid.
+    readOnly: true
+  abandonedTime:
+    description: Date and time when the invoice is abandoned.
+    x-sortable: true
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  voidedTime:
+    description: Date and time when the invoice is voided.
+    x-sortable: true
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  paidTime:
+    x-label: Payment Date
+    x-sortable: true
+    x-basic: true
+    description: Date and time when the invoice is paid.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  dueTime:
+    description: Date and time when the invoice is due for payment.
+    type: string
+    x-sortable: true
+    format: date-time
+  issuedTime:
+    description: Date and time when the invoice is issued.
+    x-label: Date Issued
+    x-sortable: true
+    x-basic: true
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  paymentFormUrl:
+    type: string
+    readOnly: true
+    format: url
+    description: |-
+      URL where the customer is redirected to pay the invoice
+      using one of the methods which are available to the customer.
+      This is an alternative to creating a new transaction with empty
+      `methods`.

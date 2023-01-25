@@ -1,0 +1,26 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Organization data exports
+  summary: Retrieve an organization data export request
+  operationId: GetOrganizationExport
+  x-sdk-operation-name: get
+  description: >-
+    Retrieve an organization data export request with a specified organization
+    ID.
+  responses:
+    '200':
+      description: Organization data export request.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OrganizationExport.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

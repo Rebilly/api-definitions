@@ -1,0 +1,30 @@
+description: Redsys gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantCode:
+            type: string
+            description: Redsys merchant code.
+            format: password
+            writeOnly: true
+          secretCode:
+            type: string
+            description: Redsys secret code.
+            format: password
+            writeOnly: true
+        required:
+          - merchantCode
+          - secretCode
+      settings:
+        type: object
+        description: Redsys settings object.
+        properties:
+          terminal:
+            type: string
+            description: Redsys terminal.

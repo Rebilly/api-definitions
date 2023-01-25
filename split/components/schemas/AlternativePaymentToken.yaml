@@ -1,0 +1,55 @@
+type: object
+title: Alternative payment token
+required:
+  - method
+  - billingAddress
+properties:
+  method:
+    description: Payment method of the token.
+    type: string
+    allOf:
+      - $ref: ./AlternativePaymentMethods.yaml
+      - not:
+          enum:
+            - payment-card
+            - paypal
+            - ach
+            - echeck
+            - digital-wallet
+            - plaid-account
+            - Khelocard
+            - Klarna
+  billingAddress:
+    description: Billing address object.
+    allOf:
+      - $ref: ./ContactObject.yaml
+  id:
+    description: ID of the token.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  isUsed:
+    description: Specifies if the token is already used.
+    type: boolean
+    default: false
+    readOnly: true
+  riskMetadata:
+    $ref: ./RiskMetadata.yaml
+  leadSource:
+    allOf:
+      - $ref: ./LeadSource.yaml
+    writeOnly: true
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  usageTime:
+    description: Date and time when the token is used.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  expirationTime:
+    description: Date and time when the token expired.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  _links:
+    $ref: ./SelfLink.yaml

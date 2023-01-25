@@ -1,0 +1,61 @@
+type: object
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  userId:
+    description: ID of the user who requested the organization data export.
+    readOnly: true
+    type: string
+  fileId:
+    description: ID of the linked file object.
+    readOnly: true
+    type: string
+    nullable: true
+  status:
+    description: Status of organization data export request.
+    readOnly: true
+    type: string
+    enum:
+      - pending
+      - processing
+      - completed
+      - queued
+      - failed
+      - expired
+  items:
+    description: Organization data export resources array.
+    readOnly: true
+    type: array
+    items:
+      $ref: ./OrganizationExportResource.yaml
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  retentionTime:
+    description: |-
+      Date and time when retention ends.
+      After this date, files are removed.
+    readOnly: true
+    type: string
+    nullable: true
+    format: date-time
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - user
+            - signedLink

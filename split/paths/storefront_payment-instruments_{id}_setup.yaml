@@ -1,0 +1,71 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Storefront
+  tags:
+    - Payment instruments
+  summary: Retrieve a payment instrument setup transaction
+  operationId: StorefrontGetPaymentInstrumentSetup
+  x-sdk-operation-name: getSetupTransaction
+  security:
+    - CustomerJWT: []
+  description: >-
+    Retrieves the latest setup transaction for a payment instrument with a
+    specified ID.
+
+
+    For more information, see [Transactions](#Transactions).
+  responses:
+    '200':
+      description: Setup transaction retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/StorefrontTransaction.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+post:
+  x-products:
+    - Storefront
+  tags:
+    - Payment instruments
+  summary: Create a setup payment instrument transaction
+  operationId: StorefrontPostPaymentInstrumentSetup
+  x-sdk-operation-name: setup
+  security:
+    - CustomerJWT: []
+  description: >-
+    Creates a setup payment instrument transaction.
+
+
+    This operation makes the payment instrument available for further payments.
+
+    Treat the response as a regular transaction.
+
+    For example, approval links must be followed until the transaction is
+    completed.
+  requestBody:
+    $ref: ../components/requestBodies/SetupPaymentInstrumentRequest.yaml
+  responses:
+    '201':
+      description: Setup transaction created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/StorefrontTransaction.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

@@ -1,0 +1,86 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Usage
+  summary: Retrieve a usage record
+  operationId: GetUsage
+  x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+  description: Retrieves a usage record with a specified ID.
+  responses:
+    '200':
+      description: Usage record retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Usage.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Usage
+  summary: Upsert a usage record
+  operationId: PutUsage
+  x-sdk-operation-name: update
+  description: Creates or updates a usage record with a specified ID.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Usage.yaml
+  responses:
+    '200':
+      description: Usage record updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Usage.yaml
+    '201':
+      description: Usage record created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Usage.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+delete:
+  x-products:
+    - Core
+  tags:
+    - Usage
+  summary: Delete a usage record
+  operationId: DeleteUsage
+  x-sdk-operation-name: delete
+  description: Deletes a usage record with a specified ID.
+  responses:
+    '204':
+      description: Usage record deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml

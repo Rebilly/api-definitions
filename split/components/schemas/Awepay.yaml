@@ -1,0 +1,22 @@
+description: Awepay gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Awepay credentials object.
+        properties:
+          sid:
+            type: string
+            description: Awepay site ID.
+          rcode:
+            type: string
+            description: Awepay rcode.
+            format: password
+            writeOnly: true
+        required:
+          - sid
+          - rcode

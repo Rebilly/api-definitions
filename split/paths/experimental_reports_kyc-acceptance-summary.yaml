@@ -1,0 +1,183 @@
+servers:
+  - url: >-
+      https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}
+    description: Sandbox server
+    variables:
+      organizationId:
+        default: unknown
+        description: >-
+          Unique organization identifier.
+
+          An organization is an entity that represents a company.
+
+          For more information, see [Obtain an organization
+          ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+  - url: https://api.rebilly.com/experimental/organizations/{organizationId}
+    description: Live server
+    variables:
+      organizationId:
+        default: unknown
+        description: >-
+          Unique organization identifier.
+
+          An organization is an entity that represents a company.
+
+          For more information, see [Obtain an organization
+          ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+get:
+  x-badge: Experimental
+  x-products:
+    - Reports
+  tags:
+    - Reports
+  summary: Retrieve a KYC acceptance summary report
+  operationId: GetKycAcceptanceSummaryReport
+  x-sdk-operation-name: getKycAcceptanceSummary
+  description: Retrieves a Know Your Customer (KYC) acceptance summary report.
+  parameters:
+    - name: periodStart
+      in: query
+      description: Date and time when the report starts.
+      required: true
+      schema:
+        type: string
+        format: date-time
+    - name: periodEnd
+      in: query
+      description: Date and time when the report ends.
+      required: true
+      schema:
+        type: string
+        format: date-time
+  responses:
+    '200':
+      description: Report retrieved.
+      content:
+        application/json:
+          schema:
+            type: object
+            title: GetKycAcceptanceSummaryResponse
+            properties:
+              data:
+                description: KYC acceptance data.
+                type: array
+                items:
+                  type: object
+                  description: Amount of accepted KYC documents.
+                  readOnly: true
+                  properties:
+                    documentType:
+                      allOf:
+                        - description: Type of KYC document.
+                          example: address-proof
+                        - $ref: ../components/schemas/KycDocumentTypes.yaml
+                    statusStatistics:
+                      type: object
+                      description: Statistics for each status.
+                      properties:
+                        accepted:
+                          type: object
+                          description: Statistics for the `accepted` status.
+                          properties:
+                            total:
+                              type: integer
+                              description: Total amount of accepted documents.
+                              example: 6
+                            automatically:
+                              type: integer
+                              description: >-
+                                Amount of documents that have been accepted
+                                automatically.
+                              example: 4
+                            manually:
+                              type: integer
+                              description: >-
+                                Amount of documents that have been accepted by
+                                reviewer.
+                              example: 2
+                            afterAutoRejected:
+                              type: integer
+                              description: >-
+                                Amount of documents that have been rejected
+                                automatically and then accepted by reviewer.
+                              example: 2
+                        rejected:
+                          type: object
+                          description: Statistics for the `rejected` status.
+                          properties:
+                            total:
+                              type: integer
+                              description: Total amount of rejected documents.
+                              example: 2
+                            automatically:
+                              type: integer
+                              description: >-
+                                Amount of documents that have been rejected
+                                automatically.
+                              example: 1
+                            manually:
+                              type: integer
+                              description: >-
+                                Amount of documents that have been rejected by
+                                reviewer.
+                              example: 1
+                            afterAutoAccepted:
+                              type: integer
+                              description: >-
+                                Amount of documents that have been accepted
+                                automatically and then rejected by reviewer.
+                              example: 1
+                        pending:
+                          type: object
+                          description: Statistics for the `pending` status.
+                          properties:
+                            total:
+                              type: integer
+                              description: Total amount of pending documents.
+                              example: 0
+                        archived:
+                          type: object
+                          description: Statistics for the `archived` status.
+                          properties:
+                            total:
+                              type: integer
+                              description: Total amount of archived documents.
+                              example: 0
+                    total:
+                      type: integer
+                      description: Total amount of documents.
+                      example: 8
+                    accuracyRate:
+                      type: number
+                      description: >-
+                        Percentage of automatically accepted and rejected
+                        documents that remain in the same status after review.
+
+                        Calculated based on the following: `(non-archived total
+                        - accepted auto rejected - rejected auto
+                        accepted)/non-archived total`.
+                      example: 62.5
+                    acceptanceRate:
+                      type: number
+                      description: >-
+                        Percentage of accepted documents from the total number
+                        of KYC documents.
+
+                        Calculated based on the following: `accepted total /
+                        total of non-archived documents`.
+                      example: 75
+                    manualReviewTime:
+                      type: number
+                      description: >-
+                        Median duration in minutes between review and created
+                        time for manually reviewed documents.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: >-
+          ../code_samples/PHP/experimental_reports_kyc-acceptance-summary/getundefined

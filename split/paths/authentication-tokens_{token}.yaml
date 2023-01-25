@@ -1,0 +1,76 @@
+parameters:
+  - name: token
+    in: path
+    description: ID of the authentication token.
+    required: true
+    schema:
+      type: string
+get:
+  x-products:
+    - Core
+  tags:
+    - Customer authentication
+  summary: Verify an authentication token
+  operationId: GetAuthenticationTokenVerification
+  x-sdk-operation-name: verify
+  description: Verifies a customer's authentication token.
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - PublishableApiKey: []
+  responses:
+    '200':
+      description: Authentication token verified.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/AuthenticationTokenResponse.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/authentication-tokens_{token}/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/authentication-tokens_{token}/getundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/authentication-tokens_{token}/getundefined
+delete:
+  x-products:
+    - Core
+  tags:
+    - Customer authentication
+  summary: Logout a customer
+  operationId: DeleteAuthenticationToken
+  x-sdk-operation-name: logout
+  description: Logs out a customer.
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - PublishableApiKey: []
+  responses:
+    '204':
+      description: Customer logged out.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/authentication-tokens_{token}/deleteundefined
+    - lang: JavaScript
+      source:
+        $ref: >-
+          ../code_samples/JavaScript/authentication-tokens_{token}/deleteundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/authentication-tokens_{token}/deleteundefined

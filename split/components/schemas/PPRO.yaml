@@ -1,0 +1,61 @@
+description: PPRO gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: PPRO credentials object.
+        properties:
+          login:
+            type: string
+            description: PPRO merchant API username.
+          password:
+            type: string
+            description: PPRO merchant API password.
+            format: password
+            writeOnly: true
+          contractId:
+            type: string
+            description: PPRO contract ID. This value is used for API credentials.
+          privateKey:
+            type: string
+            format: password
+            description: PPRO private key.
+            x-multiline: true
+            writeOnly: true
+          privateKeyPassword:
+            type: string
+            format: password
+            description: PPRO private key password.
+            writeOnly: true
+          clientCertificate:
+            type: string
+            description: Public key.
+            x-multiline: true
+          serverCertificate:
+            type: string
+            description: PPRO CA certificate.
+            x-multiline: true
+          notificationSecret:
+            type: string
+            format: password
+            description: Secret used for IPN URLs.
+            writeOnly: true
+          sharedSecret:
+            type: string
+            format: password
+            description: Secret used for redirect URLs.
+            writeOnly: true
+        required:
+          - login
+          - password
+          - contractId
+          - privateKey
+          - privateKeyPassword
+          - clientCertificate
+          - serverCertificate
+          - notificationSecret
+          - sharedSecret

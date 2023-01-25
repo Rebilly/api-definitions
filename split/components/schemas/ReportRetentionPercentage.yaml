@@ -1,0 +1,60 @@
+type: object
+properties:
+  data:
+    description: Retention data.
+    type: array
+    items:
+      type: object
+      description: Contains an aggregation.
+      readOnly: true
+      properties:
+        aggregationValue:
+          type: string
+          description: >-
+            Value by which the report provides retention periods and
+            percentages.
+
+
+            Date values are displayed as follows:
+
+
+            - Day: `YYYY-MM-DD`;
+
+            - Month: `YYYY-MM`;
+
+            - Quarter: `YYYY-MM`/`YYYY-MM`;
+
+            - Year: `YYYY`.
+        subscriptionsCount:
+          type: integer
+          description: Number of subscriptions created within the aggregation.
+        periods:
+          description: Periods of the specified aggregation.
+          type: array
+          items:
+            type: object
+            properties:
+              period:
+                type: integer
+                description: >-
+                  Retention period number.
+
+                  This value is measured from the beginning boundary of the
+                  aggregation.
+
+                  Periods are numbered as follows:
+                    - `0`: First period.
+                    - `1`: Second period.
+                    - `2`: Third period, and so on.
+              retentionRatio:
+                type: number
+                format: double
+                description: >-
+                  Ratio percentage of active, non-cancelled, subscriptions in
+                  the retention period versus all subscriptions created in the
+                  aggregation period.
+              canceledSubscriptionsCount:
+                type: integer
+                description: >-
+                  Number of canceled subscriptions within the specified
+                  retention period.

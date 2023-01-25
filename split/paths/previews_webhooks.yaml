@@ -1,0 +1,28 @@
+post:
+  x-products:
+    - Users
+  tags:
+    - Webhooks
+  summary: Trigger a test webhook
+  operationId: PostPreviewWebhook
+  x-sdk-operation-name: webhook
+  description: Triggers a test webhook.
+  requestBody:
+    $ref: ../components/requestBodies/GlobalWebhook.yaml
+  responses:
+    '204':
+      description: Test webhook triggered.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      description: Invalid data sent.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InvalidError.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/previews_webhooks/postundefined

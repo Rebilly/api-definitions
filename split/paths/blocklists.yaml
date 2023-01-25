@@ -1,0 +1,76 @@
+get:
+  x-products:
+    - Core
+  tags:
+    - Blocklists
+  summary: Retrieve blocklists
+  operationId: GetBlocklistCollection
+  x-sdk-operation-name: getAll
+  description: Retrieves a list of all blocklists.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+  responses:
+    '200':
+      description: List of blocklists retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Blocklist.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/blocklists/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/blocklists/getundefined
+post:
+  x-products:
+    - Core
+  tags:
+    - Blocklists
+  summary: Create a blocklist
+  operationId: PostBlocklist
+  x-sdk-operation-name: create
+  description: Creates a blocklist.
+  requestBody:
+    $ref: ../components/requestBodies/Blocklist.yaml
+  responses:
+    '201':
+      description: Blocklist created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Blocklist.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/blocklists/postundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/blocklists/postundefined

@@ -1,0 +1,102 @@
+parameters:
+  - name: organizationId
+    in: path
+    required: true
+    description: >-
+      Unique organization identifier.
+
+      An organization is an entity that represents a company.
+
+      For more information, see [Obtain an organization
+      ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+    schema:
+      $ref: ../components/schemas/ResourceId.yaml
+  - name: userId
+    in: path
+    required: true
+    description: ID of the user.
+    schema:
+      $ref: ../components/schemas/ResourceId.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Memberships
+  summary: Retrieve a membership
+  operationId: GetMembership
+  x-sdk-operation-name: get
+  description: Retrieves a membership with a specified organization ID and user ID.
+  responses:
+    '200':
+      description: Membership retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Membership.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Users
+  tags:
+    - Memberships
+  summary: Upsert membership
+  operationId: PutMembership
+  x-sdk-operation-name: update
+  description: >-
+    Creates or updates (upserts) a membership with a specified organization ID
+    and user ID.
+
+    Only the organization owner can grant organization membership to new users.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Membership.yaml
+    required: true
+  responses:
+    '200':
+      description: Membership updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Membership.yaml
+    '201':
+      description: Membership created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Membership.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+delete:
+  x-products:
+    - Users
+  tags:
+    - Memberships
+  summary: Delete a membership
+  operationId: DeleteMembership
+  x-sdk-operation-name: delete
+  description: Deletes a membership with a specified organization ID and user ID.
+  responses:
+    '204':
+      description: Membership deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml

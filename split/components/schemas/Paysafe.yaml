@@ -1,0 +1,27 @@
+description: Paysafe gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          storeId:
+            type: string
+            description: Paysafe store ID.
+          storePwd:
+            type: string
+            description: Paysafe store password.
+            format: password
+            writeOnly: true
+          accountNum:
+            type: string
+            description: Paysafe account number.
+        required:
+          - storeId
+          - storePwd
+          - accountNum
+      threeDSecureServer:
+        $ref: ./Paysafe3dsServers.yaml

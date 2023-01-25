@@ -1,0 +1,81 @@
+get:
+  x-products:
+    - Core
+  tags:
+    - Coupons
+  summary: Retrieve coupon redemptions
+  operationId: GetCouponRedemptionCollection
+  x-sdk-operation-name: getAllRedemptions
+  description: Retrieves a list of coupon redemptions.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+  responses:
+    '200':
+      description: List of coupon redemptions retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/CouponRedemption.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/coupons-redemptions/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/coupons-redemptions/getundefined
+post:
+  x-products:
+    - Core
+  tags:
+    - Coupons
+  summary: Redeem a coupon
+  operationId: PostCouponRedemption
+  x-sdk-operation-name: redeem
+  description: Redeems a coupon.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CouponRedemption.yaml
+    description: Coupon resource.
+    required: true
+  responses:
+    '201':
+      description: Coupon redeemed.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CouponRedemption.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/coupons-redemptions/postundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/coupons-redemptions/postundefined

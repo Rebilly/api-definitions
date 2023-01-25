@@ -1,0 +1,26 @@
+description: Dropayment gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Dropayment credentials object.
+        properties:
+          login:
+            type: string
+            description: Dropayment login.
+          endpointId:
+            type: string
+            description: Dropayment end point ID.
+          secretKey:
+            type: string
+            description: Dropayment secret key.
+            format: password
+            writeOnly: true
+        required:
+          - login
+          - endpointId
+          - secretKey

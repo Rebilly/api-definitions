@@ -1,0 +1,24 @@
+description: Prosa gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Prosa credentials object.
+        properties:
+          entityId:
+            type: string
+            description: Prosa entity ID.
+          accessToken:
+            type: string
+            format: password
+            description: Prosa access token.
+            writeOnly: true
+        required:
+          - entityId
+          - accessToken
+      threeDSecureServer:
+        $ref: ./Prosa3dsServers.yaml

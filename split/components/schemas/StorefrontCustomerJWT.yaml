@@ -1,0 +1,19 @@
+type: object
+properties:
+  id:
+    description: Session ID.
+    allOf:
+      - $ref: ./ResourceId.yaml
+    readOnly: true
+  token:
+    description: Session's token used for authentication.
+    type: string
+    readOnly: true
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  expiredTime:
+    description: Session expired time. Defaults to one hour.
+    type: string
+    format: date-time

@@ -1,0 +1,42 @@
+post:
+  x-products:
+    - Core
+  tags:
+    - Payment tokens
+  summary: Validate a digital wallet session
+  operationId: PostDigitalWalletValidation
+  x-sdk-operation-name: validate
+  description: >-
+    Validates a digital wallet session.
+
+
+    We recommend using
+    [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/) to
+    validate a digital wallet session.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/DigitalWalletValidation.yaml
+    description: Digital wallet validation request.
+    required: true
+  security:
+    - PublishableApiKey: []
+    - SecretApiKey: []
+    - JWT: []
+  responses:
+    '201':
+      description: Digital wallet validation complete.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DigitalWalletValidation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

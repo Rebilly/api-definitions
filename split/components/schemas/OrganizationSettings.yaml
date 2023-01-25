@@ -1,0 +1,44 @@
+type: object
+description: Organization settings.
+properties:
+  defaultTaxCalculator:
+    type: object
+    description: Tax calculation settings.
+    required:
+      - type
+    properties:
+      type:
+        type: string
+        description: Type of tax calculator.
+        enum:
+          - taxjar
+          - avalara
+          - flat
+      rate:
+        type: number
+        nullable: true
+        format: float
+        description: Rate for flat tax calculation.
+  billing:
+    description: Global organization settings for billing.
+    type: object
+    nullable: true
+    properties:
+      pendingOrderTtl:
+        description: >-
+          Length of time, in ISO-8601 durations format, before which a pending
+          order is automatically abandoned.
+        type: string
+        example: P7D
+        nullable: true
+        default: null
+  taxLocations:
+    type: array
+    description: >-
+      Additional organization addresses where a merchant may want to collect
+      taxes using the `taxjar` tax calculator.
+
+
+      Available only for US-based organizations.
+    items:
+      $ref: ./TaxLocation.yaml

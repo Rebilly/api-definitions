@@ -1,0 +1,22 @@
+type: object
+required:
+  - name
+properties:
+  id:
+    description: ID of the customer timeline custom event.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  name:
+    description: |-
+      Name of the customer timeline custom event type.
+      This value must not conflict with any system event name.
+    type: string
+    minLength: 1
+    maxLength: 255
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml

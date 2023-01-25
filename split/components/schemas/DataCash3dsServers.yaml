@@ -1,0 +1,14 @@
+description: DataCash 3DS servers.
+discriminator:
+  propertyName: name
+  mapping:
+    DataCash3dsServer: ./DataCash3dsServer.yaml
+type: object
+required:
+  - name
+properties:
+  name:
+    allOf:
+      - $ref: ./ThreeDSecureServerName.yaml
+    enum:
+      - DataCash3dsServer

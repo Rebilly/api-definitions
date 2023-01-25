@@ -1,0 +1,28 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Tracking
+  summary: Retrieve a webhook tracking log
+  operationId: GetTrackingWebhook
+  x-sdk-operation-name: getWebhookTrackingLog
+  description: Retrieves a webhook tracking log record with a specified ID.
+  responses:
+    '200':
+      description: Webhook tracking log record retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/WebhookTracking.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/tracking_webhooks_{id}/getundefined

@@ -1,0 +1,26 @@
+description: Sofort gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Sofort credentials object.
+        properties:
+          configKey:
+            type: string
+            description: Sofort configuration key.
+            format: password
+            writeOnly: true
+          nuaPayApiKey:
+            type: string
+            description: NuaPay API key for reconciliation.
+            format: password
+            writeOnly: true
+          nuaPayAccountId:
+            type: string
+            description: NuaPay account ID for reconciliation.
+        required:
+          - configKey

@@ -1,0 +1,78 @@
+parameters:
+  - $ref: ../components/parameters/systemEventType.yaml
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Rules
+  summary: Retrieve a draft ruleset
+  operationId: GetEventRuleSetDraft
+  x-sdk-operation-name: getDraftRuleset
+  description: Retrieves a draft ruleset with a specified ID and event type.
+  parameters:
+    - $ref: ../components/parameters/collectionFields.yaml
+  responses:
+    '200':
+      description: Draft ruleset retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RuleSetDraft.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+delete:
+  x-products:
+    - Users
+  tags:
+    - Rules
+  summary: Delete a draft ruleset
+  operationId: DeleteEventRuleSetDraft
+  x-sdk-operation-name: deleteDraftRuleset
+  description: Deletes a draft ruleset with a specified ID and event type.
+  responses:
+    '204':
+      description: Draft ruleset deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Users
+  tags:
+    - Rules
+  summary: Update a draft ruleset
+  operationId: PutEventRuleSetDraft
+  x-sdk-operation-name: updateDraftRuleset
+  description: Updates a draft ruleset for a specified event type.
+  responses:
+    '200':
+      description: Draft ruleset updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RuleSetDraft.yaml
+    '201':
+      description: Draft ruleset created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RuleSetDraft.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  requestBody:
+    $ref: ../components/requestBodies/RuleSetDraft.yaml

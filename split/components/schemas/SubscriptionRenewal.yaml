@@ -1,0 +1,63 @@
+type: object
+properties:
+  data:
+    description: Subscription renewal data.
+    type: array
+    items:
+      type: object
+      description: Contains an aggregation.
+      readOnly: true
+      properties:
+        planId:
+          description: Plan ID for which subscriptions are counted.
+          allOf:
+            - $ref: ./ResourceId.yaml
+        allRenewalCount:
+          type: integer
+          description: Total number of renewed subscriptions.
+        allDunningCount:
+          type: integer
+          description: >-
+            Total number of dunned subscriptions.
+
+            Dunning is the process of retrying unsuccessful payment
+            transactions.
+        abandonedCount:
+          type: integer
+          description: Total number of abandoned subscriptions.
+        paidRenewalCount:
+          type: integer
+          description: |-
+            Total number of paid renewed subscriptions.
+            To determine the renewal rate,
+            divide the value of this field by the `allRenewalCount` value.
+        paidDunningCount:
+          type: integer
+          description: |-
+            Total number of paid dunned subscriptions.
+            To determine the dunning success rate,
+            divide the value of this field by the `allDunningCount` value.
+        refundedRenewalCount:
+          type: integer
+          description: |-
+            Total number of paid renewed subscriptions.
+            To determine the renewal refund rate,
+            divide the value of this field by the `allRenewalCount` value.
+        refundedDunningCount:
+          type: integer
+          description: |-
+            Total number of paid dunned subscriptions.
+            To determine the dunning refund rate,
+            divide the value of this field by the `allDunningCount` value.
+        chargebackRenewalCount:
+          type: integer
+          description: |-
+            Total number of paid renewed subscriptions.
+            To determine the renewal chargeback rate,
+            divide the value of this field by the `allRenewalCount` value.
+        chargebackDunningCount:
+          type: integer
+          description: |-
+            Total number of paid dunned subscriptions.
+            To determine the dunning chargeback rate,
+            divide the value of this field by the `allDunningCount` value.

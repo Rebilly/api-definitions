@@ -1,0 +1,29 @@
+description: OnRamp gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: OnRamp credentials object.
+        properties:
+          apiKey:
+            type: string
+            format: password
+            writeOnly: true
+        required:
+          - apiKey
+      settings:
+        type: object
+        description: OnRamp settings object.
+        properties:
+          useServerToServerApi:
+            type: boolean
+            description: Specifies whether to use OnRamp server to server API.
+            default: false
+          logoUrl:
+            type: string
+            description: Set this value to use a custom logo.
+            format: url

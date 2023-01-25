@@ -1,0 +1,28 @@
+description: SecureTrading gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: SecureTrading credentials object.
+        properties:
+          websiteId:
+            type: string
+            description: SecureTrading website ID.
+          username:
+            type: string
+            description: SecureTrading web service username.
+          password:
+            type: string
+            description: SecureTrading web service password.
+            format: password
+            writeOnly: true
+        required:
+          - websiteId
+          - username
+          - password
+      threeDSecureServer:
+        $ref: ./SecureTrading3dsServers.yaml

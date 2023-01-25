@@ -1,0 +1,12 @@
+type: object
+description: Calculation instruction of the scheduled time.
+discriminator:
+  propertyName: method
+  mapping:
+    date-interval: ./date-interval.yaml
+    day-of-month: ./day-of-month.yaml
+    day-of-week: ./day-of-week.yaml
+anyOf:
+  - $ref: ./date-interval.yaml
+  - $ref: ./day-of-month.yaml
+  - $ref: ./day-of-week.yaml

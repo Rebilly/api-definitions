@@ -1,0 +1,30 @@
+type: object
+properties:
+  data:
+    description: Time series data.
+    type: array
+    items:
+      type: object
+      description: Contains an aggregation.
+      readOnly: true
+      properties:
+        date:
+          type: string
+          description: Date in `YYYY-MM-DD` format .
+        total:
+          type: number
+          format: double
+          description: Total number of all transactions within the aggregation.
+        subaggregates:
+          type: object
+          description: Subaggregates that have transactions within the range.
+          properties:
+            subaggregate:
+              type: string
+              description: ID of the subaggregate.
+            value:
+              type: number
+              format: double
+              description: >-
+                Total number of all subaggregate transactions within the
+                aggregation.

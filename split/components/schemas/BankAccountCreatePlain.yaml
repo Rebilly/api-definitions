@@ -1,0 +1,17 @@
+title: Bank account
+type: object
+required:
+  - accountNumberType
+discriminator:
+  propertyName: accountNumberType
+  mapping:
+    BBAN: ./BBANType.yaml
+    IBAN: ./IBANType.yaml
+properties:
+  accountNumberType:
+    nullable: false
+    type: string
+    enum:
+      - IBAN
+      - BBAN
+x-abstract-parent: PaymentInstruction

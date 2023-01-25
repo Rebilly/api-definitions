@@ -1,0 +1,18 @@
+description: eMerchantPay 3DS servers.
+discriminator:
+  propertyName: name
+  mapping:
+    Other: ./eMerchantPayOtherServer.yaml
+    eMerchantPay3dsServer: ./eMerchantPay3dsServer.yaml
+    ThreeDSecureIO3dsServer: ./eMerchantPayThreeDSecureIOServer.yaml
+type: object
+required:
+  - name
+properties:
+  name:
+    allOf:
+      - $ref: ./ThreeDSecureServerName.yaml
+    enum:
+      - eMerchantPay3dsServer
+      - ThreeDSecureIO3dsServer
+      - Other

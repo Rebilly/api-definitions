@@ -1,0 +1,21 @@
+description: Bambora gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantId:
+            type: string
+            description: Bambora merchant ID.
+          apiPasscode:
+            type: string
+            description: Bambora API passcode.
+            format: password
+            writeOnly: true
+        required:
+          - merchantId
+          - apiPasscode

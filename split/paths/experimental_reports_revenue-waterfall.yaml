@@ -1,0 +1,99 @@
+servers:
+  - url: >-
+      https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}
+    description: Sandbox server
+    variables:
+      organizationId:
+        default: unknown
+        description: >-
+          Unique organization identifier.
+
+          An organization is an entity that represents a company.
+
+          For more information, see [Obtain an organization
+          ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+  - url: https://api.rebilly.com/experimental/organizations/{organizationId}
+    description: Live server
+    variables:
+      organizationId:
+        default: unknown
+        description: >-
+          Unique organization identifier.
+
+          An organization is an entity that represents a company.
+
+          For more information, see [Obtain an organization
+          ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+get:
+  x-badge: Experimental
+  x-products:
+    - Reports
+  tags:
+    - Reports
+  summary: Retrieve a revenue waterfall report
+  operationId: GetRevenueWaterfallReport
+  x-sdk-operation-name: getRevenueWaterfall
+  description: >-
+    Retrieves a revenue waterfall report.
+
+
+    Use revenue waterfall reports to view revenue that is recognized up to a
+    given month.
+
+    Revenue waterfall reports contain information on booked revenue,
+
+    recognized revenue for the months in the issued period,
+
+    and the remaining revenue up to the specified month.
+  parameters:
+    - name: currency
+      in: query
+      description: Revenue currency.
+      required: true
+      schema:
+        $ref: ../components/schemas/CurrencyCode.yaml
+    - name: issuedFrom
+      in: query
+      description: Date from which revenue invoice is issued.
+      required: true
+      schema:
+        type: string
+        pattern: ^\d{4}-\d{2}$
+        example: 2022-01
+    - name: issuedTo
+      in: query
+      description: Date to which revenue invoice is issued.
+      required: true
+      schema:
+        type: string
+        pattern: ^\d{4}-\d{2}$
+        example: 2022-04
+    - name: recognizedTo
+      in: query
+      description: Month up to which revenue is recognized.
+      required: true
+      schema:
+        type: string
+        pattern: ^\d{4}-\d{2}$
+        example: 2022-04
+  responses:
+    '200':
+      description: Report retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ReportRevenueWaterfall.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: >-
+          ../code_samples/JavaScript/experimental_reports_revenue-waterfall/getundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: >-
+          ../code_samples/PHP/experimental_reports_revenue-waterfall/getundefined

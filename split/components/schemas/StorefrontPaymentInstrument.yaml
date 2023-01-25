@@ -1,0 +1,18 @@
+allOf:
+  - oneOf:
+      - $ref: ./CommonPaymentCard.yaml
+      - $ref: ./CommonBankAccount.yaml
+      - $ref: ./CommonPayPalAccount.yaml
+      - $ref: ./CommonKhelocardCard.yaml
+      - $ref: ./CommonAlternativeInstrument.yaml
+  - type: object
+    properties:
+      token:
+        description: |-
+          New customer JSON Web Token (JWT) that is used for further requests.
+          This value is null if the customer is already authenticated.
+        type: string
+        readOnly: true
+        nullable: true
+      _links:
+        $ref: ./SelfLink.yaml

@@ -1,0 +1,72 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - KYC documents
+  summary: Retrieve a KYC document
+  operationId: GetKycDocument
+  x-sdk-operation-name: get
+  description: Retrieves a KYC document with a specified ID.
+  responses:
+    '200':
+      description: KYC document retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KycDocument.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/kyc-documents_{id}/getundefined
+put:
+  x-products:
+    - Core
+  tags:
+    - KYC documents
+  summary: Upsert a KYC document
+  operationId: PutKycDocument
+  x-sdk-operation-name: update
+  description: Creates or updates (upserts) a KYC document with a specified ID.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/KycDocument.yaml
+    description: KYC document resource.
+    required: true
+  responses:
+    '200':
+      description: KYC document updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KycDocument.yaml
+    '201':
+      description: KYC document created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KycDocument.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/kyc-documents_{id}/putundefined

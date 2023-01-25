@@ -1,0 +1,31 @@
+description: Rapyd gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Rapyd credentials object.
+        properties:
+          accessKey:
+            type: string
+            description: Rapyd access key.
+          secretKey:
+            type: string
+            format: password
+            description: Rapyd secret key.
+            writeOnly: true
+        required:
+          - accessKey
+          - secretKey
+      settings:
+        type: object
+        description: Rapyd settings object.
+        properties:
+          ipnUrl:
+            type: string
+            description: |-
+              Instant Payment Notification (IPN) URL configured on Rapyd.
+              This value is used to calculate the signature.

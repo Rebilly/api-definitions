@@ -1,0 +1,26 @@
+allOf:
+  - $ref: ./CommonKycRequest.yaml
+  - properties:
+      _links:
+        type: array
+        description: Related links.
+        readOnly: true
+        items:
+          type: object
+          properties:
+            href:
+              description: Link URL.
+              type: string
+            rel:
+              description: Type of link.
+              type: string
+              enum:
+                - self
+                - documents
+      _embedded:
+        type: object
+        description: Embedded objects that are requested by the `expand` query parameter..
+        readOnly: true
+        properties:
+          documents:
+            type: array

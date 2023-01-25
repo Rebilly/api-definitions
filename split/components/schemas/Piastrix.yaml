@@ -1,0 +1,34 @@
+description: Piastrix gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Piastrix credentials object.
+        properties:
+          shopId:
+            type: string
+            description: Piastrix shop ID.
+          secretKey:
+            type: string
+            description: Piastrix secret key.
+            format: password
+            writeOnly: true
+        required:
+          - shopId
+          - secretKey
+      settings:
+        type: object
+        description: Piastrix settings object.
+        properties:
+          tolerancePercentage:
+            type: integer
+            description: Tolerance percentage for settled amounts.
+            minimum: 0
+            maximum: 5
+            example: 5
+      threeDSecureServer:
+        $ref: ./Piastrix3dsServers.yaml

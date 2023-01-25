@@ -1,0 +1,93 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: limitId
+    in: path
+    description: ID of the gateway account limit.
+    required: true
+    schema:
+      type: string
+      enum:
+        - daily-money
+        - monthly-money
+        - daily-count
+        - monthly-count
+get:
+  x-products:
+    - Users
+  tags:
+    - Gateway accounts
+  summary: Retrieve a gateway account limit
+  operationId: GetGatewayAccountLimit
+  x-sdk-operation-name: getVolumeLimit
+  description: Retrieves a gateway account limit with a specified ID.
+  responses:
+    '200':
+      description: Gateway account limit retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccountLimit.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Users
+  tags:
+    - Gateway accounts
+  summary: Update a gateway account limit
+  operationId: PutGatewayAccountLimit
+  x-sdk-operation-name: updateVolumeLimit
+  description: Updates a gateway account limit with a specified ID.
+  responses:
+    '200':
+      description: Gateway account limit updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccountLimit.yaml
+    '201':
+      description: Gateway account limit created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccountLimit.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/GatewayAccountLimit.yaml
+delete:
+  x-products:
+    - Users
+  tags:
+    - Gateway accounts
+  summary: Delete a gateway account limit
+  operationId: DeleteGatewayAccountLimit
+  x-sdk-operation-name: deleteVolumeLimit
+  description: Deletes a gateway account limit with a specified ID.
+  responses:
+    '204':
+      description: Gateway account limit deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

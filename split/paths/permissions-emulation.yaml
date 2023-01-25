@@ -1,0 +1,74 @@
+post:
+  x-products:
+    - Users
+  tags:
+    - Profile
+  summary: Start permissions emulation
+  operationId: PostPermissionsEmulation
+  x-sdk-operation-name: startPermissionsEmulation
+  description: >-
+    Starts permissions emulation.
+
+
+    Emulation during emulation is not supported. If request sent during an
+    ongoing emulation then 403 is sent in response.
+
+
+    Escalation is not supported.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          title: PostPermissionsEmulationRequest
+          required:
+            - permissions
+          properties:
+            permissions:
+              description: List of permissions to be emulated.
+              allOf:
+                - $ref: ../components/schemas/AclPermissions.yaml
+    required: true
+  responses:
+    '201':
+      description: Session created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Session.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+delete:
+  x-products:
+    - Users
+  tags:
+    - Profile
+  summary: Stop permissions emulation
+  operationId: DeletePermissionsEmulation
+  x-sdk-operation-name: stopPermissionsEmulation
+  description: |-
+    Stops permissions emulation.
+
+    Session permissions are restored to the state before emulation began.
+    If emulations have not started then `403` is sent in response.
+  responses:
+    '201':
+      description: Session restored.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Session.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml

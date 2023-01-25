@@ -1,0 +1,73 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Users
+  summary: Retrieve a user
+  operationId: GetUser
+  x-sdk-operation-name: get
+  description: Retrieves a user with specified ID.
+  responses:
+    '200':
+      description: User retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/User.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/users_{id}/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/users_{id}/getundefined
+put:
+  x-products:
+    - Users
+  tags:
+    - Users
+  summary: Upsert a user
+  operationId: PutUser
+  x-sdk-operation-name: update
+  description: Creates or updates (upserts) a user with specified ID.
+  requestBody:
+    $ref: ../components/requestBodies/User.yaml
+  responses:
+    '200':
+      description: User updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/User.yaml
+    '201':
+      description: User created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/User.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/users_{id}/putundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/users_{id}/putundefined

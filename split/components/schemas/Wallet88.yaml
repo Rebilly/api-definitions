@@ -1,0 +1,22 @@
+description: Wallet88 gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Wallet88 credentials object.
+        properties:
+          sid:
+            type: string
+            description: Wallet88 API site ID.
+          rcode:
+            type: string
+            description: Wallet88 API rcode.
+            format: password
+            writeOnly: true
+        required:
+          - sid
+          - rcode

@@ -1,0 +1,114 @@
+servers:
+  - url: >-
+      https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}
+    description: Sandbox server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: https://api.rebilly.com/experimental/organizations/{organizationId}
+    description: Live server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Reports
+  tags:
+    - Data exports
+  summary: Retrieve a data export request
+  operationId: GetDataExport
+  x-sdk-operation-name: get
+  description: Retrieves a data export request.
+  responses:
+    '200':
+      description: Data export request.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataExport.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/experimental_data-exports_{id}/getundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/experimental_data-exports_{id}/getundefined
+put:
+  x-products:
+    - Reports
+  tags:
+    - Data exports
+  summary: Modify a data export
+  operationId: PutDataExport
+  x-sdk-operation-name: update
+  description: Modifies a pending data export.
+  requestBody:
+    $ref: ../components/requestBodies/DataExport.yaml
+  responses:
+    '200':
+      description: Data export modified.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataExport.yaml
+    '201':
+      description: Data export updated.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataExport.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/experimental_data-exports_{id}/putundefined
+delete:
+  x-products:
+    - Reports
+  tags:
+    - Data exports
+  summary: Delete a data export
+  operationId: DeleteDataExport
+  x-sdk-operation-name: delete
+  description: Deletes a data export.
+  responses:
+    '204':
+      $ref: ../components/responses/NoContent.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/experimental_data-exports_{id}/deleteundefined

@@ -1,0 +1,122 @@
+post:
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Create a transaction
+  operationId: PostTransaction
+  x-sdk-operation-name: create
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
+  description: >-
+    Creates a transaction of type `sale`, `authorize` or `setup`.
+
+
+    Use this operation for the following transactions.
+
+
+    #### Real-time decision and response
+
+
+    In this transaction, you send a request and inspect the `result` of the
+    response for `approved` or `declined`.
+
+
+    #### User approval/interaction required
+
+
+    In this transaction, user approval is required to complete the transaction.
+
+    User approval generally requires the user to interact with a third party,
+
+    and is common in many transactions for alternative methods.
+
+    For example, PayPal requires user permission to complete a payment or to
+    accept a billing agreement.
+
+    Payment cards may also require user approval for 3D secure authentication.
+
+
+    If approval is required, you receive a response with a `result` value of
+    `unknown` and a `status` value of `waiting-approval`.
+
+    The `_links` property of the response has a link for the `approvalUrl`.
+
+    Open the `approvalUrl` in an iframe or in a pop. A pop is a better workflow
+    for mobile devices.
+  parameters:
+    - $ref: ../components/parameters/collectionExpand.yaml
+  requestBody:
+    $ref: ../components/requestBodies/TransactionRequest.yaml
+  responses:
+    '201':
+      description: Transaction created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Transaction.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/transactions/postundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/transactions/postundefined
+get:
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Retrieve transactions
+  operationId: GetTransactionCollection
+  x-sdk-operation-name: getAll
+  description: Retrieves a list of transactions.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionExpand.yaml
+  responses:
+    '200':
+      description: List of transactions retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Transaction.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/transactions/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/transactions/getundefined

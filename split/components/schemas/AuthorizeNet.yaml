@@ -1,0 +1,21 @@
+description: AuthorizeNet gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          apiLoginId:
+            type: string
+            description: AuthorizeNet API login ID.
+          transactionKey:
+            description: AuthorizeNet transaction key.
+            type: string
+            format: password
+            writeOnly: true
+        required:
+          - apiLoginId
+          - transactionKey

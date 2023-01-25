@@ -1,0 +1,32 @@
+description: VCreditos gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: VCreditos credentials object.
+        properties:
+          publicKey:
+            type: string
+            description: VCreditos API public key.
+          secretKey:
+            type: string
+            description: VCreditos API secret key.
+            format: password
+            writeOnly: true
+        required:
+          - publicKey
+          - secretKey
+      settings:
+        type: object
+        description: VCreditos settings object.
+        properties:
+          merchantWebsiteLoginLabel:
+            type: string
+            description: Label caption for a merchant website login input.
+          merchantWebsiteLoginDescription:
+            type: string
+            description: Description block for a merchant website login input.

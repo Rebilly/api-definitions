@@ -1,0 +1,40 @@
+description: Truevo gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Truevo credentials object.
+        properties:
+          mid:
+            type: string
+            description: Truevo merchant identifier.
+          tid:
+            type: string
+            description: Truevo terminal identifier.
+          token:
+            type: string
+            description: Truevo authentication token.
+            format: password
+            writeOnly: true
+          merchantName:
+            type: string
+            description: Merchant name for SFTP reconciliation.
+          sftpUsername:
+            type: string
+            description: SFTP reconciliation username.
+          sftpPrivateKey:
+            type: string
+            format: password
+            description: SFTP reconciliation private key.
+            x-multiline: true
+            writeOnly: true
+        required:
+          - mid
+          - tid
+          - token
+      threeDSecureServer:
+        $ref: ./Truevo3dsServers.yaml

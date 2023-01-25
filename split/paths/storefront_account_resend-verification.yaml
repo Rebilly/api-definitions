@@ -1,0 +1,31 @@
+post:
+  x-products:
+    - Storefront
+  tags:
+    - Email verification
+  summary: Resend email verification
+  operationId: StorefrontPostAccountResendVerification
+  x-sdk-operation-name: resendEmailVerification
+  security:
+    - PublishableApiKey: []
+  description: Resends a verification email for an account with a specified username.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - username
+          properties:
+            username:
+              description: Username of the account to which a verification email is sent.
+              type: string
+  responses:
+    '204':
+      description: Email sent.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

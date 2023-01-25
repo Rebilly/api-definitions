@@ -1,0 +1,36 @@
+description: Payflow gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Payflow credentials object.
+        properties:
+          user:
+            type: string
+            description: >-
+              Payflow user.
+
+              If you set up one or more additional users on the account,
+
+              this value is the ID of the user that is authorized to process
+              transactions.
+
+              If do not set up additional users on the account,
+
+              `user` has the same value as `vendor`.
+          vendor:
+            type: string
+            description: Payflow merchant login ID.
+          password:
+            type: string
+            description: Payflow merchant password.
+            format: password
+            writeOnly: true
+        required:
+          - user
+          - vendor
+          - password

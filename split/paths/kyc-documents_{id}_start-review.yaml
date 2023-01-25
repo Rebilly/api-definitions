@@ -1,0 +1,36 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - KYC documents
+  summary: Start review of a KYC document
+  operationId: PostKycDocumentStartReview
+  x-sdk-operation-name: startReview
+  description: >-
+    Starts the review process of a KYC document with a specified ID.
+
+
+    This operation also sets the KYC document `reviewStartTime` to the current
+    date-time,
+
+    and updates the review information.
+  responses:
+    '201':
+      description: KYC document review started.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KycDocument.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

@@ -1,0 +1,91 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Invoices
+  summary: Retrieve an invoice
+  operationId: GetInvoice
+  x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
+  description: Retrieves an invoice with a specified ID.
+  parameters:
+    - $ref: ../components/parameters/mediaTypeJsonPdf.yaml
+    - $ref: ../components/parameters/collectionExpand.yaml
+  responses:
+    '200':
+      description: Invoice retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Invoice.yaml
+        application/pdf:
+          schema:
+            $ref: ../components/schemas/Invoice.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/invoices_{id}/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/invoices_{id}/getundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/invoices_{id}/getundefined
+put:
+  x-products:
+    - Core
+  tags:
+    - Invoices
+  summary: Upsert an invoice
+  operationId: PutInvoice
+  x-sdk-operation-name: update
+  description: Creates or updates (upserts) an invoice with a specified ID.
+  requestBody:
+    $ref: ../components/requestBodies/Invoice.yaml
+  responses:
+    '200':
+      description: Invoice updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Invoice.yaml
+    '201':
+      description: Invoice created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Invoice.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/invoices_{id}/putundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/invoices_{id}/putundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/invoices_{id}/putundefined

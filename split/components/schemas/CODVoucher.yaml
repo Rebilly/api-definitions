@@ -1,0 +1,24 @@
+description: CODVoucher gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: CODVoucher credentials object.
+        properties:
+          apiKey:
+            type: string
+            description: CODVoucher API key.
+            format: password
+            writeOnly: true
+          apiSecret:
+            type: string
+            description: CODVoucher API secret.
+            format: password
+            writeOnly: true
+        required:
+          - apiKey
+          - apiSecret

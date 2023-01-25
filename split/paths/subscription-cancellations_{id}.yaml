@@ -1,0 +1,145 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Retrieve an order cancellation
+  operationId: GetSubscriptionCancellation
+  x-sdk-operation-name: get
+  description: Retrieves an order cancellation with a specified ID.
+  responses:
+    '200':
+      description: Cancellation retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SubscriptionCancellation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/subscription-cancellations_{id}/getundefined
+put:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Upsert a cancellation
+  operationId: PutSubscriptionCancellation
+  x-sdk-operation-name: update
+  description: Creates or updates (upserts) a cancellation order with a specified ID.
+  requestBody:
+    $ref: ../components/requestBodies/SubscriptionCancellation.yaml
+  responses:
+    '200':
+      description: Cancellation updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SubscriptionCancellation.yaml
+    '201':
+      description: Cancellation created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SubscriptionCancellation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: >-
+          ../code_samples/JavaScript/subscription-cancellations_{id}/putundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/subscription-cancellations_{id}/putundefined
+patch:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Update a subscription cancellation
+  operationId: PatchSubscriptionCancellation
+  x-sdk-operation-name: patch
+  description: |-
+    Updates a subscription cancellation with a specified ID.
+    Use this operation to update a cancellation reason and description.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          allOf:
+            - properties:
+                canceledBy:
+                  readOnly: true
+                status:
+                  readOnly: true
+                churnTime:
+                  readOnly: true
+            - $ref: ../components/schemas/SubscriptionCancellation.yaml
+    description: Patch cancellation resource.
+    required: true
+  responses:
+    '200':
+      description: Cancellation updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SubscriptionCancellation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/subscription-cancellations_{id}/patchundefined
+delete:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Delete a cancellation
+  operationId: DeleteSubscriptionCancellation
+  x-sdk-operation-name: delete
+  description: >-
+    Deletes an order cancellation with a specified ID.
+
+
+    > **Important:** Only cancellation orders with a `status` of `draft` can be
+    deleted.
+  responses:
+    '204':
+      description: Cancellation deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/subscription-cancellations_{id}/deleteundefined

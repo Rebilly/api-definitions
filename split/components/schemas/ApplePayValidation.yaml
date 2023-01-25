@@ -1,0 +1,37 @@
+description: Apple Pay session validation.
+allOf:
+  - $ref: ./DigitalWalletValidation.yaml
+  - type: object
+    required:
+      - validationRequest
+    properties:
+      type:
+        type: string
+      validationRequest:
+        description: Validation request.
+        type: object
+        properties:
+          validationUrl:
+            type: string
+            description: Apple Pay SDK URL that is used to perform validation.
+          domainName:
+            type: string
+            description: >-
+              Domain where the client code, such as
+              [FramePay](https://docs.rebilly.com/docs/developer-docs/framepay/),
+              is executed.
+
+              The domain name must be registered in the Apple Pay console.
+
+              For more information, see [Register a domain for Apple
+              Pay](../../PostDigitalWalletOnboardingApplePay).
+            example: www.example.com
+          displayName:
+            type: string
+            description: Display name of your store.
+            example: My Store
+        writeOnly: true
+      validationResponse:
+        description: Apple Pay SDK validation response.
+        type: object
+        readOnly: true

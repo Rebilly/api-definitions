@@ -1,0 +1,30 @@
+type: object
+properties:
+  organizationId:
+    description: Array of account IDs.
+    type: array
+    items:
+      allOf:
+        - $ref: ./ResourceId.yaml
+  productId:
+    description: Array of product IDs.
+    type: array
+    items:
+      allOf:
+        - $ref: ./ResourceId.yaml
+  planId:
+    description: Array of plan IDs.
+    type: array
+    items:
+      allOf:
+        - $ref: ./ResourceId.yaml
+  customFieldName:
+    description: Array of custom field names.
+    type: array
+    items:
+      type: string
+      maxLength: 60
+      pattern: ^[\w-]+$
+example:
+  organizationId:
+    - organizationId-id-1

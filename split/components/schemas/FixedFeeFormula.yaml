@@ -1,0 +1,21 @@
+type: object
+allOf:
+  - $ref: ./FeeFormula.yaml
+required:
+  - type
+  - currency
+  - amount
+properties:
+  type:
+    description: Type of fee.
+    type: string
+    enum:
+      - fixed-fee
+  currency:
+    $ref: ./CurrencyCode.yaml
+  amount:
+    description: Amount of the fee.
+    type: number
+    format: double
+    example: 10
+    x-type: Money

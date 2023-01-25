@@ -1,0 +1,44 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - KYC documents
+  summary: Reject a KYC document
+  operationId: PostKycDocumentRejection
+  x-sdk-operation-name: reject
+  description: |-
+    Rejects a KYC document and changes the `status` to `rejected`.
+    The review time and reviewer information is also updated.
+
+    > **Note:** Use this operation for manual overrides.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/KycDocumentRejection.yaml
+    description: KYC document resource.
+    required: true
+  responses:
+    '201':
+      description: KYC document rejected.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KycDocument.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/kyc-documents_{id}_rejection/postundefined

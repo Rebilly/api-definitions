@@ -1,0 +1,26 @@
+description: Redemption restrictions.
+type: object
+discriminator:
+  propertyName: type
+  mapping:
+    discounts-per-redemption: ./discounts-per-redemption.yaml
+    minimum-order-amount: ./minimum-order-amount.yaml
+    paid-by-time: ./paid-by-time.yaml
+    restrict-to-invoices: ./restrict-to-invoices.yaml
+    restrict-to-plans: ./restrict-to-plans.yaml
+    restrict-to-products: ./restrict-to-products.yaml
+    restrict-to-subscriptions: ./restrict-to-subscriptions.yaml
+properties:
+  type:
+    description: Additional redemption restriction type.
+    type: string
+    enum:
+      - discounts-per-redemption
+      - minimum-order-amount
+      - restrict-to-invoices
+      - restrict-to-plans
+      - restrict-to-subscriptions
+      - restrict-to-products
+      - paid-by-time
+required:
+  - type

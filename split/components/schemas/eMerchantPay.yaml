@@ -1,0 +1,39 @@
+description: eMerchantPay gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          clientId:
+            type: string
+            description: eMerchantPay client ID.
+          apiKey:
+            type: string
+            description: eMerchantPay API key.
+            format: password
+            writeOnly: true
+          username:
+            type: string
+            description: eMerchantPay username for the Genesis platform.
+          token:
+            type: string
+            description: eMerchantPay token for the Genesis platform.
+          password:
+            type: string
+            description: eMerchantPay password for the Genesis platform.
+            format: password
+            writeOnly: true
+      settings:
+        type: object
+        description: eMerchantPay settings object.
+        properties:
+          useGenesisPlatform:
+            type: boolean
+            description: Specifies whether to use the Genesis platform on eMerchantPay.
+            default: false
+      threeDSecureServer:
+        $ref: ./eMerchantPay3dsServers.yaml

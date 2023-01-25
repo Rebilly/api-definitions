@@ -1,0 +1,96 @@
+type: object
+required:
+  - type
+  - unitPrice
+properties:
+  id:
+    description: >-
+      ID of the website.
+
+      A website is where an organization obtains a customer through a
+      subscription.
+
+      For more information, see [Obtain an organization ID and website
+      ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  type:
+    description: Type of invoice item.
+    type: string
+    x-basic: true
+    enum:
+      - debit
+      - credit
+  description:
+    description: Description of the invoice item.
+    type: string
+    maxLength: 1000
+  unitPrice:
+    description: Unit price of the invoice item.
+    type: number
+    format: double
+  quantity:
+    description: Quantity of the invoice item.
+    type: integer
+  price:
+    description: Total price of the invoice item.
+    type: number
+    format: double
+    readOnly: true
+  productId:
+    description: ID of the product.
+    allOf:
+      - $ref: ./ResourceId.yaml
+  discountAmount:
+    description: Discount amount applied to the invoice item.
+    type: number
+    format: double
+    readOnly: true
+  periodStartTime:
+    description: Date and time when the billing period starts.
+    type: string
+    format: date-time
+  periodEndTime:
+    description: Date and time when the billing period ends.
+    type: string
+    format: date-time
+  periodNumber:
+    description: >-
+      Number of subscription order billing periods in which the invoice item has
+      been included.
+    type: integer
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  tax:
+    description: Invoice item tax.
+    readOnly: true
+    allOf:
+      - $ref: ./InvoiceTaxItem.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - product
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
+    properties:
+      product:
+        type: object
+      plan:
+        type: object

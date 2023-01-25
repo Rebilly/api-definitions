@@ -1,0 +1,40 @@
+description: Paymero gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Paymero credentials object.
+        properties:
+          apiKey:
+            type: string
+            description: Paymero API key.
+            format: password
+            writeOnly: true
+        required:
+          - apiKey
+      settings:
+        type: object
+        description: Paymero settings object.
+        properties:
+          targetCurrency:
+            description: Currency to which the received cryptocurrency is converted.
+            type: string
+            minLength: 3
+            maxLength: 3
+            example: USD
+          mainCurrency:
+            description: Blockchain on which the currency is processed.
+            type: string
+            enum:
+              - TRX
+              - ETH
+          amountExceeded:
+            description: >-
+              Specifies whether to decline transactions when the amount received
+              exceeds the amount requested.
+            type: boolean
+            default: false

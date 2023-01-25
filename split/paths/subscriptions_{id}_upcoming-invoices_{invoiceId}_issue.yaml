@@ -1,0 +1,42 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: invoiceId
+    in: path
+    description: ID of the upcoming invoice.
+    required: true
+    schema:
+      type: string
+post:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Issue an upcoming invoice for early pay
+  operationId: PostUpcomingInvoiceIssuance
+  x-sdk-operation-name: issueUpcomingInvoice
+  description: Issues an upcoming invoice with a specified ID for early pay.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/InvoiceIssue.yaml
+    description: InvoiceIssue resource.
+    required: true
+  responses:
+    '201':
+      description: Upcoming invoice issued.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Invoice.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml

@@ -1,0 +1,16 @@
+description: TestProcessor3dsServers 3DS servers.
+discriminator:
+  propertyName: name
+  mapping:
+    TestSandbox3dsServer: ./TestProcessor3dsServer.yaml
+    ThreeDSecureIO3dsServer: ./TestProcessorThreeDSecureIOServer.yaml
+type: object
+required:
+  - name
+properties:
+  name:
+    allOf:
+      - $ref: ./ThreeDSecureServerName.yaml
+    enum:
+      - TestSandbox3dsServer
+      - ThreeDSecureIO3dsServer

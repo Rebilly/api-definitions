@@ -1,0 +1,95 @@
+servers:
+  - url: >-
+      https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}
+    description: Sandbox server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: https://api.rebilly.com/experimental/organizations/{organizationId}
+    description: Live server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+post:
+  x-products:
+    - Reports
+  tags:
+    - Data exports
+  summary: Request the data export of a resource
+  operationId: PostDataExport
+  x-sdk-operation-name: queue
+  description: Requests the export of a specific data resource.
+  requestBody:
+    $ref: ../components/requestBodies/DataExport.yaml
+  responses:
+    '201':
+      description: Data export request received.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataExport.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/experimental_data-exports/postundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/experimental_data-exports/postundefined
+get:
+  x-products:
+    - Reports
+  tags:
+    - Data exports
+  summary: Retrieve data export requests
+  operationId: GetDataExportCollection
+  x-sdk-operation-name: getAll
+  description: Retrieves a list of data export requests.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionCriteria.yaml
+  responses:
+    '200':
+      description: List of data export requests retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/DataExport.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/experimental_data-exports/getundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/experimental_data-exports/getundefined

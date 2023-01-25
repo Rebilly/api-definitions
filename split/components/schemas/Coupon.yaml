@@ -1,0 +1,65 @@
+type: object
+description: Coupons and discounts.
+required:
+  - discount
+  - issuedTime
+properties:
+  id:
+    description: ID of the coupon. This value is also known as the coupon redemption code.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  discount:
+    $ref: ./Discount.yaml
+  restrictions:
+    description: Coupon restrictions.
+    type: array
+    items:
+      $ref: ./CouponRestriction.yaml
+  redemptionsCount:
+    type: integer
+    description: Total number of times that a coupon is redeemed.
+    minimum: 0
+    readOnly: true
+  status:
+    type: string
+    description: Specifies the current status of the coupon.
+    readOnly: true
+    enum:
+      - draft
+      - issued
+      - expired
+  description:
+    type: string
+    x-basic: true
+    description: >-
+      Description of the coupon. Use this field to provide an invoice discount
+      item description.
+
+
+      If this field is empty, the invoice discount item description uses the
+      related coupon ID, in the following format:
+
+      `Coupon "COUPON-ID"`.
+  issuedTime:
+    description: |-
+      Date and time when the coupon is issued.
+      This value may also be described as start time of the coupon.
+    type: string
+    x-label: Valid from
+    x-sortable: true
+    x-basic: true
+    format: date-time
+  expiredTime:
+    description: Date and time when the coupon expires.
+    type: string
+    x-label: Valid until
+    x-sortable: true
+    x-basic: true
+    format: date-time
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml

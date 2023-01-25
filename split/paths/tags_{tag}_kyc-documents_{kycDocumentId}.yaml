@@ -1,0 +1,39 @@
+parameters:
+  - $ref: ../components/parameters/tag.yaml
+  - $ref: ../components/parameters/kycDocumentId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Tags
+  summary: Tag a KYC document
+  operationId: PostTagKycDocument
+  x-sdk-operation-name: tagKycDocument
+  description: Tags a KYC document.
+  responses:
+    '204':
+      description: KYC document tagged.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+delete:
+  x-products:
+    - Core
+  tags:
+    - Tags
+  summary: Untag a KYC document
+  operationId: DeleteTagKycDocument
+  x-sdk-operation-name: untagKycDocument
+  description: Untags a KYC document.
+  responses:
+    '204':
+      description: KYC document untagged.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

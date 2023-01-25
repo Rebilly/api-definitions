@@ -1,0 +1,11 @@
+allOf:
+  - $ref: ./CommonInvoice.yaml
+  - properties:
+      transactions:
+        type: array
+        description: Invoice transactions array.
+        readOnly: true
+        items:
+          $ref: ./StorefrontTransaction.yaml
+      _links:
+        $ref: ./SelfLink.yaml

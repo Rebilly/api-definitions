@@ -1,0 +1,37 @@
+description: Gigadat gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Gigadat credentials object.
+        properties:
+          campaignId:
+            type: string
+            description: Gigadat campaign ID.
+          accessToken:
+            type: string
+            description: Gigadat access token.
+            format: password
+            writeOnly: true
+          securityToken:
+            type: string
+            description: Gigadat security token.
+            format: password
+            writeOnly: true
+        required:
+          - campaignId
+          - accessToken
+          - securityToken
+      settings:
+        type: object
+        properties:
+          sandbox:
+            type: boolean
+            description: Specifies if the gateway account is in sandbox mode.
+            default: false
+        required:
+          - sandbox

@@ -1,0 +1,22 @@
+description: ezyEFT gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: ezyEFT credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: ezyEFT merchant ID.
+          merchantToken:
+            type: string
+            format: password
+            description: ezyEFT merchant token.
+            writeOnly: true
+        required:
+          - merchantId
+          - merchantToken

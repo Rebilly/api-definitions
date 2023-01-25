@@ -1,0 +1,33 @@
+description: Pagadito gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Pagadito credentials object.
+        properties:
+          uid:
+            type: string
+            format: password
+            description: Pagadito UID.
+            writeOnly: true
+          wsk:
+            type: string
+            format: password
+            description: Pagadito WSK.
+            writeOnly: true
+        required:
+          - uid
+          - wsk
+      settings:
+        type: object
+        properties:
+          useRecurringApi:
+            type: boolean
+            default: false
+            description: >-
+              Specifies whether to use the Pagadito API for reoccurring
+              payments.

@@ -1,0 +1,62 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Retrieve a payout request
+  operationId: GetPayoutRequest
+  x-sdk-operation-name: get
+  description: Retrieves a payout request with a specified ID.
+  responses:
+    '200':
+      description: Payout request retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PayoutRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Upsert a payout request
+  operationId: PutPayoutRequest
+  x-sdk-operation-name: update
+  description: Creates or updates (upserts) a payout request with specified a ID.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PayoutRequest.yaml
+  responses:
+    '200':
+      description: Payout request updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PayoutRequest.yaml
+    '201':
+      description: Payout request created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PayoutRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

@@ -1,0 +1,31 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Coupons
+  summary: Retrieve a coupon redemption
+  operationId: GetCouponRedemption
+  x-sdk-operation-name: getRedemption
+  description: Retrieves a coupon redemption with a specified ID.
+  responses:
+    '200':
+      description: Coupon redemption retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CouponRedemption.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/coupons-redemptions_{id}/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/coupons-redemptions_{id}/getundefined

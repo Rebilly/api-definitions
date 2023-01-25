@@ -1,0 +1,52 @@
+type: object
+required:
+  - subscriptionId
+properties:
+  id:
+    description: ID of the reactivation.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  subscriptionId:
+    description: ID of the reactivated subscription.
+    allOf:
+      - $ref: ./ResourceId.yaml
+  cancellationId:
+    description: ID of the related cancellation.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  description:
+    description: Description of the reactivation reason in free form.
+    type: string
+    maxLength: 255
+  effectiveTime:
+    description: |-
+      Date and time when the service period starts,
+      unless the subscription is canceled but still active.
+
+      If the subscription is still active,
+      the subscription continues for the current service period.
+
+      If this field is omitted, this value defaults to the current time.
+    type: string
+    format: date-time
+  renewalTime:
+    description: >-
+      Date and time of the next subscription renewal.
+
+      If this field is omitted, this value is computed from the `effectiveTime`
+      field.
+
+
+      If the subscription is canceled but still active,
+
+      it is ignored and the next renewal occurs as scheduled.
+    type: string
+    format: date-time
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml

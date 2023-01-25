@@ -1,0 +1,28 @@
+description: Safecharge gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Safecharge credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: Safecharge merchant ID.
+          siteId:
+            type: string
+            description: Safecharge site ID.
+          secretKey:
+            type: string
+            description: Safecharge secret key.
+            format: password
+            writeOnly: true
+        required:
+          - merchantId
+          - secretKey
+          - siteId
+      threeDSecureServer:
+        $ref: ./Safecharge3dsServers.yaml

@@ -1,0 +1,17 @@
+type: object
+required:
+  - websiteId
+  - riskMetadata
+properties:
+  websiteId:
+    $ref: ./WebsiteId.yaml
+  billingAddress:
+    description: Billing address.
+    writeOnly: true
+    allOf:
+      - $ref: ./ContactObject.yaml
+  riskMetadata:
+    $ref: ./RiskMetadata.yaml
+oneOf:
+  - $ref: ./ReadyToPayAmount.yaml
+  - $ref: ./ReadyToPayItems.yaml

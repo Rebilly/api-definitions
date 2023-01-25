@@ -1,0 +1,16 @@
+description: SecureTrading 3DS servers.
+discriminator:
+  propertyName: name
+  mapping:
+    SecureTrading3dsServer: ./SecureTrading3dsServer.yaml
+    ThreeDSecureIO3dsServer: ./SecureTradingThreeDSecureIOServer.yaml
+type: object
+required:
+  - name
+properties:
+  name:
+    allOf:
+      - $ref: ./ThreeDSecureServerName.yaml
+    enum:
+      - SecureTrading3dsServer
+      - ThreeDSecureIO3dsServer

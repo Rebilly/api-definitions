@@ -1,0 +1,10 @@
+description: Shipping settings.
+type: object
+discriminator:
+  propertyName: calculator
+  mapping:
+    manual: ./ManualShipping.yaml
+    rebilly: ./RebillyShipping.yaml
+anyOf:
+  - $ref: ./ManualShipping.yaml
+  - $ref: ./RebillyShipping.yaml

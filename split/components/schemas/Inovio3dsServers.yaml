@@ -1,0 +1,14 @@
+description: Inovio 3DS servers.
+discriminator:
+  propertyName: name
+  mapping:
+    Inovio3dsServer: ./Inovio3dsServer.yaml
+type: object
+required:
+  - name
+properties:
+  name:
+    allOf:
+      - $ref: ./ThreeDSecureServerName.yaml
+    enum:
+      - Inovio3dsServer

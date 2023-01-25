@@ -1,0 +1,11 @@
+summary: Stripe international fees
+description: Fees for Stripe outside of the US.
+value:
+  type: buy
+  name: Stripe international fees
+  filter: >-
+    type:sale,capture;result:approved;billingAddress.country:!US;gatewayAccountId:stripe
+  formula:
+    type: percentage
+    currency: USD
+    bips: 390

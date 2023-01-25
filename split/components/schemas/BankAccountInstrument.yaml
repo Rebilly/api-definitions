@@ -1,0 +1,10 @@
+type: object
+description: Bank account BBAN or IBAN instrument.
+discriminator:
+  propertyName: accountNumberType
+  mapping:
+    BBAN: ./BBANInstrument.yaml
+    IBAN: ./IBANInstrument.yaml
+anyOf:
+  - $ref: ./BBANInstrument.yaml
+  - $ref: ./IBANInstrument.yaml

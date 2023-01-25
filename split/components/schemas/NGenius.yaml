@@ -1,0 +1,24 @@
+description: NGenius gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: NGenius credentials object.
+        properties:
+          outletId:
+            type: string
+            description: NGenius outlet ID.
+          apiKey:
+            type: string
+            description: NGenius API key.
+            format: password
+            writeOnly: true
+        required:
+          - outletId
+          - apiKey
+      threeDSecureServer:
+        $ref: ./NGenius3dsServers.yaml

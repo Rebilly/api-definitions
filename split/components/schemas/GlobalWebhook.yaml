@@ -1,0 +1,87 @@
+type: object
+required:
+  - method
+  - url
+  - credentialHash
+properties:
+  id:
+    description: ID of the webhook.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  eventsFilter:
+    description: Array of system event types.
+    type: array
+    default: []
+    items:
+      $ref: ./GlobalWebhookEventType.yaml
+  status:
+    x-basic: true
+    $ref: ./OnOff.yaml
+  method:
+    type: string
+    x-basic: true
+    enum:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+  url:
+    description: URL that triggers when a specified event occurs.
+    type: string
+    format: uri
+  headers:
+    description: Webhook headers.
+    type: array
+    items:
+      $ref: ./WebhookHeader.yaml
+  credentialHash:
+    type: string
+    description: Hash from credentials to use for authentication by the specified URL.
+  body:
+    description: >-
+      Webhook request body.
+
+      If this value is `null`,
+
+      the default payload for the specified event is used.
+
+      Template placeholders are permitted.
+
+
+      Invalid placeholders render as an empty strings.
+
+      For example, `Hello {{invalid.placeholder}}!` is rendered as `Hello !`.
+
+
+      For more information,
+
+      see
+      [Placeholders](https://www.rebilly.com/docs/automations/email-notifications/#placeholders).
+    type: string
+    nullable: true
+  filter:
+    description: >-
+      Filter that determines whether to send the webhook.
+
+      This field requires a special format.
+
+      Use `,` for multiple allowed values.
+
+      Use `;` for multiple fields.
+
+
+      For more information,
+
+      see [Using
+      filters](https://all-rebilly.redoc.ly/#section/Using-filter-with-collections).
+    type: string
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    x-label: Last update time
+    allOf:
+      - $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml

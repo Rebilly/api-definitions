@@ -1,0 +1,24 @@
+parameters:
+  - $ref: ../components/parameters/token.yaml
+put:
+  x-products:
+    - Users
+  tags:
+    - Email delivery settings
+  summary: Verify an email delivery setting
+  operationId: PutEmailDeliverySettingsVerification
+  x-sdk-operation-name: verify
+  description: Verifies an email delivery setting.
+  responses:
+    '200':
+      description: Email delivery setting verified.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmailDeliverySetting.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

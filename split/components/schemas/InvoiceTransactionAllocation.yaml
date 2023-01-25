@@ -1,0 +1,27 @@
+type: object
+properties:
+  invoiceId:
+    $ref: ./ResourceId.yaml
+  transactionId:
+    $ref: ./ResourceId.yaml
+  amount:
+    type: number
+  currency:
+    allOf:
+      - $ref: ./CurrencyCode.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - invoice
+            - transaction

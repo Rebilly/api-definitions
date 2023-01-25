@@ -1,0 +1,21 @@
+description: Flexepin gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          apiKey:
+            type: string
+            description: Flexepin API key.
+          apiSecret:
+            type: string
+            description: Flexepin API secret.
+            format: password
+            writeOnly: true
+        required:
+          - apiKey
+          - apiSecret

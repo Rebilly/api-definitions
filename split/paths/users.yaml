@@ -1,0 +1,76 @@
+get:
+  x-products:
+    - Users
+  tags:
+    - Users
+  summary: Retrieve a list of users
+  operationId: GetUserCollection
+  x-sdk-operation-name: getAll
+  description: Retrieves a list of users.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+  responses:
+    '200':
+      description: List of users retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/User.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/users/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/users/getundefined
+post:
+  x-products:
+    - Users
+  tags:
+    - Users
+  summary: Create a user
+  operationId: PostUser
+  x-sdk-operation-name: create
+  description: Creates a user.
+  requestBody:
+    $ref: ../components/requestBodies/User.yaml
+  responses:
+    '201':
+      description: User created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/User.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/users/postundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/users/postundefined

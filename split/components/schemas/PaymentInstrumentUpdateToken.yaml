@@ -1,0 +1,30 @@
+type: object
+properties:
+  token:
+    description: ID of the payment token.
+    type: string
+  billingAddress:
+    description: >-
+      Customer's billing address.
+
+      If this value is supplied it overrides the billing address that is
+      supplied with the token.
+    allOf:
+      - $ref: ./ContactObject.yaml
+  stickyGatewayAccountId:
+    description: >-
+      Sticky gateway account ID.
+
+      All future payments are processed by this gateway account.
+
+
+      For more information,
+
+      see [Gateway
+      routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
+    allOf:
+      - $ref: ./ResourceId.yaml
+  customFields:
+    $ref: ./ResourceCustomFields.yaml
+  useAsBackup:
+    $ref: ./UseAsBackup.yaml

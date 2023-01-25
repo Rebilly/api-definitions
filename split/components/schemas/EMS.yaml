@@ -1,0 +1,73 @@
+description: EMS e-Commerce (XML) API gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      settings:
+        type: object
+        description: EMS settings object.
+        properties:
+          delay:
+            type: integer
+            description: Automatic capture delay in hours.
+      credentials:
+        type: object
+        description: EMS credentials object.
+        properties:
+          storeId:
+            type: string
+            description: EMS store ID.
+          userId:
+            type: string
+            description: EMS account ID.
+          password:
+            type: string
+            format: password
+            description: EMS password.
+            writeOnly: true
+          privateKey:
+            type: string
+            format: password
+            description: Private key.
+            x-multiline: true
+            writeOnly: true
+          privateKeyPassword:
+            type: string
+            format: password
+            description: Private key password.
+            writeOnly: true
+          clientCertificate:
+            type: string
+            description: Client certificate.
+            x-multiline: true
+          clientCertificatePassword:
+            type: string
+            format: password
+            description: Client certificate password.
+            writeOnly: true
+          serverCertificate:
+            type: string
+            description: Server certificate.
+            x-multiline: true
+          merchantName:
+            type: string
+            description: Merchant name for SFTP reconciliation.
+          sftpPrivateKey:
+            type: string
+            format: password
+            description: SFTP reconciliation private key.
+            x-multiline: true
+            writeOnly: true
+        required:
+          - storeId
+          - userId
+          - password
+          - privateKey
+          - privateKeyPassword
+          - clientCertificate
+          - clientCertificatePassword
+          - serverCertificate
+      threeDSecureServer:
+        $ref: ./EMS3dsServers.yaml

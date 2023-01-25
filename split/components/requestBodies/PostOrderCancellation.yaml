@@ -1,0 +1,24 @@
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - reason
+      properties:
+        reason:
+          description: Reason for the order cancellation.
+          type: string
+          enum:
+            - did-not-use
+            - did-not-want
+            - missing-features
+            - bugs-or-problems
+            - do-not-remember
+            - too-expensive
+            - other
+        description:
+          description: Description of the cancellation reason in free form.
+          type: string
+          maxLength: 255
+description: Order resource.
+required: true

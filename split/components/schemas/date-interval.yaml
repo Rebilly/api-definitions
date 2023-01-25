@@ -1,0 +1,19 @@
+type: object
+properties:
+  method:
+    type: string
+    enum:
+      - date-interval
+  duration:
+    type: integer
+    description: Number of the days between each event.
+    minimum: 1
+  unit:
+    description: Unit of time.
+    oneOf:
+      - $ref: ./TimeUnit.yaml
+      - $ref: ./TimePluralUnit.yaml
+required:
+  - duration
+  - unit
+  - method

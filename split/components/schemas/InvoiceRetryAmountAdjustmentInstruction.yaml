@@ -1,0 +1,15 @@
+type: object
+description: Specifies if the payment amount must be adjusted for the retry.
+discriminator:
+  propertyName: method
+  mapping:
+    partial: ./partial.yaml
+    none: ./none.yaml
+properties:
+  method:
+    type: string
+    enum:
+      - none
+      - partial
+required:
+  - method

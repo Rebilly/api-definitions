@@ -1,0 +1,33 @@
+allOf:
+  - $ref: ./CommonTransaction.yaml
+  - properties:
+      paymentInstrument:
+        $ref: ./InstrumentReference.yaml
+      approvalUrl:
+        description: >-
+          URL to redirect the end-customer when transaction `status` is
+          `waiting-approval` or `offsite`.
+        type: string
+        format: uri
+      token:
+        description: >-
+          Session's token used for authentication. It would allow to visit
+          created order, invoice and transaction.
+        type: string
+        readOnly: true
+      _links:
+        type: array
+        description: Related links.
+        readOnly: true
+        items:
+          type: object
+          properties:
+            href:
+              description: Link URL.
+              type: string
+            rel:
+              description: Type of link.
+              type: string
+              enum:
+                - self
+                - approvalUrl

@@ -1,0 +1,38 @@
+title: Variable quantity
+type: object
+required:
+  - planId
+  - type
+  - quantity
+properties:
+  planId:
+    description: ID of the plan.
+    allOf:
+      - $ref: ./ResourceId.yaml
+  type:
+    description: |-
+      Type of plan. If this value is set to `variable`,
+      customers can choose the plan quantity.
+      If this value is set to `fixed`,
+      customers cannot choose the plan quantity.
+    type: string
+    enum:
+      - variable
+  quantity:
+    description: Default plan quantity.
+    type: integer
+  minimum:
+    description: Minimum plan quantity.
+    type: integer
+    minimum: 1
+    default: 1
+  multipleOf:
+    description: Multiple by which the plan quantity increases.
+    type: integer
+    minimum: 1
+    default: 1
+  maximum:
+    description: Maximum plan quantity.
+    type: integer
+    minimum: 1
+    default: 100

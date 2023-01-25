@@ -1,0 +1,35 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Query a transaction
+  operationId: PostTransactionQuery
+  x-sdk-operation-name: query
+  description: >-
+    Queries a transaction with a specified ID.
+
+
+    The query interacts with the related gateway account to obtain the result,
+    amount, and currency.
+
+    If after analysis, the transaction must be updated, see [Update a
+    transaction status](../PostTransactionUpdate).
+  responses:
+    '201':
+      description: Transaction queried.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TransactionQuery.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

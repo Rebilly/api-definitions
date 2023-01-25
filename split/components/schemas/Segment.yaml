@@ -1,0 +1,94 @@
+type: object
+required:
+  - data
+  - owner
+  - scope
+properties:
+  id:
+    description: ID of the segment.
+    readOnly: true
+    type: string
+    allOf:
+      - $ref: ./ResourceId.yaml
+  owner:
+    description: Creator of segment.
+    readOnly: true
+    type: object
+    properties:
+      id:
+        description: User ID of the creator.
+        type: string
+        allOf:
+          - $ref: ./ResourceId.yaml
+      name:
+        description: First and last name of the creator.
+        type: string
+  data:
+    description: >-
+      Object that contains a schema that is used to set up the UI for the
+      segment.
+
+      This schema is built and consumed by the frontend.
+
+      It includes information such as: segment name, UI settings, and so on.
+    type: object
+  isStarred:
+    description: |-
+      Specifies if this segment is starred by the current user.
+      Starring a segment marks it as a favorite segment,
+      and also adds the segment to a starred folder in the UI.
+    type: boolean
+  isVisible:
+    description: Specifies if the segment is visible to the current user.
+    type: boolean
+  userIds:
+    type: array
+    uniqueItems: true
+    writeOnly: true
+    description: |-
+      List of user IDs with which the segment is shared.
+      This field is used when the `scope` field is set to `shared`.
+    items:
+      description: User ID.
+      allOf:
+        - $ref: ./ResourceId.yaml
+  users:
+    type: array
+    uniqueItems: true
+    description: List of user details with which this segment is shared.
+    readOnly: true
+    items:
+      type: object
+      description: User details.
+      properties:
+        id:
+          description: User ID.
+          type: string
+          allOf:
+            - $ref: ./ResourceId.yaml
+        name:
+          description: First and last name.
+          type: string
+  scope:
+    description: Controls the visibility of the segment.
+    type: string
+    enum:
+      - private
+      - public
+      - shared
+    x-enumDescriptions:
+      private: Visible only to the owner the segment.
+      public: Visible to all in the owner's organization.
+      shared: >-
+        Visible to a specific group of users that are specified in the `userIds`
+        field.
+  systemId:
+    description: >-
+      If the segment is derived from a system segment,
+
+      this field contains the ID of the related system segment.
+
+      To provide this field in a request, the `scope` field must be set to
+      `private` .
+    writeOnly: true
+    type: string

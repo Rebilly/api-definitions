@@ -1,0 +1,31 @@
+content:
+  application/json:
+    schema:
+      allOf:
+        - required:
+            - username
+            - password
+          properties:
+            username:
+              type: string
+              description: Username.
+            password:
+              type: string
+              format: password
+              description: Password.
+            primaryAddress:
+              $ref: ../schemas/ContactObject.yaml
+            paymentToken:
+              type: string
+              description: >-
+                Write-only payment token;
+
+                if supplied, it converts into a payment instrument and is set as
+                the `defaultPaymentInstrument`.
+
+                The value of this property overrides the
+                `defaultPaymentInstrument` in the case that both are supplied.
+
+                The token may only be used once before it is expired.
+            leadSource:
+              $ref: ../schemas/LeadSourceData.yaml

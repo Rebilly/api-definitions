@@ -1,0 +1,109 @@
+type: object
+description: Matched identity data.
+properties:
+  containsImage:
+    description: Specifies if the document includes an image that contains a face.
+    type: boolean
+    example: true
+  isIdentityDocument:
+    description: Specifies if the document resembles an ID.
+    type: boolean
+    example: true
+  isPublishedOnline:
+    description: Specifies if an exact match of the document has been found online.
+    type: boolean
+    example: false
+  matchingImages:
+    description: URLs where matching images have been found online.
+    type: array
+    readOnly: true
+    maxItems: 3
+    items:
+      type: string
+  firstName:
+    description: |-
+      First name of the customer.
+      This value is null if no match is found.
+    type: string
+    nullable: true
+    example: John
+  lastName:
+    description: |-
+      Last name of the customer.
+      This value is null if no match is found.
+    type: string
+    nullable: true
+    example: Doe
+  dateOfBirth:
+    description: |-
+      Date of birth detected on the document.
+      This value is null if no match is detected.
+    type: string
+    format: date-time
+    nullable: true
+  expirationDate:
+    description: |-
+      Expiration date detected on the document.
+      This value is null if no expiration date is detected.
+    type: string
+    format: date-time
+    nullable: true
+  issueDate:
+    description: |-
+      Issue date detected on the document.
+      This value is null if no issue date is detected.
+    type: string
+    format: date-time
+    nullable: true
+  hasMinimalAge:
+    description: |-
+      Specifies that the individual is older than the minimal age limit.
+      The minimal age is 21+ the for USA and 18+ for all other countries.
+      This value is null if `dateOfBirth` is not determined.
+    type: boolean
+    nullable: true
+    readOnly: true
+    example: true
+  nationality:
+    description: |-
+      Nationality detected on a passport or citizenship document.
+      This value is null if no nationality is detected.
+    type: string
+    nullable: true
+    example: US
+    maxLength: 3
+  issuanceCountry:
+    description: Country that issued the document.
+    type: string
+    nullable: true
+    example: CA
+    minLength: 2
+    maxLength: 2
+  issuanceRegion:
+    description: Region, state, province, or territory that issued the document.
+    type: string
+    nullable: true
+    example: Ontario
+  documentNumber:
+    description: |-
+      Unique number on the identity document.
+      This value may contain alphanumeric characters.
+    type: string
+    nullable: true
+    example: '1234567890'
+  documentSubtype:
+    description: Interpreted subtype of the uploaded document.
+    type: string
+    nullable: true
+    allOf:
+      - $ref: ./KycDocumentSubtypes.yaml
+  hasMatchingFaceProof:
+    description: Specifies if an identity document has matching face proof.
+    type: boolean
+    example: false
+  expiryDate:
+    description: Use `expirationDate` field instead.
+    type: string
+    format: date-time
+    nullable: true
+    deprecated: true

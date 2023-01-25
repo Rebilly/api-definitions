@@ -1,0 +1,37 @@
+type: object
+required:
+  - type
+  - value
+properties:
+  id:
+    description: Blocklist ID.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  type:
+    description: Type of blocklist.
+    type: string
+    enum:
+      - payment-card
+      - bank-account
+      - customer-id
+      - email
+      - email-domain
+      - ip-address
+      - country
+      - fingerprint
+      - bin
+      - address
+  value:
+    description: Value of the blocklist.
+    type: string
+  expirationTime:
+    description: Date and time when the blocklist expires.
+    type: string
+    format: date-time
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml

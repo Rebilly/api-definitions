@@ -1,0 +1,18 @@
+description: Payvision 3DS servers.
+discriminator:
+  propertyName: name
+  mapping:
+    Other: ./PayvisionOtherServer.yaml
+    Payvision3dsServer: ./Payvision3dsServer.yaml
+    ThreeDSecureIO3dsServer: ./PayvisionThreeDSecureIOServer.yaml
+type: object
+required:
+  - name
+properties:
+  name:
+    allOf:
+      - $ref: ./ThreeDSecureServerName.yaml
+    enum:
+      - Payvision3dsServer
+      - ThreeDSecureIO3dsServer
+      - Other

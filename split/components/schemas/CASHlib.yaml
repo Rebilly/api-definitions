@@ -1,0 +1,22 @@
+description: CASHlib gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: CASHlib credentials object.
+        properties:
+          apiKey:
+            type: string
+            description: CASHlib API key.
+            format: password
+            writeOnly: true
+          merchantId:
+            type: string
+            description: CASHlib merchant ID.
+        required:
+          - apiKey
+          - merchantId

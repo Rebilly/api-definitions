@@ -1,0 +1,90 @@
+get:
+  x-products:
+    - Users
+  tags:
+    - Application users
+  summary: Retrieve applications
+  operationId: GetApplicationCollection
+  x-sdk-operation-name: getAll
+  description: |-
+    Retrieves a list of all applications.
+    You may sort applications by: `id`, `name`, `status`, `createdTime`,
+    and `updatedTime`.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionFields.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+  responses:
+    '200':
+      description: List of applications retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/UserApplication.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/applications/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/applications/getundefined
+post:
+  x-products:
+    - Users
+  tags:
+    - Application owners
+  summary: Register an application
+  operationId: PostApplication
+  x-sdk-operation-name: create
+  description: >-
+    Registers an application and displays it publicly in the [App
+    Store](https://app.rebilly.com/app-store).
+
+    Before you submit an application, read the [App Store
+    documentation](https://www.rebilly.com/docs/content/concepts-and-features/app-store/).
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Application.yaml
+  responses:
+    '201':
+      description: Application registered.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Application.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/applications/postundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/applications/postundefined

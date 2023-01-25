@@ -1,0 +1,116 @@
+type: array
+items:
+  type: object
+  properties:
+    metric:
+      type: string
+      description: Type of metric.
+      enum:
+        - approvalRate
+        - salesCount
+        - salesValue
+        - refundsValue
+        - chargebacksCount
+        - chargebacksValue
+        - transactionsCount
+        - redeemedCouponsCount
+        - newLeadsCount
+        - newCustomersCount
+        - appliedCouponsCount
+        - trialConversionsCount
+        - trialConversionsRate
+        - renewalSuccessRate
+        - renewalsCount
+        - newTrialsCount
+        - reactivationsCount
+        - successfulRetriesCount
+        - invoicedRevenue
+        - churnCount
+        - churnRate
+        - cancellationsCount
+        - cancellationsRate
+        - activeSubscriptionsCount
+        - newSubscriptionsCount
+        - upgradesCount
+        - downgradesCount
+        - monthlyRecurringRevenue
+        - averageRevenuePerCustomer
+        - customerLifetimeValue
+        - addressProofAcceptanceRate
+        - identityProofAcceptanceRate
+        - fundsProofAcceptanceRate
+        - purchaseProofAcceptanceRate
+        - creditFileProofAcceptanceRate
+        - kycRejectionRate
+        - kycAccuracyRate
+        - addressProofAccuracyRate
+        - identityProofAccuracyRate
+        - creditFileProofAccuracyRate
+        - kycRequestCount
+        - kycRequestAbandonmentRate
+        - kycRequestAttemptedRate
+        - kycRequestFailureRate
+        - kycRequestFulfillmentRate
+        - kycRequestExpirationRate
+    humanName:
+      type: string
+      description: Display name of the metric.
+    increaseIsGood:
+      type: boolean
+      description: Specifies whether a higher value is a positive result for the merchant.
+    segments:
+      type: array
+      description: Segment data.
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Name of the segment.
+          value:
+            type: number
+            format: double
+            nullable: true
+            description: Segment value for the specified date range.
+          previousValue:
+            type: number
+            format: double
+            nullable: true
+            description: |-
+              Segment value for the previous date range.
+              This value is relative to the specified date range.
+          humanValue:
+            type: string
+            nullable: true
+            description: |-
+              Human readable segment value.
+              This field is formatted with a currency sign.
+          changeRatio:
+            type: number
+            format: double
+            nullable: true
+            description: |-
+              Ratio of the current value for each previous value.
+              A null value represents infinity.
+          humanChangeRatio:
+            type: string
+            nullable: true
+            description: |-
+              Human readable change ratio.
+              This field is formatted percentage sign.
+              A null value represents infinity.
+          timeseries:
+            description: Time series.
+            type: array
+            items:
+              type: object
+              description: Chart data.
+              readOnly: true
+              properties:
+                date:
+                  type: string
+                  description: Entry date-time.
+                value:
+                  type: number
+                  nullable: true
+                  description: Entry value.

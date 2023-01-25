@@ -1,0 +1,21 @@
+description: Plugnpay gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          publisher-name:
+            type: string
+            description: Plugnpay member ID.
+          publisher-password:
+            type: string
+            description: Plugnpay AVS.
+            format: password
+            writeOnly: true
+        required:
+          - publisher-name
+          - publisher-password

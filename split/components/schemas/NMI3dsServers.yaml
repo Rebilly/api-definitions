@@ -1,0 +1,16 @@
+description: NMI 3DS servers.
+discriminator:
+  propertyName: name
+  mapping:
+    ThreeDSecureIO3dsServer: ./NMIThreeDSecureIOServer.yaml
+    Other: ./NMIOtherServer.yaml
+type: object
+required:
+  - name
+properties:
+  name:
+    allOf:
+      - $ref: ./ThreeDSecureServerName.yaml
+    enum:
+      - ThreeDSecureIO3dsServer
+      - Other

@@ -1,0 +1,35 @@
+parameters:
+  - $ref: ../components/parameters/customFieldResource.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Custom fields
+  summary: Retrieve custom fields
+  operationId: GetCustomFieldCollection
+  x-sdk-operation-name: getAll
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+  description: Retrieves a schema of custom fields for the specified resource type.
+  responses:
+    '200':
+      description: Schema of custom fields retrieved.
+      content:
+        application/json:
+          schema:
+            description: List of custom fields.
+            type: array
+            items:
+              $ref: ../components/schemas/CustomField.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/custom-fields_{resource}/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/custom-fields_{resource}/getundefined

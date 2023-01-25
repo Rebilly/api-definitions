@@ -1,0 +1,20 @@
+type: object
+readOnly: true
+description: Customer's lifetime revenue.
+properties:
+  currency:
+    description: Merchant's reporting currency.
+    allOf:
+      - $ref: ./CurrencyCode.yaml
+  amount:
+    x-type: Money
+    x-label: Lifetime Revenue
+    x-sortable: true
+    x-basic: true
+    description: Revenue amount in the merchant's reporting currency.
+    type: number
+    format: double
+  amountUsd:
+    description: Revenue amount in USD.
+    type: number
+    format: double

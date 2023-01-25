@@ -1,0 +1,34 @@
+post:
+  x-products:
+    - Users
+  tags:
+    - Rules
+  summary: Send a test email
+  operationId: PostPreviewRuleActionEmailSending
+  x-sdk-operation-name: sendEmailRuleAction
+  description: Sends a test email.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/SendTestEmail.yaml
+    description: Test email resource.
+    required: true
+  responses:
+    '200':
+      description: Test email sent.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SendTestEmail.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: >-
+          ../code_samples/JavaScript/previews_rule-actions_send-email/postundefined

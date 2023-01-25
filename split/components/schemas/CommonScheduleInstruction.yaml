@@ -1,0 +1,18 @@
+type: object
+description: Specifies when the instruction is performed.
+discriminator:
+  propertyName: method
+  mapping:
+    auto: ./auto.yaml
+    date-interval: ./date-interval.yaml
+    day-of-month: ./day-of-month.yaml
+    day-of-week: ./day-of-week.yaml
+    immediately: ./immediately.yaml
+    intelligent: ./intelligent.yaml
+anyOf:
+  - $ref: ./auto.yaml
+  - $ref: ./date-interval.yaml
+  - $ref: ./day-of-month.yaml
+  - $ref: ./day-of-week.yaml
+  - $ref: ./immediately.yaml
+  - $ref: ./intelligent.yaml

@@ -1,0 +1,41 @@
+type: object
+title: Alternative instrument
+x-abstract-parent: PaymentInstrument
+properties:
+  id:
+    description: ID of the payment instrument.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  method:
+    description: Payment method of the payment instrument.
+    allOf:
+      - $ref: ./AlternativePaymentMethods.yaml
+      - not:
+          enum:
+            - payment-card
+            - paypal
+            - ach
+            - echeck
+            - Khelocard
+  billingAddress:
+    description: >-
+      Billing address of the user that is associated with the payment
+      instrument.
+    allOf:
+      - $ref: ./ContactObject.yaml
+  status:
+    description: Payment instrument status.
+    type: string
+    readOnly: true
+    enum:
+      - active
+      - deactivated
+  useAsBackup:
+    $ref: ./UseAsBackup.yaml
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  customFields:
+    $ref: ./ResourceCustomFields.yaml

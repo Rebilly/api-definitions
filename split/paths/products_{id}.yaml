@@ -1,0 +1,103 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Products
+  summary: Retrieve a product
+  operationId: GetProduct
+  x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
+  description: Retrieves a product with a specified ID.
+  responses:
+    '200':
+      description: Product retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Product.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/products_{id}/getundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/products_{id}/getundefined
+put:
+  x-products:
+    - Core
+  tags:
+    - Products
+  summary: Upsert a product
+  operationId: PutProduct
+  x-sdk-operation-name: update
+  description: Creates or updates (upserts) a product with a specified ID.
+  requestBody:
+    $ref: ../components/requestBodies/Product.yaml
+  responses:
+    '200':
+      description: Product updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Product.yaml
+    '201':
+      description: Product created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Product.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/products_{id}/putundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/products_{id}/putundefined
+delete:
+  x-products:
+    - Core
+  tags:
+    - Products
+  summary: Delete a product
+  operationId: DeleteProduct
+  x-sdk-operation-name: delete
+  description: Deletes a product with a specified ID.
+  responses:
+    '204':
+      description: Product deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/products_{id}/deleteundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/products_{id}/deleteundefined

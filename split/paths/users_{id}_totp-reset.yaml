@@ -1,0 +1,30 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Users
+  tags:
+    - Users
+  summary: Reset or renew a TOTP secret
+  operationId: PostUserTotpReset
+  x-sdk-operation-name: resetTotp
+  description: Resets and renews a TOTP secret with a specified user ID.
+  responses:
+    '201':
+      description: TOTP secret reset and renewed.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/User.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/users_{id}_totp-reset/postundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/users_{id}_totp-reset/postundefined

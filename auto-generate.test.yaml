@@ -1,0 +1,1403 @@
+definition: openapi/openapi.yaml
+serverUrl: https://api-sandbox.rebilly.com/organizations/redocly
+inherit: auto
+defaults:
+  parameters:
+    - name: id
+      in: path
+      value: abc123
+    - name: REB-APIKEY
+      in: header
+      value: ${secrets.SK_SANDBOX_KEY}
+flows:
+  customers:
+    - path: /customers
+      method: get
+  websites:
+    - path: /websites
+      method: get
+  subscriptions:
+    - path: /subscriptions
+      method: get
+  products:
+    - path: /products
+      method: get
+  plans:
+    - path: /plans
+      method: get
+      parameters:
+        - name: limit
+          in: query
+          value: 1
+  transactions:
+    - path: /transactions
+      method: get
+      parameters:
+        - name: limit
+          in: query
+          value: 1
+        # - name: fields
+        #   in: query
+        #   value: id,type,result
+  flowName_/aml:
+    - path: /aml
+      method: get
+  flowName_/aml-checks:
+    - path: /aml-checks
+      method: get
+  flowName_/aml-checks/{id}:
+    - path: /aml-checks/{id}
+      method: get
+  flowName_/aml-checks/{id}/review:
+    - path: /aml-checks/{id}/review
+      method: post
+  flowName_/attachments:
+    - path: /attachments
+      method: post
+    - path: /attachments
+      method: get
+  flowName_/attachments/{id}:
+    - path: /attachments/{id}
+      method: put
+    - path: /attachments/{id}
+      method: get
+    - path: /attachments/{id}
+      method: delete
+  flowName_/authentication-options:
+    - path: /authentication-options
+      method: put
+    - path: /authentication-options
+      method: get
+  flowName_/authentication-tokens:
+    - path: /authentication-tokens
+      method: post
+    - path: /authentication-tokens
+      method: get
+  flowName_/authentication-tokens/{token}:
+    - path: /authentication-tokens/{token}
+      method: get
+    - path: /authentication-tokens/{token}
+      method: delete
+  flowName_/authentication-tokens/{token}/exchange:
+    - path: /authentication-tokens/{token}/exchange
+      method: post
+  flowName_/blocklists:
+    - path: /blocklists
+      method: post
+    - path: /blocklists
+      method: get
+  flowName_/blocklists/{id}:
+    - path: /blocklists/{id}
+      method: put
+    - path: /blocklists/{id}
+      method: get
+    - path: /blocklists/{id}
+      method: delete
+  flowName_/coupons-redemptions:
+    - path: /coupons-redemptions
+      method: post
+    - path: /coupons-redemptions
+      method: get
+  flowName_/coupons-redemptions/{id}:
+    - path: /coupons-redemptions/{id}
+      method: get
+  flowName_/coupons-redemptions/{id}/cancel:
+    - path: /coupons-redemptions/{id}/cancel
+      method: post
+  flowName_/coupons:
+    - path: /coupons
+      method: post
+    - path: /coupons
+      method: get
+  flowName_/coupons/{id}:
+    - path: /coupons/{id}
+      method: put
+    - path: /coupons/{id}
+      method: get
+  flowName_/coupons/{id}/expiration:
+    - path: /coupons/{id}/expiration
+      method: post
+  flowName_/credentials:
+    - path: /credentials
+      method: post
+    - path: /credentials
+      method: get
+  flowName_/credentials/{id}:
+    - path: /credentials/{id}
+      method: put
+    - path: /credentials/{id}
+      method: get
+    - path: /credentials/{id}
+      method: delete
+  flowName_/custom-fields/{resource}:
+    - path: /custom-fields/{resource}
+      method: get
+  flowName_/custom-fields/{resource}/{name}:
+    - path: /custom-fields/{resource}/{name}
+      method: put
+    - path: /custom-fields/{resource}/{name}
+      method: get
+  flowName_/customers:
+    - path: /customers
+      method: post
+    - path: /customers
+      method: get
+  flowName_/customers/{id}:
+    - path: /customers/{id}
+      method: put
+    - path: /customers/{id}
+      method: get
+    - path: /customers/{id}
+      method: delete
+  flowName_/customer-timeline-custom-events:
+    - path: /customer-timeline-custom-events
+      method: post
+    - path: /customer-timeline-custom-events
+      method: get
+  flowName_/customer-timeline-custom-events/{id}:
+    - path: /customer-timeline-custom-events/{id}
+      method: get
+  flowName_/customers/{id}/aml:
+    - path: /customers/{id}/aml
+      method: get
+  flowName_/customers/{id}/lead-source:
+    - path: /customers/{id}/lead-source
+      method: put
+    - path: /customers/{id}/lead-source
+      method: get
+    - path: /customers/{id}/lead-source
+      method: delete
+  flowName_/customers/{id}/timeline:
+    - path: /customers/{id}/timeline
+      method: post
+    - path: /customers/{id}/timeline
+      method: get
+  flowName_/customers/{id}/timeline/{messageId}:
+    - path: /customers/{id}/timeline/{messageId}
+      method: get
+    - path: /customers/{id}/timeline/{messageId}
+      method: delete
+  flowName_/disputes:
+    - path: /disputes
+      method: post
+    - path: /disputes
+      method: get
+  flowName_/disputes/{id}:
+    - path: /disputes/{id}
+      method: put
+    - path: /disputes/{id}
+      method: get
+  flowName_/files:
+    - path: /files
+      method: post
+    - path: /files
+      method: get
+  flowName_/files/{id}:
+    - path: /files/{id}
+      method: put
+    - path: /files/{id}
+      method: get
+    - path: /files/{id}
+      method: delete
+  flowName_/files/{id}/download:
+    - path: /files/{id}/download
+      method: get
+  flowName_/application-instances/{applicationId}:
+    - path: /application-instances/{applicationId}
+      method: put
+    - path: /application-instances/{applicationId}
+      method: get
+    - path: /application-instances/{applicationId}
+      method: delete
+  flowName_/applications:
+    - path: /applications
+      method: post
+    - path: /applications
+      method: get
+  flowName_/applications/{id}:
+    - path: /applications/{id}
+      method: get
+  flowName_/applications/{id}/instances:
+    - path: /applications/{id}/instances
+      method: get
+  flowName_/applications/{id}/instances/{organizationId}:
+    - path: /applications/{id}/instances/{organizationId}
+      method: get
+  flowName_/invoices:
+    - path: /invoices
+      method: post
+    - path: /invoices
+      method: get
+  flowName_/invoices/{id}:
+    - path: /invoices/{id}
+      method: put
+    - path: /invoices/{id}
+      method: get
+  flowName_/invoices/{id}/items:
+    - path: /invoices/{id}/items
+      method: post
+    - path: /invoices/{id}/items
+      method: get
+  flowName_/invoices/{id}/items/{itemId}:
+    - path: /invoices/{id}/items/{itemId}
+      method: put
+    - path: /invoices/{id}/items/{itemId}
+      method: get
+    - path: /invoices/{id}/items/{itemId}
+      method: delete
+  flowName_/invoices/{id}/issue:
+    - path: /invoices/{id}/issue
+      method: post
+  flowName_/invoices/{id}/abandon:
+    - path: /invoices/{id}/abandon
+      method: post
+  flowName_/invoices/{id}/void:
+    - path: /invoices/{id}/void
+      method: post
+  flowName_/invoices/{id}/recalculate:
+    - path: /invoices/{id}/recalculate
+      method: post
+  flowName_/invoices/{id}/reissue:
+    - path: /invoices/{id}/reissue
+      method: post
+  flowName_/invoices/{id}/transaction-allocations:
+    - path: /invoices/{id}/transaction-allocations
+      method: get
+  flowName_/invoices/{id}/transaction:
+    - path: /invoices/{id}/transaction
+      method: post
+  flowName_/invoices/{id}/timeline:
+    - path: /invoices/{id}/timeline
+      method: post
+    - path: /invoices/{id}/timeline
+      method: get
+  flowName_/invoices/{id}/timeline/{messageId}:
+    - path: /invoices/{id}/timeline/{messageId}
+      method: get
+    - path: /invoices/{id}/timeline/{messageId}
+      method: delete
+  flowName_/credit-memos:
+    - path: /credit-memos
+      method: post
+    - path: /credit-memos
+      method: get
+  flowName_/credit-memos/{id}:
+    - path: /credit-memos/{id}
+      method: put
+    - path: /credit-memos/{id}
+      method: get
+    - path: /credit-memos/{id}
+      method: patch
+  flowName_/credit-memos/{id}/void:
+    - path: /credit-memos/{id}/void
+      method: post
+  flowName_/credit-memos/{id}/timeline:
+    - path: /credit-memos/{id}/timeline
+      method: post
+    - path: /credit-memos/{id}/timeline
+      method: get
+  flowName_/credit-memos/{id}/timeline/{messageId}:
+    - path: /credit-memos/{id}/timeline/{messageId}
+      method: get
+    - path: /credit-memos/{id}/timeline/{messageId}
+      method: delete
+  flowName_/journal-accounts:
+    - path: /journal-accounts
+      method: post
+    - path: /journal-accounts
+      method: get
+  flowName_/journal-accounts/{id}:
+    - path: /journal-accounts/{id}
+      method: put
+    - path: /journal-accounts/{id}
+      method: get
+  flowName_/journal-entries:
+    - path: /journal-entries
+      method: post
+    - path: /journal-entries
+      method: get
+  flowName_/journal-entries/{id}:
+    - path: /journal-entries/{id}
+      method: put
+    - path: /journal-entries/{id}
+      method: get
+  flowName_/journal-entries/{id}/records:
+    - path: /journal-entries/{id}/records
+      method: post
+    - path: /journal-entries/{id}/records
+      method: get
+  flowName_/journal-entries/{id}/records/{journalRecordId}:
+    - path: /journal-entries/{id}/records/{journalRecordId}
+      method: put
+    - path: /journal-entries/{id}/records/{journalRecordId}
+      method: get
+    - path: /journal-entries/{id}/records/{journalRecordId}
+      method: delete
+  flowName_/kyc-requests:
+    - path: /kyc-requests
+      method: post
+    - path: /kyc-requests
+      method: get
+  flowName_/kyc-requests/{id}:
+    - path: /kyc-requests/{id}
+      method: get
+    - path: /kyc-requests/{id}
+      method: patch
+    - path: /kyc-requests/{id}
+      method: delete
+  flowName_/kyc-documents:
+    - path: /kyc-documents
+      method: post
+    - path: /kyc-documents
+      method: get
+  flowName_/kyc-documents/{id}:
+    - path: /kyc-documents/{id}
+      method: put
+    - path: /kyc-documents/{id}
+      method: get
+  flowName_/kyc-documents/{id}/acceptance:
+    - path: /kyc-documents/{id}/acceptance
+      method: post
+  flowName_/kyc-documents/{id}/matches:
+    - path: /kyc-documents/{id}/matches
+      method: post
+  flowName_/kyc-documents/{id}/rejection:
+    - path: /kyc-documents/{id}/rejection
+      method: post
+  flowName_/kyc-documents/{id}/review:
+    - path: /kyc-documents/{id}/review
+      method: post
+  flowName_/kyc-documents/{id}/start-review:
+    - path: /kyc-documents/{id}/start-review
+      method: post
+  flowName_/kyc-documents/{id}/stop-review:
+    - path: /kyc-documents/{id}/stop-review
+      method: post
+  flowName_/kyc-settings:
+    - path: /kyc-settings
+      method: put
+    - path: /kyc-settings
+      method: get
+  flowName_/password-tokens:
+    - path: /password-tokens
+      method: post
+    - path: /password-tokens
+      method: get
+  flowName_/password-tokens/{id}:
+    - path: /password-tokens/{id}
+      method: get
+    - path: /password-tokens/{id}
+      method: delete
+  flowName_/payment-instruments:
+    - path: /payment-instruments
+      method: post
+    - path: /payment-instruments
+      method: get
+  flowName_/payment-instruments/{id}:
+    - path: /payment-instruments/{id}
+      method: get
+    - path: /payment-instruments/{id}
+      method: patch
+  flowName_/payment-instruments/{id}/deactivation:
+    - path: /payment-instruments/{id}/deactivation
+      method: post
+  flowName_/plans:
+    - path: /plans
+      method: post
+    - path: /plans
+      method: get
+  flowName_/plans/{id}:
+    - path: /plans/{id}
+      method: put
+    - path: /plans/{id}
+      method: get
+    - path: /plans/{id}
+      method: delete
+  flowName_/products:
+    - path: /products
+      method: post
+    - path: /products
+      method: get
+  flowName_/products/{id}:
+    - path: /products/{id}
+      method: put
+    - path: /products/{id}
+      method: get
+    - path: /products/{id}
+      method: delete
+  flowName_/ready-to-pay:
+    - path: /ready-to-pay
+      method: post
+  flowName_/search:
+    - path: /search
+      method: get
+  flowName_/shipping-rates:
+    - path: /shipping-rates
+      method: post
+    - path: /shipping-rates
+      method: get
+  flowName_/shipping-rates/{id}:
+    - path: /shipping-rates/{id}
+      method: put
+    - path: /shipping-rates/{id}
+      method: get
+    - path: /shipping-rates/{id}
+      method: delete
+  flowName_/subscriptions:
+    - path: /subscriptions
+      method: post
+    - path: /subscriptions
+      method: get
+  flowName_/subscriptions/{id}:
+    - path: /subscriptions/{id}
+      method: put
+    - path: /subscriptions/{id}
+      method: get
+    - path: /subscriptions/{id}
+      method: delete
+  flowName_/subscriptions/{id}/void:
+    - path: /subscriptions/{id}/void
+      method: post
+  flowName_/subscriptions/{id}/change-items:
+    - path: /subscriptions/{id}/change-items
+      method: post
+  flowName_/subscriptions/{id}/interim-invoice:
+    - path: /subscriptions/{id}/interim-invoice
+      method: post
+  flowName_/subscription-pauses:
+    - path: /subscription-pauses
+      method: post
+    - path: /subscription-pauses
+      method: get
+  flowName_/subscription-pauses/{id}:
+    - path: /subscription-pauses/{id}
+      method: put
+    - path: /subscription-pauses/{id}
+      method: get
+    - path: /subscription-pauses/{id}
+      method: delete
+  flowName_/subscription-cancellations:
+    - path: /subscription-cancellations
+      method: post
+    - path: /subscription-cancellations
+      method: get
+  flowName_/subscription-cancellations/{id}:
+    - path: /subscription-cancellations/{id}
+      method: put
+    - path: /subscription-cancellations/{id}
+      method: get
+    - path: /subscription-cancellations/{id}
+      method: patch
+    - path: /subscription-cancellations/{id}
+      method: delete
+  flowName_/subscription-reactivations:
+    - path: /subscription-reactivations
+      method: post
+    - path: /subscription-reactivations
+      method: get
+  flowName_/subscription-reactivations/{id}:
+    - path: /subscription-reactivations/{id}
+      method: get
+  flowName_/subscriptions/{id}/upcoming-invoices:
+    - path: /subscriptions/{id}/upcoming-invoices
+      method: get
+  flowName_/subscriptions/{id}/upcoming-invoice:
+    - path: /subscriptions/{id}/upcoming-invoice
+      method: get
+  flowName_/subscriptions/{id}/upcoming-invoices/{invoiceId}/issue:
+    - path: /subscriptions/{id}/upcoming-invoices/{invoiceId}/issue
+      method: post
+  flowName_/subscriptions/{id}/timeline:
+    - path: /subscriptions/{id}/timeline
+      method: post
+    - path: /subscriptions/{id}/timeline
+      method: get
+  flowName_/subscriptions/{id}/timeline/{messageId}:
+    - path: /subscriptions/{id}/timeline/{messageId}
+      method: get
+    - path: /subscriptions/{id}/timeline/{messageId}
+      method: delete
+  flowName_/usages:
+    - path: /usages
+      method: post
+    - path: /usages
+      method: get
+  flowName_/usages/{id}:
+    - path: /usages/{id}
+      method: put
+    - path: /usages/{id}
+      method: get
+    - path: /usages/{id}
+      method: delete
+  flowName_/tags:
+    - path: /tags
+      method: post
+    - path: /tags
+      method: get
+  flowName_/tags/{tag}:
+    - path: /tags/{tag}
+      method: get
+    - path: /tags/{tag}
+      method: patch
+    - path: /tags/{tag}
+      method: delete
+  flowName_/tags/{tag}/customers:
+    - path: /tags/{tag}/customers
+      method: post
+    - path: /tags/{tag}/customers
+      method: delete
+  flowName_/tags/{tag}/customers/{customerId}:
+    - path: /tags/{tag}/customers/{customerId}
+      method: post
+    - path: /tags/{tag}/customers/{customerId}
+      method: delete
+  flowName_/tags/{tag}/kyc-documents:
+    - path: /tags/{tag}/kyc-documents
+      method: post
+    - path: /tags/{tag}/kyc-documents
+      method: delete
+  flowName_/tags/{tag}/kyc-documents/{kycDocumentId}:
+    - path: /tags/{tag}/kyc-documents/{kycDocumentId}
+      method: post
+    - path: /tags/{tag}/kyc-documents/{kycDocumentId}
+      method: delete
+  flowName_/tokens:
+    - path: /tokens
+      method: post
+    - path: /tokens
+      method: get
+  flowName_/tokens/{token}:
+    - path: /tokens/{token}
+      method: get
+  flowName_/digital-wallets/validation:
+    - path: /digital-wallets/validation
+      method: post
+  flowName_/transactions:
+    - path: /transactions
+      method: post
+    - path: /transactions
+      method: get
+  flowName_/transactions/{id}:
+    - path: /transactions/{id}
+      method: get
+    - path: /transactions/{id}
+      method: patch
+  flowName_/payouts:
+    - path: /payouts
+      method: post
+  flowName_/transactions/{id}/query:
+    - path: /transactions/{id}/query
+      method: post
+  flowName_/transactions/{id}/update:
+    - path: /transactions/{id}/update
+      method: post
+  flowName_/transactions/{id}/refund:
+    - path: /transactions/{id}/refund
+      method: post
+  flowName_/transactions/{id}/timeline:
+    - path: /transactions/{id}/timeline
+      method: post
+    - path: /transactions/{id}/timeline
+      method: get
+  flowName_/transactions/{id}/timeline/{messageId}:
+    - path: /transactions/{id}/timeline/{messageId}
+      method: get
+    - path: /transactions/{id}/timeline/{messageId}
+      method: delete
+  flowName_/fees:
+    - path: /fees
+      method: post
+    - path: /fees
+      method: get
+  flowName_/fees/{id}:
+    - path: /fees/{id}
+      method: put
+    - path: /fees/{id}
+      method: get
+    - path: /fees/{id}
+      method: patch
+  flowName_/activation/{token}:
+    - path: /activation/{token}
+      method: post
+  flowName_/api-keys:
+    - path: /api-keys
+      method: post
+    - path: /api-keys
+      method: get
+  flowName_/api-keys/{id}:
+    - path: /api-keys/{id}
+      method: put
+    - path: /api-keys/{id}
+      method: get
+    - path: /api-keys/{id}
+      method: delete
+  flowName_/balance-transactions:
+    - path: /balance-transactions
+      method: get
+  flowName_/balance-transactions/{id}:
+    - path: /balance-transactions/{id}
+      method: get
+  flowName_/billing-portals:
+    - path: /billing-portals
+      method: post
+    - path: /billing-portals
+      method: get
+  flowName_/billing-portals/{id}:
+    - path: /billing-portals/{id}
+      method: put
+    - path: /billing-portals/{id}
+      method: get
+    - path: /billing-portals/{id}
+      method: delete
+  flowName_/broadcast-messages:
+    - path: /broadcast-messages
+      method: post
+    - path: /broadcast-messages
+      method: get
+  flowName_/broadcast-messages/{id}:
+    - path: /broadcast-messages/{id}
+      method: get
+    - path: /broadcast-messages/{id}
+      method: patch
+    - path: /broadcast-messages/{id}
+      method: delete
+  flowName_/cashier-requests:
+    - path: /cashier-requests
+      method: post
+    - path: /cashier-requests
+      method: get
+  flowName_/cashier-requests/{id}:
+    - path: /cashier-requests/{id}
+      method: get
+  flowName_/cashier-strategies:
+    - path: /cashier-strategies
+      method: post
+    - path: /cashier-strategies
+      method: get
+  flowName_/cashier-strategies/{id}:
+    - path: /cashier-strategies/{id}
+      method: put
+    - path: /cashier-strategies/{id}
+      method: get
+    - path: /cashier-strategies/{id}
+      method: delete
+  flowName_/checkout-forms:
+    - path: /checkout-forms
+      method: post
+    - path: /checkout-forms
+      method: get
+  flowName_/checkout-forms/{id}:
+    - path: /checkout-forms/{id}
+      method: put
+    - path: /checkout-forms/{id}
+      method: get
+    - path: /checkout-forms/{id}
+      method: delete
+  flowName_/credential-hashes/aws-ses:
+    - path: /credential-hashes/aws-ses
+      method: post
+  flowName_/credential-hashes/aws-ses/{hash}:
+    - path: /credential-hashes/aws-ses/{hash}
+      method: get
+    - path: /credential-hashes/aws-ses/{hash}
+      method: patch
+  flowName_/credential-hashes/emails:
+    - path: /credential-hashes/emails
+      method: post
+  flowName_/credential-hashes/emails/{hash}:
+    - path: /credential-hashes/emails/{hash}
+      method: get
+    - path: /credential-hashes/emails/{hash}
+      method: patch
+  flowName_/credential-hashes/mailgun:
+    - path: /credential-hashes/mailgun
+      method: post
+  flowName_/credential-hashes/mailgun/{hash}:
+    - path: /credential-hashes/mailgun/{hash}
+      method: get
+    - path: /credential-hashes/mailgun/{hash}
+      method: patch
+  flowName_/credential-hashes/oauth2:
+    - path: /credential-hashes/oauth2
+      method: post
+    - path: /credential-hashes/oauth2
+      method: get
+  flowName_/credential-hashes/oauth2/{hash}:
+    - path: /credential-hashes/oauth2/{hash}
+      method: get
+    - path: /credential-hashes/oauth2/{hash}
+      method: patch
+  flowName_/credential-hashes/oauth2/{hash}/items:
+    - path: /credential-hashes/oauth2/{hash}/items
+      method: get
+  flowName_/credential-hashes/plaid:
+    - path: /credential-hashes/plaid
+      method: post
+    - path: /credential-hashes/plaid
+      method: get
+  flowName_/credential-hashes/plaid/{hash}:
+    - path: /credential-hashes/plaid/{hash}
+      method: get
+    - path: /credential-hashes/plaid/{hash}
+      method: patch
+  flowName_/credential-hashes/postmark:
+    - path: /credential-hashes/postmark
+      method: post
+  flowName_/credential-hashes/postmark/{hash}:
+    - path: /credential-hashes/postmark/{hash}
+      method: get
+    - path: /credential-hashes/postmark/{hash}
+      method: patch
+  flowName_/credential-hashes/sendgrid:
+    - path: /credential-hashes/sendgrid
+      method: post
+  flowName_/credential-hashes/sendgrid/{hash}:
+    - path: /credential-hashes/sendgrid/{hash}
+      method: get
+    - path: /credential-hashes/sendgrid/{hash}
+      method: patch
+  flowName_/credential-hashes/webhooks:
+    - path: /credential-hashes/webhooks
+      method: post
+  flowName_/credential-hashes/webhooks/{hash}:
+    - path: /credential-hashes/webhooks/{hash}
+      method: get
+    - path: /credential-hashes/webhooks/{hash}
+      method: patch
+  flowName_/credential-hashes/experian:
+    - path: /credential-hashes/experian
+      method: post
+    - path: /credential-hashes/experian
+      method: get
+  flowName_/credential-hashes/experian/{hash}:
+    - path: /credential-hashes/experian/{hash}
+      method: get
+    - path: /credential-hashes/experian/{hash}
+      method: patch
+  flowName_/credential-hashes/taxjar:
+    - path: /credential-hashes/taxjar
+      method: post
+    - path: /credential-hashes/taxjar
+      method: get
+  flowName_/credential-hashes/taxjar/{hash}:
+    - path: /credential-hashes/taxjar/{hash}
+      method: get
+    - path: /credential-hashes/taxjar/{hash}
+      method: patch
+  flowName_/credential-hashes/avalara:
+    - path: /credential-hashes/avalara
+      method: post
+    - path: /credential-hashes/avalara
+      method: get
+  flowName_/credential-hashes/avalara/{hash}:
+    - path: /credential-hashes/avalara/{hash}
+      method: get
+    - path: /credential-hashes/avalara/{hash}
+      method: patch
+  flowName_/custom-domains:
+    - path: /custom-domains
+      method: post
+    - path: /custom-domains
+      method: get
+  flowName_/custom-domains/{domain}:
+    - path: /custom-domains/{domain}
+      method: get
+    - path: /custom-domains/{domain}
+      method: delete
+  flowName_/email-delivery-setting-verifications/{token}:
+    - path: /email-delivery-setting-verifications/{token}
+      method: put
+  flowName_/email-delivery-settings:
+    - path: /email-delivery-settings
+      method: post
+    - path: /email-delivery-settings
+      method: get
+  flowName_/email-delivery-settings/{id}:
+    - path: /email-delivery-settings/{id}
+      method: get
+    - path: /email-delivery-settings/{id}
+      method: patch
+    - path: /email-delivery-settings/{id}
+      method: delete
+  flowName_/email-delivery-settings/{id}/resend-email-verification:
+    - path: /email-delivery-settings/{id}/resend-email-verification
+      method: post
+  flowName_/email-messages:
+    - path: /email-messages
+      method: post
+    - path: /email-messages
+      method: get
+  flowName_/email-messages/{id}:
+    - path: /email-messages/{id}
+      method: get
+    - path: /email-messages/{id}
+      method: patch
+    - path: /email-messages/{id}
+      method: delete
+  flowName_/email-notifications:
+    - path: /email-notifications
+      method: get
+  flowName_/events:
+    - path: /events
+      method: get
+  flowName_/events/{eventType}:
+    - path: /events/{eventType}
+      method: get
+  flowName_/events/{eventType}/rules:
+    - path: /events/{eventType}/rules
+      method: put
+    - path: /events/{eventType}/rules
+      method: get
+  flowName_/events/{eventType}/timeline:
+    - path: /events/{eventType}/timeline
+      method: post
+    - path: /events/{eventType}/timeline
+      method: get
+  flowName_/events/{eventType}/timeline/{messageId}:
+    - path: /events/{eventType}/timeline/{messageId}
+      method: get
+    - path: /events/{eventType}/timeline/{messageId}
+      method: delete
+  flowName_/events/{eventType}/rules/history:
+    - path: /events/{eventType}/rules/history
+      method: get
+  flowName_/events/{eventType}/rules/history/{version}:
+    - path: /events/{eventType}/rules/history/{version}
+      method: get
+  flowName_/events/{eventType}/rules/versions/{version}:
+    - path: /events/{eventType}/rules/versions/{version}
+      method: get
+  flowName_/events/{eventType}/rules/drafts:
+    - path: /events/{eventType}/rules/drafts
+      method: post
+    - path: /events/{eventType}/rules/drafts
+      method: get
+  flowName_/events/{eventType}/rules/drafts/{id}:
+    - path: /events/{eventType}/rules/drafts/{id}
+      method: put
+    - path: /events/{eventType}/rules/drafts/{id}
+      method: get
+    - path: /events/{eventType}/rules/drafts/{id}
+      method: delete
+  flowName_/forgot-password:
+    - path: /forgot-password
+      method: post
+  flowName_/gateway-accounts:
+    - path: /gateway-accounts
+      method: post
+    - path: /gateway-accounts
+      method: get
+  flowName_/gateway-accounts/{id}:
+    - path: /gateway-accounts/{id}
+      method: put
+    - path: /gateway-accounts/{id}
+      method: get
+    - path: /gateway-accounts/{id}
+      method: patch
+    - path: /gateway-accounts/{id}
+      method: delete
+  flowName_/gateway-accounts/{id}/close:
+    - path: /gateway-accounts/{id}/close
+      method: post
+  flowName_/gateway-accounts/{id}/disable:
+    - path: /gateway-accounts/{id}/disable
+      method: post
+  flowName_/gateway-accounts/{id}/downtime-schedules:
+    - path: /gateway-accounts/{id}/downtime-schedules
+      method: post
+    - path: /gateway-accounts/{id}/downtime-schedules
+      method: get
+  flowName_/gateway-accounts/{id}/downtime-schedules/{downtimeId}:
+    - path: /gateway-accounts/{id}/downtime-schedules/{downtimeId}
+      method: put
+    - path: /gateway-accounts/{id}/downtime-schedules/{downtimeId}
+      method: get
+    - path: /gateway-accounts/{id}/downtime-schedules/{downtimeId}
+      method: delete
+  flowName_/gateway-accounts/{id}/enable:
+    - path: /gateway-accounts/{id}/enable
+      method: post
+  flowName_/gateway-accounts/{id}/limits:
+    - path: /gateway-accounts/{id}/limits
+      method: get
+  flowName_/gateway-accounts/{id}/limits/{limitId}:
+    - path: /gateway-accounts/{id}/limits/{limitId}
+      method: put
+    - path: /gateway-accounts/{id}/limits/{limitId}
+      method: get
+    - path: /gateway-accounts/{id}/limits/{limitId}
+      method: delete
+  flowName_/gateway-accounts/{id}/timeline:
+    - path: /gateway-accounts/{id}/timeline
+      method: post
+    - path: /gateway-accounts/{id}/timeline
+      method: get
+  flowName_/gateway-accounts/{id}/timeline/{messageId}:
+    - path: /gateway-accounts/{id}/timeline/{messageId}
+      method: get
+    - path: /gateway-accounts/{id}/timeline/{messageId}
+      method: delete
+  flowName_/gateway-accounts/{id}/check-credentials:
+    - path: /gateway-accounts/{id}/check-credentials
+      method: post
+  flowName_/gateway-accounts/{id}/financial-settings:
+    - path: /gateway-accounts/{id}/financial-settings
+      method: put
+    - path: /gateway-accounts/{id}/financial-settings
+      method: get
+  flowName_/digital-wallets/onboarding/apple-pay:
+    - path: /digital-wallets/onboarding/apple-pay
+      method: post
+  flowName_/grid-segments:
+    - path: /grid-segments
+      method: post
+    - path: /grid-segments
+      method: get
+  flowName_/grid-segments/{id}:
+    - path: /grid-segments/{id}
+      method: put
+    - path: /grid-segments/{id}
+      method: get
+    - path: /grid-segments/{id}
+      method: delete
+  flowName_/integrations:
+    - path: /integrations
+      method: get
+  flowName_/integrations/{label}:
+    - path: /integrations/{label}
+      method: get
+  flowName_/lists:
+    - path: /lists
+      method: post
+    - path: /lists
+      method: get
+  flowName_/lists/{id}:
+    - path: /lists/{id}
+      method: put
+    - path: /lists/{id}
+      method: get
+    - path: /lists/{id}
+      method: delete
+  flowName_/lists/{id}/{version}:
+    - path: /lists/{id}/{version}
+      method: get
+  flowName_/logout:
+    - path: /logout
+      method: post
+  flowName_/memberships:
+    - path: /memberships
+      method: get
+  flowName_/memberships/{organizationId}/{userId}:
+    - path: /memberships/{organizationId}/{userId}
+      method: put
+    - path: /memberships/{organizationId}/{userId}
+      method: get
+    - path: /memberships/{organizationId}/{userId}
+      method: delete
+  flowName_/organizations:
+    - path: /organizations
+      method: post
+    - path: /organizations
+      method: get
+  flowName_/organizations/{id}:
+    - path: /organizations/{id}
+      method: get
+    - path: /organizations/{id}
+      method: patch
+  flowName_/payment-cards-bank-names:
+    - path: /payment-cards-bank-names
+      method: get
+  flowName_/payment-methods:
+    - path: /payment-methods
+      method: get
+  flowName_/payment-methods/{apiName}:
+    - path: /payment-methods/{apiName}
+      method: get
+  flowName_/payment-gateways-metadata:
+    - path: /payment-gateways-metadata
+      method: get
+  flowName_/payment-gateways-metadata/{apiName}:
+    - path: /payment-gateways-metadata/{apiName}
+      method: get
+  flowName_/payout-requests:
+    - path: /payout-requests
+      method: get
+  flowName_/payout-requests/{id}:
+    - path: /payout-requests/{id}
+      method: get
+  flowName_/payout-requests/{id}/accept:
+    - path: /payout-requests/{id}/accept
+      method: post
+  flowName_/payout-requests/{id}/reject:
+    - path: /payout-requests/{id}/reject
+      method: post
+  flowName_/payout-requests/{id}/payment-instruments:
+    - path: /payout-requests/{id}/payment-instruments
+      method: get
+  flowName_/permissions-emulation:
+    - path: /permissions-emulation
+      method: post
+    - path: /permissions-emulation
+      method: delete
+  flowName_/previews/orders:
+    - path: /previews/orders
+      method: post
+  flowName_/previews/rule-actions/send-email:
+    - path: /previews/rule-actions/send-email
+      method: post
+  flowName_/previews/rule-actions/trigger-webhook:
+    - path: /previews/rule-actions/trigger-webhook
+      method: post
+  flowName_/previews/webhooks:
+    - path: /previews/webhooks
+      method: post
+  flowName_/profile:
+    - path: /profile
+      method: put
+    - path: /profile
+      method: get
+  flowName_/profile/mfa:
+    - path: /profile/mfa
+      method: post
+    - path: /profile/mfa
+      method: get
+    - path: /profile/mfa
+      method: delete
+  flowName_/profile/password:
+    - path: /profile/password
+      method: post
+  flowName_/profile/totp-reset:
+    - path: /profile/totp-reset
+      method: post
+  flowName_/reset-password/{token}:
+    - path: /reset-password/{token}
+      method: post
+    - path: /reset-password/{token}
+      method: get
+  flowName_/roles:
+    - path: /roles
+      method: post
+    - path: /roles
+      method: get
+  flowName_/roles/{id}:
+    - path: /roles/{id}
+      method: put
+    - path: /roles/{id}
+      method: get
+    - path: /roles/{id}
+      method: delete
+  flowName_/send-through-attribution/{eventType}:
+    - path: /send-through-attribution/{eventType}
+      method: get
+  flowName_/signin:
+    - path: /signin
+      method: post
+  flowName_/signup:
+    - path: /signup
+      method: post
+  flowName_/status:
+    - path: /status
+      method: get
+  flowName_/tracking/api:
+    - path: /tracking/api
+      method: get
+  flowName_/tracking/api/{id}:
+    - path: /tracking/api/{id}
+      method: get
+  flowName_/tracking/lists:
+    - path: /tracking/lists
+      method: get
+  flowName_/tracking/webhooks:
+    - path: /tracking/webhooks
+      method: get
+  flowName_/tracking/webhooks/{id}:
+    - path: /tracking/webhooks/{id}
+      method: get
+  flowName_/tracking/webhooks/{id}/resend:
+    - path: /tracking/webhooks/{id}/resend
+      method: post
+  flowName_/users:
+    - path: /users
+      method: post
+    - path: /users
+      method: get
+  flowName_/users/{id}:
+    - path: /users/{id}
+      method: put
+    - path: /users/{id}
+      method: get
+  flowName_/users/{id}/mfa:
+    - path: /users/{id}/mfa
+      method: get
+  flowName_/users/{id}/password:
+    - path: /users/{id}/password
+      method: post
+  flowName_/users/{id}/totp-reset:
+    - path: /users/{id}/totp-reset
+      method: post
+  flowName_/webhooks:
+    - path: /webhooks
+      method: post
+    - path: /webhooks
+      method: get
+  flowName_/webhooks/{id}:
+    - path: /webhooks/{id}
+      method: put
+    - path: /webhooks/{id}
+      method: get
+  flowName_/websites:
+    - path: /websites
+      method: post
+    - path: /websites
+      method: get
+  flowName_/websites/{id}:
+    - path: /websites/{id}
+      method: put
+    - path: /websites/{id}
+      method: get
+    - path: /websites/{id}
+      method: delete
+  flowName_/experimental/customers/{customerId}/summary-metrics:
+    - path: /experimental/customers/{customerId}/summary-metrics
+      method: get
+  flowName_/experimental/data-exports:
+    - path: /experimental/data-exports
+      method: post
+    - path: /experimental/data-exports
+      method: get
+  flowName_/experimental/data-exports/{id}:
+    - path: /experimental/data-exports/{id}
+      method: put
+    - path: /experimental/data-exports/{id}
+      method: get
+    - path: /experimental/data-exports/{id}
+      method: delete
+  flowName_/organization-exports:
+    - path: /organization-exports
+      method: post
+    - path: /organization-exports
+      method: get
+  flowName_/organization-exports/{id}:
+    - path: /organization-exports/{id}
+      method: get
+  flowName_/experimental/histograms/transactions:
+    - path: /experimental/histograms/transactions
+      method: get
+  flowName_/experimental/reports/api-log-summary:
+    - path: /experimental/reports/api-log-summary
+      method: get
+  flowName_/experimental/reports/cumulative-subscriptions:
+    - path: /experimental/reports/cumulative-subscriptions
+      method: get
+  flowName_/experimental/reports/dashboard:
+    - path: /experimental/reports/dashboard
+      method: get
+  flowName_/experimental/reports/dcc-markup:
+    - path: /experimental/reports/dcc-markup
+      method: get
+  flowName_/experimental/reports/disputes:
+    - path: /experimental/reports/disputes
+      method: get
+  flowName_/experimental/reports/events-triggered:
+    - path: /experimental/reports/events-triggered
+      method: get
+  flowName_/experimental/reports/events-triggered/{eventType}/rules:
+    - path: /experimental/reports/events-triggered/{eventType}/rules
+      method: get
+  flowName_/experimental/reports/future-renewals:
+    - path: /experimental/reports/future-renewals
+      method: get
+  flowName_/experimental/reports/journal:
+    - path: /experimental/reports/journal
+      method: get
+  flowName_/experimental/reports/kyc-acceptance-summary:
+    - path: /experimental/reports/kyc-acceptance-summary
+      method: get
+  flowName_/experimental/reports/kyc-rejection-summary:
+    - path: /experimental/reports/kyc-rejection-summary
+      method: get
+  flowName_/experimental/reports/kyc-request-summary:
+    - path: /experimental/reports/kyc-request-summary
+      method: get
+  flowName_/experimental/reports/monthly-recurring-revenue:
+    - path: /experimental/reports/monthly-recurring-revenue
+      method: get
+  flowName_/experimental/reports/renewal-sales:
+    - path: /experimental/reports/renewal-sales
+      method: get
+  flowName_/experimental/reports/retention-percentage:
+    - path: /experimental/reports/retention-percentage
+      method: get
+  flowName_/experimental/reports/retention-value:
+    - path: /experimental/reports/retention-value
+      method: get
+  flowName_/experimental/reports/revenue-waterfall:
+    - path: /experimental/reports/revenue-waterfall
+      method: get
+  flowName_/experimental/reports/revenue-audit:
+    - path: /experimental/reports/revenue-audit
+      method: get
+  flowName_/experimental/reports/subscription-cancellation:
+    - path: /experimental/reports/subscription-cancellation
+      method: get
+  flowName_/experimental/reports/subscription-renewal:
+    - path: /experimental/reports/subscription-renewal
+      method: get
+  flowName_/experimental/reports/time-series-transaction:
+    - path: /experimental/reports/time-series-transaction
+      method: get
+  flowName_/experimental/reports/transactions-time-dispute:
+    - path: /experimental/reports/transactions-time-dispute
+      method: get
+  flowName_/experimental/reports/transactions:
+    - path: /experimental/reports/transactions
+      method: get
+  flowName_/experimental/subscriptions/{subscriptionId}/summary-metrics:
+    - path: /experimental/subscriptions/{subscriptionId}/summary-metrics
+      method: get
+  flowName_/storefront/account:
+    - path: /storefront/account
+      method: get
+    - path: /storefront/account
+      method: patch
+  flowName_/storefront/account/forgot-password:
+    - path: /storefront/account/forgot-password
+      method: post
+  flowName_/storefront/account/password:
+    - path: /storefront/account/password
+      method: patch
+  flowName_/storefront/account/resend-verification:
+    - path: /storefront/account/resend-verification
+      method: post
+  flowName_/storefront/account/reset-password/{token}:
+    - path: /storefront/account/reset-password/{token}
+      method: post
+  flowName_/storefront/account/verification/{token}:
+    - path: /storefront/account/verification/{token}
+      method: post
+  flowName_/storefront/billing-portals/{slug}:
+    - path: /storefront/billing-portals/{slug}
+      method: get
+  flowName_/storefront/cashier-requests/{id}:
+    - path: /storefront/cashier-requests/{id}
+      method: get
+  flowName_/storefront/cashier-deposit:
+    - path: /storefront/cashier-deposit
+      method: post
+  flowName_/storefront/checkout-forms/{id}:
+    - path: /storefront/checkout-forms/{id}
+      method: get
+  flowName_/storefront/invoices:
+    - path: /storefront/invoices
+      method: get
+  flowName_/storefront/invoices/{id}:
+    - path: /storefront/invoices/{id}
+      method: get
+  flowName_/storefront/kyc-documents:
+    - path: /storefront/kyc-documents
+      method: post
+    - path: /storefront/kyc-documents
+      method: get
+  flowName_/storefront/kyc-documents/{id}:
+    - path: /storefront/kyc-documents/{id}
+      method: get
+    - path: /storefront/kyc-documents/{id}
+      method: patch
+  flowName_/storefront/kyc-requests/{id}:
+    - path: /storefront/kyc-requests/{id}
+      method: get
+  flowName_/storefront/login:
+    - path: /storefront/login
+      method: post
+  flowName_/storefront/logout:
+    - path: /storefront/logout
+      method: post
+  flowName_/storefront/orders:
+    - path: /storefront/orders
+      method: get
+  flowName_/storefront/orders/{id}:
+    - path: /storefront/orders/{id}
+      method: get
+    - path: /storefront/orders/{id}
+      method: patch
+  flowName_/storefront/orders/{id}/cancellation:
+    - path: /storefront/orders/{id}/cancellation
+      method: post
+  flowName_/storefront/payment:
+    - path: /storefront/payment
+      method: post
+  flowName_/storefront/payment-instruments:
+    - path: /storefront/payment-instruments
+      method: post
+    - path: /storefront/payment-instruments
+      method: get
+  flowName_/storefront/payment-instruments/{id}:
+    - path: /storefront/payment-instruments/{id}
+      method: get
+    - path: /storefront/payment-instruments/{id}
+      method: patch
+  flowName_/storefront/payment-instruments/{id}/deactivation:
+    - path: /storefront/payment-instruments/{id}/deactivation
+      method: post
+  flowName_/storefront/payment-instruments/{id}/setup:
+    - path: /storefront/payment-instruments/{id}/setup
+      method: post
+    - path: /storefront/payment-instruments/{id}/setup
+      method: get
+  flowName_/storefront/payout-requests:
+    - path: /storefront/payout-requests
+      method: post
+    - path: /storefront/payout-requests
+      method: get
+  flowName_/storefront/payout-requests/{id}:
+    - path: /storefront/payout-requests/{id}
+      method: get
+  flowName_/storefront/payout-requests/{id}/cancel:
+    - path: /storefront/payout-requests/{id}/cancel
+      method: post
+  flowName_/storefront/plans:
+    - path: /storefront/plans
+      method: get
+  flowName_/storefront/plans/{id}:
+    - path: /storefront/plans/{id}
+      method: get
+  flowName_/storefront/products:
+    - path: /storefront/products
+      method: get
+  flowName_/storefront/products/{id}:
+    - path: /storefront/products/{id}
+      method: get
+  flowName_/storefront/purchase:
+    - path: /storefront/purchase
+      method: post
+  flowName_/storefront/preview-purchase:
+    - path: /storefront/preview-purchase
+      method: post
+  flowName_/storefront/ready-to-pay:
+    - path: /storefront/ready-to-pay
+      method: post
+  flowName_/storefront/register:
+    - path: /storefront/register
+      method: post
+  flowName_/storefront/transactions:
+    - path: /storefront/transactions
+      method: get
+  flowName_/storefront/transactions/{id}:
+    - path: /storefront/transactions/{id}
+      method: get
+  flowName_/storefront/websites/{id}:
+    - path: /storefront/websites/{id}
+      method: get
+  flowName_/customers/{id}/edd-score:
+    - path: /customers/{id}/edd-score
+      method: get
+    - path: /customers/{id}/edd-score
+      method: patch
+  flowName_/customers/{id}/edd-timeline:
+    - path: /customers/{id}/edd-timeline
+      method: post
+    - path: /customers/{id}/edd-timeline
+      method: get
+  flowName_/customers/{id}/edd-search-results:
+    - path: /customers/{id}/edd-search-results
+      method: get

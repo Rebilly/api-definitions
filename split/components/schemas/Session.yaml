@@ -1,0 +1,39 @@
+type: object
+required:
+  - permissions
+properties:
+  id:
+    description: ID of the session.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  token:
+    description: Authentication token of the session.
+    type: string
+  permissions:
+    description: |-
+      Permissions of the session.
+      See the format in example.
+      Use wildcard `*` for full access.
+    allOf:
+      - $ref: ./AclPermissions.yaml
+  memberships:
+    description: Organizations of which the user is a member.
+    type: array
+    items:
+      $ref: ./Membership.yaml
+  userId:
+    description: ID of the user.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  expiredTime:
+    description: Date and time when the session expired. Defaults to one hour.
+    type: string
+    format: date-time
+  _links:
+    $ref: ./SelfLink.yaml

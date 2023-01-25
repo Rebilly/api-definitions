@@ -1,0 +1,21 @@
+description: Sagepay gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          M_ID:
+            type: string
+            description: Sagepay merchant ID.
+          M_KEY:
+            type: string
+            description: Sagepay merchant key.
+            format: password
+            writeOnly: true
+        required:
+          - M_ID
+          - M_KEY

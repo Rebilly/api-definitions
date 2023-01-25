@@ -1,0 +1,130 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Gateway accounts
+  summary: Retrieves a gateway account
+  operationId: GetGatewayAccount
+  x-sdk-operation-name: get
+  description: Retrieves a gateway account with a specified ID.
+  responses:
+    '200':
+      description: Gateway account retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccount.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/gateway-accounts_{id}/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/gateway-accounts_{id}/getundefined
+put:
+  x-products:
+    - Users
+  tags:
+    - Gateway accounts
+  summary: Upsert a gateway account
+  operationId: PutGatewayAccount
+  x-sdk-operation-name: update
+  description: Creates or updates (upserts) a gateway account with a specified ID.
+  requestBody:
+    $ref: ../components/requestBodies/GatewayAccount.yaml
+  responses:
+    '200':
+      description: Gateway account updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccount.yaml
+    '201':
+      description: Gateway account created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccount.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/gateway-accounts_{id}/putundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/gateway-accounts_{id}/putundefined
+patch:
+  x-products:
+    - Users
+  tags:
+    - Gateway accounts
+  summary: Update a gateway account
+  operationId: PatchGatewayAccount
+  x-sdk-operation-name: update
+  description: Updates a gateway account with a specified ID.
+  requestBody:
+    $ref: ../components/requestBodies/GatewayAccount.yaml
+  responses:
+    '200':
+      description: Gateway account updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccount.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/gateway-accounts_{id}/patchundefined
+delete:
+  x-products:
+    - Users
+  tags:
+    - Gateway accounts
+  summary: Delete a gateway account
+  operationId: DeleteGatewayAccount
+  x-sdk-operation-name: delete
+  description: Deletes a gateway account with a specified ID.
+  responses:
+    '204':
+      description: Gateway account deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/gateway-accounts_{id}/deleteundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/gateway-accounts_{id}/deleteundefined

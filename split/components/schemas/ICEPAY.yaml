@@ -1,0 +1,24 @@
+description: ICEPAY gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: ICEPAY credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: ICEPAY merchant ID.
+            format: password
+            writeOnly: true
+          secretKey:
+            type: string
+            description: ICEPAY API secret key.
+            format: password
+            writeOnly: true
+        required:
+          - merchantId
+          - secretKey

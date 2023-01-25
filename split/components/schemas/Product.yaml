@@ -1,0 +1,34 @@
+allOf:
+  - $ref: ./CommonProduct.yaml
+  - properties:
+      taxCategoryId:
+        description: >-
+          Tax category of the product.
+
+          For a complete list of supported tax categories, see [TaxJar sales tax
+          API
+          reference](https://developers.taxjar.com/api/reference/#get-list-tax-categories).
+
+          If none of the tax categories from the list are applicable for your
+          product, use the general tax category `00000`.
+        type: string
+        example: '00000'
+      accountingCode:
+        description: Accounting code of the product.
+        type: string
+        nullable: true
+        example: '4010'
+      recognition:
+        type: object
+        nullable: true
+        properties:
+          debitAccountId:
+            description: ID of the debit journal account.
+            nullable: true
+            type: string
+          creditAccountId:
+            description: ID of the credit journal account.
+            nullable: true
+            type: string
+      _links:
+        $ref: ./SelfLink.yaml

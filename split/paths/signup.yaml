@@ -1,0 +1,40 @@
+servers:
+  - url: https://api-sandbox.rebilly.com
+    description: Sandbox server
+  - url: https://api.rebilly.com
+    description: Live server
+post:
+  x-products:
+    - Users
+  tags:
+    - Profile
+  summary: Register and create new profile
+  operationId: PostSignupRequest
+  x-sdk-operation-name: signUp
+  description: Creates a new user and sends an email confirmation.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Signup.yaml
+    description: Signup resource.
+    required: true
+  responses:
+    '201':
+      description: User created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/User.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/signup/postundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/signup/postundefined

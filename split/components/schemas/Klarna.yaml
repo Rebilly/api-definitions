@@ -1,0 +1,36 @@
+description: Klarna gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+      - settings
+    properties:
+      credentials:
+        type: object
+        description: Credentials object.
+        required:
+          - username
+          - password
+        properties:
+          username:
+            type: string
+            description: Klarna API username.
+          password:
+            type: string
+            description: Klarna API password.
+            format: password
+            writeOnly: true
+      settings:
+        type: object
+        description: Settings object.
+        required:
+          - region
+        properties:
+          region:
+            type: string
+            description: Klarna API region.
+            enum:
+              - EU
+              - NA
+              - OC

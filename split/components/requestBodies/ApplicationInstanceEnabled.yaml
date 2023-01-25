@@ -1,0 +1,39 @@
+content:
+  application/json:
+    schema:
+      properties:
+        organizationId:
+          $ref: ../schemas/OrganizationId.yaml
+        applicationId:
+          description: Unique application ID.
+          allOf:
+            - $ref: ../schemas/ResourceId.yaml
+        eventType:
+          type: string
+          description: Type of webhook event.
+          enum:
+            - application-instance-enabled
+        _embedded:
+          description: Embedded objects.
+          type: object
+          properties:
+            application:
+              $ref: ../schemas/Application.yaml
+            applicationInstance:
+              $ref: ../schemas/OwnerApplicationInstance.yaml
+        _links:
+          type: array
+          description: Related links.
+          items:
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - application
+                  - applicationInstance
+description: Application instance enabled webhook request body resource.

@@ -1,0 +1,54 @@
+description: Stripe gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - settings
+    properties:
+      credentials:
+        type: object
+        description: >-
+          Stripe Connect credentials object.
+
+          The credentials object may be provided to control the Stripe Connect
+          account to which the gateway account is connected.
+        properties:
+          stripeClientId:
+            type: string
+            description: Stripe account client ID.
+          stripeSecret:
+            type: string
+            description: Stripe Connect account secret key account.
+            format: password
+            writeOnly: true
+      settings:
+        type: object
+        description: Stripe settings object.
+        required:
+          - redirectUrl
+        properties:
+          redirectUrl:
+            type: string
+            description: >-
+              URL where the user is redirected after authorizing the account on
+              Stripe.
+            format: url
+          disablePaymentIntents:
+            type: boolean
+            description: >-
+              Specifies whether to use the Charges API instead of the
+              PaymentIntents API.
+            default: false
+          enforceOffSession:
+            type: boolean
+            description: >-
+              Specifies if the `off_session` parameter is set to `true` in
+              Stripe requests.
+            default: false
+          copyCredentialsFrom:
+            type: string
+            description: >-
+              ID of an existing Stripe gateway account from which credentials
+              are copied in order to skip the onboarding process.
+      threeDSecureServer:
+        $ref: ./Stripe3dsServers.yaml

@@ -1,0 +1,52 @@
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - websiteId
+        - currency
+      properties:
+        websiteId:
+          $ref: ../schemas/WebsiteId.yaml
+        currency:
+          $ref: ../schemas/CurrencyCode.yaml
+        amount:
+          description: Amount of the transaction.
+          type: number
+          format: double
+          default: 0
+          example: 97.97
+        billingAddress:
+          description: >-
+            Billing address.
+
+            If a billing address is not supplied the address associated with the
+            payment instrument is used.
+
+            If no address is associated with the payment instrument,
+
+            the customer's address is used.
+          nullable: true
+          type: object
+          allOf:
+            - $ref: ../schemas/ContactObject.yaml
+        redirectUrl:
+          nullable: true
+          description: >-
+            URL to redirect the end-user when an offsite transaction is
+            completed.
+
+            This field defaults to the configured website URL.
+
+            You may use `{id}` or `{result}` as placeholders in the URL.
+
+            These placeholders are replaced with the transaction ID and result.
+
+            For more information, see
+            [Placeholders](https://www.rebilly.com/docs/automations/email-notifications/#placeholders).
+          type: string
+          format: uri
+        riskMetadata:
+          $ref: ../schemas/RiskMetadata.yaml
+description: Setup transaction resource.
+required: true

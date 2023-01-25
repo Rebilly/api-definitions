@@ -1,0 +1,31 @@
+type: object
+required:
+  - period
+  - currency
+properties:
+  id:
+    description: ID of the journal entry.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  period:
+    type: object
+    properties:
+      startDate:
+        type: string
+        format: date
+        example: '2022-09-01'
+      endDate:
+        type: string
+        format: date
+        example: '2022-09-30'
+  currency:
+    description: Currency of the journal record revenue.
+    allOf:
+      - $ref: ./CurrencyCode.yaml
+  description:
+    type: string
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml

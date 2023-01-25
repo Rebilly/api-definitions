@@ -1,0 +1,74 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-badge: Experimental
+  x-products:
+    - Users
+  tags:
+    - Gateway accounts
+  summary: Retrieve financial settings of a gateway account
+  operationId: GetGatewayAccountFinancialSettings
+  x-sdk-operation-name: getFinancialSettings
+  description: >-
+    Retrieves the financial settings of a gateway account with a specified ID.
+
+
+    > **Important:** This operation is experimental and may not be backward
+    compatible.
+  responses:
+    '200':
+      description: Financial settings retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/FinancialSettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-badge: Experimental
+  x-products:
+    - Users
+  tags:
+    - Gateway accounts
+  summary: Set financial settings
+  operationId: PutGatewayAccountFinancialSettings
+  x-sdk-operation-name: setFinancialSettings
+  description: >-
+    Sets financial settings for a gateway account with a specified ID.
+
+
+    > **Important:** This operation is experimental and may not be backward
+    compatible.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/FinancialSettings.yaml
+  responses:
+    '200':
+      description: Gateway account financial settings updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/FinancialSettings.yaml
+    '201':
+      description: Gateway account financial settings created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/FinancialSettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

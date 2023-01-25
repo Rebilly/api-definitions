@@ -1,0 +1,76 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Segments
+  summary: Retrieve a segment
+  operationId: GetGridSegment
+  x-sdk-operation-name: get
+  description: Retrieves a UI segment with a specified ID.
+  responses:
+    '200':
+      description: Segment retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Segment.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Users
+  tags:
+    - Segments
+  summary: Update a segment
+  operationId: PutGridSegment
+  x-sdk-operation-name: update
+  description: Updates a segment with a specified ID.
+  responses:
+    '200':
+      description: Segment updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Segment.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Segment.yaml
+delete:
+  x-products:
+    - Users
+  tags:
+    - Segments
+  summary: Delete a segment
+  operationId: DeleteGridSegment
+  x-sdk-operation-name: delete
+  description: |-
+    Deletes a segment with a specified ID.
+    This operation also removes all shares of the deleted segment.
+
+    > **Important:** This operation can only be performed by the segment owner.
+  responses:
+    '204':
+      description: Segment deleted.
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

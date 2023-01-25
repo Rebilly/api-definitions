@@ -1,0 +1,41 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Invoices
+  summary: Recalculate an invoice
+  operationId: PostInvoiceRecalculation
+  x-sdk-operation-name: recalculate
+  description: >-
+    Recalculates shipping rates, taxes, and discounts on an invoice with a
+    specified ID.
+
+
+    One use case for this operation to apply a revoked coupon,
+
+    or coupon that is redeemed by a customer after the invoice is issued.
+  responses:
+    '201':
+      description: Invoice recalculated.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Invoice.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/invoices_{id}_recalculate/postundefined

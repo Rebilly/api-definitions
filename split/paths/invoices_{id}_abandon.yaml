@@ -1,0 +1,38 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Invoices
+  summary: Abandon an invoice
+  operationId: PostInvoiceAbandonment
+  x-sdk-operation-name: abandon
+  description: Abandons an invoice with a specified ID.
+  responses:
+    '201':
+      description: Invoice abandoned.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Invoice.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/invoices_{id}_abandon/postundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/invoices_{id}_abandon/postundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/invoices_{id}_abandon/postundefined

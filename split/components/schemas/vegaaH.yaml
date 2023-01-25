@@ -1,0 +1,21 @@
+description: vegaaH gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          terminalId:
+            type: string
+            description: vegaaH terminal ID.
+          password:
+            type: string
+            description: vegaaH password.
+            format: password
+            writeOnly: true
+        required:
+          - terminalId
+          - password

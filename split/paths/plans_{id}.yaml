@@ -1,0 +1,114 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Plans
+  summary: Retrieve a plan
+  operationId: GetPlan
+  x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
+  description: Retrieves a plan with a specified ID.
+  responses:
+    '200':
+      description: Plan retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Plan.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/plans_{id}/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/plans_{id}/getundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/plans_{id}/getundefined
+put:
+  x-products:
+    - Core
+  tags:
+    - Plans
+  summary: Upsert a plan
+  operationId: PutPlan
+  x-sdk-operation-name: update
+  description: Creates or updates (upserts) a plan with a specified ID.
+  requestBody:
+    $ref: ../components/requestBodies/Plan.yaml
+  responses:
+    '200':
+      description: Plan updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Plan.yaml
+    '201':
+      description: Plan created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Plan.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/plans_{id}/putundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/plans_{id}/putundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/plans_{id}/putundefined
+delete:
+  x-products:
+    - Core
+  tags:
+    - Plans
+  summary: Delete a plan
+  operationId: DeletePlan
+  x-sdk-operation-name: delete
+  description: Deletes a plan with a specified ID.
+  responses:
+    '204':
+      description: Plan deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/plans_{id}/deleteundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/plans_{id}/deleteundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/plans_{id}/deleteundefined

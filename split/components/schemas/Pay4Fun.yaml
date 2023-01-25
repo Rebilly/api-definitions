@@ -1,0 +1,28 @@
+description: Pay4Fun gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Pay4Fun credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: Pay4Fun merchant ID.
+          merchantSecret:
+            type: string
+            description: Pay4Fun merchant secret.
+            format: password
+            writeOnly: true
+          merchantKey:
+            type: string
+            description: Pay4Fun merchant key.
+            format: password
+            writeOnly: true
+        required:
+          - merchantId
+          - merchantSecret
+          - merchantKey

@@ -1,0 +1,48 @@
+allOf:
+  - required:
+      - type
+  - type: object
+  - properties:
+      upsertCustomer:
+        type: boolean
+        default: false
+        writeOnly: true
+        description: >-
+          Specifies whether to create or update (upsert) a customer.
+
+          If this value is `true`, the operation creates or updates (upserts) a
+          customer.
+
+          If this value is `false`, the `customerId` already exists, and the
+          related customer is not updated.
+      type:
+        description: >-
+          Type of transaction.
+
+
+          This field supports a limited subset of transaction types.
+
+          To refund or void, see [Refund a
+          transaction](../PostTransactionRefund).
+
+
+          To `capture`, use the `sale` type.
+
+          If any existing `authorize` transactions are eligible,
+
+          they are captured and the `sale` converts to a `capture` type.
+
+
+          The `setup` type sets up the payment instrument by following the
+          `setupInstruction` in the selected gateway account.
+
+          If the instruction is to `do-nothing`, a transaction with result
+          `approved` of type `setup` returns.
+        type: string
+        enum:
+          - sale
+          - authorize
+          - setup
+      limits:
+        $ref: ./TransactionLimitAmount.yaml
+  - $ref: ./CommonTransactionRequest.yaml

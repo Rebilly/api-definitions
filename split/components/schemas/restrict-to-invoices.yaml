@@ -1,0 +1,13 @@
+description: Restricts a coupon to specific invoices.
+allOf:
+  - $ref: ./CouponRestriction.yaml
+  - $ref: ./RedemptionRestriction.yaml
+  - type: object
+    required:
+      - invoiceIds
+    properties:
+      invoiceIds:
+        type: array
+        description: Invoice IDs on which a coupon can be applied.
+        items:
+          type: string

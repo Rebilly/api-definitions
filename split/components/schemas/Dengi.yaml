@@ -1,0 +1,27 @@
+description: Dengi gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          projectId:
+            type: string
+            description: Dengi project ID.
+          publicKey:
+            type: string
+            description: Dengi public key.
+            format: password
+            writeOnly: true
+          refundKey:
+            type: string
+            description: Dengi refund key.
+            format: password
+            writeOnly: true
+        required:
+          - projectId
+          - publicKey
+          - refundKey

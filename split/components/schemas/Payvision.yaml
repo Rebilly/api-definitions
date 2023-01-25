@@ -1,0 +1,38 @@
+description: Payvision gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          memberId:
+            type: string
+            description: Payvision member ID.
+          memberGuid:
+            type: string
+            description: Payvision member guid.
+            format: password
+            writeOnly: true
+        required:
+          - memberId
+          - memberGuid
+      settings:
+        type: object
+        description: Payvision settings object.
+        properties:
+          avs:
+            type: boolean
+            description: Specifies whether to use Payvision AVS.
+          delay:
+            type: integer
+            description: Automatic capture delay in hours.
+          merchantAccountType:
+            type: integer
+            description: Payvision merchant account type.
+        required:
+          - merchantAccountType
+      threeDSecureServer:
+        $ref: ./Payvision3dsServers.yaml

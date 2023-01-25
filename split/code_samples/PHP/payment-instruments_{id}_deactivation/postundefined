@@ -1,0 +1,1 @@
+$client->paymentInstruments()->deactivate('paymentInstrumentId');

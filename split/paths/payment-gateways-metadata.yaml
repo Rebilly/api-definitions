@@ -1,0 +1,19 @@
+get:
+  x-products:
+    - Users
+  tags:
+    - Metadata
+  summary: Retrieve payment gateway metadata
+  operationId: GetPaymentGatewayMetadataCollection
+  x-sdk-operation-name: getAll
+  description: Retrieves payment gateway metadata.
+  security: []
+  responses:
+    '200':
+      description: Payment gateway metadata received.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/PaymentGatewayMetadata.yaml

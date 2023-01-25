@@ -1,0 +1,64 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Journal
+  summary: Retrieve journal entry
+  operationId: GetJournalEntry
+  x-sdk-operation-name: getEntry
+  description: Retrieves a journal entry with a specified ID.
+  responses:
+    '200':
+      description: Journal entry retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/JournalEntry.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Journal
+  summary: Upsert a journal entry
+  operationId: PutJournalEntry
+  x-sdk-operation-name: updateEntry
+  description: Creates or updates (upsert) a journal entry.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/JournalEntry.yaml
+    description: Journal entry resource.
+    required: true
+  responses:
+    '200':
+      description: Journal entry updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/JournalEntry.yaml
+    '201':
+      description: Journal entry created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/JournalEntry.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

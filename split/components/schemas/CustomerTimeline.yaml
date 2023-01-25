@@ -1,0 +1,128 @@
+type: object
+properties:
+  id:
+    description: ID of the customer timeline custom event.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  type:
+    description: Type of timeline message.
+    type: string
+    enum:
+      - account-password-reset-requested
+      - account-verification-requested
+      - aml-list-was-possibly-matched
+      - cashier-request-completed
+      - cashier-request-created
+      - cashier-request-expired
+      - cashier-request-started
+      - coupon-applied
+      - coupon-redeemed
+      - coupon-redemption-canceled
+      - custom-event
+      - custom-event-processed
+      - custom-fields-changed
+      - customer-bank-account-blocked
+      - customer-blocked
+      - customer-comment-created
+      - customer-created
+      - customer-merged
+      - customer-payment-card-blocked
+      - customer-requested-otp
+      - customer-tagged
+      - customer-untagged
+      - default-payment-instrument-changed
+      - email-message-sent
+      - experian-check-performed
+      - invoice-abandoned
+      - invoice-created
+      - invoice-disputed
+      - invoice-issued
+      - invoice-paid
+      - invoice-partially-paid
+      - invoice-partially-refunded
+      - invoice-past-due
+      - invoice-refunded
+      - invoice-reissued
+      - invoice-revenue-recognized
+      - invoice-voided
+      - kyc-document-accepted
+      - kyc-document-created
+      - kyc-document-modified
+      - kyc-document-rejected
+      - kyc-document-reviewed
+      - kyc-request-fulfilled
+      - lead-source-changed
+      - order-activated
+      - order-canceled
+      - order-churned
+      - order-completed
+      - order-created
+      - order-downgraded
+      - order-paid-early
+      - order-reactivated
+      - order-renewed
+      - order-upgraded
+      - payment-card-expiration-was-modified
+      - payment-card-expired
+      - payment-instrument-created
+      - payment-instrument-deactivated
+      - primary-address-changed
+      - quickbooks-customer-created
+      - quickbooks-customer-task-failed
+      - refund-was-reflected-in-invoices
+      - subscription-paused
+      - subscription-resumed
+      - subscription-trial-end-changed
+      - transaction-abandoned
+      - transaction-amount-discrepancy-found
+      - transaction-approved
+      - transaction-canceled
+      - transaction-declined
+      - transaction-discrepancy-found
+      - transaction-disputed
+      - transaction-reconciled
+      - transaction-refunded
+      - transaction-voided
+      - transaction-waiting-gateway
+  customEventType:
+    description: >-
+      Timeline custom event type.
+
+      Used with `custom-event` type.
+
+      This value must be defined using the [Create customer timeline custom
+      event type](../PostCustomerTimeline) operation.
+    type: string
+    nullable: true
+    minLength: 1
+    maxLength: 255
+  customData:
+    description: |-
+      Timeline custom event data.
+      Used with `custom-event` type.
+      Transforms to `extraData` two-column table in response.
+    type: object
+    writeOnly: true
+    example:
+      customAttribute: customValue
+      otherAttribute: otherValue
+  triggeredBy:
+    description: Specifies who, or what, triggered the timeline event.
+    type: string
+    readOnly: true
+    enum:
+      - rebilly
+      - app
+      - direct-api
+  message:
+    description: Detailed message description.
+    type: string
+  extraData:
+    $ref: ./TimelineExtraData.yaml
+  occurredTime:
+    description: Date and time when the timeline message occurred.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  _links:
+    $ref: ./SelfLink.yaml

@@ -1,0 +1,38 @@
+parameters:
+  - name: token
+    in: path
+    description: ID of the token.
+    required: true
+    schema:
+      type: string
+get:
+  x-products:
+    - Core
+  tags:
+    - Payment tokens
+  summary: Retrieve a token
+  operationId: GetToken
+  x-sdk-operation-name: get
+  description: Retrieves a token with a specified ID.
+  security:
+    - PublishableApiKey: []
+  responses:
+    '200':
+      description: Token retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CompositeToken.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/tokens_{token}/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/tokens_{token}/getundefined

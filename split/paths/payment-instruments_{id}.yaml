@@ -1,0 +1,64 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Payment instruments
+  summary: Retrieve a payment instrument
+  operationId: GetPaymentInstrument
+  x-sdk-operation-name: get
+  description: Retrieves a payment instrument with a specified ID.
+  responses:
+    '200':
+      description: Payment instrument retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PaymentInstrument.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/payment-instruments_{id}/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/payment-instruments_{id}/getundefined
+patch:
+  x-products:
+    - Core
+  tags:
+    - Payment instruments
+  summary: Update payment instrument
+  operationId: PatchPaymentInstrument
+  x-sdk-operation-name: update
+  description: Updates the values of a payment instrument with a specified ID.
+  requestBody:
+    $ref: ../components/requestBodies/PatchPaymentInstrument.yaml
+  responses:
+    '200':
+      description: Payment instrument updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PaymentInstrument.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/payment-instruments_{id}/patchundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/payment-instruments_{id}/patchundefined

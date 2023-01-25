@@ -1,0 +1,45 @@
+description: STP Mexico gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: STP Mexico credentials object.
+        properties:
+          companyName:
+            type: string
+            description: STP Mexico account company name.
+          beneficiaryName:
+            type: string
+            description: Name of the bank account holder that is receiving payments.
+          bankId:
+            description: >-
+              ID of the bank receiving payments.
+
+              A list of bank IDs can be found in STP Mexico integration
+              documentation.
+            $ref: ./STPMexicoBanks.yaml
+          bankAccountNumber:
+            type: string
+            description: Bank account number of the payments recipient.
+          privateKey:
+            type: string
+            description: STP Mexico private key.
+            format: password
+            x-multiline: true
+            writeOnly: true
+          keyPassphrase:
+            type: string
+            description: Passphrase for the private key.
+            format: password
+            writeOnly: true
+        required:
+          - companyName
+          - beneficiaryName
+          - bankId
+          - bankAccountNumber
+          - privateKey
+          - keyPassphrase

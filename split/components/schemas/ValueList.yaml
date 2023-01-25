@@ -1,0 +1,29 @@
+type: object
+required:
+  - description
+  - values
+properties:
+  id:
+    description: ID of the list.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  version:
+    description: Version of the list.
+    type: integer
+    readOnly: true
+    minimum: 1
+  description:
+    description: Description of the list.
+    type: string
+  values:
+    description: Values in the list.
+    type: array
+    items:
+      type: string
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml

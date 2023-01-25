@@ -1,0 +1,19 @@
+description: Invoice taxes.
+type: object
+discriminator:
+  propertyName: calculator
+  mapping:
+    manual: ./manual.yaml
+    rebilly-taxjar: ./rebilly-taxjar.yaml
+    rebilly-avalara: ./rebilly-avalara.yaml
+anyOf:
+  - $ref: ./manual.yaml
+  - $ref: ./rebilly-taxjar.yaml
+  - $ref: ./rebilly-avalara.yaml
+properties:
+  amount:
+    type: integer
+    x-type: Money
+    x-sortable: true
+    description: Total amount of all invoice taxes.
+    readOnly: true

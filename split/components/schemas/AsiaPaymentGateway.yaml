@@ -1,0 +1,28 @@
+description: AsiaPaymentGateway gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: AsiaPaymentGateway credentials object.
+        properties:
+          merchantNumber:
+            type: string
+            description: AsiaPaymentGateway merchant number.
+          secretKey:
+            type: string
+            description: AsiaPaymentGateway secret key for hash.
+            format: password
+            writeOnly: true
+        required:
+          - merchantNumber
+          - secretKey
+      settings:
+        type: object
+        properties:
+          use3DSEndpoint:
+            type: boolean
+            description: Specifies whether to use a 3DS endpoint.

@@ -1,0 +1,104 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Websites
+  summary: Retrieve a website
+  operationId: GetWebsite
+  x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
+  description: Retrieves a website with specified ID.
+  responses:
+    '200':
+      description: Website retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Website.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/websites_{id}/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/websites_{id}/getundefined
+put:
+  x-products:
+    - Users
+  tags:
+    - Websites
+  summary: Upsert a website
+  operationId: PutWebsite
+  x-sdk-operation-name: update
+  description: Creates or updates (upserts) a website with specified ID.
+  requestBody:
+    $ref: ../components/requestBodies/Website.yaml
+  responses:
+    '200':
+      description: Website updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Website.yaml
+    '201':
+      description: Website created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Website.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/websites_{id}/putundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/websites_{id}/putundefined
+delete:
+  x-products:
+    - Users
+  tags:
+    - Websites
+  summary: Delete a website
+  operationId: DeleteWebsite
+  x-sdk-operation-name: delete
+  description: Deletes a website with specified ID.
+  responses:
+    '204':
+      description: Website deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/websites_{id}/deleteundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/websites_{id}/deleteundefined

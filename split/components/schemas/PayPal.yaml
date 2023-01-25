@@ -1,0 +1,67 @@
+description: PayPal gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - settings
+    properties:
+      credentials:
+        type: object
+        description: >-
+          PayPal credentials object.
+
+          This object specifies the PayPal Partner account from which a gateway
+          account is registered.
+        properties:
+          partnerId:
+            type: string
+            description: ID of the PayPal Partner account.
+          partnerClientId:
+            type: string
+            description: ID of the PayPal Partner account API client.
+          partnerSecret:
+            type: string
+            description: Secret key for the PayPal Partner account API client.
+            format: password
+            writeOnly: true
+          partnerBnCode:
+            type: string
+            description: |-
+              BN Code for the PayPal Partner account.
+              This unique code tracks the source of API requests.
+      settings:
+        type: object
+        description: PayPal settings object.
+        required:
+          - redirectUrl
+        properties:
+          redirectUrl:
+            type: string
+            description: >-
+              URL where the user is redirected after authorizing the account on
+              PayPal.
+            format: url
+          enableGuestCheckout:
+            type: boolean
+            default: false
+            description: >-
+              Specifies whether to allow users without PayPal accounts to pay
+              using credit or debit cards.
+          useHostedCheckoutForm:
+            type: boolean
+            default: false
+            description: >-
+              Specifies whether to use a Rebilly hosted PayPal form instead of
+              redirecting customers to PayPal.
+
+              For more information, see [Create a payment form using the Rebilly
+              API](https://www.rebilly.com/docs/dev-docs/create-a-hosted-payment-form/).
+          forceGuestCheckout:
+            type: boolean
+            default: false
+            description: >-
+              Specifies whether to suppress the PayPal payment method when a
+              guest checkout is available.
+
+              This option is only applicable when `useHostedCheckoutForm` is
+              enabled.

@@ -1,0 +1,68 @@
+type: object
+properties:
+  id:
+    description: ID of the session.
+    allOf:
+      - $ref: ./ResourceId.yaml
+    readOnly: true
+  type:
+    description: Type of session.
+    type: string
+    readOnly: true
+    enum:
+      - customer
+  token:
+    description: Token used for authentication.
+    type: string
+    readOnly: true
+  invalidate:
+    description: Specifies whether to invalidate a token after an exchange is performed.
+    type: boolean
+    default: true
+    example: true
+    writeOnly: true
+  oneTimePassword:
+    description: One time password that sent by email. This value must contain digits only.
+    type: string
+    pattern: ^[0-9]{6}$
+    example: '123456'
+    writeOnly: true
+  customerId:
+    readOnly: true
+    allOf:
+      - $ref: ./CustomerId.yaml
+  acl:
+    $ref: ./Acl.yaml
+  customClaims:
+    type: object
+    additionalProperties: true
+    example:
+      documents:
+        - identity-proof
+        - address-proof
+      redirectUrl: https://mywebsite.com
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  expiredTime:
+    description: |-
+      Date and time when the session expires.
+      The default value is one hour after the `createdTime` value.
+    type: string
+    format: date-time
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - customer

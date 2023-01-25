@@ -1,0 +1,68 @@
+description: Worldpay gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantCode:
+            type: string
+            description: Worldpay merchant code.
+            format: password
+            writeOnly: true
+          merchantPassword:
+            type: string
+            description: Worldpay merchant password.
+            format: password
+            writeOnly: true
+          payoutMerchantCode:
+            type: string
+            description: Optional alternate merchant code for payouts.
+            format: password
+            writeOnly: true
+          payoutMerchantPassword:
+            type: string
+            description: Optional alternate merchant password for payouts.
+            format: password
+            writeOnly: true
+          alternativePaymentsUsername:
+            type: string
+            description: Optional API username for an alternative payments platform.
+          alternativePaymentsPassword:
+            type: string
+            description: Optional API password for an alternative payments platform.
+            format: password
+            writeOnly: true
+        required:
+          - merchantCode
+          - merchantPassword
+      threeDSecureServer:
+        $ref: ./Worldpay3dsServers.yaml
+      settings:
+        type: object
+        properties:
+          delay:
+            type: integer
+            description: Automatic capture delay in hours.
+            minimum: 0
+            default: 0
+          enableStoredCredentials:
+            type: boolean
+            description: Specifies whether to enable stored credentials.
+            default: false
+          merchantInitiatedReason:
+            type: string
+            description: Value to send with merchant-initiated transactions.
+            enum:
+              - UNSCHEDULED
+              - RECURRING
+              - INSTALMENT
+              - REAUTH
+              - DELAYED
+              - INCREMENTAL
+              - RESUBMISSION
+              - NOSHOW
+            default: UNSCHEDULED

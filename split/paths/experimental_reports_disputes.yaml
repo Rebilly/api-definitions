@@ -1,0 +1,88 @@
+servers:
+  - url: >-
+      https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}
+    description: Sandbox server
+    variables:
+      organizationId:
+        default: unknown
+        description: >-
+          Unique organization identifier.
+
+          An organization is an entity that represents a company.
+
+          For more information, see [Obtain an organization
+          ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+  - url: https://api.rebilly.com/experimental/organizations/{organizationId}
+    description: Live server
+    variables:
+      organizationId:
+        default: unknown
+        description: >-
+          Unique organization identifier.
+
+          An organization is an entity that represents a company.
+
+          For more information, see [Obtain an organization
+          ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+get:
+  x-badge: Experimental
+  x-products:
+    - Reports
+  tags:
+    - Reports
+  summary: Retrieve a disputes report
+  operationId: GetDisputeReport
+  x-sdk-operation-name: getDisputes
+  description: Retrieves a disputes report.
+  parameters:
+    - name: aggregationField
+      in: query
+      description: Report aggregation field.
+      required: true
+      schema:
+        type: string
+        enum:
+          - website
+          - gatewayAcquirer
+          - currency
+          - bin
+          - country
+          - rebillNumber
+          - retryNumber
+          - gatewayAccount
+          - transactionAmount
+    - name: periodMonth
+      in: query
+      description: Report month in `YYYY-MM` format.
+      required: true
+      schema:
+        type: string
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+  responses:
+    '200':
+      description: Report retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ReportDisputes.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/experimental_reports_disputes/getundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/experimental_reports_disputes/getundefined

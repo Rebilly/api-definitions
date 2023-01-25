@@ -1,0 +1,32 @@
+description: Gooney gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Gooney credentials object.
+        properties:
+          apiUser:
+            type: string
+            description: Gooney API user.
+          apiPassword:
+            type: string
+            description: Gooney API password.
+            format: password
+            writeOnly: true
+          apiKey:
+            type: string
+            description: Gooney API key.
+          apiSecret:
+            type: string
+            description: Gooney API secret.
+            format: password
+            writeOnly: true
+        required:
+          - username
+          - password
+          - apiKey
+          - apiSecret

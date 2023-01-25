@@ -1,0 +1,20 @@
+type: array
+description: Access Control List (ACL) information.
+items:
+  type: object
+  required:
+    - scope
+    - permissions
+  properties:
+    scope:
+      description: Scope of the API key.
+      allOf:
+        - $ref: ./ApiKeyScope.yaml
+    permissions:
+      description: >-
+        If you are creating a restricted API key, use this field to specify
+        individual permissions.
+
+        Use the wildcard character `*` to provide full access.
+      allOf:
+        - $ref: ./AclPermissions.yaml

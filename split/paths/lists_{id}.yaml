@@ -1,0 +1,96 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Lists
+  summary: Retrieve latest list version
+  operationId: GetList
+  x-sdk-operation-name: getLatestVersion
+  description: Retrieves the latest version of a list with a specified ID.
+  responses:
+    '200':
+      description: List retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ValueList.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/lists_{id}/getundefined
+put:
+  x-products:
+    - Users
+  tags:
+    - Lists
+  summary: Upsert a list
+  operationId: PutList
+  x-sdk-operation-name: update
+  description: Creates or updates (upserts) a list with a specified ID.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ValueList.yaml
+    description: List resource.
+    required: true
+  responses:
+    '200':
+      description: List updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ValueList.yaml
+    '201':
+      description: List created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ValueList.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/lists_{id}/putundefined
+delete:
+  x-products:
+    - Users
+  tags:
+    - Lists
+  summary: Delete a list
+  operationId: DeleteList
+  x-sdk-operation-name: delete
+  description: Deletes a list with a specified ID.
+  responses:
+    '204':
+      description: List deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      description: Specified list is in use in a rule and cannot be deleted.
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/lists_{id}/deleteundefined

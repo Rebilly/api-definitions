@@ -1,0 +1,39 @@
+parameters:
+  - $ref: ../components/parameters/tag.yaml
+  - $ref: ../components/parameters/customerId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Tags
+  summary: Tag a customer
+  operationId: PostTagCustomer
+  x-sdk-operation-name: tagCustomer
+  description: Tags a customer.
+  responses:
+    '204':
+      description: Customer tagged.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+delete:
+  x-products:
+    - Core
+  tags:
+    - Tags
+  summary: Untag a customer
+  operationId: DeleteTagCustomer
+  x-sdk-operation-name: untagCustomer
+  description: Untags a customer.
+  responses:
+    '204':
+      description: Customer untagged.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

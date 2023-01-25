@@ -1,0 +1,52 @@
+description: Ilixium gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Ilixium credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: Ilixium merchant ID.
+          accountId:
+            type: string
+            description: Ilixium account ID.
+          digestPassword:
+            type: string
+            description: Ilixium digest password.
+            format: password
+            writeOnly: true
+        required:
+          - merchantId
+          - accountId
+          - digestPassword
+      settings:
+        type: object
+        description: Ilixium settings object.
+        properties:
+          useIpFrame:
+            type: boolean
+            description: Specifies whether to force Ilixium to process using Ip Frame.
+          useCreditEndpoint:
+            type: boolean
+            description: >-
+              Specifies whether to use a previous approval credit endpoint for
+              payouts.
+          useStandaloneCreditEndpoint:
+            type: boolean
+            description: >-
+              Specifies whether to use a standalone (token) credit endpoint for
+              payouts.
+          platform:
+            type: string
+            description: Direct API platform.
+            default: itix
+            enum:
+              - itix
+              - tpg
+      threeDSecureServer:
+        $ref: ./Ilixium3dsServers.yaml

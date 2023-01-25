@@ -1,0 +1,33 @@
+type: object
+description: Website settings.
+properties:
+  paymentForm:
+    type: object
+    description: Payment form settings.
+    properties:
+      css:
+        description: >-
+          Hosted payment form [CSS
+          options](https://www.rebilly.com/docs/content/concepts-and-features/tutorial/customize-style-rebilly-instruments/#2-use-css-property-to-override-any-styles).
+        type: string
+        nullable: true
+      theme:
+        description: >-
+          Hosted payment form [theme
+          options](https://www.rebilly.com/docs/content/concepts-and-features/tutorial/customize-style-rebilly-instruments/#adjust-the-default-style).
+        type: object
+        nullable: true
+        additionalProperties:
+          type: string
+        example:
+          colorPrimary: '#504CCA'
+      features:
+        description: Hosted payment form features.
+        type: object
+        nullable: true
+        properties:
+          showCoupons:
+            type: array
+            nullable: true
+            items:
+              type: string

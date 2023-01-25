@@ -1,0 +1,21 @@
+description: RPN gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          mid:
+            type: string
+            description: RPN merchant identifier.
+          key:
+            type: string
+            description: RPN key.
+            format: password
+            writeOnly: true
+        required:
+          - mid
+          - key

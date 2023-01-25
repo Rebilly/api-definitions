@@ -1,0 +1,125 @@
+type: object
+description: API request tracking.
+readOnly: true
+properties:
+  id:
+    allOf:
+      - $ref: ./ResourceId.yaml
+  status:
+    type: integer
+    x-sortable: true
+    description: HTTP response code.
+  url:
+    type: string
+    x-basic: true
+    x-sortable: true
+    description: Address of the API request.
+  route:
+    type: string
+    x-sortable: true
+    description: API request route.
+    example: /customers/{param}
+  method:
+    type: string
+    description: HTTP method of the API request.
+    enum:
+      - HEAD
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - PATCH
+    x-basic: true
+  request:
+    type: string
+    x-sortable: true
+    description: Request JSON-string.
+  response:
+    type: string
+    x-sortable: true
+    description: Response JSON-string.
+  requestHeaders:
+    $ref: ./HttpHeaders.yaml
+  responseHeaders:
+    $ref: ./HttpHeaders.yaml
+  user:
+    type: object
+    description: User who made the request.
+    readOnly: true
+    properties:
+      userId:
+        x-sortable: true
+        allOf:
+          - $ref: ./ResourceId.yaml
+      apiKeyId:
+        allOf:
+          - $ref: ./ResourceId.yaml
+      email:
+        description: Email address of the user.
+        type: string
+        format: email
+        x-sortable: true
+      firstName:
+        description: First name of the user.
+        type: string
+        x-sortable: true
+      lastName:
+        description: Last name of the user.
+        type: string
+        x-sortable: true
+      ipAddress:
+        type: string
+        x-sortable: true
+        deprecated: true
+        description: Client IP address.
+        format: ipv4
+      userAgent:
+        description: Software that is acting on behalf of the user.
+        type: string
+        x-sortable: true
+      fingerprint:
+        description: >-
+          User's device fingerprint hash.
+
+          A device fingerprint is a unique token that is used to identify the
+          user.
+
+          The device fingerprint is generated based on device attributes,
+
+          such as: hardware, software, IP address, language, browser, and more.
+        type: string
+        x-sortable: true
+      isSupport:
+        description: >-
+          Specifies if the API request is completed by a Rebilly Support Team
+          member.
+        type: boolean
+        x-sortable: true
+  ipAddress:
+    type: string
+    x-basic: true
+    description: Client IP address.
+  relatedIds:
+    type: object
+    description: IDs of related resources.
+    readOnly: true
+    properties:
+      customerId:
+        $ref: ./CustomerId.yaml
+      transactionId:
+        $ref: ./ResourceId.yaml
+      tokenId:
+        $ref: ./ResourceId.yaml
+  duration:
+    type: integer
+    x-sortable: true
+    x-basic: true
+    description: Request duration in milliseconds.
+  organizationId:
+    $ref: ./OrganizationId.yaml
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml

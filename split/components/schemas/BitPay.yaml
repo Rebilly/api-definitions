@@ -1,0 +1,18 @@
+description: BitPay gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: BitPay credentials object.
+        properties:
+          token:
+            type: string
+            description: BitPay merchant API token.
+            format: password
+            writeOnly: true
+        required:
+          - token

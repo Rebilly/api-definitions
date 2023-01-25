@@ -1,0 +1,36 @@
+parameters:
+  - $ref: ../components/parameters/systemEventType.yaml
+  - $ref: ../components/parameters/rulesVersion.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Rules
+  summary: Retrieve change history record of a ruleset
+  operationId: GetEventRuleHistoryVersion
+  x-sdk-operation-name: getRulesVersionNumber
+  description: >-
+    Retrieves the change history record of a ruleset with a specified event
+    type.
+
+    A history record is created each time rules are changed.
+  parameters:
+    - $ref: ../components/parameters/collectionFields.yaml
+  responses:
+    '200':
+      description: Ruleset history record retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RuleSetHistoryItem.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: >-
+          ../code_samples/JavaScript/events_{eventType}_rules_history_{version}/getundefined

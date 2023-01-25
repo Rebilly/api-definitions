@@ -1,0 +1,35 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Storefront
+  tags:
+    - Orders
+  summary: Cancel an order
+  operationId: StorefrontPostOrderCancellation
+  x-sdk-operation-name: cancel
+  security:
+    - CustomerJWT: []
+  description: Cancels an order with a specified ID.
+  requestBody:
+    $ref: ../components/requestBodies/PostOrderCancellation.yaml
+  responses:
+    '201':
+      description: Order canceled.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/StorefrontOrder.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

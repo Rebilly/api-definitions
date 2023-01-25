@@ -1,0 +1,17 @@
+type: object
+discriminator:
+  propertyName: action
+  mapping:
+    redemption-cancel: ./redemption-cancel.yaml
+    resend-email: ./resend-email.yaml
+    ruleset-restore: ./ruleset-restore.yaml
+    show-edd-search-logs: ./show-edd-search-logs.yaml
+readOnly: true
+properties:
+  action:
+    type: string
+    enum:
+      - resend-email
+      - redemption-cancel
+      - ruleset-restore
+      - show-edd-search-logs

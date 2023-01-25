@@ -1,0 +1,22 @@
+description: PayCash gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: PayCash credentials object.
+        properties:
+          emisor:
+            type: string
+            description: PayCash merchant identifier.
+          token:
+            type: string
+            description: PayCash token.
+            format: password
+            writeOnly: true
+        required:
+          - emisor
+          - token

@@ -1,0 +1,22 @@
+description: Euteller gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Euteller credentials object.
+        properties:
+          username:
+            type: string
+            description: Euteller username.
+          password:
+            type: string
+            format: password
+            description: Euteller password.
+            writeOnly: true
+        required:
+          - username
+          - password

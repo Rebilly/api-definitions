@@ -1,0 +1,100 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - API keys
+  summary: Retrieve API key
+  operationId: GetApiKey
+  x-sdk-operation-name: get
+  description: Retrieve API key with a specified ID.
+  responses:
+    '200':
+      description: API key retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ApiKey.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/api-keys_{id}/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/api-keys_{id}/getundefined
+put:
+  x-products:
+    - Users
+  tags:
+    - API keys
+  summary: Upsert an API key
+  operationId: PutApiKey
+  x-sdk-operation-name: update
+  description: Create or update (upsert) API key with a specified ID.
+  responses:
+    '200':
+      description: API key updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ApiKey.yaml
+    '201':
+      description: API key created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ApiKey.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  requestBody:
+    $ref: ../components/requestBodies/ApiKey.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/api-keys_{id}/putundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/api-keys_{id}/putundefined
+delete:
+  x-products:
+    - Users
+  tags:
+    - API keys
+  summary: Delete API key
+  operationId: DeleteApiKey
+  x-sdk-operation-name: delete
+  description: Deletes an API key with a specified ID.
+  responses:
+    '204':
+      description: API key deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/api-keys_{id}/deleteundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/api-keys_{id}/deleteundefined

@@ -1,0 +1,20 @@
+description: SecurionPay gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: SecurionPay credentials object.
+        properties:
+          secretApiKey:
+            type: string
+            format: password
+            description: SecurionPay secret API key.
+            writeOnly: true
+        required:
+          - secretApiKey
+      threeDSecureServer:
+        $ref: ./SecurionPay3dsServers.yaml

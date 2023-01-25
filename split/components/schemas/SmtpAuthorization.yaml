@@ -1,0 +1,18 @@
+type: object
+description: Authentication type and details.
+discriminator:
+  propertyName: type
+  mapping:
+    none: ./SmtpAuthorizationNone.yaml
+    cram-md5: ./cram-md5.yaml
+    login: ./login.yaml
+    plain: ./plain.yaml
+properties:
+  type:
+    type: string
+    enum:
+      - none
+      - plain
+      - login
+      - cram-md5
+    default: none

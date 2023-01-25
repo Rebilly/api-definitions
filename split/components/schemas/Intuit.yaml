@@ -1,0 +1,21 @@
+description: Intuit gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          clientId:
+            type: string
+            description: Intuit client_id key.
+          clientSecret:
+            type: string
+            description: Intuit client_secret key.
+            format: password
+            writeOnly: true
+        required:
+          - clientId
+          - clientSecret

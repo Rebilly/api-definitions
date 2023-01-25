@@ -1,0 +1,23 @@
+type: object
+description: >-
+  Updates the status of a transaction to `completed` with a specified `result`
+  and optional currency and amount values.
+required:
+  - result
+properties:
+  result:
+    description: Result of the transaction.
+    type: string
+    enum:
+      - abandoned
+      - approved
+      - canceled
+      - declined
+  amount:
+    description: Amount of the transaction.
+    type: number
+    format: double
+  currency:
+    description: Currency of the transaction.
+    allOf:
+      - $ref: ./CurrencyCode.yaml

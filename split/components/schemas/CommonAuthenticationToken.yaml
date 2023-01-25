@@ -1,0 +1,17 @@
+type: object
+title: Authentication token
+properties:
+  token:
+    description: ID of the authentication token.
+    type: string
+    readOnly: true
+  otpRequired:
+    description: >-
+      Specifies if a One-Time Password (OTP) is required to exchange the
+      authentication token.
+    type: boolean
+  credentialId:
+    description: ID of the user associated with the authentication token.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml

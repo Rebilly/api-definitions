@@ -1,0 +1,22 @@
+description: MercadoPago gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: MercadoPago credentials object.
+        properties:
+          publicKey:
+            type: string
+            description: MercadoPago public key.
+          accessToken:
+            type: string
+            description: MercadoPago access token.
+            format: password
+            writeOnly: true
+        required:
+          - publicKey
+          - accessToken

@@ -1,0 +1,32 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Update a transaction status
+  operationId: PostTransactionUpdate
+  x-sdk-operation-name: update
+  description: |-
+    Updates the status of a transaction with a specified ID to `completed`,
+    with a specified `result` and optional currency and amount values.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/TransactionUpdate.yaml
+    required: true
+  responses:
+    '200':
+      description: Transaction updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Transaction.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

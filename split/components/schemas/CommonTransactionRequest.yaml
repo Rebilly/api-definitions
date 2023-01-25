@@ -1,0 +1,127 @@
+type: object
+required:
+  - websiteId
+  - customerId
+  - currency
+  - amount
+properties:
+  websiteId:
+    $ref: ./WebsiteId.yaml
+  customerId:
+    $ref: ./CustomerId.yaml
+  currency:
+    $ref: ./CurrencyCode.yaml
+  amount:
+    description: Amount of the transaction.
+    type: number
+    format: double
+    example: 97.97
+  invoiceIds:
+    description: Array of invoice IDs.
+    nullable: true
+    type: array
+    items:
+      $ref: ./ResourceId.yaml
+  paymentInstruction:
+    description: |-
+      Payment instruction for the purchase.
+      If this value is not supplied,
+      the customer's default payment instrument is used.
+    allOf:
+      - $ref: ./PaymentInstruction.yaml
+  billingAddress:
+    description: |-
+      Billing address.
+      If this value is not supplied,
+      the billing address associated with the payment instrument is used.
+      If no billing address is associated with the payment instrument,
+      the customer's billing address is used.
+    nullable: true
+    type: object
+    allOf:
+      - $ref: ./ContactObject.yaml
+  requestId:
+    description: >-
+      Use this field to prevent duplicate transaction requests that may occur
+      within a short period of time.
+
+      If a duplicate request is sent with the same `requestId`,
+
+      it is ignored to prevent double-billing.
+
+      This value must be unique within a 24-hour period.
+
+      We recommend generating a UUID V4 as its value.
+
+
+      > **Important:** This field is recommended.
+    type: string
+    nullable: true
+    maxLength: 50
+    pattern: ^[\-\w]+$
+    example: 44433322-2c4y-483z-a0a9-158621f77a21
+  gatewayAccountId:
+    description: >-
+      Rebilly selects the appropriate payment gateway account for the
+      transaction based on the properties of the transaction and the
+      `gateway-account-requested` event rules configurations.
+
+      If you wish to prevent Rebilly from making the gateway account selection,
+
+      you may supply a gateway account id here to be used instead.
+
+      Only use this field if you intend to override the settings.
+    nullable: true
+    type: string
+    maxLength: 50
+    example: 44433322-2c4y-483z-a0a9-158621f77a21
+  description:
+    nullable: true
+    description: Payment description.
+    type: string
+    maxLength: 255
+  notificationUrl:
+    nullable: true
+    description: >-
+      URL where a server-to-server notification request type `POST` with a
+      transaction payload is sent when the transaction result is finalized.
+
+      Do not trust the notification; follow with a `GET` request to confirm the
+      result of the transaction.
+
+      Please respond with a `2xx` HTTP status code, or the request is
+      reattempted.
+
+      You may use `{id}` or `{result}` as placeholders in the URL and we replace
+      them with the transaction id and result accordingly.
+    type: string
+    format: uri
+  redirectUrl:
+    nullable: true
+    description: >-
+      URL to redirect the end-user when an offsite transaction is completed.
+
+      Defaults to the website's configured URL.
+
+      You may use `{id}` or `{result}` as placeholders in the URL and we replace
+      them with the transaction id and result accordingly.
+    type: string
+    format: uri
+  customFields:
+    $ref: ./ResourceCustomFields.yaml
+  riskMetadata:
+    $ref: ./RiskMetadata.yaml
+  isProcessedOutside:
+    description: Specified when the transaction is processed outside Rebilly.
+    type: boolean
+    default: false
+  isMerchantInitiated:
+    description: Specified when the transaction is initiated by the merchant.
+    type: boolean
+    default: false
+  processedTime:
+    type: string
+    description: |-
+      Time the transaction is processed.
+      Can be specified only if the transaction is processed outside Rebilly.
+    format: date-time

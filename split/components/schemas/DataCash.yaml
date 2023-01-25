@@ -1,0 +1,69 @@
+description: DataCash gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          client:
+            type: string
+            description: DataCash client.
+          password:
+            type: string
+            description: DataCash password.
+            format: password
+            writeOnly: true
+          reportGroup:
+            type: string
+            description: DataCash report group.
+          reportUser:
+            type: string
+            description: DataCash report user.
+          reportPassword:
+            type: string
+            description: DataCash report password.
+            format: password
+            writeOnly: true
+          visaPayoutsClient:
+            type: string
+            description: DataCash client for Visa OCT (Original Credit Transfer) payouts.
+          visaPayoutsPassword:
+            type: string
+            description: DataCash password for Visa OCT (Original Credit Transfer) payouts.
+            format: password
+            writeOnly: true
+          masterCardPayoutsClient:
+            type: string
+            description: >-
+              DataCash client for MasterCard OCT (Original Credit Transfer)
+              payouts.
+          masterCardPayoutsPassword:
+            type: string
+            description: >-
+              DataCash password for MasterCard OCT (Original Credit Transfer)
+              payouts.
+            format: password
+            writeOnly: true
+        required:
+          - client
+          - password
+      settings:
+        type: object
+        description: Datacash settings object.
+        properties:
+          policy:
+            type: integer
+            description: Policy.
+            minimum: 0
+            maximum: 7
+            default: 2
+          delay:
+            type: integer
+            description: Automatic capture delay in hours.
+            minimum: 0
+            default: 0
+      threeDSecureServer:
+        $ref: ./DataCash3dsServers.yaml

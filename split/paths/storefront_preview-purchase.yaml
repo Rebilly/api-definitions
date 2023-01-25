@@ -1,0 +1,44 @@
+post:
+  x-badge: Experimental
+  x-products:
+    - Storefront
+  tags:
+    - Purchases
+  summary: Preview a purchase
+  operationId: StorefrontPostPreviewPurchase
+  x-sdk-operation-name: preview
+  description: >-
+    Previews a purchase.
+
+
+    Use this operation to preview a purchase before completing it.
+
+
+    A purchase can be completed both with and without authentication.
+
+    Purchases that use a pre-created payment instrument must use authentication.
+
+
+    > **Warning:** The shipping aspect of this API is experimental and may
+    change to support multiple shipping methods.
+  security:
+    - CustomerJWT: []
+    - PublishableApiKey: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/StorefrontOrderPreview.yaml
+  responses:
+    '200':
+      description: Purchase preview retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/StorefrontOrderPreview.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

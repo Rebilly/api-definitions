@@ -1,0 +1,77 @@
+get:
+  x-products:
+    - Core
+  tags:
+    - Disputes
+  summary: Retrieve disputes
+  operationId: GetDisputeCollection
+  x-sdk-operation-name: getAll
+  description: Retrieves a list of all disputes.
+  parameters:
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionExpand.yaml
+  responses:
+    '200':
+      description: List of disputes successfully retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Dispute.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/disputes/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/disputes/getundefined
+post:
+  x-products:
+    - Core
+  tags:
+    - Disputes
+  summary: Create a dispute
+  operationId: PostDispute
+  x-sdk-operation-name: create
+  description: Creates a new dispute.
+  requestBody:
+    $ref: ../components/requestBodies/Dispute.yaml
+  responses:
+    '201':
+      description: Dispute created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Dispute.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/disputes/postundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/disputes/postundefined

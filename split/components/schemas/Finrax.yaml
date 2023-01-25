@@ -1,0 +1,36 @@
+description: Finrax gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Finrax credentials object.
+        properties:
+          businessId:
+            type: string
+            description: Finrax business ID.
+          apiKey:
+            type: string
+            description: Finrax API key.
+            format: password
+            writeOnly: true
+          apiSecret:
+            type: string
+            description: Finrax API secret.
+            format: password
+            writeOnly: true
+        required:
+          - businessId
+          - apiKey
+          - apiSecret
+      settings:
+        type: object
+        description: Finrax settings object.
+        required:
+          - tolerancePercentage
+        properties:
+          tolerancePercentage:
+            $ref: ./AmountAdjustmentTolerance.yaml

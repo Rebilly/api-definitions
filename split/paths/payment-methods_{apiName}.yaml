@@ -1,0 +1,29 @@
+servers:
+  - url: https://api-sandbox.rebilly.com
+    description: Sandbox server
+  - url: https://api.rebilly.com
+    description: Live server
+parameters:
+  - name: apiName
+    in: path
+    description: Name of the payment method API.
+    required: true
+    schema:
+      $ref: ../components/schemas/PaymentMethodApiName.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Metadata
+  summary: Retrieve metadata of a payment method
+  operationId: GetPaymentMethod
+  x-sdk-operation-name: get
+  description: Retrieves the metadata of a payment method with a specified `apiName`.
+  security: []
+  responses:
+    '200':
+      description: Payment method metadata received.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PaymentMethodMetadata.yaml

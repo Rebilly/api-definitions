@@ -1,0 +1,22 @@
+description: CauriPayment gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: CauriPayment credentials object.
+        properties:
+          publicKey:
+            type: string
+            description: CauriPayment merchant public key.
+          privateKey:
+            type: string
+            description: CauriPayment merchant private key.
+            format: password
+            writeOnly: true
+        required:
+          - publicKey
+          - privateKey

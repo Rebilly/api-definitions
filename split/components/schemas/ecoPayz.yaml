@@ -1,0 +1,40 @@
+description: ecoPayz gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: ecoPayz credentials object.
+        properties:
+          paymentPageId:
+            type: string
+            description: ecoPayz payment page ID.
+          merchantAccountNumber:
+            type: string
+            description: ecoPayz merchant account number.
+          merchantPassword:
+            type: string
+            description: ecoPayz merchant password.
+            format: password
+            writeOnly: true
+        required:
+          - paymentPageId
+          - merchantAccountNumber
+          - merchantPassword
+      settings:
+        type: object
+        description: ecoPayz settings object.
+        properties:
+          validCurrency:
+            type: string
+            description: Three letter currency code in ISO 4217 format.
+            enum:
+              - CAD
+              - EUR
+              - GBP
+              - USD
+        required:
+          - validCurrency

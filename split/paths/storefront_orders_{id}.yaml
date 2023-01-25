@@ -1,0 +1,54 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Storefront
+  tags:
+    - Orders
+  summary: Retrieve an order
+  operationId: StorefrontGetOrder
+  x-sdk-operation-name: get
+  security:
+    - CustomerJWT: []
+  description: Retrieve an order with a specified ID.
+  responses:
+    '200':
+      description: Order retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/StorefrontOrder.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+patch:
+  x-products:
+    - Storefront
+  tags:
+    - Orders
+  summary: Update an order
+  operationId: StorefrontPatchOrder
+  x-sdk-operation-name: update
+  security:
+    - CustomerJWT: []
+  description: Updates an order with a specified ID.
+  requestBody:
+    $ref: ../components/requestBodies/PatchOrder.yaml
+  responses:
+    '200':
+      description: Order updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/StorefrontOrder.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

@@ -1,0 +1,15 @@
+type: object
+description: Formula that is used to calculate the fee.
+discriminator:
+  propertyName: type
+  mapping:
+    fixed-fee: ./FixedFeeFormula.yaml
+    percentage: ./PercentageFormula.yaml
+required:
+  - type
+properties:
+  type:
+    type: string
+    enum:
+      - fixed-fee
+      - percentage

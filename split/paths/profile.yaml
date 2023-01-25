@@ -1,0 +1,61 @@
+get:
+  x-products:
+    - Users
+  tags:
+    - Profile
+  summary: Retrieve user's own profile
+  operationId: GetProfile
+  x-sdk-operation-name: get
+  description: Retrieves the user's own profile as requested by the user.
+  responses:
+    '200':
+      description: Profile retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Profile.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/profile/getundefined
+put:
+  x-products:
+    - Users
+  tags:
+    - Profile
+  summary: Update a user profile
+  operationId: PutProfile
+  x-sdk-operation-name: update
+  description: Updates user profile.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Profile.yaml
+    description: Profile resource.
+    required: true
+  responses:
+    '200':
+      description: Profile updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Profile.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/profile/putundefined

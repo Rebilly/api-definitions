@@ -1,0 +1,18 @@
+description: Payper gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Payper credentials object.
+        required:
+          - secretKey
+        properties:
+          secretKey:
+            type: string
+            format: password
+            description: Payper secret key.
+            writeOnly: true

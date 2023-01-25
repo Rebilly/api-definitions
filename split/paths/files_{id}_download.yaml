@@ -1,0 +1,74 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/imageSize.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Files
+  summary: Download a file
+  operationId: GetFileDownload
+  x-sdk-operation-name: download
+  description: Downloads a file with a specified ID.
+  responses:
+    '200':
+      description: File retrieved.
+      headers:
+        Content-Length:
+          description: Number of bytes in the file.
+          schema:
+            type: integer
+          example: 48
+        Content-Type:
+          description: MIME type of the file.
+          schema:
+            type: string
+          example: image/png
+      content:
+        application/json:
+          schema:
+            type: string
+            readOnly: true
+            format: binary
+        application/pdf:
+          schema:
+            type: string
+            readOnly: true
+            format: binary
+        application/zip:
+          schema:
+            type: string
+            readOnly: true
+            format: binary
+        image/jpg:
+          schema:
+            type: string
+            readOnly: true
+            format: binary
+        image/png:
+          schema:
+            type: string
+            readOnly: true
+            format: binary
+        image/gif:
+          schema:
+            type: string
+            readOnly: true
+            format: binary
+        text/csv:
+          schema:
+            type: string
+            readOnly: true
+            format: binary
+    '302':
+      $ref: ../components/responses/Found.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/files_{id}_download/getundefined

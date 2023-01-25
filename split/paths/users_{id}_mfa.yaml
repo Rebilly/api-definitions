@@ -1,0 +1,30 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Users
+  summary: Retrieve user MFA status
+  operationId: GetUserMfa
+  x-sdk-operation-name: getMfa
+  description: >-
+    Retrieves the Multi-Factor Authentication (MFA) status of a user with a
+    specified ID.
+  responses:
+    '200':
+      description: User MFA status retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ProfileMfa.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/users_{id}_mfa/getundefined

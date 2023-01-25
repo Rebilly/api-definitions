@@ -1,0 +1,59 @@
+type: object
+allOf:
+  - $ref: ./BaseKycDocument.yaml
+  - $ref: ./KycDocument.yaml
+  - properties:
+      documentMatches:
+        type: object
+        readOnly: true
+        description: Proof of identity document matches.
+        properties:
+          score:
+            description: >-
+              Calculated score that represents the percentage of confidence that
+              this ID represents the customer.
+            type: number
+            format: double
+            example: 0.75
+          data:
+            $ref: ./IdentityMatches.yaml
+      parsedData:
+        type: object
+        readOnly: true
+        description: Parsed data.
+        properties:
+          score:
+            description: >-
+              Calculated score that represents the percentage of confidence that
+              this ID represents the customer.
+            type: number
+            format: double
+            example: 0.75
+          data:
+            $ref: ./IdentityMatches.yaml
+      settings:
+        $ref: ./KycSettingsIdentity.yaml
+        readOnly: true
+      _links:
+        type: array
+        description: Related links.
+        readOnly: true
+        items:
+          type: object
+          properties:
+            href:
+              description: Link URL.
+              type: string
+            rel:
+              description: Type of link.
+              type: string
+              enum:
+                - self
+                - customer
+      _embedded:
+        type: object
+        description: Embedded objects that are requested by the `expand` query parameter.
+        readOnly: true
+        properties:
+          customer:
+            type: object

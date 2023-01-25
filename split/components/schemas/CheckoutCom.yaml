@@ -1,0 +1,29 @@
+description: Checkout.com gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Checkout.com credentials object.
+        properties:
+          secretKey:
+            type: string
+            format: password
+            description: Checkout.com secret API key.
+            writeOnly: true
+        required:
+          - secretKey
+      settings:
+        type: object
+        properties:
+          markAsWaitingGatewayOnPendingPayout:
+            type: boolean
+            description: >-
+              Specifies whether to mark pending payouts as
+              'waiting-gateway/unknown' instead of 'approved'.
+            default: false
+      threeDSecureServer:
+        $ref: ./CheckoutCom3dsServers.yaml

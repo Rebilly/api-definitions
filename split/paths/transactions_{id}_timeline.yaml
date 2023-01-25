@@ -1,0 +1,75 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Transactions timeline
+  summary: Retrieve transaction timeline messages
+  operationId: GetTransactionTimelineCollection
+  x-sdk-operation-name: getAllTimelineMessages
+  description: Retrieves a list of transaction timeline messages.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+  responses:
+    '200':
+      description: List of transaction timeline messages retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/TransactionTimeline.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/transactions_{id}_timeline/getundefined
+post:
+  x-products:
+    - Core
+  tags:
+    - Transactions timeline
+  summary: Create a transaction timeline comment
+  operationId: PostTransactionTimeline
+  x-sdk-operation-name: createTimelineComment
+  description: Creates a transaction timeline comment.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/TransactionTimeline.yaml
+    description: Transaction timeline resource.
+    required: true
+  responses:
+    '201':
+      description: Transaction timeline comment created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TransactionTimeline.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/transactions_{id}_timeline/postundefined

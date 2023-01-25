@@ -1,0 +1,41 @@
+type: object
+required:
+  - url
+properties:
+  url:
+    description: URL of the file to upload.
+    type: string
+    example: >-
+      https://blog.rebilly.com/wp-content/uploads/2017/09/rb_LogoInverted_Small.png
+  isPublic:
+    description: >-
+      Specifies if the file is available publicly without authentication.
+
+      If this value is `true`, the permalink in the `_links` section contains
+      the public URL.
+    type: boolean
+    example: false
+  name:
+    description: File name used for downloading.
+    type: string
+    example: logo.png
+  description:
+    description: Description of the file.
+    type: string
+    example: My file description
+  sourceType:
+    description: Source of the file.
+    type: string
+    nullable: true
+    enum:
+      - upload
+      - camera
+    example: upload
+  tags:
+    description: List of tags associated with the file.
+    type: array
+    items:
+      type: string
+    example:
+      - test
+      - tags

@@ -1,0 +1,57 @@
+type: object
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  websiteId:
+    $ref: ./WebsiteId.yaml
+  paymentInstrumentId:
+    description: ID of the requested payment instrument to offer for the payout.
+    type: string
+  currency:
+    description: Currency of the payout.
+    allOf:
+      - $ref: ./CurrencyCode.yaml
+  amount:
+    description: Amount of the payout.
+    type: number
+    format: double
+  status:
+    description: Status of the request.
+    type: string
+    readOnly: true
+    enum:
+      - pending
+      - partially-fulfilled
+      - fulfilled
+    x-enumDescriptions:
+      pending: Request is awaiting fulfillment.
+      partially-fulfilled: >-
+        Request is partially paid out when `availableAmount` is less than
+        `amount`.
+      fulfilled: Request is fully paid out when `availableAmount` reaches zero.
+  createdTime:
+    description: Date and time when the payout request is created.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    description: Date and time when the payout request is updated.
+    allOf:
+      - $ref: ./UpdatedTime.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - paymentInstrument

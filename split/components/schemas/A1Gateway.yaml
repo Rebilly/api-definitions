@@ -1,0 +1,24 @@
+description: A1Gateway gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: A1Gateway credentials object.
+        properties:
+          accountId:
+            type: string
+            description: A1Gateway account ID.
+          password:
+            type: string
+            description: A1Gateway password.
+            format: password
+            writeOnly: true
+        required:
+          - accountId
+          - password
+      threeDSecureServer:
+        $ref: ./A1Gateway3dsServers.yaml

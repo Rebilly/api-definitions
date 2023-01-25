@@ -1,0 +1,30 @@
+description: Jeton gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          apiKey:
+            type: string
+            description: Jeton API key.
+            format: password
+            writeOnly: true
+        required:
+          - apiKey
+      settings:
+        type: object
+        properties:
+          method:
+            type: string
+            description: Jeton method.
+            enum:
+              - CHECKOUT
+              - DIRECT
+              - QR
+              - JETGO
+        required:
+          - method

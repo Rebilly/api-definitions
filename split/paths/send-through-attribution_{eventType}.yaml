@@ -1,0 +1,33 @@
+parameters:
+  - $ref: ../components/parameters/systemEventType.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Email notifications
+  summary: Retrieve email notification attributions
+  operationId: GetSendThroughAttributionCollection
+  x-sdk-operation-name: getAll
+  description: >-
+    Retrieves a list of email notifications, that have been sent through
+    attribution, for a specified event type.
+  responses:
+    '200':
+      description: List of email notifications retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/SendThroughAttribution.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml

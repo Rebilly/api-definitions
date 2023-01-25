@@ -1,0 +1,81 @@
+get:
+  x-products:
+    - Users
+  tags:
+    - Gateway accounts
+  summary: Retrieve gateway accounts
+  operationId: GetGatewayAccountCollection
+  x-sdk-operation-name: getAll
+  description: Retrieves a list of gateway accounts.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionFields.yaml
+  responses:
+    '200':
+      description: List of gateway accounts retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/GatewayAccount.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/gateway-accounts/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/gateway-accounts/getundefined
+post:
+  x-products:
+    - Users
+  tags:
+    - Gateway accounts
+  summary: Create a gateway account
+  operationId: PostGatewayAccount
+  x-sdk-operation-name: create
+  description: Creates a gateway account.
+  requestBody:
+    $ref: ../components/requestBodies/GatewayAccount.yaml
+  responses:
+    '201':
+      description: Gateway account created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccount.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      description: Invalid data sent.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InvalidError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/gateway-accounts/postundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/gateway-accounts/postundefined

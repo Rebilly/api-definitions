@@ -1,0 +1,51 @@
+description: AstroPay Card gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: AstroPay Card credentials object.
+        properties:
+          x_login:
+            type: string
+            description: AstroPay Card login.
+          x_tran_key:
+            type: string
+            description: AstroPay Card transaction key.
+            format: password
+            writeOnly: true
+          secret_key:
+            type: string
+            description: AstroPay Card secret key.
+            format: password
+            writeOnly: true
+          api_key:
+            type: string
+            description: OneTouch Astropay API key.
+            format: password
+            writeOnly: true
+        required:
+          - x_login
+          - x_tran_key
+          - secret_key
+      settings:
+        type: object
+        description: AstroPay Card settings object.
+        properties:
+          oneTouchApi:
+            type: boolean
+            description: Specifies whether to use a OneTouch AstroPay API.
+            default: false
+          useOneTouchSdk:
+            type: boolean
+            description: Specifies whether to use the OneTouch AstroPay SDK.
+            default: false
+          merchantName:
+            type: string
+            description: Displayed merchant name for AstroPay OneTouch.
+          merchantLogoUrl:
+            type: string
+            description: Displayed merchant logo for AstroPay OneTouch.

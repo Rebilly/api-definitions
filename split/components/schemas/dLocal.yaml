@@ -1,0 +1,46 @@
+description: dLocal gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          xLogin:
+            type: string
+            description: dLocal login.
+          xTransKey:
+            type: string
+            description: dLocal transKey.
+          secretKey:
+            type: string
+            format: password
+            description: dLocal secret key.
+            writeOnly: true
+          xPayoutLogin:
+            type: string
+            description: dLocal payout login.
+          xPayoutTransKey:
+            type: string
+            description: dLocal payout transKey.
+          payoutSecretKey:
+            type: string
+            format: password
+            description: dLocal payout secret key.
+            writeOnly: true
+        required:
+          - xLogin
+          - xTransKey
+          - secretKey
+      settings:
+        type: object
+        description: dLocal settings object.
+        properties:
+          createInstallmentPlan:
+            type: boolean
+            default: false
+            description: >-
+              Specifies whether to create an installment plan and use it for
+              payment.

@@ -1,0 +1,73 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Webhooks
+  summary: Retrieve a webhook
+  operationId: GetWebhook
+  x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
+  description: Retrieves a webhook with specified ID.
+  responses:
+    '200':
+      description: Webhook retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GlobalWebhook.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/webhooks_{id}/getundefined
+put:
+  x-products:
+    - Users
+  tags:
+    - Webhooks
+  summary: Upsert a webhook
+  operationId: PutWebhook
+  x-sdk-operation-name: update
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
+  description: Creates or updates (upserts) a webhook with specified ID.
+  requestBody:
+    $ref: ../components/requestBodies/GlobalWebhook.yaml
+  responses:
+    '200':
+      description: Webhook updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GlobalWebhook.yaml
+    '201':
+      description: Webhook created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GlobalWebhook.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      description: Invalid data sent.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InvalidError.yaml

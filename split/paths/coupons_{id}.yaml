@@ -1,0 +1,73 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Coupons
+  summary: Retrieve a coupon
+  operationId: GetCoupon
+  x-sdk-operation-name: get
+  description: Retrieves a coupon with a specified ID.
+  responses:
+    '200':
+      description: Coupon retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Coupon.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/coupons_{id}/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/coupons_{id}/getundefined
+put:
+  x-products:
+    - Core
+  tags:
+    - Coupons
+  summary: Upsert a coupon
+  operationId: PutCoupon
+  x-sdk-operation-name: update
+  description: Creates or updates (upserts) a coupon with a specified coupon ID.
+  requestBody:
+    $ref: ../components/requestBodies/Coupon.yaml
+  responses:
+    '200':
+      description: Coupon updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Coupon.yaml
+    '201':
+      description: Coupon created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Coupon.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/coupons_{id}/putundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/coupons_{id}/putundefined

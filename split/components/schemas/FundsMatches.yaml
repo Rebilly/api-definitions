@@ -1,0 +1,22 @@
+type: object
+properties:
+  firstName:
+    description: |-
+      First name of the customer.
+      This value is null if no match is found.
+    type: string
+    nullable: true
+    example: John
+  lastName:
+    description: |-
+      Last name of the customer.
+      This value is null if no match is found.
+    type: string
+    nullable: true
+    example: Doe
+  documentSubtype:
+    description: Interpreted subtype of the uploaded document.
+    type: string
+    nullable: true
+    allOf:
+      - $ref: ./KycDocumentSubtypes.yaml

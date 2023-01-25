@@ -1,0 +1,36 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Retrieve subscription order upcoming invoice
+  operationId: GetSubscriptionUpcomingInvoiceCollection
+  x-sdk-operation-name: getAllUpcomingInvoices
+  description: >-
+    Retrieves an upcoming invoice for a specified subscription order.
+
+
+    This endpoint is deprecated.
+
+    Use [Retrieve an upcoming invoice](../GetSubscriptionUpcomingInvoice)
+    instead.
+  parameters:
+    - $ref: ../components/parameters/collectionExpand.yaml
+  deprecated: true
+  responses:
+    '200':
+      description: Upcoming invoices retrieved.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Invoice.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

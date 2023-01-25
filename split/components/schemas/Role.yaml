@@ -1,0 +1,62 @@
+type: object
+required:
+  - name
+  - acl
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  name:
+    type: string
+    description: Name of the user role.
+  description:
+    type: string
+    description: Description of the role.
+  acl:
+    $ref: ./Acl.yaml
+  allowedIps:
+    $ref: ./AllowedIps.yaml
+  seniorIds:
+    type: array
+    description: List of senior role IDs.
+    readOnly: true
+    items:
+      type: string
+  juniorIds:
+    type: array
+    description: List of junior role IDs.
+    items:
+      type: string
+  usersCount:
+    type: integer
+    readOnly: true
+    description: Number of users assigned to this role.
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - seniorRoles
+            - juniorRoles
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
+    properties:
+      juniorRoles:
+        type: object

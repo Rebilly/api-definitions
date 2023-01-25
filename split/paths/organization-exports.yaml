@@ -1,0 +1,73 @@
+get:
+  x-products:
+    - Users
+  tags:
+    - Organization data exports
+  summary: Retrieve organization data exports
+  operationId: GetOrganizationExportCollection
+  x-sdk-operation-name: getAll
+  description: Retrieves a list of organization data exports.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+  responses:
+    '200':
+      description: List of organization data exports retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/OrganizationExport.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+post:
+  x-products:
+    - Users
+  tags:
+    - Organization data exports
+  summary: Request an organization data export
+  operationId: PostOrganizationExport
+  x-sdk-operation-name: create
+  description: |-
+    Request an organization data export.
+    The data export is asynchronously processed.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            includeFiles:
+              description: Sets the export to include organization files.
+              type: boolean
+              default: false
+              example: true
+  responses:
+    '201':
+      description: Organization data export request received.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OrganizationExport.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

@@ -1,0 +1,23 @@
+description: Walpay gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantName:
+            type: string
+            description: Walpay merchant name.
+          merchantPin:
+            type: string
+            description: Walpay merchant pin.
+            format: password
+            writeOnly: true
+        required:
+          - merchantName
+          - merchantPin
+      threeDSecureServer:
+        $ref: ./Walpay3dsServers.yaml

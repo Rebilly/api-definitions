@@ -1,0 +1,38 @@
+post:
+  x-products:
+    - Storefront
+  tags:
+    - Authentication
+  summary: Create a session with username and password
+  operationId: StorefrontPostLogin
+  x-sdk-operation-name: login
+  security:
+    - PublishableApiKey: []
+  description: Creates a session with a specified username and password.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - username
+            - password
+          properties:
+            username:
+              description: User's username.
+              type: string
+            password:
+              description: User's current password.
+              type: string
+  responses:
+    '201':
+      description: Logged into account.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/StorefrontCustomerJWT.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml

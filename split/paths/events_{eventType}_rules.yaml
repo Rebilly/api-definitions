@@ -1,0 +1,58 @@
+parameters:
+  - $ref: ../components/parameters/systemEventType.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Rules
+  summary: Retrieve event rules
+  operationId: GetEventRuleCollection
+  x-sdk-operation-name: getRules
+  description: Retrieves rules associated with a specified event type.
+  responses:
+    '200':
+      description: Rules retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RuleSet.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/events_{eventType}_rules/getundefined
+put:
+  x-products:
+    - Users
+  tags:
+    - Rules
+  summary: Update event rules
+  operationId: PutEventRule
+  x-sdk-operation-name: createRules
+  description: Updates rules associated with a specified event type.
+  responses:
+    '200':
+      description: Rules updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RuleSet.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  requestBody:
+    $ref: ../components/requestBodies/RuleSet.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/events_{eventType}_rules/putundefined

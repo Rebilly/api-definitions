@@ -1,0 +1,22 @@
+parameters:
+  - $ref: ../components/parameters/token.yaml
+post:
+  x-products:
+    - Storefront
+  tags:
+    - Email verification
+  summary: Verify an account email
+  operationId: StorefrontPostAccountVerification
+  x-sdk-operation-name: verifyEmail
+  security:
+    - PublishableApiKey: []
+  description: Verifies an account email.
+  responses:
+    '204':
+      description: Account verified.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

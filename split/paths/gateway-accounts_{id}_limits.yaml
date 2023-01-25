@@ -1,0 +1,24 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Gateway accounts
+  summary: Retrieve gateway account limits
+  operationId: GetGatewayAccountLimitCollection
+  x-sdk-operation-name: getAllVolumeLimits
+  description: Retrieves a list of limits for a gateway account with a specified ID.
+  responses:
+    '200':
+      description: List of gateway account limits retrieved.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/GatewayAccountLimit.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml

@@ -1,0 +1,68 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Retrieve a transaction
+  operationId: GetTransaction
+  x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
+  description: Retrieves a transaction with a specified ID.
+  parameters:
+    - $ref: ../components/parameters/collectionExpand.yaml
+  responses:
+    '200':
+      description: Transaction retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Transaction.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/transactions_{id}/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/transactions_{id}/getundefined
+patch:
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Update a transaction
+  operationId: PatchTransaction
+  x-sdk-operation-name: patch
+  description: Updates the custom fields of a transaction with a specified ID.
+  requestBody:
+    $ref: ../components/requestBodies/PatchTransactionRequest.yaml
+  responses:
+    '200':
+      description: Transaction updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Transaction.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/transactions_{id}/patchundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/transactions_{id}/patchundefined

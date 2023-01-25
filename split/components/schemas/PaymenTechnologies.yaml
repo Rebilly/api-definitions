@@ -1,0 +1,43 @@
+description: PaymenTechnologies gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          authenticateId:
+            type: string
+            description: PaymenTechnologies authenticate ID.
+          authenticatePw:
+            type: string
+            description: PaymenTechnologies authenticate password.
+            format: password
+            writeOnly: true
+          publicKey:
+            type: string
+            description: PaymenTechnologies API public key.
+          secretKey:
+            type: string
+            description: PaymenTechnologies API secret key.
+            format: password
+            writeOnly: true
+          apiKey:
+            type: string
+            description: PaymenTechnologies API key required for query operations.
+            format: password
+            writeOnly: true
+        required:
+          - authenticateId
+          - authenticatePw
+          - publicKey
+          - secretKey
+          - apiKey
+      settings:
+        type: object
+        properties:
+          use3DSEndpoint:
+            type: boolean
+            description: Specifies whether to use a 3DS endpoint.

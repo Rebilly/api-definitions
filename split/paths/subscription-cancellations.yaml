@@ -1,0 +1,77 @@
+get:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Retrieve cancellations
+  operationId: GetSubscriptionCancellationCollection
+  x-sdk-operation-name: getAll
+  description: Retrieves a list of canceled subscriptions.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+  responses:
+    '200':
+      description: List of cancelled subscriptions retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/SubscriptionCancellation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/subscription-cancellations/getundefined
+post:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Cancel an order
+  operationId: PostSubscriptionCancellation
+  x-sdk-operation-name: create
+  description: Cancels a subscription order.
+  requestBody:
+    $ref: ../components/requestBodies/SubscriptionCancellation.yaml
+  responses:
+    '201':
+      description: Cancellation created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SubscriptionCancellation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/subscription-cancellations/postundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/subscription-cancellations/postundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/subscription-cancellations/postundefined

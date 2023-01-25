@@ -1,0 +1,29 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Retrieve an order reactivation
+  operationId: GetSubscriptionReactivation
+  x-sdk-operation-name: get
+  description: Retrieves an order reactivation with a specified ID.
+  responses:
+    '200':
+      description: Reactivation retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SubscriptionReactivation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: >-
+          ../code_samples/JavaScript/subscription-reactivations_{id}/getundefined

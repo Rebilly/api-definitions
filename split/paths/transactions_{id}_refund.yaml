@@ -1,0 +1,44 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Refund a transaction
+  operationId: PostTransactionRefund
+  x-sdk-operation-name: refund
+  description: |-
+    Refunds a transaction with a specified ID.
+
+    The refund is in the same currency as the original transaction.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/TransactionRefund.yaml
+    description: Transaction resource.
+    required: true
+  responses:
+    '201':
+      description: Transaction refunded.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Transaction.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/transactions_{id}_refund/postundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/transactions_{id}_refund/postundefined

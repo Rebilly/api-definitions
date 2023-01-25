@@ -1,0 +1,34 @@
+servers:
+  - url: https://api-sandbox.rebilly.com
+    description: Sandbox server
+  - url: https://api.rebilly.com
+    description: Live server
+parameters:
+  - name: token
+    in: path
+    description: Token string.
+    required: true
+    schema:
+      type: string
+post:
+  x-products:
+    - Users
+  tags:
+    - Profile
+  summary: Activate user
+  operationId: PostActivation
+  x-sdk-operation-name: activate
+  description: Sends a token to activate a user account.
+  security: []
+  responses:
+    '204':
+      description: User account activated.
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/activation_{token}/postundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/activation_{token}/postundefined

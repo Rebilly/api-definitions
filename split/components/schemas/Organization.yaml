@@ -1,0 +1,76 @@
+type: object
+required:
+  - name
+  - country
+properties:
+  id:
+    description: >-
+      Unique organization identifier.
+
+      An organization is an entity that represents a company.
+
+      For more information, see [Obtain an organization
+      ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  name:
+    description: Name of the organization.
+    type: string
+    maxLength: 60
+  website:
+    description: Organization's website.
+    type: string
+    writeOnly: true
+    format: url
+  address:
+    description: Street address of the organization.
+    type: string
+    maxLength: 60
+  address2:
+    description: Second line of the street address.
+    type: string
+    maxLength: 60
+  city:
+    description: City where the organization is located.
+    type: string
+    maxLength: 45
+  region:
+    description: Region or state where the organization is located.
+    type: string
+    maxLength: 45
+  country:
+    description: >-
+      Country where the organization is located, in [ISO Alpha-2 code
+      format](https://www.iso.org/obp/ui/#search/code/).
+    type: string
+    pattern: ^[A-Z]{2}$
+  postalCode:
+    description: Postal code of the organization.
+    type: string
+    maxLength: 10
+  phoneNumbers:
+    $ref: ./ContactPhoneNumbers.yaml
+  emails:
+    $ref: ./ContactEmails.yaml
+  taxDescriptor:
+    description: >-
+      Tax label of the organization. This information is displayed on the
+      invoice.
+    type: string
+    maxLength: 255
+  invoiceTimeZone:
+    description: Specifies the time zone to display on an invoice. UTC is used by default.
+    type: string
+    maxLength: 50
+    example: America/New_York
+  questionnaire:
+    $ref: ./OrganizationQuestionnaire.yaml
+  settings:
+    $ref: ./OrganizationSettings.yaml
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml

@@ -1,0 +1,29 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Customers timeline
+  summary: Retrieve customer timeline custom event type
+  operationId: GetCustomerTimelineCustomEventType
+  x-sdk-operation-name: get
+  description: Retrieves a customer timeline custom event type with a specified ID.
+  responses:
+    '200':
+      description: Customer timeline custom event type retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CustomerTimelineCustomEvent.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml

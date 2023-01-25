@@ -1,0 +1,42 @@
+description: Wirecard gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantUsername:
+            type: string
+            description: Wirecard merchant username.
+          merchantPassword:
+            type: string
+            description: Wirecard merchant password.
+            format: password
+            writeOnly: true
+          businessSignature:
+            type: string
+            description: Wirecard merchant business case signature.
+            format: password
+            writeOnly: true
+          delay:
+            type: integer
+            description: Automatic capture delay.
+          sftpUsername:
+            type: string
+            description: Wirecard SFTP username.
+          sftpPrivateKey:
+            type: string
+            description: Wirecard SFTP private key.
+            format: password
+            x-multiline: true
+            writeOnly: true
+        required:
+          - merchantUsername
+          - merchantPassword
+          - businessSignature
+          - delay
+      threeDSecureServer:
+        $ref: ./Wirecard3dsServers.yaml

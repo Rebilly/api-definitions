@@ -1,0 +1,33 @@
+description: Khelocard gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Credentials object.
+        required:
+          - merchantId
+          - referrer
+          - apiKey
+          - apiSecret
+        properties:
+          merchantId:
+            type: string
+            description: Khelocard merchant ID.
+          referrer:
+            type: string
+            description: Referrer URL registered at Khelocard.
+            format: uri
+          apiKey:
+            type: string
+            description: Khelocard API key.
+            format: password
+            writeOnly: true
+          apiSecret:
+            type: string
+            description: Khelocard API secret.
+            format: password
+            writeOnly: true

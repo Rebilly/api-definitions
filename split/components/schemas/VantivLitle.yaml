@@ -1,0 +1,27 @@
+description: VantivLitle gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          username:
+            type: string
+            description: VantivLitle username.
+          password:
+            type: string
+            description: VantivLitle password.
+            format: password
+            writeOnly: true
+          merchantId:
+            type: string
+            description: VantivLitle merchant ID.
+        required:
+          - username
+          - password
+          - merchantId
+      threeDSecureServer:
+        $ref: ./VantivLitle3dsServers.yaml

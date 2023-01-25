@@ -1,0 +1,47 @@
+description: BlueSnap gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: BlueSnap credentials object.
+        properties:
+          username:
+            type: string
+            description: API username of the BlueSnap merchant.
+          merchantId:
+            type: string
+            description: ID of the BlueSnap merchant.
+          password:
+            type: string
+            description: API password of the BlueSnap merchant.
+            format: password
+            writeOnly: true
+          dataProtectionKey:
+            type: string
+            description: Data protection key of the BlueSnap merchant.
+            format: password
+            writeOnly: true
+        required:
+          - username
+          - password
+      settings:
+        type: object
+        properties:
+          enableMoto:
+            type: boolean
+            description: Specifies whether to use Mail Order Telephone Order (MOTO).
+            default: false
+          salesTaxAmount:
+            type: number
+            format: double
+            description: Sales tax amount as a decimal to send with level 2/3 data.
+            example: 0.06
+          metadataCustomField:
+            type: string
+            description: Rebilly custom field to use for sending transaction metadata.
+      threeDSecureServer:
+        $ref: ./BlueSnap3dsServers.yaml

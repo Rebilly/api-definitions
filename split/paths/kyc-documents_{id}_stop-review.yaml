@@ -1,0 +1,38 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - KYC documents
+  summary: Stop review of a KYC document
+  operationId: PostKycDocumentStopReview
+  x-sdk-operation-name: stopReview
+  description: >-
+    Stops the review of a KYC document with a specified ID.
+
+
+    This operation also sets the KYC document `reviewStartTime` and the reviewer
+    information to null.
+
+    Use this operation when the reviewer must stop the review.
+
+    For example, if the reviewer must take a break, or ends a shift.
+  responses:
+    '201':
+      description: KYC document review stopped.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KycDocument.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

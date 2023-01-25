@@ -1,0 +1,62 @@
+type: object
+properties:
+  data:
+    description: Transaction data.
+    type: array
+    readOnly: true
+    items:
+      type: object
+      properties:
+        aggregationFieldValue:
+          description: Aggregation field value.
+          type: string
+        authApprovedThroughput:
+          description: Percentage of approved authentication transactions.
+          type: number
+          format: double
+        approvedThroughput:
+          description: Percentage of approved sale transactions.
+          type: number
+          format: double
+        authApprovalCount:
+          description: Total number of approved authentication transactions.
+          type: integer
+        disputesRate:
+          description: Percentage of disputed sale and capture transactions.
+          type: number
+          format: double
+        disputesCount:
+          description: Total number of disputed sale and capture transactions.
+          type: integer
+        salesCount:
+          description: Total number of sales.
+          type: integer
+        salesValue:
+          description: Total sales value.
+          type: number
+          format: double
+        salesAverage:
+          description: Average sales value.
+          type: number
+          format: double
+        refundsCount:
+          description: Total number of refunds.
+          type: integer
+        refundsValue:
+          description: Total value of refunds.
+          type: number
+          format: double
+        amount:
+          description: |-
+            Amount of revenue.
+            This value is the result of `salesValue` minus `refundsValue`.
+          type: number
+          format: double
+        count:
+          description: Total number of transactions.
+          type: number
+          format: double
+        unapprovedCount:
+          description: Total number of unapproved transactions.
+          type: number
+          format: double

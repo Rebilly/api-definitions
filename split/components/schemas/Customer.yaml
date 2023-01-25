@@ -1,0 +1,159 @@
+type: object
+description: Customer information.
+properties:
+  id:
+    description: ID of the customer.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  email:
+    description: Customer's email address.
+    type: string
+    format: email
+    nullable: true
+    readOnly: true
+    x-sortable: true
+    x-basic: true
+  firstName:
+    description: Customer's first name.
+    type: string
+    nullable: true
+    x-basic: true
+    readOnly: true
+  lastName:
+    description: Customer's last name.
+    type: string
+    nullable: true
+    x-sortable: true
+    x-basic: true
+    readOnly: true
+  websiteId:
+    x-sortable: true
+    allOf:
+      - $ref: ./WebsiteId.yaml
+  paymentToken:
+    type: string
+    writeOnly: true
+    description: >-
+      Write-only payment token.
+
+      If supplied, the token is converted into a payment instrument and set as
+      the `defaultPaymentInstrument` value.
+
+      If both are supplied, the value of this property overrides the
+      `defaultPaymentInstrument` value.
+
+      The token expires after first use.
+  defaultPaymentInstrument:
+    type: object
+    nullable: true
+    allOf:
+      - $ref: ./PaymentInstrumentValueObject.yaml
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  customFields:
+    $ref: ./ResourceCustomFields.yaml
+  primaryAddress:
+    description: Customer's primary address.
+    type: object
+    nullable: true
+    allOf:
+      - $ref: ./ContactObject.yaml
+  averageValue:
+    $ref: ./CustomerAverageValue.yaml
+  paymentCount:
+    x-label: Payments
+    x-sortable: true
+    x-basic: true
+    description: Total number of approved payments made by the customer.
+    readOnly: true
+    type: integer
+  lastPaymentTime:
+    x-label: Last Payment
+    x-sortable: true
+    x-basic: true
+    description: Time and date of the customer's last approved payment.
+    type: string
+    format: date-time
+    readOnly: true
+    nullable: true
+  lifetimeRevenue:
+    $ref: ./CustomerLifetimeRevenue.yaml
+  invoiceCount:
+    x-sortable: true
+    description: >-
+      Total number of invoices issued to the customer.
+
+      This value is auto-incrementing.
+
+      If this value is `0`, the record relates to a lead.
+
+      A lead is a customer who has not made a payment yet.
+
+      If this value is greater than or equal to `1` the record relates to a
+      customer.
+    readOnly: true
+    type: integer
+  tags:
+    description: List of customer tags.
+    readOnly: true
+    type: array
+    items:
+      $ref: ./Tag.yaml
+  revision:
+    description: >-
+      Number of times the customer's data has been modified.
+
+
+      Use this value when analyzing webhook data to determine if a change must
+      take precedence over the current representation.
+    type: integer
+    readOnly: true
+  isEddRequired:
+    description: >-
+      Specifies if Enhanced Due Diligence (EDD) is enabled for this customer.
+
+      For more information, see [Enhanced Due
+      Diligence](https://www.rebilly.com/docs/kyc-and-aml/edd/).
+    type: boolean
+    default: false
+  hasFulfilledKyc:
+    description: >-
+      Specifies if the customer has accepted and reviewed identity and address
+      documents, or an accepted credit file document.
+    type: boolean
+    readOnly: true
+  organizationId:
+    readOnly: true
+    allOf:
+      - $ref: ./OrganizationId.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - attachments
+            - defaultPaymentInstrument
+            - leadSource
+            - website
+  _embedded:
+    type: object
+    description: >-
+      Embedded objects that are requested using the `expand` query string
+      parameter.
+    readOnly: true
+    properties:
+      leadSource:
+        type: object

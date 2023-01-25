@@ -1,0 +1,71 @@
+get:
+  x-products:
+    - Core
+  tags:
+    - Customer authentication
+  summary: Retrieve authentication options
+  operationId: GetAuthenticationOption
+  x-sdk-operation-name: getAuthOptions
+  description: Retrieves customer authentication options.
+  responses:
+    '200':
+      description: Authentication options retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/AuthenticationOptions.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/authentication-options/getundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/authentication-options/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/authentication-options/getundefined
+put:
+  x-products:
+    - Core
+  tags:
+    - Customer authentication
+  summary: Change authentication options
+  operationId: PutAuthenticationOption
+  x-sdk-operation-name: updateAuthOptions
+  description: Changes customer authentication options.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/AuthenticationOptions.yaml
+    description: Authentication options resource.
+    required: true
+  responses:
+    '200':
+      description: Authentication options updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/AuthenticationOptions.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/authentication-options/putundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/authentication-options/putundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/authentication-options/putundefined

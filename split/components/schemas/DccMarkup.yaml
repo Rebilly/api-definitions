@@ -1,0 +1,43 @@
+type: object
+properties:
+  data:
+    description: Aggregation data.
+    type: array
+    items:
+      type: object
+      description: Contains an aggregation.
+      readOnly: true
+      properties:
+        aggregationValue:
+          type: string
+          description: |-
+            Value by which the report provides aggregated data.
+            Date values are displayed as follows:
+
+              - Day: `YYYY-MM-DD`.
+              - Month: `YYYY-MM`.
+        selectedCount:
+          type: integer
+          description: Number of selected offers in the aggregation.
+        selectedSum:
+          type: number
+          format: double
+          description: Amount of selected offers in the aggregation.
+        rejectedCount:
+          type: integer
+          description: Number of rejected offers in the aggregation.
+        rejectedSum:
+          type: number
+          format: double
+          description: Amount of rejected offers in the aggregation.
+        unknownCount:
+          type: integer
+          description: >-
+            Number of offers in the aggregation which are not selected nor
+            rejected.
+        unknownSum:
+          type: number
+          format: double
+          description: >-
+            Amount of offers in the aggregation which are not selected nor
+            rejected.

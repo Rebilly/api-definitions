@@ -1,0 +1,19 @@
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        deliveryAddress:
+          description: Order delivery address.
+          type: object
+          nullable: true
+          allOf:
+            - $ref: ../schemas/ContactObject.yaml
+        billingAddress:
+          description: Order billing address.
+          type: object
+          nullable: true
+          allOf:
+            - $ref: ../schemas/ContactObject.yaml
+description: Order resource.
+required: true

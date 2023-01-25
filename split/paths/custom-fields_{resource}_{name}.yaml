@@ -1,0 +1,96 @@
+parameters:
+  - $ref: ../components/parameters/customFieldResource.yaml
+  - name: name
+    in: path
+    description: ID of the custom field.
+    required: true
+    schema:
+      type: string
+      maxLength: 60
+      pattern: ^[\w-]+$
+get:
+  x-products:
+    - Core
+  tags:
+    - Custom fields
+  summary: Retrieve a custom field
+  operationId: GetCustomField
+  x-sdk-operation-name: get
+  description: >-
+    Retrieves a schema of a specified custom field for a specified resource
+    type.
+  responses:
+    '200':
+      description: Custom field schema retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CustomField.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/custom-fields_{resource}_{name}/getundefined
+    - lang: JavaScript
+      source:
+        $ref: >-
+          ../code_samples/JavaScript/custom-fields_{resource}_{name}/getundefined
+put:
+  x-products:
+    - Core
+  tags:
+    - Custom fields
+  summary: Create or alter a custom field
+  operationId: PutCustomField
+  x-sdk-operation-name: create
+  description: >-
+    Creates or alters a schema of the specified custom field for the specified
+    resource type.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CustomField.yaml
+    description: Custom fields schema of the specified resource type.
+    required: true
+  responses:
+    '200':
+      description: Custom field updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CustomField.yaml
+    '201':
+      description: Custom field created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CustomField.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '409':
+      description: |-
+        Schema in use. To remove or alter the schema, remove all
+        associated data.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Error.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/custom-fields_{resource}_{name}/putundefined
+    - lang: JavaScript
+      source:
+        $ref: >-
+          ../code_samples/JavaScript/custom-fields_{resource}_{name}/putundefined

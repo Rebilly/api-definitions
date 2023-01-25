@@ -1,0 +1,28 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Users
+  tags:
+    - Email delivery settings
+  summary: Resend email delivery setting verification email
+  operationId: PostResendEmailDeliverySettingVerification
+  x-sdk-operation-name: resendVerification
+  description: >-
+    Resends a verification email for an email delivery setting with a specified
+    ID.
+  responses:
+    '200':
+      description: Verification email sent.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmailDeliverySetting.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml

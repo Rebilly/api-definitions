@@ -1,0 +1,25 @@
+description: Coinbase gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Coinbase credentials object.
+        properties:
+          apiKey:
+            type: string
+            format: password
+            writeOnly: true
+        required:
+          - apiKey
+      settings:
+        type: object
+        description: Coinbase settings object.
+        required:
+          - tolerancePercentage
+        properties:
+          tolerancePercentage:
+            $ref: ./AmountAdjustmentTolerance.yaml

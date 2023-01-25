@@ -1,0 +1,83 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Retrieve a subscription pause
+  operationId: GetSubscriptionPause
+  x-sdk-operation-name: get
+  description: Retrieves a subscription pause with a specified ID.
+  responses:
+    '200':
+      description: Pause retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SubscriptionPause.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Update a subscription pause
+  operationId: PutSubscriptionPause
+  x-sdk-operation-name: update
+  description: Updates a subscription pause.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/SubscriptionPause.yaml
+  responses:
+    '200':
+      description: Pause updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SubscriptionPause.yaml
+    '201':
+      description: Pause created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SubscriptionPause.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+delete:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Delete a subscription pause
+  operationId: DeleteSubscriptionPause
+  x-sdk-operation-name: delete
+  description: |-
+    Deletes a subscription pause with a specified ID.
+    If the specified pause is `pending`, it is `revoked`.
+    If the specified pause is `ongoing`, it is `finished`.
+  responses:
+    '204':
+      description: Subscription pause revoked or finished.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml

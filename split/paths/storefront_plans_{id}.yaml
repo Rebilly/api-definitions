@@ -1,0 +1,26 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Storefront
+  tags:
+    - Plans
+  summary: Retrieve a plan
+  operationId: StorefrontGetPlan
+  x-sdk-operation-name: get
+  description: Retrieves a plan with a specified ID.
+  parameters:
+    - $ref: ../components/parameters/collectionExpand.yaml
+  responses:
+    '200':
+      description: Plan retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/StorefrontPlan.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

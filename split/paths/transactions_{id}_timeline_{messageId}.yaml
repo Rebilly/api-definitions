@@ -1,0 +1,60 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: messageId
+    in: path
+    description: ID of the transaction timeline message.
+    required: true
+    schema:
+      type: string
+get:
+  x-products:
+    - Core
+  tags:
+    - Transactions timeline
+  summary: Retrieve a transaction Timeline message
+  operationId: GetTransactionTimeline
+  x-sdk-operation-name: getTimelineMessage
+  description: Retrieves a timeline message with a specified ID.
+  responses:
+    '200':
+      description: Timeline message retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TransactionTimeline.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: >-
+          ../code_samples/JavaScript/transactions_{id}_timeline_{messageId}/getundefined
+delete:
+  x-products:
+    - Core
+  tags:
+    - Transactions timeline
+  summary: Delete a transaction timeline message
+  operationId: DeleteTransactionTimeline
+  x-sdk-operation-name: deleteTimelineMessage
+  description: Deletes a transaction timeline message with a specified ID.
+  responses:
+    '204':
+      description: Transaction timeline message deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: >-
+          ../code_samples/JavaScript/transactions_{id}_timeline_{messageId}/deleteundefined

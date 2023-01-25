@@ -1,0 +1,176 @@
+type: object
+properties:
+  firstName:
+    type: string
+    description: First name of the individual, or name of entity.
+    readOnly: true
+    example: Benjamin
+  lastName:
+    type: string
+    description: >-
+      Last name of the individual. Returns a `null` value for single-named
+      entities.
+    readOnly: true
+    nullable: true
+    example: Franklin
+  source:
+    type: string
+    readOnly: true
+    description: Describes which list the result is from.
+  sourceType:
+    readOnly: true
+    description: Describes the categories of the individual or entity.
+    type: array
+    example:
+      - sanctions
+      - enforcements
+    items:
+      type: string
+      enum:
+        - pep
+        - sanctions
+        - adverse-media
+        - enforcements
+        - state-owned-enterprise
+  gender:
+    type: string
+    readOnly: true
+    nullable: true
+    description: If `type`=`individual`, this field describes the gender of the individual.
+  title:
+    type: array
+    readOnly: true
+    nullable: true
+    description: Individual's job title.
+    example:
+      - Postmaster General
+      - Ambassador to France
+      - Ambassador to Sweden
+      - Supreme Executive Council of Commonwealth of Pennsylvania
+    items:
+      type: string
+  type:
+    type: string
+    readOnly: true
+    description: Describes whether the source is an individual or an entity.
+    enum:
+      - individual
+      - entity
+  legalBasis:
+    type: array
+    readOnly: true
+    description: List of references to legal documents, if they exist.
+    items:
+      type: string
+  regime:
+    type: string
+    readOnly: true
+    description: Describes the government, administration, or political entity.
+    nullable: true
+    example: United States Government
+  confidence:
+    type: string
+    description: Degree of confidence in the source list information.
+    readOnly: true
+    enum:
+      - weak
+      - medium
+      - strong
+      - very-strong
+  nationality:
+    type: string
+    readOnly: true
+    description: Nationality of the individual or entity.
+  address:
+    type: array
+    readOnly: true
+    description: Addresses associated with the individual or entity.
+    items:
+      type: object
+      properties:
+        address:
+          type: string
+          nullable: true
+          readOnly: true
+          description: Street address line 1.
+        address2:
+          type: string
+          nullable: true
+          readOnly: true
+          description: Street address line 2.
+        city:
+          type: string
+          nullable: true
+          readOnly: true
+          description: City.
+        region:
+          type: string
+          nullable: true
+          readOnly: true
+          description: State, province, or region.
+        country:
+          type: string
+          nullable: true
+          readOnly: true
+          description: Country.
+        birthplace:
+          type: boolean
+          default: false
+          readOnly: true
+          description: Individual's place of birth.
+  dob:
+    type: array
+    readOnly: true
+    description: One or more possible dates of birth.
+    items:
+      type: string
+      readOnly: true
+      description: Date of birth.
+      format: date
+      example: '1706-01-17'
+  aliases:
+    type: array
+    readOnly: true
+    description: List of aliases, if any.
+    items:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: First name of alias.
+          readOnly: true
+        lastName:
+          type: string
+          description: Last name of alias.
+          readOnly: true
+        authenticity:
+          type: string
+          description: Degree of confidence in the alias.
+          readOnly: true
+          enum:
+            - strong
+            - weak
+            - unknown
+  passport:
+    type: array
+    readOnly: true
+    description: Individual's passport information.
+    items:
+      type: object
+      properties:
+        number:
+          type: string
+          readOnly: true
+          description: Passport number.
+        registrationDate:
+          type: string
+          format: date
+          readOnly: true
+          description: Passport registration date.
+  comments:
+    type: string
+    readOnly: true
+    nullable: true
+    description: Additional information. This content varies per list.
+  _links:
+    $ref: ./SelfLink.yaml

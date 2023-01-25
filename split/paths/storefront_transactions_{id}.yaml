@@ -1,0 +1,26 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Storefront
+  tags:
+    - Transactions
+  summary: Retrieve a Transaction
+  operationId: StorefrontGetTransaction
+  x-sdk-operation-name: get
+  security:
+    - CustomerJWT: []
+  description: Retrieves a transaction with a specified ID.
+  responses:
+    '200':
+      description: Transaction retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/StorefrontTransaction.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

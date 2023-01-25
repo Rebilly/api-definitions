@@ -1,0 +1,18 @@
+description: Circle gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Circle credentials object.
+        properties:
+          apiKey:
+            type: string
+            format: password
+            description: Circle API key.
+            writeOnly: true
+        required:
+          - apiKey

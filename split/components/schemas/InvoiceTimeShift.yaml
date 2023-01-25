@@ -1,0 +1,29 @@
+type: object
+nullable: true
+description: >-
+  Use invoice time shift to control the billing time.
+
+
+  Invoice time shift adjusts the invoice issue and due date when billing must
+  occur before the service period changes.
+
+
+  Use invoice time shift in conjunction with `billingTiming` to:
+
+
+  - Bill immediately when the service period starts.
+
+  - Bill immediately after the service period ends.
+
+  - Bill at an interval of time before the service period starts.
+
+  - Bill at an interval of time after the service period starts.
+
+  - Bill at an interval of time before the service period ends.
+
+  - Bill at an interval of time after the service period ends.
+properties:
+  issueTimeShift:
+    $ref: ./IssueTimeShiftInstruction.yaml
+  dueTimeShift:
+    $ref: ./DueTimeShiftInstruction.yaml

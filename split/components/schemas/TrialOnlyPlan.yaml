@@ -1,0 +1,41 @@
+type: object
+additionalProperties: false
+required:
+  - name
+  - currency
+  - productId
+  - pricing
+  - trial
+allOf:
+  - $ref: ./CommonPlan.yaml
+properties:
+  trial:
+    type: object
+    description: Trial configuration settings.
+    required:
+      - price
+      - period
+    properties:
+      price:
+        description: |-
+          Price of setting up a trial.
+          If your service charges a fee for a trial, specify it here.
+          To charge no trial fee, set this value to `0`.
+        type: number
+        format: double
+      period:
+        $ref: ./PlanPeriod.yaml
+  invoiceTimeShift:
+    description: >-
+      Use invoice time shift to adjust the invoice issue and due date when
+      billing must occur before the service period changes.
+
+      For example, rent must be paid in advance,
+
+      so the invoice must be in advance of the billing date.
+
+      For more information, see [Service period anchor, and billing timing, and
+      invoice time
+      shift](https://www.rebilly.com/docs/dev-docs/concepts/#service-period-anchor-and-billing-timing-and-invoice-time-shift).
+    allOf:
+      - $ref: ./InvoiceTimeShift.yaml

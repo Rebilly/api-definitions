@@ -1,0 +1,44 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Users
+  tags:
+    - Gateway accounts
+  summary: Close a gateway account
+  operationId: PostGatewayAccountClosure
+  x-sdk-operation-name: close
+  description: >-
+    Closes a gateway account with a specified ID.
+
+    This process is also known as archiving.
+
+
+    When a gateway account is closed,
+
+    the gateway cannot process transactions and the `status` attribute is set to
+    `closed`.
+
+
+    >**Important:** Closing a gateway account cannot be undone. Do so with
+    caution.
+  responses:
+    '201':
+      description: Gateway account closed.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccount.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/gateway-accounts_{id}_close/postundefined

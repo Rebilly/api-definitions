@@ -1,0 +1,33 @@
+description: NMI gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          username:
+            type: string
+            description: NMI API token.
+          password:
+            type: string
+            description: NMI store ID.
+            format: password
+            writeOnly: true
+        required:
+          - username
+          - password
+      settings:
+        type: object
+        properties:
+          disableStoredCredentials:
+            description: >-
+              Specifies whether to disable NMI stored credentials for Customer
+              Initiated Transactions (CIT) and Merchant Initiated Transactions
+              (MIT).
+            type: boolean
+            default: false
+      threeDSecureServer:
+        $ref: ./NMI3dsServers.yaml

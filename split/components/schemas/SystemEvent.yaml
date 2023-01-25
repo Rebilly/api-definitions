@@ -1,0 +1,36 @@
+type: object
+description: Application event.
+readOnly: true
+properties:
+  eventType:
+    $ref: ./EventType.yaml
+  title:
+    description: Title of the system event.
+    type: string
+  description:
+    description: Description of the system event.
+    type: string
+  category:
+    description: Category of system event.
+    type: string
+    enum:
+      - billing
+      - payments
+  rulesCount:
+    description: >-
+      Total number of rules associated with the system event.
+
+      A rule is a configuration of an event and one or more actions.
+
+      A rule can be configured to stop subsequent rules in the event list from
+      being executed.
+    type: integer
+    readOnly: true
+  bindsCount:
+    description: |-
+      Total number of binds associated with the system event.
+      A bind is a configuration of an event and one or more actions.
+    type: integer
+    readOnly: true
+  _links:
+    $ref: ./SelfLink.yaml

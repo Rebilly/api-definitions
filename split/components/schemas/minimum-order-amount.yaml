@@ -1,0 +1,18 @@
+description: |-
+  Specifies a minimum order amount for a coupon application. For
+  example, if the restriction amount is $20, the coupon is only
+  applied to invoices with a total amount of $20 or more.
+allOf:
+  - $ref: ./CouponRestriction.yaml
+  - $ref: ./RedemptionRestriction.yaml
+  - type: object
+    required:
+      - amount
+      - currency
+    properties:
+      amount:
+        type: integer
+        description: Minimum order quantity.
+      currency:
+        allOf:
+          - $ref: ./CurrencyCode.yaml

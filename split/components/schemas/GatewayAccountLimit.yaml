@@ -1,0 +1,68 @@
+description: Gateway account limit details.
+type: object
+required:
+  - cap
+properties:
+  id:
+    description: ID of the gateway account limit.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  status:
+    description: Status of the gateway account limit.
+    readOnly: true
+    type: string
+    enum:
+      - monitoring
+      - reached
+  startTime:
+    description: Date and time when the gateway account limit starts.
+    type: string
+    format: date-time
+    readOnly: true
+  endTime:
+    description: |-
+      Date and time when the gateway account limit ends.
+      When a gateway account limit ends the limit resets.
+    type: string
+    format: date-time
+    readOnly: true
+  frequency:
+    description: Frequency at which the gateway account limit period resets.
+    type: string
+    readOnly: true
+    enum:
+      - daily
+      - monthly
+  type:
+    description: Type of gateway account limit.
+    type: string
+    readOnly: true
+    enum:
+      - money
+      - count
+    x-enumDescriptions:
+      money: >-
+        Limits the amount of money that a transaction can process on a gateway
+        account. If `money` is chosen, the currency is the report currency.
+      count: >-
+        Limits the total number of transaction can be processed on a gateway
+        account.
+  cap:
+    description: |-
+      Limits the maximum allowed value.
+      If `type` is set to `money`, the currency is the report currency.
+      `cap` only applies to approved transactions of type `authorize` or `sale`.
+    type: integer
+    example: 1000
+  usage:
+    description: Usage of the gateway account limit during this period.
+    type: integer
+    example: 375
+    readOnly: true
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml

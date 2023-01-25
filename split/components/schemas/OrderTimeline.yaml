@@ -1,0 +1,73 @@
+type: object
+properties:
+  id:
+    description: ID of the timeline message.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  type:
+    description: Type of timeline message.
+    type: string
+    readOnly: true
+    enum:
+      - coupon-applied
+      - email-message-sent
+      - invoice-abandoned
+      - invoice-disputed
+      - invoice-issued
+      - invoice-paid
+      - invoice-partially-paid
+      - invoice-partially-refunded
+      - invoice-past-due
+      - invoice-refunded
+      - invoice-reissued
+      - invoice-renewal-payment-declined
+      - invoice-voided
+      - order-activated
+      - order-autopay-changed
+      - order-billing-address-changed
+      - order-billing-anchor-changed
+      - order-canceled
+      - order-churned
+      - order-completed
+      - order-custom-fields-changed
+      - order-delivery-address-changed
+      - order-downgraded
+      - order-items-changed
+      - order-paid-early
+      - order-quantity-changed
+      - order-reactivated
+      - order-recurring-interval-changed
+      - order-renewal-time-changed
+      - order-renewed
+      - order-risk-metadata-changed
+      - order-upgraded
+      - order-voided
+      - order-abandoned
+      - subscription-paused
+      - subscription-pause-created
+      - subscription-pause-modified
+      - subscription-pause-revoked
+      - subscription-resumed
+      - subscription-trial-end-changed
+      - timeline-comment-created
+  triggeredBy:
+    description: Specifies who, or what, triggered the timeline event.
+    type: string
+    readOnly: true
+    enum:
+      - rebilly
+      - app
+      - direct-api
+  message:
+    description: Contents of the timeline message.
+    type: string
+  extraData:
+    $ref: ./TimelineExtraData.yaml
+  occurredTime:
+    description: Date and time when the timeline message occurred.
+    readOnly: true
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  _links:
+    $ref: ./SelfLink.yaml

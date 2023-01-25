@@ -1,0 +1,105 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: itemId
+    in: path
+    description: ID of the invoice item.
+    required: true
+    schema:
+      type: string
+get:
+  x-products:
+    - Core
+  tags:
+    - Invoices
+  summary: Retrieve an invoice item
+  operationId: GetInvoiceItem
+  x-sdk-operation-name: getInvoiceItem
+  description: Retrieves an invoice item.
+  responses:
+    '200':
+      description: Invoice item retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InvoiceItem.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/invoices_{id}_items_{itemId}/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/invoices_{id}_items_{itemId}/getundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/invoices_{id}_items_{itemId}/getundefined
+put:
+  x-products:
+    - Core
+  tags:
+    - Invoices
+  summary: Update an invoice item
+  operationId: PutInvoiceItem
+  x-sdk-operation-name: updateInvoiceItem
+  description: Updates an invoice item.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/InvoiceItem.yaml
+    description: Invoice item resource.
+    required: true
+  responses:
+    '200':
+      description: Invoice item updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InvoiceItem.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/invoices_{id}_items_{itemId}/putundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/invoices_{id}_items_{itemId}/putundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/invoices_{id}_items_{itemId}/putundefined
+delete:
+  x-products:
+    - Core
+  tags:
+    - Invoices
+  summary: Delete an invoice item
+  operationId: DeleteInvoiceItem
+  x-sdk-operation-name: deleteInvoiceItem
+  description: Deletes an invoice item.
+  responses:
+    '204':
+      description: Invoice item deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/invoices_{id}_items_{itemId}/deleteundefined
+    - lang: JavaScript
+      source:
+        $ref: >-
+          ../code_samples/JavaScript/invoices_{id}_items_{itemId}/deleteundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/invoices_{id}_items_{itemId}/deleteundefined

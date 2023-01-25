@@ -1,0 +1,60 @@
+description: Directa24 gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Directa24 credentials object.
+        properties:
+          x_login:
+            type: string
+            description: Directa24 login.
+          x_tran_key:
+            type: string
+            description: Directa24 transaction key.
+            format: password
+            writeOnly: true
+          secret_key:
+            type: string
+            description: Directa24 secret key.
+            format: password
+            writeOnly: true
+          web_pay_login:
+            type: string
+            description: Directa24 web pay status login.
+          web_pay_tran_key:
+            type: string
+            description: Directa24 web pay status password.
+            format: password
+            writeOnly: true
+          cashout_login:
+            type: string
+            description: Directa24 cashout login.
+          cashout_password:
+            type: string
+            description: Directa24 cashout password.
+            format: password
+            writeOnly: true
+        required:
+          - x_login
+          - x_tran_key
+          - secret_key
+          - web_pay_login
+          - web_pay_tran_key
+      settings:
+        type: object
+        description: Directa24 settings object.
+        properties:
+          banks:
+            type: array
+            description: List of banks that is displayed to customers.
+            items:
+              $ref: ./Directa24Banks.yaml
+          skipStep:
+            type: boolean
+            description: >-
+              Specifies whether to skip the enter user personal information
+              step.

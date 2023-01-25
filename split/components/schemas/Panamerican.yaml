@@ -1,0 +1,39 @@
+description: Panamerican gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+      - settings
+    properties:
+      credentials:
+        type: object
+        description: Panamerican credentials object.
+        properties:
+          key:
+            type: string
+            description: Panamerican key.
+          password:
+            type: string
+            description: Panamerican password.
+            format: password
+            writeOnly: true
+        required:
+          - key
+          - password
+      threeDSecureServer:
+        $ref: ./Panamerican3dsServers.yaml
+      settings:
+        type: object
+        description: Panamerican settings object.
+        properties:
+          extraStep:
+            type: boolean
+            description: >-
+              Specifies whether to display a step where the user must enter
+              their ID number.
+          convertToAscii:
+            type: boolean
+            description: Specifies whether to convert all chars to ascii.
+        required:
+          - extraStep

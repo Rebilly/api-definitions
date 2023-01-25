@@ -1,0 +1,35 @@
+description: Onlineueberweisen gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+      - settings
+    properties:
+      credentials:
+        type: object
+        description: Onlineueberweisen credentials object.
+        properties:
+          apiKey:
+            type: string
+            description: Onlineueberweisen API key.
+            format: password
+            writeOnly: true
+          nuaPayApiKey:
+            type: string
+            description: NuaPay API key for reconciliation.
+            format: password
+            writeOnly: true
+          nuaPayAccountId:
+            type: string
+            description: NuaPay account ID for reconciliation.
+        required:
+          - apiKey
+      settings:
+        type: object
+        description: Onlineueberweisen settings object.
+        properties:
+          payformCode:
+            type: string
+            description: Onlineueberweisen code to use a customized PayForm template.
+            default: default

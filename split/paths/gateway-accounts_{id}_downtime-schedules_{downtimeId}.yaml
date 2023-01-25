@@ -1,0 +1,91 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: downtimeId
+    in: path
+    description: ID of the gateway account downtime.
+    required: true
+    schema:
+      type: string
+get:
+  x-products:
+    - Users
+  tags:
+    - Gateway accounts
+  summary: Retrieve a gateway account downtime schedule
+  operationId: GetGatewayAccountDowntimeSchedule
+  x-sdk-operation-name: getDowntimeSchedule
+  description: Retrieves a gateway account downtime schedule with a specified ID.
+  responses:
+    '200':
+      description: Gateway downtime schedule retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccountDowntimeSchedule.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: >-
+          ../code_samples/JavaScript/gateway-accounts_{id}_downtime-schedules_{downtimeId}/getundefined
+put:
+  x-products:
+    - Users
+  tags:
+    - Gateway accounts
+  summary: Update a gateway account downtime schedule
+  operationId: PutGatewayAccountDowntimeSchedule
+  x-sdk-operation-name: updateDowntimeSchedule
+  description: Updates a gateway account downtime schedule with a specified ID.
+  responses:
+    '200':
+      description: Gateway account downtime schedule updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccountDowntimeSchedule.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  requestBody:
+    $ref: ../components/requestBodies/GatewayAccountDowntimeSchedule.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: >-
+          ../code_samples/JavaScript/gateway-accounts_{id}_downtime-schedules_{downtimeId}/putundefined
+delete:
+  x-products:
+    - Users
+  tags:
+    - Gateway accounts
+  summary: Delete a gateway account downtime schedule
+  operationId: DeleteGatewayAccountDowntimeSchedule
+  x-sdk-operation-name: deleteDowntimeSchedule
+  description: Deletes a gateway account downtime schedule with a specified ID.
+  responses:
+    '204':
+      description: Gateway account downtime schedule deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: >-
+          ../code_samples/JavaScript/gateway-accounts_{id}_downtime-schedules_{downtimeId}/deleteundefined

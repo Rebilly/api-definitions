@@ -1,0 +1,28 @@
+description: InstaDebit gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: InstaDebit credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: InstaDebit merchant account number.
+          password:
+            type: string
+            description: InstaDebit merchant account password.
+            format: password
+            writeOnly: true
+        required:
+          - merchantId
+          - password
+      settings:
+        type: object
+        properties:
+          merchantSubId:
+            type: integer
+            description: Merchant or organization sub ID.

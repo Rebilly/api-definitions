@@ -1,0 +1,31 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Tracking
+  summary: Retrieve an API tracking log
+  operationId: GetTrackingApi
+  x-sdk-operation-name: getApiLog
+  description: Retrieves an API tracking log record with a specified ID.
+  responses:
+    '200':
+      description: Tracking API log retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ApiTracking.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/tracking_api_{id}/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/tracking_api_{id}/getundefined

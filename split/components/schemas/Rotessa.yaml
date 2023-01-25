@@ -1,0 +1,28 @@
+description: Rotessa gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+      - settings
+    properties:
+      credentials:
+        type: object
+        description: Rotessa credentials object.
+        properties:
+          apiKey:
+            type: string
+            description: Rotessa API key.
+            format: password
+            writeOnly: true
+        required:
+          - apiKey
+      settings:
+        type: object
+        description: Rotessa settings object.
+        properties:
+          delay:
+            type: integer
+            description: Automatic capture delay.
+        required:
+          - delay

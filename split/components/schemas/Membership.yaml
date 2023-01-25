@@ -1,0 +1,60 @@
+type: object
+required:
+  - organization
+  - user
+properties:
+  organization:
+    description: Organization membership.
+    readOnly: true
+    type: object
+    properties:
+      id:
+        description: ID of the organization.
+        type: string
+        allOf:
+          - $ref: ./ResourceId.yaml
+      name:
+        description: Name of the organization.
+        type: string
+      createdTime:
+        $ref: ./CreatedTime.yaml
+      updatedTime:
+        $ref: ./UpdatedTime.yaml
+  user:
+    description: Membership user.
+    readOnly: true
+    type: object
+    properties:
+      id:
+        description: Organization ID.
+        type: string
+        allOf:
+          - $ref: ./ResourceId.yaml
+      name:
+        description: First and last name of the user.
+        type: string
+  allowedIps:
+    $ref: ./AllowedIps.yaml
+  permissions:
+    description: |-
+      Permissions that the user has within the organization.
+      Use the wildcard character `*` for full access.
+    allOf:
+      - $ref: ./AclPermissions.yaml
+  isOwner:
+    description: Specifies if the user is the owner of the organization.
+    type: boolean
+  isDefault:
+    description: Specifies if the organization is the default organization for the user.
+    type: boolean
+    readOnly: true
+  roleIds:
+    type: array
+    description: |-
+      Role IDs associated with the user.
+      Role IDs specify the roles that the user performs within the organization.
+      For example, the user may be an organization admin.
+    items:
+      type: string
+  _links:
+    $ref: ./SelfLink.yaml

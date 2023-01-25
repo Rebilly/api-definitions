@@ -1,0 +1,17 @@
+description: Cashterminal gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          secretKey:
+            description: Cashterminal secret key.
+            type: string
+            format: password
+            writeOnly: true
+        required:
+          - secretKey

@@ -1,0 +1,29 @@
+post:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Preview an order
+  operationId: PostPreviewOrder
+  x-sdk-operation-name: order
+  description: |-
+    Previews an order.
+    Use this operation to preview a draft order before making an order.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/OrderPreview.yaml
+  responses:
+    '200':
+      description: Order preview retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OrderPreview.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

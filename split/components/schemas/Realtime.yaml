@@ -1,0 +1,21 @@
+description: Realtime gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          clientId:
+            type: string
+            description: Realtime client ID.
+          secretWord:
+            type: string
+            description: Realtime secret word.
+            format: password
+            writeOnly: true
+        required:
+          - clientId
+          - secretWord

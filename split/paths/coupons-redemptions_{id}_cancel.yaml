@@ -1,0 +1,31 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Coupons
+  summary: Cancel a coupon redemption
+  operationId: PostCouponRedemptionCancellation
+  x-sdk-operation-name: cancelRedemption
+  description: Cancels a coupon redemption with a specified ID.
+  responses:
+    '201':
+      description: Coupon redemption cancelled.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/coupons-redemptions_{id}_cancel/postundefined
+    - lang: JavaScript
+      source:
+        $ref: >-
+          ../code_samples/JavaScript/coupons-redemptions_{id}_cancel/postundefined

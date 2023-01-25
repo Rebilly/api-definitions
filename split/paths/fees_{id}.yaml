@@ -1,0 +1,149 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-badge: Experimental
+  x-products:
+    - Core
+  tags:
+    - Fees
+  summary: Retrieve a fee entry
+  description: >-
+    Retrieves a fee entry.
+
+
+    > **Important:** This operation is experimental and may not be backward
+    compatible.
+  operationId: GetFee
+  x-sdk-operation-name: get
+  responses:
+    '200':
+      description: Fee retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Fee.yaml
+          examples:
+            stripe-trx:
+              $ref: ../components/examples/stripe-trx-response.yaml
+            stripe-us:
+              $ref: ../components/examples/stripe-us-response.yaml
+            stripe-intl:
+              $ref: ../components/examples/stripe-intl-response.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-badge: Experimental
+  x-products:
+    - Core
+  tags:
+    - Fees
+  summary: Upsert a fee entry
+  description: >-
+    Creates or updates (upserts) a fee entry.
+
+
+    > **Important:** This operation is experimental and may not be backward
+    compatible.
+  operationId: PutFee
+  x-sdk-operation-name: upsert
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Fee.yaml
+        examples:
+          stripe-trx:
+            $ref: ../components/examples/stripe-trx-request.yaml
+          stripe-us:
+            $ref: ../components/examples/stripe-us-request.yaml
+          stripe-intl:
+            $ref: ../components/examples/stripe-intl-request.yaml
+  responses:
+    '200':
+      description: Fee entry updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Fee.yaml
+          examples:
+            stripe-trx:
+              $ref: ../components/examples/stripe-trx-response.yaml
+            stripe-us:
+              $ref: ../components/examples/stripe-us-response.yaml
+            stripe-intl:
+              $ref: ../components/examples/stripe-intl-response.yaml
+    '201':
+      description: Fee entry created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Fee.yaml
+          examples:
+            stripe-trx:
+              $ref: ../components/examples/stripe-trx-response.yaml
+            stripe-us:
+              $ref: ../components/examples/stripe-us-response.yaml
+            stripe-intl:
+              $ref: ../components/examples/stripe-intl-response.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+patch:
+  x-badge: Experimental
+  x-products:
+    - Core
+  tags:
+    - Fees
+  summary: Patch a fee entry
+  description: >-
+    Patches a fee entry.
+
+
+    > **Important:** This operation is experimental and may not be backward
+    compatible.
+  operationId: PatchFee
+  x-sdk-operation-name: patch
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/FeePatch.yaml
+        examples:
+          stripe-trx:
+            $ref: ../components/examples/stripe-trx-request.yaml
+          stripe-us:
+            $ref: ../components/examples/stripe-us-request.yaml
+          stripe-intl:
+            $ref: ../components/examples/stripe-intl-request.yaml
+  responses:
+    '200':
+      description: Fee entry patched.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Fee.yaml
+          examples:
+            stripe-trx:
+              $ref: ../components/examples/stripe-trx-response.yaml
+            stripe-us:
+              $ref: ../components/examples/stripe-us-response.yaml
+            stripe-intl:
+              $ref: ../components/examples/stripe-intl-response.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

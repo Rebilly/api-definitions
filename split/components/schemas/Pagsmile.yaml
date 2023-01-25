@@ -1,0 +1,25 @@
+description: Pagsmile gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantId:
+            type: string
+            description: Pagsmile merchant ID.
+          appId:
+            type: string
+            description: Pagsmile application ID.
+          secretKey:
+            type: string
+            description: Pagsmile secret key.
+            format: password
+            writeOnly: true
+        required:
+          - merchantId
+          - appId
+          - secretKey

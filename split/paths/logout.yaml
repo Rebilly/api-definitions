@@ -1,0 +1,27 @@
+servers:
+  - url: https://api-sandbox.rebilly.com
+    description: Sandbox server
+  - url: https://api.rebilly.com
+    description: Live server
+post:
+  x-products:
+    - Users
+  tags:
+    - JWT session
+  summary: Delete user session
+  operationId: PostLogoutRequest
+  x-sdk-operation-name: logout
+  description: |-
+    Deletes the user's current session.
+    This endpoint must be accessed with valid JWT authorization header.
+  responses:
+    '204':
+      description: Session deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/logout/postundefined

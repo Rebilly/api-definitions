@@ -1,0 +1,2008 @@
+openapi: 3.0.3
+info:
+  version: latest
+  title: Rebilly API
+  contact:
+    name: Rebilly API Support
+    url: https://www.rebilly.com/contact/
+    email: integrations@rebilly.com
+  license:
+    name: Rebilly
+    url: https://www.rebilly.com/api-license/
+  termsOfService: https://www.rebilly.com/terms-of-use/
+  x-logo:
+    url: https://rebilly-core.redoc.ly/rb_apiLogo.svg
+    backgroundColor: '#0044d4'
+  description: >
+    # Introduction
+
+    [comment]: <> (x-product-description-placeholder)
+
+    The Rebilly API is built on HTTP and is RESTful.
+
+    It has predictable resource URLs and returns HTTP response codes to indicate
+    errors.
+
+    It also accepts and returns JSON in the HTTP body.
+
+    Use your favorite HTTP/REST library in your programming language when using
+    this API,
+
+    or use one of the Rebilly SDKs,
+
+    which are available in [PHP](https://github.com/Rebilly/rebilly-php) and
+    [JavaScript](https://github.com/Rebilly/rebilly-js-sdk).
+
+
+    Every action in the [Rebilly UI](https://app.rebilly.com) is supported by an
+    API which is documented and available for use, so that you may automate any
+    necessary workflows or processes.
+
+    This API reference documentation contains the most commonly integrated
+    resources.
+
+
+    # Authentication
+
+
+    This topic describes the different forms of authentication that are
+    available in the Rebilly API, and how to use them.
+
+
+    Rebilly offers four forms of authentication: secret key, publishable key,
+    JSON Web Tokens, and public signature key.
+
+
+    - Secret API key: Use to make requests from the server side. Never share
+    these keys. Keep them guarded and secure.
+
+    - Publishable API key: Use in your client-side code to tokenize payment
+    information.
+
+    - JWT: Use to make short-life tokens that expire after a set period of time.
+
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+
+
+    ## Manage API keys
+
+
+    To create or manage API keys, select one of the following:
+
+
+    - Use the Rebilly UI: see [Manage API
+    keys](https://www.rebilly.com/docs/dev-docs/api-keys/#manage-api-keys)
+
+    - Use the Rebilly API: see the [API key
+    operations](https://all-rebilly.redoc.ly/tag/API-keys).
+
+
+    For more information on API keys, see [API
+    keys](https://www.rebilly.com/docs/concepts-and-features/concept/api-keys).
+
+
+    # Errors
+
+    Rebilly follows the error response format proposed in [RFC
+    7807](https://tools.ietf.org/html/rfc7807), which is also known as Problem
+    Details for HTTP APIs. As with any API responses, your client must be
+    prepared to gracefully handle additional members of the response. The
+    following section describes common error types.
+
+
+    ## Forbidden
+
+    <RedocResponse pointer={"#/components/responses/Forbidden"} />
+
+
+    ## Conflict
+
+    <RedocResponse pointer={"#/components/responses/Conflict"} />
+
+
+    ## NotFound
+
+    <RedocResponse pointer={"#/components/responses/NotFound"} />
+
+
+    ## Unauthorized
+
+    <RedocResponse pointer={"#/components/responses/Unauthorized"} />
+
+
+    ## ValidationError
+
+    <RedocResponse pointer={"#/components/responses/ValidationError"} />
+
+
+    # SDKs
+
+
+    Rebilly provides a JavaScript SDK and a PHP SDK to help interact with the
+    Rebilly API.
+
+    However, no SDK is required to use the API.
+
+
+    Rebilly also provides
+    [FramePay](https://www.rebilly.com/docs/developer-docs/framepay/),
+
+    a client-side iFrame-based solution, to help create payment tokens while
+    minimizing PCI DSS compliance burdens
+
+    and maximizing your customization ability.
+
+    [FramePay](https://www.rebilly.com/docs/developer-docs/framepay/) interacts
+    with the [payment tokens creation
+    operation](https://all-rebilly.redoc.ly/tag/Payment-tokens/operation/PostToken).
+
+
+    ## JavaScript SDK
+
+
+    For installation and usage instructions, see
+    [SDKs](https://www.rebilly.com/docs/dev-docs/sdks/).
+
+    All JavaScript SDK code examples are included in the API reference
+    documentation.
+
+
+    ## PHP SDK
+
+
+    For installation and usage instructions, see
+    [SDKs](https://www.rebilly.com/docs/dev-docs/sdks/).
+
+    All SDK code examples are included in the API reference documentation.
+
+    To use them, you must configure the `$client` as follows:
+
+
+    ```php
+
+    $client = new Rebilly\Client([
+        'apiKey' => 'YourApiKeyHere',
+        'baseUrl' => 'https://api.rebilly.com',
+    ]);
+
+    ```
+
+
+    # Using filter with collections
+
+
+    Rebilly provides collections filtering. Use the `?filter` parameter on
+    collections to define which records should be shown in the response.
+
+
+    Format description:
+
+
+    - Fields and values in the filter are separated with `:`:
+    `?filter=firstName:John`.
+
+
+    - Sub-fields are separated with `.`: `?filter=billingAddress.country:US`.
+
+
+    - Multiple filters are separated with `;`:
+    `?filter=firstName:John;lastName:Doe`. \
+      They are joined with `AND` logic. Example: `firstName:John` AND `lastName:Doe`.
+
+    - To use multiple values, use `,` as values separators:
+    `?filter=firstName:John,Bob`. \
+      Multiple values specified for a field are joined with `OR` logic. Example: `firstName:John` OR `firstName:Bob`.
+
+    - To negate the filter, use `!`: `?filter=firstName:!John`.
+
+
+    - To negate multiple values, use: `?filter=firstName:!John,!Bob`.
+      This filter rule excludes all `Johns` and `Bobs` from the response.
+
+    - To use range filters, use: `?filter=amount:1..10`.
+
+
+    - To use a gte (greater than or equals) filter, use: `?filter=amount:1..`.
+      This also works for datetime-based fields.
+      
+    - To use a lte (less than or equals) filter, use: `?filter=amount:..10`.
+      This also works for datetime-based fields.
+
+    - To create [specified values
+    lists](https://all-rebilly.redoc.ly/#tag/Lists) and use them in filters,
+    use: `?filter=firstName:@yourListName`. \
+      You can also exclude list values: `?filter=firstName:!@yourListName`. \
+      Use value lists to compare against a list of data when setting conditions for rules or binds,
+      or applying filters to data table segments.
+      Commonly used lists contain values related to conditions that target specific properties such as: customers, transactions, or BINs.
+
+    - Datetime-based fields accept values formatted using RFC 3339. Example:
+    `?filter=createdTime:2021-02-14T13:30:00Z`.
+
+
+    # Expand to include embedded objects
+
+
+    Rebilly provides the ability to pre-load additional objects with a request.
+
+
+    You can use the `?expand` parameter on most requests to expand and include
+    embedded objects within the `_embedded` property of the response.
+
+    The `_embedded` property contains an array of objects keyed by the expand
+    parameter values.
+
+    To expand multiple objects, pass them as a comma-separated list of objects.
+
+
+    Example request containing multiple objects:
+
+
+    ```
+
+    ?expand=recentInvoice,customer
+
+    ```
+
+
+    Example response:
+
+
+    ```
+
+    "_embedded": [
+        "recentInvoice": {...},
+        "customer": {...}
+    ]
+
+    ```
+
+
+    Expand may be used on `GET`, `PATCH`, `POST`, `PUT` requests.
+
+
+    # Get started
+
+
+    The full [Rebilly API](https://all-rebilly.redoc.ly/) has over 500
+    operations.
+
+    This is likely more than you may need to implement your use cases.
+
+    If you would like to implement a particular use case,
+
+    [contact Rebilly](https://www.rebilly.com/support/) for guidance and
+    feedback on the best API operations to use for the task.
+
+
+    To integrate Rebilly, and learn about related resources and concepts,
+
+    see [Get started](https://www.rebilly.com/docs/dev-docs/get-started/).
+security:
+  - SecretApiKey: []
+  - JWT: []
+servers:
+  - url: https://api-sandbox.rebilly.com/organizations/{organizationId}
+    description: Sandbox server
+    variables:
+      organizationId:
+        default: unknown
+        description: >-
+          Unique organization identifier.
+
+          An organization is an entity that represents a company.
+
+          For more information, see [Obtain an organization
+          ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+  - url: https://api.rebilly.com/organizations/{organizationId}
+    description: Live server
+    variables:
+      organizationId:
+        default: unknown
+        description: >-
+          Unique organization identifier.
+
+          An organization is an entity that represents a company.
+
+          For more information, see [Obtain an organization
+          ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+components:
+  securitySchemes:
+    JWT:
+      description: >-
+        JWT is a short lifetime token that can be assigned a specific expiration
+        time.
+
+        To create a JWT session, see [JWT session
+        resource](https://all-rebilly.redoc.ly/tag/JWT-session/operation/PostSigninRequest).
+
+
+        Usage format: `Bearer <JWT>`.
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    ApplicationJWT:
+      description: >-
+        Applications in the Rebilly App Store can create a JSON Web Token (JWT)
+        by fetching an user's instance.
+
+        For more information, see [Retrieve an application
+        instance](https://all-rebilly.redoc.ly/tag/Application-owners#operation/GetApplicationInstanceByOrganization).
+
+
+        Usage format: `Bearer <JWT>`.
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    PublishableApiKey:
+      description: >-
+        This authentication method is applicable to specific operations.
+
+
+        To create a publishable API key, see [Create an API
+        key](https://all-rebilly.redoc.ly/tag/API-keys/operation/PostApiKey).
+      name: Authorization
+      type: apiKey
+      in: header
+    SecretApiKey:
+      description: |-
+        Never share your secret keys.
+        Keep them guarded and secure.
+
+        Use your secret API key only to make requests from the server side.
+        To authenticate, provide your secret key in the request header.
+      name: REB-APIKEY
+      type: apiKey
+      in: header
+    CustomerJWT:
+      description: >-
+        To create a JSON Web Token (JWT) using Storefront authentication,
+
+        see [Create a session with username and
+        password](https://all-rebilly.redoc.ly/tag/Authentication/operation/StorefrontPostLogin).
+
+
+        Usage format: `Bearer <JWT>`.
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+tags:
+  - name: Account
+    description: >-
+      Use these operations to manage Rebilly accounts.
+
+      An account in which you are subscribed to in order to use the Rebilly
+      product.
+  - name: AML
+    description: >-
+      Use Anti-Money Laundering (AML) operations to screen customers and help
+      prevent your business from becoming directly or indirectly involved in
+      criminal activity.
+
+
+      Use AML operations during customer creation, and some transaction
+      processing,
+
+      to help determine if a potential customer (lead), or customer, has
+      political or economic sanctions against them.
+
+
+      AML operations search the following for screening purposes:
+
+      Politically Exposed Persons (PEPs) lists, sanction lists,
+
+      and adverse media lists.
+  - name: API keys
+    description: >-
+      Use API keys to identify and authenticate applications and users.
+
+      Always keep your API keys private.
+
+      When creating API keys, you can restrict them to a given set of
+      permissions.
+
+      For information on how to create and manage API keys, see [API
+      keys](https://www.rebilly.com/docs/dev-docs/api-keys/).
+
+
+      In addition to API keys, you may use JSON Web Tokens (JWT) to authenticate
+      to the API.
+
+      For more information, see [JWT
+      session](https://all-rebilly.redoc.ly/#tag/JWT-Session).
+  - name: Application owners
+    description: >-
+      Use these operations to register applications to the Rebilly Apps Store
+      and manage application instances.
+
+      An application owner is a person or organization that has submitted an app
+      to the Rebilly App Store.
+
+      For more information, see [Submit an
+      app](https://www.rebilly.com/docs/dev-docs/submit-a-rebilly-app/).
+  - name: Application users
+    description: >-
+      Use these operations to install or uninstall apps from the Rebilly App
+      Store to your Rebilly account, and to manage application instances.
+
+      An application user is a person or organization that uses an app that is
+      installed from the Rebilly App Store.
+
+      For more information, see [Install or uninstall an
+      app](https://www.rebilly.com/docs/dev-docs/install-an-app/).
+  - name: Authentication
+    description: >-
+      Use these operations to manage the process of confirming the identity of
+      users that are attempting to access resources.
+  - name: Avalara credentials
+    description: >-
+      Use these operations to manage your Avalara account credentials.
+
+      The Avalara integration enables you to calculate taxes and create
+      transactions in your Avalara account.
+  - name: Balance transactions
+    description: |-
+      Use these operations to view and manage balance transactions.
+
+      > **Important:** These operations are experimental and may change.
+  - name: Billing portals
+    description: >-
+      Use these operations to create and manage billing portals.
+
+      Rebilly hosted billing portals provide secure, Rebilly hosted pages, where
+      customers can:
+
+      view invoices, cancel subscriptions, update payment instruments, and
+      update their address.
+  - name: Blocklists
+    description: >-
+      Use blocklists to prevent fraud and criminal activity.
+
+
+      Blocklists are lists of customer attribute values that are blocked from
+      buying from you.
+
+      For example, if a customer attempts to make a purchase from you with a
+      credit card that is in a blocklist, the transaction is blocked and is not
+      processed.
+
+
+      Before a new transaction is processed in Rebilly, blocklists are examined
+      to check for attributes related to the entity.
+
+      If a match is detected, the operation is aborted.
+
+      A blocklist that expires after a period of time is called a greylist.
+  - name: Broadcast messages
+    description: >-
+      Use broadcast messages to notify customers and leads about upcoming
+      promotions, service updates, and events.
+
+      Broadcast messages are emails that are sent to a specific group of
+      customers, or all customers.
+
+      For more information, see [Create a broadcast
+      message](https://www.rebilly.com/docs/automations/email-notifications/#create-a-broadcast-messages).
+  - name: Cashier
+    description: >-
+      Create and manage cashier requests and manage strategies that determine
+      the deposit amounts to display on the page.
+
+      Rebilly hosted cashiers provide a secure and compliant way to deposit
+      funds.
+
+      Cashier forms are customizable, and use fully responsive design, built-in
+      error messaging and validation.
+  - name: Checkout forms
+    description: >-
+      Use these operations to create and manage checkout forms.
+
+      Rebilly hosted checkout forms provide secure and compliant checkouts.
+
+      Checkout forms are customizable, and use fully responsive design,
+
+      built-in error messaging, validation, and expedited checkout for returning
+      customers.
+  - name: Coupons
+    description: >-
+      Use coupons to reward customers, generate sales, or to test new pricing
+      strategies.
+
+      Coupons enable you to apply different types of discounts to invoices,
+      subscriptions, and pricing plans.
+
+
+      Redeemed coupons are attached to a customer's account.
+
+      Depending on the coupon restrictions, the redeemed coupons are then
+      applied from the customer's account to subsequent invoices or
+      subscriptions.
+
+      Redeemed coupons can only be applied to invoices of the same currency.
+
+
+      Once a coupon is redeemed it cannot be modified.
+
+      You may deactivate a coupon or create a new coupon, but you cannot reuse
+      the same coupon code.
+
+      If you have a use case where you must reuse the same code, [contact
+      Rebilly](https://www.rebilly.com/contact/).
+
+
+      ### Coupon restriction types
+
+
+      The following coupon description types are available:
+
+
+      - `restrict-to-countries`: Restricts a coupon for use in specific
+      countries.
+
+      - `discounts-per-redemption`: Restricts the number of times that the
+      coupon can be applied by one redemption.
+        For example, use this restriction to configure a coupon that can only be applied to the first subscription renewal of a particular product.
+      - `minimum-order-amount`: Sets a minimum order amount for a coupon
+      application.
+        For example, if the restriction amount is $20, the coupon is only applied to invoices with a total amount of $20 or more.
+      - `restrict-to-invoices`: Restricts a coupon to specific invoices.
+
+      - `restrict-to-plans`: Restricts a coupon to specific pricing plans.
+
+      - `restrict-to-subscriptions`: Restricts a coupon to specific order
+      subscriptions.
+
+      - `restrict-to-products`: Restricts a coupon to specific products.
+
+      - `paid-by-time`: Specifies a date and time at which a coupon redemption
+      expires if not paid.
+
+      - `redemptions-per-customer`: Restricts the number of times that a coupon
+      can be redeemed by one customer.
+        For example, use this restriction to limit the number of redemptions to one per customer.
+      - `total-redemptions`: Restricts the number of times a coupon can be
+      redeemed by different customers.
+
+      - `restrict-to-bxgy`: Provides "buy X get Y" promotions.
+        These promotions incentivize new customers to buy and also reward existing customers.
+        This restriction type enables you to add discounted plans to an invoice when a certain quantity of other plans are purchased.
+        For example, if a customer buys two or more books, they get one free bookmark.
+  - name: Credit memos
+    description: >-
+      Use credit memos to provide a customer with store credit.
+
+      A common use case for using a credit memo is to provide a customer with
+      store credit,
+
+      rather than a refund, if the customer pays more than they owe or returns a
+      product.
+
+      For information on the credit memo resource, see
+      [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
+  - name: Credit memos timeline
+    description: >-
+      Use credit memo timelines to maintain an audit trail of changes and
+      activity for each credit memo.
+
+      Credit memos are a means of providing a customer with store credit.
+  - name: Custom domains
+    description: >-
+      Use custom domains to configure and use your own domain for forms and
+      billing portals,
+
+      instead of the default Rebilly domain: `portal.secure-payments.app`.
+
+      For more information, see [Configure a custom
+      domain](https://www.rebilly.com/docs/settings/organizations-and-websites#configure-a-custom-domain).
+  - name: Custom fields
+    description: >-
+      Use custom fields to extend a resource scheme to include custom data that
+      is not provided as a common field.
+
+      Depending on the resource on which the custom field is added, it may be
+      available in the Rebilly UI.
+
+
+      Example: A custom field called `preferredCommunicationChannel` is added to
+      the customer resource.
+
+      It has two allowed values, which are 'email' and 'phone'.
+
+
+      ```js
+
+      {
+        "customFields": {
+            "preferredCommunicationChannel": "email"
+        }
+      }
+
+      ```
+
+
+      For detailed information on Rebilly resources, see
+      [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
+  - name: Customer authentication
+    description: >-
+      Use these operations to validate the identity of users and manage
+      authentication credentials.
+  - name: Customers
+    description: >-
+      Use these operations to manage customers.
+
+      A customer is an entity that purchases goods or services from you (a
+      merchant),
+
+      and is the payee in any transaction that is credited to you.
+
+      Customers are associated with payment instruments,
+
+      subscriptions, invoices, and other related resources.
+
+
+      In other systems, customers may be referred to as accounts,
+
+      clients, members, patrons, or players.
+
+      For information on the customer resource, see
+      [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
+  - name: Customers timeline
+    description: >-
+      Use customer timelines to maintain an audit trail of changes and activity
+      for each customer.
+  - name: Data exports
+    description: >-
+      Use data export operations to manage the export of resource data, such as:
+
+      transactions, customers, subscriptions, invoices, invoice item data, or
+      revenue audit.
+
+      Common data export use cases are:
+
+      accounting, data analysis, reporting, or importing into other databases.
+
+
+      For detailed information on Rebilly resources,
+
+      see
+      [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
+
+
+      For information on how manage reconciliation, see [Transaction
+      reconciliation](https://www.rebilly.com/docs/dev-docs/transaction-reconciliation).
+  - name: Disputes
+    description: >-
+      Use these operations to manage disputes.
+
+      A dispute occurs when a customer contests a charge to their account.
+
+      The dispute and related information is made available to the merchant by
+      the bank or credit card company.
+
+      The merchant then has the option to represent the charge and win the case.
+
+      This process is called dispute resolution.
+
+      If the merchant is unable to represent the charge, the card issuer
+      typically reverses the sale and adds fees on top of the charge.
+
+      This process is called a chargeback.
+  - name: Email credentials
+    description: Use these operations to get, create, and manage SMTP credential hashes.
+  - name: Email delivery settings
+    description: >-
+      Use email delivery settings to configure from which email address
+      notifications and broadcast message are sent.
+
+      In Rebilly, this email address is referred to as a "From address".
+
+      Supported email service providers are:
+
+      SMTP, Mailgun, SendGrid, AWS SES, Postmark, and Rebilly.
+  - name: Email messages
+    description: Use email messages to email customers directly.
+  - name: Email notifications
+    description: >-
+      Use email notifications to keep customers informed on events,
+
+      and to inform them of events that may require action on their end.
+
+      Email notifications are targeted email messages that can be plain text or
+      HTML.
+
+
+      Email notifications can also be used to notify teammates about new
+      customers, blocklist matches, risk score changes, and more.
+
+      For more information, see [Email
+      notifications](https://www.rebilly.com/docs/automations/email-notifications/).
+  - name: Email verification
+    description: >-
+      Use these operations to manage email verification.
+
+      Email verification is the process of confirming that an email address
+      exists and is associated with an individual.
+  - name: Experian credentials
+    description: >-
+      Use these operations to manage your Experian account credentials.
+
+      The Experian integration provides identity verification.
+
+      For more information, see [Experian
+      integration](https://www.rebilly.com/docs/automations/experian-integration/#experian-integration).
+  - name: Fees
+    description: >-
+      Use fees to reconcile transactions with applicable fees and discount
+      rates.
+
+      Fees are not applied directly to transaction amounts, they do not modify
+      the transaction amount.
+
+      Fees help to describe each part of the transaction amount.
+
+
+      > **Important:** These operations are experimental and may change.
+  - name: Files
+    description: >-
+      Use the file entity to store files and related metadata.
+
+      Files can be sorted by size, MIME-type, user-defined tags, and
+      description.
+
+
+      The following methods are available to upload files:
+
+      multipart/form-data encoded form, RAW POST &mdash;
+
+      by sending the file contents as the POST body, and fetching from URL
+      &mdash;
+
+      by providing the file URL using the 'url' parameter.
+
+
+      Use the attachments entity to link a file to one or multiple objects, such
+      as:
+
+      customer, dispute, transaction, order, plan, product, invoice, or timeline
+      comment.
+
+      Attachments enable you to quickly find and use files related to specific
+      entities.
+  - name: Gateway accounts
+    description: >-
+      Use these operations to manage payment gateway accounts.
+
+      A payment gateway is a service which enables merchants to receive payments
+      from their customers to their merchant account.
+
+      A merchant account is a bank account that enables businesses to receive
+      payments.
+
+      Use payment gateway accounts to connect payment requests to third party
+      networks and platforms.
+  - name: Gateway accounts timeline
+    description: >-
+      Use gateway account timelines to maintain an audit trail of changes and
+      activity for each gateway account.
+  - name: Histograms
+    description: >-
+      Use histograms operations to generate transaction histogram reports with
+      cohorts and periods. For information on the invoice resource, see
+      [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
+  - name: Integrations
+    description: >-
+      Use these operations to manage third-party apps that are integrated to
+      your Rebilly account.
+
+      For more information on third-party apps, and how to integrate them,
+
+      see [App store](https://www.rebilly.com/docs/app-store/app-store/).
+  - name: Invoices
+    description: >-
+      Use invoices to bill for the goods or services that you provide.
+
+      If your invoice includes subscription items, it also includes the
+      corresponding service periods and prices.
+  - name: Invoices timeline
+    description: >-
+      Use invoice timelines to maintain an audit trail of changes and activity
+      for each invoice.
+  - name: Journal
+    description: Use journal accounts, entries and records to track and recognize revenue.
+  - name: JWT session
+    description: >-
+      Use these operations to manage JWT sessions.
+
+      A session contains a token, which is a JSON Web Token.
+
+      The token is created with a user's sign in credentials.
+
+
+      This token can be used to authenticate to the API.
+
+      In addition, the session can be set to expire at a particular time.
+
+      Use the token to authenticate further requests to the Rebilly API.
+
+
+      The token must be kept private, but can be stored on the user's browser
+      client to simulate a "session".
+  - name: KYC documents
+    description: >-
+      Use Know Your Customer (KYC) documents to verify your customers identity.
+
+      The KYC document operations generate a signed link to the Rebilly [KYC
+      document
+      gatherer](https://www.rebilly.com/docs/kyc-and-aml/kyc-document-gatherer/).
+
+
+      Document types:
+        - `identity-proof`: Validates a customer's identity.
+        - `address-proof`: Validates a customer's address.
+        - `purchase-proof`: Validates a customer's purchase.
+        - `funds-proof`: Validates that a customer has funds.
+        - `credit-file-proof`: Verifies that there is an existing credit file with two sources that match the customer's name, DOB, and address.
+
+      Rebilly parses and analyzes the documents and accepts or rejects them
+      according to a configurable scoring algorithm.
+
+      When all document types in a KYC request are accepted, the status is
+      fulfilled, and the [KYC request fulfilled
+      webhook](https://www.rebilly.com/docs/dev-docs/api/operation/kyc-request-fulfilled/)
+      is sent.
+
+
+      ### Credit file proof
+
+
+      The `credit-file-proof` KYC document request type is only available in the
+      API,
+
+      this option is not available in the [KYC document
+      gatherer](https://www.rebilly.com/docs/kyc-and-aml/kyc-document-gatherer/).
+
+      This request verifies that there is an existing credit file with two
+      sources that match the person's name, date of birth, and address.
+
+
+      In Canada, to meet FINTRAC requirements, the `credit-file-proof` KYC
+      document request verifies the customer's name, address, and date of birth
+      with a credit agency.
+
+
+      If `credit-file-proof` is requested in combination with `identity-proof`
+      and `address-proof`,
+
+      `credit-file-proof` is attempted first.
+
+      If `credit-file-proof` validates the identity and address,
+
+      the KYC request is considered fulfilled.
+
+      If the request is not fulfilled,
+
+      redirect your customer to the KYC document gatherer to collect their KYC
+      documents.
+  - name: Lists
+    description: >-
+      Use lists to create and maintain sets of values that may be referenced in
+      rule conditions.
+
+      Commonly used lists contain values related to conditions that target
+      specific properties such as: customers, transactions, or BINs.
+
+
+      You may grant list edit permissions to members of your team without
+      enabling them to edit rules.
+
+      This may be useful if your workflow involves frequent updates to value
+      sets that are used in rule or bind conditions.
+
+      List order may not be maintained and duplicates may be removed.
+
+
+      For more information, see [Value
+      lists](https://www.rebilly.com/docs/automations/create-a-value-list/#value-lists).
+  - name: Memberships
+    description: |-
+      Use these operations to manage user membership within your organizations.
+      Membership describes the relationship between organizations and users.
+      For example, one user could be a member of more than one organization.
+  - name: Metadata
+    description: |-
+      Use these operations to retrieve and manage metadata.
+      Metadata is structured information on other data.
+  - name: Orders
+    description: >-
+      Use these operations to manage customer orders.
+
+      An order is a customer's request to purchase items.
+
+      It can contain subscription and one-time sale items.
+
+      When an order contains one or more subscription items, it is a
+      subscription order.
+
+
+      An order generates an invoice.
+
+      A subscription order generates an invoice for each service period.
+
+      For more information, see
+      [Orders](https://www.rebilly.com/docs/dev-docs/concepts/#orders).
+  - name: Orders timeline
+    description: >-
+      Use order timelines to maintain an audit trail of changes and activity for
+      each order.
+  - name: Organization data exports
+    description: >-
+      Use organization data exports to export your organization data which you
+      may want to do as a business continuity practice.
+
+      These may also be used to to export data if you decide to migrate to a
+      different payments solution.
+  - name: Organizations
+    description: >-
+      Use these operations to manage your organizations in Rebilly.
+
+      An organization is an entity that represents you, or your company, as a
+      merchant.
+
+      You can have multiple organizations.
+
+      For more information, see [My organizations and
+      websites](https://www.rebilly.com/docs/settings/organizations-and-websites/).
+
+
+      Note: Organizations are shared between the live and sandbox environments.
+  - name: Password reset
+    description: Use these operations to manage password resets for a user or organization.
+  - name: Payment instruments
+    description: >-
+      Use these operations to manage payment instruments.
+
+      Payment instrument is a term which describes any means of making a digital
+      payment, such as:
+
+      credit cards, debit cards, direct debits, payment service providers, and
+      digital wallets.
+
+
+      For more information on payment instruments, see [Payment
+      instruments](https://www.rebilly.com/docs/dev-docs/concepts/#payment-instruments).
+  - name: Payment tokens
+    description: >-
+      Use payment tokens to reduce the scope of [PCI DSS
+      compliance](https://www.rebilly.com/docs/pci-compliance/).
+
+
+      A payment token can be made using a different authentication scheme
+      (public key authentication), which enables you to create a payment token
+      directly from the browser.
+
+      This bypasses the need to send sensitive cardholder info to your servers.
+
+      We recommend using this with the FramePay library, which helps you
+      integrate a form into this API resource and create payment tokens.
+  - name: Plaid credentials
+    description: >-
+      Use these operations to manage your Plaid account credentials.
+
+      The Plaid integration provides customer bank credential verification,
+
+      and simplifies the process of providing credentials for your customers.
+
+      For more information, see [Plaid
+      integration](https://www.rebilly.com/docs/automations/plaid-integration/).
+  - name: Plans
+    description: >-
+      Use pricing plans to describe how the customer must pay for
+      [products](https://www.rebilly.com/docs/dev-docs/api/tag/Products/).
+
+
+      Rebilly provides the following plan types:
+
+
+      - Trial only: Use this plan to create and offer a free or discounted trial
+      period for your product.
+        For example, a free 2 week trial of an internet service.
+        After the trial, the customer can choose to sign up for a paid subscription, or stop using the service.
+      - Recurring: Use this plan to create and offer a subscription for your
+      product.
+        For example, a monthly subscription to an internet service that is charged at 20 USD per month.
+      - One time sale: Use this plan to create and offer a one-off sale for your
+      products.
+        For example, a one time purchase of two bags of coffee.
+
+      For information on the plans resource, see
+      [Plans](https://www.rebilly.com/docs/dev-docs/concepts/#plans).
+
+
+      For information on plan pricing, see [Pricing
+      formulas](https://www.rebilly.com/docs/settings/pricing-formulas/).
+  - name: Products
+    description: >-
+      Use products to describe the goods and services that your business sells.
+
+      A product also describes sales items on invoices and receipts.
+
+      Product pricing is defined in
+      [plans](https://www.rebilly.com/docs/dev-docs/api/tag/Plans/).
+
+      A product may have one or many plans.
+
+
+      For information on the product resource, see
+      [Product](https://www.rebilly.com/docs/dev-docs/concepts/#products).
+  - name: Profile
+    description: |-
+      Use these operations to manage user profiles.
+      A profile represents the person that is signed in to Rebilly.
+  - name: Purchases
+    description: >-
+      Use these operations to manage purchases.
+
+      Purchases are transactions that have been executed related to the purchase
+      of goods or services.
+  - name: Reports
+    description: >-
+      Use reports operations to retrieve summary information about your
+      customers, subscriptions, transactions, and more.
+  - name: Reset password
+    description: >-
+      Use these operations to manage password resets.
+
+      When a password reset is requested, an email with a token is sent.
+
+      In the email the user must click a reset link, and then create a new
+      password.
+  - name: Roles
+    description: >-
+      Use these operations to manage user roles within your team or
+      organization.
+
+      Roles are an implementation of the general hierarchical (Role Based Access
+      Control) RBAC.
+
+      A senior role inherits all of its juniors' Access Control Lists (ACLs) and
+      its own ACL.
+
+      Junior roles are not influenced by the senior role.
+  - name: Rules
+    description: >-
+      Use rules to automate.
+
+      In the Rebilly rules engine, an action is an operation that executes when
+      an event occurs.
+
+      Action and event conditions are defined in rules.
+
+      Rulesets are collections of rules that are associated with an event.
+
+      The order in which the rules are placed within a ruleset specifies the
+      execution order.
+
+
+      For a list of events and related actions, see
+      [Events](https://www.rebilly.com/docs/automations/event-types/).
+  - name: Rules timeline
+    description: >-
+      Use rule timelines to maintain an audit trail of changes and activity for
+      each rule.
+  - name: Search
+    description: >-
+      Use search operations to search data on customers, invoices, orders,
+      transactions and more.
+  - name: Segments
+    description: >-
+      Use these operations to manage UI segments.
+
+      A segment is a filtered view of a data set that can be shared with other
+      users.
+
+      For example, you may create a transactions segment that displays specific
+      columns that are filtered and sorted based on certain criteria,
+
+      and share it with others in your organization.
+  - name: Shipping rates
+    description: >-
+      Use these operations to manage shipping rates.
+
+      A shipping rate contains a filter and a pricing for a specific shipping
+      destination.
+  - name: Status
+    description: |-
+      Use this operation to check the status of the Rebilly API.
+      No authentication is required.
+  - name: Tags
+    description: >-
+      Use tags to organize and categorize customers or KYC documents based on
+      keywords.
+  - name: TaxJar credentials
+    description: >-
+      Use these operations to manage your TaxJar account credentials.
+
+      The TaxJar integration enables you to calculate taxes and create
+      transactions for the Sales Tax AutoFile feature in your TaxJar account.
+
+      For more information, see [TaxJar
+      integration](https://www.rebilly.com/docs/automations/tax-jar-integration/#taxjar-integration).
+  - name: Tracking
+    description: |-
+      Use tracking when debugging and auditing issues.
+      Tracking is a layer for accessing all activity such as:
+      API requests, subscriptions, webhooks, events, and more.
+  - name: Transactions
+    description: |-
+      Use these operations to:
+        - set up payment instruments for payments
+        - authorize and hold funds
+        - capture funds
+        - make payments
+        - make payouts
+        - refund transactions.
+  - name: Transactions timeline
+    description: >-
+      Use transaction timelines to maintain an audit trail of changes and
+      activity for each transaction.
+  - name: Usage
+    description: >-
+      Use these operations to manage the product usage of a subscription item
+      for metered billing purposes.
+
+
+      Use metered billing when product quantity is unknown to the customer at
+      the moment of creating a subscription.
+
+      Metered billing is based on reported usage records.
+
+      Every reported usage updates the quantity of an upcoming invoice item for
+      a specified subscription and a plan.
+
+      To create a metered billing plan, see [Plans](../Plans).
+  - name: Users
+    description: >-
+      Use these operations to manage users.
+
+      A user is a person who can login to Rebilly, and take actions based on
+      their granted permissions.
+  - name: Webhook credentials
+    description: Use these operations to manage webhook credential hashes.
+  - name: Webhooks
+    description: >-
+      Use these operations to manage webhooks.
+
+      Webhooks notify your systems in real-time when certain events occur.
+
+      For example, when a new transaction occurs or a new subscription is
+      created.
+
+      Webhooks enable you to collect information about events.
+
+      Rebilly can send this information by HTTP POST request to a defined URL of
+      your choice.
+  - name: Websites
+    description: >-
+      Use these operations to manage websites.
+
+      A website is where your organization obtains a customer.
+
+      It is also the processor account and billing descriptor used for payment
+      transactions.
+
+      You can create multiple websites.
+
+
+      Websites are related to each invoice and each payment gateway account.
+
+      This enables you to associate gateway accounts with multiple websites,
+
+      or make them exclusive to particular websites.
+
+      For more information, see [My organizations and
+      websites](https://www.rebilly.com/docs/settings/organizations-and-websites/).
+paths:
+  /aml:
+    $ref: paths/aml.yaml
+  /aml-checks:
+    $ref: paths/aml-checks.yaml
+  /aml-checks/{id}:
+    $ref: paths/aml-checks_{id}.yaml
+  /aml-checks/{id}/review:
+    $ref: paths/aml-checks_{id}_review.yaml
+  /attachments:
+    $ref: paths/attachments.yaml
+  /attachments/{id}:
+    $ref: paths/attachments_{id}.yaml
+  /authentication-options:
+    $ref: paths/authentication-options.yaml
+  /authentication-tokens:
+    $ref: paths/authentication-tokens.yaml
+  /authentication-tokens/{token}:
+    $ref: paths/authentication-tokens_{token}.yaml
+  /authentication-tokens/{token}/exchange:
+    $ref: paths/authentication-tokens_{token}_exchange.yaml
+  /blocklists:
+    $ref: paths/blocklists.yaml
+  /blocklists/{id}:
+    $ref: paths/blocklists_{id}.yaml
+  /coupons-redemptions:
+    $ref: paths/coupons-redemptions.yaml
+  /coupons-redemptions/{id}:
+    $ref: paths/coupons-redemptions_{id}.yaml
+  /coupons-redemptions/{id}/cancel:
+    $ref: paths/coupons-redemptions_{id}_cancel.yaml
+  /coupons:
+    $ref: paths/coupons.yaml
+  /coupons/{id}:
+    $ref: paths/coupons_{id}.yaml
+  /coupons/{id}/expiration:
+    $ref: paths/coupons_{id}_expiration.yaml
+  /credentials:
+    $ref: paths/credentials.yaml
+  /credentials/{id}:
+    $ref: paths/credentials_{id}.yaml
+  /custom-fields/{resource}:
+    $ref: paths/custom-fields_{resource}.yaml
+  /custom-fields/{resource}/{name}:
+    $ref: paths/custom-fields_{resource}_{name}.yaml
+  /customers:
+    $ref: paths/customers.yaml
+  /customers/{id}:
+    $ref: paths/customers_{id}.yaml
+  /customer-timeline-custom-events:
+    $ref: paths/customer-timeline-custom-events.yaml
+  /customer-timeline-custom-events/{id}:
+    $ref: paths/customer-timeline-custom-events_{id}.yaml
+  /customers/{id}/aml:
+    $ref: paths/customers_{id}_aml.yaml
+  /customers/{id}/lead-source:
+    $ref: paths/customers_{id}_lead-source.yaml
+  /customers/{id}/timeline:
+    $ref: paths/customers_{id}_timeline.yaml
+  /customers/{id}/timeline/{messageId}:
+    $ref: paths/customers_{id}_timeline_{messageId}.yaml
+  /disputes:
+    $ref: paths/disputes.yaml
+  /disputes/{id}:
+    $ref: paths/disputes_{id}.yaml
+  /files:
+    $ref: paths/files.yaml
+  /files/{id}:
+    $ref: paths/files_{id}.yaml
+  /files/{id}/download:
+    $ref: paths/files_{id}_download.yaml
+  /application-instances/{applicationId}:
+    $ref: paths/application-instances_{applicationId}.yaml
+  /applications:
+    $ref: paths/applications.yaml
+  /applications/{id}:
+    $ref: paths/applications_{id}.yaml
+  /applications/{id}/instances:
+    $ref: paths/applications_{id}_instances.yaml
+  /applications/{id}/instances/{organizationId}:
+    $ref: paths/applications_{id}_instances_{organizationId}.yaml
+  /invoices:
+    $ref: paths/invoices.yaml
+  /invoices/{id}:
+    $ref: paths/invoices_{id}.yaml
+  /invoices/{id}/items:
+    $ref: paths/invoices_{id}_items.yaml
+  /invoices/{id}/items/{itemId}:
+    $ref: paths/invoices_{id}_items_{itemId}.yaml
+  /invoices/{id}/issue:
+    $ref: paths/invoices_{id}_issue.yaml
+  /invoices/{id}/abandon:
+    $ref: paths/invoices_{id}_abandon.yaml
+  /invoices/{id}/void:
+    $ref: paths/invoices_{id}_void.yaml
+  /invoices/{id}/recalculate:
+    $ref: paths/invoices_{id}_recalculate.yaml
+  /invoices/{id}/reissue:
+    $ref: paths/invoices_{id}_reissue.yaml
+  /invoices/{id}/transaction-allocations:
+    $ref: paths/invoices_{id}_transaction-allocations.yaml
+  /invoices/{id}/transaction:
+    $ref: paths/invoices_{id}_transaction.yaml
+  /invoices/{id}/timeline:
+    $ref: paths/invoices_{id}_timeline.yaml
+  /invoices/{id}/timeline/{messageId}:
+    $ref: paths/invoices_{id}_timeline_{messageId}.yaml
+  /credit-memos:
+    $ref: paths/credit-memos.yaml
+  /credit-memos/{id}:
+    $ref: paths/credit-memos_{id}.yaml
+  /credit-memos/{id}/void:
+    $ref: paths/credit-memos_{id}_void.yaml
+  /credit-memos/{id}/timeline:
+    $ref: paths/credit-memos_{id}_timeline.yaml
+  /credit-memos/{id}/timeline/{messageId}:
+    $ref: paths/credit-memos_{id}_timeline_{messageId}.yaml
+  /journal-accounts:
+    $ref: paths/journal-accounts.yaml
+  /journal-accounts/{id}:
+    $ref: paths/journal-accounts_{id}.yaml
+  /journal-entries:
+    $ref: paths/journal-entries.yaml
+  /journal-entries/{id}:
+    $ref: paths/journal-entries_{id}.yaml
+  /journal-entries/{id}/records:
+    $ref: paths/journal-entries_{id}_records.yaml
+  /journal-entries/{id}/records/{journalRecordId}:
+    $ref: paths/journal-entries_{id}_records_{journalRecordId}.yaml
+  /kyc-requests:
+    $ref: paths/kyc-requests.yaml
+  /kyc-requests/{id}:
+    $ref: paths/kyc-requests_{id}.yaml
+  /kyc-documents:
+    $ref: paths/kyc-documents.yaml
+  /kyc-documents/{id}:
+    $ref: paths/kyc-documents_{id}.yaml
+  /kyc-documents/{id}/acceptance:
+    $ref: paths/kyc-documents_{id}_acceptance.yaml
+  /kyc-documents/{id}/matches:
+    $ref: paths/kyc-documents_{id}_matches.yaml
+  /kyc-documents/{id}/rejection:
+    $ref: paths/kyc-documents_{id}_rejection.yaml
+  /kyc-documents/{id}/review:
+    $ref: paths/kyc-documents_{id}_review.yaml
+  /kyc-documents/{id}/start-review:
+    $ref: paths/kyc-documents_{id}_start-review.yaml
+  /kyc-documents/{id}/stop-review:
+    $ref: paths/kyc-documents_{id}_stop-review.yaml
+  /kyc-settings:
+    $ref: paths/kyc-settings.yaml
+  /password-tokens:
+    $ref: paths/password-tokens.yaml
+  /password-tokens/{id}:
+    $ref: paths/password-tokens_{id}.yaml
+  /payment-instruments:
+    $ref: paths/payment-instruments.yaml
+  /payment-instruments/{id}:
+    $ref: paths/payment-instruments_{id}.yaml
+  /payment-instruments/{id}/deactivation:
+    $ref: paths/payment-instruments_{id}_deactivation.yaml
+  /plans:
+    $ref: paths/plans.yaml
+  /plans/{id}:
+    $ref: paths/plans_{id}.yaml
+  /products:
+    $ref: paths/products.yaml
+  /products/{id}:
+    $ref: paths/products_{id}.yaml
+  /ready-to-pay:
+    $ref: paths/ready-to-pay.yaml
+  /search:
+    $ref: paths/search.yaml
+  /shipping-rates:
+    $ref: paths/shipping-rates.yaml
+  /shipping-rates/{id}:
+    $ref: paths/shipping-rates_{id}.yaml
+  /subscriptions:
+    $ref: paths/subscriptions.yaml
+  /subscriptions/{id}:
+    $ref: paths/subscriptions_{id}.yaml
+  /subscriptions/{id}/void:
+    $ref: paths/subscriptions_{id}_void.yaml
+  /subscriptions/{id}/change-items:
+    $ref: paths/subscriptions_{id}_change-items.yaml
+  /subscriptions/{id}/interim-invoice:
+    $ref: paths/subscriptions_{id}_interim-invoice.yaml
+  /subscription-pauses:
+    $ref: paths/subscription-pauses.yaml
+  /subscription-pauses/{id}:
+    $ref: paths/subscription-pauses_{id}.yaml
+  /subscription-cancellations:
+    $ref: paths/subscription-cancellations.yaml
+  /subscription-cancellations/{id}:
+    $ref: paths/subscription-cancellations_{id}.yaml
+  /subscription-reactivations:
+    $ref: paths/subscription-reactivations.yaml
+  /subscription-reactivations/{id}:
+    $ref: paths/subscription-reactivations_{id}.yaml
+  /subscriptions/{id}/upcoming-invoices:
+    $ref: paths/subscriptions_{id}_upcoming-invoices.yaml
+  /subscriptions/{id}/upcoming-invoice:
+    $ref: paths/subscriptions_{id}_upcoming-invoice.yaml
+  /subscriptions/{id}/upcoming-invoices/{invoiceId}/issue:
+    $ref: paths/subscriptions_{id}_upcoming-invoices_{invoiceId}_issue.yaml
+  /subscriptions/{id}/timeline:
+    $ref: paths/subscriptions_{id}_timeline.yaml
+  /subscriptions/{id}/timeline/{messageId}:
+    $ref: paths/subscriptions_{id}_timeline_{messageId}.yaml
+  /usages:
+    $ref: paths/usages.yaml
+  /usages/{id}:
+    $ref: paths/usages_{id}.yaml
+  /tags:
+    $ref: paths/tags.yaml
+  /tags/{tag}:
+    $ref: paths/tags_{tag}.yaml
+  /tags/{tag}/customers:
+    $ref: paths/tags_{tag}_customers.yaml
+  /tags/{tag}/customers/{customerId}:
+    $ref: paths/tags_{tag}_customers_{customerId}.yaml
+  /tags/{tag}/kyc-documents:
+    $ref: paths/tags_{tag}_kyc-documents.yaml
+  /tags/{tag}/kyc-documents/{kycDocumentId}:
+    $ref: paths/tags_{tag}_kyc-documents_{kycDocumentId}.yaml
+  /tokens:
+    $ref: paths/tokens.yaml
+  /tokens/{token}:
+    $ref: paths/tokens_{token}.yaml
+  /digital-wallets/validation:
+    $ref: paths/digital-wallets_validation.yaml
+  /transactions:
+    $ref: paths/transactions.yaml
+  /transactions/{id}:
+    $ref: paths/transactions_{id}.yaml
+  /payouts:
+    $ref: paths/payouts.yaml
+  /transactions/{id}/query:
+    $ref: paths/transactions_{id}_query.yaml
+  /transactions/{id}/update:
+    $ref: paths/transactions_{id}_update.yaml
+  /transactions/{id}/refund:
+    $ref: paths/transactions_{id}_refund.yaml
+  /transactions/{id}/timeline:
+    $ref: paths/transactions_{id}_timeline.yaml
+  /transactions/{id}/timeline/{messageId}:
+    $ref: paths/transactions_{id}_timeline_{messageId}.yaml
+  /fees:
+    $ref: paths/fees.yaml
+  /fees/{id}:
+    $ref: paths/fees_{id}.yaml
+  /activation/{token}:
+    $ref: paths/activation_{token}.yaml
+  /api-keys:
+    $ref: paths/api-keys.yaml
+  /api-keys/{id}:
+    $ref: paths/api-keys_{id}.yaml
+  /balance-transactions:
+    $ref: paths/balance-transactions.yaml
+  /balance-transactions/{id}:
+    $ref: paths/balance-transactions_{id}.yaml
+  /billing-portals:
+    $ref: paths/billing-portals.yaml
+  /billing-portals/{id}:
+    $ref: paths/billing-portals_{id}.yaml
+  /broadcast-messages:
+    $ref: paths/broadcast-messages.yaml
+  /broadcast-messages/{id}:
+    $ref: paths/broadcast-messages_{id}.yaml
+  /cashier-requests:
+    $ref: paths/cashier-requests.yaml
+  /cashier-requests/{id}:
+    $ref: paths/cashier-requests_{id}.yaml
+  /cashier-strategies:
+    $ref: paths/cashier-strategies.yaml
+  /cashier-strategies/{id}:
+    $ref: paths/cashier-strategies_{id}.yaml
+  /checkout-forms:
+    $ref: paths/checkout-forms.yaml
+  /checkout-forms/{id}:
+    $ref: paths/checkout-forms_{id}.yaml
+  /credential-hashes/aws-ses:
+    $ref: paths/credential-hashes_aws-ses.yaml
+  /credential-hashes/aws-ses/{hash}:
+    $ref: paths/credential-hashes_aws-ses_{hash}.yaml
+  /credential-hashes/emails:
+    $ref: paths/credential-hashes_emails.yaml
+  /credential-hashes/emails/{hash}:
+    $ref: paths/credential-hashes_emails_{hash}.yaml
+  /credential-hashes/mailgun:
+    $ref: paths/credential-hashes_mailgun.yaml
+  /credential-hashes/mailgun/{hash}:
+    $ref: paths/credential-hashes_mailgun_{hash}.yaml
+  /credential-hashes/oauth2:
+    $ref: paths/credential-hashes_oauth2.yaml
+  /credential-hashes/oauth2/{hash}:
+    $ref: paths/credential-hashes_oauth2_{hash}.yaml
+  /credential-hashes/oauth2/{hash}/items:
+    $ref: paths/credential-hashes_oauth2_{hash}_items.yaml
+  /credential-hashes/plaid:
+    $ref: paths/credential-hashes_plaid.yaml
+  /credential-hashes/plaid/{hash}:
+    $ref: paths/credential-hashes_plaid_{hash}.yaml
+  /credential-hashes/postmark:
+    $ref: paths/credential-hashes_postmark.yaml
+  /credential-hashes/postmark/{hash}:
+    $ref: paths/credential-hashes_postmark_{hash}.yaml
+  /credential-hashes/sendgrid:
+    $ref: paths/credential-hashes_sendgrid.yaml
+  /credential-hashes/sendgrid/{hash}:
+    $ref: paths/credential-hashes_sendgrid_{hash}.yaml
+  /credential-hashes/webhooks:
+    $ref: paths/credential-hashes_webhooks.yaml
+  /credential-hashes/webhooks/{hash}:
+    $ref: paths/credential-hashes_webhooks_{hash}.yaml
+  /credential-hashes/experian:
+    $ref: paths/credential-hashes_experian.yaml
+  /credential-hashes/experian/{hash}:
+    $ref: paths/credential-hashes_experian_{hash}.yaml
+  /credential-hashes/taxjar:
+    $ref: paths/credential-hashes_taxjar.yaml
+  /credential-hashes/taxjar/{hash}:
+    $ref: paths/credential-hashes_taxjar_{hash}.yaml
+  /credential-hashes/avalara:
+    $ref: paths/credential-hashes_avalara.yaml
+  /credential-hashes/avalara/{hash}:
+    $ref: paths/credential-hashes_avalara_{hash}.yaml
+  /custom-domains:
+    $ref: paths/custom-domains.yaml
+  /custom-domains/{domain}:
+    $ref: paths/custom-domains_{domain}.yaml
+  /email-delivery-setting-verifications/{token}:
+    $ref: paths/email-delivery-setting-verifications_{token}.yaml
+  /email-delivery-settings:
+    $ref: paths/email-delivery-settings.yaml
+  /email-delivery-settings/{id}:
+    $ref: paths/email-delivery-settings_{id}.yaml
+  /email-delivery-settings/{id}/resend-email-verification:
+    $ref: paths/email-delivery-settings_{id}_resend-email-verification.yaml
+  /email-messages:
+    $ref: paths/email-messages.yaml
+  /email-messages/{id}:
+    $ref: paths/email-messages_{id}.yaml
+  /email-notifications:
+    $ref: paths/email-notifications.yaml
+  /events:
+    $ref: paths/events.yaml
+  /events/{eventType}:
+    $ref: paths/events_{eventType}.yaml
+  /events/{eventType}/rules:
+    $ref: paths/events_{eventType}_rules.yaml
+  /events/{eventType}/timeline:
+    $ref: paths/events_{eventType}_timeline.yaml
+  /events/{eventType}/timeline/{messageId}:
+    $ref: paths/events_{eventType}_timeline_{messageId}.yaml
+  /events/{eventType}/rules/history:
+    $ref: paths/events_{eventType}_rules_history.yaml
+  /events/{eventType}/rules/history/{version}:
+    $ref: paths/events_{eventType}_rules_history_{version}.yaml
+  /events/{eventType}/rules/versions/{version}:
+    $ref: paths/events_{eventType}_rules_versions_{version}.yaml
+  /events/{eventType}/rules/drafts:
+    $ref: paths/events_{eventType}_rules_drafts.yaml
+  /events/{eventType}/rules/drafts/{id}:
+    $ref: paths/events_{eventType}_rules_drafts_{id}.yaml
+  /forgot-password:
+    $ref: paths/forgot-password.yaml
+  /gateway-accounts:
+    $ref: paths/gateway-accounts.yaml
+  /gateway-accounts/{id}:
+    $ref: paths/gateway-accounts_{id}.yaml
+  /gateway-accounts/{id}/close:
+    $ref: paths/gateway-accounts_{id}_close.yaml
+  /gateway-accounts/{id}/disable:
+    $ref: paths/gateway-accounts_{id}_disable.yaml
+  /gateway-accounts/{id}/downtime-schedules:
+    $ref: paths/gateway-accounts_{id}_downtime-schedules.yaml
+  /gateway-accounts/{id}/downtime-schedules/{downtimeId}:
+    $ref: paths/gateway-accounts_{id}_downtime-schedules_{downtimeId}.yaml
+  /gateway-accounts/{id}/enable:
+    $ref: paths/gateway-accounts_{id}_enable.yaml
+  /gateway-accounts/{id}/limits:
+    $ref: paths/gateway-accounts_{id}_limits.yaml
+  /gateway-accounts/{id}/limits/{limitId}:
+    $ref: paths/gateway-accounts_{id}_limits_{limitId}.yaml
+  /gateway-accounts/{id}/timeline:
+    $ref: paths/gateway-accounts_{id}_timeline.yaml
+  /gateway-accounts/{id}/timeline/{messageId}:
+    $ref: paths/gateway-accounts_{id}_timeline_{messageId}.yaml
+  /gateway-accounts/{id}/check-credentials:
+    $ref: paths/gateway-accounts_{id}_check-credentials.yaml
+  /gateway-accounts/{id}/financial-settings:
+    $ref: paths/gateway-accounts_{id}_financial-settings.yaml
+  /digital-wallets/onboarding/apple-pay:
+    $ref: paths/digital-wallets_onboarding_apple-pay.yaml
+  /grid-segments:
+    $ref: paths/grid-segments.yaml
+  /grid-segments/{id}:
+    $ref: paths/grid-segments_{id}.yaml
+  /integrations:
+    $ref: paths/integrations.yaml
+  /integrations/{label}:
+    $ref: paths/integrations_{label}.yaml
+  /lists:
+    $ref: paths/lists.yaml
+  /lists/{id}:
+    $ref: paths/lists_{id}.yaml
+  /lists/{id}/{version}:
+    $ref: paths/lists_{id}_{version}.yaml
+  /logout:
+    $ref: paths/logout.yaml
+  /memberships:
+    $ref: paths/memberships.yaml
+  /memberships/{organizationId}/{userId}:
+    $ref: paths/memberships_{organizationId}_{userId}.yaml
+  /organizations:
+    $ref: paths/organizations.yaml
+  /organizations/{id}:
+    $ref: paths/organizations_{id}.yaml
+  /payment-cards-bank-names:
+    $ref: paths/payment-cards-bank-names.yaml
+  /payment-methods:
+    $ref: paths/payment-methods.yaml
+  /payment-methods/{apiName}:
+    $ref: paths/payment-methods_{apiName}.yaml
+  /payment-gateways-metadata:
+    $ref: paths/payment-gateways-metadata.yaml
+  /payment-gateways-metadata/{apiName}:
+    $ref: paths/payment-gateways-metadata_{apiName}.yaml
+  /payout-requests:
+    $ref: paths/payout-requests.yaml
+  /payout-requests/{id}:
+    $ref: paths/payout-requests_{id}.yaml
+  /payout-requests/{id}/payment-instruments:
+    $ref: paths/payout-requests_{id}_payment-instruments.yaml
+  /permissions-emulation:
+    $ref: paths/permissions-emulation.yaml
+  /previews/orders:
+    $ref: paths/previews_orders.yaml
+  /previews/rule-actions/send-email:
+    $ref: paths/previews_rule-actions_send-email.yaml
+  /previews/rule-actions/trigger-webhook:
+    $ref: paths/previews_rule-actions_trigger-webhook.yaml
+  /previews/webhooks:
+    $ref: paths/previews_webhooks.yaml
+  /profile:
+    $ref: paths/profile.yaml
+  /profile/mfa:
+    $ref: paths/profile_mfa.yaml
+  /profile/password:
+    $ref: paths/profile_password.yaml
+  /profile/totp-reset:
+    $ref: paths/profile_totp-reset.yaml
+  /reset-password/{token}:
+    $ref: paths/reset-password_{token}.yaml
+  /roles:
+    $ref: paths/roles.yaml
+  /roles/{id}:
+    $ref: paths/roles_{id}.yaml
+  /send-through-attribution/{eventType}:
+    $ref: paths/send-through-attribution_{eventType}.yaml
+  /signin:
+    $ref: paths/signin.yaml
+  /signup:
+    $ref: paths/signup.yaml
+  /status:
+    $ref: paths/status.yaml
+  /tracking/api:
+    $ref: paths/tracking_api.yaml
+  /tracking/api/{id}:
+    $ref: paths/tracking_api_{id}.yaml
+  /tracking/lists:
+    $ref: paths/tracking_lists.yaml
+  /tracking/webhooks:
+    $ref: paths/tracking_webhooks.yaml
+  /tracking/webhooks/{id}:
+    $ref: paths/tracking_webhooks_{id}.yaml
+  /tracking/webhooks/{id}/resend:
+    $ref: paths/tracking_webhooks_{id}_resend.yaml
+  /users:
+    $ref: paths/users.yaml
+  /users/{id}:
+    $ref: paths/users_{id}.yaml
+  /users/{id}/mfa:
+    $ref: paths/users_{id}_mfa.yaml
+  /users/{id}/password:
+    $ref: paths/users_{id}_password.yaml
+  /users/{id}/totp-reset:
+    $ref: paths/users_{id}_totp-reset.yaml
+  /webhooks:
+    $ref: paths/webhooks.yaml
+  /webhooks/{id}:
+    $ref: paths/webhooks_{id}.yaml
+  /websites:
+    $ref: paths/websites.yaml
+  /websites/{id}:
+    $ref: paths/websites_{id}.yaml
+  /experimental/customers/{customerId}/summary-metrics:
+    $ref: paths/experimental_customers_{customerId}_summary-metrics.yaml
+  /experimental/data-exports:
+    $ref: paths/experimental_data-exports.yaml
+  /experimental/data-exports/{id}:
+    $ref: paths/experimental_data-exports_{id}.yaml
+  /organization-exports:
+    $ref: paths/organization-exports.yaml
+  /organization-exports/{id}:
+    $ref: paths/organization-exports_{id}.yaml
+  /experimental/histograms/transactions:
+    $ref: paths/experimental_histograms_transactions.yaml
+  /experimental/reports/api-log-summary:
+    $ref: paths/experimental_reports_api-log-summary.yaml
+  /experimental/reports/cumulative-subscriptions:
+    $ref: paths/experimental_reports_cumulative-subscriptions.yaml
+  /experimental/reports/dashboard:
+    $ref: paths/experimental_reports_dashboard.yaml
+  /experimental/reports/dcc-markup:
+    $ref: paths/experimental_reports_dcc-markup.yaml
+  /experimental/reports/disputes:
+    $ref: paths/experimental_reports_disputes.yaml
+  /experimental/reports/events-triggered:
+    $ref: paths/experimental_reports_events-triggered.yaml
+  /experimental/reports/events-triggered/{eventType}/rules:
+    $ref: paths/experimental_reports_events-triggered_{eventType}_rules.yaml
+  /experimental/reports/future-renewals:
+    $ref: paths/experimental_reports_future-renewals.yaml
+  /experimental/reports/journal:
+    $ref: paths/experimental_reports_journal.yaml
+  /experimental/reports/kyc-acceptance-summary:
+    $ref: paths/experimental_reports_kyc-acceptance-summary.yaml
+  /experimental/reports/kyc-rejection-summary:
+    $ref: paths/experimental_reports_kyc-rejection-summary.yaml
+  /experimental/reports/kyc-request-summary:
+    $ref: paths/experimental_reports_kyc-request-summary.yaml
+  /experimental/reports/monthly-recurring-revenue:
+    $ref: paths/experimental_reports_monthly-recurring-revenue.yaml
+  /experimental/reports/renewal-sales:
+    $ref: paths/experimental_reports_renewal-sales.yaml
+  /experimental/reports/retention-percentage:
+    $ref: paths/experimental_reports_retention-percentage.yaml
+  /experimental/reports/retention-value:
+    $ref: paths/experimental_reports_retention-value.yaml
+  /experimental/reports/revenue-waterfall:
+    $ref: paths/experimental_reports_revenue-waterfall.yaml
+  /experimental/reports/revenue-audit:
+    $ref: paths/experimental_reports_revenue-audit.yaml
+  /experimental/reports/subscription-cancellation:
+    $ref: paths/experimental_reports_subscription-cancellation.yaml
+  /experimental/reports/subscription-renewal:
+    $ref: paths/experimental_reports_subscription-renewal.yaml
+  /experimental/reports/time-series-transaction:
+    $ref: paths/experimental_reports_time-series-transaction.yaml
+  /experimental/reports/transactions-time-dispute:
+    $ref: paths/experimental_reports_transactions-time-dispute.yaml
+  /experimental/reports/transactions:
+    $ref: paths/experimental_reports_transactions.yaml
+  /experimental/subscriptions/{subscriptionId}/summary-metrics:
+    $ref: paths/experimental_subscriptions_{subscriptionId}_summary-metrics.yaml
+  /storefront/account:
+    $ref: paths/storefront_account.yaml
+  /storefront/account/forgot-password:
+    $ref: paths/storefront_account_forgot-password.yaml
+  /storefront/account/password:
+    $ref: paths/storefront_account_password.yaml
+  /storefront/account/resend-verification:
+    $ref: paths/storefront_account_resend-verification.yaml
+  /storefront/account/reset-password/{token}:
+    $ref: paths/storefront_account_reset-password_{token}.yaml
+  /storefront/account/verification/{token}:
+    $ref: paths/storefront_account_verification_{token}.yaml
+  /storefront/billing-portals/{slug}:
+    $ref: paths/storefront_billing-portals_{slug}.yaml
+  /storefront/cashier-requests/{id}:
+    $ref: paths/storefront_cashier-requests_{id}.yaml
+  /storefront/cashier-deposit:
+    $ref: paths/storefront_cashier-deposit.yaml
+  /storefront/checkout-forms/{id}:
+    $ref: paths/storefront_checkout-forms_{id}.yaml
+  /storefront/invoices:
+    $ref: paths/storefront_invoices.yaml
+  /storefront/invoices/{id}:
+    $ref: paths/storefront_invoices_{id}.yaml
+  /storefront/kyc-documents:
+    $ref: paths/storefront_kyc-documents.yaml
+  /storefront/kyc-documents/{id}:
+    $ref: paths/storefront_kyc-documents_{id}.yaml
+  /storefront/kyc-requests/{id}:
+    $ref: paths/storefront_kyc-requests_{id}.yaml
+  /storefront/login:
+    $ref: paths/storefront_login.yaml
+  /storefront/logout:
+    $ref: paths/storefront_logout.yaml
+  /storefront/orders:
+    $ref: paths/storefront_orders.yaml
+  /storefront/orders/{id}:
+    $ref: paths/storefront_orders_{id}.yaml
+  /storefront/orders/{id}/cancellation:
+    $ref: paths/storefront_orders_{id}_cancellation.yaml
+  /storefront/payment:
+    $ref: paths/storefront_payment.yaml
+  /storefront/payment-instruments:
+    $ref: paths/storefront_payment-instruments.yaml
+  /storefront/payment-instruments/{id}:
+    $ref: paths/storefront_payment-instruments_{id}.yaml
+  /storefront/payment-instruments/{id}/deactivation:
+    $ref: paths/storefront_payment-instruments_{id}_deactivation.yaml
+  /storefront/payment-instruments/{id}/setup:
+    $ref: paths/storefront_payment-instruments_{id}_setup.yaml
+  /storefront/payout-requests:
+    $ref: paths/storefront_payout-requests.yaml
+  /storefront/payout-requests/{id}:
+    $ref: paths/storefront_payout-requests_{id}.yaml
+  /storefront/plans:
+    $ref: paths/storefront_plans.yaml
+  /storefront/plans/{id}:
+    $ref: paths/storefront_plans_{id}.yaml
+  /storefront/products:
+    $ref: paths/storefront_products.yaml
+  /storefront/products/{id}:
+    $ref: paths/storefront_products_{id}.yaml
+  /storefront/purchase:
+    $ref: paths/storefront_purchase.yaml
+  /storefront/preview-purchase:
+    $ref: paths/storefront_preview-purchase.yaml
+  /storefront/ready-to-pay:
+    $ref: paths/storefront_ready-to-pay.yaml
+  /storefront/register:
+    $ref: paths/storefront_register.yaml
+  /storefront/transactions:
+    $ref: paths/storefront_transactions.yaml
+  /storefront/transactions/{id}:
+    $ref: paths/storefront_transactions_{id}.yaml
+  /storefront/websites/{id}:
+    $ref: paths/storefront_websites_{id}.yaml
+  /customers/{id}/edd-score:
+    $ref: paths/customers_{id}_edd-score.yaml
+  /customers/{id}/edd-timeline:
+    $ref: paths/customers_{id}_edd-timeline.yaml
+  /customers/{id}/edd-search-results:
+    $ref: paths/customers_{id}_edd-search-results.yaml
+x-webhooks:
+  application-instance-disabled:
+    $ref: webhooks/application-instance-disabled.yaml
+  application-instance-enabled:
+    $ref: webhooks/application-instance-enabled.yaml
+  aml-list-possibly-matched:
+    $ref: webhooks/aml-list-possibly-matched.yaml
+  balance-transaction-settled:
+    $ref: webhooks/balance-transaction-settled.yaml
+  credit-memo-applied:
+    $ref: webhooks/credit-memo-applied.yaml
+  credit-memo-created:
+    $ref: webhooks/credit-memo-created.yaml
+  credit-memo-modified:
+    $ref: webhooks/credit-memo-modified.yaml
+  credit-memo-partially-applied:
+    $ref: webhooks/credit-memo-partially-applied.yaml
+  credit-memo-voided:
+    $ref: webhooks/credit-memo-voided.yaml
+  customer-created:
+    $ref: webhooks/customer-created.yaml
+  customer-merged:
+    $ref: webhooks/customer-merged.yaml
+  customer-one-time-password-requested:
+    $ref: webhooks/customer-one-time-password-requested.yaml
+  customer-redirected-offsite:
+    $ref: webhooks/customer-redirected-offsite.yaml
+  customer-returned:
+    $ref: webhooks/customer-returned.yaml
+  customer-updated:
+    $ref: webhooks/customer-updated.yaml
+  dispute-created:
+    $ref: webhooks/dispute-created.yaml
+  dispute-modified:
+    $ref: webhooks/dispute-modified.yaml
+  experian-check-performed:
+    $ref: webhooks/experian-check-performed.yaml
+  invoice-tax-calculation-failed:
+    $ref: webhooks/invoice-tax-calculation-failed.yaml
+  gateway-account-downtime-ended:
+    $ref: webhooks/gateway-account-downtime-ended.yaml
+  gateway-account-downtime-started:
+    $ref: webhooks/gateway-account-downtime-started.yaml
+  gateway-account-limit-reached:
+    $ref: webhooks/gateway-account-limit-reached.yaml
+  gateway-account-requested:
+    $ref: webhooks/gateway-account-requested.yaml
+  invoice-abandoned:
+    $ref: webhooks/invoice-abandoned.yaml
+  invoice-created:
+    $ref: webhooks/invoice-created.yaml
+  invoice-issued:
+    $ref: webhooks/invoice-issued.yaml
+  invoice-modified:
+    $ref: webhooks/invoice-modified.yaml
+  invoice-paid:
+    $ref: webhooks/invoice-paid.yaml
+  invoice-partially-paid:
+    $ref: webhooks/invoice-partially-paid.yaml
+  invoice-refunded:
+    $ref: webhooks/invoice-refunded.yaml
+  invoice-partially-refunded:
+    $ref: webhooks/invoice-partially-refunded.yaml
+  invoice-past-due:
+    $ref: webhooks/invoice-past-due.yaml
+  invoice-past-due-reminder:
+    $ref: webhooks/invoice-past-due-reminder.yaml
+  invoice-reissued:
+    $ref: webhooks/invoice-reissued.yaml
+  invoice-voided:
+    $ref: webhooks/invoice-voided.yaml
+  kyc-document-accepted:
+    $ref: webhooks/kyc-document-accepted.yaml
+  kyc-document-modified:
+    $ref: webhooks/kyc-document-modified.yaml
+  kyc-document-rejected:
+    $ref: webhooks/kyc-document-rejected.yaml
+  kyc-document-reviewed:
+    $ref: webhooks/kyc-document-reviewed.yaml
+  kyc-document-archived:
+    $ref: webhooks/kyc-document-archived.yaml
+  kyc-request-attempted:
+    $ref: webhooks/kyc-request-attempted.yaml
+  kyc-request-failed:
+    $ref: webhooks/kyc-request-failed.yaml
+  kyc-request-fulfilled:
+    $ref: webhooks/kyc-request-fulfilled.yaml
+  kyc-request-partially-fulfilled:
+    $ref: webhooks/kyc-request-partially-fulfilled.yaml
+  nsf-response-received:
+    $ref: webhooks/nsf-response-received.yaml
+  offsite-payment-completed:
+    $ref: webhooks/offsite-payment-completed.yaml
+  order-abandoned:
+    $ref: webhooks/order-abandoned.yaml
+  order-completed:
+    $ref: webhooks/order-completed.yaml
+  payment-card-created:
+    $ref: webhooks/payment-card-created.yaml
+  payment-card-expiration-reminder:
+    $ref: webhooks/payment-card-expiration-reminder.yaml
+  payment-card-expired:
+    $ref: webhooks/payment-card-expired.yaml
+  payment-instrument-modified:
+    $ref: webhooks/payment-instrument-modified.yaml
+  renewal-invoice-issued:
+    $ref: webhooks/renewal-invoice-issued.yaml
+  renewal-invoice-payment-canceled:
+    $ref: webhooks/renewal-invoice-payment-canceled.yaml
+  renewal-invoice-payment-declined:
+    $ref: webhooks/renewal-invoice-payment-declined.yaml
+  risk-score-changed:
+    $ref: webhooks/risk-score-changed.yaml
+  subscription-activated:
+    $ref: webhooks/subscription-activated.yaml
+  subscription-canceled:
+    $ref: webhooks/subscription-canceled.yaml
+  subscription-churned:
+    $ref: webhooks/subscription-churned.yaml
+  subscription-downgraded:
+    $ref: webhooks/subscription-downgraded.yaml
+  subscription-modified:
+    $ref: webhooks/subscription-modified.yaml
+  subscription-reactivated:
+    $ref: webhooks/subscription-reactivated.yaml
+  subscription-renewal-reminder:
+    $ref: webhooks/subscription-renewal-reminder.yaml
+  subscription-renewed:
+    $ref: webhooks/subscription-renewed.yaml
+  subscription-trial-converted:
+    $ref: webhooks/subscription-trial-converted.yaml
+  subscription-trial-end-reminder:
+    $ref: webhooks/subscription-trial-end-reminder.yaml
+  subscription-trial-ended:
+    $ref: webhooks/subscription-trial-ended.yaml
+  subscription-trial-end-changed:
+    $ref: webhooks/subscription-trial-end-changed.yaml
+  subscription-upgraded:
+    $ref: webhooks/subscription-upgraded.yaml
+  subscription-paused:
+    $ref: webhooks/subscription-paused.yaml
+  subscription-pause-created:
+    $ref: webhooks/subscription-pause-created.yaml
+  subscription-pause-modified:
+    $ref: webhooks/subscription-pause-modified.yaml
+  subscription-pause-revoked:
+    $ref: webhooks/subscription-pause-revoked.yaml
+  subscription-resumed:
+    $ref: webhooks/subscription-resumed.yaml
+  transaction-amount-discrepancy-found:
+    $ref: webhooks/transaction-amount-discrepancy-found.yaml
+  transaction-declined:
+    $ref: webhooks/transaction-declined.yaml
+  transaction-discrepancy-found:
+    $ref: webhooks/transaction-discrepancy-found.yaml
+  transaction-process-requested:
+    $ref: webhooks/transaction-process-requested.yaml
+  transaction-processed:
+    $ref: webhooks/transaction-processed.yaml
+  transaction-timeout-resolved:
+    $ref: webhooks/transaction-timeout-resolved.yaml
+  waiting-gateway-transaction-completed:
+    $ref: webhooks/waiting-gateway-transaction-completed.yaml
+  data-export-completed:
+    $ref: webhooks/data-export-completed.yaml

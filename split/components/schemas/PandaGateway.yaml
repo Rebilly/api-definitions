@@ -1,0 +1,25 @@
+description: Panda gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantCode:
+            type: string
+            description: Panda merchant code.
+          apiCode:
+            type: string
+            description: Panda API code.
+          signKey:
+            type: string
+            description: Panda sign key.
+            format: password
+            writeOnly: true
+        required:
+          - merchantCode
+          - apiCode
+          - signKey

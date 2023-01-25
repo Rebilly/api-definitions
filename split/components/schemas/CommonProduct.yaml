@@ -1,0 +1,66 @@
+type: object
+required:
+  - name
+description: >-
+  Products are the items that your business sells.
+
+  Products include digital goods, services, and physical goods.
+
+  Products appear on invoice line items.
+
+  If you set a tax category identifier, taxes are calculated at invoice
+  generation.
+
+  If the product is shippable, shipping costs are calculated at invoice
+  generation.
+
+  Pricing and variations are set within plans.
+
+  For more information, see
+  [Plans](https://www.rebilly.com/docs/dev-docs/api/tag/Plans/).
+properties:
+  id:
+    description: ID of the product.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+    example: membership
+  name:
+    description: Name of the product.
+    type: string
+    maxLength: 255
+    example: Premium membership
+  unitLabel:
+    description: Unit label, such as per `seat` or per `unit`.
+    type: string
+    maxLength: 50
+    example: seat
+    default: unit
+  description:
+    description: Description of the product.
+    type: string
+    nullable: true
+    maxLength: 512
+  requiresShipping:
+    description: |-
+      Specifies if the product requires shipping.
+      If this value is `true`, shipping calculations are applied.
+    type: boolean
+    example: false
+  options:
+    description: >-
+      Product options such as color, size, and so forth.
+
+      Product option values are defined in plans.
+
+      For more information, see
+      [Plans](https://www.rebilly.com/docs/dev-docs/api/tag/Plans/).
+    type: array
+    items:
+      type: string
+  customFields:
+    $ref: ./ResourceCustomFields.yaml
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml

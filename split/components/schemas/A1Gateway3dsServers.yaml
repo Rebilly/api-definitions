@@ -1,0 +1,14 @@
+description: A1Gateway 3DS servers.
+discriminator:
+  propertyName: name
+  mapping:
+    Other: ./A1GatewayOtherServer.yaml
+type: object
+required:
+  - name
+properties:
+  name:
+    allOf:
+      - $ref: ./ThreeDSecureServerName.yaml
+    enum:
+      - Other

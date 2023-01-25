@@ -1,0 +1,60 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: messageId
+    in: path
+    description: ID of the gateway account timeline message.
+    required: true
+    schema:
+      type: string
+get:
+  x-products:
+    - Users
+  tags:
+    - Gateway accounts timeline
+  summary: Retrieve a gateway timeline message
+  operationId: GetGatewayAccountTimeline
+  x-sdk-operation-name: getTimelineMessage
+  description: Retrieves a gateway timeline message with a specified ID.
+  responses:
+    '200':
+      description: Gateway timeline message retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccountTimeline.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: >-
+          ../code_samples/JavaScript/gateway-accounts_{id}_timeline_{messageId}/getundefined
+delete:
+  x-products:
+    - Users
+  tags:
+    - Gateway accounts timeline
+  summary: Delete a gateway timeline message
+  operationId: DeleteGatewayAccountTimeline
+  x-sdk-operation-name: deleteTimelineMessage
+  description: Deletes a gateway timeline message with a specified ID.
+  responses:
+    '204':
+      description: Gateway account timeline message deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: >-
+          ../code_samples/JavaScript/gateway-accounts_{id}_timeline_{messageId}/deleteundefined

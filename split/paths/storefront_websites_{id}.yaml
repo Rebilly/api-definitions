@@ -1,0 +1,28 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Storefront
+  tags:
+    - Websites
+  summary: Retrieve a website
+  operationId: StorefrontGetWebsite
+  x-sdk-operation-name: get
+  security:
+    - CustomerJWT: []
+  description: |-
+    Retrieves a website with a specified ID.
+    Use this operation to find the website name, logo, or more.
+  responses:
+    '200':
+      description: Website retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Website.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

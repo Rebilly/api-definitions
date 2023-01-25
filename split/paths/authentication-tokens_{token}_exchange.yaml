@@ -1,0 +1,46 @@
+parameters:
+  - name: token
+    in: path
+    description: ID of the authentication token.
+    required: true
+    schema:
+      type: string
+post:
+  x-products:
+    - Core
+  tags:
+    - Customer authentication
+  summary: Exchange an authentication token
+  operationId: PostAuthenticationTokenExchange
+  x-sdk-operation-name: exchangeToken
+  description: |-
+    Exchanges an authentication token for a JWT.
+
+
+    By default, this operation invalidates the exchanged authentication token.
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - PublishableApiKey: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CustomerJWT.yaml
+    required: true
+  responses:
+    '201':
+      description: Authentication token exchanged for a JWT.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CustomerJWT.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

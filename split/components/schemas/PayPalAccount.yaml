@@ -1,0 +1,52 @@
+title: PayPal account
+type: object
+required:
+  - method
+  - customerId
+  - billingAddress
+allOf:
+  - $ref: ./CommonPayPalAccount.yaml
+  - properties:
+      customerId:
+        $ref: ./CustomerId.yaml
+      stickyGatewayAccountId:
+        description: >-
+          Sticky gateway account ID.
+
+          All future payments are processed by this gateway account.
+
+
+          For more information, see [Gateway
+          routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
+        type: string
+        nullable: true
+        readOnly: true
+      riskMetadata:
+        $ref: ./RiskMetadata.yaml
+      _links:
+        type: array
+        description: Related links.
+        readOnly: true
+        items:
+          type: object
+          properties:
+            href:
+              description: Link URL.
+              type: string
+            rel:
+              description: Type of link.
+              type: string
+              enum:
+                - self
+                - customer
+                - authTransaction
+                - approvalUrl
+      _embedded:
+        type: object
+        description: Embedded objects that are requested by the `expand` query parameter.
+        readOnly: true
+        properties:
+          authTransaction:
+            type: object
+          customer:
+            type: object

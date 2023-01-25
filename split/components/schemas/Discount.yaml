@@ -1,0 +1,18 @@
+type: object
+discriminator:
+  propertyName: type
+  mapping:
+    fixed: ./fixed.yaml
+    percent: ./percent.yaml
+properties:
+  type:
+    description: Discount type.
+    type: string
+    x-label: Type
+    x-sortable: true
+    x-basic: true
+    enum:
+      - fixed
+      - percent
+  context:
+    $ref: ./DiscountContext.yaml

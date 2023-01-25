@@ -1,0 +1,26 @@
+allOf:
+  - $ref: ./CommonBillingPortal.yaml
+  - type: object
+    required:
+      - name
+    properties:
+      name:
+        description: >-
+          Billing portal name.
+
+          This name is for internal use and helps you to organize and
+          differentiate billing portals.
+
+          This value is not displayed to your customers.
+        type: string
+      status:
+        description: |-
+          Status of the billing portal. If the status is `inactive`,
+          the billing portal URL results in a 404 error.
+        type: string
+        enum:
+          - active
+          - inactive
+        default: active
+      _links:
+        $ref: ./SelfLink.yaml

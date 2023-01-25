@@ -1,0 +1,31 @@
+description: Forte gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          accountId:
+            type: string
+            description: Forte account ID.
+          locationId:
+            type: string
+            description: Forte location ID.
+          apiAccessId:
+            type: string
+            description: Forte API access ID.
+            format: password
+            writeOnly: true
+          apiSecretKey:
+            type: string
+            description: Forte API secret key.
+            format: password
+            writeOnly: true
+        required:
+          - accountId
+          - locationId
+          - apiAccessId
+          - apiSecretKey

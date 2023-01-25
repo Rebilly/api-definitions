@@ -1,0 +1,70 @@
+post:
+  x-products:
+    - Core
+  tags:
+    - Cashier
+  summary: Create a cashier strategy
+  operationId: PostCashierStrategy
+  x-sdk-operation-name: create
+  description: |-
+    Creates a cashier strategy.
+    To complete the deposit, the customer is redirected to the `cashier` link.
+    After the deposit, the customer is redirected to the `redirectUrl`.
+    Corresponding transaction webhooks are sent to webhooks subscribers.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CashierStrategy.yaml
+    description: Cashier strategy resource.
+    required: true
+  responses:
+    '201':
+      description: Cashier strategy created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CashierStrategy.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Cashier
+  summary: Retrieve cashier strategies
+  operationId: GetCashierStrategyCollection
+  x-sdk-operation-name: getAll
+  description: Retrieves a list of cashier strategies.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+  responses:
+    '200':
+      description: List of cashier strategies retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/CashierStrategy.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml

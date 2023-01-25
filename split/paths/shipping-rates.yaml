@@ -1,0 +1,75 @@
+get:
+  x-products:
+    - Core
+  tags:
+    - Shipping rates
+  summary: Retrieve shipping rates
+  operationId: GetShippingRateCollection
+  x-sdk-operation-name: getAll
+  description: Retrieves a list of shipping rates.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+  responses:
+    '200':
+      description: List of shipping rates retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/ShippingRate.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/shipping-rates/getundefined
+post:
+  x-products:
+    - Core
+  tags:
+    - Shipping rates
+  summary: Create a shipping rate
+  operationId: PostShippingRate
+  x-sdk-operation-name: create
+  description: Creates a shipping rate.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ShippingRate.yaml
+    description: Shipping rate resource.
+    required: true
+  responses:
+    '201':
+      description: Shipping rate created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ShippingRate.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/shipping-rates/postundefined

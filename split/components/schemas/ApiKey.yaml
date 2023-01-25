@@ -1,0 +1,41 @@
+type: object
+description: API secret Key.
+required:
+  - description
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  description:
+    description: API key description.
+    type: string
+  type:
+    description: Type of API key.
+    type: string
+    default: secret
+    enum:
+      - secret
+      - publishable
+  acl:
+    description: >-
+      Specify access control list here if creating a restricted API key. Send
+      all matching permission with an empty scope to allow all permissions.
+    allOf:
+      - $ref: ./Acl.yaml
+  allowedIps:
+    $ref: ./AllowedIps.yaml
+  apiUser:
+    description: API user name.
+    type: string
+    readOnly: true
+  secretKey:
+    description: API secret key's value.
+    type: string
+    readOnly: true
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml

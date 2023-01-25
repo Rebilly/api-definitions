@@ -1,0 +1,24 @@
+parameters:
+  - $ref: ../components/parameters/integrationLabel.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Integrations
+  summary: Retrieve an integration for specific label
+  operationId: GetIntegration
+  x-sdk-operation-name: get
+  description: Retrieves an integration with a specified label.
+  responses:
+    '200':
+      description: Integration retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Integration.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

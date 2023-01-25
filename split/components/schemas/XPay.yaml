@@ -1,0 +1,22 @@
+description: XPay gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: XPay credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: XPay merchant ID.
+          encryptionKey:
+            type: string
+            format: password
+            writeOnly: true
+            description: XPay encryption key.
+        required:
+          - merchantId
+          - encryptionKey

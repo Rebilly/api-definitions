@@ -1,0 +1,31 @@
+type: object
+properties:
+  data:
+    description: Future renewals data.
+    type: array
+    items:
+      type: object
+      description: Contains an aggregation.
+      readOnly: true
+      properties:
+        date:
+          type: string
+          description: Date in `YYYY-MM` format.
+        sum:
+          type: number
+          format: double
+          description: Total amount of future renewals in the user's reporting currency.
+        plansCount:
+          type: array
+          description: Plan within the aggregation.
+          items:
+            type: object
+            readOnly: true
+            properties:
+              planId:
+                description: ID of the plan.
+                allOf:
+                  - $ref: ./ResourceId.yaml
+              count:
+                type: integer
+                description: Total number of future renewals of a plan.

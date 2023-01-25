@@ -1,0 +1,22 @@
+description: BankSEND gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: BankSEND credentials object.
+        properties:
+          merchantId:
+            description: BankSEND merchant ID.
+            type: string
+          merchantToken:
+            type: string
+            format: password
+            description: BankSEND merchant token.
+            writeOnly: true
+        required:
+          - merchantId
+          - merchantToken

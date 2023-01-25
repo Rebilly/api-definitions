@@ -1,0 +1,52 @@
+description: Ipay Options gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+      - settings
+    properties:
+      credentials:
+        type: object
+        description: Ipay Options credentials object.
+        properties:
+          sid:
+            type: string
+            description: Ipay Options website ID.
+          rcode:
+            type: string
+            description: Ipay Options rcode.
+            format: password
+            writeOnly: true
+        required:
+          - sid
+          - rcode
+      settings:
+        type: object
+        description: Ipay Options settings object.
+        properties:
+          extraStep:
+            type: boolean
+            description: >-
+              Specifies whether to display an extra step where the user must
+              enter their email and DNI number.
+          subdomain:
+            type: string
+            description: Subdomain to use when sending request to IpayOptions.
+            enum:
+              - miglite
+              - w88asiapay
+          platform:
+            type: string
+            description: Platform which IpayOptions processes.
+            enum:
+              - SOAP
+              - TxHandler
+              - SecureHosted
+          cardType:
+            type: string
+            description: Manually set the card_type for iDEAL.
+            enum:
+              - ideal
+              - idealqr
+              - sofort

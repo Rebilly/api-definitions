@@ -1,0 +1,141 @@
+allOf:
+  - $ref: ./CommonInvoice.yaml
+  - required:
+      - customerId
+  - properties:
+      customerId:
+        x-basic: true
+        allOf:
+          - $ref: ./CustomerId.yaml
+      transactions:
+        type: array
+        description: Invoice transactions array.
+        maxItems: 10
+        readOnly: true
+        items:
+          $ref: ./Transaction.yaml
+      retryInstruction:
+        description: >-
+          Invoice payment retry instruction.
+
+          This object specifies how to proceed if a payment related to the
+          invoice fails.
+        type: object
+        properties:
+          attempts:
+            type: array
+            description: Describes the retry instruction.
+            minItems: 1
+            items:
+              type: object
+              properties:
+                scheduleInstruction:
+                  $ref: ./InvoiceRetryScheduleInstruction.yaml
+                amountAdjustmentInstruction:
+                  $ref: ./InvoiceRetryAmountAdjustmentInstruction.yaml
+                tryBackupInstruments:
+                  description: >-
+                    Specifies whether to use backup payment instruments on an
+                    invoice payment retry.
+                  type: boolean
+                  default: false
+              required:
+                - scheduleInstruction
+          afterAttemptPolicies:
+            description: >-
+              Describes the action to take when a payment attempt concludes, and
+              payment is not collected.
+            type: array
+            items:
+              type: string
+              enum:
+                - change-subscription-renewal-time
+          afterRetryEndPolicies:
+            description: >-
+              Describes the action to take when all scheduled payment retries,
+              in a retry instruction, have concluded and payment is not
+              collected.
+            type: array
+            items:
+              type: string
+              enum:
+                - abandon-invoice
+                - cancel-subscription
+        required:
+          - attempts
+          - afterAttemptPolicies
+          - afterRetryEndPolicies
+      revision:
+        description: |-
+          Number of times the invoice data has been modified.
+
+          Use the revision number when analyzing webhook data to
+          determine if a change should take precedence over the current
+          representation.
+        type: integer
+        readOnly: true
+      type:
+        description: Type of invoice.
+        type: string
+        enum:
+          - initial
+          - renewal
+          - interim
+          - cancellation
+          - one-time
+          - refund
+          - charge
+          - one-time-sale
+        readOnly: true
+      dueReminderTime:
+        description: Date and time when a past due reminder event is triggered.
+        nullable: true
+        type: string
+        format: date-time
+        readOnly: true
+      dueReminderNumber:
+        description: Number of past due reminder events that have been triggered.
+        nullable: true
+        type: integer
+        readOnly: true
+      organizationId:
+        readOnly: true
+        allOf:
+          - $ref: ./OrganizationId.yaml
+      _links:
+        type: array
+        description: Related links.
+        readOnly: true
+        items:
+          type: object
+          properties:
+            href:
+              description: Link URL.
+              type: string
+            rel:
+              description: Type of link.
+              type: string
+              enum:
+                - self
+                - website
+                - customer
+                - organization
+                - leadSource
+                - transactionAllocations
+                - recalculateInvoice
+                - subscription
+      _embedded:
+        type: object
+        description: Embedded objects that are requested by the `expand` query parameter.
+        readOnly: true
+        properties:
+          customer:
+            type: object
+          website:
+            type: object
+          organization:
+            type: object
+          leadSource:
+            type: object
+          shippingRate:
+            type: object

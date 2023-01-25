@@ -1,0 +1,29 @@
+post:
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Create a credit transaction
+  operationId: PostPayout
+  x-sdk-operation-name: create
+  description: Creates a transaction of type `credit`.
+  requestBody:
+    $ref: ../components/requestBodies/CreditTransactionRequest.yaml
+  responses:
+    '201':
+      description: Transaction created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Transaction.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

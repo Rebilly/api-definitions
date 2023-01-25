@@ -1,0 +1,40 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Void an order
+  operationId: PostSubscriptionVoid
+  x-sdk-operation-name: void
+  description: Voids a pending order with a specified ID.
+  responses:
+    '201':
+      description: Order voided.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Subscription.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/subscriptions_{id}_void/postundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/subscriptions_{id}_void/postundefined
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP/subscriptions_{id}_void/postundefined

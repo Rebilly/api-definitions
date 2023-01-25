@@ -1,0 +1,40 @@
+post:
+  x-products:
+    - Storefront
+  tags:
+    - Purchases
+  summary: Make a purchase
+  operationId: StorefrontPostPurchase
+  x-sdk-operation-name: purchase
+  description: |-
+    Executes a purchase.
+
+    A purchase can be completed both with and without authentication.
+    Purchases that use a pre-created payment instrument must use authentication.
+
+    To preview the purchase before completing it,
+    use the [Purchase preview](./StorefrontPostPreviewPurchase) operation.
+  security:
+    - CustomerJWT: []
+    - PublishableApiKey: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Purchase.yaml
+  responses:
+    '201':
+      description: Order created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Purchase.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

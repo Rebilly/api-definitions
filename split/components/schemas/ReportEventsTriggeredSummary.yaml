@@ -1,0 +1,24 @@
+type: object
+properties:
+  data:
+    type: array
+    description: Event data.
+    items:
+      type: object
+      properties:
+        eventName:
+          description: Name of the system event.
+          type: string
+          enum:
+            - dispute-created
+            - gateway-account-requested
+            - transaction-processed
+            - subscription-canceled
+            - subscription-renewed
+            - payment-card-expired
+            - payment-declined
+            - transaction-process-requested
+            - risk-score-changed
+        count:
+          description: Total number of times this event is triggered.
+          type: integer

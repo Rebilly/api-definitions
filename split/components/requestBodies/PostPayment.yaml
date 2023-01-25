@@ -1,0 +1,57 @@
+content:
+  application/json:
+    schema:
+      oneOf:
+        - type: object
+          title: For transaction
+          required:
+            - transactionId
+          properties:
+            transactionId:
+              $ref: ../schemas/ResourceId.yaml
+            riskMetadata:
+              $ref: ../schemas/RiskMetadata.yaml
+            redirectUrl:
+              $ref: ../schemas/StorefrontTransactionRedirectUrl.yaml
+          oneOf:
+            - $ref: ../schemas/PaymentInstructionsToken.yaml
+            - $ref: ../schemas/PaymentInstructionsInstrument.yaml
+        - type: object
+          title: For invoice
+          required:
+            - invoiceId
+          properties:
+            invoiceId:
+              $ref: ../schemas/ResourceId.yaml
+            riskMetadata:
+              $ref: ../schemas/RiskMetadata.yaml
+            redirectUrl:
+              $ref: ../schemas/StorefrontTransactionRedirectUrl.yaml
+          oneOf:
+            - $ref: ../schemas/PaymentInstructionsToken.yaml
+            - $ref: ../schemas/PaymentInstructionsInstrument.yaml
+        - type: object
+          title: For amount+currency
+          required:
+            - amount
+            - currency
+            - websiteId
+          properties:
+            websiteId:
+              $ref: ../schemas/WebsiteId.yaml
+            currency:
+              $ref: ../schemas/CurrencyCode.yaml
+            amount:
+              description: Transaction amount.
+              type: number
+              format: double
+              default: 0
+              example: 97.97
+            riskMetadata:
+              $ref: ../schemas/RiskMetadata.yaml
+            redirectUrl:
+              $ref: ../schemas/StorefrontTransactionRedirectUrl.yaml
+          oneOf:
+            - $ref: ../schemas/PaymentInstructionsToken.yaml
+            - $ref: ../schemas/PaymentInstructionsInstrument.yaml
+required: true

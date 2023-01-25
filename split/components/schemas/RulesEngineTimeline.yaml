@@ -1,0 +1,35 @@
+type: object
+properties:
+  id:
+    description: ID of the timeline message.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  type:
+    description: Type of timeline message.
+    type: string
+    readOnly: true
+    enum:
+      - timeline-comment-created
+      - ruleset-created
+      - ruleset-changed
+  triggeredBy:
+    description: Specifies who, or what, triggered the timeline event.
+    type: string
+    readOnly: true
+    enum:
+      - rebilly
+      - app
+      - direct-api
+  message:
+    description: Contents of the timeline message.
+    type: string
+  extraData:
+    $ref: ./TimelineExtraData.yaml
+  occurredTime:
+    description: Date and time when the timeline message occurred.
+    readOnly: true
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  _links:
+    $ref: ./SelfLink.yaml

@@ -1,0 +1,21 @@
+description: Credorax gateway configuration.
+allOf:
+  - $ref: ./GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantId:
+            type: string
+            description: Credorax merchant ID.
+          merchantMd5Signature:
+            type: string
+            description: Credorax MD5 signature.
+            format: password
+            writeOnly: true
+        required:
+          - merchantId
+          - merchantMd5Signature

@@ -1,0 +1,68 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - KYC documents
+  summary: Retrieve a KYC request
+  operationId: GetKycRequest
+  x-sdk-operation-name: get
+  description: Retrieves a KYC request with a specified ID.
+  responses:
+    '200':
+      description: KYC request retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KycRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+patch:
+  x-products:
+    - Core
+  tags:
+    - KYC documents
+  summary: Update a KYC request
+  operationId: PatchKycRequest
+  x-sdk-operation-name: update
+  description: Updates a KYC request with a specified ID.
+  requestBody:
+    $ref: ../components/requestBodies/PatchKycRequest.yaml
+    description: KYC document resource.
+    required: true
+  responses:
+    '200':
+      description: KYC request updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KycRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+delete:
+  x-products:
+    - Core
+  tags:
+    - KYC documents
+  summary: Delete the KYC request
+  operationId: DeleteKycRequest
+  x-sdk-operation-name: delete
+  description: Deletes a KYC request with a specified ID.
+  responses:
+    '204':
+      description: KYC request deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

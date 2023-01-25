@@ -1,0 +1,51 @@
+get:
+  x-products:
+    - Users
+  tags:
+    - Tracking
+  summary: Retrieve API tracking logs
+  operationId: GetTrackingApiCollection
+  x-sdk-operation-name: getAllApiLogs
+  description: Retrieves API tracking log records.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - name: Accept
+      in: header
+      description: Response media type.
+      schema:
+        type: string
+        enum:
+          - application/json
+          - text/csv
+        default: application/json
+  responses:
+    '200':
+      description: Tracking API logs retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/ApiTracking.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/tracking_api/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/tracking_api/getundefined

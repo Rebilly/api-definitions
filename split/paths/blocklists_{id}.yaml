@@ -1,0 +1,98 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Blocklists
+  summary: Retrieve a blocklist
+  operationId: GetBlocklist
+  x-sdk-operation-name: get
+  description: Retrieves a blocklist with a specified ID.
+  responses:
+    '200':
+      description: Blocklist retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Blocklist.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/blocklists_{id}/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/blocklists_{id}/getundefined
+put:
+  x-products:
+    - Core
+  tags:
+    - Blocklists
+  summary: Create a blocklist with specified ID
+  operationId: PutBlocklist
+  x-sdk-operation-name: update
+  description: Creates a blocklist with a specified ID.
+  requestBody:
+    $ref: ../components/requestBodies/Blocklist.yaml
+  responses:
+    '200':
+      description: Blocklist updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Blocklist.yaml
+    '201':
+      description: Blocklist created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Blocklist.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/blocklists_{id}/putundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/blocklists_{id}/putundefined
+delete:
+  x-products:
+    - Core
+  tags:
+    - Blocklists
+  summary: Delete a blocklist
+  operationId: DeleteBlocklist
+  x-sdk-operation-name: delete
+  description: Deletes a blocklist with a specified ID.
+  responses:
+    '204':
+      description: Blocklist deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/blocklists_{id}/deleteundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/blocklists_{id}/deleteundefined

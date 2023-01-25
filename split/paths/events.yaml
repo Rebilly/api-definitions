@@ -1,0 +1,33 @@
+get:
+  x-products:
+    - Users
+  tags:
+    - Rules
+  summary: Retrieve system events
+  operationId: GetEventCollection
+  x-sdk-operation-name: getAll
+  description: Retrieves a list of system events.
+  responses:
+    '200':
+      description: List of system events retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/SystemEvent.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/events/getundefined

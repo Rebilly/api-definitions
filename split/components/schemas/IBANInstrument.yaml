@@ -1,0 +1,34 @@
+description: Bank account IBAN instrument.
+type: object
+required:
+  - accountNumberType
+  - accountNumber
+properties:
+  accountNumberType:
+    description: >-
+      Bank account number type.
+
+      A valid value is basic bank account number (BBAN) or international bank
+      account number (IBAN).
+    type: string
+    enum:
+      - IBAN
+  accountNumber:
+    description: >-
+      Bank account number.
+
+      Detailed information about all ISO 13616-compliant national IBAN formats
+      is available in the [SWIFT IBAN
+      Registry](https://www.swift.com/standards/data-standards/iban).
+    type: string
+    writeOnly: true
+  bic:
+    description: Bank Identifier Code (BIC).
+    type: string
+  bankName:
+    description: Bank name.
+    type: string
+  last4:
+    description: Last 4 digits of the bank account number.
+    type: string
+    readOnly: true

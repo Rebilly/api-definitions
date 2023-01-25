@@ -1,0 +1,72 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Retrieve associated payment instruments
+  operationId: GetPayoutRequestPaymentInstruments
+  x-sdk-operation-name: getPaymentInstruments
+  description: >-
+    Retrieves the payment gateway and a list of payment instruments that are
+    associated with a payout request with a specified ID.
+  responses:
+    '200':
+      description: Payout request associated payment instruments retrieved.
+      content:
+        application/json:
+          schema:
+            type: array
+            description: >-
+              List of available payment instruments per an associated gateway to
+              offer for the payout.
+            items:
+              type: object
+              properties:
+                paymentInstrumentId:
+                  description: ID of the payment instrument to offer for the payout.
+                  type: string
+                gatewayName:
+                  description: >-
+                    Name of the payment gateway and payment instrument to use
+                    for the payout.
+
+                    This field is empty if the requested payment instrument has
+                    not been used yet.
+                  x-label: Gateway account
+                  x-basic: true
+                  type: string
+                  nullable: true
+                  allOf:
+                    - $ref: ../components/schemas/GatewayName.yaml
+                exposureAmount:
+                  description: >-
+                    Total amount of sales minus credit for the specified gateway
+                    and instrument.
+                  type: number
+                  format: double
+                previousAllocatedAmount:
+                  description: >-
+                    Total amount of allocated credit for the payout request for
+                    the specified gateway and instrument.
+                  type: number
+                  format: double
+                lastPaymentTime:
+                  description: >-
+                    Date and time when the last payment is created for the
+                    gateway and the payment instrument.
+                  type: string
+                  format: date-time
+                lastPayoutTime:
+                  description: >-
+                    Date and time when the last payout is created for the
+                    gateway and the payment instrument.
+                  type: string
+                  format: date-time
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

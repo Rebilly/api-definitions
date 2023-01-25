@@ -1,0 +1,80 @@
+get:
+  x-products:
+    - Users
+  tags:
+    - Websites
+  summary: Retrieve websites
+  operationId: GetWebsiteCollection
+  x-sdk-operation-name: getAll
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
+  description: Retrieves a list of websites.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+  responses:
+    '200':
+      description: List of websites retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Website.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/websites/getundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/websites/getundefined
+post:
+  x-products:
+    - Users
+  tags:
+    - Websites
+  summary: Create a website
+  operationId: PostWebsite
+  x-sdk-operation-name: create
+  description: Creates a website.
+  requestBody:
+    $ref: ../components/requestBodies/Website.yaml
+  responses:
+    '201':
+      description: Website created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Website.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/websites/postundefined
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/websites/postundefined
