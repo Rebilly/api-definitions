@@ -5,9 +5,7 @@ properties:
   id:
     description: ID of the payment instrument.
     allOf:
-      - $ref: ./ResourceId.yaml
-  customerId:
-    $ref: ./CustomerId.yaml
+      - $ref: ../ResourceId.yaml
   method:
     description: Method of payment instrument.
     type: string
@@ -34,7 +32,7 @@ properties:
   billingAddress:
     description: Billing address.
     allOf:
-      - $ref: ./Contact/ContactObject.yaml
+      - $ref: ../Contact/ContactObject.yaml
   status:
     description: Payment instrument status.
     type: string
@@ -42,45 +40,19 @@ properties:
       - active
       - deactivated
   useAsBackup:
-    $ref: ./UseAsBackup.yaml
+    $ref: ../UseAsBackup.yaml
   createdTime:
-    $ref: ./CreatedTime.yaml
+    $ref: ../CreatedTime.yaml
   updatedTime:
-    $ref: ./UpdatedTime.yaml
+    $ref: ../UpdatedTime.yaml
   customFields:
-    $ref: ./ResourceCustomFields.yaml
-  stickyGatewayAccountId:
+    $ref: ../ResourceCustomFields.yaml
+  token:
     description: |-
-      Sticky gateway account ID.
-      All future payments are processed by this gateway account.
-
-      For more information,
-      see [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
+      New customer JSON Web Token (JWT) that is used for further requests.
+      This value is null if the customer is already authenticated.
     type: string
+    readOnly: true
     nullable: true
-    readOnly: true
-  riskMetadata:
-    $ref: ./RiskMetadata.yaml
   _links:
-    type: array
-    description: Related links.
-    readOnly: true
-    items:
-      type: object
-      properties:
-        href:
-          description: Link URL.
-          type: string
-        rel:
-          description: Type of link.
-          type: string
-          enum:
-            - self
-            - customer
-  _embedded:
-    type: object
-    description: Embedded objects that are requested by the `expand` query parameter.
-    readOnly: true
-    properties:
-      customer:
-        type: object
+    $ref: ../SelfLink.yaml
