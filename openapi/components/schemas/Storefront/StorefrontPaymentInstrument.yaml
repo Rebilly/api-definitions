@@ -1,18 +1,6 @@
-allOf:
-  - oneOf:
-    - $ref: ../StorefrontPaymentCard.yaml
-    - $ref: ../StorefrontBankAccount.yaml
-    - $ref: ../Common/CommonPayPalAccount.yaml
-    - $ref: ../StorefrontKhelocardCard.yaml
-    - $ref: ../StorefrontAlternativeInstrument.yaml
-  - type: object
-    properties:
-      token:
-        description: |-
-          New customer JSON Web Token (JWT) that is used for further requests.
-          This value is null if the customer is already authenticated.
-        type: string
-        readOnly: true
-        nullable: true
-      _links:
-        $ref: ../SelfLink.yaml
+oneOf:
+  - $ref: ./StorefrontPaymentCard.yaml
+  - $ref: ./StorefrontBankAccount.yaml
+  - $ref: ./StorefrontPayPalAccount.yaml
+  - $ref: ./StorefrontKhelocardCard.yaml
+  - $ref: ./StorefrontAlternativeInstrument.yaml
