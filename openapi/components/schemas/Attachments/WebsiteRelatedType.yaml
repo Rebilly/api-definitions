@@ -1,57 +1,9 @@
-type: object
-required:
-  - fileId
-  - relatedId
-  - relatedType
-properties:
-  id:
-    readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
-  fileId:
-    description: ID of the linked file object.
-    type: string
-  relatedType:
-    description: Linked object type.
-    type: string
-  type:
-    type: string
-    description: Attachment type. Depends on `relatedType`.
-    enum:
-      - logo
-  relatedId:
-    description: Linked object ID.
-    type: string
-  name:
-    description: Name of original attachment.
-    type: string
-  description:
-    description: Description of the attachment.
-    type: string
-  createdTime:
-    $ref: ../CreatedTime.yaml
-  updatedTime:
-    $ref: ../UpdatedTime.yaml
-  _links:
-    type: array
-    description: Related links.
-    readOnly: true
-    items:
-      type: object
-      properties:
-        href:
-          description: Link URL.
-          type: string
-        rel:
-          description: Type of link.
-          type: string
-          enum:
-            - self
-            - file
-  _embedded:
-    type: object
-    description: Embedded objects that are requested by the `expand` query parameter.
-    readOnly: true
+allOf:
+  - $ref: ../Attachment.yaml
+  - type: object
     properties:
-      file:
-        type: object
+      type:
+        type: string
+        default: logo
+        enum:
+          - logo
