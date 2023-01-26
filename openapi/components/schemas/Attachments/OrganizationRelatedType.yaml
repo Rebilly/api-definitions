@@ -3,9 +3,13 @@ allOf:
   - type: object
     properties:
       type:
-        description: Attachment type for `organization` related type. An organization can have only one attachment with type `logo`.
+        description: Attachment type for `organization` related type.
         type: string
         default: generic
         enum:
           - logo
           - generic
+        x-enumDescriptions:
+          logo: An organization can have only one attachment with type `logo`. Only images are valid.
+          generic: No limit for generic attachments. All permitted file types are valid.
+            For more information about file types, see [file details](./PostFile).
