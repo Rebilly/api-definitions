@@ -21,6 +21,11 @@ properties:
     maxLength: 50
     description: User ID of the person who reviewed the AML check.
     example: 44433322-2c4y-483z-a0a9-158621f77a21
+  reviewerName:
+    readOnly: true
+    type: string
+    nullable: true
+    description: First and last name of the person who reviewed the AML check.
   reviewTime:
     type: string
     format: date-time
@@ -44,10 +49,12 @@ properties:
           firstName:
             type: string
             readOnly: true
+            maxLength: 45
             description: Customer's first name at the time of the AML check.
           lastName:
             type: string
             readOnly: true
+            maxLength: 45
             description: Customer's last name at the time of the AML check.
           dob:
             type: string
@@ -56,10 +63,44 @@ properties:
             nullable: true
             description: Customer's date of birth.
             example: 1971-02-14
+          address:
+            description: First line of the customer's street address at the time of the AML check.
+            type: string
+            pattern: '^[\w\s\-\/\p{L},.#;:()''&]+$'
+            maxLength: 60
+            example: 36 Craven St
+            nullable: true
+          address2:
+            description: Second line of the customer's street address at the time of the AML check.
+            type: string
+            pattern: '^[\w\s\-\/\p{L},.#;:()''&]+$'
+            maxLength: 60
+            nullable: true
+          city:
+            description: Customer's city of residence at the time of the AML check.
+            type: string
+            pattern: '^[\w\s\-\p{L},.'']+$'
+            maxLength: 45
+            nullable: true
+            example: Austin
+          region:
+            description: Customer's region of residence at the time of the AML check.
+            type: string
+            pattern: '^[\w\s\-\/\p{L},.#;:()'']+$'
+            maxLength: 45
+            nullable: true
+            example: Texas
           country:
             type: string
             readOnly: true
-            description: Customer's country of residence.
+            description: Customer's country of residence at the time of the AML check.
+          postalCode:
+            description: Customer's postal code at the time of the AML check.
+            type: string
+            pattern: '^[\w\s\-]+$'
+            maxLength: 10
+            nullable: true
+            example: WC2N 5NF
       tags:
         description: List of tags that have been assigned to the customer.
         readOnly: true
