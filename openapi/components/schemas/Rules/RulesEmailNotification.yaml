@@ -69,6 +69,7 @@ properties:
             If a placeholder does not resolve to a verified `from` address,
             the default verified `from` address is used.
           maxLength: 254
+          example: example@example.com
         to:
           type: array
           description: |-
@@ -80,6 +81,7 @@ properties:
           items:
             type: string
             maxLength: 254
+            example: '{{ invoice.customer.email }}'
         cc:
           type: array
           description: |-
@@ -90,6 +92,7 @@ properties:
           items:
             type: string
             maxLength: 254
+            example: '{{ invoice.customer.email }}'
         bcc:
           type: array
           description: |-
@@ -100,24 +103,28 @@ properties:
           items:
             type: string
             maxLength: 254
+            example: '{{ invoice.customer.email }}'
         subject:
           type: string
           description: |-
             Subject of the message.
             The use of template placeholders is permitted for this field.
           maxLength: 998
+          example: Sujet de démonstration
         text:
           type: string
           description: |-
             Text body of the message.
             To use content from the `html` field, leave this field empty.
             The use of template placeholders is permitted for this field.
+          example: Texte de démonstration
         html:
           type: string
           description: |-
             HTML body of the message.
             To use content from the `text` field, leave this field empty.
             The use of template placeholders is permitted for this field.
+          example: <p>Texte de démonstration</p>
         editor:
           type: string
           description: |-
@@ -125,6 +132,7 @@ properties:
             This value is required for the email editor.
             This value is not used for sending emails.
             It is used by the editor to reproduce the message for future updates.
+          example: <div class="block">Texte de démonstration</div>
         attachments:
           description: Attachments of the email message.
           type: array
@@ -137,23 +145,13 @@ properties:
               resourceType:
                 type: string
                 description: Type of attachment resource.
+                example: customer
               resourceId:
                 type: string
                 description: |-
                   ID of the attachment resource.
                   Template placeholders are permitted.
                 maxLength: 50
-      example:
-        locale: fr-FR
-        from: example@example.com
-        to:
-          - '{{ invoice.customer.email }}'
-        subject: Sujet de démonstration
-        text: Texte de démonstration
-        html: <p>Texte de démonstration</p>
-        editor: <div class="block">Texte de démonstration</div>
-        attachments:
-          resourceType: customer
-          resourceId: cus_0YV7DDSDD1C8DA64KHH2W33CPF
+                example: cus_0YV7DDSDD1C8DA64KHH2W33CPF
 required:
   - templates
