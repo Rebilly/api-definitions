@@ -1,10 +1,11 @@
 type: object
 properties:
   id:
+    type: string
     description: ID of the credit memo.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    example: cm_0YV7DE1YYBC7C9JJ79J2PBB5RR
+    maxLength: 50
   number:
     description: Auto-incrementing number based on the sequence of credit memos for any particular customer.
     readOnly: true
@@ -88,10 +89,11 @@ properties:
         - quantity
       properties:
         id:
+          type: string
           description: ID of the credit memo item.
           readOnly: true
-          allOf:
-            - $ref: ../ResourceId.yaml
+          example: cmit_0YV7DEB11BCF3AJBVQAED7F5PA
+          maxLength: 50
         invoiceItemId:
           description: ID of the invoice item to which the credit item is referenced.
           nullable: true
@@ -114,15 +116,15 @@ properties:
           format: double
           readOnly: true
         productId:
-          description: ID of the related product.
           type: string
+          description: ID of the related product.
           maxLength: 50
-          example: product-123
+          example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
         planId:
           description: ID of the related plan.
           type: string
           maxLength: 50
-          example: gold-plan
+          example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
         tax:
           type: object
           description: Credit memo item tax.
