@@ -405,6 +405,16 @@ rules:
       disallowed:
         - x-internal
 
+  assert/embedded-is-object:
+    severity: error
+    subject:
+      type: Schema
+      property: type
+      filterInParentKeys:
+        - _embedded
+    assertions:
+      const: object
+
       # Need to account for arrays, etc...
   # assert/mediatype-schema-ref-pattern:
   #   subject: MediaType
