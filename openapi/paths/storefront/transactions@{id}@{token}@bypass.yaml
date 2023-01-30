@@ -1,19 +1,20 @@
 parameters:
   - $ref: ../../components/parameters/resourceId.yaml
-get:
+  - $ref: ../../components/parameters/token.yaml
+post:
   x-products:
     - Storefront
   tags:
     - Transactions
-  summary: Retrieve a transaction
-  operationId: StorefrontGetTransaction
-  x-sdk-operation-name: get
+  summary: Bypass KYC request
+  operationId: StorefrontPostKycRequestBypass
+  x-sdk-operation-name: bypassKycRequest
   security:
     - CustomerJWT: []
-  description: Retrieves a transaction with a specified ID.
+  description: Bypasses optional KYC request with a specified token, for transaction with a specified ID.
   responses:
     200:
-      description: Transaction retrieved.
+      description: Transaction processing completed.
       content:
         application/json:
           schema:
