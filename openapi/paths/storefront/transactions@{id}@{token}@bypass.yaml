@@ -11,10 +11,13 @@ post:
   x-sdk-operation-name: bypassKycRequest
   security:
     - CustomerJWT: []
-  description: Bypasses optional KYC request with a specified token, for transaction with a specified ID.
+  description: |-
+    Bypasses an optional KYC request with a specified token, for a transaction with a specified ID.
+
+    Use this operation to bypass a KYC request that has been marked as optional in a transaction flow, so that you can further process the transaction.
   responses:
     200:
-      description: Transaction processing completed.
+      description: KYC request bypassed.
       content:
         application/json:
           schema:
