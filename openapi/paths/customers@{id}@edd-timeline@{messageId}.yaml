@@ -1,0 +1,50 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: messageId
+    in: path
+    description: EDD timeline message ID.
+    required: true
+    schema:
+      type: string
+get:
+  x-products:
+    - Core
+  tags:
+    - Customers timeline
+  summary: Retrieve an EDD timeline message
+  operationId: GetCustomerEddTimeline
+  x-sdk-operation-name: getEddTimelineMessage
+  description: Retrieves an EDD message with a specified ID.
+  responses:
+    '200':
+      description: EDD timeline message retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Timelines/EddTimeline.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+delete:
+  x-products:
+    - Core
+  tags:
+    - Customers timeline
+  summary: Delete EDD timeline message
+  operationId: DeleteCustomerEddTimeline
+  x-sdk-operation-name: deleteEddTimelineMessage
+  description: Deletes an EDD timeline message with a specified ID.
+  responses:
+    '204':
+      description: EDD timeline message deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
