@@ -1,11 +1,10 @@
 type: object
 properties:
   id:
-    type: string
     description: ID of the credit memo.
     readOnly: true
-    example: cm_0YV7DE1YYBC7C9JJ79J2PBB5RR
-    maxLength: 50
+    allOf:
+      - $ref: ../ResourceId.yaml
   number:
     description: Auto-incrementing number based on the sequence of credit memos for any particular customer.
     readOnly: true
@@ -89,11 +88,10 @@ properties:
         - quantity
       properties:
         id:
-          type: string
           description: ID of the credit memo item.
           readOnly: true
-          example: cmit_0YV7DEB11BCF3AJBVQAED7F5PA
-          maxLength: 50
+          allOf:
+            - $ref: ../ResourceId.yaml
         invoiceItemId:
           description: ID of the invoice item to which the credit item is referenced.
           nullable: true
