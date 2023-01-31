@@ -38,9 +38,9 @@ This description provides detail on what an organization is in the context of th
 ```yaml
   organizationId:
     description: |-
-        Unique organization identifier.
-        An organization is an entity that represents a company.
-        For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+      Unique organization ID.
+      An organization is an entity that represents a company.
+      For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 ```
 
 ## Possessive apostrophes
