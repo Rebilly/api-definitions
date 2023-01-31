@@ -38,10 +38,9 @@ This description provides detail on what an organization is in the context of th
 ```yaml
   organizationId:
     description: |-
-      Your organization ID.
-      An organization is an entity that represents you,
-      or your company, as a merchant.
-      For more information, see [Obtain your organization ID](https://www.rebilly.com/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+        Unique organization identifier.
+        An organization is an entity that represents a company.
+        For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 ```
 
 ## Possessive apostrophes
@@ -290,10 +289,10 @@ This ID must be described in detail because the reader may not be aware of its c
 ```yaml
   websiteId:
     description: |-
-      Your website ID.
-      This value is a unique identifier which describes your website or websites in Rebilly.
-      A website is where your organization obtains a customer through a subscription.
-      For more information, see [Obtain your organization ID and website ID](https://www.rebilly.com/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+      Unique website ID.
+      This value is a unique identifier which describes a website or websites in Rebilly.
+      A website is where an organization obtains a customer through a subscription.
+      For more information, see [Obtain an organization ID and website ID](https://www.rebilly.com/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 ```
 
 #### Organization ID example
@@ -303,9 +302,9 @@ This ID must be described in detail because the reader may not be aware of its c
 ```yaml
   organizationId:
     description: |-
-      Your organization ID.
-      An organization is an entity that represents you, or your company, as a merchant.
-      For more information, see [Obtain your organization ID and website ID](https://www.rebilly.com/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+      Unique organization ID.
+      An organization is an entity that represents a company as a merchant.
+      For more information, see [Obtain an organization ID and website ID](https://www.rebilly.com/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 ```
 
 ### Response objects
