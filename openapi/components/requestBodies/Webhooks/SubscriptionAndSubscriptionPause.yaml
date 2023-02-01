@@ -3,14 +3,14 @@ content:
     schema:
       properties:
         subscriptionId:
-          description: Order ID.
+          description: ID of the order.
           type: string
         subscriptionPauseId:
-          description: Pause ID.
+          description: ID of the pause.
           type: string
         eventType:
           type: string
-          description: Webhook event type.
+          description: Type of webhook event.
           enum:
             - subscription-pause-created
             - subscription-pause-modified
@@ -19,6 +19,7 @@ content:
             - subscription-resumed
         _embedded:
           type: object
+          description: Embedded objects.
           properties:
             subscription:
               $ref: ../../schemas/Subscription.yaml
@@ -26,10 +27,17 @@ content:
               $ref: ../../schemas/Subscription/SubscriptionPause.yaml
         _links:
           type: array
-          description: Related resource links.
-          minItems: 1
+          description: Related links.
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/SubscriptionLink.yaml
-              - $ref: ../../schemas/Links/SubscriptionPauseLink.yaml
-description: Subscription pause and Order webhook request body resource.
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - subscription
+                  - pause
+description: Subscription pause and order webhook request body resource.

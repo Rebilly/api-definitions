@@ -15,11 +15,12 @@ allOf:
         properties:
           loginId:
             type: string
-            description: Konnektive API login ID.
+            description: ID of the Konnektive API login.
           password:
             type: string
             description: Konnektive API password.
             format: password
+            writeOnly: true
       settings:
         type: object
         description: Settings object.
@@ -33,3 +34,5 @@ allOf:
           productId:
             type: string
             description: Konnektive campaign product ID for which the order is being placed.
+            maxLength: 50
+            example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ

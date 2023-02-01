@@ -1,7 +1,8 @@
 type: object
+description: Transaction information.
 properties:
   id:
-    description: Unique transaction identifier string.
+    description: ID of the transaction.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
@@ -29,7 +30,7 @@ properties:
       - setup
       - void
   status:
-    description: Status of a transaction.
+    description: Status of the transaction.
     type: string
     readOnly: true
     enum:
@@ -50,7 +51,7 @@ properties:
       - waiting-gateway
       - waiting-refund
   result:
-    description: Result of a transaction.
+    description: Result of the transaction.
     type: string
     x-basic: true
     readOnly: true
@@ -64,7 +65,7 @@ properties:
     x-type: Money
     x-sortable: true
     x-basic: true
-    description: Total amount of a transaction.
+    description: Total amount of the transaction.
     type: number
     format: double
     readOnly: true
@@ -88,7 +89,9 @@ properties:
       - $ref: ../CurrencyCode.yaml
   requestAmount:
     description: |-
-      Amount of the payment request. If an adjustment occurs, the purchased amount may differ from the billing amount.
+      Amount of the payment request.
+      If an adjustment occurs,
+      the purchase amount may differ from the billing amount.
     type: number
     x-type: Money
     x-currency-field: requestCurrency
@@ -100,8 +103,10 @@ properties:
       - $ref: ../CurrencyCode.yaml
   parentTransactionId:
     description: ID of the parent transaction.
-    allOf:
-      - $ref: ../ResourceId.yaml
+    type: string
+    maxLength: 50
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+    nullable: true
     readOnly: true
   childTransactions:
     description: IDs of child transactions.
@@ -128,9 +133,7 @@ properties:
     items:
       $ref: ../ResourceId.yaml
   isRebill:
-    description: |-
-      Specifies whether the transaction is one of a number of recurring payments in a subscription,
-      excluding trials or setup fees.
+    description: Specifies if the transaction is one of a number of recurring payments in a subscription, excluding trials or setup fees.
     type: boolean
     readOnly: true
   rebillNumber:
@@ -145,16 +148,63 @@ properties:
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   has3ds:
-    description: Specifies whether the transaction uses 3D Secure.
+    description: Specifies if the transaction uses 3D Secure.
     type: boolean
     readOnly: true
   3ds:
-    $ref: ../Transactions/ThreeDSecureResult.yaml
+    type: object
+    description: Authentication object.
+    readOnly: true
+    properties:
+      server:
+        description: Name of the 3D Secure server.
+        type: string
+      version:
+        description: Version of 3D Secure.
+        type: string
+        enum:
+          - '1.0.2'
+          - '2.1.0'
+          - '2.2.0'
+      enrolled:
+        description: Specifies if the cardholder is enrolled in 3D Secure.
+        type: string
+        enum:
+          - yes
+          - no
+          - invalid card/timeout
+          - unavailable
+      authenticated:
+        description: Authentication response status for 3D Secure.
+        type: string
+        enum:
+          - yes
+          - no
+          - not applicable
+          - attempted
+      liability:
+        type: string
+        enum:
+          - protected
+          - not protected
+          - protected (attempt)
+      flow:
+        description: Authentication flow for 3D Secure 2.
+        type: string
+        enum:
+          - frictionless
+          - challenge
+      isDowngraded:
+        description: Specifies if 3D Secure 2 is attempted and downgraded to 3D Secure 1.
+        type: boolean
+        default: false
+        deprecated: true
   redirectUrl:
     description: |-
       URL where the end-user is redirected to when an offsite transaction is completed.
-      The default value is the website's configured URL.
+      The default value is the website URL.
     type: string
+    nullable: true
     format: uri
   retryNumber:
     type: integer
@@ -164,9 +214,10 @@ properties:
   isRetry:
     type: boolean
     readOnly: true
-    description: Specifies whether a transaction is a retry.
+    description: Specifies if a transaction is a retry.
   billingDescriptor:
     type: string
+    nullable: true
     readOnly: true
     description: |-
       Billing descriptor that appears on the periodic billing statement.
@@ -182,7 +233,7 @@ properties:
     type: string
     x-sortable: true
   hasAmountAdjustment:
-    description: Specifies whether the transaction has amount adjustment.
+    description: Specifies if the transaction has amount adjustment.
     type: boolean
     readOnly: true
   gatewayName:

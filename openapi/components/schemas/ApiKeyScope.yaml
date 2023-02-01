@@ -1,23 +1,27 @@
 type: object
 properties:
   organizationId:
-    description: Array of account identifier strings.
+    description: Array of account IDs.
     type: array
     items:
       allOf:
         - $ref: ./ResourceId.yaml
   productId:
-    description: Array of product identifier strings.
+    description: Array of product IDs.
     type: array
     items:
-      allOf:
-        - $ref: ./ResourceId.yaml
+      type: string
+      description: Unique resource ID.
+      maxLength: 50
+      example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
   planId:
-    description: Array of plan identifier strings.
+    description: Array of plan IDs.
     type: array
     items:
-      allOf:
-        - $ref: ./ResourceId.yaml
+      type: string
+      description: Unique resource ID.
+      maxLength: 50
+      example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
   customFieldName:
     description: Array of custom field names.
     type: array

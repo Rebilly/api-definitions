@@ -5,7 +5,7 @@ content:
         customerId:
           $ref: ../../schemas/CustomerId.yaml
         kycRequestId:
-          description: KYC request ID.
+          description: ID of the KYC request.
           type: string
         eventType:
           type: string
@@ -17,6 +17,7 @@ content:
             - kyc-request-partially-fulfilled
         _embedded:
           type: object
+          description: Customer and KYC request data.
           properties:
             customer:
               $ref: ../../schemas/Customer.yaml
@@ -24,10 +25,17 @@ content:
               $ref: ../../schemas/KycRequest.yaml
         _links:
           type: array
-          description: Related resource links.
-          minItems: 2
+          description: Related links.
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/CustomerLink.yaml
-              - $ref: ../../schemas/Links/KycRequestLink.yaml
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - customer
+                  - kycRequest
 description: KYC request webhook body resource.

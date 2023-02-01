@@ -12,6 +12,10 @@ properties:
       - account-password-reset-requested
       - account-verification-requested
       - aml-list-was-possibly-matched
+      - cashier-request-completed
+      - cashier-request-created
+      - cashier-request-expired
+      - cashier-request-started
       - coupon-applied
       - coupon-redeemed
       - coupon-redemption-canceled
@@ -118,9 +122,4 @@ properties:
     allOf:
       - $ref: ../ServerTimestamp.yaml
   _links:
-    type: array
-    description: Related resource links.
-    readOnly: true
-    minItems: 1
-    items:
-      $ref: ../Links/SelfLink.yaml
+    $ref: ../SelfLink.yaml

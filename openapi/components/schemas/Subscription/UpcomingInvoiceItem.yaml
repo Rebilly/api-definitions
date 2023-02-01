@@ -1,5 +1,5 @@
 type: object
-description: Line item.
+description: Invoice line item.
 required:
   - type
   - unitPriceAmount
@@ -7,32 +7,32 @@ required:
   - quantity
 properties:
   type:
-    description: Type of line item.
+    description: Type of invoice line item.
     type: string
     enum:
       - debit
       - credit
   description:
-    description: Description of line item.
+    description: Description of the line item.
     type: string
+    maxLength: 1000
   unitPriceAmount:
     description: Unit price of the line item.
     type: number
     format: double
     example: 49.95
   unitPriceCurrency:
-    allOf:
-      - $ref: ../CurrencyCode.yaml
+    $ref: ../CurrencyCode.yaml
   quantity:
-    description: Quantity of line item.
+    description: Quantity of the line item.
     type: integer
     example: 1
   periodStartTime:
-    description: Date-time when the period begins for this item.
+    description: Date and time when the period begins for this item.
     type: string
     format: date-time
   periodEndTime:
-    description: Date-time when the period ends for this item.
+    description: Date and time when the period ends for this item.
     type: string
     format: date-time
   createdTime:

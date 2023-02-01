@@ -5,12 +5,12 @@ required:
   - credentialHash
 properties:
   id:
-    description: Webhook identifier string.
+    description: ID of the webhook.
     readOnly: true
     allOf:
       - $ref: ./ResourceId.yaml
   eventsFilter:
-    description: Array of System event type.
+    description: Array of system event types.
     type: array
     default: []
     items:
@@ -28,16 +28,41 @@ properties:
       - PATCH
       - DELETE
   url:
-    description: URL that triggers when the given event occurs.
+    description: URL that triggers when a specified event occurs.
     type: string
     format: uri
   headers:
+    description: Webhook headers.
     type: array
     items:
       $ref: ./Rules/WebhookHeader.yaml
   credentialHash:
     type: string
-    description: Hash from credentials to use for authentication by the given URL.
+    description: Hash from credentials to use for authentication by the specified URL.
+  body:
+    description: |-
+      Webhook request body.
+      If this value is `null`,
+      the default payload for the specified event is used.
+      Template placeholders are permitted.
+
+      Invalid placeholders render as an empty strings.
+      For example, `Hello {{invalid.placeholder}}!` is rendered as `Hello !`.
+
+      For more information,
+      see [Placeholders](https://www.rebilly.com/docs/automations/email-notifications/#placeholders).
+    type: string
+    nullable: true
+  filter:
+    description: |-
+      Filter that determines whether to send the webhook.
+      This field requires a special format.
+      Use `,` for multiple allowed values.
+      Use `;` for multiple fields.
+
+      For more information,
+      see [Using filters](https://all-rebilly.redoc.ly/#section/Using-filter-with-collections).
+    type: string
   createdTime:
     $ref: CreatedTime.yaml
   updatedTime:
@@ -45,9 +70,4 @@ properties:
     allOf:
       - $ref: UpdatedTime.yaml
   _links:
-    type: array
-    description: Links related to resource.
-    readOnly: true
-    minItems: 1
-    items:
-      $ref: ./Links/SelfLink.yaml
+    $ref: ./SelfLink.yaml

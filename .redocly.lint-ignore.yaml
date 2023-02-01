@@ -1,5 +1,10 @@
 # This file instructs Redocly's linter to ignore the rules contained for specific parts of your API.
 # See https://redoc.ly/docs/cli/ for more information.
+openapi/openapi.yaml:
+  description-capitalization assertion:
+    - '#/info/description'
+  description-punctuation assertion:
+    - '#/info/description'
 openapi/paths/authentication-options.yaml:
   no-http-verbs-in-paths:
     - '#/'
@@ -20,6 +25,13 @@ openapi/paths/kyc-settings.yaml:
 openapi/paths/email-delivery-setting-verifications@{token}.yaml:
   put-200-and-201 assertion:
     - '#/put/responses'
+openapi/components/schemas/Rules/Actions/create-infusionsoft-order.yaml:
+  schema-properties-camelCase assertion:
+    - '#/allOf/1/properties/contactBody/properties/email_addresses'
+    - '#/allOf/1/properties/contactBody/properties/phone_numbers'
+    - '#/allOf/1/properties/orderBody/properties/order_date'
+    - '#/allOf/1/properties/orderBody/properties/order_title'
+    - '#/allOf/1/properties/orderBody/properties/order_type'
 openapi/paths/events@{eventType}@rules.yaml:
   put-200-and-201 assertion:
     - '#/put/responses'
@@ -32,3 +44,6 @@ openapi/paths/grid-segments@{id}.yaml:
 openapi/paths/profile.yaml:
   put-200-and-201 assertion:
     - '#/put/responses'
+openapi/paths/credential-hashes@avalara@{hash}.yaml:
+  path-segment-plural:
+    - '#/'

@@ -1,0 +1,82 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Cashier
+  summary: Retrieve a cashier strategy
+  operationId: GetCashierStrategy
+  x-sdk-operation-name: get
+  description: Retrieves a cashier strategy with a specified ID.
+  responses:
+    '200':
+      description: Cashier strategy retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Cashier/CashierStrategy.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Cashier
+  summary: Upsert a cashier strategy
+  operationId: PutCashierStrategy
+  x-sdk-operation-name: update
+  description: Creates or updates (upserts) a cashier strategy with a specified ID.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Cashier/CashierStrategy.yaml
+    description: Cashier strategy resource.
+    required: true
+  responses:
+    '200':
+      description: Cashier strategy updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Cashier/CashierStrategy.yaml
+    '201':
+      description: Cashier strategy created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Cashier/CashierStrategy.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+delete:
+  x-products:
+    - Core
+  tags:
+    - Cashier
+  summary: Delete a cashier strategy
+  operationId: DeleteCashierStrategy
+  x-sdk-operation-name: delete
+  description: Deletes a cashier strategy with a specified ID.
+  responses:
+    '204':
+      description: Cashier strategy deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

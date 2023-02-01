@@ -9,7 +9,7 @@ required:
   - permissions
 properties:
   id:
-    description: Application identifier string.
+    description: ID of the application.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
@@ -96,12 +96,19 @@ properties:
     $ref: ../UpdatedTime.yaml
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
-    minItems: 1
     items:
-      anyOf:
-        - $ref: ../Links/SelfLink.yaml
-        - $ref: ../Links/ApplicationInstanceLink.yaml
-        - $ref: ../Links/LogoUrlLink.yaml
-        - $ref: ../Links/AuthorLogoUrlLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - applicationInstance
+            - logoUrl
+            - authorLogoUrl

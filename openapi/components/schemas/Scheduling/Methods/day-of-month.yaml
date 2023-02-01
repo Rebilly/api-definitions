@@ -1,18 +1,18 @@
-allOf:
-  - $ref: ../CommonScheduleInstruction.yaml
-  - $ref: ../CustomEventScheduleInstruction.yaml
-  - $ref: ../ServicePeriodAnchorInstruction.yaml
-  - $ref: ../InvoiceRetryScheduleInstruction.yaml
-  - type: object
-    properties:
-      day:
-        type: integer
-        minimum: 1
-        maximum: 31
-        description: |-
-          Day of the month in which the event occurs.
-          If the month has less days, the last day of the month is selected.
-      time:
-        $ref: ../../TimeIso8601Extended.yaml
-    required:
-      - day
+type: object
+properties:
+  method:
+    type: string
+    enum:
+      - day-of-month
+  day:
+    type: integer
+    minimum: 1
+    maximum: 31
+    description: |-
+      Day of the month in which the event occurs.
+      If the month has less days, the last day of the month is selected.
+  time:
+    $ref: ../../TimeIso8601Extended.yaml
+required:
+  - day
+  - method

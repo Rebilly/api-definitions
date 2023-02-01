@@ -1,14 +1,10 @@
 type: object
+description: Subscription details.
 discriminator:
   propertyName: orderType
   mapping:
     subscription-order: ./Subscription/OrderTypes/SubscriptionOrder.yaml
     one-time-order: ./Subscription/OrderTypes/OneTimeOrder.yaml
-properties:
-  orderType:
-    description: Specifies the type of order, a subscription or a one-time purchase.
-    type: string
-    x-basic: true
-    enum:
-      - subscription-order
-      - one-time-order
+anyOf:
+  - $ref: ./Subscription/OrderTypes/SubscriptionOrder.yaml
+  - $ref: ./Subscription/OrderTypes/OneTimeOrder.yaml

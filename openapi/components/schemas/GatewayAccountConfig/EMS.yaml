@@ -18,23 +18,26 @@ allOf:
         properties:
           storeId:
             type: string
-            description: EMS store ID.
+            description: ID of the EMS store.
           userId:
             type: string
-            description: EMS account ID.
+            description: ID of the EMS account.
           password:
             type: string
             format: password
             description: EMS password.
+            writeOnly: true
           privateKey:
             type: string
             format: password
             description: Private key.
             x-multiline: true
+            writeOnly: true
           privateKeyPassword:
             type: string
             format: password
             description: Private key password.
+            writeOnly: true
           clientCertificate:
             type: string
             description: Client certificate.
@@ -43,6 +46,7 @@ allOf:
             type: string
             format: password
             description: Client certificate password.
+            writeOnly: true
           serverCertificate:
             type: string
             description: Server certificate.
@@ -55,6 +59,7 @@ allOf:
             format: password
             description: SFTP reconciliation private key.
             x-multiline: true
+            writeOnly: true
         required:
           - storeId
           - userId

@@ -1,5 +1,5 @@
 type: object
-description: Tracking API Requests.
+description: API request tracking.
 readOnly: true
 properties:
   id:
@@ -13,7 +13,7 @@ properties:
     type: string
     x-basic: true
     x-sortable: true
-    description: API request address.
+    description: Address of the API request.
   route:
     type: string
     x-sortable: true
@@ -21,7 +21,7 @@ properties:
     example: '/customers/{param}'
   method:
     type: string
-    description: HTTP method.
+    description: HTTP method of the API request.
     enum:
       - HEAD
       - GET
@@ -44,7 +44,7 @@ properties:
     $ref: ../HttpHeaders.yaml
   user:
     type: object
-    description: User who has made a request.
+    description: User who made the request.
     readOnly: true
     properties:
       userId:
@@ -55,16 +55,16 @@ properties:
         allOf:
           - $ref: ../ResourceId.yaml
       email:
-        description: User email.
+        description: Email address of the user.
         type: string
         format: email
         x-sortable: true
       firstName:
-        description: User first name.
+        description: First name of the user.
         type: string
         x-sortable: true
       lastName:
-        description: User last name.
+        description: Last name of the user.
         type: string
         x-sortable: true
       ipAddress:
@@ -74,15 +74,19 @@ properties:
         description: Client IP address.
         format: ipv4
       userAgent:
-        description: Software that is acting on behalf of a user.
+        description: Software that is acting on behalf of the user.
         type: string
         x-sortable: true
       fingerprint:
-        description: User device fingerprint hash.
+        description: |-
+          User's device fingerprint hash.
+          A device fingerprint is a unique token that is used to identify the user.
+          The device fingerprint is generated based on device attributes,
+          such as: hardware, software, IP address, language, browser, and more.
         type: string
         x-sortable: true
       isSupport:
-        description: If user from support.
+        description: Specifies if the API request is completed by a Rebilly Support Team member.
         type: boolean
         x-sortable: true
   ipAddress:
@@ -105,14 +109,11 @@ properties:
     x-sortable: true
     x-basic: true
     description: Request duration in milliseconds.
+  organizationId:
+    $ref: ../Organizations/OrganizationId.yaml
   createdTime:
     $ref: ../CreatedTime.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml
   _links:
-    type: array
-    description: Related resource links.
-    readOnly: true
-    minItems: 1
-    items:
-      $ref: ../Links/SelfLink.yaml
+    $ref: ../SelfLink.yaml

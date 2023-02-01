@@ -5,21 +5,22 @@ items:
   readOnly: true
   properties:
     invoiceId:
-      description: Invoice ID.
+      description: ID of the invoice.
       allOf:
         - $ref: ./ResourceId.yaml
     planId:
-      description: Plan ID.
-      allOf:
-        - $ref: ./ResourceId.yaml
+      type: string
+      description: ID of the plan.
+      maxLength: 50
+      example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
     subscriptionId:
-      description: Subscription order ID.
+      description: ID of the subscription order.
       allOf:
         - $ref: ./ResourceId.yaml
     customerId:
       $ref: CustomerId.yaml
     paymentId:
-      description: Payment ID.
+      description: ID of the payment.
       allOf:
         - $ref: ./ResourceId.yaml
     createdTime:
@@ -59,14 +60,14 @@ items:
       description: Dunning index of the related payment.
     isInitial:
       type: boolean
-      description: Whether it is the first renewal of the subscription or not.
+      description: Specifies if it is the first renewal of the subscription.
     refund:
       type: object
       description: Contains data for the related refund transaction if it exists.
       readOnly: true
       properties:
         transactionId:
-          description: Refund transaction ID.
+          description: ID of the refund transaction.
           allOf:
             - $ref: ./ResourceId.yaml
         transactionCreatedTime:
@@ -77,7 +78,7 @@ items:
       readOnly: true
       properties:
         disputeId:
-          description: Dispute ID.
+          description: ID of the dispute.
           allOf:
             - $ref: ./ResourceId.yaml
         disputeCreatedTime:

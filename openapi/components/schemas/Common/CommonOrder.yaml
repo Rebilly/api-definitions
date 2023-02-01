@@ -1,12 +1,14 @@
 type: object
 properties:
   id:
-    description: Order identifier string.
+    description: ID of the order.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   orderType:
-    description: Specifies the type of order, a subscription or a one-time purchase.
+    description: |-
+      Specifies the type of order.
+      An order may be a subscription or a one-time purchase.
     type: string
     enum:
       - subscription-order
@@ -15,7 +17,8 @@ properties:
   billingStatus:
     description: |-
       Billing status of the most recent invoice.
-      It may help you determine if you should change the service status such as suspending the service.
+      This value may help you to determine if you should change the service status of the service,
+      such as suspending the service.
     type: string
     readOnly: true
     enum:
@@ -35,68 +38,78 @@ properties:
     allOf:
       - $ref: ../Websites/WebsiteId.yaml
   currency:
-    description: Order's currency.
+    description: Currency of the order.
     readOnly: true
     allOf:
       - $ref: ../../schemas/CurrencyCode.yaml
   initialInvoiceId:
-    description: Initial invoice identifier string.
+    description: ID of the initial invoice.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   recentInvoiceId:
     description: |-
-      Most recently issued invoice identifier string.
-      It might not be `paid` yet.
+      ID of the most recently issued invoice.
+      The invoice might not be `paid` yet.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   items:
+    description: Item details.
     type: array
     minItems: 1
     items:
       $ref: ../Subscription/OrderItem.yaml
   deliveryAddress:
-    description: Order delivery address.
+    description: Delivery address of the order.
     nullable: true
     type: object
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   billingAddress:
-    description: Order billing address.
+    description: Billing address of the order.
     nullable: true
     type: object
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   activationTime:
-    description: Order activation time.
+    description: Date and time when the order is activated.
     x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   voidTime:
-    description: Order void time.
+    description: Date and time when the order is voided.
     allOf:
       - $ref: ../ServerTimestamp.yaml
+  abandonTime:
+    type: string
+    description: |-
+      Date and time when the pending order is automatically abandoned.
+      If this value is not passed during order creation,
+      a [pending order TTL](https://all-rebilly.redoc.ly/tag/Organizations/operation/PatchOrganization/#!path=settings/billing/pendingOrderTtl&t=request) setting is used to calculate the value.
+    format: date-time
+    nullable: true
   couponIds:
     type: array
     nullable: true
     description: |-
       List of coupons to redeem on the customer and restrict to this order.
 
-      Read more about [coupons here](https://docs.rebilly.com/docs/dashboard/marketing/coupons-and-discounts/).
+      For more information, see [Coupons](https://www.rebilly.com/docs/settings/coupons-and-discounts/).
 
-      This parameter respects the following logic:
+      This parameter uses the following logic:
 
-      - When not passed then applied coupons are not changed.
-      - When empty array passed then all applied coupon redemptions are canceled.
-      - When list of coupons is passed then not applied yet coupons are applied, already applied coupons do not changed their state, applied coupons that are not presented in
-      passed list are canceled.
+      - If this parameter is not supplied, applied coupons are not changed.
+      - If an empty array is supplied, all applied coupon redemptions are canceled.
+      - If a list of coupons is supplied, unapplied coupons in the list are applied.
+        Coupons that have already been applied do not change state.
+        Applied coupons that are not supplied in list are canceled.
 
-      If list of applied coupons on pending order are changed due to this param during update order, the invoice for the order is reissued.
+      If the list of applied coupons on a pending order is changed by this parameter during an order update, the invoice for the order is reissued.
     writeOnly: true
     items:
       type: string
-      description: Coupon ID.
+      description: ID of the coupon.
   poNumber:
     description: Purchase order number displayed on the issued invoices.
     nullable: true

@@ -2,23 +2,16 @@ allOf:
   - $ref: ../../Common/CommonKycDocument.yaml
   - properties:
       documentMatches:
+        description: Document matches.
         type: object
         readOnly: true
         properties:
           score:
-            description: >-
-              Calculated score that represents the % of confidence that this proof of address
-              represents the given customer.
+            description: Calculated score that represents the percentage of confidence that this proof of address represents the customer.
             type: number
             format: double
             example: 0.75
           data:
             $ref: ../../KycDocument/AddressMatches.yaml
       _links:
-        type: array
-        description: Related resource links.
-        readOnly: true
-        minItems: 1
-        items:
-          anyOf:
-            - $ref: ../../Links/SelfLink.yaml
+        $ref: ../../SelfLink.yaml

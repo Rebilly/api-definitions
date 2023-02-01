@@ -9,7 +9,7 @@ properties:
     readOnly: true
     type: string
   fileId:
-    description: Linked File object id.
+    description: ID of the linked file object.
     readOnly: true
     type: string
     nullable: true
@@ -35,19 +35,27 @@ properties:
   updatedTime:
     $ref: ../UpdatedTime.yaml
   retentionTime:
-    description: Retention end date. After this date, files are removed.
+    description: |-
+      Date and time when retention ends.
+      After this date, files are removed.
     readOnly: true
     type: string
     nullable: true
     format: date-time
   _links:
     type: array
-    description: Links related to the resource.
+    description: Related links.
     readOnly: true
-    minItems: 1
-    maxItems: 3
     items:
-      anyOf:
-        - $ref: ../Links/LinkSelf.yaml
-        - $ref: ../Links/LinkUser.yaml
-        - $ref: ../Links/LinkSignedLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - user
+            - signedLink

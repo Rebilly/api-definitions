@@ -5,14 +5,14 @@ content:
         customerId:
           $ref: ../../schemas/CustomerId.yaml
         kycDocumentId:
-          description: KYC document ID.
+          description: ID of the KYC document.
           type: string
         fileId:
-          description: File ID.
+          description: ID of the file.
           type: string
         eventType:
           type: string
-          description: Webhook event type.
+          description: Type of webhook event.
           enum:
             - kyc-document-accepted
             - kyc-document-created
@@ -22,6 +22,7 @@ content:
             - kyc-document-archived
         _embedded:
           type: object
+          description: Customer and KYC document data.
           properties:
             customer:
               $ref: ../../schemas/Customer.yaml
@@ -29,11 +30,18 @@ content:
               $ref: ../../schemas/KycDocument/KycDocument.yaml
         _links:
           type: array
-          description: Related resource links.
-          minItems: 3
+          description: Related links.
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/CustomerLink.yaml
-              - $ref: ../../schemas/Links/FileLink.yaml
-              - $ref: ../../schemas/Links/KycDocumentLink.yaml
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - customer
+                  - file
+                  - kycDocument
 description: KYC document webhook request body resource.

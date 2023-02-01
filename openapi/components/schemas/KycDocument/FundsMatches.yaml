@@ -1,12 +1,16 @@
 type: object
 properties:
   firstName:
-    description: Customer first name if it matches, null otherwise.
+    description: |-
+      First name of the customer.
+      This value is null if no match is found.
     type: string
     nullable: true
     example: John
   lastName:
-    description: Customer last name if it matches, null otherwise.
+    description: |-
+      Last name of the customer.
+      This value is null if no match is found.
     type: string
     nullable: true
     example: Doe
@@ -14,4 +18,5 @@ properties:
     description: Interpreted subtype of the uploaded document.
     type: string
     nullable: true
-    example: bank-statement
+    allOf:
+      - $ref: ./KycDocumentSubtypes.yaml

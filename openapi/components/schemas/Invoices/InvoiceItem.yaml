@@ -5,7 +5,7 @@ required:
 properties:
   id:
     description: |-
-      Unique website identifier string.
+      ID of the website.
       A website is where an organization obtains a customer through a subscription.
       For more information, see [Obtain an organization ID and website ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
     readOnly: true
@@ -21,6 +21,7 @@ properties:
   description:
     description: Description of the invoice item.
     type: string
+    maxLength: 1000
   unitPrice:
     description: Unit price of the invoice item.
     type: number
@@ -34,9 +35,10 @@ properties:
     format: double
     readOnly: true
   productId:
+    type: string
     description: ID of the product.
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
   discountAmount:
     description: Discount amount applied to the invoice item.
     type: number
@@ -64,19 +66,26 @@ properties:
       - $ref: ./InvoiceTaxItem.yaml
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
-    minItems: 1
     items:
-      anyOf:
-        - $ref: ../Links/SelfLink.yaml
-        - $ref: ../Links/ProductLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - product
   _embedded:
-    type: array
+    type: object
     description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Embeds/ProductEmbed.yaml
-        - $ref: ../Embeds/PlanEmbed.yaml
+    properties:
+      product:
+        type: object
+      plan:
+        type: object

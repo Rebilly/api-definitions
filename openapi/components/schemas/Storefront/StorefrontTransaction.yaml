@@ -13,10 +13,17 @@ allOf:
         readOnly: true
       _links:
         type: array
-        description: Related resource links.
+        description: Related links.
         readOnly: true
-        minItems: 1
         items:
-          anyOf:
-            - $ref: ../Links/SelfLink.yaml
-            - $ref: ../Links/ApprovalUrlLink.yaml
+          type: object
+          properties:
+            href:
+              description: Link URL.
+              type: string
+            rel:
+              description: Type of link.
+              type: string
+              enum:
+                - self
+                - approvalUrl

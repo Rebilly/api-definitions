@@ -1,3 +1,4 @@
+title: KYC documents.
 type: object
 required:
   - customerId
@@ -10,21 +11,23 @@ properties:
       - $ref: ../ResourceId.yaml
   fileId:
     deprecated: true
-    description: Linked file object id.
+    description: ID of the linked file object.
     allOf:
       - $ref: ../ResourceId.yaml
   fileIds:
-    description: >-
-      Linked file object id's.
+    description: |-
+      IDs of linked file objects.
 
-
-      Files uploaded for identity-proof must have following corresponding tags attached `['kyc', 'id-front']`, `['kyc', 'id-back']`, `['kyc', 'face-proof']` in order to be properly recognized as identity-proof files.
+      Uploaded `identity-proof` files must have the following tags attached to be used for KYC purposes:
+      `['kyc', 'id-front']`, `['kyc', 'id-back']`, `['kyc', 'face-proof']`.
     type: array
     items:
       allOf:
         - $ref: ../ResourceId.yaml
   documentType:
-    description: Document type submitted for validation, only identity-proof type is analyzed in an automated manner.
+    description: |-
+      Document type submitted for validation.
+      Only the `identity-proof` and `address-proof` types are analyzed automatically.
     allOf:
       - $ref: ../KycDocument/KycDocumentTypes.yaml
   documentSubtype:
@@ -42,17 +45,17 @@ properties:
       - rejected
       - archived
     x-enumDescriptions:
-      pending: Waiting to be reviewed or analyzed
-      in-progress: Being analyzed by Rebilly's AI
-      accepted: Accepted by AI or a human
-      rejected: Rejected by AI or a human
-      archived: Archived by Rebilly's AI
+      pending: Waiting to be reviewed or analyzed.
+      in-progress: Being analyzed by the Rebilly AI.
+      accepted: Accepted by AI or a human.
+      rejected: Rejected by AI or a human.
+      archived: Archived by the Rebilly AI.
   rejectionReason:
     $ref: ../KycDocument/KycDocumentRejection.yaml
   requestId:
     readOnly: true
     nullable: true
-    description: KYC request identifier string.
+    description: ID of the KYC request.
     type: string
     maxLength: 50
     example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
@@ -61,7 +64,7 @@ properties:
   updatedTime:
     $ref: ../UpdatedTime.yaml
   processedTime:
-    description: Processing date/time.
+    description: Date and time when the KYC document is processed.
     type: string
     format: date-time
     readOnly: true

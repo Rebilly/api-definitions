@@ -4,13 +4,19 @@ servers:
     variables:
       organizationId:
         default: unknown
-        description: Your organization ID.
+        description: |-
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
   - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
     description: Live server
     variables:
       organizationId:
         default: unknown
-        description: Your organization ID.
+        description: |-
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 get:
   x-badge: Experimental
   x-products:
@@ -20,9 +26,14 @@ get:
   summary: Retrieve a journal report
   operationId: GetJournalReport
   x-sdk-operation-name: getJournal
-  description: |
-    Retrieve a journal report which reflects a per-account revenue.
-    It is a more-granular step of a revenue waterfall report.
+  description: |-
+    Retrieves a journal report which displays revenue for each account.
+
+    A revenue journal is a detailed revenue waterfall report that describes revenue which is recognized at a certain month,
+    aggregated by product ID, product accounting code, or plan ID.
+    It contains information on booked revenue,
+    recognized revenue for the aggregation field in the booked period,
+    and the remaining revenue up to the selected month.
   parameters:
     - name: currency
       in: query
@@ -34,7 +45,7 @@ get:
       in: query
       description: |-
         Year and month from which revenue is booked.
-        If omitted then booked revenue starts from the first booked amount.
+        If this value is omitted, booked revenue is recorded from the first booked amount.
       schema:
         type: string
         pattern: '^\d{4}-\d{2}$'
@@ -43,14 +54,14 @@ get:
       in: query
       description: |-
         Year and month in which revenue is booked until.
-        If omitted then booked revenue is taken until the most recently booked amount.
+        If this value is omitted, booked revenue is recorded until the most recently booked amount.
       schema:
         type: string
         pattern: '^\d{4}-\d{2}$'
         example: 2022-01
     - name: recognizedAt
       in: query
-      description: Year and month in which revenue recognized.
+      description: Year and month when revenue is recognized.
       required: true
       schema:
         type: string
