@@ -2,6 +2,11 @@ allOf:
   - $ref: ./BalanceTransaction.yaml
   - type: object
     properties:
-      riskReserveDetails:
-        $ref: ./RiskReserveDetails.yaml
+      riskReserve:
+        type: object
+        properties:
+          releaseTime:
+            description: Time of risk reserve release.
+            allOf:
+              - $ref: ../ServerTimestamp.yaml
   - $ref: ./BalanceTransactionLinks.yaml

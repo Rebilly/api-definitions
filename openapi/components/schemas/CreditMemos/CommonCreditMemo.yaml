@@ -114,22 +114,15 @@ properties:
           format: double
           readOnly: true
         productId:
-          description: ID of the related product.
           type: string
+          description: ID of the related product.
           maxLength: 50
-          example: product-123
+          example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
         planId:
           description: ID of the related plan.
           type: string
           maxLength: 50
-          example: gold-plan
-        taxAmount:
-          description: Tax amount of the credit memo item.
-          type: number
-          format: double
-          default: 0.00
-          x-type: Money
-          deprecated: true
+          example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
         tax:
           type: object
           description: Credit memo item tax.
@@ -177,7 +170,8 @@ properties:
     default: 0.00
     x-type: Money
   taxAmount:
-    description: Tax amount of an invoice to credit.
+    description: Sum of items tax amount of an invoice to credit.
+    readOnly: true
     type: number
     format: double
     default: 0.00

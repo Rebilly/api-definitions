@@ -1,0 +1,30 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+  - $ref: ../../components/parameters/token.yaml
+post:
+  x-products:
+    - Storefront
+  tags:
+    - Transactions
+  summary: Finish a transaction KYC verification
+  operationId: StorefrontPostKycRequestContinue
+  x-sdk-operation-name: finishKyc
+  security:
+    - CustomerJWT: []
+  description: |-
+     Process a KYC interrupted transaction with a specified ID.
+
+     Use this operation to process the transaction after all documents of the KYC request with a specified token have been uploaded.
+  responses:
+    200:
+      description: KYC verification finished.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/StorefrontTransaction.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml

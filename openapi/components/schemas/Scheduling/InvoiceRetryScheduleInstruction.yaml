@@ -8,14 +8,9 @@ discriminator:
     day-of-week: ./Methods/day-of-week.yaml
     immediately: ./Methods/immediately.yaml
     intelligent: ./Methods/intelligent.yaml
-properties:
-  method:
-    type: string
-    enum:
-      - intelligent
-      - immediately
-      - date-interval
-      - day-of-month
-      - day-of-week
-required:
-  - method
+anyOf:
+  - $ref: ./Methods/date-interval.yaml
+  - $ref: ./Methods/day-of-month.yaml
+  - $ref: ./Methods/day-of-week.yaml
+  - $ref: ./Methods/immediately.yaml
+  - $ref: ./Methods/intelligent.yaml

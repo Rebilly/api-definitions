@@ -15,7 +15,7 @@ allOf:
             description: TWINT store UUID.
           cashRegisterId:
             type: string
-            description: Cash register ID.
+            description: ID of the cash register.
           publicKey:
             type: string
             description: TWINT public key.
@@ -25,10 +25,12 @@ allOf:
             description: TWINT private key.
             format: password
             x-multiline: true
+            writeOnly: true
           keyPassphrase:
             type: string
             description: TWINT key passphrase.
             format: password
+            writeOnly: true
         required:
           - storeUuid
           - cashRegisterId

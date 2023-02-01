@@ -11,6 +11,7 @@ allOf:
         enum:
           - pending
           - active
+          - abandoned
           - canceled
           - churned
           - paused
@@ -23,30 +24,37 @@ allOf:
         readOnly: true
       trial:
         type: object
-        description: To use plan defaults do not send the `trial` key, or send a `null` value.
+        description: |-
+          Trial details.
+          To use plan defaults do not send the `trial` key, or send a `null` value.
         properties:
           enabled:
             description: |-
               Specifies if there is a trial for this subscription.
-              For plans without trial prices the trial is free.
+              Plans without trial prices are free trials.
             type: boolean
           endTime:
-            description: Time and date at which the trial ends. If a trial is enabled on this subscription, a value must be provided.
+            description: |-
+              Time and date when the trial ends.
+              If a trial is enabled on this subscription, a value must be provided.
             type: string
             format: date-time
       isTrialOnly:
-        description: Specifies if a subscription ends after a trial period. Recurring settings are ignored if this value is `true`.
+        description: |-
+          Specifies if a subscription ends after a trial period.
+          If this value is `true`, recurring settings are ignored.
         type: boolean
         default: false
       invoiceTimeShift:
         description: |-
-          You can shift issue time and due time of invoices for this subscription.
+          Shifts issue time and due time of invoices for this subscription.
 
           This setting overrides plan settings.
-          To use plan settings, set `null`.
+          To use plan settings, set this value to `null`.
 
-          To use multiple plans in one subscription they all must have the same billing period,
-          this property allows to subscribe to different plans.
+          To use multiple plans in one subscription,
+          all plans must have the same billing period,
+          this property enables the customer to subscribe to different plans.
         nullable: true
         type: object
         example: null
@@ -56,24 +64,28 @@ allOf:
         type: object
         description: |-
           Recurring interval to override plan settings.
-          To use plan settings, set `null`.
+          To use plan settings, set this value to `null`.
 
-          To use multiple plans in one subscription they all must have the same recurring period length,
-          this property allows to subscribe to different plans.
+          To use multiple plans in one subscription,
+          all plans must have the same same recurring period length,
+          this property enables the customer to subscribe to different plans.
         nullable: true
         example: null
         properties:
           periodAnchorInstruction:
             $ref: ../Scheduling/ServicePeriodAnchorInstruction.yaml
       autopay:
-        description: Autopay determines if a payment attempt is automatic.
+        description: |-
+          Specifies if payment attempts are made automatically.
+          If autopay is enabled, the payment is retrieved from the customer on the renewal date using the payment instrument that is set at `paymentInstrumentId`,
+          or the default payment instrument on the subscription.
         type: boolean
         default: true
       startTime:
         description: |-
-          Subscription start time.
-          When the value is sent as `null`, it uses the current time.
-          This value can't be in past more than one service period.
+          Date and time when the subscription starts.
+          If this value is `null`, the current time is used.
+          This value cannot be more than one service period in the past.
         nullable: true
         x-sortable: true
         x-basic: true
@@ -81,48 +93,49 @@ allOf:
         type: string
         format: date-time
       endTime:
-        description: Subscription end time.
+        description: Date and time when the subscription ends.
         x-sortable: true
         type: string
         format: date-time
         readOnly: true
       renewalTime:
-        description: Subscription renewal time.
+        description: Date and time when the subscription renews.
         type: string
         x-sortable: true
         x-basic: true
         format: date-time
       rebillNumber:
-        description: Current period number.
+        description: Current billing period number.
         type: integer
         readOnly: true
         x-sortable: true
       lineItems:
         description: Subscription line items which queue until the next renewal (or interim) invoice is issued for the subscription.
         readOnly: true
-        allOf:
-          - $ref: ../Subscription/UpcomingInvoiceItemCollection.yaml
+        type: array
+        items:
+          $ref: ../Subscription/UpcomingInvoiceItem.yaml
       lineItemSubtotal:
         type: object
         readOnly: true
         description: |-
           Subtotal of line items in this subscription (signed value).
-          If credits exceed debits, it is a negative number.
+          If credits exceed debits, this value is a negative number.
         properties:
           currency:
-            x-label: Currency
-            x-sortable: true
             $ref: ../CurrencyCode.yaml
           amount:
             type: number
             x-type: Money
             x-sortable: true
+            description: Amount of the subtotal.
             format: double
             example: 49.95
       paymentInstrumentId:
         description: |-
           ID of the payment instrument to use for autopay.
-          If not provided or inactive, the customer's default payment instrument is used.
+          If this value is not provided, or if the payment instrument is inactive,
+          the customer's default payment instrument is used.
         nullable: true
         type: string
         maxLength: 50

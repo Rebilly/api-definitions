@@ -10,6 +10,7 @@ allOf:
       transactions:
         type: array
         description: Invoice transactions array.
+        maxItems: 10
         readOnly: true
         items:
           $ref: ../Transactions/Transaction.yaml
@@ -88,6 +89,10 @@ allOf:
         nullable: true
         type: integer
         readOnly: true
+      organizationId:
+        readOnly: true
+        allOf:
+          - $ref: ../Organizations/OrganizationId.yaml
       _links:
         type: array
         description: Related links.
@@ -111,14 +116,17 @@ allOf:
                 - recalculateInvoice
                 - subscription
       _embedded:
-        type: array
+        type: object
         description: Embedded objects that are requested by the `expand` query parameter.
         readOnly: true
-        minItems: 1
-        items:
-          anyOf:
-            - $ref: ../Embeds/CustomerEmbed.yaml
-            - $ref: ../Embeds/WebsiteEmbed.yaml
-            - $ref: ../Embeds/OrganizationEmbed.yaml
-            - $ref: ../Embeds/LeadSourceEmbed.yaml
-            - $ref: ../Embeds/ShippingRateEmbed.yaml
+        properties:
+          customer:
+            type: object
+          website:
+            type: object
+          organization:
+            type: object
+          leadSource:
+            type: object
+          shippingRate:
+            type: object
