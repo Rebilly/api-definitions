@@ -9,29 +9,29 @@ properties:
       - $ref: ./ResourceId.yaml
   name:
     type: string
-    description: Role name.
+    description: Name of the user role.
   description:
     type: string
-    description: Role description.
+    description: Description of the role.
   acl:
     $ref: ./Acl.yaml
   allowedIps:
     $ref: ./AllowedIps.yaml
   seniorIds:
     type: array
-    description: List of senior roles identifiers.
+    description: List of senior role IDs.
     readOnly: true
     items:
       type: string
   juniorIds:
     type: array
-    description: List of junior roles identifiers.
+    description: List of junior role IDs.
     items:
       type: string
   usersCount:
     type: integer
     readOnly: true
-    description: Number of users with this role assigned.
+    description: Number of users assigned to this role.
   createdTime:
     $ref: CreatedTime.yaml
   updatedTime:
@@ -54,12 +54,9 @@ properties:
             - seniorRoles
             - juniorRoles
   _embedded:
-    type: array
+    type: object
     description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ./Embeds/JuniorRolesEmbed.yaml
-
-
+    properties:
+      juniorRoles:
+        type: object

@@ -1,18 +1,19 @@
 type: object
 properties:
   id:
-    description: Session identifier string.
-    allOf:
-      - $ref: ../ResourceId.yaml
+    type: string
+    description: ID of the session.
+    maxLength: 50
+    example: jwt_0YV7DEJX80CDRAKVTV478ZNJDR
     readOnly: true
   type:
-    description: Session type.
+    description: Type of session.
     type: string
     readOnly: true
     enum:
       - customer
   token:
-    description: Session's token used for authentication.
+    description: Token used for authentication.
     type: string
     readOnly: true
   invalidate:

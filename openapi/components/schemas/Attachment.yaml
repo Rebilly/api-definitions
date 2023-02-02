@@ -31,7 +31,7 @@ properties:
       - transaction
       - transaction-timeline-comment
   relatedId:
-    description: Linked object ID.
+    description: ID of the linked object.
     type: string
   name:
     description: Name of original attachment.
@@ -60,10 +60,9 @@ properties:
             - self
             - file
   _embedded:
-    type: array
+    type: object
     description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ./Embeds/FileEmbed.yaml
+    properties:
+      file:
+        type: object

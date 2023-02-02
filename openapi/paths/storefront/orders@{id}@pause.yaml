@@ -4,35 +4,32 @@ post:
   x-products:
     - Storefront
   tags:
-    - Transactions
-  summary: Cancel a payout request
-  operationId: StorefrontPostPayoutRequestCancel
-  x-sdk-operation-name: cancel
+    - Orders
+  summary: Pause an order
+  operationId: StorefrontPostOrderPause
+  x-sdk-operation-name: pause
   security:
     - CustomerJWT: []
-  description: Sets the payout request status to `canceled` by customer.
+  description: Pauses an order with a specified ID.
   requestBody:
-    content:
-      application/json:
-        schema:
-          $ref: ../../components/schemas/PayoutRequestCancellation.yaml
-    description: Payout request resource.
-    required: true
+    $ref: ../../components/requestBodies/storefront/PostOrderPause.yaml
   responses:
-    200:
-      description: Payout request canceled.
+    201:
+      description: Order paused.
       headers:
         Location:
           $ref: ../../components/headers/Location.yaml
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/PayoutRequest.yaml
+            $ref: ../../components/schemas/Storefront/StorefrontOrder.yaml
     401:
       $ref: ../../components/responses/Unauthorized.yaml
     403:
       $ref: ../../components/responses/Forbidden.yaml
     404:
       $ref: ../../components/responses/NotFound.yaml
+    409:
+      $ref: ../../components/responses/Conflict.yaml
     422:
       $ref: ../../components/responses/ValidationError.yaml

@@ -1,22 +1,24 @@
 type: object
+nullable: true
+description: Purchase bump offer.
 required:
   - offerId
   - offerType
   - bumpAmount
 properties:
   offerId:
-    description: Offer ID.
+    description: ID of the bump offer.
     type: string
   offerType:
-    description: Offer type.
+    description: Type of bump offer.
     type: string
     example: bonus
   bumpAmount:
-    description: Bump amount.
+    description: Amount of the bump offer.
     allOf:
       - $ref: ../MoneyAmount.yaml
   bumpAmountInUsd:
-    description: Bump amount in USD.
+    description: Amount of the bump offer in USD.
     readOnly: true
     allOf:
       - $ref: ../MoneyAmount.yaml

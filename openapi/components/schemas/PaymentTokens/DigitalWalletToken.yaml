@@ -1,11 +1,11 @@
 type: object
-title: Digital Wallet Token
+title: Digital wallet token
 required:
   - method
   - paymentInstrument
 properties:
   method:
-    description: Token payment method.
+    description: Payment method of the token.
     type: string
     enum:
       - digital-wallet
@@ -20,7 +20,7 @@ properties:
       - payload
     properties:
       type:
-        description: Digital wallet type.
+        description: Type of digital wallet.
         type: string
         enum:
           - Apple Pay
@@ -37,12 +37,14 @@ properties:
         description: Descriptor for a payment.
         type: string
       bin:
-        description: Payment card BIN (the PAN first 6 digits).
+        description: |-
+          Bank Identification Number (BIN) of the payment card.
+          This value is the same as the first 6 digits of the associated Primary Account Number (PAN).
         type: string
         format: bin
         readOnly: true
       last4:
-        description: Payment card PAN last 4 digits.
+        description: Last 4 digits of the Primary Account Number (PAN) of the payment card.
         type: string
         readOnly: true
       brand:
@@ -59,7 +61,9 @@ properties:
         type: integer
       payload:
         writeOnly: true
-        description: Digital wallet encoded data. May contain the digital wallet billing address.
+        description: |-
+          Digital wallet encoded data.
+          This field may contain the digital wallet billing address.
         type: object
   billingAddress:
     readOnly: true
@@ -67,12 +71,12 @@ properties:
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   id:
-    description: Token identifier string.
+    description: ID of the token.
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
   isUsed:
-    description: Whether the token is already used.
+    description: Specifies if the token is already used.
     type: boolean
     default: false
     readOnly: true
@@ -87,11 +91,11 @@ properties:
   updatedTime:
     $ref: ../UpdatedTime.yaml
   usageTime:
-    description: Token usage time.
+    description: Date and time when the token is used.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   expirationTime:
-    description: Token expiration time.
+    description: Date and time when the token expired.
     allOf:
       - $ref: ../ServerTimestamp.yaml
   _links:
