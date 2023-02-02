@@ -1,52 +1,126 @@
-allOf:
-  - $ref: ./Common/CommonKycRequest.yaml
-  - required:
-      - customerId
-    properties:
-      customerId:
-        $ref: CustomerId.yaml
-      reason:
-        description: Reason for uploading.
-        example: spend limit
-        type: string
-      matchLevel:
-        description: |-
-          Tolerance level setting for document matches.
-          The value of `1` is more tolerant and `2` is strict.
-        type: integer
-        minimum: 1
-        maximum: 2
-        default: 2
-      revision:
-        description: |-
-          Number of times the KYC request data has been modified.
+type: object
+description: KYC request information.
+required:
+  - customerId
+  - documents
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  customerId:
+    $ref: ./CustomerId.yaml
+  documents:
+    $ref: ./KycRequestDocuments.yaml
+  status:
+    description: Status of the request.
+    type: string
+    readOnly: true
+    enum:
+      - gathering
+      - attempted
+      - partial
+      - pending-review
+      - fulfilled
+      - failed
+      - abandoned
+      - expired
+    x-enumDescriptions:
+      gathering: |-
+        No documents have been provided yet.
+        This is a temporary state.
+      attempted: |-
+        At least one document has been provided but none were assigned the `accepted` status.
+        This is a temporary state.
+      partial: |-
+        At least one requested document has the `accepted` status,
+        but not all requested documents have been assigned the `accepted` status.
+        This is a temporary state.
+      pending-review: |-
+        At least one requested document has the `pending` status,
+        and no requested documents have been assigned the `accepted` status.
+        This is a temporary state, until the document is reviewed,
+        or another `accepted` document is provided.
+      fulfilled: |-
+        All requested documents are provided and have been assigned the `accepted` status.
+        This is a permanent state.
+      failed: |-
+        At least one requested document has exhausted all attempts,
+        and has not been assigned a `accepted`, `pending`, or `in-progress` status.
+        This is a permanent state.
+      abandoned: |-
+        One or more documents provided but the request expired.
+        This is a permanent state.
+      expired: |-
+        No documents were provided and the request expired.
+        This is a permanent state.
+  redirectUrl:
+    description: |-
+      URL where the customer is redirected when a KYC document upload is complete.
+      When the customer is redirected,
+      Rebilly appends an `info` query parameter that has one of the following values:
+        - `back`: Customer clicked the `back to website` link.
+        - `token_expired`: Customer's token expired.
+        - `success`: Customer uploaded KYC documents that have been analyzed.
+        - `manual`: Customer uploaded KYC documents that require a manual review.
+          This is because the analyzer rejected the documents or could not process them.
+        - `partial`: Some of the customer's KYC documents have been analyzed,
+          but other documents have not.
+          For example, this may occur when a proof of address document is analyzed but proof of ID is not.
 
-          Use this value when analyzing webhook data to determine if a change must take precedence over the current representation.
-        type: integer
-        readOnly: true
-      _links:
+      Example: `https://example.com?info=success`.
+    type: string
+    format: uri
+  reason:
+    description: Reason for uploading.
+    example: spend limit
+    type: string
+  matchLevel:
+    description: |-
+      Tolerance level setting for document matches.
+      The value of `1` is more tolerant and `2` is strict.
+    type: integer
+    minimum: 1
+    maximum: 2
+    default: 2
+  revision:
+    description: |-
+      Number of times the KYC request data has been modified.
+
+      Use this value when analyzing webhook data to determine if a change must take precedence over the current representation.
+    type: integer
+    readOnly: true
+  expirationTime:
+    description: |-
+      Date and time when the request expires.
+      The default value is one hour in the future.
+    type: string
+    format: date-time
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - documents
+            - gatherer
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
+    properties:
+      documents:
         type: array
-        description: Related links.
-        readOnly: true
-        items:
-          type: object
-          properties:
-            href:
-              description: Link URL.
-              type: string
-            rel:
-              description: Type of link.
-              type: string
-              enum:
-                - self
-                - documents
-                - gatherer
-      _embedded:
-        type: object
-        description: Embedded objects that are requested by the `expand` query parameter.
-        readOnly: true
-        properties:
-          documents:
-            type: array
-            items:
-              $ref: ./KycDocument/KycDocument.yaml
