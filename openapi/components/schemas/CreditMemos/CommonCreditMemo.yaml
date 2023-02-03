@@ -50,8 +50,9 @@ properties:
           List of invoices that the credit memo is allocated to.
 
           - To delete invoice allocations, send an empty invoice allocation array in the request.
-            Paid invoices cannot be modified or deleted.
+            Only `unpaid`, `partially-paid` and `past-due` invoices can be deleted.
           - To modify invoice allocations, send a modified invoice allocation array in the request.
+            Only `unpaid`, `partially-paid` and `past-due` invoices can be modified.
           - If you do not want to modify or delete invoice allocations, do not send an invoice allocation array in the request.
         items:
           type: object
