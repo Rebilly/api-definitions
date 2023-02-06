@@ -1,71 +1,157 @@
-allOf:
-  - $ref: ../Common/CommonPaymentCard.yaml
-  - type: object
-    properties:
-      customerId:
-        $ref: ../CustomerId.yaml
-      stickyGatewayAccountId:
-        description: |-
-          Sticky gateway account ID.
-          All future payments are processed by this gateway account.
+type: object
+description: Payment card information.
+title: Payment card
+x-abstract-parent: PaymentInstrument
+properties:
+  id:
+    description: ID of the payment instrument.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  customerId:
+    $ref: ../CustomerId.yaml
+  method:
+    description: Method of payment instrument.
+    type: string
+    readOnly: true
+    enum:
+      - payment-card
+  status:
+    type: string
+    description: |-
+      Status of the payment instrument.
+      An `active` status means that a payment instrument has been used at least once for an approved transaction.
+      To remove an instrument from use, set this value to `deactivated`.
 
-          For more information,
-          see [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
-        type: string
-        nullable: true
-        readOnly: true
-      expirationReminderTime:
-        description: Date and time when an expiration reminder event is triggered.
-        nullable: true
-        type: string
-        format: date-time
-        readOnly: true
-      expirationReminderNumber:
-        description: Number of expiration reminder events that have triggered.
-        nullable: true
-        type: integer
-        readOnly: true
-      referenceData:
-        description: Payment instrument reference data.
-        type: object
-        additionalProperties:
+      For more information, see [Deactivate a payment instrument](../PostPaymentInstrumentDeactivation).
+    enum:
+      - active
+      - inactive
+      - expired
+      - deactivated
+      - verification-needed
+  fingerprint:
+    description: |-
+      Unique value that is used to identify the payment instrument.
+      This value is generated from the `bin` and the `last4` values.
+      This value contains alphanumeric characters.
+    type: string
+    readOnly: true
+  bin:
+    description: |-
+      Bank Identification Number (BIN) of the payment card.
+      This value is the same as the first 6 digits of the associated Primary Account Number (PAN).
+    type: string
+    format: bin
+    readOnly: true
+  last4:
+    description: Last 4 digits of the associated Primary Account Number (PAN).
+    type: string
+    readOnly: true
+  pan:
+    description: Primary Account Number (PAN) of the payment card.
+    type: string
+    writeOnly: true
+  expYear:
+    description: Expiration year of the payment card.
+    type: integer
+  expMonth:
+    description: Expiration month of the payment card.
+    type: integer
+  cvv:
+    description: Card Verification Value (CVV) of the payment card.
+    type: string
+    writeOnly: true
+  brand:
+    readOnly: true
+    allOf:
+      - $ref: ../PaymentCards/PaymentCardBrand.yaml
+  bankCountry:
+    description: Bank country of the payment instrument.
+    type: string
+    readOnly: true
+  bankName:
+    description: Bank name of the payment instrument.
+    type: string
+    readOnly: true
+  billingAddress:
+    description: Contact's billing address.
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  useAsBackup:
+    $ref: ../UseAsBackup.yaml
+  billingPortalUrl:
+    description: URL of the billing portal where the card can be updated.
+    type: string
+    readOnly: true
+  createdTime:
+    $ref: ../CreatedTime.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
+  customFields:
+    $ref: ../ResourceCustomFields.yaml
+  stickyGatewayAccountId:
+    description: |-
+      ID of the sticky gateway account.
+      All future payments are processed by this gateway account.
+
+      For more information,
+      see [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
+    type: string
+    nullable: true
+    readOnly: true
+  expirationReminderTime:
+    description: Date and time when an expiration reminder event is triggered.
+    nullable: true
+    type: string
+    format: date-time
+    readOnly: true
+  expirationReminderNumber:
+    description: Number of expiration reminder events that have triggered.
+    nullable: true
+    type: integer
+    readOnly: true
+  referenceData:
+    description: Payment instrument reference data.
+    type: object
+    additionalProperties:
+      type: string
+    example:
+      gatewayTransactionId: GAT123
+  digitalWallet:
+    readOnly: true
+    description: Digital wallet type.
+    type: string
+    nullable: true
+    enum:
+      - Apple Pay
+      - Google Pay
+  riskMetadata:
+    $ref: ../RiskMetadata.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
           type: string
-        example:
-          gatewayTransactionId: GAT123
-      digitalWallet:
-        readOnly: true
-        description: Digital wallet type.
-        type: string
-        nullable: true
-        enum:
-          - Apple Pay
-          - Google Pay
-      riskMetadata:
-        $ref: ../RiskMetadata.yaml
-      _links:
-        type: array
-        description: Related links.
-        readOnly: true
-        items:
-          type: object
-          properties:
-            href:
-              description: Link URL.
-              type: string
-            rel:
-              description: Type of link.
-              type: string
-              enum:
-                - self
-                - customer
-                - authTransaction
-                - approvalUrl
-      _embedded:
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - customer
+            - authTransaction
+            - approvalUrl
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
+    properties:
+      authTransaction:
         type: object
-        description: Embedded objects that are requested by the `expand` query parameter.
-        readOnly: true
-        properties:
-          authTransaction:
-            type: object
-          customer:
-            type: object
+      customer:
+        type: object

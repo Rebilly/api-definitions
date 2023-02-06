@@ -112,8 +112,9 @@ allOf:
       lineItems:
         description: Subscription line items which queue until the next renewal (or interim) invoice is issued for the subscription.
         readOnly: true
-        allOf:
-          - $ref: ../Subscription/UpcomingInvoiceItemCollection.yaml
+        type: array
+        items:
+          $ref: ../Subscription/UpcomingInvoiceItem.yaml
       lineItemSubtotal:
         type: object
         readOnly: true
@@ -122,8 +123,6 @@ allOf:
           If credits exceed debits, this value is a negative number.
         properties:
           currency:
-            x-label: Currency
-            x-sortable: true
             $ref: ../CurrencyCode.yaml
           amount:
             type: number

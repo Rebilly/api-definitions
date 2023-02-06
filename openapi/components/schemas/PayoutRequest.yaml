@@ -1,6 +1,7 @@
 type: object
 required:
   - websiteId
+  - customerId
   - currency
   - amount
 properties:
@@ -11,7 +12,7 @@ properties:
   websiteId:
     $ref: ./Websites/WebsiteId.yaml
   customerId:
-    readOnly: true
+    description: ID of the customer who is requesting a payout.
     allOf:
       - $ref: ./CustomerId.yaml
   paymentInstrumentId:
@@ -46,6 +47,7 @@ properties:
       partially-fulfilled: Request is partially paid out when `availableAmount` is less than `amount`.
       fulfilled: Request is fully paid out when `availableAmount` reaches zero.
   selectPaymentInstrumentUrl:
+    readOnly: true
     type: string
     format: uri
     description: URL for the customer to select a preferred payment instrument.
@@ -91,6 +93,13 @@ properties:
             - $ref: ./ServerTimestamp.yaml
         updatedTime:
           $ref: ./UpdatedTime.yaml
+  selectedPaymentInstrumentRedirectUrl:
+    description: |-
+      URL where the customer is redirected when a payment instrument is selected. The default value is the website URL.
+      Use `{{id}}` as a placeholder for the payout request ID.
+    type: string
+    format: uri
+    example: https://example.com/payout-request-success?id={{id}}
   createdTime:
     description: Date and time when the payout request is created.
     allOf:

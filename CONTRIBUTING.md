@@ -98,6 +98,7 @@ Rebilly uses the following lint rules:
 - [assert/schema-properties-both-created-time-and-updated-time](.redocly.yaml) (custom rules)
 - [assert/put-200-and-201](.redocly.yaml) (custom rules) (this has some exceptions)
 - [assert/schema-properties-camelCase](.redocly.yaml) (custom rules)
+- [assert/embedded-is-object](.redocly.yaml) (custom rules)
 
 ### Servers
 
