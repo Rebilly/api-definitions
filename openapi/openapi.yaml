@@ -486,6 +486,9 @@ tags:
       Use these operations to manage password resets.
       When a password reset is requested, an email with a token is sent.
       In the email the user must click a reset link, and then create a new password.
+  - name: Risk score
+    description: |-
+      Use risk score operations to configure blocklists based on transaction risk factors.
   - name: Roles
     description: |-
       Use these operations to manage user roles within your team or organization.
@@ -611,6 +614,7 @@ x-tagGroups:
       - Blocklists
       - KYC documents
       - AML
+      - Risk score
   - name: Misc
     tags:
       - Custom fields
@@ -1267,6 +1271,10 @@ paths:
     $ref: paths/customers@{id}@edd-search-results.yaml
   '/customers/{id}/edd-search-results/{searchResultId}':
     $ref: paths/customers@{id}@edd-search-results@{searchResultId}.yaml
+  '/risk-score-rules':
+    $ref: paths/risk-score-rules.yaml
+  '/risk-score-rules/blocklists':
+    $ref: paths/risk-score-rules@blocklists.yaml
   '/tags-rules':
     $ref: paths/tags-rules.yaml
   '/tags-rules/{id}':
