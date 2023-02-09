@@ -1,0 +1,80 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Tags
+  summary: Retrieve a tags rule
+  operationId: GetTagsRule
+  x-sdk-operation-name: getTagsRule
+  description: Retrieves a tags rule with a specified ID.
+  responses:
+    '200':
+      description: Tags rule retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TagUntag/TagUntagRule.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Tags
+  summary: Create a tags rule with specified ID
+  operationId: PutTagsRule
+  x-sdk-operation-name: updateTagsRule
+  description: Creates a tags rule with a specified ID.
+  responses:
+    '200':
+      description: Tags rule updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TagUntag/TagUntagRule.yaml
+    '201':
+      description: Tags rule created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TagUntag/TagUntagRule.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/TagUntag/TagUntagRule.yaml
+    description: Tags rule resource.
+    required: true
+delete:
+  x-products:
+    - Core
+  tags:
+    - Tags
+  summary: Delete tags rule
+  operationId: DeleteTagsRule
+  x-sdk-operation-name: deleteTagsRule
+  description: Deletes a tags rule with a specified ID.
+  responses:
+    '204':
+      description: Tags rule deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
