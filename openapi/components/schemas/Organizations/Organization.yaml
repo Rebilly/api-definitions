@@ -62,9 +62,11 @@ properties:
   settings:
     $ref: ./OrganizationSettings.yaml
   taxNumbers:
+    type: array
     description: Tax numbers of the organization.
-    allOf:
-      - $ref: ../TaxNumbers.yaml
+    nullable: true
+    items:
+      $ref: ../TaxNumber.yaml
   createdTime:
     $ref: ../CreatedTime.yaml
   updatedTime:
