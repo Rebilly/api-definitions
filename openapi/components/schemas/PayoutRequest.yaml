@@ -1,9 +1,9 @@
 type: object
 required:
   - websiteId
+  - customerId
   - currency
   - amount
-  - customerId
 properties:
   id:
     readOnly: true
@@ -93,6 +93,13 @@ properties:
             - $ref: ./ServerTimestamp.yaml
         updatedTime:
           $ref: ./UpdatedTime.yaml
+  selectedPaymentInstrumentRedirectUrl:
+    description: |-
+      URL where the customer is redirected when a payment instrument is selected. The default value is the website URL.
+      Use `{{id}}` as a placeholder for the payout request ID.
+    type: string
+    format: uri
+    example: https://example.com/payout-request-success?id={{id}}
   createdTime:
     description: Date and time when the payout request is created.
     allOf:
