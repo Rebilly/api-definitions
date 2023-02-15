@@ -12,7 +12,7 @@ properties:
     description: Website ID of the cashier. This value specifies the website with which the cashier is associated.
     type: string
     maxLength: 50
-    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+    example: web_0YV7DE4Z26DQSA1AC92FBJ7SEG
   customerId:
     $ref: ../CustomerId.yaml
   strategyId:
@@ -124,12 +124,13 @@ properties:
             - cashier
             - transaction
   _embedded:
-    type: array
+    type: object
     description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
-    minItems: 0
-    items:
-      anyOf:
-        - $ref: ../Embeds/CustomerEmbed.yaml
-        - $ref: ../Embeds/WebsiteEmbed.yaml
-        - $ref: ../Embeds/TransactionEmbed.yaml
+    properties:
+      customer:
+        type: object
+      website:
+        type: object
+      transaction:
+        type: object

@@ -6,8 +6,9 @@ properties:
     description: ID of the plan.
     deprecated: true
     x-basic: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    type: string
+    maxLength: 50
+    example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
   quantity:
     description: Number of product units in the specified plan.
     type: integer
@@ -29,10 +30,9 @@ properties:
     readOnly: true
     description: Specifies if the current plan revision number is greater than the plan item revision number.
   _embedded:
-    type: array
+    type: object
     description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Embeds/ProductEmbed.yaml
+    properties:
+      product:
+        type: object

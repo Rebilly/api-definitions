@@ -44,16 +44,23 @@ properties:
             - recentInvoice
             - approvalUrl
   _embedded:
-    type: array
+    type: object
     description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
-    items:
-      anyOf:
-        - $ref: ../Embeds/RecentInvoiceEmbed.yaml
-        - $ref: ../Embeds/InitialInvoiceEmbed.yaml
-        - $ref: ../Embeds/CustomerEmbed.yaml
-        - $ref: ../Embeds/WebsiteEmbed.yaml
-        - $ref: ../Embeds/LeadSourceEmbed.yaml
-        - $ref: ../Embeds/ShippingRateEmbed.yaml
-        - $ref: ../Embeds/PaymentInstrumentEmbed.yaml
-        - $ref: ../Embeds/UpcomingInvoiceEmbed.yaml
+    properties:
+      recentInvoice:
+        type: object
+      initialInvoice:
+        type: object
+      customer:
+        type: object
+      website:
+        type: object
+      leadSource:
+        type: object
+      shippingRate:
+        type: object
+      paymentInstrument:
+        type: object
+      upcomingInvoice:
+        type: object

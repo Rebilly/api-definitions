@@ -1,0 +1,61 @@
+get:
+  x-products:
+    - Core
+  tags:
+    - Risk score
+  summary: Retrieve risk score blocklist rules
+  operationId: GetRiskScoreBlocklistRules
+  x-sdk-operation-name: getAllBlocklistRules
+  security:
+    - SecretApiKey: []
+    - JWT: []
+  description: Retrieves risk score blocklist rules.
+  responses:
+    '200':
+      description: Risk score blocklist rules retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RiskScore/RiskScoreBlocklist.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Risk score
+  summary: Modify risk score blocklist rules
+  operationId: PutRiskScoreBlocklistRules
+  x-sdk-operation-name: updateRiskScoreBlocklistRules
+  description: Modifies risk score blocklist rules.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/RiskScore/RiskScoreBlocklist.yaml
+    description: Risk score blocklist rules.
+    required: true
+  responses:
+    '200':
+      description: Risk score blocklist rules set.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RiskScore/RiskScoreBlocklist.yaml
+    '201':
+      description: Risk score blocklist rules set.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RiskScore/RiskScoreBlocklist.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

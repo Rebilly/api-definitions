@@ -486,6 +486,9 @@ tags:
       Use these operations to manage password resets.
       When a password reset is requested, an email with a token is sent.
       In the email the user must click a reset link, and then create a new password.
+  - name: Risk score
+    description: |-
+      Use risk score operations to configure blocklists based on transaction risk factors.
   - name: Roles
     description: |-
       Use these operations to manage user roles within your team or organization.
@@ -611,6 +614,7 @@ x-tagGroups:
       - Blocklists
       - KYC documents
       - AML
+      - Risk score
   - name: Misc
     tags:
       - Custom fields
@@ -1055,10 +1059,6 @@ paths:
     $ref: ./paths/payout-requests.yaml
   '/payout-requests/{id}':
     $ref: './paths/payout-requests@{id}.yaml'
-  '/payout-requests/{id}/accept':
-    $ref: './paths/payout-requests@{id}@accept.yaml'
-  '/payout-requests/{id}/reject':
-    $ref: './paths/payout-requests@{id}@reject.yaml'
   '/payout-requests/{id}/payment-instruments':
     $ref: './paths/payout-requests@{id}@payment-instruments.yaml'
   /permissions-emulation:
@@ -1075,12 +1075,6 @@ paths:
     $ref: ./paths/profile.yaml
   /profile/mfa:
     $ref: ./paths/profile@mfa.yaml
-  /profile/password:
-    $ref: ./paths/profile@password.yaml
-  /profile/totp-reset:
-    $ref: ./paths/profile@totp-reset.yaml
-  '/reset-password/{token}':
-    $ref: './paths/reset-password@{token}.yaml'
   '/roles':
     $ref: ./paths/roles.yaml
   '/roles/{id}':
@@ -1111,10 +1105,6 @@ paths:
     $ref: './paths/users@{id}.yaml'
   '/users/{id}/mfa':
     $ref: './paths/users@{id}@mfa.yaml'
-  '/users/{id}/password':
-    $ref: './paths/users@{id}@password.yaml'
-  '/users/{id}/totp-reset':
-    $ref: './paths/users@{id}@totp-reset.yaml'
   /webhooks:
     $ref: ./paths/webhooks.yaml
   '/webhooks/{id}':
@@ -1223,6 +1213,8 @@ paths:
     $ref: paths/storefront/orders@{id}.yaml
   '/storefront/orders/{id}/cancellation':
     $ref: paths/storefront/orders@{id}@cancellation.yaml
+  '/storefront/orders/{id}/pause':
+    $ref: paths/storefront/orders@{id}@pause.yaml
   '/storefront/payment':
     $ref: paths/storefront/payment.yaml
   '/storefront/payment-instruments':
@@ -1237,8 +1229,6 @@ paths:
     $ref: ./paths/storefront/payout-requests.yaml
   '/storefront/payout-requests/{id}':
     $ref: paths/storefront/payout-requests@{id}.yaml
-  '/storefront/payout-requests/{id}/cancel':
-    $ref: paths/storefront/payout-requests@{id}@cancel.yaml
   '/storefront/plans':
     $ref: paths/storefront/plans.yaml
   '/storefront/plans/{id}':
@@ -1259,14 +1249,30 @@ paths:
     $ref: paths/storefront/transactions.yaml
   '/storefront/transactions/{id}':
     $ref: paths/storefront/transactions@{id}.yaml
+  '/storefront/transactions/{id}/{token}/continue':
+    $ref: paths/storefront/transactions@{id}@{token}@continue.yaml
+  '/storefront/transactions/{id}/{token}/bypass':
+    $ref: paths/storefront/transactions@{id}@{token}@bypass.yaml
   '/storefront/websites/{id}':
     $ref: paths/storefront/websites@{id}.yaml
   '/customers/{id}/edd-score':
     $ref: paths/customers@{id}@edd-score.yaml
   '/customers/{id}/edd-timeline':
     $ref: paths/customers@{id}@edd-timeline.yaml
+  '/customers/{id}/edd-timeline/{messageId}':
+    $ref: paths/customers@{id}@edd-timeline@{messageId}.yaml
   '/customers/{id}/edd-search-results':
     $ref: paths/customers@{id}@edd-search-results.yaml
+  '/customers/{id}/edd-search-results/{searchResultId}':
+    $ref: paths/customers@{id}@edd-search-results@{searchResultId}.yaml
+  '/risk-score-rules':
+    $ref: paths/risk-score-rules.yaml
+  '/risk-score-rules/blocklists':
+    $ref: paths/risk-score-rules@blocklists.yaml
+  '/tags-rules':
+    $ref: paths/tags-rules.yaml
+  '/tags-rules/{id}':
+    $ref: paths/tags-rules@{id}.yaml
 
 x-webhooks:
   application-instance-disabled:
@@ -1407,6 +1413,9 @@ x-webhooks:
   offsite-payment-completed:
     post:
       $ref: ./webhooks/offsite-payment-completed.yaml
+  order-abandoned:
+    post:
+      $ref: ./webhooks/order-abandoned.yaml
   order-completed:
     post:
       $ref: ./webhooks/order-completed.yaml

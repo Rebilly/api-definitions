@@ -35,9 +35,24 @@ properties:
     format: double
     readOnly: true
   productId:
+    type: string
     description: ID of the product.
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
+  planId:
+    type: string
+    nullable: true
+    description: ID of the plan.
+    maxLength: 50
+    readOnly: true
+    example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+  subscriptionId:
+    type: string
+    nullable: true
+    description: ID of the order.
+    maxLength: 50
+    readOnly: true
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
   discountAmount:
     description: Discount amount applied to the invoice item.
     type: number
@@ -80,11 +95,11 @@ properties:
             - self
             - product
   _embedded:
-    type: array
+    type: object
     description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Embeds/ProductEmbed.yaml
-        - $ref: ../Embeds/PlanEmbed.yaml
+    properties:
+      product:
+        type: object
+      plan:
+        type: object
