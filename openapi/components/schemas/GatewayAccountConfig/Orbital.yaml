@@ -1,0 +1,17 @@
+description: Orbital gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Orbital credentials object.
+        properties:
+          apiKey:
+            type: string
+            description: Orbital API key.
+            format: password
+        required:
+          - apiKey
