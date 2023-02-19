@@ -1,0 +1,49 @@
+description: ParamountCommerce gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: ParamountCommerce credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: ParamountCommerce merchant ID.
+          appId:
+            type: string
+            description: ParamountCommerce application ID.
+          clientId:
+            type: string
+            description: ParamountCommerce client ID.
+          clientSecret:
+            type: string
+            description: ParamountCommerce client secret.
+            format: password
+            writeOnly: true
+        required:
+          - merchantId
+          - appId
+          - clientId
+          - clientSecret
+      settings:
+        type: object
+        properties:
+          merchantSubId:
+            type: string
+            description: ParamountCommerce Merchant sub ID.
+          merchantTransactionType:
+            type: string
+            description: ParamountCommerce Merchant transaction type.
+            enum:
+              - POKER
+              - CASINO
+              - BINGO
+              - SPORTS_BETTING
+              - DIGITAL_REMITTANCE
+              - E_SPORTS
+        required:
+          - merchantSubId
+          - merchantTransactionType
