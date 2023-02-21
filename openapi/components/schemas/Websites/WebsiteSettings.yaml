@@ -1,6 +1,33 @@
 type: object
 description: Website settings.
 properties:
+  cashierForm:
+    type: object
+    description: Cashier form settings.
+    properties:
+      theme:
+        description: Various theme settings used in the cashier form.
+        type: object
+        nullable: true
+        properties:
+          colorPrimary:
+            description: Primary color for the cashier form in hexadecimal format.
+            type: string
+            nullable: true
+            maxLength: 6
+            example: '0044d4'
+          colorSecondary:
+            description: Secondary color for the cashier form in hexadecimal format.
+            type: string
+            nullable: true
+            maxLength: 6
+            example: 'ffffff'
+          buttonTemplate:
+            description: Submit button template. `{{amount}}` can be used as a placeholder for amount and currency.
+            type: string
+            nullable: true
+            maxLength: 100
+            example: Pay {{amount}}
   paymentForm:
     type: object
     description: Payment form settings.

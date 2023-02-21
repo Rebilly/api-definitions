@@ -486,6 +486,9 @@ tags:
       Use these operations to manage password resets.
       When a password reset is requested, an email with a token is sent.
       In the email the user must click a reset link, and then create a new password.
+  - name: Risk score
+    description: |-
+      Use risk score operations to configure blocklists based on transaction risk factors.
   - name: Roles
     description: |-
       Use these operations to manage user roles within your team or organization.
@@ -611,6 +614,7 @@ x-tagGroups:
       - Blocklists
       - KYC documents
       - AML
+      - Risk score
   - name: Misc
     tags:
       - Custom fields
@@ -895,6 +899,10 @@ paths:
     $ref: ./paths/cashier-strategies.yaml
   /cashier-strategies/{id}:
     $ref: ./paths/cashier-strategies@{id}.yaml
+  /cashier-custom-property-sets:
+    $ref: ./paths/cashier-custom-property-sets.yaml
+  /cashier-custom-property-sets/{id}:
+    $ref: ./paths/cashier-custom-property-sets@{id}.yaml
   /checkout-forms:
     $ref: ./paths/checkout-forms.yaml
   /checkout-forms/{id}:
@@ -1067,12 +1075,6 @@ paths:
     $ref: ./paths/profile.yaml
   /profile/mfa:
     $ref: ./paths/profile@mfa.yaml
-  /profile/password:
-    $ref: ./paths/profile@password.yaml
-  /profile/totp-reset:
-    $ref: ./paths/profile@totp-reset.yaml
-  '/reset-password/{token}':
-    $ref: './paths/reset-password@{token}.yaml'
   '/roles':
     $ref: ./paths/roles.yaml
   '/roles/{id}':
@@ -1107,10 +1109,6 @@ paths:
     $ref: './paths/users@{id}.yaml'
   '/users/{id}/mfa':
     $ref: './paths/users@{id}@mfa.yaml'
-  '/users/{id}/password':
-    $ref: './paths/users@{id}@password.yaml'
-  '/users/{id}/totp-reset':
-    $ref: './paths/users@{id}@totp-reset.yaml'
   /webhooks:
     $ref: ./paths/webhooks.yaml
   '/webhooks/{id}':
@@ -1219,6 +1217,8 @@ paths:
     $ref: paths/storefront/orders@{id}.yaml
   '/storefront/orders/{id}/cancellation':
     $ref: paths/storefront/orders@{id}@cancellation.yaml
+  '/storefront/orders/{id}/pause':
+    $ref: paths/storefront/orders@{id}@pause.yaml
   '/storefront/payment':
     $ref: paths/storefront/payment.yaml
   '/storefront/payment-instruments':
@@ -1269,6 +1269,14 @@ paths:
     $ref: paths/customers@{id}@edd-search-results.yaml
   '/customers/{id}/edd-search-results/{searchResultId}':
     $ref: paths/customers@{id}@edd-search-results@{searchResultId}.yaml
+  '/risk-score-rules':
+    $ref: paths/risk-score-rules.yaml
+  '/risk-score-rules/blocklists':
+    $ref: paths/risk-score-rules@blocklists.yaml
+  '/tags-rules':
+    $ref: paths/tags-rules.yaml
+  '/tags-rules/{id}':
+    $ref: paths/tags-rules@{id}.yaml
 
 x-webhooks:
   application-instance-disabled:
