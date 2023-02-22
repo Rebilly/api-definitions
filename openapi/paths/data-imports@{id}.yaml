@@ -1,0 +1,24 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - DataImports
+  tags:
+    - Data imports
+  summary: Retrieve a data import request
+  operationId: GetDataImport
+  x-sdk-operation-name: get
+  description: Retrieve a data import request with a specified ID.
+  responses:
+    '200':
+      description: Data import request.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DataImports/DataImport.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

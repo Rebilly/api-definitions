@@ -1,0 +1,41 @@
+type: object
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  dataImportId:
+    description: ID of the organization data import.
+    readOnly: true
+    type: string
+  content:
+    description: Content of the unprocessed row.
+    type: string
+  createdTime:
+    $ref: ../CreatedTime.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
+  terminationTime:
+    description: |-
+      Date and time when the unprocessed row will be terminated.
+    readOnly: true
+    type: string
+    nullable: true
+    format: date-time
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - user
+            - signedLink

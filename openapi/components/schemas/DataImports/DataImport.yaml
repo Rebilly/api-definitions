@@ -1,0 +1,84 @@
+type: object
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  userId:
+    description: ID of the user who requested the organization data import.
+    readOnly: true
+    type: string
+  fileId:
+    description: ID of the linked file object.
+    readOnly: true
+    type: string
+    nullable: true
+  type:
+    description: Type of imported entity import data.
+    type: string
+    enum:
+      - products
+      - plans
+      - websites
+      - gateway-accounts
+  status:
+    description: Status of organization data import request.
+    readOnly: true
+    type: string
+    enum:
+      - pending
+      - processing
+      - completed
+      - queued
+      - failed
+  processedRows:
+    description: The number of processed rows.
+    readOnly: true
+    type: integer
+  unprocessedRows:
+    description: The number of unprocessed rows.
+    readOnly: true
+    type: integer
+  createdTime:
+    $ref: ../CreatedTime.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
+  processingStartTime:
+    description: |-
+      Date and time when the data import was completed.
+    readOnly: true
+    type: string
+    nullable: true
+    format: date-time
+  completionTime:
+    description: |-
+      Date and time when the data import was completed.
+    readOnly: true
+    type: string
+    nullable: true
+    format: date-time
+  _embedded:
+    type: object
+    description: Embedded objects.
+    properties:
+      dataImportUnprocessedRows:
+        type: array
+        description: Unprocessed rows.
+        readOnly: true
+        items:
+          $ref: ../../schemas/DataImports/DataImportUnprocessedRows.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
