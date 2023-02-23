@@ -6,12 +6,14 @@ properties:
     description: ID of the plan.
     deprecated: true
     x-basic: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    type: string
+    maxLength: 50
+    example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
   quantity:
     description: Number of product units in the specified plan.
     type: integer
   plan:
+    description: Plan details.
     oneOf:
       - $ref: ../Plans/OriginalPlan.yaml
       - $ref: ../Plans/FlexiblePlan.yaml
@@ -22,16 +24,15 @@ properties:
   isModified:
     type: boolean
     readOnly: true
-    description: Specifies whether the plan information is modified for this subscription.
+    description: Specifies if the plan information is modified for this subscription.
   isGrandfathered:
     type: boolean
     readOnly: true
-    description: Specifies whether the current plan revision number is greater than the plan item revision number.
+    description: Specifies if the current plan revision number is greater than the plan item revision number.
   _embedded:
-    type: array
+    type: object
     description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Embeds/ProductEmbed.yaml
+    properties:
+      product:
+        type: object

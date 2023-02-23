@@ -11,15 +11,17 @@ allOf:
         properties:
           merchantId:
             type: string
-            description: ParamountInterac merchant ID.
+            description: ID of the ParamountInterac merchant.
           encryptionKey:
             type: string
             description: ParamountInterac encryption key.
             format: password
+            writeOnly: true
           password:
             type: string
             description: ParamountInterac password for query.
             format: password
+            writeOnly: true
         required:
           - merchantId
           - encryptionKey
@@ -29,8 +31,8 @@ allOf:
         properties:
           sandbox:
             type: boolean
-            description: Specifies whether the gateway account is in sandbox mode.
+            description: Specifies if the gateway account is in sandbox mode.
             default: false
           merchantSubId:
             type: integer
-            description: Merchant or organization sub ID.
+            description: Sub ID of the merchant or organization.

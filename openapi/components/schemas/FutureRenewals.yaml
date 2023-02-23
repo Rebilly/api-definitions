@@ -1,6 +1,7 @@
 type: object
 properties:
   data:
+    description: Future renewals data.
     type: array
     items:
       type: object
@@ -9,22 +10,23 @@ properties:
       properties:
         date:
           type: string
-          description: Date in format YYYY-MM.
+          description: Date in `YYYY-MM` format.
         sum:
           type: number
           format: double
-          description: Amount of future renewals in user's reporting currency.
+          description: Total amount of future renewals in the user's reporting currency.
         plansCount:
           type: array
+          description: Plan within the aggregation.
           items:
             type: object
-            description: Plan within the aggregation.
             readOnly: true
             properties:
               planId:
-                description: Plan identifier.
-                allOf:
-                  - $ref: ./ResourceId.yaml
+                type: string
+                description: ID of the plan.
+                maxLength: 50
+                example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
               count:
                 type: integer
-                description: Amount of plan's future renewals.
+                description: Total number of future renewals of a plan.

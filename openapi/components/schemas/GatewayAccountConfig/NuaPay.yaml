@@ -17,20 +17,23 @@ allOf:
             description: NuaPay serial number.
           nuaPayAccountId:
             type: string
-            description: NuaPay account ID.
+            description: ID of the NuaPay account.
           nuaPayOriginatorIban:
             type: string
             description: NuaPay origiantor IBAN.
             format: password
+            writeOnly: true
           nuaPayApiKey:
             type: string
             description: NuaPay API key.
             format: password
+            writeOnly: true
           nuaPayPrivateKey:
             type: string
             description: NuaPay private key.
             format: password
             x-multiline: true
+            writeOnly: true
         required:
           - nuaPayCommonName
           - nuaPaySerialNumber

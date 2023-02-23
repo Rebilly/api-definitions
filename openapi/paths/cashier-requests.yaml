@@ -1,0 +1,70 @@
+post:
+  x-products:
+    - Core
+  tags:
+    - Cashier
+  summary: Create a cashier deposit request
+  operationId: PostCashierRequest
+  x-sdk-operation-name: create
+  description: |-
+    Creates a cashier deposit request.
+    To complete the deposit, the customer is redirected to the `cashier` link.
+    After the deposit, the customer is redirected to the `redirectUrl`.
+    Corresponding transaction webhooks are sent to webhooks subscribers.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Cashier/CashierRequest.yaml
+    description: Cashier request resource.
+    required: true
+  responses:
+    '201':
+      description: Cashier request created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Cashier/CashierRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Cashier
+  summary: Retrieve cashier deposit requests
+  operationId: GetCashierRequestCollection
+  x-sdk-operation-name: getAll
+  description: Retrieves a list of cashier requests.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+  responses:
+    '200':
+      description: List of cashier deposit requests retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Cashier/CashierRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml

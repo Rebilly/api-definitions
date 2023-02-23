@@ -14,7 +14,7 @@ properties:
     example: null
     description: |-
       Risk metadata.
-      If null, the value would coalesce to the risk metadata captured when creating the payment token.
+      If this value is `null`, this field uses risk metadata that is captured when creating the payment token.
     allOf:
       - $ref: ../RiskMetadata.yaml
   customFields:
@@ -25,28 +25,42 @@ properties:
     $ref: ../UpdatedTime.yaml
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
-    minItems: 1
     items:
-      anyOf:
-        - $ref: ../Links/SelfLink.yaml
-        - $ref: ../Links/CustomerLink.yaml
-        - $ref: ../Links/InitialInvoiceLink.yaml
-        - $ref: ../Links/RecentInvoiceLink.yaml
-        - $ref: ../Links/WebsiteLink.yaml
-        - $ref: ../Links/ApprovalUrlLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - website
+            - customer
+            - initialInvoice
+            - recentInvoice
+            - approvalUrl
   _embedded:
-    type: array
+    type: object
     description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
-    items:
-      anyOf:
-        - $ref: ../Embeds/RecentInvoiceEmbed.yaml
-        - $ref: ../Embeds/InitialInvoiceEmbed.yaml
-        - $ref: ../Embeds/CustomerEmbed.yaml
-        - $ref: ../Embeds/WebsiteEmbed.yaml
-        - $ref: ../Embeds/LeadSourceEmbed.yaml
-        - $ref: ../Embeds/ShippingRateEmbed.yaml
-        - $ref: ../Embeds/PaymentInstrumentEmbed.yaml
-        - $ref: ../Embeds/UpcomingInvoiceEmbed.yaml
+    properties:
+      recentInvoice:
+        type: object
+      initialInvoice:
+        type: object
+      customer:
+        type: object
+      website:
+        type: object
+      leadSource:
+        type: object
+      shippingRate:
+        type: object
+      paymentInstrument:
+        type: object
+      upcomingInvoice:
+        type: object

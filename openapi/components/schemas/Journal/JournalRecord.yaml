@@ -1,0 +1,93 @@
+type: object
+required:
+  - type
+  - journalEntryId
+  - customerId
+  - invoiceId
+  - invoiceItemId
+  - debitAccountId
+  - creditAccountId
+properties:
+  id:
+    $ref: ../ResourceId.yaml
+  journalEntryId:
+    description: ID of the journal entry.
+    readOnly: true
+    type: string
+  customerId:
+    description: ID of the customer.
+    type: string
+    maxLength: 50
+    example: cus_0YV7DDSDD1C8DA64KHH2W33CPF
+  invoiceId:
+    description: ID of the invoice.
+    type: string
+  invoiceItemId:
+    description: ID of the invoice item.
+    type: string
+  type:
+    type: string
+    readOnly: true
+    enum:
+      - automated
+      - manual
+  estimatedAmount:
+    description: |-
+      Amount of revenue estimated to be recognized at the schedule date.
+      This value is ignored when updating a journal record with a `type` of `automated`.
+    nullable: true
+    type: number
+    format: double
+  recognizedAmount:
+    description: Amount of revenue recognized at the journal period end.
+    nullable: true
+    type: number
+    format: double
+  debitAccountId:
+    description: ID of the debit journal account.
+    nullable: true
+    type: string
+  creditAccountId:
+    description: ID of the credit journal account.
+    nullable: true
+    type: string
+  createdTime:
+    $ref: ../CreatedTime.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
+    properties:
+      customer:
+        type: object
+      invoice:
+        type: object
+      invoiceItem:
+        type: object
+      debitAccount:
+        type: object
+      creditAccount:
+        type: object
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - customer
+            - invoice
+            - invoiceItem
+            - journalEntry
+            - creditAccount
+            - debitAccount

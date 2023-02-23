@@ -5,17 +5,19 @@ post:
     - Core
   tags:
     - Orders
-  summary: Issue an interim invoice for a subscription order
+  summary: Issue an interim invoice
   operationId: PostSubscriptionInterimInvoice
   x-sdk-operation-name: createInterimInvoice
   description: |-
-    Issues an interim invoice for a subscription, typically used with plan changes and pro rata adjustments.
+    Issues an interim invoice for a subscription order.
+    Use this operation for plan changes and pro rata adjustments.
 
     This process:
-      - creates an invoice
-      - adds the subscription line items to the invoice
-      - issues the invoice
-      - optionally applies payment to the invoice if a `transactionId` is supplied.
+
+      - Creates an invoice.
+      - Adds the subscription line items to the invoice.
+      - Issues the invoice.
+      - Optionally, applies payment to the invoice if a `transactionId` is supplied.
   requestBody:
     content:
       application/json:

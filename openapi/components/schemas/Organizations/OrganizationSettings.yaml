@@ -12,12 +12,24 @@ properties:
         description: Type of tax calculator.
         enum:
           - taxjar
+          - avalara
           - flat
       rate:
         type: number
         nullable: true
         format: float
         description: Rate for flat tax calculation.
+  billing:
+    description: Global organization settings for billing.
+    type: object
+    nullable: true
+    properties:
+      pendingOrderTtl:
+        description: Length of time, in ISO-8601 durations format, before which a pending order is automatically abandoned.
+        type: string
+        example: P7D
+        nullable: true
+        default: null
   taxLocations:
     type: array
     description: |-

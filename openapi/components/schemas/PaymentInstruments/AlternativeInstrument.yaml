@@ -1,42 +1,87 @@
 type: object
-title: Alternative Instrument
+title: Alternative instrument
 required:
   - method
   - customerId
   - billingAddress
-allOf:
-  - $ref: ../Common/CommonAlternativeInstrument.yaml
-  - properties:
-      customerId:
-        $ref: ../CustomerId.yaml
-      stickyGatewayAccountId:
-        description: Sticky gateway account ID. All future payments are processed by this gateway account.
-        type: string
-        nullable: true
-        readOnly: true
-      referenceData:
-        description: Payment instrument reference data.
-        type: object
-        additionalProperties:
+x-abstract-parent: PaymentInstrument
+properties:
+  id:
+    description: ID of the payment instrument.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  customerId:
+    $ref: ../CustomerId.yaml
+  method:
+    description: Payment method of the payment instrument.
+    allOf:
+      - $ref: ../PaymentMethods/AlternativePaymentMethods.yaml
+      - not:
+          enum:
+            - payment-card
+            - paypal
+            - ach
+            - echeck
+            - Khelocard
+  billingAddress:
+    description: Billing address of the user that is associated with the payment instrument.
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  status:
+    description: Payment instrument status.
+    type: string
+    readOnly: true
+    enum:
+      - active
+      - deactivated
+  useAsBackup:
+    $ref: ../UseAsBackup.yaml
+  createdTime:
+    $ref: ../CreatedTime.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
+  customFields:
+    $ref: ../ResourceCustomFields.yaml
+  stickyGatewayAccountId:
+    description: |-
+      ID of the sticky gateway account.
+      All future payments are processed by this gateway account.
+
+      For more information,
+      see [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
+    type: string
+    nullable: true
+    readOnly: true
+  referenceData:
+    description: Payment instrument reference data.
+    type: object
+    additionalProperties:
+      type: string
+    example:
+      gatewayTransactionId: GAT123
+  riskMetadata:
+    $ref: ../RiskMetadata.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
           type: string
-        example:
-          gatewayTransactionId: GAT123
-      riskMetadata:
-        $ref: ../RiskMetadata.yaml
-      _links:
-        type: array
-        description: Links related to the resource.
-        readOnly: true
-        minItems: 1
-        items:
-          anyOf:
-            - $ref: ../Links/SelfLink.yaml
-            - $ref: ../Links/CustomerLink.yaml
-      _embedded:
-        type: array
-        description: Embedded objects that are requested by the `expand` query parameter.
-        readOnly: true
-        minItems: 1
-        items:
-          anyOf:
-            - $ref: ../Embeds/CustomerEmbed.yaml
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - customer
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
+    properties:
+      customer:
+        type: object

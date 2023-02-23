@@ -6,36 +6,44 @@ required:
   - pricing
 properties:
   id:
-    description: Plan ID.
-    readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
-  name:
-    description: Plan name, displayed on invoices and receipts.
     type: string
+    description: ID of the plan.
+    readOnly: true
+    maxLength: 50
+    example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+  name:
+    description: |-
+      Name of the plan.
+      This name is displayed on invoices and receipts.
+    type: string
+    maxLength: 255
   description:
     type: string
-    description: Plain-text description of the plan. This field accepts plain-text only.
+    description: |-
+      Plain-text description of the plan.
+      This field accepts plain-text only.
   richDescription:
     type: string
     description: |-
       Rich-text description of the plan.
-      This field accepts rich text formatting, such as: bold, underline, italic, and hyperlinks.
+      This field accepts rich text formatting,
+      such as: bold, underline, italic, and hyperlinks.
   productId:
-    description: Related product ID.
-    allOf:
-      - $ref: ../ResourceId.yaml
+    type: string
+    description: ID of the related product.
+    maxLength: 50
+    example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
   productOptions:
     type: object
-    description: Name-value pairs to specify the product options.
+    nullable: true
+    description: Name-value pairs that specify the product options.
     additionalProperties:
       type: string
     example:
       color: red
       size: xxl
   currency:
-    allOf:
-      - $ref: ../CurrencyCode.yaml
+    $ref: ../CurrencyCode.yaml
   currencySign:
     description: Currency sign.
     readOnly: true
@@ -44,37 +52,36 @@ properties:
     $ref: ../Plans/PlanPriceFormula.yaml
   setup:
     type: object
-    description: Setup. Set `null` if no setup.
+    nullable: true
+    description: Set up information of the plan.
     required:
       - price
     properties:
       price:
-        description: Price of a setup - 0 is a valid value (for free).
+        description: |-
+          Price of setting up the plan.
+          If your service charges a set up fee, specify it here.
+          To charge no set up fee, set this value to `0`.
         type: number
         format: double
   customFields:
     $ref: ../ResourceCustomFields.yaml
   isActive:
     type: boolean
-    description: Specifies whether a plan is active.
+    description: Specifies if the plan is active.
   revision:
     type: integer
     readOnly: true
     description: |-
-      Increments when the plan is modified.
-      Compare to materialized subscription items revision.
+      Number of times the plan is modified.
+      Compare this value with materialized subscription item revision values.
   createdTime:
     $ref: ../CreatedTime.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml
   isTrialOnly:
     type: boolean
-    description: Whether a plan has a trial without recurring instructions.
+    description: Specifies if a plan is a trial that does not have recurring instructions.
     readOnly: true
   _links:
-    type: array
-    description: Related resource links.
-    readOnly: true
-    minItems: 1
-    items:
-      $ref: ../Links/SelfLink.yaml
+    $ref: ../SelfLink.yaml

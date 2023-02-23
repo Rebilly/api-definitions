@@ -13,9 +13,10 @@ properties:
     allOf:
       - $ref: ./ResourceId.yaml
   planId:
+    type: string
     description: ID of the plan for which a usage is reported.
-    allOf:
-      - $ref: ./ResourceId.yaml
+    maxLength: 50
+    example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
   invoiceId:
     description: ID of the invoice to which usage is applied. This value is populated when the invoice is issued.
     readOnly: true
@@ -37,10 +38,11 @@ properties:
        Plans describe how the customer must pay for products.
     type: number
     format: float
-    minimum: 0
-    exclusiveMinimum: true
+    minimum: 0.01
   usageTime:
-    description: Date and time, in ISO 8601 format, at which a usage occurred. If this value is not provided or is empty, the date and time of the request is used.
+    description: |-
+      Date and time, in ISO 8601 format, when a usage occurred.
+      If this value is not provided or is empty, the date and time of the request is used.
     type: string
     format: date-time
   createdTime:
@@ -48,11 +50,5 @@ properties:
   updatedTime:
     $ref: UpdatedTime.yaml
   _links:
-    type: array
-    description: Related resource links.
-    readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ./Links/SelfLink.yaml
+    $ref: ./SelfLink.yaml
 

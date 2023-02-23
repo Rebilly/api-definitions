@@ -10,7 +10,7 @@ allOf:
         properties:
           appId:
             type: string
-            description: PaymentsOS application ID.
+            description: ID of the PaymentsOS application.
           publicKey:
             type: string
             description: PaymentsOS public key.
@@ -18,7 +18,10 @@ allOf:
             type: string
             format: password
             description: PaymentsOS private key.
+            writeOnly: true
         required:
           - appId
           - privateKey
           - publicKey
+      threeDSecureServer:
+        $ref: ../ThreeDSecureServers/PaymentsOS3dsServers/PaymentsOS3dsServers.yaml

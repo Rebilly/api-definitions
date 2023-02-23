@@ -8,6 +8,7 @@ properties:
     allOf:
       - $ref: ../Websites/WebsiteId.yaml
   items:
+    description: Items details.
     type: array
     writeOnly: true
     minItems: 1
@@ -17,9 +18,10 @@ properties:
         - planId
       properties:
         planId:
+          type: string
           description: ID of the plan.
-          allOf:
-            - $ref: ../ResourceId.yaml
+          maxLength: 50
+          example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
         quantity:
           description: Number of product units in the specified plan.
           type: integer
@@ -77,13 +79,15 @@ properties:
           type: number
           format: double
         planId:
+          type: string
           description: ID of the related plan.
-          allOf:
-            - $ref: ../ResourceId.yaml
+          maxLength: 50
+          example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
         productId:
+          type: string
           description: ID of the related product.
-          allOf:
-            - $ref: ../ResourceId.yaml
+          maxLength: 50
+          example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
   shippingRates:
     type: array
     description: Available shipping rates.

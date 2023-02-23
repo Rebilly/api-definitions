@@ -1,6 +1,7 @@
 type: object
 properties:
   data:
+    description: Time series data.
     type: array
     items:
       type: object
@@ -9,19 +10,19 @@ properties:
       properties:
         date:
           type: string
-          description: Date in format YYYY-MM-DD.
+          description: Date in `YYYY-MM-DD` format .
         total:
           type: number
           format: double
-          description: Amount or count of all transactions within the aggregation.
+          description: Total number of all transactions within the aggregation.
         subaggregates:
           type: object
-          description: Subaggregates which have appropriate transactions within the range.
+          description: Subaggregates that have transactions within the range.
           properties:
             subaggregate:
               type: string
-              description: Subaggregate identifier.
+              description: ID of the subaggregate.
             value:
               type: number
               format: double
-              description: Amount or count of the subaggregate's transactions within the aggregation.
+              description: Total number of all subaggregate transactions within the aggregation.

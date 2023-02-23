@@ -10,11 +10,12 @@ allOf:
         properties:
           authenticateId:
             type: string
-            description: iCanPay authenticate ID.
+            description: Authenticate ID of the iCanPay account.
           authenticatePw:
             type: string
             description: iCanPay authenticate password.
             format: password
+            writeOnly: true
           publicKey:
             type: string
             description: iCanPay API public key.
@@ -22,6 +23,7 @@ allOf:
             type: string
             description: iCanPay API secret key.
             format: password
+            writeOnly: true
         required:
           - authenticateId
           - authenticatePw

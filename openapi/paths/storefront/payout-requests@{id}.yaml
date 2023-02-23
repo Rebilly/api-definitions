@@ -1,0 +1,63 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Storefront
+  tags:
+    - Transactions
+  summary: Retrieve a payout request
+  operationId: StorefrontGetPayoutRequest
+  x-sdk-operation-name: get
+  security:
+    - CustomerJWT: []
+  description: Retrieves a payout request with a specified ID.
+  responses:
+    200:
+      description: Payout request retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/StorefrontPayoutRequest.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml
+patch:
+  x-products:
+    - Storefront
+  tags:
+    - Transactions
+  summary: Update a payout request
+  operationId: StorefrontPatchPayoutRequest
+  x-sdk-operation-name: update
+  security:
+    - CustomerJWT: []
+  description: Update a payout request with a specified ID.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - paymentInstrumentId
+          properties:
+            paymentInstrumentId:
+              description: ID of the preferable payment instrument for the payout request.
+              type: string
+  responses:
+    200:
+      description: Payout request updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/StorefrontPayoutRequest.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml
+    422:
+      $ref: ../../components/responses/ValidationError.yaml

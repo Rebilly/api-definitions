@@ -1,18 +1,19 @@
 type: object
 properties:
   id:
-    description: Session identifier string.
-    allOf:
-      - $ref: ../ResourceId.yaml
+    type: string
+    description: ID of the session.
+    maxLength: 50
+    example: jwt_0YV7DEJX80CDRAKVTV478ZNJDR
     readOnly: true
   type:
-    description: Session type.
+    description: Type of session.
     type: string
     readOnly: true
     enum:
       - customer
   token:
-    description: Session's token used for authentication.
+    description: Token used for authentication.
     type: string
     readOnly: true
   invalidate:
@@ -53,8 +54,16 @@ properties:
     format: date-time
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
-    minItems: 1
     items:
-      $ref: ../Links/CustomerLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - customer
