@@ -40,6 +40,12 @@ properties:
       it is ignored and the next renewal occurs as scheduled.
     type: string
     format: date-time
+  paymentInstrumentId:
+    writeOnly: true
+    description: |-
+      ID of the payment instrument. If this field is omitted, the subscription payment instrument remains unchanged.
+    allOf:
+      - $ref: ../ResourceId.yaml
   createdTime:
     $ref: ../CreatedTime.yaml
   updatedTime:
