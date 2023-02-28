@@ -3,11 +3,13 @@ required:
   - transactionId
 properties:
   transactionId:
-    description: ID of the transaction to apply to the invoice.
     type: string
+    description: ID of the transaction to apply to the invoice.
+    maxLength: 50
+    example: txn_0YVDTQJ8YWDGQACV2N2N5SPWQ0
   amount:
     description: |-
-      Amount to be applied to the invoice. This value must not exceed the transaction amount. 
+      Amount to be applied to the invoice. This value must not exceed the transaction amount.
       If omitted, the lesser of the unused transaction amount or the invoice due amount is used.
     type: number
     format: double
