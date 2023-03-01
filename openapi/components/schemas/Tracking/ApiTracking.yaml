@@ -89,6 +89,19 @@ properties:
         description: Specifies if the API request is completed by a Rebilly Support Team member.
         type: boolean
         x-sortable: true
+  organization:
+    type: object
+    description: Organization of the user who made the request.
+    readOnly: true
+    properties:
+      id:
+        x-sortable: true
+        allOf:
+          - $ref: ../Organizations/OrganizationId.yaml
+      name:
+        description: Name of the organization.
+        type: string
+        x-sortable: true
   ipAddress:
     type: string
     x-basic: true
@@ -109,8 +122,6 @@ properties:
     x-sortable: true
     x-basic: true
     description: Request duration in milliseconds.
-  organizationId:
-    $ref: ../Organizations/OrganizationId.yaml
   createdTime:
     $ref: ../CreatedTime.yaml
   updatedTime:
