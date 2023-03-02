@@ -36,7 +36,7 @@ properties:
       cancelled: Organization cancelled the quote.
       expired: Expired before customer or organization interaction.
   websiteId:
-    $ref: ../WebsiteId.yaml
+    $ref: ../Websites/WebsiteId.yaml
   customerId:
     $ref: ../CustomerId.yaml
   orderId:
@@ -54,11 +54,13 @@ properties:
   deliveryAddress:
     description: Delivery address of the order.
     nullable: true
+    type: object
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   billingAddress:
     description: Billing address of the order.
     nullable: true
+    type: object
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   invoicePreview:
