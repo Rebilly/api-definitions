@@ -4,6 +4,9 @@ readOnly: true
 properties:
   id:
     $ref: ../ResourceId.yaml
+  status:
+    type: integer
+    description: Response code of the HTTP request.
   time:
     type: integer
     description: Duration of the HTTP request in milliseconds.
@@ -13,43 +16,45 @@ properties:
       - $ref: ../ServerTimestamp.yaml
   url:
     type: string
+    x-sortable: true
     description: URL of the tax service endpoint.
   method:
     type: string
+    x-sortable: true
     description: Method of the HTTP request.
     example: POST
-  requestHeaders:
-    $ref: ../HttpHeaders.yaml
-  requestBody:
+  request:
     type: string
     description: Request body of the HTTP request.
-  responseCode:
-    type: integer
-    description: Response code of the HTTP request.
-  responseHeaders:
-    $ref: ../HttpHeaders.yaml
-  responseBody:
+  response:
     type: string
     description: Response body of the HTTP request.
-  organizationId:
-    $ref: ../Organizations/OrganizationId.yaml
+  requestHeaders:
+    $ref: ../HttpHeaders.yaml
+  responseHeaders:
+    $ref: ../HttpHeaders.yaml
   taxService:
     type: string
-    description: Name of the tax service used for the transaction.
+    x-sortable: true
+    description: Name of the tax service used for the request.
     enum:
       - taxjar
       - avalara
   taxServiceCredentialSource:
     type: string
-    description: |-
-        Credentials used to send or retrieve data.
-        This field can be specified by the merchant or by a default value.
+    x-sortable: true
+    description: Credentials source used to send or retrieve data.
+    enum:
+      - default
+      - merchant
   entityId:
     type: string
     description: ID of the resource associated with the tax service request.
   customerId:
     type: string
     description: ID of the customer associated with the tax service request.
+  organizationId:
+    $ref: ../Organizations/OrganizationId.yaml
   _links:
     type: array
     description: Related links.
