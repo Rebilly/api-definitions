@@ -32,13 +32,13 @@ put:
     - Core
   tags:
     - Quotes
-  summary: Update a quote
+  summary: Upsert a quote
   operationId: PutQuote
   x-sdk-operation-name: update
   description: |-
-    Updates a quote.
+    Creates or updates a quote with a specified ID.
 
-    This operation can only be used for quotes with a `status` of `draft`.
+    Update operation can only be used for quotes with a `status` of `draft`.
   requestBody:
     content:
       application/json:
@@ -48,6 +48,15 @@ put:
   responses:
     '200':
       description: Quote updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Quotes/Quote.yaml
+    '201':
+      description: Quote created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
