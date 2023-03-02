@@ -8,3 +8,28 @@ allOf:
         properties:
           applicationInstance:
             $ref: ../Applications/ApplicationInstance.yaml
+      _links:
+        type: array
+        description: Related links.
+        readOnly: true
+        items:
+          type: object
+          properties:
+            href:
+              description: Link URL.
+              type: string
+            rel:
+              description: Type of link.
+              type: string
+              enum:
+                - self
+                - applicationInstance
+                - logoUrl
+                - authorLogoUrl
+                - configuration
+              x-enumDescriptions:
+                self: Link to the application resource
+                applicationInstance: Link to the installed application resource
+                logoUrl: Link to the application logo image file
+                authorLogoUrl: Link to the author avatar image file
+                configuration: Link to an external resource where the application must be configured in order to be installed
