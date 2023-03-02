@@ -1,0 +1,160 @@
+type: object
+required:
+  - websiteId
+  - customerId
+  - items
+properties:
+  id:
+    readonly: true
+    description: ID of the quote.
+    type: string
+    maxLength: 50
+    example: qt_0YV7DES3WPC5J8JD8QTVNZBZNZ
+  orderType:
+    description: Specifies the type of quote. A quote can be a subscription or a one-time purchase.
+    type: string
+    readOnly: true
+    enum:
+      - subscription-order
+      - one-time-order
+  status:
+    description: Status of quote.
+    type: string
+    readOnly: true
+    enum:
+      - draft
+      - issued
+      - accepted
+      - rejected
+      - cancelled
+      - expired
+    x-enumDescriptions:
+      draft: Quote can be edited. This quote cannot be sent to a customer.
+      issued: Quote cannot be edited. This quote can be sent to a customer.
+      accepted: Customer accepted the quote and created an order.
+      rejected: Customer rejected the quote.
+      cancelled: Organization cancelled the quote.
+      expired: Expired before customer or organization interaction.
+  websiteId:
+    ref: ../WebsiteId.yaml
+  customerId:
+    $ref: ../CustomerId.yaml
+  orderId:
+    description: ID of the order.
+    readOnly: true
+    nullable: true
+    type: string
+    maxLength: 50
+    example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
+  items:
+    type: array
+    minItems: 1
+    items:
+      $ref: ../Subscription/OrderItem.yaml
+  deliveryAddress:
+    description: Delivery address of the order.
+    nullable: true
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  billingAddress:
+    description: Billing address of the order.
+    nullable: true
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  invoicePreview:
+    type: object
+    description: Preview of initial quote invoice.
+    readOnly: true
+    properties:
+      currency:
+        description: Currency of the invoice.
+        allOf:
+          - $ref: ../../schemas/CurrencyCode.yaml
+      amount:
+        description: Amount of the invoice.
+        type: number
+        x-type: Money
+        format: double
+      amountDue:
+        description: Amount that is due on the invoice.
+        type: number
+        x-type: Money
+        format: double
+      subtotalAmount:
+        description: Subtotal amount of the invoice.
+        type: number
+        x-type: Money
+        format: double
+      discountAmount:
+        description: Discount amount that is applied to the invoice.
+        type: number
+        x-type: Money
+        format: double
+      tax:
+        $ref: ../Invoices/InvoiceTax.yaml
+      items:
+        type: array
+        description: Invoice items array.
+        readOnly: true
+        items:
+          $ref: ../Invoices/InvoiceItem.yaml
+      discounts:
+        type: array
+        description: Discounts applied.
+        readOnly: true
+        items:
+          $ref: ../Coupon/InvoiceDiscount.yaml
+  shipping:
+    $ref: ../Shipping.yaml
+  notes:
+    description: Notes for the customer which will be displayed on the quote.
+    type: string
+  expirationTime:
+    description: Date and time when the quote expires. The default expiration time is one month from the time the quote is issued.
+    type: string
+    format: date-time
+  issuedTime:
+    description: Date and time when the quote was issued.
+    nullable: true
+    readOnly: true
+    type: string
+    format: date-time
+  acceptedTime:
+    description: Date and time when the quote was accepted.
+    nullable: true
+    readOnly: true
+    type: string
+    format: date-time
+  rejectedTime:
+    description: Date and time when the quote was rejected.
+    nullable: true
+    readOnly: true
+    type: string
+    format: date-time
+  cancelledTime:
+    description: Date and time when the quote was cancelled.
+    nullable: true
+    readOnly: true
+    type: string
+    format: date-time
+  signature:
+    $ref: ./QuoteSignature.yaml
+  couponIds:
+    type: array
+    nullable: true
+    description: |-
+      List of coupons to redeem on the customer and restrict to this order.
+
+      For more information, see [Coupons](https://www.rebilly.com/docs/settings/coupons-and-discounts/).
+
+      This parameter uses the following logic:
+      - If this parameter is not supplied, applied coupons are not changed.
+      - If an empty array is supplied, all applied coupon redemptions are canceled.
+      - If a list of coupons is supplied, unapplied coupons in the list are applied.
+      Coupons that have already been applied do not change state.
+      Applied coupons that are not supplied in list are canceled.
+
+      If the list of applied coupons on a pending order is changed by this parameter during an order update, the invoice for the order is reissued.
+    items:
+      type: string
+      description: Coupon ID.

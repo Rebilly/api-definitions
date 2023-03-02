@@ -1,0 +1,26 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Quotes
+  summary: Issue a quote
+  operationId: PostQuoteIssuance
+  x-sdk-operation-name: issue
+  description: Issues a draft quote with a specified ID.
+  responses:
+    '200':
+      description: Quote issued.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Quote/Quote.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
