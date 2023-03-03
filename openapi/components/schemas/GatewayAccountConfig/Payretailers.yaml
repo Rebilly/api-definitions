@@ -1,0 +1,20 @@
+description: Payretailers gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Payretailers credentials object.
+        properties:
+          shopId:
+            type: string
+          secretKey:
+            type: string
+            format: password
+            writeOnly: true
+        required:
+          - shopId
+          - secretKey
