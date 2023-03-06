@@ -1,0 +1,42 @@
+description: Ezeebill gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Ezeebill credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: MID in the Ezeebill.
+          accessId:
+            type: string
+            description: Access ID in the Ezeebill.
+            format: password
+            writeOnly: true
+          terminalId:
+            type: string
+            description: Terminal ID in the Ezeebill.
+          operatorId:
+            type: string
+            description: Operator ID in the Ezeebill.
+          password:
+            type: string
+            description: API Access Operator password in Ezeebill.
+            format: password
+            writeOnly: true
+          hashKey:
+            type: string
+            description: Hash Key in Ezeebill.
+            format: password
+            writeOnly: true
+        required:
+          - merchantId
+          - accessId
+          - terminalId
+          - operatorId
+          - password
+          - hashKey
