@@ -117,8 +117,11 @@ properties:
     description: Notes for the customer which are displayed on the quote.
     type: string
   expirationTime:
-    description: Date and time when the quote expires. The default expiration time is one month from the time the quote is issued.
+    description: |-
+      Date and time when the quote expires. The default expiration time is one month from the time the quote is issued.
+      This field can be `null` in `draft` state.
     type: string
+    nullable: true
     format: date-time
   issuedTime:
     description: Date and time when the quote is issued.
