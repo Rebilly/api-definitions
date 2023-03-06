@@ -1,0 +1,26 @@
+type: object
+required:
+  - plan
+properties:
+  planId:
+    description: ID of the plan.
+    deprecated: true
+    x-basic: true
+    type: string
+    maxLength: 50
+    example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+  quantity:
+    description: Number of product units in the specified plan.
+    type: integer
+  plan:
+    description: Plan details. Plan is converted to flexible when quote is issued.
+    oneOf:
+      - $ref: ../Plans/OriginalPlan.yaml
+      - $ref: ../Plans/FlexiblePlan.yaml
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
+    properties:
+      product:
+        type: object
