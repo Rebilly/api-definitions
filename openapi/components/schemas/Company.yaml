@@ -1,0 +1,49 @@
+type: object
+description: |-
+  Company information associated with the customer primary email address domain.
+  
+  This is a paid feature, to enable it [contact Rebilly](https://www.rebilly.com/support/).
+nullable: true
+readOnly: true
+properties:
+  name:
+    type: string
+    nullable: true
+  domain:
+    type: string
+    nullable: true
+  yearFounded:
+    type: number
+    format: integer
+    nullable: true
+  industry:
+    type: string
+    nullable: true
+  employeesCount:
+    type: number
+    format: integer
+    nullable: true
+  country:
+    type: string
+    nullable: true
+  locality:
+    type: string
+    nullable: true
+  linkedinUrl:
+    type: string
+    format: url
+    nullable: true
+  _links:
+    type: array
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - linkedin
+    
