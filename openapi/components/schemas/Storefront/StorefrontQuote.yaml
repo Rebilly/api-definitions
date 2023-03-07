@@ -97,24 +97,12 @@ properties:
         type: number
         x-type: Money
         format: double
-      tax:
-        $ref: ../Invoices/InvoiceTax.yaml
-      items:
-        type: array
-        description: Invoice items array.
-        readOnly: true
-        items:
-          $ref: ../Quotes/QuoteItem.yaml
-      discounts:
-        type: array
-        description: Discounts applied.
-        readOnly: true
-        items:
-          $ref: ../Coupon/InvoiceDiscount.yaml
   shipping:
     $ref: ../Shipping.yaml
-  notes:
-    description: Notes for the customer which are displayed on the quote.
+  tax:
+    $ref: ../Invoices/InvoiceTax.yaml
+  paymentTerms:
+    description: Payment terms for the customer which are displayed on the quote.
     type: string
   expirationTime:
     description: |-

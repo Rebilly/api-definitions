@@ -2,25 +2,65 @@ type: object
 required:
   - plan
 properties:
-  planId:
-    description: ID of the plan.
-    deprecated: true
-    x-basic: true
+  id:
+    description: ID of the quote item.
+    readOnly: true
     type: string
-    maxLength: 50
-    example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+    example: qti_0YV7DES3WPC5J8JD8QTVNZBZNZ
+  description:
+    description: Description of the quote item.
+    type: string
+    maxLength: 1000
+  unitPrice:
+    description: Unit price of the quote item.
+    type: number
+    format: double
   quantity:
-    description: Number of product units in the specified plan.
+    description: Quantity of the quote item.
     type: integer
-  plan:
-    description: Plan details. Plan is converted to flexible when quote is issued.
-    oneOf:
-      - $ref: ../Plans/OriginalPlan.yaml
-      - $ref: ../Plans/FlexiblePlan.yaml
+  price:
+    description: Total price of the quote item.
+    type: number
+    format: double
+    readOnly: true
+  productId:
+    type: string
+    description: ID of the product.
+    maxLength: 50
+    example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
+  planId:
+    type: string
+    nullable: true
+    description: ID of the plan.
+    maxLength: 50
+    readOnly: true
+    example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+  createdTime:
+    $ref: ../CreatedTime.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - product
   _embedded:
     type: object
     description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
     properties:
       product:
+        type: object
+      plan:
         type: object
