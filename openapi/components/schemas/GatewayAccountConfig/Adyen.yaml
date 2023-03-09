@@ -29,8 +29,23 @@ allOf:
             type: string
             description: Adyen post URL.
           splitPayments:
-            type: string
-            description: Adyen split payments in JSON format.
+            type: array
+            description: Adyen split payments.
+            items:
+              type: object
+              properties:
+                percentage:
+                  description: Percentage of the transaction amount.
+                  type: string
+                account:
+                  description: The ID of the balance account to which the split amount will be sent.
+                  type: string
+                reference:
+                  description: Unique identifier for the split payments.
+                  type: string
+                type:
+                  description: Split payment account type.
+                  type: string
         required:
           - url
       threeDSecureServer:
