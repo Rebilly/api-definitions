@@ -111,10 +111,11 @@ properties:
         items:
           $ref: ./Tags/Tag.yaml
       organizationId:
+        type: string
         readOnly: true
         description: ID of the customer's organization.
-        allOf:
-          - $ref: ./ResourceId.yaml
+        maxLength: 50
+        example: org_0YVDM8RC7GDADADSBSMW124JA8
   hits:
     readOnly: true
     description: List of hits returned during the AML check.
