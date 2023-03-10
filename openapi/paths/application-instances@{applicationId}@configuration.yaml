@@ -1,0 +1,65 @@
+parameters:
+  - $ref: ../components/parameters/applicationId.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Application users
+  summary: Retrieve an application instance configuration
+  operationId: GetApplicationInstanceConfiguration
+  x-sdk-operation-name: getConfiguration
+  description: Retrieves the configuration of an installed application with a specified ID.
+  responses:
+    '200':
+      description: Application instance configuration retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Applications/ApplicationInstanceConfiguration.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+put:
+  x-products:
+    - Users
+  tags:
+    - Application users
+  summary: Upsert an application instance configuration
+  operationId: PutApplicationInstanceConfiguration
+  x-sdk-operation-name: upsertConfiguration
+  description: Creates or updates (upserts) an application instance configuration.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Applications/ApplicationInstanceConfiguration.yaml
+  responses:
+    '200':
+      description: Application instance configuration updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Applications/ApplicationInstanceConfiguration.yaml
+    '201':
+      description: Application instance configuration created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Applications/ApplicationInstanceConfiguration.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
