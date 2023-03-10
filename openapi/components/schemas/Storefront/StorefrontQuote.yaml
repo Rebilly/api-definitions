@@ -64,43 +64,7 @@ properties:
     allOf:
       - $ref: ../Contact/ContactObject.yaml
   invoicePreview:
-    type: object
-    description: Preview of initial quote invoice.
-    readOnly: true
-    properties:
-      currency:
-        description: Currency of the invoice.
-        allOf:
-          - $ref: ../CurrencyCode.yaml
-      amount:
-        description: Amount of the invoice.
-        type: number
-        x-type: Money
-        format: double
-      subtotalAmount:
-        description: Subtotal amount of the invoice.
-        type: number
-        x-type: Money
-        format: double
-      discountAmount:
-        description: Discount amount that is applied to the invoice.
-        type: number
-        x-type: Money
-        format: double
-      shippingAmount:
-        description: Shipping amount that is applied to the invoice.
-        type: number
-        x-type: Money
-        format: double
-      taxAmount:
-        description: Tax amount that is applied to the invoice.
-        type: number
-        x-type: Money
-        format: double
-  shipping:
-    $ref: ../Shipping.yaml
-  tax:
-    $ref: ../Invoices/InvoiceTax.yaml
+    $ref: ../Quotes/QuoteInvoicePreview.yaml
   paymentTerms:
     description: Payment terms for the customer which are displayed on the quote.
     type: string
@@ -141,6 +105,10 @@ properties:
     format: uri
   signature:
     $ref: ../Quotes/QuoteSignature.yaml
+  shipping:
+    $ref: ../Shipping.yaml
+  tax:
+    $ref: ../Invoices/InvoiceTax.yaml
   _embedded:
     type: object
     description: Embedded objects that are requested by the `expand` query parameter.
