@@ -13,19 +13,20 @@ properties:
       - disabling
       - disabled
   isConfigured:
-    description: Determines if the application instance configured by [PutApplicationInstanceSettings](#TODO).
+    description: |-
+      Determines if the application instance configuration complete.
+      Configuration is done by [PutApplicationInstanceConfiguration](#TODO).
     type: boolean
     readOnly: true
   settings:
-    description: |-
-      Settings that are available for the user to complete when they install the application.
-      Use this object to describe fields that are rendered during installation, in the settings form.
+    description: Settings that are available for the user to complete when they install the application.
     type: object
     additionalProperties:
       type: string
     example:
       color: red
       limit: '5'
+    deprecated: true
   createdTime:
     $ref: ../CreatedTime.yaml
   updatedTime:

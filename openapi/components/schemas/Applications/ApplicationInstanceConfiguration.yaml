@@ -1,16 +1,21 @@
 type: object
-additionalProperties:
-  type: string
-example:
-  color: red
-  level: gold
+required:
+  - settings
 description: |-
-  Application instance settings.
+  Application instance configuration.
 
   Only user can change settings when `configuredBy` is `user`.
 
   Only the application itself can change settings when `configuredBy` is `application`.
 properties:
+  settings:
+    description: Settings that are available for the user to complete when they install the application.
+    type: object
+    additionalProperties:
+      type: string
+    example:
+      color: red
+      level: gold
   _links:
     readOnly: true
     type: array
@@ -23,7 +28,7 @@ properties:
             - self
             - configuration
           x-enumDescriptions:
-            self: Link to the application instance settings
+            self: Link to the application instance configuration
             configuration: Link to the external resource where application instance must be configured. Contains JWT in query parameter. # TODO: Describe better.
         href:
           type: string

@@ -5,13 +5,13 @@ get:
     - Users
   tags:
     - Application users
-  summary: Retrieve an application instance settings
-  operationId: GetApplicationInstanceSettings
+  summary: Retrieve an application instance configuration
+  operationId: GetApplicationInstanceConfiguration
   x-sdk-operation-name: get
-  description: Retrieves installed application settings.
+  description: Retrieves installed application configuration.
   responses:
     '200':
-      description: Application instance settings retrieved.
+      description: Application instance configuration retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -22,7 +22,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Applications/ApplicationInstanceSettings.yaml
+            $ref: ../components/schemas/Applications/ApplicationInstanceConfiguration.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -32,31 +32,31 @@ put:
     - Users
   tags:
     - Application users
-  summary: Upsert an application instance settings
-  operationId: PutApplicationInstanceSettings
+  summary: Upsert an application instance configuration
+  operationId: PutApplicationInstanceConfiguration
   x-sdk-operation-name: upsert
-  description: Creates or updates (upserts) an application instance settings.
+  description: Creates or updates (upserts) an application instance configuration.
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/Applications/ApplicationInstanceSettings.yaml
+          $ref: ../components/schemas/Applications/ApplicationInstanceConfiguration.yaml
   responses:
     '200':
-      description: Application instance settings updated.
+      description: Application instance configuration updated.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Applications/ApplicationInstanceSettings.yaml
+            $ref: ../components/schemas/Applications/ApplicationInstanceConfiguration.yaml
     '201':
-      description: Application instance settings created.
+      description: Application instance configuration created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Applications/ApplicationInstanceSettings.yaml
+            $ref: ../components/schemas/Applications/ApplicationInstanceConfiguration.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
