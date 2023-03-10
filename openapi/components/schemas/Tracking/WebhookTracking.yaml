@@ -4,7 +4,7 @@ readOnly: true
 properties:
   id:
     $ref: ../ResourceId.yaml
-  responseCode:
+  status:
     type: integer
     x-sortable: true
     description: Response code of the webhook request.
@@ -26,13 +26,13 @@ properties:
     x-sortable: true
     description: HTTP method used to send webhook.
     example: POST
-  payload:
+  request:
     type: string
     description: Webhook payload.
-  responseBody:
+  response:
     type: string
     description: Response body received.
-  headers:
+  requestHeaders:
     $ref: ../HttpHeaders.yaml
   responseHeaders:
     $ref: ../HttpHeaders.yaml
@@ -71,16 +71,4 @@ properties:
     x-sortable: true
     $ref: ../UpdatedTime.yaml
   _links:
-    type: array
-    description: Related links.
-    items:
-      type: object
-      properties:
-        href:
-          description: Link URL.
-          type: string
-        rel:
-          description: Type of link.
-          type: string
-          enum:
-            - self
+    $ref: ../SelfLink.yaml
