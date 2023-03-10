@@ -514,6 +514,8 @@ tags:
       A segment is a filtered view of a data set that can be shared with other users.
       For example, you may create a transactions segment that displays specific columns that are filtered and sorted based on certain criteria,
       and share it with others in your organization.
+  - name: Service credentials
+    description: Use these operations to get, create, and manage credentials for third-party services.
   - name: Shipping rates
     description: |-
       Use these operations to manage shipping rates.
@@ -909,6 +911,12 @@ paths:
     $ref: ./paths/checkout-forms.yaml
   /checkout-forms/{id}:
     $ref: './paths/checkout-forms@{id}.yaml'
+  /service-credentials/{type}:
+    $ref: ./paths/service-credentials@{type}.yaml
+  '/service-credentials/{type}/{id}':
+    $ref: './paths/service-credentials@{type}@{id}.yaml'
+  '/service-credentials/{type}/{id}/items':
+    $ref: './paths/service-credentials@{type}@{id}@items.yaml'
   /credential-hashes/aws-ses:
     $ref: ./paths/credential-hashes@aws-ses.yaml
   '/credential-hashes/aws-ses/{hash}':
@@ -1093,6 +1101,10 @@ paths:
     $ref: ./paths/tracking@api.yaml
   '/tracking/api/{id}':
     $ref: './paths/tracking@api@{id}.yaml'
+  /tracking/taxes:
+    $ref: ./paths/tracking@taxes.yaml
+  '/tracking/taxes/{id}':
+    $ref: './paths/tracking@taxes@{id}.yaml'
   /tracking/lists:
     $ref: ./paths/tracking@lists.yaml
   /tracking/webhooks:
