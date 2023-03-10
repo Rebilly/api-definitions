@@ -4,12 +4,12 @@ required:
 description: |-
   Application instance configuration.
 
-  Only user can change settings when `configuredBy` is `user`.
+  If the `configuredBy` field is set to `user`, only user can change application settings.
 
-  Only the application itself can change settings when `configuredBy` is `application`.
+  If the `configuredBy` field is set to `application`, only the application itself can change settings.
 properties:
   settings:
-    description: Settings that are available for the user to complete when they install the application.
+    description: Configuration settings that are available during installation.
     type: object
     additionalProperties:
       type: string
@@ -24,14 +24,16 @@ properties:
       properties:
         rel:
           type: string
+          description: Type of link.
           enum:
             - self
             - configuration
           x-enumDescriptions:
-            self: Link to the application instance configuration
+            self: Link to the application instance configuration.
             configuration: |-
-              Link to the external resource where application instance must be configured.
-              Contains JWT in query parameter.
-              Navigate user to this URL where application settings must be submitted.
+              Link to the external resource where the application instance must be configured.
+              This field contains a JWT in the query parameter.
+              Direct the user to this URL where application settings must be submitted.
         href:
           type: string
+          description: Link URL.
