@@ -486,6 +486,9 @@ tags:
       Use these operations to manage password resets.
       When a password reset is requested, an email with a token is sent.
       In the email the user must click a reset link, and then create a new password.
+  - name: Risk score
+    description: |-
+      Use risk score operations to configure blocklists based on transaction risk factors.
   - name: Roles
     description: |-
       Use these operations to manage user roles within your team or organization.
@@ -511,6 +514,8 @@ tags:
       A segment is a filtered view of a data set that can be shared with other users.
       For example, you may create a transactions segment that displays specific columns that are filtered and sorted based on certain criteria,
       and share it with others in your organization.
+  - name: Service credentials
+    description: Use these operations to get, create, and manage credentials for third-party services.
   - name: Shipping rates
     description: |-
       Use these operations to manage shipping rates.
@@ -611,6 +616,7 @@ x-tagGroups:
       - Blocklists
       - KYC documents
       - AML
+      - Risk score
   - name: Misc
     tags:
       - Custom fields
@@ -895,10 +901,20 @@ paths:
     $ref: ./paths/cashier-strategies.yaml
   /cashier-strategies/{id}:
     $ref: ./paths/cashier-strategies@{id}.yaml
+  /cashier-custom-property-sets:
+    $ref: ./paths/cashier-custom-property-sets.yaml
+  /cashier-custom-property-sets/{id}:
+    $ref: ./paths/cashier-custom-property-sets@{id}.yaml
   /checkout-forms:
     $ref: ./paths/checkout-forms.yaml
   /checkout-forms/{id}:
     $ref: './paths/checkout-forms@{id}.yaml'
+  /service-credentials/{type}:
+    $ref: ./paths/service-credentials@{type}.yaml
+  '/service-credentials/{type}/{id}':
+    $ref: './paths/service-credentials@{type}@{id}.yaml'
+  '/service-credentials/{type}/{id}/items':
+    $ref: './paths/service-credentials@{type}@{id}@items.yaml'
   /credential-hashes/aws-ses:
     $ref: ./paths/credential-hashes@aws-ses.yaml
   '/credential-hashes/aws-ses/{hash}':
@@ -1067,12 +1083,6 @@ paths:
     $ref: ./paths/profile.yaml
   /profile/mfa:
     $ref: ./paths/profile@mfa.yaml
-  /profile/password:
-    $ref: ./paths/profile@password.yaml
-  /profile/totp-reset:
-    $ref: ./paths/profile@totp-reset.yaml
-  '/reset-password/{token}':
-    $ref: './paths/reset-password@{token}.yaml'
   '/roles':
     $ref: ./paths/roles.yaml
   '/roles/{id}':
@@ -1089,6 +1099,10 @@ paths:
     $ref: ./paths/tracking@api.yaml
   '/tracking/api/{id}':
     $ref: './paths/tracking@api@{id}.yaml'
+  /tracking/taxes:
+    $ref: ./paths/tracking@taxes.yaml
+  '/tracking/taxes/{id}':
+    $ref: './paths/tracking@taxes@{id}.yaml'
   /tracking/lists:
     $ref: ./paths/tracking@lists.yaml
   /tracking/webhooks:
@@ -1103,10 +1117,6 @@ paths:
     $ref: './paths/users@{id}.yaml'
   '/users/{id}/mfa':
     $ref: './paths/users@{id}@mfa.yaml'
-  '/users/{id}/password':
-    $ref: './paths/users@{id}@password.yaml'
-  '/users/{id}/totp-reset':
-    $ref: './paths/users@{id}@totp-reset.yaml'
   /webhooks:
     $ref: ./paths/webhooks.yaml
   '/webhooks/{id}':
@@ -1215,6 +1225,8 @@ paths:
     $ref: paths/storefront/orders@{id}.yaml
   '/storefront/orders/{id}/cancellation':
     $ref: paths/storefront/orders@{id}@cancellation.yaml
+  '/storefront/orders/{id}/pause':
+    $ref: paths/storefront/orders@{id}@pause.yaml
   '/storefront/payment':
     $ref: paths/storefront/payment.yaml
   '/storefront/payment-instruments':
@@ -1249,14 +1261,30 @@ paths:
     $ref: paths/storefront/transactions.yaml
   '/storefront/transactions/{id}':
     $ref: paths/storefront/transactions@{id}.yaml
+  '/storefront/transactions/{id}/{token}/continue':
+    $ref: paths/storefront/transactions@{id}@{token}@continue.yaml
+  '/storefront/transactions/{id}/{token}/bypass':
+    $ref: paths/storefront/transactions@{id}@{token}@bypass.yaml
   '/storefront/websites/{id}':
     $ref: paths/storefront/websites@{id}.yaml
   '/customers/{id}/edd-score':
     $ref: paths/customers@{id}@edd-score.yaml
   '/customers/{id}/edd-timeline':
     $ref: paths/customers@{id}@edd-timeline.yaml
+  '/customers/{id}/edd-timeline/{messageId}':
+    $ref: paths/customers@{id}@edd-timeline@{messageId}.yaml
   '/customers/{id}/edd-search-results':
     $ref: paths/customers@{id}@edd-search-results.yaml
+  '/customers/{id}/edd-search-results/{searchResultId}':
+    $ref: paths/customers@{id}@edd-search-results@{searchResultId}.yaml
+  '/risk-score-rules':
+    $ref: paths/risk-score-rules.yaml
+  '/risk-score-rules/blocklists':
+    $ref: paths/risk-score-rules@blocklists.yaml
+  '/tags-rules':
+    $ref: paths/tags-rules.yaml
+  '/tags-rules/{id}':
+    $ref: paths/tags-rules@{id}.yaml
 
 x-webhooks:
   application-instance-disabled:

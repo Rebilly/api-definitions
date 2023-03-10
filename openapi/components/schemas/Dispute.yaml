@@ -17,6 +17,8 @@ properties:
     description: ID of the customer who is disputing a transaction.
     type: string
     readOnly: true
+    maxLength: 50
+    example: cus_0YV7DDSDD1C8DA64KHH2W33CPF
   transactionId:
     description: ID of the disputed transaction.
     type: string
@@ -210,12 +212,9 @@ properties:
     readOnly: true
     enum:
       - fraud
-      - unrecognized
-      - product-not-received
-      - product-unacceptable
-      - product-not-refunded
-      - duplicate
-      - subscription-canceled
+      - authorization
+      - processing-errors
+      - consumer-disputes
       - uncategorized
   type:
     description: Type of dispute.

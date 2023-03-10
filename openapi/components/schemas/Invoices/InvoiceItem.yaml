@@ -4,13 +4,11 @@ required:
   - unitPrice
 properties:
   id:
-    description: |-
-      ID of the website.
-      A website is where an organization obtains a customer through a subscription.
-      For more information, see [Obtain an organization ID and website ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+    type: string
+    description: ID of the invoice item.
+    maxLength: 50
+    example: ii_0YV7DES3WPC5J8JD8QTVNZBZNX
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
   type:
     description: Type of invoice item.
     type: string
@@ -35,9 +33,24 @@ properties:
     format: double
     readOnly: true
   productId:
+    type: string
     description: ID of the product.
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
+  planId:
+    type: string
+    nullable: true
+    description: ID of the plan.
+    maxLength: 50
+    readOnly: true
+    example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+  subscriptionId:
+    type: string
+    nullable: true
+    description: ID of the order.
+    maxLength: 50
+    readOnly: true
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
   discountAmount:
     description: Discount amount applied to the invoice item.
     type: number

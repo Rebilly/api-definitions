@@ -4,13 +4,19 @@ servers:
     variables:
       organizationId:
         default: unknown
-        description: Your organization ID.
+        description: |-
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
   - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
     description: Live server
     variables:
       organizationId:
         default: unknown
-        description: Your organization ID.
+        description: |-
+          Unique organization identifier.
+          An organization is an entity that represents a company.
+          For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
@@ -22,6 +28,8 @@ get:
   operationId: GetDataExport
   x-sdk-operation-name: get
   description: Retrieves a data export request.
+  parameters:
+    - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
       description: Data export request.
@@ -59,6 +67,8 @@ put:
   operationId: PutDataExport
   x-sdk-operation-name: update
   description: Modifies a pending data export.
+  parameters:
+    - $ref: ../components/parameters/collectionExpand.yaml
   requestBody:
     $ref: ../components/requestBodies/DataExport.yaml
   responses:

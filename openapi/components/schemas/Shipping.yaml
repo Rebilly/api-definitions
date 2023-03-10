@@ -5,12 +5,6 @@ discriminator:
   mapping:
     manual: ./ShippingTypes/ManualShipping.yaml
     rebilly: ./ShippingTypes/RebillyShipping.yaml
-properties:
-  calculator:
-    description: Shipping calculator.
-    type: string
-    enum:
-      - manual
-      - rebilly
-required:
-  - calculator
+anyOf:
+  - $ref: ./ShippingTypes/ManualShipping.yaml
+  - $ref: ./ShippingTypes/RebillyShipping.yaml

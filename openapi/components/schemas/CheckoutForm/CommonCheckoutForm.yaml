@@ -4,10 +4,11 @@ required:
   - plans
 properties:
   id:
+    type: string
     description: ID of the checkout form.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: chkt_frm_0YV8XZ6174C2MBS5011SAZNMBP
   websiteId:
     $ref: ../Websites/WebsiteId.yaml
   customDomain:
@@ -76,7 +77,7 @@ properties:
     type: object
     properties:
       logoId:
-        description: Linked file object ID.
+        description: ID of the linked file object.
         allOf:
           - $ref: ../ResourceId.yaml
       summary:

@@ -4,13 +4,14 @@ required:
   - country
 properties:
   id:
+    type: string
     description: |-
       Unique organization identifier.
       An organization is an entity that represents a company.
       For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: org_0YVDM8RC7GDADADSBSMW124JA8
   name:
     description: Name of the organization.
     type: string
@@ -61,6 +62,12 @@ properties:
     $ref: ./OrganizationQuestionnaire.yaml
   settings:
     $ref: ./OrganizationSettings.yaml
+  taxNumbers:
+    type: array
+    description: Tax numbers of the organization.
+    nullable: true
+    items:
+      $ref: ../TaxNumber.yaml
   createdTime:
     $ref: ../CreatedTime.yaml
   updatedTime:

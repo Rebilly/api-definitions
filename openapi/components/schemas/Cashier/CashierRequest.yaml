@@ -12,7 +12,7 @@ properties:
     description: Website ID of the cashier. This value specifies the website with which the cashier is associated.
     type: string
     maxLength: 50
-    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+    example: web_0YV7DE4Z26DQSA1AC92FBJ7SEG
   customerId:
     $ref: ../CustomerId.yaml
   strategyId:
@@ -67,6 +67,41 @@ properties:
     description: Date and time at which the cashier request expires. The default expiration time is one hour from the time the request is created.
     type: string
     format: date-time
+  customPropertySetId:
+      description: ID of a custom property set to apply to the request `propertiesSchema`.
+      type: string
+      maxLength: 50
+      example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+      writeOnly: true
+  propertiesSchema:
+    readOnly: true
+    description: |-
+      Defines properties the user can complete when they use the hosted cashier form.
+      This field accepts [JSON-schema](https://json-schema.org/) drafts 4, 6, and 7.
+    type: object
+    example:
+      type: object
+      properties:
+        email:
+          type: "string"
+        max:
+          type: "integer"
+          minimum: 0
+          exclusiveMaximum: 100
+      required: ["email"]
+  
+  properties:
+    readOnly: true
+    description: |-
+      Properties that are available for the user to complete when they use the hosted cashier form.
+      Use this object to describe fields that are rendered and completed during the deposit process, in the cashier deposit form.
+    type: object
+    additionalProperties:
+      type: string
+    example:
+      email: email@example.com
+      max: '33'
+
   createdTime:
     $ref: ../CreatedTime.yaml
   updatedTime:

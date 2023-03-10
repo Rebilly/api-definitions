@@ -1,0 +1,30 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+  - $ref: ../../components/parameters/token.yaml
+post:
+  x-products:
+    - Storefront
+  tags:
+    - Transactions
+  summary: Skip a transaction KYC verification
+  operationId: StorefrontPostKycRequestBypass
+  x-sdk-operation-name: skipKyc
+  security:
+    - CustomerJWT: []
+  description: |-
+    Skips an optional KYC request with a specified token, for a transaction with a specified ID.
+
+    Use this operation to skip a KYC request that has been marked as optional in a transaction flow, so that you can further process the transaction.
+  responses:
+    200:
+      description: KYC verification skipped.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/StorefrontTransaction.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml

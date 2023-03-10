@@ -1,0 +1,48 @@
+type: object
+title: Alternative instrument
+x-abstract-parent: PaymentInstrument
+properties:
+  id:
+    description: ID of the payment instrument.
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  method:
+    description: Payment method of the payment instrument.
+    allOf:
+      - $ref: ../PaymentMethods/AlternativePaymentMethods.yaml
+      - not:
+          enum:
+            - payment-card
+            - paypal
+            - ach
+            - echeck
+            - Khelocard
+  billingAddress:
+    description: Billing address of the user that is associated with the payment instrument.
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  status:
+    description: Payment instrument status.
+    type: string
+    readOnly: true
+    enum:
+      - active
+      - deactivated
+  useAsBackup:
+    $ref: ../UseAsBackup.yaml
+  createdTime:
+    $ref: ../CreatedTime.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
+  customFields:
+    $ref: ../ResourceCustomFields.yaml
+  token:
+    description: |-
+      New customer JSON Web Token (JWT) that is used for further requests.
+      This value is null if the customer is already authenticated.
+    type: string
+    readOnly: true
+    nullable: true
+  _links:
+    $ref: ../SelfLink.yaml
