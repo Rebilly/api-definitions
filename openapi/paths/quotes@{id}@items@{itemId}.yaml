@@ -1,0 +1,71 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: itemId
+    in: path
+    description: ID of the quote item.
+    required: true
+    schema:
+      type: string
+get:
+  x-products:
+    - Core
+  tags:
+    - Quotes
+  summary: Retrieve a quote item
+  operationId: GetQuoteItem
+  x-sdk-operation-name: getQuoteItem
+  description: Retrieves a quote item.
+  responses:
+    '200':
+      description: Quote item retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Quotes/QuoteItem.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Quotes
+  summary: Update a quote item
+  operationId: PutQuoteItem
+  x-sdk-operation-name: updateQuoteItem
+  description: Updates a quote item.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Quotes/QuoteItem.yaml
+    description: Quote item resource.
+    required: true
+  responses:
+    '200':
+      description: Quote item updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Quotes/QuoteItem.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+delete:
+  x-products:
+    - Core
+  tags:
+    - Quote
+  summary: Delete a quote item
+  operationId: DeleteQuoteItem
+  x-sdk-operation-name: deleteQuoteItem
+  description: Deletes a quote item.
+  responses:
+    '204':
+      description: Quote item deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
