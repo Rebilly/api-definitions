@@ -1,0 +1,41 @@
+type: object
+required:
+  - settings
+description: |-
+  Application instance configuration.
+
+  If the `configuredBy` field is set to `user`, only user can change application settings.
+
+  If the `configuredBy` field is set to `application`, only the application itself can change settings.
+properties:
+  settings:
+    description: Configuration settings that are available during installation.
+    type: object
+    additionalProperties:
+      type: string
+      description: Additional properties that the user may want to add when installing an application.
+    example:
+      color: red
+      level: gold
+  _links:
+    readOnly: true
+    type: array
+    description: Related links.
+    items:
+      type: object
+      properties:
+        rel:
+          type: string
+          description: Type of link.
+          enum:
+            - self
+            - configuration
+          x-enumDescriptions:
+            self: Link to the application instance configuration.
+            configuration: |-
+              Link to the external resource where the application instance must be configured.
+              This field contains a JWT in the query parameter.
+              Direct the user to this URL where application settings must be submitted.
+        href:
+          type: string
+          description: Link URL.
