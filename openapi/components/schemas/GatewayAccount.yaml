@@ -61,6 +61,7 @@ discriminator:
     EMS: ./GatewayAccountConfig/EMS.yaml
     ePay: ./GatewayAccountConfig/ePay.yaml
     Euteller: ./GatewayAccountConfig/Euteller.yaml
+    Ezeebill: ./GatewayAccountConfig/Ezeebill.yaml
     eZeeWallet: ./GatewayAccountConfig/eZeeWallet.yaml
     ezyEFT: ./GatewayAccountConfig/ezyEFT.yaml
     FinTecSystems: ./GatewayAccountConfig/FinTecSystems.yaml
@@ -109,10 +110,12 @@ discriminator:
     OchaPay: ./GatewayAccountConfig/OchaPay.yaml
     Onlineueberweisen: ./GatewayAccountConfig/Onlineueberweisen.yaml
     OnRamp: ./GatewayAccountConfig/OnRamp.yaml
+    Orbital: ./GatewayAccountConfig/Orbital.yaml
     Pagadito: ./GatewayAccountConfig/Pagadito.yaml
     Pagsmile: ./GatewayAccountConfig/Pagsmile.yaml
     Panamerican: ./GatewayAccountConfig/Panamerican.yaml
     PandaGateway: ./GatewayAccountConfig/PandaGateway.yaml
+    ParamountCommerce: ./GatewayAccountConfig/ParamountCommerce.yaml
     ParamountEft: ./GatewayAccountConfig/ParamountEft.yaml
     ParamountInterac: ./GatewayAccountConfig/ParamountInterac.yaml
     Pay4Fun: ./GatewayAccountConfig/Pay4Fun.yaml
@@ -128,6 +131,7 @@ discriminator:
     Paymero: ./GatewayAccountConfig/Paymero.yaml
     Payper: ./GatewayAccountConfig/Payper.yaml
     Payr: ./GatewayAccountConfig/Payr.yaml
+    PayRetailers: ./GatewayAccountConfig/PayRetailers.yaml
     Paysafe: ./GatewayAccountConfig/Paysafe.yaml
     Paysafecard: ./GatewayAccountConfig/Paysafecard.yaml
     Paysafecash: ./GatewayAccountConfig/Paysafecash.yaml
@@ -188,10 +192,11 @@ discriminator:
     Zimpler: ./GatewayAccountConfig/Zimpler.yaml
 properties:
   id:
+    type: string
     description: ID of the payment gateway account.
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    maxLength: 50
+    example: gw_acc_0YVCXMF26DDNKAERE5NW727S34
   gatewayName:
     $ref: ./Gateways/GatewayName.yaml
   acquirerName:

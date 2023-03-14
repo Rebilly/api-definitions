@@ -127,10 +127,6 @@ tags:
       For more information, see [Install or uninstall an app](https://www.rebilly.com/docs/dev-docs/install-an-app/).
   - name: Authentication
     description: Use these operations to manage the process of confirming the identity of users that are attempting to access resources.
-  - name: Avalara credentials
-    description: |-
-      Use these operations to manage your Avalara account credentials.
-      The Avalara integration enables you to calculate taxes and create transactions in your Avalara account.
   - name: Balance transactions
     description: |-
       Use these operations to view and manage balance transactions.
@@ -268,8 +264,6 @@ tags:
       This process is called dispute resolution.
       If the merchant is unable to represent the charge, the card issuer typically reverses the sale and adds fees on top of the charge.
       This process is called a chargeback.
-  - name: Email credentials
-    description: Use these operations to get, create, and manage SMTP credential hashes.
   - name: Email delivery settings
     description: |-
       Use email delivery settings to configure from which email address notifications and broadcast message are sent.
@@ -290,11 +284,6 @@ tags:
     description: |-
       Use these operations to manage email verification.
       Email verification is the process of confirming that an email address exists and is associated with an individual.
-  - name: Experian credentials
-    description: |-
-      Use these operations to manage your Experian account credentials.
-      The Experian integration provides identity verification.
-      For more information, see [Experian integration](https://www.rebilly.com/docs/automations/experian-integration/#experian-integration).
   - name: Fees
     description: |-
       Use fees to reconcile transactions with applicable fees and discount rates.
@@ -440,12 +429,6 @@ tags:
       A payment token can be made using a different authentication scheme (public key authentication), which enables you to create a payment token directly from the browser.
       This bypasses the need to send sensitive cardholder info to your servers.
       We recommend using this with the FramePay library, which helps you integrate a form into this API resource and create payment tokens.
-  - name: Plaid credentials
-    description: |-
-      Use these operations to manage your Plaid account credentials.
-      The Plaid integration provides customer bank credential verification,
-      and simplifies the process of providing credentials for your customers.
-      For more information, see [Plaid integration](https://www.rebilly.com/docs/automations/plaid-integration/).
   - name: Plans
     description: |-
       Use pricing plans to describe how the customer must pay for [products](https://www.rebilly.com/docs/dev-docs/api/tag/Products/).
@@ -514,6 +497,8 @@ tags:
       A segment is a filtered view of a data set that can be shared with other users.
       For example, you may create a transactions segment that displays specific columns that are filtered and sorted based on certain criteria,
       and share it with others in your organization.
+  - name: Service credentials
+    description: Use these operations to get, create, and manage credentials for third-party services.
   - name: Shipping rates
     description: |-
       Use these operations to manage shipping rates.
@@ -524,11 +509,6 @@ tags:
       No authentication is required.
   - name: Tags
     description: Use tags to organize and categorize customers or KYC documents based on keywords.
-  - name: TaxJar credentials
-    description: |-
-      Use these operations to manage your TaxJar account credentials.
-      The TaxJar integration enables you to calculate taxes and create transactions for the Sales Tax AutoFile feature in your TaxJar account.
-      For more information, see [TaxJar integration](https://www.rebilly.com/docs/automations/tax-jar-integration/#taxjar-integration).
   - name: Tracking
     description: |-
       Use tracking when debugging and auditing issues.
@@ -557,8 +537,6 @@ tags:
     description: |-
       Use these operations to manage users.
       A user is a person who can login to Rebilly, and take actions based on their granted permissions.
-  - name: Webhook credentials
-    description: Use these operations to manage webhook credential hashes.
   - name: Webhooks
     description: |-
       Use these operations to manage webhooks.
@@ -695,6 +673,8 @@ paths:
     $ref: './paths/files@{id}@download.yaml'
   '/application-instances/{applicationId}':
     $ref: './paths/application-instances@{applicationId}.yaml'
+  '/application-instances/{applicationId}/configuration':
+    $ref: './paths/application-instances@{applicationId}@configuration.yaml'
   '/applications':
     $ref: './paths/applications.yaml'
   '/applications/{id}':
@@ -907,52 +887,12 @@ paths:
     $ref: ./paths/checkout-forms.yaml
   /checkout-forms/{id}:
     $ref: './paths/checkout-forms@{id}.yaml'
-  /credential-hashes/aws-ses:
-    $ref: ./paths/credential-hashes@aws-ses.yaml
-  '/credential-hashes/aws-ses/{hash}':
-    $ref: './paths/credential-hashes@aws-ses@{hash}.yaml'
-  /credential-hashes/emails:
-    $ref: ./paths/credential-hashes@emails.yaml
-  '/credential-hashes/emails/{hash}':
-    $ref: './paths/credential-hashes@emails@{hash}.yaml'
-  /credential-hashes/mailgun:
-    $ref: ./paths/credential-hashes@mailgun.yaml
-  '/credential-hashes/mailgun/{hash}':
-    $ref: './paths/credential-hashes@mailgun@{hash}.yaml'
-  /credential-hashes/oauth2:
-    $ref: ./paths/credential-hashes@oauth2.yaml
-  '/credential-hashes/oauth2/{hash}':
-    $ref: './paths/credential-hashes@oauth2@{hash}.yaml'
-  '/credential-hashes/oauth2/{hash}/items':
-    $ref: './paths/credential-hashes@oauth2@{hash}@items.yaml'
-  /credential-hashes/plaid:
-    $ref: './paths/credential-hashes@plaid.yaml'
-  '/credential-hashes/plaid/{hash}':
-    $ref: './paths/credential-hashes@plaid@{hash}.yaml'
-  /credential-hashes/postmark:
-    $ref: ./paths/credential-hashes@postmark.yaml
-  '/credential-hashes/postmark/{hash}':
-    $ref: './paths/credential-hashes@postmark@{hash}.yaml'
-  /credential-hashes/sendgrid:
-    $ref: ./paths/credential-hashes@sendgrid.yaml
-  '/credential-hashes/sendgrid/{hash}':
-    $ref: './paths/credential-hashes@sendgrid@{hash}.yaml'
-  /credential-hashes/webhooks:
-    $ref: ./paths/credential-hashes@webhooks.yaml
-  '/credential-hashes/webhooks/{hash}':
-    $ref: './paths/credential-hashes@webhooks@{hash}.yaml'
-  /credential-hashes/experian:
-    $ref: ./paths/credential-hashes@experian.yaml
-  '/credential-hashes/experian/{hash}':
-    $ref: './paths/credential-hashes@experian@{hash}.yaml'
-  /credential-hashes/taxjar:
-    $ref: ./paths/credential-hashes@taxjar.yaml
-  '/credential-hashes/taxjar/{hash}':
-    $ref: './paths/credential-hashes@taxjar@{hash}.yaml'
-  /credential-hashes/avalara:
-    $ref: ./paths/credential-hashes@avalara.yaml
-  '/credential-hashes/avalara/{hash}':
-    $ref: './paths/credential-hashes@avalara@{hash}.yaml'
+  /service-credentials/{type}:
+    $ref: ./paths/service-credentials@{type}.yaml
+  '/service-credentials/{type}/{id}':
+    $ref: './paths/service-credentials@{type}@{id}.yaml'
+  '/service-credentials/{type}/{id}/items':
+    $ref: './paths/service-credentials@{type}@{id}@items.yaml'
   /custom-domains:
     $ref: ./paths/custom-domains.yaml
   '/custom-domains/{domain}':
@@ -1091,6 +1031,10 @@ paths:
     $ref: ./paths/tracking@api.yaml
   '/tracking/api/{id}':
     $ref: './paths/tracking@api@{id}.yaml'
+  /tracking/taxes:
+    $ref: ./paths/tracking@taxes.yaml
+  '/tracking/taxes/{id}':
+    $ref: './paths/tracking@taxes@{id}.yaml'
   /tracking/lists:
     $ref: ./paths/tracking@lists.yaml
   /tracking/webhooks:
