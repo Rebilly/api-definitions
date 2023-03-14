@@ -3,17 +3,16 @@ description: API request tracking.
 readOnly: true
 properties:
   id:
-    allOf:
-      - $ref: ../ResourceId.yaml
+    $ref: ../ResourceId.yaml
   status:
     type: integer
     x-sortable: true
-    description: HTTP response code.
+    description: Response code of the HTTP request.
   url:
     type: string
     x-basic: true
     x-sortable: true
-    description: Address of the API request.
+    description: URL of the HTTP request.
   route:
     type: string
     x-sortable: true
@@ -33,11 +32,11 @@ properties:
   request:
     type: string
     x-sortable: true
-    description: Request JSON-string.
+    description: Request body of the HTTP request.
   response:
     type: string
     x-sortable: true
-    description: Response JSON-string.
+    description: Response body of the HTTP request.
   requestHeaders:
     $ref: ../HttpHeaders.yaml
   responseHeaders:
@@ -49,8 +48,10 @@ properties:
     properties:
       userId:
         x-sortable: true
-        allOf:
-          - $ref: ../ResourceId.yaml
+        type: string
+        description: ID of the user.
+        maxLength: 50
+        example: usr_0YVCEENYJ3D7Q9EN6BN16HA0G4
       apiKeyId:
         allOf:
           - $ref: ../ResourceId.yaml
@@ -117,3 +118,10 @@ properties:
     $ref: ../UpdatedTime.yaml
   _links:
     $ref: ../SelfLink.yaml
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
+    properties:
+      organization:
+        type: object

@@ -1,0 +1,28 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Users
+  tags:
+    - Tracking
+  summary: Retrieve a tax service tracking log
+  operationId: GetTrackingTax
+  x-sdk-operation-name: getTaxTrackingLog
+  description: Retrieves a tax service tracking log with a specified ID.
+  responses:
+    '200':
+      description: Tax log retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Tracking/TaxTracking.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: '../code_samples/JavaScript/tracking@taxes@{id}/get.js'
