@@ -1,0 +1,50 @@
+type: object
+description: |-
+  Company information that is associated with the customer's primary email address domain.
+
+  This is a paid feature, to enable it [contact Rebilly](https://www.rebilly.com/support/).
+nullable: true
+readOnly: true
+properties:
+  name:
+    type: string
+    description: Name of the company.
+    nullable: true
+  domain:
+    type: string
+    description: Website domain of the company.
+  yearFounded:
+    type: number
+    description: Founding year of the company.
+    format: integer
+    nullable: true
+  industry:
+    type: string
+    description: Industry the company is associated with.
+    nullable: true
+  employeesCount:
+    type: number
+    description: Number of employees in the company.
+    format: integer
+    nullable: true
+  country:
+    type: string
+    description: Country where the company is based.
+    nullable: true
+  locality:
+    type: string
+    description: Locality or region where the company is based.
+    nullable: true
+  _links:
+    type: array
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - linkedin
