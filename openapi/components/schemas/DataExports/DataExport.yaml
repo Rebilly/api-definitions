@@ -94,6 +94,8 @@ properties:
     description: ID of the user who requested the data export.
     readOnly: true
     type: string
+    maxLength: 50
+    example: usr_0YVCEENYJ3D7Q9EN6BN16HA0G4
   recordCount:
     description: Total number of records in the export, excluding the header row.
     readOnly: true
@@ -133,3 +135,12 @@ properties:
             - user
             - download
             - signedLink
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
+    properties:
+      file:
+        type: object
+      user:
+        type: object

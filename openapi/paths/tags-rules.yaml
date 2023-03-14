@@ -1,0 +1,67 @@
+get:
+  x-products:
+    - Core
+  tags:
+    - Tags
+  summary: Retrieve tags rules list
+  operationId: GetTagsRulesCollection
+  x-sdk-operation-name: getAllTagsRules
+  description: Retrieves a list of tags rules.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+  responses:
+    '200':
+      description: List of tags rules retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/TagUntag/TagUntagRule.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Tags
+  summary: Create tags rule
+  operationId: PostTagRules
+  x-sdk-operation-name: createTagsRule
+  description: Creates a tags rule.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/TagUntag/TagUntagRule.yaml
+    description: Tags rule resource.
+    required: true
+  responses:
+    '201':
+      description: Tags rule created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TagUntag/TagUntagRule.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

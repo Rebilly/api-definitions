@@ -5,10 +5,11 @@ required:
   - lastName
 properties:
   id:
+    type: string
     description: ID of the user.
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    maxLength: 50
+    example: usr_0YVCEENYJ3D7Q9EN6BN16HA0G4
   email:
     description: Email address of the user.
     type: string
@@ -64,13 +65,13 @@ properties:
     items:
       type: string
   totpRequired:
-    description: Specifies if two-factor authentification is enabled for the user.
+    description: Specifies if two-factor authentication is enabled for the user.
     type: boolean
   totpSecret:
-    description: User's Time-based One-Time Password (TOTP) key for the authentification application, if TOTP is enabled..
+    description: User's Time-based One-Time Password (TOTP) key for the authentication application, if TOTP is enabled..
     type: string
   totpUrl:
-    description: QR-code link that redirects the user to the authentification application, if TOTP is enabled.
+    description: QR-code link that redirects the user to the authentication application, if TOTP is enabled.
     type: string
     format: url
   status:

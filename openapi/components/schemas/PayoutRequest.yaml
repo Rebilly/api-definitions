@@ -1,14 +1,16 @@
 type: object
 required:
   - websiteId
+  - customerId
   - currency
   - amount
-  - customerId
 properties:
   id:
+    type: string
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    description: Unique resource ID.
+    maxLength: 50
+    example: pout_req_0YVDMDE2BMC6KBB5MX76RF6T80
   websiteId:
     $ref: ./Websites/WebsiteId.yaml
   customerId:
@@ -16,9 +18,10 @@ properties:
     allOf:
       - $ref: ./CustomerId.yaml
   paymentInstrumentId:
+    type: string
     description: ID of the requested payment instrument to offer for the payout.
-    allOf:
-      - $ref: ./ResourceId.yaml
+    maxLength: 50
+    example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
   currency:
     description: Currency of the payout.
     allOf:
@@ -80,9 +83,10 @@ properties:
           allOf:
             - $ref: ./Gateways/GatewayName.yaml
         paymentInstrumentId:
+          type: string
           description: ID of the selected payment instrument for the transaction.
-          allOf:
-            - $ref: ./ResourceId.yaml
+          maxLength: 50
+          example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
         amount:
           description: Payout amount that is allocated from the payout request to the credit transaction.
           type: number
@@ -93,6 +97,13 @@ properties:
             - $ref: ./ServerTimestamp.yaml
         updatedTime:
           $ref: ./UpdatedTime.yaml
+  selectedPaymentInstrumentRedirectUrl:
+    description: |-
+      URL where the customer is redirected when a payment instrument is selected. The default value is the website URL.
+      Use `{{id}}` as a placeholder for the payout request ID.
+    type: string
+    format: uri
+    example: https://example.com/payout-request-success?id={{id}}
   createdTime:
     description: Date and time when the payout request is created.
     allOf:

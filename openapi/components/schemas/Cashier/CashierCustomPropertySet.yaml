@@ -1,0 +1,30 @@
+type: object
+required:
+  - name
+  - properties
+
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  name:
+    type: string
+    description: Name of the custom property set.
+  properties:
+    description: |-
+      Defines properties the user can complete when they use the hosted cashier form.
+      This field accepts [JSON-schema](https://json-schema.org/) drafts 4, 6, and 7.
+      Accepted properties types are: `string`, `number`, `integer`, `array`, and `enum`.
+      For more information, see [Configure custom hosted cashier properties](https://www.rebilly.com/docs/dev-docs/configure-custom-hosted-cashier-properties/).
+    type: object
+    example:
+      type: object
+      properties:
+        email:
+          type: "string"
+        max:
+          type: "integer"
+          minimum: 0
+          exclusiveMaximum: 100
+      required: ["email"]
