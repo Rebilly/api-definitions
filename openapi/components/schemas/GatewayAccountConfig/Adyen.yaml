@@ -36,19 +36,21 @@ allOf:
               properties:
                 percentage:
                   description: Percentage of the transaction amount.
-                  type: integer
+                  type: float
+                  exclusiveMinimum: true
                   minimum: 0
                   maximum: 100
-                  example: 5
+                  example: 0.50
                 account:
                   description: ID of the balance account where the split amount is sent.
-                  type: string
-                reference:
-                  description: Unique identifier for split payments.
                   type: string
                 type:
                   description: Account type of the split payment.
                   type: string
+                  enum:
+                    - BalanceAccount
+                    - Commission
+                    - VAT
         required:
           - url
       threeDSecureServer:
