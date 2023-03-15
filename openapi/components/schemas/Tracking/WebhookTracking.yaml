@@ -1,64 +1,77 @@
 type: object
-description: |-
-  Webhook tracking lists up to the 1,000 most-recently delivered webhooks.
-  Filters are limited to only the `id` or the `entityId` (the core related-entity `id`).
-  The results are sorted in reverse chronological order.
-  Sort order may not be further controlled.
+description: Webhook tracking logs.
 readOnly: true
 properties:
   id:
     type: string
-    description: Unique resource ID.
+    description: ID of the webhook tracking log.
     maxLength: 50
     example: hook_log_0YVBG8S0K0DG59J6S3RMN9K452
-  eventType:
-    $ref: ../EventType.yaml
-  entityId:
-    type: string
-    description: ID of the main entity related to the event type.
+  status:
+    type: integer
+    x-sortable: true
+    description: Response code of the webhook request.
+  duration:
+    type: integer
+    x-sortable: true
+    description: Duration of the webhook request in milliseconds.
+  initiatedTime:
+    description: Date and time when the webhook is initiated.
+    x-sortable: true
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
   url:
     type: string
+    x-sortable: true
     description: URL where webhook is sent.
   method:
     type: string
+    x-sortable: true
     description: HTTP method used to send webhook.
     example: POST
-  headers:
-    type: object
-    description: HTTP headers used to send webhook.
-    additionalProperties:
-      type: string
-    example:
-      My-Header: Cool-Value
-  responseCode:
-    type: integer
-    description: HTTP code response.
-  responseBody:
-    type: string
-    description: Response body received.
-  payload:
+  request:
     type: string
     description: Webhook payload.
+  response:
+    type: string
+    description: Response body received.
+  requestHeaders:
+    $ref: ../HttpHeaders.yaml
+  responseHeaders:
+    $ref: ../HttpHeaders.yaml
+  entityId:
+    type: string
+    x-sortable: true
+    description: ID of the main entity related to the event type.
+  organizationId:
+    x-sortable: true
+    allOf:
+      - $ref: ../Organizations/OrganizationId.yaml
+  eventType:
+    x-sortable: true
+    allOf:
+      - $ref: ../EventType.yaml
   source:
     type: string
+    x-sortable: true
     description: Webhook source.
     enum:
       - webhooks
       - rules
   attempt:
     type: integer
+    x-sortable: true
     description: Webhook attempt number.
   sentTime:
+    x-sortable: true
     description: Date and time when the webhook is sent.
     allOf:
       - $ref: ../ServerTimestamp.yaml
-  initiatedTime:
-    description:  Date and time when the webhook initiated.
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
   createdTime:
+    x-sortable: true
     $ref: ../CreatedTime.yaml
   updatedTime:
+    x-sortable: true
     $ref: ../UpdatedTime.yaml
   _links:
     $ref: ../SelfLink.yaml
