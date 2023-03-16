@@ -6,12 +6,15 @@ properties:
     $ref: ../ResourceId.yaml
   status:
     type: integer
+    x-sortable: true
     description: Response code of the HTTP request.
   duration:
     type: integer
+    x-sortable: true
     description: Duration of the HTTP request in milliseconds.
   initiatedTime:
     description: Date and time the HTTP request is initiated.
+    x-sortable: true
     allOf:
       - $ref: ../ServerTimestamp.yaml
   url:
@@ -33,6 +36,14 @@ properties:
     $ref: ../HttpHeaders.yaml
   responseHeaders:
     $ref: ../HttpHeaders.yaml
+  entityId:
+    type: string
+    x-sortable: true
+    description: ID of the resource associated with the tax service request.
+  organizationId:
+    x-sortable: true
+    allOf:
+      - $ref: ../Organizations/OrganizationId.yaml
   taxService:
     type: string
     x-sortable: true
@@ -47,26 +58,8 @@ properties:
     enum:
       - default
       - merchant
-  entityId:
-    type: string
-    description: ID of the resource associated with the tax service request.
   customerId:
     type: string
     description: ID of the customer associated with the tax service request.
-  organizationId:
-    $ref: ../Organizations/OrganizationId.yaml
   _links:
-    type: array
-    description: Related links.
-    items:
-      type: object
-      properties:
-        href:
-          description: Link URL.
-          type: string
-        rel:
-          description: Type of link.
-          type: string
-          enum:
-            - self
-            - invoice
+    $ref: ../SelfLink.yaml
