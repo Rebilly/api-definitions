@@ -2,9 +2,10 @@ allOf:
   - $ref: ../Common/CommonTransaction.yaml
   - properties:
       gatewayAccountId:
+        type: string
         description: ID of the gateway account that processed the transaction.
-        allOf:
-          - $ref: ../ResourceId.yaml
+        maxLength: 50
+        example: gw_acc_0YVCXMF26DDNKAERE5NW727S34
         readOnly: true
       gatewayTransactionId:
         type: string
@@ -370,6 +371,8 @@ allOf:
             type: array
             maxItems: 10
             description: Most recent related invoices.
+          organization:
+            type: object
           paymentCard:
             type: object
             # TODO: should this be replaced by `paymentInstrument`?

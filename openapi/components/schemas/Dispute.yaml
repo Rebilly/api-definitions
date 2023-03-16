@@ -9,10 +9,11 @@ required:
   - reasonCode
 properties:
   id:
+    type: string
     description: ID of the dispute.
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    maxLength: 50
+    example: dp_0YVCE8J5F2DE58FV0S8YASW4HK
   customerId:
     description: ID of the customer who is disputing a transaction.
     type: string
@@ -214,12 +215,9 @@ properties:
     readOnly: true
     enum:
       - fraud
-      - unrecognized
-      - product-not-received
-      - product-unacceptable
-      - product-not-refunded
-      - duplicate
-      - subscription-canceled
+      - authorization
+      - processing-errors
+      - consumer-disputes
       - uncategorized
   type:
     description: Type of dispute.
