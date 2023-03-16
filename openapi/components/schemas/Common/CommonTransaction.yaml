@@ -2,11 +2,9 @@ type: object
 description: Transaction information.
 properties:
   id:
-    type: string
-    description: ID of the transaction.
     readOnly: true
-    maxLength: 50
-    example: txn_0YVDTQJ8YWDGQACV2N2N5SPWQ0
+    allOf:
+      - $ref: ../Transactions/TransactionId.yaml
   websiteId:
     readOnly: true
     allOf:
@@ -104,11 +102,8 @@ properties:
       - $ref: ../CurrencyCode.yaml
   parentTransactionId:
     description: ID of the parent transaction.
-    type: string
-    maxLength: 50
-    example: txn_0YVDTQJ8YWDGQACV2N2N5SPWQ0
-    nullable: true
-    readOnly: true
+    allOf:
+      - $ref: ../Transactions/TransactionId.yaml
   childTransactions:
     description: IDs of child transactions.
     readOnly: true

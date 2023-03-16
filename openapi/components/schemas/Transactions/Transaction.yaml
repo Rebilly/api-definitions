@@ -8,11 +8,10 @@ allOf:
         example: gw_acc_0YVCXMF26DDNKAERE5NW727S34
         readOnly: true
       gatewayTransactionId:
-        type: string
         description: ID of the gateway transaction.
         readOnly: true
-        maxLength: 50
-        example: txn_0YVDTQJ8YWDGQACV2N2N5SPWQ0
+        allOf:
+          - $ref: ./TransactionId.yaml
       gateway:
         type: object
         description: Related gateway information.
