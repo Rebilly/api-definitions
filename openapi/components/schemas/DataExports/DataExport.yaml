@@ -14,10 +14,11 @@ required:
   - resource
 properties:
   id:
+    type: string
     description: ID of the export.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: exp_0YVCNQ2C1AD1RA3HXKP492GNZB
   name:
     description: Name of the export.
     type: string
@@ -94,6 +95,8 @@ properties:
     description: ID of the user who requested the data export.
     readOnly: true
     type: string
+    maxLength: 50
+    example: usr_0YVCEENYJ3D7Q9EN6BN16HA0G4
   recordCount:
     description: Total number of records in the export, excluding the header row.
     readOnly: true
