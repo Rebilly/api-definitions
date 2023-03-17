@@ -4,13 +4,15 @@ properties:
   customerId:
     $ref: CustomerId.yaml
   invoiceId:
+    type: string
     description: ID of the invoice that contains the item which generated the revenue.
-    allOf:
-      - $ref: ./ResourceId.yaml
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
   invoiceItemId:
+    type: string
     description: ID of the invoice item which generated the revenue.
-    allOf:
-      - $ref: ./ResourceId.yaml
+    maxLength: 50
+    example: ii_0YVFDEQS2KCFTBN9HXWJFY55GV
   productId:
     description: ID of the product related to the invoice item.
     nullable: true
