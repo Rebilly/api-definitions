@@ -5,9 +5,11 @@ required:
   - currency
 properties:
   id:
+    type: string
+    description: ID of the cashier deposit request.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: cash_req_0YVJ65BSGYC3EAT58SEX8KY6J7
   websiteId:
     description: Website ID of the cashier. This value specifies the website with which the cashier is associated.
     type: string
@@ -89,7 +91,7 @@ properties:
           minimum: 0
           exclusiveMaximum: 100
       required: ["email"]
-  
+
   properties:
     readOnly: true
     description: |-
