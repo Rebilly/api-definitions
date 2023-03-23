@@ -3,19 +3,21 @@ required:
   - subscriptionId
 properties:
   id:
+    type: string
     description: ID of the reactivation.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: ord_rct_0YVJ62AF5XCFCA6EBFAAA3Z7E0
   subscriptionId:
     description: ID of the reactivated subscription.
     allOf:
       - $ref: ../ResourceId.yaml
   cancellationId:
+    type: string
     description: ID of the related cancellation.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: ord_cnl_0YVJ5XVQM9CDP8248ZQX0RDMKV
   description:
     description: Description of the reactivation reason in free form.
     type: string
@@ -43,7 +45,7 @@ properties:
   paymentInstrumentId:
     writeOnly: true
     description: |-
-      ID of the payment instrument. 
+      ID of the payment instrument.
       If this field is omitted, the subscription payment instrument remains unchanged.
     type: string
     nullable: true
