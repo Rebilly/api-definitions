@@ -6,17 +6,14 @@ required:
   - status
 properties:
   id:
-    type: string
     readOnly: true
-    description: ID of the KYC document.
-    maxLength: 50
-    example: kyc_doc_0YV7JHY705C6DA487BFTAA33V8
+    allOf:
+      - $ref: ../ResourceId.yaml
   fileId:
-    type: string
     deprecated: true
     description: ID of the linked file object.
-    maxLength: 50
-    example: file_0YV7HZ7KDCC5WBV9Q7WRKG1H6N
+    allOf:
+      - $ref: ../ResourceId.yaml
   fileIds:
     description: |-
       IDs of linked file objects.
