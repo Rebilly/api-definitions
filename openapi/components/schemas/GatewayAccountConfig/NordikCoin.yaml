@@ -1,0 +1,22 @@
+description: NordikCoin gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: NordikCoin credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: ID of the NordikCoin merchant.
+          secret:
+            type: string
+            description: NordikCoin secret key.
+            format: password
+            writeOnly: true
+        required:
+          - merchantId
+          - secret
