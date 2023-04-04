@@ -1,0 +1,60 @@
+get:
+  x-products:
+    - Core
+  tags:
+    - AML
+  summary: Retrieve AML settings
+  operationId: GetAmlSettings
+  x-sdk-operation-name: getAmlSettings
+  description: Retrieves AML settings.
+  responses:
+    '200':
+      description: AML settings retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/AmlSettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - AML
+  summary: Update AML settings
+  operationId: PutAmlSettings
+  x-sdk-operation-name: putAmlSettings
+  description: Updates AML settings.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/AmlSettings.yaml
+    description: Settings for AML searches.
+    required: true
+  responses:
+    '200':
+      description: AML settings updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/AmlSettings.yaml
+    '201':
+      description: AML settings created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/AmlSettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
