@@ -1,0 +1,23 @@
+description: Chillstock gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Chillstock credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: Merchant ID (MID).
+          privateKey:
+            type: string
+            description: Chillstock private key.
+            format: password
+            x-multiline: true
+            writeOnly: true
+        required:
+          - merchantId
+          - privateKey
