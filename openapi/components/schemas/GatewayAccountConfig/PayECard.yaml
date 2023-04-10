@@ -1,0 +1,22 @@
+description: PayECard gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: PayECard credentials object.
+        properties:
+          clientId:
+            type: string
+            description: Client ID of the PayECard gateway.
+          password:
+            type: string
+            description: Password of the PayECard gateway.
+            format: password
+            writeOnly: true
+        required:
+          - clientId
+          - password
