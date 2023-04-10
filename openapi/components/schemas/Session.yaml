@@ -3,10 +3,11 @@ required:
   - permissions
 properties:
   id:
+    type: string
     description: ID of the session.
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    maxLength: 50
+    example: jwt_0YV7DEJX80CDRAKVTV478ZNJDR
   token:
     description: Authentication token of the session.
     type: string
@@ -23,10 +24,11 @@ properties:
     items:
       $ref: ./Membership.yaml
   userId:
+    type: string
     description: ID of the user.
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    maxLength: 50
+    example: usr_0YVCEENYJ3D7Q9EN6BN16HA0G4
   createdTime:
     $ref: CreatedTime.yaml
   updatedTime:
@@ -36,9 +38,4 @@ properties:
     type: string
     format: date-time
   _links:
-    type: array
-    description: Related links.
-    readOnly: true
-    minItems: 1
-    items:
-      $ref: ./Links/SelfLink.yaml
+    $ref: ./SelfLink.yaml

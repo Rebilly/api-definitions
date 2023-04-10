@@ -21,6 +21,7 @@ allOf:
             type: string
             description: Secret key for the PayPal Partner account API client.
             format: password
+            writeOnly: true
           partnerBnCode:
             type: string
             description: |-
@@ -52,3 +53,9 @@ allOf:
             description: |-
               Specifies whether to suppress the PayPal payment method when a guest checkout is available.
               This option is only applicable when `useHostedCheckoutForm` is enabled.
+          enableAlternativePaymentMethods:
+            type: boolean
+            default: false
+            description: |-
+              Specifies whether to allow customers to pay using the alternative payment options supported by PayPal.
+              When enabled, customers must manually approve all payments.

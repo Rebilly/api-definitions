@@ -3,14 +3,16 @@ content:
     schema:
       properties:
         invoiceId:
-          description: ID of the invoice.
           type: string
+          description: ID of the invoice.
+          maxLength: 50
+          example: in_0YVF9605RKC62BP14NE2R7V2XT
         reason:
           description: Error message explaining tax calculation failure.
           type: string
         eventType:
           type: string
-          description: Webhook event type.
+          description: Type of webhook event.
           enum:
             - invoice-tax-calculation-failed
         _embedded:
@@ -21,9 +23,16 @@ content:
               $ref: ../../schemas/Invoices/Invoice.yaml
         _links:
           type: array
-          description: Related resource links.
-          minItems: 1
+          description: Related links.
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/InvoiceLink.yaml
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - invoice
 description: Invoice tax validation failed webhook request body resource.

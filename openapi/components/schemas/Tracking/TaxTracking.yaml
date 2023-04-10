@@ -1,0 +1,65 @@
+type: object
+description: Tax service tracking logs.
+readOnly: true
+properties:
+  id:
+    $ref: ../ResourceId.yaml
+  status:
+    type: integer
+    x-sortable: true
+    description: Response code of the HTTP request.
+  duration:
+    type: integer
+    x-sortable: true
+    description: Duration of the HTTP request in milliseconds.
+  initiatedTime:
+    description: Date and time the HTTP request is initiated.
+    x-sortable: true
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  url:
+    type: string
+    x-sortable: true
+    description: URL of the tax service endpoint.
+  method:
+    type: string
+    x-sortable: true
+    description: Method of the HTTP request.
+    example: POST
+  request:
+    type: string
+    description: Request body of the HTTP request.
+  response:
+    type: string
+    description: Response body of the HTTP request.
+  requestHeaders:
+    $ref: ../HttpHeaders.yaml
+  responseHeaders:
+    $ref: ../HttpHeaders.yaml
+  entityId:
+    type: string
+    x-sortable: true
+    description: ID of the resource associated with the tax service request.
+  organizationId:
+    x-sortable: true
+    allOf:
+      - $ref: ../Organizations/OrganizationId.yaml
+  taxService:
+    type: string
+    x-sortable: true
+    description: Name of the tax service used for the request.
+    enum:
+      - taxjar
+      - avalara
+  taxServiceCredentialSource:
+    type: string
+    x-sortable: true
+    description: Source of the credentials that are used to send or retrieve data.
+    enum:
+      - default
+      - merchant
+  customerId:
+    type: string
+    description: ID of the customer associated with the tax service request.
+  _links:
+    $ref: ../SelfLink.yaml

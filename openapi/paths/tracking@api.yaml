@@ -3,24 +3,17 @@ get:
     - Users
   tags:
     - Tracking
-  summary: Retrieve tracking API logs
+  summary: Retrieve API tracking logs
   operationId: GetTrackingApiCollection
   x-sdk-operation-name: getAllApiLogs
+  description: Retrieves API tracking log records.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
     - $ref: ../components/parameters/collectionSort.yaml
     - $ref: ../components/parameters/collectionFilter.yaml
     - $ref: ../components/parameters/collectionQuery.yaml
-    - name: Accept
-      in: header
-      description: Response media type.
-      schema:
-        type: string
-        enum:
-          - application/json
-          - text/csv
-        default: application/json
+    - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
       description: Tracking API logs retrieved.

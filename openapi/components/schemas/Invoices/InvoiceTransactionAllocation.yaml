@@ -1,7 +1,10 @@
 type: object
 properties:
   invoiceId:
-    $ref: ../ResourceId.yaml
+    type: string
+    description: Unique resource ID.
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
   transactionId:
     $ref: ../ResourceId.yaml
   amount:
@@ -11,11 +14,17 @@ properties:
       - $ref: ../CurrencyCode.yaml
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
-    minItems: 2
-    maxItems: 2
     items:
-      anyOf:
-        - $ref: ../Links/InvoiceLink.yaml
-        - $ref: ../Links/TransactionLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - invoice
+            - transaction

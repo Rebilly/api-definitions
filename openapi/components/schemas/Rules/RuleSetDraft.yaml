@@ -4,8 +4,9 @@ properties:
   id:
     type: string
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    description: ID of the draft rule set.
+    maxLength: 50
+    example: rule_dft_0YVDN3FN43CEQ8CQ93Y0H00ZQ7
   baseVersion:
     type: integer
     minimum: 0
@@ -52,15 +53,22 @@ properties:
     $ref: ../CreatedTime.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml
-
   _links:
     type: array
     description: Related links.
     readOnly: true
     items:
-      anyOf:
-        - $ref: ../Links/LinkSelf.yaml
-        - $ref: ../Links/LinkUser.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - user
 required:
   - rules
   - name

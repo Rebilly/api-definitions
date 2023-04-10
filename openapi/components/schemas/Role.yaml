@@ -4,55 +4,61 @@ required:
   - acl
 properties:
   id:
+    type: string
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    description: ID of the role.
+    maxLength: 50
+    example: role_0YVDN2J11HDMX9N8X7DCB4CMX2
   name:
     type: string
-    description: Role name.
+    description: Name of the user role.
   description:
     type: string
-    description: Role description.
+    description: Description of the role.
   acl:
     $ref: ./Acl.yaml
   allowedIps:
     $ref: ./AllowedIps.yaml
   seniorIds:
     type: array
-    description: List of senior roles identifiers.
+    description: List of senior role IDs.
     readOnly: true
     items:
       type: string
   juniorIds:
     type: array
-    description: List of junior roles identifiers.
+    description: List of junior role IDs.
     items:
       type: string
   usersCount:
     type: integer
     readOnly: true
-    description: Number of users with this role assigned.
+    description: Number of users assigned to this role.
   createdTime:
     $ref: CreatedTime.yaml
   updatedTime:
     $ref: UpdatedTime.yaml
   _links:
     type: array
-    description: Links related to a resource.
+    description: Related links.
     readOnly: true
-    minItems: 1
     items:
-      anyOf:
-        - $ref: ./Links/SelfLink.yaml
-        - $ref: ./Links/SeniorRolesLink.yaml
-        - $ref: ./Links/JuniorRolesLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - seniorRoles
+            - juniorRoles
   _embedded:
-    type: array
+    type: object
     description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ./Embeds/JuniorRolesEmbed.yaml
-
-
+    properties:
+      juniorRoles:
+        type: object

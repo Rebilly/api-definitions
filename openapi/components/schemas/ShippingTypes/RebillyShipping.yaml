@@ -1,15 +1,20 @@
 description: Rebilly-based shipping which is calculated by shipping rates.
-allOf:
-  - $ref: ../Shipping.yaml
-  - type: object
-    properties:
-      rateId:
-        description: Shipping rate ID. If unset the cheapest applicable shipping rate is chosen.
-        nullable: true
-        type: string
-        maxLength: 50
-        example: shipping-123-456
-      amount:
-        type: integer
-        readOnly: true
-        description: Shipping amount which is calculated from [Shipping rates](https://api-reference.rebilly.com/tag/Shipping-rates).
+type: object
+required:
+  - calculator
+properties:
+  calculator:
+    description: Shipping calculator.
+    type: string
+    enum:
+      - rebilly
+  rateId:
+    description: ID of the shipping rate. If unset the cheapest applicable shipping rate is chosen.
+    nullable: true
+    type: string
+    maxLength: 50
+    example: shipping-123-456
+  amount:
+    type: integer
+    readOnly: true
+    description: Shipping amount which is calculated from [Shipping rates](https://all-rebilly.redoc.ly/tag/Shipping-rates).

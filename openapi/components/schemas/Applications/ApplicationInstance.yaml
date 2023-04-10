@@ -1,7 +1,5 @@
 type: object
 description: Application instance object.
-required:
-  - settings
 properties:
   status:
     description: Status of the application instance.
@@ -12,25 +10,26 @@ properties:
       - enabled
       - disabling
       - disabled
-  settings:
+  isConfigured:
     description: |-
-      Settings that are available for the user to complete when they install the application.
-      Use this object to describe fields that are rendered during installation, in the settings form.
+      Determines if the configuration of the application instance is complete.
+      Configuration is completed using the [PutApplicationInstanceConfiguration](https://all-rebilly.redoc.ly/tag/Application-users/operation/PutApplicationInstanceConfiguration) operation.
+    type: boolean
+    readOnly: true
+  settings:
+    description: Configuration settings that are available during installation.
     type: object
     additionalProperties:
       type: string
+      description: Additional properties that the user may want to add when installing an application.
     example:
       color: red
       limit: '5'
+    deprecated: true
+    readOnly: true
   createdTime:
     $ref: ../CreatedTime.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml
   _links:
-    type: array
-    description: Related resource links.
-    readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ../Links/SelfLink.yaml
+    $ref: ../SelfLink.yaml

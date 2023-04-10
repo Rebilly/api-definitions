@@ -30,6 +30,12 @@ properties:
     $ref: ../ResourceCustomFields.yaml
   settings:
     $ref: ./WebsiteSettings.yaml
+  logoId:
+    type: string
+    nullable: true
+    description: ID of the linked file object.
+    maxLength: 50
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
   organizationId:
     deprecated: true
     readOnly: true
@@ -37,10 +43,17 @@ properties:
       - $ref: ../Organizations/OrganizationId.yaml
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
-    minItems: 1
     items:
-      anyOf:
-        - $ref: ../Links/SelfLink.yaml
-        - $ref: ../Links/OrganizationLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - logoUrl

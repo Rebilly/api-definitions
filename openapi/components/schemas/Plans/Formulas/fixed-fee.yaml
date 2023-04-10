@@ -1,14 +1,32 @@
-allOf:
-  - $ref: ../PlanPriceFormula.yaml
-  - type: object
-    required:
-      - price
-    properties:
-      price:
-        description: |-
-          For the very simple price when it's fixed and does not depend on the quantity chosen by customer.
+type: object
+required:
+  - price
+  - formula
+properties:
+  formula:
+    type: string
+    description: |-
+      Price formula that determines which algorithm is used to calculate the invoice price based on the following factors:
 
-          If the price is 0, it's free.
-        type: number
-        format: double
-        example: 99.95
+      - Quantity in the order.
+        This value may be variable if you are charging based on usage.
+        If you are not charging based on usage,
+        this value is determined when an order is created.
+
+      - Price of the quantity range.
+        Some formulas set a price based on defined product quantity ranges.
+
+      For more information, see [Price formulas](https://www.rebilly.com/docs/billing/pricing-formulas/).
+    enum:
+      - fixed-fee
+  price:
+    description: |-
+      Use this formula to charge for subscriptions that have a fixed price,
+      number of units, and reoccur over a fixed period of time,
+      such as every: day, week, month, year, or number of years.
+
+      For example, a streaming company charges customers $13.99 each month for subscription period that is 6 months in duration.
+      The quantity of movies that a customer streams each month does not impact the price.
+    type: number
+    format: double
+    example: 99.95

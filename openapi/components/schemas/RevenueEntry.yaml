@@ -4,25 +4,27 @@ properties:
   customerId:
     $ref: CustomerId.yaml
   invoiceId:
+    type: string
     description: ID of the invoice that contains the item which generated the revenue.
-    allOf:
-      - $ref: ./ResourceId.yaml
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
   invoiceItemId:
+    type: string
     description: ID of the invoice item which generated the revenue.
-    allOf:
-      - $ref: ./ResourceId.yaml
+    maxLength: 50
+    example: ii_0YVFDEQS2KCFTBN9HXWJFY55GV
   productId:
     description: ID of the product related to the invoice item.
     nullable: true
     type: string
     maxLength: 50
-    example: product-123
+    example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
   planId:
     description: ID of the plan related to the invoice item.
     nullable: true
     type: string
     maxLength: 50
-    example: gold-plan
+    example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
   accountingCode:
     description: Product accounting code.
     type: string
@@ -40,7 +42,7 @@ properties:
       scheduled: The amount is recognized at the end of the month.
       recognized: The amount is recognized and final.
   estimatedAmount:
-    description: Estimated amount of revenue recognized unless it changes before recognition time.
+    description: Estimated amount of recognized revenue unless it changes before recognition time.
     type: number
     x-type: Money
     format: double

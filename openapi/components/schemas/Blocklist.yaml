@@ -4,10 +4,11 @@ required:
   - value
 properties:
   id:
-    description: Blocklist identifier string.
+    type: string
+    description: ID of the blocklist.
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    maxLength: 50
+    example: blkl_0YV8XTSH9MD578386XQDWSEBNF
   type:
     description: Type of blocklist.
     type: string
@@ -34,9 +35,4 @@ properties:
   updatedTime:
     $ref: UpdatedTime.yaml
   _links:
-    type: array
-    description: Related resource links.
-    readOnly: true
-    minItems: 1
-    items:
-      $ref: ./Links/SelfLink.yaml
+    $ref: ./SelfLink.yaml

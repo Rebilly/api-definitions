@@ -2,13 +2,16 @@ type: object
 description: Coupon redemption log.
 properties:
   id:
+    type: string
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    description: Unique resource ID. Defaults to UUID v4.
+    maxLength: 50
+    example: cpn_rdm_0YVCNKF81GD778N4YNVGDJK558
   couponId:
-    description: Coupon identifier string.
-    allOf:
-      - $ref: ../ResourceId.yaml
+    type: string
+    description: ID of the coupon.
+    maxLength: 50
+    example: cpn_0YVCNKF81GD778N4YNVGDJK558
   customerId:
     $ref: ../CustomerId.yaml
   additionalRestrictions:
@@ -27,9 +30,4 @@ properties:
     type: string
     format: date-time
   _links:
-    type: array
-    description: Related resource links.
-    readOnly: true
-    minItems: 1
-    items:
-      $ref: ../Links/SelfLink.yaml
+    $ref: ../SelfLink.yaml

@@ -1,0 +1,36 @@
+description: Orbital gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Orbital credentials object.
+        properties:
+          apiKey:
+            type: string
+            description: Orbital API key.
+            format: password
+            writeOnly: true
+        required:
+          - apiKey
+      settings:
+        type: object
+        description: Orbital settings object.
+        properties:
+          targetCurrency:
+            description: Currency to which the received cryptocurrency is converted.
+            type: string
+            enum:
+              - USD
+              - EUR
+              - GBP
+          mainCryptoCurrency:
+            description: Blockchain network to be used.
+            type: string
+            enum:
+              - ETH
+              - SOL
+              - TRX

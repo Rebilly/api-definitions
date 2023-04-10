@@ -9,14 +9,17 @@ required:
   - reasonCode
 properties:
   id:
-    description: Dispute identifier string.
+    type: string
+    description: ID of the dispute.
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    maxLength: 50
+    example: dp_0YVCE8J5F2DE58FV0S8YASW4HK
   customerId:
     description: ID of the customer who is disputing a transaction.
     type: string
     readOnly: true
+    maxLength: 50
+    example: cus_0YV7DDSDD1C8DA64KHH2W33CPF
   transactionId:
     description: ID of the disputed transaction.
     type: string
@@ -210,12 +213,9 @@ properties:
     readOnly: true
     enum:
       - fraud
-      - unrecognized
-      - product-not-received
-      - product-unacceptable
-      - product-not-refunded
-      - duplicate
-      - subscription-canceled
+      - authorization
+      - processing-errors
+      - consumer-disputes
       - uncategorized
   type:
     description: Type of dispute.
@@ -262,18 +262,24 @@ properties:
     $ref: UpdatedTime.yaml
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
-    minItems: 1
     items:
-      anyOf:
-        - $ref: ./Links/SelfLink.yaml
-        - $ref: ./Links/TransactionLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - transaction
   _embedded:
-    type: array
+    type: object
     description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ./Embeds/TransactionEmbed.yaml
+    properties:
+      transaction:
+        type: object

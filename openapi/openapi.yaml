@@ -45,7 +45,7 @@ components:
     JWT:
       description: |-
         JWT is a short lifetime token that can be assigned a specific expiration time.
-        To create a JWT session, see [JWT session resource](https://user-api-docs.rebilly.com/tag/JWT-Session#operation/PostSigninRequest).
+        To create a JWT session, see [JWT session resource](https://all-rebilly.redoc.ly/tag/JWT-session/operation/PostSigninRequest).
 
         Usage format: `Bearer <JWT>`.
       type: http
@@ -53,7 +53,8 @@ components:
       bearerFormat: JWT
     ApplicationJWT:
       description: |-
-        Applications in our App Store can create a JSON Web Token (JWT) by [fetching an user's instance](https://user-api-docs.rebilly.com/tag/Application-owners#operation/GetApplicationInstanceByOrganization).
+        Applications in the Rebilly App Store can create a JSON Web Token (JWT) by fetching an user's instance.
+        For more information, see [Retrieve an application instance](https://all-rebilly.redoc.ly/tag/Application-owners#operation/GetApplicationInstanceByOrganization).
 
         Usage format: `Bearer <JWT>`.
       type: http
@@ -62,10 +63,9 @@ components:
 
     PublishableApiKey:
       description: |-
-        Only for the Tokens resource.
+        This authentication method is applicable to specific operations.
 
-        You can create a Publishable API Key via our [API Keys resource](https://all-rebilly.redoc.ly/tag/API-keys/operation/PostApiKey),
-        by specifying the type as `publishable`.
+        To create a publishable API key, see [Create an API key](https://all-rebilly.redoc.ly/tag/API-keys/operation/PostApiKey).
       name: Authorization
       type: apiKey
       in: header
@@ -83,7 +83,8 @@ components:
 
     CustomerJWT:
       description: |-
-        You can create a JSON Web Token (JWT) via [Storefront Authentication](https://all-rebilly.redoc.ly/tag/Authentication/operation/StorefrontPostLogin).
+        To create a JSON Web Token (JWT) using Storefront authentication,
+        see [Create a session with username and password](https://all-rebilly.redoc.ly/tag/Authentication/operation/StorefrontPostLogin).
 
         Usage format: `Bearer <JWT>`.
       type: http
@@ -113,7 +114,7 @@ tags:
       For information on how to create and manage API keys, see [API keys](https://www.rebilly.com/docs/dev-docs/api-keys/).
 
       In addition to API keys, you may use JSON Web Tokens (JWT) to authenticate to the API.
-      For more information, see [JWT session](https://user-api-docs.rebilly.com/#tag/JWT-Session).
+      For more information, see [JWT session](https://all-rebilly.redoc.ly/#tag/JWT-Session).
   - name: Application owners
     description: |-
       Use these operations to register applications to the Rebilly Apps Store and manage application instances.
@@ -156,6 +157,8 @@ tags:
       Create and manage cashier requests and manage strategies that determine the deposit amounts to display on the page.
       Rebilly hosted cashiers provide a secure and compliant way to deposit funds.
       Cashier forms are customizable, and use fully responsive design, built-in error messaging and validation.
+
+      > **Important:** These operations are experimental and may change.
   - name: Checkout forms
     description: |-
       Use these operations to create and manage checkout forms.
@@ -263,8 +266,6 @@ tags:
       This process is called dispute resolution.
       If the merchant is unable to represent the charge, the card issuer typically reverses the sale and adds fees on top of the charge.
       This process is called a chargeback.
-  - name: Email credentials
-    description: Use these operations to get, create, and manage SMTP credential hashes.
   - name: Email delivery settings
     description: |-
       Use email delivery settings to configure from which email address notifications and broadcast message are sent.
@@ -285,11 +286,6 @@ tags:
     description: |-
       Use these operations to manage email verification.
       Email verification is the process of confirming that an email address exists and is associated with an individual.
-  - name: Experian credentials
-    description: |-
-      Use these operations to manage your Experian account credentials.
-      The Experian integration provides identity verification.
-      For more information, see [Experian integration](https://www.rebilly.com/docs/automations/experian-integration/#experian-integration).
   - name: Fees
     description: |-
       Use fees to reconcile transactions with applicable fees and discount rates.
@@ -325,31 +321,11 @@ tags:
     description: |-
       Use these operations to manage third-party apps that are integrated to your Rebilly account.
       For more information on third-party apps, and how to integrate them,
-      see [Integrations](https://www.rebilly.com/docs/automations/integrations/).
+      see [App store](https://www.rebilly.com/docs/app-store/app-store/).
   - name: Invoices
     description: |-
       Use invoices to bill for the goods or services that you provide.
       If your invoice includes subscription items, it also includes the corresponding service periods and prices.
-        - `funds-proof`: Validates that a customer has funds.
-        - `credit-file-proof`: Verifies that there is an existing credit file with two sources that match the customer's name, DOB, and address.
-
-      Rebilly parses and analyzes the documents and accepts or rejects them according to a configurable scoring algorithm.
-      When all document types in a KYC request are accepted, the status is fulfilled, and the [KYC request fulfilled webhook](https://www.rebilly.com/docs/dev-docs/api/operation/kyc-request-fulfilled/) is emitted.
-
-      ### Credit file proof
-
-      The `credit-file-proof` KYC document request type is only available in the API,
-      this option is not available in the [KYC document gatherer](https://www.rebilly.com/docs/kyc-and-aml/kyc-document-gatherer/).
-      This request verifies that there is an existing credit file with two sources that match the person's name, date of birth, and address.
-
-      In Canada, to meet FINTRAC requirements, the `credit-file-proof` KYC document request verifies the customer's name, address, and date of birth with a credit agency.
-
-      If `credit-file-proof` is requested in combination with `identity-proof` and `address-proof`,
-      `credit-file-proof` is attempted first.
-      If `credit-file-proof` validates the identity and address,
-      the KYC request is considered fulfilled.
-      If the request is not fulfilled,
-      redirect your customer to the KYC document gatherer to collect their KYC documents.
   - name: Invoices timeline
     description: Use invoice timelines to maintain an audit trail of changes and activity for each invoice.
   - name: Journal
@@ -374,6 +350,26 @@ tags:
         - `identity-proof`: Validates a customer's identity.
         - `address-proof`: Validates a customer's address.
         - `purchase-proof`: Validates a customer's purchase.
+        - `funds-proof`: Validates that a customer has funds.
+        - `credit-file-proof`: Verifies that there is an existing credit file with two sources that match the customer's name, DOB, and address.
+
+      Rebilly parses and analyzes the documents and accepts or rejects them according to a configurable scoring algorithm.
+      When all document types in a KYC request are accepted, the status is fulfilled, and the [KYC request fulfilled webhook](https://www.rebilly.com/docs/dev-docs/api/operation/kyc-request-fulfilled/) is sent.
+
+      ### Credit file proof
+
+      The `credit-file-proof` KYC document request type is only available in the API,
+      this option is not available in the [KYC document gatherer](https://www.rebilly.com/docs/kyc-and-aml/kyc-document-gatherer/).
+      This request verifies that there is an existing credit file with two sources that match the person's name, date of birth, and address.
+
+      In Canada, to meet FINTRAC requirements, the `credit-file-proof` KYC document request verifies the customer's name, address, and date of birth with a credit agency.
+
+      If `credit-file-proof` is requested in combination with `identity-proof` and `address-proof`,
+      `credit-file-proof` is attempted first.
+      If `credit-file-proof` validates the identity and address,
+      the KYC request is considered fulfilled.
+      If the request is not fulfilled,
+      redirect your customer to the KYC document gatherer to collect their KYC documents.
 
   - name: Lists
     description: |-
@@ -396,16 +392,14 @@ tags:
       Metadata is structured information on other data.
   - name: Orders
     description: |-
-      Order is a customer's request to purchase items.
+      Use these operations to manage customer orders.
+      An order is a customer's request to purchase items.
       It can contain subscription and one-time sale items.
       When an order contains one or more subscription items, it is a subscription order.
 
       An order generates an invoice.
       A subscription order generates an invoice for each service period.
       For more information, see [Orders](https://www.rebilly.com/docs/dev-docs/concepts/#orders).
-      For more information, see [My organizations and websites](https://www.rebilly.com/docs/settings/organizations-and-websites/).
-
-      Note: Organizations are shared between the live and sandbox environments.
 
   - name: Orders timeline
     description: Use order timelines to maintain an audit trail of changes and activity for each order.
@@ -418,6 +412,9 @@ tags:
       Use these operations to manage your organizations in Rebilly.
       An organization is an entity that represents you, or your company, as a merchant.
       You can have multiple organizations.
+      For more information, see [My organizations and websites](https://www.rebilly.com/docs/settings/organizations-and-websites/).
+
+      Note: Organizations are shared between the live and sandbox environments.
   - name: Password reset
     description: Use these operations to manage password resets for a user or organization.
   - name: Payment instruments
@@ -434,12 +431,6 @@ tags:
       A payment token can be made using a different authentication scheme (public key authentication), which enables you to create a payment token directly from the browser.
       This bypasses the need to send sensitive cardholder info to your servers.
       We recommend using this with the FramePay library, which helps you integrate a form into this API resource and create payment tokens.
-  - name: Plaid credentials
-    description: |-
-      Use these operations to manage your Plaid account credentials.
-      The Plaid integration provides customer bank credential verification,
-      and simplifies the process of providing credentials for your customers.
-      For more information, see [Plaid integration](https://www.rebilly.com/docs/automations/plaid-integration/).
   - name: Plans
     description: |-
       Use pricing plans to describe how the customer must pay for [products](https://www.rebilly.com/docs/dev-docs/api/tag/Products/).
@@ -480,6 +471,9 @@ tags:
       Use these operations to manage password resets.
       When a password reset is requested, an email with a token is sent.
       In the email the user must click a reset link, and then create a new password.
+  - name: Risk score
+    description: |-
+      Use risk score operations to configure blocklists based on transaction risk factors.
   - name: Roles
     description: |-
       Use these operations to manage user roles within your team or organization.
@@ -505,6 +499,8 @@ tags:
       A segment is a filtered view of a data set that can be shared with other users.
       For example, you may create a transactions segment that displays specific columns that are filtered and sorted based on certain criteria,
       and share it with others in your organization.
+  - name: Service credentials
+    description: Use these operations to get, create, and manage credentials for third-party services.
   - name: Shipping rates
     description: |-
       Use these operations to manage shipping rates.
@@ -515,15 +511,6 @@ tags:
       No authentication is required.
   - name: Tags
     description: Use tags to organize and categorize customers or KYC documents based on keywords.
-  - name: TaxJar credentials
-    description: |-
-      Use these operations to manage your TaxJar account credentials.
-      The TaxJar integration enables you to calculate taxes and create transactions for the Sales Tax AutoFile feature in your TaxJar account.
-      For more information, see [TaxJar integration](https://www.rebilly.com/docs/automations/tax-jar-integration/#taxjar-integration).
-  - name: Avalara credentials
-    description: |-
-      Use these operations to manage your Avalara account credentials.
-      The Avalara integration enables you to calculate taxes and create transactions in your Avalara account.
   - name: Tracking
     description: |-
       Use tracking when debugging and auditing issues.
@@ -541,13 +528,17 @@ tags:
   - name: Transactions timeline
     description: Use transaction timelines to maintain an audit trail of changes and activity for each transaction.
   - name: Usage
-    description: Reports the product usage of a subscription item for metered billing purposes.
+    description: |-
+      Use these operations to manage the product usage of a subscription item for metered billing purposes.
+
+      Use metered billing when product quantity is unknown to the customer at the moment of creating a subscription.
+      Metered billing is based on reported usage records.
+      Every reported usage updates the quantity of an upcoming invoice item for a specified subscription and a plan.
+      To create a metered billing plan, see [Plans](../Plans).
   - name: Users
     description: |-
       Use these operations to manage users.
       A user is a person who can login to Rebilly, and take actions based on their granted permissions.
-  - name: Webhook credentials
-    description: Use these operations to manage webhook credential hashes.
   - name: Webhooks
     description: |-
       Use these operations to manage webhooks.
@@ -603,6 +594,7 @@ x-tagGroups:
       - Blocklists
       - KYC documents
       - AML
+      - Risk score
   - name: Misc
     tags:
       - Custom fields
@@ -683,6 +675,8 @@ paths:
     $ref: './paths/files@{id}@download.yaml'
   '/application-instances/{applicationId}':
     $ref: './paths/application-instances@{applicationId}.yaml'
+  '/application-instances/{applicationId}/configuration':
+    $ref: './paths/application-instances@{applicationId}@configuration.yaml'
   '/applications':
     $ref: './paths/applications.yaml'
   '/applications/{id}':
@@ -887,56 +881,20 @@ paths:
     $ref: ./paths/cashier-strategies.yaml
   /cashier-strategies/{id}:
     $ref: ./paths/cashier-strategies@{id}.yaml
+  /cashier-custom-property-sets:
+    $ref: ./paths/cashier-custom-property-sets.yaml
+  /cashier-custom-property-sets/{id}:
+    $ref: ./paths/cashier-custom-property-sets@{id}.yaml
   /checkout-forms:
     $ref: ./paths/checkout-forms.yaml
   /checkout-forms/{id}:
     $ref: './paths/checkout-forms@{id}.yaml'
-  /credential-hashes/aws-ses:
-    $ref: ./paths/credential-hashes@aws-ses.yaml
-  '/credential-hashes/aws-ses/{hash}':
-    $ref: './paths/credential-hashes@aws-ses@{hash}.yaml'
-  /credential-hashes/emails:
-    $ref: ./paths/credential-hashes@emails.yaml
-  '/credential-hashes/emails/{hash}':
-    $ref: './paths/credential-hashes@emails@{hash}.yaml'
-  /credential-hashes/mailgun:
-    $ref: ./paths/credential-hashes@mailgun.yaml
-  '/credential-hashes/mailgun/{hash}':
-    $ref: './paths/credential-hashes@mailgun@{hash}.yaml'
-  /credential-hashes/oauth2:
-    $ref: ./paths/credential-hashes@oauth2.yaml
-  '/credential-hashes/oauth2/{hash}':
-    $ref: './paths/credential-hashes@oauth2@{hash}.yaml'
-  '/credential-hashes/oauth2/{hash}/items':
-    $ref: './paths/credential-hashes@oauth2@{hash}@items.yaml'
-  /credential-hashes/plaid:
-    $ref: './paths/credential-hashes@plaid.yaml'
-  '/credential-hashes/plaid/{hash}':
-    $ref: './paths/credential-hashes@plaid@{hash}.yaml'
-  /credential-hashes/postmark:
-    $ref: ./paths/credential-hashes@postmark.yaml
-  '/credential-hashes/postmark/{hash}':
-    $ref: './paths/credential-hashes@postmark@{hash}.yaml'
-  /credential-hashes/sendgrid:
-    $ref: ./paths/credential-hashes@sendgrid.yaml
-  '/credential-hashes/sendgrid/{hash}':
-    $ref: './paths/credential-hashes@sendgrid@{hash}.yaml'
-  /credential-hashes/webhooks:
-    $ref: ./paths/credential-hashes@webhooks.yaml
-  '/credential-hashes/webhooks/{hash}':
-    $ref: './paths/credential-hashes@webhooks@{hash}.yaml'
-  /credential-hashes/experian:
-    $ref: ./paths/credential-hashes@experian.yaml
-  '/credential-hashes/experian/{hash}':
-    $ref: './paths/credential-hashes@experian@{hash}.yaml'
-  /credential-hashes/taxjar:
-    $ref: ./paths/credential-hashes@taxjar.yaml
-  '/credential-hashes/taxjar/{hash}':
-    $ref: './paths/credential-hashes@taxjar@{hash}.yaml'
-  /credential-hashes/avalara:
-    $ref: ./paths/credential-hashes@avalara.yaml
-  '/credential-hashes/avalara/{hash}':
-    $ref: './paths/credential-hashes@avalara@{hash}.yaml'
+  /service-credentials/{type}:
+    $ref: ./paths/service-credentials@{type}.yaml
+  '/service-credentials/{type}/{id}':
+    $ref: './paths/service-credentials@{type}@{id}.yaml'
+  '/service-credentials/{type}/{id}/items':
+    $ref: './paths/service-credentials@{type}@{id}@items.yaml'
   /custom-domains:
     $ref: ./paths/custom-domains.yaml
   '/custom-domains/{domain}':
@@ -1043,10 +1001,6 @@ paths:
     $ref: ./paths/payout-requests.yaml
   '/payout-requests/{id}':
     $ref: './paths/payout-requests@{id}.yaml'
-  '/payout-requests/{id}/accept':
-    $ref: './paths/payout-requests@{id}@accept.yaml'
-  '/payout-requests/{id}/reject':
-    $ref: './paths/payout-requests@{id}@reject.yaml'
   '/payout-requests/{id}/payment-instruments':
     $ref: './paths/payout-requests@{id}@payment-instruments.yaml'
   /permissions-emulation:
@@ -1063,12 +1017,6 @@ paths:
     $ref: ./paths/profile.yaml
   /profile/mfa:
     $ref: ./paths/profile@mfa.yaml
-  /profile/password:
-    $ref: ./paths/profile@password.yaml
-  /profile/totp-reset:
-    $ref: ./paths/profile@totp-reset.yaml
-  '/reset-password/{token}':
-    $ref: './paths/reset-password@{token}.yaml'
   '/roles':
     $ref: ./paths/roles.yaml
   '/roles/{id}':
@@ -1085,6 +1033,10 @@ paths:
     $ref: ./paths/tracking@api.yaml
   '/tracking/api/{id}':
     $ref: './paths/tracking@api@{id}.yaml'
+  /tracking/taxes:
+    $ref: ./paths/tracking@taxes.yaml
+  '/tracking/taxes/{id}':
+    $ref: './paths/tracking@taxes@{id}.yaml'
   /tracking/lists:
     $ref: ./paths/tracking@lists.yaml
   /tracking/webhooks:
@@ -1099,10 +1051,6 @@ paths:
     $ref: './paths/users@{id}.yaml'
   '/users/{id}/mfa':
     $ref: './paths/users@{id}@mfa.yaml'
-  '/users/{id}/password':
-    $ref: './paths/users@{id}@password.yaml'
-  '/users/{id}/totp-reset':
-    $ref: './paths/users@{id}@totp-reset.yaml'
   /webhooks:
     $ref: ./paths/webhooks.yaml
   '/webhooks/{id}':
@@ -1211,6 +1159,8 @@ paths:
     $ref: paths/storefront/orders@{id}.yaml
   '/storefront/orders/{id}/cancellation':
     $ref: paths/storefront/orders@{id}@cancellation.yaml
+  '/storefront/orders/{id}/pause':
+    $ref: paths/storefront/orders@{id}@pause.yaml
   '/storefront/payment':
     $ref: paths/storefront/payment.yaml
   '/storefront/payment-instruments':
@@ -1225,8 +1175,6 @@ paths:
     $ref: ./paths/storefront/payout-requests.yaml
   '/storefront/payout-requests/{id}':
     $ref: paths/storefront/payout-requests@{id}.yaml
-  '/storefront/payout-requests/{id}/cancel':
-    $ref: paths/storefront/payout-requests@{id}@cancel.yaml
   '/storefront/plans':
     $ref: paths/storefront/plans.yaml
   '/storefront/plans/{id}':
@@ -1247,14 +1195,30 @@ paths:
     $ref: paths/storefront/transactions.yaml
   '/storefront/transactions/{id}':
     $ref: paths/storefront/transactions@{id}.yaml
+  '/storefront/transactions/{id}/{token}/continue':
+    $ref: paths/storefront/transactions@{id}@{token}@continue.yaml
+  '/storefront/transactions/{id}/{token}/bypass':
+    $ref: paths/storefront/transactions@{id}@{token}@bypass.yaml
   '/storefront/websites/{id}':
     $ref: paths/storefront/websites@{id}.yaml
   '/customers/{id}/edd-score':
     $ref: paths/customers@{id}@edd-score.yaml
   '/customers/{id}/edd-timeline':
     $ref: paths/customers@{id}@edd-timeline.yaml
+  '/customers/{id}/edd-timeline/{messageId}':
+    $ref: paths/customers@{id}@edd-timeline@{messageId}.yaml
   '/customers/{id}/edd-search-results':
     $ref: paths/customers@{id}@edd-search-results.yaml
+  '/customers/{id}/edd-search-results/{searchResultId}':
+    $ref: paths/customers@{id}@edd-search-results@{searchResultId}.yaml
+  '/risk-score-rules':
+    $ref: paths/risk-score-rules.yaml
+  '/risk-score-rules/blocklists':
+    $ref: paths/risk-score-rules@blocklists.yaml
+  '/tags-rules':
+    $ref: paths/tags-rules.yaml
+  '/tags-rules/{id}':
+    $ref: paths/tags-rules@{id}.yaml
 
 x-webhooks:
   application-instance-disabled:
@@ -1395,6 +1359,9 @@ x-webhooks:
   offsite-payment-completed:
     post:
       $ref: ./webhooks/offsite-payment-completed.yaml
+  order-abandoned:
+    post:
+      $ref: ./webhooks/order-abandoned.yaml
   order-completed:
     post:
       $ref: ./webhooks/order-completed.yaml
@@ -1407,6 +1374,9 @@ x-webhooks:
   payment-card-expired:
     post:
       $ref: ./webhooks/payment-card-expired.yaml
+  payment-instrument-modified:
+    post:
+      $ref: ./webhooks/payment-instrument-modified.yaml
   renewal-invoice-issued:
     post:
       $ref: ./webhooks/renewal-invoice-issued.yaml

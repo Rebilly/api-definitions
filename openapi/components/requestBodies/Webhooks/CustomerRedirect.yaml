@@ -3,7 +3,7 @@ content:
     schema:
       properties:
         transactionId:
-          description: Transaction ID.
+          description: ID of the transaction.
           type: string
         redirectUrl:
           description: URL customer redirected to.
@@ -28,14 +28,22 @@ content:
             - customer-returned
         _embedded:
           type: object
+          description: Embedded objects.
           properties:
             transaction:
               $ref: ../../schemas/Transactions/Transaction.yaml
         _links:
           type: array
-          description: Related resource links.
-          minItems: 1
+          description: Related links.
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/TransactionLink.yaml
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - transaction
 description: Customer redirect webhook request body resource.
