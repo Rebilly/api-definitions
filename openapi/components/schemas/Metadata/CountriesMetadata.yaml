@@ -1,15 +1,11 @@
 type: object
 description: Countries metadata.
-required:
-  - mode
-properties:
-  mode:
-    description: Specifies how the countries are compared.
-    type: string
-    enum:
-      - unknown
-      - all
-      - subset
-oneOf:
+discriminator:
+  propertyName: mode
+  mapping:
+    unknown: ./CountriesUnrestrictedMetadata.yaml
+    all: ./CountriesUnrestrictedMetadata.yaml
+    subset: ./CountriesSubsetMetadata.yaml
+anyOf:
   - $ref: ./CountriesUnrestrictedMetadata.yaml
   - $ref: ./CountriesSubsetMetadata.yaml
