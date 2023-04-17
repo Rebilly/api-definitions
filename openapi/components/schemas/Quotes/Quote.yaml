@@ -100,7 +100,7 @@ properties:
     type: string
     format: date-time
   redirectUrl:
-    description: URL to redirect the customer to when a quote is accepted or rejected. The default value is the website URL.
+    description: URL to redirect the customer to when a quote is rejected. The default value is the website URL.
     type: string
     format: uri
   signature:
@@ -111,18 +111,9 @@ properties:
     type: array
     nullable: true
     description: |-
-      List of coupons to redeem on the customer and restrict to this order.
+      List of coupons to redeem on the customer and apply to the order when the quote is accepted.
 
       For more information, see [Coupons](https://www.rebilly.com/docs/settings/coupons-and-discounts/).
-
-      This parameter uses the following logic:
-      - If this parameter is not supplied, applied coupons are not changed.
-      - If an empty array is supplied, all applied coupon redemptions are canceled.
-      - If a list of coupons is supplied, unapplied coupons in the list are applied.
-      Coupons that have already been applied do not change state.
-      Applied coupons that are not supplied in list are canceled.
-
-      If the list of applied coupons on a pending order is changed by this parameter during an order update, the invoice for the order is reissued.
     items:
       type: string
       description: Coupon ID.

@@ -100,7 +100,7 @@ properties:
     type: string
     format: date-time
   redirectUrl:
-    description: URL to redirect the customer to when a quote is accepted or rejected. The default value is the website URL.
+    description: URL to redirect the customer to when a quote is rejected. The default value is the website URL.
     type: string
     format: uri
   signature:
@@ -118,7 +118,9 @@ properties:
           description: Link URL.
           type: string
         rel:
-          description: Type of link.
+          description: |-
+            Type of link. If quote is accepted, a customer is redirected to `invoicePaymentFormUrl`
+            to pay the initial invoice using one of the methods which are available to the customer.
           type: string
           enum:
             - self
