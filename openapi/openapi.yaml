@@ -464,6 +464,12 @@ tags:
     description: |-
       Use these operations to manage purchases.
       Purchases are transactions that have been executed related to the purchase of goods or services.
+  - name: Recovery notifications
+    description: |-
+      Use these operations to manage transaction recovery notifications.
+      A recovery notification is a notification send to customers with abandoned transactions.
+      This allows you to convert abandoned transaction into sales.
+      You can create multiple recovery notifications.
   - name: Reports
     description: Use reports operations to retrieve summary information about your customers, subscriptions, transactions, and more.
   - name: Reset password
@@ -1219,6 +1225,10 @@ paths:
     $ref: paths/tags-rules.yaml
   '/tags-rules/{id}':
     $ref: paths/tags-rules@{id}.yaml
+  '/recovery-notifications':
+    $ref: ./paths/recovery-notifications.yaml
+  '/recovery-notifications/{id}':
+    $ref: './paths/recovery-notifications@{id}.yaml'
 
 x-webhooks:
   application-instance-disabled:
