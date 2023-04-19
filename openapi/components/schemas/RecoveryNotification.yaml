@@ -1,0 +1,26 @@
+type: object
+required:
+  - timeDelta
+  - notification
+properties:
+  id:
+    type: string
+    description: ID of the recovery notification.
+    readOnly: true
+    maxLength: 50
+    example: rn_0YV7DEJX80CDRAKVTV478ZNJDR
+  filter:
+    description: The filters that determine which abandoned transactions to notify
+    type: string
+  timeDelta:
+    description: The amount of days after which the notification should be send
+    type: integer
+  notification:
+    type: array
+    description: The configuration of a notification.
+  createdTime:
+    $ref: CreatedTime.yaml
+  updatedTime:
+    $ref: UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml

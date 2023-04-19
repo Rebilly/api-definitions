@@ -1,0 +1,85 @@
+get:
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Retrieve recovery notifications
+  operationId: GetRecoveryNotifications
+  x-sdk-operation-name: getAll
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
+  description: Retrieves a list of recovery notifications.
+  responses:
+    '200':
+      description: List of recovery notifications retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/RecoveryNotification.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/recovery-notifications/get.php
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/recovery-notifications/get.js
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/recovery-notifications/get.php
+post:
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Create a recovery notification
+  operationId: PostRecoveryNotification
+  x-sdk-operation-name: create
+  description: |-
+    Creates a recovery notification.
+
+    To create or update a recovery notification with a specified ID, use the [Upsert a recovery notification](../PutRecoveryNotification) operation.
+  requestBody:
+    $ref: ../components/requestBodies/RecoveryNotification.yaml
+  responses:
+    '201':
+      description: Recovery notification created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RecoveryNotification.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/recovery-notifications/post.php
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/recovery-notifications/post.js
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/recovery-notifications/post.php

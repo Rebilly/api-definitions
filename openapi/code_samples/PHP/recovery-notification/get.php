@@ -1,0 +1,1 @@
+$recoveryNotifications = $client->recoveryNotifications()->search();

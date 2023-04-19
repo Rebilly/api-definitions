@@ -1,0 +1,110 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Retrieve a recovery notification
+  operationId: GetRecoveryNotification
+  x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
+  description: Retrieves a recovery notification with a specified ID.
+  responses:
+    '200':
+      description: Recovery notification retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RecoveryNotification.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/recovery-notifications@{id}/get.php'
+    - lang: JavaScript
+      source:
+        $ref: '../code_samples/JavaScript/recovery-notifications@{id}/get.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/recovery-notifications@{id}/get.php
+put:
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Upsert a recovery notification
+  operationId: PutRecoveryNotification
+  x-sdk-operation-name: update
+  description: Creates or updates (upserts) a recovery notification with a specified ID.
+  requestBody:
+    $ref: ../components/requestBodies/RecoveryNotification.yaml
+  responses:
+    '200':
+      description: Recovery notification updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RecoveryNotification.yaml
+    '201':
+      description: Recovery notification created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RecoveryNotification.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/recovery-notifications@{id}/put.php'
+    - lang: JavaScript
+      source:
+        $ref: '../code_samples/JavaScript/recovery-notifications@{id}/put.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/recovery-notifications@{id}/put.php
+delete:
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Delete a recovery notification
+  operationId: DeleteRecoveryNotification
+  x-sdk-operation-name: delete
+  description: Deletes a recovery notification with a specified ID.
+  responses:
+    '204':
+      description: Recovery notification deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+  x-codeSamples:
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/recovery-notifications@{id}/delete.php
