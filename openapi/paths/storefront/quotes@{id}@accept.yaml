@@ -1,0 +1,28 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Storefront
+  tags:
+    - Quotes
+  summary: Accept a quote
+  operationId: StorefrontPostQuoteAcceptance
+  x-sdk-operation-name: accept
+  security:
+    - CustomerJWT: []
+  description: Accepts an issued quote with specified ID.
+  responses:
+    '200':
+      description: Quote accepted.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/StorefrontQuote.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../../components/responses/NotFound.yaml
+    '409':
+      $ref: ../../components/responses/Conflict.yaml
