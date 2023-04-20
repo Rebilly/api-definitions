@@ -6,4 +6,4 @@ const params = {limit: 20, offset: 100, sort: 'timeDelta'};
 const secondCollection = await api.recoveryNotifications.getAll(params);
 
 // access the collection items, each item is a Member
-secondCollection.items.forEach(recoveryNotification => console.log(recoveryNotifications.fields.title));
+secondCollection.items.forEach(recoveryNotification => console.log(recoveryNotification.fields.title));

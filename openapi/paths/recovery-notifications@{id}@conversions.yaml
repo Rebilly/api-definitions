@@ -1,0 +1,41 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Recovery notifications
+  summary: Retrieve a recovery notification's conversions
+  operationId: GetRecoveryNotificationConversions
+  x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
+  description: Retrieve conversions for a recovery notification with a specified ID.
+  responses:
+    '200':
+      description: Recovery notification conversions retrieved.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/RecoveryNotificationConversion.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/recovery-notifications@{id}@conversions/get.php'
+    - lang: JavaScript
+      source:
+        $ref: '../code_samples/JavaScript/recovery-notifications@{id}@conversions/get.js'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/recovery-notifications@{id}@conversions/get.php

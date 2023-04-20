@@ -1,0 +1,48 @@
+type: object
+required:
+  - recoveryNotificationId
+  - transactionId
+properties:
+  id:
+    type: string
+    description: ID of the recovery notification.
+    readOnly: true
+    maxLength: 50
+    example: rn_0YV7DEJX80CDRAKVTV478ZNJDR
+  recoveryNotificationId:
+    type: string
+    description: Title of the recovery notification.
+    example: Reminder for transactions over 25 USD
+  customerId:
+    $ref: ../../schemas/CustomerId.yaml
+  transactionId:
+    description: Filters to determine which abandoned transactions to notify.
+    type: string
+  createdTime:
+    $ref: CreatedTime.yaml
+  updatedTime:
+    $ref: UpdatedTime.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - transaction
+            - customer
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
+    properties:
+      transaction:
+        type: object
