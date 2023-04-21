@@ -1,0 +1,35 @@
+content:
+  application/json:
+    schema:
+      properties:
+        paymentInstrumentId:
+          type: string
+          description: ID of the payment instrument.
+          maxLength: 50
+          example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
+        eventType:
+          type: string
+          description: Type of webhook event.
+          enum:
+            - payment-instrument-modified
+        _embedded:
+          type: object
+          properties:
+            paymentInstrument:
+              $ref: ../../schemas/PaymentInstruments/PaymentInstrument.yaml
+        _links:
+          type: array
+          description: Related links.
+          readOnly: true
+          items:
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - paymentInstrument
+description: Payment instrument webhook request body resource.

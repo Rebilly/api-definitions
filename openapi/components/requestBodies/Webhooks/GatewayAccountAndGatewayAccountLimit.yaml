@@ -3,11 +3,13 @@ content:
     schema:
       properties:
         gatewayAccountId:
-          description: ID of the gateway account.
           type: string
+          description: ID of the gateway account.
+          maxLength: 50
+          example: gw_acc_0YVCXMF26DDNKAERE5NW727S34
         eventType:
           type: string
-          description: Webhook event type.
+          description: Type of webhook event.
           enum:
             - gateway-account-limit-reached
         _embedded:
@@ -21,9 +23,16 @@ content:
         _links:
           type: array
           description: Related links.
-          minItems: 2
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/GatewayAccountLink.yaml
-              - $ref: ../../schemas/Links/GatewayAccountLimitLink.yaml
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - gatewayAccount
+                  - gatewayAccountLimit
 description: Gateway account limit reached body resource.

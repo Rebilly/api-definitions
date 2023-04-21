@@ -1,33 +1,81 @@
-allOf:
-  - $ref: Common/CommonProduct.yaml
-  - properties:
-      taxCategoryId:
-        description: |-
-          Tax category of the product.
-          For a complete list of supported tax categories, see [TaxJar sales tax API reference](https://developers.taxjar.com/api/reference/#get-list-tax-categories).
-          If none of the tax categories from the list are applicable for your product, use the general tax category `00000`.
-        type: string
-        example: '00000'
-      accountingCode:
-        description: Accounting code of the product.
-        type: string
-        example: '4010'
-      recognition:
-        type: object
+type: object
+required:
+  - name
+description: |-
+  Products are the items that your business sells.
+  Products include digital goods, services, and physical goods.
+  Products appear on invoice line items.
+  If you set a tax category identifier, taxes are calculated at invoice generation.
+  If the product is shippable, shipping costs are calculated at invoice generation.
+  Pricing and variations are set within plans.
+  For more information, see [Plans](https://www.rebilly.com/docs/dev-docs/api/tag/Plans/).
+properties:
+  id:
+    type: string
+    description: ID of the product.
+    readOnly: true
+    maxLength: 50
+    example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
+  name:
+    description: Name of the product.
+    type: string
+    maxLength: 255
+    example: Premium membership
+  unitLabel:
+    description: Unit label, such as per `seat` or per `unit`.
+    type: string
+    maxLength: 50
+    example: seat
+    default: unit
+  description:
+    description: Description of the product.
+    type: string
+    nullable: true
+    maxLength: 512
+  requiresShipping:
+    description: |-
+      Specifies if the product requires shipping.
+      If this value is `true`, shipping calculations are applied.
+    type: boolean
+    example: false
+    default: false
+  options:
+    description: |-
+      Product options such as color, size, and so forth.
+      Product option values are defined in plans.
+      For more information, see [Plans](https://www.rebilly.com/docs/dev-docs/api/tag/Plans/).
+    type: array
+    items:
+      type: string
+  taxCategoryId:
+    description: |-
+      Tax category of the product.
+      For a complete list of supported tax categories, see [TaxJar sales tax API reference](https://developers.taxjar.com/api/reference/#get-list-tax-categories).
+      If none of the tax categories from the list are applicable for your product, use the general tax category `00000`.
+    type: string
+    example: '00000'
+  accountingCode:
+    description: Accounting code of the product.
+    type: string
+    nullable: true
+    example: '4010'
+  recognition:
+    type: object
+    nullable: true
+    properties:
+      debitAccountId:
+        description: ID of the debit journal account.
         nullable: true
-        properties:
-          debitAccountId:
-            description: ID of the debit journal account.
-            nullable: true
-            type: string
-          creditAccountId:
-            description: ID of the credit journal account.
-            nullable: true
-            type: string
-      _links:
-        type: array
-        description: Related links.
-        readOnly: true
-        minItems: 1
-        items:
-          $ref: ./Links/SelfLink.yaml
+        type: string
+      creditAccountId:
+        description: ID of the credit journal account.
+        nullable: true
+        type: string
+  customFields:
+    $ref: ./ResourceCustomFields.yaml
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml

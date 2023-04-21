@@ -1,10 +1,11 @@
 type: object
 properties:
   id:
+    type: string
     description: ID of the credit memo.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: crmm_0YVCNN22TWC3G8H82QNPNVZCHG
   number:
     description: Auto-incrementing number based on the sequence of credit memos for any particular customer.
     readOnly: true
@@ -50,16 +51,18 @@ properties:
           List of invoices that the credit memo is allocated to.
 
           - To delete invoice allocations, send an empty invoice allocation array in the request.
-            Paid invoices cannot be modified or deleted.
+            Only `unpaid`, `partially-paid`, and `past-due` invoices can be deleted.
           - To modify invoice allocations, send a modified invoice allocation array in the request.
+            Only `unpaid`, `partially-paid`, and `past-due` invoices can be modified.
           - If you do not want to modify or delete invoice allocations, do not send an invoice allocation array in the request.
         items:
           type: object
           properties:
             invoiceId:
+              type: string
               description: ID of invoice to which the credit memo is allocated.
-              allOf:
-                - $ref: ../ResourceId.yaml
+              maxLength: 50
+              example: in_0YVF9605RKC62BP14NE2R7V2XT
             amount:
               description: |-
                 Amount of credit that is allocated from the credit memo to the invoice.
@@ -88,16 +91,17 @@ properties:
         - quantity
       properties:
         id:
+          type: string
           description: ID of the credit memo item.
           readOnly: true
-          allOf:
-            - $ref: ../ResourceId.yaml
+          maxLength: 50
+          example: crmm_itm_0YVCNN22TWC3G8H82QNPNVZCHG
         invoiceItemId:
           description: ID of the invoice item to which the credit item is referenced.
           nullable: true
           type: string
           maxLength: 50
-          example: 44433322-2c4y-483z-a0a9-158621f77a21
+          example: ii_0YVFDEQS2KCFTBN9HXWJFY55GV
         description:
           description: Description of the credit memo item.
           type: string
@@ -114,21 +118,21 @@ properties:
           format: double
           readOnly: true
         productId:
-          description: ID of the related product.
           type: string
+          description: ID of the related product.
           maxLength: 50
-          example: product-123
+          example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
         planId:
           description: ID of the related plan.
           type: string
           maxLength: 50
-          example: gold-plan
-        taxAmount:
-          description: Tax amount of the credit memo item.
-          type: number
-          format: double
-          default: 0.00
-          x-type: Money
+          example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+        tax:
+          type: object
+          description: Credit memo item tax.
+          nullable: true
+          allOf:
+            - $ref: ../Invoices/TaxItem.yaml
   status:
     type: string
     description: Status of the credit memo.
@@ -170,7 +174,8 @@ properties:
     default: 0.00
     x-type: Money
   taxAmount:
-    description: Tax amount of an invoice to credit.
+    description: Sum of items tax amount of an invoice to credit.
+    readOnly: true
     type: number
     format: double
     default: 0.00
@@ -199,10 +204,18 @@ properties:
     $ref: ../UpdatedTime.yaml
   _links:
     type: array
-    description: Related resource links.
+    description: Related links.
     readOnly: true
     items:
-      anyOf:
-        - $ref: ../../schemas/Links/SelfLink.yaml
-        - $ref: ../../schemas/Links/CustomerLink.yaml
-        - $ref: ../../schemas/Links/InvoiceLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - customer
+            - invoice

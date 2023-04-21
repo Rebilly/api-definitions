@@ -11,18 +11,22 @@ allOf:
         properties:
           merchantId:
             type: string
-            description: Merchant ID.
+            description: ID of the merchant.
           productId:
             type: string
-            description: Product ID.
+            description: ID of the product.
+            maxLength: 50
+            example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
           merchantPassword:
             type: string
             description: Merchant password.
             format: password
+            writeOnly: true
           merchantKey:
             type: string
             description: Merchant key.
             format: password
+            writeOnly: true
         required:
           - merchantId
           - productId

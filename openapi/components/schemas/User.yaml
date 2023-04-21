@@ -5,10 +5,11 @@ required:
   - lastName
 properties:
   id:
+    type: string
     description: ID of the user.
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    maxLength: 50
+    example: usr_0YVCEENYJ3D7Q9EN6BN16HA0G4
   email:
     description: Email address of the user.
     type: string
@@ -23,9 +24,11 @@ properties:
   businessPhone:
     description: User's business phone number.
     type: string
+    nullable: true
   mobilePhone:
     description: User's mobile phone number.
     type: string
+    nullable: true
   password:
     description: |-
       User's password.
@@ -49,8 +52,10 @@ properties:
     $ref: UpdatedTime.yaml
   loginTime:
     description: Date and time when the user last logged in.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    type: string
+    nullable: true
+    format: date-time
+    readOnly: true
   reportingCurrency:
     description: |-
       User's currency code in ISO 4217 format.
@@ -64,13 +69,13 @@ properties:
     items:
       type: string
   totpRequired:
-    description: Specifies whether two-factor authentification is enabled for the user.
+    description: Specifies if two-factor authentication is enabled for the user.
     type: boolean
   totpSecret:
-    description: User's Time-based One-Time Password (TOTP) key for the authentification application, if TOTP is enabled..
+    description: User's Time-based One-Time Password (TOTP) key for the authentication application, if TOTP is enabled..
     type: string
   totpUrl:
-    description: QR-code link that redirects the user to the authentification application, if TOTP is enabled.
+    description: QR-code link that redirects the user to the authentication application, if TOTP is enabled.
     type: string
     format: url
   status:
@@ -91,6 +96,7 @@ properties:
       User preferences, such as: timezone, language, and more.
       This is an object with custom properties.
     type: object
+    nullable: true
   roleIds:
     type: array
     description: |-
@@ -102,9 +108,4 @@ properties:
   allowedIps:
     $ref: ./AllowedIps.yaml
   _links:
-    type: array
-    description: Related links.
-    readOnly: true
-    minItems: 1
-    items:
-      $ref: ./Links/SelfLink.yaml
+    $ref: ./SelfLink.yaml

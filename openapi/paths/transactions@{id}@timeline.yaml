@@ -8,11 +8,13 @@ get:
   summary: Retrieve transaction timeline messages
   operationId: GetTransactionTimelineCollection
   x-sdk-operation-name: getAllTimelineMessages
-  description: Retrieve a list of transaction timeline messages.
+  description: Retrieves a list of transaction timeline messages.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
     - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
       description: List of transaction timeline messages retrieved.
@@ -42,20 +44,20 @@ post:
     - Core
   tags:
     - Transactions timeline
-  summary: Create a transaction Timeline comment
+  summary: Create a transaction timeline comment
   operationId: PostTransactionTimeline
   x-sdk-operation-name: createTimelineComment
-  description: Create a transaction Timeline comment.
+  description: Creates a transaction timeline comment.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/Timelines/TransactionTimeline.yaml
-    description: Transaction Timeline resource.
+    description: Transaction timeline resource.
     required: true
   responses:
     '201':
-      description: Transaction Timeline comment created.
+      description: Transaction timeline comment created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml

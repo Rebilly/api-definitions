@@ -1,40 +1,61 @@
-allOf:
-  - $ref: ../PlanPriceFormula.yaml
-  - type: object
-    required:
-      - brackets
-    properties:
-      brackets:
-        description: |-
-          Price brackets, along with the price formula,
-          is used to calculate the amount to charge for the product on this plan on the invoice.
+type: object
+required:
+  - brackets
+  - formula
+properties:
+  formula:
+    type: string
+    description: |-
+      Price formula that determines which algorithm is used to calculate the invoice price based on the following factors:
 
-          The "volume" example:
+      - Quantity in the order.
+        This value may be variable if you are charging based on usage.
+        If you are not charging based on usage,
+        this value is determined when an order is created.
 
-          Price per apple | Max quantity | Description
-          ----------------|--------------|------------
-          $5              | 1            | 1
-          $4              | 5            | 2 to 5
-          $3              | null         | 6 or more
+      - Price of the quantity range.
+        Some formulas set a price based on defined product quantity ranges.
 
+      For more information, see [Price formulas](https://www.rebilly.com/docs/billing/pricing-formulas/).
+    enum:
+      - volume
+  brackets:
+    description: |-
+      Use this formula to charge for units that are sold in bulk, or volume ranges.
+      This formula enables customers to pays less per unit when they buy a large volume of units.
+      Unit cost is based on the highest volume range, and does not include lower volume range pricing.
 
-          If someone bought 1 apple, it would be $5.
+      For example, a company sells t-shirts in the following volume ranges:
 
-          If someone bought 2 apples, it would be $8. For 2 to 5 apples, the price is $4 per apple.
-        type: array
-        minItems: 1
-        items:
-          type: object
-          properties:
-            price:
-              description: If the price is 0, it is free.
-              type: number
-              format: double
-              example: 99.95
-            maxQuantity:
-              description: |-
-                If the value is `null`, it's assumed to be infinite.  It starts at the end of the previous bracket.
+      Price per unit| Max quantity | Description
+      --------------|--------------|------------
+      $10           | 1            | 1 t-shirt
+      $8            | 5            | 2 to 5 t-shirts
+      $4            | null         | 6 or more t-shirts
 
-                If there is no previous bracket, it starts at 1.
-              type: integer
-              example: 1
+      - If a customer buys 1 unit, they pay $10.
+      - If a customer buys 3 units, they pay $24 per unit, which is $8 per unit.
+      - If a customer buys 10 units, they pay $40, which is $4 per unit.
+    type: array
+    minItems: 1
+    items:
+      type: object
+      properties:
+        price:
+          description: |-
+            Price of the quantity range.
+            If the value of this field is `0`, the product is free.
+          type: number
+          format: double
+          example: 99.95
+        maxQuantity:
+          description: |-
+            Maximum permitted unit quantity.
+            If this value is `null`, no limit is in place.
+
+            This value starts from the end of the previous quantity range.
+            If there are no previous quantity ranges,
+            this value starts at 1.
+
+          type: integer
+          example: 1

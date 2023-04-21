@@ -4,10 +4,11 @@ required:
   - startSendingTime
 properties:
   id:
+    type: string
     description: ID of the broadcast message.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: mail_bcst_0YV8XW5EXWDVEAP64XP8CY2X40
   filter:
     type: string
     description: |-
@@ -131,9 +132,4 @@ properties:
   updatedTime:
     $ref: ../UpdatedTime.yaml
   _links:
-    type: array
-    description: Related resource links.
-    readOnly: true
-    minItems: 1
-    items:
-      $ref: ../Links/SelfLink.yaml
+    $ref: ../SelfLink.yaml

@@ -10,11 +10,12 @@ allOf:
         properties:
           clientId:
             type: string
-            description: Payr client ID.
+            description: ID of the Payr client.
           secretWord:
             type: string
             description: Payr secret word.
             format: password
+            writeOnly: true
           apiUserId:
             type: string
             description: |-
@@ -26,6 +27,7 @@ allOf:
               Hash of the password for the Alliance API.
               This API is used for transaction reporting.
             format: password
+            writeOnly: true
         required:
           - clientId
           - secretWord

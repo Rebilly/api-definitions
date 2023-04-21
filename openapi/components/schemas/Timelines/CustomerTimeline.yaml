@@ -1,10 +1,11 @@
 type: object
 properties:
   id:
+    type: string
     description: ID of the customer timeline custom event.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: tmln_0YV8Q9WEF5DTA8HFXS27D1G6GC
   type:
     description: Type of timeline message.
     type: string
@@ -70,6 +71,8 @@ properties:
       - primary-address-changed
       - quickbooks-customer-created
       - quickbooks-customer-task-failed
+      - quote-order-attached
+      - quote-rejected
       - refund-was-reflected-in-invoices
       - subscription-paused
       - subscription-resumed
@@ -122,9 +125,4 @@ properties:
     allOf:
       - $ref: ../ServerTimestamp.yaml
   _links:
-    type: array
-    description: Related resource links.
-    readOnly: true
-    minItems: 1
-    items:
-      $ref: ../Links/SelfLink.yaml
+    $ref: ../SelfLink.yaml

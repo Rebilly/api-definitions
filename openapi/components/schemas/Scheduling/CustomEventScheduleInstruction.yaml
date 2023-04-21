@@ -6,12 +6,7 @@ discriminator:
     date-interval: ./Methods/date-interval.yaml
     day-of-month: ./Methods/day-of-month.yaml
     day-of-week: ./Methods/day-of-week.yaml
-properties:
-  method:
-    type: string
-    enum:
-      - date-interval
-      - day-of-month
-      - day-of-week
-required:
-  - method
+anyOf:
+  - $ref: ./Methods/date-interval.yaml
+  - $ref: ./Methods/day-of-month.yaml
+  - $ref: ./Methods/day-of-week.yaml

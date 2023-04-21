@@ -1,4 +1,5 @@
 type: object
+description: Pricing information.
 discriminator:
   propertyName: formula
   mapping:
@@ -7,26 +8,9 @@ discriminator:
     stairstep: ./Formulas/stairstep.yaml
     tiered: ./Formulas/tiered.yaml
     volume: ./Formulas/volume.yaml
-required:
-  - formula
-properties:
-  formula:
-    type: string
-    description: |-
-      Price formula determines what algorithm is used to calculate the
-      invoice price based on a few factors,
-
-      - the quantity in the order (which may be variable if usage
-      pricing, otherwise determined when creating the order)
-
-      - the price brackets data
-
-
-      To determine which formula is correct, please [see the price formula
-      documentation](https://www.rebilly.com/docs/billing/pricing-formulas/).
-    enum:
-      - fixed-fee
-      - flat-rate
-      - stairstep
-      - tiered
-      - volume
+oneOf:
+  - $ref: ./Formulas/fixed-fee.yaml
+  - $ref: ./Formulas/flat-rate.yaml
+  - $ref: ./Formulas/stairstep.yaml
+  - $ref: ./Formulas/tiered.yaml
+  - $ref: ./Formulas/volume.yaml

@@ -6,8 +6,10 @@ content:
           description: ID of the recognized revenue.
           type: string
         invoiceId:
-          description: ID of the invoice.
           type: string
+          description: ID of the invoice.
+          maxLength: 50
+          example: in_0YVF9605RKC62BP14NE2R7V2XT
         itemId:
           description: ID of the invoice item.
           type: string
@@ -19,7 +21,7 @@ content:
           $ref: ../../schemas/CurrencyCode.yaml
         eventType:
           type: string
-          description: Webhook event type.
+          description: Type of webhook event.
           enum:
             - invoice-revenue-recognized
         _embedded:
@@ -30,9 +32,16 @@ content:
               $ref: ../../schemas/Invoices/Invoice.yaml
         _links:
           type: array
-          description: Related resource links.
-          minItems: 1
+          description: Related links.
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/InvoiceLink.yaml
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - invoice
 description: Invoice webhook request body resource.

@@ -1,0 +1,35 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Storefront
+  tags:
+    - Orders
+  summary: Pause an order
+  operationId: StorefrontPostOrderPause
+  x-sdk-operation-name: pause
+  security:
+    - CustomerJWT: []
+  description: Pauses an order with a specified ID.
+  requestBody:
+    $ref: ../../components/requestBodies/storefront/PostOrderPause.yaml
+  responses:
+    201:
+      description: Order paused.
+      headers:
+        Location:
+          $ref: ../../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/StorefrontOrder.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml
+    409:
+      $ref: ../../components/responses/Conflict.yaml
+    422:
+      $ref: ../../components/responses/ValidationError.yaml

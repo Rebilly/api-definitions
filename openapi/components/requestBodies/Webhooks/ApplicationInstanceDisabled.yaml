@@ -5,12 +5,12 @@ content:
         organizationId:
           $ref: ../../schemas/Organizations/OrganizationId.yaml
         applicationId:
-          description: Unique application identifier string.
+          description: Unique application ID.
           allOf:
             - $ref: ../../schemas/ResourceId.yaml
         eventType:
           type: string
-          description: Webhook event type.
+          description: Type of webhook event.
           enum:
             - application-instance-disabled
         _embedded:
@@ -21,9 +21,16 @@ content:
               $ref: ../../schemas/Applications/Application.yaml
         _links:
           type: array
-          description: Related resource links.
-          minItems: 1
+          description: Related links.
           items:
-            anyOf:
-              - $ref: ../../schemas/Links/ApplicationLink.yaml
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - application
 description: Application instance disabled webhook request body resource.

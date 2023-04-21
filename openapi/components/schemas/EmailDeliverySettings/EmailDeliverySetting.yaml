@@ -4,10 +4,11 @@ required:
   - name
 properties:
   id:
+    type: string
     description: ID of the email delivery setting.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: mail_dst_0YVCNQV8PSCERAJ7N1V4WWPZN2
   from:
     description: |-
       Email address of the sender.
@@ -30,7 +31,7 @@ properties:
       - verified
   credentialId:
     type: string
-    description: SMTP or Email Service Provider (ESP) credential ID.
+    description: ID of the SMTP or Email Service Provider (ESP) credential.
     example: b120c2ca-6c2b-4690-9dff-3b0d87852dc7
   provider:
     readOnly: true
@@ -46,16 +47,11 @@ properties:
     example: rebilly
   isDefault:
     type: boolean
-    description: Specifies whether the email delivery setting is used by default.
+    description: Specifies if the email delivery setting is used by default.
     default: false
   createdTime:
     $ref: ../CreatedTime.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml
   _links:
-    type: array
-    description: Related resource links.
-    readOnly: true
-    minItems: 1
-    items:
-      $ref: ../Links/SelfLink.yaml
+    $ref: ../SelfLink.yaml

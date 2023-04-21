@@ -1,0 +1,34 @@
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        description:
+          description: Description of the pause reason in free form.
+          type: string
+          maxLength: 255
+          nullable: true
+        effectiveTime:
+          description: |-
+            Date and time when the service period pauses.
+
+            This time must be later than the current time.
+            If this time is earlier then the current time, the current time is used.
+
+            If this field is omitted, this value defaults to the current time.
+          type: string
+          format: date-time
+          nullable: true
+        endTime:
+          description: |-
+            Date and time when the pause ends and the subscription resumes billing.
+
+            To resume a subscription from this point in time,
+            use the current time or an earlier time.
+            If `endTime` is earlier then the current time, the current time is used.
+            If this field is empty, the subscription is indefinitely paused.
+          type: string
+          format: date-time
+          nullable: true
+description: Order resource.
+required: true

@@ -9,7 +9,10 @@ required:
   - creditAccountId
 properties:
   id:
-    $ref: ../ResourceId.yaml
+    type: string
+    description: Unique resource ID.
+    maxLength: 50
+    example: jrn_rec_0YVCXV2HE5DBT89QV7RXSJEZQ4
   journalEntryId:
     description: ID of the journal entry.
     readOnly: true
@@ -17,12 +20,18 @@ properties:
   customerId:
     description: ID of the customer.
     type: string
+    maxLength: 50
+    example: cus_0YV7DDSDD1C8DA64KHH2W33CPF
   invoiceId:
+    type: string
     description: ID of the invoice.
-    type: string
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
   invoiceItemId:
-    description: ID of the invoice item.
     type: string
+    description: ID of the invoice item.
+    maxLength: 50
+    example: ii_0YVFDEQS2KCFTBN9HXWJFY55GV
   type:
     type: string
     readOnly: true
@@ -59,15 +68,15 @@ properties:
     readOnly: true
     properties:
       customer:
-        $ref: ../Customer.yaml
+        type: object
       invoice:
-        $ref: ../Invoices/Invoice.yaml
+        type: object
       invoiceItem:
-        $ref: ../Invoices/InvoiceItem.yaml
+        type: object
       debitAccount:
-        $ref: ./JournalAccount.yaml
+        type: object
       creditAccount:
-        $ref: ./JournalAccount.yaml
+        type: object
   _links:
     type: array
     description: Related links.

@@ -10,11 +10,12 @@ allOf:
         properties:
           authenticateId:
             type: string
-            description: PaymenTechnologies authenticate ID.
+            description: ID of the PaymenTechnologies authenticate.
           authenticatePw:
             type: string
             description: PaymenTechnologies authenticate password.
             format: password
+            writeOnly: true
           publicKey:
             type: string
             description: PaymenTechnologies API public key.
@@ -22,10 +23,12 @@ allOf:
             type: string
             description: PaymenTechnologies API secret key.
             format: password
+            writeOnly: true
           apiKey:
             type: string
             description: PaymenTechnologies API key required for query operations.
             format: password
+            writeOnly: true
         required:
           - authenticateId
           - authenticatePw

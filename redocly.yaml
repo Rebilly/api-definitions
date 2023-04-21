@@ -122,6 +122,7 @@ rules:
       - logout
       - onboarding
       - timeline
+      - edd-timeline
       - forgot-password
       - history
       - shippo
@@ -176,7 +177,7 @@ rules:
       sortOrder:
         direction: asc
         property: name
-    severity: warn
+    severity: error
 
   assert/headers-include-example:
     subject:
@@ -301,7 +302,7 @@ rules:
       defined: true
       minLength: 10
       maxLength: 50
-      pattern: /^(Retrieve|Create|Delete|Upsert|Preview|Send|Update|Register|Destroy|Trigger|Start|Stop|Set|Check|Enable|Disable|Close|Request|Resend|Verify|List|Patch|Activate|Refund|Query|Validate|Tag|Untag|Issue|Reactivate|Cancel|Pause|Change|Void|Search|Get|Modify|Finish|Schedule|Read|Reset|Make|Deactivate|Perform|Review|Reject|Accept|Apply|Partially|Re|Abandon|Download|Merge|Specify|Redeem|Exchange|Log).*[^\.]$/
+      pattern: /^(Retrieve|Create|Delete|Upsert|Preview|Send|Update|Register|Destroy|Trigger|Start|Stop|Skip|Set|Check|Enable|Disable|Close|Request|Resend|Verify|List|Patch|Activate|Refund|Query|Validate|Tag|Untag|Issue|Reactivate|Cancel|Pause|Change|Void|Search|Get|Modify|Finish|Schedule|Read|Reset|Make|Deactivate|Perform|Review|Reject|Accept|Apply|Partially|Re|Abandon|Download|Merge|Specify|Redeem|Exchange|Log).*[^\.]$/
 
   ### Description rules
   assert/tag-description:
@@ -405,6 +406,16 @@ rules:
     assertions:
       disallowed:
         - x-internal
+
+  assert/embedded-is-object:
+    severity: error
+    subject:
+      type: Schema
+      property: type
+      filterInParentKeys:
+        - _embedded
+    assertions:
+      const: object
 
       # Need to account for arrays, etc...
   # assert/mediatype-schema-ref-pattern:

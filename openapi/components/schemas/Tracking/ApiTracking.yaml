@@ -1,19 +1,18 @@
 type: object
-description: Tracking API Requests.
+description: API request tracking.
 readOnly: true
 properties:
   id:
-    allOf:
-      - $ref: ../ResourceId.yaml
+    $ref: ../ResourceId.yaml
   status:
     type: integer
     x-sortable: true
-    description: HTTP response code.
+    description: Response code of the HTTP request.
   url:
     type: string
     x-basic: true
     x-sortable: true
-    description: API request address.
+    description: URL of the HTTP request.
   route:
     type: string
     x-sortable: true
@@ -21,7 +20,7 @@ properties:
     example: '/customers/{param}'
   method:
     type: string
-    description: HTTP method.
+    description: HTTP method of the API request.
     enum:
       - HEAD
       - GET
@@ -33,38 +32,42 @@ properties:
   request:
     type: string
     x-sortable: true
-    description: Request JSON-string.
+    description: Request body of the HTTP request.
   response:
     type: string
     x-sortable: true
-    description: Response JSON-string.
+    description: Response body of the HTTP request.
   requestHeaders:
     $ref: ../HttpHeaders.yaml
   responseHeaders:
     $ref: ../HttpHeaders.yaml
   user:
     type: object
-    description: User who has made a request.
+    description: User who made the request.
     readOnly: true
     properties:
       userId:
         x-sortable: true
-        allOf:
-          - $ref: ../ResourceId.yaml
+        type: string
+        description: ID of the user.
+        maxLength: 50
+        example: usr_0YVCEENYJ3D7Q9EN6BN16HA0G4
       apiKeyId:
-        allOf:
-          - $ref: ../ResourceId.yaml
+        type: string
+        description: ID of the API tracking log.
+        maxLength: 50
+        example: api_key_0YV7JQMY6ED2FBE58BMFHBWBZH
       email:
-        description: User email.
+        description: Email address of the user.
         type: string
         format: email
         x-sortable: true
       firstName:
-        description: User first name.
+        description: First name of the user.
         type: string
         x-sortable: true
       lastName:
-        description: User last name.
+        description: Last name of the user.
         type: string
         x-sortable: true
       ipAddress:
@@ -74,15 +77,19 @@ properties:
         description: Client IP address.
         format: ipv4
       userAgent:
-        description: Software that is acting on behalf of a user.
+        description: Software that is acting on behalf of the user.
         type: string
         x-sortable: true
       fingerprint:
-        description: User device fingerprint hash.
+        description: |-
+          User's device fingerprint hash.
+          A device fingerprint is a unique token that is used to identify the user.
+          The device fingerprint is generated based on device attributes,
+          such as: hardware, software, IP address, language, browser, and more.
         type: string
         x-sortable: true
       isSupport:
-        description: If user from support.
+        description: Specifies if the API request is completed by a Rebilly Support Team member.
         type: boolean
         x-sortable: true
   ipAddress:
@@ -105,14 +112,18 @@ properties:
     x-sortable: true
     x-basic: true
     description: Request duration in milliseconds.
+  organizationId:
+    $ref: ../Organizations/OrganizationId.yaml
   createdTime:
     $ref: ../CreatedTime.yaml
   updatedTime:
     $ref: ../UpdatedTime.yaml
   _links:
-    type: array
-    description: Related resource links.
+    $ref: ../SelfLink.yaml
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
     readOnly: true
-    minItems: 1
-    items:
-      $ref: ../Links/SelfLink.yaml
+    properties:
+      organization:
+        type: object

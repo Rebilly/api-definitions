@@ -1,23 +1,36 @@
-allOf:
-  - $ref: ../PlanPriceFormula.yaml
-  - type: object
-    required:
-      - price
-    properties:
-      price:
-        description: |-
-          Flat-rate pricing is represented in a simple price per unit.
-          Some examples:
+type: object
+required:
+  - price
+  - formula
+properties:
+  formula:
+    type: string
+    description: |-
+      Price formula that determines which algorithm is used to calculate the invoice price based on the following factors:
 
-          - $30 per unit
-          - $0.10 per transaction
-          - $50 per period
+      - Quantity in the order.
+        This value may be variable if you are charging based on usage.
+        If you are not charging based on usage,
+        this value is determined when an order is created.
 
-          If the price is 0, it's free.
-        type: number
-        format: double
-        example: 99.95
-      maxQuantity:
-        description: If the value is `null`, it is assumed to be infinite.
-        type: integer
-        example: 1
+      - Price of the quantity range.
+        Some formulas set a price based on defined product quantity ranges.
+
+      For more information, see [Price formulas](https://www.rebilly.com/docs/billing/pricing-formulas/).
+    enum:
+      - flat-rate
+  price:
+    description: |-
+      Use this formula to charge a flat fee per unit.
+      For example, $0.10 for each transaction or $4 per unit.
+
+      If the value of this field is `0`, the product is free.
+    type: number
+    format: double
+    example: 99.95
+  maxQuantity:
+    description: |-
+      Maximum permitted unit quantity.
+      If this value is `null`, no limit is in place.
+    type: integer
+    example: 1

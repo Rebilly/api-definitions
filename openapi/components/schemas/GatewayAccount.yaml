@@ -37,6 +37,7 @@ discriminator:
     CCAvenue: ./GatewayAccountConfig/CCAvenue.yaml
     Chase: ./GatewayAccountConfig/Chase.yaml
     CheckoutCom: ./GatewayAccountConfig/CheckoutCom.yaml
+    Chillstock: ./GatewayAccountConfig/Chillstock.yaml
     Circle: ./GatewayAccountConfig/Circle.yaml
     Citadel: ./GatewayAccountConfig/Citadel.yaml
     Clearhaus: ./GatewayAccountConfig/Clearhaus.yaml
@@ -61,6 +62,7 @@ discriminator:
     EMS: ./GatewayAccountConfig/EMS.yaml
     ePay: ./GatewayAccountConfig/ePay.yaml
     Euteller: ./GatewayAccountConfig/Euteller.yaml
+    Ezeebill: ./GatewayAccountConfig/Ezeebill.yaml
     eZeeWallet: ./GatewayAccountConfig/eZeeWallet.yaml
     ezyEFT: ./GatewayAccountConfig/ezyEFT.yaml
     FinTecSystems: ./GatewayAccountConfig/FinTecSystems.yaml
@@ -104,20 +106,24 @@ discriminator:
     Neteller: ./GatewayAccountConfig/Neteller.yaml
     NGenius: ./GatewayAccountConfig/NGenius.yaml
     NinjaWallet: ./GatewayAccountConfig/NinjaWallet.yaml
+    NordikCoin: ./GatewayAccountConfig/NordikCoin.yaml
     NOWPayments: ./GatewayAccountConfig/NOWPayments.yaml
     NuaPay: ./GatewayAccountConfig/NuaPay.yaml
     OchaPay: ./GatewayAccountConfig/OchaPay.yaml
     Onlineueberweisen: ./GatewayAccountConfig/Onlineueberweisen.yaml
     OnRamp: ./GatewayAccountConfig/OnRamp.yaml
+    Orbital: ./GatewayAccountConfig/Orbital.yaml
     Pagadito: ./GatewayAccountConfig/Pagadito.yaml
     Pagsmile: ./GatewayAccountConfig/Pagsmile.yaml
     Panamerican: ./GatewayAccountConfig/Panamerican.yaml
     PandaGateway: ./GatewayAccountConfig/PandaGateway.yaml
+    ParamountCommerce: ./GatewayAccountConfig/ParamountCommerce.yaml
     ParamountEft: ./GatewayAccountConfig/ParamountEft.yaml
     ParamountInterac: ./GatewayAccountConfig/ParamountInterac.yaml
     Pay4Fun: ./GatewayAccountConfig/Pay4Fun.yaml
     PayCash: ./GatewayAccountConfig/PayCash.yaml
     PayClub: ./GatewayAccountConfig/PayClub.yaml
+    PayEcards: ./GatewayAccountConfig/PayEcards.yaml
     Paynote: ./GatewayAccountConfig/Paynote.yaml
     PayPal: ./GatewayAccountConfig/PayPal.yaml
     Payeezy: ./GatewayAccountConfig/Payeezy.yaml
@@ -128,6 +134,7 @@ discriminator:
     Paymero: ./GatewayAccountConfig/Paymero.yaml
     Payper: ./GatewayAccountConfig/Payper.yaml
     Payr: ./GatewayAccountConfig/Payr.yaml
+    PayRetailers: ./GatewayAccountConfig/PayRetailers.yaml
     Paysafe: ./GatewayAccountConfig/Paysafe.yaml
     Paysafecard: ./GatewayAccountConfig/Paysafecard.yaml
     Paysafecash: ./GatewayAccountConfig/Paysafecash.yaml
@@ -188,10 +195,11 @@ discriminator:
     Zimpler: ./GatewayAccountConfig/Zimpler.yaml
 properties:
   id:
+    type: string
     description: ID of the payment gateway account.
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    maxLength: 50
+    example: gw_acc_0YVCXMF26DDNKAERE5NW727S34
   gatewayName:
     $ref: ./Gateways/GatewayName.yaml
   acquirerName:
@@ -266,28 +274,28 @@ properties:
     minimum: 300
     maximum: 16777215
   threeDSecure:
-    description: Specifies whether a gateway account allows 3D Secure.
+    description: Specifies if a gateway account allows 3D Secure.
     type: boolean
     default: false
   dynamicDescriptor:
-    description: Specifies whether a gateway allows dynamic descriptors.
+    description: Specifies if a gateway allows dynamic descriptors.
     type: boolean
     default: false
   digitalWallets:
     $ref: ./GatewayAccounts/DigitalWallets.yaml
   isDown:
-    description: Specifies whether a gateway is in a downtime period.
+    description: Specifies if a gateway is in a downtime period.
     type: boolean
     readOnly: true
   additionalFilters:
     description: |-
-      Additional filters used to determine whether the gateway account can be selected to process a transaction.
+      Additional filters used to determine if the gateway account can be selected to process a transaction.
 
       For example, the filter may place a maximum amount value on transaction.
       If a transaction exceeds this value, the gateway account is not used.
 
       For more information see,
-      [Using filters](https://api-reference.rebilly.com/#section/Using-filter-with-collections).
+      [Using filters](https://all-rebilly.redoc.ly/#section/Using-filter-with-collections).
     type: string
     example: amount:1..100;bin:411111,444433
   timeout:
@@ -303,7 +311,7 @@ properties:
     example: TwiX3f92k4AiBE27BzTbQ38hHjicBz_w
   sticky:
     description: |-
-      Specifies whether all future payments by the customer's payment instrument are processed by this gateway account.
+      Specifies if all future payments by the customer's payment instrument are processed by this gateway account.
 
       For more information, see [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
     type: boolean
@@ -347,10 +355,17 @@ properties:
     type: array
     description: Related links.
     readOnly: true
-    minItems: 1
     items:
-      anyOf:
-        - $ref: ./Links/SelfLink.yaml
-        - $ref: ./Links/OnBoardingUrlLink.yaml
-        - $ref: ./Links/DynamicIpnLink.yaml
-        - $ref: ./Links/StaticIpnLink.yaml
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - onBoardingUrl
+            - dynamicIpnUrl
+            - staticIpnUrl

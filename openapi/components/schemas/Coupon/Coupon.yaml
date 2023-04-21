@@ -5,10 +5,11 @@ required:
   - issuedTime
 properties:
   id:
-    description: Coupon identifier string. This value is also known as the coupon redemption code.
+    type: string
+    description: ID of the coupon. This value is also known as the coupon redemption code.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: cpn_0YVCNKF81GD778N4YNVGDJK558
   discount:
     $ref: ./Discount.yaml
   restrictions:
@@ -58,9 +59,4 @@ properties:
   updatedTime:
     $ref: ../UpdatedTime.yaml
   _links:
-    type: array
-    description: Related resource links.
-    readOnly: true
-    minItems: 1
-    items:
-      $ref: ../Links/SelfLink.yaml
+    $ref: ../SelfLink.yaml
