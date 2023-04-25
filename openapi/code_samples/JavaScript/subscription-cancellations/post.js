@@ -1,5 +1,5 @@
 const data = {
-    subscriptionId: 'subscription-id-to-delete',
+    subscriptionId: 'ord_01GYJPRKHBD6ZYHH897QCJMBS4',
     churnTime: '2020-06-10T13:55:51Z',
 }
 
