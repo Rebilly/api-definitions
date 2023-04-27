@@ -1,0 +1,22 @@
+description: Airwallex gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Airwallex credentials object.
+        properties:
+          clientId:
+            type: string
+            description: Airwallex client ID.
+          apiKey:
+            type: string
+            description: Airwallex API key.
+            format: password
+            writeOnly: true
+        required:
+          - clientId
+          - apiKey
