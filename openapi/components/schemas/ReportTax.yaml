@@ -1,0 +1,44 @@
+type: object
+properties:
+  data:
+    description: Tax data.
+    type: array
+    items:
+      type: object
+      properties:
+        country:
+          description: Country to which the tax is owed, in [ISO Alpha-2 code format](https://www.iso.org/obp/ui/#search/code/).
+          type: string
+          example: 'US'
+        state:
+          description: Postal abbreviated state name for the state to which the tax is owed.
+          type: string
+          example: 'TX'
+        county:
+          description: Name of county to which the tax is owed.
+          type: string
+          example: 'TRAVIS'
+        city:
+          description: Name of city to which the tax is owed.
+          type: string
+          example: 'AUSTIN'
+        stateAmount:
+          description: Amount of state tax.
+          type: number
+          format: double
+        countyAmount:
+          description: Amount of county tax.
+          type: number
+          format: double
+        cityAmount:
+          description: Amount of city tax.
+          type: number
+          format: double
+        specialDistrictAmount:
+          description: Amount of special district tax.
+          type: number
+          format: double
+        salesAmount:
+          description: Amount of total sales.
+          type: number
+          format: double
