@@ -6,7 +6,7 @@ get:
   summary: Retrieve AML settings
   operationId: GetAmlSettings
   x-sdk-operation-name: getAmlSettings
-  description: Retrieves AML settings.
+  description: Retrieves confidence level settings for customer AML match scenarios.
   responses:
     '200':
       description: AML settings retrieved.
@@ -28,7 +28,18 @@ put:
   summary: Update AML settings
   operationId: PutAmlSettings
   x-sdk-operation-name: putAmlSettings
-  description: Updates AML settings.
+  description: |-
+    Updates confidence level settings for customer AML match scenarios.
+
+    For each scenario, set the degree of confidence to assign when a matching country,
+    mismatching country, or no country is detected.
+
+    Confidence levels:
+    - **Very strong:** Very strong degree of confidence that the AML check is correct.
+    - **Strong:** Strong degree of confidence that the AML check is correct.
+    - **Medium:** Medium degree of confidence that the AML check is correct.
+    - **Weak:** Weak degree of confidence that the AML check is correct.
+    - **No confidence:** No confidence that the AML check is correct.
   requestBody:
     content:
       application/json:
