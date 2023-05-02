@@ -266,6 +266,12 @@ tags:
       This process is called dispute resolution.
       If the merchant is unable to represent the charge, the card issuer typically reverses the sale and adds fees on top of the charge.
       This process is called a chargeback.
+  - name: ELinks
+    description: |-
+      ELink stands for external link.
+      Use ELink operations to associate entities such as customers, invoices, transactions, journal accounts, journal entries and more with external services.
+
+      Using ELinks require an active service credential.
   - name: Email delivery settings
     description: |-
       Use email delivery settings to configure from which email address notifications and broadcast message are sent.
@@ -681,6 +687,10 @@ paths:
     $ref: ./paths/disputes.yaml
   '/disputes/{id}':
     $ref: './paths/disputes@{id}.yaml'
+  /elinks:
+    $ref: ./paths/elinks.yaml
+  /elinks/{resource}/{resourceId}/{service}:
+    $ref: ./paths/elinks@{resource}@{resourceId}@{service}.yaml
   /files:
     $ref: ./paths/files.yaml
   '/files/{id}':

@@ -1,0 +1,108 @@
+parameters:
+  - $ref: ../components/parameters/eLinkResource.yaml
+  - $ref: ../components/parameters/eLinkResourceId.yaml
+  - $ref: ../components/parameters/eLinkService.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - ELinks
+  summary: Retrieve an eLink
+  operationId: GetELink
+  x-sdk-operation-name: get
+  description: Retrieves an eLink with a specified resource, resource ID and a service name.
+  responses:
+    '200':
+      description: ELink retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ELink.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - ELinks
+  summary: Sync an eLink
+  operationId: PostELink
+  x-sdk-operation-name: sync
+  description: |-
+    Sync an eLink with a specified resource, resource ID and a service name.
+  responses:
+    '204':
+      description: ELink sync scheduled.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - ELinks
+  summary: Upsert an eLink
+  operationId: PutELink
+  x-sdk-operation-name: update
+  description: |-
+    Creates or updates an eLink with a specified resource, resource ID and a service name.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ELink.yaml
+    required: true
+  responses:
+    '200':
+      description: ELink updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ELink.yaml
+    '201':
+      description: ELink created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ELink.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+delete:
+  x-products:
+    - Core
+  tags:
+    - ELinks
+  summary: Delete an eLink
+  operationId: DeleteELink
+  x-sdk-operation-name: delete
+  description: |-
+    Deletes an eLink with a specified resource, resource ID and a service name.
+  responses:
+    '204':
+      description: ELink deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
