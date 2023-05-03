@@ -25,6 +25,24 @@ properties:
       - $ref: ../FilterString.yaml
   formula:
     $ref: ./FeeFormula.yaml
+  settlementSettings:
+    description: |-
+      Fee settlement settings.
+      This value overrides gateway account financial settings of the transaction.
+    type: object
+    nullable: true
+    required:
+      - currency
+      - period
+    properties:
+      currency:
+        description: Fee settlement currency.
+        allOf:
+          - $ref: ../CurrencyCode.yaml
+      period:
+        description: Fee settlement period.
+        allOf:
+          - $ref: SettlementPeriod.yaml
   createdTime:
     $ref: ../CreatedTime.yaml
   updatedTime:
