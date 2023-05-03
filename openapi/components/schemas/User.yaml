@@ -24,9 +24,11 @@ properties:
   businessPhone:
     description: User's business phone number.
     type: string
+    nullable: true
   mobilePhone:
     description: User's mobile phone number.
     type: string
+    nullable: true
   password:
     description: |-
       User's password.
@@ -50,8 +52,10 @@ properties:
     $ref: UpdatedTime.yaml
   loginTime:
     description: Date and time when the user last logged in.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    type: string
+    nullable: true
+    format: date-time
+    readOnly: true
   reportingCurrency:
     description: |-
       User's currency code in ISO 4217 format.
@@ -92,6 +96,7 @@ properties:
       User preferences, such as: timezone, language, and more.
       This is an object with custom properties.
     type: object
+    nullable: true
   roleIds:
     type: array
     description: |-

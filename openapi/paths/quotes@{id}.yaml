@@ -1,0 +1,72 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Quotes
+  summary: Retrieve a quote
+  operationId: GetQuote
+  x-sdk-operation-name: get
+  description: Retrieves a quote with a specified ID.
+  parameters:
+    - $ref: ../components/parameters/mediaTypeJsonPdf.yaml
+    - $ref: ../components/parameters/collectionExpand.yaml
+  responses:
+    '200':
+      description: Quote retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Quotes/Quote.yaml
+        application/pdf:
+          schema:
+            $ref: ../components/schemas/Quotes/Quote.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Quotes
+  summary: Upsert a quote
+  operationId: PutQuote
+  x-sdk-operation-name: update
+  description: |-
+    Creates or updates a quote with a specified ID.
+
+    The update operation can only be used for quotes with a `status` of `draft`.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Quotes/Quote.yaml
+    required: true
+  responses:
+    '200':
+      description: Quote updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Quotes/Quote.yaml
+    '201':
+      description: Quote created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Quotes/Quote.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

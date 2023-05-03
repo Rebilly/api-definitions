@@ -4,24 +4,28 @@ required:
   - churnTime
 properties:
   id:
+    type: string
     description: ID of the cancellation.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: ord_cnl_0YVJ5XVQM9CDP8248ZQX0RDMKV
   subscriptionId:
+    type: string
     description: ID of the canceled subscription order.
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
   proratedInvoiceId:
+    type: string
     description: ID of the invoice on which the cancellation proration is calculated.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
   appliedInvoiceId:
+    type: string
     description: ID of the invoice on which the cancellation fees or credits are applied.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
   canceledBy:
     description: Specifies who initiated the cancellation.
     type: string

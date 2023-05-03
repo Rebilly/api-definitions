@@ -16,3 +16,27 @@ allOf:
             writeOnly: true
         required:
           - apiKey
+      settings:
+        type: object
+        description: Orbital settings object.
+        properties:
+          targetCurrency:
+            description: Currency to which the received cryptocurrency is converted.
+            type: string
+            enum:
+              - USD
+              - EUR
+              - GBP
+          mainCryptoCurrency:
+            description: Blockchain network to be used.
+            type: string
+            enum:
+              - ETH
+              - SOL
+              - TRX
+          logoImageUrl:
+            description: Logo image in PNG or SVG format to be displayed on the deposit screen.
+            type: string
+          productImageUrl:
+            description: Product image in JPEG format to be displayed on the deposit screen.
+            type: string

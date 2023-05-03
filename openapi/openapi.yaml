@@ -157,6 +157,8 @@ tags:
       Create and manage cashier requests and manage strategies that determine the deposit amounts to display on the page.
       Rebilly hosted cashiers provide a secure and compliant way to deposit funds.
       Cashier forms are customizable, and use fully responsive design, built-in error messaging and validation.
+
+      > **Important:** These operations are experimental and may change.
   - name: Checkout forms
     description: |-
       Use these operations to create and manage checkout forms.
@@ -462,6 +464,16 @@ tags:
     description: |-
       Use these operations to manage purchases.
       Purchases are transactions that have been executed related to the purchase of goods or services.
+  - name: Quotes
+    description: |-
+      Use quote operations to create and manage quotations.
+      Quotations describe the cost of goods or services to potential customers before they commit to a purchase.
+      A quote contains an initial invoice preview that can be accepted to become an order.
+
+      A quote can contain subscription and one-time sale items.
+      When a quote contains one or more subscription items, it is a subscription order quote.
+  - name: Quotes timeline
+    description: Use quote timelines to maintain an audit trail of changes and activity for each quote.
   - name: Reports
     description: Use reports operations to retrieve summary information about your customers, subscriptions, transactions, and more.
   - name: Reset password
@@ -583,6 +595,8 @@ x-tagGroups:
       - Plans
       - Products
       - Coupons
+      - Quotes
+      - Quotes timeline
       - Shipping rates
       - Orders timeline
       - Invoices timeline
@@ -609,6 +623,8 @@ paths:
     $ref: './paths/aml-checks@{id}.yaml'
   '/aml-checks/{id}/review':
     $ref: './paths/aml-checks@{id}@review.yaml'
+  '/aml-settings':
+    $ref: './paths/aml-settings.yaml'
   /attachments:
     $ref: ./paths/attachments.yaml
   '/attachments/{id}':
@@ -771,6 +787,24 @@ paths:
     $ref: ./paths/products.yaml
   '/products/{id}':
     $ref: './paths/products@{id}.yaml'
+  /quotes:
+    $ref: ./paths/quotes.yaml
+  /quotes/{id}:
+    $ref: ./paths/quotes@{id}.yaml
+  /quotes/{id}/accept:
+    $ref: ./paths/quotes@{id}@accept.yaml
+  /quotes/{id}/cancel:
+    $ref: ./paths/quotes@{id}@cancel.yaml
+  /quotes/{id}/issue:
+    $ref: ./paths/quotes@{id}@issue.yaml
+  /quotes/{id}/recall:
+    $ref: ./paths/quotes@{id}@recall.yaml
+  /quotes/{id}/reject:
+    $ref: ./paths/quotes@{id}@reject.yaml
+  /quotes/{id}/timeline:
+    $ref: ./paths/quotes@{id}@timeline.yaml
+  /quotes/{id}/timeline/{messageId}:
+    $ref: ./paths/quotes@{id}@timeline@{messageId}.yaml
   '/ready-to-pay':
     $ref: ./paths/ready-to-pay.yaml
   /search:
@@ -1109,6 +1143,8 @@ paths:
     $ref: ./paths/reports@subscription-cancellation.yaml
   /experimental/reports/subscription-renewal:
     $ref: ./paths/reports@subscription-renewal.yaml
+  /experimental/reports/tax:
+    $ref: ./paths/reports@tax.yaml
   /experimental/reports/time-series-transaction:
     $ref: ./paths/reports@time-series-transaction.yaml
   /experimental/reports/transactions-time-dispute:
@@ -1185,6 +1221,12 @@ paths:
     $ref: paths/storefront/purchase.yaml
   '/storefront/preview-purchase':
     $ref: paths/storefront/preview-purchase.yaml
+  '/storefront/quotes/{id}':
+    $ref: paths/storefront/quotes@{id}.yaml
+  '/storefront/quotes/{id}/accept':
+    $ref: paths/storefront/quotes@{id}@accept.yaml
+  '/storefront/quotes/{id}/reject':
+    $ref: paths/storefront/quotes@{id}@reject.yaml
   '/storefront/ready-to-pay':
     $ref: paths/storefront/ready-to-pay.yaml
   '/storefront/register':

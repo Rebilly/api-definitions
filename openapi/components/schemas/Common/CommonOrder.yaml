@@ -1,10 +1,11 @@
 type: object
 properties:
   id:
+    type: string
     description: ID of the order.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
   orderType:
     description: |-
       Specifies the type of order.
@@ -43,17 +44,19 @@ properties:
     allOf:
       - $ref: ../../schemas/CurrencyCode.yaml
   initialInvoiceId:
+    type: string
     description: ID of the initial invoice.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
   recentInvoiceId:
+    type: string
     description: |-
       ID of the most recently issued invoice.
       The invoice might not be `paid` yet.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
   items:
     description: Item details.
     type: array

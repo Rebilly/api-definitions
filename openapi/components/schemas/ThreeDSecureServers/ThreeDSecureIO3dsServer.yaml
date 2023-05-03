@@ -9,6 +9,7 @@ allOf:
       - merchantAcquirerBinMastercard
       - merchantCountry
       - merchantUrl
+      - transactionType
     properties:
       acquirerMerchantIdVisa:
         type: string
@@ -17,6 +18,18 @@ allOf:
       acquirerMerchantIdMastercard:
         type: string
         description: Mastercard acquirer merchant ID (MID).
+        maxLength: 35
+      acquirerMerchantIdAmex:
+        type: string
+        description: American Express acquirer merchant ID (MID).
+        maxLength: 35
+      acquirerMerchantIdDiscover:
+        type: string
+        description: Discover/Diners acquirer merchant ID (MID).
+        maxLength: 35
+      acquirerMerchantIdJcb:
+        type: string
+        description: JCB acquirer merchant ID (MID).
         maxLength: 35
       merchantName:
         type: string
@@ -32,6 +45,21 @@ allOf:
         description: Mastercard acquirer BIN.
         minLength: 6
         maxLength: 11
+      merchantAcquirerBinAmex:
+        type: string
+        description: American Express acquirer BIN.
+        minLength: 6
+        maxLength: 11
+      merchantAcquirerBinDiscover:
+        type: string
+        description: Discover/Diners acquirer BIN.
+        minLength: 6
+        maxLength: 11
+      merchantAcquirerBinJcb:
+        type: string
+        description: JCB acquirer BIN.
+        minLength: 6
+        maxLength: 11
       merchantCountry:
         type: string
         description: Merchant country ISO Alpha-2 code format.
@@ -41,21 +69,6 @@ allOf:
         type: string
         description: Merchant URL.
         maxLength: 2048
-      v1:
-        type: boolean
-        description: |-
-          Value determines if requests can use version 1 of 3DS.
-          In case both v1 and v2 are enabled, v2 is used.
-          If v2 is not supported for the issuer, v1 is used.
-
-          Version 1 has been deprecated by both Visa and Mastercard.
-        deprecated: true
-      v2:
-        type: boolean
-        description: |-
-          Value determines if requests attempt version 2 of 3DS.
-          In case both v1 and v2 are enabled, v2 is used.
-          If v2 is not supported for the issuer, v1 is used.
       transactionType:
         type: string
         enum:
@@ -95,7 +108,7 @@ allOf:
           - '11'
         description: |-
           Indicates the type of 3RI request.
-          Values 06 - 11 are only supported in 3D2 2.2.0.
+          Values 06 - 11 are only supported in 3DS 2.2.0.
         x-enumDescriptions:
           '01': Recurring transaction.
           '02': Instalment transaction.

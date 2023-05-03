@@ -4,10 +4,11 @@ required:
   - websiteId
 properties:
   id:
+    type: string
     description: ID of the invoice.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
   websiteId:
     $ref: ../Websites/WebsiteId.yaml
   invoiceNumber:
@@ -16,12 +17,13 @@ properties:
     type: integer
     x-basic: true
   subscriptionId:
+    type: string
     description: |-
       ID of the related subscription order, if available.
       This field is `null` if there are no related subscription orders.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
   currency:
     x-sortable: true
     x-basic: true
@@ -58,18 +60,44 @@ properties:
     $ref: ../Shipping.yaml
   tax:
     $ref: ../Invoices/InvoiceTax.yaml
-  organizationTaxNumberId:
-    type: string
-    description: Tax number identifier to associate with the invoice.
+  organizationTaxIdNumber:
+    description: Organization tax ID number that is displayed on the invoice.
+    type: object
     nullable: true
-    maxLength: 50
-    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
-  customerTaxNumberId:
-    type: string
-    description: Tax number identifier to associate with the invoice.
+    required:
+      - type
+      - value
+    properties:
+      type:
+        type: string
+        description: Type of the tax ID number.
+        enum:
+          - eu-vat
+          - other
+        example: eu-vat
+      value:
+        type: string
+        description: Value of the tax ID number.
+        example: GB980780684
+  customerTaxIdNumber:
+    description: Customer tax ID number that is displayed on the invoice.
+    type: object
     nullable: true
-    maxLength: 50
-    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+    required:
+      - type
+      - value
+    properties:
+      type:
+        type: string
+        description: Type of the tax ID number.
+        enum:
+          - eu-vat
+          - other
+        example: eu-vat
+      value:
+        type: string
+        description: Value of the tax ID number.
+        example: GB980780684
   billingAddress:
     description: Billing address of the invoice.
     allOf:

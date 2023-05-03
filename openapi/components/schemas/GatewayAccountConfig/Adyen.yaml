@@ -28,6 +28,30 @@ allOf:
           url:
             type: string
             description: Adyen post URL.
+          splitPayments:
+            type: array
+            description: Adyen split payments.
+            items:
+              type: object
+              properties:
+                percentage:
+                  description: Percentage of the transaction amount.
+                  type: number
+                  format: double
+                  minimum: 0.00
+                  maximum: 100.00
+                  example: 0.50
+                account:
+                  description: ID of the balance account where the split amount is sent.
+                  type: string
+                type:
+                  description: Account type of the split payment.
+                  type: string
+                  enum:
+                    - BalanceAccount
+                    - Commission
+                    - VAT
+                    - PaymentFee
         required:
           - url
       threeDSecureServer:

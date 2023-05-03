@@ -5,32 +5,35 @@ required:
   - quantity
 properties:
   id:
+    type: string
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    description: ID of the usage record.
+    maxLength: 50
+    example: ord_usg_0YVJ636B95DNA9M3B1638HXBCQ
   subscriptionId:
+    type: string
     description: ID of the subscription for which a usage is reported.
-    allOf:
-      - $ref: ./ResourceId.yaml
+    maxLength: 50
+    example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
   planId:
     type: string
     description: ID of the plan for which a usage is reported.
     maxLength: 50
     example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
   invoiceId:
+    type: string
     description: ID of the invoice to which usage is applied. This value is populated when the invoice is issued.
     readOnly: true
     nullable: true
-    type: string
     maxLength: 50
-    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
   invoiceItemId:
     description: ID of the invoice item to which usage is applied. This value is populated when the invoice is issued.
     readOnly: true
     nullable: true
     type: string
     maxLength: 50
-    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+    example: ii_0YVFDEQS2KCFTBN9HXWJFY55GV
   quantity:
     description: |-
        Number of used product units of a plan.
