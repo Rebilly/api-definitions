@@ -2,11 +2,11 @@ get:
   x-products:
     - Users
   tags:
-    - ELinks
-  summary: Retrieve eLinks
-  operationId: GetELinkCollection
+    - External identifiers
+  summary: Retrieve external identifiers
+  operationId: GetExternalIdentifierCollection
   x-sdk-operation-name: getAll
-  description: Retrieves a list of eLinks.
+  description: Retrieves a list of external identifiers.
   parameters:
     - $ref: ../components/parameters/collectionFilter.yaml
     - $ref: ../components/parameters/collectionSort.yaml
@@ -14,7 +14,7 @@ get:
     - $ref: ../components/parameters/collectionOffset.yaml
   responses:
     '200':
-      description: List of eLinks retrieved.
+      description: List of external identifiers retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -27,7 +27,7 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/ELink.yaml
+              $ref: ../components/schemas/ExternalIdentifier.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

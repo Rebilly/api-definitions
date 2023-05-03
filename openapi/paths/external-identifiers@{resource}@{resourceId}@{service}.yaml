@@ -1,23 +1,23 @@
 parameters:
-  - $ref: ../components/parameters/eLinkResource.yaml
-  - $ref: ../components/parameters/eLinkResourceId.yaml
-  - $ref: ../components/parameters/eLinkService.yaml
+  - $ref: ../components/parameters/externalIdentifierResource.yaml
+  - $ref: ../components/parameters/externalIdentifierResourceId.yaml
+  - $ref: ../components/parameters/externalIdentifierService.yaml
 get:
   x-products:
     - Users
   tags:
-    - ELinks
-  summary: Retrieve an eLink
-  operationId: GetELink
+    - External identifiers
+  summary: Retrieve an external identifier
+  operationId: GetExternalIdentifier
   x-sdk-operation-name: get
-  description: Retrieves an eLink with a specified resource, resource ID and a service name.
+  description: Retrieves an external identifier with a specified resource, resource ID and a service name.
   responses:
     '200':
-      description: ELink retrieved.
+      description: External identifier retrieved.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/ELink.yaml
+            $ref: ../components/schemas/ExternalIdentifier.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -28,15 +28,15 @@ post:
   x-products:
     - Users
   tags:
-    - ELinks
-  summary: Sync an eLink
-  operationId: PostELink
+    - External identifiers
+  summary: Sync an external identifier
+  operationId: PostExternalIdentifier
   x-sdk-operation-name: sync
   description: |-
-    Sync an eLink with a specified resource, resource ID and a service name.
+    Sync an external identifier with a specified resource, resource ID and a service name.
   responses:
     '204':
-      description: ELink sync scheduled.
+      description: External identifier sync scheduled.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -49,34 +49,34 @@ put:
   x-products:
     - Users
   tags:
-    - ELinks
-  summary: Upsert an eLink
-  operationId: PutELink
+    - External identifiers
+  summary: Upsert an external identifier
+  operationId: PutExternalIdentifier
   x-sdk-operation-name: update
   description: |-
-    Creates or updates an eLink with a specified resource, resource ID and a service name.
+    Creates or updates an external identifier with a specified resource, resource ID and a service name.
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/ELink.yaml
+          $ref: ../components/schemas/ExternalIdentifier.yaml
     required: true
   responses:
     '200':
-      description: ELink updated.
+      description: External identifier updated.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/ELink.yaml
+            $ref: ../components/schemas/ExternalIdentifier.yaml
     '201':
-      description: ELink created.
+      description: External identifier created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/ELink.yaml
+            $ref: ../components/schemas/ExternalIdentifier.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -89,15 +89,15 @@ delete:
   x-products:
     - Users
   tags:
-    - ELinks
-  summary: Delete an eLink
-  operationId: DeleteELink
+    - External identifiers
+  summary: Delete an external identifier
+  operationId: DeleteExternalIdentifier
   x-sdk-operation-name: delete
   description: |-
-    Deletes an eLink with a specified resource, resource ID and a service name.
+    Deletes an external identifier with a specified resource, resource ID and a service name.
   responses:
     '204':
-      description: ELink deleted.
+      description: External identifier deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
