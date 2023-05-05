@@ -1,0 +1,33 @@
+post:
+  x-products:
+    - Core
+  x-badge: Experimental
+  tags:
+    - Cashier
+  summary: Create a cashier deposit request
+  operationId: StorefrontPostCashierRequest
+  x-sdk-operation-name: create
+  description: Creates a cashier deposit request for storefront.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/Storefront/Cashier/CashierRequest.yaml
+    description: Cashier request resource.
+    required: true
+  responses:
+    '201':
+      description: Cashier request created.
+      headers:
+        Location:
+          $ref: ../../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Storefront/Cashier/CashierRequest.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../../components/responses/ValidationError.yaml

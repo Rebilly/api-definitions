@@ -1,0 +1,140 @@
+type: object
+required:
+  - websiteId
+  - currency
+properties:
+  id:
+    type: string
+    description: ID of the cashier deposit request.
+    readOnly: true
+    maxLength: 50
+    example: cash_req_0YVJ65BSGYC3EAT58SEX8KY6J7
+  websiteId:
+    description: Website ID of the cashier. This value specifies the website with which the cashier is associated.
+    type: string
+    maxLength: 50
+    example: web_0YV7DE4Z26DQSA1AC92FBJ7SEG
+  customerId:
+    readOnly: true
+    allOf:
+      - $ref: ../../CustomerId.yaml
+  strategyId:
+    description: |-
+      ID of a strategy to be applied for this request for `amounts` and `customAmount`.
+      If this field is not specified, a randomly selected strategy with a matching `filter` value is applied for empty `amounts` and `customAmount`.
+    type: string
+    maxLength: 50
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+    writeOnly: true
+  transactionId:
+    type: string
+    description: ID of the transaction that is used in the cashier request.
+    readOnly: true
+    nullable: true
+    maxLength: 50
+    example: txn_0YVDTQJ8YWDGQACV2N2N5SPWQ0
+  status:
+    description: Status of the request.
+    type: string
+    readOnly: true
+    enum:
+      - created
+      - pending
+      - completed
+      - expired
+    x-enumDescriptions:
+      created: Request is created, but it has not been visited by a customer. This is a temporary state.
+      pending: Request has been visited by a customer, but no funds have been deposited yet. This is a temporary state.
+      completed: A funds deposit transaction has been initiated. This is a permanent state.
+      expired: Request expired without a deposit attempt. This is a permanent state.
+  currency:
+    $ref: ../../CurrencyCode.yaml
+  amounts:
+    type: array
+    description: |-
+      List of available deposit amounts.
+
+      If `amounts` is not specified when a cashier is created, amounts are determined from the chosen strategy.
+      For more information, see the [`strategyId` property](./StorefrontPostCashierRequest#!path=strategyId&t=request).
+    items:
+      type: number
+      format: double
+      minimum: 0.01
+  customAmount:
+    description: |-
+      Custom amount restrictions.
+      If this value is `null`,  custom amounts are prohibited.
+      If `customAmount` is not specified when a cashier is created, amount restrictions are determined from the chosen strategy.
+      For more information, see the [`strategyId` property](./StorefrontPostCashierRequest#!path=strategyId&t=request).
+    allOf:
+     - $ref: ../../Cashier/CashierStrategyCustomAmount.yaml
+  redirectUrl:
+    description: URL to redirect the customer to when a deposit is completed. The default value is the website URL.
+    type: string
+    format: uri
+  expirationTime:
+    description: Date and time at which the cashier request expires. The default expiration time is one hour from the time the request is created.
+    type: string
+    format: date-time
+    readOnly: true
+  propertiesSchema:
+    readOnly: true
+    description: |-
+      Defines properties the user can complete when they use the hosted cashier form.
+      This field accepts [JSON-schema](https://json-schema.org/) drafts 4, 6, and 7.
+    type: object
+    example:
+      type: object
+      properties:
+        email:
+          type: "string"
+        max:
+          type: "integer"
+          minimum: 0
+          exclusiveMaximum: 100
+      required: ["email"]
+
+  properties:
+    readOnly: true
+    description: |-
+      Properties that are available for the user to complete when they use the hosted cashier form.
+      Use this object to describe fields that are rendered and completed during the deposit process, in the cashier deposit form.
+    type: object
+    additionalProperties:
+      type: string
+    example:
+      email: email@example.com
+      max: '33'
+
+  createdTime:
+    $ref: ../../CreatedTime.yaml
+  updatedTime:
+    $ref: ../../UpdatedTime.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - cashier
+            - transaction
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
+    properties:
+      customer:
+        type: object
+      website:
+        type: object
+      transaction:
+        type: object
