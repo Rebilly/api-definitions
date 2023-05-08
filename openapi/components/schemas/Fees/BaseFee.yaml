@@ -31,18 +31,8 @@ properties:
       This value overrides gateway account financial settings of the transaction.
     type: object
     nullable: true
-    required:
-      - currency
-      - period
-    properties:
-      currency:
-        description: Fee settlement currency.
-        allOf:
-          - $ref: ../CurrencyCode.yaml
-      period:
-        description: Fee settlement period.
-        allOf:
-          - $ref: ../GatewayAccounts/SettlementPeriod.yaml
+    allOf:
+      - $ref: ../GatewayAccounts/SettlementSettings.yaml
   createdTime:
     $ref: ../CreatedTime.yaml
   updatedTime:
