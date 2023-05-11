@@ -1,13 +1,20 @@
 type: object
 description: Instruction for the calculation of reserve release time.
-discriminator:
-  propertyName: method
-  mapping:
-    date-interval: ../Scheduling/Methods/date-interval.yaml
-required:
-  - method
 properties:
   method:
     type: string
     enum:
       - date-interval
+  duration:
+    type: integer
+    description: Number of time units.
+    minimum: 1
+  unit:
+    description: Unit of time.
+    oneOf:
+      - $ref: ../TimeUnit.yaml
+      - $ref: ../TimePluralUnit.yaml
+required:
+  - method
+  - duration
+  - unit
