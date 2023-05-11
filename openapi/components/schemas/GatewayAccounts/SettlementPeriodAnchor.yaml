@@ -9,11 +9,6 @@ discriminator:
   mapping:
     day-of-month: ../Scheduling/Methods/day-of-month.yaml
     day-of-week: ../Scheduling/Methods/day-of-week.yaml
-required:
-  - method
-properties:
-  method:
-    type: string
-    enum:
-      - day-of-month
-      - day-of-week
+anyOf:
+  - $ref: ../Scheduling/Methods/day-of-month.yaml
+  - $ref: ../Scheduling/Methods/day-of-week.yaml
