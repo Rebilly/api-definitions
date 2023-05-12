@@ -1,0 +1,25 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Storefront
+  x-badge: Experimental
+  tags:
+    - Cashier
+  summary: Retrieve a cashier strategy
+  operationId: StorefrontGetCashierStrategy
+  x-sdk-operation-name: get
+  description: Retrieves a cashier strategy with a specified ID.
+  responses:
+    '200':
+      description: Cashier strategy retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Cashier/CashierStrategy.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../../components/responses/NotFound.yaml
