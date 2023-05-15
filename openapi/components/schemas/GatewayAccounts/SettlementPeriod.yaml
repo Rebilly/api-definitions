@@ -1,26 +1,14 @@
 type: object
 description: |-
   Instruction for calculating the settlement time.
-  The settlement time is used,
+  The settlement time and settlement period anchor are used
   in conjunction with the transaction processed time,
   to calculate the time in which the amount settles.
-properties:
-  method:
-    type: string
-    enum:
-      - date-interval
-  duration:
-    type: integer
-    description: Number of time units.
-    minimum: 1
-  unit:
-    description: Unit of time.
-    oneOf:
-      - $ref: ../TimeUnit.yaml
-      - $ref: ../TimePluralUnit.yaml
-  anchor:
-    $ref: SettlementPeriodAnchor.yaml
-required:
-  - method
-  - duration
-  - unit
+discriminator:
+  propertyName: method
+  mapping:
+    date-interval: ../Scheduling/Methods/date-interval.yaml
+    immediately: ../Scheduling/Methods/immediately.yaml
+anyOf:
+  - $ref: ../Scheduling/Methods/date-interval.yaml
+  - $ref: ../Scheduling/Methods/immediately.yaml
