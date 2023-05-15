@@ -1,6 +1,10 @@
 type: object
 description: Financial settings.
+required:
+  - settlementSettings
 properties:
+  settlementSettings:
+    $ref: SettlementSettings.yaml
   riskReserveSettings:
     description: |-
       Risk reserve settings.
@@ -25,5 +29,3 @@ properties:
           description: Instruction for calculating the reserve release time.
           allOf:
             - $ref: ../Scheduling/Methods/date-interval.yaml
-  settlementSettings:
-    $ref: SettlementSettings.yaml
