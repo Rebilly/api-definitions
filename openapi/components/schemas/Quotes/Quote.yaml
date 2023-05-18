@@ -56,13 +56,15 @@ properties:
     description: Delivery address of the order.
     nullable: true
     type: object
-    allOf:
+    oneOf:
+      - type: 'null'
       - $ref: ../Contact/ContactObject.yaml
   billingAddress:
     description: Billing address of the order.
     nullable: true
     type: object
-    allOf:
+    oneOf:
+      - type: 'null'
       - $ref: ../Contact/ContactObject.yaml
   invoicePreview:
     $ref: ./QuoteInvoicePreview.yaml

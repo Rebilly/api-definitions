@@ -47,18 +47,20 @@ properties:
           description: Number of product units in the specified plan.
           type: integer
   billingAddress:
+    type: object
     description: Billing address details.
     writeOnly: true
     nullable: true
-    type: object
-    allOf:
+    oneOf:
+      - type: 'null'
       - $ref: ../Contact/ContactObject.yaml
   deliveryAddress:
+    type: object
     description: Delivery address details.
     writeOnly: true
     nullable: true
-    type: object
-    allOf:
+    oneOf:
+      - type: 'null'
       - $ref: ../Contact/ContactObject.yaml
   shippingRateId:
     description: |-
@@ -106,3 +108,5 @@ properties:
     format: uri
     writeOnly: true
     nullable: true
+ContactObject:
+  yaml:

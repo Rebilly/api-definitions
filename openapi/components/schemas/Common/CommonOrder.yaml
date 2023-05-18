@@ -67,13 +67,15 @@ properties:
     description: Delivery address of the order.
     nullable: true
     type: object
-    allOf:
+    oneOf:
+      - type: 'null'
       - $ref: ../Contact/ContactObject.yaml
   billingAddress:
     description: Billing address of the order.
     nullable: true
     type: object
-    allOf:
+    oneOf:
+      - type: 'null'
       - $ref: ../Contact/ContactObject.yaml
   activationTime:
     description: Date and time when the order is activated.
