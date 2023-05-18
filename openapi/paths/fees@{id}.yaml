@@ -110,7 +110,7 @@ patch:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/Fees/FeePatch.yaml
+          $ref: ../components/schemas/Fees/BaseFee.yaml
         examples:
           stripe-trx:
             $ref: ../components/examples/Fee/stripe-trx-request.yaml
@@ -138,3 +138,24 @@ patch:
       $ref: ../components/responses/Forbidden.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
+delete:
+  x-badge: Experimental
+  x-products:
+    - Core
+  tags: [Fees]
+  summary: Delete a fee entry
+  description: |-
+    Deletes a fee entry.
+
+    > **Important:** This operation is experimental and may not be backward compatible.
+  operationId: DeleteFee
+  x-sdk-operation-name: delete
+  responses:
+    '204':
+      description: Fee deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

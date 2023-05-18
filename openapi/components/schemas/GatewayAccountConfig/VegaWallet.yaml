@@ -1,0 +1,22 @@
+description: VegaWallet gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: VegaWallet credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: ID of the VegaWallet merchant.
+          password:
+            type: string
+            description: VegaWallet merchant password.
+            format: password
+            writeOnly: true
+        required:
+          - merchantId
+          - password
