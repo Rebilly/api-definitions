@@ -57,10 +57,10 @@ properties:
     $ref: ./ResourceCustomFields.yaml
   primaryAddress:
     description: Customer's primary address.
-    type: object
-    nullable: true
-    allOf:
-      - $ref: ./Contact/ContactObject.yaml
+    anyOf:
+      - $ref: '#/components/schemas/ContactObject'
+      - type: object
+        nullable: true
   company:
     $ref: Company.yaml
   averageValue:
