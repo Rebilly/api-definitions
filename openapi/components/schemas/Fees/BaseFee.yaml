@@ -21,6 +21,8 @@ properties:
     minLength: 1
     maxLength: 255
     example: 'type:sale,capture;result:approved'
+    type: string
+    nullable: true
     allOf:
       - $ref: ../FilterString.yaml
   formula:
@@ -29,6 +31,8 @@ properties:
     description: |-
       Fee settlement settings.
       This value overrides the gateway account financial settings of the transaction.
+    type: object
+    nullable: true
     allOf:
       - $ref: ../GatewayAccounts/SettlementSettings.yaml
   createdTime:
