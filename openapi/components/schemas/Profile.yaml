@@ -33,10 +33,12 @@ properties:
     description: |-
       Permissions that the user has within organizations.
       Use the wildcard character `*` for full access.
+    readOnly: true
     allOf:
       - $ref: ./AclPermissions.yaml
   memberships:
     description: Organization memberships.
+    readOnly: true
     type: array
     items:
       $ref: ./Membership.yaml
@@ -55,6 +57,7 @@ properties:
       User's currency code in ISO 4217 format.
       This value is used for reports.
     type: string
+    readOnly: true
   loginTime:
     description: Date and time when the user last logged in.
     type: string
@@ -109,11 +112,14 @@ properties:
   hasPermissionsEmulation:
     type: boolean
     description: Specifies if the current user session has permissions emulation enabled.
+    readOnly: true
   displayName:
     type: string
     description: User's full display name.
+    readOnly: true
   hash:
     type: string
     description: Unique hash value that represents the user.
+    readOnly: true
   _links:
     $ref: ./SelfLink.yaml
