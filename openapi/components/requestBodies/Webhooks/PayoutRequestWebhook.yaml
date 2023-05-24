@@ -2,24 +2,21 @@ content:
   application/json:
     schema:
       properties:
-        organizationId:
-          $ref: ../../schemas/Organizations/OrganizationId.yaml
-        applicationId:
+        payoutRequestId:
+          description: ID of the payout request.
           type: string
-          description: Unique application ID.
-          maxLength: 50
-          example: app_01H0HT25X7XXCJGS4H8VJSYF2Y
         eventType:
           type: string
           description: Type of webhook event.
           enum:
-            - application-instance-disabled
+            - payout-request-created
+            - payout-request-modified
         _embedded:
-          description: Embedded objects.
           type: object
+          description: Embedded objects.
           properties:
-            application:
-              $ref: ../../schemas/Applications/Application.yaml
+            payoutRequest:
+              $ref: ../../schemas/PayoutRequest.yaml
         _links:
           type: array
           description: Related links.
@@ -33,5 +30,5 @@ content:
                 description: Type of link.
                 type: string
                 enum:
-                  - application
-description: Application instance disabled webhook request body resource.
+                  - payoutRequest
+description: Payout request webhook request body resource.

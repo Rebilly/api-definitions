@@ -9,24 +9,27 @@ required:
   - permissions
 properties:
   id:
+    type: string
     description: ID of the application.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: app_01H0HT25X7XXCJGS4H8VJSYF2Y
   name:
     description: Name of the application.
     type: string
   logoId:
     description: File ID of the application logo.
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
   authorName:
     description: Name of the application author.
     type: string
   authorLogoId:
+    type: string
     description: File ID of the author's logo.
-    allOf:
-      - $ref: ../ResourceId.yaml
+    maxLength: 50
+    nullable: true
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
   tagline:
     description: Tagline of the application.
     type: string
@@ -50,6 +53,9 @@ properties:
       type: string
       format: operationId
       enum:
+        - DeleteApplicationInstance
+        - GetApplicationInstanceConfiguration
+        - PutApplicationInstanceConfiguration
         - PostWebhookCredentialHash
         - PostWebhook
         - GetWebhook
