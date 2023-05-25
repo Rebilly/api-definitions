@@ -40,34 +40,42 @@ properties:
         description: Specifies if a customer can authenticate with a password.
         type: boolean
         default: true
+        nullable: true
       orderCancel:
         description: Specifies if a customer can cancel an order.
         type: boolean
         default: true
+        nullable: true
       orderAddressEdit:
         description: Specifies if a customer can change an order address.
         type: boolean
         default: true
+        nullable: true
       paymentInstrumentAdd:
         description: Specifies if a customer can add a new payment instrument.
         type: boolean
         default: true
+        nullable: true
       paymentInstrumentUpdate:
         description: Specifies if a customer can update their payment instruments.
         type: boolean
         default: true
+        nullable: true
       paymentInstrumentDeactivate:
         description: Specifies if a customer can disable their payment instruments.
         type: boolean
         default: true
+        nullable: true
   customization:
     description: Visual customization options for the billing portal.
     type: object
     properties:
       logoId:
-        description: ID of the linked file object.
-        allOf:
-          - $ref: ./ResourceId.yaml
+        type: string
+        description: File ID of the billing portal logo.
+        maxLength: 50
+        nullable: true
+        example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
       colors:
         description: Various colors used in the billing portal.
         type: object
@@ -76,11 +84,13 @@ properties:
             description: Primary color for the billing portal in hexadecimal format.
             type: string
             maxLength: 6
+            nullable: true
             default: '0044d4'
           secondary:
             description: Secondary color for the billing portal in hexadecimal format.
             type: string
             maxLength: 6
+            nullable: true
             default: 'ffffff'
       links:
         description: URLs that are displayed in the billing portal.
@@ -90,22 +100,27 @@ properties:
             description: Website refund policy URL.
             type: string
             format: url
+            nullable: true
           privacyPolicy:
             description: Website privacy policy URL.
             type: string
             format: url
+            nullable: true
           termsOfService:
             description: Website terms of service URL.
             type: string
             format: url
+            nullable: true
   status:
     description: |-
       Status of the billing portal. If the status is `inactive`,
       the billing portal URL results in a 404 error.
     type: string
+    nullable: true
     enum:
       - active
       - inactive
+      - null
     default: active
   createdTime:
     $ref: ./CreatedTime.yaml
