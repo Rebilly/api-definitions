@@ -357,14 +357,15 @@ properties:
     type: integer
     readOnly: true
   riskMetadata:
-    nullable: true
     type: object
+    nullable: true
     example: null
     description: |-
       Risk metadata.
       If this value is `null`, this field uses risk metadata that is captured when creating the payment token.
-    allOf:
+    oneOf:
       - $ref: ../../RiskMetadata.yaml
+      - type: 'null'
   customFields:
     $ref: ../../ResourceCustomFields.yaml
   createdTime:
