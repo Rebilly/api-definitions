@@ -11,7 +11,7 @@ required:
 properties:
   type:
     type: string
-    description: Coupon restriction type.
+    description: Type of coupon restriction.
     enum: ["restrict-to-bxgy"]
   buy:
     type: array
@@ -25,7 +25,7 @@ properties:
       properties:
         planId:
           type: string
-          description: Plan ID of what is being purchased.
+          description: Plan ID of the item being purchased.
           maxLength: 50
           example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
         quantity:
@@ -34,7 +34,7 @@ properties:
           description: Total quantity of the associated plan ID that must be purchased for this restriction to apply.
   get:
     type: array
-    description: One or more plan and quantity definitions added to a purchase if all definitions in the `buy` condition are met.
+    description: One or more plan and quantity definitions that are added to a purchase if all definitions in the `buy` condition are met.
     minItems: 1
     items:
       type: object
@@ -44,10 +44,10 @@ properties:
       properties:
         planId:
           type: string
-          description: Plan ID of what is to be received.
+          description: Plan ID of the item that is to be received by the customer.
           maxLength: 50
           example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
         quantity:
           type: integer
           minimum: 1
-          description: Total quantity of the associated plan ID that is received.
+          description: Total quantity of the associated plan ID that is to be received by the customer.
