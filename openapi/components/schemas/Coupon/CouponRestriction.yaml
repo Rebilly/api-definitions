@@ -14,20 +14,15 @@ discriminator:
     restrict-to-subscriptions: ./CouponRestrictions/restrict-to-subscriptions.yaml
     total-redemptions: ./CouponRestrictions/total-redemptions.yaml
     restrict-to-bxgy: ./CouponRestrictions/restrict-to-bxgy.yaml
-properties:
-  type:
-    description: Coupon restriction type.
-    type: string
-    enum:
-      - discounts-per-redemption
-      - minimum-order-amount
-      - redemptions-per-customer
-      - restrict-to-invoices
-      - restrict-to-plans
-      - restrict-to-subscriptions
-      - restrict-to-products
-      - total-redemptions
-      - paid-by-time
-      - restrict-to-bxgy
-required:
-  - type
+oneOf:
+  - $ref: ./CouponRestrictions/discounts-per-redemption.yaml
+  - $ref: ./CouponRestrictions/minimum-order-amount.yaml
+  - $ref: ./CouponRestrictions/paid-by-time.yaml
+  - $ref: ./CouponRestrictions/redemptions-per-customer.yaml
+  - $ref: ./CouponRestrictions/restrict-to-countries.yaml
+  - $ref: ./CouponRestrictions/restrict-to-invoices.yaml
+  - $ref: ./CouponRestrictions/restrict-to-plans.yaml
+  - $ref: ./CouponRestrictions/restrict-to-products.yaml
+  - $ref: ./CouponRestrictions/restrict-to-subscriptions.yaml
+  - $ref: ./CouponRestrictions/total-redemptions.yaml
+  - $ref: ./CouponRestrictions/restrict-to-bxgy.yaml

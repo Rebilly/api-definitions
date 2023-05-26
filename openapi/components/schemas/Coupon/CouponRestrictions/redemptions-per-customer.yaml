@@ -1,13 +1,16 @@
+type: object
 description: |-
   Restricts the number of times that a coupon can be redeemed by one
   customer. For example, use this restriction to limit the number of
   redemptions to one per customer.
-allOf:
-  - $ref: ../CouponRestriction.yaml
-  - type: object
-    required:
-      - quantity
-    properties:
-      quantity:
-        type: integer
-        description: Restriction value.
+required:
+  - type
+  - quantity
+properties:
+  type:
+    type: string
+    description: Coupon restriction type.
+    enum: ["redemptions-per-customer"]
+  quantity:
+    type: integer
+    description: Restriction value.

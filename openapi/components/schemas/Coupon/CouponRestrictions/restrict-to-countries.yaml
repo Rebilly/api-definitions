@@ -1,16 +1,18 @@
+type: object
 description: Restricts a coupon for use in specific countries.
-allOf:
-  - $ref: ../CouponRestriction.yaml
-  - $ref: ../RedemptionRestriction.yaml
-  - type: object
-    required:
-      - countries
-    properties:
-      countries:
-        type: array
-        description: |-
-          Countries where the coupon can be applied, in ISO Alpha-2 code format.
-          For examples, see [ISO.org](https://www.iso.org/obp/ui/#search/code/).
-        items:
-          type: string
-          pattern: '^[A-Z]{2}$'
+required:
+  - type
+  - countries
+properties:
+  type:
+    type: string
+    description: Coupon restriction type.
+    enum: ["restrict-to-countries"]
+  countries:
+    type: array
+    description: |-
+      Countries where the coupon can be applied, in ISO Alpha-2 code format.
+      For examples, see [ISO.org](https://www.iso.org/obp/ui/#search/code/).
+    items:
+      type: string
+      pattern: '^[A-Z]{2}$'

@@ -1,10 +1,14 @@
+type: object
 description: Restricts the number of times a coupon can be redeemed by different customers.
-allOf:
-  - $ref: ../CouponRestriction.yaml
-  - type: object
-    required:
-      - quantity
-    properties:
-      quantity:
-        type: integer
-        description: Total redemptions quantity.
+required:
+  - type
+  - quantity
+properties:
+  type:
+    type: string
+    description: Coupon restriction type.
+    enum: ["total-redemptions"]
+  quantity:
+    type: integer
+    description: Total redemptions quantity.
+

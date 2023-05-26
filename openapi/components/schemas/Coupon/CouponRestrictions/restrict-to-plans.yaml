@@ -1,17 +1,19 @@
+type: object
 description: Restricts a coupon to specific pricing plans.
-allOf:
-  - $ref: ../CouponRestriction.yaml
-  - $ref: ../RedemptionRestriction.yaml
-  - type: object
-    required:
-      - planIds
-    properties:
-      planIds:
-        type: array
-        description: Plan IDs on which a coupon can be applied.
-        items:
-          type: string
-      minimumQuantity:
-        type: integer
-        default: 1
-        description: Minimum total quantity on which to apply the restriction and subsequent discount.
+required:
+  - type
+  - planIds
+properties:
+  type:
+    type: string
+    description: Coupon restriction type.
+    enum: ["restrict-to-plans"]
+  planIds:
+    type: array
+    description: Plan IDs on which a coupon can be applied.
+    items:
+      type: string
+  minimumQuantity:
+    type: integer
+    default: 1
+    description: Minimum total quantity on which to apply the restriction and subsequent discount.
