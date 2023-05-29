@@ -1,4 +1,5 @@
 type: object
+additionalProperties: false
 required:
   - name
   - currency
@@ -76,58 +77,61 @@ properties:
     description: |-
       Number of times the plan is modified.
       Compare this value with materialized subscription item revision values.
-  createdTime:
-    $ref: ../../CreatedTime.yaml
-  updatedTime:
-    $ref: ../../UpdatedTime.yaml
   isTrialOnly:
     type: boolean
     description: Specifies if a plan is a trial that does not have recurring instructions.
     readOnly: true
   setupAmount:
-    nullable: true
     type: string
+    description: Please provide description.
+    nullable: true
   trialAmount:
     type: string
+    description: Please provide description.
     nullable: true
   trialPeriodUnit:
     type: string
+    description: Please provide description.
     nullable: true
   trialPeriodLength:
     type: string
+    description: Please provide description.
     nullable: true
   recurringAmount:
     type: number
+    description: Please provide description.
     nullable: true
   recurringPeriodUnit:
     type: string
+    description: Please provide description.
     nullable: true
   recurringPeriodLength:
     type: number
+    description: Please provide description.
     nullable: true
   recurringPeriodLimit:
     type: string
+    description: Please provide description.
     nullable: true
   contractTermUnit:
     type: string
+    description: Please provide description.
     nullable: true
   contractTermLength:
     type: string
+    description: Please provide description.
     nullable: true
   minQuantity:
     type: string
+    description: Please provide description.
     nullable: true
   maxQuantity:
     type: number
-    nullable: true
-  expireTime:
-    type: string
-    nullable: true
-  expiredTime:
-    type: string
+    description: Please provide description.
     nullable: true
   subscriptionCount:
     type: number
+    description: Please provide description.
     nullable: true
   recurringInterval:
     description: |-
@@ -211,6 +215,18 @@ properties:
         minimum: 0.01
   invoiceTimeShift:
     $ref: ../../Invoices/InvoiceTimeShift.yaml
+  expireTime:
+    type: string
+    description: Please provide description.
+    nullable: true
+  expiredTime:
+    type: string
+    description: Please provide description.
+    nullable: true
+  createdTime:
+    $ref: ../../CreatedTime.yaml
+  updatedTime:
+    $ref: ../../UpdatedTime.yaml
   _links:
     type: array
     description: Related links.
