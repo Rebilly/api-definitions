@@ -1,18 +1,10 @@
 type: object
+description: Coupon discount.
 discriminator:
   propertyName: type
   mapping:
     fixed: ./Discounts/fixed.yaml
     percent: ./Discounts/percent.yaml
-properties:
-  type:
-    description: Discount type.
-    type: string
-    x-label: Type
-    x-sortable: true
-    x-basic: true
-    enum:
-      - fixed
-      - percent
-  context:
-    $ref: ./DiscountContext.yaml
+oneOf:
+  - $ref: ./Discounts/fixed.yaml
+  - $ref: ./Discounts/percent.yaml
