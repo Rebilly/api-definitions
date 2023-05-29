@@ -6,6 +6,10 @@ post:
   summary: Create a credit transaction
   operationId: PostPayout
   x-sdk-operation-name: create
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
   description: Creates a transaction of type `credit`.
   requestBody:
     $ref: ../components/requestBodies/CreditTransactionRequest.yaml
