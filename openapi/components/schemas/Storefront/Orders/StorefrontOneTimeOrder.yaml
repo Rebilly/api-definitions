@@ -1,4 +1,14 @@
 type: object
 allOf:
-  - $ref: ../../Common/CommonOneTimeOrder.yaml
+  - $ref: ./CommonOrder.yaml
   - $ref: ./StorefrontOrderMetadata.yaml
+  - properties:
+      status:
+        description: Status of the one-time order.
+        type: string
+        readOnly: true
+        enum:
+          - pending
+          - abandoned
+          - completed
+          - canceled
