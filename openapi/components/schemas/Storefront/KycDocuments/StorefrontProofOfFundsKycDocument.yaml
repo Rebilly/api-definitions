@@ -1,5 +1,70 @@
-allOf:
-  - $ref: ../../Common/CommonKycDocument.yaml
-  - properties:
-      _links:
-        $ref: ../../SelfLink.yaml
+type: object
+required:
+  - documentType
+  - status
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ../../ResourceId.yaml
+  fileId:
+    deprecated: true
+    description: ID of the linked file object.
+    allOf:
+      - $ref: ../../ResourceId.yaml
+  fileIds:
+    description: |-
+      IDs of linked file objects.
+
+      Uploaded `identity-proof` files must have the following tags attached to be used for KYC purposes:
+      `['kyc', 'id-front']`, `['kyc', 'id-back']`, `['kyc', 'face-proof']`.
+    type: array
+    items:
+      allOf:
+        - $ref: ../../ResourceId.yaml
+  documentType:
+    description: |-
+      Document type submitted for validation.
+      Only the `identity-proof` and `address-proof` types are analyzed automatically.
+    allOf:
+      - $ref: ../../KycDocument/KycDocumentTypes.yaml
+  documentSubtype:
+    description: Document subtype submitted for validation.
+    allOf:
+      - $ref: ../../KycDocument/KycDocumentSubtypes.yaml
+  status:
+    description: Status of the validation.
+    type: string
+    readOnly: true
+    enum:
+      - pending
+      - in-progress
+      - accepted
+      - rejected
+      - archived
+    x-enumDescriptions:
+      pending: Waiting to be reviewed or analyzed.
+      in-progress: Being analyzed by the Rebilly AI.
+      accepted: Accepted by AI or a human.
+      rejected: Rejected by AI or a human.
+      archived: Archived by the Rebilly AI.
+  rejectionReason:
+    $ref: ../../KycDocument/KycDocumentRejection.yaml
+  requestId:
+    readOnly: true
+    nullable: true
+    description: ID of the KYC request.
+    type: string
+    maxLength: 50
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+  createdTime:
+    $ref: ../../CreatedTime.yaml
+  updatedTime:
+    $ref: ../../UpdatedTime.yaml
+  processedTime:
+    description: Date and time when the KYC document is processed.
+    type: string
+    format: date-time
+    readOnly: true
+  _links:
+    $ref: ../../SelfLink.yaml
