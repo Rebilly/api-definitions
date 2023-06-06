@@ -5,9 +5,6 @@ discriminator:
   mapping:
     fixed-fee: ./Formulas/FixedFeeFormula.yaml
     percentage: ./Formulas/PercentageFormula.yaml
-required:
-  - type
-properties:
-  type:
-    type: string
-    enum: ["fixed-fee", "percentage"]
+anyOf:
+  - $ref: ./Formulas/FixedFeeFormula.yaml
+  - $ref: ./Formulas/PercentageFormula.yaml

@@ -28,6 +28,22 @@ properties:
     readOnly: true
     x-sortable: true
     type: string
+    nullable: true
     format: date-time
   _links:
-    $ref: ../SelfLink.yaml
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - customer
+            - coupon
