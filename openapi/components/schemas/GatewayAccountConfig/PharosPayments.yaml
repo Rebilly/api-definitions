@@ -1,0 +1,29 @@
+description: PharosPayments gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: PharosPayments credentials object.
+        properties:
+          username:
+            type: string
+            description: Authentication username.
+          password:
+            description: Authentication password.
+            type: string
+            format: password
+          merchantCode:
+            type: string
+            description: Merchant code.
+          terminalCode:
+            type: string
+            description: Terminal code.
+        required:
+          - username
+          - password
+          - merchantCode
+          - terminalCode
