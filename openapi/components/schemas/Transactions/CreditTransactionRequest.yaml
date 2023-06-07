@@ -55,7 +55,8 @@ properties:
     example: 44433322-2c4y-483z-a0a9-158621f77a21
   gatewayAccountId:
     description: |-
-      Rebilly selects the appropriate payment gateway account for the transaction based on the properties of the transaction and the `gateway-account-requested` event rules configurations.
+      ID of the gateway account.
+      Rebilly selects the payment gateway account for the transaction based on transaction properties and the rules configuration of the `gateway-account-requested` event.
       To prevent Rebilly from making the gateway account selection,
       supply a gateway account ID in this field.
       Only use this field if you intend to override the settings.
@@ -71,18 +72,25 @@ properties:
   notificationUrl:
     nullable: true
     description: |-
-      URL where a server-to-server notification request type `POST` with a transaction payload is sent when the transaction result is finalized.
-      Do not trust the notification; follow with a `GET` request to confirm the result of the transaction.
-      Please respond with a `2xx` HTTP status code, or the request is reattempted.
-      You may use `{id}` or `{result}` as placeholders in the URL and we replace them with the transaction id and result accordingly.
+      URL where a server-to-server `POST` notification is sent.
+      This notification is sent when the transaction result is finalized after a timeout or an offsite interaction.
+      
+      Do not trust this notification alone,
+      complete a `GET` request to confirm the result of the transaction.
+      To ensure the request is not reattempted,
+      when the result is confirmed, respond with a `2xx` HTTP status code.
+      
+      The following placeholders are available to use in this URI: `{id}` and `{result}`.
+      These placeholders are replaced the with the transaction ID and result accordingly.
     type: string
     format: uri
   redirectUrl:
     nullable: true
     description: |-
       URL to redirect the end-user when an offsite transaction is completed.
-      Defaults to the website's configured URL.
-      You may use `{id}` or `{result}` as placeholders in the URL and we replace them with the transaction id and result accordingly.
+      Defaults to the configured URL of the website.
+      You may use `{id}` or `{result}` as placeholders in the URL, 
+      these are replaced the with the transaction ID and result accordingly.
     type: string
     format: uri
   customFields:
@@ -90,18 +98,18 @@ properties:
   riskMetadata:
     $ref: ../RiskMetadata.yaml
   isProcessedOutside:
-    description: Specified when the transaction is processed outside Rebilly.
+    description: Specifies when the transaction is processed outside Rebilly.
     type: boolean
     default: false
   isMerchantInitiated:
-    description: Specified when the transaction is initiated by the merchant.
+    description: Specifies when the transaction is initiated by the merchant.
     type: boolean
     default: false
   processedTime:
     type: string
     description: |-
       Time the transaction is processed.
-      Can be specified only if the transaction is processed outside Rebilly.
+      This field is only specified if the transaction is processed outside Rebilly.
     format: date-time
 
   payoutRequestId:
