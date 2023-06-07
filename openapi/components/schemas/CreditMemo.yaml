@@ -1,4 +1,8 @@
 type: object
+description: Credit memo object.
+required:
+  - customerId
+  - currency
 properties:
   id:
     type: string
@@ -28,7 +32,7 @@ properties:
             transactionId:
               description: ID of the transaction to which the credit memo is allocated.
               allOf:
-                - $ref: ../Transactions/TransactionId.yaml
+                - $ref: ./Transactions/TransactionId.yaml
             amount:
               description: |-
                 Amount of credit that is allocated from the credit memo to the transaction.
@@ -40,11 +44,11 @@ properties:
             currency:
               readOnly: true
               allOf:
-                - $ref: ../CurrencyCode.yaml
+                - $ref: ./CurrencyCode.yaml
             createdTime:
-              $ref: ../CreatedTime.yaml
+              $ref: ./CreatedTime.yaml
             updatedTime:
-              $ref: ../UpdatedTime.yaml
+              $ref: ./UpdatedTime.yaml
       invoices:
         type: array
         description: |-
@@ -74,13 +78,13 @@ properties:
             currency:
               readOnly: true
               allOf:
-                - $ref: ../CurrencyCode.yaml
+                - $ref: ./CurrencyCode.yaml
             createdTime:
               description: Date and time at which a credit memo is allocated.
               allOf:
-                - $ref: ../ServerTimestamp.yaml
+                - $ref: ./ServerTimestamp.yaml
             updatedTime:
-              $ref: ../UpdatedTime.yaml
+              $ref: ./UpdatedTime.yaml
   items:
     type: array
     description: Items of the credit memo.
@@ -134,7 +138,7 @@ properties:
           description: Credit memo item tax.
           nullable: true
           allOf:
-            - $ref: ../Invoices/TaxItem.yaml
+            - $ref: ./Invoices/TaxItem.yaml
   status:
     type: string
     description: Status of the credit memo.
@@ -200,10 +204,22 @@ properties:
     type: integer
     readOnly: true
     description: Number of times the credit memo has been modified.
+  customerId:
+    readOnly: true
+    $ref: ./CustomerId.yaml
+  currency:
+    readOnly: true
+    $ref: ./CurrencyCode.yaml
+  invoiceId:
+    type: string
+    description: ID of the invoice to which the credit memo is issued.
+    nullable: true
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
   createdTime:
-    $ref: ../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   _links:
     type: array
     description: Related links.
