@@ -1,6 +1,7 @@
 description: ThreeDSecureIO 3DS Server.
 type: object
 required:
+  - name
   - acquirerMerchantIdVisa
   - acquirerMerchantIdMastercard
   - merchantName
@@ -10,6 +11,11 @@ required:
   - merchantUrl
   - transactionType
 properties:
+  name:
+    type: string
+    description: Merchant plug-in name.
+    enum:
+      - ThreeDSecureIO3dsServer
   acquirerMerchantIdVisa:
     type: string
     description: Visa acquirer merchant ID (MID).
