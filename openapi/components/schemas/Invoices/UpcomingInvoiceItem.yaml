@@ -1,37 +1,29 @@
 type: object
-required:
-  - type
-  - unitPrice
+readOnly: true
 properties:
   id:
     type: string
-    description: ID of the invoice item.
-    readOnly: true
+    description: ID of the upcoming invoice item.
     maxLength: 50
     example: ii_0YVFDEQS2KCFTBN9HXWJFY55GV
-  type:
-    description: Type of invoice item.
-    type: string
-    x-basic: true
-    enum:
-      - debit
-      - credit
+  isInterim:
+    description: Specifies if the line item gets into an interim invoice.
+    type: boolean
   description:
-    description: Description of the invoice item.
+    description: Description of the upcoming invoice item.
     type: string
     maxLength: 1000
   unitPrice:
-    description: Unit price of the invoice item.
+    description: Unit price of the upcoming invoice item.
     type: number
     format: double
   quantity:
-    description: Quantity of the invoice item.
+    description: Quantity of the upcoming invoice item.
     type: integer
   price:
-    description: Total price of the invoice item.
+    description: Total price of the upcoming invoice item.
     type: number
     format: double
-    readOnly: true
   productId:
     type: string
     description: ID of the product.
@@ -39,23 +31,18 @@ properties:
     example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
   planId:
     type: string
-    nullable: true
     description: ID of the plan.
     maxLength: 50
-    readOnly: true
     example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
   subscriptionId:
     type: string
-    nullable: true
     description: ID of the order.
     maxLength: 50
-    readOnly: true
     example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
   discountAmount:
-    description: Discount amount applied to the invoice item.
+    description: Discount amount applied to the upcoming invoice item.
     type: number
     format: double
-    readOnly: true
   periodStartTime:
     description: Date and time when the billing period starts.
     type: string
@@ -65,7 +52,7 @@ properties:
     type: string
     format: date-time
   periodNumber:
-    description: Consecutive number of the billing period which is covered by the invoice item.
+    description: Consecutive number of the billing period which is covered by the upcoming invoice item.
     type: integer
   createdTime:
     $ref: ../CreatedTime.yaml
@@ -73,13 +60,11 @@ properties:
     $ref: ../UpdatedTime.yaml
   tax:
     description: Invoice item tax.
-    readOnly: true
     allOf:
       - $ref: ./InvoiceTaxItem.yaml
   _links:
     type: array
     description: Related links.
-    readOnly: true
     items:
       type: object
       properties:
@@ -92,10 +77,10 @@ properties:
           enum:
             - self
             - product
+            - plan
   _embedded:
     type: object
     description: Embedded objects that are requested by the `expand` query parameter.
-    readOnly: true
     properties:
       product:
         type: object

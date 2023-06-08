@@ -1,25 +1,14 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-  - name: invoiceId
-    in: path
-    description: ID of the upcoming invoice.
-    required: true
-    schema:
-      type: string
 post:
   x-products:
     - Core
   tags:
     - Orders
-  summary: Issue a selected upcoming invoice for early pay
-  operationId: PostUpcomingInvoiceIssuance
-  x-sdk-operation-name: issueUpcomingInvoice
-  deprecated: true
-  description: |-
-    Issues an upcoming invoice with a specified ID for early pay.
-
-    This endpoint is deprecated.
-    Use [Issue an upcoming invoice for early pay](../PostSubscriptionUpcomingInvoiceIssuance) instead.
+  summary: Issue an upcoming invoice for early pay
+  operationId: PostSubscriptionUpcomingInvoiceIssuance
+  x-sdk-operation-name: issueEarlyUpcomingInvoice
+  description: Issues an upcoming invoice of the subscription for early pay.
   requestBody:
     content:
       application/json:
