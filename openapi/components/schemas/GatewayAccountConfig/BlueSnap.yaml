@@ -44,5 +44,14 @@ allOf:
             type: string
             description: Rebilly custom field to use for sending transaction metadata.
       threeDSecureServer:
-        $ref: ../ThreeDSecureServers/BlueSnap3dsServers/BlueSnap3dsServers.yaml
+        required:
+          - name
+        allOf:
+          - type: object
+            properties:
+              name:
+                type: string
+                enum:
+                  - ThreeDSecureIO3dsServer
+          - $ref: ../ThreeDSecureServers/ThreeDSecureIO3dsServer.yaml
 

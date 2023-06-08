@@ -16,4 +16,24 @@ allOf:
         required:
           - apiKey
       threeDSecureServer:
-        $ref: ../ThreeDSecureServers/Clearhaus3dsServers/Clearhaus3dsServers.yaml
+        type: object
+        required:
+          - name
+          - merchantId
+          - acquirerBin
+          - apiKey
+        properties:
+          name:
+            type: string
+            enum:
+              - Clearhaus3dsServer
+          merchantId:
+            type: string
+            description: Merchant account ID or Card Acceptor ID provided by the acquiring bank.
+          acquirerBin:
+            type: string
+            description: Acquiring institution identification code.
+          apiKey:
+            type: string
+            format: password
+            description: API key for 3D Secure server.
