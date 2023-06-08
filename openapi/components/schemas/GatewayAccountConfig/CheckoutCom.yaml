@@ -24,14 +24,4 @@ allOf:
             description: Specifies whether to mark pending payouts as 'waiting-gateway/unknown' instead of 'approved'.
             default: false
       threeDSecureServer:
-        required:
-          - name
-        allOf:
-          - type: object
-            properties:
-              name:
-                description: Merchant plug-in name.
-                type: string
-                enum:
-                  - ThreeDSecureIO3dsServer
-          - $ref: ../ThreeDSecureServers/ThreeDSecureIO3dsServer.yaml
+        $ref: ../ThreeDSecureServers/ThreeDSecureIO3dsServer.yaml
