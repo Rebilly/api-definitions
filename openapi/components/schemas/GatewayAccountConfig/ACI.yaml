@@ -26,4 +26,14 @@ allOf:
             type: string
             description: ACI custom server URL.
       threeDSecureServer:
-        $ref: ../ThreeDSecureServers/ACI3dsServers/ACI3dsServers.yaml
+        required:
+          - name
+        allOf:
+          - type: object
+            properties:
+              name:
+                type: string
+                enum:
+                  - ThreeDSecureIO3dsServer
+          - $ref: ../ThreeDSecureServers/ThreeDSecureIO3dsServer.yaml
+

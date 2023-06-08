@@ -55,4 +55,13 @@ allOf:
         required:
           - url
       threeDSecureServer:
-        $ref: ../ThreeDSecureServers/Adyen3dsServers/Adyen3dsServers.yaml
+        required:
+          - name
+        allOf:
+          - type: object
+            properties:
+              name:
+                type: string
+                enum:
+                  - ThreeDSecureIO3dsServer
+          - $ref: ../ThreeDSecureServers/ThreeDSecureIO3dsServer.yaml
