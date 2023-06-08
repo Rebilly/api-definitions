@@ -8,9 +8,12 @@ discriminator:
   mapping:
     BBAN: ./AccountNumberTypes/BBANType.yaml
     IBAN: ./AccountNumberTypes/IBANType.yaml
-anyOf:
-  - $ref: ./AccountNumberTypes/BBANType.yaml
-  - $ref: ./AccountNumberTypes/IBANType.yaml
-
+properties:
+  accountNumberType:
+    nullable: false
+    type: string
+    enum:
+      - IBAN
+      - BBAN
 x-abstract-parent: PaymentInstruction
 
