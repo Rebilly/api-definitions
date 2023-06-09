@@ -3,14 +3,7 @@ discriminator:
   propertyName: name
   mapping:
     Payvision3dsServer: ./Payvision3dsServer.yaml
-    ThreeDSecureIO3dsServer: ./PayvisionThreeDSecureIOServer.yaml
-type: object
-required:
-  - name
-properties:
-  name:
-    allOf:
-      - $ref: ../../Gateways/ThreeDSecureServerName.yaml
-    enum:
-      - Payvision3dsServer
-      - ThreeDSecureIO3dsServer
+    ThreeDSecureIO3dsServer: ../ThreeDSecureIO3dsServer.yaml
+anyOf:
+    - $ref: ./Payvision3dsServer.yaml
+    - $ref: ../ThreeDSecureIO3dsServer.yaml
