@@ -21,4 +21,13 @@ allOf:
           - outletId
           - apiKey
       threeDSecureServer:
-        $ref: ../ThreeDSecureServers/NGenius3dsServers/NGenius3dsServers.yaml
+        type: object
+        description: NGenius 3DS servers.
+        required:
+          - name
+        properties:
+          name:
+            type: string
+            description: Merchant plug-in name.
+            enum:
+              - NGenius3dsServer
