@@ -1,0 +1,20 @@
+type: object
+description: Show Enhanced Due Diligence (EDD) search logs action.
+required:
+    - action
+readOnly: true
+properties:
+    searchLogId:
+        allOf:
+            - $ref: ../../ResourceId.yaml
+    type:
+        type: string
+        enum:
+            - arrest
+            - bankruptcy
+            - fraud
+            - occupation
+    action:
+        type: string
+        enum:
+            - show_edd_search_logs

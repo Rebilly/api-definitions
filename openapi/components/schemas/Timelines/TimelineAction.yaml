@@ -2,16 +2,13 @@ type: object
 discriminator:
   propertyName: action
   mapping:
-    redemption-cancel: ./Actions/redemption-cancel.yaml
-    resend-email: ./Actions/resend-email.yaml
-    ruleset-restore: ./Actions/ruleset-restore.yaml
-    show-edd-search-logs: ./Actions/show-edd-search-logs.yaml
-readOnly: true
-properties:
-  action:
-    type: string
-    enum:
-      - resend-email
-      - redemption-cancel
-      - ruleset-restore
-      - show-edd-search-logs
+    redemption-cancel: ./Actions/CancelRedemption.yaml
+    resend-email: ./Actions/ResendEmail.yaml
+    ruleset-restore: ./Actions/RestoreRuleset.yaml
+    show-edd-search-logs: ./Actions/ShowEddSearchLogs.yaml
+anyOf:
+  - $ref: ./Actions/CancelRedemption.yaml
+  - $ref: ./Actions/ResendEmail.yaml
+  - $ref: ./Actions/RestoreRuleset.yaml
+  - $ref: ./Actions/ShowEddSearchLogs.yaml
+
