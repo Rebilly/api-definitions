@@ -4,13 +4,8 @@ discriminator:
   mapping:
     password: ./TokenModes/password.yaml
     passwordless: ./TokenModes/passwordless.yaml
-properties:
-  mode:
-    description: |-
-      Specifies the authentication verification method.
-      The `password` token requires the user to enter a password to log in.
-      The `passwordless` token, requires a secret API key to log in.
-      To obtain an API key, see [Manage API keys](https://www.rebilly.com/docs/dev-docs/api-keys/#manage-api-keys).
-    default: password
-    type: string
+oneOf:
+  - $ref: ./TokenModes/password.yaml
+  - $ref: ./TokenModes/passwordless.yaml
+
 x-abstract-parent: CommonAuthenticationToken
