@@ -41,4 +41,16 @@ allOf:
             type: string
             description: ID of an existing Stripe gateway account from which credentials are copied in order to skip the onboarding process.
       threeDSecureServer:
-        $ref: ../ThreeDSecureServers/Stripe3dsServers/Stripe3dsServers.yaml
+        type: object
+        required:
+          - name
+        description: Stripe Integrated.
+        properties:
+          name:
+            type: string
+            description: Name of the Stripe 3DS server.
+            enum:
+              - Stripe3dsServer
+          enforceThreeDSecure:
+            type: boolean
+            description: If true, Stripe attempts to perform 3D Secure and overrides any [dynamic 3D Secure Radar rules](https://stripe.com/docs/radar/rules#request-3ds).
