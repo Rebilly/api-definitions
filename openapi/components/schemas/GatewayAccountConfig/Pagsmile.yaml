@@ -16,10 +16,24 @@ allOf:
             description: ID of the Pagsmile application.
           secretKey:
             type: string
-            description: Pagsmile secret key.
+            description: Pagsmile MD5 key.
+            format: password
+            writeOnly: true
+          apiSecretKey:
+            type: string
+            description: Pagsmile secret key for the Trade Pay API. The key starts with `Pagsmile_sk`.
             format: password
             writeOnly: true
         required:
           - merchantId
           - appId
           - secretKey
+      settings:
+        type: object
+        description: Pagsmile settings object.
+        properties:
+          useTradePay:
+            type: boolean
+            description: Specifies whether to use the Trade Pay API.
+            default: false
+            example: false

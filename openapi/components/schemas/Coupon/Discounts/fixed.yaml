@@ -1,16 +1,23 @@
+type: object
 description: Coupon fixed amount discount.
-allOf:
-  - $ref: ../Discount.yaml
-  - type: object
-    required:
-      - amount
-      - currency
-    properties:
-      amount:
-        description: Discount amount.
-        type: number
-        format: double
-        minimum: 0.01
-      currency:
-        allOf:
-          - $ref: ../../CurrencyCode.yaml
+required:
+  - amount
+  - currency
+  - type
+properties:
+  amount:
+    description: Amount of discount.
+    type: number
+    format: double
+    minimum: 0.01
+  currency:
+    allOf:
+      - $ref: ../../CurrencyCode.yaml
+  type:
+    type: string
+    enum: ["fixed"]
+    x-label: Type
+    x-sortable: true
+    x-basic: true
+  context:
+    $ref: ../DiscountContext.yaml

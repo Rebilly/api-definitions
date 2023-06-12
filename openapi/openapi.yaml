@@ -286,6 +286,13 @@ tags:
     description: |-
       Use these operations to manage email verification.
       Email verification is the process of confirming that an email address exists and is associated with an individual.
+  - name: External identifiers
+    description: |-
+      Use external identifier operations to associate entities such as customers, 
+      invoices, transactions, journal accounts, journal entries, 
+      and more with external services.
+
+      To use external identifiers, you must use an active service credential.
   - name: Fees
     description: |-
       Use fees to reconcile transactions with applicable fees and discount rates.
@@ -681,6 +688,12 @@ paths:
     $ref: ./paths/disputes.yaml
   '/disputes/{id}':
     $ref: './paths/disputes@{id}.yaml'
+  /external-identifiers:
+    $ref: ./paths/external-identifiers.yaml
+  /{resource}/{resourceId}/external-identifiers/{service}:
+    $ref: ./paths/{resource}@{resourceId}@external-identifiers@{service}.yaml
+  /external-services-settings:
+    $ref: ./paths/external-services-settings.yaml
   /files:
     $ref: ./paths/files.yaml
   '/files/{id}':
@@ -1143,6 +1156,8 @@ paths:
     $ref: ./paths/reports@subscription-cancellation.yaml
   /experimental/reports/subscription-renewal:
     $ref: ./paths/reports@subscription-renewal.yaml
+  /experimental/reports/tax:
+    $ref: ./paths/reports@tax.yaml
   /experimental/reports/time-series-transaction:
     $ref: ./paths/reports@time-series-transaction.yaml
   /experimental/reports/transactions-time-dispute:
@@ -1165,6 +1180,8 @@ paths:
     $ref: paths/storefront/account@verification@{token}.yaml
   '/storefront/billing-portals/{slug}':
     $ref: paths/storefront/billing-portals@{slug}.yaml
+  '/storefront/cashier-strategies/{id}':
+    $ref: paths/storefront/cashier-strategies@{id}.yaml
   '/storefront/cashier-requests/{id}':
     $ref: paths/storefront/cashier-requests@{id}.yaml
   '/storefront/cashier-deposit':
@@ -1415,6 +1432,12 @@ x-webhooks:
   payment-instrument-modified:
     post:
       $ref: ./webhooks/payment-instrument-modified.yaml
+  payout-request-created:
+    post:
+      $ref: ./webhooks/payout-request-created.yaml
+  payout-request-modified:
+    post:
+      $ref: ./webhooks/payout-request-modified.yaml
   renewal-invoice-issued:
     post:
       $ref: ./webhooks/renewal-invoice-issued.yaml

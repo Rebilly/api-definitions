@@ -1,0 +1,48 @@
+type: object
+required:
+  - externalIdentifier
+properties:
+  resource:
+    type: string
+    description: Type of the resource.
+    enum:
+      - customers
+      - invoices
+      - invoice-items
+      - transactions
+      - journal-accounts
+      - journal-entries
+    readOnly: true
+  resourceId:
+    type: string
+    description: ID of the resource entity.
+    readOnly: true
+  service:
+    type: string
+    description: Name of the external service.
+    enum:
+      - quickbooks-online
+    readOnly: true
+  externalIdentifier:
+    type: string
+    description: ID of the referenced entity within an external service.
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    description: Related links.
+    type: array
+    readOnly: true
+    items:
+      type: object
+      properties:
+        rel:
+          type: string
+          description: Type of link.
+          enum:
+            - self
+            - externalService
+        href:
+          type: string
+          description: Link URL.

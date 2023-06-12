@@ -1,15 +1,17 @@
+type: object
 description: Specifies a date and time at which a coupon redemption expires if the invoice is not paid.
-allOf:
-  - $ref: ../CouponRestriction.yaml
-  - $ref: ../RedemptionRestriction.yaml
-  - type: object
-    required:
-      - time
-    properties:
-      time:
-        type: string
-        format: date-time
-        description: |-
-          Date and time when a coupon redemption is no longer valid, and the coupon is removed from unpaid invoices if applied.
+required:
+  - type
+  - time
+properties:
+  type:
+    description: Type of coupon restriction.
+    type: string
+    enum: ["paid-by-time"]
+  time:
+    type: string
+    format: date-time
+    description: |-
+      Date and time when a coupon redemption is no longer valid, and the coupon is removed from unpaid invoices if applied.
 
-          > **Note:** This date-time cannot be changed.
+      > **Note:** This date-time cannot be changed.

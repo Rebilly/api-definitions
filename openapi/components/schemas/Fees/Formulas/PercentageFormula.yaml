@@ -1,6 +1,4 @@
 type: object
-allOf:
-  -  $ref: ../FeeFormula.yaml
 required:
   - type
   - currency
@@ -14,21 +12,6 @@ properties:
     $ref: ../../CurrencyCode.yaml
   bips:
     $ref: ../../Bips.yaml
-  round:
-    type: string
-    enum: ["regular", "up", "down"]
-    description: |-
-      Specifies the rounding mode for the fee amount.
-      Rounding reduces amounts to 2 decimal places.
-      - `up`: Rounds the amount up to the nearest value.
-        Also know as ceiling rounding.
-        Examples: $0.011 becomes $0.02, and $0.019 becomes $0.02.
-      - `down`: Rounds the amount down to the nearest value.
-        Also know as floor rounding.
-        Examples: $0.011 becomes $0.01, and $0.019 becomes $0.01.
-      - `regular`: Rounds the amount up if the value is 5 or greater and down if less than 5.
-        Examples: $0.011 becomes $0.01, $0.019 becomes $0.02, and $0.015 becomes $0.02.
-    default: "regular"
   minAmount:
     description: |-
       Minimum fee amount.
