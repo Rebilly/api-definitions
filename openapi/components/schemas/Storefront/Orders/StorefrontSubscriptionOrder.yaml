@@ -2,7 +2,10 @@ type: object
 allOf:
   - $ref: ../../Subscription/SubscriptionCancellationState.yaml
   - $ref: ./StorefrontOrderMetadata.yaml
-  - properties:
+  - type: object
+    required:
+      - orderType
+    properties:
       id:
         type: string
         description: ID of the order.

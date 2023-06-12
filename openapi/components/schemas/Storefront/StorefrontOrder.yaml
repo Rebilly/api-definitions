@@ -4,12 +4,6 @@ discriminator:
   mapping:
     subscription-order: ./Orders/StorefrontSubscriptionOrder.yaml
     one-time-order: ./Orders/StorefrontOneTimeOrder.yaml
-properties:
-  orderType:
-    description: |-
-      Specifies the type of order.
-      An order may be a subscription or a one-time purchase.
-    type: string
-    enum:
-      - subscription-order
-      - one-time-order
+anyOf:
+    - $ref: ./Orders/StorefrontSubscriptionOrder.yaml
+    - $ref: ./Orders/StorefrontOneTimeOrder.yaml
