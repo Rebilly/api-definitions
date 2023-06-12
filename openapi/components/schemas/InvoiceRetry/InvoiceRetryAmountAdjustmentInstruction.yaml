@@ -3,13 +3,8 @@ description: Specifies if the payment amount must be adjusted for the retry.
 discriminator:
   propertyName: method
   mapping:
-    partial: ./AmountAdjustmentInstructions/partial.yaml
-    none: ./AmountAdjustmentInstructions/none.yaml
-properties:
-  method:
-    type: string
-    enum:
-      - none
-      - partial
-required:
-  - method
+    partial: ./AmountAdjustmentInstructions/Partial.yaml
+    none: ./AmountAdjustmentInstructions/None.yaml
+anyOf:
+  - $ref: ./AmountAdjustmentInstructions/None.yaml
+  - $ref: ./AmountAdjustmentInstructions/Partial.yaml
