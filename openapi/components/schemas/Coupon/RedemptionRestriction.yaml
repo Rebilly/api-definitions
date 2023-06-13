@@ -10,17 +10,11 @@ discriminator:
     restrict-to-plans: ./CouponRestrictions/restrict-to-plans.yaml
     restrict-to-products: ./CouponRestrictions/restrict-to-products.yaml
     restrict-to-subscriptions: ./CouponRestrictions/restrict-to-subscriptions.yaml
-properties:
-  type:
-    description: Additional redemption restriction type.
-    type: string
-    enum:
-      - discounts-per-redemption
-      - minimum-order-amount
-      - restrict-to-invoices
-      - restrict-to-plans
-      - restrict-to-subscriptions
-      - restrict-to-products
-      - paid-by-time
-required:
-  - type
+anyOf:
+  - $ref: ./CouponRestrictions/discounts-per-redemption.yaml
+  - $ref: ./CouponRestrictions/minimum-order-amount.yaml
+  - $ref: ./CouponRestrictions/paid-by-time.yaml
+  - $ref: ./CouponRestrictions/restrict-to-invoices.yaml
+  - $ref: ./CouponRestrictions/restrict-to-plans.yaml
+  - $ref: ./CouponRestrictions/restrict-to-products.yaml
+  - $ref: ./CouponRestrictions/restrict-to-subscriptions.yaml

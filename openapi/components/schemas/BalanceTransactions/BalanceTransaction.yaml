@@ -9,6 +9,7 @@ discriminator:
     sell-fee: ./SellFeeTransaction.yaml
     risk-reserve: ./RiskReserveTransaction.yaml
     risk-reserve-release: ./RiskReserveReleaseTransaction.yaml
+    reverse: ./ReverseTransaction.yaml
 properties:
   id:
     type: string
@@ -27,6 +28,7 @@ properties:
       - sell-fee
       - risk-reserve
       - risk-reserve-release
+      - reverse
   parentId:
     description: |-
       ID of the parent entry if one exists.
@@ -38,7 +40,7 @@ properties:
   transactionId:
     description: ID of the related transaction.
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ../Transactions/TransactionId.yaml
   settlementCurrency:
     allOf:
       - $ref: ../CurrencyCode.yaml

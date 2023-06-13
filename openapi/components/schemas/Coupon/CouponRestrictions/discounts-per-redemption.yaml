@@ -1,15 +1,17 @@
+type: object
 description: |-
   Restricts the number of times that the coupon can be applied by one
   redemption. For example, use this restriction to configure a coupon
   that can only be applied to the first subscription renewal of a
   particular product.
-allOf:
-  - $ref: ../CouponRestriction.yaml
-  - $ref: ../RedemptionRestriction.yaml
-  - type: object
-    required:
-      - quantity
-    properties:
-      quantity:
-        type: integer
-        description: Restriction quantity.
+required:
+  - type
+  - quantity
+properties:
+  type:
+    description: Type of coupon restriction.
+    type: string
+    enum: ["discounts-per-redemption"]
+  quantity:
+    type: integer
+    description: Permitted number of discounts per redemption.

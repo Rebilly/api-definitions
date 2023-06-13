@@ -67,6 +67,10 @@ get:
   summary: Retrieve transactions
   operationId: GetTransactionCollection
   x-sdk-operation-name: getAll
+  security:
+    - SecretApiKey: [ ]
+    - JWT: [ ]
+    - ApplicationJWT: [ ]
   description: Retrieves a list of transactions.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
