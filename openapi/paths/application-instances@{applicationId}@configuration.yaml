@@ -8,6 +8,10 @@ get:
   summary: Retrieve an application instance configuration
   operationId: GetApplicationInstanceConfiguration
   x-sdk-operation-name: getConfiguration
+  security:
+    - SecretApiKey: [ ]
+    - JWT: [ ]
+    - ApplicationJWT: [ ]
   description: Retrieves the configuration of an installed application with a specified ID.
   responses:
     '200':
@@ -35,6 +39,10 @@ put:
   summary: Upsert an application instance configuration
   operationId: PutApplicationInstanceConfiguration
   x-sdk-operation-name: upsertConfiguration
+  security:
+    - SecretApiKey: [ ]
+    - JWT: [ ]
+    - ApplicationJWT: [ ]
   description: Creates or updates (upserts) an application instance configuration.
   requestBody:
     content:

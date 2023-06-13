@@ -37,6 +37,10 @@ put:
   summary: Upsert a coupon
   operationId: PutCoupon
   x-sdk-operation-name: update
+  security:
+    - SecretApiKey: [ ]
+    - JWT: [ ]
+    - ApplicationJWT: [ ]
   description: Creates or updates (upserts) a coupon with a specified coupon ID.
   requestBody:
     $ref: ../components/requestBodies/Coupon.yaml

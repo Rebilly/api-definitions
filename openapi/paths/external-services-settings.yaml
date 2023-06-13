@@ -1,0 +1,48 @@
+get:
+  x-products:
+    - Users
+  tags:
+    - External identifiers
+  summary: Retrieve external service settings
+  operationId: GetExternalServiceSettings
+  x-sdk-operation-name: getExternalServiceSettings
+  description: Retrieves external service settings.
+  responses:
+    '200':
+      description: External service settings.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ExternalServiceSettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+put:
+  x-products:
+    - Users
+  tags:
+    - External identifiers
+  summary: Update external service settings
+  operationId: PutExternalServiceSettings
+  x-sdk-operation-name: updateExternalServiceSettings
+  description: Updates the external service settings.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ExternalServiceSettings.yaml
+    required: true
+  responses:
+    '200':
+      description: External service settings updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ExternalServiceSettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
