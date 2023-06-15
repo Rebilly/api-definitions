@@ -39,4 +39,13 @@ allOf:
           - businessSignature
           - delay
       threeDSecureServer:
-        $ref: ../ThreeDSecureServers/Wirecard3dsServers/Wirecard3dsServers.yaml
+        type: object
+        description: Wirecard 3DS server.
+        required:
+          - name
+        properties:
+          name:
+            type: string
+            description: Name of the merchant plug-in.
+            enum:
+              - Wirecard3dsServer
