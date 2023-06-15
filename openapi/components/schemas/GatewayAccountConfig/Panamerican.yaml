@@ -22,7 +22,16 @@ allOf:
           - key
           - password
       threeDSecureServer:
-        $ref: ../ThreeDSecureServers/Panamerican3dsServers/Panamerican3dsServers.yaml
+        type: object
+        description: Panamerican 3DS servers.
+        required:
+          - name
+        properties:
+          name:
+            type: string
+            description: Merchant plug-in name.
+            enum:
+              - Panamerican3dsServer
       settings:
         type: object
         description: Panamerican settings object.
