@@ -21,4 +21,13 @@ allOf:
           - merchantId
           - applicationId
       threeDSecureServer:
-        $ref: ../ThreeDSecureServers/SmartInvoice3dsServers/SmartInvoice3dsServers.yaml
+        type: object
+        description: SmartInvoice 3DS servers.
+        required:
+          - name
+        properties:
+          name:
+            type: string
+            description: Name of the merchant plug-in.
+            enum:
+              - SmartInvoice3dsServer
