@@ -2,28 +2,28 @@ type: object
 properties:
   parsedScore:
     allOf:
-      - $ref: ./EddData.yaml
+      - $ref: ./Edd/EddData.yaml
       - type: object
         properties:
           occupationDetails:
-            $ref: ./EddScoreDetails.yaml
+            $ref: ./Edd/EddScoreDetails.yaml
           arrestDetails:
-            $ref: ./EddScoreDetails.yaml
+            $ref: ./Edd/EddScoreDetails.yaml
           bankruptcyDetails:
-            $ref: ./EddScoreDetails.yaml
+            $ref: ./Edd/EddScoreDetails.yaml
           fraudDetails:
-            $ref: ./EddScoreDetails.yaml
+            $ref: ./Edd/EddScoreDetails.yaml
   score:
-    $ref: ./EddData.yaml
+    $ref: ./Edd/EddData.yaml
   nextUpdateTime:
     description: Date and time in ISO 8601 format when the EDD score is updated.
     type: string
     format: date-time
     nullable: true
   createdTime:
-    $ref: ../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   _links:
     type: array
     description: Related links.
