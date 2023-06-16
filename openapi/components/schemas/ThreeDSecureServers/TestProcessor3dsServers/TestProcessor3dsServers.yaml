@@ -3,14 +3,7 @@ discriminator:
   propertyName: name
   mapping:
     TestSandbox3dsServer: ./TestProcessor3dsServer.yaml
-    ThreeDSecureIO3dsServer: ./TestProcessorThreeDSecureIOServer.yaml
-type: object
-required:
-  - name
-properties:
-  name:
-    allOf:
-      - $ref: ../../Gateways/ThreeDSecureServerName.yaml
-    enum:
-      - TestSandbox3dsServer
-      - ThreeDSecureIO3dsServer
+    ThreeDSecureIO3dsServer: ../ThreeDSecureIO3dsServer.yaml
+allOf:
+  - $ref: ./TestProcessor3dsServer.yaml
+  - $ref: ../ThreeDSecureIO3dsServer.yaml

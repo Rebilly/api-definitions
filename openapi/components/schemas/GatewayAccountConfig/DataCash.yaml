@@ -62,4 +62,13 @@ allOf:
             minimum: 0
             default: 0
       threeDSecureServer:
-        $ref: ../ThreeDSecureServers/DataCash3dsServers/DataCash3dsServers.yaml
+        type: object
+        description: DataCash 3DS server.
+        required:
+          - name
+        properties:
+          name:
+            description: Name of the merchant plug-in.
+            type: string
+            enum:
+              - DataCash3dsServer
