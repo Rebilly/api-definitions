@@ -1,0 +1,29 @@
+description: MobilePay gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          providerId:
+            type: string
+            description: ID of the MobilePay provider.
+          merchantVat:
+            type: string
+            description: VAT number of the MobilePay merchant.
+          clientId:
+            type: string
+            description: ID of the MobilePay client.
+          clientSecret:
+            type: string
+            description: MobilePay client secret.
+            format: password
+            writeOnly: true
+        required:
+          - providerId
+          - merchantVat
+          - clientId
+          - clientSecret
