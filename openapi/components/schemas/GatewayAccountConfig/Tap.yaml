@@ -17,4 +17,13 @@ allOf:
         required:
           - apiKey
       threeDSecureServer:
-        $ref: ../ThreeDSecureServers/Tap3dsServers/Tap3dsServers.yaml
+        type: object
+        required:
+          - name
+        description: Name of the Tap 3DS server.
+        properties:
+          name:
+            type: string
+            description: Name of the merchant plug-in.
+            enum:
+              - Tap3dsServer

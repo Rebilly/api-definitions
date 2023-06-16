@@ -43,4 +43,13 @@ allOf:
           - merchantAccountId
           - productId
       threeDSecureServer:
-        $ref: ../ThreeDSecureServers/Inovio3dsServers/Inovio3dsServers.yaml
+        type: object
+        description: Inovio 3DS servers.
+        required:
+          - name
+        properties:
+          name:
+            type: string
+            description: Merchant plug-in name.
+            enum:
+              - Inovio3dsServer

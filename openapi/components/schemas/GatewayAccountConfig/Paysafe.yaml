@@ -24,4 +24,13 @@ allOf:
           - storePwd
           - accountNum
       threeDSecureServer:
-        $ref: ../ThreeDSecureServers/Paysafe3dsServers/Paysafe3dsServers.yaml
+        type: object
+        description: Paysafe 3DS servers.
+        required:
+          - name
+        properties:
+          name:
+            type: string
+            description: Merchant plug-in name.
+            enum:
+              - Paysafe3dsServer
