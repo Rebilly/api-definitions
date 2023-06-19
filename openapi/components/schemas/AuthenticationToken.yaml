@@ -1,0 +1,11 @@
+type: object
+discriminator:
+  propertyName: mode
+  mapping:
+    password: ./CustomerAuthentication/TokenModes/password.yaml
+    passwordless: ./CustomerAuthentication/TokenModes/passwordless.yaml
+oneOf:
+  - $ref: ./CustomerAuthentication/TokenModes/password.yaml
+  - $ref: ./CustomerAuthentication/TokenModes/passwordless.yaml
+
+x-abstract-parent: CommonAuthenticationToken

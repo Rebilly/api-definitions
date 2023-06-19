@@ -1,0 +1,135 @@
+type: object
+description: Application object.
+required:
+  - name
+  - logoId
+  - authorName
+  - tagline
+  - description
+  - permissions
+properties:
+  id:
+    type: string
+    description: ID of the application.
+    readOnly: true
+    maxLength: 50
+    example: app_01H0HT25X7XXCJGS4H8VJSYF2Y
+  name:
+    description: Name of the application.
+    type: string
+  logoId:
+    description: File ID of the application logo.
+    maxLength: 50
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+  authorName:
+    description: Name of the application author.
+    type: string
+  authorLogoId:
+    type: string
+    description: File ID of the author's logo.
+    maxLength: 50
+    nullable: true
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+  tagline:
+    description: Tagline of the application.
+    type: string
+  description:
+    description: Detailed application description. This field accepts markdown and simple text.
+    type: string
+  status:
+    description: Status of the application.
+    readOnly: true
+    type: string
+    enum:
+      - pending-approval
+      - available
+      - disabled
+  permissions:
+    description: |-
+      List of permissions that are available to the application.
+      If you would like to add permissions, contact [Rebilly Support](mailto:info@rebilly.com).
+    type: array
+    items:
+      type: string
+      format: operationId
+      enum:
+        - DeleteApplicationInstance
+        - GetApplicationInstanceConfiguration
+        - GetCustomer
+        - GetCustomerCollection
+        - GetInvoice
+        - GetInvoiceCollection
+        - GetPlan
+        - GetPlanCollection
+        - GetProduct
+        - GetProductCollection
+        - GetSubscription
+        - GetSubscriptionCollection
+        - GetTransaction
+        - GetTransactionCollection
+        - GetWebhook
+        - GetWebsite
+        - GetWebsiteCollection
+        - PostCoupon
+        - PostCouponRedemption
+        - PostGatewayAccountDowntimeSchedule
+        - PostPayout
+        - PostServiceCredential
+        - PostWebhook
+        - PostWebhookCredentialHash
+        - PutApplicationInstanceConfiguration
+        - PutCoupon
+    example:
+      - GetInvoice
+      - GetInvoiceCollection
+      - GetCustomer
+      - GetCustomerCollection
+  configurationUrl:
+    description: External URL where the application is configured during installation.
+    type: string
+    format: url
+    nullable: true
+  configuredBy:
+    type: string
+    description: Specifies who can configure the application.
+    readOnly: true
+    enum:
+      - user
+      - application
+  properties:
+    description: |-
+      Defines settings that users can complete when they install the application.
+      This field accepts [JSON-schema](https://json-schema.org/) drafts 4, 6, and 7.
+    type: object
+    example:
+      type: object
+      properties:
+        email:
+          type: "string"
+        max:
+          type: "integer"
+          minimum: 0
+          exclusiveMaximum: 100
+      required: ["email"]
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - applicationInstance
+            - logoUrl
+            - authorLogoUrl
