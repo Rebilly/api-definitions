@@ -16,7 +16,7 @@ properties:
     maxLength: 50
     example: web_0YV7DE4Z26DQSA1AC92FBJ7SEG
   customerId:
-    $ref: ../CustomerId.yaml
+    $ref: ./CustomerId.yaml
   strategyId:
     description: |-
       ID of a strategy to be applied for this request for `amounts` and `customAmount`.
@@ -47,7 +47,7 @@ properties:
       completed: A funds deposit transaction has been initiated. This is a permanent state.
       expired: Request expired without a deposit attempt. This is a permanent state.
   currency:
-    $ref: ../CurrencyCode.yaml
+    $ref: ./CurrencyCode.yaml
   amounts:
     type: array
     description: |-
@@ -60,7 +60,7 @@ properties:
       format: double
       minimum: 0.01
   customAmount:
-    $ref: ./CashierStrategyCustomAmount.yaml
+    $ref: ./Cashier/CashierStrategyCustomAmount.yaml
   redirectUrl:
     description: URL to redirect the customer to when a deposit is completed. The default value is the website URL.
     type: string
@@ -105,9 +105,9 @@ properties:
       max: '33'
 
   createdTime:
-    $ref: ../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   _links:
     type: array
     description: Related links.
