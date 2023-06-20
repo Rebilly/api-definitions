@@ -27,4 +27,13 @@ allOf:
           - apiKeyId
           - apiSecretKey
       threeDSecureServer:
-        $ref: ../ThreeDSecureServers/Ingenico3dsServers/Ingenico3dsServers.yaml
+        type: object
+        description: Ingenico 3DS servers.
+        required:
+          - name
+        properties:
+          name:
+            type: string
+            description: Merchant plug-in name.
+            enum:
+              - Ingenico3dsServer
