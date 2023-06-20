@@ -1,10 +1,10 @@
 type: object
-description: Ruleset for a specific event.
+description: Version of ruleset.
+readOnly: true
 properties:
   version:
     description: Version of the ruleset.
     type: integer
-    readOnly: true
   binds:
     type: array
     description: |-
@@ -18,12 +18,10 @@ properties:
       Rules can be configured to stop subsequent rules in the event list from being executed.
       A rule is a configuration of an event and one or more actions.
     items:
-      $ref: ./Rule.yaml
+      $ref: ./Rules/Rule.yaml
   createdTime:
-    $ref: ../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   _links:
-    $ref: ../SelfLink.yaml
-required:
-  - rules
+    $ref: ./SelfLink.yaml
