@@ -1,0 +1,36 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Issue an upcoming invoice for early pay
+  operationId: PostSubscriptionUpcomingInvoiceIssuance
+  x-sdk-operation-name: issueEarlyUpcomingInvoice
+  description: Issues an upcoming invoice of the subscription for early pay.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Invoices/InvoiceIssue.yaml
+    description: InvoiceIssue resource.
+    required: true
+  responses:
+    '201':
+      description: Upcoming invoice issued.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Invoices/UpcomingInvoice.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml

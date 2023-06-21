@@ -11,10 +11,15 @@ post:
     - Core
   tags:
     - Orders
-  summary: Issue an upcoming invoice for early pay
+  summary: Issue a specific upcoming invoice for early pay
   operationId: PostUpcomingInvoiceIssuance
   x-sdk-operation-name: issueUpcomingInvoice
-  description: Issues an upcoming invoice with a specified ID for early pay.
+  deprecated: true
+  description: |-
+    Issues an upcoming invoice with a specified ID for early pay.
+
+    This endpoint is deprecated.
+    Use [Issue an upcoming invoice for early pay](../PostSubscriptionUpcomingInvoiceIssuance) instead.
   requestBody:
     content:
       application/json:
@@ -31,7 +36,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Invoices/Invoice.yaml
+            $ref: ../components/schemas/Invoices/UpcomingInvoice.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

@@ -1,0 +1,180 @@
+type: object
+readOnly: true
+properties:
+  id:
+    description: ID of the upcoming invoice, which is persisted in the future renewal invoice.
+    type: string
+    readOnly: true
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
+  websiteId:
+    $ref: ../Websites/WebsiteId.yaml
+  subscriptionId:
+    description: ID of the related subscription order.
+    type: string
+    readOnly: true
+    maxLength: 50
+    example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
+  currency:
+    x-sortable: true
+    x-basic: true
+    allOf:
+      - $ref: ../CurrencyCode.yaml
+  customerId:
+    x-basic: true
+    allOf:
+      - $ref: ../CustomerId.yaml
+  revision:
+    description: |-
+      Number of times the upcoming invoice data has changed.
+
+      Use the revision number when analyzing webhook data to
+      determine if a change should take precedence over the current
+      representation.
+    type: integer
+  organizationId:
+    allOf:
+      - $ref: ../Organizations/OrganizationId.yaml
+  items:
+    type: array
+    description: Upcoming Invoice items array.
+    items:
+      $ref: ./UpcomingInvoiceItem.yaml
+  amount:
+    description: Amount of the invoice.
+    type: number
+    x-type: Money
+    x-sortable: true
+    x-basic: true
+    format: double
+    readOnly: true
+  amountDue:
+    description: Amount that is due on the invoice.
+    type: number
+    x-type: Money
+    x-sortable: true
+    format: double
+    readOnly: true
+  subtotalAmount:
+    description: Subtotal amount of the invoice.
+    type: number
+    x-type: Money
+    format: double
+    readOnly: true
+  discountAmount:
+    description: Discount amount that is applied to the invoice.
+    type: number
+    x-type: Money
+    format: double
+    readOnly: true
+  shipping:
+    $ref: ../Shipping.yaml
+  tax:
+    $ref: ./InvoiceTax.yaml
+  organizationTaxIdNumber:
+    description: Organization tax ID number that is displayed on the invoice.
+    type: object
+    nullable: true
+    required:
+      - type
+      - value
+    properties:
+      type:
+        type: string
+        description: Type of the tax ID number.
+        enum:
+          - eu-vat
+          - other
+        example: eu-vat
+      value:
+        type: string
+        description: Value of the tax ID number.
+        example: GB980780684
+  customerTaxIdNumber:
+    description: Customer tax ID number that is displayed on the invoice.
+    type: object
+    nullable: true
+    required:
+      - type
+      - value
+    properties:
+      type:
+        type: string
+        description: Type of the tax ID number.
+        enum:
+          - eu-vat
+          - other
+        example: eu-vat
+      value:
+        type: string
+        description: Value of the tax ID number.
+        example: GB980780684
+  billingAddress:
+    description: Billing address of the invoice.
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  deliveryAddress:
+    description: Delivery address of the invoice.
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  poNumber:
+    description: Purchase order number that is displayed on the invoice.
+    nullable: true
+    example: PO123456
+    type: string
+  notes:
+    description: Notes for the customer that are displayed on the invoice.
+    type: string
+  discounts:
+    type: array
+    description: Discounts applied.
+    readOnly: true
+    items:
+      allOf:
+        - $ref: ../Coupon/InvoiceDiscount.yaml
+  dueTime:
+    description: Date and time when the invoice is due for payment.
+    type: string
+    x-sortable: true
+    format: date-time
+  issuedTime:
+    description: Date and time when the invoice is issued.
+    x-label: Date Issued
+    x-sortable: true
+    x-basic: true
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  createdTime:
+    $ref: ../CreatedTime.yaml
+  updatedTime:
+    $ref: ../UpdatedTime.yaml
+  _links:
+    type: array
+    description: Related links.
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - website
+            - customer
+            - organization
+            - subscription
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    properties:
+      customer:
+        type: object
+      website:
+        type: object
+      organization:
+        type: object
+      leadSource:
+        type: object
