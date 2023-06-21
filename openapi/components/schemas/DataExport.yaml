@@ -2,12 +2,12 @@ type: object
 discriminator:
   propertyName: resource
   mapping:
-    customers: ./resources/customers.yaml
-    subscriptions: ./resources/subscriptions.yaml
-    transactions: ./resources/transactions.yaml
-    invoices: ./resources/invoices.yaml
-    invoiceItems: ./resources/invoiceItems.yaml
-    revenueAudit: ./resources/revenueAudit.yaml
+    customers: ./DataExports/resources/customers.yaml
+    subscriptions: ./DataExports/resources/subscriptions.yaml
+    transactions: ./DataExports/resources/transactions.yaml
+    invoices: ./DataExports/resources/invoices.yaml
+    invoiceItems: ./DataExports/resources/invoiceItems.yaml
+    revenueAudit: ./DataExports/resources/revenueAudit.yaml
 required:
   - name
   - format
@@ -104,11 +104,11 @@ properties:
   scheduledTime:
     description: Date and time when the data export is scheduled to generate a file.
     allOf:
-      - $ref: ../ServerTimestamp.yaml
+      - $ref: ./ServerTimestamp.yaml
   createdTime:
-    $ref: ../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   status:
     description: Status of export request.
     readOnly: true
