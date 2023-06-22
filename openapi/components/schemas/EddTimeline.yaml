@@ -11,10 +11,9 @@ properties:
     type: string
     readOnly: true
     enum:
-      - credit-memo-created
-      - credit-memo-applied
-      - credit-memo-partially-applied
-      - credit-memo-voided
+      - edd-search-performed
+      - edd-score-manually-updated
+      - timeline-comment-created
   triggeredBy:
     description: Specifies who, or what, triggered the timeline event.
     type: string
@@ -24,14 +23,14 @@ properties:
       - app
       - direct-api
   message:
-    description: Content of the timeline message.
+    description: Detailed message description.
     type: string
   extraData:
-    $ref: ./TimelineExtraData.yaml
+    $ref: ./Timelines/TimelineExtraData.yaml
   occurredTime:
-    description: Date and time when the timeline message occurred.
+    description: Date and time when the customer timeline custom event occurs.
     readOnly: true
     allOf:
-      - $ref: ../ServerTimestamp.yaml
+      - $ref: ./ServerTimestamp.yaml
   _links:
-    $ref: ../SelfLink.yaml
+    $ref: ./SelfLink.yaml
