@@ -4,210 +4,213 @@ required:
   - customerId
   - websiteId
   - items
-properties:
-  id:
-    type: string
-    description: ID of the order.
-    readOnly: true
-    maxLength: 50
-    example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
-  orderType:
-    description: |-
-      Specifies the type of order.
-      An order may be a subscription or a one-time purchase.
-    type: string
-    x-basic: true
-    enum:
-      - one-time-order
-  customerId:
-    $ref: ../../CustomerId.yaml
-  organizationId:
-    deprecated: true
-    readOnly: true
-    allOf:
-      - $ref: ../../Organizations/OrganizationId.yaml
-  status:
-    description: Status of the one-time order.
-    type: string
-    readOnly: true
-    enum:
-      - pending
-      - abandoned
-      - completed
-      - canceled
-  billingStatus:
-    description: |-
-      Billing status of the most recent invoice.
-      This value may help you to determine if you should change the service status of the service,
-      such as suspending the service.
-    type: string
-    readOnly: true
-    enum:
-      - draft
-      - unpaid
-      - past-due
-      - abandoned
-      - paid
-      - voided
-      - refunded
-      - disputed
-      - partially-refunded
-      - partially-paid
-  websiteId:
-    x-sortable: true
-    x-basic: true
-    allOf:
-      - $ref: ../../Websites/WebsiteId.yaml
-  currency:
-    description: Currency of the order.
-    readOnly: true
-    allOf:
-      - $ref: ../../CurrencyCode.yaml
-  initialInvoiceId:
-    description: ID of the initial invoice (`null` for one-time orders).
-    readOnly: true
-    type: string
-    nullable: true
-    maxLength: 50
-    example: in_0YVF9605RKC62BP14NE2R7V2XT
-  recentInvoiceId:
-    description: |-
-      ID of the most recently issued invoice.
-      The invoice might not be `paid` yet.
-    readOnly: true
-    type: string
-    nullable: true
-    maxLength: 50
-    example: in_0YVF9605RKC62BP14NE2R7V2XT
-  items:
-    description: Item details.
-    type: array
-    minItems: 1
-    items:
-      $ref: ../../Subscription/OrderItem.yaml
-  deliveryAddress:
-    description: Delivery address of the order.
-    nullable: true
-    type: object
-    allOf:
-      - $ref: ../../Contact/ContactObject.yaml
-  billingAddress:
-    description: Billing address of the order.
-    nullable: true
-    type: object
-    allOf:
-      - $ref: ../../Contact/ContactObject.yaml
-  activationTime:
-    description: Date and time when the order is activated.
-    x-sortable: true
-    type: string
-    format: date-time
-    readOnly: true
-    nullable: true
-  voidTime:
-    description: Date and time when the order is voided.
-    type: string
-    format: date-time
-    readOnly: true
-    nullable: true
-  abandonTime:
-    type: string
-    description: |-
-      Date and time when the pending order is automatically abandoned.
-      If this value is not passed during order creation,
-      a [pending order TTL](https://all-rebilly.redoc.ly/tag/Organizations/operation/PatchOrganization/#!path=settings/billing/pendingOrderTtl&t=request) setting is used to calculate the value.
-    format: date-time
-    nullable: true
-  couponIds:
-    type: array
-    nullable: true
-    description: |-
-      List of coupons to redeem on the customer and restrict to this order.
-
-      For more information, see [Coupons](https://www.rebilly.com/docs/settings/coupons-and-discounts/).
-
-      This parameter uses the following logic:
-
-      - If this parameter is not supplied, applied coupons are not changed.
-      - If an empty array is supplied, all applied coupon redemptions are canceled.
-      - If a list of coupons is supplied, unapplied coupons in the list are applied.
-        Coupons that have already been applied do not change state.
-        Applied coupons that are not supplied in list are canceled.
-
-      If the list of applied coupons on a pending order is changed by this parameter during an order update, the invoice for the order is reissued.
-    writeOnly: true
-    items:
-      type: string
-      description: ID of the coupon.
-  poNumber:
-    description: Purchase order number displayed on the issued invoices.
-    nullable: true
-    example: PO123456
-    type: string
-  shipping:
-    $ref: ../../Shipping.yaml
-  notes:
-    description: Notes for the customer displayed on the order invoice.
-    type: string
-
-  revision:
-    description: |-
-      Number of times the order data has been modified.
-
-      The revision is useful when analyzing webhook data to determine if the
-      change takes precedence over the current representation.
-    type: integer
-    readOnly: true
-  riskMetadata:
-    nullable: true
-    type: object
-    example: null
-    description: |-
-      Risk metadata.
-      If this value is `null`, this field uses risk metadata that is captured when creating the payment token.
-    allOf:
-      - $ref: ../../RiskMetadata.yaml
-  customFields:
-    $ref: ../../ResourceCustomFields.yaml
-  createdTime:
-    $ref: ../../CreatedTime.yaml
-  updatedTime:
-    $ref: ../../UpdatedTime.yaml
-  _links:
-    type: array
-    description: Related links.
-    readOnly: true
-    items:
-      type: object
-      properties:
-        href:
-          description: Link URL.
-          type: string
-        rel:
-          description: Type of link.
-          type: string
-          enum:
-            - self
-            - website
-            - customer
-            - initialInvoice
-            - recentInvoice
-            - approvalUrl
-            - attachments
-  _embedded:
-    type: object
-    description: Embedded objects that are requested by the `expand` query parameter.
-    readOnly: true
+allOf:
+  - $ref: ../../Subscription.yaml
+  - type: object
     properties:
-      recentInvoice:
+      id:
+        type: string
+        description: ID of the order.
+        readOnly: true
+        maxLength: 50
+        example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
+      orderType:
+        description: |-
+          Specifies the type of order.
+          An order may be a subscription or a one-time purchase.
+        type: string
+        x-basic: true
+        enum:
+          - one-time-order
+      customerId:
+        $ref: ../../CustomerId.yaml
+      organizationId:
+        deprecated: true
+        readOnly: true
+        allOf:
+          - $ref: ../../Organizations/OrganizationId.yaml
+      status:
+        description: Status of the one-time order.
+        type: string
+        readOnly: true
+        enum:
+          - pending
+          - abandoned
+          - completed
+          - canceled
+      billingStatus:
+        description: |-
+          Billing status of the most recent invoice.
+          This value may help you to determine if you should change the service status of the service,
+          such as suspending the service.
+        type: string
+        readOnly: true
+        enum:
+          - draft
+          - unpaid
+          - past-due
+          - abandoned
+          - paid
+          - voided
+          - refunded
+          - disputed
+          - partially-refunded
+          - partially-paid
+      websiteId:
+        x-sortable: true
+        x-basic: true
+        allOf:
+          - $ref: ../../Websites/WebsiteId.yaml
+      currency:
+        description: Currency of the order.
+        readOnly: true
+        allOf:
+          - $ref: ../../CurrencyCode.yaml
+      initialInvoiceId:
+        description: ID of the initial invoice (`null` for one-time orders).
+        readOnly: true
+        type: string
+        nullable: true
+        maxLength: 50
+        example: in_0YVF9605RKC62BP14NE2R7V2XT
+      recentInvoiceId:
+        description: |-
+          ID of the most recently issued invoice.
+          The invoice might not be `paid` yet.
+        readOnly: true
+        type: string
+        nullable: true
+        maxLength: 50
+        example: in_0YVF9605RKC62BP14NE2R7V2XT
+      items:
+        description: Item details.
+        type: array
+        minItems: 1
+        items:
+          $ref: ../../Subscription/OrderItem.yaml
+      deliveryAddress:
+        description: Delivery address of the order.
+        nullable: true
         type: object
-      customer:
+        allOf:
+          - $ref: ../../Contact/ContactObject.yaml
+      billingAddress:
+        description: Billing address of the order.
+        nullable: true
         type: object
-      website:
+        allOf:
+          - $ref: ../../Contact/ContactObject.yaml
+      activationTime:
+        description: Date and time when the order is activated.
+        x-sortable: true
+        type: string
+        format: date-time
+        readOnly: true
+        nullable: true
+      voidTime:
+        description: Date and time when the order is voided.
+        type: string
+        format: date-time
+        readOnly: true
+        nullable: true
+      abandonTime:
+        type: string
+        description: |-
+          Date and time when the pending order is automatically abandoned.
+          If this value is not passed during order creation,
+          a [pending order TTL](https://all-rebilly.redoc.ly/tag/Organizations/operation/PatchOrganization/#!path=settings/billing/pendingOrderTtl&t=request) setting is used to calculate the value.
+        format: date-time
+        nullable: true
+      couponIds:
+        type: array
+        nullable: true
+        description: |-
+          List of coupons to redeem on the customer and restrict to this order.
+
+          For more information, see [Coupons](https://www.rebilly.com/docs/settings/coupons-and-discounts/).
+
+          This parameter uses the following logic:
+
+          - If this parameter is not supplied, applied coupons are not changed.
+          - If an empty array is supplied, all applied coupon redemptions are canceled.
+          - If a list of coupons is supplied, unapplied coupons in the list are applied.
+            Coupons that have already been applied do not change state.
+            Applied coupons that are not supplied in list are canceled.
+
+          If the list of applied coupons on a pending order is changed by this parameter during an order update, the invoice for the order is reissued.
+        writeOnly: true
+        items:
+          type: string
+          description: ID of the coupon.
+      poNumber:
+        description: Purchase order number displayed on the issued invoices.
+        nullable: true
+        example: PO123456
+        type: string
+      shipping:
+        $ref: ../../Shipping.yaml
+      notes:
+        description: Notes for the customer displayed on the order invoice.
+        type: string
+
+      revision:
+        description: |-
+          Number of times the order data has been modified.
+
+          The revision is useful when analyzing webhook data to determine if the
+          change takes precedence over the current representation.
+        type: integer
+        readOnly: true
+      riskMetadata:
+        nullable: true
         type: object
-      leadSource:
+        example: null
+        description: |-
+          Risk metadata.
+          If this value is `null`, this field uses risk metadata that is captured when creating the payment token.
+        allOf:
+          - $ref: ../../RiskMetadata.yaml
+      customFields:
+        $ref: ../../ResourceCustomFields.yaml
+      createdTime:
+        $ref: ../../CreatedTime.yaml
+      updatedTime:
+        $ref: ../../UpdatedTime.yaml
+      _links:
+        type: array
+        description: Related links.
+        readOnly: true
+        items:
+          type: object
+          properties:
+            href:
+              description: Link URL.
+              type: string
+            rel:
+              description: Type of link.
+              type: string
+              enum:
+                - self
+                - website
+                - customer
+                - initialInvoice
+                - recentInvoice
+                - approvalUrl
+                - attachments
+      _embedded:
         type: object
-      shippingRate:
-        type: object
-      paymentInstrument:
-        type: object
+        description: Embedded objects that are requested by the `expand` query parameter.
+        readOnly: true
+        properties:
+          recentInvoice:
+            type: object
+          customer:
+            type: object
+          website:
+            type: object
+          leadSource:
+            type: object
+          shippingRate:
+            type: object
+          paymentInstrument:
+            type: object
