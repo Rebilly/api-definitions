@@ -1,0 +1,14 @@
+type: object
+description: KYC document information.
+discriminator:
+  propertyName: documentType
+  mapping:
+    identity-proof: ./KycDocument/ProofOfIdentityKycDocument.yaml
+    address-proof: ./KycDocument/ProofOfAddressKycDocument.yaml
+    funds-proof: ./KycDocument/ProofOfFundsKycDocument.yaml
+    purchase-proof: ./KycDocument/ProofOfPurchaseKycDocument.yaml
+    credit-file-proof: ./KycDocument/ProofOfCreditFileKycDocument.yaml
+properties:
+  documentType:
+    type: string
+x-no-abstract-methods: true
