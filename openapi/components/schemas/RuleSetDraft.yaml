@@ -22,14 +22,14 @@ properties:
       Binds always execute, regardless of rule based events.
       A rule is a configuration of an event and one or more actions.
     items:
-      $ref: ./Bind.yaml
+      $ref: ./Rules/Bind.yaml
   rules:
     type: array
     description: |-
       Rule can be configured to stop subsequent rules in the event list from being executed.
       A rule is a configuration of an event and one or more actions.
     items:
-      $ref: ./Rule.yaml
+      $ref: ./Rules/Rule.yaml
   author:
     description: Author of the draft.
     readOnly: true
@@ -39,7 +39,7 @@ properties:
         description: Author's user ID.
         type: string
         allOf:
-          - $ref: ../ResourceId.yaml
+          - $ref: ./ResourceId.yaml
       name:
         description: Author's first and last name.
         type: string
@@ -50,9 +50,9 @@ properties:
     type: string
     description: Detailed description of the drafted ruleset.
   createdTime:
-    $ref: ../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   _links:
     type: array
     description: Related links.
