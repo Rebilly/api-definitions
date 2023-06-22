@@ -148,13 +148,7 @@ discriminator:
     Yandex-money: ./AlternativePaymentToken.yaml
     Zotapay: ./AlternativePaymentToken.yaml
     Zimpler: ./AlternativePaymentToken.yaml
-x-abstract-parent: CommonPaymentToken
-anyOf:
-  - $ref: ./PaymentCardToken.yaml
-  - $ref: ./PayPalToken.yaml
-  - $ref: ./BankAccountToken.yaml
-  - $ref: ./DigitalWalletToken.yaml
-  - $ref: ./PlaidAccountToken.yaml
-  - $ref: ./KhelocardCardToken.yaml
-  - $ref: ./KlarnaToken.yaml
-  - $ref: ./AlternativePaymentToken.yaml
+properties:
+  method:
+    description: Payment method of the token.
+    type: string
