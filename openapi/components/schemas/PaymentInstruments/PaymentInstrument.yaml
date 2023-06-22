@@ -1,3 +1,4 @@
+type: object
 discriminator:
   propertyName: method
   mapping:
@@ -145,9 +146,8 @@ discriminator:
     Yandex-money: ./AlternativeInstrument.yaml
     Zotapay: ./AlternativeInstrument.yaml
     Zimpler: ./AlternativeInstrument.yaml
-anyOf:
-  - $ref: ../PaymentCards/PaymentCard.yaml
-  - $ref: ../BankAccounts/BankAccount.yaml
-  - $ref: ../PayPalAccount.yaml
-  - $ref: ../KhelocardCard.yaml
-  - $ref: ./AlternativeInstrument.yaml
+properties:
+  method:
+    description: Method of payment instrument.
+    type: string
+    readOnly: true
