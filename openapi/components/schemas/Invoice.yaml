@@ -10,7 +10,7 @@ properties:
     maxLength: 50
     example: in_0YVF9605RKC62BP14NE2R7V2XT
   websiteId:
-    $ref: ../Websites/WebsiteId.yaml
+    $ref: ./Websites/WebsiteId.yaml
   invoiceNumber:
     description: Auto-incrementing number based on the sequence of invoices for any particular customer.
     readOnly: true
@@ -28,7 +28,7 @@ properties:
     x-sortable: true
     x-basic: true
     allOf:
-      - $ref: ../CurrencyCode.yaml
+      - $ref: ./CurrencyCode.yaml
   amount:
     description: Amount of the invoice.
     type: number
@@ -57,9 +57,9 @@ properties:
     format: double
     readOnly: true
   shipping:
-    $ref: ../Shipping.yaml
+    $ref: ./Shipping.yaml
   tax:
-    $ref: ../Invoices/InvoiceTax.yaml
+    $ref: ./Invoices/InvoiceTax.yaml
   organizationTaxIdNumber:
     description: Organization tax ID number that is displayed on the invoice.
     type: object
@@ -101,11 +101,11 @@ properties:
   billingAddress:
     description: Billing address of the invoice.
     allOf:
-      - $ref: ../Contact/ContactObject.yaml
+      - $ref: ./Contact/ContactObject.yaml
   deliveryAddress:
     description: Delivery address of the invoice.
     allOf:
-      - $ref: ../Contact/ContactObject.yaml
+      - $ref: ./Contact/ContactObject.yaml
   poNumber:
     description: Purchase order number that is displayed on the invoice.
     nullable: true
@@ -119,14 +119,14 @@ properties:
     description: Invoice items array.
     readOnly: true
     items:
-      $ref: ../Invoices/InvoiceItem.yaml
+      $ref: ./Invoices/InvoiceItem.yaml
   discounts:
     type: array
     description: Discounts applied.
     readOnly: true
     items:
       allOf:
-        - $ref: ../Coupon/InvoiceDiscount.yaml
+        - $ref: ./Coupon/InvoiceDiscount.yaml
   autopayScheduledTime:
     description: Date and time when an automatic payment (autopay) is scheduled.
     type: string
@@ -169,19 +169,19 @@ properties:
     description: Date and time when the invoice is abandoned.
     x-sortable: true
     allOf:
-      - $ref: ../ServerTimestamp.yaml
+      - $ref: ./ServerTimestamp.yaml
   voidedTime:
     description: Date and time when the invoice is voided.
     x-sortable: true
     allOf:
-      - $ref: ../ServerTimestamp.yaml
+      - $ref: ./ServerTimestamp.yaml
   paidTime:
     x-label: Payment Date
     x-sortable: true
     x-basic: true
     description: Date and time when the invoice is paid.
     allOf:
-      - $ref: ../ServerTimestamp.yaml
+      - $ref: ./ServerTimestamp.yaml
   dueTime:
     description: Date and time when the invoice is due for payment.
     type: string
@@ -193,11 +193,11 @@ properties:
     x-sortable: true
     x-basic: true
     allOf:
-      - $ref: ../ServerTimestamp.yaml
+      - $ref: ./ServerTimestamp.yaml
   createdTime:
-    $ref: ../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   paymentFormUrl:
     type: string
     readOnly: true
@@ -210,14 +210,14 @@ properties:
   customerId:
     x-basic: true
     allOf:
-      - $ref: ../CustomerId.yaml
+      - $ref: ./CustomerId.yaml
   transactions:
     type: array
     description: Invoice transactions array.
     maxItems: 10
     readOnly: true
     items:
-      $ref: ../Transactions/Transaction.yaml
+      $ref: ./Transactions/Transaction.yaml
   retryInstruction:
     description: |-
       Invoice payment retry instruction.
@@ -232,9 +232,9 @@ properties:
           type: object
           properties:
             scheduleInstruction:
-              $ref: ../Scheduling/InvoiceRetryScheduleInstruction.yaml
+              $ref: ./Scheduling/InvoiceRetryScheduleInstruction.yaml
             amountAdjustmentInstruction:
-              $ref: ../InvoiceRetry/InvoiceRetryAmountAdjustmentInstruction.yaml
+              $ref: ./InvoiceRetry/InvoiceRetryAmountAdjustmentInstruction.yaml
             tryBackupInstruments:
               description: Specifies whether to use backup payment instruments on an invoice payment retry.
               type: boolean
@@ -296,7 +296,7 @@ properties:
   organizationId:
     readOnly: true
     allOf:
-      - $ref: ../Organizations/OrganizationId.yaml
+      - $ref: ./Organizations/OrganizationId.yaml
   _links:
     type: array
     description: Related links.
