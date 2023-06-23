@@ -4,7 +4,7 @@ required:
   - settlementSettings
 properties:
   settlementSettings:
-    $ref: SettlementSettings.yaml
+    $ref: ./GatewayAccounts/SettlementSettings.yaml
   riskReserveSettings:
     description: |-
       Risk reserve settings.
@@ -24,8 +24,8 @@ properties:
           example: 'paymentInstrument.method:payment-card'
           type: string
         bips:
-          $ref: ../Bips.yaml
+          $ref: ./Bips.yaml
         period:
           description: Instruction for calculating the reserve release time.
           allOf:
-            - $ref: ../Scheduling/Methods/date-interval.yaml
+            - $ref: ./Scheduling/Methods/date-interval.yaml
