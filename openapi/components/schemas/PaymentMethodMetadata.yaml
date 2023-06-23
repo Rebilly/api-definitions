@@ -8,7 +8,9 @@ required:
   - countries
 properties:
   apiName:
-    $ref: ./PaymentMethodApiName.yaml
+    description: Name of the payment method returned in the API response.
+    type: string
+    pattern: '^[\w\. -]+$'
   name:
     description: Name of the payment method.
     type: string
@@ -34,9 +36,9 @@ properties:
       This field supports Markdown.
     type: string
   countries:
-    $ref: ./CountriesMetadata.yaml
+    $ref: ./Metadata/CountriesMetadata.yaml
   storefrontEnabled:
     type: boolean
     default: false
   _links:
-    $ref: ../SelfLink.yaml
+    $ref: ./SelfLink.yaml

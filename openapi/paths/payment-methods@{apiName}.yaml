@@ -9,7 +9,9 @@ parameters:
     description: Name of the payment method API.
     required: true
     schema:
-      $ref: ../components/schemas/Metadata/PaymentMethodApiName.yaml
+      description: Name of the payment method returned in the API response.
+      type: string
+      pattern: '^[\w\. -]+$'
 get:
   x-products:
     - Users
@@ -26,4 +28,4 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Metadata/PaymentMethodMetadata.yaml
+            $ref: ../components/schemas/PaymentMethodMetadata.yaml

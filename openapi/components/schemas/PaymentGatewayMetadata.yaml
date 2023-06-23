@@ -79,7 +79,9 @@ properties:
     description: Array of supported payment methods. For example, `payment-card` and `bitcoin`.
     type: array
     items:
-      $ref: ./Metadata/PaymentMethodApiName.yaml
+      description: Name of the payment method returned in the API response.
+      type: string
+      pattern: '^[\w\. -]+$'
     minLength: 1
   cardBrands:
     description: |-
