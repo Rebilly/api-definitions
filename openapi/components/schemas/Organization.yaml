@@ -53,9 +53,9 @@ properties:
     maxLength: 10
     x-sortable: true
   phoneNumbers:
-    $ref: ../Contact/ContactPhoneNumbers.yaml
+    $ref: ./Contact/ContactPhoneNumbers.yaml
   emails:
-    $ref: ../Contact/ContactEmails.yaml
+    $ref: ./Contact/ContactEmails.yaml
   taxDescriptor:
     description: Tax label of the organization. This information is displayed on the invoice.
     type: string
@@ -73,15 +73,15 @@ properties:
     pattern: '^[A-Z]{3}$'
     example: USD
   questionnaire:
-    $ref: ./OrganizationQuestionnaire.yaml
+    $ref: ./Organizations/OrganizationQuestionnaire.yaml
   settings:
-    $ref: ./OrganizationSettings.yaml
+    $ref: ./Organizations/OrganizationSettings.yaml
   taxNumbers:
     type: array
     description: Tax numbers of the organization.
     nullable: true
     items:
-      $ref: ../TaxNumber.yaml
+      $ref: ./TaxNumber.yaml
   features:
     type: array
     description: Organization features.
@@ -96,8 +96,8 @@ properties:
           description: Description of the feature.
           type: string
   createdTime:
-    $ref: ../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   _links:
-    $ref: ../SelfLink.yaml
+    $ref: ./SelfLink.yaml
