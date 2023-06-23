@@ -1,11 +1,5 @@
 type: object
 properties:
-  id:
-    type: string
-    description: ID of the fee.
-    readOnly: true
-    maxLength: 50
-    example: fee_01GQT145JX3XBRJ8K812Y3GRE9
   type:
     description: Type of fee.
     type: string
@@ -24,7 +18,7 @@ properties:
     type: string
     nullable: true
   formula:
-    $ref: ./FeeFormula.yaml
+    $ref: ../schemas/Fees/FeeFormula.yaml
   settlementSettings:
     description: |-
       Fee settlement settings.
@@ -32,10 +26,5 @@ properties:
     type: object
     nullable: true
     allOf:
-      - $ref: ../GatewayAccounts/SettlementSettings.yaml
-  createdTime:
-    $ref: ../CreatedTime.yaml
-  updatedTime:
-    $ref: ../UpdatedTime.yaml
-  _links:
-    $ref: ../SelfLink.yaml
+      - $ref: ../schemas/GatewayAccounts/SettlementSettings.yaml
+
