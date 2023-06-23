@@ -8,7 +8,7 @@ required:
   - currencies
 properties:
   apiName:
-    $ref: ./PaymentGatewayName.yaml
+    $ref: ./Metadata/PaymentGatewayName.yaml
   otherNames:
     description: |-
       List of former names associated with the payment gateway.
@@ -77,7 +77,7 @@ properties:
     description: Array of supported payment methods. For example, `payment-card` and `bitcoin`.
     type: array
     items:
-      $ref: ./PaymentMethodApiName.yaml
+      $ref: ./Metadata/PaymentMethodApiName.yaml
     minLength: 1
   cardBrands:
     description: |-
@@ -85,11 +85,11 @@ properties:
       If the payment gateway supports payment cards.
     type: array
     items:
-      $ref: ../PaymentCards/PaymentCardBrand.yaml
+      $ref: ./PaymentCards/PaymentCardBrand.yaml
   merchantCountries:
-    $ref: ./CountriesMetadata.yaml
+    $ref: ./Metadata/CountriesMetadata.yaml
   currencies:
-    $ref: ./CurrenciesMetadata.yaml
+    $ref: ./Metadata/CurrenciesMetadata.yaml
   operations:
     description: Array of operations that are supported by the payment gateway.
     type: array
@@ -178,4 +178,4 @@ properties:
     minimum: 299
     maximum: 16777216
   _links:
-    $ref: ../SelfLink.yaml
+    $ref: ./SelfLink.yaml
