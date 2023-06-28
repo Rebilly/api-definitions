@@ -40,6 +40,12 @@ allOf:
           copyCredentialsFrom:
             type: string
             description: ID of an existing Stripe gateway account from which credentials are copied in order to skip the onboarding process.
+          setupFutureSage:
+            type: string
+            description: Indicates intent to make future payments with this PaymentIntent’s payment method.
+            enum:
+              - off_session
+              - on_session
       threeDSecureServer:
         type: object
         required:
