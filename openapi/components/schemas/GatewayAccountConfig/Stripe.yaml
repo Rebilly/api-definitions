@@ -42,7 +42,10 @@ allOf:
             description: ID of an existing Stripe gateway account from which credentials are copied in order to skip the onboarding process.
           setupFutureSage:
             type: string
-            description: Indicates intent to make future payments with this PaymentIntent’s payment method.
+            description: |-
+              Indicates intent to make future payments with this PaymentIntent’s payment method.
+              on_session: Use on_session if you intend to only reuse the payment method when your customer is present in your checkout flow.
+              off_session: Use off_session if your customer may or may not be present in your checkout flow.
             enum:
               - off_session
               - on_session
