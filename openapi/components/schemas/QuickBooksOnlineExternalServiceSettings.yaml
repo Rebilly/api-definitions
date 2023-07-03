@@ -1,0 +1,123 @@
+
+type: object
+description: QuickBooks Online settings.
+properties:
+  customer:
+    type: object
+    title: QuickBooks Online customer external service settings
+    properties:
+      sync:
+        type: string
+        description: Specifies how to sync customers.
+        default: manually
+        enum:
+          - manually
+          - when-used
+          - always
+        x-enumDescriptions:
+          manually: Only via a manual sync.
+          when-used: Whenever related entity is synced (transaction, invoice).
+          always: Create and update customers automatically.
+      displayName:
+        type: string
+        default: full-name
+        enum:
+          - id
+          - full-name
+          - organization-name
+  invoice:
+    type: object
+    title: QuickBooks Online invoice external service settings
+    properties:
+      sync:
+        type: string
+        description: Specifies how to sync invoices.
+        default: manually
+        enum:
+          - manually
+          - only-create
+          - always
+        x-enumDescriptions:
+          manually: Only via a manual sync.
+          only-create: Only create invoices on issue without updating.
+          always: Create, update and void invoices automatically.
+      unearnedRevenueAccountId:
+        type: string
+        description: Journal account ID for all products to be created within.
+        example: jrn_acc_01H32J1C97KWGRCKF1E1JY0QG8
+      taxesAccountId:
+        type: string
+        nullable: true
+        default: null
+        description: Journal account ID for all taxes to be created within.
+        example: jrn_acc_01H32J1KGXSRDH0K8Q7YYA552T
+      department:
+        type: string
+        nullable: true
+        default: null
+        description: QuickBooks Online department ID invoices belong to.
+        example: jrn_acc_01H32J1KGXSRDH0K8Q7YYA552T
+      itemName:
+        type: string
+      itemDescription:
+        type: string
+      itemSku:
+        type: string
+      itemLineDescription:
+        type: string
+      taxName:
+        type: string
+      taxDescription:
+        type: string
+      taxSku:
+        type: string
+      taxLineDescription:
+        type: string
+  transaction:
+    type: object
+    title: QuickBooks Online transaction external service settings
+    properties:
+      syncPayments:
+        type: string
+        description: Specifies how to sync transactions.
+        default: manually
+        enum:
+          - manually
+          - always
+        x-enumDescriptions:
+          manually: Only via a manual sync.
+          always: Create transactions automatically.
+      syncRefundReceipts:
+        type: string
+        description: Specifies how to sync invoices.
+        default: manually
+        enum:
+          - manually
+          - always
+        x-enumDescriptions:
+          manually: Only via a manual sync.
+          always: Create refund receipts automatically .
+      depositAccountId:
+        type: string
+        description: Journal account ID for all payments and refund receipts to be deposited.
+        example: jrn_acc_01H32J1C97KWGRCKF1E1JY0QG8
+      department:
+        type: string
+        nullable: true
+        default: null
+        description: QuickBooks Online department ID payments and refund receipts belong to.
+        example: jrn_acc_01H32J1KGXSRDH0K8Q7YYA552T
+  journalEntry:
+    type: object
+    title: QuickBooks Online journal entry external service settings
+    properties:
+      sync:
+        type: string
+        description: Specifies how to sync journal entries.
+        default: manually
+        enum:
+          - manually
+          - always
+        x-enumDescriptions:
+          manually: Only via a manual sync.
+          always: Create and update journal entries automatically.
