@@ -8,16 +8,16 @@ properties:
     properties:
       sync:
         type: string
-        description: Specifies how to sync customers.
+        description: Specifies how to synchronize customers between your Rebilly and QuickBooks Online account.
         default: manually
         enum:
           - manually
           - when-used
           - always
         x-enumDescriptions:
-          manually: Only via a manual sync.
-          when-used: Whenever related entity is synced (transaction, invoice).
-          always: Create and update customers automatically.
+          manually: Customer data is only synchronized when it is manually executed.
+          when-used: Customer data is synchronized when related entities, such as transactions or invoices are created or updated.
+          always: Customer data is synchronized automatically as data is created or updated.
       displayName:
         type: string
         default: full-name
@@ -31,31 +31,31 @@ properties:
     properties:
       sync:
         type: string
-        description: Specifies how to sync invoices.
+        description: Specifies how to synchronize invoices between your Rebilly and QuickBooks Online account.
         default: manually
         enum:
           - manually
-          - only-create
+          - when-issued
           - always
         x-enumDescriptions:
-          manually: Only via a manual sync.
-          only-create: Only create invoices on issue without updating.
-          always: Create, update and void invoices automatically.
+          manually: Invoice data is only synchronized when it is manually executed.
+          when-issued: Invoice data is synchronized when issued.
+          always: Invoice data is synchronized automatically as data it is issued or updated.
       unearnedRevenueAccountId:
         type: string
-        description: Journal account ID for all products to be created within.
+        description: ID of the journal account where all products are created.
         example: jrn_acc_01H32J1C97KWGRCKF1E1JY0QG8
       taxesAccountId:
         type: string
         nullable: true
         default: null
-        description: Journal account ID for all taxes to be created within.
+        description: ID of the journal account where all taxes are created.
         example: jrn_acc_01H32J1KGXSRDH0K8Q7YYA552T
       department:
         type: string
         nullable: true
         default: null
-        description: QuickBooks Online department ID invoices belong to.
+        description: ID of the QuickBooks Online department that invoices are related to.
         example: jrn_acc_01H32J1KGXSRDH0K8Q7YYA552T
       itemName:
         type: string
@@ -79,33 +79,33 @@ properties:
     properties:
       syncPayments:
         type: string
-        description: Specifies how to sync transactions.
+        description: Specifies how to synchronize transactions between your Rebilly and QuickBooks Online account.
         default: manually
         enum:
           - manually
           - always
         x-enumDescriptions:
-          manually: Only via a manual sync.
-          always: Create transactions automatically.
+          manually: Transaction data is only synchronized when it is manually executed.
+          always: Transaction data is synchronized automatically as data is created or updated.
       syncRefundReceipts:
         type: string
-        description: Specifies how to sync invoices.
+        description: Specifies how to synchronize invoices between your Rebilly and QuickBooks Online account.
         default: manually
         enum:
           - manually
           - always
         x-enumDescriptions:
-          manually: Only via a manual sync.
-          always: Create refund receipts automatically .
+          manually: Invoice data is only synchronized when it is manually executed.
+          always: Invoice data is synchronized automatically as data is created or updated.
       depositAccountId:
         type: string
-        description: Journal account ID for all payments and refund receipts to be deposited.
+        description: ID of the journal account where all payments and refund receipts are deposited.
         example: jrn_acc_01H32J1C97KWGRCKF1E1JY0QG8
       department:
         type: string
         nullable: true
         default: null
-        description: QuickBooks Online department ID payments and refund receipts belong to.
+        description: ID of the QuickBooks Online department that payments and refund receipts are related to.
         example: jrn_acc_01H32J1KGXSRDH0K8Q7YYA552T
   journalEntry:
     type: object
@@ -113,11 +113,11 @@ properties:
     properties:
       sync:
         type: string
-        description: Specifies how to sync journal entries.
+        description: Specifies how to synchronize journal entries between your Rebilly and QuickBooks Online account.
         default: manually
         enum:
           - manually
           - always
         x-enumDescriptions:
-          manually: Only via a manual sync.
-          always: Create and update journal entries automatically.
+          manually: Journal entry data is only synchronized when it is manually executed.
+          always: Journal entry data is synchronized automatically as data is created or updated.
