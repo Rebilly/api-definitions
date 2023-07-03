@@ -2,4 +2,131 @@ type: object
 description: Settings for external service integration.
 properties:
   quickBooksOnline:
-    $ref: ./QuickBooksOnlineExternalServiceSettings.yaml
+    type: object
+    title: QuickBooksOnlineExternalServiceSettings
+    description: QuickBooks Online settings.
+    properties:
+      customer:
+        type: object
+        title: QuickBooksOnlineCustomerExternalServiceSettings
+        description: Customer settings.
+        properties:
+          sync:
+            type: string
+            description: Specifies how to synchronize customers between your Rebilly and QuickBooks Online account.
+            default: manually
+            enum:
+              - manually
+              - when-used
+              - always
+            x-enumDescriptions:
+              manually: Customer data is only synchronized when it is manually executed.
+              when-used: Customer data is synchronized when related entities, such as transactions or invoices are created or updated.
+              always: Customer data is synchronized automatically as data is created or updated.
+          displayName:
+            type: string
+            default: full-name
+            enum:
+              - id
+              - full-name
+              - organization-name
+      invoice:
+        type: object
+        title: QuickBooksOnlineInvoiceExternalServiceSettings
+        description: Invoice settings.
+        properties:
+          sync:
+            type: string
+            description: Specifies how to synchronize invoices between your Rebilly and QuickBooks Online account.
+            default: manually
+            enum:
+              - manually
+              - when-issued
+              - always
+            x-enumDescriptions:
+              manually: Invoice data is only synchronized when it is manually executed.
+              when-issued: Invoice data is synchronized when issued.
+              always: Invoice data is synchronized automatically as data it is issued or updated.
+          unearnedRevenueAccountId:
+            type: string
+            description: ID of the journal account where all products are created.
+            example: jrn_acc_01H32J1C97KWGRCKF1E1JY0QG8
+          taxesAccountId:
+            type: string
+            nullable: true
+            default: null
+            description: ID of the journal account where all taxes are created.
+            example: jrn_acc_01H32J1KGXSRDH0K8Q7YYA552T
+          department:
+            type: string
+            nullable: true
+            default: null
+            description: ID of the QuickBooks Online department that invoices are related to.
+            example: jrn_acc_01H32J1KGXSRDH0K8Q7YYA552T
+          itemName:
+            type: string
+          itemDescription:
+            type: string
+          itemSku:
+            type: string
+          itemLineDescription:
+            type: string
+          taxName:
+            type: string
+          taxDescription:
+            type: string
+          taxSku:
+            type: string
+          taxLineDescription:
+            type: string
+      transaction:
+        type: object
+        title: QuickBooksOnlineTransactionExternalServiceSettings
+        description: Transaction settings.
+        properties:
+          syncPayments:
+            type: string
+            description: Specifies how to synchronize transactions between your Rebilly and QuickBooks Online account.
+            default: manually
+            enum:
+              - manually
+              - always
+            x-enumDescriptions:
+              manually: Transaction data is only synchronized when it is manually executed.
+              always: Transaction data is synchronized automatically as data is created or updated.
+          syncRefundReceipts:
+            type: string
+            description: Specifies how to synchronize invoices between your Rebilly and QuickBooks Online account.
+            default: manually
+            enum:
+              - manually
+              - always
+            x-enumDescriptions:
+              manually: Invoice data is only synchronized when it is manually executed.
+              always: Invoice data is synchronized automatically as data is created or updated.
+          depositAccountId:
+            type: string
+            description: ID of the journal account where all payments and refund receipts are deposited.
+            example: jrn_acc_01H32J1C97KWGRCKF1E1JY0QG8
+          department:
+            type: string
+            nullable: true
+            default: null
+            description: ID of the QuickBooks Online department that payments and refund receipts are related to.
+            example: jrn_acc_01H32J1KGXSRDH0K8Q7YYA552T
+      journalEntry:
+        type: object
+        title: QuickBooksOnlineJournalEntryExternalServiceSettings
+        description: Journal entry settings.
+        properties:
+          sync:
+            type: string
+            description: Specifies how to synchronize journal entries between your Rebilly and QuickBooks Online account.
+            default: manually
+            enum:
+              - manually
+              - always
+            x-enumDescriptions:
+              manually: Journal entry data is only synchronized when it is manually executed.
+              always: Journal entry data is synchronized automatically as data is created or updated.
+
