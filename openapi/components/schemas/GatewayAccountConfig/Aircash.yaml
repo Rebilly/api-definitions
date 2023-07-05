@@ -1,0 +1,31 @@
+description: Aircash gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Aircash credentials object.
+        properties:
+          privateKey:
+            writeOnly: true
+            type: string
+            description: Aircash partner private key.
+          privateKeyPass:
+            writeOnly: true
+            type: string
+            description: Aircash partner private key passphrase.
+            format: password
+          aircashPublicKey:
+            type: string
+            description: Current Aircash public key.
+          partnerId:
+            type: string
+            description: Partner id.
+        required:
+          - privateKey
+          - privateKeyPass
+          - aircashPublicKey
+          - partnerId
