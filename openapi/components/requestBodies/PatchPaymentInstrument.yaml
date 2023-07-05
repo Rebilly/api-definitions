@@ -4,7 +4,35 @@ content:
       oneOf:
         - $ref: ../schemas/PaymentInstruments/PaymentInstrumentUpdateToken.yaml
         - $ref: ../schemas/PaymentCards/PaymentCardUpdatePlain.yaml
-        - $ref: ../schemas/BankAccounts/BankAccountUpdatePlain.yaml
+        - type: object
+          properties:
+            bankName:
+              description: Name of the bank.
+              type: string
+            accountType:
+                description: Bank account type.
+                type: string
+                enum:
+                    - checking
+                    - savings
+                    - other
+            billingAddress:
+                description: Billing address.
+                allOf:
+                    - $ref: ../schemas/Contact/ContactObject.yaml
+            stickyGatewayAccountId:
+                description: |-
+                    ID of the sticky gateway account.
+                    All future payments are processed by this gateway account.
+
+                    For more information,
+                    see [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
+                allOf:
+                    - $ref: ../schemas/ResourceId.yaml
+            customFields:
+                $ref: ../schemas/ResourceCustomFields.yaml
+            useAsBackup:
+                $ref: ../schemas/UseAsBackup.yaml
 description: PaymentInstrument resource.
 required: true
 
