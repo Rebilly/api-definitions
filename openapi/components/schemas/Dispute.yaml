@@ -34,9 +34,11 @@ properties:
   acquirerReferenceNumber:
     description: Acquirer reference number for the dispute.
     type: string
+    nullable: true
   caseId:
     description: Case ID of the dispute.
     type: string
+    nullable: true
   reasonCode:
     description: Code used in the chargeback that describes the reason for the dispute.
     type: string
@@ -248,15 +250,19 @@ properties:
       Latest date and time by when a merchant must submit a representment for a dispute.
       If the deadline is missed, the merchant loses the dispute.
     type: string
+    nullable: true
     format: date-time
   rawResponse:
     description: Raw response from the payment gateway that processed the disputed transaction.
     type: string
+    nullable: true
     readOnly: true
   resolvedTime:
+    type: string
+    nullable: true
+    format: date-time
     description: Date and time when the dispute is resolved.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    readOnly: true
   createdTime:
     $ref: CreatedTime.yaml
   updatedTime:
@@ -277,6 +283,7 @@ properties:
           enum:
             - self
             - transaction
+            - attachments
   _embedded:
     type: object
     description: Embedded objects that are requested by the `expand` query parameter.
