@@ -2,8 +2,163 @@ type: object
 description: Settings for AML checking.
 properties:
   confidence:
-    allOf:
-      - $ref: ./AML/Settings/AmlSettingsConfidence.yaml
+    type: object
+    description: Confidence level settings for AML matches.
+    properties:
+      noDobExactMatch:
+        type: object
+        description: Exact match of the customer's name is found, but a date of birth is not.
+        properties:
+          matchingCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+          mismatchingCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+          noCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+      noDobInexactMatch:
+        type: object
+        description: Fuzzy, or inexact match of the customer's name is found, but a date of birth is not.
+        properties:
+          matchingCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+          mismatchingCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+          noCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+      noDobWeakMatch:
+        type: object
+        description: Weak match of the customer's name is found, but a date of birth is not.
+        properties:
+          matchingCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+          mismatchingCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+          noCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+      dobExactMatch:
+        type: object
+        description: Exact match of the customer's date of birth and name is found.
+        properties:
+          matchingCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+          mismatchingCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+          noCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+      dobInexactMatch:
+        type: object
+        description: Exact match of the customer's date of birth and a fuzzy, or inexact name match is found.
+        properties:
+          matchingCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+          mismatchingCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+          noCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+      yobExactMatch:
+        type: object
+        description: Exact match of the customer's year of birth and exact name is found.
+        properties:
+          matchingCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+          mismatchingCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+          noCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+      yobInexactMatch:
+        type: object
+        description: Exact match of the customer's year of birth and a fuzzy, or inexact name match is found.
+        properties:
+          matchingCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+          mismatchingCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+          noCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+      inexactYobExactMatch:
+        type: object
+        description: Near match of the customer's year of birth and an exact name match is found.
+        properties:
+          matchingCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+          mismatchingCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+          noCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+      inexactYobInexactMatch:
+        type: object
+        description: Near match of the customer's year of birth and a fuzzy, or inexact name match is found.
+        properties:
+          matchingCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+          mismatchingCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
+          noCountry:
+            $ref:  ./subschemas/AmlConfidence.yaml
   priority:
-    allOf:
-      - $ref: ./AML/Settings/AmlSettingsPriority.yaml
+    type: object
+    description: |-
+      Priority level settings for AML source matches. \
+      `p0` is critical priority level, and `p3` is low priority level.
+    properties:
+      pep:
+        type: object
+        description: Priorities for the `pep` source type.
+        properties:
+          veryStrong:
+            $ref:  ./subschemas/AmlPriority.yaml
+          strong:
+            $ref:  ./subschemas/AmlPriority.yaml
+          medium:
+            $ref:  ./subschemas/AmlPriority.yaml
+          weak:
+            $ref:  ./subschemas/AmlPriority.yaml
+      enforcements:
+        type: object
+        description: Priorities for the `enforcement` source type.
+        properties:
+          veryStrong:
+            $ref:  ./subschemas/AmlPriority.yaml
+          strong:
+            $ref:  ./subschemas/AmlPriority.yaml
+          medium:
+            $ref:  ./subschemas/AmlPriority.yaml
+          weak:
+            $ref:  ./subschemas/AmlPriority.yaml
+      stateOwnedEnterprise:
+        type: object
+        description: Priorities for the `state-owned-enterprise` source type.
+        properties:
+          veryStrong:
+            $ref:  ./subschemas/AmlPriority.yaml
+          strong:
+            $ref:  ./subschemas/AmlPriority.yaml
+          medium:
+            $ref:  ./subschemas/AmlPriority.yaml
+          weak:
+            $ref:  ./subschemas/AmlPriority.yaml
+      sanctions:
+        type: object
+        description: Priorities for the `sanctions` source type.
+        properties:
+          veryStrong:
+            $ref:  ./subschemas/AmlPriority.yaml
+          strong:
+            $ref:  ./subschemas/AmlPriority.yaml
+          medium:
+            $ref:  ./subschemas/AmlPriority.yaml
+          weak:
+            $ref:  ./subschemas/AmlPriority.yaml
+      adverseMedia:
+        type: object
+        description: Priorities for the `adverse-media` source type.
+        properties:
+          veryStrong:
+            $ref:  ./subschemas/AmlPriority.yaml
+          strong:
+            $ref:  ./subschemas/AmlPriority.yaml
+          medium:
+            $ref:  ./subschemas/AmlPriority.yaml
+          weak:
+            $ref:  ./subschemas/AmlPriority.yaml
+
