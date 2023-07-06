@@ -1,0 +1,21 @@
+description: Buckaroo gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Buckaroo credentials object.
+        properties:
+          websiteKey:
+            type: string
+            description: Website key.
+          secretKey:
+            description: Secret key.
+            type: string
+            format: password
+        required:
+          - websiteKey
+          - secretKey
