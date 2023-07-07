@@ -198,179 +198,195 @@ discriminator:
     vegaaH: ./GatewayAccountConfig/vegaaH.yaml
     XPay: ./GatewayAccountConfig/XPay.yaml
     Zimpler: ./GatewayAccountConfig/Zimpler.yaml
-properties:
-  id:
-    type: string
-    description: ID of the payment gateway account.
-    readOnly: true
-    maxLength: 50
-    example: gw_acc_0YVCXMF26DDNKAERE5NW727S34
-  gatewayName:
-    $ref: ./Gateways/GatewayName.yaml
-  acquirerName:
-    default: Other
-    allOf:
-      - $ref: ./Gateways/AcquirerName.yaml
-  method:
-    $ref: ./PaymentMethods/PaymentMethod.yaml
-  acceptedCurrencies:
-    description: Accepted currencies. An array of ISO 4217 currency codes.
-    type: array
-    items:
-      type: string
-  paymentCardSchemes:
-    description: Accepted payment card brands.
-    type: array
-    items:
-      $ref: ./PaymentCards/PaymentCardBrand.yaml
-  status:
-    description: Status of the gateway account.
-    readOnly: true
-    type: string
-    enum:
-      - active
-      - inactive
-      - pending
-      - closed
-  merchantCategoryCode:
-    description: Merchant category code of the payment gateway account.
-    type: string
-    pattern: '^[0-9]{4}$'
-    default: '0000'
-  dccMarkup:
-    description: Dynamic currency conversion markup in basis points.
-    type: integer
-    minimum: -10000
-    maximum: 10000
-  dccForceCurrency:
-    type: string
-    description: |-
-      Forces Dynamic Currency Conversion (DCC) to the specified currency on each sale.
-      To disable forced DCC, leave this field empty.
-  descriptor:
-    description: Gateway account descriptor value.
-    type: string
-  cityField:
-    description: Gateway account city field. This value is also known as a line 2 descriptor.
-    type: string
-  excludedDccQuoteCurrencies:
-    description: Excluded Dynamic Currency Conversion (DCC) quote currencies.
-    type: array
-    items:
-      type: string
-  monthlyLimit:
-    description: Monthly limit on the amount money that the gateway account can process.
-    type: number
-    format: double
-    minimum: 0
-  approvalWindowTtl:
-    description: Allotted time, in seconds, in which an offsite transaction must be approved before it is automatically `abandoned`.
-    type: integer
-    default: 3600
-    minimum: 300
-    maximum: 16777215
-  reconciliationWindowEnabled:
-    description: Specifies that if a transaction is not reconciled within the `reconciliationWindowTtl` time, the transaction is marked as `abandoned`.
-    type: boolean
-    default: false
-  reconciliationWindowTtl:
-    description: Allotted time, in seconds, in which a reconciliation must occur before it is automatically `abandoned`.
-    type: integer
-    minimum: 300
-    maximum: 16777215
-  threeDSecure:
-    description: Specifies if a gateway account allows 3D Secure.
-    type: boolean
-    default: false
-  dynamicDescriptor:
-    description: Specifies if a gateway allows dynamic descriptors.
-    type: boolean
-    default: false
-  digitalWallets:
-    $ref: ./GatewayAccounts/DigitalWallets.yaml
-  isDown:
-    description: Specifies if a gateway is in a downtime period.
-    type: boolean
-    readOnly: true
-  additionalFilters:
-    description: |-
-      Additional filters used to determine if the gateway account can be selected to process a transaction.
-
-      For example, the filter may place a maximum amount value on transaction.
-      If a transaction exceeds this value, the gateway account is not used.
-
-      For more information see,
-      [Using filters](https://all-rebilly.redoc.ly/#section/Using-filter-with-collections).
-    type: string
-    example: amount:1..100;bin:411111,444433
-  timeout:
-    description: Gateway account request timeout, in seconds.
-    type: integer
-    nullable: true
-    minimum: 10
-    maximum: 120
-  token:
-    description: Gateway account token.
-    type: string
-    readOnly: true
-    example: TwiX3f92k4AiBE27BzTbQ38hHjicBz_w
-  sticky:
-    description: |-
-      Specifies if all future payments by the customer's payment instrument are processed by this gateway account.
-
-      For more information, see [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
-    type: boolean
-    default: true
-  setupInstruction:
-    type: string
-    default: do-nothing
-    description: |-
-      Creates zero, one, or more child transactions such as `authorize` and `void`.
-      The transactions are linked to the `setup` transaction by the `parentTransactionId` relationship.
-    enum:
-      - authorize
-      - authorize-and-void
-      - sca
-      - do-nothing
-    x-enumDescriptions:
-      authorize: |-
-        Creates an `authorize` transaction in the amount and currency of the request.
-        This is used when a gateway account is configured for Strong Customer Authentication (SCA).
-      authorize-and-void: |-
-        Creates an `authorize` transaction in the amount and currency of the request,
-        followed by a `void`, if the `authorize` is approved.
-        This is used when a gateway account is configured for Strong Customer Authentication (SCA).
-      sca: |-
-        Uses Strong Customer Authentication (SCA) without an `authorize` transaction.
-        SCA includes 3DS, and specific wallet behavior,
-        such as setting up a billing agreement with PayPal.
-      do-nothing: |-
-        Does nothing except return an approved `setup` transaction.
-        This is the default behavior.
-  createdTime:
-    $ref: CreatedTime.yaml
-  updatedTime:
-    $ref: UpdatedTime.yaml
-  organizationId:
-    deprecated: true
-    readOnly: true
-    allOf:
-      - $ref: ./Organizations/OrganizationId.yaml
-  _links:
-    type: array
-    description: Related links.
-    readOnly: true
-    items:
-      type: object
-      properties:
-        href:
-          description: Link URL.
-          type: string
-        rel:
-          description: Type of link.
-          type: string
-          enum:
-            - self
-            - onBoardingUrl
-            - dynamicIpnUrl
-            - staticIpnUrl
+oneOf:
+  - $ref: ./GatewayAccountConfig/A1Gateway.yaml
+  - $ref: ./GatewayAccountConfig/ACI.yaml
+  - $ref: ./GatewayAccountConfig/Adyen.yaml
+  - $ref: ./GatewayAccountConfig/Airpay.yaml
+  - $ref: ./GatewayAccountConfig/Airwallex.yaml
+  - $ref: ./GatewayAccountConfig/AmazonPay.yaml
+  - $ref: ./GatewayAccountConfig/AmexVPC.yaml
+  - $ref: ./GatewayAccountConfig/ApcoPay.yaml
+  - $ref: ./GatewayAccountConfig/AsiaPaymentGateway.yaml
+  - $ref: ./GatewayAccountConfig/AstroPayCard.yaml
+  - $ref: ./GatewayAccountConfig/AuthorizeNet.yaml
+  - $ref: ./GatewayAccountConfig/Awepay.yaml
+  - $ref: ./GatewayAccountConfig/Bambora.yaml
+  - $ref: ./GatewayAccountConfig/BankSEND.yaml
+  - $ref: ./GatewayAccountConfig/BitPay.yaml
+  - $ref: ./GatewayAccountConfig/BlueSnap.yaml
+  - $ref: ./GatewayAccountConfig/BraintreePayments.yaml
+  - $ref: ./GatewayAccountConfig/Buckaroo.yaml
+  - $ref: ./GatewayAccountConfig/CASHlib.yaml
+  - $ref: ./GatewayAccountConfig/CODVoucher.yaml
+  - $ref: ./GatewayAccountConfig/Coinbase.yaml
+  - $ref: ./GatewayAccountConfig/CoinGate.yaml
+  - $ref: ./GatewayAccountConfig/CoinPayments.yaml
+  - $ref: ./GatewayAccountConfig/Cardknox.yaml
+  - $ref: ./GatewayAccountConfig/Cashflows.yaml
+  - $ref: ./GatewayAccountConfig/Cashterminal.yaml
+  - $ref: ./GatewayAccountConfig/CashToCode.yaml
+  - $ref: ./GatewayAccountConfig/CauriPayment.yaml
+  - $ref: ./GatewayAccountConfig/Cayan.yaml
+  - $ref: ./GatewayAccountConfig/CCAvenue.yaml
+  - $ref: ./GatewayAccountConfig/Chase.yaml
+  - $ref: ./GatewayAccountConfig/CheckoutCom.yaml
+  - $ref: ./GatewayAccountConfig/Chillstock.yaml
+  - $ref: ./GatewayAccountConfig/Circle.yaml
+  - $ref: ./GatewayAccountConfig/Citadel.yaml
+  - $ref: ./GatewayAccountConfig/Clearhaus.yaml
+  - $ref: ./GatewayAccountConfig/Cleo.yaml
+  - $ref: ./GatewayAccountConfig/Conekta.yaml
+  - $ref: ./GatewayAccountConfig/Coppr.yaml
+  - $ref: ./GatewayAccountConfig/Credorax.yaml
+  - $ref: ./GatewayAccountConfig/Cryptonator.yaml
+  - $ref: ./GatewayAccountConfig/CyberSource.yaml
+  - $ref: ./GatewayAccountConfig/DataCash.yaml
+  - $ref: ./GatewayAccountConfig/Dengi.yaml
+  - $ref: ./GatewayAccountConfig/Dimoco.yaml
+  - $ref: ./GatewayAccountConfig/dLocal.yaml
+  - $ref: ./GatewayAccountConfig/Dragonphoenix.yaml
+  - $ref: ./GatewayAccountConfig/Dropayment.yaml
+  - $ref: ./GatewayAccountConfig/Directa24.yaml
+  - $ref: ./GatewayAccountConfig/EBANX.yaml
+  - $ref: ./GatewayAccountConfig/EPG.yaml
+  - $ref: ./GatewayAccountConfig/EPro.yaml
+  - $ref: ./GatewayAccountConfig/EcorePay.yaml
+  - $ref: ./GatewayAccountConfig/Elavon.yaml
+  - $ref: ./GatewayAccountConfig/EMS.yaml
+  - $ref: ./GatewayAccountConfig/ePay.yaml
+  - $ref: ./GatewayAccountConfig/Euteller.yaml
+  - $ref: ./GatewayAccountConfig/Ezeebill.yaml
+  - $ref: ./GatewayAccountConfig/eZeeWallet.yaml
+  - $ref: ./GatewayAccountConfig/ezyEFT.yaml
+  - $ref: ./GatewayAccountConfig/FinTecSystems.yaml
+  - $ref: ./GatewayAccountConfig/Finrax.yaml
+  - $ref: ./GatewayAccountConfig/Flexepin.yaml
+  - $ref: ./GatewayAccountConfig/Forte.yaml
+  - $ref: ./GatewayAccountConfig/FundSend.yaml
+  - $ref: ./GatewayAccountConfig/GET.yaml
+  - $ref: ./GatewayAccountConfig/Gigadat.yaml
+  - $ref: ./GatewayAccountConfig/GlobalOne.yaml
+  - $ref: ./GatewayAccountConfig/Gooney.yaml
+  - $ref: ./GatewayAccountConfig/Gpaysafe.yaml
+  - $ref: ./GatewayAccountConfig/Greenbox.yaml
+  - $ref: ./GatewayAccountConfig/HiPay.yaml
+  - $ref: ./GatewayAccountConfig/ICEPAY.yaml
+  - $ref: ./GatewayAccountConfig/INOVAPAY.yaml
+  - $ref: ./GatewayAccountConfig/Ilixium.yaml
+  - $ref: ./GatewayAccountConfig/Ingenico.yaml
+  - $ref: ./GatewayAccountConfig/Inovio.yaml
+  - $ref: ./GatewayAccountConfig/InstaDebit.yaml
+  - $ref: ./GatewayAccountConfig/Intuit.yaml
+  - $ref: ./GatewayAccountConfig/IpayOptions.yaml
+  - $ref: ./GatewayAccountConfig/JetPay.yaml
+  - $ref: ./GatewayAccountConfig/Jeton.yaml
+  - $ref: ./GatewayAccountConfig/Khelocard.yaml
+  - $ref: ./GatewayAccountConfig/Klarna.yaml
+  - $ref: ./GatewayAccountConfig/Konnektive.yaml
+  - $ref: ./GatewayAccountConfig/loonie.yaml
+  - $ref: ./GatewayAccountConfig/LPG.yaml
+  - $ref: ./GatewayAccountConfig/MaxiCash.yaml
+  - $ref: ./GatewayAccountConfig/MercadoPago.yaml
+  - $ref: ./GatewayAccountConfig/MiFinity.yaml
+  - $ref: ./GatewayAccountConfig/MobilePay.yaml
+  - $ref: ./GatewayAccountConfig/Moneris.yaml
+  - $ref: ./GatewayAccountConfig/MtaPay.yaml
+  - $ref: ./GatewayAccountConfig/MuchBetter.yaml
+  - $ref: ./GatewayAccountConfig/MuchBetterGateway.yaml
+  - $ref: ./GatewayAccountConfig/MyFatoorah.yaml
+  - $ref: ./GatewayAccountConfig/Neosurf.yaml
+  - $ref: ./GatewayAccountConfig/NMI.yaml
+  - $ref: ./GatewayAccountConfig/Netbanking.yaml
+  - $ref: ./GatewayAccountConfig/Neteller.yaml
+  - $ref: ./GatewayAccountConfig/NGenius.yaml
+  - $ref: ./GatewayAccountConfig/NinjaWallet.yaml
+  - $ref: ./GatewayAccountConfig/NordikCoin.yaml
+  - $ref: ./GatewayAccountConfig/NOWPayments.yaml
+  - $ref: ./GatewayAccountConfig/NuaPay.yaml
+  - $ref: ./GatewayAccountConfig/OchaPay.yaml
+  - $ref: ./GatewayAccountConfig/Onlineueberweisen.yaml
+  - $ref: ./GatewayAccountConfig/OnRamp.yaml
+  - $ref: ./GatewayAccountConfig/Orbital.yaml
+  - $ref: ./GatewayAccountConfig/Pagadito.yaml
+  - $ref: ./GatewayAccountConfig/Pagsmile.yaml
+  - $ref: ./GatewayAccountConfig/Panamerican.yaml
+  - $ref: ./GatewayAccountConfig/PandaGateway.yaml
+  - $ref: ./GatewayAccountConfig/ParamountCommerce.yaml
+  - $ref: ./GatewayAccountConfig/ParamountEft.yaml
+  - $ref: ./GatewayAccountConfig/ParamountInterac.yaml
+  - $ref: ./GatewayAccountConfig/Pay4Fun.yaml
+  - $ref: ./GatewayAccountConfig/PayCash.yaml
+  - $ref: ./GatewayAccountConfig/PayClub.yaml
+  - $ref: ./GatewayAccountConfig/PayEcards.yaml
+  - $ref: ./GatewayAccountConfig/Paynote.yaml
+  - $ref: ./GatewayAccountConfig/PayPal.yaml
+  - $ref: ./GatewayAccountConfig/Payeezy.yaml
+  - $ref: ./GatewayAccountConfig/Payflow.yaml
+  - $ref: ./GatewayAccountConfig/PaymentAsia.yaml
+  - $ref: ./GatewayAccountConfig/PaymenTechnologies.yaml
+  - $ref: ./GatewayAccountConfig/PaymentsOS.yaml
+  - $ref: ./GatewayAccountConfig/Paymero.yaml
+  - $ref: ./GatewayAccountConfig/Payper.yaml
+  - $ref: ./GatewayAccountConfig/Payr.yaml
+  - $ref: ./GatewayAccountConfig/PayRetailers.yaml
+  - $ref: ./GatewayAccountConfig/Paysafe.yaml
+  - $ref: ./GatewayAccountConfig/Paysafecard.yaml
+  - $ref: ./GatewayAccountConfig/Paysafecash.yaml
+  - $ref: ./GatewayAccountConfig/PayTabs.yaml
+  - $ref: ./GatewayAccountConfig/PayULatam.yaml
+  - $ref: ./GatewayAccountConfig/Payvision.yaml
+  - $ref: ./GatewayAccountConfig/PharosPayments.yaml
+  - $ref: ./GatewayAccountConfig/Piastrix.yaml
+  - $ref: ./GatewayAccountConfig/Pin4Pay.yaml
+  - $ref: ./GatewayAccountConfig/Plugnpay.yaml
+  - $ref: ./GatewayAccountConfig/PostFinance.yaml
+  - $ref: ./GatewayAccountConfig/PPRO.yaml
+  - $ref: ./GatewayAccountConfig/Prosa.yaml
+  - $ref: ./GatewayAccountConfig/Rapyd.yaml
+  - $ref: ./GatewayAccountConfig/RPN.yaml
+  - $ref: ./GatewayAccountConfig/Realex.yaml
+  - $ref: ./GatewayAccountConfig/Realtime.yaml
+  - $ref: ./GatewayAccountConfig/Redsys.yaml
+  - $ref: ./GatewayAccountConfig/Rotessa.yaml
+  - $ref: ./GatewayAccountConfig/Safecharge.yaml
+  - $ref: ./GatewayAccountConfig/SaltarPay.yaml
+  - $ref: ./GatewayAccountConfig/SMSVoucher.yaml
+  - $ref: ./GatewayAccountConfig/Sofort.yaml
+  - $ref: ./GatewayAccountConfig/Sagepay.yaml
+  - $ref: ./GatewayAccountConfig/SeamlessChex.yaml
+  - $ref: ./GatewayAccountConfig/SecureTrading.yaml
+  - $ref: ./GatewayAccountConfig/SecurionPay.yaml
+  - $ref: ./GatewayAccountConfig/Skrill.yaml
+  - $ref: ./GatewayAccountConfig/SmartInvoice.yaml
+  - $ref: ./GatewayAccountConfig/SparkPay.yaml
+  - $ref: ./GatewayAccountConfig/StaticGateway.yaml
+  - $ref: ./GatewayAccountConfig/STPMexico.yaml
+  - $ref: ./GatewayAccountConfig/Stripe.yaml
+  - $ref: ./GatewayAccountConfig/Telr.yaml
+  - $ref: ./GatewayAccountConfig/TestProcessor.yaml
+  - $ref: ./GatewayAccountConfig/ToditoCash.yaml
+  - $ref: ./GatewayAccountConfig/Truevo.yaml
+  - $ref: ./GatewayAccountConfig/TrustsPay.yaml
+  - $ref: ./GatewayAccountConfig/Trustly.yaml
+  - $ref: ./GatewayAccountConfig/TWINT.yaml
+  - $ref: ./GatewayAccountConfig/UPayCard.yaml
+  - $ref: ./GatewayAccountConfig/USAePay.yaml
+  - $ref: ./GatewayAccountConfig/VantivLitle.yaml
+  - $ref: ./GatewayAccountConfig/VCreditos.yaml
+  - $ref: ./GatewayAccountConfig/VegaWallet.yaml
+  - $ref: ./GatewayAccountConfig/Wallet88.yaml
+  - $ref: ./GatewayAccountConfig/Walpay.yaml
+  - $ref: ./GatewayAccountConfig/WesternUnion.yaml
+  - $ref: ./GatewayAccountConfig/Wirecard.yaml
+  - $ref: ./GatewayAccountConfig/WorldlineAtosFrankfurt.yaml
+  - $ref: ./GatewayAccountConfig/Worldpay.yaml
+  - $ref: ./GatewayAccountConfig/Zotapay.yaml
+  - $ref: ./GatewayAccountConfig/eMerchantPay.yaml
+  - $ref: ./GatewayAccountConfig/ecoPayz.yaml
+  - $ref: ./GatewayAccountConfig/iCanPay.yaml
+  - $ref: ./GatewayAccountConfig/iCheque.yaml
+  - $ref: ./GatewayAccountConfig/iDebit.yaml
+  - $ref: ./GatewayAccountConfig/vegaaH.yaml
+  - $ref: ./GatewayAccountConfig/XPay.yaml
+  - $ref: ./GatewayAccountConfig/Zimpler.yaml

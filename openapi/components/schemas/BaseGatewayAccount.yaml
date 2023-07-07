@@ -1,0 +1,190 @@
+description: Gateway account details.
+type: object
+required:
+  - gatewayName
+  - method
+  - acceptedCurrencies
+properties:
+  id:
+    type: string
+    description: ID of the payment gateway account.
+    readOnly: true
+    maxLength: 50
+    example: gw_acc_0YVCXMF26DDNKAERE5NW727S34
+  gatewayName:
+    $ref: ./Gateways/GatewayName.yaml
+  acquirerName:
+    default: Other
+    allOf:
+      - $ref: ./Gateways/AcquirerName.yaml
+  method:
+    $ref: ./PaymentMethods/PaymentMethod.yaml
+  acceptedCurrencies:
+    description: Accepted currencies. An array of ISO 4217 currency codes.
+    type: array
+    items:
+      type: string
+  paymentCardSchemes:
+    description: Accepted payment card brands.
+    type: array
+    items:
+      $ref: ./PaymentCards/PaymentCardBrand.yaml
+  status:
+    description: Status of the gateway account.
+    readOnly: true
+    type: string
+    enum:
+      - active
+      - inactive
+      - pending
+      - closed
+  merchantCategoryCode:
+    description: Merchant category code of the payment gateway account.
+    type: string
+    pattern: '^[0-9]{4}$'
+    default: '0000'
+  dccMarkup:
+    description: Dynamic currency conversion markup in basis points.
+    type: integer
+    nullable: true
+    minimum: -10000
+    maximum: 10000
+  dccForceCurrency:
+    type: string
+    nullable: true
+    description: |-
+      Forces Dynamic Currency Conversion (DCC) to the specified currency on each sale.
+      To disable forced DCC, leave this field empty.
+  descriptor:
+    description: Gateway account descriptor value.
+    type: string
+    nullable: true
+  cityField:
+    description: Gateway account city field. This value is also known as a line 2 descriptor.
+    type: string
+    nullable: true
+  excludedDccQuoteCurrencies:
+    description: Excluded Dynamic Currency Conversion (DCC) quote currencies.
+    type: array
+    items:
+      type: string
+  monthlyLimit:
+    description: Monthly limit on the amount money that the gateway account can process.
+    type: number
+    nullable: true
+    format: double
+    minimum: 0
+  approvalWindowTtl:
+    description: Allotted time, in seconds, in which an offsite transaction must be approved before it is automatically `abandoned`.
+    type: integer
+    default: 3600
+    minimum: 300
+    maximum: 16777215
+  reconciliationWindowEnabled:
+    description: Specifies that if a transaction is not reconciled within the `reconciliationWindowTtl` time, the transaction is marked as `abandoned`.
+    type: boolean
+    default: false
+  reconciliationWindowTtl:
+    description: Allotted time, in seconds, in which a reconciliation must occur before it is automatically `abandoned`.
+    type: integer
+    nullable: true
+    minimum: 300
+    maximum: 16777215
+  threeDSecure:
+    description: Specifies if a gateway account allows 3D Secure.
+    type: boolean
+    default: false
+  dynamicDescriptor:
+    description: Specifies if a gateway allows dynamic descriptors.
+    type: boolean
+    default: false
+  digitalWallets:
+    $ref: ./GatewayAccounts/DigitalWallets.yaml
+  isDown:
+    description: Specifies if a gateway is in a downtime period.
+    type: boolean
+    readOnly: true
+  additionalFilters:
+    description: |-
+      Additional filters used to determine if the gateway account can be selected to process a transaction.
+
+      For example, the filter may place a maximum amount value on transaction.
+      If a transaction exceeds this value, the gateway account is not used.
+
+      For more information see,
+      [Using filters](https://all-rebilly.redoc.ly/#section/Using-filter-with-collections).
+    type: string
+    nullable: true
+    example: amount:1..100;bin:411111,444433
+  timeout:
+    description: Gateway account request timeout, in seconds.
+    type: integer
+    nullable: true
+    minimum: 10
+    maximum: 120
+  token:
+    description: Gateway account token.
+    type: string
+    nullable: true
+    readOnly: true
+    example: TwiX3f92k4AiBE27BzTbQ38hHjicBz_w
+  sticky:
+    description: |-
+      Specifies if all future payments by the customer's payment instrument are processed by this gateway account.
+
+      For more information, see [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
+    type: boolean
+    default: true
+  setupInstruction:
+    type: string
+    default: do-nothing
+    description: |-
+      Creates zero, one, or more child transactions such as `authorize` and `void`.
+      The transactions are linked to the `setup` transaction by the `parentTransactionId` relationship.
+    enum:
+      - authorize
+      - authorize-and-void
+      - sca
+      - do-nothing
+    x-enumDescriptions:
+      authorize: |-
+        Creates an `authorize` transaction in the amount and currency of the request.
+        This is used when a gateway account is configured for Strong Customer Authentication (SCA).
+      authorize-and-void: |-
+        Creates an `authorize` transaction in the amount and currency of the request,
+        followed by a `void`, if the `authorize` is approved.
+        This is used when a gateway account is configured for Strong Customer Authentication (SCA).
+      sca: |-
+        Uses Strong Customer Authentication (SCA) without an `authorize` transaction.
+        SCA includes 3DS, and specific wallet behavior,
+        such as setting up a billing agreement with PayPal.
+      do-nothing: |-
+        Does nothing except return an approved `setup` transaction.
+        This is the default behavior.
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  organizationId:
+    deprecated: true
+    readOnly: true
+    allOf:
+      - $ref: ./Organizations/OrganizationId.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - onBoardingUrl
+            - dynamicIpnUrl
+            - staticIpnUrl
