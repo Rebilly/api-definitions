@@ -5,13 +5,13 @@ get:
     - Core
   tags:
     - Orders
-  summary: Retrieve an order cancellation
+  summary: Retrieve a subscription order cancellation
   operationId: GetSubscriptionCancellation
   x-sdk-operation-name: get
-  description: Retrieves an order cancellation with a specified ID.
+  description: Retrieves a subscription order cancellation with a specified ID.
   responses:
     '200':
-      description: Cancellation retrieved.
+      description: Subscription order cancellation retrieved.
       content:
         application/json:
           schema:
@@ -32,10 +32,10 @@ put:
     - Core
   tags:
     - Orders
-  summary: Upsert a cancellation
+  summary: Upsert a subscription order cancellation
   operationId: PutSubscriptionCancellation
   x-sdk-operation-name: update
-  description: Creates or updates (upserts) a cancellation order with a specified ID.
+  description: Creates or updates (upserts) a subscription order cancellation with a specified ID.
   requestBody:
     $ref: ../components/requestBodies/SubscriptionCancellation.yaml
   responses:
@@ -73,11 +73,11 @@ patch:
     - Core
   tags:
     - Orders
-  summary: Update a subscription cancellation
+  summary: Update a subscription order cancellation
   operationId: PatchSubscriptionCancellation
   x-sdk-operation-name: patch
   description: |-
-    Updates a subscription cancellation with a specified ID.
+    Updates a subscription order cancellation with a specified ID.
     Use this operation to update a cancellation reason and description.
   requestBody:
     content:
@@ -117,16 +117,16 @@ delete:
     - Core
   tags:
     - Orders
-  summary: Delete a cancellation
+  summary: Delete a subscription order cancellation
   operationId: DeleteSubscriptionCancellation
   x-sdk-operation-name: delete
   description: |-
-    Deletes an order cancellation with a specified ID.
+    Deletes a subscription order cancellation with a specified ID.
 
-    > **Important:** Only cancellation orders with a `status` of `draft` can be deleted.
+    > **Important:** Only subscription order cancellations with a `status` of `draft` can be deleted.
   responses:
     '204':
-      description: Cancellation deleted.
+      description: Subscription order cancellation deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
