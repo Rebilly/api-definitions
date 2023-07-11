@@ -34,6 +34,7 @@ properties:
     readOnly: true
   productId:
     type: string
+    nullable: true
     description: ID of the product.
     maxLength: 50
     example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
@@ -59,10 +60,12 @@ properties:
   periodStartTime:
     description: Date and time when the billing period starts.
     type: string
+    nullable: true
     format: date-time
   periodEndTime:
     description: Date and time when the billing period ends.
     type: string
+    nullable: true
     format: date-time
   periodNumber:
     description: |-
@@ -70,6 +73,7 @@ properties:
       For example, an invoice item for a service is included in billing period number 3.
       The invoice item is only applied to billing period number 3.
     type: integer
+    nullable: true
   createdTime:
     $ref: ../CreatedTime.yaml
   updatedTime:
@@ -77,6 +81,8 @@ properties:
   tax:
     description: Invoice item tax.
     readOnly: true
+    type: object
+    nullable: true
     allOf:
       - $ref: ./InvoiceTaxItem.yaml
   _links:
@@ -95,6 +101,8 @@ properties:
           enum:
             - self
             - product
+            - subscription
+            - plan
   _embedded:
     type: object
     description: Embedded objects that are requested by the `expand` query parameter.
