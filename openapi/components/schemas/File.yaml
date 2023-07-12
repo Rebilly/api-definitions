@@ -1,0 +1,93 @@
+type: object
+properties:
+  id:
+    type: string
+    description: ID of the file.
+    readOnly: true
+    maxLength: 50
+    example: file_0YV7HZ7KDCC5WBV9Q7WRKG1H6N
+  name:
+    description: Original file name.
+    type: string
+  extension:
+    description: File extension.
+    type: string
+  description:
+    description: Description of the file.
+    type: string
+  sourceType:
+    description: Source of the file.
+    type: string
+    nullable: true
+    enum:
+      - upload
+      - camera
+      - organization-export
+      - organization-closure-export
+      - null
+    example: upload
+  tags:
+    description: List of tags associated with the file.
+    type: array
+    items:
+      type: string
+  mime:
+    description: MIME type of the file.
+    type: string
+    readOnly: true
+    enum:
+      - image/png
+      - image/jpeg
+      - image/gif
+      - application/pdf
+  size:
+    description: File size, in bytes.
+    type: integer
+    readOnly: true
+  width:
+    description: Image width. This field applicable to images only.
+    type: integer
+    readOnly: true
+  height:
+    description: Image height. This field applicable to images only.
+    type: integer
+    readOnly: true
+  sha1:
+    description: Hash sum of the file.
+    type: string
+    readOnly: true
+  exifData:
+    description: Collection of EXIF tags contained in the image metadata. This field applicable to images only.
+    type: object
+    nullable: true
+    readOnly: true
+    example:
+      FileSize: 120
+      Software: "GIMP 2.4.5"
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  isPublic:
+    description: |-
+      Specifies if the file is available publicly without authentication.
+      If this value is `true`, the permalink in the `_links` section contains the public URL.
+    type: boolean
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - download
+            - signedLink
+            - permalink

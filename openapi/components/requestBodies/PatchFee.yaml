@@ -1,0 +1,30 @@
+type: object
+properties:
+  type:
+    description: Type of fee.
+    type: string
+    enum: ["buy", "sell"]
+  name:
+    type: string
+    description: Name of the fee.
+    minLength: 1
+    maxLength: 255
+    example: 'A gateway fee'
+  filter:
+    description: Filter that is based on the properties of the transaction and used to determine when to apply the fee.
+    minLength: 1
+    maxLength: 255
+    example: 'type:sale,capture;result:approved'
+    type: string
+    nullable: true
+  formula:
+    $ref: ../schemas/Fees/FeeFormula.yaml
+  settlementSettings:
+    description: |-
+      Fee settlement settings.
+      This value overrides the gateway account financial settings of the transaction.
+    type: object
+    nullable: true
+    allOf:
+      - $ref: ../schemas/GatewayAccounts/SettlementSettings.yaml
+
