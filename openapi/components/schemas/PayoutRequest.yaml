@@ -19,6 +19,7 @@ properties:
       - $ref: ./CustomerId.yaml
   paymentInstrumentId:
     type: string
+    nullable: true
     description: ID of the requested payment instrument to offer for the payout.
     maxLength: 50
     example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
@@ -30,11 +31,15 @@ properties:
     description: Amount of the payout.
     type: number
     format: double
-  unallocatedAmount:
+  availableAmount:
     description: Available payout request amount that has not been allocated.
     readOnly: true
     type: number
     format: double
+  description:
+    description: Description of payout request.
+    type: string
+    nullable: true
   status:
     description: Status of the request.
     type: string
