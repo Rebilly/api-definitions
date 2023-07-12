@@ -68,7 +68,7 @@ properties:
     nullable: true
     type: object
     allOf:
-      - $ref: ../Contact/ContactObject.yaml
+      - $ref: ../Contact/ContactInformation.yaml
   requestId:
     description: |-
       Use this field to prevent duplicate transaction requests that may occur within a short period of time.
@@ -103,12 +103,12 @@ properties:
     description: |-
       URL where a server-to-server `POST` notification is sent.
       This notification is sent when the transaction result is finalized after a timeout or an offsite interaction.
-      
+
       Do not trust this notification alone,
       complete a `GET` request to confirm the result of the transaction.
       To ensure the request is not reattempted,
       when the result is confirmed, respond with a `2xx` HTTP status code.
-      
+
       The following placeholders are available to use in this URI: `{id}` and `{result}`.
       These placeholders are replaced the with the transaction ID and result accordingly.
     type: string
@@ -118,7 +118,7 @@ properties:
     description: |-
       URL to redirect the end-user when an offsite transaction is completed.
       Defaults to the configured URL of the website.
-      You may use `{id}` or `{result}` as placeholders in the URL, 
+      You may use `{id}` or `{result}` as placeholders in the URL,
       these are replaced the with the transaction ID and result accordingly.
     type: string
     format: uri
