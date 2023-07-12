@@ -1,5 +1,16 @@
 type: object
 properties:
   issuedTime:
+    description: |-
+      Date and time when the invoice is issued.
+      If this field is `null` or omitted, the invoice is issued immediately.
     type: string
     format: date-time
+    nullable: true
+  dueTime:
+    description: |-
+      Date and time when the invoice is due for payment.
+      If this field is `null` or omitted, this value is set to the `issuedTime` value.
+    type: string
+    format: date-time
+    nullable: true
