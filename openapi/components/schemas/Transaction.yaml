@@ -4,16 +4,16 @@ properties:
   id:
     readOnly: true
     allOf:
-      - $ref: ../Transactions/TransactionId.yaml
+      - $ref: ./Transactions/TransactionId.yaml
   websiteId:
     readOnly: true
     allOf:
-      - $ref: ../Websites/WebsiteId.yaml
+      - $ref: ./Websites/WebsiteId.yaml
   customerId:
     x-basic: true
     x-sortable: true
     allOf:
-      - $ref: ../CustomerId.yaml
+      - $ref: ./CustomerId.yaml
   type:
     description: Type of transaction.
     type: string
@@ -70,7 +70,7 @@ properties:
   currency:
     readOnly: true
     allOf:
-      - $ref: ../CurrencyCode.yaml
+      - $ref: ./CurrencyCode.yaml
   purchaseAmount:
     description: |-
       Amount by which the purchase is completed.
@@ -84,7 +84,7 @@ properties:
   purchaseCurrency:
     readOnly: true
     allOf:
-      - $ref: ../CurrencyCode.yaml
+      - $ref: ./CurrencyCode.yaml
   requestAmount:
     description: |-
       Amount of the payment request.
@@ -98,35 +98,35 @@ properties:
   requestCurrency:
     readOnly: true
     allOf:
-      - $ref: ../CurrencyCode.yaml
+      - $ref: ./CurrencyCode.yaml
   parentTransactionId:
     description: ID of the parent transaction.
     allOf:
-      - $ref: ../Transactions/TransactionId.yaml
+      - $ref: ./Transactions/TransactionId.yaml
   childTransactions:
     description: IDs of child transactions.
     readOnly: true
     type: array
     items:
-      $ref: ../ResourceId.yaml
+      $ref: ./ResourceId.yaml
   invoiceIds:
     description: Related invoice IDs.
     readOnly: true
     type: array
     items:
-      $ref: ../ResourceId.yaml
+      $ref: ./ResourceId.yaml
   subscriptionIds:
     description: Subscription IDs of invoices that are related to the transaction.
     readOnly: true
     type: array
     items:
-      $ref: ../ResourceId.yaml
+      $ref: ./ResourceId.yaml
   planIds:
     description: Plan IDs of orders that are related to the transaction.
     readOnly: true
     type: array
     items:
-      $ref: ../ResourceId.yaml
+      $ref: ./ResourceId.yaml
   isRebill:
     description: Specifies if the transaction is one of a number of recurring payments in a subscription, excluding trials or setup fees.
     type: boolean
@@ -141,7 +141,7 @@ properties:
   billingAddress:
     description: Billing address.
     allOf:
-      - $ref: ../Contact/ContactObject.yaml
+      - $ref: ./Contact/ContactObject.yaml
   has3ds:
     description: Specifies if the transaction uses 3D Secure.
     type: boolean
@@ -239,19 +239,19 @@ properties:
     x-label: Gateway
     x-basic: true
     allOf:
-      - $ref: ../Gateways/GatewayName.yaml
+      - $ref: ./Gateways/GatewayName.yaml
   customFields:
-    $ref: ../ResourceCustomFields.yaml
+    $ref: ./ResourceCustomFields.yaml
   processedTime:
     description: Date and time when the transaction is processed.
     x-sortable: true
     x-basic: true
     allOf:
-      - $ref: ../ServerTimestamp.yaml
+      - $ref: ./ServerTimestamp.yaml
   createdTime:
-    $ref: ../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   gatewayAccountId:
     type: string
     description: ID of the gateway account that processed the transaction.
@@ -262,7 +262,7 @@ properties:
     description: ID of the gateway transaction.
     readOnly: true
     allOf:
-      - $ref: ./TransactionId.yaml
+      - $ref: ./Transactions/TransactionId.yaml
   gateway:
     type: object
     description: Related gateway information.
@@ -339,7 +339,7 @@ properties:
       This value is only available when a transaction uses a payment gateway.
       If a transaction does not use a payment gateway, this value is `null`.
     allOf:
-      - $ref: ../Gateways/AcquirerName.yaml
+      - $ref: ./Gateways/AcquirerName.yaml
   method:
     deprecated: true
     description: |-
@@ -347,7 +347,7 @@ properties:
 
       >**Note:** Use `paymentInstrument.method` instead.
     allOf:
-      - $ref: ../PaymentMethods/PaymentMethod.yaml
+      - $ref: ./PaymentMethods/PaymentMethod.yaml
   velocity:
     description: Number of transactions by the same customer in the past 24 hours.
     type: integer
@@ -377,10 +377,10 @@ properties:
     type: object
     description: Payment instrument information.
     anyOf:
-      - $ref: ../PaymentInstruments/ValueObjects/VaultedInstrument.yaml
-      - $ref: ../PaymentInstruments/ValueObjects/AlternativePaymentInstrument.yaml
-      - $ref: ../PaymentInstruments/ValueObjects/CashInstrument.yaml
-      - $ref: ../PaymentInstruments/ValueObjects/CheckInstrument.yaml
+      - $ref: ./PaymentInstruments/ValueObjects/VaultedInstrument.yaml
+      - $ref: ./PaymentInstruments/ValueObjects/AlternativePaymentInstrument.yaml
+      - $ref: ./PaymentInstruments/ValueObjects/CashInstrument.yaml
+      - $ref: ./PaymentInstruments/ValueObjects/CheckInstrument.yaml
   hasDcc:
     description: Specifies if Dynamic Currency Conversion (DCC) applies to the transaction.
     type: boolean
@@ -396,15 +396,15 @@ properties:
       base:
         description: Initial amount and currency to convert from.
         allOf:
-          - $ref: ../Money.yaml
+          - $ref: ./Money.yaml
       quote:
         description: Suggested amount and currency to convert to.
         allOf:
-          - $ref: ../Money.yaml
+          - $ref: ./Money.yaml
       usdMarkup:
         description: Markup amount converted to USD.
         allOf:
-          - $ref: ../MoneyAmount.yaml
+          - $ref: ./MoneyAmount.yaml
       outcome:
         type: string
         description: Dynamic currency conversion outcome.
@@ -429,7 +429,7 @@ properties:
       order:
         description: Initial amount and currency.
         allOf:
-          - $ref: ../Money.yaml
+          - $ref: ./Money.yaml
       version:
         type: string
         description: |-
@@ -440,7 +440,7 @@ properties:
           Language in which the bump offer displays to the user.
           This field in useful to find translation issues.
         allOf:
-          - $ref: ../LanguageIsoCode.yaml
+          - $ref: ./LanguageIsoCode.yaml
       outcome:
         type: string
         readOnly: true
@@ -456,14 +456,14 @@ properties:
         description: Offers presented to a customer.
         minItems: 1
         items:
-          $ref: ../PurchaseBumps/PurchaseBumpOffer.yaml
+          $ref: ./PurchaseBumps/PurchaseBumpOffer.yaml
       selectedOffer:
         readOnly: true
         description: |-
           Offer selected by a customer.
           If a bump offer outcome is not `selected`, this value is `null`.
         allOf:
-          - $ref: ../PurchaseBumps/PurchaseBumpOffer.yaml
+          - $ref: ./PurchaseBumps/PurchaseBumpOffer.yaml
   riskScore:
     description: Risk score for the transaction.
     type: integer
@@ -472,7 +472,7 @@ properties:
     type: object
     nullable: true
     allOf:
-      - $ref: ../RiskMetadata.yaml
+      - $ref: ./RiskMetadata.yaml
   notificationUrl:
     description: |-
       URL where a server-to-server POST notification is sent.
@@ -554,7 +554,7 @@ properties:
   reportCurrency:
     readOnly: true
     allOf:
-      - $ref: ../CurrencyCode.yaml
+      - $ref: ./CurrencyCode.yaml
   settlementTime:
     type: string
     description: Date and time when the transaction is settled by the banking institution.
@@ -570,11 +570,11 @@ properties:
     nullable: true
     x-sortable: true
   limits:
-    $ref: ../TransactionLimitAmount.yaml
+    $ref: ./TransactionLimitAmount.yaml
   organizationId:
     readOnly: true
     allOf:
-      - $ref: ../Organizations/OrganizationId.yaml
+      - $ref: ./Organizations/OrganizationId.yaml
   _links:
     type: array
     description: Related links.
