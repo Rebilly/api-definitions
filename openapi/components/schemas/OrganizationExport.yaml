@@ -1,0 +1,67 @@
+type: object
+properties:
+  id:
+    readOnly: true
+    type: string
+    description: Unique resource ID.
+    maxLength: 50
+    example: org_exp_0YVDMCH30ZC2XA5BYHH6B6SRTJ
+  userId:
+    description: ID of the user who requested the organization data export.
+    readOnly: true
+    type: string
+    maxLength: 50
+    example: usr_0YVCEENYJ3D7Q9EN6BN16HA0G4
+  fileId:
+    type: string
+    description: ID of the linked file object.
+    readOnly: true
+    nullable: true
+    maxLength: 50
+    example: file_0YV7HZ7KDCC5WBV9Q7WRKG1H6N
+  status:
+    description: Status of organization data export request.
+    readOnly: true
+    type: string
+    enum:
+      - pending
+      - processing
+      - completed
+      - queued
+      - failed
+      - expired
+  items:
+    description: Organization data export resources array.
+    readOnly: true
+    type: array
+    items:
+      $ref: ./OrganizationExports/OrganizationExportResource.yaml
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  retentionTime:
+    description: |-
+      Date and time when retention ends.
+      After this date, files are removed.
+    readOnly: true
+    type: string
+    nullable: true
+    format: date-time
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - user
+            - signedLink
