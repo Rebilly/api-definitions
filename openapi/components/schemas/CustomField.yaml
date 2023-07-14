@@ -35,19 +35,53 @@ properties:
     type: string
     nullable: true
   additionalSchema:
+    type: object
     description: |-
       Additional schema which adds additional values constrains.
-
-      Additional parameters which can be added according to type:
-
-      | Parameter name | Types            | Description |
-      | -------------- | ---------------- | ----------- |
-      | `allowedValues`| string, array    | List of allowed values. |
-      | `maxLength`    | string           | Maximum allowed length of a string. A maximum length of 4000 characters can be configured. By default, this value is set to 255. |
-      | `minimum`      | number, integer  | Minimum allowed value of a number or integer. It combines with `maximum`. |
-      | `maximum`      | number, integer  | Maximum allowed value of a number or integer. It combines with `minimum`. |
-      | `pattern`      | string           | Allowed regular expression of a string. |
-      | `required`     | any              | Required value. It must be `boolean`. It combines with any other parameter. |
-      | `default`      | any              | Default value. It must match the custom field type. It combines with any other parameter.
+      Custom fields of different types accept different constraints.
+    parameters:
+      allowedValues:
+        description: List of allowed values. Available for custom fields with types `string` and `array`.
+        oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+      maxLength:
+        description: -|
+          Maximum allowed length of a string. A maximum length of 4000 characters can be configured.
+          By default, this value is set to 255. Available for custom fields with type `string`.
+        type: number
+        format: integer
+      minimum:
+        description: -|
+          Minimum allowed value of a number or integer. It combines with `maximum`.
+          Available for custom fields with type `number` and `integer`.
+        type: number
+      maximum:
+        description: -|
+          Maximum allowed value of a number or integer. It combines with `minimum`.
+          Available for custom fields with type `number` and `integer`.
+        type: number
+      pattern:
+        description: -|
+          Allowed regular expression of a string.
+          Available for custom fields with type `string`.
+        type: string
+      required:
+        description: -|
+          Whether this is a required value. It combines with any other parameter.
+          Available for custom fields with any type.
+        type: boolean
+      default:
+        description: -|
+          Default value. It must match the custom field type. It combines with any other parameter.
+          Available for custom fields with any type.
+        oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          - type: number
   _links:
     $ref: ./SelfLink.yaml
