@@ -41,10 +41,11 @@ properties:
       Custom fields of different types accept different constraints.
     properties:
       allowedValues:
-        description: List of allowed values. Available for custom fields with types `string` and `array`.
         oneOf:
           - type: string
+            description: List of allowed values. Available for custom fields with types `string`.
           - type: array
+            description: List of allowed values. Available for custom fields with types `array`.
             items:
               type: string
       maxLength:
@@ -74,14 +75,20 @@ properties:
           Available for custom fields with any type.
         type: boolean
       default:
-        description: |-
-          Default value. It must match the custom field type. It combines with any other parameter.
-          Available for custom fields with any type.
         oneOf:
           - type: string
+            description: |-
+              Default value. It combines with any other parameter.
+              Available for custom fields with type `string`.
           - type: array
+            description: |-
+              Default value. It combines with any other parameter.
+              Available for custom fields with type `array`.
             items:
               type: string
           - type: number
+            description: |-
+              Default value. It combines with any other parameter.
+              Available for custom fields with type `number` and `integer`.
   _links:
     $ref: ./SelfLink.yaml
