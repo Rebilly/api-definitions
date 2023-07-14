@@ -19,8 +19,10 @@ properties:
     properties:
       releaseTime:
         description: Time of risk reserve release.
-        allOf:
-          - $ref: ../ServerTimestamp.yaml
+        type: string
+        nullable: true
+        format: date-time
+        readOnly: true
   parentId:
     description: |-
       ID of the parent entry if one exists.
@@ -43,6 +45,7 @@ properties:
     x-basic: true
     description: Amount of the settlement.
     type: number
+    nullable: true
     format: double
   settlementTime:
     description: Date and time of the expected settlement.
@@ -53,6 +56,7 @@ properties:
       If the settlement currency does not match the transaction currency.
       This field displays the exchange rate of the settlement.
     type: number
+    nullable: true
     format: double
   createdTime:
     $ref: ../CreatedTime.yaml
