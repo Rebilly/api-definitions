@@ -10,7 +10,7 @@ properties:
     maxLength: 50
     example: chkt_frm_0YV8XZ6174C2MBS5011SAZNMBP
   websiteId:
-    $ref: ../Websites/WebsiteId.yaml
+    $ref: ./Websites/WebsiteId.yaml
   customDomain:
     description: Custom domain for the checkout form.
     type: string
@@ -22,7 +22,7 @@ properties:
       Plans describe how the customer must pay for products. For more information, see [Plans](https://www.rebilly.com/docs/dev-docs/api/tag/Plans/).
     minItems: 1
     allOf:
-      - $ref: CheckoutFormPlans.yaml
+      - $ref: ./CheckoutForm/CheckoutFormPlans.yaml
   addonPlans:
     description: |-
       List of add-on plans that are displayed to the customer on the payment screen.
@@ -31,7 +31,7 @@ properties:
       The customer selects whether to add an add-on plan to their current order.
     default: []
     allOf:
-      - $ref: CheckoutFormPlans.yaml
+      - $ref: ./CheckoutForm/CheckoutFormPlans.yaml
   bumpPlans:
     description: |-
       List of bump plans that are displayed to the customer on the payment screen.
@@ -41,7 +41,7 @@ properties:
       or to use the plans that are specified in their current order.
     default: []
     allOf:
-      - $ref: CheckoutFormPlans.yaml
+      - $ref: ./CheckoutForm/CheckoutFormPlans.yaml
   accountsEnabled:
     description: |-
       Specifies if the account is enabled.
@@ -71,7 +71,7 @@ properties:
       If not specified, all available payment methods are displayed.
     type: array
     items:
-      $ref: ../PaymentMethods/PaymentMethod.yaml
+      $ref: ./PaymentMethods/PaymentMethod.yaml
   customization:
     description: Visual customization options for the checkout form.
     type: object
@@ -79,7 +79,7 @@ properties:
       logoId:
         description: ID of the linked file object.
         allOf:
-          - $ref: ../ResourceId.yaml
+          - $ref: ./ResourceId.yaml
       summary:
         description: Summary text.
         type: string
@@ -156,12 +156,12 @@ properties:
           - information.companyName
           - information.phoneNumber
   createdTime:
-    $ref: ../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   token:
     description: Session token that is used for authentication.
     type: string
     readOnly: true
   _links:
-    $ref: ../SelfLink.yaml
+    $ref: ./SelfLink.yaml
