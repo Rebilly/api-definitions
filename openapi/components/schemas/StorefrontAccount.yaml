@@ -4,17 +4,17 @@ properties:
     description: ID of the account.
     readOnly: true
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ./ResourceId.yaml
   websiteId:
     readOnly: true
     allOf:
-      - $ref: ../WebsiteId.yaml
+      - $ref: ./WebsiteId.yaml
   username:
     type: string
     description: Username associated with the account.
     readOnly: true
   primaryAddress:
-    $ref: ../Contact/ContactObject.yaml
+    $ref: ./Contact/ContactObject.yaml
   paymentToken:
     type: string
     writeOnly: true
@@ -24,15 +24,15 @@ properties:
       The value of this property overrides the `defaultPaymentInstrument` if both are supplied.
       This token may only be used once before it expires.
   defaultPaymentInstrument:
-    $ref: PaymentInstruments/InstrumentReference.yaml
+    $ref: ./Storefront/PaymentInstruments/InstrumentReference.yaml
   customFields:
-    $ref: ../ResourceCustomFields.yaml
+    $ref: ./ResourceCustomFields.yaml
   createdTime:
-    $ref: ../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   _links:
-    $ref: ../SelfLink.yaml
+    $ref: ./SelfLink.yaml
   _embedded:
     type: object
     description: Embedded objects that are requested by the `expand` query parameter.

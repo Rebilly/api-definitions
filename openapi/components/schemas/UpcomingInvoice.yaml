@@ -8,7 +8,7 @@ properties:
     maxLength: 50
     example: in_0YVF9605RKC62BP14NE2R7V2XT
   websiteId:
-    $ref: ../WebsiteId.yaml
+    $ref: ./WebsiteId.yaml
   subscriptionId:
     description: ID of the related subscription order.
     type: string
@@ -19,11 +19,11 @@ properties:
     x-sortable: true
     x-basic: true
     allOf:
-      - $ref: ../CurrencyCode.yaml
+      - $ref: ./CurrencyCode.yaml
   customerId:
     x-basic: true
     allOf:
-      - $ref: ../CustomerId.yaml
+      - $ref: ./CustomerId.yaml
   revision:
     description: |-
       Number of times the upcoming invoice data has changed.
@@ -34,12 +34,12 @@ properties:
     type: integer
   organizationId:
     allOf:
-      - $ref: ../Organizations/OrganizationId.yaml
+      - $ref: ./Organizations/OrganizationId.yaml
   items:
     type: array
     description: Upcoming Invoice items array.
     items:
-      $ref: ./UpcomingInvoiceItem.yaml
+      $ref: ./Invoices/UpcomingInvoiceItem.yaml
   amount:
     description: Amount of the invoice.
     type: number
@@ -68,9 +68,9 @@ properties:
     format: double
     readOnly: true
   shipping:
-    $ref: ../Shipping.yaml
+    $ref: ./Shipping.yaml
   tax:
-    $ref: ./InvoiceTax.yaml
+    $ref: ./Invoices/InvoiceTax.yaml
   organizationTaxIdNumber:
     description: Organization tax ID number that is displayed on the invoice.
     type: object
@@ -112,11 +112,11 @@ properties:
   billingAddress:
     description: Billing address of the invoice.
     allOf:
-      - $ref: ../Contact/ContactObject.yaml
+      - $ref: ./Contact/ContactObject.yaml
   deliveryAddress:
     description: Delivery address of the invoice.
     allOf:
-      - $ref: ../Contact/ContactObject.yaml
+      - $ref: ./Contact/ContactObject.yaml
   poNumber:
     description: Purchase order number that is displayed on the invoice.
     nullable: true
@@ -131,7 +131,7 @@ properties:
     readOnly: true
     items:
       allOf:
-        - $ref: ../Coupon/InvoiceDiscount.yaml
+        - $ref: ./Coupon/InvoiceDiscount.yaml
   dueTime:
     description: Date and time when the invoice is due for payment.
     type: string
@@ -143,11 +143,11 @@ properties:
     x-sortable: true
     x-basic: true
     allOf:
-      - $ref: ../ServerTimestamp.yaml
+      - $ref: ./ServerTimestamp.yaml
   createdTime:
-    $ref: ../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   _links:
     type: array
     description: Related links.
