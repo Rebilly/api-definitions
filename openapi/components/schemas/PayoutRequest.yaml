@@ -118,5 +118,18 @@ properties:
     allOf:
       - $ref: ./UpdatedTime.yaml
   _links:
-    $ref: ./SelfLink.yaml
-
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - paymentInstrument
