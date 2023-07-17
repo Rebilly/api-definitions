@@ -3,7 +3,7 @@ description: API request tracking.
 readOnly: true
 properties:
   id:
-    $ref: ../ResourceId.yaml
+    $ref: ./ResourceId.yaml
   status:
     type: integer
     x-sortable: true
@@ -38,9 +38,9 @@ properties:
     x-sortable: true
     description: Response body of the HTTP request.
   requestHeaders:
-    $ref: ../HttpHeaders.yaml
+    $ref: ./HttpHeaders.yaml
   responseHeaders:
-    $ref: ../HttpHeaders.yaml
+    $ref: ./HttpHeaders.yaml
   user:
     type: object
     description: User who made the request.
@@ -96,30 +96,40 @@ properties:
     type: string
     x-basic: true
     description: Client IP address.
+  relatedResourceIds:
+    type: array
+    description: IDs of related resources.
+    readOnly: true
+    items:
+      type: string
+    example:
+      - in_0YVF9605RKC62BP14NE2R7V2XT
+      - cus_0YV7DDSDD1C8DA64KHH2W33CPF
   relatedIds:
     type: object
     description: IDs of related resources.
     readOnly: true
+    deprecated: true
     properties:
       customerId:
-        $ref: ../CustomerId.yaml
+        $ref: ./CustomerId.yaml
       transactionId:
-        $ref: ../Transactions/TransactionId.yaml
+        $ref: ./Transactions/TransactionId.yaml
       tokenId:
-        $ref: ../ResourceId.yaml
+        $ref: ./ResourceId.yaml
   duration:
     type: integer
     x-sortable: true
     x-basic: true
     description: Request duration in milliseconds.
   organizationId:
-    $ref: ../Organizations/OrganizationId.yaml
+    $ref: ./Organizations/OrganizationId.yaml
   createdTime:
-    $ref: ../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   _links:
-    $ref: ../SelfLink.yaml
+    $ref: ./SelfLink.yaml
   _embedded:
     type: object
     description: Embedded objects that are requested by the `expand` query parameter.
