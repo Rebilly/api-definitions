@@ -8,17 +8,17 @@ properties:
     description: ID of the order.
     readOnly: true
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ./ResourceId.yaml
   invoice:
     description: Initial invoice.
     readOnly: true
     allOf:
-      - $ref: StorefrontInvoice.yaml
+      - $ref: ./StorefrontInvoice.yaml
   transaction:
     description: Initial transaction.
     readOnly: true
     allOf:
-      - $ref: StorefrontTransaction.yaml
+      - $ref: ./StorefrontTransaction.yaml
   token:
     description: |-
       Session token that is used for authentication.
@@ -28,7 +28,7 @@ properties:
   websiteId:
     writeOnly: true
     allOf:
-      - $ref: ../Websites/WebsiteId.yaml
+      - $ref: ./Websites/WebsiteId.yaml
   items:
     type: array
     writeOnly: true
@@ -52,26 +52,26 @@ properties:
     nullable: true
     type: object
     allOf:
-      - $ref: ../ContactObject.yaml
+      - $ref: ./ContactObject.yaml
   deliveryAddress:
     description: Delivery address details.
     writeOnly: true
     nullable: true
     type: object
     allOf:
-      - $ref: ../ContactObject.yaml
+      - $ref: ./ContactObject.yaml
   shippingRateId:
     description: |-
       ID of the shipping rate. If this value is not set,
       the cheapest applicable shipping rate is chosen.
     writeOnly: true
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ./ResourceId.yaml
   paymentInstruction:
     description: Payment instruction for the purchase.
     writeOnly: true
     allOf:
-      - $ref: ../PaymentInstruction.yaml
+      - $ref: ./PaymentInstruction.yaml
   couponIds:
     type: array
     description: List of coupons that are applied to the order.
