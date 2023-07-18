@@ -4,11 +4,11 @@ properties:
   id:
     readOnly: true
     allOf:
-      - $ref: ../Transactions/TransactionId.yaml
+      - $ref: ./Transactions/TransactionId.yaml
   websiteId:
     readOnly: true
     allOf:
-      - $ref: ../Websites/WebsiteId.yaml
+      - $ref: ./Websites/WebsiteId.yaml
   type:
     description: Type of transaction.
     type: string
@@ -65,7 +65,7 @@ properties:
   currency:
     readOnly: true
     allOf:
-      - $ref: ../CurrencyCode.yaml
+      - $ref: ./CurrencyCode.yaml
   purchaseAmount:
     description: |-
       Amount by which the purchase is completed.
@@ -79,7 +79,7 @@ properties:
   purchaseCurrency:
     readOnly: true
     allOf:
-      - $ref: ../CurrencyCode.yaml
+      - $ref: ./CurrencyCode.yaml
   requestAmount:
     description: |-
       Amount of the payment request.
@@ -93,35 +93,35 @@ properties:
   requestCurrency:
     readOnly: true
     allOf:
-      - $ref: ../CurrencyCode.yaml
+      - $ref: ./CurrencyCode.yaml
   parentTransactionId:
     description: ID of the parent transaction.
     allOf:
-      - $ref: ../Transactions/TransactionId.yaml
+      - $ref: ./Transactions/TransactionId.yaml
   childTransactions:
     description: IDs of child transactions.
     readOnly: true
     type: array
     items:
-      $ref: ../ResourceId.yaml
+      $ref: ./ResourceId.yaml
   invoiceIds:
     description: Related invoice IDs.
     readOnly: true
     type: array
     items:
-      $ref: ../ResourceId.yaml
+      $ref: ./ResourceId.yaml
   subscriptionIds:
     description: Subscription IDs of invoices that are related to the transaction.
     readOnly: true
     type: array
     items:
-      $ref: ../ResourceId.yaml
+      $ref: ./ResourceId.yaml
   planIds:
     description: Plan IDs of orders that are related to the transaction.
     readOnly: true
     type: array
     items:
-      $ref: ../ResourceId.yaml
+      $ref: ./ResourceId.yaml
   isRebill:
     description: Specifies if the transaction is one of a number of recurring payments in a subscription, excluding trials or setup fees.
     type: boolean
@@ -136,7 +136,7 @@ properties:
   billingAddress:
     description: Billing address.
     allOf:
-      - $ref: ../Contact/ContactObject.yaml
+      - $ref: ./Contact/ContactObject.yaml
   has3ds:
     description: Specifies if the transaction uses 3D Secure.
     type: boolean
@@ -234,21 +234,21 @@ properties:
     x-label: Gateway
     x-basic: true
     allOf:
-      - $ref: ../Gateways/GatewayName.yaml
+      - $ref: ./Gateways/GatewayName.yaml
   customFields:
-    $ref: ../ResourceCustomFields.yaml
+    $ref: ./ResourceCustomFields.yaml
   processedTime:
     description: Date and time when the transaction is processed.
     x-sortable: true
     x-basic: true
     allOf:
-      - $ref: ../ServerTimestamp.yaml
+      - $ref: ./ServerTimestamp.yaml
   createdTime:
-    $ref: ../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   paymentInstrument:
-    $ref: ./PaymentInstruments/InstrumentReference.yaml
+    $ref: ./Storefront/PaymentInstruments/InstrumentReference.yaml
   approvalUrl:
     description: URL to redirect the end-customer when transaction `status` is `waiting-approval` or `offsite`.
     type: string
