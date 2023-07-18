@@ -66,52 +66,9 @@ properties:
     nullable: true
     example: WC2N 5NF
   phoneNumbers:
-    description: List of phone numbers associated with the contact.
-    type: array
-    items:
-      type: object
-      required:
-        - label
-        - value
-      properties:
-        label:
-          description: Phone number label or name.
-          type: string
-          maxLength: 45
-          example: main
-        value:
-          description: Phone number value.
-          type: string
-          maxLength: 50
-          example: 512-710-1640
-        primary:
-          description: Specifies if the phone number is the contact's primary phone number.
-          type: boolean
-          example: true
+    $ref: ./ContactPhoneNumbers.yaml
   emails:
-    description: List of email addresses associated with the contact.
-    type: array
-    items:
-      type: object
-      required:
-        - label
-        - value
-      properties:
-        label:
-          description: Email label or name.
-          type: string
-          maxLength: 45
-          example: main
-        value:
-          description: Email address value.
-          type: string
-          format: email
-          maxLength: 255
-          example: rebilly@example.com
-        primary:
-          description: Specifies if the email address is the contact's primary email address.
-          type: boolean
-          example: true
+    $ref: ./ContactEmails.yaml
   dob:
     description: Contact's date of birth in ISO-8601 `YYYY-MM-DD` format.
     type: string
