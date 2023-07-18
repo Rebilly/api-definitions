@@ -43,15 +43,16 @@ properties:
       allowedValues:
         oneOf:
           - type: string
-            description: List of allowed values. Available for custom fields with types `string`.
+            description: List of allowed values for custom fields of type `string`.
           - type: array
-            description: List of allowed values. Available for custom fields with types `array`.
+            description: List of allowed values for custom fields of type `array`.
             items:
               type: string
       maxLength:
         description: |-
-          Maximum allowed length of a string. A maximum length of 4000 characters can be configured.
-          By default, this value is set to 255. Available for custom fields with type `string`.
+          Maximum allowed string length for custom fields of type `string`. 
+          A maximum length of 4000 characters can be configured.
+          By default, this value is set to 255.
         type: number
         format: integer
       minimum:
@@ -67,12 +68,12 @@ properties:
       pattern:
         description: |-
           Allowed regular expression of a string.
-          Available for custom fields with type `string`.
+          Available for custom fields of type `string`.
         type: string
       required:
         description: |-
-          Whether this is a required value. It combines with any other parameter.
-          Available for custom fields with any type.
+          Specifies whether this value is required. 
+          This value can be combined with any parameter and is available for custom fields of any type.
         type: boolean
       default:
         oneOf:
