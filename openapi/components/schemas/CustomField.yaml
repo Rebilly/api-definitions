@@ -41,6 +41,7 @@ properties:
       Custom fields of different types accept different constraints.
     properties:
       allowedValues:
+        description: List of allowed values.
         oneOf:
           - type: string
             description: List of allowed values for custom fields of type `string`.
@@ -50,19 +51,19 @@ properties:
               type: string
       maxLength:
         description: |-
-          Maximum allowed string length for custom fields of type `string`. 
+          Maximum allowed string length for custom fields of type `string`.
           A maximum length of 4000 characters can be configured.
           By default, this value is set to 255.
         type: number
         format: integer
       minimum:
         description: |-
-          Minimum allowed number or integer value for custom fields of type `number` and `integer`. 
+          Minimum allowed number or integer value for custom fields of type `number` and `integer`.
           This value can be combined with the `maximum` parameter.
         type: number
       maximum:
         description: |-
-          Maximum allowed number or integer value for custom fields of type `number` and `integer`. 
+          Maximum allowed number or integer value for custom fields of type `number` and `integer`.
           This value can be combined with the `minimum` parameter.
         type: number
       pattern:
@@ -72,24 +73,22 @@ properties:
         type: string
       required:
         description: |-
-          Specifies whether this value is required. 
+          Specifies whether this value is required.
           This value can be combined with any parameter and is available for custom fields of any type.
         type: boolean
       default:
+        description: Default value. This value can be combined with any parameter.
         oneOf:
           - type: string
             description: |-
               Default value for custom fields of type `string`.
-              This value can be combined with any parameter.
           - type: array
             description: |-
               Default value for custom fields of type `array`.
-              This value can be combined with any parameter.
             items:
               type: string
           - type: number
             description: |-
               Default value for custom fields of type `number` and `integer`.
-              This value can be combined with any parameter.
   _links:
     $ref: ./SelfLink.yaml
