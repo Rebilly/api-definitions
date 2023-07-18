@@ -31,11 +31,13 @@ properties:
     description: Amount of the payout.
     type: number
     format: double
+    x-type: Money
   availableAmount:
     description: Available payout request amount that has not been allocated.
     readOnly: true
     type: number
     format: double
+    x-type: Money
   description:
     description: Description of payout request.
     type: string
@@ -118,5 +120,18 @@ properties:
     allOf:
       - $ref: ./UpdatedTime.yaml
   _links:
-    $ref: ./SelfLink.yaml
-
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - paymentInstrument
