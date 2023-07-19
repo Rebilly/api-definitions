@@ -77,9 +77,90 @@ properties:
     pattern: '^[A-Z]{3}$'
     example: USD
   questionnaire:
-    $ref: ./Organizations/OrganizationQuestionnaire.yaml
+    type: object
+    description: Organization questionnaire.
+    properties:
+      role:
+        type: string
+        description: Role of the owner.
+      monthlyTransactions:
+        type: string
+        description: Amount of monthly processed transaction.
+      products:
+        type: array
+        description: List of products the organization is interested in.
+        items:
+          type: string
+      integrationType:
+        type: string
+        description: Type of integration the organization would like.
+      launchTiming:
+        type: string
+        description: When the organization would like to go live.
   settings:
-    $ref: ./Organizations/OrganizationSettings.yaml
+    type: object
+    description: Organization settings.
+    properties:
+      defaultTaxCalculator:
+        type: object
+        description: Tax calculation settings.
+        required:
+          - type
+        properties:
+          type:
+            type: string
+            description: Type of tax calculator.
+            enum:
+              - taxjar
+              - avalara
+              - flat
+          rate:
+            type: number
+            nullable: true
+            format: float
+            description: Rate for flat tax calculation.
+      billing:
+        description: Global organization settings for billing.
+        type: object
+        nullable: true
+        properties:
+          pendingOrderTtl:
+            description: Length of time, in ISO-8601 durations format, before which a pending order is automatically abandoned.
+            type: string
+            example: P7D
+            nullable: true
+            default: null
+      taxLocations:
+        type: array
+        description: |-
+          Additional organization addresses where a merchant may want to collect taxes using the `taxjar` tax calculator.
+
+          Available only for US-based organizations.
+        items:
+          type: object
+          required:
+            - country
+          properties:
+            address:
+              description: Street address of the tax location.
+              type: string
+              maxLength: 60
+            city:
+              description: City of the tax location.
+              type: string
+              maxLength: 45
+            region:
+              description: Region or state of the tax location.
+              type: string
+              maxLength: 45
+            country:
+              description: Country of the tax location, in [ISO Alpha-2 code format](https://www.iso.org/obp/ui/#search/code/).
+              type: string
+              pattern: '^[A-Z]{2}$'
+            postalCode:
+              description: Postal code of the tax location.
+              type: string
+              maxLength: 10
   taxNumbers:
     type: array
     description: Tax numbers of the organization.
