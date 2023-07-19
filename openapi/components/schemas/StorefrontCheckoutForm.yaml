@@ -17,12 +17,13 @@ properties:
     maxLength: 255
     nullable: true
   plans:
+    type: array
     description: |-
       List of plans that are applied to a customer order by default.
       Plans describe how the customer must pay for products. For more information, see [Plans](https://www.rebilly.com/docs/dev-docs/api/tag/Plans/).
     minItems: 1
-    allOf:
-      - $ref: ./CheckoutForm/CheckoutFormPlans.yaml
+    items:
+      $ref: ./CheckoutFormPlan.yaml
   addonPlans:
     description: |-
       List of add-on plans that are displayed to the customer on the payment screen.
@@ -30,8 +31,9 @@ properties:
 
       The customer selects whether to add an add-on plan to their current order.
     default: []
-    allOf:
-      - $ref: ./CheckoutForm/CheckoutFormPlans.yaml
+    type: array
+    items:
+      $ref: ./CheckoutFormPlan.yaml
   bumpPlans:
     description: |-
       List of bump plans that are displayed to the customer on the payment screen.
@@ -40,8 +42,9 @@ properties:
       The customer selects whether to purchase bump plans,
       or to use the plans that are specified in their current order.
     default: []
-    allOf:
-      - $ref: ./CheckoutForm/CheckoutFormPlans.yaml
+    type: array
+    items:
+      $ref: ./CheckoutFormPlan.yaml
   accountsEnabled:
     description: |-
       Specifies if the account is enabled.
