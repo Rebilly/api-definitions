@@ -41,9 +41,17 @@ patch:
             - score
           properties:
             score:
+              type: object
               description: Customer's EDD score.
-              allOf:
-                - $ref: ../components/schemas/Edd/EddData.yaml
+              properties:
+                occupation:
+                  $ref: ../components/schemas/EddScore.yaml
+                arrest:
+                  $ref: ../components/schemas/EddScore.yaml
+                bankruptcy:
+                  $ref: ../components/schemas/EddScore.yaml
+                fraud:
+                  $ref: ../components/schemas/EddScore.yaml
   responses:
     '200':
       description: EDD score updated.
