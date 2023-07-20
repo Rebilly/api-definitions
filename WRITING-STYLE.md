@@ -121,7 +121,7 @@ Use [semantic line breaks](https://sembr.org/). This standard specifies that you
 
 ## Nouns strings (or noun stacks)
 
-Avoid using a series of nouns together consecutively. This can make descriptions difficult to understand because it may not be clear which words are modifier nouns and which noun is the object. In writing, this is known as a [noun strings (or noun stacks)](https://www.plainlanguage.gov/guidelines/words/avoid-noun-strings/). This often occurs in business and technical content when the author attempts to make content concise, but mistakenly removes important context.
+Avoid using a series of nouns together consecutively. This can make descriptions difficult to understand because it may not be clear which words are modifier nouns and which noun is the object. In writing, this is known as a [noun string (or noun stack)](https://www.plainlanguage.gov/guidelines/words/avoid-noun-strings/). This often occurs in business and technical content when the author attempts to make content concise, but mistakenly removes important context.
 
 To avoid noun strings, place the modifier noun before the noun that it modifies. This makes it easier to understand the relationship between the words. This often requires the use of articles (a, an, the) and prepositions (of, from, in, on, to, for ...).
 
@@ -134,10 +134,10 @@ To avoid noun strings, place the modifier noun before the noun that it modifies.
 
 ```yaml
 scope:
-  description:  API key scope.
+  description: API key scope.
 ```
 | Noun (object)| modifier noun| |
-|---|---|---|---|
+|---|---|---|
 | API key| scope |  ❌  |
 
 #### Correct use
@@ -160,7 +160,7 @@ scope:
 
 ```yaml
 creationTime:
-  description:  Coupon creation time.
+  description: Coupon creation time.
 ```
 
 | Noun (object)| modifier noun | noun | |
@@ -186,24 +186,24 @@ creationTime:
 #### Incorrect use
 
 ```yaml
-organizationId:
+organizationName:
   description: Organization name
 ```
 
 | Noun (object)| noun | |
-|---|---|---|---|
+|---|---|---|
 | Organization| name | ❌ |
 
 #### Correct use
 
 ```yaml
-organizationId:
+organizationName:
   description: Name of the organization.
 ```
 
-| Noun | preposition & article | noun (object)| verb | modifier noun | |
+| Noun | preposition & article | noun (object)| |
 |---|---|---|---|---|---|
-| Name| of the | coupon | was | created | ✅ |
+| Name| of the | organization | ✅ |
 
 </details>
 
@@ -214,22 +214,22 @@ organizationId:
 
 ```yaml
 taxNumberType:
-  description:  Tax number type.
+  description: Tax number type.
 ```
 
-| Noun (object) | modifier noun | noun | |
-|---|---|---|---|
-| Tax number | type | time | ❌ |
+| Noun (object) | modifier noun | |
+|---|---|---|
+| Tax number | type | ❌ |
 
 #### Correct use
 
 ```yaml
-creationTime:
+taxNumberType:
   description: Type of tax number.
 ```
 
-| Noun | preposition & article | noun (object)| |
-|---|---|---|---|---|---|
+| Noun | preposition | noun (object)| |
+|---|---|---|---|
 | Type | of | tax number | ✅ |
 
 </details>
