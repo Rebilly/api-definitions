@@ -20,12 +20,12 @@ properties:
     enum:
       - one-time-order
   customerId:
-    $ref: ../../CustomerId.yaml
+    $ref: ./CustomerId.yaml
   organizationId:
     deprecated: true
     readOnly: true
     allOf:
-      - $ref: ../../OrganizationId.yaml
+      - $ref: ./OrganizationId.yaml
   status:
     description: Status of the one-time order.
     type: string
@@ -57,12 +57,12 @@ properties:
     x-sortable: true
     x-basic: true
     allOf:
-      - $ref: ../../Websites/WebsiteId.yaml
+      - $ref: ./WebsiteId.yaml
   currency:
     description: Currency of the order.
     readOnly: true
     allOf:
-      - $ref: ../../CurrencyCode.yaml
+      - $ref: ./CurrencyCode.yaml
   initialInvoiceId:
     description: ID of the initial invoice (`null` for one-time orders).
     readOnly: true
@@ -84,19 +84,19 @@ properties:
     type: array
     minItems: 1
     items:
-      $ref: ../../Subscription/OrderItem.yaml
+      $ref: ./OrderItem.yaml
   deliveryAddress:
     description: Delivery address of the order.
     nullable: true
     type: object
     allOf:
-      - $ref: ../../Contact/ContactObject.yaml
+      - $ref: ./Contact/ContactObject.yaml
   billingAddress:
     description: Billing address of the order.
     nullable: true
     type: object
     allOf:
-      - $ref: ../../Contact/ContactObject.yaml
+      - $ref: ./Contact/ContactObject.yaml
   activationTime:
     description: Date and time when the order is activated.
     x-sortable: true
@@ -145,7 +145,7 @@ properties:
     example: PO123456
     type: string
   shipping:
-    $ref: ../../Shipping.yaml
+    $ref: ./Shipping.yaml
   notes:
     description: Notes for the customer displayed on the order invoice.
     type: string
@@ -166,13 +166,13 @@ properties:
       Risk metadata.
       If this value is `null`, this field uses risk metadata that is captured when creating the payment token.
     allOf:
-      - $ref: ../../RiskMetadata.yaml
+      - $ref: ./RiskMetadata.yaml
   customFields:
-    $ref: ../../ResourceCustomFields.yaml
+    $ref: ./ResourceCustomFields.yaml
   createdTime:
-    $ref: ../../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   _links:
     type: array
     description: Related links.
