@@ -19,16 +19,19 @@ properties:
     properties:
       releaseTime:
         description: Time of risk reserve release.
-        allOf:
-          - $ref: ../ServerTimestamp.yaml
+        type: string
+        nullable: true
+        format: date-time
+        readOnly: true
   parentId:
     description: |-
       ID of the parent entry if one exists.
 
       Some types of transactions relate to parent transactions.
       For example, a `risk-reserve` relates to a `charge`, and a `risk-reserve-release` relates a to `risk-reserve`.
-    allOf:
-      - $ref: ../ResourceId.yaml
+    type: string
+    maxLength: 50
+    example: btxn_0YVCNJYRXTDDQ9QF2Z60ZA05WP
   transactionId:
     description: ID of the related transaction.
     allOf:
@@ -43,6 +46,7 @@ properties:
     x-basic: true
     description: Amount of the settlement.
     type: number
+    nullable: true
     format: double
   settlementTime:
     description: Date and time of the expected settlement.
@@ -53,6 +57,7 @@ properties:
       If the settlement currency does not match the transaction currency.
       This field displays the exchange rate of the settlement.
     type: number
+    nullable: true
     format: double
   createdTime:
     $ref: ../CreatedTime.yaml
