@@ -4,7 +4,7 @@ required:
   - currency
 properties:
   websiteId:
-    $ref: ./Websites/WebsiteId.yaml
+    $ref: ./WebsiteId.yaml
   currency:
     allOf:
       - $ref: ./CurrencyCode.yaml
@@ -19,4 +19,10 @@ properties:
     maxLength: 50
     example: gw_acc_0YVCXMF26DDNKAERE5NW727S34
   redirectUrl:
-    $ref: ./Transactions/TransactionRedirectUrl.yaml
+    description: |-
+      URL to redirect the end-user when an offsite transaction is completed.
+      The following placeholders are available to use in this URI: `{id}` and `{result}`.
+      This field defaults to the configured website URL.
+    type: string
+    format: uri
+
