@@ -202,7 +202,7 @@ organizationName:
 ```
 
 | Noun | preposition & article | noun (object)| |
-|---|---|---|---|---|---|
+|---|---|---|---|
 | Name| of the | organization | ✅ |
 
 </details>
