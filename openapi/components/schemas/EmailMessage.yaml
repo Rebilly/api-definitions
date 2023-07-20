@@ -25,12 +25,14 @@ properties:
   metadata:
     description: Metadata associated with the email message.
     type: object
+    nullable: true
     additionalProperties:
       type: string
     example:
       eventType: subscription-canceled
   credentialHash:
     type: string
+    nullable: true
     description: ID of the SMTP or Email Service Provider (ESP) credential.
     example: b120c2ca-6c2b-4690-9dff-3b0d87852dc7
   from:
@@ -98,6 +100,29 @@ properties:
           description: ID of the attachment resource.
           maxLength: 50
           example: att_0YV7J787J0DW0918MQQMDHWA7M
+  responseCode:
+    type: integer
+    nullable: true
+    description: Status code returned by a mail service after an attempt to send email.
+    readOnly: true
+    example: 250
+  responseBody:
+    type: string
+    nullable: true
+    description: Body of response returned by a mail service after an attempt to send email.
+    readOnly: true
+  initiatedTime:
+    type: string
+    nullable: true
+    description: Date and time when the email is initiated.
+    format: date-time
+    readOnly: true
+  sentTime:
+    type: string
+    nullable: true
+    description: Date and time when the email is sent.
+    format: date-time
+    readOnly: true
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:
