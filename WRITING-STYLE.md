@@ -119,7 +119,7 @@ Use [semantic line breaks](https://sembr.org/). This standard specifies that you
     the KYC document score becomes `95`.
 ```
 
-## Nouns strings (or noun stacks)
+## Noun strings (or noun stacks)
 
 Avoid using a series of nouns together consecutively. This can make descriptions difficult to understand because it may not be clear which words are modifier nouns and which noun is the object. In writing, this is known as a [noun string (or noun stack)](https://www.plainlanguage.gov/guidelines/words/avoid-noun-strings/). This often occurs in business and technical content when the author attempts to make content concise, but mistakenly removes important context.
 
