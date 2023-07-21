@@ -1,0 +1,62 @@
+type: object
+description: Additional data.
+readOnly: true
+properties:
+  actions:
+    description: |-
+      Actions available for a timeline message.
+      If no actions are available, this field is empty.
+    type: array
+    minItems: 0
+    items:
+      $ref: ./TimelineAction.yaml
+  tables:
+    description: Table data that is attached to the timeline message.
+    type: array
+    minItems: 0
+    items:
+      $ref: ./TimelineTable.yaml
+  author:
+    type: object
+    description: Author of the timeline message.
+    properties:
+      userFullName:
+        description: Author's full name.
+        type: string
+      userId:
+        description: Author's user ID.
+        type: string
+        maxLength: 50
+        example: usr_0YVCEENYJ3D7Q9EN6BN16HA0G4
+  mentions:
+    description: User mentions, or tags, in a timeline.
+    type: object
+    additionalProperties:
+      type: string
+    example:
+      '@test@mail.com': userId-1
+  links:
+    description: Links that are attached to a timeline message.
+    type: array
+    items:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          enum:
+            - kyc-document
+            - invoice
+            - subscription
+            - transaction
+            - email-message
+            - dispute
+            - coupon
+            - external
+        resourceId:
+          $ref: ./ResourceId.yaml
+        placeholder:
+          type: string
+          example: KYC document
+        externalUrl:
+          type: string
+          example: 'http://example.com'

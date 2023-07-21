@@ -1,0 +1,25 @@
+allOf:
+  - $ref: ./ShippingRates/ShippingOption.yaml
+  - properties:
+      filter:
+        type: string
+        description: |-
+          Filter based on invoice properties that is used to determine when the rate is applicable.
+          If no filters are used, the rate is always applicable.
+        default: ''
+        example: 'deliveryAddress.country:US,CA,RU;amount:100..1000'
+      status:
+        description: |-
+          Status of the shipping rate.
+          If `status` is `inactive` the shipping rate is not applied.
+        type: string
+        enum:
+          - active
+          - inactive
+        default: active
+      createdTime:
+        $ref: ./CreatedTime.yaml
+      updatedTime:
+        $ref: ./UpdatedTime.yaml
+      _links:
+        $ref: ./SelfLink.yaml

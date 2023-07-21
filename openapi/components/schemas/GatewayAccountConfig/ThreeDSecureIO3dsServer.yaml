@@ -1,0 +1,128 @@
+description: ThreeDSecureIO 3DS Server.
+type: object
+required:
+  - name
+  - acquirerMerchantIdVisa
+  - acquirerMerchantIdMastercard
+  - merchantName
+  - merchantAcquirerBinVisa
+  - merchantAcquirerBinMastercard
+  - merchantCountry
+  - merchantUrl
+  - transactionType
+properties:
+  name:
+    type: string
+    description: Merchant plug-in name.
+    enum:
+      - ThreeDSecureIO3dsServer
+  acquirerMerchantIdVisa:
+    type: string
+    description: Merchant ID (MID) of the Visa acquirer.
+    maxLength: 35
+  acquirerMerchantIdMastercard:
+    type: string
+    description: Merchant ID (MID) of the Mastercard acquirer.
+    maxLength: 35
+  acquirerMerchantIdAmex:
+    type: string
+    description: Merchant ID (MID) of the American Express acquirer.
+    maxLength: 35
+  acquirerMerchantIdDiscover:
+    type: string
+    description: Merchant ID (MID) of the Discover/Diners acquirer.
+    maxLength: 35
+  acquirerMerchantIdJcb:
+    type: string
+    description: Merchant ID (MID) of the JCB acquirer.
+    maxLength: 35
+  merchantName:
+    type: string
+    description: Name of the merchant.
+    maxLength: 40
+  merchantAcquirerBinVisa:
+    type: string
+    description: BIN of the Visa acquirer.
+    minLength: 6
+    maxLength: 11
+  merchantAcquirerBinMastercard:
+    type: string
+    description: BIN of the Mastercard acquirer.
+    minLength: 6
+    maxLength: 11
+  merchantAcquirerBinAmex:
+    type: string
+    description: BIN of the American Express acquirer.
+    minLength: 6
+    maxLength: 11
+  merchantAcquirerBinDiscover:
+    type: string
+    description: BIN of the Discover/Diners acquirer.
+    minLength: 6
+    maxLength: 11
+  merchantAcquirerBinJcb:
+    type: string
+    description: BIN of the JCB acquirer.
+    minLength: 6
+    maxLength: 11
+  merchantCountry:
+    type: string
+    description: Merchant country in ISO Alpha-2 code format.
+    maxLength: 2
+    example: US
+  merchantUrl:
+    type: string
+    description: URL of the merchant's website.
+    maxLength: 2048
+  transactionType:
+    type: string
+    enum:
+      - '01'
+      - '03'
+      - '10'
+      - '11'
+      - '28'
+    description: Identifies the type of transaction that is being authenticated.
+    x-enumDescriptions:
+      01: Goods/Service purchase.
+      03: Check acceptance.
+      10: Account funding.
+      11: Quasi-Cash transaction. Indicates the type of 3RI request.
+      28: Prepaid activation and load.
+  declineNotEnrolled:
+    type: boolean
+    description: Specifies whether to decline transactions if a payment card is not enrolled.
+    default: false
+  use3dsForMerchantInitiated:
+    type: boolean
+    description: Specifies whether to use 3DS for merchant initiated transactions.
+    default: false
+  threeRIInd:
+    type: string
+    enum:
+      - '01'
+      - '02'
+      - '03'
+      - '04'
+      - '05'
+      - '06'
+      - '07'
+      - '08'
+      - '09'
+      - '10'
+      - '11'
+    description: |-
+      Indicates the type of 3RI request.
+      Values 06 - 11 are only supported in 3DS 2.2.0.
+    x-enumDescriptions:
+      '01': Recurring transaction.
+      '02': Instalment transaction.
+      '03': Add card.
+      '04': Maintain card information.
+      '05': Account verification.
+      '06': Split/delayed shipment.
+      '07': Top-up.
+      '08': Mail order.
+      '09': Telephone order.
+      '10': Whitelist status check.
+      '11': Other payment.
