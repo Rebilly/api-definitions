@@ -1,0 +1,18 @@
+type: object
+description: Specifies when the instruction is performed.
+discriminator:
+  propertyName: method
+  mapping:
+    auto: ./SchedulingMethodAuto.yaml
+    date-interval: ./SchedulingMethodDateInterval.yaml
+    day-of-month: ./SchedulingMethodDayOfMonth.yaml
+    day-of-week: ./SchedulingMethodDayOfWeek.yaml
+    immediately: ./SchedulingMethodImmediately.yaml
+    intelligent: ./SchedulingMethodIntelligent.yaml
+anyOf:
+  - $ref: ./SchedulingMethodAuto.yaml
+  - $ref: ./SchedulingMethodDateInterval.yaml
+  - $ref: ./SchedulingMethodDayOfMonth.yaml
+  - $ref: ./SchedulingMethodDayOfWeek.yaml
+  - $ref: ./SchedulingMethodImmediately.yaml
+  - $ref: ./SchedulingMethodIntelligent.yaml
