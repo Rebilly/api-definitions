@@ -81,6 +81,7 @@ properties:
       Defines properties the user can complete when they use the hosted cashier form.
       This field accepts [JSON-schema](https://json-schema.org/) drafts 4, 6, and 7.
     type: object
+    nullable: true
     example:
       type: object
       properties:
@@ -91,19 +92,18 @@ properties:
           minimum: 0
           exclusiveMaximum: 100
       required: ["email"]
-
   properties:
     readOnly: true
     description: |-
       Properties that are available for the user to complete when they use the hosted cashier form.
       Use this object to describe fields that are rendered and completed during the deposit process, in the cashier deposit form.
     type: object
+    nullable: true
     additionalProperties:
       type: string
     example:
       email: email@example.com
       max: '33'
-
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:
