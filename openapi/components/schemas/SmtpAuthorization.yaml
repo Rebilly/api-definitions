@@ -1,0 +1,14 @@
+type: object
+description: Authentication type and details.
+discriminator:
+  propertyName: type
+  mapping:
+    none: ./SmtpAuthorizationNone.yaml
+    cram-md5: ./SmtpAuthorizationCramMd5.yaml
+    login: ./SmtpAuthorizationLogin.yaml
+    plain: ./SmtpAuthorizationPlain.yaml
+oneOf:
+  - $ref: ./SmtpAuthorizationNone.yaml
+  - $ref: ./SmtpAuthorizationCramMd5.yaml
+  - $ref: ./SmtpAuthorizationLogin.yaml
+  - $ref: ./SmtpAuthorizationPlain.yaml
