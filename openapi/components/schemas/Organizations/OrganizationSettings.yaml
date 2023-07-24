@@ -22,7 +22,6 @@ properties:
   billing:
     description: Global organization settings for billing.
     type: object
-    nullable: true
     properties:
       pendingOrderTtl:
         description: Length of time, in ISO-8601 durations format, before which a pending order is automatically abandoned.
@@ -38,3 +37,22 @@ properties:
       Available only for US-based organizations.
     items:
       $ref: ./TaxLocation.yaml
+  notifications:
+    description: Organization access-change notification settings.
+    type: object
+    properties:
+      notifyOnUserAccessChanges:
+        description: Whether to send notification when a user's access changes.
+        type: boolean
+        default: false
+      notifyOnApiKeyAccessChanges:
+        description: Whether to send notification when an API key's access changes.
+        type: boolean
+        default: false
+      notificationEmailAddresses:
+        description: List of email addresses to send notifications to.
+        type: array
+        items:
+          type: string
+          format: email
+        default: []
