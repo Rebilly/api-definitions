@@ -47,7 +47,7 @@ properties:
     readOnly: true
     type: string
   pricing:
-    $ref: ./Plans/PlanPriceFormula.yaml
+    $ref: ./PlanPriceFormula.yaml
   setup:
     type: object
     nullable: true
@@ -91,7 +91,23 @@ properties:
         type: number
         format: double
       period:
-        $ref: ./Plans/PlanPeriod.yaml
+        type: object
+        description: Period information.
+        required:
+          - unit
+          - length
+        properties:
+          unit:
+            description: Unit of time.
+            type: string
+            enum:
+              - day
+              - week
+              - month
+              - year
+          length:
+            description: Length of time.
+            type: integer
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:
