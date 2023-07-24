@@ -1,0 +1,25 @@
+description: JPMOrbital gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantId:
+            type: string
+            description: ID of the JPMOrbital merchant.
+          username:
+            type: string
+            description: Connection username.
+          password:
+            type: string
+            description: Connection password.
+            format: password
+            writeOnly: true
+        required:
+          - merchantId
+          - username
+          - password
