@@ -1,0 +1,14 @@
+oneOf:
+  - $ref:  ./Storefront/KycDocuments/StorefrontProofOfIdentityKycDocument.yaml
+  - $ref:  ./Storefront/KycDocuments/StorefrontProofOfAddressKycDocument.yaml
+  - $ref:  ./Storefront/KycDocuments/StorefrontProofOfFundsKycDocument.yaml
+  - $ref:  ./Storefront/KycDocuments/StorefrontProofOfPurchaseKycDocument.yaml
+  - $ref:  ./Storefront/KycDocuments/StorefrontProofOfCreditFileKycDocument.yaml
+discriminator:
+  propertyName: documentType
+  mapping:
+    identity-proof:  ./Storefront/KycDocuments/StorefrontProofOfIdentityKycDocument.yaml
+    address-proof:  ./Storefront/KycDocuments/StorefrontProofOfAddressKycDocument.yaml
+    funds-proof:  ./Storefront/KycDocuments/StorefrontProofOfFundsKycDocument.yaml
+    purchase-proof:  ./Storefront/KycDocuments/StorefrontProofOfPurchaseKycDocument.yaml
+    credit-file-proof:  ./Storefront/KycDocuments/StorefrontProofOfCreditFileKycDocument.yaml
