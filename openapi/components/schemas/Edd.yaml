@@ -1,20 +1,35 @@
 type: object
 properties:
   parsedScore:
-    allOf:
-      - $ref: ./Edd/EddData.yaml
-      - type: object
-        properties:
-          occupationDetails:
-            $ref: ./Edd/EddScoreDetails.yaml
-          arrestDetails:
-            $ref: ./Edd/EddScoreDetails.yaml
-          bankruptcyDetails:
-            $ref: ./Edd/EddScoreDetails.yaml
-          fraudDetails:
-            $ref: ./Edd/EddScoreDetails.yaml
+    type: object
+    properties:
+      occupation:
+        $ref: ./EddScore.yaml
+      arrest:
+        $ref: ./EddScore.yaml
+      bankruptcy:
+        $ref: ./EddScore.yaml
+      fraud:
+        $ref: ./EddScore.yaml
+      occupationDetails:
+        $ref: ./EddScoreDetails.yaml
+      arrestDetails:
+        $ref: ./EddScoreDetails.yaml
+      bankruptcyDetails:
+        $ref: ./EddScoreDetails.yaml
+      fraudDetails:
+        $ref: ./EddScoreDetails.yaml
   score:
-    $ref: ./Edd/EddData.yaml
+    type: object
+    properties:
+      occupation:
+        $ref: ./EddScore.yaml
+      arrest:
+        $ref: ./EddScore.yaml
+      bankruptcy:
+        $ref: ./EddScore.yaml
+      fraud:
+        $ref: ./EddScore.yaml
   nextUpdateTime:
     description: Date and time in ISO 8601 format when the EDD score is updated.
     type: string

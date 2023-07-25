@@ -30,26 +30,31 @@ properties:
     description: Street address of the organization.
     type: string
     maxLength: 60
+    nullable: true
     x-sortable: true
   address2:
     description: Second line of the street address.
     type: string
     maxLength: 60
+    nullable: true
     x-sortable: true
   city:
     description: City where the organization is located.
     type: string
     maxLength: 45
+    nullable: true
     x-sortable: true
   region:
     description: Region or state where the organization is located.
     type: string
     maxLength: 45
+    nullable: true
     x-sortable: true
   country:
     description: Country where the organization is located, in [ISO Alpha-2 code format](https://www.iso.org/obp/ui/#search/code/).
     type: string
     pattern: '^[A-Z]{2}$'
+    nullable: true
     x-sortable: true
   postalCode:
     description: Postal code of the organization.
@@ -63,6 +68,7 @@ properties:
   taxDescriptor:
     description: Tax label of the organization. This information is displayed on the invoice.
     type: string
+    nullable: true
     maxLength: 255
   invoiceTimeZone:
     description: Specifies the time zone to display on an invoice. UTC is used by default.
@@ -185,4 +191,18 @@ properties:
   updatedTime:
     $ref: ./UpdatedTime.yaml
   _links:
-    $ref: ./SelfLink.yaml
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - attachments
