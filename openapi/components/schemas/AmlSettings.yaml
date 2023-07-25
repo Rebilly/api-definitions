@@ -2,8 +2,162 @@ type: object
 description: Settings for AML checking.
 properties:
   confidence:
-    allOf:
-      - $ref: ./AML/Settings/AmlSettingsConfidence.yaml
+    type: object
+    description: Confidence level settings for AML matches.
+    properties:
+      noDobExactMatch:
+        type: object
+        description: Exact match of the customer's name is found, but a date of birth is not.
+        properties:
+          matchingCountry:
+            $ref: ./AmlConfidence.yaml
+          mismatchingCountry:
+            $ref: ./AmlConfidence.yaml
+          noCountry:
+            $ref: ./AmlConfidence.yaml
+      noDobInexactMatch:
+        type: object
+        description: Fuzzy, or inexact match of the customer's name is found, but a date of birth is not.
+        properties:
+          matchingCountry:
+            $ref: ./AmlConfidence.yaml
+          mismatchingCountry:
+            $ref: ./AmlConfidence.yaml
+          noCountry:
+            $ref: ./AmlConfidence.yaml
+      noDobWeakMatch:
+        type: object
+        description: Weak match of the customer's name is found, but a date of birth is not.
+        properties:
+          matchingCountry:
+            $ref: ./AmlConfidence.yaml
+          mismatchingCountry:
+            $ref: ./AmlConfidence.yaml
+          noCountry:
+            $ref: ./AmlConfidence.yaml
+      dobExactMatch:
+        type: object
+        description: Exact match of the customer's date of birth and name is found.
+        properties:
+          matchingCountry:
+            $ref: ./AmlConfidence.yaml
+          mismatchingCountry:
+            $ref: ./AmlConfidence.yaml
+          noCountry:
+            $ref: ./AmlConfidence.yaml
+      dobInexactMatch:
+        type: object
+        description: Exact match of the customer's date of birth and a fuzzy, or inexact name match is found.
+        properties:
+          matchingCountry:
+            $ref: ./AmlConfidence.yaml
+          mismatchingCountry:
+            $ref: ./AmlConfidence.yaml
+          noCountry:
+            $ref: ./AmlConfidence.yaml
+      yobExactMatch:
+        type: object
+        description: Exact match of the customer's year of birth and exact name is found.
+        properties:
+          matchingCountry:
+            $ref: ./AmlConfidence.yaml
+          mismatchingCountry:
+            $ref: ./AmlConfidence.yaml
+          noCountry:
+            $ref: ./AmlConfidence.yaml
+      yobInexactMatch:
+        type: object
+        description: Exact match of the customer's year of birth and a fuzzy, or inexact name match is found.
+        properties:
+          matchingCountry:
+            $ref: ./AmlConfidence.yaml
+          mismatchingCountry:
+            $ref: ./AmlConfidence.yaml
+          noCountry:
+            $ref: ./AmlConfidence.yaml
+      inexactYobExactMatch:
+        type: object
+        description: Near match of the customer's year of birth and an exact name match is found.
+        properties:
+          matchingCountry:
+            $ref: ./AmlConfidence.yaml
+          mismatchingCountry:
+            $ref: ./AmlConfidence.yaml
+          noCountry:
+            $ref: ./AmlConfidence.yaml
+      inexactYobInexactMatch:
+        type: object
+        description: Near match of the customer's year of birth and a fuzzy, or inexact name match is found.
+        properties:
+          matchingCountry:
+            $ref: ./AmlConfidence.yaml
+          mismatchingCountry:
+            $ref: ./AmlConfidence.yaml
+          noCountry:
+            $ref: ./AmlConfidence.yaml
   priority:
-    allOf:
-      - $ref: ./AML/Settings/AmlSettingsPriority.yaml
+    type: object
+    description: |-
+      Priority level settings for AML source matches. \
+      `p0` is critical priority level, and `p3` is low priority level.
+    properties:
+      pep:
+        type: object
+        description: Priorities for the `pep` source type.
+        properties:
+          veryStrong:
+            $ref: ./AmlPriority.yaml
+          strong:
+            $ref: ./AmlPriority.yaml
+          medium:
+            $ref: ./AmlPriority.yaml
+          weak:
+            $ref: ./AmlPriority.yaml
+      enforcements:
+        type: object
+        description: Priorities for the `enforcement` source type.
+        properties:
+          veryStrong:
+            $ref: ./AmlPriority.yaml
+          strong:
+            $ref: ./AmlPriority.yaml
+          medium:
+            $ref: ./AmlPriority.yaml
+          weak:
+            $ref: ./AmlPriority.yaml
+      stateOwnedEnterprise:
+        type: object
+        description: Priorities for the `state-owned-enterprise` source type.
+        properties:
+          veryStrong:
+            $ref: ./AmlPriority.yaml
+          strong:
+            $ref: ./AmlPriority.yaml
+          medium:
+            $ref: ./AmlPriority.yaml
+          weak:
+            $ref: ./AmlPriority.yaml
+      sanctions:
+        type: object
+        description: Priorities for the `sanctions` source type.
+        properties:
+          veryStrong:
+            $ref: ./AmlPriority.yaml
+          strong:
+            $ref: ./AmlPriority.yaml
+          medium:
+            $ref: ./AmlPriority.yaml
+          weak:
+            $ref: ./AmlPriority.yaml
+      adverseMedia:
+        type: object
+        description: Priorities for the `adverse-media` source type.
+        properties:
+          veryStrong:
+            $ref: ./AmlPriority.yaml
+          strong:
+            $ref: ./AmlPriority.yaml
+          medium:
+            $ref: ./AmlPriority.yaml
+          weak:
+            $ref: ./AmlPriority.yaml
