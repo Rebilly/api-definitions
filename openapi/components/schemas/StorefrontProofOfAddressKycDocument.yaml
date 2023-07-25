@@ -6,12 +6,12 @@ properties:
   id:
     readOnly: true
     allOf:
-      - $ref: ../../ResourceId.yaml
+      - $ref: ./ResourceId.yaml
   fileId:
     deprecated: true
     description: ID of the linked file object.
     allOf:
-      - $ref: ../../ResourceId.yaml
+      - $ref: ./ResourceId.yaml
   fileIds:
     description: |-
       IDs of linked file objects.
@@ -21,17 +21,17 @@ properties:
     type: array
     items:
       allOf:
-        - $ref: ../../ResourceId.yaml
+        - $ref: ./ResourceId.yaml
   documentType:
     description: |-
       Document type submitted for validation.
       Only the `identity-proof` and `address-proof` types are analyzed automatically.
     allOf:
-      - $ref: ../../KycDocument/KycDocumentTypes.yaml
+      - $ref: ./KycDocument/KycDocumentTypes.yaml
   documentSubtype:
     description: Document subtype submitted for validation.
     allOf:
-      - $ref: ../../KycDocument/KycDocumentSubtypes.yaml
+      - $ref: ./KycDocument/KycDocumentSubtypes.yaml
   status:
     description: Status of the validation.
     type: string
@@ -49,7 +49,7 @@ properties:
       rejected: Rejected by AI or a human.
       archived: Archived by the Rebilly AI.
   rejectionReason:
-    $ref: ../../KycDocumentRejection.yaml
+    $ref: ./KycDocumentRejection.yaml
   requestId:
     readOnly: true
     nullable: true
@@ -58,9 +58,9 @@ properties:
     maxLength: 50
     example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
   createdTime:
-    $ref: ../../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   processedTime:
     description: Date and time when the KYC document is processed.
     type: string
@@ -77,6 +77,6 @@ properties:
         format: double
         example: 0.75
       data:
-        $ref: ../../KycAddressMatches.yaml
+        $ref: ./KycAddressMatches.yaml
   _links:
-    $ref: ../../SelfLink.yaml
+    $ref: ./SelfLink.yaml
