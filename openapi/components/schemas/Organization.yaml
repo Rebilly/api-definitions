@@ -84,24 +84,30 @@ properties:
     example: USD
   questionnaire:
     type: object
+    nullable: true
     description: Organization questionnaire.
     properties:
       role:
         type: string
+        nullable: true
         description: Role of the owner.
       monthlyTransactions:
         type: string
+        nullable: true
         description: Amount of monthly processed transaction.
       products:
         type: array
+        nullable: true
         description: List of products the organization is interested in.
         items:
           type: string
       integrationType:
         type: string
+        nullable: true
         description: Type of integration the organization would like.
       launchTiming:
         type: string
+        nullable: true
         description: When the organization would like to go live.
   settings:
     type: object
@@ -151,14 +157,17 @@ properties:
               description: Street address of the tax location.
               type: string
               maxLength: 60
+              nullable: true
             city:
               description: City of the tax location.
               type: string
               maxLength: 45
+              nullable: true
             region:
               description: Region or state of the tax location.
               type: string
               maxLength: 45
+              nullable: true
             country:
               description: Country of the tax location, in [ISO Alpha-2 code format](https://www.iso.org/obp/ui/#search/code/).
               type: string
@@ -167,6 +176,26 @@ properties:
               description: Postal code of the tax location.
               type: string
               maxLength: 10
+              nullable: true
+      notifications:
+        description: Organization access-related notification settings.
+        type: object
+        properties:
+          notifyOnUserAccessChanges:
+            description: Specifies whether to send notifications when users are created or updated.
+            type: boolean
+            default: false
+          notifyOnApiKeyAccessChanges:
+            description: Specifies whether to send notifications when API keys are created or updated.
+            type: boolean
+            default: false
+          notificationEmailAddresses:
+            description: List of email addresses to send notifications to.
+            type: array
+            items:
+              type: string
+              format: email
+            default: [ ]
   taxNumbers:
     type: array
     description: Tax numbers of the organization.
