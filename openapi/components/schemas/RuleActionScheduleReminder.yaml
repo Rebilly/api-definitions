@@ -1,0 +1,30 @@
+allOf:
+  - $ref: ./RuleAction.yaml
+  - type: object
+    properties:
+      role:
+        type: string
+        enum:
+          - all
+          - renewal
+          - trial-end
+        description: Role of Reminder (available only on Order events, other events should use `all`).
+      schedule:
+        type: object
+        description: Schedule instructions collection.
+        properties:
+          instructions:
+            type: array
+            items:
+              $ref: ./ReminderScheduleInstruction.yaml
+          chronology:
+            type: string
+            enum:
+              - before
+              - after
+        required:
+          - instructions
+          - chronology
+
+    required:
+      - role
