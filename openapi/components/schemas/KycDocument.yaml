@@ -8,7 +8,10 @@ discriminator:
     funds-proof: ./KycDocument/ProofOfFundsKycDocument.yaml
     purchase-proof: ./KycDocument/ProofOfPurchaseKycDocument.yaml
     credit-file-proof: ./KycDocument/ProofOfCreditFileKycDocument.yaml
-properties:
-  documentType:
-    type: string
+oneOf:
+  - $ref: ./KycDocument/ProofOfIdentityKycDocument.yaml
+  - $ref: ./KycDocument/ProofOfAddressKycDocument.yaml
+  - $ref: ./KycDocument/ProofOfFundsKycDocument.yaml
+  - $ref: ./KycDocument/ProofOfPurchaseKycDocument.yaml
+  - $ref: ./KycDocument/ProofOfCreditFileKycDocument.yaml
 x-no-abstract-methods: true
