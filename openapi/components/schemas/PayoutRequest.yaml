@@ -12,7 +12,7 @@ properties:
     maxLength: 50
     example: pout_req_0YVDMDE2BMC6KBB5MX76RF6T80
   websiteId:
-    $ref: ./Websites/WebsiteId.yaml
+    $ref: ./WebsiteId.yaml
   customerId:
     description: ID of the customer who is requesting a payout.
     allOf:
@@ -31,11 +31,13 @@ properties:
     description: Amount of the payout.
     type: number
     format: double
+    x-type: Money
   availableAmount:
     description: Available payout request amount that has not been allocated.
     readOnly: true
     type: number
     format: double
+    x-type: Money
   description:
     description: Description of payout request.
     type: string
@@ -69,7 +71,7 @@ properties:
         transactionId:
           description: ID of the transaction to which the payout request is allocated.
           allOf:
-            - $ref: ./Transactions/TransactionId.yaml
+            - $ref: ./TransactionId.yaml
         transactionResult:
           description: Result of a transaction.
           type: string
@@ -118,5 +120,18 @@ properties:
     allOf:
       - $ref: ./UpdatedTime.yaml
   _links:
-    $ref: ./SelfLink.yaml
-
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - paymentInstrument

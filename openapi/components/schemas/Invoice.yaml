@@ -10,7 +10,7 @@ properties:
     maxLength: 50
     example: in_0YVF9605RKC62BP14NE2R7V2XT
   websiteId:
-    $ref: ./Websites/WebsiteId.yaml
+    $ref: ./WebsiteId.yaml
   invoiceNumber:
     description: Auto-incrementing number based on the sequence of invoices for any particular customer.
     readOnly: true
@@ -111,9 +111,13 @@ properties:
     nullable: true
     example: PO123456
     type: string
+    minimum: 0
+    maximum: 50
   notes:
     description: Notes for the customer that are displayed on the invoice.
     type: string
+    minimum: 0
+    maximum: 65535
   items:
     type: array
     description: Invoice items array.

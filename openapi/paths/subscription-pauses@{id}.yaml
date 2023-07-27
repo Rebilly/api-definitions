@@ -5,17 +5,17 @@ get:
     - Core
   tags:
     - Orders
-  summary: Retrieve a subscription pause
+  summary: Retrieve a subscription order pause
   operationId: GetSubscriptionPause
   x-sdk-operation-name: get
-  description: Retrieves a subscription pause with a specified ID.
+  description: Retrieves a subscription order pause with a specified ID.
   responses:
     '200':
       description: Pause retrieved.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Subscription/SubscriptionPause.yaml
+            $ref: ../components/schemas/SubscriptionPause.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -27,22 +27,22 @@ put:
     - Core
   tags:
     - Orders
-  summary: Update a subscription pause
+  summary: Update a subscription order pause
   operationId: PutSubscriptionPause
   x-sdk-operation-name: update
-  description: Updates a subscription pause.
+  description: Updates a subscription order pause.
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/Subscription/SubscriptionPause.yaml
+          $ref: ../components/schemas/SubscriptionPause.yaml
   responses:
     '200':
       description: Pause updated.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Subscription/SubscriptionPause.yaml
+            $ref: ../components/schemas/SubscriptionPause.yaml
     '201':
       description: Pause created.
       headers:
@@ -51,7 +51,7 @@ put:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Subscription/SubscriptionPause.yaml
+            $ref: ../components/schemas/SubscriptionPause.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -63,16 +63,16 @@ delete:
     - Core
   tags:
     - Orders
-  summary: Delete a subscription pause
+  summary: Delete a subscription order pause
   operationId: DeleteSubscriptionPause
   x-sdk-operation-name: delete
   description: |-
-    Deletes a subscription pause with a specified ID.
+    Deletes a subscription order pause with a specified ID.
     If the specified pause is `pending`, it is `revoked`.
     If the specified pause is `ongoing`, it is `finished`.
   responses:
     '204':
-      description: Subscription pause revoked or finished.
+      description: Subscription order pause revoked or finished.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
