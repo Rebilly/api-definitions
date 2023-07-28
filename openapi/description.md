@@ -139,6 +139,13 @@ Example response:
 
 Expand may be used on `GET`, `PATCH`, `POST`, `PUT` requests.
 
+# Limit on collections offset
+
+For performance reasons, take note that we have a `1000` limit on `?offset=...`.
+For example, if you attempt to retrieve a collection using `?offset=1001` or `?offset=2000` it will return the same results as if you used `?offset=1000`. 
+
+Visit our [Data Exports API](https://all-rebilly.redoc.ly/tag/Data-exports) for an asynchronous solution. 
+
 # Get started
 
 The full [Rebilly API](https://all-rebilly.redoc.ly/) has over 500 operations.
