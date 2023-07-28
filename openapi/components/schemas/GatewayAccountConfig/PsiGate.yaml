@@ -1,0 +1,29 @@
+description: PsiGate gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          username:
+            type: string
+            description: Username, also known as "storename"
+          password:
+            type: string
+            description: Password.
+            format: password
+            writeOnly: true
+          clientId:
+            type: string
+            description: Client ID.
+          clientApiKey:
+            type: string
+            description: Client API Key.
+        required:
+          - username
+          - password
+          - clientId
+          - clientApiKey
