@@ -12,15 +12,19 @@ properties:
       Type `duo` cannot be updated or deleted.
       If you need to reset your Duo MFA, [Contact support](https://www.rebilly.com/support/).
     type: string
+    nullable: true
     enum:
       - duo
       - guardian
+      - null
   lastAuthTime:
     description: |-
       Date and time when MFA verification is most recently passed.
       To disable MFA, no more than 10 minutes must elapse between this value and the request to disable MFA.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    type: string
+    nullable: true
+    format: date-time
+    readOnly: true
   _links:
     type: array
     description: Related links.
