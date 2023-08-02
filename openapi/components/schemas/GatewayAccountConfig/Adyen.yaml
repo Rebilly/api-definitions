@@ -46,6 +46,15 @@ allOf:
                   minimum: 0.00
                   maximum: 100.00
                   example: 0.50
+                amount:
+                  description: Fix amount.
+                  type: number
+                  format: integer
+                  example: 100
+                currency:
+                  description: Three letter currency code.
+                  type: string
+                  example: USD
                 account:
                   description: ID of the balance account where the split amount is sent.
                   type: string
@@ -55,6 +64,7 @@ allOf:
                   enum:
                     - BalanceAccount
                     - Commission
+                    - Remainder
                     - VAT
                     - PaymentFee
         required:
