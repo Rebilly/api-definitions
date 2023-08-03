@@ -1,10 +1,10 @@
 type: object
 allOf:
   - $ref: ./BaseKycDocument.yaml
-  - $ref: ../KycDocument.yaml
   - properties:
       documentMatches:
         type: object
+        nullable: true
         readOnly: true
         description: Proof of identity document matches.
         properties:
@@ -17,6 +17,7 @@ allOf:
             $ref: ../KycIdentityMatches.yaml
       parsedData:
         type: object
+        nullable: true
         readOnly: true
         description: Parsed data.
         properties:
@@ -28,8 +29,11 @@ allOf:
           data:
             $ref: ../KycIdentityMatches.yaml
       settings:
-        $ref: ./Settings/KycSettingsIdentity.yaml
+        type: object
+        nullable: true
         readOnly: true
+        allOf:
+         - $ref: ./Settings/KycSettingsIdentity.yaml
       _links:
         type: array
         description: Related links.

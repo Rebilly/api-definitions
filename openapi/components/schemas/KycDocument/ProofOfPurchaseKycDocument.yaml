@@ -1,10 +1,10 @@
 type: object
 allOf:
   - $ref: ./BaseKycDocument.yaml
-  - $ref: ../KycDocument.yaml
   - properties:
       documentMatches:
         type: object
+        nullable: true
         readOnly: true
         description: Proof of purchase document matches.
         properties:
@@ -12,6 +12,7 @@ allOf:
             $ref: ./PurchaseMatches.yaml
       parsedData:
         type: object
+        nullable: true
         readOnly: true
         description: Parsed data.
         properties:
