@@ -16,12 +16,14 @@ properties:
     example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
   proratedInvoiceId:
     type: string
+    nullable: true
     description: ID of the invoice on which the cancellation proration is calculated.
     readOnly: true
     maxLength: 50
     example: in_0YVF9605RKC62BP14NE2R7V2XT
   appliedInvoiceId:
     type: string
+    nullable: true
     description: ID of the invoice on which the cancellation fees or credits are applied.
     readOnly: true
     maxLength: 50
@@ -33,6 +35,7 @@ properties:
     enum:
       - merchant
       - customer
+      - rebilly
   reason:
     description: Reason for the cancellation.
     type: string
@@ -80,6 +83,7 @@ properties:
       Date and time when a subscription is cancelled.
       By default, this occurs when `status` is `confirmed`, unless `draft` is specified.
     type: string
+    nullable: true
     format: date-time
     readOnly: true
   createdTime:
@@ -140,7 +144,13 @@ properties:
   lineItemSubtotal:
     description: Subtotal of the line items added after the subscription cancellation.
     readOnly: true
-    type: number
-    example: 49.95
+    type: object
+    properties:
+      amount:
+        type: number
+        description: Subtotal amount of the line items.
+        example: 49.95
+      currency:
+        $ref: ./CurrencyCode.yaml
   _links:
     $ref: ./SelfLink.yaml
