@@ -132,6 +132,7 @@ properties:
   autopayScheduledTime:
     description: Date and time when an automatic payment (autopay) is scheduled.
     type: string
+    nullable: true
     x-sortable: true
     format: date-time
   autopayRetryNumber:
@@ -170,20 +171,26 @@ properties:
   abandonedTime:
     description: Date and time when the invoice is abandoned.
     x-sortable: true
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    type: string
+    nullable: true
+    format: date-time
+    readOnly: true
   voidedTime:
     description: Date and time when the invoice is voided.
     x-sortable: true
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    type: string
+    nullable: true
+    format: date-time
+    readOnly: true
   paidTime:
     x-label: Payment Date
     x-sortable: true
     x-basic: true
     description: Date and time when the invoice is paid.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    type: string
+    nullable: true
+    format: date-time
+    readOnly: true
   dueTime:
     description: Date and time when the invoice is due for payment.
     type: string
@@ -202,6 +209,7 @@ properties:
     $ref: ./UpdatedTime.yaml
   paymentFormUrl:
     type: string
+    nullable: true
     readOnly: true
     format: url
     description: |-
@@ -225,6 +233,7 @@ properties:
       Invoice payment retry instruction.
       This object specifies how to proceed if a payment related to the invoice fails.
     type: object
+    nullable: true
     properties:
       attempts:
         type: array
@@ -317,6 +326,7 @@ properties:
             - website
             - customer
             - organization
+            - attachments
             - leadSource
             - transactionAllocations
             - recalculateInvoice

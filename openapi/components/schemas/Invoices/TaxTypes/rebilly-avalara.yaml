@@ -6,6 +6,14 @@ properties:
   calculator:
     description: Type of tax calculator.
     type: string
+    enum:
+      - "rebilly-avalara"
+  amount:
+    type: integer
+    x-type: Money
+    x-sortable: true
+    description: Total amount of all invoice taxes.
+    readOnly: true
   items:
     type: array
     description: Taxes that are applied to this invoice and calculated based on the `taxCategoryId` of the related product.
