@@ -42,9 +42,11 @@ properties:
       Short description of the payment gateway.
       This field supports Markdown.
     type: string
+    nullable: true
   homepage:
     description: URL of the payment gateway home page.
     type: string
+    nullable: true
     format: uri
   externalDocs:
     description: |-
@@ -69,12 +71,14 @@ properties:
   publishedPricing:
     description: Pricing description for the payment gateway, if pricing is published.
     type: string
+    nullable: true
   setupInstructions:
     description: |-
       Special gateway account set up instructions for merchants.
       For example: After adding this gateway account,
       set the IPN to `//example.com/ipns/{gateway-name}/{organization-id}` by contacting your account rep.
     type: string
+    nullable: true
   paymentMethods:
     description: Array of supported payment methods. For example, `payment-card` and `bitcoin`.
     type: array
@@ -97,18 +101,12 @@ properties:
     description: Currencies metadata.
     required:
       - mode
-    properties:
-      mode:
-        description: Specifies how the currencies are compared.
-        type: string
-        enum:
-          - unknown
-          - all
-          - subset
     oneOf:
       - title: Unrestricted
         properties:
           mode:
+            description: Specifies how the currencies are compared.
+            type: string
             enum:
               - unknown
               - all
@@ -117,10 +115,12 @@ properties:
           - values
         properties:
           mode:
+            description: Specifies how the currencies are compared.
+            type: string
             enum:
               - subset
           values:
-            description: List of supported countries.
+            description: List of supported currencies.
             type: array
             minItems: 1
             uniqueItems: true
@@ -190,6 +190,7 @@ properties:
     default: false
   ipn:
     type: object
+    nullable: true
     description: |-
       Describes the Instant Payment Notification (IPN) that a payment gateway supports.
       If this value is null, IPN is not supported.
