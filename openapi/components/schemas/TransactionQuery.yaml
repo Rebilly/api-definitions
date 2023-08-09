@@ -1,0 +1,44 @@
+type: object
+properties:
+  transactionId:
+    $ref: ./TransactionId.yaml
+  result:
+    description: Result of the transaction.
+    type: string
+    readOnly: true
+    enum:
+      - abandoned
+      - approved
+      - canceled
+      - declined
+      - unknown
+  status:
+    description: Status of the transaction.
+    type: string
+    readOnly: true
+    enum:
+      - completed
+      - conn-error
+      - disputed
+      - never-sent
+      - offsite
+      - partially-refunded
+      - pending
+      - refunded
+      - sending
+      - suspended
+      - timeout
+      - voided
+      - waiting-approval
+      - waiting-capture
+      - waiting-gateway
+      - waiting-refund
+  amount:
+    description: Amount of the transaction.
+    type: number
+    format: double
+    readOnly: true
+  currency:
+    readOnly: true
+    allOf:
+      - $ref: ./CurrencyCode.yaml

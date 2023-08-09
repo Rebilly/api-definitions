@@ -1,0 +1,58 @@
+type: object
+required:
+  - from
+  - name
+properties:
+  id:
+    type: string
+    description: ID of the email delivery setting.
+    readOnly: true
+    maxLength: 50
+    example: mail_dst_0YVCNQV8PSCERAJ7N1V4WWPZN2
+  from:
+    description: |-
+      Email address of the sender.
+
+      > **Important:** This email address must be unique within your account.
+    type: string
+    format: email
+    maxLength: 254
+    example: from-example@rebilly.com
+  name:
+    description: Name of the sender.
+    type: string
+    example: John Doe
+  status:
+    description: Status of the email message.
+    readOnly: true
+    type: string
+    enum:
+      - pending
+      - verified
+  credentialId:
+    type: string
+    nullable: true
+    description: ID of the SMTP or Email Service Provider (ESP) credential.
+    example: b120c2ca-6c2b-4690-9dff-3b0d87852dc7
+  provider:
+    readOnly: true
+    description: Email service provider name.
+    type: string
+    enum:
+      - rebilly
+      - smtp
+      - aws-ses
+      - mailgun
+      - postmark
+      - sendgrid
+    example: rebilly
+  isDefault:
+    type: boolean
+    description: Specifies if the email delivery setting is used by default.
+    default: false
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml

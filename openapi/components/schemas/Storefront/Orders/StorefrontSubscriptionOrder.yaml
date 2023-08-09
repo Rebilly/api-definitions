@@ -1,6 +1,5 @@
 type: object
 allOf:
-  - $ref: ../../Subscription/SubscriptionCancellationState.yaml
   - $ref: ./StorefrontOrderMetadata.yaml
   - properties:
       id:
@@ -40,7 +39,7 @@ allOf:
         x-sortable: true
         x-basic: true
         allOf:
-          - $ref: ../../Websites/WebsiteId.yaml
+          - $ref: ../../WebsiteId.yaml
       currency:
         description: Currency of the order.
         readOnly: true
@@ -65,7 +64,7 @@ allOf:
         type: array
         minItems: 1
         items:
-          $ref: ../../Subscription/OrderItem.yaml
+          $ref: ../../OrderItem.yaml
       deliveryAddress:
         description: Delivery address of the order.
         nullable: true
@@ -239,7 +238,43 @@ allOf:
         type: array
         deprecated: true
         items:
-          $ref: ../../Subscription/OrderLineItem.yaml
+          type: object
+          description: Invoice line item. Use `isInterim` property of upcoming invoice items instead.
+          deprecated: true
+          properties:
+            type:
+              description: Type of invoice line item.
+              type: string
+              enum:
+                - debit
+                - credit
+            description:
+              description: Description of the line item.
+              type: string
+              maxLength: 1000
+            unitPriceAmount:
+              description: Unit price of the line item.
+              type: number
+              format: double
+              example: 49.95
+            unitPriceCurrency:
+              $ref: ../../CurrencyCode.yaml
+            quantity:
+              description: Quantity of the line item.
+              type: integer
+              example: 1
+            periodStartTime:
+              description: Date and time when the period begins for this item.
+              type: string
+              format: date-time
+            periodEndTime:
+              description: Date and time when the period ends for this item.
+              type: string
+              format: date-time
+            createdTime:
+              $ref: ../../CreatedTime.yaml
+            updatedTime:
+              $ref: ../../UpdatedTime.yaml
       lineItemSubtotal:
         type: object
         readOnly: true
@@ -265,3 +300,42 @@ allOf:
         nullable: true
         maxLength: 50
         example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
+      canceledTime:
+        description: Date and time when the subscription order is canceled.
+        x-label: Cancellation time
+        x-sortable: true
+        x-basic: true
+        type: string
+        format: date-time
+        readOnly: true
+      canceledBy:
+        description: Specifies who initiated the cancellation.
+        type: string
+        readOnly: true
+        enum:
+          - merchant
+          - customer
+          - rebilly
+      cancelCategory:
+        description: Category of the cancellation.
+        type: string
+        readOnly: true
+        enum:
+          - billing-failure
+          - did-not-use
+          - did-not-want
+          - missing-features
+          - bugs-or-problems
+          - do-not-remember
+          - risk-warning
+          - contract-expired
+          - too-expensive
+          - never-started
+          - switched-plan
+          - other
+      cancelDescription:
+        description: Description of the cancellation reason in free form.
+        type: string
+        readOnly: true
+        maxLength: 255
+

@@ -1,0 +1,114 @@
+type: object
+required:
+  - name
+  - url
+  - servicePhone
+  - serviceEmail
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ./WebsiteId.yaml
+  name:
+    description: Name of the website.
+    type: string
+  url:
+    description: Domain address of the website.
+    type: string
+  servicePhone:
+    description: Customer service phone number of the website.
+    type: string
+  serviceEmail:
+    description: Customer service email address of the website.
+    type: string
+    format: email
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  customFields:
+    $ref: ./ResourceCustomFields.yaml
+  settings:
+    type: object
+    description: Website settings.
+    properties:
+      cashierForm:
+        type: object
+        description: Cashier form settings.
+        properties:
+          theme:
+            description: Theme settings that are used in the cashier form.
+            type: object
+            nullable: true
+            properties:
+              colorPrimary:
+                description: Primary color for the cashier form in hexadecimal format.
+                type: string
+                nullable: true
+                maxLength: 6
+                example: '0044d4'
+              colorSecondary:
+                description: Secondary color for the cashier form in hexadecimal format.
+                type: string
+                nullable: true
+                maxLength: 6
+                example: 'ffffff'
+              buttonTemplate:
+                description: Submit button template. `{{amount}}` can be used as a placeholder for amount and currency.
+                type: string
+                nullable: true
+                maxLength: 100
+                example: Pay {{amount}}
+      paymentForm:
+        type: object
+        description: Payment form settings.
+        properties:
+          css:
+            description: Hosted payment form [CSS options](https://www.rebilly.com/docs/content/concepts-and-features/tutorial/customize-style-rebilly-instruments/#2-use-css-property-to-override-any-styles).
+            type: string
+            nullable: true
+          theme:
+            description: Hosted payment form [theme options](https://www.rebilly.com/docs/content/concepts-and-features/tutorial/customize-style-rebilly-instruments/#adjust-the-default-style).
+            type: object
+            nullable: true
+            additionalProperties:
+              type: string
+            example:
+              colorPrimary: '#504CCA'
+          features:
+            description: Hosted payment form features.
+            type: object
+            nullable: true
+            properties:
+              showCoupons:
+                type: array
+                nullable: true
+                items:
+                  type: string
+  logoId:
+    type: string
+    nullable: true
+    description: ID of the linked file object.
+    maxLength: 50
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+  organizationId:
+    deprecated: true
+    readOnly: true
+    allOf:
+      - $ref: ./OrganizationId.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - logoUrl

@@ -1,0 +1,42 @@
+type: object
+properties:
+  id:
+    type: string
+    description: ID of the timeline message.
+    readOnly: true
+    maxLength: 50
+    example: tmln_0YV8Q9WEF5DTA8HFXS27D1G6GC
+  type:
+    description: Type of timeline message.
+    type: string
+    readOnly: true
+    enum:
+      - quote-created
+      - quote-issued
+      - quote-accepted
+      - quote-rejected
+      - quote-canceled
+      - quote-recalled
+      - quote-updated
+      - quote-expired
+      - quote-order-attached
+  triggeredBy:
+    description: Specifies who, or what, triggered the timeline message.
+    type: string
+    readOnly: true
+    enum:
+      - rebilly
+      - app
+      - direct-api
+  message:
+    description: Contents of the timeline message.
+    type: string
+  extraData:
+    $ref: ./TimelineExtraData.yaml
+  occurredTime:
+    description: Date and time when the timeline message occurred.
+    readOnly: true
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  _links:
+    $ref: ./SelfLink.yaml

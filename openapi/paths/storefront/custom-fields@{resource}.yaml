@@ -1,0 +1,30 @@
+parameters:
+  - $ref: ../../components/parameters/storefrontCustomFieldResource.yaml
+get:
+  x-products:
+    - Storefront
+  tags:
+    - Custom fields
+  summary: Retrieve custom fields
+  operationId: StorefrontGetCustomFieldCollection
+  x-sdk-operation-name: getAll
+  security:
+    - CustomerJWT: []
+  parameters:
+    - $ref: ../../components/parameters/collectionLimit.yaml
+    - $ref: ../../components/parameters/collectionOffset.yaml
+  description: Retrieves a schema of custom fields for the specified resource type.
+  responses:
+    '200':
+      description: Schema of custom fields retrieved.
+      content:
+        application/json:
+          schema:
+            description: List of custom fields.
+            type: array
+            items:
+              $ref: ../../components/schemas/CustomField.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml

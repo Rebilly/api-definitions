@@ -1,10 +1,10 @@
 type: object
 allOf:
   - $ref: ./BaseKycDocument.yaml
-  - $ref: ./KycDocument.yaml
   - properties:
       documentMatches:
         type: object
+        nullable: true
         readOnly: true
         description: Proof of funds document matches.
         properties:
@@ -12,6 +12,7 @@ allOf:
             $ref: ./FundsMatches.yaml
       parsedData:
         type: object
+        nullable: true
         readOnly: true
         properties:
           data:

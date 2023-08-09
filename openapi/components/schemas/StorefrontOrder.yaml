@@ -1,0 +1,15 @@
+type: object
+discriminator:
+  propertyName: orderType
+  mapping:
+    subscription-order: ./Storefront/Orders/StorefrontSubscriptionOrder.yaml
+    one-time-order: ./Storefront/Orders/StorefrontOneTimeOrder.yaml
+properties:
+  orderType:
+    description: |-
+      Specifies the type of order.
+      An order may be a subscription or a one-time purchase.
+    type: string
+    enum:
+      - subscription-order
+      - one-time-order

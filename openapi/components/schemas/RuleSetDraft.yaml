@@ -1,0 +1,75 @@
+type: object
+description: Draft ruleset for specific event.
+properties:
+  id:
+    type: string
+    readOnly: true
+    description: ID of the draft rule set.
+    maxLength: 50
+    example: rule_dft_0YVDN3FN43CEQ8CQ93Y0H00ZQ7
+  baseVersion:
+    type: integer
+    minimum: 0
+    description: |-
+      Ruleset version on which the draft ruleset is based.
+      Generally, a draft ruleset is cloned from an existing ruleset.
+      Use this field to determine if the active ruleset changed since the draft creation.
+      `0` denotes a draft ruleset that is not created from an existing ruleset.
+      The value of this field is informational only, it is not assigned to the active ruleset.
+  binds:
+    type: array
+    description: |-
+      Binds always execute, regardless of rule based events.
+      A rule is a configuration of an event and one or more actions.
+    items:
+      $ref: ./Rules/Bind.yaml
+  rules:
+    type: array
+    description: |-
+      Rule can be configured to stop subsequent rules in the event list from being executed.
+      A rule is a configuration of an event and one or more actions.
+    items:
+      $ref: ./Rules/Rule.yaml
+  author:
+    description: Author of the draft.
+    readOnly: true
+    type: object
+    properties:
+      id:
+        description: Author's user ID.
+        type: string
+        allOf:
+          - $ref: ./ResourceId.yaml
+      name:
+        description: Author's first and last name.
+        type: string
+  name:
+    type: string
+    description: Name of the draft.
+  description:
+    type: string
+    description: Detailed description of the drafted ruleset.
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - user
+required:
+  - rules
+  - name
+  - baseVersion

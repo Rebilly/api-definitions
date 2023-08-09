@@ -1,0 +1,112 @@
+type: object
+properties:
+  id:
+    readOnly: true
+    type: string
+    description: Unique resource ID.
+    maxLength: 50
+    example: org_exp_0YVDMCH30ZC2XA5BYHH6B6SRTJ
+  userId:
+    description: ID of the user who requested the organization data export.
+    readOnly: true
+    type: string
+    maxLength: 50
+    example: usr_0YVCEENYJ3D7Q9EN6BN16HA0G4
+  fileId:
+    type: string
+    description: ID of the linked file object.
+    readOnly: true
+    nullable: true
+    maxLength: 50
+    example: file_0YV7HZ7KDCC5WBV9Q7WRKG1H6N
+  status:
+    description: Status of organization data export request.
+    readOnly: true
+    type: string
+    enum:
+      - pending
+      - processing
+      - completed
+      - queued
+      - failed
+      - expired
+  resources:
+    description: Organization data export resources array.
+    readOnly: true
+    type: array
+    items:
+      type: object
+      properties:
+        type:
+          description: Exported resource.
+          readOnly: true
+          type: string
+          enum:
+            - customers
+            - users
+            - payment-instruments
+            - invoices
+            - orders
+            - transactions
+            - disputes
+            - gateway-accounts
+            - blocklists
+            - lists
+            - webhooks
+            - products
+            - websites
+            - plans
+            - credit-memos
+            - files
+            - email-notifications
+          x-enumDescriptions:
+            customers: All customers of the organization.
+            users: All users of the organization.
+            payment-instruments: All payment instruments of the organization.
+            invoices: All invoices of the organization.
+            orders: All orders of the organization.
+            transactions: All transactions of the organization.
+            disputes: All disputes of the organization.
+            gateway-accounts: All gateway accounts of the organization.
+            blocklists: All blocklists of the organization.
+            lists: All lists of the organization.
+            webhooks: All webhooks of the organization.
+            products: All products of the organization.
+            websites: All websites of the organization.
+            plans: All plans of the organization.
+            credit-memos: All credit-memos of the organization.
+            files: All files of the organization.
+            email-notifications: All email-notifications of the organization.
+        recordCount:
+          description: Number of exported resources.
+          readOnly: true
+          type: integer
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  retentionTime:
+    description: |-
+      Date and time when retention ends.
+      After this date, files are removed.
+    readOnly: true
+    type: string
+    nullable: true
+    format: date-time
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - user
+            - signedLink

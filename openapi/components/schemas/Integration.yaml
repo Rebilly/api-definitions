@@ -1,0 +1,47 @@
+type: object
+properties:
+  service:
+    readOnly: true
+    description: Name of the integration service.
+    allOf:
+      - $ref: ./Credentials/OAuth2Credentials/OAuth2CredentialService.yaml
+  count:
+    readOnly: true
+    type: integer
+    minimum: 0
+    description: Total number of available rule sets.
+  configurations:
+    readOnly: true
+    type: array
+    minItems: 0
+    description: List of configurations.
+    items:
+      type: object
+      properties:
+        labels:
+          description: Labels of the configuration.
+          type: array
+          minItems: 0
+          items:
+            type: string
+        eventType:
+          $ref: ./EventType.yaml
+        title:
+          type: string
+          description: Title of the configuration.
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - oauth2Connect

@@ -1,0 +1,27 @@
+type: object
+description: Email notification event.
+readOnly: true
+properties:
+  eventType:
+    $ref: ./EventType.yaml
+  count:
+    type: integer
+    readOnly: true
+    description: Total number of binds with `send-email` actions per event.
+  notifications:
+    readOnly: true
+    type: array
+    description: List of notifications.
+    items:
+      type: object
+      properties:
+        labels:
+          description: Labels of the notification.
+          type: array
+          items:
+            type: string
+        title:
+          type: string
+          description: Title of the notification.
+  _links:
+    $ref: ./SelfLink.yaml

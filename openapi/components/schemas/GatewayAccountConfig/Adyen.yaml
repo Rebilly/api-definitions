@@ -25,6 +25,11 @@ allOf:
         type: object
         description: Adyen settings object.
         properties:
+          store:
+            type: string
+            description: E-commerce or point-of-sale store that is processing the payment.
+            minLength: 1
+            maxLength: 16
           url:
             type: string
             description: Adyen post URL.
@@ -41,6 +46,13 @@ allOf:
                   minimum: 0.00
                   maximum: 100.00
                   example: 0.50
+                commissionAmount:
+                  description: Fixed commission amount in minor units.
+                  type: number
+                  format: integer
+                  example: 100
+                currency:
+                  $ref: ../CurrencyCode.yaml
                 account:
                   description: ID of the balance account where the split amount is sent.
                   type: string
@@ -50,9 +62,9 @@ allOf:
                   enum:
                     - BalanceAccount
                     - Commission
-                    - VAT
+                    - Remainder
                     - PaymentFee
         required:
           - url
       threeDSecureServer:
-        $ref: ../ThreeDSecureServers/ThreeDSecureIO3dsServer.yaml
+        $ref: ./ThreeDSecureIO3dsServer.yaml

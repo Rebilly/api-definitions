@@ -1,0 +1,76 @@
+type: object
+description: Matched address data.
+properties:
+  firstName:
+    description: |-
+      First name of the customer.
+      This value is null if no match is found.
+    type: string
+    nullable: true
+    example: John
+  lastName:
+    description: |-
+      Last name of the customer.
+      This value is null if no match is found.
+    type: string
+    nullable: true
+    example: Doe
+  line1:
+    description: |-
+      Address of the customer's residence.
+      This value is null if no match is found.
+    type: string
+    nullable: true
+    example: 36 Craven St
+  city:
+    description: |-
+      Customer's city of residence.
+      This value is null if no match is found.
+    type: string
+    nullable: true
+    example: London
+  region:
+    description: |-
+      Customer's region of residence.
+      This value is null if no match is found.
+    type: string
+    nullable: true
+    example: London
+  postalCode:
+    description: |-
+      Postal code of the customer's residence.
+      This value is null if no match is found.
+    type: string
+    nullable: true
+    example: WC2N 5NF
+  wordCount:
+    description: Total number of words in the document.
+    type: integer
+    example: 350
+  uniqueWords:
+    description: Total number of unique words in the document.
+    type: integer
+    example: 175
+  date:
+    description: |-
+      Date detected on the document.
+      Use this field to determine if the document is recent.
+    type: string
+    format: date
+    nullable: true
+    example: 2021-01-01
+  phone:
+    description: Phone number of the company or agency that issued the document.
+    type: string
+    nullable: true
+    example: (123) 456-7890
+  documentSubtype:
+    description: Interpreted subtype of the uploaded document.
+    type: string
+    nullable: true
+    allOf:
+      - $ref: ./KycDocument/KycDocumentSubtypes.yaml
+  isTampered:
+    description: Specifies if an address proof document has been tampered with.
+    type: boolean
+    example: false

@@ -1,0 +1,29 @@
+type: object
+description: Ruleset for a specific event.
+properties:
+  version:
+    description: Version of the ruleset.
+    type: integer
+    readOnly: true
+  binds:
+    type: array
+    description: |-
+      Binds always execute, regardless of rule based events.
+      A bind is a configuration of an event and one or more actions.
+    items:
+      $ref: ./Rules/Bind.yaml
+  rules:
+    type: array
+    description: |-
+      Rules can be configured to stop subsequent rules in the event list from being executed.
+      A rule is a configuration of an event and one or more actions.
+    items:
+      $ref: ./Rules/Rule.yaml
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml
+required:
+  - rules

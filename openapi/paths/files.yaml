@@ -29,7 +29,7 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/Files/File.yaml
+              $ref: ../components/schemas/File.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -74,8 +74,8 @@ post:
       application/json:
         schema:
           oneOf:
-            - $ref: ../components/schemas/Files/FileCreateFromInline.yaml
-            - $ref: ../components/schemas/Files/FileCreateFromUrl.yaml
+            - $ref: ../components/requestBodies/FileCreateFromInline.yaml
+            - $ref: ../components/requestBodies/FileCreateFromUrl.yaml
     required: true
   responses:
     '201':
@@ -86,7 +86,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Files/File.yaml
+            $ref: ../components/schemas/File.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
