@@ -1,6 +1,8 @@
 type: object
 title: Khelocard card
 x-abstract-parent: PaymentInstrument
+required:
+  - method
 properties:
   id:
     type: string
@@ -61,7 +63,10 @@ properties:
     nullable: true
     readOnly: true
   riskMetadata:
-    $ref: ./RiskMetadata.yaml
+    type: object
+    nullable: true
+    allOf:
+      - $ref: ./RiskMetadata.yaml
   _links:
     type: array
     description: Related links.

@@ -5,11 +5,6 @@ discriminator:
   mapping:
     partial: ./AmountAdjustmentInstructions/partial.yaml
     none: ./AmountAdjustmentInstructions/none.yaml
-properties:
-  method:
-    type: string
-    enum:
-      - none
-      - partial
-required:
-  - method
+oneOf:
+  - $ref: ./AmountAdjustmentInstructions/partial.yaml
+  - $ref: ./AmountAdjustmentInstructions/none.yaml
