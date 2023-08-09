@@ -26,35 +26,39 @@ allOf:
         type: object
         properties:
           itemName:
-            description: Line item name.
+            description: Name of the line item.
             type: string
             default: '{{ item.plan.id | default: item.product.id | default: item.description }}'
           itemDescription:
-            description: Line item description.
+            description: Description of the line item.
             type: string
             default: '{{ item.product.description | default: item.description }}'
           itemSku:
-            description: Line item SKU.
+            description: SKU of the line item.
             type: string
             default: '{{ item.plan.id | default: item.product.id | default: item.id }}'
           itemLineDescription:
-            description: Item line description.
+            description: Description of the line item.
             type: string
             default: '{{ item.plan.id | default: item.product.id | default: item.description }}{% if item.periodStartTime and item.periodEndTime %} ({{ item.periodStartTime | datetime: "M jS, Y" }} – {{ item.periodEndTime | datetime: "M jS, Y" }}){% endif %}'
           taxName:
-            description: Tax item name. Used when `taxesAccount` is set.
+            description: |-
+              Name of the tax item name. 
+              This value is used when the `taxesAccount` field is configured.
             type: string
             default: '{{ tax.description }}'
           taxDescription:
-            description: Tax item description.
+            description: Description of the tax item.
             type: string
-            default: '{{ tax.description }} Used when `taxesAccount` is set.'
+            default: '{{ tax.description }} This value is used when the `taxesAccount` field is configured.'
           taxSku:
-            description: Tax item SKU.
+            description: SKU of the tax item.
             type: string
             default: tax
           taxLineDescription:
-            description: Tax line description.  Used when `taxesAccount` is set.
+            description: |-
+              Description of the tax line.
+              This value is used when the `taxesAccount` field is configured.
             type: string
             default: '{{ tax.description }}{% if item %} for {{ item.plan.id | default: item.description }}{% if item.periodStartTime and item.periodEndTime %} ({{ item.periodStartTime | datetime: "M jS, Y" }} – {{ item.periodEndTime | datetime: "M jS, Y" }}){% else %} for multiple items{% endif %}{% endif %}'
       credentialHash:

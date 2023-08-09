@@ -8,10 +8,13 @@ allOf:
           - all
           - renewal
           - trial-end
-        description: Role of Reminder (available only on Order events, other events should use `all`).
+        description: |-
+          Specifies the types of events that the reminder is applicable to.
+          The `renewal` and `trial-end` options are only available for order events.
+          Other events must use the `all` option.
       schedule:
         type: object
-        description: Schedule instructions collection.
+        description: Collection of schedule instructions.
         properties:
           instructions:
             type: array
