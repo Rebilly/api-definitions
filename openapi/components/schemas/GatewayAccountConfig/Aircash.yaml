@@ -9,23 +9,21 @@ allOf:
         type: object
         description: Aircash credentials object.
         properties:
+          partnerId:
+            type: string
+            description: ID of the Aircash partner.
           privateKey:
             writeOnly: true
             type: string
             description: Private key of the Aircash partner.
-          privateKeyPass:
+            format: password
+            x-multiline: true
+          privateKeyPassword:
             writeOnly: true
             type: string
-            description: Private key passphrase of the Aircash partner.
+            description: Private key password of the Aircash partner.
             format: password
-          aircashPublicKey:
-            type: string
-            description: Public key of the Aircash partner.
-          partnerId:
-            type: string
-            description: ID of the Aircash partner.
         required:
-          - privateKey
-          - privateKeyPass
-          - aircashPublicKey
           - partnerId
+          - privateKey
+          - privateKeyPassword
