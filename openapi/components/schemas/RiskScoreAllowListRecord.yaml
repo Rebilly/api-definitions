@@ -1,0 +1,31 @@
+type: object
+description: Risk score allow list record.
+required:
+  - type
+  - value
+properties:
+  id:
+    type: string
+    description: ID of the allow list record.
+    readOnly: true
+    maxLength: 50
+    example: rsal_0YVF9605RKC62BP14NE2R7V2XT
+  type:
+    type: string
+    description: Type of exclusion from adding to blocklist.
+    enum:
+      - address
+      - bank-account
+      - bin
+      - country
+      - customer-id
+      - email
+      - email-domain
+      - fingerprint
+      - ip-address
+      - payment-card
+  value:
+    type: string
+    description: Value of allowed record.
+  createdTime:
+    $ref: ./CreatedTime.yaml
