@@ -1,5 +1,28 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Risk score
+  summary: Retrieve risk score allow list record
+  operationId: GetRiskScoreAllowListRecord
+  x-sdk-operation-name: getRiskScoreAllowListRecord
+  security:
+    - SecretApiKey: []
+    - JWT: []
+  description: Retrieves risk score allow list record.
+  responses:
+    '200':
+      description: Risk score allow list record retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RiskScoreAllowListRecord.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
 delete:
   x-products:
     - Core
