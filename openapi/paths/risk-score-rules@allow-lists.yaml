@@ -15,9 +15,10 @@ get:
       description: Risk score allow list records retrieved.
       content:
         application/json:
-          type: array
-          items:
-            $ref: ../components/schemas/RiskScoreAllowListRecord.yaml
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/RiskScoreAllowListRecord.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -28,7 +29,7 @@ post:
   tags:
     - Risk score
   summary: Create a risk score allow list record
-  operationId: StoreRiskScoreAllowListRecord
+  operationId: PostRiskScoreAllowListRecord
   x-sdk-operation-name: storeRiskScoreAllowListRecord
   security:
     - PublishableApiKey: []
