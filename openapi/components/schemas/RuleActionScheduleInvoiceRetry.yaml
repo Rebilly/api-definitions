@@ -1,0 +1,45 @@
+description: Schedule an invoice retry.
+allOf:
+  - $ref: ./RuleAction.yaml
+  - type: object
+    properties:
+      attempts:
+        type: array
+        description: Describes the retry instruction.
+        minItems: 1
+        items:
+          type: object
+          properties:
+            scheduleInstruction:
+              $ref: ./InvoiceRetryScheduleInstruction.yaml
+            amountAdjustmentInstruction:
+              $ref: ./InvoiceRetry/InvoiceRetryAmountAdjustmentInstruction.yaml
+            tryBackupInstruments:
+              description: Specifies whether to use backup payment instruments on an invoice payment retry.
+              type: boolean
+              default: false
+          required:
+            - scheduleInstruction
+      afterAttemptPolicies:
+        description: Policy on the attempt finishes.
+        type: array
+        items:
+          type: string
+          enum:
+            - change-subscription-renewal-time
+      afterRetryEndPolicies:
+        description: Policy on the retry ends.
+        type: array
+        items:
+          type: string
+          enum:
+            - abandon-invoice
+            - cancel-subscription
+      overrideRetryInstruction:
+        description: Specifies whether to replace the existing retry.
+        type: boolean
+    required:
+      - attempts
+      - afterAttemptPolicies
+      - afterRetryEndPolicies
+      - overrideRetryInstruction

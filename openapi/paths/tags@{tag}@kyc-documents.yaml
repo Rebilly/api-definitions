@@ -19,7 +19,6 @@ post:
       application/json:
         schema:
           type: object
-          title: PostTagKycDocumentCollectionRequest
           required:
             - kycDocumentIds
           properties:
@@ -33,7 +32,7 @@ post:
                 example: kyc_doc_0YV7JHY705C6DA487BFTAA33V8
   responses:
     '204':
-      description: KYC documents tagged.
+      description: KYC documents tagging process has been scheduled.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -59,7 +58,6 @@ delete:
       application/json:
         schema:
           type: object
-          title: DeleteTagKycDocumentCollectionRequest
           required:
             - kycDocumentIds
           properties:
@@ -73,7 +71,7 @@ delete:
                 example: kyc_doc_0YV7JHY705C6DA487BFTAA33V8
   responses:
     '204':
-      description: KYC documents untagged.
+      description: KYC documents untagging process has been scheduled.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

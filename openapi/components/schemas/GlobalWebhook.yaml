@@ -18,7 +18,11 @@ properties:
       $ref: ./GlobalEventType.yaml
   status:
     x-basic: true
-    $ref: ./OnOff.yaml
+    type: string
+    default: active
+    enum:
+      - active
+      - inactive
   method:
     type: string
     x-basic: true
@@ -44,7 +48,11 @@ properties:
           type: string
         status:
           description: Status of the property.
-          $ref: ./OnOff.yaml
+          type: string
+          default: active
+          enum:
+            - active
+            - inactive
         value:
           description: Value of the property.
           type: string
