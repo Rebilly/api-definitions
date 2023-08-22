@@ -1,0 +1,44 @@
+type: object
+description: Rule information.
+properties:
+  id:
+    description: ID of the rule.
+    allOf:
+      - $ref: ./ResourceId.yaml
+  name:
+    description: Name of the rule.
+    type: string
+  labels:
+    description: Labels of the rule.
+    type: array
+    uniqueItems: true
+    example:
+      - test-rule
+      - 'category:foo'
+    items:
+      type: string
+      pattern: '[a-zA-Z][a-zA-Z0-9:-]*'
+  status:
+    description: Status of the rule.
+    type: string
+    default: active
+    enum:
+      - active
+      - inactive
+  filter:
+    description: |-
+      Filters the collection items.
+      This field requires a special format. Use `,` for multiple allowed values.
+      Use `;` for multiple fields.
+
+      For more information, see [Using filter with collections](https://all-rebilly.redoc.ly/#section/Using-filter-with-collections).
+    type: string
+  actions:
+    description: Actions that execute when an event occurs.
+    type: array
+    uniqueItems: true
+    items:
+      $ref: ./RuleAction.yaml
+required:
+  - name
+  - actions
