@@ -1,0 +1,23 @@
+allOf:
+  - $ref: ./RuleAction.yaml
+  - type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+        description: ID of the action.
+      title:
+        type: string
+        description: Title of the messages (this title appears in reports).
+      emails:
+        type: array
+        description: List of messages.
+        minItems: 1
+        items:
+          $ref: ./RulesEmailNotification.yaml
+      splitTestStartTime:
+        type: string
+        format: date-time
+        description: Split test start time.
+    required:
+      - emails
