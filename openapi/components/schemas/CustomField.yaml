@@ -1,95 +1,22 @@
 description: Separate custom field schema.
 type: object
-required:
-  - type
-properties:
-  name:
-    description: Name of the custom field.
-    type: string
-    readOnly: true
-  type:
-    description: Describes the data type. Custom field type value cannot be changed.
-    type: string
-    enum:
-      - array
-      - boolean
-      - date
-      - datetime
-      - integer
-      - number
-      - string
-      - monetary
-    x-enumDescriptions:
-      array: Array of strings with up to 255 characters. Maximum size is 1000 elements.
-      boolean: Specifies a `true` or `false` value.
-      date: String in [full-date](https://www.rfc-editor.org/rfc/rfc3339) format (YYYY-MM-DD).
-      datetime: String in [date-time](https://www.rfc-editor.org/rfc/rfc3339) format (YYYY-MM-DDTHH:MM:SSZ).
-      integer: Cardinal value of between `-2^31` and `2^31-1`.
-      number: Float value. This field also accepts cardinal values which are interpreted as float.
-      string: Regular string of up to 255 characters.
-      monetary: |-
-        A map of 3-letter currency, code, and amount.
-        Example: `{"currency": "EUR", "amount": 25.30}`.
-  description:
-    description: Description of the custom field.
-    type: string
-    nullable: true
-  additionalSchema:
-    type: object
-    nullable: true
-    description: |-
-      Additional schema which adds additional values constrains.
-      Custom fields of different types accept different constraints.
-    properties:
-      allowedValues:
-        description: List of allowed values.
-        oneOf:
-          - type: string
-            description: List of allowed values for custom fields of type `string`.
-          - type: array
-            description: List of allowed values for custom fields of type `array`.
-            items:
-              type: string
-      maxLength:
-        description: |-
-          Maximum allowed string length for custom fields of type `string`.
-          A maximum length of 4000 characters can be configured.
-          By default, this value is set to 255.
-        type: number
-        format: integer
-      minimum:
-        description: |-
-          Minimum allowed number or integer value for custom fields of type `number` and `integer`.
-          This value can be combined with the `maximum` parameter.
-        type: number
-      maximum:
-        description: |-
-          Maximum allowed number or integer value for custom fields of type `number` and `integer`.
-          This value can be combined with the `minimum` parameter.
-        type: number
-      pattern:
-        description: |-
-          Allowed regular expression of a string.
-          Available for custom fields of type `string`.
-        type: string
-      required:
-        description: |-
-          Specifies whether this value is required.
-          This value can be combined with any parameter and is available for custom fields of any type.
-        type: boolean
-      default:
-        description: Default value. This value can be combined with any parameter.
-        oneOf:
-          - type: string
-            description: |-
-              Default value for custom fields of type `string`.
-          - type: array
-            description: |-
-              Default value for custom fields of type `array`.
-            items:
-              type: string
-          - type: number
-            description: |-
-              Default value for custom fields of type `number` and `integer`.
-  _links:
-    $ref: ./SelfLink.yaml
+discriminator:
+  propertyName: type
+  mapping:
+    array: CustomFields/ArrayCustomField.yaml
+    boolean: CustomFields/BooleanCustomField.yaml
+    date: CustomFields/DateCustomField.yaml
+    datetime: CustomFields/DateTimeCustomField.yaml
+    integer: CustomFields/IntegerCustomField.yaml
+    number: CustomFields/NumberCustomField.yaml
+    string: CustomFields/StringCustomField.yaml
+    monetary: CustomFields/MonetaryCustomField.yaml
+oneOf: 
+  - $ref: CustomFields/ArrayCustomField.yaml
+  - $ref: CustomFields/BooleanCustomField.yaml
+  - $ref: CustomFields/DateCustomField.yaml
+  - $ref: CustomFields/DateTimeCustomField.yaml
+  - $ref: CustomFields/IntegerCustomField.yaml
+  - $ref: CustomFields/NumberCustomField.yaml
+  - $ref: CustomFields/StringCustomField.yaml
+  - $ref: CustomFields/MonetaryCustomField.yaml
