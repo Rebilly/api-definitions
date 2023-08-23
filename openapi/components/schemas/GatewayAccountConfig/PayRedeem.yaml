@@ -1,0 +1,18 @@
+description: PayRedeem config
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: PayRedeem credentials object
+        properties:
+          apiKey:
+            type: string
+            description: PayRedeem api key
+            format: password
+            writeOnly: true
+        required:
+          - apiKey
