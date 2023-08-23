@@ -7,28 +7,14 @@ properties:
     type: string
     readOnly: true
   type:
-    description: Describes the data type. Custom field type value cannot be changed.
+    description: |-
+      Describes the data type. Custom field type value cannot be changed.
+
+      A map of 3-letter currency, code, and amount.
+      Example: `{"currency": "EUR", "amount": 25.30}`.
     type: string
     enum:
-      - array
-      - boolean
-      - date
-      - datetime
-      - integer
-      - number
-      - string
       - monetary
-    x-enumDescriptions:
-      array: Array of strings with up to 255 characters. Maximum size is 1000 elements.
-      boolean: Specifies a `true` or `false` value.
-      date: String in [full-date](https://www.rfc-editor.org/rfc/rfc3339) format (YYYY-MM-DD).
-      datetime: String in [date-time](https://www.rfc-editor.org/rfc/rfc3339) format (YYYY-MM-DDTHH:MM:SSZ).
-      integer: Cardinal value of between `-2^31` and `2^31-1`.
-      number: Float value. This field also accepts cardinal values which are interpreted as float.
-      string: Regular string of up to 255 characters.
-      monetary: |-
-        A map of 3-letter currency, code, and amount.
-        Example: `{"currency": "EUR", "amount": 25.30}`.
   description:
     description: Description of the custom field.
     type: string
