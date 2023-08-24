@@ -10,10 +10,10 @@ properties:
     description: |-
       Describes the data type. Custom field type value cannot be changed.
 
-      Cardinal value of between `-2^31` and `2^31-1`.
+      Array of strings with up to 255 characters. Maximum size is 1000 elements.
     type: string
     enum:
-      - integer
+      - array
   description:
     description: Description of the custom field.
     type: string
@@ -23,21 +23,20 @@ properties:
     nullable: true
     description: Additional schema which adds additional values constrains.
     properties:
-      minimum:
-        description: |-
-          Minimum allowed integer.
-          This value can be combined with the `maximum` parameter.
-        type: integer
-      maximum:
-        description: |-
-          Maximum allowed integer.
-          This value can be combined with the `minimum` parameter.
-        type: integer
+      allowedValues:
+        description: List of allowed values.
+        type: array
+        items:
+          type: string
       required:
-        description: Specifies whether this value is required.
+        description: |-
+          Specifies whether this value is required.
+          This value can be combined with any parameter and is available for custom fields of any type.
         type: boolean
       default:
         description: Default value.
-        type: integer
+        type: array
+        items:
+          type: string
   _links:
-    $ref: ../SelfLink.yaml
+    $ref: ./SelfLink.yaml

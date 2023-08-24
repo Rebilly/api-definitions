@@ -10,11 +10,10 @@ properties:
     description: |-
       Describes the data type. Custom field type value cannot be changed.
 
-      A map of 3-letter currency, code, and amount.
-      Example: `{"currency": "EUR", "amount": 25.30}`.
+      Regular string of up to 255 characters.
     type: string
     enum:
-      - monetary
+      - string
   description:
     description: Description of the custom field.
     type: string
@@ -24,17 +23,25 @@ properties:
     nullable: true
     description: Additional schema which adds additional values constrains.
     properties:
+      allowedValues:
+        description: List of allowed values.
+        type: array
+        items:
+          type: string
+      maxLength:
+        description: |-
+          Maximum allowed string length .
+          A maximum length of 4000 characters can be configured.
+          By default, this value is set to 255.
+        type: integer
+      pattern:
+        description: Allowed regular expression of a string.
+        type: string
       required:
         description: Specifies whether this value is required.
         type: boolean
       default:
         description: Default value.
-        type: object
-        properties:
-          currency:
-            $ref: ../CurrencyCode.yaml
-          amount:
-            type: number
-            format: double
+        type: string
   _links:
-    $ref: ../SelfLink.yaml
+    $ref: ./SelfLink.yaml

@@ -10,10 +10,11 @@ properties:
     description: |-
       Describes the data type. Custom field type value cannot be changed.
 
-      Float value. This field also accepts cardinal values which are interpreted as float.
+      A map of 3-letter currency, code, and amount.
+      Example: `{"currency": "EUR", "amount": 25.30}`.
     type: string
     enum:
-      - number
+      - monetary
   description:
     description: Description of the custom field.
     type: string
@@ -23,24 +24,17 @@ properties:
     nullable: true
     description: Additional schema which adds additional values constrains.
     properties:
-      minimum:
-        description: |-
-          Minimum allowed number.
-          This value can be combined with the `maximum` parameter.
-        type: number
-        format: double
-      maximum:
-        description: |-
-          Maximum allowed number.
-          This value can be combined with the `minimum` parameter.
-        type: number
-        format: double
       required:
         description: Specifies whether this value is required.
         type: boolean
       default:
         description: Default value.
-        type: number
-        format: double
+        type: object
+        properties:
+          currency:
+            $ref: ./CurrencyCode.yaml
+          amount:
+            type: number
+            format: double
   _links:
-    $ref: ../SelfLink.yaml
+    $ref: ./SelfLink.yaml

@@ -10,10 +10,10 @@ properties:
     description: |-
       Describes the data type. Custom field type value cannot be changed.
 
-      Regular string of up to 255 characters.
+      String in [full-date](https://www.rfc-editor.org/rfc/rfc3339) format (YYYY-MM-DD).
     type: string
     enum:
-      - string
+      - date
   description:
     description: Description of the custom field.
     type: string
@@ -23,25 +23,12 @@ properties:
     nullable: true
     description: Additional schema which adds additional values constrains.
     properties:
-      allowedValues:
-        description: List of allowed values.
-        type: array
-        items:
-          type: string
-      maxLength:
-        description: |-
-          Maximum allowed string length .
-          A maximum length of 4000 characters can be configured.
-          By default, this value is set to 255.
-        type: integer
-      pattern:
-        description: Allowed regular expression of a string.
-        type: string
       required:
         description: Specifies whether this value is required.
         type: boolean
       default:
         description: Default value.
         type: string
+        format: date
   _links:
-    $ref: ../SelfLink.yaml
+    $ref: ./SelfLink.yaml

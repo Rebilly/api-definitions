@@ -10,10 +10,10 @@ properties:
     description: |-
       Describes the data type. Custom field type value cannot be changed.
 
-      Array of strings with up to 255 characters. Maximum size is 1000 elements.
+      Float value. This field also accepts cardinal values which are interpreted as float.
     type: string
     enum:
-      - array
+      - number
   description:
     description: Description of the custom field.
     type: string
@@ -23,20 +23,24 @@ properties:
     nullable: true
     description: Additional schema which adds additional values constrains.
     properties:
-      allowedValues:
-        description: List of allowed values.
-        type: array
-        items:
-          type: string
-      required:
+      minimum:
         description: |-
-          Specifies whether this value is required.
-          This value can be combined with any parameter and is available for custom fields of any type.
+          Minimum allowed number.
+          This value can be combined with the `maximum` parameter.
+        type: number
+        format: double
+      maximum:
+        description: |-
+          Maximum allowed number.
+          This value can be combined with the `minimum` parameter.
+        type: number
+        format: double
+      required:
+        description: Specifies whether this value is required.
         type: boolean
       default:
         description: Default value.
-        type: array
-        items:
-          type: string
+        type: number
+        format: double
   _links:
-    $ref: ../SelfLink.yaml
+    $ref: ./SelfLink.yaml
