@@ -1,0 +1,42 @@
+type: object
+required:
+  - type
+properties:
+  name:
+    description: Name of the custom field.
+    type: string
+    readOnly: true
+  type:
+    description: |-
+      Describes the data type. Custom field type value cannot be changed.
+
+      Array of strings with up to 255 characters. Maximum size is 1000 elements.
+    type: string
+    enum:
+      - array
+  description:
+    description: Description of the custom field.
+    type: string
+    nullable: true
+  additionalSchema:
+    type: object
+    nullable: true
+    description: Additional schema which adds additional values constrains.
+    properties:
+      allowedValues:
+        description: List of allowed values.
+        type: array
+        items:
+          type: string
+      required:
+        description: |-
+          Specifies whether this value is required.
+          This value can be combined with any parameter and is available for custom fields of any type.
+        type: boolean
+      default:
+        description: Default value.
+        type: array
+        items:
+          type: string
+  _links:
+    $ref: ./SelfLink.yaml

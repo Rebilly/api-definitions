@@ -1,0 +1,47 @@
+type: object
+required:
+  - type
+properties:
+  name:
+    description: Name of the custom field.
+    type: string
+    readOnly: true
+  type:
+    description: |-
+      Describes the data type. Custom field type value cannot be changed.
+
+      Regular string of up to 255 characters.
+    type: string
+    enum:
+      - string
+  description:
+    description: Description of the custom field.
+    type: string
+    nullable: true
+  additionalSchema:
+    type: object
+    nullable: true
+    description: Additional schema which adds additional values constrains.
+    properties:
+      allowedValues:
+        description: List of allowed values.
+        type: array
+        items:
+          type: string
+      maxLength:
+        description: |-
+          Maximum allowed string length .
+          A maximum length of 4000 characters can be configured.
+          By default, this value is set to 255.
+        type: integer
+      pattern:
+        description: Allowed regular expression of a string.
+        type: string
+      required:
+        description: Specifies whether this value is required.
+        type: boolean
+      default:
+        description: Default value.
+        type: string
+  _links:
+    $ref: ./SelfLink.yaml
