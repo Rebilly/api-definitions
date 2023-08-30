@@ -1,0 +1,28 @@
+type: object
+properties:
+  totalCount:
+    description: Total count of declined transactions.
+    type: integer
+    example: 1500
+  data:
+    type: array
+    items:
+      type: object
+      properties:
+        message:
+          description: Description or message related to the declined transactions report.
+          type: string
+          example: error
+        count:
+          description: Count of declined transactions.
+          type: integer
+          example: 500
+        percentage:
+          description: Percentage count of declined transactions.
+          type: number
+          format: double
+          example: 25.0
+      required:
+        - message
+        - count
+        - percentage
