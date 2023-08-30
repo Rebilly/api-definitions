@@ -1,0 +1,46 @@
+type: object
+required:
+  - type
+properties:
+  name:
+    description: Name of the custom field.
+    type: string
+    readOnly: true
+  type:
+    description: |-
+      Describes the data type. Custom field type value cannot be changed.
+
+      Float value. This field also accepts cardinal values which are interpreted as float.
+    type: string
+    enum:
+      - number
+  description:
+    description: Description of the custom field.
+    type: string
+    nullable: true
+  additionalSchema:
+    type: object
+    nullable: true
+    description: Additional schema which adds additional values constrains.
+    properties:
+      minimum:
+        description: |-
+          Minimum allowed number.
+          This value can be combined with the `maximum` parameter.
+        type: number
+        format: double
+      maximum:
+        description: |-
+          Maximum allowed number.
+          This value can be combined with the `minimum` parameter.
+        type: number
+        format: double
+      required:
+        description: Specifies whether this value is required.
+        type: boolean
+      default:
+        description: Default value.
+        type: number
+        format: double
+  _links:
+    $ref: ./SelfLink.yaml
