@@ -3,16 +3,16 @@ get:
     - Core
   tags:
     - Risk score
-  summary: Retrieve Allow list collection
+  summary: Retrieve allowlist collection
   operationId: GetAllowlistCollection
   x-sdk-operation-name: getAllowlistCollection
   security:
     - SecretApiKey: []
     - JWT: []
-  description: Retrieves allow list collection.
+  description: Retrieves allowlist collection.
   responses:
     '200':
-      description: Allow list collection retrieved.
+      description: Allowlist collection retrieved.
       content:
         application/json:
           schema:
@@ -28,22 +28,22 @@ post:
     - Core
   tags:
     - Risk score
-  summary: Create an allow list record
+  summary: Create an allowlist record
   operationId: PostAllowlist
   x-sdk-operation-name: storeAllowlist
   security:
     - PublishableApiKey: []
-  description: Creates an allow list record.
+  description: Creates an allowlist record.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/Allowlist.yaml
-    description: Allow list record.
+    description: Allowlist record.
     required: true
   responses:
     201:
-      description: Allow list record created.
+      description: Allowlist record created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
