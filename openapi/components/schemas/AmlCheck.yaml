@@ -43,6 +43,20 @@ properties:
       - sign-up
       - recurring
       - purchase
+  status:
+    type: string
+    description: Status of the AML check.
+    readOnly: true
+    enum:
+      - pending-review
+      - no-match
+      - confirmed-match
+      - false-positive
+    x-enumDescriptions:
+      pending-review: Possible AML match detected and waiting to be manually reviewed.
+      no-match: No possible AML match detected.
+      confirmed-match: Possible AML match manually reviewed and marked as confirmed.
+      false-positive: Possible AML match manually reviewed and marked as false positive.
   customer:
     type: object
     properties:
@@ -121,6 +135,12 @@ properties:
     type: array
     items:
       $ref: ./AML.yaml
+  tags:
+    description: List of AML check tags.
+    readOnly: true
+    type: array
+    items:
+      $ref: ./Tag.yaml
   _links:
     type: array
     description: Related links.

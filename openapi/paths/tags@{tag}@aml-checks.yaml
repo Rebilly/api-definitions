@@ -1,0 +1,80 @@
+parameters:
+  - $ref: ../components/parameters/tag.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Tags
+  summary: Tag a list of AML checks
+  operationId: PostTagAmlCheckCollection
+  x-sdk-operation-name: tagAmlChecks
+  description: |-
+    Tags a list of AML checks.
+
+    If an AML check in the list already has the specified tag applied, the AML check is ignored.
+    This is an asynchronous operation.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - amlCheckIds
+          properties:
+            amlCheckIds:
+              description: List of AML check IDs to tag.
+              type: array
+              minItems: 1
+              maxItems: 1000
+              items:
+                type: string
+                example: aml_chk_0YV7JHY705C6DA487BFTAA33V8
+  responses:
+    '204':
+      description: AML checks tagging process has been scheduled.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+delete:
+  x-products:
+    - Core
+  tags:
+    - Tags
+  summary: Untag a list of AML checks
+  operationId: DeleteTagAmlCheckCollection
+  x-sdk-operation-name: untagAmlChecks
+  description: |-
+    Untags a list of AML checks.
+
+    If an AML check in the list does not have the specified tag applied, the AML check is ignored.
+    This is an asynchronous operation.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - amlCheckIds
+          properties:
+            amlCheckIds:
+              description: List of AML check IDs to tag.
+              type: array
+              minItems: 1
+              maxItems: 1000
+              items:
+                type: string
+                example: aml_chk_0YV7JHY705C6DA487BFTAA33V8
+  responses:
+    '204':
+      description: AML checks untagging process has been scheduled.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

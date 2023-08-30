@@ -1,0 +1,10 @@
+type: object
+description: Coupon discount.
+discriminator:
+  propertyName: type
+  mapping:
+    fixed: ./DiscountFixed.yaml
+    percent: ./DiscountPercent.yaml
+oneOf:
+  - $ref: ./DiscountFixed.yaml
+  - $ref: ./DiscountPercent.yaml
