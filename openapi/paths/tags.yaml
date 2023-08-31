@@ -48,7 +48,11 @@ post:
   x-sdk-operation-name: create
   description: Creates a tag.
   requestBody:
-    $ref: ../components/requestBodies/Tag.yaml
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/requestBodies/Tag.yaml
   responses:
     '201':
       description: Tag created.

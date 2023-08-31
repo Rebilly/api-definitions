@@ -1,6 +1,8 @@
-content:
-  application/json:
-    schema:
-      $ref: ../schemas/Tag.yaml
+type: object
 description: Tag resource.
-required: true
+required:
+  - name
+  - type
+allOf:
+  - $ref: ../schemas/TagName.yaml
+  - $ref: ../schemas/TagType.yaml

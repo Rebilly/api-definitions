@@ -32,7 +32,11 @@ patch:
   x-sdk-operation-name: update
   description: Updates a tag with a specified name.
   requestBody:
-    $ref: ../components/requestBodies/UpdateTag.yaml
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/requestBodies/UpdateTag.yaml
   responses:
     '200':
       description: Tag updated.
