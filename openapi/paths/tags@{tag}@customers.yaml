@@ -19,7 +19,6 @@ post:
       application/json:
         schema:
           type: object
-          title: PostTagCustomerCollectionRequest
           required:
             - customerIds
           properties:
@@ -32,7 +31,7 @@ post:
                 type: string
   responses:
     '204':
-      description: Customers tagged.
+      description: Customers tagging process has been scheduled.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -58,7 +57,6 @@ delete:
       application/json:
         schema:
           type: object
-          title: DeleteTagCustomerCollectionRequest
           required:
             - customerIds
           properties:
@@ -71,7 +69,7 @@ delete:
                 type: string
   responses:
     '204':
-      description: Customers untagged.
+      description: Customers untagging process has been scheduled.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

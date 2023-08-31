@@ -1,0 +1,40 @@
+type: object
+required:
+  - type
+properties:
+  name:
+    description: Name of the custom field.
+    type: string
+    readOnly: true
+  type:
+    description: |-
+      Describes the data type. Custom field type value cannot be changed.
+
+      A map of 3-letter currency, code, and amount.
+      Example: `{"currency": "EUR", "amount": 25.30}`.
+    type: string
+    enum:
+      - monetary
+  description:
+    description: Description of the custom field.
+    type: string
+    nullable: true
+  additionalSchema:
+    type: object
+    nullable: true
+    description: Additional schema which adds additional values constrains.
+    properties:
+      required:
+        description: Specifies whether this value is required.
+        type: boolean
+      default:
+        description: Default value.
+        type: object
+        properties:
+          currency:
+            $ref: ./CurrencyCode.yaml
+          amount:
+            type: number
+            format: double
+  _links:
+    $ref: ./SelfLink.yaml

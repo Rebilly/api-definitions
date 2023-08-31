@@ -1,0 +1,33 @@
+allOf:
+  - $ref: ./RuleAction.yaml
+  - type: object
+    properties:
+      role:
+        type: string
+        enum:
+          - all
+          - renewal
+          - trial-end
+        description: |-
+          Specifies the types of events that the reminder is applicable to.
+          The `renewal` and `trial-end` options are only available for order events.
+          Other events must use the `all` option.
+      schedule:
+        type: object
+        description: Collection of schedule instructions.
+        properties:
+          instructions:
+            type: array
+            items:
+              $ref: ./ReminderScheduleInstruction.yaml
+          chronology:
+            type: string
+            enum:
+              - before
+              - after
+        required:
+          - instructions
+          - chronology
+
+    required:
+      - role
