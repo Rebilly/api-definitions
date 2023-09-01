@@ -2,20 +2,18 @@ type: object
 description: |-
   Use tags to organize and categorize customers or KYC documents based on keywords.
   For more information, see [Tags](https://www.rebilly.com/docs/dev-docs/api/tag/Tags/).
-allOf:
-  - type: object
-    properties:
-      id:
-        description: ID of the tag.
-        allOf:
-          - $ref: ./ResourceId.yaml
-  - $ref: ./TagType.yaml
-  - $ref: ./TagName.yaml
-  - type: object
-    properties:
-      createdTime:
-        $ref: ./CreatedTime.yaml
-      updatedTime:
-        $ref: ./UpdatedTime.yaml
-      _links:
-        $ref: ./SelfLink.yaml
+properties:
+  id:
+    description: ID of the tag.
+    allOf:
+      - $ref: ./ResourceId.yaml
+  name:
+    $ref: ./TagName.yaml
+  type:
+    $ref: ./TagType.yaml
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml
