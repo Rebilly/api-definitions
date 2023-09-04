@@ -1,0 +1,37 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Risk score
+  summary: Retrieve allowlist record
+  operationId: GetAllowlist
+  x-sdk-operation-name: getAllowlist
+  security:
+    - SecretApiKey: []
+    - JWT: []
+  description: Retrieves allowlist record.
+  responses:
+    '200':
+      description: Allowlist record retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Allowlist.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+delete:
+  x-products:
+    - Core
+  tags:
+    - Risk score
+  summary: Delete allowlist record
+  operationId: DeleteAllowlist
+  x-sdk-operation-name: delete
+  description: Deletes allowlist record with a specified ID.
+  responses:
+    '204':
+      description: Allowlist record deleted.
