@@ -70,6 +70,18 @@ properties:
           oneOf:
             - $ref: ./Plans/OriginalPlan.yaml
             - $ref: ./Plans/FlexiblePlan.yaml
+        description:
+          type: string
+          description: Description of the invoice item.
+          example: Charge per approved transaction with DCC
+          nullable: true
+          maxLength: 255
+        costDescription:
+          type: string
+          description: Cost description of the invoice item.
+          example: 50% of the markup for approved transactions
+          nullable: true
+          maxLength: 255
         createdTime:
           $ref: ./CreatedTime.yaml
         updatedTime:
@@ -140,10 +152,22 @@ properties:
               enum:
                 - debit
                 - credit
+            name:
+              description: Name of the invoice item.
+              type: string
+              maxLength: 1000
             description:
               description: Description of the invoice item.
               type: string
-              maxLength: 1000
+              example: Charge per approved transaction with DCC
+              nullable: true
+              maxLength: 255
+            costDescription:
+              type: string
+              description: Cost description of the invoice item.
+              example: 50% of the markup for approved transactions
+              nullable: true
+              maxLength: 255
             unitPrice:
               description: Unit price of the invoice item.
               type: number
