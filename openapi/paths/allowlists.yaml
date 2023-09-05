@@ -1,0 +1,62 @@
+get:
+  x-products:
+    - Core
+  tags:
+    - Allowlists
+  summary: Retrieve allowlist collection
+  operationId: GetAllowlistCollection
+  x-sdk-operation-name: getAllowlistCollection
+  security:
+    - SecretApiKey: []
+    - JWT: []
+  description: Retrieves allowlist collection.
+  parameters:
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+  responses:
+    '200':
+      description: Allowlist collection retrieved.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Allowlist.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Allowlists
+  summary: Create allowlist record
+  operationId: PostAllowlist
+  x-sdk-operation-name: storeAllowlist
+  security:
+    - PublishableApiKey: []
+  description: Creates allowlist record.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Allowlist.yaml
+    description: Allowlist record.
+    required: true
+  responses:
+    201:
+      description: Allowlist record created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Allowlist.yaml
+    401:
+      $ref: ../components/responses/Unauthorized.yaml
+    409:
+      $ref: ../components/responses/Conflict.yaml
