@@ -30,26 +30,31 @@ properties:
     description: Street address of the organization.
     type: string
     maxLength: 60
+    nullable: true
     x-sortable: true
   address2:
     description: Second line of the street address.
     type: string
     maxLength: 60
+    nullable: true
     x-sortable: true
   city:
     description: City where the organization is located.
     type: string
     maxLength: 45
+    nullable: true
     x-sortable: true
   region:
     description: Region or state where the organization is located.
     type: string
     maxLength: 45
+    nullable: true
     x-sortable: true
   country:
     description: Country where the organization is located, in [ISO Alpha-2 code format](https://www.iso.org/obp/ui/#search/code/).
     type: string
     pattern: '^[A-Z]{2}$'
+    nullable: true
     x-sortable: true
   postalCode:
     description: Postal code of the organization.
@@ -63,6 +68,7 @@ properties:
   taxDescriptor:
     description: Tax label of the organization. This information is displayed on the invoice.
     type: string
+    nullable: true
     maxLength: 255
   invoiceTimeZone:
     description: Specifies the time zone to display on an invoice. UTC is used by default.
@@ -77,9 +83,119 @@ properties:
     pattern: '^[A-Z]{3}$'
     example: USD
   questionnaire:
-    $ref: ./Organizations/OrganizationQuestionnaire.yaml
+    type: object
+    nullable: true
+    description: Organization questionnaire.
+    properties:
+      role:
+        type: string
+        nullable: true
+        description: Role of the owner.
+      monthlyTransactions:
+        type: string
+        nullable: true
+        description: Amount of monthly processed transactions.
+      products:
+        type: array
+        nullable: true
+        description: List of products the organization is interested in.
+        items:
+          type: string
+      integrationType:
+        type: string
+        nullable: true
+        description: Type of integration the organization would like.
+      launchTiming:
+        type: string
+        nullable: true
+        description: When the organization would like to go live.
   settings:
-    $ref: ./Organizations/OrganizationSettings.yaml
+    type: object
+    description: Organization settings.
+    properties:
+      defaultTaxCalculator:
+        type: object
+        description: Tax calculation settings.
+        required:
+          - type
+        properties:
+          type:
+            type: string
+            description: Type of tax calculator.
+            enum:
+              - taxjar
+              - avalara
+              - flat
+          rate:
+            type: number
+            nullable: true
+            format: float
+            description: Rate for flat tax calculation.
+      billing:
+        description: Global organization settings for billing.
+        type: object
+        nullable: true
+        properties:
+          pendingOrderTtl:
+            description: Length of time, in ISO-8601 durations format, before which a pending order is automatically abandoned.
+            type: string
+            example: P7D
+            nullable: true
+            default: null
+      taxLocations:
+        type: array
+        description: |-
+          Additional organization addresses where a merchant may want to collect taxes using the `taxjar` tax calculator.
+
+          Available only for US-based organizations.
+        items:
+          type: object
+          required:
+            - country
+          properties:
+            address:
+              description: Street address of the tax location.
+              type: string
+              maxLength: 60
+              nullable: true
+            city:
+              description: City of the tax location.
+              type: string
+              maxLength: 45
+              nullable: true
+            region:
+              description: Region or state of the tax location.
+              type: string
+              maxLength: 45
+              nullable: true
+            country:
+              description: Country of the tax location, in [ISO Alpha-2 code format](https://www.iso.org/obp/ui/#search/code/).
+              type: string
+              pattern: '^[A-Z]{2}$'
+            postalCode:
+              description: Postal code of the tax location.
+              type: string
+              maxLength: 10
+              nullable: true
+      notifications:
+        description: Organization access-related notification settings.
+        type: object
+        properties:
+          notifyOnUserAccessChanges:
+            description: Specifies whether to send notifications when users are created or updated.
+            type: boolean
+            default: false
+          notifyOnApiKeyAccessChanges:
+            description: Specifies whether to send notifications when API keys are created or updated.
+            type: boolean
+            default: false
+          notificationEmailAddresses:
+            description: List of email addresses to send notifications to.
+            type: array
+            items:
+              type: string
+              format: email
+            default: [ ]
   taxNumbers:
     type: array
     description: Tax numbers of the organization.
@@ -104,4 +220,18 @@ properties:
   updatedTime:
     $ref: ./UpdatedTime.yaml
   _links:
-    $ref: ./SelfLink.yaml
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - attachments

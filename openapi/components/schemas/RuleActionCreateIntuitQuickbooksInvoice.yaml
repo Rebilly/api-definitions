@@ -1,0 +1,16 @@
+description: Create an Intuit QuickBooks invoice.
+allOf:
+  - $ref: ./RuleActionUpdateIntuitQuickbooksInvoice.yaml
+  - type: object
+    properties:
+      customerDisplayName:
+        description: |-
+          Customer display name in QuickBooks. Duplicate names are mapped to a single QuickBooks customer.
+
+          Event placeholders could be used as follows:
+          - Organization name: `{{ invoice.customer.primaryAddress.organization }}`;
+          - Full customer name: `{{ invoice.customer.firstName }} {{ invoice.customer.lastName }}`;
+          - Customer ID: `{{ invoice.customer.id }}`.
+        type: string
+    required:
+      - customerDisplayName

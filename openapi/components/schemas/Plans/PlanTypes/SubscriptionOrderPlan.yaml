@@ -22,11 +22,13 @@ properties:
     description: |-
       Plain-text description of the plan.
       This field accepts plain-text only.
+    maxLength: 65535
   richDescription:
     type: string
     description: |-
       Rich-text description of the plan.
       This field accepts rich text formatting, such as: bold, underline, italic, and hyperlinks.
+    maxLength: 65535
   productId:
     type: string
     description: ID of the related product.
@@ -109,6 +111,8 @@ properties:
           set this field to `12`.
         type: integer
         nullable: true
+        minimum: 1
+        maximum: 65535
       billingTiming:
         $ref: ../PlanBillingTiming.yaml
   trial:

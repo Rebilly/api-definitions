@@ -1,6 +1,7 @@
 type: object
 title: Bank account
-x-abstract-parent: PaymentInstrument
+required:
+  - method
 properties:
   id:
     type: string
@@ -41,6 +42,7 @@ properties:
   bic:
     description: Bank Identifier Code (BIC).
     type: string
+    nullable: true
   billingAddress:
     description: Customer's billing address.
     allOf:
@@ -76,7 +78,10 @@ properties:
     nullable: true
     readOnly: true
   riskMetadata:
-    $ref: ../RiskMetadata.yaml
+    type: object
+    nullable: true
+    allOf:
+      - $ref: ../RiskMetadata.yaml
   useAsBackup:
     $ref: ../UseAsBackup.yaml
   createdTime:

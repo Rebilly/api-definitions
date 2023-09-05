@@ -85,6 +85,11 @@ properties:
                 nullable: true
                 items:
                   type: string
+              fullPageRedirect:
+                type: boolean
+                description: Specifies whether the hosted payment form uses a full page redirect, or the default iframe modal, for approval URL redirects.
+                nullable: true
+                default: false
   logoId:
     type: string
     nullable: true
@@ -95,7 +100,7 @@ properties:
     deprecated: true
     readOnly: true
     allOf:
-      - $ref: ./Organizations/OrganizationId.yaml
+      - $ref: ./OrganizationId.yaml
   _links:
     type: array
     description: Related links.

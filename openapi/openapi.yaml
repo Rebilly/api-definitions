@@ -95,6 +95,11 @@ tags:
     description: |-
       Use these operations to manage Rebilly accounts.
       An account in which you are subscribed to in order to use the Rebilly product.
+  - name: Allowlists
+    description: |-
+      Use allowlists to exclude specific customer attribute data from risk score checks.
+      
+      Allowlists are lists of data that are excluded from risk score checks. Allowlists prevent specific data from being added to a [blocklist record](https://www.rebilly.com/docs/automations/blocklists/) when a [risk score](https://www.rebilly.com/docs/automations/risk-scoring/) threshold reached.
   - name: AML
     description: |-
       Use Anti-Money Laundering (AML) operations to screen customers and help prevent your business from becoming directly or indirectly involved in criminal activity.
@@ -596,6 +601,7 @@ x-tagGroups:
   - name: Risk
     tags:
       - Blocklists
+      - Allowlists
       - KYC documents
       - AML
       - Risk score
@@ -861,6 +867,10 @@ paths:
     $ref: './paths/tags@{tag}@kyc-documents.yaml'
   '/tags/{tag}/kyc-documents/{kycDocumentId}':
     $ref: './paths/tags@{tag}@kyc-documents@{kycDocumentId}.yaml'
+  '/tags/{tag}/aml-checks':
+    $ref: './paths/tags@{tag}@aml-checks.yaml'
+  '/tags/{tag}/aml-checks/{amlCheckId}':
+    $ref: './paths/tags@{tag}@aml-checks@{amlCheckId}.yaml'
   /tokens:
     $ref: ./paths/tokens.yaml
   '/tokens/{token}':
@@ -1249,6 +1259,10 @@ paths:
     $ref: paths/risk-score-rules.yaml
   '/risk-score-rules/blocklists':
     $ref: paths/risk-score-rules@blocklists.yaml
+  '/allowlists':
+    $ref: paths/allowlists.yaml
+  '/allowlists/{id}':
+    $ref: paths/allowlists@{id}.yaml
   '/tags-rules':
     $ref: paths/tags-rules.yaml
   '/tags-rules/{id}':

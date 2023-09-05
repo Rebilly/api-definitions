@@ -1,7 +1,8 @@
 type: object
 description: Payment card information.
 title: Payment card
-x-abstract-parent: PaymentInstrument
+required:
+  - method
 properties:
   id:
     type: string
@@ -70,6 +71,7 @@ properties:
   bankCountry:
     description: Bank country of the payment instrument.
     type: string
+    nullable: true
     readOnly: true
   bankName:
     description: Bank name of the payment instrument.
@@ -127,8 +129,12 @@ properties:
     enum:
       - Apple Pay
       - Google Pay
+      - null
   riskMetadata:
-    $ref: ../RiskMetadata.yaml
+    type: object
+    nullable: true
+    allOf:
+      - $ref: ../RiskMetadata.yaml
   _links:
     type: array
     description: Related links.

@@ -1,0 +1,34 @@
+type: object
+required:
+  - type
+properties:
+  name:
+    description: Name of the custom field.
+    type: string
+    readOnly: true
+  type:
+    description: |-
+      Describes the data type. Custom field type value cannot be changed.
+
+      String in [date-time](https://www.rfc-editor.org/rfc/rfc3339) format (YYYY-MM-DDTHH:MM:SSZ).
+    type: string
+    enum:
+      - datetime
+  description:
+    description: Description of the custom field.
+    type: string
+    nullable: true
+  additionalSchema:
+    type: object
+    nullable: true
+    description: Additional schema which adds additional values constrains.
+    properties:
+      required:
+        description: Specifies whether this value is required.
+        type: boolean
+      default:
+        description: Default value.
+        type: string
+        format: date-time
+  _links:
+    $ref: ./SelfLink.yaml
