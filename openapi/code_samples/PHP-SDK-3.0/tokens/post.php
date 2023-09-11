@@ -43,4 +43,8 @@ $paymentInstrumentForm->setCvv(123);
 
 $paymentCardTokenForm->setPaymentInstrument($paymentInstrumentForm);
 
-$paymentCardToken = $service->paymentTokens()->create($paymentCardTokenForm);
+try {
+    $paymentCardToken = $service->paymentTokens()->create($paymentCardTokenForm);
+} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
+}

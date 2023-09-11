@@ -6,4 +6,8 @@ $websiteForm->setUrl('http://testwebsite.com');
 $websiteForm->setServicePhone('+0123456789');
 $websiteForm->setServiceEmail('test@testwebsite.com');
 
-$website = $service->websites()->create($websiteForm);
+try {
+    $website = $service->websites()->create($websiteForm);
+} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
+}

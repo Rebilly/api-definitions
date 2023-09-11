@@ -8,4 +8,8 @@ $transactionForm->setCustomFields([
     ],
 ]);
 
-$transaction = $service->transactions()->patch('transactionId', $transactionForm);
+try {
+    $transaction = $service->transactions()->patch('transactionId', $transactionForm);
+} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
+}

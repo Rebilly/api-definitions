@@ -21,4 +21,8 @@ $restrictionForm = Rebilly\Sdk\Model\CouponRestrictionFactory::from($restriction
 
 $couponForm->setRestrictions([$restrictionForm]);
 
-$coupon = $service->coupons()->update('couponId', $couponForm);
+try {
+    $coupon = $service->coupons()->update('couponId', $couponForm);
+} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
+}

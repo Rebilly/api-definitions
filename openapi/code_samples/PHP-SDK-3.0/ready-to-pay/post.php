@@ -5,4 +5,8 @@ $readyToPayForm->setCurrency('USD');
 $readyToPayForm->setAmount(10);
 $readyToPayForm->setCustomerId('customerId');
 
-$transactions = $service->purchase()->readyToPay($readyToPayForm);
+try {
+    $transactions = $service->purchase()->readyToPay($readyToPayForm);
+} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
+}

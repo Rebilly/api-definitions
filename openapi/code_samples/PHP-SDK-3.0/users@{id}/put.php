@@ -5,4 +5,8 @@ $userForm->setFirstName('John');
 $userForm->setLastName('Doe');
 $userForm->setEmail('johndoe@test.com');
 
-$user = $service->users()->update('userId', $userForm);
+try {
+    $user = $service->users()->update('userId', $userForm);
+} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
+}

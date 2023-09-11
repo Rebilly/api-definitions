@@ -13,4 +13,8 @@ $restrictionForm = Rebilly\Sdk\Model\CouponRestrictionFactory::from($restriction
 
 $redemptionForm->setAdditionalRestrictions([$restrictionForm]);
 
-$couponRedemption = $service->coupons()->redeem($redemptionForm);
+try {
+    $couponRedemption = $service->coupons()->redeem($redemptionForm);
+} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
+}

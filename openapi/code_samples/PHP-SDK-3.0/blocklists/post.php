@@ -5,4 +5,8 @@ $blocklistForm->setType($blocklistForm::TYPE_EMAIL);
 $blocklistForm->setValue('test@test.com');
 $blocklistForm->setExpirationTime('2025-01-01 05:00:00');
 
-$blocklist = $service->blocklists()->create($blocklistForm);
+try {
+    $blocklist = $service->blocklists()->create($blocklistForm);
+} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
+}

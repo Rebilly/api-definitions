@@ -10,4 +10,8 @@ $gatewayAccountForm->setPaymentCardSchemes([
 ]);
 $gatewayAccountForm->setMethod('cash');
 
-$gatewayAccount = $service->gatewayAccounts()->create($gatewayAccountForm);
+try {
+    $gatewayAccount = $service->gatewayAccounts()->create($gatewayAccountForm);
+} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
+}

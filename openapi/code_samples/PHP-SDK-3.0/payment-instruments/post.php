@@ -39,11 +39,19 @@ $paymentInstrumentForm->setBillingAddress([
     ],
 ]);
 
-$paymentInstrument = $service->paymentInstruments()->create($paymentInstrumentForm);
+try {
+    $paymentInstrument = $service->paymentInstruments()->create($paymentInstrumentForm);
+} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
+}
 
 // Alternatively you can specify a payment token
 $paymentInstrumentForm = new Rebilly\Sdk\Model\PaymentCardCreatePlain();
 $paymentInstrumentForm->setCustomerId('customerId');
 $paymentInstrumentForm->setToken('payment-token');
 
-$paymentInstrument = $service->paymentInstruments()->create($paymentInstrumentForm);
+try {
+    $paymentInstrument = $service->paymentInstruments()->create($paymentInstrumentForm);
+} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
+}

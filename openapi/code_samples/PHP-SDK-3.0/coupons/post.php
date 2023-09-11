@@ -20,4 +20,8 @@ $restrictionForm = new Rebilly\Sdk\Model\CouponRestrictionDiscountPerRedemption(
 
 $couponForm->setRestrictions([$restrictionForm]);
 
-$coupon = $service->coupons()->create($couponForm);
+try {
+    $coupon = $service->coupons()->create($couponForm);
+} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
+}

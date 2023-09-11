@@ -47,4 +47,8 @@ $transactionForm->setBillingAddress([
     'dob' => '2000-06-01',
 ]);
 
-$transaction = $service->transactions()->create($transactionForm);
+try {
+    $transaction = $service->transactions()->create($transactionForm);
+} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
+}
