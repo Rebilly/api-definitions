@@ -1,8 +1,10 @@
-$fileForm = new Rebilly\Entities\File();
+$service = new Rebilly\Sdk\CoreService($client);
+
+$fileForm = new Rebilly\Sdk\Model\FileCreateFromUrl();
 $fileForm->setUrl('http://test.com/somefile.jpg');
 
 try {
-    $file = $client->files()->create($fileForm);
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    $file = $service->files()->upload($fileForm);
+} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }
