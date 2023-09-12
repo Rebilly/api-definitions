@@ -17,7 +17,6 @@ extends:
   - recommended
 plugins:
   - ./plugins/custom-rules.js
-  - ./plugins/custom-assertions.js
   - ./plugins/decorators.js
   - ./plugins/products-bundler/bundler.js
 rules:
@@ -29,6 +28,7 @@ rules:
   operation-tag-defined: error
   operation-4xx-response: off
   paths-kebab-case: error
+  tags-alphabetical: error
 
   request-mime-type:
     severity: error
@@ -159,17 +159,6 @@ rules:
       mutuallyExclusive:
         - example
         - examples
-
-  rule/tags-alphabetical:
-    subject:
-      type: Root
-      property: tags
-    assertions:
-      customAssertions/sortOrder:
-        direction: asc
-        property: name
-        ignoreCase: true
-    severity: error
 
   rule/headers-include-example:
     subject:
