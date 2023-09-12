@@ -1,8 +1,12 @@
 type: object
 title: With items
 required:
+  - websiteId
   - items
+  - riskMetadata
 properties:
+  websiteId:
+    $ref: ../WebsiteId.yaml
   items:
     type: array
     minItems: 1
@@ -20,3 +24,10 @@ properties:
         quantity:
           description: Number of product units in the specified plan.
           type: integer
+  billingAddress:
+    description: Billing address.
+    writeOnly: true
+    allOf:
+      - $ref: ../Contact/ContactObject.yaml
+  riskMetadata:
+    $ref: ../RiskMetadata.yaml
