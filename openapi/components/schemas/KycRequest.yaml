@@ -13,7 +13,10 @@ properties:
   customerId:
     $ref: ./CustomerId.yaml
   documents:
-    $ref: ./KycRequestDocuments.yaml
+    type: array
+    description: Documents to request from the customer.
+    items:
+      $ref: KycRequestDocument.yaml
   status:
     description: Status of the request.
     type: string
