@@ -10,7 +10,7 @@ properties:
     maxLength: 50
     example: in_0YVF9605RKC62BP14NE2R7V2XT
   websiteId:
-    $ref: ./Websites/WebsiteId.yaml
+    $ref: ./WebsiteId.yaml
   invoiceNumber:
     description: Auto-incrementing number based on the sequence of invoices for any particular customer.
     readOnly: true
@@ -111,25 +111,47 @@ properties:
     nullable: true
     example: PO123456
     type: string
+    maxLength: 50
   notes:
     description: Notes for the customer that are displayed on the invoice.
     type: string
+    maxLength: 65535
   items:
     type: array
     description: Invoice items array.
     readOnly: true
     items:
-      $ref: ./Invoices/InvoiceItem.yaml
+      $ref: ./InvoiceItem.yaml
   discounts:
     type: array
     description: Discounts applied.
     readOnly: true
     items:
-      allOf:
-        - $ref: ./Coupon/InvoiceDiscount.yaml
+      type: object
+      readOnly: true
+      properties:
+        couponId:
+          type: string
+          description: ID of the coupon.
+          maxLength: 50
+          example: cpn_0YVCNKF81GD778N4YNVGDJK558
+        redemptionId:
+          description: ID of the redemption.
+          allOf:
+            - $ref: ./ResourceId.yaml
+        amount:
+          description: Total amount discounted by this coupon.
+          type: number
+          format: double
+        description:
+          type: string
+          description: Description of the discount.
+        context:
+          $ref: ./DiscountContext.yaml
   autopayScheduledTime:
     description: Date and time when an automatic payment (autopay) is scheduled.
     type: string
+    nullable: true
     x-sortable: true
     format: date-time
   autopayRetryNumber:
@@ -168,20 +190,26 @@ properties:
   abandonedTime:
     description: Date and time when the invoice is abandoned.
     x-sortable: true
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    type: string
+    nullable: true
+    format: date-time
+    readOnly: true
   voidedTime:
     description: Date and time when the invoice is voided.
     x-sortable: true
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    type: string
+    nullable: true
+    format: date-time
+    readOnly: true
   paidTime:
     x-label: Payment Date
     x-sortable: true
     x-basic: true
     description: Date and time when the invoice is paid.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    type: string
+    nullable: true
+    format: date-time
+    readOnly: true
   dueTime:
     description: Date and time when the invoice is due for payment.
     type: string
@@ -200,6 +228,7 @@ properties:
     $ref: ./UpdatedTime.yaml
   paymentFormUrl:
     type: string
+    nullable: true
     readOnly: true
     format: url
     description: |-
@@ -217,12 +246,13 @@ properties:
     maxItems: 10
     readOnly: true
     items:
-      $ref: ./Transactions/Transaction.yaml
+      $ref: ./Transaction.yaml
   retryInstruction:
     description: |-
       Invoice payment retry instruction.
       This object specifies how to proceed if a payment related to the invoice fails.
     type: object
+    nullable: true
     properties:
       attempts:
         type: array
@@ -232,7 +262,7 @@ properties:
           type: object
           properties:
             scheduleInstruction:
-              $ref: ./Scheduling/InvoiceRetryScheduleInstruction.yaml
+              $ref: ./InvoiceRetryScheduleInstruction.yaml
             amountAdjustmentInstruction:
               $ref: ./InvoiceRetry/InvoiceRetryAmountAdjustmentInstruction.yaml
             tryBackupInstruments:
@@ -296,7 +326,7 @@ properties:
   organizationId:
     readOnly: true
     allOf:
-      - $ref: ./Organizations/OrganizationId.yaml
+      - $ref: ./OrganizationId.yaml
   _links:
     type: array
     description: Related links.
@@ -315,6 +345,7 @@ properties:
             - website
             - customer
             - organization
+            - attachments
             - leadSource
             - transactionAllocations
             - recalculateInvoice

@@ -4,7 +4,7 @@ required:
   - customerId
   - documentType
   - status
-  - fieldIds
+  - fileIds
 properties:
   id:
     type: string
@@ -26,8 +26,9 @@ properties:
       `['kyc', 'id-front']`, `['kyc', 'id-back']`, `['kyc', 'face-proof']`.
     type: array
     items:
-      allOf:
-        - $ref: ../ResourceId.yaml
+      type: string
+      maxLength: 50
+      example: file_0YV7HZ7KDCC5WBV9Q7WRKG1H6N
   documentType:
     description: |-
       Document type submitted for validation.
@@ -55,7 +56,7 @@ properties:
       rejected: Rejected by AI or a human.
       archived: Archived by the Rebilly AI.
   rejectionReason:
-    $ref: ../KycDocument/KycDocumentRejection.yaml
+    $ref: ../KycDocumentRejection.yaml
   requestId:
     readOnly: true
     nullable: true
@@ -70,6 +71,7 @@ properties:
   processedTime:
     description: Date and time when the KYC document is processed.
     type: string
+    nullable: true
     format: date-time
     readOnly: true
   customerId:
@@ -107,10 +109,11 @@ properties:
     readOnly: true
     type: array
     items:
-      $ref: ../Tags/Tag.yaml
+      $ref: ../Tag.yaml
   reason:
     description: Reason for uploading.
     type: string
+    nullable: true
   matchLevel:
     description: Tolerance level setting for document matches.
     type: integer

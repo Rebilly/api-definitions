@@ -46,18 +46,29 @@ allOf:
                   minimum: 0.00
                   maximum: 100.00
                   example: 0.50
+                commissionAmount:
+                  description: Fixed commission amount in minor units.
+                  type: number
+                  format: integer
+                  example: 100
+                currency:
+                  $ref: ../CurrencyCode.yaml
                 account:
                   description: ID of the balance account where the split amount is sent.
                   type: string
+                merchantCountry:
+                  description: Two-letter ISO 3166 alpha-2 code of the merchant's country.
+                  type: string
+                  example: US
                 type:
                   description: Account type of the split payment.
                   type: string
                   enum:
                     - BalanceAccount
                     - Commission
-                    - VAT
+                    - Remainder
                     - PaymentFee
         required:
           - url
       threeDSecureServer:
-        $ref: ../ThreeDSecureServers/ThreeDSecureIO3dsServer.yaml
+        $ref: ./ThreeDSecureIO3dsServer.yaml

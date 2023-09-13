@@ -8,6 +8,7 @@ discriminator:
     invoices: ./DataExports/resources/invoices.yaml
     invoiceItems: ./DataExports/resources/invoiceItems.yaml
     revenueAudit: ./DataExports/resources/revenueAudit.yaml
+    amlChecks: ./DataExports/resources/amlChecks.yaml
 required:
   - name
   - format
@@ -32,6 +33,7 @@ properties:
       - invoices
       - invoiceItems
       - revenueAudit
+      - amlChecks
   format:
     description: Output format of the export.
     type: string
@@ -97,6 +99,13 @@ properties:
     type: string
     maxLength: 50
     example: usr_0YVCEENYJ3D7Q9EN6BN16HA0G4
+  fileId:
+    type: string
+    description: ID of the data export file.
+    readOnly: true
+    nullable: true
+    maxLength: 50
+    example: file_0YV7HZ7KDCC5WBV9Q7WRKG1H6N
   recordCount:
     description: Total number of records in the export, excluding the header row.
     readOnly: true

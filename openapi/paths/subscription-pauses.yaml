@@ -3,10 +3,10 @@ get:
     - Core
   tags:
     - Orders
-  summary: Retrieve subscription pauses
+  summary: Retrieve subscription order pauses
   operationId: GetSubscriptionPauseCollection
   x-sdk-operation-name: getAll
-  description: Retrieves a list of subscription pauses.
+  description: Retrieves a list of subscription order pauses.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -14,7 +14,7 @@ get:
     - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
-      description: List of pauses retrieved.
+      description: List of subscription order pauses retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -27,7 +27,7 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/Subscription/SubscriptionPause.yaml
+              $ref: ../components/schemas/SubscriptionPause.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -37,15 +37,15 @@ post:
     - Core
   tags:
     - Orders
-  summary: Pause a subscription
+  summary: Pause a subscription order
   operationId: PostSubscriptionPause
   x-sdk-operation-name: pause
-  description: Pauses a subscription with a specified ID.
+  description: Pauses a subscription order with a specified ID.
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/Subscription/SubscriptionPause.yaml
+          $ref: ../components/schemas/SubscriptionPause.yaml
     description: Pause resource.
     required: true
   responses:
@@ -57,7 +57,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Subscription/SubscriptionPause.yaml
+            $ref: ../components/schemas/SubscriptionPause.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

@@ -1,0 +1,119 @@
+type: object
+description: Tag or untag rule.
+required:
+  - name
+  - eventType
+  - addTags
+  - removeTags
+properties:
+  id:
+    type: string
+    description: ID of the rule.
+    readOnly: true
+    maxLength: 50
+    example: tag_rule_0YVCEE5APAD7V84MK3P9CCJVYY
+  name:
+    description: Name of the rule.
+    type: string
+  eventType:
+    allOf:
+      - $ref: ./GlobalEventType.yaml
+      - not:
+          enum:
+            - application-instance-disabled
+            - application-instance-enabled
+            - balance-transaction-settled
+            - credit-memo-applied
+            - credit-memo-created
+            - credit-memo-modified
+            - credit-memo-partially-applied
+            - credit-memo-voided
+            - customer-redirected-offsite
+            - customer-returned
+            - dispute-created
+            - dispute-modified
+            - gateway-account-downtime-ended
+            - gateway-account-downtime-started
+            - gateway-account-limit-reached
+            - gateway-account-onboarding-completed
+            - gateway-account-onboarding-failed
+            - gateway-account-requested
+            - invoice-created
+            - invoice-modified
+            - invoice-past-due-reminder
+            - invoice-tax-calculation-failed
+            - nsf-response-received
+            - offsite-payment-completed
+            - order-abandon-reminder
+            - organization-tax-number-validated
+            - payment-card-created
+            - payment-card-expiration-reminder
+            - payment-instrument-modified
+            - renewal-invoice-payment-canceled
+            - risk-score-changed
+            - subscription-modified
+            - subscription-pause-created
+            - subscription-pause-modified
+            - subscription-pause-revoked
+            - subscription-renewal-reminder
+            - subscription-trial-converted
+            - subscription-trial-end-changed
+            - subscription-trial-end-reminder
+            - subscription-trial-ended
+            - transaction-process-requested
+            - transaction-processed
+            - transaction-reconciled
+            - transaction-timeout-resolved
+            - waiting-gateway-transaction-completed
+            - data-export-completed
+  filter:
+    description: |-
+      Filter that determines whether to tag or untag.
+      This field requires a special format.
+      Use `,` for multiple allowed values.
+      Use `;` for multiple fields.
+
+      For more information,
+      see [Using filters](https://api-reference.rebilly.com/#section/Using-filter-with-collections).
+    type: string
+    nullable: true
+  addTags:
+    description: List of tags to add to the customer.
+    type: array
+    minItems: 0
+    maxItems: 1000
+    items:
+      type: string
+  removeTags:
+    description: List of tags to remove for the customer.
+    type: array
+    minItems: 0
+    maxItems: 1000
+    items:
+      type: string
+  status:
+    description: Status of the rule.
+    type: string
+    default: active
+    enum:
+      - active
+      - inactive
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    type: array
+    description: Related resource links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self

@@ -1,11 +1,16 @@
 content:
   application/json:
     schema:
-      allOf:
-        - $ref: ../schemas/Tags/Tag.yaml
-        - properties:
-            type:
-              readOnly: true
+      required:
+        - name
+      properties:
+        name:
+          description: |-
+            Unique name for the tag.
+            Tag names are not case-sensitive.
+          type: string
+          maxLength: 255
+          pattern: '^[@~\-\.\w\s]+$'
+          example: New
 description: Tag resource.
 required: true
-    

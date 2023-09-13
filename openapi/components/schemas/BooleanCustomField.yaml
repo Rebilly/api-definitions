@@ -1,0 +1,33 @@
+type: object
+required:
+  - type
+properties:
+  name:
+    description: Name of the custom field.
+    type: string
+    readOnly: true
+  type:
+    description: |-
+      Describes the data type. Custom field type value cannot be changed.
+
+      Specifies a `true` or `false` value.
+    type: string
+    enum:
+      - boolean
+  description:
+    description: Description of the custom field.
+    type: string
+    nullable: true
+  additionalSchema:
+    type: object
+    nullable: true
+    description: Additional schema which adds additional values constrains.
+    properties:
+      required:
+        description: Specifies whether this value is required.
+        type: boolean
+      default:
+        description: Default value.
+        type: boolean
+  _links:
+    $ref: ./SelfLink.yaml

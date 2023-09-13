@@ -1,0 +1,63 @@
+type: object
+properties:
+  id:
+    type: string
+    description: ID of the timeline message.
+    readOnly: true
+    maxLength: 50
+    example: tmln_0YV8Q9WEF5DTA8HFXS27D1G6GC
+  type:
+    description: Type of timeline message.
+    type: string
+    readOnly: true
+    enum:
+      - coupon-applied
+      - email-message-sent
+      - invoice-abandoned
+      - invoice-disputed
+      - invoice-issued
+      - invoice-paid
+      - invoice-partially-paid
+      - invoice-partially-refunded
+      - invoice-past-due
+      - invoice-refunded
+      - invoice-reissued
+      - invoice-renewal-payment-declined
+      - invoice-revenue-recognized
+      - invoice-tax-calculation-failed
+      - invoice-voided
+      - quickbooks-credit-memo-created
+      - quickbooks-credit-memo-voided
+      - quickbooks-invoice-created
+      - quickbooks-invoice-task-failed
+      - quickbooks-invoice-updated
+      - quickbooks-invoice-voided
+      - quickbooks-revenue-recognition-created
+      - timeline-comment-created
+      - transaction-abandoned
+      - transaction-approved
+      - transaction-canceled
+      - transaction-declined
+      - transaction-initiated
+      - transaction-refunded
+      - transaction-voided
+  triggeredBy:
+    description: Specifies who, or what, triggered the timeline event.
+    type: string
+    readOnly: true
+    enum:
+      - rebilly
+      - app
+      - direct-api
+  message:
+    description: Describes the message details.
+    type: string
+  extraData:
+    $ref: ./TimelineExtraData.yaml
+  occurredTime:
+    description: Date and time when the timeline message occurred.
+    readOnly: true
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  _links:
+    $ref: ./SelfLink.yaml

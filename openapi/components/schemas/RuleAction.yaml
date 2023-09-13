@@ -1,0 +1,78 @@
+type: object
+discriminator:
+  propertyName: name
+  mapping:
+    add-risk-score: ./RuleActionAddRiskScore.yaml
+    adjust-ready-to-pay: ./RuleActionAdjustReadyToPay.yaml
+    blocklist: ./RuleActionAddBlockList.yaml
+    cancel-scheduled-payments: ./RuleActionCancelScheduledPayments.yaml
+    create-intuit-quickbooks-balance-transaction-entry: ./RuleActionCreateIntuitQuickbooksBalanceTransactionEntry.yaml
+    create-intuit-quickbooks-invoice: ./RuleActionCreateIntuitQuickbooksInvoice.yaml
+    create-intuit-quickbooks-payment: ./RuleActionCreateIntuitQuickbooksPayment.yaml
+    create-intuit-quickbooks-refund-receipt: ./RuleActionCreateIntuitQuickbooksRefundReceipt.yaml
+    create-intuit-quickbooks-revenue-recognition-entry: ./RuleActionCreateIntuitQuickbooksRevenueRecognitionEntry.yaml
+    create-keap-infusionsoft-order: ./RuleActionCreateInfusionsoftOrder.yaml
+    create-keap-infusionsoft-payment: ./RuleActionCreateInfusionsoftPayment.yaml
+    decline-transaction: ./RuleActionDeclineTransaction.yaml
+    check-ontario-restriction: ./RuleActionCheckOntarioRestriction.yaml
+    display-message: ./RuleActionDisplayMessage.yaml
+    display-other-choices: ./RuleActionDisplayOtherChoices.yaml
+    guess-payment-card-expiration: ./RuleActionGuessPaymentCardExpiration.yaml
+    offer-purchase-bump: ./RuleActionOfferPurchaseBump.yaml
+    perform-experian-check: ./RuleActionPerformExperianCheck.yaml
+    pick-gateway-account: ./RuleActionPickGatewayAccount.yaml
+    remove-reminder: ./RuleActionRemoveReminder.yaml
+    request-kyc: ./RuleActionRequestKyc.yaml
+    reset-reminder: ./RuleActionResetReminder.yaml
+    schedule-invoice-retry: ./RuleActionScheduleInvoiceRetry.yaml
+    schedule-payment: ./RuleActionSchedulePayment.yaml
+    schedule-reminder: ./RuleActionScheduleReminder.yaml
+    send-email: ./RuleActionSendEmail.yaml
+    stop-subscriptions: ./RuleActionStopSubscriptions.yaml
+    tag-or-untag-customer: ./RuleActionTagOrUntagCustomer.yaml
+    update-intuit-quickbooks-invoice: ./RuleActionUpdateIntuitQuickbooksInvoice.yaml
+    void-intuit-quickbooks-invoice: ./RuleActionVoidIntuitQuickbooksInvoice.yaml
+properties:
+  name:
+    type: string
+    description: Name of the action.
+    enum:
+      - add-risk-score
+      - adjust-ready-to-pay
+      - blocklist
+      - cancel-scheduled-payments
+      - create-intuit-quickbooks-balance-transaction-entry
+      - create-intuit-quickbooks-invoice
+      - create-intuit-quickbooks-payment
+      - create-intuit-quickbooks-refund-receipt
+      - create-intuit-quickbooks-revenue-recognition-entry
+      - create-keap-infusionsoft-order
+      - create-keap-infusionsoft-payment
+      - decline-transaction
+      - check-ontario-restriction
+      - display-message
+      - display-other-choices
+      - guess-payment-card-expiration
+      - offer-purchase-bump
+      - perform-experian-check
+      - pick-gateway-account
+      - remove-reminder
+      - request-kyc
+      - reset-reminder
+      - schedule-invoice-retry
+      - schedule-payment
+      - schedule-reminder
+      - send-email
+      - stop-subscriptions
+      - tag-or-untag-customer
+      - update-intuit-quickbooks-invoice
+      - void-intuit-quickbooks-invoice
+  status:
+    description: Status of the action.
+    type: string
+    default: active
+    enum:
+      - active
+      - inactive
+required:
+  - name

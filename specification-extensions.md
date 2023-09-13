@@ -17,12 +17,3 @@ This document contains all OpenAPI extensions used in the Rebilly API definition
 
 * `x-is-free-form`
   This flag is used for PHP SDK auto-generation. It indicates that the schema should not be generated as a model.
-
-* `x-no-generate`
-  This flag is used for PHP SDK auto-generation. It indicates that the schema should not be generated. Updates to schemas with this flag require a manual update of the SDK.
-
-* `x-abstract-parent`
-  This property is used for PHP SDK auto-generation. This property indicates the parent abstract class if the generator is unable to define it.
-
-* `x-no-abstract-methods`
-  This flag is used for PHP SDK auto-generation. It indicates that the generated model does not implement getters or setters.

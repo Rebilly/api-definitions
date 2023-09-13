@@ -1,0 +1,33 @@
+description: PSiGate gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          username:
+            type: string
+            description: Username or store name.
+          password:
+            type: string
+            description: Password of the PSiGate gateway account.
+            format: password
+            writeOnly: true
+          clientId:
+            type: string
+            description: Client ID.
+          clientApiKey:
+            type: string
+            description: Client API key.
+            format: password
+            writeOnly: true
+        required:
+          - username
+          - password
+          - clientId
+          - clientApiKey
+      threeDSecureServer:
+        $ref: ./ThreeDSecureIO3dsServer.yaml

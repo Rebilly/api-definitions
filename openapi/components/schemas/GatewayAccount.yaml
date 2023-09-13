@@ -10,6 +10,7 @@ discriminator:
     A1Gateway: ./GatewayAccountConfig/A1Gateway.yaml
     ACI: ./GatewayAccountConfig/ACI.yaml
     Adyen: ./GatewayAccountConfig/Adyen.yaml
+    Aircash: ./GatewayAccountConfig/Aircash.yaml
     Airpay: ./GatewayAccountConfig/Airpay.yaml
     Airwallex: ./GatewayAccountConfig/Airwallex.yaml
     AmazonPay: ./GatewayAccountConfig/AmazonPay.yaml
@@ -24,6 +25,7 @@ discriminator:
     BitPay: ./GatewayAccountConfig/BitPay.yaml
     BlueSnap: ./GatewayAccountConfig/BlueSnap.yaml
     BraintreePayments: ./GatewayAccountConfig/BraintreePayments.yaml
+    Buckaroo: ./GatewayAccountConfig/Buckaroo.yaml
     CASHlib: ./GatewayAccountConfig/CASHlib.yaml
     CODVoucher: ./GatewayAccountConfig/CODVoucher.yaml
     Coinbase: ./GatewayAccountConfig/Coinbase.yaml
@@ -55,6 +57,7 @@ discriminator:
     Dragonphoenix: ./GatewayAccountConfig/Dragonphoenix.yaml
     Dropayment: ./GatewayAccountConfig/Dropayment.yaml
     Directa24: ./GatewayAccountConfig/Directa24.yaml
+    EasyPayDirect: ./GatewayAccountConfig/EasyPayDirect.yaml
     EBANX: ./GatewayAccountConfig/EBANX.yaml
     EPG: ./GatewayAccountConfig/EPG.yaml
     EPro: ./GatewayAccountConfig/EPro.yaml
@@ -88,6 +91,7 @@ discriminator:
     IpayOptions: ./GatewayAccountConfig/IpayOptions.yaml
     JetPay: ./GatewayAccountConfig/JetPay.yaml
     Jeton: ./GatewayAccountConfig/Jeton.yaml
+    JPMOrbital: ./GatewayAccountConfig/JPMOrbital.yaml
     Khelocard: ./GatewayAccountConfig/Khelocard.yaml
     Klarna: ./GatewayAccountConfig/Klarna.yaml
     Konnektive: ./GatewayAccountConfig/Konnektive.yaml
@@ -149,6 +153,7 @@ discriminator:
     Pin4Pay: ./GatewayAccountConfig/Pin4Pay.yaml
     Plugnpay: ./GatewayAccountConfig/Plugnpay.yaml
     PostFinance: ./GatewayAccountConfig/PostFinance.yaml
+    PSiGate: ./GatewayAccountConfig/PSiGate.yaml
     PPRO: ./GatewayAccountConfig/PPRO.yaml
     Prosa: ./GatewayAccountConfig/Prosa.yaml
     Rapyd: ./GatewayAccountConfig/Rapyd.yaml
@@ -240,19 +245,23 @@ properties:
   dccMarkup:
     description: Dynamic currency conversion markup in basis points.
     type: integer
+    nullable: true
     minimum: -10000
     maximum: 10000
   dccForceCurrency:
     type: string
+    nullable: true
     description: |-
       Forces Dynamic Currency Conversion (DCC) to the specified currency on each sale.
       To disable forced DCC, leave this field empty.
   descriptor:
     description: Gateway account descriptor value.
     type: string
+    nullable: true
   cityField:
     description: Gateway account city field. This value is also known as a line 2 descriptor.
     type: string
+    nullable: true
   excludedDccQuoteCurrencies:
     description: Excluded Dynamic Currency Conversion (DCC) quote currencies.
     type: array
@@ -261,6 +270,7 @@ properties:
   monthlyLimit:
     description: Monthly limit on the amount money that the gateway account can process.
     type: number
+    nullable: true
     format: double
     minimum: 0
   approvalWindowTtl:
@@ -276,6 +286,7 @@ properties:
   reconciliationWindowTtl:
     description: Allotted time, in seconds, in which a reconciliation must occur before it is automatically `abandoned`.
     type: integer
+    nullable: true
     minimum: 300
     maximum: 16777215
   threeDSecure:
@@ -302,6 +313,7 @@ properties:
       For more information see,
       [Using filters](https://all-rebilly.redoc.ly/#section/Using-filter-with-collections).
     type: string
+    nullable: true
     example: amount:1..100;bin:411111,444433
   timeout:
     description: Gateway account request timeout, in seconds.
@@ -312,6 +324,7 @@ properties:
   token:
     description: Gateway account token.
     type: string
+    nullable: true
     readOnly: true
     example: TwiX3f92k4AiBE27BzTbQ38hHjicBz_w
   sticky:
@@ -347,15 +360,17 @@ properties:
       do-nothing: |-
         Does nothing except return an approved `setup` transaction.
         This is the default behavior.
+  customFields:
+    $ref: ./ResourceCustomFields.yaml
   createdTime:
-    $ref: CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   organizationId:
     deprecated: true
     readOnly: true
     allOf:
-      - $ref: ./Organizations/OrganizationId.yaml
+      - $ref: ./OrganizationId.yaml
   _links:
     type: array
     description: Related links.
