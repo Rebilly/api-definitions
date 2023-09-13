@@ -47,7 +47,12 @@ put:
   x-sdk-operation-name: update
   description: Creates or updates (upserts) a plan with a specified ID.
   requestBody:
-    $ref: ../components/requestBodies/Plan.yaml
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Plan.yaml
+    description: Plan resource.
+    required: true
   responses:
     '200':
       description: Plan updated.
