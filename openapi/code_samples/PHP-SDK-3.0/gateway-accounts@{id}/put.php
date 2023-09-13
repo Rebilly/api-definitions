@@ -1,5 +1,5 @@
-$service = new Rebilly\Sdk\UsersService($client);
-$gatewayAccountForm = new Rebilly\Sdk\Model\A1Gateway();
+$service = new \Rebilly\Sdk\UsersService($client);
+$gatewayAccountForm = new \Rebilly\Sdk\Model\A1Gateway();
 
 $gatewayAccountForm->setAcquirerName('Bank of Rebilly');
 $gatewayAccountForm->setOrganizationId('organizationId');
@@ -12,6 +12,6 @@ $gatewayAccountForm->setMethod('cash');
 
 try {
     $gatewayAccount = $service->gatewayAccounts()->update('gatewayAccountId', $gatewayAccountForm);
-} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

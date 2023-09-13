@@ -1,4 +1,4 @@
-$service = new Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\CoreService($client);
 
 $plansPaginator = $service->plans()->getAllPaginator(limit: 5);
 

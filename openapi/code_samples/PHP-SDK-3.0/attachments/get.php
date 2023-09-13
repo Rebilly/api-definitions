@@ -1,4 +1,4 @@
-$service = new Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\CoreService($client);
 
 $attachmentsPaginator = $service->files()->getAllAttachmentsPaginator(limit: 5, filter: 'relatedType:customer');
 foreach ($attachmentsPaginator as $attachmentPage) {

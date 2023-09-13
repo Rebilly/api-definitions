@@ -1,4 +1,4 @@
-$service = new Rebilly\Sdk\UsersService($client);
+$service = new \Rebilly\Sdk\UsersService($client);
 
 $paymentInstrumentsPaginator = $service->paymentInstruments()->getAllPaginator(
     filter: 'status:active;method:payment-card',

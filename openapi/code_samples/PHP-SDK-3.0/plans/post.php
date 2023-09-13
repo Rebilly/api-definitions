@@ -1,6 +1,6 @@
-$service = new Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\CoreService($client);
 
-$plan = Rebilly\Sdk\Model\SubscriptionOrderPlan::from([])
+$plan = \Rebilly\Sdk\Model\SubscriptionOrderPlan::from([])
     ->setProductId('productId')
     ->setName('Test plan')
     ->setCurrency('USD')
@@ -12,6 +12,6 @@ $plan = Rebilly\Sdk\Model\SubscriptionOrderPlan::from([])
     );
 try {
     $plan = $service->plans()->create($plan);
-} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

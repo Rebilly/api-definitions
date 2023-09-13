@@ -1,4 +1,4 @@
-$service = new Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\CoreService($client);
 
 $couponsPaginator = $service->coupons()->getAllPaginator(limit: 5, filter: 'status:issued');
 foreach ($couponsPaginator as $couponsPage) {

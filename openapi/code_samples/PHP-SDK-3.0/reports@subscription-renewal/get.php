@@ -1,4 +1,4 @@
-$service = new Rebilly\Sdk\ReportsService($client);
+$service = new \Rebilly\Sdk\ReportsService($client);
 
 $report = $service->reports()->getSubscriptionRenewal(
     new DateTimeImmutable('2022-01-01'),

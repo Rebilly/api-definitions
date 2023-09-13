@@ -1,4 +1,4 @@
-$service = new Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\CoreService($client);
 
 $productsPaginator = $service->products()->getAllPaginator(limit: 5);
 foreach ($productsPaginator as $productPage) {

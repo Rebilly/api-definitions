@@ -1,4 +1,4 @@
-$service = new Rebilly\Sdk\ReportsService($client);
+$service = new \Rebilly\Sdk\ReportsService($client);
 
 $dataExportsPaginator = $service->dataExports()->getAllPaginator(limit: 5);
 foreach ($dataExportsPaginator as $dataExportPage) {

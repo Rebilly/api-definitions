@@ -1,3 +1,3 @@
-$service = new Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\CoreService($client);
 
 $passwordTokens = $service->customerAuthentication()->getAllResetPasswordTokens();

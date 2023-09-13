@@ -1,6 +1,6 @@
-$service = new Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\CoreService($client);
 
-$transactionForm = new Rebilly\Sdk\Model\PatchTransactionRequest();
+$transactionForm = new \Rebilly\Sdk\Model\PatchTransactionRequest();
 $transactionForm->setCustomFields([
     [
         'name' => 'customField',
@@ -10,6 +10,6 @@ $transactionForm->setCustomFields([
 
 try {
     $transaction = $service->transactions()->patch('transactionId', $transactionForm);
-} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

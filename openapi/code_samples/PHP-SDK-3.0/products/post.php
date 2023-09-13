@@ -1,6 +1,6 @@
-$service = new Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\CoreService($client);
 
-$product = new Rebilly\Sdk\Model\Product([
+$product = new \Rebilly\Sdk\Model\Product([
     'name' => 'my first product',
     'description' => 'made to be of the highest quality',
     'taxCategoryId' => '',
@@ -10,6 +10,6 @@ $product = new Rebilly\Sdk\Model\Product([
 
 try {
     $product = $service->products()->create($product);
-} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

@@ -1,6 +1,6 @@
-$service = new Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\CoreService($client);
 
-$plan = new Rebilly\Sdk\Model\SubscriptionOrderPlan([
+$plan = new \Rebilly\Sdk\Model\SubscriptionOrderPlan([
     'recurringInterval' => [
         'unit' => PlanPeriod::UNIT_WEEK,
         'length' => 2,
@@ -9,7 +9,7 @@ $plan = new Rebilly\Sdk\Model\SubscriptionOrderPlan([
 
 try {
     $plan = $service->plans()->update('planId', $plan);
-} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }
 
@@ -23,6 +23,6 @@ $plan->setRecurringInterval(new PlanPeriod([
 
 try {
     $plan = $service->plans()->update('planId', $plan);
-} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

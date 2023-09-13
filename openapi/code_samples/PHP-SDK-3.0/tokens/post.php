@@ -1,6 +1,6 @@
-$service = new Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\CoreService($client);
 
-$paymentCardTokenForm = new Rebilly\Sdk\Model\PaymentCardToken();
+$paymentCardTokenForm = new \Rebilly\Sdk\Model\PaymentCardToken();
 $paymentCardTokenForm->setBillingAddress([
     'firstName' => 'John',
     'lastName' => 'Doe',
@@ -35,7 +35,7 @@ $paymentCardTokenForm->setBillingAddress([
     ],
 ]);
 
-$paymentInstrumentForm = new Rebilly\Sdk\Model\PaymentCardTokenPaymentInstrument();
+$paymentInstrumentForm = new \Rebilly\Sdk\Model\PaymentCardTokenPaymentInstrument();
 $paymentInstrumentForm->setPan('4111111111111111');
 $paymentInstrumentForm->setExpYear(2025);
 $paymentInstrumentForm->setExpMonth(8);
@@ -45,6 +45,6 @@ $paymentCardTokenForm->setPaymentInstrument($paymentInstrumentForm);
 
 try {
     $paymentCardToken = $service->paymentTokens()->create($paymentCardTokenForm);
-} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

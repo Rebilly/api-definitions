@@ -1,6 +1,6 @@
-$service = new Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\CoreService($client);
 
-$transactionForm = new Rebilly\Sdk\Model\PostTransactionRequest([
+$transactionForm = new \Rebilly\Sdk\Model\PostTransactionRequest([
     'type' => 'sale',
     'amount' => 1,
 ]);
@@ -8,7 +8,7 @@ $transactionForm->setCustomerId('customerId');
 $transactionForm->setWebsiteId('websiteId');
 $transactionForm->setCurrency('USD');
 
-$paymentInstruction = new Rebilly\Sdk\Model\PaymentInstructionInstrument();
+$paymentInstruction = new \Rebilly\Sdk\Model\PaymentInstructionInstrument();
 $paymentInstruction->setToken('payment-token');
 $transactionForm->setPaymentInstruction($paymentInstruction);
 
@@ -49,6 +49,6 @@ $transactionForm->setBillingAddress([
 
 try {
     $transaction = $service->transactions()->create($transactionForm);
-} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

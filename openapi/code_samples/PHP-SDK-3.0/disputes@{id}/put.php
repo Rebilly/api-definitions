@@ -1,6 +1,6 @@
-$service = new Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\CoreService($client);
 
-$disputeForm = new Rebilly\Sdk\Model\Dispute();
+$disputeForm = new \Rebilly\Sdk\Model\Dispute();
 $disputeForm->setTransactionId('transactionId');
 $disputeForm->setCurrency('USD');
 $disputeForm->setAmount(10);
@@ -11,6 +11,6 @@ $disputeForm->setPostedTime('2025-01-01 05:00:00');
 
 try {
     $dispute = $service->disputes()->update('disputeId', $disputeForm);
-} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

@@ -1,4 +1,4 @@
-$service = new Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\CoreService($client);
 
 $paymentCardTokensPaginator = $service->paymentTokens()->getAllPaginator(limit:  5);
 foreach ($paymentCardTokensPaginator as $paymentCardTokensPage) {

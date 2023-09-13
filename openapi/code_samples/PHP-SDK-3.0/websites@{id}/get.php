@@ -1,2 +1,2 @@
-$service = new Rebilly\Sdk\UsersService($client);
+$service = new \Rebilly\Sdk\UsersService($client);
 $website = $service->websites()->get('websiteId');

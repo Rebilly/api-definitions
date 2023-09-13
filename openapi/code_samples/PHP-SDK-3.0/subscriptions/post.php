@@ -1,4 +1,4 @@
-$service = new Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\CoreService($client);
 
 $order = SubscriptionOrder::from()
     ->setWebsiteId('websiteId')
@@ -14,6 +14,6 @@ $order = SubscriptionOrder::from()
 
 try {
     $order = $service->subscriptions()->create($order);
-} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

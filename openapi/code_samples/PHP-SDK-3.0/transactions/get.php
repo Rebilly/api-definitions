@@ -1,4 +1,4 @@
-$service = new Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\CoreService($client);
 
 $transactionsPaginator = $service->transactions()->getAllPaginator(limit:  5, filter: 'result:approved');
 foreach ($transactionsPaginator as $transactionsPage) {

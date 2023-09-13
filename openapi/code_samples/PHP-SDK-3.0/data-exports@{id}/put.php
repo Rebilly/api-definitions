@@ -1,6 +1,6 @@
-$service = new Rebilly\Sdk\ReportsService($client);
+$service = new \Rebilly\Sdk\ReportsService($client);
 
-$dataExport = new Rebilly\Sdk\Model\Customers([
+$dataExport = new \Rebilly\Sdk\Model\Customers([
     'name' => 'Daily customer export v2',
     'format' => 'csv',
     'fields' => [
@@ -14,7 +14,7 @@ $dataExport = new Rebilly\Sdk\Model\Customers([
 
 try {
     $dataExport = $service->dataExports()->update('dataExportId', $dataExport);
-} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }
 
@@ -31,6 +31,6 @@ $dataExport->setFields([
 
 try {
     $dataExport = $service->dataExports()->update('dataExportId', $dataExport);
-} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }
