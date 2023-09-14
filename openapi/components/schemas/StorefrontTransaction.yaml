@@ -110,7 +110,7 @@ properties:
     type: array
     items:
       $ref: ./ResourceId.yaml
-  subscriptionIds:
+  orderIds:
     description: Subscription IDs of invoices that are related to the transaction.
     readOnly: true
     type: array
@@ -249,6 +249,101 @@ properties:
     $ref: ./UpdatedTime.yaml
   paymentInstrument:
     $ref: ./Storefront/PaymentInstruments/InstrumentReference.yaml
+  hasDcc:
+    description: Specifies if Dynamic Currency Conversion (DCC) applies to the transaction.
+    type: boolean
+    readOnly: true
+  dcc:
+    description: |-
+      Detailed Dynamic currency conversion (DCC).
+      If DCC is not applied to the transaction, this value is `null`.
+    type: object
+    nullable: true
+    readOnly: true
+    properties:
+      base:
+        description: Initial amount and currency to convert from.
+        allOf:
+          - $ref: ./Money.yaml
+      quote:
+        description: Suggested amount and currency to convert to.
+        allOf:
+          - $ref: ./Money.yaml
+      usdMarkup:
+        description: Markup amount converted to USD.
+        allOf:
+          - $ref: ./MoneyAmount.yaml
+      outcome:
+        type: string
+        description: Dynamic currency conversion outcome.
+        enum:
+          - rejected
+          - selected
+          - unknown
+  hasBumpOffer:
+    description: |-
+      Specifies if the transaction has a bump offer.
+      A bump offer is a discount, purchase bonus, deal, that is offered to the customer during checkout.
+    type: boolean
+    readOnly: true
+  bumpOffer:
+    description: |-
+      Bump offer information.
+      If the transaction does not have an associated bump offer, this value is `null`.
+    type: object
+    nullable: true
+    readOnly: true
+    properties:
+      order:
+        description: Initial amount and currency.
+        allOf:
+          - $ref: ./Money.yaml
+      version:
+        type: string
+        description: |-
+          Name of the version selected.
+          This field is useful to measure split tests.
+      language:
+        description: |-
+          Language in which the bump offer displays to the user.
+          This field in useful to find translation issues.
+        allOf:
+          - $ref: ./LanguageIsoCode.yaml
+      outcome:
+        type: string
+        readOnly: true
+        description: Status of the bump offer.
+        enum:
+          - presented
+          - rejected
+          - selected
+          - unknown
+      presentedOffers:
+        type: array
+        readOnly: true
+        description: Offers presented to a customer.
+        minItems: 1
+        items:
+          $ref: ./PurchaseBumpOffer.yaml
+      selectedOffer:
+        readOnly: true
+        description: |-
+          Offer selected by a customer.
+          If a bump offer outcome is not `selected`, this value is `null`.
+        allOf:
+          - $ref: ./PurchaseBumpOffer.yaml
+  isDisputed:
+    description: Specifies if a transaction is disputed.
+    type: boolean
+    readOnly: true
+  isReconciled:
+    description: Specifies if the transaction is verified with gateway batch data.
+    type: boolean
+    readOnly: true
+  hadDiscrepancy:
+    description: Specifies if the transaction is updated due to a discrepancy with its source of truth.
+    type: boolean
+    readOnly: true
   approvalUrl:
     description: URL to redirect the end-customer when transaction `status` is `waiting-approval` or `offsite`.
     type: string
