@@ -249,37 +249,6 @@ properties:
     $ref: ./UpdatedTime.yaml
   paymentInstrument:
     $ref: ./Storefront/PaymentInstruments/InstrumentReference.yaml
-  hasDcc:
-    description: Specifies if dynamic currency conversion (DCC) applies to the transaction.
-    type: boolean
-    readOnly: true
-  dcc:
-    description: |-
-      Detailed dynamic currency conversion (DCC) information.
-      If DCC is not applied to the transaction, this value is `null`.
-    type: object
-    nullable: true
-    readOnly: true
-    properties:
-      base:
-        description: Initial amount and currency to convert from.
-        allOf:
-          - $ref: ./Money.yaml
-      quote:
-        description: Suggested amount and currency to convert to.
-        allOf:
-          - $ref: ./Money.yaml
-      usdMarkup:
-        description: Markup amount converted to USD.
-        allOf:
-          - $ref: ./MoneyAmount.yaml
-      outcome:
-        type: string
-        description: Dynamic currency conversion outcome.
-        enum:
-          - rejected
-          - selected
-          - unknown
   hasBumpOffer:
     description: |-
       Specifies if the transaction has a bump offer.
