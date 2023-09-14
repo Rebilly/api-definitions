@@ -86,7 +86,7 @@ An acronym is an abbreviation formed from the initial letters of words that are 
 
 Do not assume that your audience will understand and be familiar with all acronyms, especially acronyms for financial terms or for state bodies that are specific to one country. It is important to be consistent in our use of acronyms and related descriptions. If we are not, we may confuse our audience.
 
-In each description, define acronyms that may not be commonly used in their first instance. Thereafter, use the acronym.
+In descriptions, define acronyms that may not be commonly used in their first instance. Thereafter, use the acronym.
 
 Example:
 
