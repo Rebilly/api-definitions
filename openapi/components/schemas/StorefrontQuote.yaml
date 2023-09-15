@@ -94,38 +94,78 @@ properties:
       - $ref: ./Contact/ContactObject.yaml
   invoicePreview:
     type: object
-    description: Preview of initial quote invoice.
+    description: Preview of the quote invoice.
     readOnly: true
     properties:
       currency:
         description: Currency of the invoice.
         allOf:
           - $ref: ./CurrencyCode.yaml
-      amount:
-        description: Amount of the invoice.
-        type: number
-        x-type: Money
-        format: double
-      subtotalAmount:
-        description: Subtotal amount of the invoice.
-        type: number
-        x-type: Money
-        format: double
-      discountAmount:
-        description: Discount amount that is applied to the invoice.
-        type: number
-        x-type: Money
-        format: double
-      shippingAmount:
-        description: Shipping amount that is applied to the invoice.
-        type: number
-        x-type: Money
-        format: double
-      taxAmount:
-        description: Tax amount that is applied to the invoice.
-        type: number
-        x-type: Money
-        format: double
+      initialAmounts:
+        type: object
+        description: |-
+          Total amounts of the initial invoice.
+          This includes setup, trial and one time sale items.
+          Can be `null` if such items are not present.
+        nullable: true
+        properties:
+          amount:
+            description: Amount of the invoice.
+            type: number
+            x-type: Money
+            format: double
+          subtotalAmount:
+            description: Subtotal amount of the invoice.
+            type: number
+            x-type: Money
+            format: double
+          discountAmount:
+            description: Discount amount that is applied to the invoice.
+            type: number
+            x-type: Money
+            format: double
+          shippingAmount:
+            description: Shipping amount that is applied to the invoice.
+            type: number
+            x-type: Money
+            format: double
+          taxAmount:
+            description: Tax amount that is applied to the invoice.
+            type: number
+            x-type: Money
+            format: double
+      recurringAmounts:
+        type: object
+        description: |-
+          Total amounts of the recurring invoice.
+          Can be `null` if the quote doesn't have recurring items.
+        nullable: true
+        properties:
+          amount:
+            description: Amount of the invoice.
+            type: number
+            x-type: Money
+            format: double
+          subtotalAmount:
+            description: Subtotal amount of the invoice.
+            type: number
+            x-type: Money
+            format: double
+          discountAmount:
+            description: Discount amount that is applied to the invoice.
+            type: number
+            x-type: Money
+            format: double
+          shippingAmount:
+            description: Shipping amount that is applied to the invoice.
+            type: number
+            x-type: Money
+            format: double
+          taxAmount:
+            description: Tax amount that is applied to the invoice.
+            type: number
+            x-type: Money
+            format: double
       items:
         type: array
         description: Invoice items.
@@ -134,19 +174,32 @@ properties:
           properties:
             type:
               type: string
-              description: Type of invoice item.
+              description: Type of the invoice item.
               x-basic: true
               enum:
                 - debit
                 - credit
+            name:
+              description: Name of the invoice item.
+              type: string
+              maxLength: 1000
             description:
               description: Description of the invoice item.
               type: string
-              maxLength: 1000
+              example: Charge per approved transaction with DCC
+              default: ''
+              maxLength: 255
+            priceDescription:
+              type: string
+              description: Price description of the invoice item.
+              example: 50% of the markup for approved transactions
+              default: ''
+              maxLength: 255
             unitPrice:
               description: Unit price of the invoice item.
               type: number
               format: double
+              nullable: true
             quantity:
               description: Quantity of the invoice item.
               type: integer
@@ -155,14 +208,24 @@ properties:
               type: number
               format: double
               readOnly: true
-            periodStartTime:
-              description: Date and time when the billing period starts.
+            period:
+              description: Date interval of the invoice item.
               type: string
-              format: date-time
-            periodEndTime:
-              description: Date and time when the billing period ends.
+              nullable: true
+            setupUnitPrice:
+              description: Unit price of the invoice item.
+              type: number
+              format: double
+              nullable: true
+            trialUnitPrice:
+              description: Unit price of the invoice item.
+              type: number
+              format: double
+              nullable: true
+            trialPeriod:
+              description: Date interval of the invoice item trial.
               type: string
-              format: date-time
+              nullable: true
             tax:
               description: Invoice item tax.
               readOnly: true
