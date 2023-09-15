@@ -1,5 +1,6 @@
 <?php
-$service =  new \Rebilly\Sdk\UsersService($client);
+
+$service = new \Rebilly\Sdk\UsersService($client);
 $application = new \Rebilly\Sdk\Model\Application();
 $application->setName('My application');
 $application->setDescription('My application description');

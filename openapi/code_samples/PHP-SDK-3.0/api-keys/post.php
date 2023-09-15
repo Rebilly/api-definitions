@@ -1,5 +1,6 @@
 <?php
-$service =  new \Rebilly\Sdk\UsersService($client);
+
+$service = new \Rebilly\Sdk\UsersService($client);
 
 $apiKeyForm = new \Rebilly\Sdk\Model\ApiKey();
 $apiKeyForm->setDescription('Test key');

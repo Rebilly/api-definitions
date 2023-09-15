@@ -1,5 +1,6 @@
 <?php
-$service =  new \Rebilly\Sdk\CoreService($client);
+
+$service = new \Rebilly\Sdk\CoreService($client);
 
 $blocklistForm = new \Rebilly\Sdk\Model\Blocklist();
 $blocklistForm->setType($blocklistForm::TYPE_EMAIL);

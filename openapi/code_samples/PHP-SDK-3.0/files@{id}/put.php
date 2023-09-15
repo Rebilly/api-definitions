@@ -1,5 +1,6 @@
 <?php
-$service =  new \Rebilly\Sdk\CoreService($client);
+
+$service = new \Rebilly\Sdk\CoreService($client);
 $fileForm = new \Rebilly\Sdk\Model\File();
 $fileForm->setDescription('This is a test file');
 

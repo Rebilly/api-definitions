@@ -1,4 +1,5 @@
 <?php
-$service =  new \Rebilly\Sdk\ReportsService($client);
+
+$service = new \Rebilly\Sdk\ReportsService($client);
 
 $dataExport = $service->dataExports()->get('dataExportId');

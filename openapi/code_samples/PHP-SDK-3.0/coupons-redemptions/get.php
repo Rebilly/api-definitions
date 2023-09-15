@@ -1,5 +1,6 @@
 <?php
-$service =  new \Rebilly\Sdk\CoreService($client);
+
+$service = new \Rebilly\Sdk\CoreService($client);
 
 $couponRedemptionsPaginator = $service->coupons()->getAllRedemptionsPaginator(limit: 5, filter: 'customerId:testCustomer');
 foreach ($couponRedemptionsPaginator as $couponRedemptionsPage) {

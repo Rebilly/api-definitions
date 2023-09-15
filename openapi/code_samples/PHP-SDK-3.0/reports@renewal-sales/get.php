@@ -1,5 +1,6 @@
 <?php
-$service =  new \Rebilly\Sdk\ReportsService($client);
+
+$service = new \Rebilly\Sdk\ReportsService($client);
 
 $report = $service->reports()->getRenewalSales(
     '2022-01',

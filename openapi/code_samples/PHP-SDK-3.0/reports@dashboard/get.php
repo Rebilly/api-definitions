@@ -1,5 +1,6 @@
 <?php
-$service =  new \Rebilly\Sdk\ReportsService($client);
+
+$service = new \Rebilly\Sdk\ReportsService($client);
 
 $dashboard = $service->reports()->getDashboardMetrics(
     new DateTimeImmutable('2022-01-01'),

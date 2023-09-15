@@ -1,5 +1,6 @@
 <?php
-$service =  new \Rebilly\Sdk\ReportsService($client);
+
+$service = new \Rebilly\Sdk\ReportsService($client);
 
 $report = $service->reports()->getTriggeredEventRuleReport(
     \Rebilly\Sdk\Model\EventType::ACCOUNT_PASSWORD_RESET_REQUESTED,

@@ -1,5 +1,6 @@
 <?php
-$service =  new \Rebilly\Sdk\CoreService($client);
+
+$service = new \Rebilly\Sdk\CoreService($client);
 
 $order = new \Rebilly\Sdk\Model\SubscriptionOrder([
     'shipping' => [

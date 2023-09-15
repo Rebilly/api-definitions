@@ -1,5 +1,6 @@
 <?php
-$service =  new \Rebilly\Sdk\UsersService($client);
+
+$service = new \Rebilly\Sdk\UsersService($client);
 
 $organizationForm = new \Rebilly\Sdk\Model\PatchOrganizationRequest();
 $organizationForm->setName('Test Organization');

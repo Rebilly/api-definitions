@@ -1,5 +1,6 @@
 <?php
-$service =  new \Rebilly\Sdk\UsersService($client);
+
+$service = new \Rebilly\Sdk\UsersService($client);
 
 $apiKeysPaginator = $service->apiKeys()->getAllPaginator(limit: 5);
 foreach ($apiKeysPaginator as $apiKeysPage) {

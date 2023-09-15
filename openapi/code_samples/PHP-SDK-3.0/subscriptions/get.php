@@ -1,5 +1,6 @@
 <?php
-$service =  new \Rebilly\Sdk\CoreService($client);
+
+$service = new \Rebilly\Sdk\CoreService($client);
 
 $ordersPaginator = $service->subscriptions()->getAllPaginator(filter: 'customerId:testCustomerId');
 foreach ($ordersPaginator as $orderPage) {

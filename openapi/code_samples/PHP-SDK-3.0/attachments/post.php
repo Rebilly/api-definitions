@@ -1,5 +1,6 @@
 <?php
-$service =  new \Rebilly\Sdk\CoreService($client);
+
+$service = new \Rebilly\Sdk\CoreService($client);
 
 $attachmentForm = new \Rebilly\Sdk\Model\Attachment();
 $attachmentForm->setFileId('fileId');

@@ -1,5 +1,6 @@
 <?php
-$service =  new \Rebilly\Sdk\CoreService($client);
+
+$service = new \Rebilly\Sdk\CoreService($client);
 
 $invoiceItem = new \Rebilly\Sdk\Model\InvoiceItem();
 $invoiceItemForm->setType(\Rebilly\Sdk\Model\InvoiceItem::TYPE_DEBIT);

@@ -1,5 +1,6 @@
 <?php
-$service =  new \Rebilly\Sdk\CoreService($client);
+
+$service = new \Rebilly\Sdk\CoreService($client);
 
 $filesPaginator = $service->files()->getAllPaginator(limit: 5, filter: 'name:TestFile');
 foreach ($filesPaginator as $filesPage) {

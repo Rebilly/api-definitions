@@ -1,5 +1,6 @@
 <?php
-$service =  new \Rebilly\Sdk\UsersService($client);
+
+$service = new \Rebilly\Sdk\UsersService($client);
 
 $websiteForm = new \Rebilly\Sdk\Model\Website();
 $websiteForm->setName('TestWebsite');

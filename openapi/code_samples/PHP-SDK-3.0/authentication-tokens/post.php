@@ -1,5 +1,6 @@
 <?php
-$service =  new \Rebilly\Sdk\CoreService($client);
+
+$service = new \Rebilly\Sdk\CoreService($client);
 
 $authenticationForm = \Rebilly\Sdk\Model\AuthenticationToken::from(['mode' => Password::MODE_PASSWORD]);
 $authenticationForm->setUsername('username');

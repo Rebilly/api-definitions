@@ -1,5 +1,6 @@
 <?php
-$service =  new \Rebilly\Sdk\UsersService($client);
+
+$service = new \Rebilly\Sdk\UsersService($client);
 
 $paymentInstrumentForm = new \Rebilly\Sdk\Model\PaymentCardCreatePlain();
 $paymentInstrumentForm->setCustomerId('customerId');
