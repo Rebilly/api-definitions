@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\CoreService($client);
+<?php
+$service =  new \Rebilly\Sdk\CoreService($client);
 
 $plan = \Rebilly\Sdk\Model\SubscriptionOrderPlan::from([])
     ->setProductId('productId')

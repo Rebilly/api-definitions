@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\CoreService($client);
+<?php
+$service =  new \Rebilly\Sdk\CoreService($client);
 
 $readyToPayForm = new \Rebilly\Sdk\Model\PostReadyToPay();
 $readyToPayForm->setCurrency('USD');

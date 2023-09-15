@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\CoreService($client);
+<?php
+$service =  new \Rebilly\Sdk\CoreService($client);
 
 $cancellationsPaginator = $service->subscriptionCancellations()->getAllPaginator(
     filter: 'reason:' . \Rebilly\Sdk\Model\SubscriptionCancellation::REASON_CONTRACT_EXPIRED,

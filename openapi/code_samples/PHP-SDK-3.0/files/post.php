@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\CoreService($client);
+<?php
+$service =  new \Rebilly\Sdk\CoreService($client);
 
 $fileForm = new \Rebilly\Sdk\Model\FileCreateFromUrl();
 $fileForm->setUrl('http://test.com/somefile.jpg');

@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\CoreService($client);
+<?php
+$service =  new \Rebilly\Sdk\CoreService($client);
 
 $invoiceItem = \Rebilly\Sdk\Model\InvoiceItem::from([
     'type' => \Rebilly\Sdk\Model\InvoiceItem::TYPE_DEBIT,

@@ -1,2 +1,3 @@
-$service = new \Rebilly\Sdk\UsersService($client);
+<?php
+$service =  new \Rebilly\Sdk\UsersService($client);
 $applicationInstances = $service->applicationInstances()->get('applicationId');

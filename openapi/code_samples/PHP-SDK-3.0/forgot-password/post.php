@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\UsersService($client);
+<?php
+$service =  new \Rebilly\Sdk\UsersService($client);
 
 $forgotPasswordForm = new \Rebilly\Sdk\Model\ForgotPassword();
 $forgotPasswordForm->setEmail('johndoe@test.com');

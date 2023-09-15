@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\CoreService($client);
+<?php
+$service =  new \Rebilly\Sdk\CoreService($client);
 $couponForm = new \Rebilly\Sdk\Model\Coupon([
     'issuedTime' => '2022-01-01T00:00:00-04:00',
 ]);

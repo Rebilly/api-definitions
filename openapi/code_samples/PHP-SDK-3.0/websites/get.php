@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\UsersService($client);
+<?php
+$service =  new \Rebilly\Sdk\UsersService($client);
 
 $websitesPaginator = $service->websites()->getAllPaginator(limit:  5, filter: 'name:TestWebsite');
 foreach ($websitesPaginator as $websitesPage) {

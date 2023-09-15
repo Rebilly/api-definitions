@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\CoreService($client);
+<?php
+$service =  new \Rebilly\Sdk\CoreService($client);
 
 $paymentCardTokenForm = new \Rebilly\Sdk\Model\PaymentCardToken();
 $paymentCardTokenForm->setBillingAddress([

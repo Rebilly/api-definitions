@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\UsersService($client);
+<?php
+$service =  new \Rebilly\Sdk\UsersService($client);
 
 $gatewayAccountsPaginator = $service->gatewayAccounts()->getAllPaginator(limit: 5, filter: 'currency:USD');
 foreach ($gatewayAccountsPaginator as $gatewayAccountsPage) {

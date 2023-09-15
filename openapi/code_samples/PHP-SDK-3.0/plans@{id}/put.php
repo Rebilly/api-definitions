@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\CoreService($client);
+<?php
+$service =  new \Rebilly\Sdk\CoreService($client);
 
 $plan = new \Rebilly\Sdk\Model\SubscriptionOrderPlan([
     'recurringInterval' => [

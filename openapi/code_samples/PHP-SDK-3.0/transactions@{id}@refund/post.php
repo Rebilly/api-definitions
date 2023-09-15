@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\CoreService($client);
+<?php
+$service =  new \Rebilly\Sdk\CoreService($client);
 
 $transactionRefund = new \Rebilly\Sdk\Model\TransactionRefund();
 $transactionRefund->setAmount(1.99);

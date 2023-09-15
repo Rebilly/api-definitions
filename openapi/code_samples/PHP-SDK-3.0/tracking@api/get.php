@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\UsersService($client);
+<?php
+$service =  new \Rebilly\Sdk\UsersService($client);
 
 $apiTrackingLogsPaginator = $service->tracking()->getAllApiLogsPaginator(limit:  5, filter: 'status:200');
 foreach ($apiTrackingLogsPaginator as $apiTrackingLogsPage) {

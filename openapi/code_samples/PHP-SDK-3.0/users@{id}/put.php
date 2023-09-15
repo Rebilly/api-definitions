@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\UsersService($client);
+<?php
+$service =  new \Rebilly\Sdk\UsersService($client);
 
 $userForm = new \Rebilly\Sdk\Model\User();
 $userForm->setFirstName('John');

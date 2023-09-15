@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\CoreService($client);
+<?php
+$service =  new \Rebilly\Sdk\CoreService($client);
 
 $disputeForm = new \Rebilly\Sdk\Model\Dispute();
 $disputeForm->setTransactionId('transactionId');

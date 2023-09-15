@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\CoreService($client);
+<?php
+$service =  new \Rebilly\Sdk\CoreService($client);
 
 $resetPasswordTokenForm = new \Rebilly\Sdk\Model\ResetPasswordToken();
 $resetPasswordTokenForm->setUsername('username')

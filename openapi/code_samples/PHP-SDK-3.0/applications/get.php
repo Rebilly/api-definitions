@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\UsersService($client);
+<?php
+$service =  new \Rebilly\Sdk\UsersService($client);
 
 $applicationsPaginator = $service->applications()->getAllPaginator(filter: 'status:available', limit: 5);
 foreach ($applicationsPaginator as $applicationPage) {

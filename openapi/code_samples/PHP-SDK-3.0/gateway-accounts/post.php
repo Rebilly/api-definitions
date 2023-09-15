@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\UsersService($client);
+<?php
+$service =  new \Rebilly\Sdk\UsersService($client);
 
 $gatewayAccountForm = new \Rebilly\Sdk\Model\A1Gateway();
 $gatewayAccountForm->setAcquirerName('Bank of Rebilly');

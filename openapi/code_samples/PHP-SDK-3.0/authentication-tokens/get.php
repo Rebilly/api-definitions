@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\CoreService($client);
+<?php
+$service =  new \Rebilly\Sdk\CoreService($client);
 $listOfTokens = $service->customerAuthentication()->getAllAuthTokens();
 
 // alternatively you can specify one or more of them

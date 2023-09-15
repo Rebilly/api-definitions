@@ -1,3 +1,4 @@
-$service = new \Rebilly\Sdk\ReportsService($client);
+<?php
+$service =  new \Rebilly\Sdk\ReportsService($client);
 
 $service->dataExports()->delete('dataExportId');

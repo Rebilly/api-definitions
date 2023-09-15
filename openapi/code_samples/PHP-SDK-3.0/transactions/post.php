@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\CoreService($client);
+<?php
+$service =  new \Rebilly\Sdk\CoreService($client);
 
 $transactionForm = new \Rebilly\Sdk\Model\PostTransactionRequest([
     'type' => 'sale',

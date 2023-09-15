@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\CoreService($client);
+<?php
+$service =  new \Rebilly\Sdk\CoreService($client);
 
 $disputesPaginator = $service->disputes()->getAllPaginator(filter: 'transactionId:testId', limit: 5);
 foreach ($disputesPaginator as $disputesPage) {

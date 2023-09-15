@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\CoreService($client);
+<?php
+$service =  new \Rebilly\Sdk\CoreService($client);
 
 $product = new \Rebilly\Sdk\Model\Product([
     'name' => 'my first product',

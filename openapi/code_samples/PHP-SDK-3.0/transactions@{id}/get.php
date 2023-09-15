@@ -1,2 +1,3 @@
-$service = new \Rebilly\Sdk\CoreService($client);
+<?php
+$service =  new \Rebilly\Sdk\CoreService($client);
 $transaction = $service->transactions()->get('transactionId');

@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\ReportsService($client);
+<?php
+$service =  new \Rebilly\Sdk\ReportsService($client);
 
 $dataExport = new \Rebilly\Sdk\Model\Customers([
     'name' => 'Daily customer export v2',

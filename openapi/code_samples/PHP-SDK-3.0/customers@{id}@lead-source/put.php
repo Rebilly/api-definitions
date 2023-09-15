@@ -1,4 +1,5 @@
-$service = new \Rebilly\Sdk\CoreService($client);
+<?php
+$service =  new \Rebilly\Sdk\CoreService($client);
 
 $leadSourceForm = \Rebilly\Sdk\Model\LeadSource::from([])
     ->setSource('TestSource')
