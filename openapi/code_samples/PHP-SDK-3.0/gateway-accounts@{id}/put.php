@@ -5,7 +5,7 @@ $gatewayAccountForm = new \Rebilly\Sdk\Model\A1Gateway();
 
 $gatewayAccountForm->setAcquirerName('Bank of Rebilly');
 $gatewayAccountForm->setOrganizationId('organizationId');
-$gatewayAccountForm->setMerchantCategoryCode(5734);
+$gatewayAccountForm->setMerchantCategoryCode('5734');
 $gatewayAccountForm->setPaymentCardSchemes([
     'Visa',
     'MasterCard',

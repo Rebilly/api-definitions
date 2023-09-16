@@ -41,7 +41,7 @@ $paymentInstrumentForm = new \Rebilly\Sdk\Model\PaymentCardTokenPaymentInstrumen
 $paymentInstrumentForm->setPan('4111111111111111');
 $paymentInstrumentForm->setExpYear(2025);
 $paymentInstrumentForm->setExpMonth(8);
-$paymentInstrumentForm->setCvv(123);
+$paymentInstrumentForm->setCvv('123');
 
 $paymentCardTokenForm->setPaymentInstrument($paymentInstrumentForm);
 

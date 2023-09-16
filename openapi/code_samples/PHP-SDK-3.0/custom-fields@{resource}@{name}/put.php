@@ -3,7 +3,7 @@
 $service = new \Rebilly\Sdk\CoreService($client);
 
 $customFieldForm = new \Rebilly\Sdk\Model\BooleanCustomField();
-$customFieldForm->setType($customFieldForm::TYPE_BOOLEAN);
+$customFieldForm->setDescription('testFieldDescription');
 
 try {
     $customField = $service->customFields()->create('customers', 'testFieldName', $customFieldForm);
