@@ -46,11 +46,9 @@ jobs:
             ${{ runner.os }}-composer-
 
       - name: "Install dependencies"
-        working-directory: examples
         run: composer install --no-interaction --no-scripts --no-suggest
 
       - name: "Run tests"
-        working-directory: examples
         run: vendor/bin/psalm
 
   cs:
@@ -88,7 +86,6 @@ jobs:
             ${{ runner.os }}-composer-
 
       - name: "Install dependencies"
-        working-directory: examples
         run: composer install --no-interaction --no-scripts --no-suggest
 
       - uses: actions/cache@v3
@@ -99,5 +96,4 @@ jobs:
             ${{ runner.os }}-cs-fixer-
 
       - name: "Run tests"
-        working-directory: examples
         run: vendor/bin/php-cs-fixer fix -vv --dry-run
