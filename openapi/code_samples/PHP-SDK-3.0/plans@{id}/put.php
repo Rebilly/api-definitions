@@ -2,9 +2,9 @@
 
 $service = new \Rebilly\Sdk\CoreService($client);
 
-$plan = new \Rebilly\Sdk\Model\SubscriptionOrderPlan([
+$plan = new \Rebilly\Sdk\Model\Plan([
     'recurringInterval' => [
-        'unit' => PlanPeriod::UNIT_WEEK,
+        'unit' => \Rebilly\Sdk\Model\SubscriptionOrderPlanRecurringInterval::UNIT_WEEK,
         'length' => 2,
     ],
 ]);
@@ -18,8 +18,8 @@ try {
 // OR
 
 $plan = $service->plans()->get('planId');
-$plan->setRecurringInterval(new PlanPeriod([
-    'unit' => PlanPeriod::UNIT_WEEK,
+$plan->setRecurringInterval(new \Rebilly\Sdk\Model\SubscriptionOrderPlanRecurringInterval([
+    'unit' => \Rebilly\Sdk\Model\SubscriptionOrderPlanRecurringInterval::UNIT_WEEK,
     'length' => 2,
 ]));
 

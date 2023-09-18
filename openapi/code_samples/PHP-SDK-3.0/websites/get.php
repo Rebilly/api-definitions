@@ -2,7 +2,7 @@
 
 $service = new \Rebilly\Sdk\UsersService($client);
 
-$websitesPaginator = $service->websites()->getAllPaginator(limit:  5, filter: 'name:TestWebsite');
+$websitesPaginator = $service->websites()->getAllPaginator(limit: 5, filter: 'name:TestWebsite');
 foreach ($websitesPaginator as $websitesPage) {
     printf("Websites page %d/%d\n", $websitesPaginator->key() + 1, $websitesPaginator->count());
     foreach ($websitesPage as $website) {

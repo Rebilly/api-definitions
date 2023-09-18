@@ -9,7 +9,7 @@ $invoiceItem = \Rebilly\Sdk\Model\InvoiceItem::from([
 ]);
 
 try {
-    $invoiceItem = $service->invoices()->update('invoiceId', 'invoiceItemId', $invoiceItem);
+    $invoiceItem = $service->invoices()->updateInvoiceItem('invoiceId', 'invoiceItemId', $invoiceItem);
 } catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

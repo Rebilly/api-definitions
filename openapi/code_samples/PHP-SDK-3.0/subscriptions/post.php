@@ -2,13 +2,13 @@
 
 $service = new \Rebilly\Sdk\CoreService($client);
 
-$order = SubscriptionOrder::from()
+$order = \Rebilly\Sdk\Model\SubscriptionOrder::from()
     ->setWebsiteId('websiteId')
     ->setCustomerId('customerId')
     ->setItems([
-        OrderItem::from()
+        \Rebilly\Sdk\Model\OrderItem::from()
             ->setPlan(
-                OriginalPlan::from()
+                \Rebilly\Sdk\Model\OrderItemPlan::from()
                     ->setId('planId')
             )
             ->setQuantity(1),

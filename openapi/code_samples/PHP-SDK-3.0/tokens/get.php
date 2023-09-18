@@ -2,7 +2,7 @@
 
 $service = new \Rebilly\Sdk\CoreService($client);
 
-$paymentCardTokensPaginator = $service->paymentTokens()->getAllPaginator(limit:  5);
+$paymentCardTokensPaginator = $service->paymentTokens()->getAllPaginator(limit: 5);
 foreach ($paymentCardTokensPaginator as $paymentCardTokensPage) {
     printf("Payment card tokens page %d/%d\n", $paymentCardTokensPaginator->key() + 1, $paymentCardTokensPaginator->count());
     foreach ($paymentCardTokensPage as $paymentCardToken) {

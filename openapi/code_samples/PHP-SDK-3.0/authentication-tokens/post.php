@@ -2,7 +2,7 @@
 
 $service = new \Rebilly\Sdk\CoreService($client);
 
-$authenticationForm = \Rebilly\Sdk\Model\AuthenticationToken::from(['mode' => Password::MODE_PASSWORD]);
+$authenticationForm = \Rebilly\Sdk\Model\AuthenticationTokenPasswordMode::from();
 $authenticationForm->setUsername('username');
 $authenticationForm->setPassword('test123');
 

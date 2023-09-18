@@ -2,7 +2,7 @@
 
 $service = new \Rebilly\Sdk\CoreService($client);
 
-$cancellation = new \Rebilly\Sdk\Models\SubscriptionCancellation([
+$cancellation = new \Rebilly\Sdk\Model\SubscriptionCancellation([
     'subscriptionId' => 'subscriptionId',
     'churnTime' => new DateTimeImmutable(),
     'canceledBy' => \Rebilly\Sdk\Model\SubscriptionCancellation::CANCELED_BY_MERCHANT,
@@ -11,6 +11,6 @@ $cancellation = new \Rebilly\Sdk\Models\SubscriptionCancellation([
 
 try {
     $cancellation = $service->subscriptionCancellations()->create($cancellation);
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

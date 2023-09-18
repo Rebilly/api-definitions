@@ -3,7 +3,7 @@
 $service = new \Rebilly\Sdk\CoreService($client);
 
 $resetPasswordTokenForm = new \Rebilly\Sdk\Model\ResetPasswordToken();
-$resetPasswordTokenForm->setUsername('username')
+$resetPasswordTokenForm->setUsername('username');
 
 try {
     $tokens = $coreService->customerAuthentication()->createResetPasswordToken($resetPasswordTokenForm);

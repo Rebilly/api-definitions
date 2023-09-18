@@ -3,10 +3,9 @@
 $service = new \Rebilly\Sdk\CoreService($client);
 
 $order = new \Rebilly\Sdk\Model\SubscriptionOrder([
-    'shipping' => [
-        'calculator' => \Rebilly\Sdk\Model\Shipping::CALCULATOR_MANUAL,
+    'shipping' => new \Rebilly\Sdk\Model\ManualShipping([
         'amount' => 14.99,
-    ],
+    ]),
 ]);
 
 try {

@@ -2,7 +2,7 @@
 
 $service = new \Rebilly\Sdk\UsersService($client);
 
-$usersPaginator = $service->users()->getAllPaginator(limit:  5, filter: 'firstName:John');
+$usersPaginator = $service->users()->getAllPaginator(limit: 5, filter: 'firstName:John');
 foreach ($usersPaginator as $usersPage) {
     printf("Users page %d/%d\n", $usersPaginator->key() + 1, $usersPaginator->count());
     foreach ($usersPage as $user) {
