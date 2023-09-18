@@ -1,0 +1,260 @@
+type: object
+required:
+  - websiteId
+  - customerId
+  - items
+properties:
+  id:
+    readOnly: true
+    description: ID of the quote.
+    type: string
+    maxLength: 50
+    example: qt_0YV7DES3WPC5J8JD8QTVNZBZNZ
+  type:
+    description: Specifies the type of quote. A quote can be a subscription or a one-time purchase.
+    type: string
+    readOnly: true
+    enum:
+      - subscription-order
+      - one-time-order
+  status:
+    description: Status of the quote.
+    type: string
+    readOnly: true
+    enum:
+      - draft
+      - issued
+      - accepted
+      - rejected
+      - canceled
+      - expired
+    x-enumDescriptions:
+      draft: Quote can be edited. This quote cannot be sent to a customer.
+      issued: Quote cannot be edited. This quote can be sent to a customer.
+      accepted: Customer accepted the quote and created an order.
+      rejected: Customer rejected the quote.
+      canceled: Organization canceled the quote.
+      expired: Expired before customer or organization interaction.
+  websiteId:
+    $ref: ./WebsiteId.yaml
+  customerId:
+    $ref: ./CustomerId.yaml
+  orderId:
+    description: ID of the order.
+    readOnly: true
+    nullable: true
+    type: string
+    maxLength: 50
+    example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
+  items:
+    type: array
+    description: Items included in the quote.
+    minItems: 1
+    items:
+      type: object
+      required:
+        - plan
+        - quantity
+      properties:
+        id:
+          description: ID of the quote item.
+          readOnly: true
+          type: string
+          example: qti_0YV7DES3WPC5J8JD8QTVNZBZNZ
+        quantity:
+          description: Number of product units in the specified plan.
+          type: integer
+          minimum: 1
+        plan:
+          description: Plan details.
+          oneOf:
+            - $ref: ./Plans/OriginalPlan.yaml
+            - $ref: ./Plans/FlexiblePlan.yaml
+        createdTime:
+          $ref: ./CreatedTime.yaml
+        updatedTime:
+          $ref: ./UpdatedTime.yaml
+        _embedded:
+          type: object
+          description: Embedded objects that are requested by the `expand` query parameter.
+          readOnly: true
+          properties:
+            product:
+              type: object
+  deliveryAddress:
+    description: Delivery address of the order.
+    nullable: true
+    type: object
+    allOf:
+      - $ref: ./Contact/ContactObject.yaml
+  billingAddress:
+    description: Billing address of the order.
+    nullable: true
+    type: object
+    allOf:
+      - $ref: ./Contact/ContactObject.yaml
+  invoicePreview:
+    type: object
+    description: Preview of initial quote invoice.
+    readOnly: true
+    properties:
+      currency:
+        description: Currency of the invoice.
+        allOf:
+          - $ref: ./CurrencyCode.yaml
+      amount:
+        description: Amount of the invoice.
+        type: number
+        x-type: Money
+        format: double
+      subtotalAmount:
+        description: Subtotal amount of the invoice.
+        type: number
+        x-type: Money
+        format: double
+      discountAmount:
+        description: Discount amount that is applied to the invoice.
+        type: number
+        x-type: Money
+        format: double
+      shippingAmount:
+        description: Shipping amount that is applied to the invoice.
+        type: number
+        x-type: Money
+        format: double
+      taxAmount:
+        description: Tax amount that is applied to the invoice.
+        type: number
+        x-type: Money
+        format: double
+      items:
+        type: array
+        description: Invoice items.
+        items:
+          type: object
+          properties:
+            type:
+              type: string
+              description: Type of invoice item.
+              x-basic: true
+              enum:
+                - debit
+                - credit
+            description:
+              description: Description of the invoice item.
+              type: string
+              maxLength: 1000
+            unitPrice:
+              description: Unit price of the invoice item.
+              type: number
+              format: double
+            quantity:
+              description: Quantity of the invoice item.
+              type: integer
+            price:
+              description: Total price of the invoice item.
+              type: number
+              format: double
+              readOnly: true
+            periodStartTime:
+              description: Date and time when the billing period starts.
+              type: string
+              format: date-time
+            periodEndTime:
+              description: Date and time when the billing period ends.
+              type: string
+              format: date-time
+            tax:
+              description: Invoice item tax.
+              readOnly: true
+              allOf:
+                - $ref: ./Invoices/InvoiceTaxItem.yaml
+  paymentTerms:
+    description: Payment terms for the customer which are displayed on the quote.
+    type: string
+  expirationTime:
+    description: |-
+      Date and time when the quote expires. The default expiration time is one month from the time the quote is issued.
+      In a `draft` state, this field may be `null`.
+    type: string
+    nullable: true
+    format: date-time
+  issuedTime:
+    description: Date and time when the quote is issued.
+    nullable: true
+    readOnly: true
+    type: string
+    format: date-time
+  acceptedTime:
+    description: Date and time when the quote is accepted.
+    nullable: true
+    readOnly: true
+    type: string
+    format: date-time
+  rejectedTime:
+    description: Date and time when the quote is rejected.
+    nullable: true
+    readOnly: true
+    type: string
+    format: date-time
+  canceledTime:
+    description: Date and time when the quote is canceled.
+    nullable: true
+    readOnly: true
+    type: string
+    format: date-time
+  redirectUrl:
+    description: URL to redirect the customer to when a quote is rejected. The default value is the website URL.
+    type: string
+    format: uri
+  signature:
+    type: object
+    properties:
+      showWrittenSignatureLines:
+        type: boolean
+        default: false
+        description: Specifies whether to show written signature lines.
+      organizationPrintedName:
+        type: string
+        description: Printed name of the organization.
+        nullable: true
+        default: null
+  shipping:
+    $ref: ./Shipping.yaml
+  couponIds:
+    type: array
+    nullable: true
+    description: |-
+      List of coupons to redeem on the customer and apply to the order when the quote is accepted.
+
+      For more information, see [Coupons](https://www.rebilly.com/docs/settings/coupons-and-discounts/).
+    items:
+      type: string
+      description: Coupon ID.
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - quoteAcceptanceFormUrl
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
+    properties:
+      customer:
+        type: object
+      website:
+        type: object
+      order:
+        type: object

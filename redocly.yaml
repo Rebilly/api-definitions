@@ -29,6 +29,9 @@ rules:
   operation-4xx-response: off
   paths-kebab-case: error
 
+  tags-alphabetical:
+    severity: error
+    ignoreCase: true
   request-mime-type:
     severity: error
     allowedValues:
@@ -56,7 +59,7 @@ rules:
       #   - type
       #   - status
       #   - title
-  assert/response-contains-property:
+  rule/response-contains-property:
     severity: off
     subject:
       type: SchemaProperties
@@ -78,7 +81,7 @@ rules:
       required:
         - id
         - _links
-  assert/response-error-contains-property:
+  rule/response-error-contains-property:
     severity: off
     subject:
       type: SchemaProperties
@@ -147,7 +150,7 @@ rules:
   parameter-description: error
   ## custom rules
   ### Examples
-  assert/params-must-include-examples:
+  rule/params-must-include-examples:
     severity: off
     subject:
       type: Parameter
@@ -159,17 +162,7 @@ rules:
         - example
         - examples
 
-  assert/tags-alphabetical:
-    subject:
-      type: Root
-      property: tags
-    assertions:
-      sortOrder:
-        direction: asc
-        property: name
-    severity: error
-
-  assert/headers-include-example:
+  rule/headers-include-example:
     subject:
       type: Header
       property: example
@@ -177,7 +170,7 @@ rules:
       defined: true
       nonEmpty: true
 
-  assert/path-must-be-ref-file:
+  rule/path-must-be-ref-file:
     subject:
       type: PathItem
     where:
@@ -188,7 +181,7 @@ rules:
     assertions:
       ref: /^(.\/paths|paths)\/[a-z{].*yaml$/
 
-  assert/x-sdk-operation-name:
+  rule/x-sdk-operation-name:
     where:
       - subject:
           type: Paths
@@ -201,7 +194,7 @@ rules:
       casing: camelCase
       defined: true
 
-  assert/operation-id-delete:
+  rule/operation-id-delete:
     where:
       - subject:
           type: Operation
@@ -216,7 +209,7 @@ rules:
       pattern: /Delete/
       casing: PascalCase
 
-  assert/operation-id-get:
+  rule/operation-id-get:
     where:
       - subject:
           type: Operation
@@ -231,7 +224,7 @@ rules:
       pattern: /Get/
       casing: PascalCase
 
-  assert/operation-id-patch:
+  rule/operation-id-patch:
     where:
       - subject:
           type: Operation
@@ -245,7 +238,7 @@ rules:
     assertions:
       pattern: /Patch/
 
-  assert/operation-id-post:
+  rule/operation-id-post:
     where:
       - subject:
           type: Paths
@@ -264,7 +257,7 @@ rules:
       pattern: /Post/
       casing: PascalCase
 
-  assert/operation-id-put:
+  rule/operation-id-put:
     where:
       - subject:
           type: Operation
@@ -279,7 +272,7 @@ rules:
       pattern: /Put/
       casing: PascalCase
 
-  assert/operation-summary:
+  rule/operation-summary:
     subject:
       type: Operation
       property: summary
@@ -295,45 +288,45 @@ rules:
       pattern: /^(Retrieve|Create|Delete|Upsert|Preview|Send|Update|Register|Destroy|Trigger|Start|Stop|Skip|Set|Check|Enable|Disable|Close|Request|Resend|Verify|List|Patch|Activate|Refund|Query|Validate|Tag|Untag|Issue|Reactivate|Cancel|Pause|Change|Void|Search|Get|Modify|Finish|Schedule|Read|Reset|Make|Deactivate|Perform|Review|Reject|Accept|Apply|Partially|Re|Abandon|Download|Merge|Specify|Redeem|Exchange|Log|Sync).*[^\.]$/
 
   ### Description rules
-  assert/tag-description:
+  rule/tag-description:
     subject:
       type: Tag
       property: description
     assertions:
       defined: true
-  assert/description-capitalization:
+  rule/description-capitalization:
     subject:
       type: any
       property: description
     assertions:
-      pattern: /^([A-Z]|dLocal|ecoPayz|eMerchantPay|ePay|eZeeWallet|ezyEFT|iCanPay|iCheque|iDebit|loonie|vegaaH)/
-  assert/description-punctuation:
+      pattern: /^([A-Z]|#+ [A-Z]|dLocal|ecoPayz|eMerchantPay|ePay|eZeeWallet|ezyEFT|iCanPay|iCheque|iDebit|loonie|vegaaH)/
+  rule/description-punctuation:
     subject:
       type: any
       property: description
     assertions:
-      pattern: /(\.|server)$/
-  assert/no-anthropmorphic-possessives:
+      pattern: /(\.\n?|server)$/
+  rule/no-anthropmorphic-possessives:
     subject:
       type: any
       property: description
     assertions:
       notPattern: /(Rebilly's|subscription's|invoice's|item's|order's|product's|transaction's|document's|payment's|payout's|card's|instrument's)/i
 
-  assert/no-description-start-with-the-a-an:
+  rule/no-description-start-with-the-a-an:
     subject:
       type: any
       property: description
     assertions:
       notPattern: /^(The\s|A\s|An\s)/
-  assert/no-past-future:
+  rule/no-past-future:
     subject:
       type: any
       property: description
     assertions:
       notPattern: /(was\s|were\s|will\s)/
 
-  assert/info-description:
+  rule/info-description:
     subject:
       type: Info
       property: description
@@ -341,7 +334,7 @@ rules:
       defined: true
       minLength: 30
 
-  assert/schema-properties-both-created-time-and-updated-time:
+  rule/schema-properties-both-created-time-and-updated-time:
     subject:
       type: SchemaProperties
     assertions:
@@ -349,7 +342,7 @@ rules:
         - createdTime
         - updatedTime
 
-  assert/schema-properties-camelCase:
+  rule/schema-properties-camelCase:
     where:
       - subject:
           type: SchemaProperties
@@ -365,7 +358,7 @@ rules:
     assertions:
       casing: camelCase
 
-  assert/put-200-and-201:
+  rule/put-200-and-201:
     subject:
       type: Responses
     where:
@@ -382,14 +375,14 @@ rules:
         - '200'
         - '201'
 
-  assert/no-x-code-samples:
+  rule/no-x-code-samples:
     subject:
       type: Operation
     assertions:
       disallowed:
         - x-code-samples
 
-  assert/no-x-internal:
+  rule/no-x-internal:
     subject:
       type: Operation
     message: This is in a public repository. Do not include internal APIs.
@@ -397,7 +390,7 @@ rules:
       disallowed:
         - x-internal
 
-  assert/embedded-is-object:
+  rule/embedded-is-object:
     severity: error
     subject:
       type: Schema
@@ -408,7 +401,7 @@ rules:
       const: object
 
       # Need to account for arrays, etc...
-  # assert/mediatype-schema-ref-pattern:
+  # rule/mediatype-schema-ref-pattern:
   #   subject: MediaType
   #   property: schema
   #   message: Ref needs to point to components directory.
@@ -416,44 +409,46 @@ rules:
 
 decorators:
   products-bundler/bundle: error
-features.openapi:
-  pagination: item
-  theme:
-    logo:
-      gutter: 20px 30px 14px 30px
-    colors:
-      primary:
-        main: '#0044D4'
-      text:
-        primary: '#0D2B3E'
-    typography:
-      headings:
-        fontFamily: Roboto
-      fontFamily: 'Roboto, Verdana, Geneva, sans-serif'
-      fontSize: 14px
-      code:
-        fontFamily: '"Courier New",monospace'
-      rightPanelHeading:
-        color: white
-    rightPanel:
-      backgroundColor: '#505A6F'
-    codeBlock:
-      backgroundColor: '#0D2B3E'
-    links:
-      color: '#6CC496'
-  htmlTemplate: ./web/index.html
-  generateCodeSamples:
-    languages:
-      - lang: curl
-      - lang: Node.js
-      - lang: C#
-      - lang: Python
-      - lang: Java
-      - lang: Go
-      - lang: Ruby
-      - lang: PHP
-  schemaExpansionLevel: '2'
-  maxDisplayedEnumValues: 10
-  hideTryItPanel: false
-  expandResponses: '200,201'
-  requiredPropsFirst: true
+  plugin/remove-php-sample-prefix: on
+theme:
+  openapi:
+    pagination: item
+    theme:
+      logo:
+        gutter: 20px 30px 14px 30px
+      colors:
+        primary:
+          main: '#0044D4'
+        text:
+          primary: '#0D2B3E'
+      typography:
+        headings:
+          fontFamily: Roboto
+        fontFamily: 'Roboto, Verdana, Geneva, sans-serif'
+        fontSize: 14px
+        code:
+          fontFamily: '"Courier New",monospace'
+        rightPanelHeading:
+          color: white
+      rightPanel:
+        backgroundColor: '#505A6F'
+      codeBlock:
+        backgroundColor: '#0D2B3E'
+      links:
+        color: '#6CC496'
+    htmlTemplate: ./web/index.html
+    generateCodeSamples:
+      languages:
+        - lang: curl
+        - lang: Node.js
+        - lang: C#
+        - lang: Python
+        - lang: Java
+        - lang: Go
+        - lang: Ruby
+        - lang: PHP
+    schemaExpansionLevel: '2'
+    maxDisplayedEnumValues: 10
+    hideTryItPanel: false
+    expandResponses: '200,201'
+    requiredPropsFirst: true

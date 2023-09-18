@@ -22,7 +22,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/ReadyToPay/CoreReadyToPay.yaml
+          $ref: ../components/requestBodies/PostReadyToPay.yaml
   responses:
     200:
       description: Payment methods retrieved.
@@ -31,7 +31,7 @@ post:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/ReadyToPay/ReadyToPayMethods.yaml
+              $ref: ../components/schemas/ReadyToPayMethods.yaml
     401:
       $ref: ../components/responses/Unauthorized.yaml
     403:
@@ -42,3 +42,7 @@ post:
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/ready-to-pay/post.php'
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: '../code_samples/PHP-SDK-3.0/ready-to-pay/post.php'

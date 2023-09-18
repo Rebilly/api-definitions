@@ -1,0 +1,20 @@
+type: object
+description: Coupon percent discount.
+required:
+  - value
+  - type
+properties:
+  value:
+    description: Percentage of discount.
+    type: number
+    format: double
+    minimum: 0.01
+    maximum: 100
+  type:
+    type: string
+    enum: ["percent"]
+    x-label: Type
+    x-sortable: true
+    x-basic: true
+  context:
+    $ref: ./DiscountContext.yaml

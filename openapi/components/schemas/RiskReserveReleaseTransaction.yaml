@@ -1,0 +1,58 @@
+type: object
+required:
+  - type
+properties:
+  id:
+    type: string
+    description: ID of the balance transaction.
+    readOnly: true
+    maxLength: 50
+    example: btxn_0YVCNJYRXTDDQ9QF2Z60ZA05WP
+  type:
+    description: Type of balance transaction.
+    type: string
+    readOnly: true
+    enum:
+      - risk-reserve-release
+  parentId:
+    description: |-
+      ID of the parent entry if one exists.
+
+      Some types of transactions relate to parent transactions.
+      For example, a `risk-reserve` relates to a `charge`, and a `risk-reserve-release` relates a to `risk-reserve`.
+    type: string
+    maxLength: 50
+    example: btxn_0YVCNJYRXTDDQ9QF2Z60ZA05WP
+  transactionId:
+    description: ID of the related transaction.
+    allOf:
+      - $ref: ./TransactionId.yaml
+  settlementCurrency:
+    allOf:
+      - $ref: ./CurrencyCode.yaml
+  settlementAmount:
+    x-type: Money
+    x-currency-field: settlementCurrency
+    x-sortable: true
+    x-basic: true
+    description: Amount of the settlement.
+    type: number
+    nullable: true
+    format: double
+  settlementTime:
+    description: Date and time of the expected settlement.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  settlementRate:
+    description: |-
+      If the settlement currency does not match the transaction currency.
+      This field displays the exchange rate of the settlement.
+    type: number
+    nullable: true
+    format: double
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml

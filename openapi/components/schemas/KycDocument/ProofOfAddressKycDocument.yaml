@@ -1,10 +1,10 @@
 type: object
 allOf:
   - $ref: ./BaseKycDocument.yaml
-  - $ref: ./KycDocument.yaml
   - properties:
       documentMatches:
         type: object
+        nullable: true
         readOnly: true
         properties:
           score:
@@ -13,9 +13,10 @@ allOf:
             format: double
             example: 0.75
           data:
-            $ref: ./AddressMatches.yaml
+            $ref: ../KycAddressMatches.yaml
       parsedData:
         type: object
+        nullable: true
         readOnly: true
         properties:
           score:
@@ -24,10 +25,13 @@ allOf:
             format: double
             example: 0.75
           data:
-            $ref: ./AddressMatches.yaml
+            $ref: ../KycAddressMatches.yaml
       settings:
-        $ref: ./Settings/KycSettingsAddress.yaml
+        type: object
+        nullable: true
         readOnly: true
+        allOf:
+          - $ref: ./Settings/KycSettingsAddress.yaml
       _links:
         type: array
         description: Related links.

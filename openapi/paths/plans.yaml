@@ -32,7 +32,7 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/Plans/Plan.yaml
+              $ref: ../components/schemas/Plan.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -58,7 +58,12 @@ post:
   x-sdk-operation-name: create
   description: Creates a plan.
   requestBody:
-    $ref: ../components/requestBodies/Plan.yaml
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Plan.yaml
+    description: Plan resource.
+    required: true
   responses:
     '201':
       description: Plan created.
@@ -68,7 +73,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Plans/Plan.yaml
+            $ref: ../components/schemas/Plan.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

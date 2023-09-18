@@ -19,7 +19,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Plans/Plan.yaml
+            $ref: ../components/schemas/Plan.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -47,14 +47,19 @@ put:
   x-sdk-operation-name: update
   description: Creates or updates (upserts) a plan with a specified ID.
   requestBody:
-    $ref: ../components/requestBodies/Plan.yaml
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Plan.yaml
+    description: Plan resource.
+    required: true
   responses:
     '200':
       description: Plan updated.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Plans/Plan.yaml
+            $ref: ../components/schemas/Plan.yaml
     '201':
       description: Plan created.
       headers:
@@ -63,7 +68,7 @@ put:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Plans/Plan.yaml
+            $ref: ../components/schemas/Plan.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

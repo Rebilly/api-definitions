@@ -11,7 +11,9 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/Rules/ActionTests/SendTestEmail.yaml
+          description: Send a test email.
+          allOf:
+            - $ref: ../components/schemas/RulesEmailNotification.yaml
     description: Test email resource.
     required: true
   responses:
@@ -20,7 +22,9 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Rules/ActionTests/SendTestEmail.yaml
+            description: Send a test email.
+            allOf:
+              - $ref: ../components/schemas/RulesEmailNotification.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

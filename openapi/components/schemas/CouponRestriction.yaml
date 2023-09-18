@@ -1,0 +1,28 @@
+description: Coupon restrictions.
+type: object
+discriminator:
+  propertyName: type
+  mapping:
+    discounts-per-redemption: ./CouponRestrictionDiscountPerRedemption.yaml
+    minimum-order-amount: ./CouponRestrictionMinimumOrderAmount.yaml
+    paid-by-time: ./CouponRestrictionPaidByTime.yaml
+    redemptions-per-customer: ./CouponRestrictionRedemptionsPerCustomer.yaml
+    restrict-to-countries: ./CouponRestrictionRestrictToCountries.yaml
+    restrict-to-invoices: ./CouponRestrictionRestrictToInvoices.yaml
+    restrict-to-plans: ./CouponRestrictionRestrictToPlans.yaml
+    restrict-to-products: ./CouponRestrictionRestrictToProducts.yaml
+    restrict-to-subscriptions: ./CouponRestrictionRestrictToSubscriptions.yaml
+    total-redemptions: ./CouponRestrictionTotalRedemptions.yaml
+    restrict-to-bxgy: ./CouponRestrictionRetrictToBxgy.yaml
+anyOf:
+  - $ref: ./CouponRestrictionDiscountPerRedemption.yaml
+  - $ref: ./CouponRestrictionMinimumOrderAmount.yaml
+  - $ref: ./CouponRestrictionPaidByTime.yaml
+  - $ref: ./CouponRestrictionRedemptionsPerCustomer.yaml
+  - $ref: ./CouponRestrictionRestrictToCountries.yaml
+  - $ref: ./CouponRestrictionRestrictToInvoices.yaml
+  - $ref: ./CouponRestrictionRestrictToPlans.yaml
+  - $ref: ./CouponRestrictionRestrictToProducts.yaml
+  - $ref: ./CouponRestrictionRestrictToSubscriptions.yaml
+  - $ref: ./CouponRestrictionTotalRedemptions.yaml
+  - $ref: ./CouponRestrictionRetrictToBxgy.yaml

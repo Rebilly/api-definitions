@@ -1,0 +1,44 @@
+type: object
+required:
+  - plan
+properties:
+  id:
+    type: string
+    description: ID of the order item.
+    readOnly: true
+    maxLength: 50
+    example: ord_itm_0YVJ6172Q2CXW9VP7KJMKHCMMX
+  planId:
+    description: ID of the plan.
+    deprecated: true
+    x-basic: true
+    type: string
+    maxLength: 50
+    example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+  quantity:
+    description: Number of product units in the specified plan.
+    type: integer
+  plan:
+    description: Plan details.
+    anyOf:
+      - $ref: ./Plans/OriginalPlan.yaml
+      - $ref: ./Plans/FlexiblePlan.yaml
+  revision:
+    type: integer
+    readOnly: true
+    description: Revision number that increments with each overriding change to this specific plan item.
+  isModified:
+    type: boolean
+    readOnly: true
+    description: Specifies if the plan information is modified for this subscription.
+  isGrandfathered:
+    type: boolean
+    readOnly: true
+    description: Specifies if the current plan revision number is greater than the plan item revision number.
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
+    properties:
+      product:
+        type: object

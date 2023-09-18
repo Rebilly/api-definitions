@@ -1,0 +1,50 @@
+parameters:
+  - $ref: ../components/parameters/tag.yaml
+  - name: amlCheckId
+    in: path
+    description: ID of the AML check to tag.
+    required: true
+    schema:
+      type: string
+post:
+  x-products:
+    - Core
+  tags:
+    - Tags
+  summary: Tag an AML check
+  operationId: PostTagAmlCheck
+  x-sdk-operation-name: tagAmlCheck
+  description: |-
+    Tags an AML check.
+
+    If a AML check in the list does not have the specified tag applied, the AML check is ignored.
+  responses:
+    '204':
+      description: AML check tagged.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+delete:
+  x-products:
+    - Core
+  tags:
+    - Tags
+  summary: Untag an AML check
+  operationId: DeleteTagAmlCheck
+  x-sdk-operation-name: untagAmlCheck
+  description: |-
+    Untags an AML check.
+
+    If a AML check in the list does not have the specified tag applied, the AML check is ignored.
+  responses:
+    '204':
+      description: AML check untagged.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

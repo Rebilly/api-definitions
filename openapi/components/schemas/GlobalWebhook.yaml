@@ -18,7 +18,11 @@ properties:
       $ref: ./GlobalEventType.yaml
   status:
     x-basic: true
-    $ref: ./OnOff.yaml
+    type: string
+    default: active
+    enum:
+      - active
+      - inactive
   method:
     type: string
     x-basic: true
@@ -36,7 +40,27 @@ properties:
     description: Webhook headers.
     type: array
     items:
-      $ref: ./Rules/WebhookHeader.yaml
+      type: object
+      description: Webhook headers.
+      properties:
+        name:
+          description: Name of the property.
+          type: string
+        status:
+          description: Status of the property.
+          type: string
+          default: active
+          enum:
+            - active
+            - inactive
+        value:
+          description: Value of the property.
+          type: string
+          example:
+            value1
+      required:
+        - name
+        - value
   credentialHash:
     type: string
     description: Hash from credentials to use for authentication by the specified URL.

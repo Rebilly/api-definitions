@@ -80,6 +80,19 @@ Features:
 - Use the MRR report in revenue recognition to view predictable recurring revenue. ✅
 - To view predictable recurring revenue, use the MRR report in revenue recognition. ✅
 
+## Acronyms
+
+An acronym is an abbreviation formed from the initial letters of words that are often used together. Acronyms are often pronounced as a word, or each letter is spelt.
+
+Do not assume that your audience will understand and be familiar with all acronyms, especially acronyms for financial terms or for state bodies that are specific to one country. It is important to be consistent in our use of acronyms and related descriptions. If we are not, we may confuse our audience.
+
+In descriptions, define acronyms that may not be commonly used in their first instance. Thereafter, use the acronym.
+
+Example:
+
+- First usage: Treasury Inflation Protected Securities (TIPS)
+- Thereafter: TIPS
+
 ## Capitalization
 
 Use sentence-style capitalization for all descriptions. Capitalize the first letter of the first word and use lowercase thereafter.
@@ -118,6 +131,121 @@ Use [semantic line breaks](https://sembr.org/). This standard specifies that you
     For example, if the `firstName` check weight is set to `5`, and the check fails,
     the KYC document score becomes `95`.
 ```
+
+## Noun strings (or noun stacks)
+
+Avoid using a series of nouns together consecutively. This can make descriptions difficult to understand because it may not be clear which words are modifier nouns and which noun is the object. In writing, this is known as a [noun string (or noun stack)](https://www.plainlanguage.gov/guidelines/words/avoid-noun-strings/). This often occurs in business and technical content when the author attempts to make content concise, but mistakenly removes important context.
+
+To avoid noun strings, place the modifier noun before the noun that it modifies. This makes it easier to understand the relationship between the words. This often requires the use of articles (a, an, the) and prepositions (of, from, in, on, to, for ...).
+
+### Examples
+
+<details> 
+<summary> Example 1</summary>
+
+#### Incorrect use
+
+```yaml
+scope:
+  description: API key scope.
+```
+| Noun (object)| modifier noun| |
+|---|---|---|
+| API key| scope |  ❌  |
+
+#### Correct use
+
+```yaml
+scope:
+  description: Scope of the API key.
+```
+
+| Modifier noun | preposition & article | noun (object)| |
+|---|---|---|---|
+| Scope| of the | API key |  ✅ |
+
+</details>
+
+<details> 
+<summary> Example 2 </summary>
+
+#### Incorrect use
+
+```yaml
+creationTime:
+  description: Coupon creation time.
+```
+
+| Noun (object)| modifier noun | noun | |
+|---|---|---|---|
+| Coupon | creation | time | ❌ |
+
+#### Correct use
+
+```yaml
+creationTime:
+  description: Time when the coupon was created.
+```
+
+| Noun | conjunction & article | noun (object)| verb | modifier noun | |
+|---|---|---|---|---|---| 
+| Time| when the | coupon | was | created | ✅ |
+
+</details>
+
+<details> 
+<summary> Example 3</summary>
+
+#### Incorrect use
+
+```yaml
+organizationName:
+  description: Organization name
+```
+
+| Noun (object)| noun | |
+|---|---|---|
+| Organization| name | ❌ |
+
+#### Correct use
+
+```yaml
+organizationName:
+  description: Name of the organization.
+```
+
+| Noun | preposition & article | noun (object)| |
+|---|---|---|---|
+| Name| of the | organization | ✅ |
+
+</details>
+
+<details> 
+<summary> Example 4</summary>
+
+#### Incorrect use
+
+```yaml
+taxNumberType:
+  description: Tax number type.
+```
+
+| Noun (object) | modifier noun | |
+|---|---|---|
+| Tax number | type | ❌ |
+
+#### Correct use
+
+```yaml
+taxNumberType:
+  description: Type of tax number.
+```
+
+| Noun | preposition | noun (object)| |
+|---|---|---|---|
+| Type | of | tax number | ✅ |
+
+</details>
 
 ## Tags
 

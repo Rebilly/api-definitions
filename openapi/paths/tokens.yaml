@@ -16,7 +16,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/PaymentTokens/CompositeToken.yaml
+          $ref: ../components/schemas/CompositeToken.yaml
     description: Payment token resource.
     required: true
   security:
@@ -32,7 +32,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/PaymentTokens/CompositeToken.yaml
+            $ref: ../components/schemas/CompositeToken.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -46,6 +46,10 @@ post:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/tokens/post.js
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/tokens/post.php
 get:
   x-products:
     - Core
@@ -73,7 +77,7 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/PaymentTokens/CompositeToken.yaml
+              $ref: ../components/schemas/CompositeToken.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -85,3 +89,7 @@ get:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/tokens/get.js
+    - lang: PHP
+      label: PHP-SDK-3.0
+      source:
+        $ref: ../code_samples/PHP-SDK-3.0/tokens/get.php

@@ -1,0 +1,100 @@
+type: object
+required:
+  - type
+  - journalEntryId
+  - customerId
+  - invoiceId
+  - invoiceItemId
+  - debitAccountId
+  - creditAccountId
+properties:
+  id:
+    type: string
+    description: Unique resource ID.
+    maxLength: 50
+    example: jrn_rec_0YVCXV2HE5DBT89QV7RXSJEZQ4
+  journalEntryId:
+    description: ID of the journal entry.
+    readOnly: true
+    type: string
+  customerId:
+    description: ID of the customer.
+    type: string
+    maxLength: 50
+    example: cus_0YV7DDSDD1C8DA64KHH2W33CPF
+  invoiceId:
+    type: string
+    description: ID of the invoice.
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
+  invoiceItemId:
+    type: string
+    description: ID of the invoice item.
+    maxLength: 50
+    example: ii_0YVFDEQS2KCFTBN9HXWJFY55GV
+  type:
+    type: string
+    readOnly: true
+    enum:
+      - automated
+      - manual
+  estimatedAmount:
+    description: |-
+      Amount of revenue estimated to be recognized at the schedule date.
+      This value is ignored when updating a journal record with a `type` of `automated`.
+    nullable: true
+    type: number
+    format: double
+  recognizedAmount:
+    description: Amount of revenue recognized at the journal period end.
+    nullable: true
+    type: number
+    format: double
+  debitAccountId:
+    description: ID of the debit journal account.
+    nullable: true
+    type: string
+  creditAccountId:
+    description: ID of the credit journal account.
+    nullable: true
+    type: string
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
+    properties:
+      customer:
+        type: object
+      invoice:
+        type: object
+      invoiceItem:
+        type: object
+      debitAccount:
+        type: object
+      creditAccount:
+        type: object
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - customer
+            - invoice
+            - invoiceItem
+            - journalEntry
+            - creditAccount
+            - debitAccount
