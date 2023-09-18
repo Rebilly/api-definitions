@@ -1,2 +1,4 @@
-$service = new Rebilly\Sdk\CoreService($client);
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
 $service->invoices()->deleteInvoiceItem('invoiceId', 'invoiceItemId');

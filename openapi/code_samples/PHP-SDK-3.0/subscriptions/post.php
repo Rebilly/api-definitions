@@ -1,12 +1,14 @@
-$service = new Rebilly\Sdk\CoreService($client);
+<?php
 
-$order = SubscriptionOrder::from()
+$service = new \Rebilly\Sdk\CoreService($client);
+
+$order = \Rebilly\Sdk\Model\SubscriptionOrder::from()
     ->setWebsiteId('websiteId')
     ->setCustomerId('customerId')
     ->setItems([
-        OrderItem::from()
+        \Rebilly\Sdk\Model\OrderItem::from()
             ->setPlan(
-                OriginalPlan::from()
+                \Rebilly\Sdk\Model\OrderItemPlan::from()
                     ->setId('planId')
             )
             ->setQuantity(1),
@@ -14,6 +16,6 @@ $order = SubscriptionOrder::from()
 
 try {
     $order = $service->subscriptions()->create($order);
-} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }
