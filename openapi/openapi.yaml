@@ -95,6 +95,11 @@ tags:
     description: |-
       Use these operations to manage Rebilly accounts.
       An account in which you are subscribed to in order to use the Rebilly product.
+  - name: Allowlists
+    description: |-
+      Use allowlists to exclude specific customer attribute data from risk score checks.
+      
+      Allowlists are lists of data that are excluded from risk score checks. Allowlists prevent specific data from being added to a [blocklist record](https://www.rebilly.com/docs/automations/blocklists/) when a [risk score](https://www.rebilly.com/docs/automations/risk-scoring/) threshold reached.
   - name: AML
     description: |-
       Use Anti-Money Laundering (AML) operations to screen customers and help prevent your business from becoming directly or indirectly involved in criminal activity.
@@ -596,6 +601,7 @@ x-tagGroups:
   - name: Risk
     tags:
       - Blocklists
+      - Allowlists
       - KYC documents
       - AML
       - Risk score
@@ -607,8 +613,6 @@ x-tagGroups:
 
 
 paths:
-  /aml:
-    $ref: './paths/aml.yaml'
   /aml-checks:
     $ref: './paths/aml-checks.yaml'
   '/aml-checks/{id}':
@@ -661,8 +665,6 @@ paths:
     $ref: ./paths/customer-timeline-custom-events.yaml
   '/customer-timeline-custom-events/{id}':
     $ref: './paths/customer-timeline-custom-events@{id}.yaml'
-  '/customers/{id}/aml':
-    $ref: './paths/customers@{id}@aml.yaml'
   '/customers/{id}/lead-source':
     $ref: './paths/customers@{id}@lead-source.yaml'
   '/customers/{id}/timeline':

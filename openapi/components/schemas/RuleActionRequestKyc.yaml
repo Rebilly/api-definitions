@@ -4,7 +4,11 @@ allOf:
   - type: object
     properties:
       documents:
-        $ref: ./KycRequestDocuments.yaml
+        type: array
+        description: Documents to request from the customer.
+        minItems: 1
+        items:
+          $ref: ./KycRequestDocument.yaml
       excludePolicy:
         type: string
         description: Specifies who should be excluded from the verification.
