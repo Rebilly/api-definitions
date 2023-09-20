@@ -1,0 +1,10 @@
+type: object
+description: Instruction for calculating the period anchor.
+discriminator:
+  propertyName: method
+  mapping:
+    day-of-month: ./SchedulingMethodDayOfMonth.yaml
+    day-of-week: ./SchedulingMethodDayOfWeek.yaml
+anyOf:
+  - $ref: ./SchedulingMethodDayOfMonth.yaml
+  - $ref: ./SchedulingMethodDayOfWeek.yaml

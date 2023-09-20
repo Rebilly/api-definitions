@@ -56,44 +56,6 @@ properties:
     $ref: ./Shipping.yaml
   tax:
     $ref: ./Invoices/InvoiceTax.yaml
-  organizationTaxIdNumber:
-    description: Organization tax ID number that is displayed on the invoice.
-    type: object
-    nullable: true
-    required:
-      - type
-      - value
-    properties:
-      type:
-        type: string
-        description: Type of the tax ID number.
-        enum:
-          - eu-vat
-          - other
-        example: eu-vat
-      value:
-        type: string
-        description: Value of the tax ID number.
-        example: GB980780684
-  customerTaxIdNumber:
-    description: Customer tax ID number that is displayed on the invoice.
-    type: object
-    nullable: true
-    required:
-      - type
-      - value
-    properties:
-      type:
-        type: string
-        description: Type of the tax ID number.
-        enum:
-          - eu-vat
-          - other
-        example: eu-vat
-      value:
-        type: string
-        description: Value of the tax ID number.
-        example: GB980780684
   billingAddress:
     description: Billing address of the invoice.
     allOf:
@@ -121,8 +83,28 @@ properties:
     description: Discounts applied.
     readOnly: true
     items:
-      allOf:
-        - $ref: ./Coupon/InvoiceDiscount.yaml
+      type: object
+      readOnly: true
+      properties:
+        couponId:
+          type: string
+          description: ID of the coupon.
+          maxLength: 50
+          example: cpn_0YVCNKF81GD778N4YNVGDJK558
+        redemptionId:
+          description: ID of the redemption.
+          allOf:
+            - $ref: ./ResourceId.yaml
+        amount:
+          description: Total amount discounted by this coupon.
+          type: number
+          format: double
+        description:
+          type: string
+          description: Description of the discount.
+        context:
+          $ref: ./DiscountContext.yaml
+
   autopayScheduledTime:
     description: Date and time when an automatic payment (autopay) is scheduled.
     type: string

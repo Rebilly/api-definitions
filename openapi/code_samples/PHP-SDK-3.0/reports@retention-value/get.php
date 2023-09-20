@@ -1,4 +1,6 @@
-$service = new Rebilly\Sdk\ReportsService($client);
+<?php
+
+$service = new \Rebilly\Sdk\ReportsService($client);
 
 $report = $service->reports()->getRetentionValue(
     'month',

@@ -1,0 +1,18 @@
+description: EasyPayDirect gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: EasyPayDirect credentials object.
+        properties:
+          secretKey:
+            type: string
+            description: API secret key of the EasyPayDirect account.
+            format: password
+            writeOnly: true
+        required:
+          - secretKey

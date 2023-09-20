@@ -69,7 +69,6 @@ properties:
       - '13.7'
       - '13.8'
       - '13.9'
-      - '2'
       - '30'
       - '31'
       - '35'
@@ -88,7 +87,6 @@ properties:
       - '59'
       - '60'
       - '62'
-      - '7'
       - '70'
       - '71'
       - '72'
@@ -98,7 +96,6 @@ properties:
       - '76'
       - '77'
       - '79'
-      - '8'
       - '80'
       - '81'
       - '82'
@@ -205,11 +202,17 @@ properties:
       - '5'
       - '6'
       - '7'
+      - '8'
       - '9'
       - '51'
       - 'A'
       - 'B'
-
+  reasonDescription:
+    description: Description of the reason for the dispute.
+    type: string
+    nullable: true
+    maxLength: 512
+    readOnly: true
   category:
     description: Category of dispute.
     type: string
@@ -262,6 +265,15 @@ properties:
     nullable: true
     format: date-time
     description: Date and time when the dispute is resolved.
+    readOnly: true
+  revision:
+    description: |-
+      Number of times the dispute data has been modified.
+
+      Use the revision number when analyzing webhook data to
+      determine if a change should take precedence over the current
+      representation.
+    type: integer
     readOnly: true
   createdTime:
     $ref: CreatedTime.yaml

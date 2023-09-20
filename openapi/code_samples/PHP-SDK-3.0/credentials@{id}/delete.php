@@ -1,3 +1,5 @@
-$service = new Rebilly\Sdk\CoreService($client);
+<?php
 
-$client->customerAuthentication()->deleteCredential('credentialId');
+$service = new \Rebilly\Sdk\CoreService($client);
+
+$service->customerAuthentication()->deleteCredential('credentialId');
