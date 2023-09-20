@@ -44,13 +44,13 @@ properties:
       color: red
       size: xxl
   currency:
-    $ref: ../../CurrencyCode.yaml
+    $ref: ./CurrencyCode.yaml
   currencySign:
     description: Currency sign.
     readOnly: true
     type: string
   pricing:
-    $ref: ../PlanPriceFormula.yaml
+    $ref: ./PlanPriceFormula.yaml
   setup:
     type: object
     nullable: true
@@ -66,7 +66,7 @@ properties:
         type: number
         format: double
   customFields:
-    $ref: ../../ResourceCustomFields.yaml
+    $ref: ./ResourceCustomFields.yaml
   isActive:
     type: boolean
     description: Specifies if the plan is active.
@@ -115,7 +115,15 @@ properties:
         minimum: 1
         maximum: 65535
       billingTiming:
-        $ref: ../PlanBillingTiming.yaml
+        type: string
+        default: prepaid
+        description: |-
+          Billing timing in relation to the service period.
+          For `prepaid` plans the customer pays when the service period starts,
+          whereas, for `postpaid` plans, the customer pays when the service period ends.
+        enum:
+          - prepaid
+          - postpaid
   trial:
     type: object
     nullable: true
@@ -133,7 +141,24 @@ properties:
         type: number
         format: double
       period:
-        $ref: ../PlanPeriod.yaml
+        type: object
+        description: Period information.
+        required:
+          - unit
+          - length
+        properties:
+          unit:
+            description: Unit of time.
+            type: string
+            enum:
+              - day
+              - week
+              - month
+              - year
+          length:
+            description: Length of time.
+            type: integer
+            minimum: 1
   meteredBilling:
     type: object
     nullable: true
@@ -165,11 +190,11 @@ properties:
         nullable: true
         minimum: 0.01
   invoiceTimeShift:
-    $ref: ../../Invoices/InvoiceTimeShift.yaml
+    $ref: ./Invoices/InvoiceTimeShift.yaml
   createdTime:
-    $ref: ../../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   _links:
     type: array
     description: Related links.
