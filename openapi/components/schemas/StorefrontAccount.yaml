@@ -28,7 +28,20 @@ properties:
       The value of this property overrides the `defaultPaymentInstrument` if both are supplied.
       This token may only be used once before it expires.
   defaultPaymentInstrument:
-    $ref: ./Storefront/PaymentInstruments/InstrumentReference.yaml
+    type: object
+    description: Default payment instrument information.
+    required:
+      - method
+    properties:
+      method:
+        $ref: ./PaymentMethods/PaymentMethod.yaml
+      paymentInstrumentId:
+        type: string
+        description: ID of the payment instrument.
+        maxLength: 50
+        example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
+  customFields:
+    $ref: ./ResourceCustomFields.yaml
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:
