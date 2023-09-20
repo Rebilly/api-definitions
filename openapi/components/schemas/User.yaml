@@ -29,12 +29,6 @@ properties:
     description: User's mobile phone number.
     type: string
     nullable: true
-  password:
-    description: |-
-      User's password.
-      If this value is not provided, a password reset email is sent.
-    type: string
-    format: password
   permissions:
     description: |-
       Permissions that the user has within organizations.
@@ -68,16 +62,6 @@ properties:
     readOnly: true
     items:
       type: string
-  totpRequired:
-    description: Specifies if two-factor authentication is enabled for the user.
-    type: boolean
-  totpSecret:
-    description: User's Time-based One-Time Password (TOTP) key for the authentication application, if TOTP is enabled..
-    type: string
-  totpUrl:
-    description: QR-code link that redirects the user to the authentication application, if TOTP is enabled.
-    type: string
-    format: url
   status:
     description: Status of the user's account.
     type: string

@@ -1,3 +1,5 @@
-$service = new Rebilly\Sdk\CoreService($client);
+<?php
 
-$customerCredentials = $service->customerAuthentication()->getAllCredentials(filter: 'customerId:testCustomer');
+$service = new \Rebilly\Sdk\CoreService($client);
+
+$customerCredentials = $service->customerAuthentication()->getAllCredentials(limit: 10);

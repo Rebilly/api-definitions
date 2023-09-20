@@ -70,6 +70,20 @@ properties:
           oneOf:
             - $ref: ./OriginalPlan.yaml
             - $ref: ./FlexiblePlan.yaml
+        description:
+          type: string
+          description: Description of the quote item.
+          example: Charge per approved transaction with DCC
+          default: ''
+          maxLength: 255
+        priceDescription:
+          type: string
+          description: |-
+            Price description of the quote item.
+            This value is only used for metered billing items.
+          example: 50% of the markup for approved transactions
+          default: ''
+          maxLength: 255
         createdTime:
           $ref: ./CreatedTime.yaml
         updatedTime:
@@ -140,10 +154,24 @@ properties:
               enum:
                 - debit
                 - credit
+            name:
+              description: Name of the invoice item.
+              type: string
+              maxLength: 1000
             description:
               description: Description of the invoice item.
               type: string
-              maxLength: 1000
+              example: Charge per approved transaction with DCC
+              default: ''
+              maxLength: 255
+            priceDescription:
+              type: string
+              description: |-
+                Price description of the invoice item.
+                This value is only used for metered billing items.
+              example: 50% of the markup for approved transactions
+              default: ''
+              maxLength: 255
             unitPrice:
               description: Unit price of the invoice item.
               type: number

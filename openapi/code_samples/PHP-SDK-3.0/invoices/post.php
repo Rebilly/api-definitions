@@ -1,6 +1,8 @@
-$service = new Rebilly\Sdk\CoreService($client);
+<?php
 
-$invoice = Rebilly\Sdk\Model\Invoice::from()
+$service = new \Rebilly\Sdk\CoreService($client);
+
+$invoice = \Rebilly\Sdk\Model\Invoice::from()
     ->setCustomerId('customerId')
     ->setWebsiteId('websiteId')
     ->setCurrency('USD')
@@ -40,6 +42,6 @@ $invoice = Rebilly\Sdk\Model\Invoice::from()
 
 try {
     $invoice = $service->invoices()->create($invoice);
-} catch (Rebilly\Sdk\Exception\DataValidationException $e) {
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }
