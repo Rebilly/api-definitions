@@ -196,7 +196,18 @@ properties:
   updatedTime:
     $ref: ./UpdatedTime.yaml
   paymentInstrument:
-    $ref: ./Storefront/PaymentInstruments/InstrumentReference.yaml
+    type: object
+    description: Default payment instrument information.
+    required:
+      - method
+    properties:
+      method:
+        $ref: ./PaymentMethods/PaymentMethod.yaml
+      paymentInstrumentId:
+        type: string
+        description: ID of the payment instrument.
+        maxLength: 50
+        example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
   approvalUrl:
     description: URL to redirect the end-customer when transaction `status` is `waiting-approval` or `offsite`.
     type: string

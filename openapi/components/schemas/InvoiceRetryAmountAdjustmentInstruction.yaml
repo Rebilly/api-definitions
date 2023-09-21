@@ -1,0 +1,10 @@
+type: object
+description: Specifies if the payment amount must be adjusted for the retry.
+discriminator:
+  propertyName: method
+  mapping:
+    partial: ./AmountAdjustmentInstructionPartial.yaml
+    none: ./AmountAdjustmentInstructionNone.yaml
+oneOf:
+  - $ref: ./AmountAdjustmentInstructionPartial.yaml
+  - $ref: ./AmountAdjustmentInstructionNone.yaml
