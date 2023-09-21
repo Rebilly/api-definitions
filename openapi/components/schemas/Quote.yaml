@@ -235,11 +235,21 @@ properties:
               description: Date interval of the invoice item trial.
               type: string
               nullable: true
-            tax:
+            taxAmount:
               description: Invoice item tax.
-              readOnly: true
-              allOf:
-                - $ref: ./Invoices/InvoiceTaxItem.yaml
+              type: number
+              format: double
+              nullable: true
+            setupTaxAmount:
+              description: Invoice setup item tax.
+              type: number
+              format: double
+              nullable: true
+            trialTaxAmount:
+              description: Invoice trial item tax.
+              type: number
+              format: double
+              nullable: true
   paymentTerms:
     description: Payment terms for the customer which are displayed on the quote.
     type: string
