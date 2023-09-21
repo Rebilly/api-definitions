@@ -118,10 +118,7 @@ properties:
           - $ref: ./CurrencyCode.yaml
       initialAmounts:
         type: object
-        description: |-
-          Total amounts of the initial invoice.
-          This includes setup, trial and one time sale items.
-          Can be `null` if such items are not present.
+        description: Total amounts of the initial invoice.
         properties:
           amount:
             description: Amount of the invoice.
@@ -152,6 +149,7 @@ properties:
         type: object
         description: |-
           Total amounts of the recurring invoice.
+          This includes recurring items only.
           Can be `null` if the quote doesn't have recurring items.
         nullable: true
         properties:
