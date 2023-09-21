@@ -4,6 +4,7 @@ required:
   - currency
   - productId
   - pricing
+  - trial
 properties:
   id:
     type: string
@@ -21,11 +22,13 @@ properties:
     description: |-
       Plain-text description of the plan.
       This field accepts plain-text only.
+    maxLength: 65535
   richDescription:
     type: string
     description: |-
       Rich-text description of the plan.
       This field accepts rich text formatting, such as: bold, underline, italic, and hyperlinks.
+    maxLength: 65535
   productId:
     type: string
     description: ID of the related product.
@@ -74,20 +77,22 @@ properties:
     description: |-
       Number of times the plan is modified.
       Compare this value with materialized subscription item revision values.
+  isTrialOnly:
+    type: boolean
+    description: Specifies if a plan is a trial that does not have recurring instructions.
+    readOnly: true
   trial:
     type: object
-    nullable: true
-    description: |-
-      Trial configuration setting.
-      If you do not want to offer a trial, set this value to `null`.
+    description: Trial configuration settings.
     required:
       - price
       - period
     properties:
       price:
         description: |-
-          Price of the trial.
-          For a free trial, set this value to `0`.
+          Price of setting up a trial.
+          If your service charges a fee for a trial, specify it here.
+          To charge no trial fee, set this value to `0`.
         type: number
         format: double
       period:
@@ -109,17 +114,18 @@ properties:
             description: Length of time.
             type: integer
             minimum: 1
+  invoiceTimeShift:
+    description: |-
+      Use invoice time shift to adjust the invoice issue and due date when billing must occur before the service period changes.
+      For example, rent must be paid in advance,
+      so the invoice must be in advance of the billing date.
+      For more information, see [Service period anchor, and billing timing, and invoice time shift](https://www.rebilly.com/docs/dev-docs/concepts/#service-period-anchor-and-billing-timing-and-invoice-time-shift).
+    allOf:
+      - $ref: ./Invoices/InvoiceTimeShift.yaml
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:
     $ref: ./UpdatedTime.yaml
-  _embedded:
-    type: object
-    description: Embedded objects that are requested by the `expand` query parameter.
-    readOnly: true
-    properties:
-      product:
-        type: object
   _links:
     type: array
     description: Related links.
