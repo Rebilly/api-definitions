@@ -4,19 +4,18 @@ post:
   x-products:
     - Core
   tags:
-    - KYC documents
-  summary: Stop review of a KYC document
-  operationId: PostKycDocumentStopReview
-  x-sdk-operation-name: stopReview
+    - AML
+  summary: Start review of a AML check
+  operationId: PostAmlCheckStartReview
+  x-sdk-operation-name: startReview
   description: |-
-    Stops the review of a KYC document with a specified ID.
+    Starts the review process of a AML check with a specified ID.
 
-    This operation also sets the KYC document `reviewStartTime` and the reviewer information to null.
-    Use this operation when the reviewer must stop the review.
-    For example, if the reviewer must take a break, or ends a shift.
+    This operation also sets the AML check `reviewStartTime` to the current date-time,
+    and updates the review information.
   responses:
     '201':
-      description: KYC document review stopped.
+      description: AML check review started.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
