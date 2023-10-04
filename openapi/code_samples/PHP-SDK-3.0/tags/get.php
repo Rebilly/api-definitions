@@ -12,7 +12,7 @@ foreach ($tagsPaginator as $tagPage) {
 
 // OR
 
-$tags = $service->tags()->getAll(limit: 100);
+$tags = $service->tags()->getAll();
 foreach ($tags as $tag) {
     printf("Tag #%s: %s\n", $tag->getId(), $tag->getName());
 }
