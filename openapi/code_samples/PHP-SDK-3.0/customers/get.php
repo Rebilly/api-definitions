@@ -12,7 +12,7 @@ foreach ($customersPaginator as $customerPage) {
 
 // OR
 
-$customers = $service->customers()->getAll(limit: 100);
+$customers = $service->customers()->getAll(filter: 'firstName:John');
 foreach ($customers as $customer) {
     printf("Customer #%s: %s\n", $customer->getId(), $customer->getFirstName());
 }
