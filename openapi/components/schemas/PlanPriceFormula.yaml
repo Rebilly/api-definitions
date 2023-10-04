@@ -1,0 +1,16 @@
+type: object
+description: Pricing information.
+discriminator:
+  propertyName: formula
+  mapping:
+    fixed-fee: ./PlanFormulaFixedFee.yaml
+    flat-rate: ./PlanFormulaFlatRate.yaml
+    stairstep: ./PlanFormulaStairstep.yaml
+    tiered: ./PlanFormulaTiered.yaml
+    volume: ./PlanFormulaVolume.yaml
+oneOf:
+  - $ref: ./PlanFormulaFixedFee.yaml
+  - $ref: ./PlanFormulaFlatRate.yaml
+  - $ref: ./PlanFormulaStairstep.yaml
+  - $ref: ./PlanFormulaTiered.yaml
+  - $ref: ./PlanFormulaVolume.yaml

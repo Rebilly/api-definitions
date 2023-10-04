@@ -1,0 +1,36 @@
+content:
+  application/json:
+    schema:
+      properties:
+        couponId:
+          description: ID of the coupon.
+          type: string
+        eventType:
+          type: string
+          description: Type of webhook event.
+          enum:
+            - coupon-expiration-modified
+            - coupon-expired
+            - coupon-issued
+            - coupon-modified
+        _embedded:
+          type: object
+          description: Embedded objects.
+          properties:
+            coupon:
+              $ref: ../../schemas/Coupon.yaml
+        _links:
+          type: array
+          description: Related links.
+          items:
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - coupon
+description: Coupon webhook request body resource.
