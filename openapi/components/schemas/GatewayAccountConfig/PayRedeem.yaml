@@ -1,0 +1,30 @@
+description: PayRedeem gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: PayRedeem credentials object.
+        properties:
+          apiUser:
+            type: string
+            description: PayRedeem API user.
+          apiPassword:
+            type: string
+            description: PayRedeem API password.
+            format: password
+            writeOnly: true
+          apiKey:
+            type: string
+            description: PayRedeem API key.
+            format: password
+            writeOnly: true
+        required:
+          - apiUser
+          - apiPassword
+          - apiKey
+      threeDSecureServer:
+        $ref: ./ThreeDSecureIO3dsServer.yaml
