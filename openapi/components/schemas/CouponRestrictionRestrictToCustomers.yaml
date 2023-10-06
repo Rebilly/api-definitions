@@ -1,0 +1,16 @@
+type: object
+description: Restricts a coupon to specific customers.
+required:
+  - type
+  - customerIds
+properties:
+  type:
+    type: string
+    description: Type of coupon restriction.
+    enum: ["restrict-to-customers"]
+  customerIds:
+    type: array
+    description: Customer IDs on which a coupon can be applied.
+    items:
+      type: string
+
