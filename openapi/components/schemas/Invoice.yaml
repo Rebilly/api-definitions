@@ -59,7 +59,9 @@ properties:
   shipping:
     $ref: ./Shipping.yaml
   tax:
-    $ref: ./Invoices/InvoiceTax.yaml
+    description: Invoice taxes.
+    allOf:
+      - $ref: ./Taxes/Tax.yaml
   organizationTaxIdNumber:
     description: Organization tax ID number that is displayed on the invoice.
     type: object

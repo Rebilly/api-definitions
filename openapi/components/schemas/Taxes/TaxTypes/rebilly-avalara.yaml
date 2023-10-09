@@ -1,7 +1,7 @@
 type: object
 description: Avalara tax calculator.
 required:
-- calculator
+  - calculator
 properties:
   calculator:
     description: Type of tax calculator.
@@ -12,11 +12,11 @@ properties:
     type: integer
     x-type: Money
     x-sortable: true
-    description: Total amount of all invoice taxes.
+    description: Total amount of all taxes.
     readOnly: true
   items:
     type: array
-    description: Taxes that are applied to this invoice and calculated based on the `taxCategoryId` of the related product.
+    description: Taxes applied and calculated based on the `taxCategoryId` of the related product.
     items:
       allOf:
-        - $ref: ../InvoiceTaxItem.yaml
+        - $ref: ../TaxItem.yaml
