@@ -35,19 +35,39 @@ For more information on API keys, see [API keys](https://www.rebilly.com/docs/co
 Rebilly follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807), which is also known as Problem Details for HTTP APIs. As with any API responses, your client must be prepared to gracefully handle additional members of the response. The following section describes common error types.
 
 ## Forbidden
-<RedocResponse pointer={"#/components/responses/Forbidden"} />
+
+{% openapi-response
+    openApiFilePath="./openapi.yaml"
+    pointer="#/components/responses/Forbidden"
+/%}
 
 ## Conflict
-<RedocResponse pointer={"#/components/responses/Conflict"} />
+
+{% openapi-response
+    openApiFilePath="./openapi.yaml"
+    pointer="#/components/responses/Conflict"
+/%}
 
 ## NotFound
-<RedocResponse pointer={"#/components/responses/NotFound"} />
+
+{% openapi-response
+    openApiFilePath="./openapi.yaml"
+    pointer="#/components/responses/NotFound"
+/%}
 
 ## Unauthorized
-<RedocResponse pointer={"#/components/responses/Unauthorized"} />
+
+{% openapi-response
+    openApiFilePath="./openapi.yaml"
+    pointer="#/components/responses/Unauthorized"
+/%}
 
 ## ValidationError
-<RedocResponse pointer={"#/components/responses/ValidationError"} />
+
+{% openapi-response
+    openApiFilePath="./openapi.yaml"
+    pointer="#/components/responses/ValidationError"
+/%}
 
 # SDKs
 
