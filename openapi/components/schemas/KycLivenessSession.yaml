@@ -1,0 +1,71 @@
+type: object
+description: KYC liveness session information.
+required:
+  - customerId
+  - documents
+properties:
+  id:
+    type: string
+    readOnly: true
+    description: ID of the KYC liveness session.
+    maxLength: 50
+    example: kyc_lvs_0YV7JMJ3DBCGRBR7K9D4HVGPP5
+  customerId:
+    $ref: ./CustomerId.yaml
+  requestId:
+    type: string
+    description: ID of the KYC request that the liveness session is associated with.
+    maxLength: 50
+    example: kyc_req_0YV7JMJ3DBCGRBR7K9D4HVGPP5
+  sessionId:
+    type: string
+    readOnly: true
+    description: Session ID of the KYC liveness session in the third-party service.
+  status:
+    description: Status of the session.
+    type: string
+    readOnly: true
+    enum:
+      - pending
+      - processed
+      - failed
+      - abandoned
+    x-enumDescriptions:
+      pending: |-
+        Session is created, but not processed yet.
+        This is a temporary state.
+      processed: |-
+        Session was completed and is processed.
+        This is a permanent state.
+      failed: |-
+        Session was completed, but was not successful.
+        This is a permanent state.
+      abandoned: |-
+        Session was not completed and timed out.
+        This is a permanent state.
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
+    properties:
+      documents:
+        type: array
