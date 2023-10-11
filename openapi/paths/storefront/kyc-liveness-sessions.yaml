@@ -1,0 +1,82 @@
+post:
+  x-products:
+    - Storefront
+  tags:
+    - KYC documents
+  summary: Create a KYC liveness session
+  operationId: StorefrontPostKycLivenessSession
+  x-sdk-operation-name: create
+  description: |-
+    Creates a KYC liveness session.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/StorefrontKycLivenessSession.yaml
+        examples:
+          request-liveness-session:
+            summary: Basic liveness session
+            description: |-
+              This example shows how to create a liveness session with a request ID.
+            value:
+              customerId: '123_456789'
+              requestId: 'kyc_req_0YV7JMJ3DBCGRBR7K9D4HVGPP5'
+          no-request-liveness-session:
+            summary: Basic liveness session
+            description: |-
+              This example shows how to create a liveness session without a request ID.
+            value:
+              customerId: '123_456789'
+              requestId: null
+    description: KYC request resource.
+    required: true
+  responses:
+    '201':
+      description: KYC liveness session created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/StorefrontKycRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+get:
+  x-products:
+    - Storefront
+  tags:
+    - KYC documents
+  summary: Retrieve KYC liveness session
+  operationId: StorefrontGetKycLivenessSessionCollection
+  x-sdk-operation-name: getAll
+  description: Retrieves a list of KYC liveness sessions.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+  responses:
+    '200':
+      description: List of KYC liveness sessions retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/StorefrontKycLivenessSession.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
