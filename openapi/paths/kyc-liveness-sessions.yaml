@@ -28,11 +28,13 @@ post:
               This example shows how to create a liveness session without a request ID.
             value:
               customerId: '123_456789'
-              requestId: null
     required: true
   responses:
     '201':
       description: KYC liveness session created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
