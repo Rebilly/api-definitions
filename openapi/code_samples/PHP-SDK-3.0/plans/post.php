@@ -6,7 +6,7 @@ $plan = \Rebilly\Sdk\Model\Plan::from([])
     ->setProductId('productId')
     ->setName('Test plan')
     ->setCurrency('USD')
-    ->setPricing(new \Rebilly\Sdk\Model\FlatRate(['price' => 9.99]))
+    ->setPricing(new \Rebilly\Sdk\Model\PlanFormulaFlatRate(['price' => 9.99]))
     ->setRecurringInterval(
         \Rebilly\Sdk\Model\SubscriptionOrderPlanRecurringInterval::from()
             ->setUnit(\Rebilly\Sdk\Model\SubscriptionOrderPlanRecurringInterval::UNIT_MONTH)
