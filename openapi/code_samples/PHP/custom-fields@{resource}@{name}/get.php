@@ -1,1 +1,4 @@
-$customField = $client->customFields()->load('customers', 'testFieldName');
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+$customField = $service->customFields()->get('customers', 'testFieldName');

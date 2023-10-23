@@ -1,1 +1,4 @@
-$client->attachments()->delete('attachmentId');
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+$service->files()->detach('attachmentId');

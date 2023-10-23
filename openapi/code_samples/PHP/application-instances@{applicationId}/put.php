@@ -1,8 +1,12 @@
-$applicationInstance = new Rebilly\Entities\ApplicationInstance();
-$applicationInstance->setSettings(['color' => 'red', 'limit' => 5]);
+<?php
+
+$service = new \Rebilly\Sdk\UsersService($client);
+$applicationInstance = \Rebilly\Sdk\Model\ApplicationInstance::from([
+    'settings' => ['color' => 'red', 'limit' => 5],
+]);
 
 try {
-    $applicationInstance = $client->applicationInstances()->update('applicationId', $applicationInstance);
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    $applicationInstance = $service->applicationInstances()->upsert('applicationId', $applicationInstance);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

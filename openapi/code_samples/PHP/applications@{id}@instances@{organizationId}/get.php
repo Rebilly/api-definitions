@@ -1,1 +1,4 @@
-$applicationInstance = $client->applications()->loadInstance('applicationId', 'organizationId');
+<?php
+
+$service = new \Rebilly\Sdk\UsersService($client);
+$applicationInstance = $service->applications()->getInstance('applicationId', 'organizationId');

@@ -1,0 +1,1 @@
+$client->attachments()->delete('attachmentId');

@@ -1,0 +1,1 @@
+$client->customers()->deleteLeadSource('myCustomerId');

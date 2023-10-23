@@ -11,12 +11,12 @@ properties:
     maxLength: 50
     example: cpn_0YVCNKF81GD778N4YNVGDJK558
   discount:
-    $ref: ./Coupon/Discount.yaml
+    $ref: ./Discount.yaml
   restrictions:
     description: Coupon restrictions.
     type: array
     items:
-      $ref: ./Coupon/CouponRestriction.yaml
+      $ref: ./CouponRestriction.yaml
   redemptionsCount:
     type: integer
     description: Total number of times that a coupon is redeemed.
@@ -55,6 +55,15 @@ properties:
     x-sortable: true
     x-basic: true
     format: date-time
+  revision:
+    description: |-
+      Number of times the coupon data has been modified.
+
+      Use the revision number when analyzing webhook data to
+      determine if a change should take precedence over the current
+      representation.
+    type: integer
+    readOnly: true
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:

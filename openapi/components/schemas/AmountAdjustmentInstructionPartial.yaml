@@ -1,0 +1,30 @@
+type: object
+required:
+  - method
+  - value
+  - type
+properties:
+  method:
+    type: string
+    enum:
+      - partial
+  value:
+    description: Amount of the payment.
+    type: number
+    format: float
+  type:
+    description: Payment amount type.
+    type: string
+    enum:
+      - percent
+      - fixed
+  afterApprovalPolicy:
+    description: After an approved payment retry for an adjusted amount, this field specifies whether to discount the remaining invoice amount.
+    discriminator:
+      propertyName: method
+      mapping:
+        none: ./AmountAdjustmentPoliciesNone.yaml
+        discount-amount-remaining: ./AmountAdjustmentPoliciesDiscountAmountRemaining.yaml
+    oneOf:
+      - $ref: ./AmountAdjustmentPoliciesNone.yaml
+      - $ref: ./AmountAdjustmentPoliciesDiscountAmountRemaining.yaml

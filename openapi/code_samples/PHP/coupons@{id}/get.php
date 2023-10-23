@@ -1,1 +1,4 @@
-$coupon = $client->coupons()->load('couponId');
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+$coupon = $service->coupons()->get('couponId');

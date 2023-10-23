@@ -1,1 +1,4 @@
-$gatewayAccount = $client->gatewayAccounts()->load('gatewayAccountId');
+<?php
+
+$service = new \Rebilly\Sdk\UsersService($client);
+$gatewayAccount = $service->gatewayAccounts()->get('gatewayAccountId');

@@ -1,1 +1,4 @@
-$client->files()->delete('fileId');
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+$service->files()->delete('fileId');

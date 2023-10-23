@@ -1,1 +1,4 @@
-$client->plans()->delete('planId');
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+$service->plans()->delete('planId');

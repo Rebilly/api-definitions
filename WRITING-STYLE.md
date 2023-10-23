@@ -80,6 +80,19 @@ Features:
 - Use the MRR report in revenue recognition to view predictable recurring revenue. ✅
 - To view predictable recurring revenue, use the MRR report in revenue recognition. ✅
 
+## Acronyms
+
+An acronym is an abbreviation formed from the initial letters of words that are often used together. Acronyms are often pronounced as a word, or each letter is spelt.
+
+Do not assume that your audience will understand and be familiar with all acronyms, especially acronyms for financial terms or for state bodies that are specific to one country. It is important to be consistent in our use of acronyms and related descriptions. If we are not, we may confuse our audience.
+
+In descriptions, define acronyms that may not be commonly used in their first instance. Thereafter, use the acronym.
+
+Example:
+
+- First usage: Treasury Inflation Protected Securities (TIPS)
+- Thereafter: TIPS
+
 ## Capitalization
 
 Use sentence-style capitalization for all descriptions. Capitalize the first letter of the first word and use lowercase thereafter.

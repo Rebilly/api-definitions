@@ -1,1 +1,5 @@
-$authenticationOptions = $client->authenticationOptions()->load();
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+
+$authenticationOptions = $service->customerAuthentication()->getAuthOptions();

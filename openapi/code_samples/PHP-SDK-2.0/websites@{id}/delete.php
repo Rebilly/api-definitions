@@ -1,0 +1,1 @@
+$client->websites()->delete('websiteId');

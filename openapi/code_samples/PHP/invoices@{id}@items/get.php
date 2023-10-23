@@ -1,3 +1,4 @@
-$invoiceItems = $client->invoiceItems()->search('invoiceId', [
-    'filter' => 'quantity:5',
-]);
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+$invoiceItems = $service->invoices()->getAllInvoiceItems('invoiceId');

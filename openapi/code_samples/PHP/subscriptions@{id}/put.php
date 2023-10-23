@@ -1,48 +1,26 @@
-$subscriptionForm = new Rebilly\Entities\Subscription();
-$subscriptionForm->setCustomerId('customerId');
-$subscriptionForm->setWebsiteId('websiteId');
-$subscriptionForm->setItems($subscriptionForm->createItems([
-    [
-        'planId' => 'my-plan',
-        'quantity' => 1,
-    ],
-]));
-$subscriptionForm->setBillingAddress([
-    'firstName' => 'John',
-    'lastName' => 'Doe',
-    'organization' => 'Test LTD',
-    'address' => 'Test street 5',
-    'address2' => 'Test house 5',
-    'city' => 'New York',
-    'region' => 'Long Island',
-    'country' => 'US',
-    'postalCode' => '123456',
-    'emails' => [
-        [
-            'label' => 'main',
-            'value' => 'johndoe@testemail.com',
-            'primary' => true,
-        ],
-        [
-            'label' => 'secondary',
-            'value' => 'otheremail@testemail.com',
-        ],
-    ],
-    'phoneNumbers' => [
-        [
-            'label' => 'work',
-            'value' => '+123456789',
-            'primary' => true,
-        ],
-        [
-            'label' => 'home',
-            'value' => '+9874654321',
-        ],
-    ],
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+
+$order = new \Rebilly\Sdk\Model\SubscriptionOrder([
+    'shipping' => new \Rebilly\Sdk\Model\ManualShipping([
+        'amount' => 14.99,
+    ]),
 ]);
 
 try {
-    $subscription = $client->subscriptions()->update('subscriptionId', $subscriptionForm);
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    $order = $service->subscriptions()->update('orderId', $order);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
+}
+
+// OR
+
+$order = $service->subscriptions()->get('orderId');
+$order->setShipping(new \Rebilly\Sdk\Model\ManualShipping(['amount' => 14.99]));
+
+try {
+    $order = $service->subscriptions()->update('orderId', $order);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

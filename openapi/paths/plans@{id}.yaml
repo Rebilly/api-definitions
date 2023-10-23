@@ -28,15 +28,15 @@ get:
       $ref: ../components/responses/NotFound.yaml
   x-codeSamples:
     - lang: PHP
+      label: PHP-SDK-2.0
       source:
-        $ref: '../code_samples/PHP/plans@{id}/get.php'
+        $ref: '../code_samples/PHP-SDK-2.0/plans@{id}/get.php'
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/plans@{id}/get.js'
     - lang: PHP
-      label: PHP-SDK-3.0
       source:
-        $ref: ../code_samples/PHP-SDK-3.0/plans@{id}/get.php
+        $ref: ../code_samples/PHP/plans@{id}/get.php
 put:
   x-products:
     - Core
@@ -47,7 +47,12 @@ put:
   x-sdk-operation-name: update
   description: Creates or updates (upserts) a plan with a specified ID.
   requestBody:
-    $ref: ../components/requestBodies/Plan.yaml
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Plan.yaml
+    description: Plan resource.
+    required: true
   responses:
     '200':
       description: Plan updated.
@@ -74,15 +79,15 @@ put:
       $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
     - lang: PHP
+      label: PHP-SDK-2.0
       source:
-        $ref: '../code_samples/PHP/plans@{id}/put.php'
+        $ref: '../code_samples/PHP-SDK-2.0/plans@{id}/put.php'
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/plans@{id}/put.js'
     - lang: PHP
-      label: PHP-SDK-3.0
       source:
-        $ref: ../code_samples/PHP-SDK-3.0/plans@{id}/put.php
+        $ref: ../code_samples/PHP/plans@{id}/put.php
 delete:
   x-products:
     - Core
@@ -103,12 +108,12 @@ delete:
       $ref: ../components/responses/Conflict.yaml
   x-codeSamples:
     - lang: PHP
+      label: PHP-SDK-2.0
       source:
-        $ref: '../code_samples/PHP/plans@{id}/delete.php'
+        $ref: '../code_samples/PHP-SDK-2.0/plans@{id}/delete.php'
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/plans@{id}/delete.js'
     - lang: PHP
-      label: PHP-SDK-3.0
       source:
-        $ref: ../code_samples/PHP-SDK-3.0/plans@{id}/delete.php
+        $ref: ../code_samples/PHP/plans@{id}/delete.php

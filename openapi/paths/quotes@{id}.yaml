@@ -70,3 +70,36 @@ put:
       $ref: ../components/responses/NotFound.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
+patch:
+  x-products:
+    - Core
+  tags:
+    - Quotes
+  summary: Partially update a quote
+  operationId: PatchQuote
+  x-sdk-operation-name: patch
+  description: |-
+    Partially updates a quote with a specified ID.
+
+    The update operation can only be used for quotes with a `status` of `draft`.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/requestBodies/PatchQuote.yaml
+    required: true
+  responses:
+    '200':
+      description: Quote updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Quote.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

@@ -1,9 +1,13 @@
-$leadSourceForm = new Rebilly\Entities\LeadSource();
-$leadSourceForm->setSource('TestSource');
-$leadSourceForm->setCampaign('TestCampaign');
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+
+$leadSourceForm = \Rebilly\Sdk\Model\LeadSource::from([])
+    ->setSource('TestSource')
+    ->setCampaign('TestCampaign');
 
 try {
-    $customer = $client->customers()->updateLeadSource('myCustomerId', $leadSourceForm);
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    $customer = $service->customers()->createLeadSource('myCustomerId', $leadSourceForm);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

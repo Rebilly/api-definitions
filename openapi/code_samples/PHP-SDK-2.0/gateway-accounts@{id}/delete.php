@@ -1,0 +1,1 @@
+$client->gatewayAccounts()->delete('gatewayAccountId');
