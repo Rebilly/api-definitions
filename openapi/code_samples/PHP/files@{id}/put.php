@@ -1,8 +1,11 @@
-$fileForm = new Rebilly\Entities\File();
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+$fileForm = new \Rebilly\Sdk\Model\File();
 $fileForm->setDescription('This is a test file');
 
 try {
-    $file = $client->files()->update('fileId', $fileForm);
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    $file = $service->files()->update('fileId', $fileForm);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

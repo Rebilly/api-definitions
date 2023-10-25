@@ -1,10 +1,15 @@
-$invoiceItemForm = new Rebilly\Entities\InvoiceItem();
-$invoiceItemForm->setType($invoiceItemForm::TYPE_DEBIT);
-$invoiceItemForm->setUnitPrice(0.99);
-$invoiceItemForm->setQuantity(5);
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+
+$invoiceItem = \Rebilly\Sdk\Model\InvoiceItem::from([
+    'type' => \Rebilly\Sdk\Model\InvoiceItem::TYPE_DEBIT,
+    'unitPrice' => 0.99,
+    'quantity' => 5,
+]);
 
 try {
-    $invoiceItem = $client->invoiceItems()->update($invoiceItemForm, 'invoiceId', 'invoiceItemId');
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    $invoiceItem = $service->invoices()->updateInvoiceItem('invoiceId', 'invoiceItemId', $invoiceItem);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

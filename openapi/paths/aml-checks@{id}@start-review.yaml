@@ -1,0 +1,33 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - AML
+  summary: Start review of an AML check
+  operationId: PostAmlCheckStartReview
+  x-sdk-operation-name: startReview
+  description: |-
+    Starts the manual review process for an AML check with a specified ID.
+
+    This operation also sets the AML check `reviewStartTime` to the current date-time,
+    and updates the review information.
+  responses:
+    '201':
+      description: AML check review started.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/AmlCheck.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

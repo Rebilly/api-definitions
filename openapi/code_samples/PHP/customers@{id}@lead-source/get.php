@@ -1,2 +1,4 @@
-$customer = $client->customers()->load('myCustomerId');
-$leadSource = $customer->getLeadSource();
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+$customerLeadSource = $service->customers()->getLeadSource('customerId');

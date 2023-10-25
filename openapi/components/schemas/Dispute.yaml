@@ -207,7 +207,12 @@ properties:
       - '51'
       - 'A'
       - 'B'
-
+  reasonDescription:
+    description: Description of the reason for the dispute.
+    type: string
+    nullable: true
+    maxLength: 512
+    readOnly: true
   category:
     description: Category of dispute.
     type: string
@@ -218,6 +223,7 @@ properties:
       - processing-errors
       - consumer-disputes
       - uncategorized
+      - bank-return
   type:
     description: Type of dispute.
     type: string
@@ -229,6 +235,7 @@ properties:
       - fraud
       - ethoca-alert
       - verifi-alert
+      - bank-return
   status:
     description: Status of the dispute.
     type: string
@@ -260,6 +267,15 @@ properties:
     nullable: true
     format: date-time
     description: Date and time when the dispute is resolved.
+    readOnly: true
+  revision:
+    description: |-
+      Number of times the dispute data has been modified.
+
+      Use the revision number when analyzing webhook data to
+      determine if a change should take precedence over the current
+      representation.
+    type: integer
     readOnly: true
   createdTime:
     $ref: CreatedTime.yaml

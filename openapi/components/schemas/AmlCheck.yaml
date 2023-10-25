@@ -26,6 +26,11 @@ properties:
     type: string
     nullable: true
     description: First and last name of the person who reviewed the AML check.
+  reviewStartTime:
+    type: string
+    format: date-time
+    nullable: true
+    description: Date and time when the AML check review is started.
   reviewTime:
     type: string
     format: date-time
@@ -43,6 +48,22 @@ properties:
       - sign-up
       - recurring
       - purchase
+  status:
+    type: string
+    description: Status of the AML check.
+    readOnly: true
+    enum:
+      - pending-review
+      - in-review
+      - no-match
+      - confirmed-match
+      - false-positive
+    x-enumDescriptions:
+      pending-review: Possible AML match detected and waiting to be manually reviewed.
+      in-review: A manual AML match review is in progress.
+      no-match: No possible AML match detected.
+      confirmed-match: Possible AML match manually reviewed and marked as confirmed.
+      false-positive: Possible AML match manually reviewed and marked as false positive.
   customer:
     type: object
     properties:

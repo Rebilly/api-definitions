@@ -1,0 +1,21 @@
+type: object
+description: TaxJar tax calculator.
+required:
+  - calculator
+properties:
+  calculator:
+    description: Type of tax calculator.
+    type: string
+    enum:
+      - "rebilly-taxjar"
+  amount:
+    type: integer
+    x-type: Money
+    x-sortable: true
+    description: Total amount of taxes.
+    readOnly: true
+  items:
+    type: array
+    description: Taxes applied and calculated based on the `taxCategoryId` of the related product.
+    items:
+      $ref: ../TaxItem.yaml

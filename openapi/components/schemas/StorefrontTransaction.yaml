@@ -110,7 +110,7 @@ properties:
     type: array
     items:
       $ref: ./ResourceId.yaml
-  subscriptionIds:
+  orderIds:
     description: Subscription IDs of invoices that are related to the transaction.
     readOnly: true
     type: array
@@ -137,58 +137,6 @@ properties:
     description: Billing address.
     allOf:
       - $ref: ./Contact/ContactObject.yaml
-  has3ds:
-    description: Specifies if the transaction uses 3D Secure.
-    type: boolean
-    readOnly: true
-  3ds:
-    type: object
-    description: Authentication object.
-    readOnly: true
-    properties:
-      server:
-        description: Name of the 3D Secure server.
-        type: string
-      version:
-        description: Version of 3D Secure.
-        type: string
-        enum:
-          - '1.0.2'
-          - '2.1.0'
-          - '2.2.0'
-      enrolled:
-        description: Specifies if the cardholder is enrolled in 3D Secure.
-        type: string
-        enum:
-          - yes
-          - no
-          - invalid card/timeout
-          - unavailable
-      authenticated:
-        description: Authentication response status for 3D Secure.
-        type: string
-        enum:
-          - yes
-          - no
-          - not applicable
-          - attempted
-      liability:
-        type: string
-        enum:
-          - protected
-          - not protected
-          - protected (attempt)
-      flow:
-        description: Authentication flow for 3D Secure 2.
-        type: string
-        enum:
-          - frictionless
-          - challenge
-      isDowngraded:
-        description: Specifies if 3D Secure 2 is attempted and downgraded to 3D Secure 1.
-        type: boolean
-        default: false
-        deprecated: true
   redirectUrl:
     description: |-
       URL where the end-user is redirected to when an offsite transaction is completed.
@@ -248,7 +196,18 @@ properties:
   updatedTime:
     $ref: ./UpdatedTime.yaml
   paymentInstrument:
-    $ref: ./Storefront/PaymentInstruments/InstrumentReference.yaml
+    type: object
+    description: Default payment instrument information.
+    required:
+      - method
+    properties:
+      method:
+        $ref: ./PaymentMethods/PaymentMethod.yaml
+      paymentInstrumentId:
+        type: string
+        description: ID of the payment instrument.
+        maxLength: 50
+        example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
   approvalUrl:
     description: URL to redirect the end-customer when transaction `status` is `waiting-approval` or `offsite`.
     type: string

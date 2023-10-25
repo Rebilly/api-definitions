@@ -1,1 +1,4 @@
-$paymentInstrument = $client->paymentInstruments()->load('paymentInstrumentId');
+<?php
+
+$service = new \Rebilly\Sdk\UsersService($client);
+$paymentInstrument = $service->paymentInstruments()->get('paymentInstrumentId');

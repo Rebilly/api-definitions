@@ -1,9 +1,16 @@
-$subscriptionCancellationForm = new Rebilly\Entities\SubscriptionCancellation();
-$subscriptionCancellationForm->setSubscriptionId('subscription-1');
-$subscriptionCancellationForm->setChurnTime(date('c'));
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+
+$cancellation = new \Rebilly\Sdk\Model\SubscriptionCancellation([
+    'subscriptionId' => 'subscriptionId',
+    'churnTime' => new DateTimeImmutable(),
+    'canceledBy' => \Rebilly\Sdk\Model\SubscriptionCancellation::CANCELED_BY_MERCHANT,
+    'reason' => \Rebilly\Sdk\Model\SubscriptionCancellation::REASON_CONTRACT_EXPIRED,
+]);
 
 try {
-    $subscription = $client->subscriptionCancellations()->create($subscriptionCancellationForm);
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    $cancellation = $service->subscriptionCancellations()->create($cancellation);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

@@ -1,8 +1,12 @@
-$apiKeyForm = new Rebilly\Entities\ApiKey();
+<?php
+
+$service = new \Rebilly\Sdk\UsersService($client);
+
+$apiKeyForm = new \Rebilly\Sdk\Model\ApiKey();
 $apiKeyForm->setDescription('Test key');
 
 try {
-    $apiKey = $client->apiKeys()->create($apiKeyForm);
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    $apiKey = $service->apiKeys()->create($apiKeyForm);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

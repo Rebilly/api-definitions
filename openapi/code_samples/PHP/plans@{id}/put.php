@@ -1,12 +1,30 @@
-$planForm = new Rebilly\Entities\Plan();
-$planForm->setName('TestPlan');
-$planForm->setCurrency('USD');
-$planForm->setTrialAmount(1);
-$planForm->setTrialPeriodUnit('day');
-$planForm->setTrialPeriodLength(1);
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+
+$plan = new \Rebilly\Sdk\Model\Plan([
+    'recurringInterval' => [
+        'unit' => \Rebilly\Sdk\Model\SubscriptionOrderPlanRecurringInterval::UNIT_WEEK,
+        'length' => 2,
+    ],
+]);
 
 try {
-    $plan = $client->plans()->update('planId', $planForm);
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    $plan = $service->plans()->update('planId', $plan);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
+    print_r($e->getValidationErrors());
+}
+
+// OR
+
+$plan = $service->plans()->get('planId');
+$plan->setRecurringInterval(new \Rebilly\Sdk\Model\SubscriptionOrderPlanRecurringInterval([
+    'unit' => \Rebilly\Sdk\Model\SubscriptionOrderPlanRecurringInterval::UNIT_WEEK,
+    'length' => 2,
+]));
+
+try {
+    $plan = $service->plans()->update('planId', $plan);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

@@ -68,8 +68,22 @@ properties:
         plan:
           description: Plan details.
           oneOf:
-            - $ref: ./Plans/OriginalPlan.yaml
-            - $ref: ./Plans/FlexiblePlan.yaml
+            - $ref: ./OriginalPlan.yaml
+            - $ref: ./FlexiblePlan.yaml
+        description:
+          type: string
+          description: Description of the quote item.
+          example: Charge per approved transaction with DCC
+          default: ''
+          maxLength: 255
+        priceDescription:
+          type: string
+          description: |-
+            Price description of the quote item.
+            This value is only used for metered billing items.
+          example: 50% of the markup for approved transactions
+          default: ''
+          maxLength: 255
         createdTime:
           $ref: ./CreatedTime.yaml
         updatedTime:
@@ -95,80 +109,147 @@ properties:
       - $ref: ./Contact/ContactObject.yaml
   invoicePreview:
     type: object
-    description: Preview of initial quote invoice.
+    description: Preview of the quote invoice.
     readOnly: true
     properties:
       currency:
         description: Currency of the invoice.
         allOf:
           - $ref: ./CurrencyCode.yaml
-      amount:
-        description: Amount of the invoice.
-        type: number
-        x-type: Money
-        format: double
-      subtotalAmount:
-        description: Subtotal amount of the invoice.
-        type: number
-        x-type: Money
-        format: double
-      discountAmount:
-        description: Discount amount that is applied to the invoice.
-        type: number
-        x-type: Money
-        format: double
-      shippingAmount:
-        description: Shipping amount that is applied to the invoice.
-        type: number
-        x-type: Money
-        format: double
-      taxAmount:
-        description: Tax amount that is applied to the invoice.
-        type: number
-        x-type: Money
-        format: double
+      initialAmounts:
+        type: object
+        description: Total amounts of the initial invoice.
+        properties:
+          amount:
+            description: Amount of the invoice.
+            type: number
+            x-type: Money
+            format: double
+          subtotalAmount:
+            description: Subtotal amount of the invoice.
+            type: number
+            x-type: Money
+            format: double
+          discountAmount:
+            description: Discount amount that is applied to the invoice.
+            type: number
+            x-type: Money
+            format: double
+          shippingAmount:
+            description: Shipping amount that is applied to the invoice.
+            type: number
+            x-type: Money
+            format: double
+          taxAmount:
+            description: Tax amount that is applied to the invoice.
+            type: number
+            x-type: Money
+            format: double
+      recurringAmounts:
+        type: object
+        description: |-
+          Total amounts of the recurring invoice.
+          This includes recurring items only.
+          If the quote does not have recurring items, the value of this field is `null`.
+        nullable: true
+        properties:
+          amount:
+            description: Amount of the invoice.
+            type: number
+            x-type: Money
+            format: double
+          subtotalAmount:
+            description: Subtotal amount of the invoice.
+            type: number
+            x-type: Money
+            format: double
+          discountAmount:
+            description: Discount amount that is applied to the invoice.
+            type: number
+            x-type: Money
+            format: double
+          shippingAmount:
+            description: Shipping amount that is applied to the invoice.
+            type: number
+            x-type: Money
+            format: double
+          taxAmount:
+            description: Tax amount that is applied to the invoice.
+            type: number
+            x-type: Money
+            format: double
       items:
         type: array
         description: Invoice items.
         items:
           type: object
           properties:
+            quoteItemId:
+              description: ID of the related quote item.
+              type: string
+              example: qti_0YV7DES3WPC5J8JD8QTVNZBZNZ
             type:
               type: string
-              description: Type of invoice item.
+              description: Type of the invoice item.
               x-basic: true
               enum:
                 - debit
                 - credit
+            name:
+              description: Name of the invoice item.
+              type: string
+              maxLength: 1000
             description:
               description: Description of the invoice item.
               type: string
-              maxLength: 1000
+              example: Charge per approved transaction with DCC
+              maxLength: 255
+            priceDescription:
+              type: string
+              description: Price description of the invoice item.
+              example: 50% of the markup for approved transactions
+              maxLength: 255
             unitPrice:
               description: Unit price of the invoice item.
               type: number
               format: double
+              nullable: true
             quantity:
               description: Quantity of the invoice item.
               type: integer
-            price:
-              description: Total price of the invoice item.
+            period:
+              description: Date interval of the invoice item.
+              type: string
+              nullable: true
+            setupUnitPrice:
+              description: Unit price of the invoice item.
               type: number
               format: double
-              readOnly: true
-            periodStartTime:
-              description: Date and time when the billing period starts.
+              nullable: true
+            trialUnitPrice:
+              description: Unit price of the invoice item.
+              type: number
+              format: double
+              nullable: true
+            trialPeriod:
+              description: Date interval of the invoice item trial.
               type: string
-              format: date-time
-            periodEndTime:
-              description: Date and time when the billing period ends.
-              type: string
-              format: date-time
-            tax:
+              nullable: true
+            taxAmount:
               description: Invoice item tax.
-              readOnly: true
-              allOf:
-                - $ref: ./Invoices/InvoiceTaxItem.yaml
+              type: number
+              format: double
+              nullable: true
+            setupTaxAmount:
+              description: Tax amount of the setup that is applied to the invoice.
+              type: number
+              format: double
+              nullable: true
+            trialTaxAmount:
+              description: Tax amount of the trial that is applied to the invoice.
+              type: number
+              format: double
+              nullable: true
   paymentTerms:
     description: Payment terms for the customer which are displayed on the quote.
     type: string
@@ -221,6 +302,8 @@ properties:
         default: null
   shipping:
     $ref: ./Shipping.yaml
+  tax:
+    $ref: ./Taxes/Taxes.yaml
   couponIds:
     type: array
     nullable: true

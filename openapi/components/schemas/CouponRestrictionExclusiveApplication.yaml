@@ -1,0 +1,12 @@
+type: object
+description: |-
+  Restricts a coupon so that it cannot be used in combination with other coupons.
+  If more than one coupon is active, a coupon with this restriction is only applied if it provides a larger discount than the other coupons combined.
+  If a coupon with this restriction is applied, all other coupons are removed.
+required:
+  - type
+properties:
+  type:
+    type: string
+    description: Type of coupon restriction.
+    enum: ["restrict-to-exclusive-application"]

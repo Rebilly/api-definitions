@@ -1,10 +1,14 @@
-$customerCredentialForm = new Rebilly\Entities\CustomerCredential();
-$customerCredentialForm->setCustomerId('customerId');
-$customerCredentialForm->setUsername('test');
-$customerCredentialForm->setPassword('1234');
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+
+$customerCredentialForm = \Rebilly\Sdk\Model\CustomerCredential::from([])
+    ->setCustomerId('customerId')
+    ->setUsername('test')
+    ->setPassword('1234');
 
 try {
-    $customerCredential = $client->customerCredentials()->update('credentialId', $customerCredentialForm);
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    $customerCredential = $service->customerAuthentication()->updateCredential('credentialId', $customerCredentialForm);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

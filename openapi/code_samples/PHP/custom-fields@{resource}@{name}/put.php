@@ -1,8 +1,12 @@
-$customFieldForm = new Rebilly\Entities\CustomField();
-$customFieldForm->setType($customFieldForm::TYPE_BOOLEAN);
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+
+$customFieldForm = new \Rebilly\Sdk\Model\BooleanCustomField();
+$customFieldForm->setDescription('testFieldDescription');
 
 try {
-    $customField = $client->customFields()->update('customers', 'testFieldName', $customFieldForm);
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    $customField = $service->customFields()->create('customers', 'testFieldName', $customFieldForm);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

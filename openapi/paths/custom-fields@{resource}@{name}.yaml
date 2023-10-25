@@ -16,7 +16,7 @@ get:
   summary: Retrieve a custom field
   operationId: GetCustomField
   x-sdk-operation-name: get
-  description: Retrieves a schema of a specified custom field for a specified resource type.
+  description: Retrieves a specified custom field schema for a specified resource.
   responses:
     '200':
       description: Custom field schema retrieved.
@@ -32,11 +32,15 @@ get:
       $ref: ../components/responses/NotFound.yaml
   x-codeSamples:
     - lang: PHP
+      label: PHP-SDK-2.0
       source:
-        $ref: '../code_samples/PHP/custom-fields@{resource}@{name}/get.php'
+        $ref: '../code_samples/PHP-SDK-2.0/custom-fields@{resource}@{name}/get.php'
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/custom-fields@{resource}@{name}/get.js'
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/custom-fields@{resource}@{name}/get.php'
 put:
   x-products:
     - Core
@@ -45,13 +49,13 @@ put:
   summary: Create or alter a custom field
   operationId: PutCustomField
   x-sdk-operation-name: create
-  description: Creates or alters a schema of the specified custom field for the specified resource type.
+  description: Creates or alters a specified custom field schema for a specified resource.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/CustomField.yaml
-    description: Custom fields schema of the specified resource type.
+    description: Custom fields schema of the specified resource.
     required: true
   responses:
     '200':
@@ -83,8 +87,12 @@ put:
       $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
     - lang: PHP
+      label: PHP-SDK-2.0
       source:
-        $ref: '../code_samples/PHP/custom-fields@{resource}@{name}/put.php'
+        $ref: '../code_samples/PHP-SDK-2.0/custom-fields@{resource}@{name}/put.php'
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/custom-fields@{resource}@{name}/put.js'
+    - lang: PHP
+      source:
+        $ref: '../code_samples/PHP/custom-fields@{resource}@{name}/put.php'

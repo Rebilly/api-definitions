@@ -1,15 +1,19 @@
-$readyToPayForm = new Rebilly\Entities\ReadyToPay();
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+
+$readyToPayForm = new \Rebilly\Sdk\Model\PostReadyToPay();
 $readyToPayForm->setCurrency('USD');
 $readyToPayForm->setAmount(10);
 $readyToPayForm->setWebsiteId('websiteId');
 $readyToPayForm->setCustomerId('customerId');
 
-$riskMetadata = new Rebilly\Entities\RiskMetadata();
+$riskMetadata = new \Rebilly\Sdk\Model\RiskMetadata();
 $riskMetadata->setFingerprint('fingerprint');
 $readyToPayForm->setRiskMetadata($riskMetadata);
 
 try {
-    $transaction = $client->transactions()->create($readyToPayForm);
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    $transactions = $service->purchase()->readyToPay($readyToPayForm);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

@@ -1,1 +1,4 @@
-$plan = $client->plans()->load('planId');
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+$plan = $service->plans()->get('planId');
