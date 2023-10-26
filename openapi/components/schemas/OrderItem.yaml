@@ -23,6 +23,61 @@ properties:
     anyOf:
       - $ref: ./OriginalPlan.yaml
       - $ref: ./FlexiblePlan.yaml
+  usageLimits:
+    type: object
+    nullable: true
+    description: |-
+      Set the soft and hard usage limits thresholds for an item with metered billing plan.
+      This value is ignored when the plan is not metered.
+    properties:
+      softLimit:
+        type: object
+        nullable: true
+        description: |-
+          Soft limit configures thresholds for notification purposes.
+          When the reported usage reaches 75%, 90% and 100% of the configured limit, a specific event is fired.
+          Webhook and a notification can be configured for this event to notify the customer.
+          Useful for accounting and customer success purposes.
+          Metered billing plan usages can still be reported if the soft limit is reached.
+        properties:
+          quantity:
+            type: integer
+            description: Usage limit quantity.
+            nullable: true
+            minimum: 0
+            exclusiveMinimum: true
+          amount:
+            type: number
+            format: double
+            description: Usage limit amount in the order currency.
+            nullable: true
+            minimum: 0
+            exclusiveMinimum: true
+      hardLimit:
+        type: object
+        nullable: true
+        description: |-
+          Hard limit is an addition to the soft limit. A customer may receive notification when soft limit is reached,
+          but a service can still be provided up to hard limit value to let the customer upgrade the plan.
+          When the reported usage reaches the configured limit, a specific event is fired.
+          Webhook and a notification can be configured for this event to notify the customer or block service
+          to the customer in merchant system.
+          Metered billing plan usages can no longer be reported when the total usage reaches hard limit quantity
+          or amount values.
+        properties:
+          quantity:
+            type: integer
+            description: Usage limit quantity.
+            nullable: true
+            minimum: 0
+            exclusiveMinimum: true
+          amount:
+            type: number
+            format: double
+            description: Usage limit amount in the order currency.
+            nullable: true
+            minimum: 0
+            exclusiveMinimum: true
   revision:
     type: integer
     readOnly: true
