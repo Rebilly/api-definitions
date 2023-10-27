@@ -1,0 +1,68 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Plans
+  summary: Retrieve a plan matrix
+  operationId: GetPlanMatrix
+  x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
+  description: Retrieves a plan matrix with a specified ID.
+  responses:
+    '200':
+      description: Plan matrix retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PlanMatrix.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Plans
+  summary: Upsert a plan matrix
+  operationId: PutPlanMatrix
+  x-sdk-operation-name: update
+  description: Creates or updates (upserts) a plan matrix with a specified ID.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PlanMatrix.yaml
+    description: Plan resource.
+    required: true
+  responses:
+    '200':
+      description: Plan matrix updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PlanMatrix.yaml
+    '201':
+      description: Plan matrix created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PlanMatrix.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

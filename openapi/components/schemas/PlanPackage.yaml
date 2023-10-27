@@ -1,0 +1,101 @@
+type: object
+description: All plans in the package must have the same recurringInterval and trial settings.
+properties:
+  id:
+    type: string
+    description: ID of the package.
+    readOnly: true
+    maxLength: 50
+    example: plan_pkg_01GYJPRKHBD6ZYHH897QCJMBS4
+  recurringInterval:
+    type: object
+    description: Service interval settings.
+    properties:
+      unit:
+        description: Unit of time.
+        type: string
+        enum:
+          - day
+          - week
+          - month
+          - year
+      length:
+        description: Length of time.
+        type: integer
+        minimum: 1
+  name:
+    type: string
+    description: Name of the package.
+    maxLength: 50
+    example: Monthly
+  main:
+    type: array
+    nullable: true
+    items:
+      type: object
+      description: Main plans. Only one main item can be used in a subscription.
+      properties:
+        position:
+          type: integer
+          description: Unique position to relate this plan with another plan in a different package
+        plan:
+          allOf:
+            - type: object
+              description: Plan details.
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  description: ID of the main plan.
+                  maxLength: 50
+                  example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+            - $ref: ./SubscriptionOrderPlan.yaml
+  secondary:
+    type: array
+    nullable: true
+    items:
+      type: object
+      description: Secondary plans. Subscription can have any number of secondary plans.
+      properties:
+        position:
+          type: integer
+          description: Unique position to relate this plan with another plan in a different package
+        plan:
+          allOf:
+            - type: object
+              description: Plan details.
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  description: ID of the main plan.
+                  maxLength: 50
+                  example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+            - $ref: ./SubscriptionOrderPlan.yaml
+  addons:
+    type: array
+    nullable: true
+    items:
+      type: object
+      description: |-
+        Subscription can have any number of addon plans.
+        Addons can not be the only items in a subscription.
+      properties:
+        position:
+          type: integer
+          description: Unique position to relate this plan with another plan in a different package
+        plan:
+          allOf:
+            - type: object
+              description: Plan details.
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  description: ID of the main plan.
+                  maxLength: 50
+                  example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+            - $ref: ./SubscriptionOrderPlan.yaml
