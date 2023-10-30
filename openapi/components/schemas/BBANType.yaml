@@ -1,13 +1,15 @@
 type: object
+description: BBAN type object.
 required:
   - accountNumberType
   - method
   - customerId
   - accountNumber
+  - routingNumber
+  - accountType
   - billingAddress
-description: IBAN type object.
 allOf:
-  - $ref: ../BankAccountCreatePlain.yaml
+  - $ref: ./BankAccountCreatePlain.yaml
   - properties:
       method:
         description: Payment method of the payment instrument.
@@ -15,10 +17,10 @@ allOf:
         enum:
           - ach
       customerId:
-        $ref: ../../CustomerId.yaml
+        $ref: ./CustomerId.yaml
       accountNumberType:
         description: |-
-          Customer's bank account number type.
+          Bank account number type.
           A valid value is a Basic Bank Account Number (BBAN) or an International Bank Account Number (IBAN).
         type: string
         default: BBAN
@@ -30,6 +32,18 @@ allOf:
           Customer's bank account number.
           Detailed information on all ISO 13616-compliant national IBAN formats is available in the [SWIFT IBAN Registry](https://www.swift.com/standards/data-standards/iban).
         type: string
+        pattern: '^[0-9]+$'
+      routingNumber:
+        description: Bank routing number.
+        type: string
+        pattern: '^[0-9]+$'
+      accountType:
+        description: Bank account type.
+        type: string
+        enum:
+          - checking
+          - savings
+          - other
       bankName:
         description: Bank name.
         type: string
@@ -39,10 +53,10 @@ allOf:
       billingAddress:
         description: Customer's billing address.
         allOf:
-          - $ref: ../../Contact/ContactObject.yaml
+          - $ref: ./Contact/ContactObject.yaml
       customFields:
-        $ref: ../../ResourceCustomFields.yaml
+        $ref: ./ResourceCustomFields.yaml
       riskMetadata:
-        $ref: ../../RiskMetadata.yaml
+        $ref: ./RiskMetadata.yaml
       useAsBackup:
-        $ref: ../../UseAsBackup.yaml
+        $ref: ./UseAsBackup.yaml
