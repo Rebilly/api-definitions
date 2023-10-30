@@ -1,41 +1,27 @@
 type: object
-title: Plaid account token
+title: Bank account token
 required:
   - method
-  - billingAddress
   - paymentInstrument
+  - billingAddress
 properties:
   method:
     description: Payment method of the token.
     type: string
-    enum: [plaid-account]
+    enum:
+      - ach
+      - echeck
   paymentInstrument:
-    description: Plaid payment instrument details.
-    type: object
-    required:
-      - linkToken
-      - publicToken
-      - accountId
-    properties:
-      linkToken:
-        type: string
-        description: Plaid link token.
-        writeOnly: true
-      publicToken:
-        type: string
-        description: Plaid public token.
-      accountId:
-        type: string
-        description: ID of the Plaid account.
+    $ref: ./BankAccountInstrument.yaml
   billingAddress:
     description: Billing address object.
     allOf:
-      - $ref: ../ContactObject.yaml
+      - $ref: ./ContactObject.yaml
   id:
     description: ID of the token.
     readOnly: true
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ./ResourceId.yaml
   isUsed:
     description: Specifies if the token is already used.
     type: boolean
@@ -45,15 +31,15 @@ properties:
     type: object
     nullable: true
     allOf:
-      - $ref: ../RiskMetadata.yaml
+      - $ref: ./RiskMetadata.yaml
   leadSource:
     allOf:
-      - $ref: ../LeadSource.yaml
+      - $ref: ./LeadSource.yaml
     writeOnly: true
   createdTime:
-    $ref: ../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   usageTime:
     description: Date and time when the token is used.
     type: string
@@ -67,4 +53,4 @@ properties:
     format: date-time
     readOnly: true
   _links:
-    $ref: ../SelfLink.yaml
+    $ref: ./SelfLink.yaml

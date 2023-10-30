@@ -1,5 +1,5 @@
 type: object
-title: Khelocard card token
+title: Plaid account token
 required:
   - method
   - billingAddress
@@ -8,43 +8,34 @@ properties:
   method:
     description: Payment method of the token.
     type: string
-    enum: [Khelocard]
+    enum: [plaid-account]
   paymentInstrument:
-    description: Token instrument details.
+    description: Plaid payment instrument details.
     type: object
     required:
-      - number
-      - cvv
-      - expYear
-      - expMonth
+      - linkToken
+      - publicToken
+      - accountId
     properties:
-      number:
-        description: Khelocard card number.
+      linkToken:
         type: string
+        description: Plaid link token.
         writeOnly: true
-      cvv:
-        description: Khelocard Card Verification Value (CVV).
+      publicToken:
         type: string
-        writeOnly: true
-      last4:
-        description: Last 4 digits of the Khelocard card number.
+        description: Plaid public token.
+      accountId:
         type: string
-        readOnly: true
-      expMonth:
-        description: Khelocard card expiration month.
-        type: integer
-      expYear:
-        description: Khelocard card expiration year.
-        type: integer
+        description: ID of the Plaid account.
   billingAddress:
     description: Billing address object.
     allOf:
-      - $ref: ../ContactObject.yaml
+      - $ref: ./ContactObject.yaml
   id:
     description: ID of the token.
     readOnly: true
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ./ResourceId.yaml
   isUsed:
     description: Specifies if the token is already used.
     type: boolean
@@ -54,15 +45,15 @@ properties:
     type: object
     nullable: true
     allOf:
-      - $ref: ../RiskMetadata.yaml
+      - $ref: ./RiskMetadata.yaml
   leadSource:
     allOf:
-      - $ref: ../LeadSource.yaml
+      - $ref: ./LeadSource.yaml
     writeOnly: true
   createdTime:
-    $ref: ../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   usageTime:
     description: Date and time when the token is used.
     type: string
@@ -76,4 +67,4 @@ properties:
     format: date-time
     readOnly: true
   _links:
-    $ref: ../SelfLink.yaml
+    $ref: ./SelfLink.yaml

@@ -1,37 +1,33 @@
 type: object
-title: PayPal token
+title: Alternative payment token
 required:
   - method
-  - paymentInstrument
+  - billingAddress
 properties:
   method:
     description: Payment method of the token.
     type: string
-    enum: [paypal]
-  paymentInstrument:
-    description: Paypal instrument details required for express checkout.
-    type: object
-    required:
-      - billingAgreementToken
-      - paypalMerchantId
-    properties:
-      paypalMerchantId:
-        description: ID of the PayPal merchant.
-        type: string
-      billingAgreementToken:
-        description: PayPal billing agreement token.
-        type: string
+    allOf:
+      - $ref: ./AlternativePaymentMethods.yaml
+      - not:
+          enum:
+            - payment-card
+            - paypal
+            - ach
+            - echeck
+            - digital-wallet
+            - plaid-account
+            - Khelocard
+            - Klarna
   billingAddress:
     description: Billing address object.
-    nullable: true
-    type: object
     allOf:
-      - $ref: ../ContactObject.yaml
+      - $ref: ./ContactObject.yaml
   id:
     description: ID of the token.
     readOnly: true
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ./ResourceId.yaml
   isUsed:
     description: Specifies if the token is already used.
     type: boolean
@@ -41,15 +37,15 @@ properties:
     type: object
     nullable: true
     allOf:
-      - $ref: ../RiskMetadata.yaml
+      - $ref: ./RiskMetadata.yaml
   leadSource:
     allOf:
-      - $ref: ../LeadSource.yaml
+      - $ref: ./LeadSource.yaml
     writeOnly: true
   createdTime:
-    $ref: ../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   usageTime:
     description: Date and time when the token is used.
     type: string
@@ -57,10 +53,10 @@ properties:
     format: date-time
     readOnly: true
   expirationTime:
-    description: Date and time when the token expires.
+    description: Date and time when the token expired.
     type: string
     nullable: true
     format: date-time
     readOnly: true
   _links:
-    $ref: ../SelfLink.yaml
+    $ref: ./SelfLink.yaml
