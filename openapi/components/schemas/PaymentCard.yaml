@@ -11,7 +11,7 @@ properties:
     maxLength: 50
     example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
   customerId:
-    $ref: ../CustomerId.yaml
+    $ref: ./CustomerId.yaml
   method:
     description: Method of payment instrument.
     type: string
@@ -25,7 +25,7 @@ properties:
       An `active` status means that a payment instrument has been used at least once for an approved transaction.
       To remove an instrument from use, set this value to `deactivated`.
 
-      For more information, see [Deactivate a payment instrument](../PostPaymentInstrumentDeactivation).
+      For more information, see [Deactivate a payment instrument](./PostPaymentInstrumentDeactivation).
     enum:
       - active
       - inactive
@@ -67,7 +67,7 @@ properties:
   brand:
     readOnly: true
     allOf:
-      - $ref: ../PaymentCards/PaymentCardBrand.yaml
+      - $ref: ./PaymentCardBrand.yaml
   bankCountry:
     description: Bank country of the payment instrument.
     type: string
@@ -80,7 +80,7 @@ properties:
   billingAddress:
     description: Contact's billing address.
     allOf:
-      - $ref: ../Contact/ContactObject.yaml
+      - $ref: ./Contact/ContactObject.yaml
   useAsBackup:
     $ref: ../UseAsBackup.yaml
   billingPortalUrl:
@@ -88,11 +88,11 @@ properties:
     type: string
     readOnly: true
   createdTime:
-    $ref: ../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   customFields:
-    $ref: ../ResourceCustomFields.yaml
+    $ref: ./ResourceCustomFields.yaml
   stickyGatewayAccountId:
     description: |-
       ID of the sticky gateway account.
@@ -134,7 +134,7 @@ properties:
     type: object
     nullable: true
     allOf:
-      - $ref: ../RiskMetadata.yaml
+      - $ref: ./RiskMetadata.yaml
   revision:
     description: |-
       Number of times the payment instrument data has been modified.
