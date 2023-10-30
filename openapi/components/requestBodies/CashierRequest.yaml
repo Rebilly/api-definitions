@@ -1,0 +1,84 @@
+type: object
+required:
+  - websiteId
+  - customerId
+  - currency
+properties:
+  websiteId:
+    description: Website ID of the cashier. This value specifies the website with which the cashier is associated.
+    type: string
+    maxLength: 50
+    example: web_0YV7DE4Z26DQSA1AC92FBJ7SEG
+  customerId:
+    $ref: ../schemas/CustomerId.yaml
+  strategyId:
+    description: |-
+      ID of a strategy to be applied for this request for `amounts` and `customAmount`.
+      If this field is not specified, a randomly selected strategy with a matching `filter` value is applied for empty `amounts` and `customAmount`.
+    type: string
+    maxLength: 50
+    nullable: true
+    example: cash_str_0YVJ64MAHTDPA97H8S7R5MYR1M
+  currency:
+    $ref: ../schemas/CurrencyCode.yaml
+  amounts:
+    type: array
+    nullable: true
+    description: |-
+      List of available deposit amounts.
+
+      If `amounts` is not specified when a cashier is created, amounts are determined from the chosen strategy.
+      For more information, see the [`strategyId` property](../PostCashierRequest#!path=strategyId&t=request).
+    items:
+      type: number
+      format: double
+      minimum: 0.01
+  customAmount:
+    type: object
+    description: |-
+      Custom amount restrictions.
+      If this value is `null`,  custom amounts are prohibited.
+      If `customAmount` is not specified when a cashier is created, amount restrictions are determined from the chosen strategy.
+      For more information, see the [`strategyId` property](../PostCashierRequest#!path=strategyId&t=request).
+    nullable: true
+    required:
+      - minimum
+      - multipleOf
+      - maximum
+    properties:
+      minimum:
+        description: Minimum custom amount.
+        type: number
+        format: double
+        minimum: 0.01
+      multipleOf:
+        description: |-
+          Multiple by which the custom amount increases.
+
+          For example, if `minimum` is equal to 5.30, and `multipleOf` is 0.50, the valid custom amount is 5.30, 5.80, 6.30, 6.80 and so on until the `maximum` value is reached.
+
+          A valid custom amount must be equal to `minimum` + X * `multipleOf`, where X is any non negative integer.
+        type: number
+        format: double
+        minimum: 0.01
+      maximum:
+        description: Maximum custom amount. This value must be equal to `minimum` + X * `multipleOf`, where X is any positive integer.
+        type: number
+        format: double
+        minimum: 0.01
+  redirectUrl:
+    description: URL to redirect the customer to when a deposit is completed. The default value is the website URL.
+    type: string
+    nullable: true
+    format: uri
+  expirationTime:
+    description: Date and time at which the cashier request expires. The default expiration time is one hour from the time the request is created.
+    type: string
+    nullable: true
+    format: date-time
+  customPropertySetId:
+    description: ID of a custom property set to apply to the request `propertiesSchema`.
+    type: string
+    maxLength: 50
+    nullable: true
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21

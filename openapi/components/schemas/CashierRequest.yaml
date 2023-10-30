@@ -17,14 +17,6 @@ properties:
     example: web_0YV7DE4Z26DQSA1AC92FBJ7SEG
   customerId:
     $ref: ./CustomerId.yaml
-  strategyId:
-    description: |-
-      ID of a strategy to be applied for this request for `amounts` and `customAmount`.
-      If this field is not specified, a randomly selected strategy with a matching `filter` value is applied for empty `amounts` and `customAmount`.
-    type: string
-    maxLength: 50
-    example: cash_str_0YVJ64MAHTDPA97H8S7R5MYR1M
-    writeOnly: true
   transactionId:
     type: string
     description: ID of the transaction that is used in the cashier request.
@@ -100,12 +92,6 @@ properties:
     description: Date and time at which the cashier request expires. The default expiration time is one hour from the time the request is created.
     type: string
     format: date-time
-  customPropertySetId:
-      description: ID of a custom property set to apply to the request `propertiesSchema`.
-      type: string
-      maxLength: 50
-      example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
-      writeOnly: true
   propertiesSchema:
     readOnly: true
     description: |-
