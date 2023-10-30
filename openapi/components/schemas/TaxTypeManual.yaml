@@ -1,13 +1,14 @@
 type: object
-description: TaxJar tax calculator.
+description: Manual tax calculator.
 required:
   - calculator
+  - items
 properties:
   calculator:
     description: Type of tax calculator.
     type: string
     enum:
-      - "rebilly-taxjar"
+      - "manual"
   amount:
     type: integer
     x-type: Money
@@ -16,6 +17,6 @@ properties:
     readOnly: true
   items:
     type: array
-    description: Taxes applied and calculated based on the `taxCategoryId` of the related product.
+    description: Taxes applied.
     items:
-      $ref: ../TaxItem.yaml
+      $ref: ./TaxItem.yaml
