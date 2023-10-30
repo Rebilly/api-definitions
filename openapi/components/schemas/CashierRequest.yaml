@@ -23,8 +23,9 @@ properties:
       If this field is not specified, a randomly selected strategy with a matching `filter` value is applied for empty `amounts` and `customAmount`.
     type: string
     maxLength: 50
-    example: cash_str_0YVJ64MAHTDPA97H8S7R5MYR1M
     writeOnly: true
+    nullable: true
+    example: cash_str_0YVJ64MAHTDPA97H8S7R5MYR1M
   transactionId:
     type: string
     description: ID of the transaction that is used in the cashier request.
@@ -50,6 +51,7 @@ properties:
     $ref: ./CurrencyCode.yaml
   amounts:
     type: array
+    nullable: true
     description: |-
       List of available deposit amounts.
 
@@ -95,6 +97,7 @@ properties:
   redirectUrl:
     description: URL to redirect the customer to when a deposit is completed. The default value is the website URL.
     type: string
+    nullable: true
     format: uri
   expirationTime:
     description: Date and time at which the cashier request expires. The default expiration time is one hour from the time the request is created.
