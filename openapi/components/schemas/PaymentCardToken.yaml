@@ -53,19 +53,19 @@ properties:
       brand:
         readOnly: true
         allOf:
-          - $ref: ../PaymentCardBrand.yaml
+          - $ref: ./PaymentCardBrand.yaml
   billingAddress:
     description: |-
       Billing address object.
       This value is required to perform payments.
       For payment-card updates, `billingAddress` can be ignored.
     allOf:
-      - $ref: ../ContactObject.yaml
+      - $ref: ./ContactObject.yaml
   id:
     description: ID of the token.
     readOnly: true
     allOf:
-      - $ref: ../ResourceId.yaml
+      - $ref: ./ResourceId.yaml
   isUsed:
     description: Specifies if the token has been used.
     type: boolean
@@ -75,15 +75,15 @@ properties:
     type: object
     nullable: true
     allOf:
-      - $ref: ../RiskMetadata.yaml
+      - $ref: ./RiskMetadata.yaml
   leadSource:
     allOf:
-      - $ref: ../LeadSource.yaml
+      - $ref: ./LeadSource.yaml
     writeOnly: true
   createdTime:
-    $ref: ../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   usageTime:
     description: Date and time when the token is used.
     type: string
@@ -97,4 +97,4 @@ properties:
     format: date-time
     readOnly: true
   _links:
-    $ref: ../SelfLink.yaml
+    $ref: ./SelfLink.yaml
