@@ -34,11 +34,11 @@ properties:
       Document type submitted for validation.
       Only the `identity-proof` and `address-proof` types are analyzed automatically.
     allOf:
-      - $ref: ../KycDocument/KycDocumentTypes.yaml
+      - $ref: ./KycDocumentTypes.yaml
   documentSubtype:
     description: Document subtype submitted for validation.
     allOf:
-      - $ref: ../KycDocument/KycDocumentSubtypes.yaml
+      - $ref: ./KycDocumentSubtypes.yaml
   status:
     description: Status of the validation.
     type: string
@@ -56,7 +56,7 @@ properties:
       rejected: Rejected by AI or a human.
       archived: Archived by the Rebilly AI.
   rejectionReason:
-    $ref: ../KycDocumentRejection.yaml
+    $ref: ./KycDocumentRejection.yaml
   requestId:
     readOnly: true
     nullable: true
@@ -65,9 +65,9 @@ properties:
     maxLength: 50
     example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
   createdTime:
-    $ref: ../CreatedTime.yaml
+    $ref: ./CreatedTime.yaml
   updatedTime:
-    $ref: ../UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   processedTime:
     description: Date and time when the KYC document is processed.
     type: string
@@ -75,7 +75,7 @@ properties:
     format: date-time
     readOnly: true
   customerId:
-    $ref: ../CustomerId.yaml
+    $ref: ./CustomerId.yaml
   reviewerId:
     description: ID of the KYC document reviewer.
     type: string
@@ -109,7 +109,7 @@ properties:
     readOnly: true
     type: array
     items:
-      $ref: ../Tag.yaml
+      $ref: ./Tag.yaml
   reason:
     description: Reason for uploading.
     type: string

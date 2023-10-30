@@ -6,34 +6,32 @@ allOf:
         type: object
         nullable: true
         readOnly: true
-        description: Proof of identity document matches.
         properties:
           score:
-            description: Calculated score that represents the percentage of confidence that this ID represents the customer.
+            description: Calculated score that represents the percentage of confidence that this proof of address represents the customer.
             type: number
             format: double
             example: 0.75
           data:
-            $ref: ../KycIdentityMatches.yaml
+            $ref: ./KycAddressMatches.yaml
       parsedData:
         type: object
         nullable: true
         readOnly: true
-        description: Parsed data.
         properties:
           score:
-            description: Calculated score that represents the percentage of confidence that this ID represents the customer.
+            description: Calculated score that represents the percentage of confidence that this proof of address represents the customer.
             type: number
             format: double
             example: 0.75
           data:
-            $ref: ../KycIdentityMatches.yaml
+            $ref: ./KycAddressMatches.yaml
       settings:
         type: object
         nullable: true
         readOnly: true
         allOf:
-         - $ref: ./Settings/KycSettingsIdentity.yaml
+          - $ref: ./KycSettingsAddress.yaml
       _links:
         type: array
         description: Related links.
