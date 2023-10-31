@@ -15,6 +15,19 @@ properties:
     description: |-
       ID of a strategy to be applied for this request for `amounts` and `customAmount`.
       If this field is not specified, a randomly selected strategy with a matching `filter` value is applied for empty `amounts` and `customAmount`.
+      If there is no matching strategy, the default strategy with the following parameters is applied for empty `amounts` and `customAmount`:
+      ```yaml
+        amounts:
+          calculator: absolute
+          baseAmount: 10
+          increments: [10, 20]
+          adjustBaseToLastDeposit: true
+        customAmount:
+          minimum: 1
+          multipleOf: 1
+          maximum: 10000
+      ```
+      For more information, see [Create a cashier strategy](../PostCashierStrategy).
     type: string
     maxLength: 50
     nullable: true
