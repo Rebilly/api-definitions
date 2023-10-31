@@ -1,0 +1,18 @@
+title: Bank account
+type: object
+required:
+  -  accountNumberType
+## Discriminator is required for SDK generation
+discriminator:
+  propertyName: accountNumberType
+  mapping:
+    BBAN: ./BBANType.yaml
+    IBAN: ./IBANType.yaml
+properties:
+  accountNumberType:
+    nullable: false
+    type: string
+    enum:
+      - IBAN
+      - BBAN
+

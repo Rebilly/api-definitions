@@ -143,7 +143,7 @@ properties:
   billingAddress:
     description: Billing address.
     allOf:
-      - $ref: ./Contact/ContactObject.yaml
+      - $ref: ./ContactObject.yaml
   has3ds:
     description: Specifies if the transaction uses 3D Secure.
     type: boolean
@@ -241,7 +241,7 @@ properties:
     x-label: Gateway
     x-basic: true
     allOf:
-      - $ref: ./Gateways/GatewayName.yaml
+      - $ref: ./GatewayName.yaml
   customFields:
     $ref: ./ResourceCustomFields.yaml
   processedTime:
@@ -344,7 +344,7 @@ properties:
       This value is only available when a transaction uses a payment gateway.
       If a transaction does not use a payment gateway, this value is `null`.
     allOf:
-      - $ref: ./Gateways/AcquirerName.yaml
+      - $ref: ./AcquirerName.yaml
   method:
     deprecated: true
     description: |-
@@ -352,7 +352,7 @@ properties:
 
       >**Note:** Use `paymentInstrument.method` instead.
     allOf:
-      - $ref: ./PaymentMethods/PaymentMethod.yaml
+      - $ref: ./PaymentMethod.yaml
   velocity:
     description: Number of transactions by the same customer in the past 24 hours.
     type: integer
@@ -383,10 +383,10 @@ properties:
     type: object
     description: Payment instrument information.
     anyOf:
-      - $ref: ./PaymentInstruments/ValueObjects/VaultedInstrument.yaml
-      - $ref: ./PaymentInstruments/ValueObjects/AlternativePaymentInstrument.yaml
-      - $ref: ./PaymentInstruments/ValueObjects/CashInstrument.yaml
-      - $ref: ./PaymentInstruments/ValueObjects/CheckInstrument.yaml
+      - $ref: ./VaultedInstrument.yaml
+      - $ref: ./AlternativePaymentInstrument.yaml
+      - $ref: ./CashInstrument.yaml
+      - $ref: ./CheckInstrument.yaml
   hasDcc:
     description: Specifies if Dynamic Currency Conversion (DCC) applies to the transaction.
     type: boolean

@@ -1,0 +1,70 @@
+type: object
+nullable: true
+description: |-
+  Use invoice time shift to control the billing time.
+
+  Invoice time shift adjusts the invoice issue and due date when billing must occur before the service period changes.
+
+  Use invoice time shift in conjunction with `billingTiming` to:
+
+  - Bill immediately when the service period starts.
+  - Bill immediately after the service period ends.
+  - Bill at an interval of time before the service period starts.
+  - Bill at an interval of time after the service period starts.
+  - Bill at an interval of time before the service period ends.
+  - Bill at an interval of time after the service period ends.
+properties:
+  issueTimeShift:
+    type: object
+    description: |-
+      Calculation instruction of the billing time.
+
+      This is used in conjunction with the service period anchor to calculate
+      the time at which the invoice is issued. For more information, see
+      [Service period anchor, billing timing, and invoice time shift](https://www.rebilly.com/docs/dev-docs/concepts/#service-period-anchor-and-billing-timing-and-invoice-time-shift).
+    required:
+      - chronology
+      - duration
+      - unit
+    properties:
+      chronology:
+        type: string
+        description: Sequential order of the billing time relative to the start of the service period.
+        enum:
+          - before
+      duration:
+        type: integer
+        description: Amount of time by which to move the invoice issue time or date.
+        minimum: 1
+      unit:
+        description: Unit of time.
+        oneOf:
+          - $ref: ./TimeUnit.yaml
+          - $ref: ./TimePluralUnit.yaml
+  dueTimeShift:
+    type: object
+    required:
+      - duration
+      - unit
+    description: |-
+      Calculation instruction of the invoice due time.
+
+      This is used in conjunction with the billing anchor to calculate when
+      an invoice is due for payment. For more information, see
+      [Service period anchor, billing timing, and invoice time shift](https://www.rebilly.com/docs/dev-docs/concepts/#service-period-anchor-and-billing-timing-and-invoice-time-shift).
+
+      The sequential order of due time shift is always after the due date.
+
+    default:
+      duration: 1
+      unit: hour
+    properties:
+      duration:
+        type: integer
+        description: Amount of time by which to move the invoice due time or date.
+        minimum: 1
+      unit:
+        description: Unit of time.
+        oneOf:
+          - $ref: ./TimeUnit.yaml
+          - $ref: ./TimePluralUnit.yaml

@@ -211,13 +211,13 @@ properties:
     maxLength: 50
     example: gw_acc_0YVCXMF26DDNKAERE5NW727S34
   gatewayName:
-    $ref: ./Gateways/GatewayName.yaml
+    $ref: ./GatewayName.yaml
   acquirerName:
     default: Other
     allOf:
-      - $ref: ./Gateways/AcquirerName.yaml
+      - $ref: ./AcquirerName.yaml
   method:
-    $ref: ./PaymentMethods/PaymentMethod.yaml
+    $ref: ./PaymentMethod.yaml
   acceptedCurrencies:
     description: Accepted currencies. An array of ISO 4217 currency codes.
     type: array
@@ -227,7 +227,7 @@ properties:
     description: Accepted payment card brands.
     type: array
     items:
-      $ref: ./PaymentCards/PaymentCardBrand.yaml
+      $ref: ./PaymentCardBrand.yaml
   status:
     description: Status of the gateway account.
     readOnly: true
@@ -298,7 +298,7 @@ properties:
     type: boolean
     default: false
   digitalWallets:
-    $ref: ./GatewayAccounts/DigitalWallets.yaml
+    $ref: ./DigitalWallets.yaml
   isDown:
     description: Specifies if a gateway is in a downtime period.
     type: boolean

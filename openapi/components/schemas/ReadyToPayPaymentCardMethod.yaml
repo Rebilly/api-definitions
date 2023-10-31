@@ -1,0 +1,27 @@
+type: object
+title: Payment card
+required:
+  - method
+properties:
+  method:
+    type: string
+    description: Payment method.
+    enum:
+      - payment-card
+  feature:
+    type: object
+    nullable: true
+    description: |-
+      Specific feature of this method.
+      For example, a digital wallet.
+      If the method does not have any features, this value is null.
+    allOf:
+      - $ref: ./PaymentCardFeature.yaml
+  brands:
+    type: array
+    description: List of supported brands.
+    minItems: 1
+    items:
+      $ref: ./PaymentCardBrand.yaml
+  filters:
+    $ref: ./ReadyToPayMethodFilters.yaml

@@ -1,0 +1,10 @@
+type: object
+description: Formula that is used to calculate the fee.
+discriminator:
+  propertyName: type
+  mapping:
+    fixed-fee: ./FixedFeeFormula.yaml
+    percentage: ./PercentageFeeFormula.yaml
+anyOf:
+  - $ref: ./FixedFeeFormula.yaml
+  - $ref: ./PercentageFeeFormula.yaml

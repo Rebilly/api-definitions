@@ -1,0 +1,22 @@
+description: Vaulted payment instrument.
+title: Vaulted instrument
+required:
+  - method
+  - paymentInstrumentId
+properties:
+  method:
+    description: |-
+      Payment method supported vault.
+      For more information, see [Payment instrument](https://all-rebilly.redoc.ly/tag/Payment-instruments).
+    type: string
+    enum:
+      - payment-card
+      - ach
+      - paypal
+    allOf:
+      - $ref: ./PaymentMethod.yaml
+  paymentInstrumentId:
+    type: string
+    description: ID of the payment instrument.
+    maxLength: 50
+    example: inst_0YVB8KPKNXCBR9EDX7JHSED75N

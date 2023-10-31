@@ -1,0 +1,122 @@
+type: object
+title: Bank account
+required:
+  - method
+properties:
+  id:
+    type: string
+    description: ID of the payment instrument.
+    readOnly: true
+    maxLength: 50
+    example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
+  customerId:
+    $ref: ./CustomerId.yaml
+  method:
+    description: Method of payment instrument.
+    type: string
+    readOnly: true
+    enum:
+      - ach
+  bankName:
+    description: Name of the bank.
+    type: string
+  routingNumber:
+    description: Bank routing number.
+    type: string
+  accountNumberType:
+    description: |-
+      Type of bank account number.
+      A valid value is a Basic Bank Account Number (BBAN) or an International Bank Account Number (IBAN).
+    type: string
+    default: BBAN
+    enum:
+      - BBAN
+      - IBAN
+  accountType:
+    description: Type of bank account.
+    type: string
+    enum:
+      - checking
+      - savings
+      - other
+  bic:
+    description: Bank Identifier Code (BIC).
+    type: string
+    nullable: true
+  billingAddress:
+    description: Customer's billing address.
+    allOf:
+      - $ref: ./ContactObject.yaml
+  fingerprint:
+    description: |-
+      Unique value which identifies the bank account.
+      This value contains alphanumeric characters.
+      Depending on the type of bank account number,
+      a bank account fingerprint is generated using one of the following:
+      - BBAN: `last4` and `routingNumber` values.
+      - IBAN: First 8 characters of the IBAN and the `last4` value.
+    type: string
+    readOnly: true
+  last4:
+    description: Last 4 digits of the bank account number.
+    type: string
+    readOnly: true
+  status:
+    description: Status of the bank account.
+    type: string
+    readOnly: true
+    enum:
+      - active
+      - deactivated
+  stickyGatewayAccountId:
+    description: |-
+      ID of the sticky gateway account.
+      All future payments are processed by this gateway account.
+
+      For more information, see [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
+    type: string
+    nullable: true
+    readOnly: true
+  riskMetadata:
+    type: object
+    nullable: true
+    allOf:
+      - $ref: ./RiskMetadata.yaml
+  useAsBackup:
+    $ref: ./UseAsBackup.yaml
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  customFields:
+    $ref: ./ResourceCustomFields.yaml
+  revision:
+    description: |-
+      Number of times the payment instrument data has been modified.
+
+      Use this value when analyzing webhook data to determine if a change must take precedence over the current representation.
+    type: integer
+    readOnly: true
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - customer
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
+    properties:
+      customer:
+        type: object
