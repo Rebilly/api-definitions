@@ -5,7 +5,7 @@ required:
   - currency
 properties:
   websiteId:
-    description: Website ID of the cashier. This value specifies the website with which the cashier is associated.
+    description: Website ID of the deposit. This value specifies the website with which the deposit is associated.
     type: string
     maxLength: 50
     example: web_0YV7DE4Z26DQSA1AC92FBJ7SEG
@@ -27,11 +27,11 @@ properties:
           multipleOf: 1
           maximum: 10000
       ```
-      For more information, see [Create a cashier strategy](../PostCashierStrategy).
+      For more information, see [Create a deposit strategy](../PostDepositStrategy).
     type: string
     maxLength: 50
     nullable: true
-    example: cash_str_0YVJ64MAHTDPA97H8S7R5MYR1M
+    example: dep_str_0YVJ64MAHTDPA97H8S7R5MYR1M
   currency:
     $ref: ../schemas/CurrencyCode.yaml
   amounts:
@@ -40,8 +40,8 @@ properties:
     description: |-
       List of available deposit amounts.
 
-      If `amounts` is not specified when a cashier is created, amounts are determined from the chosen strategy.
-      For more information, see the [`strategyId` property](../PostCashierRequest#!path=strategyId&t=request).
+      If `amounts` is not specified when a deposit is created, amounts are determined from the chosen strategy.
+      For more information, see the [`strategyId` property](../PostDepositRequest#!path=strategyId&t=request).
     items:
       type: number
       format: double
@@ -51,8 +51,8 @@ properties:
     description: |-
       Custom amount restrictions.
       If this value is `null`,  custom amounts are prohibited.
-      If `customAmount` is not specified when a cashier is created, amount restrictions are determined from the chosen strategy.
-      For more information, see the [`strategyId` property](../PostCashierRequest#!path=strategyId&t=request).
+      If `customAmount` is not specified when a deposit is created, amount restrictions are determined from the chosen strategy.
+      For more information, see the [`strategyId` property](../PostDepositRequest#!path=strategyId&t=request).
     nullable: true
     required:
       - minimum
@@ -85,7 +85,7 @@ properties:
     nullable: true
     format: uri
   expirationTime:
-    description: Date and time at which the cashier request expires. The default expiration time is one hour from the time the request is created.
+    description: Date and time at which the deposit request expires. The default expiration time is one hour from the time the request is created.
     type: string
     nullable: true
     format: date-time

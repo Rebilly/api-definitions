@@ -6,23 +6,23 @@ required:
 properties:
   id:
     type: string
-    description: ID of the cashier strategy.
+    description: ID of the deposit strategy.
     readOnly: true
     maxLength: 50
-    example: cash_str_0YVJ64MAHTDPA97H8S7R5MYR1M
+    example: dep_str_0YVJ64MAHTDPA97H8S7R5MYR1M
   name:
     type: string
     description: Name of the strategy.
   filter:
     type: string
     description: |-
-      Filter that uses cashier request properties to determine if a cashier strategy is applicable for the request.
+      Filter that uses deposit request properties to determine if a deposit strategy is applicable for the request.
       If this field is empty, the strategy is applicable for any request.
     default: ''
-    example: 'cashierRequest.currency:USD'
+    example: 'depositRequest.currency:USD'
   amounts:
     type: object
-    description: Cashier strategy amounts configuration.
+    description: Deposit strategy amounts configuration.
     required:
       - calculator
       - baseAmount
@@ -31,7 +31,7 @@ properties:
       calculator:
         type: string
         description: |-
-          Cashier amounts calculator.
+          Deposit amounts calculator.
           This field specifies if amounts are calculated using an absolute or percentage calculation.
 
           Amounts are specified in `baseAmount`, and increments are specified in `increments`.
@@ -53,7 +53,7 @@ properties:
         description: |-
           List of incremental amounts that are displayed to customer.
 
-          For more information, see the [`calculator` property](../PostCashierStrategy#!path=amounts/calculator&t=request).
+          For more information, see the [`calculator` property](../PostDepositStrategy#!path=amounts/calculator&t=request).
         items:
           type: number
           format: double
@@ -63,7 +63,7 @@ properties:
         default: false
         description: |-
           Specifies if the base amount must be adjusted based on the last deposit.
-          If this value is `true`, the `baseAmount` is changed to the last successful deposit amount made using [Create a cashier request](../PostCashierRequest).
+          If this value is `true`, the `baseAmount` is changed to the last successful deposit amount made using [Create a deposit request](../PostDepositRequest).
 
           If the customer has no successful deposits, `baseAmount` is not adjusted.
   customAmount:
@@ -71,8 +71,8 @@ properties:
     description: |-
       Custom amount restrictions.
       If this value is `null`,  custom amounts are prohibited.
-      If `customAmount` is not specified when a cashier is created, amount restrictions are determined from the chosen strategy.
-      For more information, see the [`strategyId` property](../PostCashierRequest#!path=strategyId&t=request).
+      If `customAmount` is not specified when a deposit is created, amount restrictions are determined from the chosen strategy.
+      For more information, see the [`strategyId` property](../PostDepositRequest#!path=strategyId&t=request).
     nullable: true
     required:
       - minimum
