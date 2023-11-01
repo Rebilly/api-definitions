@@ -1,0 +1,24 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Storefront
+  tags:
+    - Deposits
+  summary: Retrieve a deposit strategy
+  operationId: StorefrontGetDepositStrategy
+  x-sdk-operation-name: get
+  description: Retrieves a deposit strategy with a specified ID.
+  responses:
+    '200':
+      description: Deposit strategy retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/DepositStrategy.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../../components/responses/NotFound.yaml

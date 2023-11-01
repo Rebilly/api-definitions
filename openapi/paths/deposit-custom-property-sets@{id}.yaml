@@ -5,18 +5,18 @@ get:
     - Core
   x-badge: Experimental
   tags:
-    - Cashier
-  summary: Retrieve a custom cashier property set
-  operationId: GetCashierCustomPropertySet
+    - Deposits
+  summary: Retrieve a custom deposit property set
+  operationId: GetDepositCustomPropertySet
   x-sdk-operation-name: get
-  description: Retrieves a custom cashier property set with a specified ID.
+  description: Retrieves a custom deposit property set with a specified ID.
   responses:
     '200':
-      description: Custom cashier property set retrieved.
+      description: Custom deposit property set retrieved.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/CashierCustomPropertySet.yaml
+            $ref: ../components/schemas/DepositCustomPropertySet.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -28,34 +28,34 @@ put:
     - Core
   x-badge: Experimental
   tags:
-    - Cashier
-  summary: Upsert a custom cashier property set
-  operationId: PutCashierCustomPropertySet
+    - Deposits
+  summary: Upsert a custom deposit property set
+  operationId: PutDepositCustomPropertySet
   x-sdk-operation-name: update
-  description: Creates or updates (upserts) a custom cashier property set with a specified ID.
+  description: Creates or updates (upserts) a custom deposit property set with a specified ID.
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/CashierCustomPropertySet.yaml
-    description: Custom cashier property set resource.
+          $ref: ../components/schemas/DepositCustomPropertySet.yaml
+    description: Custom deposit property set resource.
     required: true
   responses:
     '200':
-      description: Custom cashier property updated.
+      description: Custom deposit property updated.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/CashierCustomPropertySet.yaml
+            $ref: ../components/schemas/DepositCustomPropertySet.yaml
     '201':
-      description: Custom cashier property set created.
+      description: Custom deposit property set created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/CashierCustomPropertySet.yaml
+            $ref: ../components/schemas/DepositCustomPropertySet.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -67,16 +67,15 @@ put:
 delete:
   x-products:
     - Core
-  x-badge: Experimental
   tags:
-    - Cashier
-  summary: Delete a custom cashier property set
-  operationId: DeleteCashierCustomPropertySet
+    - Deposits
+  summary: Delete a custom deposit property set
+  operationId: DeleteDepositCustomPropertySet
   x-sdk-operation-name: delete
-  description: Deletes a custom cashier property set with a specified ID.
+  description: Deletes a custom deposit property set with a specified ID.
   responses:
     '204':
-      description: Custom cashier property set deleted.
+      description: Custom deposit property set deleted.
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
