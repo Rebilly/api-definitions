@@ -1,6 +1,6 @@
 # Rebilly OpenAPI Definitions
 
-- Our website (www.rebilly.com) is powered by the [Redocly Revel](https://redocly.com/developer-portal/).
+- Our website (www.rebilly.com) is powered by [Redocly Revel](https://redocly.com/developer-portal/).
 - Our API reference is powered by [Redocly Realm](https://redocly.com/product-updates/).
 
 TBD: Add Redocly validation status badge.
