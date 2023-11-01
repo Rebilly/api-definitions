@@ -1,5 +1,7 @@
 # Products bundler
 
+TODO: remove after spec permalinks are replaced.
+
 File `openapi/openapi.yaml` is a single entrypoint for every bundled API definition.
 It should include all paths, tags and x-webhooks. It is a job of the `products-bundler`
 plugin to bundle specific API definition file for a product.
