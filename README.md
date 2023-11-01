@@ -1,7 +1,7 @@
 # Rebilly OpenAPI Definitions
 
-- Our website (www.rebilly.com) is powered by the [Redocly Portal](https://redocly.com/developer-portal/).
-- Our API reference is powered by [Redocly API docs](https://redocly.com/reference-docs/).
+- Our website (www.rebilly.com) is powered by [Redocly Revel](https://redocly.com/developer-portal/).
+- Our API reference is powered by [Redocly Realm](https://redocly.com/product-updates/).
 
 TBD: Add Redocly validation status badge.
 
@@ -42,11 +42,11 @@ Rebilly uses [Redocly](https://redocly.com/) to generate, manage, and preview AP
 1. In the **Personal API keys** section, click **Add API key**.
 1. Enter an API key name, then click **Save**.
 1. Copy the API key.
-1. In a terminal, execute the following command: `redocly login`. 
+1. In a terminal, execute the following command: `npx @redocly/cli login`. 
 1. When prompted, paste your API key.
 1. Execute one of the following commands to start a development server docs preview:
-    - Core API docs: `redocly preview-docs core@latest`
-    - All API docs: `redocly preview-docs all@latest`
+    - Core API docs: `npx @redocly/cli preview-docs core@latest`
+    - All API docs: `npx @redocly/cli preview-docs all@latest`
  1. In a web browser, open the preview server URL that is displayed in the terminal.
 
 #### Build
@@ -55,5 +55,5 @@ Run `npm run build` to bundle the definitions into a single file in the `dist` f
 
 #### Validate
 
-Run `npx redocly lint` to validate the definitions.
+Run `npx @redocly/cli lint` to validate the definitions.
 

@@ -1,18 +1,86 @@
 apis:
   core@latest:
     root: openapi/openapi.yaml
+    output: catalog/core.yaml
+    metadata:
+      description: The most common APIs used to automate common workflows.
     decorators:
       filter-in:
         property: x-products
         value:
           - Core
+      plugin/change-title:
+        title: Core APIs
   all@latest:
     root: openapi/openapi.yaml
+    output: catalog/all.yaml
+    metadata:
+      description: All Rebilly APIs.
     decorators:
       plugin/remove-tag-groups: on
+      plugin/change-title:
+        title: All APIs
+  storefront@latest:
+    root: openapi/openapi.yaml
+    output: catalog/storefront.yaml
+    metadata:
+      description: APIs intended to be used directly from an untrusted browser.
+    decorators:
+      filter-in:
+        property: x-products
+        value:
+          - Storefront
+      plugin/change-title:
+        title: Storefront APIs
+      plugin/remove-tag-groups: on
+      plugin/remove-unused-tags: on
+  reports@latest:
+    root: openapi/openapi.yaml
+    output: catalog/reports.yaml
+    metadata:
+      description: APIs for reporting purposes.
+    decorators:
+      filter-in:
+        property: x-products
+        value:
+          - Reports
+      plugin/change-title:
+        title: Reports APIs
+      plugin/remove-tag-groups: on
+      plugin/remove-unused-tags: on
+  combined@latest:
+    root: openapi/openapi.yaml
+    output: catalog/combined.yaml
+    metadata:
+      description: Combined APIs for who knows what. Maybe we can remove this since we have "All"?
+    decorators:
+      filter-in:
+        property: x-products
+        value:
+          - Combined
+      plugin/change-title:
+        title: Combined APIs
+      plugin/remove-tag-groups: on
+      plugin/remove-unused-tags: on
+  users@latest:
+    root: openapi/openapi.yaml
+    output: catalog/users.yaml
+    metadata:
+      description: Users APIs for who knows what. Maybe we can remove this since we have "All"?
+    decorators:
+      filter-in:
+        property: x-products
+        value:
+          - Users
+      plugin/change-title:
+        title: Users APIs
+      plugin/remove-tag-groups: on
+      plugin/remove-unused-tags: on
   # The original bundler
   openapi:
     root: openapi/openapi.yaml
+    metadata:
+      description: All Rebilly APIs.
 extends:
   - recommended
 plugins:
@@ -452,3 +520,29 @@ theme:
     hideTryItPanel: false
     expandResponses: '200,201'
     requiredPropsFirst: true
+  catalog:
+    rebilly-catalog:
+      title: Rebilly API catalog
+      description: Discover how our APIs can support your business.
+      slug: /catalog/
+      items:
+        - directory: ./catalog
+          flatten: true
+          includeByMetadata:
+            type: [openapi]
+  navbar:
+    items:
+      - page: /catalog/
+        label: Catalog
+      - page: /contributing/
+        label: Contributing
+  logo:
+    altText: Rebilly API catalog
+    image: ./web/rb_apiLogo.svg
+ignore:
+  - '.github' # works
+  # - 'openapi'
+  - 'plugins'
+  - 'web'
+  # - 'CONTRIBUTING.md'
+  # - 'README.md'
