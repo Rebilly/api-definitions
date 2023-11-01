@@ -46,6 +46,25 @@ properties:
       type: number
       format: double
       minimum: 0.01
+  limitAmount:
+    type: object
+    description: |-
+      Deposit amount limit information.  Set optional minimum and maximum deposit amounts.
+      If this value is `null`, deposit amount limits are not set.
+      If `limitAmount` is not specified when a deposit request is created, amount limits are determined from the chosen strategy.
+      For more information, see the [`strategyId` property](https://all-rebilly.redoc.ly/tag/Deposits/#operation/PostDepositRequest#!path=strategyId&t=request).
+    nullable: true
+    properties:
+      minimum:
+        description: Minimum deposit amount.
+        type: number
+        format: double
+        minimum: 0.01
+      maximum:
+        description: Maximum deposit amount.
+        type: number
+        format: double
+        minimum: 0.01
   customAmount:
     type: object
     description: |-

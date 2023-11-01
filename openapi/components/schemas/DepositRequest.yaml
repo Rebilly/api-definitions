@@ -51,6 +51,27 @@ properties:
       type: number
       format: double
       minimum: 0.01
+  limitAmount:
+    type: object
+    description: |-
+        Deposit amount limit information.  Set optional minimum and maximum deposit amounts.
+        If this value is `null`, deposit amount limits are not set.
+        If `limitAmount` is not specified when a cashier is created, amount limits are determined from the chosen strategy.
+        For more information, see the [`strategyId` property](../PostCashierRequest#!path=strategyId&t=request).
+    nullable: true
+    properties:
+        minimum:
+            description: Minimum deposit amount.
+            type: number
+            format: double
+            minimum: 0.01
+            default: 0.01
+        maximum:
+            description: Maximum deposit amount.
+            type: number
+            format: double
+            minimum: 0.01
+            default: 1000.00
   customAmount:
     type: object
     description: |-
