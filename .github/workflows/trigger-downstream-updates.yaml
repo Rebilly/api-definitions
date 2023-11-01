@@ -86,3 +86,18 @@ jobs:
           repo: Rebilly/rebilly-php
           token: ${{ secrets.MACHINE_USER_PAT }}
           inputs: '{ "trigger-reason": "${{needs.generate-trigger-reason.outputs.reason}}" }'
+
+  trigger-website-update:
+    name: Trigger website update
+    runs-on: ubuntu-latest
+    needs: generate-trigger-reason
+    steps:
+
+      - name: Trigger update workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Update the api folder based on api-definitions
+          ref: main
+          repo: Rebilly/website
+          token: ${{ secrets.MACHINE_USER_PAT }}
+          inputs: '{ "trigger-reason": "${{needs.generate-trigger-reason.outputs.reason}}" }'
