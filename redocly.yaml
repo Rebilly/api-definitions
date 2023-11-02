@@ -1,4 +1,16 @@
 apis:
+  core@public:
+    root: openapi/openapi.yaml
+    output: docs/dev-docs/api/index.yaml
+    metadata:
+      description: The most common APIs used to automate common workflows.
+    decorators:
+      filter-in:
+        property: x-products
+        value:
+          - Core
+      plugin/change-title:
+        title: Core APIs
   core@latest:
     root: openapi/openapi.yaml
     output: catalog/core.yaml
@@ -504,12 +516,11 @@ theme:
       languages:
         - lang: curl
         - lang: Node.js
+        - lang: Ruby
         - lang: C#
+        - lang: Go
         - lang: Python
         - lang: Java
-        - lang: Go
-        - lang: Ruby
-        - lang: PHP
     schemaExpansionLevel: '2'
     maxDisplayedEnumValues: 10
     hideTryItPanel: false
