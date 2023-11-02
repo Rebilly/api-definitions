@@ -1,4 +1,16 @@
 apis:
+  core@public:
+    root: openapi/openapi.yaml
+    output: docs/dev-docs/api/index.yaml
+    metadata:
+      description: The most common APIs used to automate common workflows.
+    decorators:
+      filter-in:
+        property: x-products
+        value:
+          - Core
+      plugin/change-title:
+        title: Core APIs
   core@latest:
     root: openapi/openapi.yaml
     output: catalog/core.yaml
