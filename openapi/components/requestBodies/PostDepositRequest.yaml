@@ -46,6 +46,27 @@ properties:
       type: number
       format: double
       minimum: 0.01
+  amountLimits:
+    type: object
+    description: |-
+      Deposit amount limit information. Set optional minimum and maximum deposit amounts. Limits override `amounts` and `customAmount` values.
+      If this value is `null`, deposit amount limits are not set.
+    nullable: true
+    minProperties: 1
+    properties:
+      minimum:
+        description: Minimum deposit amount.
+        type: number
+        nullable: true
+        format: double
+        default: 0
+        minimum: 0
+      maximum:
+        description: Maximum deposit amount.
+        type: number
+        nullable: true
+        format: double
+        minimum: 0
   customAmount:
     type: object
     description: |-
