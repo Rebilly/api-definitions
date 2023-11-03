@@ -10,7 +10,16 @@ properties:
     example: ord_rct_0YVJ62AF5XCFCA6EBFAAA3Z7E0
   subscriptionId:
     type: string
-    description: ID of the reactivated subscription.
+    description: |-
+      ID of the reactivated subscription.
+
+      If this subscription has a canceled status hence still active
+      then the reactivation is effectively "canceling" the ongoing cancellation.
+
+      If this subscription has a churned status hence inactive then
+      the reactivation is more like starting a new subscription
+      with the same parameters and ID, but no setup fees and trial,
+      and with the next service period number after the cancellation.
     maxLength: 50
     example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
   cancellationId:
@@ -26,11 +35,14 @@ properties:
     maxLength: 255
   effectiveTime:
     description: |-
-      Date and time when the service period starts,
-      unless the subscription is canceled but still active.
+      Date and time when the service period starts, unless the subscription is canceled but still active.
 
-      If the subscription is still active,
-      the subscription continues for the current service period.
+      If the subscription is still active then this field is ignored
+      and the subscription status moves back to "active" immediately.
+
+      If the subscription is churned then this time behaves like `startTime` of the subscriptions order:
+      the new service period starts since the effective time which can be in future
+      or in the recent past, but no more than one service period in the past.
 
       If this field is omitted, this value defaults to the current time.
     type: string
@@ -41,8 +53,7 @@ properties:
       Date and time of the next subscription renewal.
       If this field is omitted, this value is computed from the `effectiveTime` field.
 
-      If the subscription is canceled but still active,
-      it is ignored and the next renewal occurs as scheduled.
+      Specifying this field has the same effect as specifying `renewalTime` for a subscription order directly.
     type: string
     format: date-time
   paymentInstrumentId:

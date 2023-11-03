@@ -62,6 +62,7 @@ properties:
     description: |-
       Status of the subscription service.
       A subscription starts in the `pending` status, and becomes `active` when the service period begins.
+      On reactivation, a subscription restarts in the `reactivating` status, then becomes `active` accordingly.
     type: string
     readOnly: true
     enum:
@@ -74,6 +75,7 @@ properties:
       - voided
       - completed
       - trial-ended
+      - reactivating
   inTrial:
     description: Specifies if the subscription is currently in a trial period.
     type: boolean
