@@ -5,10 +5,10 @@ get:
     - Core
   tags:
     - Orders
-  summary: Retrieve the available order's stages
+  summary: Retrieve subscription stages
   operationId: GetSubscriptionStageCollection
   x-sdk-operation-name: getAllStages
-  description: Retrieves a list of order stages.
+  description: Retrieves a list of subscription stages.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -17,7 +17,7 @@ get:
     - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
-      description: List of order stages retrieved.
+      description: List of subscription stages retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -38,7 +38,7 @@ post:
     - Core
   tags:
     - Orders
-  summary: Create an order stage
+  summary: Create a subscription stage
   operationId: PostSubscriptionStage
   x-sdk-operation-name: createStage
   description: |-
@@ -49,11 +49,11 @@ post:
       application/json:
         schema:
           $ref: ../components/schemas/SubscriptionStage.yaml
-    description: Order Stage resource.
+    description: Subscription Stage resource.
     required: true
   responses:
     '201':
-      description: Order stage created.
+      description: Subscription stage created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
