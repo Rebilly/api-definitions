@@ -1,0 +1,44 @@
+type: object
+description: |-
+  Subscription stage is a sequence of periods (up to infinite) of a subscription with the given settings
+  which can be followed by another stage with different subscription settings.
+  A stage change is similar to a new subscription creation, but with the same ID and following period number.
+
+  A stage with number 1 is always implicitly created when the subscription order is created,
+  but the concept is not applicable for one-time sales.
+
+  A new stage may create a separate invoice if there are postpaid items on the given stage,
+  before moving to the next stage with the appropriate initial invoice.
+
+  A new stage can be created for a canceled or a churned subscription.
+  If the subscription is churned, it becomes "pending" until the start date as if it is recreated.
+properties:
+  number:
+    description: Unique consecutive number of the stage.
+    type: integer
+    minimum: 1
+    readOnly: true
+  status:
+    description: Status of the stage.
+    type: string
+    enum:
+      - "active"
+      - "completed"
+      - "upcoming"
+    readOnly: true
+  fromServicePeriod:
+    description: |-
+      Number of service period when this subscription stage starts and the previous stage ends.
+      If this field is omitted, this value defaults to the next service period for the given subscription,
+      unless it conflicts with previous upcoming stages.
+    type: integer
+    minimum: 0
+  pendingActivation:
+    description: |-
+      Whether the stage is requires the initial invoice of the stage to be paid
+      in order to activate the subscription from status "pending".
+      Always `true` when stage number is 1.
+    type: boolean
+    default: true
+  subscription:
+    $ref: ./SubscriptionOrder.yaml

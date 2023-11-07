@@ -1,0 +1,30 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: stageNumber
+    in: path
+    description: Number of the order stage.
+    required: true
+    schema:
+      type: string
+get:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Retrieve an order stage
+  operationId: GetSubscriptionStage
+  x-sdk-operation-name: getStage
+  description: Retrieves a order stage with a specified number.
+  responses:
+    '200':
+      description: Order stage retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SubscriptionStage.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
