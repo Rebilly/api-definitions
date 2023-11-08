@@ -156,13 +156,11 @@ properties:
       data:
         $ref: ./KycAddressMatches.yaml
   settings:
-    type:
-      - 'object'
-      - 'null'
     description: Settings used to score the document.
     readOnly: true
-    allOf:
+    oneOf:
       - $ref: ./KycSettingsAddress.yaml
+      - type: 'null'
   _links:
     type: array
     description: Related links.

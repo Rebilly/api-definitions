@@ -64,11 +64,9 @@ properties:
       - 'null'
     readOnly: true
   riskMetadata:
-    type:
-      - 'object'
-      - 'null'
-    allOf:
+    oneOf:
       - $ref: ./RiskMetadata.yaml
+      - type: 'null'
   revision:
     description: |-
       Number of times the payment instrument data has been modified.

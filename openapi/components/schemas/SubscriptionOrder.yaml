@@ -119,12 +119,10 @@ properties:
       To use multiple plans in one subscription,
       all plans must have the same billing period,
       this property enables the customer to subscribe to different plans.
-    type:
-      - 'object'
-      - 'null'
     example: null
-    allOf:
+    oneOf:
       - $ref: ./InvoiceTimeShift.yaml
+      - type: 'null'
   recurringInterval:
     type: 
       - 'object'
@@ -304,18 +302,14 @@ properties:
       $ref: ./OrderItem.yaml
   deliveryAddress:
     description: Delivery address of the order.
-    type:
-      - 'object'
-      - 'null'
-    allOf:
+    oneOf:
       - $ref: ./ContactObject.yaml
+      - type: 'null'
   billingAddress:
     description: Billing address of the order.
-    type:
-      - 'object'
-      - 'null'
-    allOf:
+    oneOf:
       - $ref: ./ContactObject.yaml
+      - type: 'null'
   activationTime:
     description: Date and time when the order is activated.
     x-sortable: true

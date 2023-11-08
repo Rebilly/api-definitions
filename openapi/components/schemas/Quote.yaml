@@ -98,18 +98,14 @@ properties:
               type: object
   deliveryAddress:
     description: Delivery address of the order.
-    type:
-      - 'object'
-      - 'null'
-    allOf:
+    oneOf:
       - $ref: ./ContactObject.yaml
+      - type: 'null'
   billingAddress:
     description: Billing address of the order.
-    type:
-      - 'object'
-      - 'null'
-    allOf:
+    oneOf:
       - $ref: ./ContactObject.yaml
+      - type: 'null'
   invoicePreview:
     type: object
     description: Preview of the quote invoice.

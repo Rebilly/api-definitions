@@ -80,11 +80,9 @@ properties:
       - 'null'
     readOnly: true
   riskMetadata:
-    type:
-      - 'object'
-      - 'null'
-    allOf:
+    oneOf:
       - $ref: ./RiskMetadata.yaml
+      - type: 'null'
   useAsBackup:
     $ref: ./UseAsBackup.yaml
   createdTime:

@@ -65,18 +65,14 @@ properties:
       $ref: ./OrderItem.yaml
   deliveryAddress:
     description: Delivery address of the order.
-    type:
-      - 'object'
-      - 'null'
-    allOf:
+    oneOf:
       - $ref: ./ContactObject.yaml
+      - type: 'null'
   billingAddress:
     description: Billing address of the order.
-    type:
-      - 'object'
-      - 'null'
-    allOf:
+    oneOf:
       - $ref: ./ContactObject.yaml
+      - type: 'null'
   activationTime:
     description: Date and time when the order is activated.
     x-sortable: true

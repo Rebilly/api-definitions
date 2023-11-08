@@ -5,17 +5,13 @@ content:
       properties:
         deliveryAddress:
           description: Order delivery address.
-          type:
-            - 'object'
-            - 'null'
-          allOf:
+          oneOf:
             - $ref: ../../schemas/ContactObject.yaml
+            - type: 'null'
         billingAddress:
           description: Order billing address.
-          type:
-            - 'object'
-            - 'null'
-          allOf:
+          oneOf:
             - $ref: ../../schemas/ContactObject.yaml
+            - type: 'null'
 description: Order resource.
 required: true

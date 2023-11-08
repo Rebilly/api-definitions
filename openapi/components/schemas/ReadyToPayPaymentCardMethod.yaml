@@ -9,15 +9,13 @@ properties:
     enum:
       - payment-card
   feature:
-    type:
-      - 'object'
-      - 'null'
     description: |-
       Specific feature of this method.
       For example, a digital wallet.
       If the method does not have any features, this value is null.
-    allOf:
+    oneOf:
       - $ref: ./PaymentCardFeature.yaml
+      - type: 'null'
   brands:
     type: array
     description: List of supported brands.

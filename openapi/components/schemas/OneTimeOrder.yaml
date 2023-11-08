@@ -89,18 +89,14 @@ properties:
       $ref: ./OrderItem.yaml
   deliveryAddress:
     description: Delivery address of the order.
-    type:
-      - 'object'
-      - 'null'
-    allOf:
+    oneOf:
       - $ref: ./ContactObject.yaml
+      - type: 'null'
   billingAddress:
     description: Billing address of the order.
-    type:
-      - 'object'
-      - 'null'
-    allOf:
+    oneOf:
       - $ref: ./ContactObject.yaml
+      - type: 'null'
   activationTime:
     description: Date and time when the order is activated.
     x-sortable: true
@@ -168,15 +164,13 @@ properties:
     type: integer
     readOnly: true
   riskMetadata:
-    type:
-      - 'object'
-      - 'null'
     example: null
     description: |-
       Risk metadata.
       If this value is `null`, this field uses risk metadata that is captured when creating the payment token.
-    allOf:
+    oneOf:
       - $ref: ./RiskMetadata.yaml
+      - type: 'null'
   customFields:
     $ref: ./ResourceCustomFields.yaml
   createdTime:

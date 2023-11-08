@@ -27,11 +27,9 @@ content:
             dispute:
               $ref: ../../schemas/Dispute.yaml
             transaction:
-              type:
-                - 'object'
-                - 'null'
-              allOf:
+              oneOf:
                 - $ref: ../../schemas/Transaction.yaml
+                - type: 'null'
         _links:
           type: array
           description: Related links.

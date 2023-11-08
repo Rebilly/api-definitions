@@ -23,11 +23,9 @@ properties:
         type: string
   billingAddress:
     description: Billing address object.
-    type:
-      - 'object'
-      - 'null'
-    allOf:
+    oneOf:
       - $ref: ./ContactObject.yaml
+      - type: 'null'
   id:
     description: ID of the token.
     readOnly: true
@@ -39,11 +37,9 @@ properties:
     default: false
     readOnly: true
   riskMetadata:
-    type:
-      - 'object'
-      - 'null'
-    allOf:
+    oneOf:
       - $ref: ./RiskMetadata.yaml
+      - type: 'null'
   leadSource:
     allOf:
       - $ref: ./LeadSource.yaml

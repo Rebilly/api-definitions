@@ -40,11 +40,9 @@ content:
             the billing address associated with the payment instrument is used.
             If no billing address is associated with the payment instrument,
             the customer's billing address is used.
-          type:
-            - 'object'
-            - 'null'
-          allOf:
+          oneOf:
             - $ref: ../schemas/ContactObject.yaml
+            - type: 'null'
         requestId:
           description: |-
             Use this field to prevent duplicate transaction requests that may occur within a short period of time.

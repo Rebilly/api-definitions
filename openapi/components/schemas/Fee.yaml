@@ -34,11 +34,9 @@ properties:
     description: |-
       Fee settlement settings.
       This value overrides the gateway account financial settings of the transaction.
-    type:
-      - 'object'
-      - 'null'
-    allOf:
+    oneOf:
       - $ref: ./SettlementSettings.yaml
+      - type: 'null'
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:

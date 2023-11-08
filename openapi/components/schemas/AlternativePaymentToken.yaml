@@ -34,11 +34,9 @@ properties:
     default: false
     readOnly: true
   riskMetadata:
-    type:
-      - 'object'
-      - 'null'
-    allOf:
+    oneOf:
       - $ref: ./RiskMetadata.yaml
+      - type: 'null'
   leadSource:
     allOf:
       - $ref: ./LeadSource.yaml

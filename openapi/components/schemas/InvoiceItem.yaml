@@ -87,11 +87,9 @@ properties:
   tax:
     description: Invoice item tax.
     readOnly: true
-    type:
-      - 'object'
-      - 'null'
-    allOf:
+    oneOf:
       - $ref: ./TaxItem.yaml
+      - type: 'null'
   _links:
     type: array
     description: Related links.

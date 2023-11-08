@@ -497,11 +497,9 @@ properties:
     type: integer
     readOnly: true
   riskMetadata:
-    type:
-      - 'object'
-      - 'null'
-    allOf:
+    oneOf:
       - $ref: ./RiskMetadata.yaml
+      - type: 'null'
   notificationUrl:
     description: |-
       URL where a server-to-server POST notification is sent.

@@ -158,13 +158,11 @@ properties:
       data:
         $ref: ./KycIdentityMatches.yaml
   settings:
-    type:
-      - 'object'
-      - 'null'
     description: Settings used to score the document.
     readOnly: true
-    allOf:
+    oneOf:
       - $ref: ./KycSettingsIdentity.yaml
+      - type: 'null'
   _links:
     type: array
     description: Related links.
