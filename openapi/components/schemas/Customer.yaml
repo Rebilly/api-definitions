@@ -9,22 +9,25 @@ properties:
     maxLength: 50
   email:
     description: Customer's email address.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     format: email
-    nullable: true
     readOnly: true
     x-sortable: true
     x-basic: true
   firstName:
     description: Customer's first name.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     x-basic: true
     readOnly: true
   lastName:
     description: Customer's last name.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     x-sortable: true
     x-basic: true
     readOnly: true
@@ -41,8 +44,9 @@ properties:
       If both are supplied, the value of this property overrides the `defaultPaymentInstrument` value.
       The token expires after first use.
   defaultPaymentInstrument:
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     description: Default payment instrument information.
     anyOf:
       - $ref: ./VaultedInstrument.yaml
@@ -57,8 +61,9 @@ properties:
     $ref: ./ResourceCustomFields.yaml
   primaryAddress:
     description: Customer's primary address.
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     allOf:
       - $ref: ./ContactObject.yaml
   company:
@@ -77,10 +82,11 @@ properties:
     x-sortable: true
     x-basic: true
     description: Time and date of the customer's last approved payment.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     format: date-time
     readOnly: true
-    nullable: true
   lifetimeRevenue:
     $ref: ./CustomerLifetimeRevenue.yaml
   invoiceCount:
@@ -121,9 +127,10 @@ properties:
     allOf:
       - $ref: ./OrganizationId.yaml
   taxNumbers:
-    type: array
+    type:
+      - 'array'
+      - 'null'
     description: Tax numbers of the customer.
-    nullable: true
     items:
       $ref: ./TaxNumber.yaml
   _links:

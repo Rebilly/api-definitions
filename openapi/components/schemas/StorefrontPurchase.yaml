@@ -49,15 +49,17 @@ properties:
   billingAddress:
     description: Billing address details.
     writeOnly: true
-    nullable: true
-    type: object
+    type:
+      - 'object'
+      - 'null'
     allOf:
       - $ref: ./ContactObject.yaml
   deliveryAddress:
     description: Delivery address details.
     writeOnly: true
-    nullable: true
-    type: object
+    type:
+      - 'object'
+      - 'null'
     allOf:
       - $ref: ./ContactObject.yaml
   shippingRateId:
@@ -79,14 +81,17 @@ properties:
     items:
       type: string
   password:
-    type: string
+    type:
+      - 'string'
+      - 'null'
     description: |-
       Customer account password.
       If this value is set, it is used to create a customer account.
     writeOnly: true
-    nullable: true
   redirectUrl:
-    type: string
+    type:
+      - 'string'
+      - 'null'
     description: |-
       URL to redirect the end-user when an offsite transaction is completed.
       If `website.url` is `https://example.com`,
@@ -105,4 +110,3 @@ properties:
       These placeholders are replaced with the transaction ID and result.
     format: uri
     writeOnly: true
-    nullable: true

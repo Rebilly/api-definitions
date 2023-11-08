@@ -20,8 +20,9 @@ properties:
 
       Some types of transactions relate to parent transactions.
       For example, a `risk-reserve` relates to a `charge`, and a `risk-reserve-release` relates a to `risk-reserve`.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     maxLength: 50
     example: btxn_0YVCNJYRXTDDQ9QF2Z60ZA05WP
   transactionId:
@@ -37,8 +38,9 @@ properties:
     x-sortable: true
     x-basic: true
     description: Amount of the settlement.
-    type: number
-    nullable: true
+    type:
+      - 'number'
+      - 'null'
     format: double
   settlementTime:
     description: Date and time of the expected settlement.
@@ -48,8 +50,9 @@ properties:
     description: |-
       If the settlement currency does not match the transaction currency.
       This field displays the exchange rate of the settlement.
-    type: number
-    nullable: true
+    type:
+      - 'number'
+      - 'null'
     format: double
   createdTime:
     $ref: ./CreatedTime.yaml

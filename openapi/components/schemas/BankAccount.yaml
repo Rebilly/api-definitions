@@ -41,8 +41,9 @@ properties:
       - other
   bic:
     description: Bank Identifier Code (BIC).
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
   billingAddress:
     description: Customer's billing address.
     allOf:
@@ -74,12 +75,14 @@ properties:
       All future payments are processed by this gateway account.
 
       For more information, see [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
   riskMetadata:
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     allOf:
       - $ref: ./RiskMetadata.yaml
   useAsBackup:

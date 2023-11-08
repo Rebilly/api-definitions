@@ -42,8 +42,9 @@ properties:
   orderId:
     description: ID of the order.
     readOnly: true
-    nullable: true
-    type: string
+    type:
+      - 'string'
+      - 'null'
     maxLength: 50
     example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
   items:
@@ -97,14 +98,16 @@ properties:
               type: object
   deliveryAddress:
     description: Delivery address of the order.
-    nullable: true
-    type: object
+    type:
+      - 'object'
+      - 'null'
     allOf:
       - $ref: ./ContactObject.yaml
   billingAddress:
     description: Billing address of the order.
-    nullable: true
-    type: object
+    type:
+      - 'object'
+      - 'null'
     allOf:
       - $ref: ./ContactObject.yaml
   invoicePreview:
@@ -146,12 +149,13 @@ properties:
             x-type: Money
             format: double
       recurringAmounts:
-        type: object
+        type:
+          - 'object'
+          - 'null'
         description: |-
           Total amounts of the recurring invoice.
           This includes recurring items only.
           If the quote does not have recurring items, the value of this field is `null`.
-        nullable: true
         properties:
           amount:
             description: Amount of the invoice.
@@ -211,45 +215,53 @@ properties:
               maxLength: 255
             unitPrice:
               description: Unit price of the invoice item.
-              type: number
+              type:
+                - 'number'
+                - 'null'
               format: double
-              nullable: true
             quantity:
               description: Quantity of the invoice item.
               type: integer
             period:
               description: Date interval of the invoice item.
-              type: string
-              nullable: true
+              type:
+                - 'string'
+                - 'null'
             setupUnitPrice:
               description: Unit price of the invoice item.
-              type: number
+              type:
+                - 'number'
+                - 'null'
               format: double
-              nullable: true
             trialUnitPrice:
               description: Unit price of the invoice item.
-              type: number
+              type:
+                - 'number'
+                - 'null'
               format: double
-              nullable: true
             trialPeriod:
               description: Date interval of the invoice item trial.
-              type: string
-              nullable: true
+              type:
+                - 'string'
+                - 'null'
             taxAmount:
               description: Invoice item tax.
-              type: number
+              type:
+                - 'number'
+                - 'null'
               format: double
-              nullable: true
             setupTaxAmount:
               description: Tax amount of the setup that is applied to the invoice.
-              type: number
+              type:
+                - 'number'
+                - 'null'
               format: double
-              nullable: true
             trialTaxAmount:
               description: Tax amount of the trial that is applied to the invoice.
-              type: number
+              type:
+                - 'number'
+                - 'null'
               format: double
-              nullable: true
   paymentTerms:
     description: Payment terms for the customer which are displayed on the quote.
     type: string
@@ -257,32 +269,37 @@ properties:
     description: |-
       Date and time when the quote expires. The default expiration time is one month from the time the quote is issued.
       In a `draft` state, this field may be `null`.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: date-time
   issuedTime:
     description: Date and time when the quote is issued.
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
-    type: string
     format: date-time
   acceptedTime:
     description: Date and time when the quote is accepted.
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
-    type: string
     format: date-time
   rejectedTime:
     description: Date and time when the quote is rejected.
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
-    type: string
     format: date-time
   canceledTime:
     description: Date and time when the quote is canceled.
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
-    type: string
     format: date-time
   redirectUrl:
     description: URL to redirect the customer to when a quote is rejected. The default value is the website URL.
@@ -296,17 +313,19 @@ properties:
         default: false
         description: Specifies whether to show written signature lines.
       organizationPrintedName:
-        type: string
+        type:
+          - 'string'
+          - 'null'
         description: Printed name of the organization.
-        nullable: true
         default: null
   shipping:
     $ref: ./Shipping.yaml
   tax:
     $ref: ./Taxes.yaml
   couponIds:
-    type: array
-    nullable: true
+    type:
+      - 'array'
+      - 'null'
     description: |-
       List of coupons to redeem on the customer and apply to the order when the quote is accepted.
 

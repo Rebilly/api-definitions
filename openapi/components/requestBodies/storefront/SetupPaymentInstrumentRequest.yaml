@@ -22,19 +22,21 @@ content:
             If a billing address is not supplied the address associated with the payment instrument is used.
             If no address is associated with the payment instrument,
             the customer's address is used.
-          nullable: true
-          type: object
+          type:
+            - 'object'
+            - 'null'
           allOf:
             - $ref: ../../schemas/ContactObject.yaml
         redirectUrl:
-          nullable: true
+          type:
+            - 'string'
+            - 'null'
           description: |-
             URL to redirect the end-user when an offsite transaction is completed.
             This field defaults to the configured website URL.
             You may use `{id}` or `{result}` as placeholders in the URL.
             These placeholders are replaced with the transaction ID and result.
             For more information, see [Placeholders](https://www.rebilly.com/docs/automations/email-notifications/#placeholders).
-          type: string
           format: uri
         riskMetadata:
           $ref: ../../schemas/RiskMetadata.yaml
