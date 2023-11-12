@@ -125,7 +125,9 @@ properties:
           example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
         tax:
           description: Credit memo item tax.
-          $ref: ../schemas/CreditMemoTaxItem.yaml
+          oneOf:
+            - $ref: ../schemas/CreditMemoTaxItem.yaml
+            - type: 'null'
   reason:
     description: Reason for the credit memo.
     type: string

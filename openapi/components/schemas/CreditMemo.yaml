@@ -138,7 +138,9 @@ properties:
           example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
         tax:
           description: Credit memo item tax.
-          $ref: ./CreditMemoTaxItem.yaml
+          oneOf:
+            - $ref: ./CreditMemoTaxItem.yaml
+            - type: 'null'
   status:
     type: string
     description: Status of the credit memo.
