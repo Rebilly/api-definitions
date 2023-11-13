@@ -9,13 +9,12 @@ properties:
     enum:
       - ach
   feature:
-    type: object
-    nullable: true
     description: |-
       Specific feature of this method.
       For example, a digital wallet or a processor.
       If the method does not have any features, this value is null.
     oneOf:
       - $ref: ./AchPlaidFeature.yaml
+      - type: 'null'
   filters:
     $ref: ./ReadyToPayMethodFilters.yaml

@@ -89,8 +89,9 @@ properties:
           example: crmm_itm_0YVCNN22TWC3G8H82QNPNVZCHG
         invoiceItemId:
           description: ID of the invoice item to which the credit item is referenced.
-          nullable: true
-          type: string
+          type:
+            - 'string'
+            - 'null'
           maxLength: 50
           example: ii_0YVFDEQS2KCFTBN9HXWJFY55GV
         description:
@@ -109,23 +110,24 @@ properties:
           format: double
           readOnly: true
         productId:
-          type: string
-          nullable: true
+          type:
+            - 'string'
+            - 'null'
           description: ID of the related product.
           maxLength: 50
           example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
         planId:
           description: ID of the related plan.
-          type: string
-          nullable: true
+          type:
+            - 'string'
+            - 'null'
           maxLength: 50
           example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
         tax:
-          type: object
           description: Credit memo item tax.
-          nullable: true
-          allOf:
+          oneOf:
             - $ref: ../schemas/CreditMemoTaxItem.yaml
+            - type: 'null'
   reason:
     description: Reason for the credit memo.
     type: string
