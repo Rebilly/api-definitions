@@ -31,8 +31,7 @@ properties:
         format: double
       currency:
         description: Authorized for the digital wallet currency.
-        allOf:
-          - $ref: ./CurrencyCode.yaml
+        $ref: ./CurrencyCode.yaml
       descriptor:
         description: Descriptor for a payment.
         type: string
@@ -70,13 +69,11 @@ properties:
   billingAddress:
     readOnly: true
     description: Billing address object.
-    allOf:
-      - $ref: ./ContactObject.yaml
+    $ref: ./ContactObject.yaml
   id:
     description: ID of the token.
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    $ref: ./ResourceId.yaml
   isUsed:
     description: Specifies if the token is already used.
     type: boolean
