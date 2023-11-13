@@ -40,8 +40,9 @@ properties:
         description: |-
           Bank Identification Number (BIN) of the payment card.
           This value is the same as the first 6 digits of the associated Primary Account Number (PAN).
-        type: string
-        nullable: true
+        type:
+          - 'string'
+          - 'null'
         format: bin
         readOnly: true
       last4:
@@ -82,10 +83,9 @@ properties:
     default: false
     readOnly: true
   riskMetadata:
-    type: object
-    nullable: true
-    allOf:
+    oneOf:
       - $ref: ./RiskMetadata.yaml
+      - type: 'null'
   leadSource:
     allOf:
       - $ref: ./LeadSource.yaml
@@ -96,14 +96,16 @@ properties:
     $ref: ./UpdatedTime.yaml
   usageTime:
     description: Date and time when the token is used.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: date-time
     readOnly: true
   expirationTime:
     description: Date and time when the token expired.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: date-time
     readOnly: true
   _links:

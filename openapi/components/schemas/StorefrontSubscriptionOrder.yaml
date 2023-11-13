@@ -65,16 +65,14 @@ properties:
       $ref: ./OrderItem.yaml
   deliveryAddress:
     description: Delivery address of the order.
-    nullable: true
-    type: object
-    allOf:
+    oneOf:
       - $ref: ./ContactObject.yaml
+      - type: 'null'
   billingAddress:
     description: Billing address of the order.
-    nullable: true
-    type: object
-    allOf:
+    oneOf:
       - $ref: ./ContactObject.yaml
+      - type: 'null'
   activationTime:
     description: Date and time when the order is activated.
     x-sortable: true
@@ -85,16 +83,18 @@ properties:
     allOf:
       - $ref: ./ServerTimestamp.yaml
   abandonTime:
-    type: string
+    type:
+      - 'string'
+      - 'null'
     description: |-
       Date and time when the pending order is automatically abandoned.
       If this value is not passed during order creation,
       a [pending order TTL](https://all-rebilly.redoc.ly/tag/Organizations/operation/PatchOrganization/#!path=settings/billing/pendingOrderTtl&t=request) setting is used to calculate the value.
     format: date-time
-    nullable: true
   couponIds:
-    type: array
-    nullable: true
+    type:
+      - 'array'
+      - 'null'
     description: |-
       List of coupons to redeem on the customer and restrict to this order.
 
@@ -115,9 +115,10 @@ properties:
       description: ID of the coupon.
   poNumber:
     description: Purchase order number displayed on the issued invoices.
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: PO123456
-    type: string
   shipping:
     $ref: ./Shipping.yaml
   notes:
@@ -188,13 +189,14 @@ properties:
           To use multiple plans in one subscription,
           all plans must have the same billing period,
           this property enables the customer to subscribe to different plans.
-        nullable: true
-        type: object
         example: null
-        allOf:
+        oneOf:
           - $ref: ./InvoiceTimeShift.yaml
+          - type: 'null'
       recurringInterval:
-        type: object
+        type: 
+          - 'object'
+          - 'null'
         description: |-
           Recurring interval to override plan settings.
           To use plan settings, set this value to `null`.
@@ -202,7 +204,6 @@ properties:
           To use multiple plans in one subscription,
           all plans must have the same same recurring period length,
           this property enables the customer to subscribe to different plans.
-        nullable: true
         example: null
         properties:
           periodAnchorInstruction:
@@ -219,11 +220,12 @@ properties:
           Date and time when the subscription starts.
           If this value is `null`, the current time is used.
           This value cannot be more than one service period in the past.
-        nullable: true
+        type:
+          - 'string'
+          - 'null'
         x-sortable: true
         x-basic: true
         example: null
-        type: string
         format: date-time
 
       endTime:
@@ -248,13 +250,14 @@ properties:
       To use multiple plans in one subscription,
       all plans must have the same billing period,
       this property enables the customer to subscribe to different plans.
-    nullable: true
-    type: object
     example: null
-    allOf:
+    oneOf:
       - $ref: ./InvoiceTimeShift.yaml
+      - type: 'null'
   recurringInterval:
-    type: object
+    type: 
+      - 'object'
+      - 'null'
     description: |-
       Recurring interval to override plan settings.
       To use plan settings, set this value to `null`.
@@ -262,7 +265,6 @@ properties:
       To use multiple plans in one subscription,
       all plans must have the same same recurring period length,
       this property enables the customer to subscribe to different plans.
-    nullable: true
     example: null
     properties:
       periodAnchorInstruction:
@@ -279,11 +281,12 @@ properties:
       Date and time when the subscription starts.
       If this value is `null`, the current time is used.
       This value cannot be more than one service period in the past.
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     x-sortable: true
     x-basic: true
     example: null
-    type: string
     format: date-time
   endTime:
     description: Date and time when the subscription ends.
@@ -362,12 +365,13 @@ properties:
         format: double
         example: 49.95
   paymentInstrumentId:
-    type: string
+    type:
+      - 'string'
+      - 'null'
     description: |-
       ID of the payment instrument to use for autopay.
       If this value is not provided, or if the payment instrument is inactive,
       the customer's default payment instrument is used.
-    nullable: true
     maxLength: 50
     example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
   canceledTime:

@@ -53,9 +53,10 @@ properties:
     $ref: ./KycDocumentRejection.yaml
   requestId:
     readOnly: true
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     description: ID of the KYC request.
-    type: string
     maxLength: 50
     example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
   createdTime:
@@ -64,40 +65,46 @@ properties:
     $ref: ./UpdatedTime.yaml
   processedTime:
     description: Date and time when the KYC document is processed.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: date-time
     readOnly: true
   customerId:
     $ref: ./CustomerId.yaml
   reviewerId:
     description: ID of the KYC document reviewer.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
     maxLength: 50
     example: 44433322-2c4y-483z-a0a9-158621f77a21
   reviewerName:
     description: First and last name of the KYC document reviewer.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
   reviewStartTime:
     description: Date and time when the manual review starts.
-    nullable: true
-    type: string
+    type:
+      - 'string'
+      - 'null'
     format: date-time
     readOnly: true
   reviewTime:
     description: Date and time of manual review.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: date-time
     readOnly: true
   notes:
     description: Reviewer notes.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
   tags:
     description: List of KYC document tags.
     readOnly: true
@@ -106,8 +113,9 @@ properties:
       $ref: ./Tag.yaml
   reason:
     description: Reason for uploading.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
   matchLevel:
     description: Tolerance level setting for document matches.
     type: integer
@@ -122,8 +130,9 @@ properties:
     type: integer
     readOnly: true
   documentMatches:
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     readOnly: true
     properties:
       score:
@@ -134,8 +143,9 @@ properties:
       data:
         $ref: ./KycAddressMatches.yaml
   parsedData:
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     readOnly: true
     properties:
       score:
@@ -146,12 +156,11 @@ properties:
       data:
         $ref: ./KycAddressMatches.yaml
   settings:
-    type: object
     description: Settings used to score the document.
-    nullable: true
     readOnly: true
-    allOf:
+    oneOf:
       - $ref: ./KycSettingsAddress.yaml
+      - type: 'null'
   _links:
     type: array
     description: Related links.

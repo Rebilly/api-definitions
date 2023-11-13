@@ -33,12 +33,14 @@ properties:
     format: double
   acquirerReferenceNumber:
     description: Acquirer reference number for the dispute.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
   caseId:
     description: Case ID of the dispute.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
   reasonCode:
     description: Code used in the chargeback that describes the reason for the dispute.
     type: string
@@ -209,8 +211,9 @@ properties:
       - 'B'
   reasonDescription:
     description: Description of the reason for the dispute.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     maxLength: 512
     readOnly: true
   category:
@@ -254,17 +257,20 @@ properties:
     description: |-
       Latest date and time by when a merchant must submit a representment for a dispute.
       If the deadline is missed, the merchant loses the dispute.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: date-time
   rawResponse:
     description: Raw response from the payment gateway that processed the disputed transaction.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
   resolvedTime:
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: date-time
     description: Date and time when the dispute is resolved.
     readOnly: true

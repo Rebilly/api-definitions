@@ -62,8 +62,9 @@ properties:
     $ref: ./Taxes.yaml
   organizationTaxIdNumber:
     description: Organization tax ID number that is displayed on the invoice.
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     required:
       - type
       - value
@@ -81,8 +82,9 @@ properties:
         example: GB980780684
   customerTaxIdNumber:
     description: Customer tax ID number that is displayed on the invoice.
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     required:
       - type
       - value
@@ -108,9 +110,10 @@ properties:
       - $ref: ./ContactObject.yaml
   poNumber:
     description: Purchase order number that is displayed on the invoice.
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: PO123456
-    type: string
     maxLength: 50
   notes:
     description: Notes for the customer that are displayed on the invoice.
@@ -150,8 +153,9 @@ properties:
           $ref: ./DiscountContext.yaml
   autopayScheduledTime:
     description: Date and time when an automatic payment (autopay) is scheduled.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     x-sortable: true
     format: date-time
   autopayRetryNumber:
@@ -190,15 +194,17 @@ properties:
   abandonedTime:
     description: Date and time when the invoice is abandoned.
     x-sortable: true
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: date-time
     readOnly: true
   voidedTime:
     description: Date and time when the invoice is voided.
     x-sortable: true
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: date-time
     readOnly: true
   paidTime:
@@ -206,8 +212,9 @@ properties:
     x-sortable: true
     x-basic: true
     description: Date and time when the invoice is paid.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: date-time
     readOnly: true
   dueTime:
@@ -227,8 +234,9 @@ properties:
   updatedTime:
     $ref: ./UpdatedTime.yaml
   paymentFormUrl:
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
     format: url
     description: |-
@@ -251,8 +259,9 @@ properties:
     description: |-
       Invoice payment retry instruction.
       This object specifies how to proceed if a payment related to the invoice fails.
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     properties:
       attempts:
         type: array
@@ -314,14 +323,16 @@ properties:
     readOnly: true
   dueReminderTime:
     description: Date and time when a past due reminder event is triggered.
-    nullable: true
-    type: string
+    type:
+      - 'string'
+      - 'null'
     format: date-time
     readOnly: true
   dueReminderNumber:
     description: Number of past due reminder events that have been triggered.
-    nullable: true
-    type: integer
+    type:
+      - 'integer'
+      - 'null'
     readOnly: true
   organizationId:
     readOnly: true

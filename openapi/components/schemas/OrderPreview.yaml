@@ -28,17 +28,15 @@ properties:
   billingAddress:
     description: Billing address details.
     writeOnly: true
-    nullable: true
-    type: object
-    allOf:
+    oneOf:
       - $ref: ./ContactObject.yaml
+      - type: 'null'
   deliveryAddress:
     description: Delivery address details.
     writeOnly: true
-    nullable: true
-    type: object
-    allOf:
+    oneOf:
       - $ref: ./ContactObject.yaml
+      - type: 'null'
   couponIds:
     type: array
     writeOnly: true
