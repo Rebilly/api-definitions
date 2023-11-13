@@ -53,13 +53,20 @@ properties:
       unless it conflicts with previous upcoming stages.
     type: integer
     minimum: 0
-  pendingActivation:
-    description: |-
-      Whether the stage requires the initial invoice of the stage to be paid
-      in order to activate the subscription from status "pending".
-      Always `true` when stage number is 1.
-    type: boolean
-    default: true
+  activationPolicy:
+    description: What the stage requires in order to start the subscription, that is moving it from status "pending" to "active".
+    type: string
+    enum:
+      - "immediately"
+      - "after-initial-invoice-payment"
+      - "after-invoices-payment"
+    default: "after-initial-invoice-payment"
+    x-enumDescriptions:
+      immediately: Start the subscription immediately when the stage begins.
+      after-initial-invoice-payment: Start the subscription after the generated initial invoice for the stage is paid.
+      after-invoices-payment: |-
+        Start the subscription after all the related invoices are paid or closed otherwise (voided, abandoned).
+        The related invoices include the initial invoice and all unpaid or past-due invoices for the subscription in the past.
   initialInvoiceId:
     description: ID of the initial invoice of this stage.
     readOnly: true
