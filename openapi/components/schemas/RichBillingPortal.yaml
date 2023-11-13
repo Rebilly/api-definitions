@@ -1,0 +1,143 @@
+type: object
+required:
+  - websiteId
+  - name
+  - recurringOptions
+  - levels
+  - solutions
+properties:
+  id:
+    type: string
+    description: ID of the billing portal.
+    readOnly: true
+    maxLength: 50
+    example: bill_prt_0YV7K5TYV5D1P9ZNKDT39KZC3C
+  websiteId:
+    $ref: ./WebsiteId.yaml
+  name:
+    type: string
+    description: Billing portal name.
+  recurringOptions:
+    type: array
+    description: Recurring options for the billing portal. For example, it can have `monthly` and `yearly` variants.
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          description: |-
+            ID of a recurring options.
+            It must be unique between other recurring options in the same billing portal.
+        name:
+          type: string
+          description: Name of recurring options for the billing portal.
+          example: monthly
+        recurringInterval:
+          type: object
+          description: Recurring interval settings.
+          properties:
+            unit:
+              description: Unit of time.
+              type: string
+              enum:
+                - day
+                - week
+                - month
+                - year
+            length:
+              description: Length of time.
+              type: integer
+              minimum: 1
+  levels:
+    type: array
+    description: Level options for billing portal solution.
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          description: |-
+            ID of a level.
+            It must be unique between other levels in the same billing portal.
+          example: enterprise
+        name:
+          type: string
+          description: Name of recurring options for the billing portal.
+          example: Enterprise
+  solutions:
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          type: object
+          description: Combination of flexible plans, attached to level and recurring option.
+          properties:
+            id:
+              type: string
+              description: |-
+                ID of a solution.
+                It must be unique between other solutions in the same billing portal.
+              example: streaming
+            name:
+              type: string
+              description: Solution name.
+              minLength: 1
+              maxLength: 100
+              example: Streaming
+            description:
+              type: string
+              description: Description of a solution.
+            status:
+              type: string
+              description: Status of a solution.
+              enum:
+                - active
+                - archived
+            matrix:
+              type: array
+              items:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status of a solution item.
+                    enum:
+                      - active
+                      - archived
+                  recurringOptionId:
+                    type: string
+                    description: ID of a recurring option.
+                  levelId:
+                    type: string
+                    description: ID of a level.
+                  plans:
+                    type: array
+                    items:
+                      allOf:
+                        - type: object
+                          description: Plan details.
+                          required:
+                            - id
+                          properties:
+                            id:
+                              type: string
+                              description: ID of the main plan.
+                              maxLength: 50
+                              example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+                        - $ref: ./SubscriptionOrderPlan.yaml
+      variants:
+        type: array
+        items:
+          type: array
+          description: Combination of solutions which can be used together.
+          items:
+            type: string
+            description: ID of a solution.
+          example:
+            - billing
+            - payments
+            - KYC
+
+
+
