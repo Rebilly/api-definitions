@@ -63,8 +63,9 @@ properties:
   initialInvoiceId:
     description: ID of the initial invoice of this stage.
     readOnly: true
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
     maxLength: 50
     example: in_0YVF9605RKC62BP14NE2R7V2XT
   revision:
@@ -90,20 +91,22 @@ properties:
           To use multiple plans in one subscription,
           all plans must have the same billing period,
           this property enables the customer to subscribe to different plans.
-        nullable: true
-        type: object
+        type:
+          - object
+          - null
         example: null
         allOf:
           - $ref: ./InvoiceTimeShift.yaml
       recurringInterval:
-        type: object
+        type:
+          - object
+          - null
         description: |-
           Recurring interval to override plan settings.
           To use plan settings, set this value to `null`.
 
           To use multiple plans in one subscription,
           all plans must have the same recurring period length.
-        nullable: true
         example: null
         properties:
           periodAnchorInstruction:
@@ -121,26 +124,29 @@ properties:
           If this value is `null`, the current time is used.
           This value cannot be more than one service period in the past.
           If `fromServicePeriod` of the related stage number is more than current service period plus 1, this value is ignored.
-        nullable: true
+        type:
+          - string
+          - null
         x-basic: true
         example: null
-        type: string
         format: date-time
       renewalTime:
         description: |-
           Date and time when the subscription renews.
           If `fromServicePeriod` of the related stage number is more than current service period plus 1, this value is ignored.
-        type: string
         x-basic: true
         format: date-time
-        nullable: true
+        type:
+          - string
+          - null
       paymentInstrumentId:
-        type: string
         description: |-
           ID of the payment instrument to use for autopay.
           If this value is not provided, or if the payment instrument is inactive,
           the customer's default payment instrument is used.
-        nullable: true
+        type:
+          - string
+          - null
         maxLength: 50
         example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
       currency:
@@ -156,19 +162,18 @@ properties:
           $ref: ./OrderItem.yaml
       deliveryAddress:
         description: Delivery address of the order.
-        nullable: true
-        type: object
-        allOf:
+        oneOf:
           - $ref: ./ContactObject.yaml
+          - type: null
       billingAddress:
         description: Billing address of the order.
-        nullable: true
-        type: object
-        allOf:
+        oneOf:
           - $ref: ./ContactObject.yaml
+          - type: null
       couponIds:
-        type: array
-        nullable: true
+        type:
+          - array
+          - null
         description: |-
           List of coupons to redeem on the customer and restrict to this order.
 
@@ -176,9 +181,9 @@ properties:
 
           This parameter uses the following logic:
 
-          - If this parameter is not supplied, applied coupons are not changed.
+          - If null or nothing is supplied, applied coupons are not changed.
           - If an empty array is supplied, all applied coupon redemptions are canceled.
-          - If a list of coupons is supplied, unapplied coupons in the list are applied.
+          - If a list of coupons is supplied, non-applied coupons in the list are applied.
             Coupons that have already been applied do not change state.
             Applied coupons that are not supplied in list are canceled.
 
@@ -188,9 +193,10 @@ properties:
           description: ID of the coupon.
       poNumber:
         description: Purchase order number displayed on the issued invoices.
-        nullable: true
         example: PO123456
-        type: string
+        type:
+          - string
+          - null
       shipping:
         $ref: ./Shipping.yaml
       notes:
