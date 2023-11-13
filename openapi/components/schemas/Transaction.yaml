@@ -3,8 +3,7 @@ description: Transaction information.
 properties:
   id:
     readOnly: true
-    allOf:
-      - $ref: ./TransactionId.yaml
+    $ref: ./TransactionId.yaml
   websiteId:
     readOnly: true
     allOf:
@@ -69,8 +68,7 @@ properties:
     readOnly: true
   currency:
     readOnly: true
-    allOf:
-      - $ref: ./CurrencyCode.yaml
+    $ref: ./CurrencyCode.yaml
   purchaseAmount:
     description: |-
       Amount by which the purchase is completed.
@@ -83,8 +81,7 @@ properties:
     readOnly: true
   purchaseCurrency:
     readOnly: true
-    allOf:
-      - $ref: ./CurrencyCode.yaml
+    $ref: ./CurrencyCode.yaml
   requestAmount:
     description: |-
       Amount of the payment request.
@@ -97,15 +94,13 @@ properties:
     readOnly: true
   requestCurrency:
     readOnly: true
-    allOf:
-      - $ref: ./CurrencyCode.yaml
+    $ref: ./CurrencyCode.yaml
   parentTransactionId:
     description: ID of the parent transaction.
     type:
       - 'string'
       - 'null'
-    allOf:
-      - $ref: ./TransactionId.yaml
+    $ref: ./TransactionId.yaml
   childTransactions:
     description: IDs of child transactions.
     readOnly: true
@@ -143,8 +138,7 @@ properties:
     x-sortable: true
   billingAddress:
     description: Billing address.
-    allOf:
-      - $ref: ./ContactObject.yaml
+    $ref: ./ContactObject.yaml
   has3ds:
     description: Specifies if the transaction uses 3D Secure.
     type: boolean
@@ -251,8 +245,7 @@ properties:
     description: Date and time when the transaction is processed.
     x-sortable: true
     x-basic: true
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    $ref: ./ServerTimestamp.yaml
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:
@@ -422,16 +415,13 @@ properties:
     properties:
       base:
         description: Initial amount and currency to convert from.
-        allOf:
-          - $ref: ./Money.yaml
+        $ref: ./Money.yaml
       quote:
         description: Suggested amount and currency to convert to.
-        allOf:
-          - $ref: ./Money.yaml
+        $ref: ./Money.yaml
       usdMarkup:
         description: Markup amount converted to USD.
-        allOf:
-          - $ref: ./MoneyAmount.yaml
+        $ref: ./MoneyAmount.yaml
       outcome:
         type: string
         description: Dynamic currency conversion outcome.
@@ -456,8 +446,7 @@ properties:
     properties:
       order:
         description: Initial amount and currency.
-        allOf:
-          - $ref: ./Money.yaml
+        $ref: ./Money.yaml
       version:
         type: string
         description: |-
@@ -467,8 +456,7 @@ properties:
         description: |-
           Language in which the bump offer displays to the user.
           This field in useful to find translation issues.
-        allOf:
-          - $ref: ./LanguageIsoCode.yaml
+        $ref: ./LanguageIsoCode.yaml
       outcome:
         type: string
         readOnly: true
@@ -584,8 +572,7 @@ properties:
     readOnly: true
   reportCurrency:
     readOnly: true
-    allOf:
-      - $ref: ./CurrencyCode.yaml
+    $ref: ./CurrencyCode.yaml
   settlementTime:
     type:
       - 'string'

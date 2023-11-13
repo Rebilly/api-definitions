@@ -23,8 +23,7 @@ properties:
   currency:
     x-sortable: true
     x-basic: true
-    allOf:
-      - $ref: ./CurrencyCode.yaml
+    $ref: ./CurrencyCode.yaml
   amount:
     description: Amount of the invoice.
     type: number
@@ -58,12 +57,10 @@ properties:
     $ref: ./Taxes.yaml
   billingAddress:
     description: Billing address of the invoice.
-    allOf:
-      - $ref: ./ContactObject.yaml
+    $ref: ./ContactObject.yaml
   deliveryAddress:
     description: Delivery address of the invoice.
-    allOf:
-      - $ref: ./ContactObject.yaml
+    $ref: ./ContactObject.yaml
   poNumber:
     description: Purchase order number that is displayed on the invoice.
     type:
@@ -94,8 +91,7 @@ properties:
           example: cpn_0YVCNKF81GD778N4YNVGDJK558
         redemptionId:
           description: ID of the redemption.
-          allOf:
-            - $ref: ./ResourceId.yaml
+          $ref: ./ResourceId.yaml
         amount:
           description: Total amount discounted by this coupon.
           type: number
@@ -147,20 +143,17 @@ properties:
   abandonedTime:
     description: Date and time when the invoice is abandoned.
     x-sortable: true
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    $ref: ./ServerTimestamp.yaml
   voidedTime:
     description: Date and time when the invoice is voided.
     x-sortable: true
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    $ref: ./ServerTimestamp.yaml
   paidTime:
     x-label: Payment Date
     x-sortable: true
     x-basic: true
     description: Date and time when the invoice is paid.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    $ref: ./ServerTimestamp.yaml
   dueTime:
     description: Date and time when the invoice is due for payment.
     type: string
@@ -171,8 +164,7 @@ properties:
     x-label: Date Issued
     x-sortable: true
     x-basic: true
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    $ref: ./ServerTimestamp.yaml
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:
