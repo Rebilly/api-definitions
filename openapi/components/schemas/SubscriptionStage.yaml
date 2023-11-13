@@ -64,8 +64,8 @@ properties:
     description: ID of the initial invoice of this stage.
     readOnly: true
     type:
-      - string
-      - null
+      - "string"
+      - "null"
     maxLength: 50
     example: in_0YVF9605RKC62BP14NE2R7V2XT
   revision:
@@ -92,15 +92,15 @@ properties:
           all plans must have the same billing period,
           this property enables the customer to subscribe to different plans.
         type:
-          - object
-          - null
+          - "object"
+          - "null"
         example: null
         allOf:
           - $ref: ./InvoiceTimeShift.yaml
       recurringInterval:
         type:
-          - object
-          - null
+          - "object"
+          - "null"
         description: |-
           Recurring interval to override plan settings.
           To use plan settings, set this value to `null`.
@@ -125,8 +125,8 @@ properties:
           This value cannot be more than one service period in the past.
           If `fromServicePeriod` of the related stage number is more than current service period plus 1, this value is ignored.
         type:
-          - string
-          - null
+          - "string"
+          - "null"
         x-basic: true
         example: null
         format: date-time
@@ -137,16 +137,16 @@ properties:
         x-basic: true
         format: date-time
         type:
-          - string
-          - null
+          - "string"
+          - "null"
       paymentInstrumentId:
         description: |-
           ID of the payment instrument to use for autopay.
           If this value is not provided, or if the payment instrument is inactive,
           the customer's default payment instrument is used.
         type:
-          - string
-          - null
+          - "string"
+          - "null"
         maxLength: 50
         example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
       currency:
@@ -164,16 +164,16 @@ properties:
         description: Delivery address of the order.
         oneOf:
           - $ref: ./ContactObject.yaml
-          - type: null
+          - type: "null"
       billingAddress:
         description: Billing address of the order.
         oneOf:
           - $ref: ./ContactObject.yaml
-          - type: null
+          - type: "null"
       couponIds:
         type:
-          - array
-          - null
+          - "array"
+          - "null"
         description: |-
           List of coupons to redeem on the customer and restrict to this order.
 
@@ -195,8 +195,8 @@ properties:
         description: Purchase order number displayed on the issued invoices.
         example: PO123456
         type:
-          - string
-          - null
+          - "string"
+          - "null"
       shipping:
         $ref: ./Shipping.yaml
       notes:
