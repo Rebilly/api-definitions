@@ -23,8 +23,8 @@ properties:
         id:
           type: string
           description: |-
-            ID of a recurring options.
-            It must be unique between other recurring options in the same billing portal.
+            ID of the recurring options.
+            This value must be unique to other recurring options in the same billing portal.
         name:
           type: string
           description: Name of recurring options for the billing portal.
@@ -55,7 +55,7 @@ properties:
           type: string
           description: |-
             ID of a level.
-            It must be unique between other levels in the same billing portal.
+            This value must be unique to other levels in the same billing portal.
           example: enterprise
         name:
           type: string
@@ -74,21 +74,21 @@ properties:
               type: string
               description: |-
                 ID of a solution.
-                It must be unique between other solutions in the same billing portal.
+                This value must be unique to other solutions in the same billing portal.
               example: kyc
             name:
               type: string
-              description: Solution name.
+              description: Name of a solution.
               minLength: 1
               maxLength: 100
               example: KYC product
             description:
               type: string
-              description: Description of a solution.
+              description: Description of the solution.
               example: KYC product description
             status:
               type: string
-              description: Status of a solution.
+              description: Status of the solution.
               enum:
                 - active
                 - archived
@@ -99,17 +99,17 @@ properties:
                 properties:
                   status:
                     type: string
-                    description: Status of a solution item.
+                    description: Status of the solution item.
                     enum:
                       - active
                       - archived
                   recurringOptionId:
                     type: string
-                    description: ID of a recurring option.
+                    description: ID of the recurring option.
                     example: monthly
                   levelId:
                     type: string
-                    description: ID of a level.
+                    description: ID of the level.
                     example: enterprise
                   plans:
                     type: array
@@ -133,7 +133,7 @@ properties:
           description: Combination of solutions which can be used together.
           items:
             type: string
-            description: ID of a solution.
+            description: IDs of solutions.
           example:
             - billing
             - payments
