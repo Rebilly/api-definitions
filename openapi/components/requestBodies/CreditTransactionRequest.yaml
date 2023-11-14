@@ -21,8 +21,9 @@ content:
           example: 97.97
         invoiceIds:
           description: Array of invoice IDs.
-          nullable: true
-          type: array
+          type:
+            - 'array'
+            - 'null'
           items:
             $ref: ../schemas/ResourceId.yaml
         paymentInstruction:
@@ -30,8 +31,7 @@ content:
             Payment instruction for the purchase.
             If this value is not supplied,
             the customer's default payment instrument is used.
-          allOf:
-            - $ref: ../schemas/PaymentInstruction.yaml
+          $ref: ../schemas/PaymentInstruction.yaml
         billingAddress:
           description: |-
             Billing address.
@@ -39,10 +39,9 @@ content:
             the billing address associated with the payment instrument is used.
             If no billing address is associated with the payment instrument,
             the customer's billing address is used.
-          nullable: true
-          type: object
-          allOf:
+          oneOf:
             - $ref: ../schemas/ContactObject.yaml
+            - type: 'null'
         requestId:
           description: |-
             Use this field to prevent duplicate transaction requests that may occur within a short period of time.
@@ -51,8 +50,9 @@ content:
             This value must be unique within a 24-hour period.
 
             > **Important:** This field is recommended.
-          type: string
-          nullable: true
+          type:
+            - 'string'
+            - 'null'
           maxLength: 50
           pattern: '^[\-\w]+$'
           example: 44433322-2c4y-483z-a0a9-158621f77a21
@@ -63,17 +63,18 @@ content:
             To prevent Rebilly from making the gateway account selection,
             supply a gateway account ID in this field.
             Only use this field if you intend to override the settings.
-          nullable: true
-          type: string
+          type:
+            - 'string'
+            - 'null'
           maxLength: 50
           example: gw_acc_0YVCXMF26DDNKAERE5NW727S34
         description:
-          nullable: true
+          type:
+            - 'string'
+            - 'null'
           description: Payment description.
-          type: string
           maxLength: 255
         notificationUrl:
-          nullable: true
           description: |-
             URL where a server-to-server `POST` notification is sent.
             This notification is sent when the transaction result is finalized after a timeout or an offsite interaction.
@@ -85,16 +86,19 @@ content:
 
             The following placeholders are available to use in this URI: `{id}` and `{result}`.
             These placeholders are replaced the with the transaction ID and result accordingly.
-          type: string
+          type: 
+            - 'string'
+            - 'null'
           format: uri
         redirectUrl:
-          nullable: true
+          type:
+            - 'string'
+            - 'null'
           description: |-
             URL to redirect the end-user when an offsite transaction is completed.
             Defaults to the configured URL of the website.
             You may use `{id}` or `{result}` as placeholders in the URL,
             these are replaced the with the transaction ID and result accordingly.
-          type: string
           format: uri
         customFields:
           $ref: ../schemas/ResourceCustomFields.yaml

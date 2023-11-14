@@ -41,8 +41,7 @@ properties:
   currency:
     description: Currency of the order.
     readOnly: true
-    allOf:
-      - $ref: ./CurrencyCode.yaml
+    $ref: ./CurrencyCode.yaml
   initialInvoiceId:
     type: string
     description: ID of the initial invoice.
@@ -65,36 +64,34 @@ properties:
       $ref: ./OrderItem.yaml
   deliveryAddress:
     description: Delivery address of the order.
-    nullable: true
-    type: object
-    allOf:
+    oneOf:
       - $ref: ./ContactObject.yaml
+      - type: 'null'
   billingAddress:
     description: Billing address of the order.
-    nullable: true
-    type: object
-    allOf:
+    oneOf:
       - $ref: ./ContactObject.yaml
+      - type: 'null'
   activationTime:
     description: Date and time when the order is activated.
     x-sortable: true
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    $ref: ./ServerTimestamp.yaml
   voidTime:
     description: Date and time when the order is voided.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    $ref: ./ServerTimestamp.yaml
   abandonTime:
-    type: string
+    type:
+      - 'string'
+      - 'null'
     description: |-
       Date and time when the pending order is automatically abandoned.
       If this value is not passed during order creation,
       a [pending order TTL](https://all-rebilly.redoc.ly/tag/Organizations/operation/PatchOrganization/#!path=settings/billing/pendingOrderTtl&t=request) setting is used to calculate the value.
     format: date-time
-    nullable: true
   couponIds:
-    type: array
-    nullable: true
+    type:
+      - 'array'
+      - 'null'
     description: |-
       List of coupons to redeem on the customer and restrict to this order.
 
@@ -115,9 +112,10 @@ properties:
       description: ID of the coupon.
   poNumber:
     description: Purchase order number displayed on the issued invoices.
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: PO123456
-    type: string
   shipping:
     $ref: ./Shipping.yaml
   notes:

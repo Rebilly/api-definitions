@@ -4,8 +4,7 @@ properties:
   id:
     description: ID of the payment instrument.
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    $ref: ./ResourceId.yaml
   method:
     description: Method of payment instrument.
     type: string
@@ -39,8 +38,7 @@ properties:
     type: string
   billingAddress:
     description: Customer's billing address.
-    allOf:
-      - $ref: ./ContactObject.yaml
+    $ref: ./ContactObject.yaml
   fingerprint:
     description: |-
       Unique value which identifies the bank account.
@@ -74,8 +72,9 @@ properties:
     description: |-
       New customer JSON Web Token (JWT) that is used for further requests.
       This value is null if the customer is already authenticated.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
-    nullable: true
   _links:
     $ref: ./SelfLink.yaml

@@ -4,8 +4,9 @@ description: Risk metadata used for 3D Secure and risk scoring.
 properties:
   ipAddress:
     description: Customer's IP address.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: ipv4 or ipv6
     example: 93.92.91.90
   fingerprint:
@@ -14,18 +15,19 @@ properties:
       A device fingerprint is a unique token that is used to identify the customer.
       The device fingerprint is generated based on device attributes, such as: hardware,
       software, IP address, language, browser, and more.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     maxLength: 50
     example: pIUt3xbgX3l9g3YDiLbx
   httpHeaders:
-    type: object
-    nullable: true
-    allOf:
+    oneOf:
       - $ref: ./HttpHeaders.yaml
+      - type: 'null'
   browserData:
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     description: Browser data used for 3D Secure and risk scoring.
     required:
       - colorDepth
@@ -72,8 +74,9 @@ properties:
         maximum: 1410
         example: 300
   extraData:
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     description: Third-party data used for risk scoring.
     properties:
       kountFraudSessionId:
@@ -113,31 +116,36 @@ properties:
     readOnly: true
   vpnServiceName:
     description: VPN service name, if available.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
   isp:
     description: Internet Service Provider (ISP) name, if available.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
   country:
     description: Country ISO Alpha-2 code of the specified IP address.
     maxLength: 2
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
     example: US
   region:
     description: Region of the specified IP address.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
     example: NY
   city:
     description: City of the specified IP address.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
     example: New York
   latitude:
@@ -147,31 +155,36 @@ properties:
     readOnly: true
   longitude:
     description: Longitude of the specified IP address.
-    type: number
-    nullable: true
+    type:
+      - 'number'
+      - 'null'
     format: double
     readOnly: true
   postalCode:
     description: Postal code of the specified IP address.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     maxLength: 10
     readOnly: true
   timeZone:
     description: Time zone of the specified IP address.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
     example: America/New_York
   accuracyRadius:
     description: Accuracy radius of the specified IP address, in kilometers.
-    type: integer
-    nullable: true
+    type:
+      - 'integer'
+      - 'null'
     readOnly: true
   distance:
     description: Distance between the customer's IP address and the billing address geolocation, in kilometers.
-    type: integer
-    nullable: true
+    type:
+      - 'integer'
+      - 'null'
     readOnly: true
   hasMismatchedBillingAddressCountry:
     description: Specifies if the customer's billing address country and geo-IP address are not the same.

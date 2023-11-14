@@ -32,6 +32,16 @@ apis:
       plugin/remove-tag-groups: on
       plugin/change-title:
         title: All APIs
+  all@3.0:
+    root: openapi/openapi.yaml
+    output: catalog/all-3.0.yaml
+    metadata:
+      description: All Rebilly APIs.
+    decorators:
+      plugin/remove-tag-groups: on
+      plugin/change-title:
+        title: All APIs
+      plugin/backport-to-30: on
   storefront@latest:
     root: openapi/openapi.yaml
     output: catalog/storefront.yaml
@@ -207,6 +217,7 @@ rules:
       - api
       - upcoming-invoice
   custom-rules/no-unused-tags: error
+  custom-rules/sibling-ref: error
   response-contains-header:
     severity: error
     names:
