@@ -27,18 +27,20 @@ properties:
     type: object
     nullable: true
     description: |-
-      Set the soft and hard usage limits thresholds for an item with metered billing plan.
+      Specifies the soft and hard usage limits thresholds for an item with a metered billing plan.
       This value is ignored when the plan is not metered.
     properties:
       softLimit:
         type: object
         nullable: true
         description: |-
-          Soft limit configures thresholds for notification purposes.
-          When the reported usage reaches 75%, 90% and 100% of the configured limit, a specific event is fired.
-          Webhook and a notification can be configured for this event to notify the customer.
-          Useful for accounting and customer success purposes.
-          Metered billing plan usages can still be reported if the soft limit is reached.
+          Defines thresholds for notification purposes.
+          For example, to notify the customer that their usage is near the hard limit of their metered billing plan.
+          This notification informs the customer so that they can upgrade their plan before the hard limit is reached.
+          When the reported usage reaches 75%, 90%, and 100% of the configured limit a specific event is fired.
+          To notify the customer, a webhook and notification can be configured for this event.
+          This field is useful for accounting and customer success purposes.
+          The usage of metered billing plans can still be reported if the soft limit is reached.
         minProperties: 1
         maxProperties: 1
         properties:
@@ -50,20 +52,26 @@ properties:
           amount:
             type: number
             format: double
-            description: Usage limit amount in the order currency.
+            description: Usage limit amount in the currency of the order.
             nullable: true
             minimum: 0.01
       hardLimit:
         type: object
         nullable: true
         description: |-
-          Hard limit is an addition to the soft limit. A customer may receive notification when soft limit is reached,
-          but a service can still be provided up to hard limit value to let the customer upgrade the plan.
-          When the reported usage reaches the configured limit, a specific event is fired.
-          Webhook and a notification can be configured for this event to notify the customer or block service
-          to the customer in merchant system.
-          Metered billing plan usages can no longer be reported when the total usage reaches hard limit quantity
-          or amount values.
+          Defines a limit where the customer can no longer use the service.
+          Hard limits are used in addition to soft limits. 
+          When a soft limit is reached, 
+          a customer may receive a notification
+          but the service can still be provided up to the hard limit value so that the customer can upgrade their plan.
+          When the reported usage reaches the configured limit, 
+          a specific event is triggered.
+          To notify the customer in the merchant system, 
+          or block a service, 
+          a webhook and notification can be configured for this event.
+          When the total usage reaches the hard limit quantity, 
+          or amount values, 
+          metered billing plan usages can no longer be reported
         minProperties: 1
         maxProperties: 1
         properties:
@@ -75,7 +83,7 @@ properties:
           amount:
             type: number
             format: double
-            description: Usage limit amount in the order currency.
+            description: Usage limit amount in the currency of the order.
             nullable: true
             minimum: 0.01
   revision:
