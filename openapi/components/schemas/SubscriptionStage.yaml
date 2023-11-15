@@ -1,17 +1,17 @@
 type: object
 description: |-
-  Subscription stage is a sequence of periods (up to infinite) of a subscription with the given settings
-  which can be followed by another stage with different subscription settings.
-  A stage change is similar to a new subscription creation, but with the same ID and following period number.
+  Subscription stages are sequences of periods in a subscription that have configured settings.
+  Subscription stages can be followed by subsequent stages that have different subscription settings.
+  A stage change is similar to the creation of a new subscription, but the stage uses the same subscription identifier along with the period number of the subsequent stage.
 
-  A stage with number 1 is always implicitly created when the subscription order is created,
-  but the concept is not applicable for one-time sales.
+  A stage with a period number of `1` is always implicitly created when a subscription order is created.
+  This feature is not applicable for one-time sales.
 
-  A new stage may create a separate invoice if there are postpaid items on the given stage,
+  A new stage may create a separate invoice if there are postpaid items on the stage,
   before moving to the next stage with the appropriate initial invoice.
 
   A new stage can be created for a canceled or a churned subscription.
-  If the subscription is churned, it becomes "pending" until the start date as if it is recreated.
+  If the subscription is churned, it is assigned the `pending` status until the start date.
 properties:
   subscriptionId:
     description: ID of the subscription.
@@ -54,7 +54,7 @@ properties:
     type: integer
     minimum: 0
   activationPolicy:
-    description: What the stage requires in order to start the subscription, that is moving it from status "pending" to "active".
+    description: Specifies what is required for the stage to start the subscription. Starting the subscription moves it from the `pending` to `active` status.
     type: string
     enum:
       - "immediately"
@@ -130,7 +130,7 @@ properties:
           Date and time when the subscription starts.
           If this value is `null`, the current time is used.
           This value cannot be more than one service period in the past.
-          If `fromServicePeriod` of the related stage number is more than current service period plus 1, this value is ignored.
+          If the `fromServicePeriod` value of the related stage number is greater than current service period number plus 1, this value is ignored.
         type:
           - "string"
           - "null"
@@ -140,7 +140,7 @@ properties:
       renewalTime:
         description: |-
           Date and time when the subscription renews.
-          If `fromServicePeriod` of the related stage number is more than current service period plus 1, this value is ignored.
+          If the `fromServicePeriod` value of the related stage number is greater than current service period number plus 1, this value is ignored.
         x-basic: true
         format: date-time
         type:
@@ -199,7 +199,7 @@ properties:
           type: string
           description: ID of the coupon.
       poNumber:
-        description: Purchase order number displayed on the issued invoices.
+        description: Purchase order number that is displayed on the issued invoices.
         example: PO123456
         type:
           - "string"
@@ -207,7 +207,7 @@ properties:
       shipping:
         $ref: ./Shipping.yaml
       notes:
-        description: Notes for the customer displayed on the order invoice.
+        description: Notes for the customer that are displayed on the order invoice.
         type: string
       customFields:
         $ref: ./ResourceCustomFields.yaml
