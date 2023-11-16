@@ -1,1 +1,4 @@
-$invoice = $client->invoices()->abandon('invoiceId');
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+$invoice = $service->invoices()->abandon('invoiceId');

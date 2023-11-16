@@ -23,18 +23,19 @@ properties:
     type: string
   businessPhone:
     description: User's business phone number.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
   mobilePhone:
     description: User's mobile phone number.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
   permissions:
     description: |-
       Permissions that the user has within organizations.
       Use the wildcard character `*` for full access.
-    allOf:
-      - $ref: ./AclPermissions.yaml
+    $ref: ./AclPermissions.yaml
   computedPermissions:
     description: All user permissions and roles. Use these permissions to emulate the user.
     readOnly: true
@@ -46,8 +47,9 @@ properties:
     $ref: UpdatedTime.yaml
   loginTime:
     description: Date and time when the user last logged in.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: date-time
     readOnly: true
   reportingCurrency:
@@ -79,8 +81,9 @@ properties:
     description: |-
       User preferences, such as: timezone, language, and more.
       This is an object with custom properties.
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
   roleIds:
     type: array
     description: |-

@@ -36,8 +36,7 @@ properties:
     type: integer
   billingAddress:
     description: Billing address.
-    allOf:
-      - $ref: ./Contact/ContactObject.yaml
+    $ref: ./ContactObject.yaml
   status:
     description: Payment instrument status.
     type: string
@@ -59,14 +58,14 @@ properties:
 
       For more information,
       see [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
   riskMetadata:
-    type: object
-    nullable: true
-    allOf:
+    oneOf:
       - $ref: ./RiskMetadata.yaml
+      - type: 'null'
   revision:
     description: |-
       Number of times the payment instrument data has been modified.

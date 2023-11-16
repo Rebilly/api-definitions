@@ -3,8 +3,7 @@ description: Transaction information.
 properties:
   id:
     readOnly: true
-    allOf:
-      - $ref: ./TransactionId.yaml
+    $ref: ./TransactionId.yaml
   websiteId:
     readOnly: true
     allOf:
@@ -69,8 +68,7 @@ properties:
     readOnly: true
   currency:
     readOnly: true
-    allOf:
-      - $ref: ./CurrencyCode.yaml
+    $ref: ./CurrencyCode.yaml
   purchaseAmount:
     description: |-
       Amount by which the purchase is completed.
@@ -83,8 +81,7 @@ properties:
     readOnly: true
   purchaseCurrency:
     readOnly: true
-    allOf:
-      - $ref: ./CurrencyCode.yaml
+    $ref: ./CurrencyCode.yaml
   requestAmount:
     description: |-
       Amount of the payment request.
@@ -97,14 +94,13 @@ properties:
     readOnly: true
   requestCurrency:
     readOnly: true
-    allOf:
-      - $ref: ./CurrencyCode.yaml
+    $ref: ./CurrencyCode.yaml
   parentTransactionId:
     description: ID of the parent transaction.
-    type: string
-    nullable: true
-    allOf:
-      - $ref: ./TransactionId.yaml
+    type:
+      - 'string'
+      - 'null'
+    $ref: ./TransactionId.yaml
   childTransactions:
     description: IDs of child transactions.
     readOnly: true
@@ -142,8 +138,7 @@ properties:
     x-sortable: true
   billingAddress:
     description: Billing address.
-    allOf:
-      - $ref: ./Contact/ContactObject.yaml
+    $ref: ./ContactObject.yaml
   has3ds:
     description: Specifies if the transaction uses 3D Secure.
     type: boolean
@@ -200,8 +195,9 @@ properties:
     description: |-
       URL where the end-user is redirected to when an offsite transaction is completed.
       The default value is the website URL.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: uri
   retryNumber:
     type: integer
@@ -213,8 +209,9 @@ properties:
     readOnly: true
     description: Specifies if a transaction is a retry.
   billingDescriptor:
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
     description: |-
       Billing descriptor that appears on the periodic billing statement.
@@ -241,22 +238,22 @@ properties:
     x-label: Gateway
     x-basic: true
     allOf:
-      - $ref: ./Gateways/GatewayName.yaml
+      - $ref: ./GatewayName.yaml
   customFields:
     $ref: ./ResourceCustomFields.yaml
   processedTime:
     description: Date and time when the transaction is processed.
     x-sortable: true
     x-basic: true
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    $ref: ./ServerTimestamp.yaml
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:
     $ref: ./UpdatedTime.yaml
   gatewayAccountId:
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     description: ID of the gateway account that processed the transaction.
     maxLength: 50
     example: gw_acc_0YVCXMF26DDNKAERE5NW727S34
@@ -264,8 +261,9 @@ properties:
   gatewayTransactionId:
     description: ID of the gateway transaction.
     readOnly: true
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     maxLength: 50
     example: txn_0YVDTQJ8YWDGQACV2N2N5SPWQ0
   gateway:
@@ -279,64 +277,77 @@ properties:
         properties:
           code:
             description: Gateway response code.
-            type: string
-            nullable: true
+            type:
+              - 'string'
+              - 'null'
           message:
             description: Gateway response message.
-            type: string
-            nullable: true
+            type:
+              - 'string'
+              - 'null'
           type:
             description: Gateway response type.
-            type: string
-            nullable: true
+            type:
+              - 'string'
+              - 'null'
           originalCode:
             description: Raw, unmapped gateway response code.
-            type: string
-            nullable: true
+            type:
+              - 'string'
+              - 'null'
           originalMessage:
             description: Raw, unmapped gateway response message.
-            type: string
-            nullable: true
+            type:
+              - 'string'
+              - 'null'
       avsResponse:
         description: Gateway Address Verification System (AVS) response.
         type: object
         properties:
           code:
             description: Response code.
-            type: string
-            nullable: true
+            type:
+              - 'string'
+              - 'null'
           message:
             description: Response message.
-            type: string
-            nullable: true
+            type:
+              - 'string'
+              - 'null'
           originalCode:
             description: Raw response code.
-            type: string
-            nullable: true
+            type:
+              - 'string'
+              - 'null'
           originalMessage:
             description: Raw response message.
-            type: string
-            nullable: true
+            type:
+              - 'string'
+              - 'null'
       cvvResponse:
         description: Gateway Card Verification Value (CVV) response.
         type: object
         properties:
           code:
             description: Response code.
-            type: string
-            nullable: true
+            type:
+              - 'string'
+              - 'null'
           message:
             description: Response message.
-            type: string
-            nullable: true
+            type:
+              - 'string'
+              - 'null'
           originalCode:
             description: Raw response code.
-            type: string
-            nullable: true
+            type:
+              - 'string'
+              - 'null'
           originalMessage:
             description: Raw response message.
-            type: string
-            nullable: true
+            type:
+              - 'string'
+              - 'null'
   acquirerName:
     readOnly: true
     description: |-
@@ -344,7 +355,7 @@ properties:
       This value is only available when a transaction uses a payment gateway.
       If a transaction does not use a payment gateway, this value is `null`.
     allOf:
-      - $ref: ./Gateways/AcquirerName.yaml
+      - $ref: ./AcquirerName.yaml
   method:
     deprecated: true
     description: |-
@@ -352,7 +363,7 @@ properties:
 
       >**Note:** Use `paymentInstrument.method` instead.
     allOf:
-      - $ref: ./PaymentMethods/PaymentMethod.yaml
+      - $ref: ./PaymentMethod.yaml
   velocity:
     description: Number of transactions by the same customer in the past 24 hours.
     type: integer
@@ -365,28 +376,30 @@ properties:
     readOnly: true
   referenceData:
     description: Transaction reference data.
-    type: object
+    type:
+      - 'object'
+      - 'null'
     additionalProperties:
       type: string
     example:
       gatewayTransactionId: GAT123
     readOnly: true
-    nullable: true
   bin:
     description: Payment card Bank Identification Number (BIN).
     x-label: BIN
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: bin
     readOnly: true
   paymentInstrument:
     type: object
     description: Payment instrument information.
     anyOf:
-      - $ref: ./PaymentInstruments/ValueObjects/VaultedInstrument.yaml
-      - $ref: ./PaymentInstruments/ValueObjects/AlternativePaymentInstrument.yaml
-      - $ref: ./PaymentInstruments/ValueObjects/CashInstrument.yaml
-      - $ref: ./PaymentInstruments/ValueObjects/CheckInstrument.yaml
+      - $ref: ./VaultedInstrument.yaml
+      - $ref: ./AlternativePaymentInstrument.yaml
+      - $ref: ./CashInstrument.yaml
+      - $ref: ./CheckInstrument.yaml
   hasDcc:
     description: Specifies if Dynamic Currency Conversion (DCC) applies to the transaction.
     type: boolean
@@ -395,22 +408,20 @@ properties:
     description: |-
       Detailed Dynamic currency conversion (DCC).
       If DCC is not applied to the transaction, this value is `null`.
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     readOnly: true
     properties:
       base:
         description: Initial amount and currency to convert from.
-        allOf:
-          - $ref: ./Money.yaml
+        $ref: ./Money.yaml
       quote:
         description: Suggested amount and currency to convert to.
-        allOf:
-          - $ref: ./Money.yaml
+        $ref: ./Money.yaml
       usdMarkup:
         description: Markup amount converted to USD.
-        allOf:
-          - $ref: ./MoneyAmount.yaml
+        $ref: ./MoneyAmount.yaml
       outcome:
         type: string
         description: Dynamic currency conversion outcome.
@@ -428,14 +439,14 @@ properties:
     description: |-
       Bump offer information.
       If the transaction does not have an associated bump offer, this value is `null`.
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     readOnly: true
     properties:
       order:
         description: Initial amount and currency.
-        allOf:
-          - $ref: ./Money.yaml
+        $ref: ./Money.yaml
       version:
         type: string
         description: |-
@@ -445,8 +456,7 @@ properties:
         description: |-
           Language in which the bump offer displays to the user.
           This field in useful to find translation issues.
-        allOf:
-          - $ref: ./LanguageIsoCode.yaml
+        $ref: ./LanguageIsoCode.yaml
       outcome:
         type: string
         readOnly: true
@@ -475,10 +485,9 @@ properties:
     type: integer
     readOnly: true
   riskMetadata:
-    type: object
-    nullable: true
-    allOf:
+    oneOf:
       - $ref: ./RiskMetadata.yaml
+      - type: 'null'
   notificationUrl:
     description: |-
       URL where a server-to-server POST notification is sent.
@@ -490,8 +499,9 @@ properties:
       when the result is confirmed, respond with a 2xx HTTP status code.
 
       The following placeholders are available to use in this URI: `{id}` and `{result}`.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: uri
   isDisputed:
     description: Specifies if a transaction is disputed.
@@ -501,16 +511,18 @@ properties:
     description: |-
       Date and time when the dispute is created.
       If the transaction is not disputed, this value is `null`.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     format: date-time
     readOnly: true
-    nullable: true
     x-sortable: true
   disputeStatus:
     description: Status of the dispute.
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
-    type: string
     enum:
       - null
       - response-needed
@@ -544,8 +556,9 @@ properties:
     x-sortable: true
   arn:
     x-label: ARN
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
     description: Acquirer reference number.
     example: '74836950144358910018150'
@@ -559,21 +572,22 @@ properties:
     readOnly: true
   reportCurrency:
     readOnly: true
-    allOf:
-      - $ref: ./CurrencyCode.yaml
+    $ref: ./CurrencyCode.yaml
   settlementTime:
-    type: string
+    type:
+      - 'string'
+      - 'null'
     description: Date and time when the transaction is settled by the banking institution.
     format: date-time
     readOnly: true
-    nullable: true
     x-sortable: true
   discrepancyTime:
-    type: string
+    type:
+      - 'string'
+      - 'null'
     description: Date and time of the most recent discrepancy on the transaction.
     format: date-time
     readOnly: true
-    nullable: true
     x-sortable: true
   limits:
     $ref: ./TransactionLimitAmount.yaml

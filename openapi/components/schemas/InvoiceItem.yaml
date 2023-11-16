@@ -33,21 +33,24 @@ properties:
     format: double
     readOnly: true
   productId:
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     description: ID of the product.
     maxLength: 50
     example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
   planId:
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     description: ID of the plan.
     maxLength: 50
     readOnly: true
     example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
   subscriptionId:
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     description: ID of the order.
     maxLength: 50
     readOnly: true
@@ -59,21 +62,24 @@ properties:
     readOnly: true
   periodStartTime:
     description: Date and time when the billing period starts.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: date-time
   periodEndTime:
     description: Date and time when the billing period ends.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: date-time
   periodNumber:
     description: |-
       Billing period number that is associated with the invoice item.
       For example, an invoice item for a service is included in billing period number 3.
       The invoice item is only applied to billing period number 3.
-    type: integer
-    nullable: true
+    type:
+      - 'integer'
+      - 'null'
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:
@@ -81,10 +87,9 @@ properties:
   tax:
     description: Invoice item tax.
     readOnly: true
-    type: object
-    nullable: true
-    allOf:
-      - $ref: ./Invoices/InvoiceTaxItem.yaml
+    oneOf:
+      - $ref: ./TaxItem.yaml
+      - type: 'null'
   _links:
     type: array
     description: Related links.

@@ -1,1 +1,4 @@
-$paymentCardToken = $client->paymentCardTokens()->load('tokenId');
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+$paymentCardToken = $service->paymentTokens()->get('tokenId');

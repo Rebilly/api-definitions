@@ -1,8 +1,12 @@
-$forgotPasswordForm = new Rebilly\Entities\ForgotPassword();
+<?php
+
+$service = new \Rebilly\Sdk\UsersService($client);
+
+$forgotPasswordForm = new \Rebilly\Sdk\Model\ForgotPassword();
 $forgotPasswordForm->setEmail('johndoe@test.com');
 
 try {
-    $client->users()->forgotPassword($forgotPasswordForm);
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    $service->account()->forgotPassword($forgotPasswordForm);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

@@ -1,1 +1,4 @@
-$client->apiKeys()->delete('apiKeyID');
+<?php
+
+$service = new \Rebilly\Sdk\UsersService($client);
+$service->apiKeys()->delete('apiKeyID');

@@ -1,11 +1,15 @@
-$websiteForm = new Rebilly\Entities\Website();
+<?php
+
+$service = new \Rebilly\Sdk\UsersService($client);
+
+$websiteForm = new \Rebilly\Sdk\Model\Website();
 $websiteForm->setName('TestWebsite');
 $websiteForm->setUrl('http://testwebsite.com');
 $websiteForm->setServicePhone('+0123456789');
 $websiteForm->setServiceEmail('test@testwebsite.com');
 
 try {
-    $website = $client->websites()->create($websiteForm);
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    $website = $service->websites()->create($websiteForm);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

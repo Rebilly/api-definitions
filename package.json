@@ -1,24 +1,13 @@
 {
   "name": "rebilly-openapi-spec",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "dependencies": {
-    "@redocly/cli": "1.1.0"
+    "@redocly/cli": "1.4.0",
+    "@redocly/portal": "0.63.3"
   },
   "private": true,
   "scripts": {
-    "start": "redocly preview-docs",
-    "build": "npm run build-core && npm run build-users && npm run build-reports && npm run build-storefront && npm run build-combined",
-    "build-for-js-sdk": "npm run build-core -- --ext json && npm run build-users -- --ext json && npm run build-reports -- --ext json && npm run build-storefront -- --ext json",
-    "test": "redocly lint",
-    "build-core": "REBILLY_API_PRODUCT=Core redocly bundle openapi -o dist/core",
-    "build-users": "REBILLY_API_PRODUCT=Users redocly bundle openapi -o dist/users",
-    "build-reports": "REBILLY_API_PRODUCT=Reports redocly bundle openapi -o dist/reports",
-    "build-storefront": "REBILLY_API_PRODUCT=Storefront redocly bundle openapi -o dist/storefront",
-    "build-combined": "REBILLY_API_PRODUCT=Combined redocly bundle openapi -o dist/combined",
-    "serve-core": "REBILLY_API_PRODUCT=Core npm run start openapi",
-    "serve-users": "REBILLY_API_PRODUCT=Users npm run start openapi",
-    "serve-reports": "REBILLY_API_PRODUCT=Reports npm run start openapi",
-    "serve-storefront": "REBILLY_API_PRODUCT=Storefront npm run start openapi",
-    "serve-combined": "REBILLY_API_PRODUCT=Combined npm run start openapi"
+    "start": "portal develop",
+    "build-for-js-sdk": "redocly bundle all@latest -o dist/all --ext json"
   }
 }

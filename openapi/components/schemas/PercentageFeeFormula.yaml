@@ -1,0 +1,23 @@
+type: object
+required:
+  - type
+  - currency
+  - bips
+properties:
+  type:
+    description: Type of fee.
+    type: string
+    enum: ["percentage"]
+  currency:
+    $ref: ./CurrencyCode.yaml
+  bips:
+    $ref: ./Bips.yaml
+  minAmount:
+    description: |-
+      Minimum fee amount.
+      This value is applied when the calculated fee is less than the required minimum.
+    type: number
+    format: double
+    example: 10.0
+    x-type: Money
+

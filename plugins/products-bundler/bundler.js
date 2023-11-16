@@ -49,9 +49,9 @@ const decorators = {
               definitionRoot['servers'] = productMapping['servers'];
             }
             definitionRoot['paths'] = getNewPaths(definitionRoot['paths'], ctx, tagsNamesToInclude, availableMethods, includedXProducts);
-            definitionRoot['x-webhooks'] = getNewPaths(definitionRoot['x-webhooks'], ctx, tagsNamesToInclude, ['post'], includedXProducts);
-            if (Object.keys(definitionRoot['x-webhooks']).length === 0) {
-              delete definitionRoot['x-webhooks'];
+            definitionRoot['webhooks'] = getNewPaths(definitionRoot['webhooks'], ctx, tagsNamesToInclude, ['post'], includedXProducts);
+            if (Object.keys(definitionRoot['webhooks']).length === 0) {
+              delete definitionRoot['webhooks'];
             }
             definitionRoot['components'] = getNewComponents(definitionRoot);
           }
@@ -172,8 +172,8 @@ function getNewComponents(definitionRoot) {
   }
 
   const sectionsToCheck = [definitionRoot['paths'], definitionRoot['info']];
-  if ('x-webhooks' in definitionRoot) {
-    sectionsToCheck.push(definitionRoot['x-webhooks']);
+  if ('webhooks' in definitionRoot) {
+    sectionsToCheck.push(definitionRoot['webhooks']);
   }
   let usedComponents = {};
   sectionsToCheck.forEach((element) => {

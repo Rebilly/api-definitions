@@ -1,10 +1,14 @@
-$attachmentForm = new Rebilly\Entities\Attachment();
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+
+$attachmentForm = new \Rebilly\Sdk\Model\Attachment();
 $attachmentForm->setFileId('fileId');
-$attachmentForm->setRelatedType($attachmentForm::TYPE_CUSTOMER);
+$attachmentForm->setRelatedType($attachmentForm::RELATED_TYPE_CUSTOMER);
 $attachmentForm->setRelatedId('customerId');
 
 try {
-    $attachment = $client->attachments()->create($attachmentForm);
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    $attachment = $service->files()->attach($attachmentForm);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

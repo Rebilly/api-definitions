@@ -6,11 +6,6 @@ required:
   - pricing
   - trial
 properties:
-  id:
-    type: string
-    description: ID of the plan.
-    maxLength: 50
-    example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
   name:
     description: |-
       Name of the plan.
@@ -35,8 +30,9 @@ properties:
     maxLength: 50
     example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
   productOptions:
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     description: Name-value pairs that specify the product options.
     additionalProperties:
       type: string
@@ -52,8 +48,9 @@ properties:
   pricing:
     $ref: ./PlanPriceFormula.yaml
   setup:
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     description: Set up information of the plan.
     required:
       - price
@@ -120,8 +117,7 @@ properties:
       For example, rent must be paid in advance,
       so the invoice must be in advance of the billing date.
       For more information, see [Service period anchor, and billing timing, and invoice time shift](https://www.rebilly.com/docs/dev-docs/concepts/#service-period-anchor-and-billing-timing-and-invoice-time-shift).
-    allOf:
-      - $ref: ./Invoices/InvoiceTimeShift.yaml
+    $ref: ./InvoiceTimeShift.yaml
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:

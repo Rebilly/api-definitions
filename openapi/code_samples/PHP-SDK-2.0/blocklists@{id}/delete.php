@@ -1,0 +1,1 @@
+$client->blocklists()->delete('blocklistId');

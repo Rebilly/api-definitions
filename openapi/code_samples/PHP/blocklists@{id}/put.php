@@ -1,10 +1,14 @@
-$blocklistForm = new Rebilly\Entities\Blocklist();
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+
+$blocklistForm = new \Rebilly\Sdk\Model\Blocklist();
 $blocklistForm->setType($blocklistForm::TYPE_EMAIL);
 $blocklistForm->setValue('test@test.com');
-$blocklistForm->setExpiredTime('2025-01-01 05:00:00');
+$blocklistForm->setExpirationTime('2025-01-01 05:00:00');
 
 try {
-    $blocklist = $client->blocklists()->create($blocklistForm, 'blocklistId');
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    $blocklist = $service->blocklists()->update('blocklistId', $blocklistForm);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

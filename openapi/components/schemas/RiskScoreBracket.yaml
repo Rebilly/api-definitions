@@ -1,0 +1,29 @@
+type:
+  - 'object'
+  - 'null'
+required:
+  - brackets
+properties:
+  brackets:
+    description: Risk factor values range with corresponding risk score increment value. First matched bracket is applied.
+    type: array
+    minItems: 1
+    items:
+      type: object
+      required:
+        - start
+        - end
+        - value
+      properties:
+        start:
+          description: Minimal risk factor value when condition is applied.
+          type: integer
+          minimum: 0
+        end:
+          description: Maximal risk factor value when condition is applied.
+          type: integer
+          minimum: 1
+        value:
+          type: integer
+          description: Value added to the risk score of the transaction.
+          minimum: 1

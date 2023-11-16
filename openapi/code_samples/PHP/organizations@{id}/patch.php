@@ -1,9 +1,13 @@
-$organizationForm = new Rebilly\Entities\Organization();
+<?php
+
+$service = new \Rebilly\Sdk\UsersService($client);
+
+$organizationForm = new \Rebilly\Sdk\Model\PatchOrganizationRequest();
 $organizationForm->setName('Test Organization');
 $organizationForm->setCountry('US');
 
 try {
-    $organization = $client->organizations()->update('organizationId', $organizationForm);
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    $organization = $service->organizations()->update('organizationId', $organizationForm);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

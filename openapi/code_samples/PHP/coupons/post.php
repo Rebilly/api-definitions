@@ -1,11 +1,13 @@
-$couponForm = new Rebilly\Entities\Coupons\Coupon();
+<?php
 
-$discountArray = [
-    'currency' => 'USD',
-    'amount' => 1.99,
-];
+$service = new \Rebilly\Sdk\CoreService($client);
 
-$discountForm = new \Rebilly\Entities\Coupons\Discounts\Fixed($discountArray);
+$couponForm = new \Rebilly\Sdk\Model\Coupon();
+
+$discountForm = new \Rebilly\Sdk\Model\DiscountFixed();
+$discountForm->setCurrency('USD');
+$discountForm->setAmount(1.99);
+
 $couponForm->setDiscount($discountForm);
 // Coupon can be used right now
 $couponForm->setIssuedTime(date('c'));
@@ -14,12 +16,12 @@ $restrictionArray = [
     'quantity' => 2,
 ];
 
-$restrictionForm = new Rebilly\Entities\Coupons\Restrictions\DiscountsPerRedemption($restrictionArray);
+$restrictionForm = new \Rebilly\Sdk\Model\CouponRestrictionDiscountPerRedemption($restrictionArray);
 
 $couponForm->setRestrictions([$restrictionForm]);
 
 try {
-    $coupon = $client->coupons()->create($couponForm);
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    $coupon = $service->coupons()->create($couponForm);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }

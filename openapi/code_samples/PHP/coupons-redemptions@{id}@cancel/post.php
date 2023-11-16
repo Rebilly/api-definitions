@@ -1,1 +1,4 @@
-$client->couponsRedemptions()->cancel('id');
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+$service->coupons()->cancelRedemption('id');

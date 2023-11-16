@@ -1,1 +1,4 @@
-$customers = $client->customers()->load('myCustomerId');
+<?php
+
+$service = new \Rebilly\Sdk\CoreService($client);
+$customer = $service->customers()->get('customerId');

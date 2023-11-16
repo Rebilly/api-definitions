@@ -1,0 +1,14 @@
+type: object
+description: |-
+  Instruction for calculating the settlement time.
+  The settlement time and settlement period anchor are used
+  in conjunction with the transaction processed time,
+  to calculate the time in which the amount settles.
+discriminator:
+  propertyName: method
+  mapping:
+    date-interval: ./SchedulingMethodDateInterval.yaml
+    immediately: ./SchedulingMethodImmediately.yaml
+anyOf:
+  - $ref: ./SchedulingMethodDateInterval.yaml
+  - $ref: ./SchedulingMethodImmediately.yaml

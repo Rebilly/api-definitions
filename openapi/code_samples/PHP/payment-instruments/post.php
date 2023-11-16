@@ -1,4 +1,8 @@
-$paymentInstrumentForm = new Rebilly\Entities\CommonPaymentInstrument();
+<?php
+
+$service = new \Rebilly\Sdk\UsersService($client);
+
+$paymentInstrumentForm = new \Rebilly\Sdk\Model\PaymentCardCreatePlain();
 $paymentInstrumentForm->setCustomerId('customerId');
 $paymentInstrumentForm->setPan('4111111111111111');
 $paymentInstrumentForm->setExpYear(2025);
@@ -38,18 +42,18 @@ $paymentInstrumentForm->setBillingAddress([
 ]);
 
 try {
-    $paymentInstrument = $client->paymentInstruments()->create($paymentInstrumentForm);
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    $paymentInstrument = $service->paymentInstruments()->create($paymentInstrumentForm);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }
 
 // Alternatively you can specify a payment token
-$paymentInstrumentForm = new Rebilly\Entities\CommonPaymentInstrument();
+$paymentInstrumentForm = new \Rebilly\Sdk\Model\PaymentCardCreatePlain();
 $paymentInstrumentForm->setCustomerId('customerId');
 $paymentInstrumentForm->setToken('payment-token');
 
 try {
-    $paymentInstrument = $client->paymentInstruments()->create($paymentInstrumentForm);
-} catch (Rebilly\Http\Exception\DataValidationException $e) {
+    $paymentInstrument = $service->paymentInstruments()->create($paymentInstrumentForm);
+} catch (\Rebilly\Sdk\Exception\DataValidationException $e) {
     print_r($e->getValidationErrors());
 }
