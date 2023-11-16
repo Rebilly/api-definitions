@@ -1,0 +1,12 @@
+description: Taxes.
+type: object
+discriminator:
+  propertyName: calculator
+  mapping:
+    manual: ./ManualTax.yaml
+    rebilly-taxjar: ./RebillyTaxJarTax.yaml
+    rebilly-avalara: ./RebillyAvalaraTax.yaml
+anyOf:
+  - $ref: ./ManualTax.yaml
+  - $ref: ./RebillyTaxJarTax.yaml
+  - $ref: ./RebillyAvalaraTax.yaml

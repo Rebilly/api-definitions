@@ -211,13 +211,13 @@ properties:
     maxLength: 50
     example: gw_acc_0YVCXMF26DDNKAERE5NW727S34
   gatewayName:
-    $ref: ./Gateways/GatewayName.yaml
+    $ref: ./GatewayName.yaml
   acquirerName:
     default: Other
     allOf:
-      - $ref: ./Gateways/AcquirerName.yaml
+      - $ref: ./AcquirerName.yaml
   method:
-    $ref: ./PaymentMethods/PaymentMethod.yaml
+    $ref: ./PaymentMethod.yaml
   acceptedCurrencies:
     description: Accepted currencies. An array of ISO 4217 currency codes.
     type: array
@@ -227,7 +227,7 @@ properties:
     description: Accepted payment card brands.
     type: array
     items:
-      $ref: ./PaymentCards/PaymentCardBrand.yaml
+      $ref: ./PaymentCardBrand.yaml
   status:
     description: Status of the gateway account.
     readOnly: true
@@ -244,24 +244,28 @@ properties:
     default: '0000'
   dccMarkup:
     description: Dynamic currency conversion markup in basis points.
-    type: integer
-    nullable: true
+    type:
+      - 'integer'
+      - 'null'
     minimum: -10000
     maximum: 10000
   dccForceCurrency:
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     description: |-
       Forces Dynamic Currency Conversion (DCC) to the specified currency on each sale.
       To disable forced DCC, leave this field empty.
   descriptor:
     description: Gateway account descriptor value.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
   cityField:
     description: Gateway account city field. This value is also known as a line 2 descriptor.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
   excludedDccQuoteCurrencies:
     description: Excluded Dynamic Currency Conversion (DCC) quote currencies.
     type: array
@@ -269,8 +273,9 @@ properties:
       type: string
   monthlyLimit:
     description: Monthly limit on the amount money that the gateway account can process.
-    type: number
-    nullable: true
+    type:
+      - 'number'
+      - 'null'
     format: double
     minimum: 0
   approvalWindowTtl:
@@ -285,8 +290,9 @@ properties:
     default: false
   reconciliationWindowTtl:
     description: Allotted time, in seconds, in which a reconciliation must occur before it is automatically `abandoned`.
-    type: integer
-    nullable: true
+    type:
+      - 'integer'
+      - 'null'
     minimum: 300
     maximum: 16777215
   threeDSecure:
@@ -298,7 +304,7 @@ properties:
     type: boolean
     default: false
   digitalWallets:
-    $ref: ./GatewayAccounts/DigitalWallets.yaml
+    $ref: ./DigitalWallets.yaml
   isDown:
     description: Specifies if a gateway is in a downtime period.
     type: boolean
@@ -312,19 +318,22 @@ properties:
 
       For more information see,
       [Using filters](https://all-rebilly.redoc.ly/#section/Using-filter-with-collections).
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: amount:1..100;bin:411111,444433
   timeout:
     description: Gateway account request timeout, in seconds.
-    type: integer
-    nullable: true
+    type:
+      - 'integer'
+      - 'null'
     minimum: 10
     maximum: 120
   token:
     description: Gateway account token.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
     example: TwiX3f92k4AiBE27BzTbQ38hHjicBz_w
   sticky:

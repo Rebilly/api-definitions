@@ -1,0 +1,32 @@
+post:
+  x-products:
+    - Storefront
+  x-badge: Experimental
+  tags:
+    - Deposits
+  summary: Create a deposit
+  operationId: StorefrontPostDeposit
+  x-sdk-operation-name: create
+  security:
+    - CustomerJWT: []
+  description: Creates a deposit transaction.
+  requestBody:
+    $ref: ../../components/requestBodies/storefront/PostDeposit.yaml
+  responses:
+    201:
+      description: Transaction created.
+      headers:
+        Location:
+          $ref: ../../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/StorefrontTransaction.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml
+    422:
+      $ref: ../../components/responses/ValidationError.yaml

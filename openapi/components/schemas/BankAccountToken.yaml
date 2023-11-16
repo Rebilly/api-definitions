@@ -1,0 +1,55 @@
+type: object
+title: Bank account token
+required:
+  - method
+  - paymentInstrument
+  - billingAddress
+properties:
+  method:
+    description: Payment method of the token.
+    type: string
+    enum:
+      - ach
+      - echeck
+  paymentInstrument:
+    $ref: ./BankAccountInstrument.yaml
+  billingAddress:
+    description: Billing address object.
+    $ref: ./ContactObject.yaml
+  id:
+    description: ID of the token.
+    readOnly: true
+    $ref: ./ResourceId.yaml
+  isUsed:
+    description: Specifies if the token is already used.
+    type: boolean
+    default: false
+    readOnly: true
+  riskMetadata:
+    oneOf:
+      - $ref: ./RiskMetadata.yaml
+      - type: 'null'
+  leadSource:
+    allOf:
+      - $ref: ./LeadSource.yaml
+    writeOnly: true
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  usageTime:
+    description: Date and time when the token is used.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+  expirationTime:
+    description: Date and time when the token expired.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+  _links:
+    $ref: ./SelfLink.yaml

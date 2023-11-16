@@ -32,22 +32,7 @@ To create or manage API keys, select one of the following:
 For more information on API keys, see [API keys](https://www.rebilly.com/docs/concepts-and-features/concept/api-keys).
 
 # Errors
-Rebilly follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807), which is also known as Problem Details for HTTP APIs. As with any API responses, your client must be prepared to gracefully handle additional members of the response. The following section describes common error types.
-
-## Forbidden
-<RedocResponse pointer={"#/components/responses/Forbidden"} />
-
-## Conflict
-<RedocResponse pointer={"#/components/responses/Conflict"} />
-
-## NotFound
-<RedocResponse pointer={"#/components/responses/NotFound"} />
-
-## Unauthorized
-<RedocResponse pointer={"#/components/responses/Unauthorized"} />
-
-## ValidationError
-<RedocResponse pointer={"#/components/responses/ValidationError"} />
+Rebilly follows the error response format proposed in [RFC 9457](https://tools.ietf.org/html/rfc9457), which is also known as Problem Details for HTTP APIs. As with any API responses, your client must be prepared to gracefully handle additional members of the response.
 
 # SDKs
 

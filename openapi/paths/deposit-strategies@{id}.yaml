@@ -1,0 +1,85 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  x-badge: Experimental
+  tags:
+    - Deposits
+  summary: Retrieve a deposit strategy
+  operationId: GetDepositStrategy
+  x-sdk-operation-name: get
+  description: Retrieves a deposit strategy with a specified ID.
+  responses:
+    '200':
+      description: Deposit strategy retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DepositStrategy.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  x-badge: Experimental
+  tags:
+    - Deposits
+  summary: Upsert a deposit strategy
+  operationId: PutDepositStrategy
+  x-sdk-operation-name: update
+  description: Creates or updates (upserts) a deposit strategy with a specified ID.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/DepositStrategy.yaml
+    description: Deposit strategy resource.
+    required: true
+  responses:
+    '200':
+      description: Deposit strategy updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DepositStrategy.yaml
+    '201':
+      description: Deposit strategy created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DepositStrategy.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+delete:
+  x-products:
+    - Core
+  x-badge: Experimental
+  tags:
+    - Deposits
+  summary: Delete a deposit strategy
+  operationId: DeleteDepositStrategy
+  x-sdk-operation-name: delete
+  description: Deletes a deposit strategy with a specified ID.
+  responses:
+    '204':
+      description: Deposit strategy deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

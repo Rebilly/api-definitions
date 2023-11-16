@@ -1,0 +1,22 @@
+type: object
+title: With amount
+required:
+  - websiteId
+  - currency
+  - amount
+  - riskMetadata
+properties:
+  websiteId:
+    $ref: ./WebsiteId.yaml
+  currency:
+    $ref: ./CurrencyCode.yaml
+  amount:
+    description: Amount to pay.
+    type: number
+    format: double
+  billingAddress:
+    description: Billing address.
+    writeOnly: true
+    $ref: ./ContactObject.yaml
+  riskMetadata:
+    $ref: ./RiskMetadata.yaml

@@ -29,8 +29,9 @@ properties:
     default: unit
   description:
     description: Description of the product.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     maxLength: 512
   requiresShipping:
     description: |-
@@ -52,26 +53,31 @@ properties:
       Tax category of the product.
       For a complete list of supported tax categories, see [TaxJar sales tax API reference](https://developers.taxjar.com/api/reference/#get-list-tax-categories).
       If none of the tax categories from the list are applicable for your product, use the general tax category `00000`.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: '00000'
   accountingCode:
     description: Accounting code of the product.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: '4010'
   recognition:
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     properties:
       debitAccountId:
         description: ID of the debit journal account.
-        nullable: true
-        type: string
+        type:
+          - 'string'
+          - 'null'
       creditAccountId:
         description: ID of the credit journal account.
-        nullable: true
-        type: string
+        type:
+          - 'string'
+          - 'null'
   customFields:
     $ref: ./ResourceCustomFields.yaml
   createdTime:
