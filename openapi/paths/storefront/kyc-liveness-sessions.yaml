@@ -11,7 +11,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/StorefrontKycLivenessSession.yaml
+          $ref: ../../components/schemas/StorefrontKycLivenessSession.yaml
         examples:
           request-liveness-session:
             summary: Basic liveness session
@@ -34,48 +34,48 @@ post:
       description: KYC liveness session created.
       headers:
         Location:
-          $ref: ../components/headers/Location.yaml
+          $ref: ../../components/headers/Location.yaml
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/StorefrontKycRequest.yaml
+            $ref: ../../components/schemas/StorefrontKycRequest.yaml
     '401':
-      $ref: ../components/responses/Unauthorized.yaml
+      $ref: ../../components/responses/Unauthorized.yaml
     '403':
-      $ref: ../components/responses/Forbidden.yaml
+      $ref: ../../components/responses/Forbidden.yaml
     '422':
-      $ref: ../components/responses/ValidationError.yaml
+      $ref: ../../components/responses/ValidationError.yaml
 get:
   x-products:
     - Storefront
   tags:
     - KYC documents
-  summary: Retrieve KYC liveness session
+  summary: Retrieve KYC liveness sessions
   operationId: StorefrontGetKycLivenessSessionCollection
   x-sdk-operation-name: getAll
   description: Retrieves a list of KYC liveness sessions.
   parameters:
-    - $ref: ../components/parameters/collectionLimit.yaml
-    - $ref: ../components/parameters/collectionOffset.yaml
-    - $ref: ../components/parameters/collectionFilter.yaml
-    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../../components/parameters/collectionLimit.yaml
+    - $ref: ../../components/parameters/collectionOffset.yaml
+    - $ref: ../../components/parameters/collectionFilter.yaml
+    - $ref: ../../components/parameters/collectionSort.yaml
   responses:
     '200':
       description: List of KYC liveness sessions retrieved.
       headers:
         Pagination-Total:
-          $ref: ../components/headers/Pagination-Total.yaml
+          $ref: ../../components/headers/Pagination-Total.yaml
         Pagination-Limit:
-          $ref: ../components/headers/Pagination-Limit.yaml
+          $ref: ../../components/headers/Pagination-Limit.yaml
         Pagination-Offset:
-          $ref: ../components/headers/Pagination-Offset.yaml
+          $ref: ../../components/headers/Pagination-Offset.yaml
       content:
         application/json:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/StorefrontKycLivenessSession.yaml
+              $ref: ../../components/schemas/StorefrontKycLivenessSession.yaml
     '401':
-      $ref: ../components/responses/Unauthorized.yaml
+      $ref: ../../components/responses/Unauthorized.yaml
     '403':
-      $ref: ../components/responses/Forbidden.yaml
+      $ref: ../../components/responses/Forbidden.yaml
