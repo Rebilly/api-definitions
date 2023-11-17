@@ -15,18 +15,17 @@ properties:
     $ref: ./WebsiteId.yaml
   customerId:
     description: ID of the customer who is requesting a payout.
-    allOf:
-      - $ref: ./CustomerId.yaml
+    $ref: ./CustomerId.yaml
   paymentInstrumentId:
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     description: ID of the requested payment instrument to offer for the payout.
     maxLength: 50
     example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
   currency:
     description: Currency of the payout.
-    allOf:
-      - $ref: ./CurrencyCode.yaml
+    $ref: ./CurrencyCode.yaml
   amount:
     description: Amount of the payout.
     type: number
@@ -40,8 +39,9 @@ properties:
     x-type: Money
   description:
     description: Description of payout request.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
   status:
     description: Status of the request.
     type: string
@@ -70,8 +70,7 @@ properties:
       properties:
         transactionId:
           description: ID of the transaction to which the payout request is allocated.
-          allOf:
-            - $ref: ./TransactionId.yaml
+          $ref: ./TransactionId.yaml
         transactionResult:
           description: Result of a transaction.
           type: string
@@ -87,8 +86,7 @@ properties:
           description: Name of the payment gateway that processed, or is selected to process, the transaction.
           x-label: Gateway account
           x-basic: true
-          allOf:
-            - $ref: ./Gateways/GatewayName.yaml
+          $ref: ./GatewayName.yaml
         paymentInstrumentId:
           type: string
           description: ID of the selected payment instrument for the transaction.
@@ -100,8 +98,7 @@ properties:
           format: double
         createdTime:
           description: Date and time when a payout request is allocated.
-          allOf:
-            - $ref: ./ServerTimestamp.yaml
+          $ref: ./ServerTimestamp.yaml
         updatedTime:
           $ref: ./UpdatedTime.yaml
   selectedPaymentInstrumentRedirectUrl:
@@ -113,12 +110,10 @@ properties:
     example: https://example.com/payout-request-success?id={{id}}
   createdTime:
     description: Date and time when the payout request is created.
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    $ref: ./ServerTimestamp.yaml
   updatedTime:
     description: Date and time when the payout request is updated.
-    allOf:
-      - $ref: ./UpdatedTime.yaml
+    $ref: ./UpdatedTime.yaml
   _links:
     type: array
     description: Related links.

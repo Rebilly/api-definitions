@@ -32,31 +32,35 @@ properties:
     type: object
     description: Website settings.
     properties:
-      cashierForm:
+      depositForm:
         type: object
-        description: Cashier form settings.
+        description: Deposit form settings.
         properties:
           theme:
-            description: Theme settings that are used in the cashier form.
-            type: object
-            nullable: true
+            description: Theme settings that are used in the deposit form.
+            type:
+              - 'object'
+              - 'null'
             properties:
               colorPrimary:
-                description: Primary color for the cashier form in hexadecimal format.
-                type: string
-                nullable: true
+                description: Primary color for the deposit form in hexadecimal format.
+                type:
+                  - 'string'
+                  - 'null'
                 maxLength: 6
                 example: '0044d4'
               colorSecondary:
-                description: Secondary color for the cashier form in hexadecimal format.
-                type: string
-                nullable: true
+                description: Secondary color for the deposit form in hexadecimal format.
+                type:
+                  - 'string'
+                  - 'null'
                 maxLength: 6
                 example: 'ffffff'
               buttonTemplate:
                 description: Submit button template. `{{amount}}` can be used as a placeholder for amount and currency.
-                type: string
-                nullable: true
+                type:
+                  - 'string'
+                  - 'null'
                 maxLength: 100
                 example: Pay {{amount}}
       paymentForm:
@@ -65,39 +69,46 @@ properties:
         properties:
           css:
             description: Hosted payment form [CSS options](https://www.rebilly.com/docs/content/concepts-and-features/tutorial/customize-style-rebilly-instruments/#2-use-css-property-to-override-any-styles).
-            type: string
-            nullable: true
+            type:
+              - 'string'
+              - 'null'
           theme:
             description: Hosted payment form [theme options](https://www.rebilly.com/docs/content/concepts-and-features/tutorial/customize-style-rebilly-instruments/#adjust-the-default-style).
-            type: object
-            nullable: true
+            type:
+              - 'object'
+              - 'null'
             additionalProperties:
               type: string
             example:
               colorPrimary: '#504CCA'
           features:
             description: Hosted payment form features.
-            type: object
-            nullable: true
+            type:
+              - 'object'
+              - 'null'
             properties:
               showCoupons:
-                type: array
-                nullable: true
+                type:
+                  - 'array'
+                  - 'null'
                 items:
                   type: string
               fullPageRedirect:
-                type: boolean
+                type:
+                  - 'boolean'
+                  - 'null'
                 description: Specifies whether the hosted payment form uses a full page redirect, or the default iframe modal, for approval URL redirects.
-                nullable: true
                 default: false
               skipRedirectOnPaymentComplete:
-                type: boolean
+                type:
+                  - 'boolean'
+                  - 'null'
                 description: Specifies whether the hosted payment form skips the redirect to the website URL when the payment is completed.
-                nullable: true
                 default: false
   logoId:
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     description: ID of the linked file object.
     maxLength: 50
     example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21

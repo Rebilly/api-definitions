@@ -1,0 +1,29 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Storefront
+  x-badge: Experimental
+  tags:
+    - Deposits
+  summary: Retrieve a deposit request
+  operationId: StorefrontGetDepositRequest
+  x-sdk-operation-name: get
+  security:
+    - CustomerJWT: []
+  description: Retrieves a deposit request with a specified ID.
+  parameters:
+    - $ref: ../../components/parameters/collectionExpand.yaml
+  responses:
+    '200':
+      description: Deposit request retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/DepositRequest.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../../components/responses/NotFound.yaml

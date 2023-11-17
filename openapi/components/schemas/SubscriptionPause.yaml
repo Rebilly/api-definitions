@@ -32,9 +32,10 @@ properties:
       - customer
   description:
     description: Description of the pause reason in free form.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     maxLength: 255
-    nullable: true
   effectiveTime:
     description: |-
       Date and time when the service period pauses.
@@ -43,9 +44,10 @@ properties:
       If this time is earlier then the current time, the current time is used.
 
       If this field is omitted, this value defaults to the current time.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     format: date-time
-    nullable: true
   endTime:
     description: |-
       Date and time when the pause ends and the subscription resumes billing.
@@ -54,9 +56,10 @@ properties:
       use the current time or an earlier time.
       If `endTime` is earlier then the current time, the current time is used.
       If this field is empty, the subscription is indefinitely paused.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     format: date-time
-    nullable: true
   timeRemaining:
     description: |-
       Amount of time between the pause end time and the renewal time in ISO-8601 durations format.
@@ -71,9 +74,10 @@ properties:
       and the billing anchor is ignored for that period.
 
       For more information, see [Service period anchor, billing timing, and invoice time shift](https://www.rebilly.com/docs/dev-docs/concepts/#service-period-anchor-and-billing-timing-and-invoice-time-shift).
-    type: string
+    type:
+      - 'string'
+      - 'null'
     example: P3600S
-    nullable: true
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:

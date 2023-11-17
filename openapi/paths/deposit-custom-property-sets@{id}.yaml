@@ -1,0 +1,85 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  x-badge: Experimental
+  tags:
+    - Deposits
+  summary: Retrieve a custom deposit property set
+  operationId: GetDepositCustomPropertySet
+  x-sdk-operation-name: get
+  description: Retrieves a custom deposit property set with a specified ID.
+  responses:
+    '200':
+      description: Custom deposit property set retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DepositCustomPropertySet.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  x-badge: Experimental
+  tags:
+    - Deposits
+  summary: Upsert a custom deposit property set
+  operationId: PutDepositCustomPropertySet
+  x-sdk-operation-name: update
+  description: Creates or updates (upserts) a custom deposit property set with a specified ID.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/DepositCustomPropertySet.yaml
+    description: Custom deposit property set resource.
+    required: true
+  responses:
+    '200':
+      description: Custom deposit property updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DepositCustomPropertySet.yaml
+    '201':
+      description: Custom deposit property set created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DepositCustomPropertySet.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+delete:
+  x-products:
+    - Core
+  x-badge: Experimental
+  tags:
+    - Deposits
+  summary: Delete a custom deposit property set
+  operationId: DeleteDepositCustomPropertySet
+  x-sdk-operation-name: delete
+  description: Deletes a custom deposit property set with a specified ID.
+  responses:
+    '204':
+      description: Custom deposit property set deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

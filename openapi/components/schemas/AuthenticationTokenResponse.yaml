@@ -20,12 +20,12 @@ properties:
   credentialId:
     description: ID of the user associated with the authentication token.
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    $ref: ./ResourceId.yaml
   expiredTime:
     description: Date and time when the token expired.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: date-time
   _links:
     $ref: ./SelfLink.yaml

@@ -5,8 +5,7 @@ properties:
   id:
     description: ID of the payment instrument.
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    $ref: ./ResourceId.yaml
   method:
     description: Method of payment instrument.
     type: string
@@ -62,7 +61,7 @@ properties:
   brand:
     readOnly: true
     allOf:
-      - $ref: ./PaymentCards/PaymentCardBrand.yaml
+      - $ref: ./PaymentCardBrand.yaml
   bankCountry:
     description: Bank country of the payment instrument.
     type: string
@@ -73,8 +72,7 @@ properties:
     readOnly: true
   billingAddress:
     description: Contact's billing address.
-    allOf:
-      - $ref: ./Contact/ContactObject.yaml
+    $ref: ./ContactObject.yaml
   useAsBackup:
     $ref: ./UseAsBackup.yaml
   billingPortalUrl:
@@ -91,8 +89,9 @@ properties:
     description: |-
       New customer JSON Web Token (JWT) that is used for further requests.
       This value is null if the customer is already authenticated.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
-    nullable: true
   _links:
     $ref: ./SelfLink.yaml
