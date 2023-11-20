@@ -1,12 +1,16 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
 post:
   x-products:
     - Storefront
   tags:
     - KYC documents
-  summary: KYC liveness session finalization attempt
-  operationId: StorefrontPostKycLivenessSession
+  summary: Finish KYC liveness session
+  operationId: StorefrontPostFinishKycLivenessSession
   x-sdk-operation-name: finish
   description: Attempt to finalize a pending KYC liveness session.
+  security:
+    - CustomerJWT: []
   responses:
     '200':
       description: KYC liveness session finalization attempt successful.
