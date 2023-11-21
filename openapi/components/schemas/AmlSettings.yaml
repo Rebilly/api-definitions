@@ -95,6 +95,46 @@ properties:
             $ref: ./AmlConfidence.yaml
           noCountry:
             $ref: ./AmlConfidence.yaml
+      cityAndRegionMatch:
+        type: object
+        description: Exact match of the customer's city and region of residence and exact name is found.
+        properties:
+          matchingCountry:
+            $ref: ./AmlConfidence.yaml
+          mismatchingCountry:
+            $ref: ./AmlConfidence.yaml
+          noCountry:
+            $ref: ./AmlConfidence.yaml
+      cityMatchAndRegionMismatch:
+        type: object
+        description: Exact match of the customer's city of residence and fuzzy, or inexact name match is found, but the region of residence does not match.
+        properties:
+          matchingCountry:
+            $ref: ./AmlConfidence.yaml
+          mismatchingCountry:
+            $ref: ./AmlConfidence.yaml
+          noCountry:
+            $ref: ./AmlConfidence.yaml
+      cityMatchAndNoRegion:
+        type: object
+        description: Exact match of the customer's city of residence and fuzzy, or inexact name match is found, but the region of residence is not provided.
+        properties:
+          matchingCountry:
+            $ref: ./AmlConfidence.yaml
+          mismatchingCountry:
+            $ref: ./AmlConfidence.yaml
+          noCountry:
+            $ref: ./AmlConfidence.yaml
+      noCityAndRegionMatch:
+        type: object
+        description: Exact match of the customer's region of residence and exact name match is found, but the city of residence is not provided.
+        properties:
+          matchingCountry:
+            $ref: ./AmlConfidence.yaml
+          mismatchingCountry:
+            $ref: ./AmlConfidence.yaml
+          noCountry:
+            $ref: ./AmlConfidence.yaml
   priority:
     type: object
     description: |-
