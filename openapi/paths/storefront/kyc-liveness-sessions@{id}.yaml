@@ -1,0 +1,26 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Storefront
+  tags:
+    - KYC documents
+  summary: Retrieve a KYC liveness session
+  operationId: StorefrontGetKycLivenessSession
+  x-sdk-operation-name: get
+  description: Retrieves a KYC liveness session with a specified ID.
+  security:
+    - CustomerJWT: []
+  responses:
+    '200':
+      description: KYC liveness session retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/StorefrontKycLivenessSession.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../../components/responses/NotFound.yaml
