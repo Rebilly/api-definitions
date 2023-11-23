@@ -1,0 +1,53 @@
+content:
+  application/json:
+    schema:
+      properties:
+        subscriptionId:
+          type: string
+          description: ID of the order.
+          example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
+        subscriptionItemId:
+          type: string
+          description: ID of the order item.
+          example: ord_itm_01GYJPRKHBD6ZYHH897QCJMBS4
+        planId:
+          type: string
+          description: ID of the plan.
+          example: plan_01GYJPRKHBD6ZYHH897QCJMBS4
+        usageQuantity:
+          type: integer
+          description: Reported usage quantity.
+        usageAmount:
+          type: number
+          format: double
+          description: Reported usage amount.
+        currency:
+          type: string
+          description: Reported usage amount currency.
+        eventType:
+          type: string
+          description: Type of webhook event.
+          enum:
+            - soft-usage-limit-reached
+            - hard-usage-limit-reached
+        _embedded:
+          type: object
+          description: Embedded objects.
+          properties:
+            subscription:
+              $ref: ../../schemas/Subscription.yaml
+        _links:
+          type: array
+          description: Related links.
+          items:
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - subscription
+description: Usage limit webhook request body resource.
