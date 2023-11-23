@@ -20,20 +20,18 @@ post:
     and include an empty `paymentMethods` property for the `adjust-ready-to-payout` action.
 
     For more information, see [Update event rules](https://all-rebilly.redoc.ly/tag/Rules#operation/PutEventRule) and [Gateway accounts](https://all-rebilly.redoc.ly/tag/Gateway-accounts).
-
-    If this operation to pay is used with a transaction-scoped JSON Web Token (JWT), all fields are ignored except `riskMetadata`.
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../../components/schemas/ReadyToPayout.yaml
+          $ref: ../../components/schemas/ReadyToPayout/ReadyToPayout.yaml
   responses:
     200:
       description: Payment methods retrieved.
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/ReadyToPayMethods.yaml
+            $ref: ../../components/schemas/ReadyToPayoutMethods.yaml
     401:
       $ref: ../../components/responses/Unauthorized.yaml
     403:

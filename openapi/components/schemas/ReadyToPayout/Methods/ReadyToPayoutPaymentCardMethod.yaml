@@ -1,0 +1,18 @@
+type: object
+title: Payment card
+required:
+  - method
+properties:
+  method:
+    type: string
+    description: Payment method.
+    enum:
+      - payment-card
+  brands:
+    type: array
+    description: List of supported brands.
+    minItems: 1
+    items:
+      $ref: ../../PaymentCards/PaymentCardBrand.yaml
+  filters:
+    $ref: ../ReadyToPayoutMethodFilters.yaml
