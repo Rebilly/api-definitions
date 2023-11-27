@@ -369,6 +369,26 @@ properties:
       do-nothing: |-
         Does nothing except return an approved `setup` transaction.
         This is the default behavior.
+  readyToPayoutInstruction:
+    type: string
+    default: none
+    description: |-
+      Defines a mode of gateway payout behaviour.
+    enum:
+      - all
+      - covered-payout
+      - approved-payment
+      - none
+    x-enumDescriptions:
+      all: |-
+        Allow any amount to payout through gateway.
+      covered-payout: |-
+        Only payout amount of gateway what has been paid into gateway.
+      approved-payment: |-
+        Payout any amount as long as there was a previously approved transaction for this customer and currency.
+        via this gateway
+      none:
+        Gateway not allowed for payout. This will be the default value, merchant will need to opt into payouts.
   customFields:
     $ref: ./ResourceCustomFields.yaml
   createdTime:
