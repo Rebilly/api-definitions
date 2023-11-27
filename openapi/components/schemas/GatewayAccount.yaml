@@ -375,7 +375,7 @@ properties:
       - 'null'
     default: none
     description: |-
-      Defines a mode of gateway payout behaviour for [StorefrontReadyToPayout](https://all-rebilly.redoc.ly/tag/Purchases/operation/StorefrontPostReadyToPayout).
+      Defines the mode of gateway payout behaviour for the [Ready to payout](https://all-rebilly.redoc.ly/tag/Purchases/operation/StorefrontPostReadyToPayout) operation.
       If this value is `null`, payouts are not supported by the gateway.
     enum:
       - all
@@ -384,14 +384,18 @@ properties:
       - none
     x-enumDescriptions:
       all: |-
-        Allow any amount to payout through gateway.
+        Payout any amount from this gateway.
       covered-payout: |-
-        Only payout amount of gateway what has been paid into gateway.
+        Payout from this gateway if it previously processed a payment for the same, 
+        or a greater, amount.
       approved-payment: |-
-        Payout any amount as long as there was a previously approved transaction for this customer and currency.
-        via this gateway
+        Payout any amount from this gateway if it processed an earlier payment. 
+        The customer must have a previously approved transaction, 
+        in the same currency, on this gateway.
       none:
-        Gateway not allowed for payout. This will be the default value, merchant will need to opt into payouts.
+        Do not allow any payouts with this gateway. 
+        This is the default value, 
+        merchants must opt into payouts.
   customFields:
     $ref: ./ResourceCustomFields.yaml
   createdTime:
