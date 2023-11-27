@@ -370,10 +370,13 @@ properties:
         Does nothing except return an approved `setup` transaction.
         This is the default behavior.
   readyToPayoutInstruction:
-    type: string
+    type:
+      - 'string'
+      - 'null'
     default: none
     description: |-
       Defines a mode of gateway payout behaviour.
+      If a `null`, a gateway does not support payout operation.
     enum:
       - all
       - covered-payout
