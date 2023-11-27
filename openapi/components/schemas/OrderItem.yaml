@@ -25,14 +25,12 @@ properties:
       - $ref: ./FlexiblePlan.yaml
   usageLimits:
     type: object
-    nullable: true
     description: |-
       Specifies the soft and hard usage limits thresholds for an item with a metered billing plan.
       This value is ignored when the plan is not metered.
     properties:
       softLimit:
         type: object
-        nullable: true
         description: |-
           Defines thresholds for notification purposes.
           For example, to notify the customer that their usage is near the hard limit of their metered billing plan.
@@ -47,44 +45,39 @@ properties:
           quantity:
             type: integer
             description: Usage limit quantity.
-            nullable: true
             minimum: 1
           amount:
             type: number
             format: double
             description: Usage limit amount in the currency of the order.
-            nullable: true
             minimum: 0.01
       hardLimit:
         type: object
-        nullable: true
         description: |-
           Defines a limit where the customer can no longer use the service.
-          Hard limits are used in addition to soft limits. 
-          When a soft limit is reached, 
+          Hard limits are used in addition to soft limits.
+          When a soft limit is reached,
           a customer may receive a notification
           but the service can still be provided up to the hard limit value so that the customer can upgrade their plan.
-          When the reported usage reaches the configured limit, 
+          When the reported usage reaches the configured limit,
           a specific event is triggered.
-          To notify the customer in the merchant system, 
-          or block a service, 
+          To notify the customer in the merchant system,
+          or block a service,
           a webhook and notification can be configured for this event.
-          When the total usage reaches the hard limit quantity, 
-          or amount values, 
-          metered billing plan usages can no longer be reported
+          When the total usage reaches the hard limit quantity,
+          or amount values,
+          metered billing plan usages can no longer be reported.
         minProperties: 1
         maxProperties: 1
         properties:
           quantity:
             type: integer
             description: Usage limit quantity.
-            nullable: true
             minimum: 1
           amount:
             type: number
             format: double
             description: Usage limit amount in the currency of the order.
-            nullable: true
             minimum: 0.01
   revision:
     type: integer
