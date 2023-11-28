@@ -370,13 +370,10 @@ properties:
         Does nothing except return an approved `setup` transaction.
         This is the default behavior.
   readyToPayoutInstruction:
-    type:
-      - 'string'
-      - 'null'
+    type: string
     default: none
     description: |-
       Defines the mode of gateway payout behaviour for the [Ready to payout](https://all-rebilly.redoc.ly/tag/Purchases/operation/StorefrontPostReadyToPayout) operation.
-      If this value is `null`, payouts are not supported by the gateway.
     enum:
       - all
       - covered-payout
@@ -386,15 +383,15 @@ properties:
       all: |-
         Payout any amount from this gateway.
       covered-payout: |-
-        Payout from this gateway if it previously processed a payment for the same, 
+        Payout from this gateway if it previously processed a payment for the same,
         or a greater, amount.
       approved-payment: |-
-        Payout any amount from this gateway if it processed an earlier payment. 
-        The customer must have a previously approved transaction, 
+        Payout any amount from this gateway if it processed an earlier payment.
+        The customer must have a previously approved transaction,
         in the same currency, on this gateway.
       none:
-        Do not allow any payouts with this gateway. 
-        This is the default value, 
+        Do not allow any payouts with this gateway.
+        This is the default value,
         merchants must opt into payouts.
   customFields:
     $ref: ./ResourceCustomFields.yaml
