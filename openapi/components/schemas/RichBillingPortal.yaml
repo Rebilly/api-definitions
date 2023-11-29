@@ -1,9 +1,7 @@
 type: object
 required:
   - name
-  - recurringOptions
-  - levels
-  - solutions
+  - plans
 properties:
   id:
     type: string
@@ -14,128 +12,46 @@ properties:
   name:
     type: string
     description: Name of the billing portal.
-  recurringOptions:
+  status:
+    description: Status of the billing portal.
+    type: string
+    enum:
+      - active
+      - inactive
+    default: active
+  plans:
     type: array
-    description: Recurring options for the billing portal. For example, it can have `monthly` and `yearly` variants.
     items:
-      type: object
-      properties:
-        id:
-          type: string
-          description: |-
-            ID of the recurring option.
-            This value must be unique to other recurring options in the same billing portal.
-          example: monthly
-        name:
-          type: string
-          description: Name of recurring option for the billing portal.
-          example: Monthly
-        recurringInterval:
-          type: object
-          description: Recurring interval settings.
-          properties:
-            unit:
-              description: Unit of time.
-              type: string
-              enum:
-                - day
-                - week
-                - month
-                - year
-            length:
-              description: Length of time.
-              type: integer
-              minimum: 1
-  levels:
-    type: array
-    description: Level options for billing portal solution.
-    items:
-      type: object
-      properties:
-        level:
-          type: string
-          description: |-
-            Machine-readable value of a level.
-            This value must be unique to other levels in the same billing portal.
-          example: enterprise
-        name:
-          type: string
-          description: Name of the level for the billing portal.
-          example: Enterprise
-  solutions:
-    type: object
-    properties:
-      items:
-        type: array
-        items:
-          type: object
-          description: Combination of flexible plans, attached to level and recurring option.
+      allOf:
+        - type: object
+          description: Plan details.
+          required:
+            - id
           properties:
             id:
               type: string
-              description: |-
-                ID of a solution.
-                This value must be unique to other solutions in the same billing portal.
-              example: kyc
-            name:
+              description: ID of the plan.
+              maxLength: 50
+              example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+        - $ref: ./SubscriptionOrderPlan.yaml
+  addons:
+    type: array
+    items:
+      allOf:
+        - type: object
+          description: Addon plan details.
+          required:
+            - id
+          properties:
+            id:
               type: string
-              description: Name of a solution.
-              minLength: 1
-              maxLength: 100
-              example: KYC product
-            description:
-              type: string
-              description: Description of the solution.
-              example: KYC product description
-            status:
-              type: string
-              description: Status of the solution.
-              enum:
-                - active
-                - archived
-            matrix:
-              type: array
-              items:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    description: Status of the solution item.
-                    enum:
-                      - active
-                      - archived
-                  recurringOptionId:
-                    type: string
-                    description: ID of the recurring option.
-                    example: monthly
-                  levelId:
-                    type: string
-                    description: ID of the level.
-                    example: enterprise
-                  plans:
-                    type: array
-                    items:
-                      allOf:
-                        - type: object
-                          description: Plan details.
-                          required:
-                            - id
-                          properties:
-                            id:
-                              type: string
-                              description: ID of the main plan.
-                              maxLength: 50
-                              example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
-                        - $ref: ./SubscriptionOrderPlan.yaml
-      variants:
-        type: array
-        items:
-          type: array
-          description: Combination of solutions which can be used together.
-          items:
-            type: string
-            description: IDs of solutions.
-          example:
-            - billing
-            - payments
-            - kyc
+              description: ID of the addon plan.
+              maxLength: 50
+              example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+        - $ref: ./SubscriptionOrderPlan.yaml
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml
