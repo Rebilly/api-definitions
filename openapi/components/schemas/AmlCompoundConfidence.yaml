@@ -1,8 +1,8 @@
 type: object
 properties:
-  cityAndRegionMatch:
+  addressMatch:
     type: object
-    description: Exact match of the customer's city and region of residence is found.
+    description: A match for the customer's city and/or region is found.
     properties:
       matchingCountry:
         $ref: ./AmlConfidence.yaml
@@ -10,9 +10,9 @@ properties:
         $ref: ./AmlConfidence.yaml
       noCountry:
         $ref: ./AmlConfidence.yaml
-  cityMatchAndRegionMismatch:
+  addressMismatch:
     type: object
-    description: Exact match of the customer's city of residence but the region of residence does not match.
+    description: A match for the customer's city and/or region is not found.
     properties:
       matchingCountry:
         $ref: ./AmlConfidence.yaml
@@ -20,19 +20,9 @@ properties:
         $ref: ./AmlConfidence.yaml
       noCountry:
         $ref: ./AmlConfidence.yaml
-  cityMatchAndNoRegion:
+  noAddress:
     type: object
-    description: Exact match of the customer's city of residence is found, but the region of residence is not provided.
-    properties:
-      matchingCountry:
-        $ref: ./AmlConfidence.yaml
-      mismatchingCountry:
-        $ref: ./AmlConfidence.yaml
-      noCountry:
-        $ref: ./AmlConfidence.yaml
-  noCityOrMismatchAndRegionMatch:
-    type: object
-    description: Exact match of the customer's region of residence is found, but the city of residence is not provided or is an inexact match.
+    description: No city and no region is available to match against.
     properties:
       matchingCountry:
         $ref: ./AmlConfidence.yaml
