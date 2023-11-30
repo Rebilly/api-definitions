@@ -414,7 +414,7 @@ tags:
       You can have multiple organizations.
       For more information, see [My organizations and websites](https://www.rebilly.com/docs/settings/organizations-and-websites/).
 
-      Note: Organizations are shared between the live and sandbox environments.
+      Note: No data, including organizations, is shared between the live and sandbox environments.
   - name: Password reset
     description: Use these operations to manage password resets for a user or organization.
   - name: Payment instruments
@@ -1114,6 +1114,8 @@ paths:
     $ref: ./paths/reports@dashboard.yaml
   /experimental/reports/dcc-markup:
     $ref: ./paths/reports@dcc-markup.yaml
+  /experimental/reports/declined-transactions:
+    $ref: ./paths/reports@declined-transactions.yaml
   /experimental/reports/disputes:
     $ref: ./paths/reports@disputes.yaml
   /experimental/reports/events-triggered:
@@ -1356,6 +1358,9 @@ webhooks:
   experian-check-performed:
     post:
       $ref: ./webhooks/experian-check-performed.yaml
+  hard-usage-limit-reached:
+    post:
+      $ref: ./webhooks/hard-usage-limit-reached.yaml
   invoice-tax-calculation-failed:
     post:
       $ref: ./webhooks/invoice-tax-calculation-failed.yaml
@@ -1476,6 +1481,9 @@ webhooks:
   risk-score-changed:
     post:
       $ref: ./webhooks/risk-score-changed.yaml
+  soft-usage-limit-reached:
+    post:
+      $ref: ./webhooks/soft-usage-limit-reached.yaml
   subscription-activated:
     post:
       $ref: ./webhooks/subscription-activated.yaml
