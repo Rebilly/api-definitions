@@ -1,0 +1,23 @@
+type: object
+description: Change customer subscription items
+properties:
+  items:
+    type: array
+    description: Item details.
+    minItems: 1
+    items:
+      type: object
+      required:
+        - planId
+        - quantity
+      properties:
+        planId:
+          type: string
+          description: ID of the plan.
+          maxLength: 50
+          example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+        quantity:
+          description: Number of units of the product on the given plan.
+          type: integer
+          min: 0
+

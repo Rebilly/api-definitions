@@ -1,0 +1,38 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Storefront
+  tags:
+    - Orders
+  summary: Change subscription order items
+  operationId: StorefrontPostSubscriptionItemsChange
+  x-sdk-operation-name: changeItems
+  security:
+    - CustomerJWT: []
+  description: Changes subscription order items and quantities.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/requestBodies/storefront/SubscriptionItemsChange.yaml
+    description: Change items request.
+    required: true
+  responses:
+    '200':
+      description: Subscription items changed.
+      headers:
+        Location:
+          $ref: ../../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/StorefrontOrder.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../../components/responses/NotFound.yaml
+    '422':
+      $ref: ../../components/responses/ValidationError.yaml
