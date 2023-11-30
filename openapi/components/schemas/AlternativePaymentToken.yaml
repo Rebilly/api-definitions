@@ -21,23 +21,20 @@ properties:
             - Klarna
   billingAddress:
     description: Billing address object.
-    allOf:
-      - $ref: ./ContactObject.yaml
+    $ref: ./ContactObject.yaml
   id:
     description: ID of the token.
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    $ref: ./ResourceId.yaml
   isUsed:
     description: Specifies if the token is already used.
     type: boolean
     default: false
     readOnly: true
   riskMetadata:
-    type: object
-    nullable: true
-    allOf:
+    oneOf:
       - $ref: ./RiskMetadata.yaml
+      - type: 'null'
   leadSource:
     allOf:
       - $ref: ./LeadSource.yaml
@@ -48,14 +45,16 @@ properties:
     $ref: ./UpdatedTime.yaml
   usageTime:
     description: Date and time when the token is used.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: date-time
     readOnly: true
   expirationTime:
     description: Date and time when the token expired.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: date-time
     readOnly: true
   _links:

@@ -5,43 +5,49 @@ properties:
     description: |-
       First name of the customer.
       This value is null if no match is found.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: John
   lastName:
     description: |-
       Last name of the customer.
       This value is null if no match is found.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: Doe
   line1:
     description: |-
       Address of the customer's residence.
       This value is null if no match is found.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: 36 Craven St
   city:
     description: |-
       Customer's city of residence.
       This value is null if no match is found.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: London
   region:
     description: |-
       Customer's region of residence.
       This value is null if no match is found.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: London
   postalCode:
     description: |-
       Postal code of the customer's residence.
       This value is null if no match is found.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: WC2N 5NF
   wordCount:
     description: Total number of words in the document.
@@ -55,21 +61,23 @@ properties:
     description: |-
       Date detected on the document.
       Use this field to determine if the document is recent.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     format: date
-    nullable: true
     example: 2021-01-01
   phone:
     description: Phone number of the company or agency that issued the document.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: (123) 456-7890
   documentSubtype:
     description: Interpreted subtype of the uploaded document.
-    type: string
-    nullable: true
-    allOf:
-      - $ref: ./KycDocumentSubtypes.yaml
+    type:
+      - 'string'
+      - 'null'
+    $ref: ./KycDocumentSubtypes.yaml
   isTampered:
     description: Specifies if an address proof document has been tampered with.
     type: boolean

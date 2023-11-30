@@ -4,8 +4,7 @@ properties:
   id:
     description: ID of the payment instrument.
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    $ref: ./ResourceId.yaml
   method:
     description: Method of payment instrument.
     type: string
@@ -13,8 +12,7 @@ properties:
       - paypal
   billingAddress:
     description: Billing address.
-    allOf:
-      - $ref: ./ContactObject.yaml
+    $ref: ./ContactObject.yaml
   username:
     description: PayPal username.
     type: string
@@ -39,8 +37,9 @@ properties:
     description: |-
       New customer JSON Web Token (JWT) that is used for further requests.
       This value is null if the customer is already authenticated.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
-    nullable: true
   _links:
     $ref: ./SelfLink.yaml

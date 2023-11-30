@@ -66,6 +66,8 @@ properties:
             - transaction-timeout-resolved
             - waiting-gateway-transaction-completed
             - data-export-completed
+            - hard-usage-limit-reached.yaml
+            - soft-usage-limit-reached.yaml
   filter:
     description: |-
       Filter that determines whether to tag or untag.
@@ -75,8 +77,9 @@ properties:
 
       For more information,
       see [Using filters](https://api-reference.rebilly.com/#section/Using-filter-with-collections).
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
   addTags:
     description: List of tags to add to the customer.
     type: array

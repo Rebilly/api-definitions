@@ -1,3 +1,11 @@
+title: Volume
+description: |-
+  Volume pricing details.
+  Use this formula to charge for units that are sold in bulk,
+  or volume ranges. In general,
+  this formula means that a customer pays less per unit when they buy a large volume of units.
+
+  For more information, see [Volume](https://www.rebilly.com/docs/settings/pricing-formulas/#volume).
 type: object
 required:
   - brackets
@@ -57,8 +65,9 @@ properties:
             If there are no previous quantity ranges,
             this value starts at 1.
 
-          type: integer
-          nullable: true
+          type:
+            - 'integer'
+            - 'null'
           example: 1
           minimum: 1
           maximum: 65535
@@ -66,8 +75,9 @@ properties:
     description: |-
       Minimum permitted unit quantity.
       If this value is `null`, no limit is in place.
-    type: integer
-    nullable: true
+    type:
+      - 'integer'
+      - 'null'
     default: null
     example: 1
     minimum: 1

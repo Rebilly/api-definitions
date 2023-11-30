@@ -70,8 +70,9 @@ properties:
       - $ref: ./PaymentCardBrand.yaml
   bankCountry:
     description: Bank country of the payment instrument.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
   bankName:
     description: Bank name of the payment instrument.
@@ -79,8 +80,7 @@ properties:
     readOnly: true
   billingAddress:
     description: Contact's billing address.
-    allOf:
-      - $ref: ./ContactObject.yaml
+    $ref: ./ContactObject.yaml
   useAsBackup:
     $ref: ./UseAsBackup.yaml
   billingPortalUrl:
@@ -100,19 +100,22 @@ properties:
 
       For more information,
       see [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
   expirationReminderTime:
     description: Date and time when an expiration reminder event is triggered.
-    nullable: true
-    type: string
+    type:
+      - 'string'
+      - 'null'
     format: date-time
     readOnly: true
   expirationReminderNumber:
     description: Number of expiration reminder events that have triggered.
-    nullable: true
-    type: integer
+    type:
+      - 'integer'
+      - 'null'
     readOnly: true
   referenceData:
     description: Payment instrument reference data.
@@ -124,17 +127,17 @@ properties:
   digitalWallet:
     readOnly: true
     description: Digital wallet type.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     enum:
       - Apple Pay
       - Google Pay
       - null
   riskMetadata:
-    type: object
-    nullable: true
-    allOf:
+    oneOf:
       - $ref: ./RiskMetadata.yaml
+      - type: 'null'
   revision:
     description: |-
       Number of times the payment instrument data has been modified.
