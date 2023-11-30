@@ -1,0 +1,35 @@
+type: object
+description: |-
+  Settlement settings.
+  Use these settings to set up settlement accounts.
+required:
+  - settlementCurrency
+  - settlementPeriod
+properties:
+  settlementCurrency:
+    description: Default settlement currency for all transactions.
+    $ref: ./CurrencyCode.yaml
+  settlementPeriod:
+    description: Default settlement period for all transactions.
+    $ref: SettlementPeriod.yaml
+  advancedSettings:
+    description: |-
+      Advanced settlement settings.
+      Use these settings to override either default settlement currency,
+      period, or both for the transactions matched a filter.
+    type: array
+    items:
+      type: object
+      required:
+        - filter
+      properties:
+        filter:
+          type: string
+          description: Filter that is based on transaction properties and is used to determine when to apply the settings.
+          minLength: 1
+          maxLength: 255
+          example: 'currency:EUR,GBP'
+        settlementCurrency:
+          $ref: ./CurrencyCode.yaml
+        settlementPeriod:
+          $ref: SettlementPeriod.yaml

@@ -1,0 +1,28 @@
+type: object
+required:
+  - name
+  - price
+  - currency
+properties:
+  id:
+    type: string
+    description: ID of the shipping rate.
+    readOnly: true
+    maxLength: 50
+    example: ship_rate_0YVDN408G4DQE9G1RV1QCFHJ3P
+  name:
+    type: string
+    description: Name of the shipping rate.
+  description:
+    type:
+      - 'string'
+      - 'null'
+    description: Description of the shipping rate.
+  price:
+    description: |-
+      Price of the shipping rate.
+      If `price` is `0`, shipping is free.
+    type: number
+    format: double
+  currency:
+    $ref: ./CurrencyCode.yaml

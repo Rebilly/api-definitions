@@ -1,3 +1,4 @@
+description: Details of the subscription order plan. Use this plan for subscriptions or sales that reoccur over a period of time.
 type: object
 required:
   - name
@@ -6,11 +7,6 @@ required:
   - pricing
   - recurringInterval
 properties:
-  id:
-    type: string
-    description: ID of the plan.
-    maxLength: 50
-    example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
   name:
     description: |-
       Name of the plan.
@@ -35,8 +31,9 @@ properties:
     maxLength: 50
     example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
   productOptions:
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     description: Name-value pairs that specify the product options.
     additionalProperties:
       type: string
@@ -52,8 +49,9 @@ properties:
   pricing:
     $ref: ./PlanPriceFormula.yaml
   setup:
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     description: Set up information of the plan.
     required:
       - price
@@ -88,8 +86,9 @@ properties:
     type: object
     properties:
       periodAnchorInstruction:
-        type: string
-        nullable: true
+        type:
+          - 'string'
+          - 'null'
       unit:
         description: Unit of time.
         type: string
@@ -110,8 +109,9 @@ properties:
           Example: For a 1 year contract that is billed monthly,
           where the `periodUnit` is `month` and the `periodDuration` is `1`,
           set this field to `12`.
-        type: integer
-        nullable: true
+        type:
+          - 'integer'
+          - 'null'
         minimum: 1
         maximum: 65535
       billingTiming:
@@ -125,8 +125,9 @@ properties:
           - prepaid
           - postpaid
   trial:
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     description: |-
       Trial configuration setting.
       If you do not want to offer a trial, set this value to `null`.
@@ -160,8 +161,9 @@ properties:
             type: integer
             minimum: 1
   meteredBilling:
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     required:
       - strategy
     description: |-
@@ -179,18 +181,20 @@ properties:
           last: Last reported invoice item quantity usage.
       min:
         description: Minimum quantity that is charged at the end of a service period regardless of reported usage.
-        type: number
+        type:
+          - 'number'
+          - 'null'
         format: float
-        nullable: true
         minimum: 0.01
       max:
         description: Maximum quantity that is charged at the end of a service period regardless of reported usage.
-        type: number
+        type:
+          - 'number'
+          - 'null'
         format: float
-        nullable: true
         minimum: 0.01
   invoiceTimeShift:
-    $ref: ./Invoices/InvoiceTimeShift.yaml
+    $ref: ./InvoiceTimeShift.yaml
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:

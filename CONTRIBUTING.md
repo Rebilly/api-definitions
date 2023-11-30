@@ -10,11 +10,11 @@ Rebilly follows a design-first approach to APIs.
 
 - Use OpenAPI 3.0 to describe APIs according to below.
 - Use [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow) (create a branch and open a pull request for any change).
-- Check your work with Redocly CLI which runs `lint` and `bundle` commands controlled through the `.redocly.yaml` configuration file when a pull request is opened (you will see the green checks or red x marks).
+- Check your work with Redocly CLI which runs `lint` and `bundle` commands controlled through the `redocly.yaml` configuration file when a pull request is opened (you will see the green checks or red x marks).
 - In terms of sequence, merge the API definitions before merging and releasing software to production.
 
 To get started:
-- Set up [your environment](./README.md#environment-setup).
+- Set up your environment.
 - Read the remainder of this page to understand how we design APIs and write API definitions.
 
 ## API description writing guidance
@@ -52,14 +52,14 @@ Rebilly uses the following lint rules:
 - [operation-operationId-unique](https://redocly.com/docs/cli/rules/operation-operationId-unique/) (recommended)
 - [operation-operationId-url-safe](https://redocly.com/docs/cli/rules/operation-operationId-url-safe/) (recommended)
 - [operation-summary](https://redocly.com/docs/cli/rules/operation-summary/) (recommended)
-- [assert/x-sdk-operation-name](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
-- [assert/operation-id-delete](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
-- [assert/operation-id-get](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
-- [assert/operation-id-patch](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
-- [assert/operation-id-post](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
-- [assert/operation-id-put](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
-- [assert/no-x-code-samples](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
-- [assert/no-x-internal](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [rule/x-sdk-operation-name](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [rule/operation-id-delete](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [rule/operation-id-get](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [rule/operation-id-patch](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [rule/operation-id-post](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [rule/operation-id-put](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [rule/no-x-code-samples](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [rule/no-x-internal](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
 
 ### Parameters
 
@@ -70,7 +70,7 @@ Rebilly uses the following lint rules:
 - [path-declaration-must-exist](https://redocly.com/docs/cli/rules/path-declaration-must-exist/) (recommended)
 - [path-not-include-query](https://redocly.com/docs/cli/rules/path-not-include-query/) (recommended)
 - [path-parameters-defined](https://redocly.com/docs/cli/rules/path-parameters-defined/) (recommended)
-- [assert/params-must-include-examples](.redocly.yaml) (custom rules)
+- [rule/params-must-include-examples](redocly.yaml) (custom rules)
 
 ### Paths
 
@@ -81,7 +81,7 @@ Rebilly uses the following lint rules:
 - [path-excludes-patterns](https://redocly.com/docs/cli/rules/path-excludes-patterns/)
 - [path-segment-plural](https://redocly.com/docs/cli/rules/path-segment-plural/) (Redocly additional rules)
 - [paths-kebab-case](https://redocly.com/docs/cli/rules/paths-kebab-case/) (Redocly additional rules)
-- [assert/path-must-be-ref-file](.redocly.yaml) (custom rules)
+- [rule/path-must-be-ref-file](redocly.yaml) (custom rules)
 
 ### Requests, Responses, and Schemas
 
@@ -94,11 +94,11 @@ Rebilly uses the following lint rules:
 - [response-contains-header](https://redocly.com/docs/cli/rules/response-contains-header/) (Redocly additional rules)
 - [response-contains-property](https://redocly.com/docs/cli/rules/response-contains-property/)
 - [scalar-property-missing-example](https://redocly.com/docs/cli/rules/scalar-property-missing-example/)
-- [assert/headers-include-example](.redocly.yaml) (custom rules)
-- [assert/schema-properties-both-created-time-and-updated-time](.redocly.yaml) (custom rules)
-- [assert/put-200-and-201](.redocly.yaml) (custom rules) (this has some exceptions)
-- [assert/schema-properties-camelCase](.redocly.yaml) (custom rules)
-- [assert/embedded-is-object](.redocly.yaml) (custom rules)
+- [rule/headers-include-example](redocly.yaml) (custom rules)
+- [rule/schema-properties-both-created-time-and-updated-time](redocly.yaml) (custom rules)
+- [rule/put-200-and-201](redocly.yaml) (custom rules) (this has some exceptions)
+- [rule/schema-properties-camelCase](redocly.yaml) (custom rules)
+- [rule/embedded-is-object](redocly.yaml) (custom rules)
 
 ### Servers
 
@@ -114,19 +114,19 @@ Rebilly uses the following lint rules:
 - [operation-tag-defined](https://redocly.com/docs/cli/rules/operation-tag-defined/) (Redocly additional rules)
 - [tag-description](https://redocly.com/docs/cli/rules/tag-description/)
 - [tags-alphabetical](https://redocly.com/docs/cli/rules/tags-alphabetical/)
-- [custom-rules/no-unused-tags](.redocly.yaml) (custom rules)
+- [custom-rules/no-unused-tags](redocly.yaml) (custom rules)
 
 
 ### Writing style
 
-- [assert/operation-summary](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
-- [assert/tag-description](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
-- [assert/info-description](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
-- [assert/description-capitalization](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
-- [assert/description-punctuation](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
-- [assert/no-anthropmorphic-possessives](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
-- [assert/no-past-future](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
-- [assert/no-description-start-with-the-a-an](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [rule/operation-summary](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [rule/tag-description](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [rule/info-description](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [rule/description-capitalization](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [rule/description-punctuation](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [rule/no-anthropmorphic-possessives](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [rule/no-past-future](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [rule/no-description-start-with-the-a-an](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
 
 ### Maintenance
 

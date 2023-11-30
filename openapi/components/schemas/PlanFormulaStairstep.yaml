@@ -1,3 +1,9 @@
+title: Stair-step
+description: |-
+  Stair-step pricing details.
+  Use this formula to charge for units that are sold in specific quantities.
+
+  For more information, see [Stair-step](https://www.rebilly.com/docs/billing/pricing-formulas/#stair-step).
 type: object
 required:
   - brackets
@@ -56,8 +62,9 @@ properties:
             This value starts from the end of the previous quantity range.
             If there are no previous quantity ranges,
             this value starts at 1.
-          type: integer
-          nullable: true
+          type:
+            - 'integer'
+            - 'null'
           example: 1
           minimum: 1
           maximum: 65535
@@ -65,8 +72,9 @@ properties:
     description: |-
       Minimum permitted unit quantity.
       If this value is `null`, no limit is in place.
-    type: integer
-    nullable: true
+    type:
+      - 'integer'
+      - 'null'
     default: null
     example: 1
     minimum: 1

@@ -17,28 +17,33 @@ properties:
     maxLength: 50
     example: web_0YV7DE4Z26DQSA1AC92FBJ7SEG
   reviewerId:
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     maxLength: 50
     description: User ID of the person who reviewed the AML check.
     example: 44433322-2c4y-483z-a0a9-158621f77a21
   reviewerName:
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     description: First and last name of the person who reviewed the AML check.
   reviewStartTime:
-    type: string
+    type:
+      - 'string'
+      - 'null'
     format: date-time
-    nullable: true
     description: Date and time when the AML check review is started.
   reviewTime:
-    type: string
+    type:
+      - 'string'
+      - 'null'
     format: date-time
-    nullable: true
     description: Date and time when the AML check review is completed.
   priority:
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     default: null
     description: Highest matched priority of all hits within an AML check.
   source:
@@ -69,8 +74,7 @@ properties:
     properties:
       id:
         description: ID of the customer.
-        allOf:
-          - $ref: ./ResourceId.yaml
+        $ref: ./ResourceId.yaml
       primaryAddress:
         type: object
         description: Customer's data at the time of the AML check.
@@ -84,48 +88,55 @@ properties:
             maxLength: 45
             description: Customer's last name at the time of the AML check.
           dob:
-            type: string
+            type:
+              - 'string'
+              - 'null'
             format: date
-            nullable: true
             description: Customer's date of birth.
             example: 1971-02-14
           address:
             description: First line of the customer's street address at the time of the AML check.
-            type: string
+            type:
+              - 'string'
+              - 'null'
             pattern: '^[\w\s\-\/\p{L},.#;:()''&]+$'
             maxLength: 60
             example: 36 Craven St
-            nullable: true
           address2:
             description: Second line of the customer's street address at the time of the AML check.
-            type: string
+            type:
+              - 'string'
+              - 'null'
             pattern: '^[\w\s\-\/\p{L},.#;:()''&]+$'
             maxLength: 60
-            nullable: true
           city:
             description: Customer's city of residence at the time of the AML check.
-            type: string
+            type:
+              - 'string'
+              - 'null'
             pattern: '^[\w\s\-\p{L},.'']+$'
             maxLength: 45
-            nullable: true
             example: Austin
           region:
             description: Customer's region of residence at the time of the AML check.
-            type: string
+            type:
+              - 'string'
+              - 'null'
             pattern: '^[\w\s\-\/\p{L},.#;:()'']+$'
             maxLength: 45
-            nullable: true
             example: Texas
           country:
-            type: string
-            nullable: true
+            type:
+              - 'string'
+              - 'null'
             description: Customer's country of residence at the time of the AML check.
           postalCode:
             description: Customer's postal code at the time of the AML check.
-            type: string
+            type:
+              - 'string'
+              - 'null'
             pattern: '^[\w\s\-]+$'
             maxLength: 10
-            nullable: true
             example: WC2N 5NF
       tags:
         description: List of tags that have been assigned to the customer.

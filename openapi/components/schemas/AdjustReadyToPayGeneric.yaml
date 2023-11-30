@@ -1,0 +1,14 @@
+type: object
+title: Generic
+properties:
+  paymentMethod:
+    description: Payment method of the payment instrument.
+    allOf:
+      - $ref: ./AlternativePaymentMethods.yaml
+      - not:
+          enum:
+            - paypal
+  feature:
+    type:
+      - 'string'
+      - 'null'

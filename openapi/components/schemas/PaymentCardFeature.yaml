@@ -1,0 +1,9 @@
+type: object
+discriminator:
+  propertyName: name
+  mapping:
+    'Apple Pay': ./ApplePayFeature.yaml
+    'Google Pay': ./GooglePayFeature.yaml
+oneOf:
+  - $ref: ./ApplePayFeature.yaml
+  - $ref: ./GooglePayFeature.yaml

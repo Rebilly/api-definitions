@@ -18,8 +18,7 @@ properties:
   currency:
     x-sortable: true
     x-basic: true
-    allOf:
-      - $ref: ./CurrencyCode.yaml
+    $ref: ./CurrencyCode.yaml
   customerId:
     x-basic: true
     allOf:
@@ -39,7 +38,7 @@ properties:
     type: array
     description: Upcoming invoice items array.
     items:
-      $ref: ./Invoices/UpcomingInvoiceItem.yaml
+      $ref: ./UpcomingInvoiceItem.yaml
   amount:
     description: Amount of the invoice.
     type: number
@@ -70,11 +69,12 @@ properties:
   shipping:
     $ref: ./Shipping.yaml
   tax:
-    $ref: ./Taxes/Taxes.yaml
+    $ref: ./Taxes.yaml
   organizationTaxIdNumber:
     description: Organization tax ID number that is displayed on the invoice.
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     required:
       - type
       - value
@@ -92,8 +92,9 @@ properties:
         example: GB980780684
   customerTaxIdNumber:
     description: Customer tax ID number that is displayed on the invoice.
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     required:
       - type
       - value
@@ -111,17 +112,16 @@ properties:
         example: GB980780684
   billingAddress:
     description: Billing address of the invoice.
-    allOf:
-      - $ref: ./Contact/ContactObject.yaml
+    $ref: ./ContactObject.yaml
   deliveryAddress:
     description: Delivery address of the invoice.
-    allOf:
-      - $ref: ./Contact/ContactObject.yaml
+    $ref: ./ContactObject.yaml
   poNumber:
     description: Purchase order number that is displayed on the invoice.
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: PO123456
-    type: string
   notes:
     description: Notes for the customer that are displayed on the invoice.
     type: string
@@ -140,8 +140,7 @@ properties:
           example: cpn_0YVCNKF81GD778N4YNVGDJK558
         redemptionId:
           description: ID of the redemption.
-          allOf:
-            - $ref: ./ResourceId.yaml
+          $ref: ./ResourceId.yaml
         amount:
           description: Total amount discounted by this coupon.
           type: number
@@ -161,8 +160,7 @@ properties:
     x-label: Date Issued
     x-sortable: true
     x-basic: true
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
+    $ref: ./ServerTimestamp.yaml
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:

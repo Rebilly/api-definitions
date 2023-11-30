@@ -13,9 +13,10 @@ properties:
     $ref: ./WebsiteId.yaml
   customDomain:
     description: Custom domain for the checkout form.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     maxLength: 255
-    nullable: true
   plans:
     type: array
     description: |-
@@ -63,9 +64,10 @@ properties:
       Limits the number of purchases that can be made using a specific checkout form.
       If a purchase limit value is set, each purchase decreases this value.
       When the purchases limit value reaches zero, the checkout form becomes inactive.
-    type: integer
+    type:
+      - 'integer'
+      - 'null'
     minimum: 0
-    nullable: true
     default: null
   paymentMethods:
     description: |-
@@ -74,15 +76,14 @@ properties:
       If not specified, all available payment methods are displayed.
     type: array
     items:
-      $ref: ./PaymentMethods/PaymentMethod.yaml
+      $ref: ./PaymentMethod.yaml
   customization:
     description: Visual customization options for the checkout form.
     type: object
     properties:
       logoId:
         description: ID of the linked file object.
-        allOf:
-          - $ref: ./ResourceId.yaml
+        $ref: ./ResourceId.yaml
       summary:
         description: Summary text.
         type: string

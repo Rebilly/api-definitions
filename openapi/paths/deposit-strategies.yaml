@@ -1,0 +1,72 @@
+post:
+  x-products:
+    - Core
+  x-badge: Experimental
+  tags:
+    - Deposits
+  summary: Create a deposit strategy
+  operationId: PostDepositStrategy
+  x-sdk-operation-name: create
+  description: |-
+    Creates a deposit strategy.
+    To complete the deposit, the customer is redirected to the `deposit` link.
+    After the deposit, the customer is redirected to the `redirectUrl`.
+    Corresponding transaction webhooks are sent to webhooks subscribers.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/DepositStrategy.yaml
+    description: Deposit strategy resource.
+    required: true
+  responses:
+    '201':
+      description: Deposit strategy created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DepositStrategy.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+get:
+  x-products:
+    - Core
+  x-badge: Experimental
+  tags:
+    - Deposits
+  summary: Retrieve deposit strategies
+  operationId: GetDepositStrategyCollection
+  x-sdk-operation-name: getAll
+  description: Retrieves a list of deposit strategies.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+  responses:
+    '200':
+      description: List of deposit strategies retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/DepositStrategy.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml

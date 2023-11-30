@@ -28,33 +28,38 @@ properties:
     example: https://example.com
   address:
     description: Street address of the organization.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     maxLength: 60
-    nullable: true
     x-sortable: true
   address2:
     description: Second line of the street address.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     maxLength: 60
-    nullable: true
     x-sortable: true
   city:
     description: City where the organization is located.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     maxLength: 45
-    nullable: true
     x-sortable: true
   region:
     description: Region or state where the organization is located.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     maxLength: 45
-    nullable: true
     x-sortable: true
   country:
     description: Country where the organization is located, in [ISO Alpha-2 code format](https://www.iso.org/obp/ui/#search/code/).
-    type: string
+    type:
+      - 'string'
+      - 'null'
     pattern: '^[A-Z]{2}$'
-    nullable: true
     x-sortable: true
   postalCode:
     description: Postal code of the organization.
@@ -62,13 +67,14 @@ properties:
     maxLength: 10
     x-sortable: true
   phoneNumbers:
-    $ref: ./Contact/ContactPhoneNumbers.yaml
+    $ref: ./ContactPhoneNumbers.yaml
   emails:
-    $ref: ./Contact/ContactEmails.yaml
+    $ref: ./ContactEmails.yaml
   taxDescriptor:
     description: Tax label of the organization. This information is displayed on the invoice.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     maxLength: 255
   invoiceTimeZone:
     description: Specifies the time zone to display on an invoice. UTC is used by default.
@@ -83,31 +89,37 @@ properties:
     pattern: '^[A-Z]{3}$'
     example: USD
   questionnaire:
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
     description: Organization questionnaire.
     properties:
       role:
-        type: string
-        nullable: true
+        type:
+          - 'string'
+          - 'null'
         description: Role of the owner.
       monthlyTransactions:
-        type: string
-        nullable: true
+        type:
+          - 'string'
+          - 'null'
         description: Amount of monthly processed transactions.
       products:
-        type: array
-        nullable: true
+        type:
+          - 'array'
+          - 'null'
         description: List of products the organization is interested in.
         items:
           type: string
       integrationType:
-        type: string
-        nullable: true
+        type:
+          - 'string'
+          - 'null'
         description: Type of integration the organization would like.
       launchTiming:
-        type: string
-        nullable: true
+        type:
+          - 'string'
+          - 'null'
         description: When the organization would like to go live.
   settings:
     type: object
@@ -127,20 +139,23 @@ properties:
               - avalara
               - flat
           rate:
-            type: number
-            nullable: true
+            type:
+              - 'number'
+              - 'null'
             format: float
             description: Rate for flat tax calculation.
       billing:
         description: Global organization settings for billing.
-        type: object
-        nullable: true
+        type:
+          - 'object'
+          - 'null'
         properties:
           pendingOrderTtl:
             description: Length of time, in ISO-8601 durations format, before which a pending order is automatically abandoned.
-            type: string
+            type:
+              - 'string'
+              - 'null'
             example: P7D
-            nullable: true
             default: null
       taxLocations:
         type: array
@@ -155,28 +170,32 @@ properties:
           properties:
             address:
               description: Street address of the tax location.
-              type: string
+              type:
+                - 'string'
+                - 'null'
               maxLength: 60
-              nullable: true
             city:
               description: City of the tax location.
-              type: string
+              type:
+                - 'string'
+                - 'null'
               maxLength: 45
-              nullable: true
             region:
               description: Region or state of the tax location.
-              type: string
+              type:
+                - 'string'
+                - 'null'
               maxLength: 45
-              nullable: true
             country:
               description: Country of the tax location, in [ISO Alpha-2 code format](https://www.iso.org/obp/ui/#search/code/).
               type: string
               pattern: '^[A-Z]{2}$'
             postalCode:
               description: Postal code of the tax location.
-              type: string
+              type:
+                - 'string'
+                - 'null'
               maxLength: 10
-              nullable: true
       notifications:
         description: Organization access-related notification settings.
         type: object
@@ -197,9 +216,10 @@ properties:
               format: email
             default: [ ]
   taxNumbers:
-    type: array
+    type:
+      - 'array'
+      - 'null'
     description: Tax numbers of the organization.
-    nullable: true
     items:
       $ref: ./TaxNumber.yaml
   features:
