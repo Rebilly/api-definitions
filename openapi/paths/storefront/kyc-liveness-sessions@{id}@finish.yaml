@@ -8,12 +8,17 @@ post:
   summary: Finish KYC liveness session
   operationId: StorefrontPostKycLivenessSessionFinish
   x-sdk-operation-name: finish
-  description: Attempt to finalize a pending KYC liveness session.
+  description: |-
+    Attempt to finalize a pending KYC liveness session.
+    Session will be finalized only once the KYC liveness session in the third-party service is in a final state.
   security:
     - CustomerJWT: []
   responses:
     '200':
-      description: KYC liveness session finalization attempt successful.
+      description: |-
+        KYC liveness session finalization attempt successful.
+        This does not mean that the session was finalized.
+        Check the status of the session to determine the result of this operation.
       headers:
         Location:
           $ref: ../../components/headers/Location.yaml
