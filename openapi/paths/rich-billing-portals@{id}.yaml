@@ -1,0 +1,56 @@
+get:
+  x-badge: Experimental
+  x-products:
+    - Core
+  tags:
+    - Billing portals
+  summary: Retrieve a billing portal
+  operationId: GetRichBillingPortal
+  x-sdk-operation-name: get
+  description: Retrieve a billing portal.
+  responses:
+    '200':
+      description: Billing portal retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RichBillingPortal.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-badge: Experimental
+  x-products:
+    - Core
+  tags:
+    - Billing portals
+  summary: Update a billing portal
+  operationId: PutRichBillingPortal
+  x-sdk-operation-name: update
+  description: Updates a billing portal.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/RichBillingPortal.yaml
+    description: Billing portal resource.
+    required: true
+  responses:
+    '200':
+      description: Billing portal updated.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RichBillingPortal.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
