@@ -1,8 +1,4 @@
 type: object
-required:
-  - websiteId
-  - name
-  - plans
 properties:
   id:
     type: string
@@ -21,7 +17,6 @@ properties:
     enum:
       - active
       - inactive
-    default: active
   plans:
     type: array
     minItems: 1
@@ -29,8 +24,6 @@ properties:
       allOf:
         - type: object
           description: Plan details.
-          required:
-            - id
           properties:
             id:
               type: string
@@ -61,8 +54,6 @@ properties:
       allOf:
         - type: object
           description: Addon plan details.
-          required:
-            - id
           properties:
             id:
               type: string
