@@ -30,23 +30,11 @@ properties:
               description: ID of the plan.
               maxLength: 50
               example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
-            description:
-              type: string
-              description: Description of the plan.
-              maxLength: 512
-              default: ''
-              example: Hosting option with extended features.
-            features:
-              type: array
-              description: List of features of the plan.
-              items:
-                type: string
-                maxLength: 64
-              default: []
-              example:
-                - Unlimited space
-                - Dedicated server with preinstalled software, 16 GB RAM
-                - Multiuser access
+            usageLimitAlerts:
+              type: ['boolean', 'null']
+              description: Specify if customer must receive spending limit alerts.
+              default: false
+              example: true
         - $ref: ./SubscriptionOrderPlan.yaml
   addons:
     type: array
@@ -60,23 +48,6 @@ properties:
               description: ID of the addon plan.
               maxLength: 50
               example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
-            description:
-              type: string
-              description: Description of the plan.
-              maxLength: 512
-              default: ''
-              example: Hosting option with extended features.
-            features:
-              type: array
-              description: List of features of the plan.
-              items:
-                type: string
-                maxLength: 64
-              default: []
-              example:
-                - Unlimited space
-                - Dedicated server with preinstalled software, 16 GB RAM
-                - Multiuser access
         - $ref: ./SubscriptionOrderPlan.yaml
     default: []
   createdTime:
