@@ -1,0 +1,27 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Storefront
+  tags:
+    - KYC documents
+  summary: Finish KYC liveness session
+  operationId: StorefrontPostKycLivenessSessionFinish
+  x-sdk-operation-name: finish
+  description: Attempt to finalize a pending KYC liveness session.
+  security:
+    - CustomerJWT: []
+  responses:
+    '200':
+      description: KYC liveness session finalization attempt successful.
+      headers:
+        Location:
+          $ref: ../../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/StorefrontKycLivenessSession.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
