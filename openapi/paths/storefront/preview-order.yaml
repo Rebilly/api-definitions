@@ -1,0 +1,30 @@
+post:
+  x-badge: Experimental
+  x-products:
+    - Storefront
+  tags:
+    - Orders
+  summary: Preview an order
+  operationId: StorefrontPostPreviewOrder
+  x-sdk-operation-name: preview
+  description: Previews an order.
+  security:
+    - CustomerJWT: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/StorefrontOrderPreview.yaml
+  responses:
+    200:
+      description: Order preview retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/StorefrontOrderPreview.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    422:
+      $ref: ../../components/responses/ValidationError.yaml

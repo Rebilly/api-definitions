@@ -1,6 +1,14 @@
 type: object
-description: Change customer subscription items.
+required:
+  - billingPortalId
+  - items
 properties:
+  billingPortalId:
+    type: string
+    description: ID of the billing portal.
+    readOnly: true
+    maxLength: 50
+    example: bill_prt_0YV7K5TYV5D1P9ZNKDT39KZC3C
   items:
     type: array
     description: Item details.
@@ -9,7 +17,6 @@ properties:
       type: object
       required:
         - planId
-        - quantity
       properties:
         planId:
           type: string
@@ -81,3 +88,13 @@ properties:
                   format: double
                   description: Usage limit amount in the currency of the order.
                   minimum: 0.01
+  billingAddress:
+    description: Billing address details.
+    oneOf:
+      - $ref: ../../../components/ContactObject.yaml
+      - type: 'null'
+  deliveryAddress:
+    description: Delivery address details.
+    oneOf:
+      - $ref: ../../../components/ContactObject.yaml
+      - type: 'null'
