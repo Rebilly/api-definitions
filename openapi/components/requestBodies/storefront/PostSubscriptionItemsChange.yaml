@@ -1,6 +1,15 @@
 type: object
 description: Change customer subscription items.
 properties:
+  effectiveTime:
+    type: string
+    description: Effective time when changes are applied.
+    enum:
+      - now
+      - next-service-period
+    x-enumDescriptions:
+      now: Apply changes immediately.
+      next-service-period: Apply changes at the beginning of next service period.
   items:
     type: array
     description: Item details.
