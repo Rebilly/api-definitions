@@ -24,79 +24,89 @@ properties:
     description: |-
       First name of the customer.
       This value is null if no match is found.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: John
   lastName:
     description: |-
       Last name of the customer.
       This value is null if no match is found.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: Doe
   dateOfBirth:
     description: |-
       Date of birth detected on the document.
       This value is null if no match is detected.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     format: date-time
-    nullable: true
   expirationDate:
     description: |-
       Expiration date detected on the document.
       This value is null if no expiration date is detected.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     format: date-time
-    nullable: true
   issueDate:
     description: |-
       Issue date detected on the document.
       This value is null if no issue date is detected.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     format: date-time
-    nullable: true
   hasMinimalAge:
     description: |-
       Specifies that the individual is older than the minimal age limit.
       The minimal age is 21+ the for USA and 18+ for all other countries.
       This value is null if `dateOfBirth` is not determined.
-    type: boolean
-    nullable: true
+    type:
+      - 'boolean'
+      - 'null'
     readOnly: true
     example: true
   nationality:
     description: |-
       Nationality detected on a passport or citizenship document.
       This value is null if no nationality is detected.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: US
     maxLength: 3
   issuanceCountry:
     description: Country that issued the document.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: CA
     minLength: 2
     maxLength: 2
   issuanceRegion:
     description: Region, state, province, or territory that issued the document.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: Ontario
   documentNumber:
     description: |-
       Unique number on the identity document.
       This value may contain alphanumeric characters.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: '1234567890'
   documentSubtype:
     description: Interpreted subtype of the uploaded document.
-    type: string
-    nullable: true
-    allOf:
-      - $ref: ./KycDocumentSubtypes.yaml
+    type:
+      - 'string'
+      - 'null'
+    $ref: ./KycDocumentSubtypes.yaml
   hasMatchingFaceProof:
     description: Specifies if an identity document has matching face proof.
     type: boolean
@@ -109,7 +119,8 @@ properties:
   # deprecated
   expiryDate:
     description: Use `expirationDate` field instead.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     format: date-time
-    nullable: true
     deprecated: true

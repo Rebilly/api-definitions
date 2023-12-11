@@ -5,8 +5,7 @@ required:
 properties:
   id:
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    $ref: ./ResourceId.yaml
   fileIds:
     description: |-
       IDs of linked file objects.
@@ -15,18 +14,15 @@ properties:
       `['kyc', 'id-front']`, `['kyc', 'id-back']`, `['kyc', 'face-proof']`.
     type: array
     items:
-      allOf:
-        - $ref: ./ResourceId.yaml
+      $ref: ./ResourceId.yaml
   documentType:
     description: |-
       Document type submitted for validation.
       Only the `identity-proof` and `address-proof` types are analyzed automatically.
-    allOf:
-      - $ref: ./KycDocumentTypes.yaml
+    $ref: ./KycDocumentTypes.yaml
   documentSubtype:
     description: Document subtype submitted for validation.
-    allOf:
-      - $ref: ./KycDocumentSubtypes.yaml
+    $ref: ./KycDocumentSubtypes.yaml
   status:
     description: Status of the validation.
     type: string
@@ -47,9 +43,10 @@ properties:
     $ref: ./KycDocumentRejection.yaml
   requestId:
     readOnly: true
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     description: ID of the KYC request.
-    type: string
     maxLength: 50
     example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
   createdTime:

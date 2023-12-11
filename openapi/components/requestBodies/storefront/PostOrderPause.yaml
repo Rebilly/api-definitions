@@ -5,9 +5,10 @@ content:
       properties:
         description:
           description: Description of the pause reason in free form.
-          type: string
+          type:
+            - 'string'
+            - 'null'
           maxLength: 255
-          nullable: true
         effectiveTime:
           description: |-
             Date and time when the service period pauses.
@@ -16,9 +17,10 @@ content:
             If this time is earlier then the current time, the current time is used.
 
             If this field is omitted, this value defaults to the current time.
-          type: string
+          type:
+            - 'string'
+            - 'null'
           format: date-time
-          nullable: true
         endTime:
           description: |-
             Date and time when the pause ends and the subscription resumes billing.
@@ -27,8 +29,9 @@ content:
             use the current time or an earlier time.
             If `endTime` is earlier then the current time, the current time is used.
             If this field is empty, the subscription is indefinitely paused.
-          type: string
+          type:
+            - 'string'
+            - 'null'
           format: date-time
-          nullable: true
 description: Order resource.
 required: true

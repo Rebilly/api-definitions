@@ -18,6 +18,7 @@ properties:
     description: Name of the application.
     type: string
   logoId:
+    type: string
     description: File ID of the application logo.
     maxLength: 50
     example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
@@ -25,10 +26,11 @@ properties:
     description: Name of the application author.
     type: string
   authorLogoId:
-    type: string
+    type:
+      - 'string'
+      - 'null'
     description: File ID of the author's logo.
     maxLength: 50
-    nullable: true
     example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
   tagline:
     description: Tagline of the application.
@@ -86,9 +88,10 @@ properties:
       - GetCustomerCollection
   configurationUrl:
     description: External URL where the application is configured during installation.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     format: url
-    nullable: true
   configuredBy:
     type: string
     description: Specifies who can configure the application.

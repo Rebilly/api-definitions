@@ -26,8 +26,7 @@ properties:
             - Khelocard
   billingAddress:
     description: Billing address of the user that is associated with the payment instrument.
-    allOf:
-      - $ref: ./ContactObject.yaml
+    $ref: ./ContactObject.yaml
   status:
     description: Payment instrument status.
     type: string
@@ -50,8 +49,9 @@ properties:
 
       For more information,
       see [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
   referenceData:
     description: Payment instrument reference data.
@@ -61,10 +61,9 @@ properties:
     example:
       gatewayTransactionId: GAT123
   riskMetadata:
-    type: object
-    nullable: true
-    allOf:
+    oneOf:
       - $ref: ./RiskMetadata.yaml
+      - type: 'null'
   revision:
     description: |-
       Number of times the payment instrument data has been modified.

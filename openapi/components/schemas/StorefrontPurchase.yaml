@@ -7,8 +7,7 @@ properties:
   orderId:
     description: ID of the order.
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    $ref: ./ResourceId.yaml
   invoice:
     description: Initial invoice.
     readOnly: true
@@ -49,24 +48,21 @@ properties:
   billingAddress:
     description: Billing address details.
     writeOnly: true
-    nullable: true
-    type: object
-    allOf:
+    oneOf:
       - $ref: ./ContactObject.yaml
+      - type: 'null'
   deliveryAddress:
     description: Delivery address details.
     writeOnly: true
-    nullable: true
-    type: object
-    allOf:
+    oneOf:
       - $ref: ./ContactObject.yaml
+      - type: 'null'
   shippingRateId:
     description: |-
       ID of the shipping rate. If this value is not set,
       the cheapest applicable shipping rate is chosen.
     writeOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    $ref: ./ResourceId.yaml
   paymentInstruction:
     description: Payment instruction for the purchase.
     writeOnly: true
@@ -79,14 +75,17 @@ properties:
     items:
       type: string
   password:
-    type: string
+    type:
+      - 'string'
+      - 'null'
     description: |-
       Customer account password.
       If this value is set, it is used to create a customer account.
     writeOnly: true
-    nullable: true
   redirectUrl:
-    type: string
+    type:
+      - 'string'
+      - 'null'
     description: |-
       URL to redirect the end-user when an offsite transaction is completed.
       If `website.url` is `https://example.com`,
@@ -105,4 +104,3 @@ properties:
       These placeholders are replaced with the transaction ID and result.
     format: uri
     writeOnly: true
-    nullable: true

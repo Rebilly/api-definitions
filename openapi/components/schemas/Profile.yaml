@@ -3,8 +3,7 @@ properties:
   id:
     description: ID of the user.
     readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
+    $ref: ./ResourceId.yaml
   email:
     description: Email address of the user.
     readOnly: true
@@ -22,13 +21,15 @@ properties:
   businessPhone:
     description: User's business phone number.
     readOnly: true
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
   mobilePhone:
     description: User's mobile phone number.
     readOnly: true
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
   permissions:
     description: |-
       Permissions that the user has within organizations.
@@ -54,8 +55,9 @@ properties:
     readOnly: true
   loginTime:
     description: Date and time when the user last logged in.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: date-time
     readOnly: true
   status:
@@ -76,8 +78,9 @@ properties:
     description: |-
       User preferences, such as: timezone, language, and more.
       This is an object with custom properties.
-    type: object
-    nullable: true
+    type:
+      - 'object'
+      - 'null'
   hasPermissionsEmulation:
     type: boolean
     description: Specifies if the current user session has permissions emulation enabled.

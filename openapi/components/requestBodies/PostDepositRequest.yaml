@@ -28,15 +28,17 @@ properties:
           maximum: 10000
       ```
       For more information, see [Create a deposit strategy](https://all-rebilly.redoc.ly/tag/Deposits/#operation/PostDepositStrategy).
-    type: string
+    type:
+      - 'string'
+      - 'null'
     maxLength: 50
-    nullable: true
     example: dep_str_0YVJ64MAHTDPA97H8S7R5MYR1M
   currency:
     $ref: ../schemas/CurrencyCode.yaml
   amounts:
-    type: array
-    nullable: true
+    type:
+      - 'array'
+      - 'null'
     description: |-
       List of available deposit amounts.
 
@@ -47,34 +49,38 @@ properties:
       format: double
       minimum: 0.01
   amountLimits:
-    type: object
+    type:
+      - 'object'
+      - 'null'
     description: |-
       Deposit amount limit information. Set optional minimum and maximum deposit amounts. Limits override `amounts` and `customAmount` values.
       If this value is `null`, deposit amount limits are not set.
-    nullable: true
     minProperties: 1
     properties:
       minimum:
         description: Minimum deposit amount.
-        type: number
-        nullable: true
+        type:
+          - 'number'
+          - 'null'
         format: double
         default: 0
         minimum: 0
       maximum:
         description: Maximum deposit amount.
-        type: number
-        nullable: true
+        type:
+          - 'number'
+          - 'null'
         format: double
         minimum: 0
   customAmount:
-    type: object
+    type:
+      - 'object'
+      - 'null'
     description: |-
       Custom amount restrictions.
       If this value is `null`,  custom amounts are prohibited.
       If `customAmount` is not specified when a deposit request is created, amount restrictions are determined from the chosen strategy.
       For more information, see the [`strategyId` property](https://all-rebilly.redoc.ly/tag/Deposits/#operation/PostDepositRequest#!path=strategyId&t=request).
-    nullable: true
     required:
       - minimum
       - multipleOf
@@ -102,17 +108,20 @@ properties:
         minimum: 0.01
   redirectUrl:
     description: URL to redirect the customer to when a deposit is completed. The default value is the website URL.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: uri
   expirationTime:
     description: Date and time at which the deposit request expires. The default expiration time is one hour after the time the request is created.
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     format: date-time
   customPropertySetId:
     description: ID of a custom property set to apply to the request `propertiesSchema`.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     maxLength: 50
-    nullable: true
     example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21

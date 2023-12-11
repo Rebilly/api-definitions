@@ -41,12 +41,12 @@ properties:
       - other
   bic:
     description: Bank Identifier Code (BIC).
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
   billingAddress:
     description: Customer's billing address.
-    allOf:
-      - $ref: ./ContactObject.yaml
+    $ref: ./ContactObject.yaml
   fingerprint:
     description: |-
       Unique value which identifies the bank account.
@@ -74,14 +74,14 @@ properties:
       All future payments are processed by this gateway account.
 
       For more information, see [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     readOnly: true
   riskMetadata:
-    type: object
-    nullable: true
-    allOf:
+    oneOf:
       - $ref: ./RiskMetadata.yaml
+      - type: 'null'
   useAsBackup:
     $ref: ./UseAsBackup.yaml
   createdTime:

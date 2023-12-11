@@ -61,13 +61,13 @@ properties:
   currency:
     description: Currency of the order.
     readOnly: true
-    allOf:
-      - $ref: ./CurrencyCode.yaml
+    $ref: ./CurrencyCode.yaml
   initialInvoiceId:
     description: ID of the initial invoice (`null` for one-time orders).
     readOnly: true
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     maxLength: 50
     example: in_0YVF9605RKC62BP14NE2R7V2XT
   recentInvoiceId:
@@ -75,52 +75,55 @@ properties:
       ID of the most recently issued invoice.
       The invoice might not be `paid` yet.
     readOnly: true
-    type: string
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     maxLength: 50
     example: in_0YVF9605RKC62BP14NE2R7V2XT
   items:
-    description: Item details.
+    description: Details of items in the order.
     type: array
     minItems: 1
     items:
       $ref: ./OrderItem.yaml
   deliveryAddress:
     description: Delivery address of the order.
-    nullable: true
-    type: object
-    allOf:
+    oneOf:
       - $ref: ./ContactObject.yaml
+      - type: 'null'
   billingAddress:
     description: Billing address of the order.
-    nullable: true
-    type: object
-    allOf:
+    oneOf:
       - $ref: ./ContactObject.yaml
+      - type: 'null'
   activationTime:
     description: Date and time when the order is activated.
     x-sortable: true
-    type: string
+    type:
+      - 'string'
+      - 'null'
     format: date-time
     readOnly: true
-    nullable: true
   voidTime:
     description: Date and time when the order is voided.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     format: date-time
     readOnly: true
-    nullable: true
   abandonTime:
-    type: string
+    type:
+      - 'string'
+      - 'null'
     description: |-
       Date and time when the pending order is automatically abandoned.
       If this value is not passed during order creation,
       a [pending order TTL](https://all-rebilly.redoc.ly/tag/Organizations/operation/PatchOrganization/#!path=settings/billing/pendingOrderTtl&t=request) setting is used to calculate the value.
     format: date-time
-    nullable: true
   couponIds:
-    type: array
-    nullable: true
+    type:
+      - 'array'
+      - 'null'
     description: |-
       List of coupons to redeem on the customer and restrict to this order.
 
@@ -141,9 +144,10 @@ properties:
       description: ID of the coupon.
   poNumber:
     description: Purchase order number displayed on the issued invoices.
-    nullable: true
+    type:
+      - 'string'
+      - 'null'
     example: PO123456
-    type: string
   shipping:
     $ref: ./Shipping.yaml
   notes:
@@ -159,14 +163,13 @@ properties:
     type: integer
     readOnly: true
   riskMetadata:
-    nullable: true
-    type: object
     example: null
     description: |-
       Risk metadata.
       If this value is `null`, this field uses risk metadata that is captured when creating the payment token.
-    allOf:
+    oneOf:
       - $ref: ./RiskMetadata.yaml
+      - type: 'null'
   customFields:
     $ref: ./ResourceCustomFields.yaml
   createdTime:
