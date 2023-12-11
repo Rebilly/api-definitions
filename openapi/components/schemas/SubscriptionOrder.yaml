@@ -333,6 +333,15 @@ properties:
       If this value is not passed during order creation,
       a [pending order TTL](https://all-rebilly.redoc.ly/tag/Organizations/operation/PatchOrganization/#!path=settings/billing/pendingOrderTtl&t=request) setting is used to calculate the value.
     format: date-time
+  delinquentPeriod:
+    type:
+      - 'string'
+      - 'null'
+    description: |-
+      Length of time, in ISO-8601 durations format,
+      before which an order with an invoice in state past due is automatically cancelled.
+    example: P7D
+    default: null
   couponIds:
     type:
       - 'array'
