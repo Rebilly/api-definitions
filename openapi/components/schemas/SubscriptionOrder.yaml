@@ -422,11 +422,31 @@ properties:
       If this value is `null`, this field uses risk metadata that is captured when creating the payment token.
     allOf:
       - $ref: ./RiskMetadata.yaml
-  billingPortalId:
-    type: ['string', 'null']
-    description: ID of the billing portal.
-    maxLength: 50
-    example: bill_prt_0YV7K5TYV5D1P9ZNKDT39KZC3C
+  billingPortal:
+    type: ['object', 'null']
+    default: null
+    properties:
+      id:
+        type: ['string', 'null']
+        description: ID of the billing portal.
+        maxLength: 50
+        example: bill_prt_0YV7K5TYV5D1P9ZNKDT39KZC3C
+      mainItemsIds:
+        type: array
+        readOnly: true
+        items:
+          type: string
+          description: ID of the order item.
+          maxLength: 50
+          example: ord_itm_0YVJ6172Q2CXW9VP7KJMKHCMMX
+      addonIds:
+        type: array
+        readOnly: true
+        items:
+          type: string
+          description: ID of the order item.
+          maxLength: 50
+          example: ord_itm_0YVJ6172Q2CXW9VP7KJMKHCMMX
   customFields:
     $ref: ./ResourceCustomFields.yaml
   createdTime:

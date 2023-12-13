@@ -1,0 +1,50 @@
+type: object
+properties:
+  id:
+    type: string
+    description: ID of the order.
+    readOnly: true
+    maxLength: 50
+    example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
+  customerId:
+    $ref: ./CustomerId.yaml
+  organizationId:
+    $ref: ./OrganizationId.yaml
+  autopay:
+    description: |-
+      Specifies if payment attempts are made automatically.
+      If autopay is enabled, the payment is retrieved from the customer on the renewal date using the payment instrument that is set at `paymentInstrumentId`,
+      or the default payment instrument on the subscription.
+    type: boolean
+  items:
+  startTime:
+    description: |-
+      Date and time when the subscription starts.
+      If this value is `null`, the current time is used.
+      This value cannot be more than one service period in the past.
+    type:
+      - 'string'
+      - 'null'
+    x-sortable: true
+    x-basic: true
+    example: null
+    format: date-time
+  endTime:
+    description: Date and time when the subscription ends.
+    x-sortable: true
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+  renewalTime:
+    description: Date and time when the subscription renews.
+    type:
+      - 'string'
+      - 'null'
+    x-sortable: true
+    x-basic: true
+    format: date-time
+  customFields:
+    $ref: ./CustomFields.yaml
+  createdTime:
