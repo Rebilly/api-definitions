@@ -1,0 +1,32 @@
+type: object
+properties:
+  addressMatch:
+    type: object
+    description: Match for the customer's city or region, or both, is found.
+    properties:
+      matchingCountry:
+        $ref: ./AmlConfidence.yaml
+      mismatchingCountry:
+        $ref: ./AmlConfidence.yaml
+      noCountry:
+        $ref: ./AmlConfidence.yaml
+  addressMismatch:
+    type: object
+    description: Match for the customer's city or region, or both, is not found.
+    properties:
+      matchingCountry:
+        $ref: ./AmlConfidence.yaml
+      mismatchingCountry:
+        $ref: ./AmlConfidence.yaml
+      noCountry:
+        $ref: ./AmlConfidence.yaml
+  noAddress:
+    type: object
+    description: No city and no region is available to match against.
+    properties:
+      matchingCountry:
+        $ref: ./AmlConfidence.yaml
+      mismatchingCountry:
+        $ref: ./AmlConfidence.yaml
+      noCountry:
+        $ref: ./AmlConfidence.yaml
