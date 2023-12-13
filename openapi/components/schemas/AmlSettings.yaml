@@ -5,96 +5,49 @@ properties:
     type: object
     description: Confidence level settings for AML matches.
     properties:
-      noDobExactMatch:
+      dob:
         type: object
-        description: Exact match of the customer's name is found, but a date of birth is not.
+        description: Confidence level settings for AML matches based on date of birth.
         properties:
-          matchingCountry:
-            $ref: ./AmlConfidence.yaml
-          mismatchingCountry:
-            $ref: ./AmlConfidence.yaml
-          noCountry:
-            $ref: ./AmlConfidence.yaml
-      noDobInexactMatch:
+          exactMatch:
+            description: Exact match of the customer's date of birth and name is found.
+            $ref: ./AmlCompoundConfidence.yaml
+          inexactMatch:
+            description: Exact match of the customer's date of birth and a fuzzy, or inexact, name match is found.
+            $ref: ./AmlCompoundConfidence.yaml
+      noDob:
         type: object
-        description: Fuzzy, or inexact match of the customer's name is found, but a date of birth is not.
+        description: Confidence level settings for AML matches based on a missing date of birth.
         properties:
-          matchingCountry:
-            $ref: ./AmlConfidence.yaml
-          mismatchingCountry:
-            $ref: ./AmlConfidence.yaml
-          noCountry:
-            $ref: ./AmlConfidence.yaml
-      noDobWeakMatch:
+          exactMatch:
+            description: Exact match of the customer's name is found, but a date of birth is not.
+            $ref: ./AmlCompoundConfidence.yaml
+          inexactMatch:
+            description: Fuzzy, or inexact match of the customer's name is found, but a date of birth is not.
+            $ref: ./AmlCompoundConfidence.yaml
+          weakMatch:
+            description: Weak match of the customer's name is found, but a date of birth is not.
+            $ref: ./AmlCompoundConfidence.yaml
+      yob:
         type: object
-        description: Weak match of the customer's name is found, but a date of birth is not.
+        description: Confidence level settings for AML matches based on year of birth.
         properties:
-          matchingCountry:
-            $ref: ./AmlConfidence.yaml
-          mismatchingCountry:
-            $ref: ./AmlConfidence.yaml
-          noCountry:
-            $ref: ./AmlConfidence.yaml
-      dobExactMatch:
+          exactMatch:
+            description: Exact match of the customer's year of birth and exact name is found.
+            $ref: ./AmlCompoundConfidence.yaml
+          inexactMatch:
+            description: Exact match of the customer's year of birth and a fuzzy, or inexact, name match is found.
+            $ref: ./AmlCompoundConfidence.yaml
+      inexactYob:
         type: object
-        description: Exact match of the customer's date of birth and name is found.
+        description: Confidence level settings for AML matches based on a near match of year of birth.
         properties:
-          matchingCountry:
-            $ref: ./AmlConfidence.yaml
-          mismatchingCountry:
-            $ref: ./AmlConfidence.yaml
-          noCountry:
-            $ref: ./AmlConfidence.yaml
-      dobInexactMatch:
-        type: object
-        description: Exact match of the customer's date of birth and a fuzzy, or inexact name match is found.
-        properties:
-          matchingCountry:
-            $ref: ./AmlConfidence.yaml
-          mismatchingCountry:
-            $ref: ./AmlConfidence.yaml
-          noCountry:
-            $ref: ./AmlConfidence.yaml
-      yobExactMatch:
-        type: object
-        description: Exact match of the customer's year of birth and exact name is found.
-        properties:
-          matchingCountry:
-            $ref: ./AmlConfidence.yaml
-          mismatchingCountry:
-            $ref: ./AmlConfidence.yaml
-          noCountry:
-            $ref: ./AmlConfidence.yaml
-      yobInexactMatch:
-        type: object
-        description: Exact match of the customer's year of birth and a fuzzy, or inexact name match is found.
-        properties:
-          matchingCountry:
-            $ref: ./AmlConfidence.yaml
-          mismatchingCountry:
-            $ref: ./AmlConfidence.yaml
-          noCountry:
-            $ref: ./AmlConfidence.yaml
-      inexactYobExactMatch:
-        type: object
-        description: Near match of the customer's year of birth and an exact name match is found.
-        properties:
-          matchingCountry:
-            $ref: ./AmlConfidence.yaml
-          mismatchingCountry:
-            $ref: ./AmlConfidence.yaml
-          noCountry:
-            $ref: ./AmlConfidence.yaml
-      inexactYobInexactMatch:
-        type: object
-        description: Near match of the customer's year of birth and a fuzzy, or inexact name match is found.
-        properties:
-          matchingCountry:
-            $ref: ./AmlConfidence.yaml
-          mismatchingCountry:
-            $ref: ./AmlConfidence.yaml
-          noCountry:
-            $ref: ./AmlConfidence.yaml
+          exactMatch:
+            description: Near match of the customer's year of birth and an exact name match is found.
+            $ref: ./AmlCompoundConfidence.yaml
+          inexactMatch:
+            description: Near match of the customer's year of birth and a fuzzy, or inexact, name match is found.
+            $ref: ./AmlCompoundConfidence.yaml
   priority:
     type: object
     description: |-
