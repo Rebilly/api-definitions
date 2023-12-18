@@ -11,18 +11,37 @@ properties:
     maxLength: 50
     example: qt_0YV7DES3WPC5J8JD8QTVNZBZNZ
   type:
-    description: Specifies the type of quote. A quote can be a subscription or a one-time purchase.
+    description: Specifies the type of the quote. A quote can be a subscription or a one-time purchase.
     type: string
     readOnly: true
     enum:
       - subscription-order
       - one-time-order
-  changeItemsOrderId:
-    description: Specifies order id in case of change items operation.
+  action:
+    description: |-
+      Action of the quote. For `change` and `reactivate` actions `orderId` must be provided.
+      On acceptance if there are related approved transactions they are applied to the newly issued invoice.
+    type: string
+    enum:
+      - create
+      - change
+      - reactivate
+    x-enumDescriptions:
+      create: On accept quote new order is created and `orderId` is filled with the order ID.
+      change: On accept quote changed items are applied to an order with `orderId`.
+        For more information, see [subscription items change](https://www.rebilly.com/docs/dev-docs/api/Orders/PostSubscriptionItemsChange/).
+      reactivate: On accept quote change items an order with `orderId` is reactivated and changed items are applied.
+        For more information, see [subscription items change](https://www.rebilly.com/docs/dev-docs/api/Orders/PostSubscriptionItemsChange/)
+        and [reactivate a subscription](https://www.rebilly.com/docs/dev-docs/api/Orders/PostSubscriptionReactivation/).
+    example: create
+    default: create
+  orderId:
+    description: ID of the related order.
     type:
       - 'string'
       - 'null'
-    default: null
+    maxLength: 50
+    example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
   status:
     description: Status of the quote.
     type: string
@@ -45,14 +64,6 @@ properties:
     $ref: ./WebsiteId.yaml
   customerId:
     $ref: ./CustomerId.yaml
-  orderId:
-    description: ID of the order.
-    readOnly: true
-    type:
-      - 'string'
-      - 'null'
-    maxLength: 50
-    example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
   items:
     type: array
     description: Items included in the quote.
@@ -404,6 +415,38 @@ properties:
       canBeAcceptedByCustomer:
         type: boolean
         default: true
+      reactivate:
+        effectiveTime:
+          description: |-
+            Date and time when the service period starts,
+            unless the subscription is canceled but still active.
+
+            If the subscription is still active,
+            the subscription continues for the current service period.
+
+            If this field is omitted, this value defaults to the current time.
+          type: string
+          format: date-time
+          writeOnly: true
+        renewalTime:
+          description: |-
+            Date and time of the next subscription renewal.
+            If this field is omitted, this value is computed from the `effectiveTime` field.
+
+            If the subscription is canceled but still active,
+            it is ignored and the next renewal occurs as scheduled.
+          type: string
+          format: date-time
+        paymentInstrumentId:
+          writeOnly: true
+          description: |-
+            ID of the payment instrument.
+            If this field is omitted, the subscription payment instrument remains unchanged.
+          type:
+            - 'string'
+            - 'null'
+          maxLength: 50
+          example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
       changeItems:
         type: object
         properties:

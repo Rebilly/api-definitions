@@ -424,17 +424,24 @@ properties:
       - $ref: ./RiskMetadata.yaml
   customFields:
     $ref: ./ResourceCustomFields.yaml
-  quoteIdsForChangeItems:
+  quotes:
     type: array
-    description: |-
-      List of issued quotes for change items operation.
-      If any of these quotes is accepted, change items is applied.
+    description: List of related quotes with `issued` status.
     readOnly: true
     items:
-      description: ID of the quote.
-      type: string
-      maxLength: 50
-      example: qt_0YV7DES3WPC5J8JD8QTVNZBZNZ
+      type: object
+      properties:
+        id:
+          description: ID of the quote.
+          type: string
+          maxLength: 50
+          example: qt_0YV7DES3WPC5J8JD8QTVNZBZNZ
+        type:
+          description: Type of the quote.
+          type: string
+          enum:
+            - change
+            - reactivate
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:
