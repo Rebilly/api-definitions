@@ -1,5 +1,5 @@
 type: object
-required: 
+required:
   - action
   - orderId
   - items
@@ -16,34 +16,36 @@ properties:
     maxLength: 50
     example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
   items:
-    description: Details of items in the order.
     type: array
+    description: Item details.
     minItems: 1
     items:
       type: object
-      description: |-
-        New set of items for the subscription.
-        To remove an item, include the items array and exclude the items you want to remove.
       required:
-        - plan
-        - quantity
+        - planId
       properties:
-        plan:
-          description: Plan details.
-          oneOf:
-            - $ref: ./OriginalPlan.yaml
-            - $ref: ./FlexiblePlan.yaml
+        planId:
+          type: string
+          description: ID of the plan.
+          maxLength: 50
+          example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
         quantity:
           description: Number of units of the product on the given plan.
           type: integer
+          min: 0
         usageLimits:
-          type: object
+          type: [ 'object', 'null' ]
           description: |-
             Specifies the soft and hard usage limit thresholds for an item with a metered billing plan.
             This value is ignored when the plan is not metered.
           properties:
+            alerts:
+              type: boolean
+              description: Specify if customer must receive spending limit alerts.
+              default: false
+              example: true
             softLimit:
-              type: object
+              type: [ 'object', 'null' ]
               description: |-
                 Defines thresholds for notification purposes.
                 For example, to notify the customer that their usage is near the hard limit of their metered billing plan.
@@ -65,7 +67,7 @@ properties:
                   description: Usage limit amount in the currency of the order.
                   minimum: 0.01
             hardLimit:
-              type: object
+              type: [ 'object', 'null' ]
               description: |-
                 Defines a limit where the customer can no longer use the service.
                 Hard limits are used in addition to soft limits.
