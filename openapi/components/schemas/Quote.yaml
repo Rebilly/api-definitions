@@ -42,6 +42,16 @@ properties:
       - 'null'
     maxLength: 50
     example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
+  invoiceId:
+    type:
+      - 'string'
+      - 'null'
+    description: |-
+      ID of the related invoice.
+      For quotes with action `change` this is value of interim invoice for change related order.
+    readOnly: true
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
   status:
     description: Status of the quote.
     type: string
@@ -64,9 +74,6 @@ properties:
     $ref: ./WebsiteId.yaml
   customerId:
     $ref: ./CustomerId.yaml
-  prepaid:
-    type: boolean
-    description: Defines if quote acceptance requires a payment.
   items:
     type: array
     description: Items included in the quote.
@@ -407,11 +414,6 @@ properties:
     items:
       type: string
       description: Coupon ID.
-  transactions:
-    type: array
-    description: List of transaction associated with the quote.
-    items:
-      $ref: ./Transaction.yaml
   settings:
     type: object
     properties:
@@ -501,4 +503,6 @@ properties:
       website:
         type: object
       order:
+        type: object
+      invoice:
         type: object
