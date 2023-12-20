@@ -424,24 +424,6 @@ properties:
       - $ref: ./RiskMetadata.yaml
   customFields:
     $ref: ./ResourceCustomFields.yaml
-  quotes:
-    type: array
-    description: List of related quotes with `issued` status.
-    readOnly: true
-    items:
-      type: object
-      properties:
-        id:
-          description: ID of the quote.
-          type: string
-          maxLength: 50
-          example: qt_0YV7DES3WPC5J8JD8QTVNZBZNZ
-        type:
-          description: Type of the quote.
-          type: string
-          enum:
-            - change
-            - reactivate
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:
@@ -488,5 +470,7 @@ properties:
         type: object
       upcomingInvoice:
         type: object
-      recentQuote:
+      changeItemsQuote:
+        type: object
+      changeItemsInvoice:
         type: object
