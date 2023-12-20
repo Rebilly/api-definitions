@@ -66,10 +66,16 @@ properties:
       - 'null'
     maxLength: 50
     example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
-  prepaid:
-    type: boolean
+  invoiceId:
+    type:
+      - 'string'
+      - 'null'
+    description: |-
+      ID of the related invoice.
+      For quotes with action `change` this is value of interim invoice for change related order.
     readOnly: true
-    description: Defines if quote acceptance requires a payment.
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
   items:
     type: array
     minItems: 1
@@ -351,4 +357,6 @@ properties:
       customer:
         type: object
       website:
+        type: object
+      invoice:
         type: object
