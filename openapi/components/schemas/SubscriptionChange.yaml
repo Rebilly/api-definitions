@@ -81,13 +81,24 @@ properties:
                   format: double
                   description: Usage limit amount in the currency of the order.
                   minimum: 0.01
-        trialEndTime:
-          description: Free trial item date time.
+        servicePeriodStartTime:
+          description: Date and time when the item service period starts.
           type:
             - 'string'
             - 'null'
           example: null
           format: date-time
+        servicePeriodEndTime:
+          description: Date and time when the item service period ends.
+          type:
+            - 'string'
+            - 'null'
+          example: null
+          format: date-time
+        inTrial:
+          description: Specifies if service item is in trial.
+          type: boolean
+          example: false
   renewalPolicy:
     description: Specifies if the subscription retains its current `renewalTime` or resets it to a newly calculated `renewalTime`.
     type: string
