@@ -331,6 +331,69 @@ properties:
     $ref: ./Shipping.yaml
   tax:
     $ref: ./Taxes.yaml
+  settings:
+    type: object
+    properties:
+      reactivate:
+        effectiveTime:
+          description: |-
+            Date and time when the service period starts,
+            unless the subscription is canceled but still active.
+
+            If the subscription is still active,
+            the subscription continues for the current service period.
+
+            If this field is omitted, this value defaults to the current time.
+          type: string
+          format: date-time
+          writeOnly: true
+        renewalTime:
+          description: |-
+            Date and time of the next subscription renewal.
+            If this field is omitted, this value is computed from the `effectiveTime` field.
+
+            If the subscription is canceled but still active,
+            it is ignored and the next renewal occurs as scheduled.
+          type: string
+          format: date-time
+        paymentInstrumentId:
+          writeOnly: true
+          description: |-
+            ID of the payment instrument.
+            If this field is omitted, the subscription payment instrument remains unchanged.
+          type:
+            - 'string'
+            - 'null'
+          maxLength: 50
+          example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+      change:
+        type: object
+        properties:
+          renewalPolicy:
+            description: Specifies if the subscription retains its current `renewalTime` or resets it to a newly calculated `renewalTime`.
+            type: string
+            enum:
+              - reset
+              - retain
+          prorated:
+            description: |-
+              Specifies whether to give a pro rata credit for the amount of time remaining between the `effectiveTime` and the end of the current period.
+
+              In addition, if the `renewalTime` is retained, by setting the `renewalPolicy` to `retain`,
+              a pro rata debit occurs for the amount between the `effectiveTime` and the `renewalTime` as a percentage of the normal period size.
+            type: boolean
+          effectiveTime:
+            description: |-
+              Date from which the renewal time for `reset` operations and proration calculations are made.
+              If this field is omitted, this value defaults to the time of quote acceptance.
+            type: string
+            format: date-time
+          keepTrial:
+            description: |-
+              Specifies if the subscription order must retain its active trial.
+              This field is only applicable if `renewalPolicy` is set to `retain`.
+            type: boolean
+            default: false
   _links:
     type: array
     description: Related links.
