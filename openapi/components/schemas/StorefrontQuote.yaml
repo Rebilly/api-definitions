@@ -18,22 +18,22 @@ properties:
       - subscription-order
       - one-time-order
   action:
-    description: |-
-      Action of the quote. For `change` and `reactivate` actions `orderId` must be provided.
-      On acceptance if there are related approved transactions they are applied to the newly issued invoice.
+    description: Action of the quote. For `change` and `reactivate` actions `orderId` must be provided.
     type: string
-    readOnly: true
     enum:
       - create
       - change
       - reactivate
     x-enumDescriptions:
-      create: On accept quote new order is created and `orderId` is filled with the order ID.
-      change: On accept quote changed items are applied to an order with `orderId`.
-        For more information, see [subscription items change](https://www.rebilly.com/docs/dev-docs/api/Orders/PostSubscriptionItemsChange/).
-      reactivate: On accept quote change items an order with `orderId` is reactivated and changed items are applied.
-        For more information, see [subscription items change](https://www.rebilly.com/docs/dev-docs/api/Orders/PostSubscriptionItemsChange/)
-        and [reactivate a subscription](https://www.rebilly.com/docs/dev-docs/api/Orders/PostSubscriptionReactivation/).
+      create: Create new order.
+        On accept quote new order is created. `orderId` and `invoiceId` are filled with new generated values from the order.
+      change: Change existing order.
+        On accept quote interim invoice is issued and linked to `invoiceId`.
+        After the invoice is paid changed items are applied to an order with `orderId`.
+      reactivate: Reactivate churned/canceled order.
+        On accept quote new invoice is issued to be and linked to `invoiceId`. Quote items are applied to the order.
+        The related order will have `pending` status.
+        Once the invoice is paid, the order becomes active on `settings.reactivate.effectiveTime` or immediately if `settings.reactivate.effectiveTime` is omitted.
     example: create
     default: create
   status:
@@ -70,9 +70,7 @@ properties:
     type:
       - 'string'
       - 'null'
-    description: |-
-      ID of the related invoice.
-      For quotes with action `change` this is value of interim invoice for change related order.
+    description: ID of the issued invoice after acceptance.
     readOnly: true
     maxLength: 50
     example: in_0YVF9605RKC62BP14NE2R7V2XT
