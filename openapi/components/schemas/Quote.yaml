@@ -418,37 +418,39 @@ properties:
     type: object
     properties:
       reactivate:
-        effectiveTime:
-          description: |-
-            Date and time when the service period starts,
-            unless the subscription is canceled but still active.
+        type: object
+        properties:
+          effectiveTime:
+            description: |-
+              Date and time when the service period starts,
+              unless the subscription is canceled but still active.
 
-            If the subscription is still active,
-            the subscription continues for the current service period.
+              If the subscription is still active,
+              the subscription continues for the current service period.
 
-            If this field is omitted, this value defaults to the current time.
-          type: string
-          format: date-time
-          writeOnly: true
-        renewalTime:
-          description: |-
-            Date and time of the next subscription renewal.
-            If this field is omitted, this value is computed from the `effectiveTime` field.
+              If this field is omitted, this value defaults to the current time.
+            type: string
+            format: date-time
+            writeOnly: true
+          renewalTime:
+            description: |-
+              Date and time of the next subscription renewal.
+              If this field is omitted, this value is computed from the `effectiveTime` field.
 
-            If the subscription is canceled but still active,
-            it is ignored and the next renewal occurs as scheduled.
-          type: string
-          format: date-time
-        paymentInstrumentId:
-          writeOnly: true
-          description: |-
-            ID of the payment instrument.
-            If this field is omitted, the subscription payment instrument remains unchanged.
-          type:
-            - 'string'
-            - 'null'
-          maxLength: 50
-          example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+              If the subscription is canceled but still active,
+              it is ignored and the next renewal occurs as scheduled.
+            type: string
+            format: date-time
+          paymentInstrumentId:
+            writeOnly: true
+            description: |-
+              ID of the payment instrument.
+              If this field is omitted, the subscription payment instrument remains unchanged.
+            type:
+              - 'string'
+              - 'null'
+            maxLength: 50
+            example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
       change:
         type: object
         properties:
