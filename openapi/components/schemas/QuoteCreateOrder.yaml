@@ -1,4 +1,6 @@
 type: object
+title: QuoteCreateOrder
+description: QuoteCreateOrder
 required:
   - websiteId
   - customerId
@@ -19,13 +21,12 @@ properties:
       - subscription-order
       - one-time-order
   action:
-    description: Action of the quote.
+    description: |-
+      Action of the quote.
+      On accept quote new order is created. `orderId` and `invoiceId` are filled with new generated values from the order.
     type: string
     enum:
       - create
-    x-enumDescriptions:
-      create: Create new order.
-        On accept quote new order is created. `orderId` and `invoiceId` are filled with new generated values from the order.
     example: create
   orderId:
     description: ID of the related order.

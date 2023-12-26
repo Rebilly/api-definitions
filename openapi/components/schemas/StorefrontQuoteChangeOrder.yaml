@@ -1,11 +1,8 @@
 type: object
-title: QuoteChangeOrder
 required:
   - websiteId
   - customerId
   - items
-  - action
-  - orderId
 properties:
   id:
     readOnly: true
@@ -29,23 +26,8 @@ properties:
     enum:
       - change
     example: change
-  orderId:
-    description: ID of the related order.
-    type:
-      - 'string'
-      - 'null'
-    maxLength: 50
-    example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
-  invoiceId:
-    type:
-      - 'string'
-      - 'null'
-    description: ID of the issued invoice after acceptance.
-    readOnly: true
-    maxLength: 50
-    example: in_0YVF9605RKC62BP14NE2R7V2XT
   status:
-    description: Status of the quote.
+    description: Status of quote.
     type: string
     readOnly: true
     enum:
@@ -66,9 +48,24 @@ properties:
     $ref: ./WebsiteId.yaml
   customerId:
     $ref: ./CustomerId.yaml
+  orderId:
+    description: ID of the order.
+    readOnly: true
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 50
+    example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
+  invoiceId:
+    type:
+      - 'string'
+      - 'null'
+    description: ID of the issued invoice after acceptance.
+    readOnly: true
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
   items:
     type: array
-    description: Items included in the quote.
     minItems: 1
     items:
       type: object
@@ -410,17 +407,6 @@ properties:
     $ref: ./Shipping.yaml
   tax:
     $ref: ./Taxes.yaml
-  couponIds:
-    type:
-      - 'array'
-      - 'null'
-    description: |-
-      List of coupons to redeem on the customer and apply to the order when the quote is accepted.
-
-      For more information, see [Coupons](https://www.rebilly.com/docs/settings/coupons-and-discounts/).
-    items:
-      type: string
-      description: Coupon ID.
   _links:
     type: array
     description: Related links.
@@ -432,11 +418,13 @@ properties:
           description: Link URL.
           type: string
         rel:
-          description: Type of link.
+          description: |-
+            Type of link. If quote is accepted, a customer is redirected to `invoicePaymentFormUrl`
+            to pay the initial invoice using one of the methods which are available to the customer.
           type: string
           enum:
             - self
-            - quoteAcceptanceFormUrl
+            - invoicePaymentFormUrl
   _embedded:
     type: object
     description: Embedded objects that are requested by the `expand` query parameter.
@@ -445,8 +433,6 @@ properties:
       customer:
         type: object
       website:
-        type: object
-      order:
         type: object
       invoice:
         type: object

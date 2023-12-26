@@ -1,11 +1,8 @@
 type: object
-title: QuoteChangeOrder
 required:
   - websiteId
   - customerId
   - items
-  - action
-  - orderId
 properties:
   id:
     readOnly: true
@@ -22,30 +19,16 @@ properties:
       - one-time-order
   action:
     description: |-
-      Action of the quote for change order items.
-      On accept quote interim invoice is issued and linked to `invoiceId`.
-      After the invoice is paid changed items are applied to an order with `orderId`.
+      Action of the quote for churned/canceled order reactivation.
+      On accept quote new invoice is issued to be and linked to `invoiceId`. Quote items are applied to the order.
+      The related order will have `pending` status.
+      Once the invoice is paid, the order becomes active on `settings.reactivate.effectiveTime` or immediately if `settings.reactivate.effectiveTime` is omitted.
     type: string
     enum:
-      - change
-    example: change
-  orderId:
-    description: ID of the related order.
-    type:
-      - 'string'
-      - 'null'
-    maxLength: 50
-    example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
-  invoiceId:
-    type:
-      - 'string'
-      - 'null'
-    description: ID of the issued invoice after acceptance.
-    readOnly: true
-    maxLength: 50
-    example: in_0YVF9605RKC62BP14NE2R7V2XT
+      - reactivate
+    example: reactivate
   status:
-    description: Status of the quote.
+    description: Status of quote.
     type: string
     readOnly: true
     enum:
@@ -66,9 +49,24 @@ properties:
     $ref: ./WebsiteId.yaml
   customerId:
     $ref: ./CustomerId.yaml
+  orderId:
+    description: ID of the order.
+    readOnly: true
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 50
+    example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
+  invoiceId:
+    type:
+      - 'string'
+      - 'null'
+    description: ID of the issued invoice after acceptance.
+    readOnly: true
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
   items:
     type: array
-    description: Items included in the quote.
     minItems: 1
     items:
       type: object
@@ -174,31 +172,37 @@ properties:
           properties:
             product:
               type: object
-  renewalPolicy:
-    description: Specifies if the subscription retains its current `renewalTime` or resets it to a newly calculated `renewalTime`.
-    type: string
-    enum:
-      - reset
-      - retain
-  prorated:
-    description: |-
-      Specifies whether to give a pro rata credit for the amount of time remaining between the `effectiveTime` and the end of the current period.
-
-      In addition, if the `renewalTime` is retained, by setting the `renewalPolicy` to `retain`,
-      a pro rata debit occurs for the amount between the `effectiveTime` and the `renewalTime` as a percentage of the normal period size.
-    type: boolean
   effectiveTime:
     description: |-
-      Date from which the renewal time for `reset` operations and proration calculations are made.
-      If this field is omitted, this value defaults to the time of quote acceptance.
+      Date and time when the service period starts,
+      unless the subscription is canceled but still active.
+
+      If the subscription is still active,
+      the subscription continues for the current service period.
+
+      If this field is omitted, this value defaults to the current time.
     type: string
     format: date-time
-  keepTrial:
+    writeOnly: true
+  renewalTime:
     description: |-
-      Specifies if the subscription order must retain its active trial.
-      This field is only applicable if `renewalPolicy` is set to `retain`.
-    type: boolean
-    default: false
+      Date and time of the next subscription renewal.
+      If this field is omitted, this value is computed from the `effectiveTime` field.
+
+      If the subscription is canceled but still active,
+      it is ignored and the next renewal occurs as scheduled.
+    type: string
+    format: date-time
+  paymentInstrumentId:
+    writeOnly: true
+    description: |-
+      ID of the payment instrument.
+      If this field is omitted, the subscription payment instrument remains unchanged.
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 50
+    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
   invoicePreview:
     type: object
     description: Preview of the quote invoice.
@@ -410,17 +414,6 @@ properties:
     $ref: ./Shipping.yaml
   tax:
     $ref: ./Taxes.yaml
-  couponIds:
-    type:
-      - 'array'
-      - 'null'
-    description: |-
-      List of coupons to redeem on the customer and apply to the order when the quote is accepted.
-
-      For more information, see [Coupons](https://www.rebilly.com/docs/settings/coupons-and-discounts/).
-    items:
-      type: string
-      description: Coupon ID.
   _links:
     type: array
     description: Related links.
@@ -432,11 +425,13 @@ properties:
           description: Link URL.
           type: string
         rel:
-          description: Type of link.
+          description: |-
+            Type of link. If quote is accepted, a customer is redirected to `invoicePaymentFormUrl`
+            to pay the initial invoice using one of the methods which are available to the customer.
           type: string
           enum:
             - self
-            - quoteAcceptanceFormUrl
+            - invoicePaymentFormUrl
   _embedded:
     type: object
     description: Embedded objects that are requested by the `expand` query parameter.
@@ -445,8 +440,6 @@ properties:
       customer:
         type: object
       website:
-        type: object
-      order:
         type: object
       invoice:
         type: object

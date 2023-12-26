@@ -1,4 +1,5 @@
 type: object
+title: QuoteReactivateOrder
 required:
   - websiteId
   - customerId
@@ -20,15 +21,14 @@ properties:
       - subscription-order
       - one-time-order
   action:
-    description: Action of the quote.
+    description: |-
+      Action of the quote for churned/canceled order reactivation.
+      On accept quote new invoice is issued to be and linked to `invoiceId`. Quote items are applied to the order.
+      The related order will have `pending` status.
+      Once the invoice is paid, the order becomes active on `settings.reactivate.effectiveTime` or immediately if `settings.reactivate.effectiveTime` is omitted.
     type: string
     enum:
       - reactivate
-    x-enumDescriptions:
-      reactivate: Reactivate churned/canceled order.
-        On accept quote new invoice is issued to be and linked to `invoiceId`. Quote items are applied to the order.
-        The related order will have `pending` status.
-        Once the invoice is paid, the order becomes active on `settings.reactivate.effectiveTime` or immediately if `settings.reactivate.effectiveTime` is omitted.
     example: reactivate
   orderId:
     description: ID of the related order.
