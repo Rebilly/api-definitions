@@ -17,6 +17,18 @@ allOf:
             description: Awepay rcode.
             format: password
             writeOnly: true
+          secretKey:
+            type: string
+            description: Awepay secret key for the P2P REST API.
+            format: password
+            writeOnly: true
         required:
           - sid
           - rcode
+      settings:
+        type: object
+        description: Awepay setting.
+        properties:
+          useP2pRest:
+            type: boolean
+            description: Specifies whether to use the P2P REST API.
