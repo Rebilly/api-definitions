@@ -54,28 +54,32 @@ properties:
   addons:
     type: array
     items:
-      allOf:
-        - type: object
-          description: Addon plan details.
-          required:
-            - id
-          properties:
-            id:
-              type: string
-              description: ID of the addon plan.
-              maxLength: 50
-              example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
-            status:
-              type: string
-              description: |-
-                Status of the plan in the billing portal.
-                If status is `archived` customer can continue using it, but can not select it as a new item.
-              enum:
-                - active
-                - archived
-              default: active
-              example: active
-        - $ref: ./SubscriptionOrderPlan.yaml
+      type: object
+      description: Addon plan details.
+      properties:
+        plan:
+          allOf:
+            - type: object
+              description: Plan details.
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  description: ID of the plan.
+                  maxLength: 50
+                  example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+            - $ref: ./SubscriptionOrderPlan.yaml
+        status:
+          type: string
+          description: |-
+            Status of the plan in the billing portal.
+            If status is `archived` customer can continue using it, but can not select it as a new item.
+          enum:
+            - active
+            - archived
+          default: active
+          example: active
     default: []
   createdTime:
     $ref: ./CreatedTime.yaml
