@@ -184,9 +184,10 @@ properties:
       the subscription continues for the current service period.
 
       If this field is omitted, this value defaults to the current time.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     format: date-time
-    writeOnly: true
   renewalTime:
     description: |-
       Date and time of the next subscription renewal.
@@ -194,10 +195,11 @@ properties:
 
       If the subscription is canceled but still active,
       it is ignored and the next renewal occurs as scheduled.
-    type: string
+    type:
+      - 'string'
+      - 'null'
     format: date-time
   paymentInstrumentId:
-    writeOnly: true
     description: |-
       ID of the payment instrument.
       If this field is omitted, the subscription payment instrument remains unchanged.
