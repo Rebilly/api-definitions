@@ -1,0 +1,58 @@
+allOf:
+  - $ref: ./Subscription.yaml
+  - type: object
+    properties:
+      paymentInstrumentId:
+        type:
+          - 'string'
+          - 'null'
+        description: |-
+          ID of the payment instrument to use for autopay.
+          If this value is not provided, or if the payment instrument is inactive,
+          the customer's default payment instrument is used.
+        maxLength: 50
+        example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
+      poNumber:
+        description: Purchase order number displayed on the issued invoices.
+        type:
+          - 'string'
+          - 'null'
+        example: PO123456
+      notes:
+        description: Notes for the customer displayed on the order invoice.
+        type: string
+      billingStatus:
+        description: |-
+          Billing status of the most recent invoice.
+          This value may help you to determine if you should change the service status of the service,
+          such as suspending the service.
+        type: string
+        readOnly: true
+        enum:
+          - draft
+          - unpaid
+          - past-due
+          - abandoned
+          - paid
+          - voided
+          - refunded
+          - disputed
+          - partially-refunded
+          - partially-paid
+      billingAddress:
+        description: Billing address of the order.
+        oneOf:
+          - $ref: ./ContactObject.yaml
+          - type: 'null'
+      deliveryAddress:
+        description: Delivery address of the order.
+        oneOf:
+          - $ref: ./ContactObject.yaml
+          - type: 'null'
+      autopay:
+        description: |-
+          Specifies if payment attempts are made automatically.
+          If autopay is enabled, the payment is retrieved from the customer on the renewal date using the payment instrument that is set at `paymentInstrumentId`,
+          or the default payment instrument on the subscription.
+        type: boolean
+        default: true

@@ -137,13 +137,6 @@ properties:
     properties:
       periodAnchorInstruction:
         $ref: ./ServicePeriodAnchorInstruction.yaml
-  autopay:
-    description: |-
-      Specifies if payment attempts are made automatically.
-      If autopay is enabled, the payment is retrieved from the customer on the renewal date using the payment instrument that is set at `paymentInstrumentId`,
-      or the default payment instrument on the subscription.
-    type: boolean
-    default: true
   startTime:
     description: |-
       Date and time when the subscription starts.
@@ -238,34 +231,6 @@ properties:
         description: Amount of the subtotal.
         format: double
         example: 49.95
-  paymentInstrumentId:
-    type:
-      - 'string'
-      - 'null'
-    description: |-
-      ID of the payment instrument to use for autopay.
-      If this value is not provided, or if the payment instrument is inactive,
-      the customer's default payment instrument is used.
-    maxLength: 50
-    example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
-  billingStatus:
-    description: |-
-      Billing status of the most recent invoice.
-      This value may help you to determine if you should change the service status of the service,
-      such as suspending the service.
-    type: string
-    readOnly: true
-    enum:
-      - draft
-      - unpaid
-      - past-due
-      - abandoned
-      - paid
-      - voided
-      - refunded
-      - disputed
-      - partially-refunded
-      - partially-paid
   websiteId:
     x-sortable: true
     x-basic: true
@@ -299,16 +264,6 @@ properties:
     minItems: 1
     items:
       $ref: ./OrderItem.yaml
-  deliveryAddress:
-    description: Delivery address of the order.
-    oneOf:
-      - $ref: ./ContactObject.yaml
-      - type: 'null'
-  billingAddress:
-    description: Billing address of the order.
-    oneOf:
-      - $ref: ./ContactObject.yaml
-      - type: 'null'
   activationTime:
     description: Date and time when the order is activated.
     x-sortable: true
@@ -355,17 +310,8 @@ properties:
     items:
       type: string
       description: ID of the coupon.
-  poNumber:
-    description: Purchase order number displayed on the issued invoices.
-    type:
-      - 'string'
-      - 'null'
-    example: PO123456
   shipping:
     $ref: ./Shipping.yaml
-  notes:
-    description: Notes for the customer displayed on the order invoice.
-    type: string
   canceledBy:
     description: Specifies who initiated the cancellation.
     type:

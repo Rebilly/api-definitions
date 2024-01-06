@@ -35,24 +35,6 @@ properties:
       - abandoned
       - completed
       - canceled
-  billingStatus:
-    description: |-
-      Billing status of the most recent invoice.
-      This value may help you to determine if you should change the service status of the service,
-      such as suspending the service.
-    type: string
-    readOnly: true
-    enum:
-      - draft
-      - unpaid
-      - past-due
-      - abandoned
-      - paid
-      - voided
-      - refunded
-      - disputed
-      - partially-refunded
-      - partially-paid
   websiteId:
     x-sortable: true
     x-basic: true
@@ -86,16 +68,6 @@ properties:
     minItems: 1
     items:
       $ref: ./OrderItem.yaml
-  deliveryAddress:
-    description: Delivery address of the order.
-    oneOf:
-      - $ref: ./ContactObject.yaml
-      - type: 'null'
-  billingAddress:
-    description: Billing address of the order.
-    oneOf:
-      - $ref: ./ContactObject.yaml
-      - type: 'null'
   activationTime:
     description: Date and time when the order is activated.
     x-sortable: true
@@ -142,18 +114,8 @@ properties:
     items:
       type: string
       description: ID of the coupon.
-  poNumber:
-    description: Purchase order number displayed on the issued invoices.
-    type:
-      - 'string'
-      - 'null'
-    example: PO123456
   shipping:
     $ref: ./Shipping.yaml
-  notes:
-    description: Notes for the customer displayed on the order invoice.
-    type: string
-
   revision:
     description: |-
       Number of times the order data has been modified.
