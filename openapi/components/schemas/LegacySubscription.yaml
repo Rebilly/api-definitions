@@ -1,7 +1,20 @@
 allOf:
   - $ref: ./BaseSubscription.yaml
   - type: object
+    required:
+      - orderType
+      - customerId
+      - websiteId
+      - items
     properties:
+      orderType:
+        description: |-
+          Specifies the type of order.
+          An order may be a subscription or a one-time purchase.
+        type: string
+        x-basic: true
+        enum:
+          - subscription-order
       paymentInstrumentId:
         type:
           - 'string'
