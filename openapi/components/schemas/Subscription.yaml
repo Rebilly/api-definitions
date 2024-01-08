@@ -173,13 +173,13 @@ properties:
     readOnly: true
     x-sortable: true
   lineItems:
-    description: Subscription line items which queue until the next renewal (or interim) invoice is issued for the subscription.
+    description: Subscription line items which queue until the next renewal, or interim, invoice is issued for the subscription.
     readOnly: true
     type: array
     deprecated: true
     items:
       type: object
-      description: Invoice line item. Use `isInterim` property of upcoming invoice items instead.
+      description: Invoice line item. Use the `isInterim` property of upcoming invoice items instead.
       deprecated: true
       properties:
         type:
@@ -204,11 +204,11 @@ properties:
           type: integer
           example: 1
         periodStartTime:
-          description: Date and time when the period begins for this item.
+          description: Date and time when the service period begins for this item.
           type: string
           format: date-time
         periodEndTime:
-          description: Date and time when the period ends for this item.
+          description: Date and time when the service period ends for this item.
           type: string
           format: date-time
         createdTime:
