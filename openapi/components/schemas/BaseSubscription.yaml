@@ -6,8 +6,6 @@ properties:
     readOnly: true
     maxLength: 50
     example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
-  customerId:
-    $ref: ./CustomerId.yaml
   renewalReminderTime:
     description: Date and time when the renewal reminder event triggers.
     type:
@@ -47,10 +45,6 @@ properties:
       - 'integer'
       - 'null'
     readOnly: true
-  organizationId:
-    readOnly: true
-    allOf:
-      - $ref: ./OrganizationId.yaml
   status:
     description: |-
       Status of the subscription service.
@@ -218,11 +212,6 @@ properties:
         description: Amount of the subtotal.
         format: double
         example: 49.95
-  websiteId:
-    x-sortable: true
-    x-basic: true
-    allOf:
-      - $ref: ./WebsiteId.yaml
   currency:
     description: Currency of the order.
     readOnly: true

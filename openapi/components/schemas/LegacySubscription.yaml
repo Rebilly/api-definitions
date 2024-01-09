@@ -15,6 +15,17 @@ allOf:
         x-basic: true
         enum:
           - subscription-order
+      organizationId:
+        readOnly: true
+        allOf:
+          - $ref: ./OrganizationId.yaml
+      customerId:
+        $ref: ./CustomerId.yaml
+      websiteId:
+        x-sortable: true
+        x-basic: true
+        allOf:
+          - $ref: ./WebsiteId.yaml
       initialInvoiceId:
         description: ID of the initial invoice.
         readOnly: true
