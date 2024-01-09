@@ -15,6 +15,24 @@ allOf:
         x-basic: true
         enum:
           - subscription-order
+      initialInvoiceId:
+        description: ID of the initial invoice.
+        readOnly: true
+        type:
+          - 'string'
+          - 'null'
+        maxLength: 50
+        example: in_0YVF9605RKC62BP14NE2R7V2XT
+      recentInvoiceId:
+        description: |-
+          ID of the most recently issued invoice.
+          The invoice might not be `paid` yet.
+        readOnly: true
+        type:
+          - 'string'
+          - 'null'
+        maxLength: 50
+        example: in_0YVF9605RKC62BP14NE2R7V2XT
       paymentInstrumentId:
         type:
           - 'string'
