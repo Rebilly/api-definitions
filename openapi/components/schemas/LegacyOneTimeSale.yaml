@@ -1,7 +1,50 @@
 allOf:
   - $ref: ./OneTimeSale.yaml
   - type: object
+    required:
+      - orderType
+      - customerId
+      - websiteId
+      - items
     properties:
+      orderType:
+        description: |-
+          Specifies the type of order.
+          An order may be a subscription or a one-time purchase.
+        type: string
+        x-basic: true
+        enum:
+          - one-time-order
+      customerId:
+        $ref: ./CustomerId.yaml
+      organizationId:
+        deprecated: true
+        readOnly: true
+        allOf:
+          - $ref: ./OrganizationId.yaml
+      websiteId:
+        x-sortable: true
+        x-basic: true
+        allOf:
+          - $ref: ./WebsiteId.yaml
+      initialInvoiceId:
+        description: ID of the initial invoice (`null` for one-time orders).
+        readOnly: true
+        type:
+          - 'string'
+          - 'null'
+        maxLength: 50
+        example: in_0YVF9605RKC62BP14NE2R7V2XT
+      recentInvoiceId:
+        description: |-
+          ID of the most recently issued invoice.
+          The invoice might not be `paid` yet.
+        readOnly: true
+        type:
+          - 'string'
+          - 'null'
+        maxLength: 50
+        example: in_0YVF9605RKC62BP14NE2R7V2XT
       poNumber:
         description: Purchase order number displayed on the issued invoices.
         type:

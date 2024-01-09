@@ -1,8 +1,6 @@
 type: object
 required:
-  - orderType
-  - customerId
-  - websiteId
+  - type
   - items
 properties:
   id:
@@ -11,21 +9,12 @@ properties:
     readOnly: true
     maxLength: 50
     example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
-  orderType:
-    description: |-
-      Specifies the type of order.
-      An order may be a subscription or a one-time purchase.
+  type:
+    description: Specifies the type of order.
     type: string
     x-basic: true
     enum:
-      - one-time-order
-  customerId:
-    $ref: ./CustomerId.yaml
-  organizationId:
-    deprecated: true
-    readOnly: true
-    allOf:
-      - $ref: ./OrganizationId.yaml
+      - one-time-sale
   status:
     description: Status of the one-time order.
     type: string
@@ -35,33 +24,10 @@ properties:
       - abandoned
       - completed
       - canceled
-  websiteId:
-    x-sortable: true
-    x-basic: true
-    allOf:
-      - $ref: ./WebsiteId.yaml
   currency:
     description: Currency of the order.
     readOnly: true
     $ref: ./CurrencyCode.yaml
-  initialInvoiceId:
-    description: ID of the initial invoice (`null` for one-time orders).
-    readOnly: true
-    type:
-      - 'string'
-      - 'null'
-    maxLength: 50
-    example: in_0YVF9605RKC62BP14NE2R7V2XT
-  recentInvoiceId:
-    description: |-
-      ID of the most recently issued invoice.
-      The invoice might not be `paid` yet.
-    readOnly: true
-    type:
-      - 'string'
-      - 'null'
-    maxLength: 50
-    example: in_0YVF9605RKC62BP14NE2R7V2XT
   items:
     description: Details of items in the order.
     type: array
