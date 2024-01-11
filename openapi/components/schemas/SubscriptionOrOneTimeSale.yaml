@@ -1,0 +1,10 @@
+type: object
+description: Subscription details.
+discriminator:
+  propertyName: orderType
+  mapping:
+    subscription-order: ./Subscription.yaml
+    one-time-order: ./OneTimeSale.yaml
+oneOf:
+  - $ref: ./Subscription.yaml
+  - $ref: ./OneTimeSale.yaml

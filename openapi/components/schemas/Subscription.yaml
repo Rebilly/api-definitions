@@ -1,10 +1,472 @@
 type: object
-description: Subscription details.
-discriminator:
-  propertyName: orderType
-  mapping:
-    subscription-order: ./SubscriptionOrder.yaml
-    one-time-order: ./OneTimeOrder.yaml
-anyOf:
-  - $ref: ./SubscriptionOrder.yaml
-  - $ref: ./OneTimeOrder.yaml
+required:
+  - orderType
+  - customerId
+  - websiteId
+  - items
+properties:
+  id:
+    type: string
+    description: ID of the order.
+    readOnly: true
+    maxLength: 50
+    example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
+  orderType:
+    description: |-
+      Specifies the type of order.
+      An order may be a subscription or a one-time purchase.
+    type: string
+    x-basic: true
+    enum:
+      - subscription-order
+  customerId:
+    $ref: ./CustomerId.yaml
+  renewalReminderTime:
+    description: Date and time when the renewal reminder event triggers.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+  renewalReminderNumber:
+    description: Number of triggered renewal reminder events.
+    type:
+      - 'integer'
+      - 'null'
+    readOnly: true
+  trialReminderTime:
+    description: Date and time when the trial reminder event triggers.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+  trialReminderNumber:
+    description: Number of triggered trial reminder events.
+    type:
+      - 'integer'
+      - 'null'
+    readOnly: true
+  abandonReminderTime:
+    description: Date and time when the abandon order reminder event triggers.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+  abandonReminderNumber:
+    description: Number of abandon order reminder events that are triggered.
+    type:
+      - 'integer'
+      - 'null'
+    readOnly: true
+  organizationId:
+    readOnly: true
+    allOf:
+      - $ref: ./OrganizationId.yaml
+  status:
+    description: |-
+      Status of the subscription service.
+      A subscription starts in the `pending` status, and becomes `active` when the service period begins.
+    type: string
+    readOnly: true
+    enum:
+      - pending
+      - active
+      - abandoned
+      - canceled
+      - churned
+      - paused
+      - voided
+      - completed
+      - trial-ended
+  inTrial:
+    description: Specifies if the subscription is currently in a trial period.
+    type: boolean
+    readOnly: true
+  trial:
+    type: object
+    description: |-
+      Trial details.
+      To use plan defaults do not send the `trial` key, or send a `null` value.
+    properties:
+      enabled:
+        description: |-
+          Specifies if there is a trial for this subscription.
+          Plans without trial prices are free trials.
+        type: boolean
+      endTime:
+        description: |-
+          Time and date when the trial ends.
+          If a trial is enabled on this subscription, a value must be provided.
+        type:
+          - 'string'
+          - 'null'
+        format: date-time
+  isTrialOnly:
+    description: |-
+      Specifies if a subscription ends after a trial period.
+      If this value is `true`, recurring settings are ignored.
+    type: boolean
+    default: false
+  invoiceTimeShift:
+    description: |-
+      Shifts issue time and due time of invoices for this subscription.
+
+      This setting overrides plan settings.
+      To use plan settings, set this value to `null`.
+
+      To use multiple plans in one subscription,
+      all plans must have the same billing period,
+      this property enables the customer to subscribe to different plans.
+    example: null
+    oneOf:
+      - $ref: ./InvoiceTimeShift.yaml
+      - type: 'null'
+  recurringInterval:
+    type:
+      - 'object'
+      - 'null'
+    description: |-
+      Recurring interval to override plan settings.
+      To use plan settings, set this value to `null`.
+
+      To use multiple plans in one subscription,
+      all plans must have the same recurring period length.
+    example: null
+    properties:
+      periodAnchorInstruction:
+        $ref: ./ServicePeriodAnchorInstruction.yaml
+  autopay:
+    description: |-
+      Specifies if payment attempts are made automatically.
+      If autopay is enabled, the payment is retrieved from the customer on the renewal date using the payment instrument that is set at `paymentInstrumentId`,
+      or the default payment instrument on the subscription.
+    type: boolean
+    default: true
+  startTime:
+    description: |-
+      Date and time when the subscription starts.
+      If this value is `null`, the current time is used.
+      This value cannot be more than one service period in the past.
+    type:
+      - 'string'
+      - 'null'
+    x-sortable: true
+    x-basic: true
+    example: null
+    format: date-time
+  endTime:
+    description: Date and time when the subscription ends.
+    x-sortable: true
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+  renewalTime:
+    description: Date and time when the subscription renews.
+    type:
+      - 'string'
+      - 'null'
+    x-sortable: true
+    x-basic: true
+    format: date-time
+  rebillNumber:
+    description: Current billing period number.
+    type:
+      - 'integer'
+      - 'null'
+    readOnly: true
+    x-sortable: true
+  lineItems:
+    description: Subscription line items which queue until the next renewal, or interim, invoice is issued for the subscription.
+    readOnly: true
+    type: array
+    deprecated: true
+    items:
+      type: object
+      description: Invoice line item. Use the `isInterim` property of upcoming invoice items instead.
+      deprecated: true
+      properties:
+        type:
+          description: Type of invoice line item.
+          type: string
+          enum:
+            - debit
+            - credit
+        description:
+          description: Description of the line item.
+          type: string
+          maxLength: 1000
+        unitPriceAmount:
+          description: Unit price of the line item.
+          type: number
+          format: double
+          example: 49.95
+        unitPriceCurrency:
+          $ref: ./CurrencyCode.yaml
+        quantity:
+          description: Quantity of the line item.
+          type: integer
+          example: 1
+        periodStartTime:
+          description: Date and time when the service period begins for this item.
+          type: string
+          format: date-time
+        periodEndTime:
+          description: Date and time when the service period ends for this item.
+          type: string
+          format: date-time
+        createdTime:
+          $ref: ./CreatedTime.yaml
+        updatedTime:
+          $ref: ./UpdatedTime.yaml
+  lineItemSubtotal:
+    type: object
+    readOnly: true
+    description: |-
+      Subtotal of line items in this subscription (signed value).
+      If credits exceed debits, this value is a negative number.
+    properties:
+      currency:
+        $ref: ./CurrencyCode.yaml
+      amount:
+        type: number
+        x-type: Money
+        x-sortable: true
+        description: Amount of the subtotal.
+        format: double
+        example: 49.95
+  paymentInstrumentId:
+    type:
+      - 'string'
+      - 'null'
+    description: |-
+      ID of the payment instrument to use for autopay.
+      If this value is not provided, or if the payment instrument is inactive,
+      the customer's default payment instrument is used.
+    maxLength: 50
+    example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
+  billingStatus:
+    description: |-
+      Billing status of the most recent invoice.
+      This value may help you to determine if you should change the service status of the service,
+      such as suspending the service.
+    type: string
+    readOnly: true
+    enum:
+      - draft
+      - unpaid
+      - past-due
+      - abandoned
+      - paid
+      - voided
+      - refunded
+      - disputed
+      - partially-refunded
+      - partially-paid
+  websiteId:
+    x-sortable: true
+    x-basic: true
+    allOf:
+      - $ref: ./WebsiteId.yaml
+  currency:
+    description: Currency of the order.
+    readOnly: true
+    $ref: ./CurrencyCode.yaml
+  initialInvoiceId:
+    description: ID of the initial invoice.
+    readOnly: true
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
+  recentInvoiceId:
+    description: |-
+      ID of the most recently issued invoice.
+      The invoice might not be `paid` yet.
+    readOnly: true
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
+  items:
+    description: Details of items in the order.
+    type: array
+    minItems: 1
+    items:
+      $ref: ./OrderItem.yaml
+  deliveryAddress:
+    description: Delivery address of the order.
+    oneOf:
+      - $ref: ./ContactObject.yaml
+      - type: 'null'
+  billingAddress:
+    description: Billing address of the order.
+    oneOf:
+      - $ref: ./ContactObject.yaml
+      - type: 'null'
+  activationTime:
+    description: Date and time when the order is activated.
+    x-sortable: true
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+  voidTime:
+    description: Date and time when the order is voided.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+  abandonTime:
+    type:
+      - 'string'
+      - 'null'
+    description: |-
+      Date and time when the pending order is automatically abandoned.
+      If this value is not passed during order creation,
+      a [pending order TTL](https://all-rebilly.redoc.ly/tag/Organizations/operation/PatchOrganization/#!path=settings/billing/pendingOrderTtl&t=request) setting is used to calculate the value.
+    format: date-time
+  couponIds:
+    type:
+      - 'array'
+      - 'null'
+    description: |-
+      List of coupons to redeem on the customer and restrict to this order.
+
+      For more information, see [Coupons](https://www.rebilly.com/docs/settings/coupons-and-discounts/).
+
+      This parameter uses the following logic:
+
+      - If this parameter is not supplied, applied coupons are not changed.
+      - If an empty array is supplied, all applied coupon redemptions are canceled.
+      - If a list of coupons is supplied, unapplied coupons in the list are applied.
+        Coupons that have already been applied do not change state.
+        Applied coupons that are not supplied in list are canceled.
+
+      If the list of applied coupons on a pending order is changed by this parameter during an order update, the invoice for the order is reissued.
+    writeOnly: true
+    items:
+      type: string
+      description: ID of the coupon.
+  poNumber:
+    description: Purchase order number displayed on the issued invoices.
+    type:
+      - 'string'
+      - 'null'
+    example: PO123456
+  shipping:
+    $ref: ./Shipping.yaml
+  notes:
+    description: Notes for the customer displayed on the order invoice.
+    type: string
+  canceledBy:
+    description: Specifies who initiated the cancellation.
+    type:
+      - 'string'
+      - 'null'
+    readOnly: true
+    enum:
+      - merchant
+      - customer
+      - rebilly
+      - null
+  cancelCategory:
+    description: Category of the cancellation.
+    type:
+      - 'string'
+      - 'null'
+    readOnly: true
+    enum:
+      - billing-failure
+      - did-not-use
+      - did-not-want
+      - missing-features
+      - bugs-or-problems
+      - do-not-remember
+      - risk-warning
+      - contract-expired
+      - too-expensive
+      - never-started
+      - switched-plan
+      - other
+      - null
+  cancelDescription:
+    description: Description of the cancellation reason in free form.
+    type:
+      - 'string'
+      - 'null'
+    readOnly: true
+    maxLength: 255
+  revision:
+    description: |-
+      Number of times the order data has been modified.
+
+      The revision is useful when analyzing webhook data to determine if the
+      change takes precedence over the current representation.
+    type: integer
+    readOnly: true
+  riskMetadata:
+    type:
+      - 'object'
+      - 'null'
+    example: null
+    description: |-
+      Risk metadata.
+      If this value is `null`, this field uses risk metadata that is captured when creating the payment token.
+    allOf:
+      - $ref: ./RiskMetadata.yaml
+  customFields:
+    $ref: ./ResourceCustomFields.yaml
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - website
+            - customer
+            - initialInvoice
+            - recentInvoice
+            - approvalUrl
+            - attachments
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
+    properties:
+      recentInvoice:
+        type: object
+      initialInvoice:
+        type: object
+      customer:
+        type: object
+      website:
+        type: object
+      leadSource:
+        type: object
+      shippingRate:
+        type: object
+      paymentInstrument:
+        type: object
+      upcomingInvoice:
+        type: object
