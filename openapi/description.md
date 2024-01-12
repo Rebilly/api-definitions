@@ -27,7 +27,7 @@ Rebilly offers four forms of authentication: secret key, publishable key, JSON W
 To create or manage API keys, select one of the following:
 
 - Use the Rebilly UI: see [Manage API keys](https://www.rebilly.com/docs/dev-docs/api-keys/#manage-api-keys)
-- Use the Rebilly API: see the [API key operations](https://all-rebilly.redoc.ly/tag/API-keys).
+- Use the Rebilly API: see the [API key operations](https://www.rebilly.com/catalog/all/API-keys).
 
 For more information on API keys, see [API keys](https://www.rebilly.com/docs/concepts-and-features/concept/api-keys).
 
@@ -42,7 +42,7 @@ However, no SDK is required to use the API.
 Rebilly also provides [FramePay](https://www.rebilly.com/docs/developer-docs/framepay/),
 a client-side iFrame-based solution, to help create payment tokens while minimizing PCI DSS compliance burdens
 and maximizing your customization ability.
-[FramePay](https://www.rebilly.com/docs/developer-docs/framepay/) interacts with the [payment tokens creation operation](https://all-rebilly.redoc.ly/tag/Payment-tokens/operation/PostToken).
+[FramePay](https://www.rebilly.com/docs/developer-docs/framepay/) interacts with the [payment tokens creation operation](https://www.rebilly.com/catalog/all/Payment-tokens/PostToken).
 
 ## JavaScript SDK
 
@@ -87,11 +87,11 @@ Format description:
 
 - To use a gte (greater than or equals) filter, use: `?filter=amount:1..`.
   This also works for datetime-based fields.
-  
+
 - To use a lte (less than or equals) filter, use: `?filter=amount:..10`.
   This also works for datetime-based fields.
 
-- To create [specified values lists](https://all-rebilly.redoc.ly/#tag/Lists) and use them in filters, use: `?filter=firstName:@yourListName`. \
+- To create [specified values lists](https://www.rebilly.com/catalog/all/Lists) and use them in filters, use: `?filter=firstName:@yourListName`. \
   You can also exclude list values: `?filter=firstName:!@yourListName`. \
   Use value lists to compare against a list of data when setting conditions for rules or binds,
   or applying filters to data table segments.
@@ -127,13 +127,13 @@ Expand may be used on `GET`, `PATCH`, `POST`, `PUT` requests.
 # Limit on collections offset
 
 For performance reasons, take note that we have a `1000` limit on `?offset=...`.
-For example, attempting to retrieve a collection using `?offset=1001` or `?offset=2000` returns the same results as if you used `?offset=1000`. 
+For example, attempting to retrieve a collection using `?offset=1001` or `?offset=2000` returns the same results as if you used `?offset=1000`.
 
-Visit our [Data Exports API](https://all-rebilly.redoc.ly/tag/Data-exports) for an asynchronous solution. 
+Visit our [Data Exports API](https://www.rebilly.com/catalog/all/Data-exports) for an asynchronous solution.
 
 # Get started
 
-The full [Rebilly API](https://all-rebilly.redoc.ly/) has over 500 operations.
+The full [Rebilly API](https://www.rebilly.com/catalog/all/) has over 500 operations.
 This is likely more than you may need to implement your use cases.
 If you would like to implement a particular use case,
 [contact Rebilly](https://www.rebilly.com/support/) for guidance and feedback on the best API operations to use for the task.
