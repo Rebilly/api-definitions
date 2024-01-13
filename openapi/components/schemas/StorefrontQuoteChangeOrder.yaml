@@ -26,6 +26,40 @@ properties:
     enum:
       - change
     example: change
+  acceptanceConditions:
+    type: array
+    writeOnly: true
+    description: If conditions are fulfilled the quote is automatically accepted.
+    items:
+      type: string
+      enum:
+        - customer
+        - signature
+        - payment
+        - partial-payment
+      x-enumDescriptions:
+        customer: Quote can be accepted by customer.
+        signature: Quote can be accepted if merchant received the signed quote from the customer.
+        payment: Related invoice must be paid in full.
+        partial-payment: Related invoice must be paid in full or partially paid.
+    example: ['customer', 'payment']
+    default: ['customer']
+  acceptanceFulfillment:
+    type: array
+    readOnly: true
+    description: Conditions with fulfillment flag.
+    items:
+      type: object
+      properties:
+        condition:
+          type: string
+          enum:
+            - customer
+            - signature
+            - payment
+            - partial-payment
+        isFulfilled:
+          type: boolean
   status:
     description: Status of quote.
     type: string
@@ -60,7 +94,7 @@ properties:
     type:
       - 'string'
       - 'null'
-    description: ID of the issued invoice after acceptance.
+    description: ID of the payment invoice.
     readOnly: true
     maxLength: 50
     example: in_0YVF9605RKC62BP14NE2R7V2XT

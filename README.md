@@ -5,12 +5,14 @@
 
 TBD: Add Redocly validation status badge.
 
-## Links
+## View API docs
 
-- [Core API docs](https://api-reference.rebilly.com/)
-- [Users API docs](https://user-api-docs.rebilly.com/)
-- [Reports API docs](https://reports-api-docs.rebilly.com/)
-- [Storefront API docs](https://storefront-api-docs.rebilly.com/) (this API is in development and subject to change)
+To view the full Rebilly API reference documentation, go to [https://www.rebilly.com/catalog/all/](https://www.rebilly.com/catalog/all/).
+
+The full Rebilly API reference documentation has over 500 operations. This is likely more than you may need to implement your use cases. If you would like to implement a particular use case, [contact Rebilly](https://www.rebilly.com/support/) for guidance and feedback on the best API operations to use for the task.
+
+To integrate Rebilly, and learn about related resources and concepts,
+see [Get started](https://www.rebilly.com/docs/dev-docs/get-started/).
 
 ## Contributing
 
@@ -29,7 +31,7 @@ If you use VS Code, use the [Redocly VS Code extension](https://marketplace.visu
 
 #### Preview
 
-This process describes how to start a development server docs preview for the Rebilly API docs. 
+This process describes how to start a development server docs preview for the Rebilly API docs.
 Changes made to the API specification while the development server is running are immediately displayed in the docs preview.
 
 Rebilly uses [Redocly](https://redocly.com/) to generate, manage, and preview API docs.
@@ -42,7 +44,7 @@ Rebilly uses [Redocly](https://redocly.com/) to generate, manage, and preview AP
 1. In the **Personal API keys** section, click **Add API key**.
 1. Enter an API key name, then click **Save**.
 1. Copy the API key.
-1. In a terminal, execute the following command: `npx @redocly/cli login`. 
+1. In a terminal, execute the following command: `npx @redocly/cli login`.
 1. When prompted, paste your API key.
 1. Execute one of the following commands to start a development server docs preview:
     - Core API docs: `npx @redocly/cli preview-docs core@latest`
