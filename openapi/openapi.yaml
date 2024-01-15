@@ -53,7 +53,7 @@ components:
     ApplicationJWT:
       description: |-
         Applications in the Rebilly App Store can create a JSON Web Token (JWT) by fetching an user's instance.
-        For more information, see [Retrieve an application instance](https://all-rebilly.redoc.ly/tag/Application-owners#operation/GetApplicationInstanceByOrganization).
+        For more information, see [Retrieve an application instance](https://www.rebilly.com/catalog/all/Application-owners/GetApplicationInstanceByOrganization/).
 
         Usage format: `Bearer <JWT>`.
       type: http
@@ -64,7 +64,7 @@ components:
       description: |-
         This authentication method is applicable to specific operations.
 
-        To create a publishable API key, see [Create an API key](https://all-rebilly.redoc.ly/tag/API-keys/operation/PostApiKey).
+        To create a publishable API key, see [Create an API key](https://www.rebilly.com/catalog/all/API-keys/PostApiKey).
       name: Authorization
       type: apiKey
       in: header
@@ -83,7 +83,7 @@ components:
     CustomerJWT:
       description: |-
         To create a JSON Web Token (JWT) using Storefront authentication,
-        see [Create a session with username and password](https://all-rebilly.redoc.ly/tag/Authentication/operation/StorefrontPostLogin).
+        see [Create a session with username and password](https://www.rebilly.com/catalog/all/Storefront-account/StorefrontPostLogin).
 
         Usage format: `Bearer <JWT>`.
       type: http
@@ -91,10 +91,6 @@ components:
       bearerFormat: JWT
 
 tags:
-  - name: Account
-    description: |-
-      Use these operations to manage Rebilly accounts.
-      An account in which you are subscribed to in order to use the Rebilly product.
   - name: Allowlists
     description: |-
       Use allowlists to exclude specific customer attribute data from risk score checks.
@@ -126,8 +122,6 @@ tags:
       Use these operations to install or uninstall apps from the Rebilly App Store to your Rebilly account, and to manage application instances.
       An application user is a person or organization that uses an app that is installed from the Rebilly App Store.
       For more information, see [Install or uninstall an app](https://www.rebilly.com/docs/dev-docs/install-an-app/).
-  - name: Authentication
-    description: Use these operations to manage the process of confirming the identity of users that are attempting to access resources.
   - name: Balance transactions
     description: |-
       Use these operations to view and manage balance transactions.
@@ -286,10 +280,6 @@ tags:
 
       Email notifications can also be used to notify teammates about new customers, blocklist matches, risk score changes, and more.
       For more information, see [Email notifications](https://www.rebilly.com/docs/automations/email-notifications/).
-  - name: Email verification
-    description: |-
-      Use these operations to manage email verification.
-      Email verification is the process of confirming that an email address exists and is associated with an individual.
   - name: External identifiers
     description: |-
       Use external identifier operations to associate entities such as customers,
@@ -415,8 +405,6 @@ tags:
       For more information, see [My organizations and websites](https://www.rebilly.com/docs/settings/organizations-and-websites/).
 
       Note: No data, including organizations, is shared between the live and sandbox environments.
-  - name: Password reset
-    description: Use these operations to manage password resets for a user or organization.
   - name: Payment instruments
     description: |-
       Use these operations to manage payment instruments.
@@ -460,10 +448,6 @@ tags:
     description: |-
       Use these operations to manage user profiles.
       A profile represents the person that is signed in to Rebilly.
-  - name: Purchases
-    description: |-
-      Use these operations to manage purchases.
-      Purchases are transactions that have been executed related to the purchase of goods or services.
   - name: Quotes
     description: |-
       Use quote operations to create and manage quotations.
@@ -519,6 +503,163 @@ tags:
     description: |-
       Use this operation to check the status of the Rebilly API.
       No authentication is required.
+  - name: Storefront account
+    description: |-
+      Use these operations to manage Storefront accounts.
+      A Storefront account is an account that the customer is subscribed to in order to use the Rebilly product.
+
+      Storefront operations interact directly with the customer,
+      and provide the customer with access to their own data.
+
+      To use Storefront operations,
+      the customer must be issued a JWT with limited permissions.
+      For more information, see [Create a session with username and password](https://www.rebilly.com/catalog/all/Storefront-account/StorefrontPostLogin) and [Exchange an authentication token](https://www.rebilly.com/catalog/all/Customer-authentication/PostAuthenticationTokenExchange).
+
+      Storefront operations are intended to be used directly from an untrusted browser.
+  - name: Storefront billing portals
+    description: |-
+      Use these operations to access Storefront billing portals.
+
+      Storefront operations interact directly with the customer,
+      and provide the customer with access to their own data.
+
+      To use Storefront operations,
+      the customer must be issued a JWT with limited permissions.
+      For more information, see [Create a session with username and password](https://www.rebilly.com/catalog/all/Storefront-account/StorefrontPostLogin) and [Exchange an authentication token](https://www.rebilly.com/catalog/all/Customer-authentication/PostAuthenticationTokenExchange).
+      Storefront operations are intended to be used directly from an untrusted browser.
+  - name: Storefront checkout forms
+    description: |-
+      Use these operations to access Storefront checkout forms.
+
+      Storefront operations interact directly with the customer,
+      and provide the customer with access to their own data.
+
+      To use Storefront operations,
+      the customer must be issued a JWT with limited permissions.
+      For more information, see [Create a session with username and password](https://www.rebilly.com/catalog/all/Storefront-account/StorefrontPostLogin) and [Exchange an authentication token](https://www.rebilly.com/catalog/all/Customer-authentication/PostAuthenticationTokenExchange).
+      Storefront operations are intended to be used directly from an untrusted browser.
+  - name: Storefront custom fields
+    description: |-
+      Use these operations to access Storefront custom fields.
+
+      Storefront operations interact directly with the customer,
+      and provide the customer with access to their own data.
+
+      To use Storefront operations,
+      the customer must be issued a JWT with limited permissions.
+      For more information, see [Create a session with username and password](https://www.rebilly.com/catalog/all/Storefront-account/StorefrontPostLogin) and [Exchange an authentication token](https://www.rebilly.com/catalog/all/Customer-authentication/PostAuthenticationTokenExchange).
+      Storefront operations are intended to be used directly from an untrusted browser.
+  - name: Storefront deposits
+    description: |-
+      Use these operations to access Storefront deposits.
+
+      Storefront operations interact directly with the customer,
+      and provide the customer with access to their own data.
+
+      To use Storefront operations, the customer must be issued a JWT with limited permissions. For more information, see [Create a session with username and password](https://www.rebilly.com/catalog/all/Storefront-account/StorefrontPostLogin) and [Exchange an authentication token](https://www.rebilly.com/catalog/all/Customer-authentication/PostAuthenticationTokenExchange).
+      Storefront operations are intended to be used directly from an untrusted browser.
+  - name: Storefront invoices
+    description: |-
+      Use these operations to access Storefront invoices.
+
+      Storefront operations interact directly with the customer,
+      and provide the customer with access to their own data.
+
+      To use Storefront operations, the customer must be issued a JWT with limited permissions. For more information, see [Create a session with username and password](https://www.rebilly.com/catalog/all/Storefront-account/StorefrontPostLogin) and [Exchange an authentication token](https://www.rebilly.com/catalog/all/Customer-authentication/PostAuthenticationTokenExchange).
+      Storefront operations are intended to be used directly from an untrusted browser.
+  - name: Storefront KYC documents
+    description: |-
+      Use these operations to access Storefront KYC documents.
+
+      Storefront operations interact directly with the customer,
+      and provide the customer with access to their own data.
+
+      To use Storefront operations, the customer must be issued a JWT with limited permissions. For more information, see [Create a session with username and password](https://www.rebilly.com/catalog/all/Storefront-account/StorefrontPostLogin) and [Exchange an authentication token](https://www.rebilly.com/catalog/all/Customer-authentication/PostAuthenticationTokenExchange).
+      Storefront operations are intended to be used directly from an untrusted browser.
+  - name: Storefront orders
+    description: |-
+      Use these operations to access Storefront orders.
+
+      Storefront operations interact directly with the customer,
+      and provide the customer with access to their own data.
+
+      To use Storefront operations, the customer must be issued a JWT with limited permissions. For more information, see [Create a session with username and password](https://www.rebilly.com/catalog/all/Storefront-account/StorefrontPostLogin) and [Exchange an authentication token](https://www.rebilly.com/catalog/all/Customer-authentication/PostAuthenticationTokenExchange).
+      Storefront operations are intended to be used directly from an untrusted browser.
+  - name: Storefront payment instruments
+    description: |-
+      Use these operations to access Storefront payment instruments.
+
+      Storefront operations interact directly with the customer,
+      and provide the customer with access to their own data.
+
+      To use Storefront operations, the customer must be issued a JWT with limited permissions. For more information, see [Create a session with username and password](https://www.rebilly.com/catalog/all/Storefront-account/StorefrontPostLogin) and [Exchange an authentication token](https://www.rebilly.com/catalog/all/Customer-authentication/PostAuthenticationTokenExchange).
+      Storefront operations are intended to be used directly from an untrusted browser.
+  - name: Storefront plans
+    description: |-
+      Use these operations to access Storefront plans.
+
+      Storefront operations interact directly with the customer,
+      and provide the customer with access to their own data.
+
+      To use Storefront operations,
+      the customer must be issued a JWT with limited permissions.
+      For more information, see [Create a session with username and password](https://www.rebilly.com/catalog/all/Storefront-account/StorefrontPostLogin) and [Exchange an authentication token](https://www.rebilly.com/catalog/all/Customer-authentication/PostAuthenticationTokenExchange).
+      Storefront operations are intended to be used directly from an untrusted browser.
+  - name: Storefront products
+    description: |-
+      Use these operations to access Storefront products.
+
+      Storefront operations interact directly with the customer,
+      and provide the customer with access to their own data.
+
+      To use Storefront operations,
+      the customer must be issued a JWT with limited permissions.
+      For more information,
+      see [Create a session with username and password](https://www.rebilly.com/catalog/all/Storefront-account/StorefrontPostLogin) and [Exchange an authentication token](https://www.rebilly.com/catalog/all/Customer-authentication/PostAuthenticationTokenExchange).
+      Storefront operations are intended to be used directly from an untrusted browser.
+  - name: Storefront purchases
+    description: |-
+      Use these operations to manage Storefront purchases.
+      Purchases are transactions that have been executed related to the purchase of goods or services.
+
+      Storefront operations interact directly with the customer,
+      and provide the customer with access to their own data.
+
+      To use Storefront operations,
+      the customer must be issued a JWT with limited permissions.
+      For more information, see [Create a session with username and password](https://www.rebilly.com/catalog/all/Storefront-account/StorefrontPostLogin) and [Exchange an authentication token](https://www.rebilly.com/catalog/all/Customer-authentication/PostAuthenticationTokenExchange).
+      Storefront operations are intended to be used directly from an untrusted browser.
+  - name: Storefront quotes
+    description: |-
+      Use these operations to access Storefront quotes.
+
+      Storefront operations interact directly with the customer,
+      and provide the customer with access to their own data.
+
+      To use Storefront operations, the customer must be issued a JWT with limited permissions. For more information, see [Create a session with username and password](https://www.rebilly.com/catalog/all/Storefront-account/StorefrontPostLogin) and [Exchange an authentication token](https://www.rebilly.com/catalog/all/Customer-authentication/PostAuthenticationTokenExchange).
+      Storefront operations are intended to be used directly from an untrusted browser.
+  - name: Storefront transactions
+    description: |-
+      Use these operations to access Storefront transactions.
+
+      Storefront operations interact directly with the customer,
+      and provide the customer with access to their own data.
+
+      To use Storefront operations,
+      the customer must be issued a JWT with limited permissions.
+      For more information, see [Create a session with username and password](https://www.rebilly.com/catalog/all/Storefront-account/StorefrontPostLogin) and [Exchange an authentication token](https://www.rebilly.com/catalog/all/Customer-authentication/PostAuthenticationTokenExchange).
+      Storefront operations are intended to be used directly from an untrusted browser.
+  - name: Storefront websites
+    description: |-
+      Use these operations to access Storefront websites.
+
+      Storefront operations interact directly with the customer,
+      and provide the customer with access to their own data.
+
+      To use Storefront operations,
+      the customer must be issued a JWT with limited permissions.
+      For more information, see [Create a session with username and password](https://www.rebilly.com/catalog/all/Storefront-account/StorefrontPostLogin) and [Exchange an authentication token](https://www.rebilly.com/catalog/all/Customer-authentication/PostAuthenticationTokenExchange).
+      Storefront operations are intended to be used directly from an untrusted browser.
   - name: Tags
     description: Use tags to organize and categorize customers or KYC documents based on keywords.
   - name: Tracking
@@ -1564,3 +1705,6 @@ webhooks:
   data-export-completed:
     post:
       $ref: ./webhooks/data-export-completed.yaml
+  order-delinquency-reached:
+    post:
+      $ref: ./webhooks/order-delinquency-reached.yaml
