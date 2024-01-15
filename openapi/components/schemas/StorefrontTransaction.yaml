@@ -179,6 +179,88 @@ properties:
     x-basic: true
     allOf:
       - $ref: ./GatewayName.yaml
+  gateway:
+    type: object
+    description: Related gateway information.
+    readOnly: true
+    properties:
+      response:
+        description: Gateway response.
+        type: object
+        properties:
+          code:
+            description: Gateway response code.
+            type:
+              - 'string'
+              - 'null'
+          message:
+            description: Gateway response message.
+            type:
+              - 'string'
+              - 'null'
+          type:
+            description: Gateway response type.
+            type:
+              - 'string'
+              - 'null'
+          originalCode:
+            description: Raw, unmapped gateway response code.
+            type:
+              - 'string'
+              - 'null'
+          originalMessage:
+            description: Raw, unmapped gateway response message.
+            type:
+              - 'string'
+              - 'null'
+      avsResponse:
+        description: Gateway Address Verification System (AVS) response.
+        type: object
+        properties:
+          code:
+            description: Response code.
+            type:
+              - 'string'
+              - 'null'
+          message:
+            description: Response message.
+            type:
+              - 'string'
+              - 'null'
+          originalCode:
+            description: Raw response code.
+            type:
+              - 'string'
+              - 'null'
+          originalMessage:
+            description: Raw response message.
+            type:
+              - 'string'
+              - 'null'
+      cvvResponse:
+        description: Gateway Card Verification Value (CVV) response.
+        type: object
+        properties:
+          code:
+            description: Response code.
+            type:
+              - 'string'
+              - 'null'
+          message:
+            description: Response message.
+            type:
+              - 'string'
+              - 'null'
+          originalCode:
+            description: Raw response code.
+            type:
+              - 'string'
+              - 'null'
+          originalMessage:
+            description: Raw response message.
+            type:
+              - 'string'
+              - 'null'
   customFields:
     $ref: ./ResourceCustomFields.yaml
   processedTime:
