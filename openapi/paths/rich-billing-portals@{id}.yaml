@@ -1,3 +1,5 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
 get:
   x-badge: Experimental
   x-products:
@@ -41,6 +43,15 @@ put:
   responses:
     '200':
       description: Billing portal updated.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RichBillingPortal.yaml
+    '201':
+      description: Billing portal created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
