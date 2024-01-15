@@ -333,6 +333,16 @@ properties:
       If this value is not passed during order creation,
       a [pending order TTL](https://www.rebilly.com/catalog/all/Organizations/PatchOrganization/#!t=request&path=settings/billing/pendingOrderTtl) setting is used to calculate the value.
     format: date-time
+  delinquencyPeriod:
+    type:
+      - 'string'
+      - 'null'
+    description: |-
+      Length of time, in ISO-8601 durations format,
+      before which an order with an invoice in past the due state is automatically canceled.
+      If the provided value is `null`, the order does not change state.
+    example: P7D
+    default: null
   poNumber:
     description: Purchase order number displayed on the issued invoices.
     type:
