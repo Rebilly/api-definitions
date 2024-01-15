@@ -4,14 +4,14 @@ get:
     - Core
   tags:
     - Billing portals
-  summary: Retrieve billing portals
+  summary: Retrieve rich billing portals
   operationId: GetRichBillingPortalCollection
   x-sdk-operation-name: getAll
   security:
     - SecretApiKey: []
     - JWT: []
     - ApplicationJWT: []
-  description: Retrieves a list of billing portals.
+  description: Retrieves a list of rich billing portals.
   parameters:
     - $ref: ../components/parameters/collectionFilter.yaml
     - $ref: ../components/parameters/collectionSort.yaml
@@ -20,7 +20,7 @@ get:
     - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
-      description: List of billing portals retrieved.
+      description: List of rich billing portals retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
@@ -44,20 +44,20 @@ post:
     - Core
   tags:
     - Billing portals
-  summary: Create a billing portal
+  summary: Create a rich billing portal
   operationId: PostRichBillingPortal
   x-sdk-operation-name: create
-  description: Creates a billing portal.
+  description: Creates a rich billing portal.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/RichBillingPortal.yaml
-    description: Billing portal resource.
+    description: Rich billing portal resource.
     required: true
   responses:
     '201':
-      description: Billing portal created.
+      description: Rich billing portal created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
