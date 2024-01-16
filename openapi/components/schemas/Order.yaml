@@ -71,12 +71,12 @@ properties:
         - $ref: ./OneTimeSale.yaml
   invoiceTimeShift:
     description: |-
-      Shifts issue time and due time of invoices for this subscription.
+      Shifts issue time and due time of invoices for this order.
 
       This setting overrides plan settings.
       To use plan settings, set this value to `null`.
 
-      To use multiple plans in one subscription,
+      To use multiple plans in one order,
       all plans must have the same billing period,
       this property enables the customer to subscribe to different plans.
     example: null
@@ -116,7 +116,7 @@ properties:
     description: |-
       Specifies if payment attempts are made automatically.
       If autopay is enabled, the payment is retrieved from the customer on the renewal date using the payment instrument that is set at `paymentInstrumentId`,
-      or the default payment instrument on the subscription.
+      or the default payment instrument on the order.
     type: boolean
     default: true
   revision:
