@@ -1,8 +1,4 @@
 type: object
-required:
-  - websiteId
-  - customerId
-  - items
 properties:
   id:
     readOnly: true
@@ -20,9 +16,7 @@ properties:
   action:
     description: |-
       Action of the quote for churned/canceled order reactivation.
-      On accept quote new invoice is issued to be and linked to `invoiceId`. Quote items are applied to the order.
-      The related order will have `pending` status.
-      Once the invoice is paid, the order becomes active on `settings.reactivate.effectiveTime` or immediately if `settings.reactivate.effectiveTime` is omitted.
+      On acceptance quote items are applied to the order and order is reactivated.
     type: string
     enum:
       - reactivate
@@ -30,25 +24,21 @@ properties:
   acceptanceConditions:
     type: array
     writeOnly: true
-    description: Conditions that must be met for the quote to be accepted.
+    description: If conditions are fulfilled the quote is automatically accepted.
     items:
       type: string
       enum:
         - customer
-        - signature
         - payment
-        - partial-payment
       x-enumDescriptions:
         customer: Quote can be accepted by customer.
-        signature: Quote can be accepted if merchant received the signed quote from the customer.
         payment: Related invoice must be paid in full.
-        partial-payment: Related invoice must be paid in full or partially paid.
-    example: ['customer', 'payment']
+    example: ['payment']
     default: ['customer']
   acceptanceFulfillment:
     type: array
     readOnly: true
-    description: Conditions with fulfillment flag.
+    description: List of `acceptanceConditions` with fulfillment status.
     items:
       type: object
       properties:
@@ -56,9 +46,8 @@ properties:
           type: string
           enum:
             - customer
-            - signature
             - payment
-            - partial-payment
+            - merchant
         isFulfilled:
           type: boolean
   status:
@@ -86,15 +75,11 @@ properties:
   orderId:
     description: ID of the order.
     readOnly: true
-    type:
-      - 'string'
-      - 'null'
+    type: string
     maxLength: 50
     example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
   invoiceId:
-    type:
-      - 'string'
-      - 'null'
+    type: string
     description: ID of the payment invoice.
     readOnly: true
     maxLength: 50

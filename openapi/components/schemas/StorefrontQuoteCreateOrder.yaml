@@ -1,8 +1,4 @@
 type: object
-required:
-  - websiteId
-  - customerId
-  - items
 properties:
   id:
     readOnly: true
@@ -20,32 +16,29 @@ properties:
   action:
     description: |-
       Action of the quote.
-      On accept quote new order is created. `orderId` and `invoiceId` are filled with new generated values from the order.
+      On accept quote new order is created. `orderId` is filled with new generated value from the order.
     type: string
     enum:
       - create
+    example: create
   acceptanceConditions:
     type: array
     writeOnly: true
-    description: Conditions that must be met for the quote to be accepted.
+    description: If conditions are fulfilled the quote is automatically accepted.
     items:
       type: string
       enum:
         - customer
-        - signature
         - payment
-        - partial-payment
       x-enumDescriptions:
         customer: Quote can be accepted by customer.
-        signature: Quote can be accepted if merchant received the signed quote from the customer.
         payment: Related invoice must be paid in full.
-        partial-payment: Related invoice must be paid in full or partially paid.
-    example: ['customer', 'payment']
+    example: ['payment']
     default: ['customer']
   acceptanceFulfillment:
     type: array
     readOnly: true
-    description: Conditions with fulfillment flag.
+    description: List of `acceptanceConditions` with fulfillment status.
     items:
       type: object
       properties:
@@ -53,9 +46,8 @@ properties:
           type: string
           enum:
             - customer
-            - signature
             - payment
-            - partial-payment
+            - merchant
         isFulfilled:
           type: boolean
   status:
@@ -89,9 +81,7 @@ properties:
     maxLength: 50
     example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
   invoiceId:
-    type:
-      - 'string'
-      - 'null'
+    type: string
     description: ID of the payment invoice.
     readOnly: true
     maxLength: 50
@@ -437,8 +427,8 @@ properties:
         rel:
           description: |-
             Type of link.
-            If the quote is accepted, the customer is redirected to `invoicePaymentFormUrl`
-            to pay the initial invoice using one of the methods which are available to the customer.
+            If the quote is issued, a customer can be redirected to the `invoicePaymentFormUrl` value
+            to pay the related invoice using one of the methods which are available to the customer.
           type: string
           enum:
             - self

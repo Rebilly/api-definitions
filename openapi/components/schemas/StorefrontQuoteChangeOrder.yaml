@@ -1,8 +1,4 @@
 type: object
-required:
-  - websiteId
-  - customerId
-  - items
 properties:
   id:
     readOnly: true
@@ -20,8 +16,7 @@ properties:
   action:
     description: |-
       Action of the quote for change order items.
-      On accept quote interim invoice is issued and linked to `invoiceId`.
-      After the invoice is paid changed items are applied to an order with `orderId`.
+      On acceptance quote items are applied to the related order.
     type: string
     enum:
       - change
@@ -29,25 +24,21 @@ properties:
   acceptanceConditions:
     type: array
     writeOnly: true
-    description: Conditions that must be met for the quote to be accepted.
+    description: If conditions are fulfilled the quote is automatically accepted.
     items:
       type: string
       enum:
         - customer
-        - signature
         - payment
-        - partial-payment
       x-enumDescriptions:
         customer: Quote can be accepted by customer.
-        signature: Quote can be accepted if merchant received the signed quote from the customer.
         payment: Related invoice must be paid in full.
-        partial-payment: Related invoice must be paid in full or partially paid.
-    example: ['customer', 'payment']
-    default: ['customer']
+    example: [ 'payment' ]
+    default: [ 'customer' ]
   acceptanceFulfillment:
     type: array
     readOnly: true
-    description: Conditions with fulfillment flag.
+    description: List of `acceptanceConditions` with fulfillment status.
     items:
       type: object
       properties:
@@ -55,9 +46,8 @@ properties:
           type: string
           enum:
             - customer
-            - signature
             - payment
-            - partial-payment
+            - merchant
         isFulfilled:
           type: boolean
   status:
@@ -85,15 +75,11 @@ properties:
   orderId:
     description: ID of the order.
     readOnly: true
-    type:
-      - 'string'
-      - 'null'
+    type: string
     maxLength: 50
     example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
   invoiceId:
-    type:
-      - 'string'
-      - 'null'
+    type: string
     description: ID of the payment invoice.
     readOnly: true
     maxLength: 50
@@ -455,9 +441,9 @@ properties:
           type: string
         rel:
           description: |-
-            Type of link. 
-            If the quote is accepted, the customer is redirected to `invoicePaymentFormUrl`
-            to pay the initial invoice using one of the methods which are available to the customer.
+            Type of link.
+            If the quote is issued, a customer can be redirected to the `invoicePaymentFormUrl` value
+            to pay the related invoice using one of the methods which are available to the customer.
           type: string
           enum:
             - self
@@ -470,6 +456,8 @@ properties:
       customer:
         type: object
       website:
+        type: object
+      order:
         type: object
       invoice:
         type: object
