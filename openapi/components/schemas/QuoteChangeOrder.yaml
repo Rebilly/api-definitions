@@ -23,8 +23,7 @@ properties:
   action:
     description: |-
       Action of the quote for change order items.
-      On accept quote interim invoice is issued and linked to `invoiceId`.
-      After the invoice is paid changed items are applied to an order with `orderId`.
+      On acceptance quote items are applied to the related order.
     type: string
     enum:
       - change
@@ -32,25 +31,21 @@ properties:
   acceptanceConditions:
     type: array
     writeOnly: true
-    description: Conditions that must be met for the quote to be accepted.
+    description: If conditions are fulfilled the quote is automatically accepted.
     items:
       type: string
       enum:
         - customer
-        - signature
         - payment
-        - partial-payment
       x-enumDescriptions:
         customer: Quote can be accepted by customer.
-        signature: Quote can be accepted if merchant received the signed quote from the customer.
         payment: Related invoice must be paid in full.
-        partial-payment: Related invoice must be paid in full or partially paid.
-    example: ['customer', 'payment']
+    example: ['payment']
     default: ['customer']
   acceptanceFulfillment:
     type: array
     readOnly: true
-    description: Conditions with fulfillment flag.
+    description: List of `acceptanceConditions` with fulfillment status.
     items:
       type: object
       properties:
@@ -58,22 +53,17 @@ properties:
           type: string
           enum:
             - customer
-            - signature
             - payment
-            - partial-payment
+            - merchant
         isFulfilled:
           type: boolean
   orderId:
     description: ID of the related order.
-    type:
-      - 'string'
-      - 'null'
+    type: string
     maxLength: 50
     example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
   invoiceId:
-    type:
-      - 'string'
-      - 'null'
+    type: string
     description: ID of the payment invoice.
     readOnly: true
     maxLength: 50
@@ -451,7 +441,7 @@ properties:
       - 'array'
       - 'null'
     description: |-
-      List of coupons to redeem on the customer and apply to the order when the quote is accepted.
+      List of coupons to redeem on the customer and apply to the related invoice.
 
       For more information, see [Coupons](https://www.rebilly.com/docs/settings/coupons-and-discounts/).
     items:
@@ -468,11 +458,15 @@ properties:
           description: Link URL.
           type: string
         rel:
-          description: Type of link.
+          description: |-
+            Type of link.
+            If the quote is issued, a customer can be redirected to the `invoicePaymentFormUrl` value
+            to pay the related invoice using one of the methods which are available to the customer.
           type: string
           enum:
             - self
             - quoteAcceptanceFormUrl
+            - invoicePaymentFormUrl
   _embedded:
     type: object
     description: Embedded objects that are requested by the `expand` query parameter.
@@ -483,4 +477,6 @@ properties:
       website:
         type: object
       order:
+        type: object
+      invoice:
         type: object
