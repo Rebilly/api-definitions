@@ -1,0 +1,24 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Storefront
+  tags:
+    - Storefront upcoming invoices
+  summary: Retrieve a Upcoming Invoice
+  operationId: StorefrontGetUpcomingInvoice
+  x-sdk-operation-name: get
+  security:
+    - CustomerJWT: []
+  description: Retrieves an upcoming invoice with a specified ID.
+  responses:
+    200:
+      description: Upcoming invoice retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/StorefrontUpcomingInvoice.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
