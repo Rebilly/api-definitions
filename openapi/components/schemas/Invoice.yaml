@@ -337,11 +337,15 @@ properties:
     description: |-
       Date and time when the related order is considered delinquent and gets canceled,
       which abandons this and other order's invoices with a status `unpaid` or `past-due`.
+      If it is `null`, this invoice won't make the related order delinquent.
+      If `dueTime` becomes higher than field's value, it becomes equal to `dueTime`.
+
       If the invoice is not related to an order, this field can only be `null`.
     type:
       - 'string'
       - 'null'
     format: date-time
+    default: null
   _links:
     type: array
     description: Related links.
