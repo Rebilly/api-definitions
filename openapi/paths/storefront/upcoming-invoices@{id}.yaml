@@ -4,16 +4,20 @@ get:
   x-products:
     - Storefront
   tags:
-    - Storefront upcoming invoices
-  summary: Retrieve a Upcoming Invoice
-  operationId: StorefrontGetUpcomingInvoice
+    - Storefront orders
+  summary: Retrieve an upcoming subscription order invoice
+  operationId: StorefrontGetOrderUpcomingInvoice
   x-sdk-operation-name: get
   security:
     - CustomerJWT: []
   description: Retrieves an upcoming invoice with a specified ID.
   responses:
     200:
-      description: Upcoming invoice retrieved.
+      description: |-
+        Retrieves an upcoming invoice for a specified subscription order.
+        An upcoming invoice is an invoice that has not been issued.
+        It functions as a preview of the next invoice for the order.
+        For more information, see [Invoices](https://www.rebilly.com/docs/dev-docs/invoices/).
       content:
         application/json:
           schema:
@@ -22,3 +26,5 @@ get:
       $ref: ../../components/responses/Unauthorized.yaml
     403:
       $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml
