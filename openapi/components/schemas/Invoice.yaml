@@ -333,6 +333,15 @@ properties:
     readOnly: true
     allOf:
       - $ref: ./OrganizationId.yaml
+  delinquencyTime:
+    description: |-
+      Date and time when the related order is considered delinquent and gets canceled,
+      which abandons this and other order's invoices with a status `unpaid` or `past-due`.
+      If the invoice is not related to an order, this field can only be `null`.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
   _links:
     type: array
     description: Related links.
