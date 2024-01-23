@@ -75,8 +75,10 @@ properties:
   invoiceIssueTimeShift:
     description: |-
       Invoice issue time shift interval in ISO-8601 format.
+      
+      This field adjusts the issue date and time of renewal invoices for the order.
 
-      Interval supports `-/+` signs.
+      This interval value supports both `-` and `+` symbols.
     type:
       - 'string'
       - 'null'
@@ -84,8 +86,11 @@ properties:
   invoiceDueTimeShift:
     description: |-
       Invoice due time shift interval in ISO-8601 format.
+      
+      This field adjusts when the payment is due for the order.
+      If autopay is configured, payment is collected automatically on this date.
 
-      Interval supports only `+` sign.
+      This interval value supports the `+` symbol.
     type:
       - 'string'
       - 'null'
