@@ -63,7 +63,9 @@ properties:
     readOnly: true
     $ref: ./CurrencyCode.yaml
   initialInvoiceId:
-    description: ID of the initial invoice (`null` for one-time orders).
+    description: |-
+      ID of the initial invoice.
+      This value is `null` for one-time orders.
     readOnly: true
     type:
       - 'string'
@@ -118,7 +120,7 @@ properties:
     description: |-
       Date and time when the pending order is automatically abandoned.
       If this value is not passed during order creation,
-      a [pending order TTL](https://www.rebilly.com/catalog/all/Organizations/PatchOrganization/#!t=request&path=settings/billing/pendingOrderTtl) setting is used to calculate the value.
+      the [pending order TTL](https://www.rebilly.com/catalog/all/Organizations/PatchOrganization/#!t=request&path=settings/billing/pendingOrderTtl) setting is used to calculate the value.
     format: date-time
   couponIds:
     type:
@@ -135,7 +137,7 @@ properties:
       - If an empty array is supplied, all applied coupon redemptions are canceled.
       - If a list of coupons is supplied, unapplied coupons in the list are applied.
         Coupons that have already been applied do not change state.
-        Applied coupons that are not supplied in list are canceled.
+        Applied coupons that are not supplied in the list are canceled.
 
       If the list of applied coupons on a pending order is changed by this parameter during an order update, the invoice for the order is reissued.
     writeOnly: true
@@ -143,7 +145,7 @@ properties:
       type: string
       description: ID of the coupon.
   poNumber:
-    description: Purchase order number displayed on the issued invoices.
+    description: Purchase order number that is displayed on the issued invoices.
     type:
       - 'string'
       - 'null'
@@ -151,7 +153,7 @@ properties:
   shipping:
     $ref: ./Shipping.yaml
   notes:
-    description: Notes for the customer displayed on the order invoice.
+    description: Notes for the customer that are displayed on the order invoice.
     type: string
   revision:
     description: |-
