@@ -1,0 +1,34 @@
+content:
+  application/json:
+    schema:
+      properties:
+        productId:
+          description: ID of the changed product.
+          type: string
+        eventType:
+          type: string
+          description: Type of webhook event.
+          enum:
+            - product-activated
+            - product-deactivated
+        _embedded:
+          type: object
+          description: Embedded objects.
+          properties:
+            product:
+              $ref: ../../schemas/Product.yaml
+        _links:
+          type: array
+          description: Related links.
+          items:
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - product
+description: Product webhook request body resource.
