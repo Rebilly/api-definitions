@@ -7,7 +7,7 @@ post:
   tags:
     - Storefront orders
   summary: Change subscription order items
-  operationId: StorefrontPostSubscriptionItemsChange
+  operationId: StorefrontPostOrderItemsChange
   x-sdk-operation-name: changeItems
   security:
     - CustomerJWT: []
@@ -16,7 +16,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../../components/requestBodies/storefront/PostSubscriptionItemsChange.yaml
+          $ref: ../../components/requestBodies/storefront/PostOrderItemsChange.yaml
     description: Change items request.
     required: true
   responses:
@@ -28,7 +28,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/StorefrontOrder.yaml
+            $ref: ../../components/schemas/Quote.yaml
     '401':
       $ref: ../../components/responses/Unauthorized.yaml
     '403':
