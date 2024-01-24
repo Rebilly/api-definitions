@@ -63,10 +63,17 @@ allOf:
             description: Automatic capture delay in hours.
             minimum: 0
             default: 0
-          enableStoredCredentials:
-            type: boolean
-            description: Specifies whether to enable stored credentials.
-            default: false
+          enforceStoredCredentials:
+            type: string
+            description: |-
+              Specifies whether to enforce stored credentials.
+              `mit-enabled` means that stored credentials are sent only on merchant initiated transactions. This is the expected usage.
+              `always-enabled` means that stored credentials are also used, if available, for customer facing transactions.
+            enum:
+              - disabled
+              - mit-enabled
+              - always-enabled
+            default: disabled
           merchantInitiatedReason:
             type: string
             description: Value to send with merchant-initiated transactions.
