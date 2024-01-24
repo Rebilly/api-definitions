@@ -335,12 +335,13 @@ properties:
       - $ref: ./OrganizationId.yaml
   delinquencyTime:
     description: |-
-      Date and time when the related order is considered delinquent and gets canceled,
-      which abandons this and other order's invoices with a status `unpaid` or `past-due`.
-      If it is `null`, this invoice won't make the related order delinquent.
-      If `dueTime` becomes higher than field's value, it becomes equal to `dueTime`.
+      Date and time when the related order is considered delinquent, and is canceled.
+      The current invoice is abandoned along with order invoices that have the `unpaid` or `past-due` status.
+      If this value is `null`, no delinquency time is configured.
+      If the `dueTime` of the order becomes greater than the `delinquencyTime` value, 
+      the `delinquencyTime` value becomes equal to `dueTime`.
 
-      If the invoice is not related to an order, this field can only be `null`.
+      If an invoice is not related to an order, this field can only be `null`.
     type:
       - 'string'
       - 'null'
