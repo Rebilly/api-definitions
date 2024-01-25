@@ -1,0 +1,40 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: itemId
+    in: path
+    description: ID of subscription item.
+    required: true
+    schema:
+      type: string
+post:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Change subscription order item
+  operationId: PutSubscriptionItem
+  x-sdk-operation-name: changeItem
+  description: Changes subscription order item. This is an experimental endpoint, can be changed or removed in the future.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/SubscriptionItemChange.yaml
+    description: Change item request.
+    required: true
+  responses:
+    '201':
+      description: Order item changed.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OrderItem.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
