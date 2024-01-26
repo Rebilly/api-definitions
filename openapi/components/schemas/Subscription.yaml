@@ -247,7 +247,10 @@ properties:
       - 'null'
     description: |-
       Length of time, in ISO-8601 durations format,
-      before which an order with an invoice in past the due state is automatically canceled.
+      which is added to the due time of the order when setting the delinquency time for all related invoices.
+      When the delinquency time of an invoice is reached, the order is automatically canceled. 
+      The current invoice is abandoned along with order invoices that have the `unpaid` or `past-due` status.
+
       If the provided value is `null`, the order does not change state.
     example: P7D
     default: null
