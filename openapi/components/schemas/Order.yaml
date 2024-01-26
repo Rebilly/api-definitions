@@ -124,6 +124,26 @@ properties:
     oneOf:
       - $ref: ./ContactObject.yaml
       - type: 'null'
+  startTime:
+    description: |-
+      Date and time when the subscription starts.
+      If this value is `null`, the current time is used.
+      This value cannot be more than one service period in the past.
+    type:
+      - 'string'
+      - 'null'
+    x-sortable: true
+    x-basic: true
+    example: null
+    format: date-time
+  activationTime:
+    description: Date and time when the order is activated.
+    x-sortable: true
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
   autopay:
     description: |-
       Specifies if payment attempts are made automatically.

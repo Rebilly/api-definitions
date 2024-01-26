@@ -113,18 +113,6 @@ properties:
     properties:
       periodAnchorInstruction:
         $ref: ./ServicePeriodAnchorInstruction.yaml
-  startTime:
-    description: |-
-      Date and time when the subscription starts.
-      If this value is `null`, the current time is used.
-      This value cannot be more than one service period in the past.
-    type:
-      - 'string'
-      - 'null'
-    x-sortable: true
-    x-basic: true
-    example: null
-    format: date-time
   endTime:
     description: Date and time when the subscription ends.
     x-sortable: true
@@ -217,14 +205,6 @@ properties:
     minItems: 1
     items:
       $ref: ./OrderItem.yaml
-  activationTime:
-    description: Date and time when the order is activated.
-    x-sortable: true
-    type:
-      - 'string'
-      - 'null'
-    format: date-time
-    readOnly: true
   voidTime:
     description: Date and time when the order is voided.
     type:
@@ -248,7 +228,7 @@ properties:
     description: |-
       Length of time, in ISO-8601 durations format,
       which is added to the due time of the order when setting the delinquency time for all related invoices.
-      When the delinquency time of an invoice is reached, the order is automatically canceled. 
+      When the delinquency time of an invoice is reached, the order is automatically canceled.
       The current invoice is abandoned along with order invoices that have the `unpaid` or `past-due` status.
 
       If the provided value is `null`, the order does not change state.
