@@ -16,24 +16,7 @@ properties:
     maxLength: 50
     example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
   currency:
-    x-sortable: true
-    x-basic: true
     $ref: ./CurrencyCode.yaml
-  customerId:
-    x-basic: true
-    allOf:
-      - $ref: ./CustomerId.yaml
-  revision:
-    description: |-
-      Number of times the upcoming invoice data has changed.
-
-      Use the revision number when analyzing webhook data to
-      determine if a change should take precedence over the current
-      representation.
-    type: integer
-  organizationId:
-    allOf:
-      - $ref: ./OrganizationId.yaml
   items:
     type: array
     description: Upcoming invoice items array.
@@ -42,74 +25,27 @@ properties:
   amount:
     description: Amount of the invoice.
     type: number
-    x-type: Money
-    x-sortable: true
-    x-basic: true
     format: double
     readOnly: true
   amountDue:
     description: Amount that is due on the invoice.
     type: number
-    x-type: Money
-    x-sortable: true
     format: double
     readOnly: true
   subtotalAmount:
     description: Subtotal amount of the invoice.
     type: number
-    x-type: Money
     format: double
     readOnly: true
   discountAmount:
     description: Discount amount that is applied to the invoice.
     type: number
-    x-type: Money
     format: double
     readOnly: true
   shipping:
     $ref: ./Shipping.yaml
   tax:
     $ref: ./Taxes.yaml
-  organizationTaxIdNumber:
-    description: Organization tax ID number that is displayed on the invoice.
-    type:
-      - 'object'
-      - 'null'
-    required:
-      - type
-      - value
-    properties:
-      type:
-        type: string
-        description: Type of the tax ID number.
-        enum:
-          - eu-vat
-          - other
-        example: eu-vat
-      value:
-        type: string
-        description: Value of the tax ID number.
-        example: GB980780684
-  customerTaxIdNumber:
-    description: Customer tax ID number that is displayed on the invoice.
-    type:
-      - 'object'
-      - 'null'
-    required:
-      - type
-      - value
-    properties:
-      type:
-        type: string
-        description: Type of the tax ID number.
-        enum:
-          - eu-vat
-          - other
-        example: eu-vat
-      value:
-        type: string
-        description: Value of the tax ID number.
-        example: GB980780684
   billingAddress:
     description: Billing address of the invoice.
     $ref: ./ContactObject.yaml
@@ -153,13 +89,9 @@ properties:
   dueTime:
     description: Date and time when the invoice is due for payment.
     type: string
-    x-sortable: true
     format: date-time
   issuedTime:
     description: Date and time when the invoice is issued.
-    x-label: Date Issued
-    x-sortable: true
-    x-basic: true
     $ref: ./ServerTimestamp.yaml
   createdTime:
     $ref: ./CreatedTime.yaml
@@ -179,21 +111,3 @@ properties:
           type: string
           enum:
             - self
-            - website
-            - customer
-            - organization
-            - subscription
-            - attachments
-            - leadSource
-  _embedded:
-    type: object
-    description: Embedded objects that are requested by the `expand` query parameter.
-    properties:
-      customer:
-        type: object
-      website:
-        type: object
-      organization:
-        type: object
-      leadSource:
-        type: object
