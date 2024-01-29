@@ -22,7 +22,7 @@ properties:
   action:
     description: |-
       Action of the quote.
-      When a quote is accepted, a new order is created. 
+      When a quote is accepted, a new order is created.
       The `orderId` value is filled with a new generated value from the order.
     type: string
     enum:
@@ -31,7 +31,7 @@ properties:
   acceptanceConditions:
     type: array
     writeOnly: true
-    description: Conditions must be met for the quote to be automatically accepted.
+    description: Conditions that must be met for the quote to be automatically accepted.
     items:
       type: string
       enum:
@@ -59,11 +59,11 @@ properties:
           type: boolean
   orderId:
     description: ID of the related order.
+    readOnly: true
     type:
       - 'string'
       - 'null'
     maxLength: 50
-    readOnly: true
     example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
   invoiceId:
     type: string

@@ -16,7 +16,7 @@ properties:
   action:
     description: |-
       Action of the quote.
-      When a quote is accepted, a new order is created. 
+      When a quote is accepted, a new order is created.
       The `orderId` value is filled with a new generated value from the order.
     type: string
     enum:
@@ -25,7 +25,7 @@ properties:
   acceptanceConditions:
     type: array
     writeOnly: true
-    description: Conditions must be met for the quote to be automatically accepted.
+    description: Conditions that must be met for the quote to be automatically accepted.
     items:
       type: string
       enum:
@@ -51,8 +51,22 @@ properties:
             - organization
         isFulfilled:
           type: boolean
+  orderId:
+    description: ID of the related order.
+    readOnly: true
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 50
+    example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
+  invoiceId:
+    type: string
+    description: ID of the payment invoice.
+    readOnly: true
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
   status:
-    description: Status of quote.
+    description: Status of the quote.
     type: string
     readOnly: true
     enum:
@@ -73,22 +87,9 @@ properties:
     $ref: ./WebsiteId.yaml
   customerId:
     $ref: ./CustomerId.yaml
-  orderId:
-    description: ID of the order.
-    readOnly: true
-    type:
-      - 'string'
-      - 'null'
-    maxLength: 50
-    example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
-  invoiceId:
-    type: string
-    description: ID of the payment invoice.
-    readOnly: true
-    maxLength: 50
-    example: in_0YVF9605RKC62BP14NE2R7V2XT
   items:
     type: array
+    description: Items included in the quote.
     minItems: 1
     items:
       type: object
@@ -443,6 +444,8 @@ properties:
       customer:
         type: object
       website:
+        type: object
+      order:
         type: object
       invoice:
         type: object
