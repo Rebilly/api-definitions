@@ -1,6 +1,6 @@
 parameters:
   - $ref: ../../components/parameters/resourceId.yaml
-get:
+post:
   x-products:
     - Storefront
   tags:
@@ -12,7 +12,7 @@ get:
     - CustomerJWT: []
   description: Creates an email message to resend Invoice
   responses:
-    200:
+    201:
       description: Email message created.
       content:
         application/json:
@@ -23,4 +23,4 @@ get:
     403:
       $ref: ../../components/responses/Forbidden.yaml
     409:
-      $ref: ../../components/responses/ConflictFound.yaml
+      $ref: ../../components/responses/Conflict.yaml
