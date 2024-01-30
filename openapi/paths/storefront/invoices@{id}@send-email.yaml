@@ -11,13 +11,14 @@ post:
   security:
     - CustomerJWT: []
   description: Creates an email message to resend Invoice
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/requestBodies/PostInvoiceEmailMessage.yaml
   responses:
-    201:
+    204:
       description: Email message created.
-      content:
-        application/json:
-          schema:
-            $ref: ../../components/schemas/EmailMessage.yaml
     401:
       $ref: ../../components/responses/Unauthorized.yaml
     403:
