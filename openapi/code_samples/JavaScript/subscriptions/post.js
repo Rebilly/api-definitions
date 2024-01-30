@@ -3,7 +3,7 @@ const data = {
     customerId: 'foobar-0001',
     websiteId: 'my-main-website',
     items: [
-        { planId: 'my-plan-id', quantity: '1' },
+        { plan: { id: 'my-plan-id' }, quantity: 1 },
     ],
     // you can append this subscription to
     // an existing invoice by passing its ID
@@ -26,7 +26,6 @@ const data = {
             primary: true
         }],
     },
-    quantity: 1,
     customFields: {}
 };
 
