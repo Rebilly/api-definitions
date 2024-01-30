@@ -17,6 +17,36 @@ properties:
     enum:
       - subscription-order
       - one-time-order
+  acceptanceConditions:
+    type: array
+    writeOnly: true
+    description: Conditions that must be met for the quote to be automatically accepted.
+    items:
+      type: string
+      enum:
+        - customer
+        - payment
+        - organization
+      x-enumDescriptions:
+        customer: Quote is accepted when the customer accepts the quote.
+        payment: Quote is accepted when the customer pays the quote.
+    example: ['payment']
+    default: ['customer']
+  acceptanceFulfillment:
+    type: array
+    readOnly: true
+    description: List of `acceptanceConditions` with fulfillment status.
+    items:
+      type: object
+      properties:
+        condition:
+          type: string
+          enum:
+            - customer
+            - payment
+            - organization
+        isFulfilled:
+          type: boolean
   status:
     description: Status of the quote.
     type: string
