@@ -1,0 +1,42 @@
+content:
+  application/json:
+    schema:
+      properties:
+        depositRequestId:
+          description: ID of the deposit request.
+          type: string
+          maxLength: 50
+          example: dep_req_0YVJ65BSGYC3EAT58SEX8KY6J7
+        transactionId:
+          type: string
+          description: ID of the transaction that is used in the deposit request.
+          maxLength: 50
+          example: txn_0YVDTQJ8YWDGQACV2N2N5SPWQ0
+        eventType:
+          type: string
+          description: Type of webhook event.
+          enum:
+            - deposit-request-completed
+        _embedded:
+          type: object
+          description: Embedded objects.
+          properties:
+            depositRequest:
+              $ref: ../../schemas/DepositRequest.yaml
+            transaction:
+                $ref: ../../schemas/Transaction.yaml
+        _links:
+          type: array
+          description: Related links.
+          items:
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - deposit
+description: DepositRequest webhook request body resource.
