@@ -493,12 +493,13 @@ properties:
       URL where a server-to-server POST notification is sent.
       This notification is sent when the transaction result is finalized after a timeout or an offsite interaction.
 
-      Do not trust this notification alone,
-      complete a GET request to confirm the result of the transaction.
+      Do not interpret this notification as a confirmation,
+      complete a `GET` request to confirm the result of the transaction.
       To ensure the request is not reattempted,
-      when the result is confirmed, respond with a 2xx HTTP status code.
+      when the result is confirmed, respond with a `2xx` HTTP status code.
 
       The following placeholders are available to use in this URI: `{id}` and `{result}`.
+      These placeholders are replaced the with the transaction ID and result accordingly.
     type:
       - 'string'
       - 'null'
@@ -595,6 +596,22 @@ properties:
     readOnly: true
     allOf:
       - $ref: ./OrganizationId.yaml
+  depositRequestId:
+    readOnly: true
+    type:
+      - 'string'
+      - 'null'
+    description: ID of the deposit request if applicable. The created transaction is based on the properties of this deposit request.
+    maxLength: 50
+    example: dep_req_0YVJ65BSGYC3EAT58SEX8KY6J7
+  payoutRequestId:
+    readOnly: true
+    type:
+      - 'string'
+      - 'null'
+    description: ID of the payout request if applicable. The created transaction is based on the properties of this payout request.
+    maxLength: 50
+    example: pout_req_0YVJ65BSGYC3EAT58SEX8KY6J7
   _links:
     type: array
     description: Related links.
