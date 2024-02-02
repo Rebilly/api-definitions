@@ -35,3 +35,40 @@ get:
       $ref: ../../components/responses/Unauthorized.yaml
     403:
       $ref: ../../components/responses/Forbidden.yaml
+post:
+  x-badge: Experimental
+  x-products:
+    - Storefront
+  tags:
+    - Storefront orders
+  summary: Create an order
+  operationId: StorefrontPostOrder
+  x-sdk-operation-name: create
+  description: Creates a subscription order in a billing portal.
+  security:
+    - CustomerJWT: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/requestBodies/storefront/PostOrder.yaml
+    description: Create an order request.
+    required: true
+  responses:
+    '201':
+      description: Order created.
+      headers:
+        Location:
+          $ref: ../../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/StorefrontOrder.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../../components/responses/NotFound.yaml
+    '422':
+      $ref: ../../components/responses/ValidationError.yaml
