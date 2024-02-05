@@ -1,0 +1,59 @@
+type: object
+properties:
+  id:
+    type: string
+    description: ID of the billing portal.
+    readOnly: true
+    maxLength: 50
+    example: bill_prt_0YV7K5TYV5D1P9ZNKDT39KZC3C
+  websiteId:
+    $ref: ./WebsiteId.yaml
+  name:
+    type: string
+    description: Name of the billing portal.
+  status:
+    description: Status of the billing portal.
+    type: string
+    enum:
+      - active
+      - inactive
+  token:
+    description: Token used for session authentication.
+    type: string
+    readOnly: true
+  plans:
+    type: array
+    minItems: 1
+    description: Details of selected plans.
+    items:
+      allOf:
+        - type: object
+          description: Plan details.
+          properties:
+            id:
+              type: string
+              description: ID of the plan.
+              maxLength: 50
+              example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+        - $ref: ./SubscriptionOrderPlan.yaml
+  addons:
+    type: array
+    description: Details of selected add-ons.
+    items:
+      allOf:
+        - type: object
+          description: Add-on plan details.
+          properties:
+            id:
+              type: string
+              description: ID of the add-on plan.
+              maxLength: 50
+              example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+        - $ref: ./SubscriptionOrderPlan.yaml
+    default: []
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml

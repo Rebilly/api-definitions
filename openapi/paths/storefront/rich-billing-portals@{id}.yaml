@@ -1,0 +1,26 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+get:
+  x-badge: Experimental
+  x-products:
+    - Storefront
+  tags:
+    - Storefront billing portals
+  summary: Retrieve a rich billing portal
+  operationId: StorefrontGetRichBillingPortal
+  x-sdk-operation-name: get
+  security: []
+  description: Retrieves a rich billing portal.
+  responses:
+    '200':
+      description: Billing portal retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/StorefrontRichBillingPortal.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../../components/responses/NotFound.yaml
