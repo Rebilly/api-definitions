@@ -173,7 +173,7 @@ properties:
           enum:
             - self
             - deposit
-            - transaction
+            - transactions
   _embedded:
     type: object
     description: Embedded objects that are requested by the `expand` query parameter.
@@ -183,5 +183,7 @@ properties:
         type: object
       website:
         type: object
-      transaction:
-        type: object
+      transactions:
+        type: array
+        maxItems: 10
+        description: Most recent associated transactions.
