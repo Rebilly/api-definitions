@@ -32,12 +32,14 @@ properties:
     enum:
       - created
       - pending
+      - initiated
       - completed
       - expired
     x-enumDescriptions:
       created: Request is created, but it has not been visited by a customer. This is a temporary state.
       pending: Request has been visited by a customer, but no funds have been deposited yet. This is a temporary state.
-      completed: A funds deposit transaction has been initiated. This is a permanent state.
+      initiated: A funds deposit transaction has been initiated. This is a temporary state.
+      completed: A funds deposit transaction has been completed. This is a permanent state.
       expired: Request expired without a deposit attempt. This is a permanent state.
   currency:
     $ref: ./CurrencyCode.yaml
@@ -125,6 +127,22 @@ properties:
     example:
       email: email@example.com
       max: '33'
+  notificationUrl:
+    description: |-
+      URL where a server-to-server POST notification is sent.
+      This notification is sent when the transaction result is finalized after a timeout or an offsite interaction.
+
+      Do not interpret this notification as a confirmation,
+      complete a `GET` request to confirm the result of the transaction.
+      To ensure the request is not reattempted,
+      when the result is confirmed, respond with a `2xx` HTTP status code.
+
+      The following placeholders are available to use in this URI: `{id}` and `{result}`.
+      These placeholders are replaced the with the transaction ID and result accordingly.
+    type:
+      - 'string'
+      - 'null'
+    format: uri
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:
