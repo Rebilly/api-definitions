@@ -1,0 +1,30 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Storefront
+  tags:
+    - Storefront orders
+  summary: Update order usage limits
+  operationId: StorefrontPatchOrder
+  x-sdk-operation-name: update
+  security:
+    - CustomerJWT: []
+  description: Updates order usage limits.
+  requestBody:
+    $ref: ../../components/requestBodies/storefront/PostOrderUsageLimits.yaml
+  responses:
+    200:
+      description: Order usage limits updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/StorefrontOrder.yaml
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    404:
+      $ref: ../../components/responses/NotFound.yaml
+    422:
+      $ref: ../../components/responses/ValidationError.yaml

@@ -1,31 +1,22 @@
 type: object
 required:
-  - richBillingPortalId
   - items
 properties:
-  richBillingPortalId:
-    type: string
-    description: ID of the billing portal.
-    maxLength: 50
-    example: bill_prt_0YV7K5TYV5D1P9ZNKDT39KZC3C
   items:
     type: array
-    description: Details of items in the order.
+    description: Details of items in the order and corresponding usage limits.
     minItems: 1
     items:
       type: object
       required:
-        - planId
+        - itemId
+        - usageLimits
       properties:
-        planId:
+        itemId:
           type: string
-          description: ID of the plan.
+          description: ID of order item.
           maxLength: 50
-          example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
-        quantity:
-          description: Number of units of the product on the given plan.
-          type: integer
-          minimum: 0
+          example: ord_itm_0YV7DENSVGDBW9S71XZNNYYQ0X
         usageLimits:
           type: ['object', 'null']
           description: |-
@@ -82,13 +73,3 @@ properties:
                   format: double
                   description: Usage limit amount in the currency of the order.
                   minimum: 0.01
-  billingAddress:
-    description: Billing address details.
-    oneOf:
-      - $ref: ../../schemas/ContactObject.yaml
-      - type: 'null'
-  deliveryAddress:
-    description: Delivery address details.
-    oneOf:
-      - $ref: ../../schemas/ContactObject.yaml
-      - type: 'null'
