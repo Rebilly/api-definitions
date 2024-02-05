@@ -1,77 +1,78 @@
 content:
   application/json:
-    type: object
-    required:
-      - items
-    properties:
-      items:
-        type: array
-        description: Details of items in the order and corresponding usage limits.
-        minItems: 1
+    schema:
+      type: object
+      required:
+        - items
+      properties:
         items:
-          type: object
-          required:
-            - itemId
-            - usageLimits
-          properties:
-            itemId:
-              type: string
-              description: ID of order item.
-              maxLength: 50
-              example: ord_itm_0YV7DENSVGDBW9S71XZNNYYQ0X
-            usageLimits:
-              type: ['object', 'null']
-              description: |-
-                Specifies the soft and hard usage limit thresholds for an item with a metered billing plan.
-                This value is ignored when the plan is not metered.
-              properties:
-                softLimit:
-                  type: ['object', 'null']
-                  description: |-
-                    Defines thresholds for notification purposes.
-                    For example, to notify the customer that their usage is near the hard limit of their metered billing plan.
-                    This notification informs the customer so that they can upgrade their plan before the hard limit is reached.
-                    When the reported usage reaches 75%, 90%, and 100% of the configured limit a specific event is fired.
-                    To notify the customer, a webhook and notification can be configured for this event.
-                    This field is useful for accounting and customer success purposes.
-                    The usage of metered billing plans can still be reported if the soft limit is reached.
-                  minProperties: 1
-                  maxProperties: 1
-                  properties:
-                    quantity:
-                      type: integer
-                      description: Usage limit quantity.
-                      minimum: 1
-                    amount:
-                      type: number
-                      format: double
-                      description: Usage limit amount in the currency of the order.
-                      minimum: 0.01
-                hardLimit:
-                  type: ['object', 'null']
-                  description: |-
-                    Defines a limit where the customer can no longer use the service.
-                    Hard limits are used in addition to soft limits.
-                    When a soft limit is reached,
-                    a customer may receive a notification
-                    but the service can still be provided up to the hard limit value so that the customer can upgrade their plan.
-                    When the reported usage reaches the configured limit,
-                    a specific event is triggered.
-                    To notify the customer in the merchant system,
-                    or block a service,
-                    a webhook and notification can be configured for this event.
-                    When the total usage reaches the hard limit quantity,
-                    or amount values,
-                    metered billing plan usages can no longer be reported.
-                  minProperties: 1
-                  maxProperties: 1
-                  properties:
-                    quantity:
-                      type: integer
-                      description: Usage limit quantity.
-                      minimum: 1
-                    amount:
-                      type: number
-                      format: double
-                      description: Usage limit amount in the currency of the order.
-                      minimum: 0.01
+          type: array
+          description: Details of items in the order and corresponding usage limits.
+          minItems: 1
+          items:
+            type: object
+            required:
+              - itemId
+              - usageLimits
+            properties:
+              itemId:
+                type: string
+                description: ID of order item.
+                maxLength: 50
+                example: ord_itm_0YV7DENSVGDBW9S71XZNNYYQ0X
+              usageLimits:
+                type: ['object', 'null']
+                description: |-
+                  Specifies the soft and hard usage limit thresholds for an item with a metered billing plan.
+                  This value is ignored when the plan is not metered.
+                properties:
+                  softLimit:
+                    type: ['object', 'null']
+                    description: |-
+                      Defines thresholds for notification purposes.
+                      For example, to notify the customer that their usage is near the hard limit of their metered billing plan.
+                      This notification informs the customer so that they can upgrade their plan before the hard limit is reached.
+                      When the reported usage reaches 75%, 90%, and 100% of the configured limit a specific event is fired.
+                      To notify the customer, a webhook and notification can be configured for this event.
+                      This field is useful for accounting and customer success purposes.
+                      The usage of metered billing plans can still be reported if the soft limit is reached.
+                    minProperties: 1
+                    maxProperties: 1
+                    properties:
+                      quantity:
+                        type: integer
+                        description: Usage limit quantity.
+                        minimum: 1
+                      amount:
+                        type: number
+                        format: double
+                        description: Usage limit amount in the currency of the order.
+                        minimum: 0.01
+                  hardLimit:
+                    type: ['object', 'null']
+                    description: |-
+                      Defines a limit where the customer can no longer use the service.
+                      Hard limits are used in addition to soft limits.
+                      When a soft limit is reached,
+                      a customer may receive a notification
+                      but the service can still be provided up to the hard limit value so that the customer can upgrade their plan.
+                      When the reported usage reaches the configured limit,
+                      a specific event is triggered.
+                      To notify the customer in the merchant system,
+                      or block a service,
+                      a webhook and notification can be configured for this event.
+                      When the total usage reaches the hard limit quantity,
+                      or amount values,
+                      metered billing plan usages can no longer be reported.
+                    minProperties: 1
+                    maxProperties: 1
+                    properties:
+                      quantity:
+                        type: integer
+                        description: Usage limit quantity.
+                        minimum: 1
+                      amount:
+                        type: number
+                        format: double
+                        description: Usage limit amount in the currency of the order.
+                        minimum: 0.01
