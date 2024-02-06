@@ -100,6 +100,15 @@ properties:
         type: number
         format: double
         minimum: 0.01
+  priority:
+    type: integer
+    description: |-
+      Priority of the cashier strategy.
+      If multiple strategies are applicable for a request, the strategy with the highest priority is used.
+      If multiple strategies have the same priority, the strategy is chosen randomly.
+    default: 0
+    maximum: 9999
+    minimum: 0
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:
