@@ -6,17 +6,19 @@ post:
     - Storefront
   tags:
     - Storefront orders
-  summary: Change subscription order items
-  operationId: StorefrontPostOrderItemsChange
+  summary: Change subscription items
+  operationId: StorefrontPostSubscriptionItemsChange
   x-sdk-operation-name: changeItems
   security:
     - CustomerJWT: []
-  description: Creates a quote for change items and quantities.
+  description: |-
+    Creates a quote for change items and quantities.
+    Applies the update to subscription when the quote is accepted.
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../../components/requestBodies/storefront/PostOrderItemsChange.yaml
+          $ref: ../../components/requestBodies/storefront/PostSubscriptionItemsChange.yaml
     description: Change items request.
     required: true
   responses:
