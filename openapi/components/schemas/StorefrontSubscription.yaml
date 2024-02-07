@@ -408,6 +408,11 @@ properties:
     type: string
     readOnly: true
     maxLength: 255
+  richBillingPortalId:
+    type: string
+    description: ID of the billing portal.
+    default: null
+    example: rbl_prt_0YV7K5TYV5D1P9ZNKDT39KZC3C
   customFields:
     $ref: ./ResourceCustomFields.yaml
   createdTime:
@@ -416,3 +421,12 @@ properties:
     $ref: ./UpdatedTime.yaml
   _links:
     $ref: ./SelfLink.yaml
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
+    properties:
+      changeItemsQuote:
+        type: object
+      changeItemsInvoice:
+        type: object
