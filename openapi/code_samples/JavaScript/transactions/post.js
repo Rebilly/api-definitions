@@ -1,6 +1,7 @@
 // first set the properties for the new transaction
 const data = {
     customerId: 'foobar-0001',
+    type: 'sale',
     websiteId: 'my-main-website',
     paymentInstrument: {
         method: 'payment-card',
