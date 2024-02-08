@@ -1,6 +1,5 @@
 parameters:
   - $ref: ../../components/parameters/resourceId.yaml
-  - $ref: ../../components/parameters/collectionExpand.yaml
 get:
   x-products:
     - Storefront
@@ -11,6 +10,8 @@ get:
   x-sdk-operation-name: get
   security:
     - CustomerJWT: []
+  parameters:
+    - $ref: ../../components/parameters/collectionExpand.yaml
   description: Retrieve an order with a specified ID.
   responses:
     200:
