@@ -12,10 +12,15 @@ properties:
     description: |-
       ID of the sticky gateway account.
       All future payments are processed by this gateway account.
+      To remove sticky gateway account from payment instrument, set this value to `null`.
 
       For more information,
       see [Gateway routing](https://www.rebilly.com/docs/settings/intelligent-payment-routing/#sticky-gateway-accounts).
-    $ref: ./ResourceId.yaml
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 50
+    example: gw_acc_0YVCXMF26DDNKAERE5NW727S34
   customFields:
     $ref: ./ResourceCustomFields.yaml
   useAsBackup:
