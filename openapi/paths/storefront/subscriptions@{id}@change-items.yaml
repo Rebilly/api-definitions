@@ -12,8 +12,8 @@ post:
   security:
     - CustomerJWT: []
   description: |-
-    Creates a quote for change items and quantities.
-    Applies the update to subscription when the quote is accepted.
+    Creates a quote for requested changes to items and quantities.
+    This operation applies the requested changes to the subscription when the quote is accepted.
   requestBody:
     content:
       application/json:
@@ -23,7 +23,7 @@ post:
     required: true
   responses:
     '200':
-      description: Quote for change items created and issued.
+      description: Quote for requested changes to items and quantities is created and issued.
       headers:
         Location:
           $ref: ../../components/headers/Location.yaml
