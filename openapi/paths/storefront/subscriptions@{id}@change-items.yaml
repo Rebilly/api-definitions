@@ -1,0 +1,41 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+post:
+  x-badge: Experimental
+  x-products:
+    - Storefront
+  tags:
+    - Storefront orders
+  summary: Change subscription items
+  operationId: StorefrontPostSubscriptionItemsChange
+  x-sdk-operation-name: changeItems
+  security:
+    - CustomerJWT: []
+  description: |-
+    Creates a quote for requested changes to items and quantities.
+    This operation applies the requested changes to the subscription when the quote is accepted.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/requestBodies/storefront/PostSubscriptionItemsChange.yaml
+    description: Change items request.
+    required: true
+  responses:
+    '201':
+      description: Quote for requested changes to items and quantities is created and issued.
+      headers:
+        Location:
+          $ref: ../../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/StorefrontQuoteChangeOrder.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../../components/responses/NotFound.yaml
+    '422':
+      $ref: ../../components/responses/ValidationError.yaml
