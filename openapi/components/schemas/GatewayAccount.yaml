@@ -361,11 +361,9 @@ properties:
     x-enumDescriptions:
       authorize: |-
         Creates an `authorize` transaction in the amount and currency of the request.
-        This is used when a gateway account is configured for Strong Customer Authentication (SCA).
       authorize-and-void: |-
-        Creates an `authorize` transaction in the amount and currency of the request,
-        followed by a `void`, if the `authorize` is approved.
-        This is used when a gateway account is configured for Strong Customer Authentication (SCA).
+        Creates an `authorize` transaction followed by a `void`, if the `authorize` is approved.
+        If the request amount is $0, then a $1 authorize is created. Otherwise the request amount is used.
       sca: |-
         Uses Strong Customer Authentication (SCA) without an `authorize` transaction.
         SCA includes 3DS, and specific wallet behavior,
