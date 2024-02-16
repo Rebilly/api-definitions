@@ -51,6 +51,10 @@ Rebilly uses [Redocly](https://redocly.com/) to generate, manage, and preview AP
     - All API docs: `npx @redocly/cli preview-docs all@latest`
 1. In a web browser, open the preview server URL that is displayed in the terminal.
 
+#### Bundle
+
+Run `npm run build-for-js-sdk` to bundle the definitions into a single file in the `dist` folder.
+
 #### Validate
 
 Run `npx @redocly/cli lint` to validate the definitions.
