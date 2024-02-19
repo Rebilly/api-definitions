@@ -51,11 +51,15 @@ properties:
       - instrument-selected
       - partially-fulfilled
       - fulfilled
+      - rejected
+      - canceled
     x-enumDescriptions:
       pending: Request is awaiting customer's selection of the payment instrument or fulfillment.
       instrument-selected: Request has a selected payment instrument and is awaiting fulfillment.
       partially-fulfilled: Request is partially paid out when `availableAmount` is less than `amount`.
       fulfilled: Request is fully paid out when `availableAmount` reaches zero.
+      rejected: Request is rejected by merchant.
+      canceled: Request is canceled by customer.
   selectPaymentInstrumentUrl:
     readOnly: true
     type: string
