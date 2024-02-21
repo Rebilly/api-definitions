@@ -12,6 +12,8 @@ get:
     - SecretApiKey: []
     - JWT: []
     - ApplicationJWT: []
+  parameters:
+    - $ref: ../components/parameters/orderExpand.yaml
   description: Retrieves an order with a specified ID.
   responses:
     '200':
@@ -35,6 +37,8 @@ put:
   operationId: PutOrder
   x-sdk-operation-name: update
   description: Creates or updates (upserts) an order with a specified ID.
+  parameters:
+    - $ref: ../components/parameters/orderExpand.yaml
   requestBody:
     content:
       application/json:
