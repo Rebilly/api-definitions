@@ -1,0 +1,41 @@
+content:
+  application/json:
+    schema:
+      properties:
+        quoteId:
+          type: string
+          description: ID of the quote.
+          example: qt_01GYJPRKHBD6ZYHH897QCJMBS4
+        eventType:
+          type: string
+          description: Type of webhook event.
+          enum:
+            - quote-accepted
+            - quote-canceled
+            - quote-created
+            - quote-expired
+            - quote-issued
+            - quote-recalled
+            - quote-rejected
+            - quote-updated
+        _embedded:
+          type: object
+          description: Embedded objects.
+          properties:
+            quote:
+              $ref: ../../schemas/Quote.yaml
+        _links:
+          type: array
+          description: Related links.
+          items:
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - quote
+description: Quote webhook request body resource.
