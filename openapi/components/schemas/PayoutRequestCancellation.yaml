@@ -1,6 +1,17 @@
-type: object
+description: Reason the payout request is canceled.
+type:
+  - 'object'
+  - 'null'
 readOnly: true
 properties:
-  reason:
-    description: Cancellation reason of the payout request.
+  canceledBy:
+    description: Specifies who initiated the cancellation.
     type: string
+    default: customer
+    enum:
+      - merchant
+      - customer
+  description:
+    description: Description of the cancellation reason in free form.
+    type: string
+    maxLength: 255
