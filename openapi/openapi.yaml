@@ -1185,6 +1185,8 @@ paths:
     $ref: ./paths/payout-requests.yaml
   '/payout-requests/{id}':
     $ref: './paths/payout-requests@{id}.yaml'
+  '/payout-requests/{id}/cancel':
+    $ref: './paths/payout-requests@{id}@cancel.yaml'
   '/payout-requests/{id}/payment-instruments':
     $ref: './paths/payout-requests@{id}@payment-instruments.yaml'
   /permissions-emulation:
@@ -1199,10 +1201,6 @@ paths:
     $ref: ./paths/profile.yaml
   /profile/mfa:
     $ref: ./paths/profile@mfa.yaml
-  /rich-billing-portals:
-    $ref: ./paths/rich-billing-portals.yaml
-  /rich-billing-portals/{id}:
-    $ref: ./paths/rich-billing-portals@{id}.yaml
   '/roles':
     $ref: ./paths/roles.yaml
   '/roles/{id}':
@@ -1319,6 +1317,8 @@ paths:
     $ref: paths/storefront/account@verification@{token}.yaml
   '/storefront/billing-portals/{slug}':
     $ref: paths/storefront/billing-portals@{slug}.yaml
+  '/storefront/experimental/billing-portals/{slug}':
+    $ref: paths/storefront/experimental@billing-portals@{slug}.yaml
   '/storefront/deposit-strategies/{id}':
     $ref: paths/storefront/deposit-strategies@{id}.yaml
   '/storefront/deposit-requests/{id}':
@@ -1387,8 +1387,6 @@ paths:
     $ref: paths/storefront/purchase.yaml
   '/storefront/preview-purchase':
     $ref: paths/storefront/preview-purchase.yaml
-  '/storefront/rich-billing-portals/{id}':
-    $ref: paths/storefront/rich-billing-portals@{id}.yaml
   '/storefront/quotes/{id}':
     $ref: paths/storefront/quotes@{id}.yaml
   '/storefront/quotes/{id}/accept':
@@ -1626,6 +1624,30 @@ webhooks:
   payout-request-modified:
     post:
       $ref: ./webhooks/payout-request-modified.yaml
+  quote-accepted:
+    post:
+      $ref: ./webhooks/quote-accepted.yaml
+  quote-canceled:
+    post:
+      $ref: ./webhooks/quote-canceled.yaml
+  quote-created:
+    post:
+      $ref: ./webhooks/quote-created.yaml
+  quote-expired:
+    post:
+      $ref: ./webhooks/quote-expired.yaml
+  quote-issued:
+    post:
+      $ref: ./webhooks/quote-issued.yaml
+  quote-recalled:
+    post:
+      $ref: ./webhooks/quote-recalled.yaml
+  quote-rejected:
+    post:
+      $ref: ./webhooks/quote-rejected.yaml
+  quote-updated:
+    post:
+      $ref: ./webhooks/quote-updated.yaml
   renewal-invoice-issued:
     post:
       $ref: ./webhooks/renewal-invoice-issued.yaml
