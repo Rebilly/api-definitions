@@ -87,6 +87,18 @@ properties:
             description: Website terms of service URL.
             type: string
             format: url
+  plans:
+    type: array
+    minItems: 1
+    description: Details of selected plans.
+    items:
+      $ref: ./FlexiblePlan.yaml
+  addons:
+    type: array
+    description: Details of selected add-ons.
+    items:
+      $ref: ./FlexiblePlan.yaml
+    default: [ ]
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:
