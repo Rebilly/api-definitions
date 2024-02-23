@@ -16,13 +16,6 @@ properties:
     readOnly: true
     type: integer
     x-basic: true
-  orderId:
-    description: ID of the order.
-    readOnly: true
-    example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
-    type:
-      - 'string'
-      - 'null'
   subscriptionId:
     type: string
     description: |-
@@ -356,7 +349,7 @@ properties:
       Date and time when the related order is considered delinquent, and is canceled.
       The current invoice is abandoned along with order invoices that have the `unpaid` or `past-due` status.
       If this value is `null`, no delinquency time is configured.
-      If the `dueTime` of the order becomes greater than the `delinquencyTime` value, 
+      If the `dueTime` of the order becomes greater than the `delinquencyTime` value,
       the `delinquencyTime` value becomes equal to `dueTime`.
 
       If an invoice is not related to an order, this field can only be `null`.
