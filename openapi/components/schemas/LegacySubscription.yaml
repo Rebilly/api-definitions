@@ -118,7 +118,7 @@ properties:
     example: true
   invoiceTimeShift:
     description: |-
-      Adjusts the issue date and time of renewal invoices for the subscription.
+      Shifts issue time and due time of invoices for this subscription.
 
       This setting overrides plan settings.
       To use plan settings, set this value to `null`.
@@ -180,7 +180,7 @@ properties:
     x-basic: true
     format: date-time
   rebillNumber:
-    description: Number of the current billing period.
+    description: Current billing period number.
     type:
       - 'integer'
       - 'null'
@@ -293,7 +293,7 @@ properties:
   recentInvoiceId:
     description: |-
       ID of the most recently issued invoice.
-      Note: The invoice might not be paid yet.
+      The invoice might not be `paid` yet.
     readOnly: true
     type:
       - 'string'
@@ -338,7 +338,7 @@ properties:
     description: |-
       Date and time when the pending order is automatically abandoned.
       If this value is not passed during order creation,
-      the [pending order TTL](https://www.rebilly.com/catalog/all/Organizations/PatchOrganization/#!t=request&path=settings/billing/pendingOrderTtl) setting is used to calculate the value.
+      a [pending order TTL](https://www.rebilly.com/catalog/all/Organizations/PatchOrganization/#!t=request&path=settings/billing/pendingOrderTtl) setting is used to calculate the value.
     format: date-time
   delinquencyPeriod:
     type:
@@ -376,7 +376,7 @@ properties:
       type: string
       description: ID of the coupon.
   poNumber:
-    description: Purchase order number that is displayed on the issued invoices.
+    description: Purchase order number displayed on the issued invoices.
     type:
       - 'string'
       - 'null'
@@ -384,7 +384,7 @@ properties:
   shipping:
     $ref: ./Shipping.yaml
   notes:
-    description: Notes for the customer that are displayed on the order invoice.
+    description: Notes for the customer displayed on the order invoice.
     type: string
   canceledBy:
     description: Specifies who initiated the cancellation.
