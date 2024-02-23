@@ -390,7 +390,8 @@ tags:
       An order generates an invoice.
       A subscription order generates an invoice for each service period.
       For more information, see [Orders](https://www.rebilly.com/docs/dev-docs/concepts/#orders).
-
+  - name: Orders experimental
+    description: Use these operations to manage orders with mixed recurring plan subscriptions.
   - name: Orders timeline
     description: Use order timelines to maintain an audit trail of changes and activity for each order.
   - name: Organization data exports
@@ -961,6 +962,10 @@ paths:
     $ref: ./paths/shipping-rates.yaml
   '/shipping-rates/{id}':
     $ref: './paths/shipping-rates@{id}.yaml'
+  /orders:
+    $ref: ./paths/orders.yaml
+  /orders/{id}:
+    $ref: ./paths/orders@{id}.yaml
   /subscriptions:
     $ref: ./paths/subscriptions.yaml
   '/subscriptions/{id}':
