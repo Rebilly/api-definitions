@@ -61,35 +61,10 @@ properties:
       For example, an invoice item for a service is included in billing period number 3.
       The invoice item is only applied to billing period number 3.
     type: integer
+  tax:
+    description: Invoice item tax.
+    $ref: ./TaxItem.yaml
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:
     $ref: ./UpdatedTime.yaml
-  tax:
-    description: Invoice item tax.
-    $ref: ./TaxItem.yaml
-  _links:
-    type: array
-    description: Related links.
-    items:
-      type: object
-      properties:
-        href:
-          description: Link URL.
-          type: string
-        rel:
-          description: Type of link.
-          type: string
-          enum:
-            - self
-            - product
-            - plan
-            - subscription
-  _embedded:
-    type: object
-    description: Embedded objects that are requested by the `expand` query parameter.
-    properties:
-      product:
-        type: object
-      plan:
-        type: object
