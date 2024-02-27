@@ -38,6 +38,14 @@ properties:
     x-basic: true
     allOf:
       - $ref: ./WebsiteId.yaml
+  orderId:
+    description: ID of the order.
+    readOnly: true
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 50
+    example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
   currency:
     description: Currency of the order.
     readOnly: true
@@ -408,11 +416,11 @@ properties:
     type: string
     readOnly: true
     maxLength: 255
-  richBillingPortalId:
+  billingPortalId:
     type: string
     description: ID of the billing portal.
     default: null
-    example: rbl_prt_0YV7K5TYV5D1P9ZNKDT39KZC3C
+    example: bill_prt_0YV7K5TYV5D1P9ZNKDT39KZC3C
   customFields:
     $ref: ./ResourceCustomFields.yaml
   createdTime:

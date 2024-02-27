@@ -109,6 +109,13 @@ properties:
       If this value is `true`, recurring settings are ignored.
     type: boolean
     default: false
+  isTrialConverted:
+    description: |-
+      Specifies if a subscription had trial conversion.
+      Trial conversion is when at least one successful payment is made on the subscription after a trial.
+    type: boolean
+    readOnly: true
+    example: true
   invoiceTimeShift:
     description: |-
       Shifts issue time and due time of invoices for this subscription.
@@ -435,11 +442,11 @@ properties:
       If this value is `null`, this field uses risk metadata that is captured when creating the payment token.
     allOf:
       - $ref: ./RiskMetadata.yaml
-  richBillingPortalId:
+  billingPortalId:
     type: string
     description: ID of the billing portal.
     default: null
-    example: rbl_prt_0YV7K5TYV5D1P9ZNKDT39KZC3C
+    example: bill_prt_0YV7K5TYV5D1P9ZNKDT39KZC3C
   customFields:
     $ref: ./ResourceCustomFields.yaml
   createdTime:
