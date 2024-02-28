@@ -348,7 +348,6 @@ properties:
       Length of time, in ISO-8601 durations format,
       which is added to the due time of the order when setting the delinquency time for all related invoices.
       When the delinquency time of an invoice is reached, the order is automatically canceled.
-      The current invoice is abandoned along with order invoices that have the `unpaid` or `past-due` status.
 
       If the provided value is `null`, the order does not change state.
     example: P7D
@@ -442,11 +441,6 @@ properties:
       If this value is `null`, this field uses risk metadata that is captured when creating the payment token.
     allOf:
       - $ref: ./RiskMetadata.yaml
-  billingPortalId:
-    type: string
-    description: ID of the billing portal.
-    default: null
-    example: bill_prt_0YV7K5TYV5D1P9ZNKDT39KZC3C
   customFields:
     $ref: ./ResourceCustomFields.yaml
   createdTime:
