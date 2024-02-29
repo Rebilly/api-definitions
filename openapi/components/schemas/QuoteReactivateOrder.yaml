@@ -388,8 +388,10 @@ properties:
     type:
       - 'boolean'
       - 'null'
-    default: null
-    description: Specifies whether to automatically pay the related invoice when the quote is accepted.
+    description: |-
+      Specifies if payment attempts for the related subscription are made automatically.
+      If autopay is enabled, the payment is retrieved from the customer on the renewal date using the payment instrument that is set at `paymentInstrumentId`,
+      or the default payment instrument on the subscription.
   paymentTerms:
     description: Payment terms for the customer which are displayed on the quote.
     type: string
