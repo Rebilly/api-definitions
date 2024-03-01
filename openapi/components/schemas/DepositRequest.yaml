@@ -43,14 +43,16 @@ properties:
       - created
       - pending
       - initiated
+      - attempted
       - completed
       - expired
     x-enumDescriptions:
       created: Request is created, but it has not been visited by a customer. This is a temporary state.
       pending: Request has been visited by a customer, but no funds have been deposited yet. This is a temporary state.
       initiated: A funds deposit transaction has been initiated. This is a temporary state.
-      completed: A funds deposit transaction has been completed. This is a permanent state.
-      expired: Request expired without a deposit attempt. This is a permanent state.
+      attempted: A funds deposit transaction was attempted and declined. This is a temporary state.
+      completed: A funds deposit transaction has been approved and completed. This is a permanent state.
+      expired: Request expired without an approved deposit transaction. This is a permanent state.
   currency:
     $ref: ./CurrencyCode.yaml
   amounts:
