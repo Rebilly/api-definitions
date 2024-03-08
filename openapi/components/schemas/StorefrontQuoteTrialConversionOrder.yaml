@@ -1,10 +1,4 @@
 type: object
-title: QuoteCreateOrder
-required:
-  - websiteId
-  - customerId
-  - items
-  - action
 properties:
   id:
     readOnly: true
@@ -203,16 +197,6 @@ properties:
           properties:
             product:
               type: object
-  deliveryAddress:
-    description: Delivery address of the order.
-    oneOf:
-      - $ref: ./ContactObject.yaml
-      - type: 'null'
-  billingAddress:
-    description: Billing address of the order.
-    oneOf:
-      - $ref: ./ContactObject.yaml
-      - type: 'null'
   invoicePreview:
     type: object
     description: Preview of the quote invoice.
@@ -364,13 +348,6 @@ properties:
                 - 'number'
                 - 'null'
               format: double
-  autopay:
-    type: boolean
-    default: false
-    description: |-
-      Specifies if payment attempts for the related subscription are made automatically.
-      If autopay is enabled, the payment is retrieved from the customer on the renewal date using the payment instrument that is set at `paymentInstrumentId`,
-      or the default payment instrument on the subscription.
   paymentTerms:
     description: Payment terms for the customer which are displayed on the quote.
     type: string
@@ -435,17 +412,6 @@ properties:
     $ref: ./Shipping.yaml
   tax:
     $ref: ./Taxes.yaml
-  couponIds:
-    type:
-      - 'array'
-      - 'null'
-    description: |-
-      List of coupons to redeem on the customer and apply to the related invoice.
-
-      For more information, see [Coupons](https://www.rebilly.com/docs/settings/coupons-and-discounts/).
-    items:
-      type: string
-      description: Coupon ID.
   _links:
     type: array
     description: Related links.
@@ -464,7 +430,6 @@ properties:
           type: string
           enum:
             - self
-            - quoteAcceptanceFormUrl
             - invoicePaymentFormUrl
   _embedded:
     type: object

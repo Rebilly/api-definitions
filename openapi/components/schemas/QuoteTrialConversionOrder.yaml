@@ -1,10 +1,11 @@
 type: object
-title: QuoteCreateOrder
+title: QuoteChangeOrder
 required:
   - websiteId
   - customerId
   - items
   - action
+  - orderId
 properties:
   id:
     readOnly: true
@@ -23,13 +24,12 @@ properties:
       - one-time-order
   action:
     description: |-
-      Action of the quote.
-      When a quote is accepted, a new order is created.
-      The `orderId` value is filled with a new generated value from the order.
+      Action of the quote for change order items.
+      When a quote is accepted, quote items are applied to the related order.
     type: string
     enum:
-      - create
-    example: create
+      - change
+    example: change
   acceptanceConditions:
     type: array
     writeOnly: true
@@ -61,10 +61,7 @@ properties:
           type: boolean
   orderId:
     description: ID of the related order.
-    readOnly: true
-    type:
-      - 'string'
-      - 'null'
+    type: string
     maxLength: 50
     example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
   invoiceId:
@@ -87,7 +84,7 @@ properties:
     x-enumDescriptions:
       draft: Quote can be edited. This quote cannot be sent to a customer.
       issued: Quote cannot be edited. This quote can be sent to a customer.
-      accepted: Customer accepted the quote and created an order.
+      accepted: Customer accepted the quote and the related order item changes are applied.
       rejected: Customer rejected the quote.
       canceled: Organization canceled the quote.
       expired: Expired before customer or organization interaction.
@@ -203,16 +200,6 @@ properties:
           properties:
             product:
               type: object
-  deliveryAddress:
-    description: Delivery address of the order.
-    oneOf:
-      - $ref: ./ContactObject.yaml
-      - type: 'null'
-  billingAddress:
-    description: Billing address of the order.
-    oneOf:
-      - $ref: ./ContactObject.yaml
-      - type: 'null'
   invoicePreview:
     type: object
     description: Preview of the quote invoice.
@@ -365,8 +352,9 @@ properties:
                 - 'null'
               format: double
   autopay:
-    type: boolean
-    default: false
+    type:
+      - 'boolean'
+      - 'null'
     description: |-
       Specifies if payment attempts for the related subscription are made automatically.
       If autopay is enabled, the payment is retrieved from the customer on the renewal date using the payment instrument that is set at `paymentInstrumentId`,
