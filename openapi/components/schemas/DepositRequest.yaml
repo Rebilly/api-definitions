@@ -22,9 +22,19 @@ properties:
       - 'string'
       - 'null'
     description: ID of the transaction that is used in the deposit request.
+    deprecated: true
     readOnly: true
     maxLength: 50
     example: txn_0YVDTQJ8YWDGQACV2N2N5SPWQ0
+  transactionIds:
+    type: array
+    description: |-
+      List of transaction IDs that are associated with the deposit request.
+      This list includes transactions that are created from the deposit request.
+      There is a maximum of one `approved` transaction in the list.
+    items:
+      type: string
+      maxLength: 50
   status:
     description: Status of the request.
     type: string
@@ -33,14 +43,16 @@ properties:
       - created
       - pending
       - initiated
+      - attempted
       - completed
       - expired
     x-enumDescriptions:
       created: Request is created, but it has not been visited by a customer. This is a temporary state.
       pending: Request has been visited by a customer, but no funds have been deposited yet. This is a temporary state.
       initiated: A funds deposit transaction has been initiated. This is a temporary state.
-      completed: A funds deposit transaction has been completed. This is a permanent state.
-      expired: Request expired without a deposit attempt. This is a permanent state.
+      attempted: A funds deposit transaction was attempted and declined. This is a temporary state.
+      completed: A funds deposit transaction has been approved and completed. This is a permanent state.
+      expired: Request expired without an approved deposit transaction. This is a permanent state.
   currency:
     $ref: ./CurrencyCode.yaml
   amounts:
@@ -163,7 +175,7 @@ properties:
           enum:
             - self
             - deposit
-            - transaction
+            - transactions
   _embedded:
     type: object
     description: Embedded objects that are requested by the `expand` query parameter.
@@ -173,5 +185,7 @@ properties:
         type: object
       website:
         type: object
-      transaction:
-        type: object
+      transactions:
+        type: array
+        maxItems: 10
+        description: Most recent associated transactions.

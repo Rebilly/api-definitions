@@ -109,6 +109,13 @@ properties:
       If this value is `true`, recurring settings are ignored.
     type: boolean
     default: false
+  isTrialConverted:
+    description: |-
+      Specifies if a subscription had trial conversion.
+      Trial conversion is when at least one successful payment is made on the subscription after a trial.
+    type: boolean
+    readOnly: true
+    example: true
   invoiceTimeShift:
     description: |-
       Shifts issue time and due time of invoices for this subscription.
@@ -298,7 +305,7 @@ properties:
     type: array
     minItems: 1
     items:
-      $ref: ./OrderItem.yaml
+      $ref: ./SubscriptionOrOneTimeSaleItem.yaml
   deliveryAddress:
     description: Delivery address of the order.
     oneOf:
@@ -340,8 +347,7 @@ properties:
     description: |-
       Length of time, in ISO-8601 durations format,
       which is added to the due time of the order when setting the delinquency time for all related invoices.
-      When the delinquency time of an invoice is reached, the order is automatically canceled. 
-      The current invoice is abandoned along with order invoices that have the `unpaid` or `past-due` status.
+      When the delinquency time of an invoice is reached, the order is automatically canceled.
 
       If the provided value is `null`, the order does not change state.
     example: P7D
