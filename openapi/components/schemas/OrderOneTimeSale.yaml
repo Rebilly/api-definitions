@@ -53,28 +53,6 @@ properties:
       If this value is not passed during order creation,
       a [pending order TTL](https://www.rebilly.com/catalog/all/Organizations/PatchOrganization/#!t=request&path=settings/billing/pendingOrderTtl) setting is used to calculate the value.
     format: date-time
-  couponIds:
-    type:
-      - 'array'
-      - 'null'
-    description: |-
-      List of coupons to redeem on the customer and restrict to this order.
-
-      For more information, see [Coupons](https://www.rebilly.com/docs/settings/coupons-and-discounts/).
-
-      This parameter uses the following logic:
-
-      - If this parameter is not supplied, applied coupons are not changed.
-      - If an empty array is supplied, all applied coupon redemptions are canceled.
-      - If a list of coupons is supplied, unapplied coupons in the list are applied.
-        Coupons that have already been applied do not change state.
-        Applied coupons that are not supplied in list are canceled.
-
-      If the list of applied coupons on a pending order is changed by this parameter during an order update, the invoice for the order is reissued.
-    writeOnly: true
-    items:
-      type: string
-      description: ID of the coupon.
   revision:
     description: |-
       Number of times the order data has been modified.

@@ -231,28 +231,6 @@ properties:
       If the provided value is `null`, the order does not change state.
     example: P7D
     default: null
-  couponIds:
-    type:
-      - 'array'
-      - 'null'
-    description: |-
-      List of coupons to redeem on the customer and restrict to this order.
-
-      For more information, see [Coupons](https://www.rebilly.com/docs/settings/coupons-and-discounts/).
-
-      This parameter uses the following logic:
-
-      - If this parameter is not supplied, applied coupons are not changed.
-      - If an empty array is supplied, all applied coupon redemptions are canceled.
-      - If a list of coupons is supplied, unapplied coupons in the list are applied.
-        Coupons that have already been applied do not change state.
-        Applied coupons that are not supplied in list are canceled.
-
-      If the list of applied coupons on a pending order is changed by this parameter during an order update, the invoice for the order is reissued.
-    writeOnly: true
-    items:
-      type: string
-      description: ID of the coupon.
   canceledBy:
     description: Specifies who initiated the cancellation.
     type:
