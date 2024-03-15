@@ -43,20 +43,7 @@ properties:
     items:
       type: string
   recurring:
-    description: Recurring export schedule.
-    type: object
-    required:
-      - instruction
-    properties:
-      instruction:
-        type: string
-        description: Schedule instruction in [Recurrence Rule RFC 5545](https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html) format.
-      start:
-        type: string
-        format: date-time
-        description: |-
-          Date and time when the first scheduled recurring export occurs.
-          The default value is now.
+    $ref: ./DataExportRecurring.yaml
   userId:
     description: ID of the user who requested the data export.
     readOnly: true
