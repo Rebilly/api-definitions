@@ -1,6 +1,11 @@
 type: object
 description: Reactivate customer subscription.
+required:
+  - subscriptionId
 properties:
+  subscriptionId:
+    type: string
+    description: ID of the subscription associated with the reactivation quote.
   items:
     type: array
     description: Details of items in the subscription.
@@ -22,7 +27,7 @@ properties:
   preview:
     description: |-
       Specifies if the quote must be previewed before it is created.
-      Subscriptions cannot be changed in the preview.
+      Subscriptions cannot be reactivated in the preview.
     type: boolean
     default: false
     example: true
