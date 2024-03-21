@@ -94,9 +94,11 @@ properties:
   updatedTime:
     $ref: ./UpdatedTime.yaml
   churnTime:
-    description: Date and time when the subscription is deactivated.
+    description: Specifies when the subscription is to be canceled.
     type: string
-    format: date-time
+    enum:
+      - now
+      - at-next-renewal
   lineItems:
     description: |-
       Items to be added to the new invoice.
