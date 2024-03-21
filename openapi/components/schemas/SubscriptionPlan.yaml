@@ -49,20 +49,7 @@ properties:
   pricing:
     $ref: ./PlanPriceFormula.yaml
   setup:
-    type:
-      - 'object'
-      - 'null'
-    description: Set up information of the plan.
-    required:
-      - price
-    properties:
-      price:
-        description: |-
-          Price of setting up the plan.
-          If your service charges a set up fee, specify it here.
-          To charge no set up fee, set this value to `0`.
-        type: number
-        format: double
+    $ref: ./PlanSetup.yaml
   customFields:
     $ref: ./ResourceCustomFields.yaml
   isActive:
@@ -123,41 +110,12 @@ properties:
           - prepaid
           - postpaid
   trial:
-    type:
-      - 'object'
-      - 'null'
     description: |-
       Trial configuration setting.
       If you do not want to offer a trial, set this value to `null`.
-    required:
-      - price
-      - period
-    properties:
-      price:
-        description: |-
-          Price of the trial.
-          For a free trial, set this value to `0`.
-        type: number
-        format: double
-      period:
-        type: object
-        description: Period information.
-        required:
-          - unit
-          - length
-        properties:
-          unit:
-            description: Unit of time.
-            type: string
-            enum:
-              - day
-              - week
-              - month
-              - year
-          length:
-            description: Length of time.
-            type: integer
-            minimum: 1
+    oneOf: 
+      - $ref: ./PlanTrial.yaml
+      - type: 'null'
   meteredBilling:
     type:
       - 'object'
