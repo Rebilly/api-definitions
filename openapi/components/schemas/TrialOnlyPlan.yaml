@@ -52,20 +52,7 @@ properties:
   pricing:
     $ref: ./PlanPriceFormula.yaml
   setup:
-    type:
-      - 'object'
-      - 'null'
-    description: Set up information of the plan.
-    required:
-      - price
-    properties:
-      price:
-        description: |-
-          Price of setting up the plan.
-          If your service charges a set up fee, specify it here.
-          To charge no set up fee, set this value to `0`.
-        type: number
-        format: double
+    $ref: ./PlanSetup.yaml
   customFields:
     $ref: ./ResourceCustomFields.yaml
   isActive:
@@ -83,38 +70,8 @@ properties:
     description: Specifies if a plan is a trial that does not have recurring instructions.
     readOnly: true
   trial:
-    type: object
     description: Trial configuration settings.
-    required:
-      - price
-      - period
-    properties:
-      price:
-        description: |-
-          Price of setting up a trial.
-          If your service charges a fee for a trial, specify it here.
-          To charge no trial fee, set this value to `0`.
-        type: number
-        format: double
-      period:
-        type: object
-        description: Period information.
-        required:
-          - unit
-          - length
-        properties:
-          unit:
-            description: Unit of time.
-            type: string
-            enum:
-              - day
-              - week
-              - month
-              - year
-          length:
-            description: Length of time.
-            type: integer
-            minimum: 1
+    $ref: ./PlanTrial.yaml
   invoiceTimeShift:
     description: |-
       Use invoice time shift to adjust the invoice issue and due date when billing must occur before the service period changes.
