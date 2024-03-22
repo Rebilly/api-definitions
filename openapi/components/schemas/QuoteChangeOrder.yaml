@@ -233,6 +233,38 @@ properties:
     description: |-
       Specifies if the quotation invoice must include interim items only.
       If this value is set to `false`, all upcoming items are included.
+  usageSettings:
+    type:
+      - 'object'
+      - 'null'
+    description: Settings for items with metered billing.
+    properties:
+      policy:
+        type: string
+        enum:
+          - reset
+          - transfer
+        description: Policy for removed items with metered billing plan.
+        x-enumDescriptions:
+          reset: Delete existing usages.
+          transfer: Transfer usages from removed plans to existing plans inside the subscription with `transfers` field.
+      transfers:
+        type: array
+        default: []
+        description: |-
+          List of usage transfers for items with metered billing plans.
+          If an item with specified plan does not exist or does not have metered billing plan then this transfer is ignored.
+        items:
+          type: object
+          properties:
+            fromPlanId:
+              type: string
+              description: ID of the plan from which usages will be transferred.
+              example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+            toPlanId:
+              type: string
+              description: ID of the plan to which usages will be transferred.
+              example: plan_0YV7DENSVGDBW9S71XZNNYYQ0Y
   invoicePreview:
     type: object
     description: Preview of the quote invoice.
