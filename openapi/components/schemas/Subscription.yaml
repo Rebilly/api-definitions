@@ -109,6 +109,13 @@ properties:
       If this value is `true`, recurring settings are ignored.
     type: boolean
     default: false
+  isTrialConverted:
+    description: |-
+      Specifies if a subscription had trial conversion.
+      Trial conversion is when at least one successful payment is made on the subscription after a trial.
+    type: boolean
+    readOnly: true
+    example: true
   invoiceTimeShift:
     description: |-
       Shifts issue time and due time of invoices for this subscription.
@@ -156,8 +163,8 @@ properties:
     x-basic: true
     example: null
     format: date-time
-  endTime:
-    description: Date and time when the subscription ends.
+  churnTime:
+    description: Date and time when the subscription is deactivated.
     x-sortable: true
     type:
       - 'string'
@@ -298,7 +305,7 @@ properties:
     type: array
     minItems: 1
     items:
-      $ref: ./OrderItem.yaml
+      $ref: ./SubscriptionOrOneTimeSaleItem.yaml
   deliveryAddress:
     description: Delivery address of the order.
     oneOf:
@@ -341,7 +348,6 @@ properties:
       Length of time, in ISO-8601 durations format,
       which is added to the due time of the order when setting the delinquency time for all related invoices.
       When the delinquency time of an invoice is reached, the order is automatically canceled.
-      The current invoice is abandoned along with order invoices that have the `unpaid` or `past-due` status.
 
       If the provided value is `null`, the order does not change state.
     example: P7D
@@ -435,11 +441,15 @@ properties:
       If this value is `null`, this field uses risk metadata that is captured when creating the payment token.
     allOf:
       - $ref: ./RiskMetadata.yaml
-  richBillingPortalId:
-    type: string
-    description: ID of the billing portal.
-    default: null
-    example: rbl_prt_0YV7K5TYV5D1P9ZNKDT39KZC3C
+  billingPortalToken:
+    description: |-
+      Customer JWT to access billing portal. This field is presented only if billing portal exists.
+      This is an experimental field and can be changed or removed in the future.
+    type:
+      - 'string'
+      - 'null'
+    readOnly: true
+    x-badge: experimental
   customFields:
     $ref: ./ResourceCustomFields.yaml
   createdTime:

@@ -50,20 +50,7 @@ properties:
   pricing:
     $ref: ./PlanPriceFormula.yaml
   setup:
-    type:
-      - 'object'
-      - 'null'
-    description: Set up information of the plan.
-    required:
-      - price
-    properties:
-      price:
-        description: |-
-          Price of setting up the plan.
-          If your service charges a set up fee, specify it here.
-          To charge no set up fee, set this value to `0`.
-        type: number
-        format: double
+    $ref: ./PlanSetup.yaml
   customFields:
     $ref: ./ResourceCustomFields.yaml
   isActive:
@@ -112,6 +99,39 @@ properties:
             description: Length of time.
             type: integer
             minimum: 1
+  meteredBilling:
+    type:
+      - 'object'
+      - 'null'
+    required:
+      - strategy
+    description: |-
+      Use metered billing when an exact quantity is unknown.
+      Report usage during a service period and charge customers afterwards.
+      Metered billing plans must be postpaid.
+    properties:
+      strategy:
+        type: string
+        enum:
+          - sum
+          - last
+        x-enumDescriptions:
+          sum: Total amount of reported invoice item quantity usage.
+          last: Last reported invoice item quantity usage.
+      min:
+        description: Minimum quantity that is charged at the end of a service period regardless of reported usage.
+        type:
+          - 'number'
+          - 'null'
+        format: float
+        minimum: 0.01
+      max:
+        description: Maximum quantity that is charged at the end of a service period regardless of reported usage.
+        type:
+          - 'number'
+          - 'null'
+        format: float
+        minimum: 0.01
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:

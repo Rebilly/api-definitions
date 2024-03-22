@@ -1,25 +1,30 @@
 parameters:
-  - $ref: ../../components/parameters/resourceId.yaml
+  - name: slug
+    in: path
+    description: Resource slug.
+    required: true
+    schema:
+      type: string
+      maxLength: 100
+      pattern: '^[@~\-\.\w]+$'
 get:
-  x-badge: Experimental
   x-products:
     - Storefront
   tags:
     - Storefront billing portals
-  summary: Retrieve a rich billing portal
-  operationId: StorefrontGetRichBillingPortal
+  summary: Retrieve a billing portal
+  operationId: StorefrontGetExperimentalBillingPortal
   x-sdk-operation-name: get
-  security: []
-  description: Retrieves a rich billing portal.
-  parameters:
-    - $ref: ../../components/parameters/collectionExpand.yaml
+  security:
+    - CustomerJWT: [ ]
+  description: Retrieve a billing portal with a specified slug.
   responses:
     '200':
       description: Billing portal retrieved.
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/StorefrontRichBillingPortal.yaml
+            $ref: ../../components/schemas/StorefrontBillingPortal.yaml
     '401':
       $ref: ../../components/responses/Unauthorized.yaml
     '403':
