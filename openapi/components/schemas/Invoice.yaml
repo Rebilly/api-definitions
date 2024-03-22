@@ -16,6 +16,13 @@ properties:
     readOnly: true
     type: integer
     x-basic: true
+  orderId:
+    description: ID of the order.
+    readOnly: true
+    example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
+    type:
+      - 'string'
+      - 'null'
   subscriptionId:
     type: string
     description: |-
@@ -24,6 +31,16 @@ properties:
     readOnly: true
     maxLength: 50
     example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
+  quoteId:
+    type:
+      - "string"
+      - "null"
+    description: |-
+      ID of the related quote, if available.
+      This field is `null` if there are no related quotes.
+    readOnly: true
+    maxLength: 50
+    example: qt_0YV7DES3WPC5J8JD8QTVNZBZNZ
   currency:
     x-sortable: true
     x-basic: true
@@ -168,6 +185,7 @@ properties:
     readOnly: true
     enum:
       - "draft"
+      - "quotation"
       - "unpaid"
       - "paid"
       - "partially-paid"
@@ -336,9 +354,8 @@ properties:
   delinquencyTime:
     description: |-
       Date and time when the related order is considered delinquent, and is canceled.
-      The current invoice is abandoned along with order invoices that have the `unpaid` or `past-due` status.
       If this value is `null`, no delinquency time is configured.
-      If the `dueTime` of the order becomes greater than the `delinquencyTime` value, 
+      If the `dueTime` of the order becomes greater than the `delinquencyTime` value,
       the `delinquencyTime` value becomes equal to `dueTime`.
 
       If an invoice is not related to an order, this field can only be `null`.

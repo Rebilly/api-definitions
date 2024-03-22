@@ -73,6 +73,7 @@ properties:
       - ethoca-alert
       - verifi-alert
       - bank-return
+      - paypal-claim
   status:
     description: Status of the dispute.
     type: string
@@ -108,6 +109,18 @@ properties:
     format: date-time
     description: Date and time when the dispute is resolved.
     readOnly: true
+  source:
+    description: Source of the dispute.
+    type:
+      - 'string'
+      - 'null'
+    readOnly: true
+    enum:
+      - null
+      - api
+      - manual
+      - sftp
+      - webhook
   revision:
     description: |-
       Number of times the dispute data has been modified.

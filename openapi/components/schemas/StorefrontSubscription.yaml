@@ -69,7 +69,7 @@ properties:
     type: array
     minItems: 1
     items:
-      $ref: ./OrderItem.yaml
+      $ref: ./SubscriptionOrOneTimeSaleItem.yaml
   deliveryAddress:
     description: Delivery address of the order.
     oneOf:
@@ -292,8 +292,8 @@ properties:
     x-basic: true
     example: null
     format: date-time
-  endTime:
-    description: Date and time when the subscription ends.
+  churnTime:
+    description: Date and time when the subscription is deactivated.
     x-sortable: true
     type: string
     format: date-time
@@ -416,11 +416,11 @@ properties:
     type: string
     readOnly: true
     maxLength: 255
-  richBillingPortalId:
+  billingPortalId:
     type: string
     description: ID of the billing portal.
     default: null
-    example: rbl_prt_0YV7K5TYV5D1P9ZNKDT39KZC3C
+    example: bill_prt_0YV7K5TYV5D1P9ZNKDT39KZC3C
   customFields:
     $ref: ./ResourceCustomFields.yaml
   createdTime:

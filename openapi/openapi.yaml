@@ -344,7 +344,7 @@ tags:
         - `credit-file-proof`: Verifies that there is an existing credit file with two sources that match the customer's name, DOB, and address.
 
       Rebilly parses and analyzes the documents and accepts or rejects them according to a configurable scoring algorithm.
-      When all document types in a KYC request are accepted, the status is fulfilled, and the [KYC request fulfilled webhook](https://www.rebilly.com/docs/dev-docs/api/operation/kyc-request-fulfilled/) is sent.
+      When all document types in a KYC request are accepted, the status is fulfilled, and the [KYC request fulfilled webhook](https://www.rebilly.com/docs/dev-docs/api/KYC-documents/kyc-request-fulfilled/) is sent.
 
       ### Credit file proof
 
@@ -421,7 +421,7 @@ tags:
       We recommend using this with the FramePay library, which helps you integrate a form into this API resource and create payment tokens.
   - name: Plans
     description: |-
-      Use pricing plans to describe how the customer must pay for [products](https://www.rebilly.com/docs/dev-docs/api/tag/Products/).
+      Use pricing plans to describe how the customer must pay for [products](https://www.rebilly.com/docs/dev-docs/api/Products/).
 
       Rebilly provides the following plan types:
 
@@ -440,7 +440,7 @@ tags:
     description: |-
       Use products to describe the goods and services that your business sells.
       A product also describes sales items on invoices and receipts.
-      Product pricing is defined in [plans](https://www.rebilly.com/docs/dev-docs/api/tag/Plans/).
+      Product pricing is defined in [plans](https://www.rebilly.com/docs/dev-docs/api/Plans/).
       A product may have one or many plans.
 
       For information on the product resource, see [Product](https://www.rebilly.com/docs/dev-docs/concepts/#products).
@@ -1185,6 +1185,8 @@ paths:
     $ref: ./paths/payout-requests.yaml
   '/payout-requests/{id}':
     $ref: './paths/payout-requests@{id}.yaml'
+  '/payout-requests/{id}/cancel':
+    $ref: './paths/payout-requests@{id}@cancel.yaml'
   '/payout-requests/{id}/payment-instruments':
     $ref: './paths/payout-requests@{id}@payment-instruments.yaml'
   /permissions-emulation:
@@ -1199,10 +1201,6 @@ paths:
     $ref: ./paths/profile.yaml
   /profile/mfa:
     $ref: ./paths/profile@mfa.yaml
-  /rich-billing-portals:
-    $ref: ./paths/rich-billing-portals.yaml
-  /rich-billing-portals/{id}:
-    $ref: ./paths/rich-billing-portals@{id}.yaml
   '/roles':
     $ref: ./paths/roles.yaml
   '/roles/{id}':
@@ -1319,6 +1317,8 @@ paths:
     $ref: paths/storefront/account@verification@{token}.yaml
   '/storefront/billing-portals/{slug}':
     $ref: paths/storefront/billing-portals@{slug}.yaml
+  '/storefront/experimental/billing-portals/{slug}':
+    $ref: paths/storefront/experimental@billing-portals@{slug}.yaml
   '/storefront/deposit-strategies/{id}':
     $ref: paths/storefront/deposit-strategies@{id}.yaml
   '/storefront/deposit-requests/{id}':
@@ -1359,6 +1359,8 @@ paths:
     $ref: paths/storefront/orders@{id}@cancellation.yaml
   '/storefront/orders/{id}/pause':
     $ref: paths/storefront/orders@{id}@pause.yaml
+  '/storefront/subscriptions/{id}/change-items':
+    $ref: paths/storefront/subscriptions@{id}@change-items.yaml
   '/storefront/payment':
     $ref: paths/storefront/payment.yaml
   '/storefront/payment-instruments':
@@ -1385,8 +1387,6 @@ paths:
     $ref: paths/storefront/purchase.yaml
   '/storefront/preview-purchase':
     $ref: paths/storefront/preview-purchase.yaml
-  '/storefront/rich-billing-portals/{id}':
-    $ref: paths/storefront/rich-billing-portals@{id}.yaml
   '/storefront/quotes/{id}':
     $ref: paths/storefront/quotes@{id}.yaml
   '/storefront/quotes/{id}/accept':
@@ -1618,12 +1618,39 @@ webhooks:
   payment-instrument-modified:
     post:
       $ref: ./webhooks/payment-instrument-modified.yaml
+  payout-request-canceled:
+    post:
+      $ref: ./webhooks/payout-request-canceled.yaml
   payout-request-created:
     post:
       $ref: ./webhooks/payout-request-created.yaml
   payout-request-modified:
     post:
       $ref: ./webhooks/payout-request-modified.yaml
+  quote-accepted:
+    post:
+      $ref: ./webhooks/quote-accepted.yaml
+  quote-canceled:
+    post:
+      $ref: ./webhooks/quote-canceled.yaml
+  quote-created:
+    post:
+      $ref: ./webhooks/quote-created.yaml
+  quote-expired:
+    post:
+      $ref: ./webhooks/quote-expired.yaml
+  quote-issued:
+    post:
+      $ref: ./webhooks/quote-issued.yaml
+  quote-recalled:
+    post:
+      $ref: ./webhooks/quote-recalled.yaml
+  quote-rejected:
+    post:
+      $ref: ./webhooks/quote-rejected.yaml
+  quote-updated:
+    post:
+      $ref: ./webhooks/quote-updated.yaml
   renewal-invoice-issued:
     post:
       $ref: ./webhooks/renewal-invoice-issued.yaml
@@ -1651,6 +1678,9 @@ webhooks:
   subscription-downgraded:
     post:
       $ref: ./webhooks/subscription-downgraded.yaml
+  subscription-items-changed:
+    post:
+      $ref: ./webhooks/subscription-items-changed.yaml
   subscription-modified:
     post:
       $ref: ./webhooks/subscription-modified.yaml
