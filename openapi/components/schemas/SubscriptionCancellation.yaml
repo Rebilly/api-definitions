@@ -98,11 +98,16 @@ properties:
     type: string
     format: date-time
   churnTimePolicy:
-    description: Specifies when the subscription is to be canceled.
-    type: string
+    description: |-
+      Specifies when the subscription is to be canceled.
+      The `churnTimePolicy` is takes precedence over the `churnTime` in request.
+    type:
+      - 'string'
+      - 'null'
     enum:
-      - now
-      - at-next-renewal
+      - 'null'
+      - 'now'
+      - 'at-next-renewal'
   lineItems:
     description: |-
       Items to be added to the new invoice.
