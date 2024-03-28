@@ -1,0 +1,42 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Preview a subscription stage
+  operationId: PostPreviewSubscriptionStage
+  x-sdk-operation-name: subscriptionStage
+  description: |-
+    Previews a new stage for the subscription order.
+    Use this operation to preview a stage with the invoice before making an order.
+    The stage number is calculated automatically based on the previous stage number.
+
+    If the stage number is greater than the active stage number plus one,
+    the calculation is based on the assumption that the order isn't changed,
+    therefore the related initial invoice gets postpaid items from the previous stage,
+    and prepaid items from the new previewed stage.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/SubscriptionStage.yaml
+    description: Subscription Stage resource.
+    required: true
+  responses:
+    '201':
+      description: Subscription stage retrieved.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SubscriptionStage.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
