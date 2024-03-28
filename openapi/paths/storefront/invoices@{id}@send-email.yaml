@@ -1,0 +1,27 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Storefront
+  tags:
+    - Storefront invoices
+  summary: Resend an invoice email
+  operationId: StorefrontPostInvoiceSendEmail
+  x-sdk-operation-name: post
+  security:
+    - CustomerJWT: []
+  description: Creates an email message to resend an invoice.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/requestBodies/PostInvoiceEmailMessage.yaml
+  responses:
+    204:
+      description: Email message created.
+    401:
+      $ref: ../../components/responses/Unauthorized.yaml
+    403:
+      $ref: ../../components/responses/Forbidden.yaml
+    409:
+      $ref: ../../components/responses/Conflict.yaml
