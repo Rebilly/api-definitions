@@ -32,20 +32,19 @@ jobs:
         run: echo '::set-output name=value::${{steps.parse-commit.outputs.group1}} Rebilly/api-definitions${{steps.parse-commit.outputs.group2}}'
 
 
-  trigger-recomm-update:
-    name: Trigger Recomm update
+  trigger-fe-metadata-update:
+    name: Trigger frontend metadata update
     runs-on: ubuntu-latest
     needs: generate-trigger-reason
     steps:
 
-      - name: Wait for Redocly to publish combined bundle
+      - name: Wait for Redocly to publish the build
         uses: Sibz/await-status-action@v1.0.1
         with:
           authToken: ${{ secrets.GITHUB_TOKEN }}
-          # Which status checks to wait for. We only care about the combined bundle.
-          # Todo: update with new message
-          contexts: 'Redocly Registry (combined/combined) bundle'
-          # How long to wait for the Redocly status to be posted, in seconds
+          # Wait for the redocly project build
+          contexts: 'Project build'
+          # How long to wait for the status to be posted, in seconds
           timeout: 600
           notPresentTimeout: 600
 
@@ -53,21 +52,6 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: FE/api-metadata/Update resources from API definitions
-          ref: main
-          repo: Rebilly/rebilly
-          token: ${{ secrets.MACHINE_USER_PAT }}
-          inputs: '{ "trigger-reason": "${{needs.generate-trigger-reason.outputs.reason}}" }'
-
-  trigger-rebilly-js-sdk-update:
-    name: Trigger JS SDK update
-    runs-on: ubuntu-latest
-    needs: generate-trigger-reason
-    steps:
-
-      - name: Trigger update workflow
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: FE/Rebilly JS SDK/Updates JS SDK resources based on api-definitions
           ref: main
           repo: Rebilly/rebilly
           token: ${{ secrets.MACHINE_USER_PAT }}
