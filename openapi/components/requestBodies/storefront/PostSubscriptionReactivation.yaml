@@ -1,0 +1,34 @@
+type: object
+description: Reactivate customer subscription.
+required:
+  - orderId
+properties:
+  orderId:
+    type: string
+    description: ID of the order associated with the reactivation quote.
+    example: ord_01HRF27SATGE4Z6PBJE6PD8328
+  items:
+    type: array
+    description: Details of items in the subscription.
+    minItems: 1
+    items:
+      type: object
+      required:
+        - planId
+      properties:
+        planId:
+          type: string
+          description: ID of the plan.
+          maxLength: 50
+          example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+        quantity:
+          description: Number of units of the product on the given plan.
+          type: integer
+          minimum: 0
+  preview:
+    description: |-
+      Specifies if the quote must be previewed before it is created.
+      Subscriptions cannot be reactivated in the preview.
+    type: boolean
+    default: false
+    example: true
