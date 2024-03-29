@@ -1,0 +1,38 @@
+post:
+  x-badge: Experimental
+  x-products:
+    - Storefront
+  tags:
+    - Storefront orders
+  summary: Reactivate a subscription
+  operationId: StorefrontPostSubscriptionReactivation
+  x-sdk-operation-name: reactivation
+  security:
+    - CustomerJWT: []
+  description: |-
+    Creates a quote for requested reactivation.
+    This operation applies the requested reactivation to the subscription when the quote invoice is paid.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/requestBodies/storefront/PostSubscriptionReactivation.yaml
+    description: Change items request.
+  responses:
+    '201':
+      description: Quote for requested reactivation is created and issued.
+      headers:
+        Location:
+          $ref: ../../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/StorefrontQuoteReactivateOrder.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../../components/responses/NotFound.yaml
+    '422':
+      $ref: ../../components/responses/ValidationError.yaml
