@@ -1,7 +1,7 @@
 type: object
 required:
   - subscriptionId
-  - churnTime
+  - churnTimePolicy
 properties:
   id:
     type: string
@@ -97,6 +97,17 @@ properties:
     description: Date and time when the subscription is deactivated.
     type: string
     format: date-time
+  churnTimePolicy:
+    description: |-
+      Specifies when the subscription is to be deactivated.
+      The `churnTimePolicy` takes precedence over the `churnTime` in request.
+    type:
+      - 'string'
+      - 'null'
+    enum:
+      - 'null'
+      - 'now'
+      - 'at-next-renewal'
   lineItems:
     description: |-
       Items to be added to the new invoice.
