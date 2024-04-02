@@ -11,6 +11,12 @@ properties:
     readOnly: true
     maxLength: 50
     example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
+  orderId:
+    type: string
+    description: ID of the order (experimental).
+    readOnly: true
+    maxLength: 50
+    example: ord_01GYJPRKHBD6ZYHH897QCJMBS4
   orderType:
     description: |-
       Specifies the type of order.
@@ -163,8 +169,8 @@ properties:
     x-basic: true
     example: null
     format: date-time
-  endTime:
-    description: Date and time when the subscription ends.
+  churnTime:
+    description: Date and time when the subscription is deactivated.
     x-sortable: true
     type:
       - 'string'
@@ -441,6 +447,15 @@ properties:
       If this value is `null`, this field uses risk metadata that is captured when creating the payment token.
     allOf:
       - $ref: ./RiskMetadata.yaml
+  billingPortalToken:
+    description: |-
+      Customer JWT to access billing portal. This field is presented only if billing portal exists.
+      This is an experimental field and can be changed or removed in the future.
+    type:
+      - 'string'
+      - 'null'
+    readOnly: true
+    x-badge: experimental
   customFields:
     $ref: ./ResourceCustomFields.yaml
   createdTime:
