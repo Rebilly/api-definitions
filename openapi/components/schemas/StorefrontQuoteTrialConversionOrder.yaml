@@ -17,13 +17,12 @@ properties:
       - one-time-order
   action:
     description: |-
-      Action of the quote.
-      When a quote is accepted, a new order is created.
-      The `orderId` value is filled with a new generated value from the order.
+      Action of the quote for a trial order with ended trial.
+      When a quote is accepted, the related order is activated.
     type: string
     enum:
-      - create
-    example: create
+      - trial-conversion
+    example: trial-conversion
   acceptanceConditions:
     type: array
     writeOnly: true
@@ -53,12 +52,10 @@ properties:
             - organization
         isFulfilled:
           type: boolean
-  orderId:
-    description: ID of the related order.
+  subscriptionId:
+    description: ID of the related subscription.
     readOnly: true
-    type:
-      - 'string'
-      - 'null'
+    type: string
     maxLength: 50
     example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
   invoiceId:
