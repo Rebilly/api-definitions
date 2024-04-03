@@ -1,0 +1,35 @@
+description: BVNK gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: BVNK credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: Merchant ID of the BVNK merchant.
+          hawkAuthId:
+            type: string
+            description: HAWK auth ID.
+            format: password
+            writeOnly: true
+          hawkAuthKey:
+            type: string
+            description: HAWK auth key.
+            format: password
+            writeOnly: true
+        required:
+          - merchantId
+          - hawkAuthId
+          - hawkAuthKey
+      settings:
+        type: object
+        properties:
+          expiryMinutes:
+            type: integer
+            description: TTL of the transaction in minutes.
+            default: 30
