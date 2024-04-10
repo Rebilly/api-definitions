@@ -25,7 +25,7 @@ properties:
     description: |-
       Action of the quote.
       When a quote is accepted, a new order is created.
-      The `subscriptionId` value is filled with a new generated value from the order.
+      The `orderId` value is filled with a new generated value from the order.
     type: string
     enum:
       - create
@@ -59,8 +59,8 @@ properties:
             - organization
         isFulfilled:
           type: boolean
-  subscriptionId:
-    description: ID of the related subscription or one-time purchase.
+  order:
+    description: ID of the related order.
     readOnly: true
     type:
       - 'string'
@@ -475,7 +475,7 @@ properties:
         type: object
       website:
         type: object
-      subscription:
+      order:
         type: object
       invoice:
         type: object
