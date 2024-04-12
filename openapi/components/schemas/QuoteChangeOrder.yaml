@@ -5,7 +5,7 @@ required:
   - customerId
   - items
   - action
-  - orderId
+  - subscriptionId
 properties:
   id:
     readOnly: true
@@ -59,8 +59,8 @@ properties:
             - organization
         isFulfilled:
           type: boolean
-  orderId:
-    description: ID of the related order.
+  subscriptionId:
+    description: ID of the related subscription.
     type: string
     maxLength: 50
     example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
@@ -233,6 +233,35 @@ properties:
     description: |-
       Specifies if the quotation invoice must include interim items only.
       If this value is set to `false`, all upcoming items are included.
+  usageSettings:
+    type: array
+    default: []
+    description: Usage settings for items with metered billing.
+    items:
+      type: object
+      properties:
+        planId:
+          type: string
+          description: ID of the plan from which usages are transferred.
+          example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+        policy:
+          type: string
+          enum:
+            - reset
+            - transfer
+          description: Policy for removed items that have a metered billing plan.
+          x-enumDescriptions:
+            reset: Delete existing usages.
+            transfer: Transfer usages from removed plans to existing plans that are in the same subscription, using the `transferTo` field.
+        transferTo:
+          type:
+            - 'string'
+            - 'null'
+          default: null
+          description: |-
+            ID of the plan to which usages are transferred.
+            If an item with a specified plan does not exist, or does not have a metered billing plan, this transfer is ignored.
+          example: plan_0YV7DENSVGDBW9S71XZNNYYQ0Y
   invoicePreview:
     type: object
     description: Preview of the quote invoice.
@@ -496,7 +525,7 @@ properties:
         type: object
       website:
         type: object
-      order:
+      subscription:
         type: object
       invoice:
         type: object

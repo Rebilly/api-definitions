@@ -101,6 +101,10 @@ properties:
         minimum: 1
         maximum: 128
         example: dd65ratxc5qv15iph3vyoq7l6davuowadd65ratxc5qv15iph3vyoq7l6davuowa
+      fingerprintJsRequestId:
+        description: Unique identifier of the visitor's identification request.
+        type: string
+        example: 1708102555327.NLOjmg
   isProxy:
     description: Specifies if the customer's IP address is related to a proxy.
     type: boolean
@@ -220,6 +224,10 @@ properties:
   declinedPaymentInstrumentVelocity:
     description: Number of declined transactions for this payment instrument fingerprint in the last 24 hours.
     type: integer
+    readOnly: true
+  isBot:
+    description: Specifies if the visitor session is identified as a bot.
+    type: boolean
     readOnly: true
   deviceVelocity:
     description: Number of transactions for this device, based on fingerprint, in the last 24 hours.
