@@ -1,0 +1,30 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: journalAccountBalanceId
+    in: path
+    description: ID of the journal account balance.
+    required: true
+    schema:
+      type: string
+get:
+  x-products:
+    - Core
+  tags:
+    - Journal
+  summary: Retrieve a journal entry accounts balance.
+  operationId: GetJournalEntryAccountsBalance
+  x-sdk-operation-name: getEntryAccountsBalance
+  description: Retrieve a journal entry accounts balance with specific ID.
+  responses:
+    '200':
+      description: Journal account balances retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/JournalAccountBalance.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

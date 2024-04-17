@@ -1,0 +1,26 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Journal
+  summary: Retrieve journal entry accounts balances
+  operationId: GetAllJournalEntryAccountsBalances
+  x-sdk-operation-name: getAllEntryAccountsBalances
+  description: Retrieves a list of accounts balances for the journal entry.
+  responses:
+    '200':
+      description: Journal account balances retrieved.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/JournalAccountBalance.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

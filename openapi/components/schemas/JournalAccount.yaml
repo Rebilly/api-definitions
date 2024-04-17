@@ -16,6 +16,27 @@ properties:
     type:
       - 'string'
       - 'null'
+  role:
+    type: string
+    description: Role of the journal account in the accounting ledger.
+    enum:
+      - revenue
+      - unearned-revenue
+      - taxes
+  plandId:
+    type:
+      - 'string'
+      - 'null'
+    description: ID of the plan that the journal account belongs to.
+    example: plan_0YVCXS791DD8JAK1WV3VHM70ZQ
+
+  productId:
+    type:
+      - 'string'
+      - 'null'
+    description: ID of the product that the journal account belongs to.
+    example: prod_0YVCXS791DD8JAK1WV3VHM70ZQ
+
   createdTime:
     description: Date and time when the journal record is created.
     $ref: ./ServerTimestamp.yaml

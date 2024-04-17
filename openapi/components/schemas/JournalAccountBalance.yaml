@@ -1,0 +1,32 @@
+type: object
+required:
+  - name
+properties:
+  id:
+    type: string
+    description: ID of the journal account balance.
+    readOnly: true
+    maxLength: 50
+    example: jrn_acc_bal_0YVCXS791DD8JAK1WV3VHM70ZQ
+  journalAccountId:
+    type: string
+    description: ID of the journal account that the balance belongs to.
+    example: jrn_acc_0YVCXS791DD8JAK1WV3VHM70ZQ
+  journalEntryId:
+    type: string
+    description: ID of the journal entry that the balance belongs to. Each balance is calculated based on the journal entry period.
+    example: jrn_ent_0YVCXSFCF2DJX99NBBSJCEVETB
+  balance:
+    type: number
+    description: Balance of the journal account.
+    example: 1000.00
+  currency:
+    description: Currency of the journal account balance. It is the same as the journal entry.
+    $ref: ./CurrencyCode.yaml
+  createdTime:
+    description: Date and time when the journal record is created.
+    $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml
