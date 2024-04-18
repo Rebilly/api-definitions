@@ -113,7 +113,7 @@ properties:
     description: |-
       Trial configuration setting.
       If you do not want to offer a trial, set this value to `null`.
-    oneOf: 
+    oneOf:
       - $ref: ./PlanTrial.yaml
       - type: 'null'
   meteredBilling:
@@ -151,6 +151,10 @@ properties:
         minimum: 0.01
   invoiceTimeShift:
     $ref: ./InvoiceTimeShift.yaml
+  hasJournalAccounts:
+    type: boolean
+    description: Specifies if the plan has journal accounts created.
+    default: false
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:
