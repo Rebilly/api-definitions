@@ -6,15 +6,6 @@ properties:
     type: string
     maxLength: 50
     example: qt_0YV7DES3WPC5J8JD8QTVNZBZNZ
-  type:
-    description: |-
-      Specifies the type of the quote.
-      A quote can be a subscription or a one-time purchase.
-    type: string
-    readOnly: true
-    enum:
-      - subscription-order
-      - one-time-order
   action:
     description: |-
       Action of the quote for change order items.
@@ -101,6 +92,10 @@ properties:
           readOnly: true
           type: string
           example: qti_0YV7DES3WPC5J8JD8QTVNZBZNZ
+        orderItemId:
+          description: ID of the related subscription or one time sale.
+          type: string
+          example: sub_0YV7DES3WPC5J8JD8QTVNZBZNZ
         quantity:
           description: Number of product units in the specified plan.
           type: integer
@@ -124,6 +119,41 @@ properties:
           example: 50% of the markup for approved transactions
           default: ''
           maxLength: 255
+        renewalPolicy:
+          description: Specifies if the subscription retains its current `renewalTime` or resets it to a newly calculated `renewalTime`.
+          type: string
+          default: retain
+          enum:
+            - reset
+            - retain
+        prorated:
+          description: |-
+            Specifies whether to give a pro rata credit for the amount of time remaining between the `effectiveTime` and the end of the current period.
+
+            In addition, if the `renewalTime` is retained, by setting the `renewalPolicy` to `retain`,
+            a pro rata debit occurs for the amount between the `effectiveTime` and the `renewalTime` as a percentage of the normal period length.
+          type: boolean
+          default: true
+        effectiveTime:
+          description: |-
+            Date from which the renewal time for `reset` operations and proration calculations are made.
+            If this field is omitted, this value defaults to the time of quote acceptance.
+          type:
+            - 'string'
+            - 'null'
+          format: date-time
+        keepTrial:
+          description: |-
+            Specifies if the subscription order must retain its active trial.
+            This field is only applicable if `renewalPolicy` is set to `retain`.
+          type: boolean
+          default: false
+        interimOnly:
+          type: boolean
+          default: true
+          description: |-
+            Specifies if the quotation invoice must include interim items only.
+            If this value is set to `false`, all upcoming items are included.
         usageLimits:
           type:
             - 'object'
@@ -194,39 +224,6 @@ properties:
           properties:
             product:
               type: object
-  renewalPolicy:
-    description: Specifies if the subscription retains its current `renewalTime` or resets it to a newly calculated `renewalTime`.
-    type: string
-    enum:
-      - reset
-      - retain
-  prorated:
-    description: |-
-      Specifies whether to give a pro rata credit for the amount of time remaining between the `effectiveTime` and the end of the current period.
-
-      In addition, if the `renewalTime` is retained, by setting the `renewalPolicy` to `retain`,
-      a pro rata debit occurs for the amount between the `effectiveTime` and the `renewalTime` as a percentage of the normal period length.
-    type: boolean
-  effectiveTime:
-    description: |-
-      Date from which the renewal time for `reset` operations and proration calculations are made.
-      If this field is omitted, this value defaults to the time of quote acceptance.
-    type:
-      - 'string'
-      - 'null'
-    format: date-time
-  keepTrial:
-    description: |-
-      Specifies if the subscription order must retain its active trial.
-      This field is only applicable if `renewalPolicy` is set to `retain`.
-    type: boolean
-    default: false
-  interimOnly:
-    type: boolean
-    default: true
-    description: |-
-      Specifies if the quotation invoice must include interim items only.
-      If this value is set to `false`, all upcoming items are included.
   usageSettings:
     type: array
     default: []
