@@ -13,15 +13,6 @@ properties:
     type: string
     maxLength: 50
     example: qt_0YV7DES3WPC5J8JD8QTVNZBZNZ
-  type:
-    description: |-
-      Specifies the type of the quote.
-      A quote can be a subscription or a one-time purchase.
-    type: string
-    readOnly: true
-    enum:
-      - subscription-order
-      - one-time-order
   action:
     description: |-
       Action of the quote for an ended trial-only subscription.
@@ -107,6 +98,10 @@ properties:
           readOnly: true
           type: string
           example: qti_0YV7DES3WPC5J8JD8QTVNZBZNZ
+        orderItemId:
+          description: ID of the related subscription or one time sale.
+          type: string
+          example: sub_0YV7DES3WPC5J8JD8QTVNZBZNZ
         quantity:
           description: Number of product units in the specified plan.
           type: integer
