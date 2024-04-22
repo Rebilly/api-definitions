@@ -1,0 +1,28 @@
+description: Unlimit gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Unlimit credentials object.
+        properties:
+          terminalId:
+            type: string
+            description: ID of the Unlimit terminal.
+          password:
+            type: string
+            description: Password of the Unlimit terminal merchant.
+            format: password
+            writeOnly: true
+          ipnSecret:
+            type: string
+            description: IPN secrect of the Unlimit merchant.
+            format: password
+            writeOnly: true
+        required:
+          - terminalId
+          - password
+          - ipnSecret
