@@ -46,6 +46,10 @@ post:
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
       content:
         application/json:
           schema:
@@ -54,5 +58,7 @@ post:
       $ref: ../components/responses/ValidationError.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
   requestBody:
     $ref: ../components/requestBodies/GridSegment.yaml

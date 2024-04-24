@@ -42,6 +42,11 @@ delete:
   responses:
     '204':
       description: Quote timeline message deleted.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -50,3 +55,5 @@ delete:
       $ref: ../components/responses/NotFound.yaml
     '409':
       $ref: ../components/responses/Conflict.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml

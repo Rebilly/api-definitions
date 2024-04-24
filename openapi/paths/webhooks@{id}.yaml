@@ -48,6 +48,11 @@ put:
   responses:
     '200':
       description: Webhook updated.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
       content:
         application/json:
           schema:
@@ -57,6 +62,10 @@ put:
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
       content:
         application/json:
           schema:
@@ -71,3 +80,5 @@ put:
         application/json:
           schema:
             $ref: ../components/schemas/InvalidError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml

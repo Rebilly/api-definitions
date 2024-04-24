@@ -42,6 +42,10 @@ post:
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
       content:
         application/json:
           schema:
@@ -52,6 +56,8 @@ post:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
   x-codeSamples:
     - lang: JavaScript
       source:
@@ -71,12 +77,19 @@ delete:
   responses:
     '204':
       description: User MFA deleted.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
   x-codeSamples:
     - lang: JavaScript
       source:
