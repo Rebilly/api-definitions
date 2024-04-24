@@ -27,7 +27,7 @@ Rebilly offers four forms of authentication: secret key, publishable key, JSON W
 To create or manage API keys, select one of the following:
 
 - Use the Rebilly UI: see [Manage API keys](https://www.rebilly.com/docs/dev-docs/api-keys/#manage-api-keys)
-- Use the Rebilly API: see the [API key operations](https://www.rebilly.com/catalog/all/API-keys).
+- Use the Rebilly API: see the [API key operations](https://www.rebilly.com/catalog/all/api-keys).
 
 For more information on API keys, see [API keys](https://www.rebilly.com/docs/concepts-and-features/concept/api-keys).
 
@@ -42,7 +42,7 @@ However, no SDK is required to use the API.
 Rebilly also provides [FramePay](https://www.rebilly.com/docs/developer-docs/framepay/),
 a client-side iFrame-based solution, to help create payment tokens while minimizing PCI DSS compliance burdens
 and maximizing your customization ability.
-[FramePay](https://www.rebilly.com/docs/developer-docs/framepay/) interacts with the [payment tokens creation operation](https://www.rebilly.com/catalog/all/Payment-tokens/PostToken).
+[FramePay](https://www.rebilly.com/docs/developer-docs/framepay/) interacts with the [payment tokens creation operation](https://www.rebilly.com/catalog/all/payment-tokens/posttoken).
 
 ## JavaScript SDK
 
