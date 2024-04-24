@@ -91,7 +91,6 @@ properties:
           type: object
           required:
             - plan
-            - quantity
           properties:
             quoteItemId:
               description: ID of the quote item.
@@ -110,9 +109,11 @@ properties:
                 - subscription
                 - one-time-sale
             quantity:
-              description: Number of product units in the specified plan.
+              description: |-
+                Number of product units in the specified plan.
+                Quantity for metered billing is always 0.
               type: integer
-              minimum: 1
+              default: 1
             plan:
               description: Plan details.
               oneOf:
