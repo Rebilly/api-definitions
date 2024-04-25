@@ -1,9 +1,34 @@
-allOf:
-  - type: object
-    properties:
-      status:
-        type: integer
-        description: HTTP status code.
-        minimum: 429
-        maximum: 429
-  - $ref: ./BaseProblem.yaml
+type: object
+additionalProperties: true
+minProperties: 1
+description: RFC-7807 [problem details](https://tools.ietf.org/html/rfc7807) JSON object.
+properties:
+  type:
+    type: string
+    description: |-
+      Problem type in the form of a [URI](https://tools.ietf.org/html/rfc3986) reference.
+      It should provide human-readable documentation for the problem type.
+      When this member is not present, its value is assumed to be "about:blank".
+    format: uri
+    example: about:blank
+  title:
+    type: string
+    description: |-
+      Short, human-readable summary of the problem type.
+      Other than for the purposes of localization, this should not change from occurrence to occurrence of the problem.
+    example: Rate Limit Exceeded
+  status:
+    type: integer
+    description: HTTP status code.
+    minimum: 429
+    maximum: 429
+  detail:
+    type: string
+    description: Human-readable explanation that is specific to this occurrence of the problem.
+    example: A request cannot be executed because the user has sent too many requests within a certain period of time
+  instance:
+    type: string
+    description: |-
+      URI reference that identifies the specific occurrence of the problem.
+      It may or may not yield further information if dereferenced.
+
