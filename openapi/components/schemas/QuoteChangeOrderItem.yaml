@@ -1,0 +1,39 @@
+allOf:
+  - $ref: ./QuoteOrderItem.yaml
+  - type: object
+    properties:
+      renewalPolicy:
+        description: Specifies if the subscription retains its current `renewalTime` or resets it to a newly calculated `renewalTime`.
+        type: string
+        default: retain
+        enum:
+          - reset
+          - retain
+      prorated:
+        description: |-
+          Specifies whether to give a pro rata credit for the amount of time remaining between the `effectiveTime` and the end of the current period.
+
+          In addition, if the `renewalTime` is retained, by setting the `renewalPolicy` to `retain`,
+          a pro rata debit occurs for the amount between the `effectiveTime` and the `renewalTime` as a percentage of the normal period length.
+        type: boolean
+        default: true
+      effectiveTime:
+        description: |-
+          Date from which the renewal time for `reset` operations and proration calculations are made.
+          If this field is omitted, this value defaults to the time of quote acceptance.
+        type:
+          - 'string'
+          - 'null'
+        format: date-time
+      keepTrial:
+        description: |-
+          Specifies if the subscription order must retain its active trial.
+          This field is only applicable if `renewalPolicy` is set to `retain`.
+        type: boolean
+        default: false
+      interimOnly:
+        type: boolean
+        default: true
+        description: |-
+          Specifies if the quotation invoice must include interim items only.
+          If this value is set to `false`, all upcoming items are included.

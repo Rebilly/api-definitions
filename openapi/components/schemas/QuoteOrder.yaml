@@ -1,0 +1,26 @@
+type: object
+description: Related order properties.
+properties:
+  id:
+    description: ID of the related order.
+    readOnly: true
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 50
+    example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
+  items:
+    type: array
+    description: Items included in the quote.
+    minItems: 1
+    items:
+      $ref: ./QuoteOrderItem.yaml
+  autopay:
+    type: boolean
+    default: false
+    description: |-
+      Specifies if payment attempts for the related subscription are made automatically.
+      If autopay is enabled, the payment is retrieved from the customer on the renewal date using the payment instrument that is set at `paymentInstrumentId`,
+      or the default payment instrument on the subscription.
+  shipping:
+    $ref: ./Shipping.yaml
