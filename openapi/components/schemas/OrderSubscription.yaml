@@ -66,13 +66,26 @@ properties:
       Plans without trial prices are free trials.
     type: boolean
   trialPeriod:
+    type: object
     description: |-
-      Trial period length, in ISO-8601 durations format.
+      Trial period information.
       If a trial is enabled on this subscription, a value must be provided.
-    type:
-      - 'string'
-      - 'null'
-    format: date-time
+    required:
+      - unit
+      - length
+    properties:
+      unit:
+        description: Unit of time.
+        type: string
+        enum:
+          - day
+          - week
+          - month
+          - year
+      length:
+        description: Length of time.
+        type: integer
+        minimum: 1
   isTrialOnly:
     description: |-
       Specifies if a subscription ends after a trial period.
