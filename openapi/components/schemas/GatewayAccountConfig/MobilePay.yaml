@@ -8,12 +8,12 @@ allOf:
       credentials:
         type: object
         properties:
-          providerId:
+          merchantSerialNumber:
             type: string
-            description: ID of the MobilePay provider.
-          merchantVat:
+            description: Serial number of the MobilePay merchant.
+          subscriptionKey:
             type: string
-            description: VAT number of the MobilePay merchant.
+            description: Subscription key of the MobilePay.
           clientId:
             type: string
             description: ID of the MobilePay client.
@@ -23,7 +23,7 @@ allOf:
             format: password
             writeOnly: true
         required:
-          - providerId
-          - merchantVat
+          - merchantSerialNumber
+          - subscriptionKey
           - clientId
           - clientSecret
