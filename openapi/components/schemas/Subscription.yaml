@@ -109,6 +109,25 @@ properties:
           - 'string'
           - 'null'
         format: date-time
+      period:
+        type: object
+        description: Trial period information.
+        required:
+          - unit
+          - length
+        properties:
+          unit:
+            description: Unit of time.
+            type: string
+            enum:
+              - day
+              - week
+              - month
+              - year
+          length:
+            description: Length of time.
+            type: integer
+            minimum: 1
   isTrialOnly:
     description: |-
       Specifies if a subscription ends after a trial period.
