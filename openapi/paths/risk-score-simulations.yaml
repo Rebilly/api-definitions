@@ -1,0 +1,65 @@
+get:
+  x-badge: Experimental
+  x-products:
+    - Core
+  tags:
+    - Risk score
+  summary: Retrieve a risk score simulations
+  operationId: GetRiskScoreSimulationsCollection
+  x-sdk-operation-name: getAll
+  security:
+    - SecretApiKey: []
+    - JWT: []
+  description: Retrieves a risk score simulations.
+  responses:
+    '200':
+      description: Risk score simulations retrieved.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/RiskScoreSimulation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+post:
+  x-badge: Experimental
+  x-products:
+    - Core
+  tags:
+    - Risk score
+  summary: Create a risk score simulation
+  operationId: PostRiskScoreSimulation
+  x-sdk-operation-name: create
+  description: Creates a risk score simulation with a specified ID.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/RiskScoreSimulation.yaml
+  responses:
+    '200':
+      description: Risk score simulation updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RiskScoreSimulation.yaml
+    '201':
+      description: Risk score simulation created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RiskScoreSimulation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
