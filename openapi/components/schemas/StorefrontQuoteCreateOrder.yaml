@@ -71,18 +71,18 @@ properties:
     $ref: ./WebsiteId.yaml
   customerId:
     $ref: ./CustomerId.yaml
-  order:
+  orderId:
+    description: ID of the related order.
+    readOnly: true
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 50
+    example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
+  orderChanges:
     type: object
     description: Related order properties.
     properties:
-      id:
-        description: ID of the related order.
-        readOnly: true
-        type:
-          - 'string'
-          - 'null'
-        maxLength: 50
-        example: ord_0YV7DES3WPC5J8JD8QTVNZBZNZ
       items:
         type: array
         description: Items included in the quote.

@@ -3,7 +3,7 @@ title: QuoteCreateOrder
 required:
   - websiteId
   - customerId
-  - order
+  - orderChanges
   - type
 properties:
   id:
@@ -77,18 +77,18 @@ properties:
     $ref: ./WebsiteId.yaml
   customerId:
     $ref: ./CustomerId.yaml
-  order:
+  orderId:
+    description: ID of the related order.
+    readOnly: true
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 50
+    example: ord_01HVKA5975PJBSQ1SX72G3MSZC
+  orderChanges:
     type: object
     description: Related order properties.
     properties:
-      id:
-        description: ID of the related order.
-        readOnly: true
-        type:
-          - 'string'
-          - 'null'
-        maxLength: 50
-        example: ord_01HVKA5975PJBSQ1SX72G3MSZC
       items:
         type: array
         description: Items included in the quote.
