@@ -1,0 +1,63 @@
+get:
+  x-badge: Experimental
+  x-products:
+    - Core
+  tags:
+    - Risk score
+  summary: Retrieve a risk score simulation job
+  operationId: GetRiskScoreSimulationJob
+  x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+  description: Retrieves a risk score simulation job.
+  responses:
+    '200':
+      description: Risk score simulation jobs retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RiskScoreSimulationJob.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-badge: Experimental
+  x-products:
+    - Core
+  tags:
+    - Risk score
+  summary: Update a risk score simulation job.
+  operationId: PutRiskScoreSimulationJob
+  x-sdk-operation-name: update
+  security:
+    - SecretApiKey: []
+    - JWT: []
+  description: Update a risk score simulation job. Only pending jobs can be updated.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/RiskScoreSimulationJob.yaml
+    required: true
+  responses:
+    '200':
+      description: Risk score simulation job updated.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RiskScoreSimulationJob.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

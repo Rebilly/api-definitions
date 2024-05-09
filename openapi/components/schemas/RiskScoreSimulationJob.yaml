@@ -1,30 +1,26 @@
 type: object
-description: Risk score simulation.
+description: A job to simulate a risk score calculation given a set of risk score settings.
 required:
-  - simulationJobId
+  - rules
   - period
 properties:
   id:
-    description: ID of the simulation.
     type: string
-    readOnly: true
-    maxLength: 50
-    example: rsim_0YVCNQ2C1AD1RA3HXKP492GNZB
-  simulationJobId:
-    description: ID of the simulation job.
-    type: string
-    readOnly: true
+    description: ID of the job.
     maxLength: 50
     example: rsim_job_0YVCNQ2C1AD1RA3HXKP492GNZB
-  status:
-    description: Status of the simulation.
-    type: string
     readOnly: true
+  status:
+    type: string
+    description: Status of the job.
     enum:
       - pending
       - processing
       - completed
       - failed
+      - stopped
+    example: completed
+    readOnly: true
   summary:
     description: Summary of the simulation.
     readOnly: true
@@ -47,20 +43,37 @@ properties:
           type: integer
         amount:
           $ref: ./Money.yaml
+  rules:
+    description: Risk score rules.
+    $ref: ./RiskScoreRules.yaml
+  period:
+    type: object
+    description: Full period of the simulation.
+    properties:
+      startDate:
+        type: string
+        format: date
+        example: 01-09-2022
+      endDate:
+        type: string
+        format: date
+        example: 30-09-2022
   createdAt:
-    description: Date and time when the simulation was created.
+    description: Date and time when the simulation job was created.
     $ref: ./ServerTimestamp.yaml
   startedAt:
-    description: Date and time when the simulation started.
+    description: Date and time when the simulation job started.
     $ref: ./ServerTimestamp.yaml
   finishedAt:
-    description: Date and time when the simulation finished.
+    description: Date and time when the simulation job finished.
     $ref: ./ServerTimestamp.yaml
   _links:
     $ref: ./SelfLink.yaml
   _embedded:
     type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
     properties:
-      transactions:
+      simulations:
         type: array
-        description: Transactions of the simulation.
+        description: Simulation runs done by the job.
