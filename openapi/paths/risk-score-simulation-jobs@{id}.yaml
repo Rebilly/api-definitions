@@ -1,16 +1,18 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
 get:
   x-badge: Experimental
   x-products:
     - Core
   tags:
     - Risk score
-  summary: Retrieve a risk score simulation job
+  summary: Retrieve risk score simulation job
   operationId: GetRiskScoreSimulationJob
   x-sdk-operation-name: get
   security:
     - SecretApiKey: []
     - JWT: []
-  description: Retrieves a risk score simulation job.
+  description: Retrieve risk score simulation job.
   responses:
     '200':
       description: Risk score simulation jobs retrieved.
@@ -24,19 +26,19 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-put:
+patch:
   x-badge: Experimental
   x-products:
     - Core
   tags:
     - Risk score
-  summary: Update a risk score simulation job.
-  operationId: PutRiskScoreSimulationJob
+  summary: Update risk score simulation job
+  operationId: PatchRiskScoreSimulationJob
   x-sdk-operation-name: update
   security:
     - SecretApiKey: []
     - JWT: []
-  description: Update a risk score simulation job. Only pending jobs can be updated.
+  description: Update risk score simulation job. Only pending jobs can be updated.
   requestBody:
     content:
       application/json:

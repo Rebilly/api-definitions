@@ -1,5 +1,5 @@
 type: object
-description: A job to simulate a risk score calculation given a set of risk score settings.
+description: Resource to simulate a risk score calculation given a set of risk score settings.
 required:
   - rules
   - period
@@ -71,9 +71,7 @@ properties:
     $ref: ./SelfLink.yaml
   _embedded:
     type: object
-    description: Embedded objects that are requested by the `expand` query parameter.
-    readOnly: true
     properties:
-      simulations:
+      transactions:
         type: array
-        description: Simulation runs done by the job.
+        description: Transactions of the simulation.
