@@ -17,6 +17,11 @@ required:
   - ipVelocity
   - emailVelocity
   - billingAddressVelocity
+  - isRebill
+  - isRetry
+  - customerLifetimeValue
+  - browserAdBlockEnabled
+  - paymentInstrumentApprovedTransactionCount
 properties:
   isProxy:
     description: Specifies whether the customer's IP address is related to a proxy.
@@ -65,4 +70,19 @@ properties:
     $ref: ./RiskScoreBracket.yaml
   billingAddressVelocity:
     description: Number of transactions for this billing address in the last 24 hours.
+    $ref: ./RiskScoreBracket.yaml
+  isRebill:
+    description: Specifies whether the transaction is one of a number of recurring payments in a subscription, excluding trials or setup fees.
+    $ref: ./RiskScoreBoolean.yaml
+  isRetry:
+    description: Specifies whether the transaction is a retry.
+    $ref: ./RiskScoreBoolean.yaml
+  customerLifetimeValue:
+    description: Total revenue from the customer, in USD.
+    $ref: ./RiskScoreBracket.yaml
+  browserAdBlockEnabled:
+    description: Specifies whether an ad blocker was detected.
+    $ref: ./RiskScoreBoolean.yaml
+  paymentInstrumentApprovedTransactionCount:
+    description: Number of approved transactions for this payment instrument.
     $ref: ./RiskScoreBracket.yaml
