@@ -12,15 +12,15 @@ get:
   parameters:
     - $ref: ../../components/parameters/collectionExpand.yaml
   responses:
-    200:
+    '200':
       description: Account retrieved.
       content:
         application/json:
           schema:
             $ref: ../../components/schemas/StorefrontAccount.yaml
-    401:
+    '401':
       $ref: ../../components/responses/Unauthorized.yaml
-    403:
+    '403':
       $ref: ../../components/responses/Forbidden.yaml
 patch:
   x-products:
@@ -40,15 +40,22 @@ patch:
           allOf:
             - $ref: ../../components/schemas/StorefrontAccount.yaml
   responses:
-    200:
+    '200':
       description: Account updated.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../../components/headers/X-RateLimit-Remaining.yaml
       content:
         application/json:
           schema:
             $ref: ../../components/schemas/StorefrontAccount.yaml
-    401:
+    '401':
       $ref: ../../components/responses/Unauthorized.yaml
-    403:
+    '403':
       $ref: ../../components/responses/Forbidden.yaml
-    422:
+    '422':
       $ref: ../../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../../components/responses/TooManyRequests.yaml

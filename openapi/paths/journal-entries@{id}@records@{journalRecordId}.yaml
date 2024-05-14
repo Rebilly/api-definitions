@@ -42,6 +42,11 @@ put:
   responses:
     '200':
       description: Journal record updated.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
       content:
         application/json:
           schema:
@@ -51,6 +56,10 @@ put:
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
       content:
         application/json:
           schema:
@@ -63,6 +72,8 @@ put:
       $ref: ../components/responses/NotFound.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
 delete:
   x-products:
     - Core
@@ -75,6 +86,11 @@ delete:
   responses:
     '204':
       description: Journal record deleted.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -83,3 +99,5 @@ delete:
       $ref: ../components/responses/NotFound.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml

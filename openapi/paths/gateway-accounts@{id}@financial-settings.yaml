@@ -1,7 +1,8 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
 get:
-  x-badge: Experimental
+  x-badges:
+    - name: Experimental
   x-products:
     - Users
   tags:
@@ -28,7 +29,8 @@ get:
       $ref: ../components/responses/NotFound.yaml
 
 put:
-  x-badge: Experimental
+  x-badges:
+    - name: Experimental
   x-products:
     - Users
   tags:
@@ -48,6 +50,11 @@ put:
   responses:
     '200':
       description: Gateway account financial settings updated.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
       content:
         application/json:
           schema:
@@ -57,6 +64,10 @@ put:
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
       content:
         application/json:
           schema:
@@ -69,3 +80,5 @@ put:
       $ref: ../components/responses/NotFound.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml

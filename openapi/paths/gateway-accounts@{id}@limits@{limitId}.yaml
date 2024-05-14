@@ -54,6 +54,10 @@ put:
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
       content:
         application/json:
           schema:
@@ -68,6 +72,8 @@ put:
       $ref: ../components/responses/Conflict.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
   requestBody:
     content:
       application/json:
@@ -85,6 +91,11 @@ delete:
   responses:
     '204':
       description: Gateway account limit deleted.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

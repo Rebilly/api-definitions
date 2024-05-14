@@ -27,7 +27,7 @@ Rebilly offers four forms of authentication: secret key, publishable key, JSON W
 To create or manage API keys, select one of the following:
 
 - Use the Rebilly UI: see [Manage API keys](https://www.rebilly.com/docs/dev-docs/api-keys/#manage-api-keys)
-- Use the Rebilly API: see the [API key operations](https://www.rebilly.com/catalog/all/API-keys).
+- Use the Rebilly API: see the [API key operations](https://www.rebilly.com/catalog/all/api-keys).
 
 For more information on API keys, see [API keys](https://www.rebilly.com/docs/concepts-and-features/concept/api-keys).
 
@@ -42,7 +42,7 @@ However, no SDK is required to use the API.
 Rebilly also provides [FramePay](https://www.rebilly.com/docs/developer-docs/framepay/),
 a client-side iFrame-based solution, to help create payment tokens while minimizing PCI DSS compliance burdens
 and maximizing your customization ability.
-[FramePay](https://www.rebilly.com/docs/developer-docs/framepay/) interacts with the [payment tokens creation operation](https://www.rebilly.com/catalog/all/Payment-tokens/PostToken).
+[FramePay](https://www.rebilly.com/docs/developer-docs/framepay/) interacts with the [payment tokens creation operation](https://www.rebilly.com/catalog/all/payment-tokens/posttoken).
 
 ## JavaScript SDK
 
@@ -71,3 +71,12 @@ If you would like to implement a particular use case,
 
 To integrate Rebilly, and learn about related resources and concepts,
 see [Get started](https://www.rebilly.com/docs/dev-docs/get-started/).
+
+# Rate limits
+
+Rebilly enforces rate limits on the API to ensure that no single organization consumes too many resources.
+Rate limits are applied to the organization, and not to the API key.
+In sandbox environment, rate limits are enforced for non-GET endpoints and are set at 3000 requests per 10 minutes.
+You can find the exact number of consumed requests in the `X-RateLimit-Limit` and `X-RateLimit-Remaining` headers in the response.
+If the rate limit is exceeded, the API returns a `429 Too Many Requests` response
+and a `X-RateLimit-Retry-After` header that includes a UTC timestamp of when the rate limit resets.

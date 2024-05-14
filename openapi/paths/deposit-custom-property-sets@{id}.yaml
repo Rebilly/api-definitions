@@ -3,7 +3,8 @@ parameters:
 get:
   x-products:
     - Core
-  x-badge: Experimental
+  x-badges:
+    - name: Experimental
   tags:
     - Deposits
   summary: Retrieve a custom deposit property set
@@ -26,7 +27,8 @@ get:
 put:
   x-products:
     - Core
-  x-badge: Experimental
+  x-badges:
+    - name: Experimental
   tags:
     - Deposits
   summary: Upsert a custom deposit property set
@@ -43,6 +45,11 @@ put:
   responses:
     '200':
       description: Custom deposit property updated.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
       content:
         application/json:
           schema:
@@ -52,6 +59,10 @@ put:
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
       content:
         application/json:
           schema:
@@ -64,10 +75,13 @@ put:
       $ref: ../components/responses/Conflict.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
 delete:
   x-products:
     - Core
-  x-badge: Experimental
+  x-badges:
+    - name: Experimental
   tags:
     - Deposits
   summary: Delete a custom deposit property set
@@ -77,9 +91,16 @@ delete:
   responses:
     '204':
       description: Custom deposit property set deleted.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml

@@ -20,7 +20,7 @@ post:
     To invert this behavior, place an all matching rule at the end of the `ready-to-pay-requested` event in the rules engine,
     and include an empty `paymentMethods` property for the `adjust-ready-to-pay` action.
 
-    For more information, see [Update event rules](https://www.rebilly.com/catalog/all/Rules/PutEventRule) and [Gateway accounts](https://www.rebilly.com/catalog/all/Gateway-accounts).
+    For more information, see [Update event rules](https://www.rebilly.com/catalog/all/rules/puteventrule) and [Gateway accounts](https://www.rebilly.com/catalog/all/gateway-accounts).
 
     If this operation to pay is used with a transaction-scoped JSON Web Token (JWT), all fields are ignored except `riskMetadata`.
   requestBody:
@@ -29,15 +29,22 @@ post:
         schema:
           $ref: ../../components/schemas/ReadyToPay.yaml
   responses:
-    200:
+    '200':
       description: Payment methods retrieved.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../../components/headers/X-RateLimit-Remaining.yaml
       content:
         application/json:
           schema:
             $ref: ../../components/schemas/ReadyToPayMethods.yaml
-    401:
+    '401':
       $ref: ../../components/responses/Unauthorized.yaml
-    403:
+    '403':
       $ref: ../../components/responses/Forbidden.yaml
-    422:
+    '422':
       $ref: ../../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../../components/responses/TooManyRequests.yaml
