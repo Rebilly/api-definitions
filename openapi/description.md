@@ -71,3 +71,12 @@ If you would like to implement a particular use case,
 
 To integrate Rebilly, and learn about related resources and concepts,
 see [Get started](https://www.rebilly.com/docs/dev-docs/get-started/).
+
+# Rate limits
+
+Rebilly enforces rate limits on the API to ensure that no single organization consumes too many resources.
+Rate limits are applied to the organization, and not to the API key.
+In sandbox environment, rate limits are enforced for non-GET endpoints and are set at 3000 requests per 10 minutes.
+You can find the exact number of consumed requests in the `X-RateLimit-Limit` and `X-RateLimit-Remaining` headers in the response.
+If the rate limit is exceeded, the API returns a `429 Too Many Requests` response
+and a `X-RateLimit-Retry-After` header that includes a UTC timestamp of when the rate limit resets.
