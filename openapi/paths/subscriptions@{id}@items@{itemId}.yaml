@@ -27,6 +27,11 @@ patch:
   responses:
     '200':
       description: Order item updated.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
       content:
         application/json:
           schema:
@@ -37,3 +42,9 @@ patch:
       $ref: ../components/responses/Forbidden.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: "../code_samples/JavaScript/subscriptions@{id}@items@{itemId}/patch.js"

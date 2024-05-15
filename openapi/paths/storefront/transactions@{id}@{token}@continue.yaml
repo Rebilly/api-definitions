@@ -16,17 +16,24 @@ post:
 
      Use this operation to process the transaction after all documents of the KYC request with a specified token have been uploaded.
   responses:
-    200:
+    '200':
       description: KYC verification finished.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../../components/headers/X-RateLimit-Remaining.yaml
       content:
         application/json:
           schema:
             $ref: ../../components/schemas/StorefrontTransaction.yaml
-    401:
+    '401':
       $ref: ../../components/responses/Unauthorized.yaml
-    403:
+    '403':
       $ref: ../../components/responses/Forbidden.yaml
-    404:
+    '404':
       $ref: ../../components/responses/NotFound.yaml
-    409:
+    '409':
       $ref: ../../components/responses/Conflict.yaml
+    '429':
+      $ref: ../../components/responses/TooManyRequests.yaml
