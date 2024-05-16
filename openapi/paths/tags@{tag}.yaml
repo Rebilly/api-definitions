@@ -36,6 +36,11 @@ patch:
   responses:
     '200':
       description: Tag updated.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
       content:
         application/json:
           schema:
@@ -50,6 +55,8 @@ patch:
       $ref: ../components/responses/Conflict.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
 delete:
   x-products:
     - Core
@@ -64,9 +71,16 @@ delete:
   responses:
     '204':
       description: Tag deleted.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml

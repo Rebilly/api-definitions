@@ -13,7 +13,7 @@ get:
     - $ref: ../../components/parameters/collectionLimit.yaml
     - $ref: ../../components/parameters/collectionOffset.yaml
   responses:
-    200:
+    '200':
       description: List of KYC documents retrieved.
       headers:
         Pagination-Total:
@@ -28,9 +28,9 @@ get:
             type: array
             items:
               $ref: ../../components/schemas/StorefrontKycDocument.yaml
-    401:
+    '401':
       $ref: ../../components/responses/Unauthorized.yaml
-    403:
+    '403':
       $ref: ../../components/responses/Forbidden.yaml
 post:
   x-products:
@@ -51,18 +51,24 @@ post:
     description: KYC document resource.
     required: true
   responses:
-    201:
+    '201':
       description: KYC document created.
       headers:
         Location:
           $ref: ../../components/headers/Location.yaml
+        X-RateLimit-Limit:
+          $ref: ../../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../../components/headers/X-RateLimit-Remaining.yaml
       content:
         application/json:
           schema:
             $ref: ../../components/schemas/StorefrontKycDocument.yaml
-    401:
+    '401':
       $ref: ../../components/responses/Unauthorized.yaml
-    403:
+    '403':
       $ref: ../../components/responses/Forbidden.yaml
-    422:
+    '422':
       $ref: ../../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../../components/responses/TooManyRequests.yaml
