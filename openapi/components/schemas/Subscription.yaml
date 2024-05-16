@@ -112,25 +112,15 @@ properties:
         format: date-time
       period:
         type:
-          - 'object'
+          - 'string'
           - 'null'
-        description: Trial period information.
-        required:
-          - unit
-          - length
-        properties:
-          unit:
-            description: Unit of time.
-            type: string
-            enum:
-              - day
-              - week
-              - month
-              - year
-          length:
-            description: Length of time.
-            type: integer
-            minimum: 1
+        description: |-
+          Trial period time interval in ISO-8601 format.
+          If a trial is enabled on this subscription, a value must be provided.
+
+          This interval value supports the `+` symbol.
+        default: +P00Y00M00DT00H00M00S
+        example: +P00Y00M00DT00H00M00S
   isTrialOnly:
     description: |-
       Specifies if a subscription ends after a trial period.
