@@ -168,14 +168,6 @@ Set up lint rules to enforce any design rules to keep this list to a minimum (an
 - Add `"#/parameters/collectionSort"` to Resource collection if Resource support sorting.
     - Define all sortable properties.
 
-## Feedback on design
-
-When a draft pull request is opened, there is a change being proposed. It may be a new API proposal, enhancing or fixing documentation for an existing API.
-
-Taking the time to review and provide feedback on APIs helps you manyfold by better understanding the entire collection of APIs.
-
-While not a requirement, we have a preference to use [conventional comments](https://conventionalcomments.org/) for pull request comments.
-
 ## Helpful resources
 
 - [Redocly CLI documentation](https://redoc.ly/docs/cli/)
