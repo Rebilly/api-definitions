@@ -1,0 +1,22 @@
+description: PayU gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: PayU credentials object.
+        properties:
+          merchantKey:
+            type: string
+            description: Merchant key of the PayU merchant.
+          merchantSalt:
+            type: string
+            description: Merchant salt of the PayU merchant.
+            format: password
+            writeOnly: true
+        required:
+          - merchantKey
+          - merchantSalt
