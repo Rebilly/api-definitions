@@ -12,17 +12,17 @@ get:
     - CustomerJWT: []
   description: Retrieves a payout request with a specified ID.
   responses:
-    200:
+    '200':
       description: Payout request retrieved.
       content:
         application/json:
           schema:
             $ref: ../../components/schemas/StorefrontPayoutRequest.yaml
-    401:
+    '401':
       $ref: ../../components/responses/Unauthorized.yaml
-    403:
+    '403':
       $ref: ../../components/responses/Forbidden.yaml
-    404:
+    '404':
       $ref: ../../components/responses/NotFound.yaml
 patch:
   x-products:
@@ -49,17 +49,24 @@ patch:
               maxLength: 50
               example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
   responses:
-    200:
+    '200':
       description: Payout request updated.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../../components/headers/X-RateLimit-Remaining.yaml
       content:
         application/json:
           schema:
             $ref: ../../components/schemas/StorefrontPayoutRequest.yaml
-    401:
+    '401':
       $ref: ../../components/responses/Unauthorized.yaml
-    403:
+    '403':
       $ref: ../../components/responses/Forbidden.yaml
-    404:
+    '404':
       $ref: ../../components/responses/NotFound.yaml
-    422:
+    '422':
       $ref: ../../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../../components/responses/TooManyRequests.yaml
