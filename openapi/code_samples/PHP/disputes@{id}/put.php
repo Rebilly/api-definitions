@@ -1,8 +1,8 @@
 <?php
 
-$service = new \Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
-$disputeForm = new \Rebilly\Sdk\Model\Dispute();
+$disputeForm = new \Rebilly\Sdk\Model\PostDisputeRequest();
 $disputeForm->setTransactionId('transactionId');
 $disputeForm->setCurrency('USD');
 $disputeForm->setAmount(10);

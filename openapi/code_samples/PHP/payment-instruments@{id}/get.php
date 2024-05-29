@@ -1,4 +1,4 @@
 <?php
 
-$service = new \Rebilly\Sdk\UsersService($client);
+$service = new \Rebilly\Sdk\Service($client);
 $paymentInstrument = $service->paymentInstruments()->get('paymentInstrumentId');

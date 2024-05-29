@@ -1,6 +1,6 @@
 <?php
 
-$service = new \Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
 $redemptionForm = new \Rebilly\Sdk\Model\CouponRedemption();
 $redemptionForm->setCustomerId('customerId');

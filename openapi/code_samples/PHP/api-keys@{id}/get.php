@@ -1,4 +1,4 @@
 <?php
 
-$service = new \Rebilly\Sdk\UsersService($client);
+$service = new \Rebilly\Sdk\Service($client);
 $apiKeys = $service->apiKeys()->get('apiKeyID');

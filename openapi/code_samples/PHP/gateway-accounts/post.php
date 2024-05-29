@@ -1,16 +1,15 @@
 <?php
 
-$service = new \Rebilly\Sdk\UsersService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
-$gatewayAccountForm = new \Rebilly\Sdk\Model\A1Gateway();
+$gatewayAccountForm = new \Rebilly\Sdk\Model\Stripe();
 $gatewayAccountForm->setAcquirerName('Bank of Rebilly');
-$gatewayAccountForm->setOrganizationId('organizationId');
 $gatewayAccountForm->setMerchantCategoryCode('5734');
 $gatewayAccountForm->setPaymentCardSchemes([
     'Visa',
     'MasterCard',
 ]);
-$gatewayAccountForm->setMethod('cash');
+$gatewayAccountForm->setMethod('payment-card');
 
 try {
     $gatewayAccount = $service->gatewayAccounts()->create($gatewayAccountForm);

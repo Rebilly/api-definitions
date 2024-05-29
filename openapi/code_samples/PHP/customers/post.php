@@ -1,6 +1,6 @@
 <?php
 
-$service = new \Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
 $customerForm = \Rebilly\Sdk\Model\Customer::from([])
     ->setWebsiteId('websiteId')

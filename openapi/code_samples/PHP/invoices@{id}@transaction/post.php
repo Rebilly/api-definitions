@@ -1,6 +1,6 @@
 <?php
 
-$service = new \Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
 $invoiceTransaction = new \Rebilly\Sdk\Model\InvoiceTransaction([
     'transactionId' => 'transactionId',

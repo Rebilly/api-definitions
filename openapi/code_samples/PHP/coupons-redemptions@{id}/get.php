@@ -1,4 +1,4 @@
 <?php
 
-$service = new \Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\Service($client);
 $couponRedemption = $service->coupons()->getRedemption('redemptionId');

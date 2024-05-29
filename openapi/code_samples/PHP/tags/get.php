@@ -1,6 +1,6 @@
 <?php
 
-$service = new \Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
 $tagsPaginator = $service->tags()->getAllPaginator(limit: 5);
 foreach ($tagsPaginator as $tagPage) {

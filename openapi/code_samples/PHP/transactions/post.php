@@ -1,6 +1,6 @@
 <?php
 
-$service = new \Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
 $transactionForm = new \Rebilly\Sdk\Model\PostTransactionRequest([
     'type' => 'sale',
@@ -10,7 +10,7 @@ $transactionForm->setCustomerId('customerId');
 $transactionForm->setWebsiteId('websiteId');
 $transactionForm->setCurrency('USD');
 
-$paymentInstruction = new \Rebilly\Sdk\Model\PaymentInstructionInstrument();
+$paymentInstruction = new \Rebilly\Sdk\Model\PaymentInstructionToken();
 $paymentInstruction->setToken('payment-token');
 $transactionForm->setPaymentInstruction($paymentInstruction);
 

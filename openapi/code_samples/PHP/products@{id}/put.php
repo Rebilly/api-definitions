@@ -1,6 +1,6 @@
 <?php
 
-$service = new \Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
 $product = new \Rebilly\Sdk\Model\Product([
     'requiresShipping' => false,
@@ -17,7 +17,7 @@ try {
 
 $product = $service->products()->get('productId');
 $product->setRequiresShipping(false)
-        ->setAccountingCode('101');
+    ->setAccountingCode('101');
 
 try {
     $product = $service->products()->update('productId', $product);

@@ -1,6 +1,6 @@
 <?php
 
-$service = new \Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
 $invoiceReissue = new \Rebilly\Sdk\Model\InvoiceReissue([
     'dueTime' => '2025-01-01 05:00:00',

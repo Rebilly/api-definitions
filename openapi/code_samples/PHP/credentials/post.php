@@ -1,6 +1,6 @@
 <?php
 
-$service = new \Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
 $customerCredentialForm = \Rebilly\Sdk\Model\CustomerCredential::from([])
     ->setCustomerId('customerId')

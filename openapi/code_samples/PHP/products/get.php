@@ -1,6 +1,6 @@
 <?php
 
-$service = new \Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
 $productsPaginator = $service->products()->getAllPaginator(limit: 5);
 foreach ($productsPaginator as $productPage) {

@@ -1,15 +1,15 @@
 <?php
 
-$service = new \Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
-$plan = \Rebilly\Sdk\Model\Plan::from([])
+$plan = \Rebilly\Sdk\Model\SubscriptionPlan::from([])
     ->setProductId('productId')
     ->setName('Test plan')
     ->setCurrency('USD')
     ->setPricing(new \Rebilly\Sdk\Model\PlanFormulaFlatRate(['price' => 9.99]))
     ->setRecurringInterval(
-        \Rebilly\Sdk\Model\SubscriptionOrderPlanRecurringInterval::from()
-            ->setUnit(\Rebilly\Sdk\Model\SubscriptionOrderPlanRecurringInterval::UNIT_MONTH)
+        \Rebilly\Sdk\Model\SubscriptionPlanRecurringInterval::from()
+            ->setUnit(\Rebilly\Sdk\Model\SubscriptionPlanRecurringInterval::UNIT_MONTH)
             ->setLength(1),
     );
 

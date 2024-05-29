@@ -1,6 +1,6 @@
 <?php
 
-$service = new \Rebilly\Sdk\UsersService($client);
+$service = new \Rebilly\Sdk\Service($client);
 $applicationInstance = \Rebilly\Sdk\Model\ApplicationInstance::from([
     'settings' => ['color' => 'red', 'limit' => 5],
 ]);

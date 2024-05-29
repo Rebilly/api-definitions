@@ -1,6 +1,6 @@
 <?php
 
-$service = new \Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\Service($client);
 $couponForm = new \Rebilly\Sdk\Model\Coupon();
 $couponForm->setIssuedTime('2022-01-01T00:00:00-04:00');
 

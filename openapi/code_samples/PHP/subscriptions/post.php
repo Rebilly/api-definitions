@@ -1,14 +1,14 @@
 <?php
 
-$service = new \Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
-$order = \Rebilly\Sdk\Model\SubscriptionOrder::from()
+$order = \Rebilly\Sdk\Model\Subscription::from()
     ->setWebsiteId('websiteId')
     ->setCustomerId('customerId')
     ->setItems([
-        \Rebilly\Sdk\Model\OrderItem::from()
+        \Rebilly\Sdk\Model\SubscriptionOrOneTimeSaleItem::from()
             ->setPlan(
-                \Rebilly\Sdk\Model\OrderItemPlan::from()
+                \Rebilly\Sdk\Model\OriginalPlan::from()
                     ->setId('planId')
             )
             ->setQuantity(1),

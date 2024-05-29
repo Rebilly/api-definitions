@@ -1,6 +1,6 @@
 <?php
 
-$service = new \Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
 $authenticationOptionsForm = new \Rebilly\Sdk\Model\AuthenticationOptions();
 // Regular expression below matches any password with 6+ length that contains alphabet symbols and/or numbers.

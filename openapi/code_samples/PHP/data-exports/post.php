@@ -1,8 +1,8 @@
 <?php
 
-$service = new \Rebilly\Sdk\ReportsService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
-$dataExport = new \Rebilly\Sdk\Model\Customers([
+$dataExport = new \Rebilly\Sdk\Model\CustomersDataExport([
     'name' => 'Daily customer export',
     'format' => 'csv',
     'fields' => [

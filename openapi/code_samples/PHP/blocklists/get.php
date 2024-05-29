@@ -1,6 +1,6 @@
 <?php
 
-$service = new \Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
 $blocklistsPaginator = $service->blocklists()->getAllPaginator(limit: 5, filter: 'value:testValue');
 foreach ($blocklistsPaginator as $blocklistPage) {

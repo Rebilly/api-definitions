@@ -1,8 +1,8 @@
 <?php
 
-$service = new \Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
-$order = new \Rebilly\Sdk\Model\SubscriptionOrder([
+$order = new \Rebilly\Sdk\Model\Subscription([
     'shipping' => new \Rebilly\Sdk\Model\ManualShipping([
         'amount' => 14.99,
     ]),

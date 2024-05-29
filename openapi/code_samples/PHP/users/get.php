@@ -1,6 +1,6 @@
 <?php
 
-$service = new \Rebilly\Sdk\UsersService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
 $usersPaginator = $service->users()->getAllPaginator(limit: 5, filter: 'firstName:John');
 foreach ($usersPaginator as $usersPage) {

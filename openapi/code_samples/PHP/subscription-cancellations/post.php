@@ -1,6 +1,6 @@
 <?php
 
-$service = new \Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
 $cancellation = new \Rebilly\Sdk\Model\SubscriptionCancellation([
     'subscriptionId' => 'subscriptionId',

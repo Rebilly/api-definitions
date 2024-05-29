@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <psalm
     errorLevel="4"
-    resolveFromConfigFile="true"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
@@ -12,8 +11,9 @@
         <directory name="./" />
         <ignoreFiles>
             <directory name="vendor" />
-            <file name="data-exports/post.php"/> <!-- Class was renamed in unreleased version -->
-            <file name="data-exports@{id}/put.php"/> <!-- Class was renamed in unreleased version -->
+            <file name="plans@{id}/put.php"/> <!-- Fix PHP SDK UndefinedInterfaceMethod: Method Rebilly\Sdk\Model\Plan::setRecurringInterval does not exist -->
+            <file name="ready-to-pay/post.php"/> <!-- Fix PHP SDK UndefinedMethod: Method Rebilly\Sdk\Model\ReadyToPayAmount::setCustomerId does not exist -->
+            <file name="subscriptions/get.php"/> <!-- Fix PHP SDK UndefinedInterfaceMethod: Method Rebilly\Sdk\Model\SubscriptionOrOneTimeSale::getStatus does not exist -->
         </ignoreFiles>
     </projectFiles>
     <issueHandlers>

@@ -1,6 +1,6 @@
 <?php
 
-$service = new \Rebilly\Sdk\UsersService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
 $paymentInstrumentForm = new \Rebilly\Sdk\Model\PaymentCardCreatePlain();
 $paymentInstrumentForm->setCustomerId('customerId');
@@ -48,7 +48,7 @@ try {
 }
 
 // Alternatively you can specify a payment token
-$paymentInstrumentForm = new \Rebilly\Sdk\Model\PaymentCardCreatePlain();
+$paymentInstrumentForm = new \Rebilly\Sdk\Model\PaymentInstrumentCreateToken();
 $paymentInstrumentForm->setCustomerId('customerId');
 $paymentInstrumentForm->setToken('payment-token');
 

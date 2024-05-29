@@ -1,5 +1,5 @@
 <?php
 
-$service = new \Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
 $service->customerAuthentication()->deleteResetPasswordToken('tokenId');

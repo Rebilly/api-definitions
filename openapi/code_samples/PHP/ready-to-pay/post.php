@@ -1,8 +1,8 @@
 <?php
 
-$service = new \Rebilly\Sdk\CoreService($client);
+$service = new \Rebilly\Sdk\Service($client);
 
-$readyToPayForm = new \Rebilly\Sdk\Model\PostReadyToPay();
+$readyToPayForm = new \Rebilly\Sdk\Model\ReadyToPayAmount();
 $readyToPayForm->setCurrency('USD');
 $readyToPayForm->setAmount(10);
 $readyToPayForm->setWebsiteId('websiteId');
