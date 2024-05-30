@@ -1,0 +1,29 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-badge: Experimental
+  x-products:
+    - Core
+  tags:
+    - Risk score
+  summary: Stop an active risk score simulation job
+  operationId: PostRiskScoreSimulationJobStop
+  x-sdk-operation-name: create
+  security:
+    - SecretApiKey: []
+    - JWT: []
+  description: Stops an active risk score simulation job.
+  responses:
+    '200':
+      description: Risk score simulation job stopped.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RiskScoreSimulationJob.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
