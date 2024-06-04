@@ -1,0 +1,75 @@
+type: object
+description: Resource to simulate a risk score calculation given a set of risk score settings.
+required:
+  - rules
+  - period
+properties:
+  id:
+    type: string
+    description: ID of the job.
+    maxLength: 50
+    example: risk_sjob_0YVCNQ2C1AD1RA3HXKP492GNZB
+    readOnly: true
+  status:
+    type: string
+    description: Status of the job.
+    enum:
+      - pending
+      - processing
+      - completed
+      - failed
+      - stopped
+    example: completed
+    readOnly: true
+  summary:
+    description: Summary of the simulation.
+    readOnly: true
+    type: array
+    items:
+      type: object
+      properties:
+        metric:
+          type: string
+          enum:
+            - processedTransactions
+            - affectedTransactions
+            - declinedToCanceledTransactions
+            - canceledToApprovedTransactions
+            - approvedToCanceledTransactions
+        count:
+          type: integer
+        amount:
+          $ref: ./Money.yaml
+  rules:
+    description: Risk score rules.
+    $ref: ./RiskScoreRules.yaml
+  period:
+    type: object
+    description: Full period of the simulation.
+    properties:
+      startDate:
+        type: string
+        format: date-time
+        example: 2020-01-01T00:00:00
+      endDate:
+        type: string
+        format: date-time
+        example: 2020-01-01T00:00:00
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  startedTime:
+    description: Date and time when the simulation job started.
+    $ref: ./ServerTimestamp.yaml
+  finishedTime:
+    description: Date and time when the simulation job finished.
+    $ref: ./ServerTimestamp.yaml
+  _links:
+    $ref: ./SelfLink.yaml
+  _embedded:
+    type: object
+    properties:
+      transactions:
+        type: array
+        description: Transactions of the simulation.
