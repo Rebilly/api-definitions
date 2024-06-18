@@ -87,12 +87,17 @@ properties:
       - 'null'
   matchLevel:
     description: |-
-      Tolerance level setting for document matches.
-      The value of `1` is more tolerant and `2` is strict.
+      Document verification level.
     type: integer
-    minimum: 1
-    maximum: 2
+    enum:
+      - 1
+      - 2
+      - 3
     default: 2
+    x-enumDescriptions:
+      1: Apply a lesser number of verification requirements. Use this option for requests that relate to sale transactions.
+      2: Apply strict verification requirements. Use this option for requests that relate to credit transactions.
+      3: Apply a basic number of verification requirements. Use this option for requests that do not require a high level of verification.
   revision:
     description: |-
       Number of times the KYC request data has been modified.
