@@ -23,13 +23,17 @@ properties:
     $ref: ./AllowedIps.yaml
   seniorIds:
     type: array
-    description: List of senior role IDs.
+    description: |-
+      List of role IDs where this role is used.
+      For example, a role called `user` may be used in the `admin` and `manager` roles.
     readOnly: true
     items:
       type: string
   juniorIds:
     type: array
-    description: List of junior role IDs.
+    description: |-
+      List of role IDs that are included in this role.
+      For example, a role called `admin` may include the `user` and `manager` roles.
     items:
       type: string
   usersCount:
