@@ -1,0 +1,22 @@
+type: object
+description: Perform a name inquiry on a payment instrument.
+required:
+  - gatewayAccountId
+properties:
+  gatewayAccountId:
+    description: ID of the gateway account.
+    type: string
+  result:
+    description: Result of the payment instrument name inquiry.
+    type: string
+    readOnly: true
+    enum:
+      - full-match
+      - partial-match
+      - no-match
+      - not-supported
+      - unknown
+  response:
+    readOnly: true
+    description: Raw response message from gateway.
+    type: string
