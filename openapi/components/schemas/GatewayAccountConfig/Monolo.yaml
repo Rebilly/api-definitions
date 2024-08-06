@@ -1,0 +1,28 @@
+description: Monolo gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Monolo credentials object.
+        properties:
+          businessId:
+            type: string
+            description: ID of the Monolo merchant account.
+          apiKey:
+            type: string
+            description: Monolo API key.
+            format: password
+            writeOnly: true
+          secret:
+            type: string
+            description: Monolo secret.
+            format: password
+            writeOnly: true
+        required:
+          - businessId
+          - apiKey
+          - secret
