@@ -157,6 +157,18 @@ properties:
               - 'null'
             example: P7D
             default: null
+          orderDelinquencyPeriod:
+            description: |-
+              Length of time, in ISO-8601 durations format,
+              which is added to the due time of the order when setting the delinquency time for all related invoices.
+              When the delinquency time of an invoice is reached, the order is automatically canceled.
+
+              If the provided value is `null`, the order does not change state.
+            type:
+              - 'string'
+              - 'null'
+            example: P7D
+            default: null
       taxLocations:
         type: array
         description: |-
