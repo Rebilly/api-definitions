@@ -17,7 +17,7 @@ const decorators = {
   }
 };
 
-module.exports = {
+module.exports = () => ({
   id,
   decorators,
-};
+});

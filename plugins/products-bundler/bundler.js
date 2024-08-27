@@ -201,7 +201,7 @@ function getNewComponents(definitionRoot) {
   return definitionRoot.components;
 }
 
-module.exports = {
+module.exports = () => ({
   id: 'products-bundler',
   decorators,
-};
+});

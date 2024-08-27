@@ -10,7 +10,7 @@ const rules = {
     },
 };
 
-module.exports = {
+module.exports = () => ({
     id,
     rules,
-};
+});
