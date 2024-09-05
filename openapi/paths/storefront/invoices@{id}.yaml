@@ -1,6 +1,5 @@
 parameters:
   - $ref: ../../components/parameters/resourceId.yaml
-  - $ref: ../../components/parameters/collectionExpand.yaml
 get:
   x-products:
     - Storefront
@@ -12,6 +11,8 @@ get:
   security:
     - CustomerJWT: []
   description: Retrieves an invoice with a specified ID.
+  parameters:
+    - $ref: ../../components/parameters/collectionExpand.yaml
   responses:
     '200':
       description: Invoice retrieved.
