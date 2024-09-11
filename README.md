@@ -40,9 +40,9 @@ Rebilly uses [Redocly](https://redocly.com/) to generate, manage, and preview AP
    Use this command to install the package globally on your machine: `npm install @redocly/cli -g`
 1. [Sign in or create a Redocly account](https://app.redocly.com/signup). \
    If you are a Rebilly employee, sign in using SSO and your Rebilly email address.
-1. In Redocly, in the top right of the screen, click your name, then click **My profile**.
-1. In the **Personal API keys** section, click **Add API key**.
-1. Enter an API key name, then click **Save**.
+1. In Redocly, in the top right of the screen, press your name, then press **My profile**.
+1. In the **Personal API keys** section, press **Add API key**.
+1. Enter an API key name, then press **Save**.
 1. Copy the API key.
 1. In a terminal, execute the following command: `npx @redocly/cli login`.
 1. When prompted, paste your API key.
