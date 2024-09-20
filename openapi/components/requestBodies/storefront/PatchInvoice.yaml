@@ -1,0 +1,16 @@
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        deliveryAddress:
+          description: Invoice delivery address.
+          oneOf:
+            - $ref: ../../schemas/ContactObject.yaml
+            - type: 'null'
+        billingAddress:
+          description: Invoice billing address.
+          oneOf:
+            - $ref: ../../schemas/ContactObject.yaml
+            - type: 'null'
+required: true
