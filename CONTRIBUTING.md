@@ -149,7 +149,7 @@ Set up lint rules to enforce any design rules to keep this list to a minimum (an
 
 ### Operations
 
-- Follow [path conventions](./openapi/paths/README/)
+- Follow [path conventions](./openapi/paths/README.md)
 - Use appropriate HTTP methods.
     - POST to insert a new resource.
     - PUT to create with specified ID or replace existing Resource (must return 200 for updated and 201 for created).
