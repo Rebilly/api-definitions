@@ -276,10 +276,17 @@ properties:
       - partially-refunded
       - partially-paid
   websiteId:
+    type: string
+    description: |-
+      ID of the website.
+      A website is where an organization obtains a customer.
+      For more information, see [Obtain an organization ID and website ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+
+      > **Note:** The ID of the website cannot be changed after creation.
+    maxLength: 50
+    example: web_0YV7DE4Z26DQSA1AC92FBJ7SEG
     x-sortable: true
     x-basic: true
-    allOf:
-      - $ref: ./WebsiteId.yaml
   currency:
     description: Currency of the order.
     readOnly: true
