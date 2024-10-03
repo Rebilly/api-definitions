@@ -1,0 +1,24 @@
+description: gate2way gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: gate2way credentials object.
+        properties:
+          apiKey:
+            type: string
+            description: API key of gate2way account.
+            format: password
+            writeOnly: true
+          apiSecret:
+            type: string
+            description: API secret of gate2way account.
+            format: password
+            writeOnly: true
+        required:
+          - apiKey
+          - apiSecret
