@@ -1,0 +1,47 @@
+content:
+  application/json:
+    schema:
+      properties:
+        subscriptionId:
+          type: string
+          description: ID of the order.
+          example: sub_01HRF27SATGE4Z6PBJE6PD8328
+        subscriptionItemId:
+          type: string
+          description: ID of the subscription item.
+          example: sub_01HW2V1Y3A6QPM1NX4WCYHFSRS
+        quantity:
+          type: integer
+          description: Quantity of the subscription item.
+        quantityFilled:
+          type: integer
+          description: Reported quantity.
+        previousQuantityFilled:
+          type: integer
+          description: Reported quantity before the subscription item updates.
+        eventType:
+          type: string
+          description: Type of webhook event.
+          enum:
+            - subscription-quantity-filled-limit-reached
+        _embedded:
+          type: object
+          description: Embedded objects.
+          properties:
+            subscription:
+              $ref: ../../schemas/SubscriptionOrOneTimeSale.yaml
+        _links:
+          type: array
+          description: Related links.
+          items:
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - subscription
+description: Request body resource of the usage limit webhook.
