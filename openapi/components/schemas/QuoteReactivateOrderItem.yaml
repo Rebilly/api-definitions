@@ -1,0 +1,35 @@
+allOf:
+  - $ref: ./QuoteOrderItem.yaml
+  - type: object
+    properties:
+      renewalPolicy:
+        description: Specifies if the subscription retains its current `renewalTime` or resets it to a newly calculated `renewalTime`.
+        type: string
+        default: retain
+        enum:
+          - reset
+          - retain
+      effectiveTime:
+        description: |-
+          Date and time when the service period starts,
+          unless the subscription is canceled but still active.
+
+          If the subscription is still active,
+          the subscription continues for the current service period.
+
+          If this field is omitted, this value defaults to the current time.
+        type:
+          - 'string'
+          - 'null'
+        format: date-time
+      renewalTime:
+        description: |-
+          Date and time of the next subscription renewal.
+          If this field is omitted, this value is computed from the `effectiveTime` field.
+
+          If the subscription is canceled but still active,
+          it is ignored and the next renewal occurs as scheduled.
+        type:
+          - 'string'
+          - 'null'
+        format: date-time
