@@ -124,7 +124,7 @@ Rebilly uses the following lint rules:
 - [rule/info-description](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
 - [rule/description-capitalization](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
 - [rule/description-punctuation](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
-- [rule/no-anthropmorphic-possessives](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
+- [rule/no-anthropomorphic-possessives](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
 - [rule/no-past-future](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
 - [rule/no-description-start-with-the-a-an](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
 

@@ -161,82 +161,13 @@ properties:
           Plans without trial prices are free trials.
         type: boolean
         readOnly: true
-      trial:
-        type: object
-        description: |-
-          Trial details.
-          To use plan defaults do not send the `trial` key, or send a `null` value.
-        properties:
-          enabled:
-            description: |-
-              Specifies if there is a trial for this subscription.
-              Plans without trial prices are free trials.
-            type: boolean
-          endTime:
-            description: |-
-              Time and date when the trial ends.
-              If a trial is enabled on this subscription, a value must be provided.
-            type: string
-            format: date-time
-      isTrialOnly:
-        description: |-
-          Specifies if a subscription ends after a trial period.
-          If this value is `true`, recurring settings are ignored.
-        type: boolean
-        default: false
-      invoiceTimeShift:
-        description: |-
-          Shifts issue time and due time of invoices for this subscription.
-
-          This setting overrides plan settings.
-          To use plan settings, set this value to `null`.
-
-          To use multiple plans in one subscription,
-          all plans must have the same billing period,
-          this property enables the customer to subscribe to different plans.
-        example: null
-        oneOf:
-          - $ref: ./InvoiceTimeShift.yaml
-          - type: 'null'
-      recurringInterval:
-        type:
-          - 'object'
-          - 'null'
-        description: |-
-          Recurring interval to override plan settings.
-          To use plan settings, set this value to `null`.
-
-          To use multiple plans in one subscription,
-          all plans must have the same same recurring period length,
-          this property enables the customer to subscribe to different plans.
-        example: null
-        properties:
-          periodAnchorInstruction:
-            $ref: ./ServicePeriodAnchorInstruction.yaml
-      autopay:
-        description: |-
-          Specifies if payment attempts are made automatically.
-          If autopay is enabled, the payment is retrieved from the customer on the renewal date using the payment instrument that is set at `paymentInstrumentId`,
-          or the default payment instrument on the subscription.
-        type: boolean
-        default: true
-      startTime:
-        description: |-
-          Date and time when the subscription starts.
-          If this value is `null`, the current time is used.
-          This value cannot be more than one service period in the past.
-        type:
-          - 'string'
-          - 'null'
-        x-sortable: true
-        x-basic: true
-        example: null
-        format: date-time
       endTime:
         description: |-
           Time and date when the trial ends.
           If a trial is enabled on this subscription, a value must be provided.
-        type: string
+        type:
+          - 'string'
+          - 'null'
         format: date-time
   isTrialOnly:
     description: |-
@@ -254,10 +185,7 @@ properties:
       To use multiple plans in one subscription,
       all plans must have the same billing period,
       this property enables the customer to subscribe to different plans.
-    example: null
-    oneOf:
-      - $ref: ./InvoiceTimeShift.yaml
-      - type: 'null'
+    $ref: ./InvoiceTimeShift.yaml
   recurringInterval:
     type:
       - 'object'

@@ -128,10 +128,7 @@ properties:
       To use multiple plans in one subscription,
       all plans must have the same billing period,
       this property enables the customer to subscribe to different plans.
-    example: null
-    oneOf:
-      - $ref: ./InvoiceTimeShift.yaml
-      - type: 'null'
+    $ref: ./InvoiceTimeShift.yaml
   recurringInterval:
     type:
       - 'object'
@@ -444,15 +441,12 @@ properties:
     type: integer
     readOnly: true
   riskMetadata:
-    type:
-      - 'object'
-      - 'null'
-    example: null
     description: |-
       Risk metadata.
       If this value is `null`, this field uses risk metadata that is captured when creating the payment token.
-    allOf:
+    oneOf:
       - $ref: ./RiskMetadata.yaml
+      - type: 'null'
   billingPortalToken:
     description: |-
       Customer JWT to access billing portal. This field is presented only if billing portal exists.
