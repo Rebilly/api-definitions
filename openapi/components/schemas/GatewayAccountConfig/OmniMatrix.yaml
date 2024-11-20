@@ -1,0 +1,22 @@
+description: OmniMatrix gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: OmniMatrix credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: ID of the OmniMatrix merchant.
+          secret:
+            type: string
+            description: OmniMatrix secret key.
+            format: password
+            writeOnly: true
+        required:
+          - merchantId
+          - secret
