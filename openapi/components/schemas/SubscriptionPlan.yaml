@@ -5,8 +5,13 @@ required:
   - currency
   - productId
   - pricing
-  - recurringInterval
 properties:
+  id:
+    type: string
+    description: ID of the plan.
+    maxLength: 50
+    example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+    readOnly: true
   name:
     description: |-
       Name of the plan.
@@ -71,6 +76,9 @@ properties:
       Service interval settings.
       For a one-time sale, set this value to `null`.
     type: object
+    required:
+      - unit
+      - length
     properties:
       periodAnchorInstruction:
         $ref: ./ServicePeriodAnchorInstruction.yaml
@@ -113,9 +121,7 @@ properties:
     description: |-
       Trial configuration setting.
       If you do not want to offer a trial, set this value to `null`.
-    oneOf:
-      - $ref: ./PlanTrial.yaml
-      - type: 'null'
+    $ref: ./PlanTrial.yaml
   meteredBilling:
     type:
       - 'object'
