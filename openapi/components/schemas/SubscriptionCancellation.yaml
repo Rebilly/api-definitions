@@ -1,7 +1,6 @@
 type: object
 required:
   - subscriptionId
-  - churnTimePolicy
 properties:
   id:
     type: string
@@ -94,7 +93,9 @@ properties:
   updatedTime:
     $ref: ./UpdatedTime.yaml
   churnTime:
-    description: Date and time when the subscription is deactivated.
+    description: |-
+      Date and time when the subscription is deactivated.
+      If this field and `churnTimePolicy` are omitted, this value defaults to the current time.
     type: string
     format: date-time
   churnTimePolicy:
