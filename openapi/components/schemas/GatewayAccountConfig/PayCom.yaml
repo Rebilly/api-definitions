@@ -1,0 +1,20 @@
+description: PayCom gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: PayCom credentials object.
+        properties:
+          apiKey:
+            type: string
+            description: PayCom API key.
+            format: password
+            writeOnly: true
+        required:
+          - apiKey
+      threeDSecureServer:
+        $ref: ./ThreeDSecureIO3dsServer.yaml
