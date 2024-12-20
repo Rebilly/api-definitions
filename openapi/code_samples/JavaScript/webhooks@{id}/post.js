@@ -1,6 +1,6 @@
 // creating a new webhook
 const data = {
-    // leave filter empty to enable 
+    // leave filter empty to enable
     // the webhook for all events
     eventsFilter: [],
     status: 'active',
@@ -21,7 +21,7 @@ const secondWebhook = await api.webhooks.create({id: 'my-second-key', data});
 
 // updating a webhook
 const data = {
-    eventsFilter: ['suspended-payment-completed'],
+    eventsFilter: ['offsite-payment-completed'],
     status: 'active',
     method: 'POST',
     headers: {},
