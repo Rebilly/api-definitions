@@ -1,0 +1,25 @@
+description: Limepay gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          xLogin:
+            type: string
+            description: Limepay login.
+          xTransKey:
+            type: string
+            description: Limepay transKey.
+          secretKey:
+            type: string
+            format: password
+            description: Limepay secret key.
+            writeOnly: true
+        required:
+          - xLogin
+          - xTransKey
+          - secretKey
