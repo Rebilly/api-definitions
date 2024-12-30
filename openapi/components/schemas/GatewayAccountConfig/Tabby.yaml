@@ -1,0 +1,27 @@
+description: Tabby gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Tabby credentials object.
+        properties:
+          publicKey:
+            type: string
+            description: Public API key of Tabby account.
+            format: password
+            writeOnly: true
+          secretKey:
+            type: string
+            description: Secret API key of Tabby account.
+            format: password
+            writeOnly: true
+          merchantCode:
+            type: string
+            description: Merchant code of Tabby account.
+        required:
+          - publicKey
+          - merchantCode
