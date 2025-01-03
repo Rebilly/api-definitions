@@ -53,7 +53,7 @@ Rebilly uses [Redocly](https://redocly.com/) to generate, manage, and preview AP
 
 #### Bundle
 
-Run `npm run build-for-js-sdk` to bundle the definitions into a single file in the `dist` folder.
+Run `npm run build:latest` to bundle the definitions into a single file in the `catalog` folder.
 
 #### Validate
 
