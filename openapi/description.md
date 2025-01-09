@@ -70,7 +70,9 @@ If you would like to implement a particular use case,
 [contact Rebilly](https://www.rebilly.com/support/) for guidance and feedback on the best API operations to use for the task.
 
 To integrate Rebilly, and learn about related resources and concepts,
-see [Get started](https://www.rebilly.com/docs/dev-docs/get-started/).
+see [Get started](https://www.rebilly.com/docs/dev-docs#get-started).
+
+To create and manage API keys, see [API keys](https://www.rebilly.com/docs/dev-docs/api-keys/).
 
 # Rate limits
 
