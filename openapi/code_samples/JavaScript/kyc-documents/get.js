@@ -5,5 +5,5 @@ const firstCollection = await api.kycDocuments.getAll();
 const params = {limit: 20, offset: 100, sort: '-createdTime'};
 const secondCollection = await api.kycDocuments.getAll(params);
 
-// access the collection items, each item is a Member
+// access the collection items, each item is a KycDocument
 secondCollection.items.forEach(document => console.log(document.fields.documentType));

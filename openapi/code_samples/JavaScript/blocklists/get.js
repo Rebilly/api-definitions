@@ -5,5 +5,5 @@ const firstCollection = await api.blocklists.getAll();
 const params = {limit: 20, offset: 100, sort: '-createdTime'};
 const secondCollection = await api.blocklists.getAll(params);
 
-// access the collection items, each item is a Member
+// access the collection items, each item is a Blocklist
 secondCollection.items.forEach(blocklistItem => console.log(blocklistItem.fields.status));

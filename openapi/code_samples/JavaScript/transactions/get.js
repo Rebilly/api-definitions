@@ -5,5 +5,5 @@ const firstCollection = await api.transactions.getAll();
 const params = {limit: 20, offset: 100, sort: '-createdTime'};
 const secondCollection = await api.transactions.getAll(params);
 
-// access the collection items, each item is a Member
+// access the collection items, each item is a Transaction
 secondCollection.items.forEach(transaction => console.log(transaction.fields.type));

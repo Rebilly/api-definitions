@@ -5,5 +5,5 @@ const firstCollection = await api.applications.getAll();
 const params = {limit: 20, offset: 100, sort: '-createdTime'};
 const secondCollection = await api.applications.getAll(params);
 
-// access the collection items, each item is a Member
-secondCollection.items.forEach(apiKey => console.log(apiKey.applications.name));
+// access the collection items, each item is an Application
+secondCollection.items.forEach(application => console.log(application.fields.name));

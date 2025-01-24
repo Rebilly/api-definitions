@@ -6,6 +6,6 @@ const firstCollection = await api.invoices
 const params = {id: 'my-invoice', limit: 20, offset: 100};
 const secondCollection = await api.invoices.getAllTimelineMessages(params);
 
-// access the collection items, each item is a Member
+// access the collection items, each item is an InvoiceTimeline
 secondCollection.items
     .forEach(message => console.log(message.fields.eventType));

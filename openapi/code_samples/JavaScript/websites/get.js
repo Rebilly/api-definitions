@@ -5,5 +5,5 @@ const firstCollection = await api.websites.getAll();
 const params = {limit: 20, offset: 100, sort: '-createdTime'};
 const secondCollection = await api.websites.getAll(params);
 
-// access the collection items, each item is a Member
+// access the collection items, each item is a Website
 secondCollection.items.forEach(website => console.log(website.fields.name));

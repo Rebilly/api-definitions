@@ -2,8 +2,8 @@
 const firstCollection = await api.customerAuthentication.getAllResetPasswordTokens();
 
 // alternatively you can specify one or more of them
-const params = {limit: 20, offset: 100}; 
+const params = {limit: 20, offset: 100};
 const secondCollection = await api.customerAuthentication.getAllResetPasswordTokens(params);
 
-// access the collection items, each item is a Member
+// access the collection items, each item is a ResetPasswordToken
 secondCollection.items.forEach(token => console.log(token.fields.token));

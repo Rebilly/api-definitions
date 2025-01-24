@@ -5,5 +5,5 @@ const firstCollection = await api.invoices.getAll();
 const params = {limit: 20, offset: 100, sort: '-createdTime'};
 const secondCollection = await api.invoices.getAll(params);
 
-// access the collection items, each item is a Member
+// access the collection items, each item is an Invoice
 secondCollection.items.forEach(invoice => console.log(invoice.fields.firstName));

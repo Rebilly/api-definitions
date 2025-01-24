@@ -5,5 +5,5 @@ const firstCollection = await api.subscriptionReactivations.getAll();
 const params = {limit: 20, offset: 100, sort: '-createdTime'};
 const secondCollection = await api.subscriptionReactivations.getAll(params);
 
-// access the collection items, each item is a Member
+// access the collection items, each item is a SubscriptionReactivation
 secondCollection.items.forEach(subscription => console.log(subscription.fields.customerId));

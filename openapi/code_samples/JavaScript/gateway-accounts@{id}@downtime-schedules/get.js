@@ -5,6 +5,6 @@ const firstCollection = await api.gatewayAccounts.getAllDowntimeSchedules({id: '
 const params = {id: 'my-gateway', limit: 20, offset: 100};
 const secondCollection = await api.gatewayAccounts.getAllDowntimeSchedules(params);
 
-// access the collection items, each item is a Member
+// access the collection items, each item is a GatewayAccountDowntimeSchedule
 secondCollection.items
     .forEach(gatewayAccount => console.log(gatewayAccount.fields.reason));

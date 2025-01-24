@@ -5,5 +5,5 @@ const firstCollection = await api.tracking.getAllTaxTrackingLogs();
 const params = {limit: 20, offset: 100};
 const secondCollection = await api.tracking.getAllTaxTrackingLogs(params);
 
-// access the collection items, each item is a Member
+// access the collection items, each item is a TaxTracking
 secondCollection.items.forEach(entry => console.log(entry.fields.eventType));

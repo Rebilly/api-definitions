@@ -6,6 +6,6 @@ const firstCollection = await api.transactions
 const params = {id: 'my-transaction', limit: 20, offset: 100};
 const secondCollection = await api.transactions.getAllTimelineMessages(params);
 
-// access the collection items, each item is a Member
+// access the collection items, each item is a TransactionTimeline
 secondCollection.items
     .forEach(message => console.log(message.fields.eventType));

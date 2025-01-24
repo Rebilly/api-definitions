@@ -5,5 +5,5 @@ const firstCollection = await api.paymentInstruments.getAll();
 const params = {limit: 20, offset: 100, sort: '-createdTime'};
 const secondCollection = await api.paymentInstruments.getAll(params);
 
-// access the collection items, each item is a Member
+// access the collection items, each item is a PaymentInstrument
 secondCollection.items.forEach(paymentInstrument => console.log(paymentInstrument.fields.customerId));

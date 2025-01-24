@@ -6,6 +6,6 @@ const firstCollection = await api.customers
 const params = {id: 'my-customer', limit: 20, offset: 100};
 const secondCollection = await api.customers.getAllTimelineMessages(params);
 
-// access the collection items, each item is a Member
+// access the collection items, each item is a CustomerTimeline
 secondCollection.items
     .forEach(message => console.log(message.fields.eventType));

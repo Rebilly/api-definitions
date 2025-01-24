@@ -6,6 +6,6 @@ const firstCollection = await api.gatewayAccounts
 const params = {id: 'my-gateway', limit: 20, offset: 100};
 const secondCollection = await api.gatewayAccounts.getAllTimelineMessages(params);
 
-// access the collection items, each item is a Member
+// access the collection items, each item is a GatewayAccountTimeline
 secondCollection.items
     .forEach(message => console.log(message.fields.eventType));

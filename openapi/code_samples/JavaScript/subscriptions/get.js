@@ -5,5 +5,5 @@ const firstCollection = await api.subscriptions.getAll();
 const params = {limit: 20, offset: 100, sort: '-createdTime'};
 const secondCollection = await api.subscriptions.getAll(params);
 
-// access the collection items, each item is a Member
+// access the collection items, each item is a Subscription
 secondCollection.items.forEach(subscription => console.log(subscription.fields.customerId));
