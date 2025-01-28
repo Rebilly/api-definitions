@@ -16,3 +16,13 @@ allOf:
             format: password
             description: Payper secret key.
             writeOnly: true
+      settings:
+        type: object
+        properties:
+          autodepositLookup:
+            type: boolean
+            description: Perform Interac e-Transfer Autodeposit lookup before a payout. Execute the payout if Autodeposit is enabled and the customer account name matches the provided customer name.
+            default: false
+          autodepositLookupInterval:
+            type: integer
+            description: Number of days to suppress Interac e-Transfer Autodeposit lookup.
