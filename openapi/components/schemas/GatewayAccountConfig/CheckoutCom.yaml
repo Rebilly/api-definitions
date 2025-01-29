@@ -12,7 +12,16 @@ allOf:
           secretKey:
             type: string
             format: password
-            description: Checkout.com secret API key.
+            description: |-
+              Checkout.com secret API key.
+              Generate this key in the Checkout.com dashboard under Developers->API keys section.
+            writeOnly: true
+          signatureKey:
+            type: string
+            format: password
+            description: |-
+              Checkout.com webhook signature key.
+              Generate this key in the Checkout.com dashboard under Developers->Webhooks section.
             writeOnly: true
         required:
           - secretKey
@@ -28,6 +37,10 @@ allOf:
             description: Name of the website custom field that contains the sub-entity ID.
           processingChannelId:
             type: string
-            description: Checkout.com processing channel ID.
+            description: |-
+              Checkout.com processing channel ID.
+              Checkout.com secret API key can be configured with a default processing channel ID.
+              Otherwise the processing channel ID needs to be set.
+
       threeDSecureServer:
         $ref: ./ThreeDSecureIO3dsServer.yaml
