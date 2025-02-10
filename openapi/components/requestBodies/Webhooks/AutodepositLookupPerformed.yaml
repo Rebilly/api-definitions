@@ -1,0 +1,70 @@
+content:
+  application/json:
+    schema:
+      properties:
+        customerId:
+          $ref: ../../schemas/CustomerId.yaml
+        transactionId:
+          $ref: ../../schemas/TransactionId.yaml
+        autodepositLookupResponse:
+          description: Autodeposit lookup response.
+          type: object
+          properties:
+            enrolled:
+              type: boolean
+              default: false
+              description: Specifies whether the autodeposit lookup is enrolled or not.
+            firstName:
+              type:
+                - 'string'
+                - 'null'
+              description: First name from the autodeposit lookup response.
+            lastName:
+              type:
+                - 'string'
+                - 'null'
+              description: Last name from the autodeposit lookup response.
+            middleName:
+              type:
+                - 'string'
+                - 'null'
+              description: Middle name from the autodeposit lookup response.
+            companyName:
+              type:
+                - 'string'
+                - 'null'
+              description: Company name from the autodeposit lookup response.
+            tradeName:
+              type:
+                - 'string'
+                - 'null'
+              description: Trade name from the autodeposit lookup response.
+        eventType:
+          type: string
+          description: Type of webhook event.
+          enum:
+            - autodeposit-lookup-performed
+        _embedded:
+          type: object
+          description: Embedded object.
+          properties:
+            customer:
+              $ref: ../../schemas/Customer.yaml
+            transaction:
+              $ref: ../../schemas/Transaction.yaml
+        _links:
+          type: array
+          description: Related links.
+          items:
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - customer
+                  - transaction
+description: Autodeposit lookup performed webhook resource.
