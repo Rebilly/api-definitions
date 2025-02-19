@@ -1,0 +1,28 @@
+description: Triple000 gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Triple000 credentials object.
+        properties:
+          username:
+            type: string
+            description: Username of the Triple000 merchant.
+          password:
+            type: string
+            format: password
+            description: Triple000 password.
+            writeOnly: true
+          secretWord:
+            type: string
+            format: password
+            description: Triple000 secret word.
+            writeOnly: true
+        required:
+          - username
+          - password
+          - secretWord
