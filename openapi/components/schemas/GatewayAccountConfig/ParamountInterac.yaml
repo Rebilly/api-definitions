@@ -38,8 +38,12 @@ allOf:
             description: Sub ID of the merchant or organization.
           autodepositLookup:
             type: boolean
-            description: Perform Interac e-Transfer Autodeposit lookup before a payout. Execute the payout if Autodeposit is enabled and the customer account name matches the provided customer name.
+            description: Perform Interac e-Transfer Autodeposit lookup before a payout.
             default: false
-          autodepositLookupDay:
+          autodepositLookupInterval:
             type: integer
             description: Number of days to suppress Interac e-Transfer Autodeposit lookup.
+          bypassAutodepositLookup:
+            type: boolean
+            default: false
+            description: Specifies whether to proceed with the payout regardless of the Interac e-Transfer Autodeposit lookup result.
