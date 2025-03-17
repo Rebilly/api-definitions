@@ -32,6 +32,24 @@ properties:
       - 'string'
       - 'null'
     format: date-time
+  source:
+    description: Source that triggered the creation of the blocklist.
+    type:
+      - 'string'
+      - 'null'
+    readOnly: true
+    enum:
+      - automated-blocklists
+      - manual-blocklists
+      - risk-score-rules
+    example: manual-blocklists
+  entityId:
+    type:
+      - 'string'
+      - 'null'
+    readOnly: true
+    description: ID of the user, transaction or dispute that triggered the creation of the blocklist.
+    example: txn_0YVDTQJ8YWDGQACV2N2N5SPWQ0
   createdTime:
     $ref: CreatedTime.yaml
   updatedTime:
