@@ -25,7 +25,10 @@ properties:
       - $ref: ./OriginalPlan.yaml
       - $ref: ./FlexiblePlan.yaml
   usageLimits:
-    type: object
+    type:
+      - 'object'
+      - 'null'
+    default: null
     description: |-
       Specifies the soft and hard usage limit thresholds for an item with a metered billing plan.
       This value is ignored when the plan is not metered.
@@ -80,6 +83,22 @@ properties:
             format: double
             description: Usage limit amount in the currency of the order.
             minimum: 0
+  usageStatus:
+    type:
+      - 'object'
+      - 'null'
+    default: null
+    readOnly: true
+    description: Current status of the usage limits.
+    properties:
+      isSoftLimitReached:
+        type: boolean
+        description: Specifies if the soft limit has been reached.
+        example: false
+      isHardLimitReached:
+        type: boolean
+        description: Specifies if the hard limit has been reached.
+        example: false
   revision:
     type: integer
     readOnly: true
