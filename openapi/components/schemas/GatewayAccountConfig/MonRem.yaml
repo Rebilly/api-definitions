@@ -1,0 +1,32 @@
+description: MonRem gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: MonRem credentials object.
+        properties:
+          clientId:
+            type: string
+            description: Client ID of the MonRem.
+          username:
+            type: string
+            description: Username of the MonRem.
+          password:
+            type: string
+            description: Password of the MonRem.
+            format: password
+            writeOnly: true
+          clientSecret:
+            type: string
+            description: Client secret of the MonRem.
+            format: password
+            writeOnly: true
+        required:
+          - clientId
+          - username
+          - password
+          - clientSecret
