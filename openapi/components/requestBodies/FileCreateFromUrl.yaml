@@ -16,10 +16,12 @@ properties:
   name:
     description: File name used for downloading.
     type: string
+    maxLength: 255
     example: logo.png
   description:
     description: Description of the file.
     type: string
+    maxLength: 255
     example: My file description
   sourceType:
     description: Source of the file.
@@ -29,6 +31,9 @@ properties:
     enum:
       - upload
       - camera
+      - organization-export
+      - organization-closure-export
+      - null
     example: upload
   tags:
     description: List of tags associated with the file.
