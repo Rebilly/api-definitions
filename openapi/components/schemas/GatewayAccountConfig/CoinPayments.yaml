@@ -31,9 +31,20 @@ allOf:
             format: password
             description: ID of the CoinPayments merchant.
             writeOnly: true
+          clientId:
+            type: string
+            description: CoinPayments client ID required for API version 2.
+          clientSecret:
+            type: string
+            format: password
+            description: CoinPayments client secret required for API version 2.
+            writeOnly: true
       settings:
         type: object
         properties:
           useCallbackAddress:
             type: boolean
             description: Specifies whether to use a callback address payment type.
+          useV2Api:
+            type: boolean
+            description: Specifies whether to use CoinPayments API version 2. CoinPayments client ID and secret must be provided both.
