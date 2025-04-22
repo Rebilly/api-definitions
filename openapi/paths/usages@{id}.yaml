@@ -25,56 +25,6 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-put:
-  x-products:
-    - Core
-  tags:
-    - Usage
-  summary: Upsert a usage record
-  operationId: PutUsage
-  x-sdk-operation-name: update
-  description: Creates or updates a usage record with a specified ID.
-  requestBody:
-    required: true
-    content:
-      application/json:
-        schema:
-          $ref: ../components/schemas/Usage.yaml
-  responses:
-    '200':
-      description: Usage record updated.
-      headers:
-        X-RateLimit-Limit:
-          $ref: ../components/headers/X-RateLimit-Limit.yaml
-        X-RateLimit-Remaining:
-          $ref: ../components/headers/X-RateLimit-Remaining.yaml
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Usage.yaml
-    '201':
-      description: Usage record created.
-      headers:
-        Location:
-          $ref: ../components/headers/Location.yaml
-        X-RateLimit-Limit:
-          $ref: ../components/headers/X-RateLimit-Limit.yaml
-        X-RateLimit-Remaining:
-          $ref: ../components/headers/X-RateLimit-Remaining.yaml
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Usage.yaml
-    '401':
-      $ref: ../components/responses/Unauthorized.yaml
-    '403':
-      $ref: ../components/responses/Forbidden.yaml
-    '404':
-      $ref: ../components/responses/NotFound.yaml
-    '422':
-      $ref: ../components/responses/ValidationError.yaml
-    '429':
-      $ref: ../components/responses/TooManyRequests.yaml
 delete:
   x-products:
     - Core
