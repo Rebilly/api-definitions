@@ -1,0 +1,34 @@
+type: object
+required:
+  - plan
+properties:
+  id:
+    description: ID of the quote item.
+    readOnly: true
+    type: string
+    example: qt_itm_01HXCEQNR3F1G2A6RX6HPS3KFY
+  type:
+    description: Specifies the type of order item.
+    type: string
+    x-basic: true
+    enum:
+      - one-time-sale
+  quantity:
+    description: Number of product units in the specified plan.
+    type: integer
+    default: 1
+  plan:
+    description: Plan details.
+    oneOf:
+      - $ref: ./OriginalPlan.yaml
+      - $ref: ./FlexiblePlan.yaml
+  description:
+    type: string
+    description: Description of the quote item.
+    example: Charge per approved transaction with DCC
+    default: ''
+    maxLength: 255
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml

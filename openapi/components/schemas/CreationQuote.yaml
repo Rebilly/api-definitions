@@ -1,4 +1,10 @@
 type: object
+title: CreationQuote
+required:
+  - websiteId
+  - customerId
+  - order
+  - type
 properties:
   id:
     readOnly: true
@@ -8,21 +14,11 @@ properties:
     example: qt_01HXBZMEGPETPHJZH6V4RHBMA8
   type:
     description: |-
-      Specifies the type of the quote.
-      A quote can be a subscription or a one-time purchase.
-    type: string
-    readOnly: true
-    enum:
-      - subscription-order
-      - one-time-order
-  action:
-    description: |-
-      Action of the quote for churned or canceled order reactivation.
-      When a quote is accepted, quote items are applied to the order and order is reactivated.
+      Type of the quote.
+      When a quote is accepted, a new order is created.
     type: string
     enum:
-      - reactivate
-    example: reactivate
+      - creation
   acceptanceConditions:
     type: array
     writeOnly: true
@@ -52,12 +48,6 @@ properties:
             - organization
         isFulfilled:
           type: boolean
-  subscriptionId:
-    description: ID of the related subscription.
-    readOnly: true
-    type: string
-    maxLength: 50
-    example: sub_01HRF27SATGE4Z6PBJE6PD8328
   invoiceId:
     type: string
     description: ID of the payment invoice.
@@ -78,155 +68,53 @@ properties:
     x-enumDescriptions:
       draft: Quote can be edited. This quote cannot be sent to a customer.
       issued: Quote cannot be edited. This quote can be sent to a customer.
-      accepted: Customer accepted the quote and the related order is reactivated.
+      accepted: Customer accepted the quote and created an order.
       rejected: Customer rejected the quote.
-      canceled: Organization canceled the quote.
+      canceled: Organization or customer canceled the quote.
       expired: Expired before customer or organization interaction.
   websiteId:
     $ref: ./WebsiteId.yaml
   customerId:
     $ref: ./CustomerId.yaml
-  items:
-    type: array
-    description: Items included in the quote.
-    minItems: 1
-    items:
-      type: object
-      required:
-        - plan
-        - quantity
-      properties:
-        id:
-          description: ID of the quote item.
-          readOnly: true
-          type: string
-          example: qt_itm_01HXCEQNR3F1G2A6RX6HPS3KFY
-        quantity:
-          description: Number of product units in the specified plan.
-          type: integer
-          minimum: 1
-        plan:
-          description: Plan details.
-          oneOf:
-            - $ref: ./OriginalPlan.yaml
-            - $ref: ./FlexiblePlan.yaml
-        description:
-          type: string
-          description: Description of the quote item.
-          example: Charge per approved transaction with DCC
-          default: ''
-          maxLength: 255
-        priceDescription:
-          type: string
-          description: |-
-            Price description of the quote item.
-            This value is only used for metered billing items.
-          example: 50% of the markup for approved transactions
-          default: ''
-          maxLength: 255
-        usageLimits:
-          type:
-            - 'object'
-            - 'null'
-          default: null
-          description: |-
-            Specifies the soft and hard usage limit thresholds for an item with a metered billing plan.
-            This value is ignored when the plan is not metered.
-          properties:
-            softLimit:
-              type: object
-              description: |-
-                Defines thresholds for notification purposes.
-                For example, to notify the customer that their usage is near the hard limit of their metered billing plan.
-                This notification informs the customer so that they can upgrade their plan before the hard limit is reached.
-                When the reported usage reaches 75%, 90%, and 100% of the configured limit a specific event is fired.
-                To notify the customer, a webhook and notification can be configured for this event.
-                This field is useful for accounting and customer success purposes.
-                The usage of metered billing plans can still be reported if the soft limit is reached.
-              minProperties: 1
-              maxProperties: 1
-              properties:
-                quantity:
-                  type: integer
-                  description: Usage limit quantity.
-                  minimum: 0
-                amount:
-                  type: number
-                  format: double
-                  description: Usage limit amount in the currency of the order.
-                  minimum: 0
-            hardLimit:
-              type: object
-              description: |-
-                Defines a limit where the customer can no longer use the service.
-                Hard limits are used in addition to soft limits.
-                When a soft limit is reached,
-                a customer may receive a notification
-                but the service can still be provided up to the hard limit value so that the customer can upgrade their plan.
-                When the reported usage reaches the configured limit,
-                a specific event is triggered.
-                To notify the customer in the merchant system,
-                or block a service,
-                a webhook and notification can be configured for this event.
-                When the total usage reaches the hard limit quantity,
-                or amount values,
-                metered billing plan usages can no longer be reported.
-              minProperties: 1
-              maxProperties: 1
-              properties:
-                quantity:
-                  type: integer
-                  description: Usage limit quantity.
-                  minimum: 0
-                amount:
-                  type: number
-                  format: double
-                  description: Usage limit amount in the currency of the order.
-                  minimum: 0
-        createdTime:
-          $ref: ./CreatedTime.yaml
-        updatedTime:
-          $ref: ./UpdatedTime.yaml
-        _embedded:
-          type: object
-          description: Embedded objects that are requested by the `expand` query parameter.
-          readOnly: true
-          properties:
-            product:
-              type: object
-  effectiveTime:
-    description: |-
-      Date and time when the service period starts,
-      unless the subscription is canceled but still active.
-
-      If the subscription is still active,
-      the subscription continues for the current service period.
-
-      If this field is omitted, this value defaults to the current time.
-    type:
-      - 'string'
-      - 'null'
-    format: date-time
-  renewalTime:
-    description: |-
-      Date and time of the next subscription renewal.
-      If this field is omitted, this value is computed from the `effectiveTime` field.
-
-      If the subscription is canceled but still active,
-      it is ignored and the next renewal occurs as scheduled.
-    type:
-      - 'string'
-      - 'null'
-    format: date-time
-  paymentInstrumentId:
-    description: |-
-      ID of the payment instrument.
-      If this field is omitted, the subscription payment instrument remains unchanged.
-    type:
-      - 'string'
-      - 'null'
-    maxLength: 50
-    example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+  order:
+    type: object
+    description: Properties of the related order.
+    required:
+      - items
+    properties:
+      id:
+        description: ID of the related order.
+        readOnly: true
+        type:
+          - 'string'
+          - 'null'
+        maxLength: 50
+        example: ord_01HVKA5975PJBSQ1SX72G3MSZC
+      items:
+        type: array
+        description: Items included in the quote.
+        minItems: 1
+        items:
+          $ref: ./QuoteItem.yaml
+      autopay:
+        type: boolean
+        default: false
+        description: |-
+          Specifies if payment attempts for the related order are made automatically.
+          If autopay is enabled, the payment is retrieved from the customer on the renewal date using the payment instrument that is set at `paymentInstrumentId`,
+          or the default payment instrument on the order.
+      shipping:
+        $ref: ./Shipping.yaml
+      deliveryAddress:
+        description: Delivery address of the order.
+        oneOf:
+          - $ref: ./ContactObject.yaml
+          - type: 'null'
+      billingAddress:
+        description: Billing address of the order.
+        oneOf:
+          - $ref: ./ContactObject.yaml
+          - type: 'null'
   invoicePreview:
     type: object
     description: Preview of the quote invoice.
@@ -442,10 +330,19 @@ properties:
           - 'null'
         description: Printed name of the organization.
         default: null
-  shipping:
-    $ref: ./Shipping.yaml
   tax:
     $ref: ./Taxes.yaml
+  couponIds:
+    type:
+      - 'array'
+      - 'null'
+    description: |-
+      List of coupons to redeem on the customer and apply to the related invoice.
+
+      For more information, see [Coupons](https://www.rebilly.com/docs/settings/coupons-and-discounts/).
+    items:
+      type: string
+      description: Coupon ID.
   _links:
     type: array
     description: Related links.
@@ -464,6 +361,7 @@ properties:
           type: string
           enum:
             - self
+            - quoteAcceptanceFormUrl
             - invoicePaymentFormUrl
   _embedded:
     type: object
@@ -474,7 +372,7 @@ properties:
         type: object
       website:
         type: object
-      subscription:
+      order:
         type: object
       invoice:
         type: object
