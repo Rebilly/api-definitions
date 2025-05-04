@@ -21,6 +21,22 @@ allOf:
           mpgId:
             type: string
             description: Merchant payment gateway ID from Mastercard.
+          clientCertificate:
+            type: string
+            description: |-
+              Client certificate for mutual TLS (mTLS) authentication.
+              This value is required if `useMtls` is set to `true`.
+            format: string
+            writeOnly: true
+            x-multiline: true
+          privateKey:
+            type: string
+            description: |-
+              Client private key for mutual TLS (mTLS) authentication.
+              This value is required if `useMtls` is set to `true`.
+            format: password
+            x-multiline: true
+            writeOnly: true
         required:
           - cardAcceptorIdCode
           - acquiringInstitutionIdentificationCode
@@ -41,6 +57,11 @@ allOf:
           terminalIds:
             type: string
             description: Comma-separated list of terminal IDs.
+          useMtls:
+            type: boolean
+            default: false
+            description: |-
+              Indicates whether to use mutual TLS (mTLS) for the connection.
         required:
           - cardAcceptorName
           - cardAcceptorLocation
