@@ -105,31 +105,15 @@ properties:
     description: Currencies metadata.
     required:
       - mode
+    discriminator:
+      propertyName: mode
+      mapping:
+        unknown: ./CurrenciesUnrestrictedMetadata.yaml
+        all: ./CurrenciesUnrestrictedMetadata.yaml
+        subset: ./CurrenciesSubsetMetadata.yaml
     oneOf:
-      - title: Unrestricted
-        properties:
-          mode:
-            description: Specifies how the currencies are compared.
-            type: string
-            enum:
-              - unknown
-              - all
-      - title: Subset
-        required:
-          - values
-        properties:
-          mode:
-            description: Specifies how the currencies are compared.
-            type: string
-            enum:
-              - subset
-          values:
-            description: List of supported currencies.
-            type: array
-            minItems: 1
-            uniqueItems: true
-            items:
-              $ref: ./CurrencyCode.yaml
+      - $ref: ./CurrenciesUnrestrictedMetadata.yaml
+      - $ref: ./CurrenciesSubsetMetadata.yaml
   operations:
     description: Array of operations that are supported by the payment gateway.
     type: array

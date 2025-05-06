@@ -1,0 +1,17 @@
+title: Subset
+required:
+  - mode
+  - values
+properties:
+  mode:
+    description: Specifies how the currencies are compared.
+    type: string
+    enum:
+      - subset
+  values:
+    description: List of supported currencies.
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items:
+      $ref: ./CurrencyCode.yaml
