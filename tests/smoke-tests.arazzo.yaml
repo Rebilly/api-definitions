@@ -1,0 +1,314 @@
+arazzo: 1.0.1
+
+info:
+  title: Rebilly workflows
+  version: 1.0.0
+
+sourceDescriptions:
+  - name: Rebilly
+    type: openapi
+    url: ./openapi.yaml
+
+components:
+  inputs:
+    env:
+      properties:
+        REBILLY_ORGANIZATION:
+          type: string
+        REBILLY_API_KEY:
+          type: string
+          format: password
+  parameters:
+    apiKey:
+      in: header
+      name: REB-APIKEY
+      value: $inputs.env.REBILLY_API_KEY
+    organizationId:
+      in: path
+      name: organizationId
+      value: $inputs.env.REBILLY_ORGANIZATION
+
+workflows:
+  - workflowId: rebilly-api/status
+    inputs:
+      properties:
+          $ref: '#/components/inputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetStatus
+        operationId: GetStatus
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/attachments
+
+    inputs:
+      properties:
+          $ref: '#/components/inputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetAttachmentCollection
+        operationId: GetAttachmentCollection
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/files
+
+    inputs:
+      properties:
+          $ref: '#/components/inputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetFileCollection
+        operationId: GetFileCollection
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/applications
+
+    inputs:
+      properties:
+          $ref: '#/components/inputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetApplicationCollection
+        operationId: GetApplicationCollection
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/customers
+
+    inputs:
+      properties:
+          $ref: '#/components/inputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetCustomerCollection
+        operationId: GetCustomerCollection
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/custom-fields
+
+    inputs:
+      properties:
+          $ref: '#/components/inputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetCustomFieldCollection
+        operationId: GetCustomFieldCollection
+        parameters:
+          - name: resource
+            in: path
+            value: customers
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/webhooks
+
+    inputs:
+      properties:
+          $ref: '#/components/inputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetWebhookCollection
+        operationId: GetWebhookCollection
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/events
+
+    inputs:
+      properties:
+          $ref: '#/components/inputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetEventCollection
+        operationId: GetEventCollection
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/websites
+
+    inputs:
+      properties:
+          $ref: '#/components/inputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetWebsiteCollection
+        operationId: GetWebsiteCollection
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/api-keys
+
+    inputs:
+      properties:
+          $ref: '#/components/inputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetApiKeyCollection
+        operationId: GetApiKeyCollection
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/tags
+
+    inputs:
+      properties:
+          $ref: '#/components/inputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetTagCollection
+        operationId: GetTagCollection
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/fees
+
+    inputs:
+      properties:
+          $ref: '#/components/inputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetFeeCollection
+        operationId: GetFeeCollection
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/custom-domains
+
+    inputs:
+      properties:
+          $ref: '#/components/inputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetCustomDomainCollection
+        operationId: GetCustomDomainCollection
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/shipping-rates
+
+    inputs:
+      properties:
+          $ref: '#/components/inputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetShippingRateCollection
+        operationId: GetShippingRateCollection
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/roles
+
+    inputs:
+      properties:
+          $ref: '#/components/inputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetRoleCollection
+        operationId: GetRoleCollection
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/profile
+
+    inputs:
+      properties:
+          $ref: '#/components/inputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetProfile
+        operationId: GetProfile
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/tags-rules
+
+    inputs:
+      properties:
+          $ref: '#/components/inputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetTagRuleCollection
+        operationId: GetTagRuleCollection
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/coupons
+
+    inputs:
+      properties:
+          $ref: '#/components/inputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetCouponCollection
+        operationId: GetCouponCollection
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/payment-gateways-metadata
+
+    inputs:
+      properties:
+          $ref: '#/components/inputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetPaymentGatewayMetadataCollection
+        operationId: GetPaymentGatewayMetadataCollection
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/products
+
+    inputs:
+      properties:
+          $ref: '#/components/inputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetProductCollection
+        operationId: GetProductCollection
+
+        successCriteria:
+          - condition: $statusCode == 200
