@@ -38,12 +38,14 @@ properties:
     example: ii_0YVFDEQS2KCFTBN9HXWJFY55GV
   quantity:
     description: |-
-       Number of used product units of a plan.
-       Products are the goods and services that your business sells.
-       Plans describe how the customer must pay for products.
+      The quantity of consumed units for a subscription plan product.
+      Represents the actual usage of a billable product or service by the customer.
+      Accepts both integer and decimal values with a precision of up to 3 decimal places.
+      The minimum billable unit is 0.001.
     type: number
-    format: float
-    minimum: 0.01
+    format: double
+    minimum: 0.001
+    example: 5.125
   usageTime:
     description: |-
       Date and time, in ISO 8601 format, when a usage occurred.
@@ -53,7 +55,7 @@ properties:
   acceptPartialQuantity:
     description: |-
       Specifies whether partial usage should be accepted if the reported quantity exceeds the available limit.
-      
+
       When set to `true`, the system automatically adjusts the reported quantity to the maximum allowed limit and reports the usage.
       When set to `false`, the system rejects the request if the reported quantity exceeds the limit.
     type: boolean
@@ -66,4 +68,3 @@ properties:
     $ref: UpdatedTime.yaml
   _links:
     $ref: ./SelfLink.yaml
-
