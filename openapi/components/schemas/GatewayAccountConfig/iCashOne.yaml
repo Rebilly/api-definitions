@@ -1,0 +1,18 @@
+description: iCashOne gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: iCashOne credentials object.
+        properties:
+          apiKey:
+            writeOnly: true
+            format: password
+            type: string
+            description: iCashOne API key.
+        required:
+          - apiKey
