@@ -82,3 +82,23 @@ put:
             $ref: ../components/schemas/InvalidError.yaml
     '429':
       $ref: ../components/responses/TooManyRequests.yaml
+delete:
+  x-products:
+    - Users
+  summary: Delete a webhook
+  operationId: DeleteWebhook
+  x-sdk-operation-name: delete
+  description: Deletes a webhook with a specified ID.
+  tags:
+    - Webhooks
+  responses:
+    '204':
+      description: Webhook deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
