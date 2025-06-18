@@ -13,6 +13,4 @@ const customField = await api.customFields.create(params);
 
 // or update the custom field
 const customField = await api.customFields.update(params);
-
-// you can verify if the custom field is used
-console.log(customField.fields.isUsed);
+console.log(customField.fields.name);
