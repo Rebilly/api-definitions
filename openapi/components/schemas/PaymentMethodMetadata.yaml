@@ -50,5 +50,57 @@ properties:
       The customer must complete the process independently.
     type: boolean
     default: false
+  supportedCurrencies:
+    type: object
+    description: List of currencies that are supported by the payment method.
+    required:
+      - mode
+    discriminator:
+      propertyName: mode
+      mapping:
+        unknown: ./CurrenciesUnrestrictedMetadata.yaml
+        all: ./CurrenciesUnrestrictedMetadata.yaml
+        subset: ./CurrenciesSubsetMetadata.yaml
+    oneOf:
+      - $ref: ./CurrenciesUnrestrictedMetadata.yaml
+      - $ref: ./CurrenciesSubsetMetadata.yaml
+  relevantBusinessModels:
+    description: Business models that are relevant to the payment method.
+    type: array
+    items:
+      type: string
+      enum:
+        - B2B
+        - B2C
+  type:
+    description: |-
+      Type of payment method.
+      For example, wallet, bank transfer, credit card.
+    type:
+      - 'string'
+      - 'null'
+  recurringPayments:
+    description: Specifies whether the payment method supports recurring payments.
+    type: boolean
+    default: false
+  refunds:
+    description: Specifies whether the payment method supports refunds.
+    type: boolean
+    default: false
+  disputes:
+    description: Specifies whether the payment method supports disputes.
+    type: boolean
+    default: false
+  ux:
+    description: List of steps that describes the user experience during the payment flow.
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required:
+        - description
+      properties:
+        description:
+          type: string
   _links:
     $ref: ./SelfLink.yaml
