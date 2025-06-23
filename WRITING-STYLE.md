@@ -484,7 +484,7 @@ Parameter example:
 bookedTo:
     type: string
     description: |-
-      Year and month in which revenue is booked until.
+      Year and month up to which revenue is booked.
       If empty then booked revenue is taken until the most recently booked amount.
     pattern: '^\d{4}-\d{2}$'
     example: 2022-01
