@@ -28,9 +28,19 @@ properties:
         type: string
         writeOnly: true
       cvv:
-        description: Card Verification Value (CVV/CVC) of the payment card.
+        description: Card Verification Value (CVV/CVC) of the payment card. Takes precedence over `encryptedCvv` if both are included.
         type: string
         writeOnly: true
+      encryptedCvv:
+        description: |-
+          Encrypted CVV of the payment card.
+          Use to update a payment card with a CVV stored on the client side.
+          This value is returned for client side caching if `cvv` is provided in the request.
+        type:
+          - 'string'
+          - 'null'
+        minLength: 100
+        maxLength: 255
       expMonth:
         description: Expiration month of the payment card.
         type: integer
