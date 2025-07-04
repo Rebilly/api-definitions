@@ -111,6 +111,22 @@ properties:
                   - 'null'
                 description: Specifies whether the hosted payment form displays 0 amount line items in the summary.
                 default: false
+      amplitude:
+        type: object
+        description: Amplitude settings. Amplitude is an analytics tool for tracking user behavior.
+        properties:
+          tracking:
+            description: Specifies whether the hosted pages, such as KYC pages, include Amplitude analytics.
+            type: boolean
+            default: false
+          apiKey:
+            description: API key of an Amplitude project.
+            type:
+              - 'string'
+              - 'null'
+            minLength: 20
+            maxLength: 50
+            example: '35d1795750c585984f7e6b01c0ca6e19'
   logoId:
     type:
       - 'string'
