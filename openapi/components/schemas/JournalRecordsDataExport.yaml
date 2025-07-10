@@ -1,5 +1,5 @@
 type: object
-description: Transaction resource to export.
+description: Journal record resource to export.
 required:
   - name
   - format
@@ -19,7 +19,7 @@ properties:
     description: Type of resource to export.
     type: string
     enum:
-      - transactions
+      - journalRecords
   format:
     description: Output format of the export.
     type: string
@@ -85,10 +85,9 @@ properties:
       - type: object
         properties:
           field:
-            x-sortable: true
             type: string
-            default: processedTime
-            example: processedTime
+            default: createdTime
+            example: createdTime
   _links:
     type: array
     description: Related links.
