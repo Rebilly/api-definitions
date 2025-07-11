@@ -127,6 +127,36 @@ properties:
         description: |-
           Specifies if the quotation invoice must include interim items only.
           If this value is set to `false`, all upcoming items are included.
+      usageSettings:
+        type: array
+        default: []
+        description: Usage settings for items with metered billing.
+        items:
+          type: object
+          required:
+            - productId
+            - policy
+          properties:
+            productId:
+              type: string
+              description: |-
+                ID of the product to use to transfer usage.
+                If the `policy` value is `transfer`, 
+                and an existing item and a new item are of the same product,
+                usage can be transferred to the new item. 
+                If a new item of the same product does not exist, 
+                or does not have a metered billing plan, 
+                this transfer is ignored.
+              example: prod_0YV7DENSVGDBW9S71XZNNYYQ0X
+            policy:
+              type: string
+              enum:
+                - reset
+                - transfer
+              description: Policy for removed items that have a metered billing plan.
+              x-enumDescriptions:
+                reset: Delete existing usages.
+                transfer: Transfer usages from removed item to new item of the same product.
       autopay:
         type:
           - 'boolean'
