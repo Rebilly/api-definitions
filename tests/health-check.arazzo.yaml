@@ -1,0 +1,18 @@
+arazzo: 1.0.1
+
+info:
+  title: Rebilly healthcheck
+  version: 1.0.0
+
+sourceDescriptions:
+  - name: Rebilly
+    type: openapi
+    url: https://www.rebilly.com/_spec/catalog/all.yaml
+
+workflows:
+  - workflowId: rebilly-api/status
+    steps:
+      - stepId: GetStatus
+        operationId: GetStatus
+        successCriteria:
+          - condition: $statusCode == 200
