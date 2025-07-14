@@ -9,14 +9,14 @@ allOf:
       taxesAccount:
         description: |-
           ID of the taxes QuickBooks account.
-          If supplied taxes are represented as separate line items instead of integrated tax field.
+          If this field is supplied, taxes are represented as separate line items instead of an integrated tax field.
         type:
           - 'string'
           - 'null'
       discountsAccount:
         description: |-
           ID of the discounts QuickBooks account.
-          If not set `unearnedRevenueAccount` is used for discounts.
+          If this field is not set, `unearnedRevenueAccount` is used for discounts.
         type:
           - 'string'
           - 'null'
@@ -46,7 +46,7 @@ allOf:
             default: '{{ item.plan.id | default: item.product.id | default: item.description }}{% if item.periodStartTime and item.periodEndTime %} ({{ item.periodStartTime | datetime: "M jS, Y" }} – {{ item.periodEndTime | datetime: "M jS, Y" }}){% endif %}'
           taxName:
             description: |-
-              Name of the tax item name. 
+              Name of the tax item name.
               This value is used when the `taxesAccount` field is configured.
             type: string
             default: '{{ tax.description }}'
