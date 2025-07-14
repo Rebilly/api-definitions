@@ -1,0 +1,59 @@
+get:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Reports
+  tags:
+    - Reports
+  summary: Retrieve an ARR report
+  operationId: GetAnnualRecurringRevenueReport
+  x-sdk-operation-name: getAnnualRecurringRevenue
+  description: |-
+    Retrieves an Annual Recurring Revenue (ARR) report.
+
+    Use ARR reports to view information on the predictable recurring revenue for your business over a period of months.
+  parameters:
+    - name: currency
+      in: query
+      description: Revenue currency.
+      required: true
+      schema:
+        $ref: ../components/schemas/CurrencyCode.yaml
+    - name: periodStart
+      in: query
+      description: Date and time when the report starts.
+      required: true
+      schema:
+        type: string
+        pattern: '^\d{4}-\d{2}$'
+        example: 2022-01
+    - name: periodEnd
+      in: query
+      description: Date and time when the report ends.
+      required: true
+      schema:
+        type: string
+        pattern: '^\d{4}-\d{2}$'
+        example: 2022-06
+  responses:
+    '200':
+      description: Report retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ReportAnnualRecurringRevenue.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/reports@annual-recurring-revenue/get.js

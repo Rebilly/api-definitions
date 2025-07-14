@@ -1,0 +1,76 @@
+type: object
+properties:
+  data:
+    description: Annual Recurring Revenue (ARR) data.
+    type: array
+    items:
+      type: object
+      properties:
+        period:
+          description: Revenue month.
+          type: string
+          pattern: '^\d{4}-\d{2}$'
+          example: 2022-06
+        total:
+          description: Total Annual Recurring Revenue (ARR) amount.
+          type: number
+          format: double
+          example: 300.0
+        breakdown:
+          description: |-
+            ARR categories are described below.
+            The difference between the current period ARR and the previous period ARR is equal to:
+            `new` + `reactivation` + `expansion` - `contraction` - `churned`.
+          type: object
+          properties:
+            new:
+              description: |-
+                Occurs when new customers sign up.
+                New ARR is the amount of the new customer's subscription.
+
+                Example: A new customer signs up to a $40 per month plan.
+                This is a new ARR amount of $480 ($40 multiplied by 12 months).
+              type: number
+              format: double
+              example: 480.0
+            reactivation:
+              description: |-
+                Occurs when a customer stops being a customer for a period but later signs up again.
+                Reactivation ARR is the amount of the customer's new subscription.
+
+                Example: A customer cancels their subscription, but signs up again and purchases a $25 per month plan.
+                This is a reactivation ARR amount of $300 ($25 multiplied by 12 months).
+              type: number
+              format: double
+              example: 300.0
+            churned:
+              description: |-
+                Occurs when a subscription is churned.
+                Churn occurs when the paid service period on a subscription order expires.
+                Churned ARR is the amount that is lost as a result of the churned subscription.
+
+                Example: When a subscription is churned, the value of a subscription goes from $80 per month to $0 per month.
+                This is a churned ARR amount of $960 ($80 multiplied by 12 months).
+              type: number
+              format: double
+              example: 960.0
+            contraction:
+              description: |-
+                Occurs when an existing customer changes items which result in a smaller ARR.
+                Contraction ARR is the amount before the change minus the amount after the change.
+
+                Example: A customer downgrades from a plan that is $100 per month to plan that is $80 per month.
+                This is a contraction ARR amount of $240 ($20 multiplied by 12 months).
+              type: number
+              format: double
+              example: 240.0
+            expansion:
+              description: |-
+                Occurs when existing customers change items which result in a bigger ARR.
+                Expansion ARR is the amount after the change minus the amount before the change.
+
+                Example: A customer upgrades from a plan that is $40 per month to a plan that is $100 per month.
+                This is an expansion ARR amount of $720 ($60 multiplied by 12 months).
+              type: number
+              format: double
+              example: 720.0
