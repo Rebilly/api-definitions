@@ -3,6 +3,7 @@ const RemoveTagGroups = require('./decorators/remove-tag-groups');
 const ChangeTitle = require('./decorators/change-title');
 const RemoveUnusedTags = require('./decorators/remove-unused-tags');
 const BackportTo30 = require('./decorators/backport-to-30');
+const IncludeDeprecatedFields = require('./decorators/include-deprecated-fields');
 const id = 'plugin';
 
 
@@ -14,6 +15,7 @@ const decorators = {
     'remove-unused-tags': RemoveUnusedTags,
     'change-title': ChangeTitle,
     'backport-to-30': BackportTo30,
+    'include-deprecated-fields': IncludeDeprecatedFields,
   }
 };
 
