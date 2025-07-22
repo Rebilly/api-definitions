@@ -12,14 +12,21 @@ properties:
     example: sub_usg_0YVJ636B95DNA9M3B1638HXBCQ
   subscriptionId:
     type: string
-    description: ID of the subscription for which a usage is reported.
+    description: |-
+      Subscription ID for which the usage is reported.
+
+      > **Note:** Passing order ID in the `subscriptionId` field is deprecated and will be removed shortly. In the response, the order ID will be returned in this field until the deprecation is complete.
     maxLength: 50
     example: sub_01HRF27SATGE4Z6PBJE6PD8328
   planId:
     type: string
-    description: ID of the plan for which a usage is reported.
+    description: |-
+      Leave this field blank and specify the subscription ID for which a usage is reported in the `subscriptionId` field.
+
+      > **Note:** This field is deprecated and will be removed from this operation shortly. In the response, `planId` will be returned in this field until the deprecation is complete.
     maxLength: 50
     example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+    deprecated: true
   invoiceId:
     type:
       - 'string'
