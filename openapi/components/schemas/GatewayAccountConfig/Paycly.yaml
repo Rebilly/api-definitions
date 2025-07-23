@@ -1,0 +1,27 @@
+description: Paycly gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Paycly credentials object.
+        properties:
+          apiToken:
+            writeOnly: true
+            format: password
+            type: string
+            description: Paycly API token.
+          websiteId:
+            writeOnly: true
+            type: string
+            description: Paycly Website ID.
+        required:
+          - apiToken
+          - websiteId
+      settings:
+        type: object
+        description: Paycly settings object.
+        properties: {}
