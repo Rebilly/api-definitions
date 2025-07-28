@@ -1,7 +1,7 @@
 import axios from 'axios';
 import fs from 'fs/promises';
 import { parse, stringify } from 'yaml'
-import set from "lodash/set.js"
+import { set } from 'es-toolkit/compat'
 
 const sourceUrl = 'https://www.rebilly.com/_spec/catalog/all.yaml';
 const destinationFile = './openapi.yaml';
@@ -42,7 +42,7 @@ const hiddenDeprecatedProperties = [
     },
 ]
 
-hiddenDeprecatedProperties.forEach(({path, definition}) => {
+hiddenDeprecatedProperties.forEach(({ path, definition }) => {
     set(schema, path, definition);
 })
 

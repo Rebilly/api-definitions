@@ -1,4 +1,4 @@
-const set = require('lodash.set')
+const { set } = require('es-toolkit/compat')
 module.exports = RemoveTagGroups;
 
 /** @type {import('@redocly/cli').OasDecorator} */
@@ -40,7 +40,7 @@ function RemoveTagGroups() {
           },
         ]
 
-        hiddenDeprecatedProperties.forEach(({path, definition}) => {
+        hiddenDeprecatedProperties.forEach(({ path, definition }) => {
           set(Root, path, definition);
         })
 
