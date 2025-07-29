@@ -1,0 +1,20 @@
+description: Kushki gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Kushki credentials object.
+        properties:
+          privateKey:
+            writeOnly: true
+            format: password
+            type: string
+            description: Kushki private API key.
+        required:
+          - privateKey
+      threeDSecureServer:
+        $ref: ./ThreeDSecureIO3dsServer.yaml
