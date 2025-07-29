@@ -496,66 +496,65 @@ rules:
 decorators:
   products-bundler/bundle: error
   plugin/remove-php-sample-prefix: on
-theme:
-  openapi:
-    pagination: item
-    theme:
-      logo:
-        gutter: 20px 30px 14px 30px
-      colors:
-        primary:
-          main: '#0044D4'
-        text:
-          primary: '#0D2B3E'
-      typography:
-        headings:
-          fontFamily: Roboto
-        fontFamily: 'Roboto, Verdana, Geneva, sans-serif'
-        fontSize: 14px
-        code:
-          fontFamily: '"Courier New",monospace'
-        rightPanelHeading:
-          color: white
-      rightPanel:
-        backgroundColor: '#505A6F'
-      codeBlock:
-        backgroundColor: '#0D2B3E'
-      links:
-        color: '#6CC496'
-    htmlTemplate: ./web/index.html
-    generateCodeSamples:
-      languages:
-        - lang: curl
-        - lang: Node.js
-        - lang: Ruby
-        - lang: C#
-        - lang: Go
-        - lang: Python
-        - lang: Java
-    schemaExpansionLevel: '2'
-    maxDisplayedEnumValues: 10
-    hideTryItPanel: false
-    expandResponses: '200,201'
-    requiredPropsFirst: true
-  catalog:
-    rebilly-catalog:
-      title: Rebilly API catalog
-      description: Discover how our APIs can support your business.
-      slug: /catalog/
-      items:
-        - directory: ./catalog
-          flatten: true
-          includeByMetadata:
-            type: [openapi]
-  navbar:
+openapi:
+  pagination: item
+  theme:
+    logo:
+      gutter: 20px 30px 14px 30px
+    colors:
+      primary:
+        main: '#0044D4'
+      text:
+        primary: '#0D2B3E'
+    typography:
+      headings:
+        fontFamily: Roboto
+      fontFamily: 'Roboto, Verdana, Geneva, sans-serif'
+      fontSize: 14px
+      code:
+        fontFamily: '"Courier New",monospace'
+      rightPanelHeading:
+        color: white
+    rightPanel:
+      backgroundColor: '#505A6F'
+    codeBlock:
+      backgroundColor: '#0D2B3E'
+    links:
+      color: '#6CC496'
+  htmlTemplate: ./web/index.html
+  generateCodeSamples:
+    languages:
+      - lang: curl
+      - lang: Node.js
+      - lang: Ruby
+      - lang: C#
+      - lang: Go
+      - lang: Python
+      - lang: Java
+  schemaExpansionLevel: '2'
+  maxDisplayedEnumValues: 10
+  hideTryItPanel: false
+  expandResponses: '200,201'
+  requiredPropsFirst: true
+catalogClassic:
+  rebilly-catalog:
+    title: Rebilly API catalog
+    description: Discover how our APIs can support your business.
+    slug: /catalog/
     items:
-      - page: /catalog/
-        label: Catalog
-      - page: /contributing/
-        label: Contributing
-  logo:
-    altText: Rebilly API catalog
-    image: ./web/rb_apiLogo.svg
+      - directory: ./catalog
+        flatten: true
+        includeByMetadata:
+          type: [openapi]
+navbar:
+  items:
+    - page: /catalog/
+      label: Catalog
+    - page: /contributing/
+      label: Contributing
+logo:
+  altText: Rebilly API catalog
+  image: ./web/rb_apiLogo.svg
 ignore:
   - '.github' # works
   # - 'openapi'
