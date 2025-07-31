@@ -1,0 +1,66 @@
+type: object
+properties:
+  aggregationField:
+    description: Journal account by which the report amounts are aggregated.
+    type: string
+    enum:
+      - journalRecord.creditAccountId
+      - journalRecord.debitAccountId
+  currency:
+    $ref: ./CurrencyCode.yaml
+  periodStart:
+    description: Year and month from which the report is generated.
+    type: string
+    pattern: '^\d{4}-\d{2}$'
+    example: '2025-06'
+  periodEnd:
+    description: Year and month up to which the report is generated.
+    type: string
+    pattern: '^\d{4}-\d{2}$'
+    example: '2025-09'
+  journalAccountIds:
+    description: |-
+      Comma-separated list of journal account IDs which were provided to filter the report. Null means that no value was provided and all journal accounts are included.
+    type:
+      - string
+      - 'null'
+    example: 'jrn_acc_01JXFPKZP4QE4CR3GTT23K8R5J,jrn_acc_01JXFPM6M3CYJ496E5NSCBPM49'
+  data:
+    description: Journal summary report data.
+    type: array
+    items:
+      type: object
+      properties:
+        period:
+          description: Journal period month and year.
+          type: string
+          pattern: '^\d{4}-\d{2}$'
+          example: '2025-06'
+        totalAmount:
+          description: Total summary of journal records amount for the period.
+          type:
+            - 'number'
+            - 'null'
+          format: double
+          x-type: Money
+          x-currency-field: currency
+        currency:
+          $ref: ./CurrencyCode.yaml
+        breakdown:
+          description: Breakdown of journal records by journal account.
+          type: array
+          items:
+            type: object
+            properties:
+              journalAccountId:
+                description: ID of the journal account.
+                type: string
+                example: 'jrn_acc_01JXFPKZP4QE4CR3GTT23K8R5J'
+              recognizedAmount:
+                description: Amount of revenue recognized for the journal account in the period.
+                type:
+                  - 'number'
+                  - 'null'
+                format: double
+                x-type: Money
+                x-currency-field: currency

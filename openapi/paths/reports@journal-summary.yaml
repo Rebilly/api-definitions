@@ -1,0 +1,74 @@
+get:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Reports
+  tags:
+    - Reports
+  summary: Retrieve a journal summary report
+  operationId: GetJournalSummaryReport
+  x-sdk-operation-name: getJournalSummary
+  description: |-
+    Retrieves a journal summary report which displays recognized revenue by journal account name for each calendar month.
+    It includes both monthly and annual journal entries, and sums the revenue per account for each month.
+
+    - Rows: Represent individual journal account names, corresponding to product or revenue categories.
+    - Columns: Represent monthly periods, showing the total recognized revenue in each journal account for that month.
+  parameters:
+    - name: periodStart
+      required: true
+      in: query
+      description: Year and month from which the report is generated.
+      schema:
+        type: string
+        pattern: '^\d{4}-\d{2}$'
+        example: 2025-06
+    - name: periodEnd
+      required: true
+      in: query
+      description: Year and month up to which the report is generated.
+      schema:
+        type: string
+        pattern: '^\d{4}-\d{2}$'
+        example: 2025-09
+    - name: currency
+      in: query
+      description: The currency for the journal entries in the report.
+      required: true
+      schema:
+        $ref: ../components/schemas/CurrencyCode.yaml
+    - name: aggregationField
+      in: query
+      description: Report aggregation field.
+      required: true
+      schema:
+        type: string
+        enum:
+          - journalRecord.creditAccountId
+          - journalRecord.debitAccountId
+    - name: journalAccountIds
+      in: query
+      description: |-
+        Comma-separated list of journal account IDs to filter the report.
+        If this value is not provided, all journal accounts are included.
+      schema:
+        type: string
+        example: 'jrn_acc_01JXFPKZP4QE4CR3GTT23K8R5J,jrn_acc_01JXFPM6M3CYJ496E5NSCBPM49'
+  responses:
+    '200':
+      description: Report retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/JournalSummaryReport.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
