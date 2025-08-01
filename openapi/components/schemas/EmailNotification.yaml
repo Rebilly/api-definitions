@@ -8,6 +8,10 @@ properties:
     type: integer
     readOnly: true
     description: Total number of binds with `send-email` actions per event.
+  activeCount:
+    type: integer
+    readOnly: true
+    description: Number of active binds with `send-email` actions per event.
   notifications:
     readOnly: true
     type: array
@@ -23,5 +27,8 @@ properties:
         title:
           type: string
           description: Title of the notification.
+        isActive:
+          type: boolean
+          description: Specifies if the notification is enabled.
   _links:
     $ref: ./SelfLink.yaml
