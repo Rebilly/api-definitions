@@ -7,46 +7,29 @@ info:
 sourceDescriptions:
   - name: Rebilly
     type: openapi
-    url: ./openapi.yaml
+    url: https://www.rebilly.com/_spec/catalog/all-respect.json
 
 components:
-  inputs:
-    env:
-      properties:
-        REBILLY_ORGANIZATION:
-          type: string
-        REBILLY_API_KEY:
-          type: string
-          format: password
   parameters:
     apiKey:
       in: header
       name: REB-APIKEY
-      value: $inputs.env.REBILLY_API_KEY
+      value: $inputs.apiKey
     organizationId:
       in: path
       name: organizationId
-      value: $inputs.env.REBILLY_ORGANIZATION
+      value: $inputs.organizationId
 
 workflows:
-  - workflowId: rebilly-api/status
-    inputs:
-      properties:
-          $ref: '#/components/inputs'
-    parameters:
-      - reference: $components.parameters.apiKey
-      - reference: $components.parameters.organizationId
-    steps:
-      - stepId: GetStatus
-        operationId: GetStatus
-        successCriteria:
-          - condition: $statusCode == 200
-
   - workflowId: rebilly-api/attachments
 
     inputs:
       properties:
-          $ref: '#/components/inputs'
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
     parameters:
       - reference: $components.parameters.apiKey
       - reference: $components.parameters.organizationId
@@ -60,7 +43,11 @@ workflows:
 
     inputs:
       properties:
-          $ref: '#/components/inputs'
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
     parameters:
       - reference: $components.parameters.apiKey
       - reference: $components.parameters.organizationId
@@ -74,7 +61,11 @@ workflows:
 
     inputs:
       properties:
-          $ref: '#/components/inputs'
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
     parameters:
       - reference: $components.parameters.apiKey
       - reference: $components.parameters.organizationId
@@ -88,7 +79,11 @@ workflows:
 
     inputs:
       properties:
-          $ref: '#/components/inputs'
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
     parameters:
       - reference: $components.parameters.apiKey
       - reference: $components.parameters.organizationId
@@ -102,7 +97,11 @@ workflows:
 
     inputs:
       properties:
-          $ref: '#/components/inputs'
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
     parameters:
       - reference: $components.parameters.apiKey
       - reference: $components.parameters.organizationId
@@ -120,7 +119,11 @@ workflows:
 
     inputs:
       properties:
-          $ref: '#/components/inputs'
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
     parameters:
       - reference: $components.parameters.apiKey
       - reference: $components.parameters.organizationId
@@ -134,7 +137,11 @@ workflows:
 
     inputs:
       properties:
-          $ref: '#/components/inputs'
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
     parameters:
       - reference: $components.parameters.apiKey
       - reference: $components.parameters.organizationId
@@ -148,7 +155,11 @@ workflows:
 
     inputs:
       properties:
-          $ref: '#/components/inputs'
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
     parameters:
       - reference: $components.parameters.apiKey
       - reference: $components.parameters.organizationId
@@ -162,7 +173,11 @@ workflows:
 
     inputs:
       properties:
-          $ref: '#/components/inputs'
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
     parameters:
       - reference: $components.parameters.apiKey
       - reference: $components.parameters.organizationId
@@ -176,7 +191,11 @@ workflows:
 
     inputs:
       properties:
-          $ref: '#/components/inputs'
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
     parameters:
       - reference: $components.parameters.apiKey
       - reference: $components.parameters.organizationId
@@ -190,7 +209,11 @@ workflows:
 
     inputs:
       properties:
-          $ref: '#/components/inputs'
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
     parameters:
       - reference: $components.parameters.apiKey
       - reference: $components.parameters.organizationId
@@ -204,7 +227,11 @@ workflows:
 
     inputs:
       properties:
-          $ref: '#/components/inputs'
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
     parameters:
       - reference: $components.parameters.apiKey
       - reference: $components.parameters.organizationId
@@ -218,7 +245,11 @@ workflows:
 
     inputs:
       properties:
-          $ref: '#/components/inputs'
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
     parameters:
       - reference: $components.parameters.apiKey
       - reference: $components.parameters.organizationId
@@ -232,7 +263,11 @@ workflows:
 
     inputs:
       properties:
-          $ref: '#/components/inputs'
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
     parameters:
       - reference: $components.parameters.apiKey
       - reference: $components.parameters.organizationId
@@ -246,7 +281,11 @@ workflows:
 
     inputs:
       properties:
-          $ref: '#/components/inputs'
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
     parameters:
       - reference: $components.parameters.apiKey
       - reference: $components.parameters.organizationId
@@ -260,7 +299,11 @@ workflows:
 
     inputs:
       properties:
-          $ref: '#/components/inputs'
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
     parameters:
       - reference: $components.parameters.apiKey
       - reference: $components.parameters.organizationId
@@ -274,7 +317,11 @@ workflows:
 
     inputs:
       properties:
-          $ref: '#/components/inputs'
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
     parameters:
       - reference: $components.parameters.apiKey
       - reference: $components.parameters.organizationId
@@ -288,7 +335,11 @@ workflows:
 
     inputs:
       properties:
-          $ref: '#/components/inputs'
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
     parameters:
       - reference: $components.parameters.apiKey
       - reference: $components.parameters.organizationId
@@ -302,7 +353,11 @@ workflows:
 
     inputs:
       properties:
-          $ref: '#/components/inputs'
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
     parameters:
       - reference: $components.parameters.apiKey
       - reference: $components.parameters.organizationId
