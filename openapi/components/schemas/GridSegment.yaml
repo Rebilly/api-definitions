@@ -28,6 +28,53 @@ properties:
       This schema is built and consumed by the frontend.
       It includes information such as: segment name, UI settings, and so on.
     type: object
+    properties:
+      name:
+        description: Name of data grid segment.
+        type: string
+        maxLength: 100
+      columns:
+        description: List of columns to display in grid segment.
+        type: array
+        items:
+          type: string
+          maxLength: 50
+      filters:
+        description: Combination of filters to apply on grid segment data.
+        example: 'averageValue/amount:10;bin:555,2058'
+        type:
+          - 'string'
+          - 'null'
+      page:
+        description: "Where to display grid segment: data tables or customer details."
+        type: string
+        enum:
+          - data-tables
+          - customer-details
+      sort:
+        type: string
+        description: |-
+          Column to sort data by.
+          To sort in descending order, prefix with `-`.
+      type:
+        description: Data to display in grid segment.
+        type: string
+        enum:
+          - customers
+          - invoices
+          - transactions
+          - subscriptions
+          - api-logs
+          - coupon-redemptions
+          - webhook-logs
+          - tax-logs
+          - credit-memos
+          - kyc
+          - aml
+          - payout-requests
+          - organizations
+          - quotes
+          - deposit-requests
   isStarred:
     description: |-
       Specifies if this segment is starred by the current user.
