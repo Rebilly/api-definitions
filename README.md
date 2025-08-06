@@ -25,7 +25,7 @@ If you use VS Code, use the [Redocly VS Code extension](https://marketplace.visu
 ### Install
 
 1. Install [Node JS](https://nodejs.org/) (version 14 or more recent)
-2. Clone repo and run `npm ci` in the repo root
+2. Clone repo and run `pnpm install` in the repo root
 
 ### Usage
 
@@ -37,24 +37,24 @@ Changes made to the API specification while the development server is running ar
 Rebilly uses [Redocly](https://redocly.com/) to generate, manage, and preview API docs.
 
 1. In a terminal, install the [Redocly CLI](https://github.com/Redocly/redocly-cli). \
-   Use this command to install the package globally on your machine: `npm install @redocly/cli -g`
+   Use this command to install the package globally on your machine: `pnpm install @redocly/cli -g`
 1. [Sign in or create a Redocly account](https://app.redocly.com/signup). \
    If you are a Rebilly employee, sign in using SSO and your Rebilly email address.
 1. In Redocly, in the top right of the screen, press your name, then press **My profile**.
 1. In the **Personal API keys** section, press **Add API key**.
 1. Enter an API key name, then press **Save**.
 1. Copy the API key.
-1. In a terminal, execute the following command: `npx @redocly/cli login`.
+1. In a terminal, execute the following command: `redocly login`.
 1. When prompted, paste your API key.
 1. Execute one of the following commands to start a development server docs preview:
-    - Core API docs: `npx @redocly/cli preview-docs core@latest`
-    - All API docs: `npx @redocly/cli preview-docs all@latest`
+    - Core API docs: `redocly preview-docs core@latest`
+    - All API docs: `redocly preview-docs all@latest`
 1. In a web browser, open the preview server URL that is displayed in the terminal.
 
 #### Bundle
 
-Run `npm run build:latest` to bundle the definitions into a single file in the `catalog` folder.
+Run `pnpm run build:latest` to bundle the definitions into a single file in the `catalog` folder.
 
 #### Validate
 
-Run `npx @redocly/cli lint` to validate the definitions.
+Run `redocly lint` to validate the definitions.
