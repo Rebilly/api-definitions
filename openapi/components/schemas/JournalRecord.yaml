@@ -1,6 +1,5 @@
 type: object
 required:
-  - type
   - journalEntryId
   - invoiceItemId
   - debitAccountId
@@ -9,12 +8,14 @@ properties:
   id:
     type: string
     description: Unique resource ID.
+    readOnly: true
     maxLength: 50
     example: jrn_rec_0YVCXV2HE5DBT89QV7RXSJEZQ4
   journalEntryId:
     description: ID of the journal entry.
-    readOnly: true
     type: string
+    maxLength: 50
+    example: jrn_ent_01JXJ8EF9WVR0W187QZ6WF5703
   customerId:
     description: ID of the customer.
     type: string
@@ -57,11 +58,15 @@ properties:
     type:
       - 'string'
       - 'null'
+    maxLength: 50
+    example: jrn_acc_01JXJ8S97PTMYX8W01SQ72FSWC
   creditAccountId:
     description: ID of the credit journal account.
     type:
       - 'string'
       - 'null'
+    maxLength: 50
+    example: jrn_acc_01JXJ8RW7AWMVAH7DP3VXYQC1W
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:
@@ -80,6 +85,8 @@ properties:
       debitAccount:
         type: object
       creditAccount:
+        type: object
+      journalEntry:
         type: object
   _links:
     type: array
