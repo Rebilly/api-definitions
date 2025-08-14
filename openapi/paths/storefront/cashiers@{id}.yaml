@@ -1,0 +1,25 @@
+get:
+  summary: Get cashier details for storefront
+  operationId: getStorefrontCashier
+  x-products:
+    - Storefront
+  x-badges:
+    - name: Experimental
+  tags:
+    - Storefront cashiers
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Cashier ID
+  responses:
+    '200':
+      description: Cashier details
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/StorefrontCashier.yaml
+    '404':
+      description: Cashier not found

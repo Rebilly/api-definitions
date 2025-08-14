@@ -1,0 +1,37 @@
+post:
+  x-products:
+    - Core
+  x-badges:
+    - name: Experimental
+  tags:
+    - Cashiers
+  summary: Create a cashier
+  operationId: PostCashier
+  x-sdk-operation-name: create
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/requestBodies/PostCashier.yaml
+  responses:
+    '201':
+      description: Cashier created.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Cashier.yaml
+    '200':
+      description: Cashier retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Cashier.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml

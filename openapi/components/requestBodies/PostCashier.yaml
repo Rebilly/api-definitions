@@ -1,0 +1,83 @@
+type: object
+required:
+  - customerId
+  - websiteId
+  - currency
+properties:
+  customerId:
+    $ref: ../schemas/CustomerId.yaml
+  websiteId:
+    $ref: ../schemas/WebsiteId.yaml
+  currency:
+    $ref: ../schemas/CurrencyCode.yaml
+  redirectUrl:
+    description: |-
+      URL to redirect the customer to when a deposit or withdrawal is completed.
+      The default value is the website URL.
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 2083
+    format: uri
+  balance:
+    description: Current cash balance of the customer.
+    type: number
+    format: double
+    minimum: 0
+    example: 1500.00
+  bonusBalance:
+    description: Bonus balance available to the customer.
+    type: number
+    format: double
+    minimum: 0
+    example: 0.00
+  depositLimits:
+    type: object
+    writeOnly: true
+    properties:
+      minimum:
+        type: number
+        format: double
+        minimum: 0.01
+        example: 1000.00
+        description: Minimum deposit limit.
+      maximum:
+        type: number
+        format: double
+        example: 10000.00
+        description: Maximum deposit limit.
+    description: |-
+      Deposit limits for the customer.
+      This object is used to set the minimum and maximum deposit limits for the customer.
+  notificationUrl:
+    description: |-
+      URL where a server-to-server `POST` notification is sent.
+      This notification is sent when the transaction result is finalized after a timeout or an offsite interaction.
+
+      Do not interpret this notification as a confirmation,
+      complete a `GET` request to confirm the result of the transaction.
+      To ensure the request is not reattempted,
+      when the result is confirmed, respond with a `2xx` HTTP status code.
+
+      The following placeholders are available to use in this URI: `{id}` and `{result}`.
+      These placeholders are replaced the with the transaction ID and result accordingly.
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 2083
+    format: uri
+  expirationTime:
+    description: |-
+      Date and time at which the cashier expires.
+      The default expiration time is one hour after the time the request is created.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+  pendingPayoutTotal:
+    type: number
+    format: double
+    description: |-
+      Sum of all payout requests that are currently in a pending state.
+      This value is also the maximum possible "reverse cash in" amount.
+    example: 0

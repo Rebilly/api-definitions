@@ -1,0 +1,169 @@
+type: object
+required:
+  - id
+  - customerId
+  - websiteId
+  - redirectUrl
+  - expirationTime
+  - currency
+  - balance
+  - bonusBalance
+  - pendingPayoutTotal
+  - depositAmounts
+  - depositCustomAmount
+  - depositMethods
+  - payoutMethods
+  - notificationUrl
+properties:
+  id:
+    type: string
+    description: Unique identifier of the cashier.
+    maxLength: 50
+    example: cashier_0YV7DE4Z26DQSA1AC92FBJ7SEG
+  customerId:
+    $ref: ../schemas/CustomerId.yaml
+  websiteId:
+    $ref: ../schemas/WebsiteId.yaml
+  currency:
+    $ref: ../schemas/CurrencyCode.yaml
+  redirectUrl:
+    description: |-
+      URL to redirect the customer to when a deposit or withdrawal is completed.
+      The default value is the website URL.
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 2083
+    format: uri
+  balance:
+    type: number
+    format: double
+    minimum: 0
+    description: Customer's current balance.
+    example: 1500.00
+  bonusBalance:
+    type: number
+    format: double
+    minimum: 0
+    description: Bonus balance available to the customer.
+    example: 1500.00
+  notificationUrl:
+    description: |-
+      URL where a server-to-server `POST` notification is sent.
+      This notification is sent when the transaction result is finalized after a timeout or an offsite interaction.
+
+      Do not interpret this notification as a confirmation,
+      complete a `GET` request to confirm the result of the transaction.
+      To ensure the request is not reattempted,
+      when the result is confirmed, respond with a `2xx` HTTP status code.
+
+      The following placeholders are available to use in this URI: `{id}` and `{result}`.
+      These placeholders are replaced the with the transaction ID and result accordingly.
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 2083
+    format: uri
+  expirationTime:
+    description: |-
+      Date and time at which the cashier expires.
+      The default expiration time is one hour after the request is created.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+  pendingPayoutTotal:
+    type: number
+    format: double
+    minimum: 0
+    description: |-
+      Total amount of pending payout requests.
+      This value represents the sum of all payout requests that are in a pending state and the maximum possible "reverse cash in" amount.
+    example: 100.00
+  depositMethods:
+    type: array
+    items:
+      type: object
+      required:
+        - method
+      properties:
+        method:
+          type: string
+          example: payment-card
+        brands:
+          type: array
+          items:
+            type: string
+          example: ["Visa", "MasterCard", "American Express", "Discover"]
+        feature:
+          type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              example: Google Pay
+        amounts:
+          type: array
+          items:
+            type: number
+            format: double
+            minimum: 0.01
+          example: [10.00, 20.00, 50.00]
+  payoutMethods:
+    type: array
+    items:
+      type: object
+      required:
+        - method
+      properties:
+        method:
+          type: string
+          example: payment-card
+        brands:
+          type: array
+          items:
+            type: string
+          example: ["Visa", "MasterCard", "American Express", "Discover"]
+  depositAmounts:
+    type: array
+    items:
+      type: number
+      format: double
+      minimum: 0.01
+    example: [10.00, 20.00]
+    description: List of predefined deposit amounts that the customer can choose from.
+  depositCustomAmount:
+    type: object
+    required:
+      - minimum
+      - maximum
+    properties:
+      minimum:
+        type: number
+        format: double
+        minimum: 0.01
+        example: 10.00
+      maximum:
+        type: number
+        format: double
+        minimum: 0.01
+        example: 1000.00
+      multipleOf:
+        type: number
+        format: double
+        minimum: 0.01
+        example: 0.50
+    description: |-
+        Custom amount restrictions.
+        If this value is not specified, custom amounts are prohibited.
+  lastDepositRequestId:
+    type: string
+    description: ID of the last deposit request that was made for this cashier.
+    example: dep_req_01K2HMPNTBDS92TA6W4EX3VJPM
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml
