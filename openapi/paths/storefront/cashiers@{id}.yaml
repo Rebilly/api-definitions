@@ -1,25 +1,28 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
 get:
-  summary: Get cashier details for storefront
-  operationId: getStorefrontCashier
-  x-products:
-    - Storefront
   x-badges:
     - name: Experimental
+  x-products:
+    - Storefront
   tags:
     - Storefront cashiers
-  parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Cashier ID
+  summary: Retrieve a cashier
+  operationId: StorefrontGetCashier
+  x-sdk-operation-name: get
+  security:
+    - CustomerJWT: [ ]
+  description: Retrieves a cashier with a specified ID.
   responses:
     '200':
-      description: Cashier details
+      description: Cashier retrieved.
       content:
         application/json:
           schema:
             $ref: ../../components/schemas/StorefrontCashier.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
     '404':
-      description: Cashier not found
+      $ref: ../../components/responses/NotFound.yaml
