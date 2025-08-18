@@ -20,8 +20,6 @@ properties:
     description: Unique identifier of the cashier.
     maxLength: 50
     example: cashier_0YV7DE4Z26DQSA1AC92FBJ7SEG
-  customerId:
-    $ref: ../schemas/CustomerId.yaml
   websiteId:
     $ref: ../schemas/WebsiteId.yaml
   currency:
@@ -47,31 +45,6 @@ properties:
     minimum: 0
     description: Bonus balance available to the customer.
     example: 1500.00
-  notificationUrl:
-    description: |-
-      URL where a server-to-server `POST` notification is sent.
-      This notification is sent when the transaction result is finalized after a timeout or an offsite interaction.
-
-      Do not interpret this notification as a confirmation,
-      complete a `GET` request to confirm the result of the transaction.
-      To ensure the request is not reattempted,
-      when the result is confirmed, respond with a `2xx` HTTP status code.
-
-      The following placeholders are available to use in this URI: `{id}` and `{result}`.
-      These placeholders are replaced the with the transaction ID and result accordingly.
-    type:
-      - 'string'
-      - 'null'
-    maxLength: 2083
-    format: uri
-  expirationTime:
-    description: |-
-      Date and time at which the cashier expires.
-      The default expiration time is one hour after the request is created.
-    type:
-      - 'string'
-      - 'null'
-    format: date-time
   pendingPayoutTotal:
     type: number
     format: double
@@ -83,33 +56,19 @@ properties:
   depositMethods:
     type: array
     items:
-      type: object
-      required:
-        - method
-      properties:
-        method:
-          type: string
-          example: payment-card
-        brands:
-          type: array
-          items:
-            type: string
-          example: ["Visa", "MasterCard", "American Express", "Discover"]
-        feature:
-          type: object
+      allOf:
+        - $ref: ./ReadyToPayMethods.yaml
+        - type: object
           required:
-            - name
+            - amounts
           properties:
-            name:
-              type: string
-              example: Google Pay
-        amounts:
-          type: array
-          items:
-            type: number
-            format: double
-            minimum: 0.01
-          example: [10.00, 20.00, 50.00]
+            amounts:
+              type: array
+              items:
+                type: number
+                format: double
+                minimum: 0.01
+              example: [ 10.00, 20.00, 50.00 ]
   payoutMethods:
     type: array
     items:
@@ -138,6 +97,7 @@ properties:
     required:
       - minimum
       - maximum
+      - multipleOf
     properties:
       minimum:
         type: number
