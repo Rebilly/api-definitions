@@ -1,0 +1,44 @@
+type: object
+description: Result of an executed document check during KYC verification.
+properties:
+  name:
+    description: Name of the document check.
+    type: string
+    enum: [
+      city,
+      containsImage,
+      date,
+      dateIsInvalid,
+      dateOfBirth,
+      decision,
+      documentSubtype,
+      expirationDate,
+      firstName,
+      hasMatchingFaceProof,
+      hasMinimalAge,
+      isIdentityDocument,
+      isPublishedOnline,
+      isTampered,
+      issueDate,
+      lastName,
+      line1,
+      matchesDateOfBirth,
+      phone,
+      postalCode,
+      region,
+    ]
+  failed:
+    description: |-
+      Specifies if a document check has failed.
+      When a check fails,
+      the score value associated with the check is subtracted from the overall score of the proof document.
+      The overall score together with accept and reject thresholds determine whether an proof document passes or fails verification.
+      For more information, see [KYC](https://www.rebilly.com/docs/kyc-and-aml/kyc)
+    type: boolean
+    example: true
+  score:
+    type: integer
+    description: Specifies the number of points to deduct from the proof document when a check fails during the verification process.
+    minimum: 0
+    maximum: 100
+    example: 75
