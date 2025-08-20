@@ -91,14 +91,17 @@ content:
                         description: Usage limit amount in the currency of the order.
                         minimum: 0
                   trialLimit:
-                    type: ['double', 'null']
+                    oneOf:
+                      - type: number
+                        format: double
+                        minimum: 0
+                      - type: 'null'
                     description: |-
                       Defines a usage cap during the trial period of a subscription.
                       This limit is enforced only while the subscription is in trial phase.
                       When the reported usage reaches the configured trial limit, an event called 'trial-usage-limit-reached' is triggered.
                       To notify the customer or restrict access to the service, a webhook and notification can be configured for this event.
                       Once the trial limit is reached, additional usage cannot be reported until the trial ends.
-                    minimum: 0
                     example: 20.725
 description: Order resource.
 required: true
