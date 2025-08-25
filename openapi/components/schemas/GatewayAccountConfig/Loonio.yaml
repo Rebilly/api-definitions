@@ -1,0 +1,26 @@
+description: Loonio gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Loonio credentials object.
+        properties:
+          username:
+            type: string
+            description: Username of the merchant.
+          password:
+            type: string
+            description: Password of the merchant.
+            format: password
+            writeOnly: true
+          accountId:
+            type: string
+            description: Account ID of the merchant.
+        required:
+          - username
+          - password
+          - accountId
