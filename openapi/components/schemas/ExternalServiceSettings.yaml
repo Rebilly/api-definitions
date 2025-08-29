@@ -47,8 +47,14 @@ properties:
               manually: Invoice data is only synchronized when it is manually executed.
               when-issued: Invoice data is synchronized when issued.
               always: Invoice data is synchronized automatically as data it is issued or updated.
+          syncZeroInvoices:
+            type: boolean
+            description: Specifies whether to synchronize zero amount invoices.
+            default: false
           unearnedRevenueAccountId:
-            type: string
+            type:
+              - 'string'
+              - 'null'
             description: ID of the journal account where all products are created.
             example: jrn_acc_01H32J1C97KWGRCKF1E1JY0QG8
           taxesAccountId:
@@ -57,6 +63,13 @@ properties:
               - 'null'
             default: null
             description: ID of the journal account where all taxes are created.
+            example: jrn_acc_01H32J1KGXSRDH0K8Q7YYA552T
+          discountsAccountId:
+            type:
+              - 'string'
+              - 'null'
+            default: null
+            description: ID of the journal account where all discounts are created.
             example: jrn_acc_01H32J1KGXSRDH0K8Q7YYA552T
           department:
             type:
@@ -115,7 +128,9 @@ properties:
               manually: Invoice data is only synchronized when it is manually executed.
               always: Invoice data is synchronized automatically as data is created or updated.
           depositAccountId:
-            type: string
+            type:
+              - 'string'
+              - 'null'
             description: ID of the journal account where all payments and refund receipts are deposited.
             example: jrn_acc_01H32J1C97KWGRCKF1E1JY0QG8
           department:
