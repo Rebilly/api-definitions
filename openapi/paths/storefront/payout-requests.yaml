@@ -37,34 +37,3 @@ get:
       $ref: ../../components/responses/Unauthorized.yaml
     '403':
       $ref: ../../components/responses/Forbidden.yaml
-post:
-  x-badges:
-    - name: Experimental
-  x-products:
-    - Storefront
-  tags:
-    - Storefront transactions
-  summary: Create a payout request
-  operationId: StorefrontPostPayoutRequest
-  x-sdk-operation-name: create
-  security:
-    - CustomerJWT: []
-  description: Creates a payout request.
-  requestBody:
-    $ref: ../../components/requestBodies/storefront/PostPayoutRequest.yaml
-  responses:
-    '201':
-      description: Payout request created.
-      headers:
-        Location:
-          $ref: ../../components/headers/Location.yaml
-      content:
-        application/json:
-          schema:
-            $ref: ../../components/schemas/StorefrontPayoutRequest.yaml
-    '401':
-      $ref: ../../components/responses/Unauthorized.yaml
-    '403':
-      $ref: ../../components/responses/Forbidden.yaml
-    '422':
-      $ref: ../../components/responses/ValidationError.yaml
