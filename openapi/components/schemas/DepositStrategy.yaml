@@ -103,10 +103,14 @@ properties:
   priority:
     type: integer
     description: |-
-      Specifies a positive integer that controls the order in which deposit strategies are applied to the request.
-      A higher number indicates a higher priority and will be applied first.
+      Non-negative integer value that specifies which deposit strategy is applied to the request.
+      The strategy with the highest priority value is applied.
     default: 0
     minimum: 0
+  isActive:
+    type: boolean
+    description: Specifies if the strategy is enabled.
+    default: true
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:
