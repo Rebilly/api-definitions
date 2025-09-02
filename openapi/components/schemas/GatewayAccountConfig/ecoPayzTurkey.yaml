@@ -1,0 +1,40 @@
+description: ecoPayzTurkey gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: ecoPayzTurkey credentials object.
+        properties:
+          paymentPageId:
+            type: string
+            description: ID of the ecoPayzTurkey payment page.
+          merchantAccountNumber:
+            type: string
+            description: ecoPayzTurkey merchant account number.
+          merchantPassword:
+            type: string
+            description: ecoPayzTurkey merchant password.
+            format: password
+            writeOnly: true
+        required:
+          - paymentPageId
+          - merchantAccountNumber
+          - merchantPassword
+      settings:
+        type: object
+        description: ecoPayzTurkey settings object.
+        properties:
+          validCurrency:
+            type: string
+            description: Three letter currency code in ISO 4217 format.
+            enum:
+              - CAD
+              - EUR
+              - GBP
+              - USD
+        required:
+          - validCurrency
