@@ -359,6 +359,11 @@ properties:
       which is added to the due time of the order when setting the delinquency time for all related invoices.
       When the delinquency time of an invoice is reached, the order is automatically canceled.
 
+      {% admonition type="warning" %}
+      If the `delinquencyPeriod` value is `null`, the order does not change state and remains active.
+      You must explicitly configure the delinquency period to enable automatic cancellation of unpaid orders.
+      {% /admonition %}
+
       If this value is not passed during order creation,
       an [order delinquency period](https://www.rebilly.com/catalog/all/organizations/patchorganization#organizations/patchorganization/t=request&path=settings/billing/orderdelinquencyperiod) setting is used to calculate the value.
     example: P7D
