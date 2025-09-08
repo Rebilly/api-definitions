@@ -43,9 +43,11 @@ properties:
       If supplied, the token is converted into a payment instrument and set as the `defaultPaymentInstrument` value.
       If both are supplied, the value of this property overrides the `defaultPaymentInstrument` value.
       The token expires after first use.
-# TODO Check if it's valid. Might require a oneOf instead.
   defaultPaymentInstrument:
-    anyOf:
+    type:
+      - 'object'
+      - 'null'
+    oneOf:
       - $ref: ./VaultedInstrument.yaml
       - $ref: ./AlternativePaymentInstrument.yaml
       - $ref: ./CashInstrument.yaml
