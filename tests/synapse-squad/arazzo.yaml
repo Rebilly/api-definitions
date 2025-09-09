@@ -1,0 +1,96 @@
+arazzo: 1.0.1
+
+info:
+  title: Synapse squad workflows
+  version: 1.0.0
+
+sourceDescriptions:
+  - name: Rebilly
+    type: openapi
+    url: https://www.rebilly.com/_spec/catalog/all-respect.json
+
+components:
+  parameters:
+    apiKey:
+      in: header
+      name: REB-APIKEY
+      value: $inputs.apiKey
+    organizationId:
+      in: path
+      name: organizationId
+      value: $inputs.organizationId
+
+workflows:
+  - workflowId: rebilly-api/applications
+
+    inputs:
+      properties:
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetApplicationCollection
+        operationId: GetApplicationCollection
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/webhooks
+
+    inputs:
+      properties:
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetWebhookCollection
+        operationId: GetWebhookCollection
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/external-identifiers
+
+    inputs:
+      properties:
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetExternalIdentifierCollection
+        operationId: GetExternalIdentifierCollection
+
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: rebilly-api/external-services-settings
+
+    inputs:
+      properties:
+        organizationId:
+          type: string
+        apiKey:
+          type: string
+          format: password
+    parameters:
+      - reference: $components.parameters.apiKey
+      - reference: $components.parameters.organizationId
+    steps:
+      - stepId: GetExternalServiceSettings
+        operationId: GetExternalServiceSettings
+
+        successCriteria:
+          - condition: $statusCode == 200
