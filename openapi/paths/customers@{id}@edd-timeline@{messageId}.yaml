@@ -28,30 +28,3 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-delete:
-  x-products:
-    - Core
-  tags:
-    - Customers timeline
-  summary: Delete an EDD timeline message
-  operationId: DeleteCustomerEddTimeline
-  x-sdk-operation-name: deleteEddTimelineMessage
-  description: Deletes an EDD timeline message with a specified ID.
-  responses:
-    '204':
-      description: EDD timeline message deleted.
-      headers:
-        X-RateLimit-Limit:
-          $ref: ../components/headers/X-RateLimit-Limit.yaml
-        X-RateLimit-Remaining:
-          $ref: ../components/headers/X-RateLimit-Remaining.yaml
-    '401':
-      $ref: ../components/responses/Unauthorized.yaml
-    '403':
-      $ref: ../components/responses/Forbidden.yaml
-    '404':
-      $ref: ../components/responses/NotFound.yaml
-    '409':
-      $ref: ../components/responses/Conflict.yaml
-    '429':
-      $ref: ../components/responses/TooManyRequests.yaml

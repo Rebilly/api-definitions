@@ -22,38 +22,3 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-patch:
-  x-products:
-    - Core
-  tags:
-    - Customers
-  summary: Update a customer's EDD score
-  operationId: PatchCustomerEddScore
-  x-sdk-operation-name: patchCustomerEddScore
-  description: Updates an EDD score for a customer with a specified ID.
-  requestBody:
-    required: true
-    content:
-      application/json:
-        schema:
-          $ref: ../components/requestBodies/PatchEddScore.yaml
-  responses:
-    '200':
-      description: EDD score updated.
-      headers:
-        X-RateLimit-Limit:
-          $ref: ../components/headers/X-RateLimit-Limit.yaml
-        X-RateLimit-Remaining:
-          $ref: ../components/headers/X-RateLimit-Remaining.yaml
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Edd.yaml
-    '401':
-      $ref: ../components/responses/Unauthorized.yaml
-    '403':
-      $ref: ../components/responses/Forbidden.yaml
-    '422':
-      $ref: ../components/responses/ValidationError.yaml
-    '429':
-      $ref: ../components/responses/TooManyRequests.yaml
