@@ -360,8 +360,9 @@ properties:
       When the delinquency time of an invoice is reached, the order is automatically canceled.
 
       {% admonition type="warning" %}
-      If the `delinquencyPeriod` value is `null`, the order does not change state and remains active.
+      - If the `delinquencyPeriod` value is `null`, the order does not change state and remains active.
       You must explicitly configure the delinquency period to enable automatic cancellation of unpaid orders.
+      - If you add a delinquency period to an active order, it is applied to all new invoices created for the order. It is not applied to the unpaid and past-due invoices. To apply a delinquency period to unpaid and past-due invoices, set the `delinquencyTime` parameter using the [upsert an invoice API operation](https://www.rebilly.com/catalog/all/invoices/putinvoice#invoices/putinvoice/t=request&path=delinquencytime).
       {% /admonition %}
 
       If this value is not passed during order creation,
