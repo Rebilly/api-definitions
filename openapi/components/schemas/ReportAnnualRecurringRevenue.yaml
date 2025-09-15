@@ -17,12 +17,14 @@ properties:
           format: double
           example: 300.0
         breakdown:
-          description: |-
-            ARR categories are described below.
-            The difference between the current period ARR and the previous period ARR is equal to:
-            `new` + `reactivation` + `expansion` - `contraction` - `churned`.
+          description: ARR categories are described below.
           type: object
           properties:
+            change:
+              description: Difference in total ARR between the current and previous period.
+              type: number
+              format: double
+              example: 500.0
             new:
               description: |-
                 Occurs when new customers sign up.

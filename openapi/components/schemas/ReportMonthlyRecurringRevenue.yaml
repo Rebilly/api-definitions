@@ -17,12 +17,14 @@ properties:
           format: double
           example: 245.0
         breakdown:
-          description: |-
-            MRR categories are described below.
-            The difference between the current period MRR and the previous period MRR is equal to:
-            `new` + `reactivation` + `expansion` - `contraction` - `churned`.
+          description: MRR categories are described below.
           type: object
           properties:
+            change:
+              description: Difference in total MRR between the current and previous period.
+              type: number
+              format: double
+              example: 500.0
             new:
               description: |-
                 Occurs when new customers sign up.
