@@ -6,6 +6,12 @@ properties:
     enum:
       - journalRecord.creditAccountId
       - journalRecord.debitAccountId
+  amountField:
+    description: Journal record amount field which is used to calculate the report amounts.
+    type: string
+    enum:
+      - journalRecord.estimatedAmount
+      - journalRecord.recognizedAmount
   currency:
     $ref: ./CurrencyCode.yaml
   periodStart:
@@ -58,7 +64,15 @@ properties:
                 type: string
                 example: 'jrn_acc_01JXFPKZP4QE4CR3GTT23K8R5J'
               recognizedAmount:
-                description: Amount of revenue recognized for the journal account in the period.
+                description: Amount of revenue recognized for the journal account in the period. This field is present only if the `amountField` value is `journalRecord.recognizedAmount`.
+                type:
+                  - 'number'
+                  - 'null'
+                format: double
+                x-type: Money
+                x-currency-field: currency
+              estimatedAmount:
+                description: Amount of revenue estimated for the journal account in the period. This field is present only if the `amountField` value is `journalRecord.estimatedAmount`.
                 type:
                   - 'number'
                   - 'null'

@@ -32,7 +32,7 @@ get:
     - name: currency
       in: query
       description: |-
-        Currency for the journal entries in the report. 
+        Currency for the journal entries in the report.
         If no value is provided, the organization reporting currency is used.
       schema:
         $ref: ../components/schemas/CurrencyCode.yaml
@@ -44,6 +44,14 @@ get:
         enum:
           - journalRecord.creditAccountId
           - journalRecord.debitAccountId
+    - name: amountField
+      in: query
+      description: Report amount field. If this value is not provided, the report uses `journalRecord.recognizedAmount`.
+      schema:
+        type: string
+        enum:
+          - journalRecord.estimatedAmount
+          - journalRecord.recognizedAmount
     - name: journalAccountIds
       in: query
       description: |-
