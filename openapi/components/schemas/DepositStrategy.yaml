@@ -6,23 +6,23 @@ required:
 properties:
   id:
     type: string
-    description: ID of the deposit strategy.
+    description: ID of the deposit amount strategy.
     readOnly: true
     maxLength: 50
     example: dep_str_0YVJ64MAHTDPA97H8S7R5MYR1M
   name:
     type: string
-    description: Name of the strategy.
+    description: Name of the deposit amount strategy.
   filter:
     type: string
     description: |-
-      Filter that uses deposit request properties to determine if a deposit strategy is applicable for the request.
-      If this field is empty, the strategy is applicable for any request.
+      Filter that uses deposit request properties to determine if a deposit amount strategy is applicable for the deposit request.
+      If this field is empty, the deposit amount strategy is applicable for any request.
     default: ''
     example: 'depositRequest.currency:USD'
   amounts:
     type: object
-    description: Deposit strategy amounts configuration.
+    description: Amounts configuration for deposit amount strategy.
     required:
       - calculator
       - baseAmount
@@ -73,7 +73,7 @@ properties:
     description: |-
       Custom amount restrictions.
       If this value is `null`,  custom amounts are prohibited.
-      If `customAmount` is not specified when a deposit request is created, amount restrictions are determined from the chosen strategy.
+      If `customAmount` is not specified when a deposit request is created, amount restrictions are determined from the chosen deposit amount strategy.
       For more information, see the [`strategyId` property](https://www.rebilly.com/catalog/all/deposits/postdepositrequest#deposits/postdepositrequest/t=request&path=strategyid).
     required:
       - minimum
@@ -103,13 +103,13 @@ properties:
   priority:
     type: integer
     description: |-
-      Non-negative integer value that specifies which deposit strategy is applied to the request.
-      The strategy with the highest priority value is applied.
+      Non-negative integer value that specifies which deposit amount strategy is applied to the request.
+      The deposit amount strategy with the highest priority value is applied.
     default: 0
     minimum: 0
   isActive:
     type: boolean
-    description: Specifies if the strategy is enabled.
+    description: Specifies if the deposit amount strategy is active.
     default: true
   createdTime:
     $ref: ./CreatedTime.yaml

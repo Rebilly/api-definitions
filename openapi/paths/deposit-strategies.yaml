@@ -5,24 +5,33 @@ post:
     - name: Experimental
   tags:
     - Deposits
-  summary: Create a deposit strategy
+  summary: Create a deposit amount strategy
   operationId: PostDepositStrategy
   x-sdk-operation-name: create
   description: |-
-    Creates a deposit strategy.
-    To complete the deposit, the customer is redirected to the `deposit` link.
-    After the deposit, the customer is redirected to the `redirectUrl`.
-    Corresponding transaction webhooks are sent to webhooks subscribers.
+    Creates a deposit amount strategy.
+    Use deposit amount strategies to determine the amounts presented to customers in deposit forms, based on currency, customer segmentation (tags), or prior deposit behavior.
+
+    Selection of deposit amount strategy:
+      - If more than one deposit amount strategy applies to a deposit request,
+    the deposit amount strategy with the greater `priority` value is applied.
+      - If the `strategyId` property is specified when a deposit request is created,
+      the specified deposit amount strategy is applied. This overrides the priority and filter based selection process.
+
+    Default behavior:
+      - If the `customAmount` property is not specified when a deposit request is created, amount restrictions are determined from the chosen deposit amount strategy.
+      - If the `amounts` property is not specified when a deposit request is created, amounts are determined from the chosen deposit amount strategy.
+
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/DepositStrategy.yaml
-    description: Deposit strategy resource.
+    description: Deposit amount strategy resource.
     required: true
   responses:
     '201':
-      description: Deposit strategy created.
+      description: Deposit amount strategy created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -49,10 +58,10 @@ get:
     - name: Experimental
   tags:
     - Deposits
-  summary: Retrieve deposit strategies
+  summary: Retrieve deposit amount strategies
   operationId: GetDepositStrategyCollection
   x-sdk-operation-name: getAll
-  description: Retrieves a list of deposit strategies.
+  description: Retrieves a list of deposit amount strategies.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -60,7 +69,7 @@ get:
     - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
-      description: List of deposit strategies retrieved.
+      description: List of deposit amount strategies retrieved.
       headers:
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml

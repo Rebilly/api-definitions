@@ -7,13 +7,13 @@ get:
     - name: Experimental
   tags:
     - Deposits
-  summary: Retrieve a deposit strategy
+  summary: Retrieve a deposit amount strategy
   operationId: GetDepositStrategy
   x-sdk-operation-name: get
-  description: Retrieves a deposit strategy with a specified ID.
+  description: Retrieves a deposit amount strategy with a specified ID.
   responses:
     '200':
-      description: Deposit strategy retrieved.
+      description: Deposit amount strategy retrieved.
       content:
         application/json:
           schema:
@@ -31,26 +31,32 @@ put:
     - name: Experimental
   tags:
     - Deposits
-  summary: Upsert a deposit strategy
+  summary: Upsert a deposit amount strategy
   operationId: PutDepositStrategy
   x-sdk-operation-name: update
-  description: Creates or updates (upserts) a deposit strategy with a specified ID.
+  description: |-
+    Creates or updates (upserts) a deposit amount strategy with a specified ID.
+
+    Use deposit amount strategies to determine the amounts presented to customers in deposit forms, based on currency, customer segmentation (tags), or prior deposit behavior.
+
+    When more than one deposit amount strategy applies to a deposit request,
+    the deposit amount strategy with the greater `priority` value is applied.
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/DepositStrategy.yaml
-    description: Deposit strategy resource.
+    description: Deposit amount strategy resource.
     required: true
   responses:
     '200':
-      description: Deposit strategy updated.
+      description: Deposit amount strategy updated.
       content:
         application/json:
           schema:
             $ref: ../components/schemas/DepositStrategy.yaml
     '201':
-      description: Deposit strategy created.
+      description: Deposit amount strategy created.
       headers:
         Location:
           $ref: ../components/headers/Location.yaml
@@ -79,13 +85,13 @@ delete:
     - name: Experimental
   tags:
     - Deposits
-  summary: Delete a deposit strategy
+  summary: Delete a deposit amount strategy
   operationId: DeleteDepositStrategy
   x-sdk-operation-name: delete
-  description: Deletes a deposit strategy with a specified ID.
+  description: Deletes a deposit amount strategy with a specified ID.
   responses:
     '204':
-      description: Deposit strategy deleted.
+      description: Deposit amount strategy deleted.
       headers:
         X-RateLimit-Limit:
           $ref: ../components/headers/X-RateLimit-Limit.yaml

@@ -13,9 +13,9 @@ properties:
     $ref: ../schemas/CustomerId.yaml
   strategyId:
     description: |-
-      ID of a strategy to be applied for this request for `amounts` and `customAmount`.
-      If this field is not specified, a randomly selected strategy with a matching `filter` value is applied for empty `amounts` and `customAmount`.
-      If there is no matching strategy, the default strategy with the following parameters is applied for empty `amounts` and `customAmount`:
+      ID of a deposit amount strategy to be applied for this request for `amounts` and `customAmount`.
+      If this field is not specified, a randomly selected deposit amount strategy with a matching `filter` value is applied for empty `amounts` and `customAmount`.
+      If there is no matching deposit amount strategy, the default strategy with the following parameters is applied for empty `amounts` and `customAmount`:
       ```yaml
         amounts:
           calculator: absolute
@@ -27,7 +27,7 @@ properties:
           multipleOf: 1
           maximum: 10000
       ```
-      For more information, see [Create a deposit strategy](https://www.rebilly.com/catalog/all/deposits/postdepositstrategy).
+      For more information, see [Create a deposit amount strategy](https://www.rebilly.com/catalog/all/deposits/postdepositstrategy).
     type:
       - 'string'
       - 'null'
@@ -42,7 +42,7 @@ properties:
     description: |-
       List of available deposit amounts.
 
-      If `amounts` is not specified when a deposit request is created, amounts are determined from the chosen strategy.
+      If `amounts` is not specified when a deposit request is created, amounts are determined from the chosen deposit amount strategy.
       For more information, see the [`strategyId` property](https://www.rebilly.com/catalog/all/deposits/postdepositrequest#deposits/postdepositrequest/t=request&path=strategyid).
     items:
       type: number
@@ -79,7 +79,7 @@ properties:
     description: |-
       Custom amount restrictions.
       If this value is `null`,  custom amounts are prohibited.
-      If `customAmount` is not specified when a deposit request is created, amount restrictions are determined from the chosen strategy.
+      If `customAmount` is not specified when a deposit request is created, amount restrictions are determined from the chosen deposit amount strategy.
       For more information, see the [`strategyId` property](https://www.rebilly.com/catalog/all/deposits/postdepositrequest#deposits/postdepositrequest/t=request&path=strategyid).
     required:
       - minimum
