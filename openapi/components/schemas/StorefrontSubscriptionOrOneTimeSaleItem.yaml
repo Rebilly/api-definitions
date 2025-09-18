@@ -1,0 +1,135 @@
+type: object
+required:
+  - plan
+properties:
+  id:
+    type: string
+    description: ID of the order item.
+    readOnly: true
+    maxLength: 50
+  planId:
+    description: ID of the plan.
+    deprecated: true
+    x-basic: true
+    type: string
+    maxLength: 50
+    example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+  quantity:
+    description: Number of product units in the specified plan.
+    type: integer
+    minimum: 0
+    maximum: 1000000000
+  quantityFilled:
+    description: Number of filled product units.
+    type: number
+    format: double
+    example: 5.125
+  plan:
+    anyOf:
+      - $ref: ./OriginalPlan.yaml
+      - $ref: ./FlexiblePlan.yaml
+  usageLimits:
+    oneOf:
+      - $ref: ./UsageLimits.yaml
+      - type: 'null'
+    default: null
+  usageStatus:
+    type:
+      - 'object'
+      - 'null'
+    default: null
+    readOnly: true
+    description: Current status of the usage limits.
+    properties:
+      isSoftLimitReached:
+        type: boolean
+        description: Specifies if the soft limit has been reached.
+        example: false
+      isHardLimitReached:
+        type: boolean
+        description: Specifies if the hard limit has been reached.
+        example: false
+      isTrialLimitReached:
+        type: boolean
+        description: Specifies if the trial limit has been reached.
+        example: false
+  inTrial:
+    description: Specifies if the subscription is currently in a trial period.
+    type: boolean
+    readOnly: true
+  trial:
+    type: object
+    description: |-
+      Trial details.
+      To use plan defaults do not send the `trial` key, or send a `null` value.
+    properties:
+      enabled:
+        description: |-
+          Specifies if there is a trial for this subscription.
+          Plans without trial prices are free trials.
+        type: boolean
+        readOnly: true
+      endTime:
+        description: |-
+          Time and date when the trial ends.
+          If a trial is enabled on this subscription, a value must be provided.
+        type:
+          - 'string'
+          - 'null'
+        format: date-time
+  isTrialOnly:
+    description: |-
+      Specifies if a subscription ends after a trial period.
+      If this value is `true`, recurring settings are ignored.
+    type: boolean
+    default: false
+  recurringInterval:
+    type:
+      - 'object'
+      - 'null'
+    description: |-
+      Recurring interval to override plan settings.
+      To use plan settings, set this value to `null`.
+
+      To use multiple plans in one subscription,
+      all plans must have the same same recurring period length,
+      this property enables the customer to subscribe to different plans.
+    example: null
+    properties:
+      periodAnchorInstruction:
+        $ref: ./ServicePeriodAnchorInstruction.yaml
+  renewalTime:
+    description: Date and time when the subscription renews.
+    type:
+      - 'string'
+      - 'null'
+    x-sortable: true
+    x-basic: true
+    format: date-time
+  rebillNumber:
+    description: Current billing period number.
+    type: integer
+    readOnly: true
+    x-sortable: true
+  revision:
+    type: integer
+    readOnly: true
+    description: Revision number that increments with each overriding change to this specific plan item.
+  isModified:
+    type: boolean
+    readOnly: true
+    description: Specifies if the plan information is modified for this subscription.
+  isGrandfathered:
+    type: boolean
+    readOnly: true
+    description: Specifies if the current plan revision number is greater than the plan item revision number.
+  excludeFromMrr:
+    type: boolean
+    description: Specifies if this item should be excluded from monthly recurring revenue calculations.
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
+    properties:
+      product:
+        type: object
