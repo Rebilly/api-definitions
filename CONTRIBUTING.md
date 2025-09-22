@@ -8,7 +8,7 @@
 
 Rebilly follows a design-first approach to APIs.
 
-- Use OpenAPI 3.0 to describe APIs according to below.
+- Use OpenAPI 3.1 to describe APIs according to below.
 - Use [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow) (create a branch and open a pull request for any change).
 - Check your work with Redocly CLI which runs `lint` and `bundle` commands controlled through the `redocly.yaml` configuration file when a pull request is opened (you will see the green checks or red x marks).
 - In terms of sequence, merge the API definitions before merging and releasing software to production.
@@ -170,6 +170,6 @@ Set up lint rules to enforce any design rules to keep this list to a minimum (an
 
 ## Helpful resources
 
-- [Redocly CLI documentation](https://redoc.ly/docs/cli/)
+- [Redocly CLI documentation](https://redocly.com/docs/cli/)
 - [Redocly VS Code extension](https://marketplace.visualstudio.com/items?itemName=Redocly.openapi-vs-code)
 - [OpenAPI specification](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3/)
