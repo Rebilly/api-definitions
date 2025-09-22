@@ -1,0 +1,107 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Orders experimental
+  summary: Retrieve an order pause
+  operationId: GetOrderPause
+  x-sdk-operation-name: get
+  description: Retrieves an order pause with a specified ID.
+  responses:
+    '200':
+      description: Pause retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OrderPause.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Orders experimental
+  summary: Update an order pause
+  operationId: PutOrderPause
+  x-sdk-operation-name: update
+  description: Updates an order pause with a specified ID.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/OrderPause.yaml
+  responses:
+    '200':
+      description: Pause updated.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OrderPause.yaml
+    '201':
+      description: Pause created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OrderPause.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
+delete:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Orders experimental
+  summary: Delete an order pause
+  operationId: DeleteOrderPause
+  x-sdk-operation-name: delete
+  description: |-
+    Deletes an order pause with a specified ID.
+    If the specified pause is `pending`, it is `revoked`.
+    If the specified pause is `ongoing`, it is `finished`.
+  responses:
+    '204':
+      description: Order pause revoked or finished.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml

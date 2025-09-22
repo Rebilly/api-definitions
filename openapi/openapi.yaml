@@ -395,7 +395,8 @@ tags:
       An order generates an invoice.
       A subscription order generates an invoice for each service period.
       For more information, see [Orders](https://www.rebilly.com/docs/dev-docs/concepts/#orders).
-
+  - name: Orders experimental
+    description: Use these operations to manage orders that include items with mixed recurring subscription plans.
   - name: Orders timeline
     description: Use order timelines to maintain an audit trail of changes and activity for each order.
   - name: Organization data exports
@@ -981,18 +982,44 @@ paths:
     $ref: ./paths/shipping-rates.yaml
   '/shipping-rates/{id}':
     $ref: './paths/shipping-rates@{id}.yaml'
+  /orders:
+    $ref: ./paths/orders.yaml
+  /orders/{id}:
+    $ref: ./paths/orders@{id}.yaml
+  /orders/{id}/upcoming-invoice:
+    $ref: ./paths/orders@{id}@upcoming-invoice.yaml
+  /order-pauses:
+    $ref: ./paths/order-pauses.yaml
+  /order-pauses/{id}:
+    $ref: ./paths/order-pauses@{id}.yaml
+  /order-cancellations:
+    $ref: ./paths/order-cancellations.yaml
+  /order-cancellations/{id}:
+    $ref: ./paths/order-cancellations@{id}.yaml
+  /order-reactivations:
+    $ref: ./paths/order-reactivations.yaml
+  '/order-reactivations/{id}':
+    $ref: ./paths/order-reactivations@{id}.yaml
   /subscriptions:
     $ref: ./paths/subscriptions.yaml
   '/subscriptions/{id}':
     $ref: './paths/subscriptions@{id}.yaml'
   '/subscriptions/{id}/void':
     $ref: './paths/subscriptions@{id}@void.yaml'
+  '/orders/{id}/void':
+    $ref: './paths/orders@{id}@void.yaml'
   '/subscriptions/{id}/change-items':
     $ref: './paths/subscriptions@{id}@change-items.yaml'
+  '/orders/{id}/change-items':
+    $ref: './paths/orders@{id}@change-items.yaml'
   '/subscriptions/{id}/items/{itemId}':
     $ref: './paths/subscriptions@{id}@items@{itemId}.yaml'
+  '/orders/{id}/items/{itemId}':
+    $ref: './paths/orders@{id}@items@{itemId}.yaml'
   '/subscriptions/{id}/interim-invoice':
     $ref: './paths/subscriptions@{id}@interim-invoice.yaml'
+  '/orders/{id}/interim-invoice':
+    $ref: './paths/orders@{id}@interim-invoice.yaml'
   /subscription-pauses:
     $ref: ./paths/subscription-pauses.yaml
   '/subscription-pauses/{id}':
@@ -1011,6 +1038,8 @@ paths:
     $ref: './paths/subscriptions@{id}@upcoming-invoice.yaml'
   '/subscriptions/{id}/upcoming-invoice/issue':
     $ref: './paths/subscriptions@{id}@upcoming-invoice@issue.yaml'
+  '/orders/{id}/upcoming-invoice/issue':
+    $ref: './paths/orders@{id}@upcoming-invoice@issue.yaml'
   '/subscriptions/{id}/upcoming-invoices/{invoiceId}/issue':
     $ref: './paths/subscriptions@{id}@upcoming-invoices@{invoiceId}@issue.yaml'
   '/subscriptions/{id}/timeline':

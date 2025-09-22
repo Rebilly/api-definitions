@@ -1,0 +1,197 @@
+type: object
+required:
+  - type
+  - customerId
+  - websiteId
+  - items
+properties:
+  id:
+    type: string
+    description: ID of the order.
+    readOnly: true
+    maxLength: 50
+    example: ord_01HVKA5975PJBSQ1SX72G3MSZC
+  type:
+    type: string
+    description: Type of the order.
+    const: one-time
+  organizationId:
+    type: string
+    description: |-
+      Unique organization identifier.
+      An organization is an entity that represents a company.
+      For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+    maxLength: 50
+    readOnly: true
+    example: org_0YVDM8RC7GDADADSBSMW124JA8
+  customerId:
+    $ref: ./CustomerId.yaml
+  websiteId:
+    $ref: ./WebsiteId.yaml
+  activationInvoiceId:
+    type: string
+    description: ID of the activation invoice.
+    readOnly: true
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
+  recentInvoiceId:
+    description: |-
+      ID of the most recently issued invoice.
+      The invoice might not be `paid` yet.
+    readOnly: true
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
+  status:
+    description: Status of the order.
+    type: string
+    readOnly: true
+    enum:
+      - pending
+      - voided
+      - completed
+      - abandoned
+  items:
+    type: array
+    minItems: 1
+    description: Item in the order.
+    items:
+      $ref: ./OneTimeSaleItem.yaml
+  poNumber:
+    description: Purchase order number that is displayed on the issued invoices.
+    type:
+      - 'string'
+      - 'null'
+    example: PO123456
+  notes:
+    description: Notes for the customer that are displayed on the order invoice.
+    type: string
+  billingAddress:
+    description: Billing address of the order.
+    oneOf:
+      - $ref: ./ContactObject.yaml
+      - type: 'null'
+  deliveryAddress:
+    description: Delivery address of the order.
+    oneOf:
+      - $ref: ./ContactObject.yaml
+      - type: 'null'
+  delinquencyPeriod:
+    type:
+      - 'string'
+      - 'null'
+    description: |-
+      Length of time, in ISO-8601 durations format,
+      which is added to the due time of the order when setting the delinquency time for all related invoices.
+      When the delinquency time of an invoice is reached, the order is automatically canceled.
+
+      If the provided value is `null`, the order does not change state.
+    example: +P00Y00M07DT00H00M00S
+    default: null
+  couponIds:
+    type:
+      - 'array'
+      - 'null'
+    description: |-
+      List of coupons to redeem on the customer and restrict to this order.
+
+      For more information, see [Coupons](https://www.rebilly.com/docs/settings/coupons-and-discounts/).
+
+      This parameter uses the following logic:
+
+      - If this parameter is not supplied, applied coupons are not changed.
+      - If an empty array is supplied, all applied coupon redemptions are canceled.
+      - If a list of coupons is supplied, unapplied coupons in the list are applied.
+        Coupons that have already been applied do not change state.
+        Applied coupons that are not supplied in list are canceled.
+
+      If the list of applied coupons on a pending order is changed by this parameter during an order update, the invoice for the order is reissued.
+    writeOnly: true
+    items:
+      type: string
+      description: ID of the coupon.
+  riskMetadata:
+    description: |-
+      Risk metadata.
+      If this value is `null`, this field uses risk metadata that is captured when creating the payment token.
+    oneOf:
+      - $ref: ./RiskMetadata.yaml
+      - type: 'null'
+  activationTime:
+    description: Date and time when the order is activated.
+    x-sortable: true
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+  currency:
+    description: Currency of the order.
+    readOnly: true
+    $ref: ./CurrencyCode.yaml
+  shipping:
+    $ref: ./Shipping.yaml
+  abandonTime:
+    type:
+      - 'string'
+      - 'null'
+    description: |-
+      Date and time when the pending order is automatically abandoned.
+      If this value is not passed during order creation,
+      a [pending order TTL](https://www.rebilly.com/catalog/all/organizations/patchorganization/#!t=request&path=settings/billing/pendingOrderTtl) setting is used to calculate the value.
+    format: date-time
+  abandonReminderTime:
+    description: Date and time when the abandon order reminder event triggers.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+  abandonReminderNumber:
+    description: Number of abandon order reminder events that are triggered.
+    type:
+      - 'integer'
+      - 'null'
+    readOnly: true
+  voidTime:
+    description: Date and time when the order is voided.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+  customFields:
+    $ref: ./ResourceCustomFields.yaml
+  revision:
+    description: |-
+      Number of times the order data has been modified.
+
+      The revision is useful when analyzing webhook data to determine if the
+      change takes precedence over the current representation.
+    type: integer
+    readOnly: true
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml
+  _embedded:
+    type: object
+    description: Embedded objects that are requested by the `expand` query parameter.
+    readOnly: true
+    properties:
+      customer:
+        $ref: ./Customer.yaml
+      activationInvoice:
+        $ref: ./Invoice.yaml
+      recentInvoice:
+        $ref: ./Invoice.yaml
+      upcomingInvoice:
+        $ref: ./OrderUpcomingInvoice.yaml
+      paymentInstrument:
+        $ref: ./PaymentInstrument.yaml
+      website:
+        $ref: ./Website.yaml

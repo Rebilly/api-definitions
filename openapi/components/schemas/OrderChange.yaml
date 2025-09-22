@@ -1,0 +1,66 @@
+type: object
+required:
+  - items
+  - renewalPolicy
+  - prorated
+properties:
+  items:
+    description: Details of items in the order.
+    type: array
+    minItems: 1
+    items:
+      type: object
+      description: |-
+        New items for the order.
+        To remove an item, include the items array and exclude the items you want to remove.
+      required:
+        - plan
+      properties:
+        plan:
+          description: Plan details.
+          oneOf:
+            - $ref: ./OriginalPlan.yaml
+            - $ref: ./FlexiblePlan.yaml
+        quantity:
+          description: Number of units of the product on the given plan.
+          type: integer
+        usageLimits:
+          $ref: ./UsageLimits.yaml
+  renewalPolicy:
+    description: Specifies if the order retains its current `renewalTime` or resets it to a newly calculated `renewalTime`.
+    type: string
+    enum:
+      - reset
+      - retain
+  prorated:
+    description: |-
+      Specifies whether to give a pro rata credit for the amount of time remaining between the `effectiveTime` and the end of the current period.
+
+      In addition, if the `renewalTime` is retained, by setting the `renewalPolicy` to `retain`,
+      a pro rata debit occurs for the amount between the `effectiveTime` and the `renewalTime` as a percentage of the normal period size.
+    type: boolean
+  effectiveTime:
+    description: |-
+      Date from which the renewal time for `reset` operations and proration calculations are made.
+      If this field is omitted, this value defaults to the current time.
+    type: string
+    format: date-time
+  preview:
+    description: |-
+      Specifies if changes to the order can be previewed.
+      Orders cannot be changed in preview.
+    type: boolean
+    default: false
+  keepTrial:
+    description: |-
+      Specifies if the order must retain its active trial.
+      This field is only applicable if `renewalPolicy` is set to `retain`.
+    type: boolean
+    default: false
+  ignoreRecurring:
+    description: |-
+      Specifies if the order must ignore the recurring settings of its items.
+      This field is only applicable if the order is trial-only and the `keepTrial` value is `true`.
+      For more information, see [Trial-only order](https://www.rebilly.com/docs/dev-docs/subscriptions#trial-only-subscription).
+    type: boolean
+    default: false

@@ -1,0 +1,68 @@
+type: object
+readOnly: true
+properties:
+  id:
+    type: string
+    description: ID of the upcoming invoice item.
+    maxLength: 50
+    example: ii_0YVFDEQS2KCFTBN9HXWJFY55GV
+  isInterim:
+    description: Specifies if the line item is added to an interim invoice.
+    type: boolean
+  description:
+    description: Description of the upcoming invoice item.
+    type: string
+    maxLength: 1000
+  unitPrice:
+    description: Unit price of the upcoming invoice item.
+    type: number
+    format: double
+  quantity:
+    description: Quantity of the upcoming invoice item.
+    type: integer
+  price:
+    description: Total price of the upcoming invoice item.
+    type: number
+    format: double
+  productId:
+    type:
+      - 'string'
+      - 'null'
+    description: ID of the product.
+    maxLength: 50
+    example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
+  planId:
+    type:
+      - 'string'
+      - 'null'
+    description: ID of the plan.
+    maxLength: 50
+    example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+  orderId:
+    type: string
+    description: ID of the order.
+    maxLength: 50
+    example: ord_01HVKA5975PJBSQ1SX72G3MSZC
+  periodStartTime:
+    description: Date and time when the billing period starts.
+    type: string
+    format: date-time
+  periodEndTime:
+    description: Date and time when the billing period ends.
+    type: string
+    format: date-time
+  periodNumber:
+    description: |-
+      Billing period number that is associated with the invoice item.
+      For example, an invoice item for a service is included in billing period number 3.
+      The invoice item is only applied to billing period number 3.
+    type: integer
+  tax:
+    description: Invoice item tax.
+    $ref: ./TaxItem.yaml
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml

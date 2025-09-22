@@ -34,25 +34,10 @@ properties:
       - type: 'null'
     default: null
   usageStatus:
-    type:
-      - 'object'
-      - 'null'
+    oneOf:
+      - $ref: ./UsageStatus.yaml
+      - type: 'null'
     default: null
-    readOnly: true
-    description: Current status of the usage limits.
-    properties:
-      isSoftLimitReached:
-        type: boolean
-        description: Specifies if the soft limit has been reached.
-        example: false
-      isHardLimitReached:
-        type: boolean
-        description: Specifies if the hard limit has been reached.
-        example: false
-      isTrialLimitReached:
-        type: boolean
-        description: Specifies if the trial limit has been reached.
-        example: false
   revision:
     type: integer
     readOnly: true

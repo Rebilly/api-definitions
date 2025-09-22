@@ -1,0 +1,101 @@
+type: object
+readOnly: true
+properties:
+  id:
+    description: |-
+      ID of the upcoming invoice.
+      This value is persisted in the future renewal invoice.
+    type: string
+    readOnly: true
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
+  currency:
+    x-sortable: true
+    x-basic: true
+    $ref: ./CurrencyCode.yaml
+  revision:
+    description: |-
+      Number of times the upcoming invoice data has changed.
+
+      Use the revision number when analyzing webhook data to
+      determine if a change should take precedence over the current
+      representation.
+    type: integer
+  items:
+    type: array
+    description: Upcoming invoice items array.
+    items:
+      $ref: ./OrderUpcomingInvoiceItem.yaml
+  amount:
+    description: Amount of the invoice.
+    type: number
+    x-type: Money
+    x-sortable: true
+    x-basic: true
+    format: double
+    readOnly: true
+  amountDue:
+    description: Amount that is due on the invoice.
+    type: number
+    x-type: Money
+    x-sortable: true
+    format: double
+    readOnly: true
+  subtotalAmount:
+    description: Subtotal amount of the invoice.
+    type: number
+    x-type: Money
+    format: double
+    readOnly: true
+  discountAmount:
+    description: Discount amount that is applied to the invoice.
+    type: number
+    x-type: Money
+    format: double
+    readOnly: true
+  shipping:
+    $ref: ./Shipping.yaml
+  tax:
+    $ref: ./Taxes.yaml
+  discounts:
+    type: array
+    description: Discounts applied.
+    readOnly: true
+    items:
+      type: object
+      readOnly: true
+      properties:
+        couponId:
+          type: string
+          description: ID of the coupon.
+          maxLength: 50
+          example: cpn_0YVCNKF81GD778N4YNVGDJK558
+        redemptionId:
+          description: ID of the redemption.
+          $ref: ./ResourceId.yaml
+        amount:
+          description: Total amount discounted by this coupon.
+          type: number
+          format: double
+        description:
+          type: string
+          description: Description of the discount.
+        context:
+          $ref: ./DiscountContext.yaml
+  issuedTime:
+    description: Date and time when the invoice is issued.
+    x-label: Date Issued
+    x-sortable: true
+    x-basic: true
+    $ref: ./ServerTimestamp.yaml
+  dueTime:
+    description: Date and time when the invoice is due for payment.
+    type: string
+    x-sortable: true
+    format: date-time
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml

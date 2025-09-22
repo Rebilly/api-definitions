@@ -1,0 +1,30 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Orders experimental
+  summary: Retrieve an order reactivation
+  operationId: GetOrderReactivation
+  x-sdk-operation-name: get
+  description: Retrieves an order reactivation with a specified ID.
+  responses:
+    '200':
+      description: Reactivation retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OrderReactivation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/order-reactivations@{id}/get.js

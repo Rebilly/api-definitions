@@ -1,0 +1,33 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Orders experimental
+  summary: Retrieve an upcoming order invoice
+  operationId: GetOrderUpcomingInvoice
+  x-sdk-operation-name: getUpcomingInvoice
+  description: |-
+    Retrieves an upcoming invoice for a specified order.
+
+    An upcoming invoice is an invoice that has not been issued.
+    It functions as a preview of the next invoice for the order.
+    For more information, see [Invoices](https://www.rebilly.com/docs/dev-docs/invoices/).
+  parameters:
+    - $ref: ../components/parameters/collectionExpand.yaml
+  responses:
+    '200':
+      description: Upcoming invoice retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OrderUpcomingInvoice.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

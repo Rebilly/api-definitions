@@ -1,0 +1,39 @@
+type: object
+required:
+  - type
+  - plan
+properties:
+  id:
+    type: string
+    description: ID of the one-time sale.
+    readOnly: true
+    maxLength: 50
+    example: ots_01HRF27SATGE4Z6PBJE6PD8328
+  type:
+    description: Specifies the type of order item.
+    type: string
+    x-basic: true
+    const: one-time-sale
+  plan:
+    description: Details of the plan.
+    oneOf:
+      - $ref: ./OriginalPlan.yaml
+      - $ref: ./FlexiblePlan.yaml
+    writeOnly: true
+  quantity:
+    description: Number of product units in the specified plan.
+    type: integer
+    minimum: 0
+    maximum: 1000000000
+  revision:
+    description: |-
+      Number of times the order data has been modified.
+
+      The revision is useful when analyzing webhook data to determine if the
+      change takes precedence over the current representation.
+    type: integer
+    readOnly: true
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml

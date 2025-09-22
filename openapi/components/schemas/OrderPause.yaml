@@ -1,0 +1,86 @@
+type: object
+description: Order pause details.
+required:
+  - orderId
+properties:
+  id:
+    type: string
+    description: ID of the order pause.
+    readOnly: true
+    maxLength: 50
+    example: sub_pau_01H085J3ZR1WKD120D73D7N4C9
+  orderId:
+    type: string
+    description: ID of the paused order.
+    maxLength: 50
+    example: ord_01HVKA5975PJBSQ1SX72G3MSZC
+  status:
+    description: Status of the order pause.
+    type: string
+    readOnly: true
+    enum:
+      - pending
+      - ongoing
+      - revoked
+      - finished
+  pausedBy:
+    description: Specifies who initiated the pause.
+    type: string
+    default: customer
+    enum:
+      - merchant
+      - customer
+  description:
+    description: Description of the pause reason in free form.
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 255
+  effectiveTime:
+    description: |-
+      Date and time when the service period pauses.
+
+      This time must be later than the current time.
+      If this time is earlier then the current time, the current time is used.
+
+      If this field is omitted, this value defaults to the current time.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+  endTime:
+    description: |-
+      Date and time when the pause ends and the order resumes billing.
+
+      To resume a order from this point in time,
+      use the current time or an earlier time.
+      If `endTime` is earlier then the current time, the current time is used.
+      If this field is empty, the order is indefinitely paused.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+  timeRemaining:
+    description: |-
+      Amount of time between the pause end time and the renewal time in ISO-8601 durations format.
+      By default, this value is computed as the time between the pause and the renewal.
+
+      Example: A $30 per month subscription on a 30-day month is paused on day 20 of the order.
+      There are 10 unused days on the order.
+      Therefore, the order renews in 10 days after it is resumed.
+      The upcoming invoice does not change the amount for the invoiced period, it remains at $30.
+      If the order uses a billing anchor,
+      the renewal time after a pause shift behaves as though the renewal time is moved forward by an [Order API operation](https://www.rebilly.com/catalog/all/orders),
+      and the billing anchor is ignored for that period.
+
+      For more information, see [Service period anchor, billing timing, and invoice time shift](https://www.rebilly.com/docs/dev-docs/concepts/#service-period-anchor-and-billing-timing-and-invoice-time-shift).
+    type:
+      - 'string'
+      - 'null'
+    example: P3600S
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml

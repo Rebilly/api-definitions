@@ -1,0 +1,171 @@
+type: object
+required:
+  - orderId
+properties:
+  id:
+    type: string
+    description: ID of the cancellation.
+    readOnly: true
+    maxLength: 50
+    example: sub_cnl_0YVJ5XVQM9CDP8248ZQX0RDMKV
+  orderId:
+    type: string
+    description: ID of the canceled order.
+    maxLength: 50
+    example: sub_01HRF27SATGE4Z6PBJE6PD8328
+  proratedInvoiceId:
+    type:
+      - 'string'
+      - 'null'
+    description: ID of the invoice on which the cancellation proration is calculated.
+    readOnly: true
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
+  appliedInvoiceId:
+    type:
+      - 'string'
+      - 'null'
+    description: ID of the invoice on which the cancellation fees or credits are applied.
+    readOnly: true
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
+  canceledBy:
+    description: Specifies who initiated the cancellation.
+    type: string
+    default: customer
+    enum:
+      - merchant
+      - customer
+      - rebilly
+  reason:
+    description: Reason for the cancellation.
+    type: string
+    default: other
+    enum:
+      - did-not-use
+      - did-not-want
+      - missing-features
+      - bugs-or-problems
+      - do-not-remember
+      - risk-warning
+      - contract-expired
+      - too-expensive
+      - other
+      - billing-failure
+  description:
+    description: Description of the cancellation reason in free form.
+    type: string
+    maxLength: 255
+  prorated:
+    description: Specifies if the customer gets a pro-rata credit for the time remaining between `churnTime` and order next renewal time.
+    type: boolean
+    default: false
+  status:
+    description: Status of the order cancellation.
+    type: string
+    default: confirmed
+    enum:
+      - draft
+      - confirmed
+      - completed
+      - revoked
+    x-enumDescriptions:
+      draft: Creates a draft cancellation so that the cancellation and charge can be previewed.
+      confirmed: |-
+        Confirms an order cancellation.
+        Sets the order to cancel when the `churnTime` is reached.
+      completed: |-
+        Marks an order cancellation as completed.
+        This is a read-only status that is set when the `churnTime` is reached.
+        The cancellation may not be changed or deleted when the status is `completed`.
+      revoked: Revokes an order cancellation.
+  canceledTime:
+    description: |-
+      Date and time when an order is canceled.
+      By default, this occurs when `status` is `confirmed`, unless `draft` is specified.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  churnTime:
+    description: |-
+      Date and time when the order is deactivated.
+      If this field and `churnTimePolicy` are omitted, this value defaults to the current time.
+    type: string
+    format: date-time
+  churnTimePolicy:
+    description: |-
+      Specifies when the order is to be deactivated.
+      The `churnTimePolicy` takes precedence over the `churnTime` in request.
+    type:
+      - 'string'
+      - 'null'
+    enum:
+      - null
+      - now
+      - at-next-renewal
+  lineItems:
+    description: |-
+      Items to be added to the new invoice.
+      Proration item is generated and added automatically.
+    type: array
+    items:
+      type: object
+      description: Invoice line item.
+      required:
+        - type
+        - unitPriceAmount
+        - unitPriceCurrency
+        - quantity
+      properties:
+        type:
+          description: Type of invoice line item.
+          type: string
+          enum:
+            - debit
+            - credit
+        description:
+          description: Description of the line item.
+          type: string
+          maxLength: 1000
+        unitPriceAmount:
+          description: Unit price of the line item.
+          type: number
+          format: double
+          example: 49.95
+        unitPriceCurrency:
+          $ref: ./CurrencyCode.yaml
+        quantity:
+          description: Quantity of the line item.
+          type: integer
+          example: 1
+        periodStartTime:
+          description: Date and time when the service period begins for this item.
+          type: string
+          format: date-time
+        periodEndTime:
+          description: Date and time when the service period ends for this item.
+          type: string
+          format: date-time
+        createdTime:
+          $ref: ./CreatedTime.yaml
+        updatedTime:
+          $ref: ./UpdatedTime.yaml
+  lineItemSubtotal:
+    description: Subtotal of the line items added after the order cancellation.
+    readOnly: true
+    type: object
+    properties:
+      amount:
+        type: number
+        description: Subtotal amount of the line items.
+        example: 49.95
+      currency:
+        $ref: ./CurrencyCode.yaml
+  _links:
+    $ref: ./SelfLink.yaml

@@ -1,0 +1,136 @@
+type: object
+required:
+  - type
+  - plan
+properties:
+  id:
+    type: string
+    description: ID of the subscription.
+    readOnly: true
+    maxLength: 50
+    example: sub_01HRF27SATGE4Z6PBJE6PD8328
+  type:
+    description: Specifies the type of order item.
+    type: string
+    x-basic: true
+    const: subscription
+  renewalReminderTime:
+    description: Date and time when the renewal reminder event triggers.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+  renewalReminderNumber:
+    description: Number of triggered renewal reminder events.
+    type:
+      - 'integer'
+      - 'null'
+    readOnly: true
+  trialReminderTime:
+    description: Date and time when the trial reminder event triggers.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+  trialReminderNumber:
+    description: Number of triggered trial reminder events.
+    type:
+      - 'integer'
+      - 'null'
+    readOnly: true
+  inTrial:
+    description: Specifies if the subscription is currently in a trial period.
+    type: boolean
+    readOnly: true
+  trialEnabled:
+    description: |-
+      Specifies if there is a trial for this subscription.
+      Plans without trial prices are free trials.
+    type: boolean
+  trialEndTime:
+    description: |-
+      Time and date when the trial ends.
+      If a trial is enabled on this subscription, a value must be provided.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+  trialOnly:
+    description: |-
+      Specifies if a subscription ends after a trial period.
+      If this value is `true`, recurring settings are ignored.
+    type: boolean
+    default: false
+  trialConversionTime:
+    description: |-
+      Date and time when the subscription had a trial conversion.
+      Trial conversion occurs when the first successful payment is made after a trial period.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+  recurringInterval:
+    type:
+      - 'object'
+      - 'null'
+    description: |-
+      Recurring interval to override plan settings.
+      To use plan settings, set this value to `null`.
+
+      To use multiple plans in one subscription,
+      all plans must have the same recurring period length.
+    example: null
+    properties:
+      periodAnchorInstruction:
+        $ref: ./ServicePeriodAnchorInstruction.yaml
+  renewalTime:
+    description: Date and time when the subscription renews.
+    type:
+      - 'string'
+      - 'null'
+    x-sortable: true
+    x-basic: true
+    format: date-time
+  rebillNumber:
+    description: Current billing period number.
+    type:
+      - 'integer'
+      - 'null'
+    readOnly: true
+    x-sortable: true
+  plan:
+    description: Details of the plan.
+    oneOf:
+      - $ref: ./OriginalPlan.yaml
+      - $ref: ./FlexiblePlan.yaml
+    writeOnly: true
+  quantity:
+    description: Number of product units in the specified plan.
+    type: integer
+    minimum: 0
+    maximum: 1000000000
+  quantityFilled:
+    description: Number of filled product units.
+    type: number
+    format: double
+    example: 5.125
+  usageLimits:
+    oneOf:
+      - $ref: ./UsageLimits.yaml
+      - type: 'null'
+    default: null
+  usageStatus:
+    oneOf:
+      - $ref: ./UsageStatus.yaml
+      - type: 'null'
+    default: null
+  excludeFromMrr:
+    type: boolean
+    description: Specifies if this item should be excluded from monthly recurring revenue calculations.
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml

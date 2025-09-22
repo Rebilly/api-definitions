@@ -1,0 +1,44 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Orders experimental
+  summary: Issue an upcoming invoice for early pay
+  operationId: PostOrderUpcomingInvoiceIssuance
+  x-sdk-operation-name: issueEarlyUpcomingInvoice
+  description: Issues an upcoming invoice, for an order with a specified ID, for early pay.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/InvoiceIssue.yaml
+    description: InvoiceIssue resource.
+    required: true
+  responses:
+    '201':
+      description: Upcoming invoice issued.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/UpcomingInvoice.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml

@@ -1,0 +1,155 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Orders experimental
+  summary: Retrieve an order cancellation
+  operationId: GetOrderCancellation
+  x-sdk-operation-name: get
+  description: Retrieves an order cancellation with a specified ID.
+  responses:
+    '200':
+      description: Order cancellation retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OrderCancellation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Orders experimental
+  summary: Upsert an order cancellation
+  operationId: PutOrderCancellation
+  x-sdk-operation-name: update
+  description: Creates or updates (upserts) an order cancellation with a specified ID.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/OrderCancellation.yaml
+    description: Cancellation resource.
+    required: true
+  responses:
+    '200':
+      description: Cancellation updated.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OrderCancellation.yaml
+    '201':
+      description: Cancellation created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OrderCancellation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
+patch:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Orders experimental
+  summary: Update an order cancellation
+  operationId: PatchOrderCancellation
+  x-sdk-operation-name: patch
+  description: |-
+    Updates an order cancellation with a specified ID.
+    Use this operation to update a cancellation reason and description.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          allOf:
+            - properties:
+                canceledBy:
+                  readOnly: true
+                status:
+                  readOnly: true
+            - $ref: ../components/schemas/OrderCancellation.yaml
+    description: Patch cancellation resource.
+    required: true
+  responses:
+    '200':
+      description: Cancellation updated.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OrderCancellation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
+delete:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Orders experimental
+  summary: Delete an order cancellation
+  operationId: DeleteOrderCancellation
+  x-sdk-operation-name: delete
+  description: |-
+    Deletes an order cancellation with a specified ID.
+
+    > **Important:** Only order cancellations with a `status` of `draft` can be deleted.
+  responses:
+    '204':
+      description: Order cancellation deleted.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml

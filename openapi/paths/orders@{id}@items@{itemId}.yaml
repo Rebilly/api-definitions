@@ -2,7 +2,7 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
   - name: itemId
     in: path
-    description: ID of subscription item.
+    description: ID of the order item.
     required: true
     schema:
       type: string
@@ -12,11 +12,11 @@ patch:
   x-products:
     - Core
   tags:
-    - Orders
-  summary: Update a subscription order item
-  operationId: PatchSubscriptionItem
+    - Orders experimental
+  summary: Update an order item
+  operationId: PatchOrderItem
   x-sdk-operation-name: updateItem
-  description: Updates a subscription order item. This is an experimental endpoint, can be changed or removed in the future.
+  description: Updates an order item. This is an experimental endpoint and may be changed or removed in the future.
   requestBody:
     content:
       application/json:
@@ -35,7 +35,7 @@ patch:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/SubscriptionOrOneTimeSaleItem.yaml
+            $ref: ../components/schemas/Order.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -47,4 +47,4 @@ patch:
   x-codeSamples:
     - lang: JavaScript
       source:
-        $ref: "../code_samples/JavaScript/subscriptions@{id}@items@{itemId}/patch.js"
+        $ref: "../code_samples/JavaScript/orders@{id}@items@{itemId}/patch.js"

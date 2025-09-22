@@ -1,0 +1,88 @@
+get:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Orders experimental
+  summary: Retrieve order reactivations
+  operationId: GetOrderReactivationCollection
+  x-sdk-operation-name: getAll
+  description: Retrieves a list of order reactivations.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+  responses:
+    '200':
+      description: List of order reactivations retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/OrderReactivation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/order-reactivations/get.js
+post:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Orders experimental
+  summary: Reactivate an order
+  operationId: PostOrderReactivation
+  x-sdk-operation-name: reactivate
+  description: Reactivates an order with a specified ID.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/OrderReactivation.yaml
+    description: Reactivation resource.
+    required: true
+  responses:
+    '201':
+      description: |-
+        Reactivation created. The order is now active.
+        If the order had a related cancellation with a `status` of `confirmed`, it is revoked.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OrderReactivation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/order-reactivations/post.js

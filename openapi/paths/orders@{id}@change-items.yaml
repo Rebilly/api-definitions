@@ -1,33 +1,31 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-  - name: itemId
-    in: path
-    description: ID of subscription item.
-    required: true
-    schema:
-      type: string
-patch:
+post:
   x-badges:
     - name: Experimental
   x-products:
     - Core
   tags:
-    - Orders
-  summary: Update a subscription order item
-  operationId: PatchSubscriptionItem
-  x-sdk-operation-name: updateItem
-  description: Updates a subscription order item. This is an experimental endpoint, can be changed or removed in the future.
+    - Orders experimental
+  summary: Change order items
+  operationId: PostOrderItemsChange
+  x-sdk-operation-name: changeItems
+  parameters:
+    - $ref: ../components/parameters/orderExpand.yaml
+  description: Changes order items or quantities, and designates if or when pro-rata credits should be given.
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../components/requestBodies/OrderItemUpdate.yaml
-    description: Update item request.
+          $ref: ../components/schemas/OrderChange.yaml
+    description: Change items request.
     required: true
   responses:
-    '200':
-      description: Order item updated.
+    '201':
+      description: Order changed.
       headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
         X-RateLimit-Limit:
           $ref: ../components/headers/X-RateLimit-Limit.yaml
         X-RateLimit-Remaining:
@@ -35,7 +33,7 @@ patch:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/SubscriptionOrOneTimeSaleItem.yaml
+            $ref: ../components/schemas/Order.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -44,7 +42,3 @@ patch:
       $ref: ../components/responses/ValidationError.yaml
     '429':
       $ref: ../components/responses/TooManyRequests.yaml
-  x-codeSamples:
-    - lang: JavaScript
-      source:
-        $ref: "../code_samples/JavaScript/subscriptions@{id}@items@{itemId}/patch.js"

@@ -1,0 +1,75 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Orders experimental
+  summary: Retrieve an order
+  operationId: GetOrder
+  x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
+  parameters:
+    - $ref: ../components/parameters/orderExpand.yaml
+  description: Retrieves an order with a specified ID.
+  responses:
+    '200':
+      description: Order retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Order.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Orders experimental
+  summary: Upsert an order
+  operationId: PutOrder
+  x-sdk-operation-name: update
+  description: Creates or updates (upserts) an order with a specified ID.
+  parameters:
+    - $ref: ../components/parameters/orderExpand.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Order.yaml
+    description: Order resource.
+  responses:
+    '200':
+      description: Order updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Order.yaml
+    '201':
+      description: Order created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Order.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

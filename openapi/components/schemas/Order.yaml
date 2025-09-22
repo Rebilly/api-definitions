@@ -1,0 +1,9 @@
+type: object
+discriminator:
+  propertyName: type
+  mapping:
+    recurring: ./RecurringOrder.yaml
+    one-time: ./OneTimeOrder.yaml
+oneOf:
+  - $ref: ./RecurringOrder.yaml
+  - $ref: ./OneTimeOrder.yaml
