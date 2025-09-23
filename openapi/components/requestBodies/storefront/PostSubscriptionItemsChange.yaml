@@ -31,6 +31,11 @@ properties:
           description: Number of units of the product on the given plan.
           type: integer
           minimum: 0
+        usageLimits:
+          oneOf:
+            - $ref: ../../schemas/UsageLimits.yaml
+            - type: 'null'
+          default: null
   preview:
     description: |-
       Specifies if the quote must be previewed before it is created.
