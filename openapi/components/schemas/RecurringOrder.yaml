@@ -72,6 +72,11 @@ properties:
     description: Item in the order.
     items:
       type: object
+      discriminator:
+        propertyName: type
+        mapping:
+          one-time-sale: ./OneTimeSaleItem.yaml
+          subscription: ./SubscriptionItem.yaml
       oneOf:
         - $ref: ./SubscriptionItem.yaml
         - $ref: ./OneTimeSaleItem.yaml
