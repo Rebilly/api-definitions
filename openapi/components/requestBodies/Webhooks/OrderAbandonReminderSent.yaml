@@ -1,0 +1,37 @@
+content:
+  application/json:
+    schema:
+      properties:
+        subscriptionId:
+          type: string
+          description: ID of the order.
+          example: sub_01HRF27SATGE4Z6PBJE6PD8328
+        scheduleNumber:
+          type: integer
+          description: Number of triggered abandon reminder events.
+        eventType:
+          description: Rebilly webhooks event type.
+          type: string
+          enum:
+            - order-abandon-reminder
+        _embedded:
+          type: object
+          description: Embedded objects.
+          properties:
+            subscription:
+              $ref: ../../schemas/SubscriptionOrOneTimeSale.yaml
+        _links:
+          type: array
+          description: Related links.
+          items:
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - subscription
+description: Order abandon reminder webhook request body resource.

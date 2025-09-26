@@ -1,0 +1,77 @@
+content:
+  application/json:
+    schema:
+      properties:
+        eventType:
+          type: string
+          description: Type of webhook event.
+          enum:
+            - ready-to-pay-requested
+        websiteId:
+          $ref: ../../schemas/WebsiteId.yaml
+        currency:
+          type: string
+          description: Currency of the ready to pay request.
+        amount:
+          type: number
+          format: double
+          description: Amount of the ready to pay request.
+        items:
+          type: array
+          items:
+            type: object
+            required:
+              - planId
+              - quantity
+            properties:
+              planId:
+                type: string
+                description: ID of the plan.
+                maxLength: 50
+                example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+              quantity:
+                description: Number of product units in the specified plan.
+                type: integer
+        billingAddress:
+          description: Customer's billing address.
+          oneOf:
+            - $ref: ../../schemas/ContactObject.yaml
+            - type: 'null'
+        riskMetadata:
+          $ref: ../../schemas/RiskMetadata.yaml
+        customerId:
+          $ref: ../../schemas/CustomerId.yaml
+        transactionId:
+          $ref: ../../schemas/TransactionId.yaml
+        checkoutFormId:
+          $ref: ../../schemas/CheckoutFormId.yaml
+        _embedded:
+          type: object
+          description: Embedded objects.
+          properties:
+            checkoutForm:
+              $ref: ../../schemas/CheckoutForm.yaml
+            customer:
+              $ref: ../../schemas/Customer.yaml
+            transaction:
+              $ref: ../../schemas/Transaction.yaml
+            website:
+              $ref: ../../schemas/Website.yaml
+        _links:
+          type: array
+          description: Related links.
+          items:
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - checkoutForm
+                  - customer
+                  - transaction
+                  - website
+description: Ready to pay requested webhook request body resource.

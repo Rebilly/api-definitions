@@ -1,0 +1,45 @@
+content:
+  application/json:
+    schema:
+      properties:
+        customerId:
+          $ref: ../../schemas/CustomerId.yaml
+        taxIdNumber:
+          type: string
+          description: Value of the tax number.
+          example: GB980780684
+        taxIdType:
+          type: string
+          description: Type of the tax ID number.
+          enum:
+            - eu-vat
+            - other
+        isValid:
+          type: boolean
+          description: Determines if the tax number passed the EU official [VIES validation](https://ec.europa.eu/taxation_customs/vies/#/vat-validation).
+        eventType:
+          description: Rebilly webhooks event type.
+          type: string
+          enum:
+            - customer-tax-number-validated
+        _embedded:
+          type: object
+          description: Embedded objects.
+          properties:
+            customer:
+              $ref: ../../schemas/Customer.yaml
+        _links:
+          type: array
+          description: Related links.
+          items:
+            type: object
+            properties:
+              href:
+                description: Link URL.
+                type: string
+              rel:
+                description: Type of link.
+                type: string
+                enum:
+                  - customer
+description: Customer tax number validated webhook request body resource.
