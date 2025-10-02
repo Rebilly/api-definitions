@@ -1,0 +1,25 @@
+description: Aera gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Aera credentials object.
+        properties:
+          clientId:
+            type: string
+          apiKey:
+            type: string
+            format: password
+            writeOnly: true
+          ipnSecret:
+            type: string
+            format: password
+            writeOnly: true
+        required:
+          - clientId
+          - apiKey
+          - ipnSecret
