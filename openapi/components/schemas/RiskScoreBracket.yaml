@@ -11,18 +11,23 @@ properties:
     items:
       type: object
       required:
-        - start
-        - end
         - value
       properties:
         start:
           description: Minimal risk factor value when condition is applied.
-          type: integer
+          type:
+            - 'integer'
+            - 'null'
           minimum: 0
         end:
           description: Maximal risk factor value when condition is applied.
-          type: integer
+          type:
+            - 'integer'
+            - 'null'
           minimum: 1
         value:
           type: integer
           description: Value added to the risk score of the transaction.
+      anyOf:
+        - required: [ 'start' ]
+        - required: [ 'end' ]
