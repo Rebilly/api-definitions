@@ -21,42 +21,6 @@ components:
       value: $inputs.organizationId
 
 workflows:
-  - workflowId: rebilly-api/attachments
-
-    inputs:
-      properties:
-        organizationId:
-          type: string
-        apiKey:
-          type: string
-          format: password
-    parameters:
-      - reference: $components.parameters.apiKey
-      - reference: $components.parameters.organizationId
-    steps:
-      - stepId: GetAttachmentCollection
-        operationId: GetAttachmentCollection
-        successCriteria:
-          - condition: $statusCode == 200
-
-  - workflowId: rebilly-api/files
-
-    inputs:
-      properties:
-        organizationId:
-          type: string
-        apiKey:
-          type: string
-          format: password
-    parameters:
-      - reference: $components.parameters.apiKey
-      - reference: $components.parameters.organizationId
-    steps:
-      - stepId: GetFileCollection
-        operationId: GetFileCollection
-        successCriteria:
-          - condition: $statusCode == 200
-
   - workflowId: rebilly-api/customers
 
     inputs:
@@ -72,28 +36,6 @@ workflows:
     steps:
       - stepId: GetCustomerCollection
         operationId: GetCustomerCollection
-        successCriteria:
-          - condition: $statusCode == 200
-
-  - workflowId: rebilly-api/custom-fields
-
-    inputs:
-      properties:
-        organizationId:
-          type: string
-        apiKey:
-          type: string
-          format: password
-    parameters:
-      - reference: $components.parameters.apiKey
-      - reference: $components.parameters.organizationId
-    steps:
-      - stepId: GetCustomFieldCollection
-        operationId: GetCustomFieldCollection
-        parameters:
-          - name: resource
-            in: path
-            value: customers
         successCriteria:
           - condition: $statusCode == 200
 
