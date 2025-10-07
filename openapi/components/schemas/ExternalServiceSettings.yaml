@@ -1,15 +1,15 @@
 type: object
-description: Settings for external service integration.
+description: Settings that configure integrations with external services.
 properties:
   quickBooksOnline:
     type: object
     title: QuickBooksOnlineExternalServiceSettings
-    description: QuickBooks Online settings.
+    description: Settings for QuickBooks Online.
     properties:
       customer:
         type: object
         title: QuickBooksOnlineCustomerExternalServiceSettings
-        description: Customer settings.
+        description: Settings for customers.
         properties:
           sync:
             type: string
@@ -25,6 +25,7 @@ properties:
               always: Customer data is synchronized automatically as data is created or updated.
           displayName:
             type: string
+            description: Format used to display the customer name in QuickBooks Online.
             default: full-name
             enum:
               - id
@@ -33,7 +34,7 @@ properties:
       invoice:
         type: object
         title: QuickBooksOnlineInvoiceExternalServiceSettings
-        description: Invoice settings.
+        description: Settings for invoices.
         properties:
           sync:
             type: string
@@ -46,7 +47,7 @@ properties:
             x-enumDescriptions:
               manually: Invoice data is only synchronized when it is manually executed.
               when-issued: Invoice data is synchronized when issued.
-              always: Invoice data is synchronized automatically as data it is issued or updated.
+              always: Invoice data is synchronized automatically when it is issued or updated.
           syncZeroInvoices:
             type: boolean
             description: Specifies whether to synchronize zero amount invoices.
@@ -55,7 +56,7 @@ properties:
             type:
               - 'string'
               - 'null'
-            description: ID of the journal account where all products are created.
+            description: ID of the unearned revenue journal account for product items.
             example: jrn_acc_01H32J1C97KWGRCKF1E1JY0QG8
           taxesAccountId:
             type:
@@ -105,7 +106,7 @@ properties:
       transaction:
         type: object
         title: QuickBooksOnlineTransactionExternalServiceSettings
-        description: Transaction settings.
+        description: Settings for transactions.
         properties:
           syncPayments:
             type: string
@@ -119,7 +120,7 @@ properties:
               always: Transaction data is synchronized automatically as data is created or updated.
           syncRefundReceipts:
             type: string
-            description: Specifies how to synchronize invoices between your Rebilly and QuickBooks Online account.
+            description: Specifies how to synchronize refund receipts between your Rebilly and QuickBooks Online account.
             default: manually
             enum:
               - manually
@@ -143,7 +144,7 @@ properties:
       journalEntry:
         type: object
         title: QuickBooksOnlineJournalEntryExternalServiceSettings
-        description: Journal entry settings.
+        description: Settings for journal entries.
         properties:
           sync:
             type: string
