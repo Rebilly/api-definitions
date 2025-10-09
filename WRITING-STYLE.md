@@ -80,6 +80,29 @@ Features:
 - Use the MRR report in revenue recognition to view predictable recurring revenue. ✅
 - To view predictable recurring revenue, use the MRR report in revenue recognition. ✅
 
+## Anthropomorphic verbs
+
+Do not attribute human actions or capabilities to inanimate objects.
+This is [anthropomorphic](https://www.oreilly.com/library/view/microsoft-manual-of/9780735669833/ch01s03.html).
+Inanimate objects such as operations, features, or settings cannot "enable", "allow", "let", "help", or "prevent" actions.
+Instead, describe what the user does with the object.
+
+### Examples
+
+Tag descriptions:
+
+- Application owner operations enable you to register applications. ❌
+- Use application owner operations to register applications. ✅
+- Gateway account operations allow you to manage payment gateways. ❌
+- Use gateway account operations to manage payment gateways. ✅
+
+Feature descriptions:
+
+- This feature allows you to customize settings. ❌
+- Use this feature to customize settings. ✅
+- KYC verification helps you validate customer identity. ❌
+- Use KYC verification to validate customer identity. ✅
+
 ## Acronyms
 
 An acronym is an abbreviation formed from the initial letters of words that are often used together. Acronyms are often pronounced as a word, or each letter is spelt.
