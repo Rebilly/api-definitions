@@ -53,36 +53,6 @@ properties:
         type: boolean
         description: Specifies if the trial limit has been reached.
         example: false
-  inTrial:
-    description: Specifies if the subscription is currently in a trial period.
-    type: boolean
-    readOnly: true
-  trial:
-    type: object
-    description: |-
-      Trial details.
-      To use plan defaults do not send the `trial` key, or send a `null` value.
-    properties:
-      enabled:
-        description: |-
-          Specifies if there is a trial for this subscription.
-          Plans without trial prices are free trials.
-        type: boolean
-        readOnly: true
-      endTime:
-        description: |-
-          Time and date when the trial ends.
-          If a trial is enabled on this subscription, a value must be provided.
-        type:
-          - 'string'
-          - 'null'
-        format: date-time
-  isTrialOnly:
-    description: |-
-      Specifies if a subscription ends after a trial period.
-      If this value is `true`, recurring settings are ignored.
-    type: boolean
-    default: false
   recurringInterval:
     type:
       - 'object'
