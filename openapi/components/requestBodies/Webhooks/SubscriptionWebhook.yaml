@@ -8,7 +8,7 @@ content:
           example: sub_01HRF27SATGE4Z6PBJE6PD8328
         eventType:
           type: string
-          description: Type of webhook event.
+          description: Type of event that triggered the webhook.
           enum:
             - order-completed
             - order-abandoned
@@ -29,22 +29,22 @@ content:
             - subscription-items-changed
         _embedded:
           type: object
-          description: Embedded objects.
+          description: Embedded objects related to the order event.
           properties:
             subscription:
               $ref: ../../schemas/SubscriptionOrOneTimeSale.yaml
         _links:
           type: array
-          description: Related links.
+          description: Links to related resources.
           items:
             type: object
             properties:
               href:
-                description: Link URL.
+                description: URL of the link.
                 type: string
               rel:
-                description: Type of link.
+                description: Relationship type of the link.
                 type: string
                 enum:
                   - subscription
-description: Order webhook request body resource.
+description: Payload of order-related webhook event.

@@ -18,28 +18,28 @@ content:
           type: boolean
           description: Determines if the tax number passed the EU official [VIES validation](https://ec.europa.eu/taxation_customs/vies/#/vat-validation).
         eventType:
-          description: Rebilly webhooks event type.
+          description: Type of event that triggered the webhook.
           type: string
           enum:
             - organization-tax-number-validated
         _embedded:
           type: object
-          description: Embedded objects.
+          description: Embedded objects related to the organization tax number validation event.
           properties:
             organization:
               $ref: ../../schemas/Organization.yaml
         _links:
           type: array
-          description: Related links.
+          description: Links to related resources.
           items:
             type: object
             properties:
               href:
-                description: Link URL.
+                description: URL of the link.
                 type: string
               rel:
-                description: Type of link.
+                description: Relationship type of the link.
                 type: string
                 enum:
                   - organization
-description: Organization tax number validated webhook request body resource.
+description: Payload of organization tax number validation-related webhook event.

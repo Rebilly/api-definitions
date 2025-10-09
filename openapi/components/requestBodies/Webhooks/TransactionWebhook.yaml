@@ -6,7 +6,7 @@ content:
           $ref: ../../schemas/TransactionId.yaml
         eventType:
           type: string
-          description: Type of webhook event.
+          description: Type of event that triggered the webhook.
           enum:
             - gateway-account-requested
             - offsite-payment-completed
@@ -21,22 +21,22 @@ content:
             - autodeposit-lookup-performed
         _embedded:
           type: object
-          description: Embedded objects.
+          description: Embedded objects related to the transaction event.
           properties:
             transaction:
               $ref: ../../schemas/Transaction.yaml
         _links:
           type: array
-          description: Related links.
+          description: Links to related resources.
           items:
             type: object
             properties:
               href:
-                description: Link URL.
+                description: URL of the link.
                 type: string
               rel:
-                description: Type of link.
+                description: Relationship type of the link.
                 type: string
                 enum:
                   - transaction
-description: Transaction webhook request body resource.
+description: Payload of transaction-related webhook event.

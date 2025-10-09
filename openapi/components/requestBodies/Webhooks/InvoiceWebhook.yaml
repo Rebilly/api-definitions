@@ -9,7 +9,7 @@ content:
           example: in_0YVF9605RKC62BP14NE2R7V2XT
         eventType:
           type: string
-          description: Type of webhook event.
+          description: Type of event that triggered the webhook.
           enum:
             - invoice-abandoned
             - invoice-created
@@ -32,16 +32,16 @@ content:
               $ref: ../../schemas/Invoice.yaml
         _links:
           type: array
-          description: Related links.
+          description: Links to related resources.
           items:
             type: object
             properties:
               href:
-                description: Link URL.
+                description: URL of the link.
                 type: string
               rel:
-                description: Type of link.
+                description: Relationship type of the link.
                 type: string
                 enum:
                   - invoice
-description: Invoice webhook request body resource.
+description: Payload of invoice-related webhook event.

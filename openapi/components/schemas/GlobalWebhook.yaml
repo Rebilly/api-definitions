@@ -11,7 +11,9 @@ properties:
     maxLength: 50
     example: hook_0YVBG8S0K0DG59J6S3RMN9K452
   eventsFilter:
-    description: Array of system event types.
+    description: |-
+      Event types that trigger the webhook.
+      If empty, all event types trigger the webhook.
     type: array
     default: []
     items:
@@ -33,28 +35,28 @@ properties:
       - PATCH
       - DELETE
   url:
-    description: URL that triggers when a specified event occurs.
+    description: URL that receives requests when a specified event occurs.
     type: string
     format: uri
   headers:
-    description: Webhook headers.
+    description: Headers to include in the webhook request.
     type: array
     items:
       type: object
-      description: Webhook headers.
+      description: Header to include in the webhook request.
       properties:
         name:
-          description: Name of the property.
+          description: Name of the header.
           type: string
         status:
-          description: Status of the property.
+          description: Status of the header.
           type: string
           default: active
           enum:
             - active
             - inactive
         value:
-          description: Value of the property.
+          description: Value of the header.
           type: string
           example:
             value1
@@ -63,7 +65,7 @@ properties:
         - value
   credentialHash:
     type: string
-    description: Hash from credentials to use for authentication by the specified URL.
+    description: Credential hash for authenticating requests to the URL.
   body:
     description: |-
       Webhook request body.
@@ -71,7 +73,7 @@ properties:
       the default payload for the specified event is used.
       Template placeholders are permitted.
 
-      Invalid placeholders render as an empty strings.
+      Invalid placeholders render as empty strings.
       For example, `Hello {{invalid.placeholder}}!` is rendered as `Hello !`.
 
       For more information,

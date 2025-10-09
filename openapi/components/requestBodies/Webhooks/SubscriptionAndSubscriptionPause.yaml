@@ -12,7 +12,7 @@ content:
           example: sub_pau_01H085J3ZR1WKD120D73D7N4C9
         eventType:
           type: string
-          description: Type of webhook event.
+          description: Type of event that triggered the webhook.
           enum:
             - subscription-pause-created
             - subscription-pause-modified
@@ -21,7 +21,7 @@ content:
             - subscription-resumed
         _embedded:
           type: object
-          description: Embedded objects.
+          description: Embedded objects related to the subscription pause event.
           properties:
             subscription:
               $ref: ../../schemas/SubscriptionOrOneTimeSale.yaml
@@ -29,17 +29,17 @@ content:
               $ref: ../../schemas/SubscriptionPause.yaml
         _links:
           type: array
-          description: Related links.
+          description: Links to related resources.
           items:
             type: object
             properties:
               href:
-                description: Link URL.
+                description: URL of the link.
                 type: string
               rel:
-                description: Type of link.
+                description: Relationship type of the link.
                 type: string
                 enum:
                   - subscription
                   - pause
-description: Subscription pause and order webhook request body resource.
+description: Payload of subscription pause-related webhook event.

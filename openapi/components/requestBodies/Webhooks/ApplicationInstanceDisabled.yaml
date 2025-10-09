@@ -11,27 +11,27 @@ content:
           example: app_01H0HT25X7XXCJGS4H8VJSYF2Y
         eventType:
           type: string
-          description: Type of webhook event.
+          description: Type of event that triggered the webhook.
           enum:
             - application-instance-disabled
         _embedded:
-          description: Embedded objects.
+          description: Embedded objects related to the application instance event.
           type: object
           properties:
             application:
               $ref: ../../schemas/Application.yaml
         _links:
           type: array
-          description: Related links.
+          description: Links to related resources.
           items:
             type: object
             properties:
               href:
-                description: Link URL.
+                description: URL of the link.
                 type: string
               rel:
-                description: Type of link.
+                description: Relationship type of the link.
                 type: string
                 enum:
                   - application
-description: Application instance disabled webhook request body resource.
+description: Payload of application instance-related webhook event.

@@ -10,28 +10,28 @@ content:
           type: integer
           description: Number of triggered abandon reminder events.
         eventType:
-          description: Rebilly webhooks event type.
+          description: Type of event that triggered the webhook.
           type: string
           enum:
             - order-abandon-reminder
         _embedded:
           type: object
-          description: Embedded objects.
+          description: Embedded objects related to the order abandon reminder event.
           properties:
             subscription:
               $ref: ../../schemas/SubscriptionOrOneTimeSale.yaml
         _links:
           type: array
-          description: Related links.
+          description: Links to related resources.
           items:
             type: object
             properties:
               href:
-                description: Link URL.
+                description: URL of the link.
                 type: string
               rel:
-                description: Type of link.
+                description: Relationship type of the link.
                 type: string
                 enum:
                   - subscription
-description: Order abandon reminder webhook request body resource.
+description: Payload of order abandon reminder-related webhook event.

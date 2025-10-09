@@ -13,12 +13,12 @@ content:
           example: in_0YVF9605RKC62BP14NE2R7V2XT
         eventType:
           type: string
-          description: Type of webhook event.
+          description: Type of event that triggered the webhook.
           enum:
             - renewal-invoice-issued
         _embedded:
           type: object
-          description: Embedded objects.
+          description: Embedded objects related to the renewal invoice event.
           properties:
             subscription:
               $ref: ../../schemas/SubscriptionOrOneTimeSale.yaml
@@ -26,17 +26,17 @@ content:
               $ref: ../../schemas/Invoice.yaml
         _links:
           type: array
-          description: Related links.
+          description: Links to related resources.
           items:
             type: object
             properties:
               href:
-                description: Link URL.
+                description: URL of the link.
                 type: string
               rel:
-                description: Type of link.
+                description: Relationship type of the link.
                 type: string
                 enum:
                   - subscription
                   - invoice
-description: Renewal invoice issued webhook request body resource.
+description: Payload of renewal invoice-related webhook event.

@@ -9,29 +9,29 @@ content:
           example: cus_0YV7DDSDD1C8DA64KHH2W33CPF
         eventType:
           type: string
-          description: Type of webhook event.
+          description: Type of event that triggered the webhook.
           enum:
             - customer-merged
         duplicatedCustomer:
           $ref: ../../schemas/Customer.yaml
         _embedded:
           type: object
-          description: Customer object.
+          description: Embedded objects related to the customer merge event.
           properties:
             targetCustomer:
               $ref: ../../schemas/Customer.yaml
         _links:
           type: array
-          description: Related links.
+          description: Links to related resources.
           items:
             type: object
             properties:
               href:
-                description: Link URL.
+                description: URL of the link.
                 type: string
               rel:
-                description: Type of link.
+                description: Relationship type of the link.
                 type: string
                 enum:
                   - customer
-description: Merged customer webhook request body resource.
+description: Payload of customer merge-related webhook event.

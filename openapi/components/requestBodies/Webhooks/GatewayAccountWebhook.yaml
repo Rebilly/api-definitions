@@ -9,7 +9,7 @@ content:
           example: gw_acc_0YVCXMF26DDNKAERE5NW727S34
         eventType:
           type: string
-          description: Type of webhook event.
+          description: Type of event that triggered the webhook.
           enum:
             - gateway-account-downtime-ended
             - gateway-account-downtime-started
@@ -17,22 +17,22 @@ content:
             - gateway-account-onboarding-failed
         _embedded:
           type: object
-          description: Embedded objects.
+          description: Embedded objects related to the gateway account event.
           properties:
             gatewayAccount:
               $ref: ../../schemas/GatewayAccount.yaml
         _links:
           type: array
-          description: Related links.
+          description: Links to related resources.
           items:
             type: object
             properties:
               href:
-                description: Link URL.
+                description: URL of the link.
                 type: string
               rel:
-                description: Type of link.
+                description: Relationship type of the link.
                 type: string
                 enum:
                   - gatewayAccount
-description: Gateway account limit reached body resource.
+description: Payload of gateway account-related webhook event.

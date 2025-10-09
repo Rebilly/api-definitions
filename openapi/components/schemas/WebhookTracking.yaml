@@ -1,5 +1,7 @@
 type: object
-description: Webhook tracking logs.
+description: |-
+  Webhook tracking log.
+  This log contains information about a webhook request and its response.
 readOnly: true
 properties:
   id:
@@ -22,18 +24,18 @@ properties:
   url:
     type: string
     x-sortable: true
-    description: URL where webhook is sent.
+    description: URL that receives the webhook.
   method:
     type: string
     x-sortable: true
-    description: HTTP method used to send webhook.
+    description: HTTP method for sending the webhook.
     example: POST
   request:
     type: string
-    description: Webhook payload.
+    description: Payload of the webhook request.
   response:
     type: string
-    description: Response body received.
+    description: Response body from the webhook URL.
   requestHeaders:
     $ref: ./HttpHeaders.yaml
   responseHeaders:
@@ -53,14 +55,14 @@ properties:
   source:
     type: string
     x-sortable: true
-    description: Webhook source.
+    description: Source that triggered the webhook.
     enum:
       - webhooks
       - rules
   attempt:
     type: integer
     x-sortable: true
-    description: Webhook attempt number.
+    description: Number of attempts to send the webhook.
   sentTime:
     x-sortable: true
     description: Date and time when the webhook is sent.

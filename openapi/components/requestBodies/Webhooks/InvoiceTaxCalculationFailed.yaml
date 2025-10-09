@@ -12,27 +12,27 @@ content:
           type: string
         eventType:
           type: string
-          description: Type of webhook event.
+          description: Type of event that triggered the webhook.
           enum:
             - invoice-tax-calculation-failed
         _embedded:
           type: object
-          description: Invoice object.
+          description: Embedded objects related to the invoice tax calculation event.
           properties:
             invoice:
               $ref: ../../schemas/Invoice.yaml
         _links:
           type: array
-          description: Related links.
+          description: Links to related resources.
           items:
             type: object
             properties:
               href:
-                description: Link URL.
+                description: URL of the link.
                 type: string
               rel:
-                description: Type of link.
+                description: Relationship type of the link.
                 type: string
                 enum:
                   - invoice
-description: Invoice tax validation failed webhook request body resource.
+description: Payload of invoice tax calculation-related webhook event.

@@ -14,28 +14,28 @@ content:
           example: file_0YV7HZ7KDCC5WBV9Q7WRKG1H6N
         eventType:
           type: string
-          description: Rebilly webhooks event type.
+          description: Type of event that triggered the webhook.
           enum:
             - data-export-completed
         _embedded:
           type: object
-          description: Embedded objects.
+          description: Embedded objects related to the data export event.
           properties:
             dataExport:
               $ref: ../../schemas/DataExport.yaml
         _links:
           type: array
-          description: Related links.
+          description: Links to related resources.
           items:
             type: object
             properties:
               href:
-                description: Link URL.
+                description: URL of the link.
                 type: string
               rel:
-                description: Type of link.
+                description: Relationship type of the link.
                 type: string
                 enum:
                   - dataExport
                   - download
-description: Data export webhook body resource.
+description: Payload of data export-related webhook event.
