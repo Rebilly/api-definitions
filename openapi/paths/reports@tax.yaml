@@ -14,22 +14,19 @@ get:
   parameters:
     - name: periodStart
       in: query
-      description: Date and time when the report starts.
-      required: true
+      description: Date and time when the report starts. If not provided, start of previous month is used.
       schema:
         type: string
         format: date-time
     - name: periodEnd
       in: query
-      description: Date and time when the report ends.
-      required: true
+      description: Date and time when the report ends. If not provided, end of current month is used.
       schema:
         type: string
         format: date-time
     - name: accountingMethod
       in: query
-      description: Accounting method to use when generating the report.
-      required: true
+      description: Accounting method to use when generating the report. If not provided, cash is used.
       schema:
         type: string
         enum:
