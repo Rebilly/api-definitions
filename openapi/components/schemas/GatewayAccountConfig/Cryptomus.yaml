@@ -1,0 +1,26 @@
+description: Cryptomus gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Cryptomus credentials object.
+        properties:
+          merchantId:
+            type: string
+          apiKey:
+            type: string
+            format: password
+            writeOnly: true
+        required:
+          - merchantId
+          - apiKey
+      settings:
+        type: object
+        properties:
+          refundAddress:
+            type: string
+            description: The address to which the refund should be made.
