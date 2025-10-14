@@ -1,0 +1,41 @@
+description: Naewe gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Naewe credentials object.
+        properties:
+          businessId:
+            type: string
+            description: ID of the Naewe merchant account.
+          apiKey:
+            type: string
+            description: Naewe API key.
+            format: password
+            writeOnly: true
+          secret:
+            type: string
+            description: Naewe secret.
+            format: password
+            writeOnly: true
+        required:
+          - businessId
+          - apiKey
+          - secret
+      settings:
+        type: object
+        description: Naewe settings object.
+        properties:
+          payoutCurrency:
+            type: string
+            description: Cryptocurrency of the payout.
+          payoutNetwork:
+            type: string
+            description: Blockchain network to use for the payout.
+          destinationTagCustomField:
+            type: string
+            description: Name of the customer custom field that holds payout destination tag for XRP.
