@@ -1,0 +1,25 @@
+description: Splitit gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          terminalId:
+            type: string
+            description: Splitit terminal ID.
+          username:
+            type: string
+            description: Splitit username.
+          password:
+            type: string
+            description: Splitit password.
+            format: password
+            writeOnly: true
+        required:
+          - terminalId
+          - username
+          - password
