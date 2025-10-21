@@ -4,16 +4,16 @@ required:
 description: |-
   Application instance configuration.
 
-  If the `configuredBy` field is set to `user`, only user can change application settings.
+  If the `configuredBy` field is set to `user`, only the user can change application settings.
 
   If the `configuredBy` field is set to `application`, only the application itself can change settings.
 properties:
   settings:
-    description: Configuration settings that are available during installation.
+    description: Configuration settings for the application instance.
     type: object
     additionalProperties:
       type: string
-      description: Additional properties that the user may want to add when installing an application.
+      description: Additional properties that the user specifies when installing an application.
     example:
       color: red
       level: gold
@@ -26,7 +26,7 @@ properties:
       properties:
         rel:
           type: string
-          description: Type of link.
+          description: Type of the link.
           enum:
             - self
             - configuration
@@ -38,4 +38,4 @@ properties:
               Direct the user to this URL where application settings must be submitted.
         href:
           type: string
-          description: Link URL.
+          description: URL of the link.

@@ -2,7 +2,7 @@ type: object
 description: Application instance object.
 properties:
   status:
-    description: Status of the application instance.
+    description: Current status of the application instance.
     readOnly: true
     type: string
     enum:
@@ -13,15 +13,16 @@ properties:
   isConfigured:
     description: |-
       Specifies if the configuration of the application instance is complete.
+      Some applications require additional configuration after installation before they can be used.
       Configuration is completed using the [Upsert an application instance configuration](https://www.rebilly.com/catalog/all/application-users/putapplicationinstanceconfiguration) operation.
     type: boolean
     readOnly: true
   settings:
-    description: Configuration settings that are available during installation.
+    description: Configuration settings that were submitted during installation.
     type: object
     additionalProperties:
       type: string
-      description: Additional properties that the user adds when installing an application.
+      description: Additional properties that were added by the user when the application was installed.
     example:
       color: red
       limit: '5'
