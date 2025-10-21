@@ -27,6 +27,7 @@ properties:
       - calculator
       - baseAmount
       - increments
+      - defaultIndex
     properties:
       calculator:
         type: string
@@ -58,6 +59,17 @@ properties:
           type: number
           format: double
           minimum: 0.01
+      defaultIndex:
+        type:
+          - 'integer'
+          - 'null'
+        description: |-
+          Index of the default amount in the amounts list that is displayed to the customer.
+          Use it to specify which amount from the calculated amounts is preselected when the customer opens the deposit form.
+
+          When `hideBaseAmount` is `true`, the 0 index refers to the first increment.
+        minimum: 0
+        default: 0
       adjustBaseToLastDeposit:
         type: boolean
         default: false
