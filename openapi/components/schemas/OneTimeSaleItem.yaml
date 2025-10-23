@@ -14,12 +14,23 @@ properties:
     type: string
     x-basic: true
     const: one-time-sale
+  planId:
+    description: ID of the plan.
+    x-basic: true
+    type: string
+    maxLength: 50
+    example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+  productId:
+    type: string
+    description: ID of the related product.
+    maxLength: 50
+    example: prod_0YV7DES3WPC5J8JD8QTVNZBZNZ
+    readOnly: true
   plan:
     description: Details of the plan.
     oneOf:
       - $ref: ./OriginalPlan.yaml
       - $ref: ./FlexiblePlan.yaml
-    writeOnly: true
   quantity:
     description: Number of product units in the specified plan.
     type: integer
