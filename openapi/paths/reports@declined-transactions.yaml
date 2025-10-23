@@ -12,8 +12,9 @@ get:
   parameters:
     - name: aggregationField
       in: query
-      description: Report aggregation field.
-      required: true
+      description: |-
+        Aggregation field of the report.
+        If a value is not provided, `gatewayResponseMessage` is used.
       schema:
         type: string
         enum:
@@ -21,15 +22,17 @@ get:
           - gatewayResponseOriginalMessage
     - name: periodStart
       in: query
-      description: Date and time when the report starts.
-      required: true
+      description: |-
+        Date and time when the report starts.
+        If no value is provided, the start date of the previous month is used.
       schema:
         type: string
         format: date-time
     - name: periodEnd
       in: query
-      description: Date and time when the report ends.
-      required: true
+      description: |-
+        Date and time when the report ends.
+        If no value is provided, the end date of current month is used.
       schema:
         type: string
         format: date-time
