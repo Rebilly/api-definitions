@@ -66,6 +66,46 @@ properties:
       - completed
       - trial-ended
       - abandoned
+  inTrial:
+    description: Specifies if the subscription is currently in a trial period.
+    type: boolean
+    readOnly: true
+  trial:
+    type: object
+    description: |-
+      Details of the trial.
+      To use plan defaults, omit the `trial` key or set this value to `null`.
+    properties:
+      enabled:
+        description: |-
+          Specifies if there is a trial for this subscription.
+          Plans without trial prices are free trials.
+        type: boolean
+      endTime:
+        description: |-
+          Time and date when the trial ends.
+          If a trial is enabled on this subscription, a value must be provided.
+
+          If the specified trial end time is in the past, the current time is used.
+        type:
+          - 'string'
+          - 'null'
+        format: date-time
+  isTrialOnly:
+    description: |-
+      Specifies if a subscription ends after a trial period.
+      If this value is `true`, recurring settings are ignored.
+    type: boolean
+    default: false
+  trialConversionTime:
+    description: |-
+      Date and time when the subscription had a trial conversion.
+      Trial conversion occurs when the first successful payment is made after a trial period.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
   items:
     type: array
     minItems: 1
