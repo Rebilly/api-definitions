@@ -84,6 +84,16 @@ properties:
         description: |-
           Specifies if the base amount is hidden in the deposit form options.
           If this value is `true`, the base amount is used to calculate increments but is not shown as a selectable option.
+      minimumBaseAmount:
+        type:
+          - 'number'
+          - 'null'
+        format: double
+        minimum: 0.01
+        description: |-
+          Minimum value for the base amount. 
+          If the base amount of the last deposit is less than this value, 
+          this value is used as the base amount.
   customAmount:
     type:
       - 'object'
