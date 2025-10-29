@@ -1,0 +1,41 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+post:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Storefront
+  tags:
+    - Storefront cashiers
+  summary: Cancel pending payout requests
+  operationId: StorefrontPostCashierPayoutRequestCancellation
+  x-sdk-operation-name: cancelPayoutRequests
+  security:
+    - CustomerJWT: [ ]
+  description: |-
+    Cancels pending payout requests that are associated with the cashier resource.
+
+    - To cancel all pending payout requests, omit the request body.
+    - To cancel payout requests based on a specific amount, include the amount in the request body.
+    The oldest requests are canceled first until the specified amount is reached.
+  requestBody:
+    required: false
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/requestBodies/storefront/PostCashierPayoutRequestCancellation.yaml
+  responses:
+    '200':
+      description: Cancelled all applicable pending cashier payout requests.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Cashier.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../../components/responses/NotFound.yaml
+    '422':
+      $ref: ../../components/responses/ValidationError.yaml
