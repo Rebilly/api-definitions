@@ -18,29 +18,41 @@ Do not assume that the reader has the same knowledge of the product as you. We a
 
 > The curse of knowledge is a cognitive bias that occurs when an individual, communicating with other individuals, unknowingly assumes that the others have the background to understand.
 
-Avoid this bias by describing information that may seem obvious to you when writing. For example, when describing `organizationId`, describe what that value is in a Rebilly context, or link to detailed information.
+Avoid this bias by describing information that may seem obvious to you when writing. For example, when describing the `hardLimit` field , describe what that value is and how it works in a Rebilly context, or link to detailed information.
 
 ### Undesired example of the knowledge bias
 
 ```yaml
-  organizationId:
-    description: Organization ID.
+  hardLimit:
+    type: [ 'object', 'null' ]
+    description: Hard usage limit.
 ```
 
-To understand what this ID value is, the reader must understand what an organization is in Rebilly. This may be obvious to you if you have expert knowledge of the product. The reader may not.
+This field may be obvious to you if you have expert knowledge of the product. The reader may not.
 
-If the reader does not know what an organization is, they need to search the docs to find out, and then come back to API docs. This is frustrating for the reader. It's infuriating if they need to continually do this to understand an API. Over time, if the reader is persistent, they will learn these concepts themselves. This is a major hurdle for new users to overcome. Many readers may simply quit, or may label the docs as "bad" and not use them, or our product.
+If the reader does not know exactly what a hard limit is or are how it works in Rebilly, they need to search the docs to find out, and then come back to API docs. This is frustrating for the reader. It's infuriating if they need to continually do this to understand an API. Over time, if the reader is persistent, they will learn these concepts themselves. This is a major hurdle for new users to overcome. Many readers may simply quit, or may label the docs as "bad" and not use them, or our product.
 
 ### Example which avoids knowledge bias
 
-This description provides detail on what an organization is in the context of the Rebilly product. It also provides a link to information that describes how to obtain the organization ID.
+This description provides detail on what a hard limit is.
 
 ```yaml
-  organizationId:
+  hardLimit:
+    type: [ 'object', 'null' ]
     description: |-
-      Unique organization ID.
-      An organization is an entity that represents a company.
-      For more information, see [Obtain an organization ID](https://www.rebilly.com/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+      Defines a limit where the customer can no longer use the service.
+      Hard limits are used in addition to soft limits.
+      
+      When a soft limit is reached,
+      a customer may receive a notification
+      but the service can still be provided up to the hard limit value so that the customer can upgrade their plan.
+      When the reported usage reaches the configured limit,
+      a specific event is triggered.
+
+      To notify the customer in the merchant system, or block a service,
+      a webhook and notification can be configured for this event.
+      When the total usage reaches the hard limit quantity, or amount values,
+      metered billing plan usages can no longer be reported.
 ```
 
 ## Possessive apostrophes
