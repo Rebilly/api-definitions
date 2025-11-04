@@ -1,0 +1,40 @@
+description: AsiaPay gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: AsiaPay credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: AsiaPay merchant number.
+          loginId:
+            type: string
+            description: AsiaPay login ID.
+          secretKey:
+            type: string
+            description: AsiaPay secret key for hash.
+            format: password
+            writeOnly: true
+          password:
+            type: string
+            description: AsiaPay password.
+            format: password
+            writeOnly: true
+        required:
+          - merchantId
+          - loginId
+          - password
+          - secretKey
+      settings:
+        type: object
+        properties:
+          baseUrl:
+            type: string
+            description: Base URL for AsiaPay API.
+        required:
+          - baseUrl
