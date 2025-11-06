@@ -1,0 +1,51 @@
+type: object
+properties:
+  asOfDate:
+    type: string
+    format: date
+    description: The date as of which the deferred revenue report is generated
+    example: "2024-03-31"
+  currency:
+    $ref: CurrencyCode.yaml
+  booked:
+    type: number
+    description: Total booked amount as of the report date
+    example: 127850.00
+  recognized:
+    type: number
+    description: Total recognized amount as of the report date
+    example: 89495.00
+  liability:
+    type: number
+    description: Total liability amount as of the report date
+    example: 38355.00
+  months:
+    type: array
+    description: Monthly breakdown data
+    items:
+      type: object
+      properties:
+        month:
+          type: string
+          pattern: '^\d{4}-\d{2}$'
+          example: "2024-03"
+        bookedAsOfMonth:
+          type: number
+          description: The cumulative booked amount as of the month
+          example: 127850.00
+        bookedInMonth:
+          type: number
+          description: The amount booked in the specific month
+          example: 24750.00
+        recognizeAsOfMonth:
+          type: number
+          description: The cumulative recognized amount as of the month
+          example: 89495.00
+        recognizeInMonth:
+          type: number
+          description: The amount recognized in the specific month
+          example: 18650.00
+        liabilityAsOfMonth:
+          type: number
+          description: The liability amount as of the specific month
+          example: 38355.00

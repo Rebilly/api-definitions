@@ -1,0 +1,58 @@
+get:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Reports
+  tags:
+    - Reports
+  summary: Retrieve a deferred revenue report
+  operationId: GetDeferredRevenueReport
+  x-sdk-operation-name: getDeferredRevenue
+  description: |-
+    Retrieves a deferred revenue report which displays monthly total liability and liability changes over months.
+
+    This deferred revenue report provides a month-by-month overview of deferred revenue recognized revenue and liabilities as of a given report date.
+    It presents the total deferred revenue for each month,
+    the amount recognized as revenue both cumulatively and within the specific month,
+    as well as the remaining deferred revenue liability up to that month.
+  parameters:
+    - name: currency
+      in: query
+      description: |-
+        Currency of the revenue.
+        If no value is provided, the reporting currency of the organization is used.
+      schema:
+        $ref: ../components/schemas/CurrencyCode.yaml
+    - name: asOfDate
+      in: query
+      description: |-
+        Date and time up to which revenue is recognized for the report.
+        If no value is provided, the end of the current month is used.
+      schema:
+        type: string
+        format: date-time
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+  responses:
+    '200':
+      description: Report retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ReportDeferredRevenue.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+  x-codeSamples:
+    - lang: JavaScript
+      source:
+        $ref: ../code_samples/JavaScript/reports@deferred-revenue/get.js
