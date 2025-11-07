@@ -333,6 +333,7 @@ This section provides guidance on how to write operation, object, and parameter 
 ### Operations
 
 - Start all operation descriptions with an active verb (Retrieves, Adds, Creates, Updates, Deletes, Sets, Specifies ...)
+- Describe what the operation does. Use verb phrases for operation descriptions. For example, "Retrieves customer information with a specified ID."
 - Do not start with an imperative (Create, Retrieve, Merge ...). The user may read this as a command.
 - Avoid starting with "The" or "A". Omit articles for ease of reading.
 - Avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
@@ -350,7 +351,7 @@ Get a customer by ID:
 
 ```yaml
   operationId: GetCustomer
-  description: Retrieves customer information based on the customer's ID.
+  description: Retrieves customer information with a specified ID.
 ```
 
 Create a new customer:
@@ -364,15 +365,27 @@ Delete a customer by ID:
 
 ```yaml
   operationId: DeleteCustomer
-  description: Deletes a customer account based on the customer's ID.
+  description: Deletes a customer account with a specified ID.
 ```
+### Fields
 
-### ID fields
+- Describe what the field is. Use noun phrases for field descriptions.
+- Avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
+- Avoid starting with "The" or "A". Omit articles for ease of reading.
+- Provide detail and link to related content if necessary.
 
-Avoid repeating the field name as the description. This provides no value to the reader. 
+Example:
+
+```yaml
+state:
+  description: State of the bonus.
+```
+#### ID fields
+
+Avoid repeating the field name as the description. This provides no value to the reader.
 Also, avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
 
-#### ID examples
+##### ID examples
 
 Invoice ID:
 
@@ -395,11 +408,11 @@ Customer ID:
     description: ID of the invoiced customer.
 ```
 
-### Timestamp fields
+#### Timestamp fields
 
 Use the following format to convey times.
 
-#### Examples
+##### Examples
 
 Coupon created time:
 
@@ -419,7 +432,7 @@ Coupon expired time:
 
 Use the following format to convey boolean types.
 
-#### Examples
+##### Examples
 
 Is Java enabled in a browser:
 
@@ -445,7 +458,7 @@ Is processed outside of Rebilly:
     description: Specifies if the transaction was processed outside of Rebilly.
 ```
 
-#### Website ID example
+##### Website ID example
 
 This ID must be described in detail because the reader may not be aware of its context in the Rebilly product.
 
@@ -458,7 +471,7 @@ This ID must be described in detail because the reader may not be aware of its c
       For more information, see [Obtain an organization ID and website ID](https://www.rebilly.com/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
 ```
 
-#### Organization ID example
+##### Organization ID example
 
 This ID must be described in detail because the reader may not be aware of its context in the Rebilly product.
 
