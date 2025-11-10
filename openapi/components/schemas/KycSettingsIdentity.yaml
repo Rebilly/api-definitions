@@ -97,3 +97,51 @@ properties:
         minimum: 0
         maximum: 100
         description: Overall score by which an identity proof document passes the verification process.
+  minimumAgeSettings:
+    type: object
+    description: Minimum age settings for identity proof documents.
+    properties:
+      defaultMinimumAge:
+        type: integer
+        minimum: 1
+        maximum: 100
+        description: |-
+          Default minimum age requirement for identity proof documents.
+          This is used when no location-specific override is configured.
+        default: 18
+      locationOverrides:
+        type: array
+        description: |-
+          Location-specific minimum age.
+          Each item specifies a minimum age for a specific location.
+          For country-wide rules, omit the state field.
+          For state-specific rules, include the state field.
+        items:
+          type: object
+          required:
+            - country
+            - minimumAge
+          properties:
+            country:
+              type: string
+              description: Country code in ISO 3166 alpha-2 format.
+              pattern: '^[A-Z]{2}$'
+              example: US
+            state:
+              type: string
+              description: |-
+                Name or code of the state or region.
+              maxLength: 45
+              example: AZ
+            minimumAge:
+              type: integer
+              description: Minimum age requirement for this location.
+              minimum: 1
+              maximum: 100
+              example: 21
+        example:
+          - country: US
+            minimumAge: 21
+          - country: US
+            state: AL
+            minimumAge: 19
