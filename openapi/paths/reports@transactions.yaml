@@ -12,26 +12,29 @@ get:
   parameters:
     - name: periodStart
       in: query
-      description: Date and time when the report starts.
-      required: true
+      description: |-
+        Date and time when the report starts.
+        If not provided or null, the report starts from the first day of the current month.
       schema:
         type: string
         format: date-time
     - name: periodEnd
       in: query
-      description: Date and time when the report ends.
-      required: true
+      description: |-
+        Date and time when the report ends.
+        If not provided or null, the report ends at the last day of the current month.
       schema:
         type: string
         format: date-time
     - name: aggregationField
       in: query
       description: Report aggregation field.
-      required: true
       schema:
         type: string
+        default: website
         enum:
           - website
+          - country
           - currency
           - bin
           - rebillNumber
