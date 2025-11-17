@@ -24,27 +24,30 @@ get:
         $ref: ../components/schemas/CurrencyCode.yaml
     - name: issuedFrom
       in: query
-      description: Date from which revenue invoice is issued.
-      required: true
+      description: |-
+        Date from which revenue invoice is issued.
+        If not provided or null, the report starts from the previous month.
       schema:
         type: string
-        pattern: '^\d{4}-\d{2}$'
+        pattern: '^\d{4}-(0[1-9]|1[0-2])$'
         example: 2022-01
     - name: issuedTo
       in: query
-      description: Date to which revenue invoice is issued.
-      required: true
+      description: |-
+        Date to which revenue invoice is issued.
+        If not provided or null, the report ends at the current month.
       schema:
         type: string
-        pattern: '^\d{4}-\d{2}$'
+        pattern: '^\d{4}-(0[1-9]|1[0-2])$'
         example: 2022-04
     - name: recognizedTo
       in: query
-      description: Month up to which revenue is recognized.
-      required: true
+      description: |-
+        Month up to which revenue is recognized.
+        If not provided or null, the current month is used.
       schema:
         type: string
-        pattern: '^\d{4}-\d{2}$'
+        pattern: '^\d{4}-(0[1-9]|1[0-2])$'
         example: 2022-04
   responses:
     '200':
