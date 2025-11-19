@@ -1,0 +1,167 @@
+extends:
+    - recommended-strict
+# TODO: add necessary rules for the Replay Platform API.
+#  - enforce a rule so that you cannot add inline schema into responses.
+rules:
+  rule/multi-sentence-descriptions-must-use-block-scalars:
+    severity: error
+    subject:
+      type: any
+      property: description
+    message: |-
+      Multi-sentence descriptions must use block scalars with semantic line breaks. For more information, see [Redocly documentation](../website/api-definitions/WRITING-STYLE.md).
+    where:
+      - subject:
+          type: any
+          property: description
+        assertions:
+          defined: true
+          minLength: 1
+          # Exclude descriptions that already contain newlines (block scalars)
+          notPattern: /\n/
+    assertions:
+      # period + spaces (not newline) + Uppercase => inline multi-sentence
+      notPattern: /\.(?!\r?\n)[ ]+[A-Z]/
+
+  rule/descriptions-must-not-start-with-articles:
+    severity: warn
+    subject:
+      type: Schema
+      property: description
+    message: |-
+      Description must not start with 'The' or 'A'
+      For more information, see [Redocly documentation](../website/api-definitions/WRITING-STYLE.md).
+    where:
+      - subject:
+          type: Schema
+          property: description
+        assertions:
+          defined: true
+          minLength: 1
+    assertions:
+      notPattern: /^(The|A)\s/
+
+  rule/id-fields-must-have-meaningful-context:
+    severity: warn
+    subject:
+      type: Schema
+      property: description
+    message: |-
+      ID fields must provide meaningful context,
+      and not just repeat the field name.
+      For more information, see [Writing style](../website/api-definitions/WRITING-STYLE.md).
+    where:
+      - subject:
+          type: Schema
+          property: description
+        assertions:
+          defined: true
+          minLength: 1
+      - subject:
+          type: Schema
+          property: name
+        assertions:
+          defined: true
+          pattern: /[Ii]d$/
+    assertions:
+      # Check if description is just repeating the field name
+      notPattern: /^(The\s+)?[Ii]d\s+(of\s+)?(the\s+)?(item|field|object|value)\.?$/
+
+  rule/timestamp-fields-must-start-correctly:
+    severity: error
+    subject:
+      type: Schema
+      property: description
+    message: |-
+      Timestamp fields must start with 'Date and time when'
+      For more information, see [Writing style](../website/api-definitions/WRITING-STYLE.md#timestamp-fields).
+    where:
+      - subject:
+          type: Schema
+          property: description
+        assertions:
+          defined: true
+          minLength: 1
+      - subject:
+          type: Schema
+          property: format
+        assertions:
+          defined: true
+          pattern: /date-time/
+      - subject:
+          type: Schema
+          property: description
+        assertions:
+          notPattern: /^Default value\.$/
+    assertions:
+      pattern: /^Date and time when/
+
+  rule/boolean-fields-must-start-correctly:
+    severity: error
+    subject:
+      type: Schema
+      property: description
+    message: |-
+      Boolean fields must start with 'Specifies if'
+      For more information, see [Writing style](../website/api-definitions/WRITING-STYLE.md#boolean-fields).
+    where:
+      - subject:
+          type: Schema
+          property: description
+        assertions:
+          defined: true
+          minLength: 1
+      - subject:
+          type: Schema
+          property: type
+        assertions:
+          defined: true
+          pattern: /boolean/
+      - subject:
+          type: Schema
+          property: description
+        assertions:
+          notPattern: /^Default value\.$/
+    assertions:
+      pattern: /^Specifies if/
+
+  rule/summaries-must-not-end-with-period:
+    severity: error
+    subject:
+      type: any
+      property: summary
+    message: |-
+      Summary fields must not end with a period.
+      For more information, see [Writing style](../website/api-definitions/WRITING-STYLE.md#summaries).
+    where:
+      - subject:
+          type: any
+          property: summary
+        assertions:
+          defined: true
+          minLength: 1
+    assertions:
+      notPattern: /\.$/
+
+  rule/descriptions-must-not-use-possessive-apostrophes:
+    severity: error
+    subject:
+      type: any
+      property: description
+    message: |-
+      Descriptions must not use possessive apostrophes ('s) for inanimate objects.
+      Use prepositions instead.
+      Example: "invoice for a subscription" not "subscription's invoice".
+      For more information, see [Writing style](../website/api-definitions/WRITING-STYLE.md#possessive-apostrophes).
+    where:
+      - subject:
+          type: any
+          property: description
+        assertions:
+          defined: true
+          minLength: 1
+    assertions:
+      # Match possessive apostrophes for inanimate objects
+      # Pattern matches: word's, WORD's, acronym's, etc.
+      # Excludes: customer's, player's, merchant's (animate objects)
+      notPattern: /\b(?!customer|player|merchant|contact|user|individual|person)\w+'s\b/i

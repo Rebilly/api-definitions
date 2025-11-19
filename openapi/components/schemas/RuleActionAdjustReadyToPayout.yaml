@@ -6,9 +6,13 @@ allOf:
       prioritizeActivePaymentInstruments:
         type: boolean
         default: false
-        description: Specifies if payment methods, that are associated with the customer's active payment instruments, are displayed at the top of the list.
+        description: |-
+          Specifies if payment methods that are associated with the customer's active payment instruments are displayed at the top of the list.
+          If this value is set to `true`, these payment methods appear at the top.
       paymentMethods:
         type: array
-        description: Ordered list of allowed payment methods. If this field is empty, no payment methods are allowed.
+        description: |-
+          Ordered list of allowed payment methods.
+          If no value is provided, no payment methods are allowed.
         items:
           $ref: ./AdjustReadyToPayoutPaymentMethod.yaml

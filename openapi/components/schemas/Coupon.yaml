@@ -6,14 +6,18 @@ required:
 properties:
   id:
     type: string
-    description: ID of the coupon. This value is also known as the coupon redemption code.
+    description: |-
+      ID of the coupon.
+      This value is also known as the coupon redemption code.
     readOnly: true
     maxLength: 50
     example: cpn_0YVCNKF81GD778N4YNVGDJK558
   discount:
     $ref: ./Discount.yaml
   restrictions:
-    description: Coupon restrictions. All `type` values in this array must be unique.
+    description: |-
+      Coupon restrictions.
+      All `type` values in this array must be unique.
     type: array
     items:
       $ref: ./CouponRestriction.yaml
@@ -34,10 +38,12 @@ properties:
     type: string
     x-basic: true
     description: |-
-      Description of the coupon. Use this field to provide an invoice discount item description.
+      Description of the coupon.
+      Use this field to provide a description for the invoice discount item.
 
-      If this field is empty, the invoice discount item description uses the related coupon ID, in the following format:
-      `Coupon "COUPON-ID"`.
+      If this field is empty,
+      the invoice discount item description uses the related coupon ID,
+      in the following format: `Coupon "COUPON-ID"`.
   issuedTime:
     description: |-
       Date and time when the coupon is issued.

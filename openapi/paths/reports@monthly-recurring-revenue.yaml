@@ -15,13 +15,18 @@ get:
   parameters:
     - name: currency
       in: query
-      description: Revenue currency. If not provided, the organization reporting currency is used.
+      description: |-
+        Revenue currency.
+        If no value is provided, the organization reporting currency is used.
       required: true
       schema:
         $ref: ../components/schemas/CurrencyCode.yaml
     - name: periodStart
       in: query
-      description: Date and time when the report starts. If not provided or null, the report starts from the previous month.
+      description: |-
+        Date and time when the report starts.
+        If no value is provided or is `null`,
+        the report starts at the beginning of the previous month.
       required: true
       schema:
         type: string
@@ -29,7 +34,10 @@ get:
         example: 2022-01
     - name: periodEnd
       in: query
-      description: Date and time when the report ends. If not provided or null, the report ends at the current month.
+      description: |-
+        Date and time when the report ends.
+        If no value is provided or `null`,
+        the report ends at the current month.
       required: true
       schema:
         type: string

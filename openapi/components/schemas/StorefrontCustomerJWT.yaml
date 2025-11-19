@@ -7,7 +7,7 @@ properties:
     maxLength: 50
     example: jwt_0YV7DEJX80CDRAKVTV478ZNJDR
   token:
-    description: Session's token used for authentication.
+    description: Session token for authentication in the billing portal.
     type: string
     readOnly: true
   createdTime:
@@ -15,6 +15,8 @@ properties:
   updatedTime:
     $ref: ./UpdatedTime.yaml
   expiredTime:
-    description: Session expired time. Defaults to one hour.
+    description: |-
+      Date and time when the session expired.
+      The default value is one hour after the `createdTime` value.
     type: string
     format: date-time

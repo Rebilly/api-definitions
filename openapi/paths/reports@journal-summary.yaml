@@ -17,14 +17,20 @@ get:
   parameters:
     - name: periodStart
       in: query
-      description: Year and month from which the report is generated. If not provided or null, the report starts from one year ago.
+      description: |-
+        Year and month from which the report is generated.
+        If no value is provided or is `null`,
+        the report starts from one year ago.
       schema:
         type: string
         pattern: '^\d{4}-(0[1-9]|1[0-2])$'
         example: 2025-06
     - name: periodEnd
       in: query
-      description: Year and month up to which the report is generated. If not provided or null, the report ends at the current month.
+      description: |-
+        Year and month up to which the report is generated.
+        If no value is provided or is `null`,
+        the report ends at the current month.
       schema:
         type: string
         pattern: '^\d{4}-(0[1-9]|1[0-2])$'
@@ -38,7 +44,10 @@ get:
         $ref: ../components/schemas/CurrencyCode.yaml
     - name: aggregationField
       in: query
-      description: Report aggregation field. If not provided, the report aggregates by `journalRecord.creditAccountId`.
+      description: |-
+        Report aggregation field.
+        If no value is provided,
+        the report aggregates by `journalRecord.creditAccountId`.
       schema:
         type: string
         enum:
@@ -46,7 +55,9 @@ get:
           - journalRecord.debitAccountId
     - name: amountField
       in: query
-      description: Report amount field. If this value is not provided, the report uses `journalRecord.recognizedAmount`.
+      description: |-
+        Report amount field.
+        If no value is provided, the report uses `journalRecord.recognizedAmount`.
       schema:
         type: string
         enum:
@@ -56,7 +67,7 @@ get:
       in: query
       description: |-
         Comma-separated list of journal account IDs to filter the report.
-        If this value is not provided, all journal accounts are included.
+        If no value is provided, all journal accounts are included.
       schema:
         type: string
         example: 'jrn_acc_01JXFPKZP4QE4CR3GTT23K8R5J,jrn_acc_01JXFPM6M3CYJ496E5NSCBPM49'

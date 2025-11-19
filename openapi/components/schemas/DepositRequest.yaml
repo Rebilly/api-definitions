@@ -11,7 +11,7 @@ properties:
     maxLength: 50
     example: dep_req_0YVJ65BSGYC3EAT58SEX8KY6J7
   websiteId:
-    description: Website ID of the deposit. This value specifies the website with which the deposit is associated.
+    description: ID of the website associated with the deposit.
     type: string
     maxLength: 50
     example: web_0YV7DE4Z26DQSA1AC92FBJ7SEG
@@ -96,17 +96,23 @@ properties:
         format: double
         minimum: 0.01
       maximum:
-        description: Maximum custom amount. This value must be equal to `minimum` + X * `multipleOf`, where X is any positive integer.
+        description: |-
+          Maximum custom amount.
+          This value must be equal to `minimum` + X * `multipleOf`, where X is any positive integer.
         type: number
         format: double
         minimum: 0.01
   redirectUrl:
-    description: URL to redirect the customer to when a deposit is completed. The default value is the website URL.
+    description: |-
+      URL to redirect the customer to when a deposit is completed.
+      The default value is the website URL.
     type: string
     maxLength: 2083
     format: uri
   expirationTime:
-    description: Date and time at which the deposit request expires. The default expiration time is one hour from the time the request is created.
+    description: |-
+      Date and time when the deposit request expires.
+      The default expiration time is one hour from the time the request is created.
     type: string
     format: date-time
   propertiesSchema:

@@ -15,7 +15,9 @@ properties:
     enum: ["restrict-to-bxgy"]
   buy:
     type: array
-    description: One or more plan and quantity definitions that must be purchased to receive all plans and quantities that are defined in the `get` instruction. All `planId` values in this array must be unique.
+    description: |-
+      One or more plan and quantity definitions that must be purchased to receive all plans and quantities that are defined in the `get` instruction.
+      All `planId` values in this array must be unique.
     minItems: 1
     items:
       type: object
@@ -25,7 +27,9 @@ properties:
       properties:
         planId:
           type: string
-          description: Plan ID of the item being purchased. This value must be unique within the `buy.items` array.
+          description: |-
+            Plan ID of the item being purchased.
+            This value must be unique within the `buy.items` array.
           maxLength: 50
           example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
         quantity:
@@ -34,7 +38,9 @@ properties:
           description: Total quantity of the associated plan ID that must be purchased for this restriction to apply.
   get:
     type: array
-    description: One or more plan and quantity definitions that are added to a purchase if all definitions in the `buy` condition are met. All `planId` values in this array must be unique.
+    description: |-
+      One or more plan and quantity definitions that are added to a purchase if all definitions in the `buy` condition are met.
+      All `planId` values in this array must be unique.
     minItems: 1
     items:
       type: object
@@ -44,7 +50,9 @@ properties:
       properties:
         planId:
           type: string
-          description: Plan ID of the item that is to be received by the customer. This value must be unique within the `get.items` array.
+          description: |-
+            Plan ID of the item that is to be received by the customer.
+            This value must be unique within the `get.items` array.
           maxLength: 50
           example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
         quantity:
