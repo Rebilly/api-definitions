@@ -13,9 +13,9 @@ get:
     - name: aggregationField
       in: query
       description: Report aggregation field.
-      required: true
       schema:
         type: string
+        default: website
         enum:
           - website
           - gatewayAcquirer
@@ -27,10 +27,12 @@ get:
           - gatewayAccount
     - name: periodMonth
       in: query
-      description: Report month in `YYYY-MM` format.
-      required: true
+      description: |-
+        Report month in `YYYY-MM` format.
+        If no value is provided, current month is used.
       schema:
         type: string
+        pattern: '^\d{4}-(0[1-9]|1[0-2])$'
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
     - $ref: ../components/parameters/collectionFilter.yaml
