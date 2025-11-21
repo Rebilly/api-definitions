@@ -1,0 +1,28 @@
+description: Paybilt gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Paybilt credentials object.
+        properties:
+          tokenId:
+            type: string
+            description: ID of the Paybilt token API.
+          tokenApiKey:
+            type: string
+            description: Paybilt token API key.
+            format: password
+            writeOnly: true
+          apiKey:
+            type: string
+            description: Paybilt API key.
+            format: password
+            writeOnly: true
+        required:
+          - tokenId
+          - tokenApiKey
+          - apiKey
