@@ -13,9 +13,9 @@ get:
     - name: type
       in: query
       description: Type of report aggregation.
-      required: true
       schema:
         type: string
+        default: count
         enum:
           - count
           - amount
@@ -24,9 +24,9 @@ get:
     - name: subaggregate
       in: query
       description: Report subaggregate.
-      required: true
       schema:
         type: string
+        default: gateway-account
         enum:
           - website
           - gateway-account
@@ -42,15 +42,17 @@ get:
           - leads.sales-agent
     - name: periodStart
       in: query
-      description: Date and time when the report starts.
-      required: true
+      description: |-
+        Date and time when the report starts.
+        If no value is provided, the report begins on the first day of the current month.
       schema:
         type: string
         format: date-time
     - name: periodEnd
       in: query
-      description: Date and time when the report ends.
-      required: true
+      description: |-
+        Date and time when the report ends.
+        If no value is provided, the report ends on the last day of the current month.
       schema:
         type: string
         format: date-time
