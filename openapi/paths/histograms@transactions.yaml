@@ -12,23 +12,29 @@ get:
   parameters:
     - name: periodStart
       in: query
-      description: Date and time when the report starts.
-      required: true
+      description: |-
+        Date and time when the report starts.
+        The default value depends on the aggregation period:
+        - 24 hours ago for `minute` aggregation.
+        - First day of the current month for other aggregation periods.
       schema:
         type: string
         format: date-time
     - name: periodEnd
       in: query
-      description: Date and time when the report ends.
-      required: true
+      description: |-
+        Date and time when the report ends.
+        The default value depends on the aggregation period:
+        - Current time for `minute` aggregation.
+        - Last day of the current month for other aggregation periods.
       schema:
         type: string
         format: date-time
     - name: aggregationPeriod
       in: query
       description: Aggregation period of the report.
-      required: true
       schema:
+        default: day
         type: string
         enum:
           - minute
@@ -38,8 +44,8 @@ get:
     - name: metric
       in: query
       description: Metric on which the report is based.
-      required: true
       schema:
+        default: sales_count
         type: string
         enum:
           - approval
