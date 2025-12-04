@@ -13,9 +13,9 @@ get:
     - name: aggregationField
       in: query
       description: Report aggregation field.
-      required: true
       schema:
         type: string
+        default: month
         enum:
           - day
           - month
@@ -24,9 +24,9 @@ get:
     - name: aggregationPeriod
       in: query
       description: Report aggregation period.
-      required: true
       schema:
         type: string
+        default: month
         enum:
           - day
           - month
@@ -43,15 +43,17 @@ get:
           - "false"
     - name: periodStart
       in: query
-      description: Date and time when the report starts.
-      required: true
+      description: |
+        Date and time when the report starts.
+        If not provided, defaults to the start of the current month.
       schema:
         type: string
         format: date-time
     - name: periodEnd
       in: query
-      description: Date and time when the report ends.
-      required: true
+      description: |
+        Date and time when the report ends.
+        If not provided, defaults to the end of the current month.
       schema:
         type: string
         format: date-time
