@@ -1,0 +1,24 @@
+description: Antom gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Antom credentials object.
+        properties:
+          clientId:
+            type: string
+            description: Antom client ID.
+          privateKey:
+            type: string
+            description: Antom private key.
+            format: password
+            writeOnly: true
+        required:
+          - clientId
+          - privateKey
+      threeDSecureServer:
+        $ref: ./ThreeDSecureIO3dsServer.yaml
