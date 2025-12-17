@@ -1,0 +1,44 @@
+content:
+  application/json:
+    schema:
+      type: object
+      title: Patch payout request
+      properties:
+        status:
+          description: Status of the request.
+          type: string
+          enum:
+            - pending
+            - flushed
+            - approved
+            - canceled
+            - customer-reversed
+            - system-reversed
+            - admin-reversed
+          x-enumDescriptions:
+            pending: Request was created by the customer.
+            flushed: Request was assessed, deemed eligible for processing and is ready for approval.
+            approved: Request was approved and is ready for processing.
+            canceled: Request is canceled by merchant or customer.
+            customer-reversed: Request was reversed by the customer.
+            system-reversed: Request was reversed by the system.
+            admin-reversed: Request was manually reversed.
+        description:
+          description: Description of the payout request.
+          type:
+            - 'string'
+            - 'null'
+        blocked:
+          description: |-
+            Specifies whether the payout request is blocked or unblocked.
+            This field can only be applied to payout requests in the following statuses:
+            `pending`, `flushed`, `approved`, or `in-progress`.
+
+            When a payout request is blocked, it cannot:
+            - Move to the next status in the workflow.
+              For example: `pending` → `flushed` → `approved` → `in-progress`.
+            - Have allocations created.
+            - Have allocations processed.
+          type: boolean
+          example: false
+description: Fields for updating the payout request status, description, and blocked state.

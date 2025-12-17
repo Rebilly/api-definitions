@@ -1,0 +1,91 @@
+type: object
+required:
+  - payoutRequestId
+  - paymentInstrumentId  
+  - gatewayAccountId
+  - amount
+  - currency
+properties:
+  id:
+    type: string
+    readOnly: true
+    description: ID of the resource.
+    maxLength: 50
+    example: pra_0YVDMDE2BMC6KBB5MX76RF6T80
+  payoutRequestId:
+    description: ID of the payout request associated with this allocation.
+    readOnly: true
+    type: string
+    maxLength: 50
+    example: pout_req_0YVDMDE2BMC6KBB5MX76RF6T80
+  paymentInstrumentId:
+    type: string
+    description: ID of the payment instrument allocated to the payout request.
+    maxLength: 50
+    example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
+  gatewayAccountId:
+    type: string
+    description: ID of the gateway account to use for processing this allocation.
+    maxLength: 50
+    example: gateway_0YVB8KPKNXCBR9EDX7JHSED75N
+  gatewayName:
+    type: string
+    description: Name of the gateway account to use for processing this allocation.
+    maxLength: 50
+    example: TestProcessor
+  amount:
+    description: Amount allocated to this payment instrument.
+    type: number
+    format: double
+    x-type: Money
+  currency:
+    description: Currency of the payout request allocation.
+    $ref: ./CurrencyCode.yaml
+  status:
+    description: Status of this payout request allocation.
+    type: string
+    enum:
+      - pending
+      - processing
+      - completed
+      - failed
+      - canceled
+    x-enumDescriptions:
+      pending: Allocation was created and is waiting to be processed.
+      processing: Allocation is being processed and a transaction is being created.
+      completed: Allocation was successfully processed and the transaction was approved.
+      failed: Allocation could not be processed because the transaction was declined or an error occurred.
+      canceled: Allocation was canceled before processing.
+  transactionId:
+    description: ID of the transaction that is created when processing this allocation, if applicable.
+    type:
+      - 'string'
+      - 'null'
+    readOnly: true
+    maxLength: 50
+    example: txn_0YVB8KPKNXCBR9EDX7JHSED75N
+  createdTime:
+    description: Date and time when the allocation for the payout request was created.
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - transaction
+            - gatewayAccount
+            - payoutRequest
+            - paymentInstrument
+

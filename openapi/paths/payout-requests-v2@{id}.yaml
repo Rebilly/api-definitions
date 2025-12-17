@@ -1,0 +1,27 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Retrieve a payout request (v2 temporary endpoint)
+  operationId: GetPayoutRequestV2
+  x-sdk-operation-name: getV2
+  description: Retrieves a payout request with a specified ID.
+  deprecated: true
+  responses:
+    '200':
+      description: Payout request retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PayoutRequestV2.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

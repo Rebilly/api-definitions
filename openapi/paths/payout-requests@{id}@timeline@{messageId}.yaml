@@ -1,0 +1,56 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+  - name: messageId
+    in: path
+    required: true
+    schema:
+      type: string
+    description: ID of the timeline message.
+get:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Transactions timeline
+  summary: Retrieve a payout request timeline message
+  operationId: GetPayoutRequestTimelineMessage
+  x-sdk-operation-name: getTimelineMessage
+  description: Retrieves a payout request timeline message with a specified ID.
+  responses:
+    '200':
+      description: Payout request timeline message retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PayoutRequestTimelineMessage.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
+delete:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Transactions timeline
+  summary: Delete a payout request timeline message
+  operationId: DeletePayoutRequestTimelineMessage
+  x-sdk-operation-name: deleteTimelineMessage
+  description: Deletes a payout request timeline message with a specified ID.
+  responses:
+    '204':
+      description: Payout request timeline message deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml

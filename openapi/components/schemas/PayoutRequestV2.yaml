@@ -8,7 +8,7 @@ properties:
   id:
     type: string
     readOnly: true
-    description: Unique resource ID.
+    description: ID of the resource.
     maxLength: 50
     example: pout_req_0YVDMDE2BMC6KBB5MX76RF6T80
   websiteId:
@@ -32,7 +32,7 @@ properties:
     format: double
     x-type: Money
   availableAmount:
-    description: Available payout request amount that has not been allocated.
+    description: Amount of the payout request that is unallocated and available.
     readOnly: true
     type: number
     format: double
@@ -45,71 +45,50 @@ properties:
   status:
     description: Status of the request.
     type: string
-    readOnly: true
     enum:
       - pending
+      - flushed
+      - approved
+      - in-progress
       - instrument-selected
       - partially-fulfilled
       - fulfilled
       - canceled
+      - customer-reversed
+      - system-reversed
+      - admin-reversed
     x-enumDescriptions:
-      pending: Request is awaiting customer's selection of the payment instrument or fulfillment.
-      instrument-selected: Request has a selected payment instrument and is awaiting fulfillment.
-      partially-fulfilled: Request is partially paid out when `availableAmount` is less than `amount`.
-      fulfilled: Request is fully paid out when `availableAmount` reaches zero.
+      pending: Request was created by the customer.
+      flushed: Request was assessed, deemed eligible for processing and is ready for approval.
+      approved: Request was approved and is ready for processing.
+      in-progress: Request has allocations and is being processed.
+      instrument-selected: Request has a selected payment instrument.
+      partially-fulfilled: Request is partially paid out.
+      fulfilled: Request is fully paid out.
       canceled: Request is canceled by merchant or customer.
+      customer-reversed: Request was reversed by the customer.
+      system-reversed: Request was reversed by the system.
+      admin-reversed: Request was reversed by the admin.
+  blocked:
+    description: Specifies whether the payout request is blocked or unblocked.
+    type: boolean
+    readOnly: false
+    example: false
   selectPaymentInstrumentUrl:
     readOnly: true
     type: string
     format: uri
-    description: URL for the customer to select a preferred payment instrument.
+    description: URL where the customer can select a preferred payment instrument.
   allocations:
     type: array
-    description: List of credit transactions that are allocated to reduce the available amount of a payout request.
+    description: List of payout request allocations for the payout request.
     readOnly: true
     items:
-      type: object
-      properties:
-        transactionId:
-          description: ID of the transaction to which the payout request is allocated.
-          $ref: ./TransactionId.yaml
-        transactionResult:
-          description: Result of a transaction.
-          type: string
-          x-basic: true
-          readOnly: true
-          enum:
-            - abandoned
-            - approved
-            - canceled
-            - declined
-            - unknown
-        method:
-          $ref: ./PaymentMethod.yaml
-        gatewayName:
-          description: Name of the payment gateway that processed, or is selected to process, the transaction.
-          x-label: Gateway account
-          x-basic: true
-          $ref: ./GatewayName.yaml
-        paymentInstrumentId:
-          type: string
-          description: ID of the selected payment instrument for the transaction.
-          maxLength: 50
-          example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
-        amount:
-          description: Payout amount that is allocated from the payout request to the credit transaction.
-          type: number
-          format: double
-        currency:
-          $ref: ../schemas/CurrencyCode.yaml
-        createdTime:
-          description: Date and time when a payout request is allocated.
-          $ref: ./CreatedTime.yaml
-        updatedTime:
-          $ref: ./UpdatedTime.yaml
+      $ref: ./PayoutRequestAllocation.yaml
   selectedPaymentInstrumentRedirectUrl:
     description: |-
-      URL where the customer is redirected when a payment instrument is selected. The default value is the website URL.
+      URL where the customer is redirected after selecting a payment instrument.
+      The default value is the website URL.
       Use `{{id}}` as a placeholder for the payout request ID.
     type: string
     format: uri

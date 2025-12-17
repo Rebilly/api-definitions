@@ -1,0 +1,49 @@
+type: object
+properties:
+  id:
+    type: string
+    description: ID of the message.
+    readOnly: true
+    maxLength: 50
+    example: tlm_0YVDMDE2BMC6KBB5MX76RF6T80
+  type:
+    type: string
+    description: Type of timeline event.
+    readOnly: true
+    enum:
+      - timeline-comment-created
+      - payout-request-created
+      - payout-request-flushed
+      - payout-request-flush-undone
+      - payout-request-approved
+      - payout-request-approval-undone
+      - payout-request-allocated
+      - payout-request-processing-started
+      - payout-request-fulfilled
+      - payout-request-canceled
+      - payout-request-reversed
+      - payout-request-blocked
+      - payout-request-unblocked
+  occurredTime:
+    description: Date and time when the timeline event occurred.
+    $ref: ./ServerTimestamp.yaml
+  triggeredBy:
+    type: string
+    description: Who or what triggered this event.
+    readOnly: true
+    enum:
+      - rebilly
+      - app
+      - direct-api
+  message:
+    type: string
+    description: Human-readable message describing the timeline event.
+  extraData:
+    $ref: ./TimelineExtraData.yaml
+required:
+  - id
+  - type
+  - occurredTime
+  - triggeredBy
+  - message
+  - extraData

@@ -1,0 +1,83 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Transactions timeline
+  summary: Retrieve payout request timeline messages
+  operationId: GetPayoutRequestTimelineCollection
+  x-sdk-operation-name: getAllTimelineMessages
+  description: Retrieves a list of payout request timeline messages.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+  responses:
+    '200':
+      description: List of payout request timeline messages retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/PayoutRequestTimelineMessage.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
+post:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Transactions timeline
+  summary: Create a payout request timeline comment
+  operationId: PostPayoutRequestTimeline
+  x-sdk-operation-name: createTimelineComment
+  description: Creates a payout request timeline comment.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PayoutRequestTimelineMessage.yaml
+    description: Payout request timeline resource.
+    required: true
+  responses:
+    '201':
+      description: Payout request timeline comment created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PayoutRequestTimelineMessage.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
