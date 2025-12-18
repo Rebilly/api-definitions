@@ -1,6 +1,5 @@
-type:
-  - 'object'
-  - 'null'
+type: object
+description: Items temporarily blocklisted when TTL is greater than `0`.
 required:
   - riskScoreThreshold
   - ttl
@@ -13,5 +12,6 @@ properties:
     type: integer
     description: |-
       Amount of seconds a blocklist exists before it expires.
-      If value for this field is `0` then blocklist record never expires.
-    minimum: 0
+      This value must be greater than 0.
+    minimum: 1
+
