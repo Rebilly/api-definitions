@@ -8,8 +8,8 @@ get:
   tags:
     - Transactions
   summary: Retrieve associated payment instruments
-  operationId: GetPayoutRequestPaymentInstruments
-  x-sdk-operation-name: getPaymentInstruments
+  operationId: GetPayoutRequestV2PaymentInstruments
+  x-sdk-operation-name: getPaymentInstrumentsV2
   description: Retrieves the payment gateway and a list of payment instruments that are associated with a payout request with a specified ID.
   responses:
     '200':
@@ -38,6 +38,11 @@ get:
                     - 'null'
                   allOf:
                     - $ref: ../components/schemas/GatewayName.yaml
+                gatewayAccountId:
+                  description: ID of the gateway account to use for processing this allocation.
+                  type: string
+                  maxLength: 50
+                  example: gateway_0YVB8KPKNXCBR9EDX7JHSED75N
                 exposureAmount:
                   description: Total amount of sales minus credit for the specified gateway and instrument.
                   type: number
