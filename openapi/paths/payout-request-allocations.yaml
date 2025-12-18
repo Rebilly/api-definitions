@@ -1,0 +1,76 @@
+post:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Create a payout request allocation
+  operationId: PostPayoutRequestAllocation
+  x-sdk-operation-name: create
+  description: |-
+    Creates an allocation for a payout request.
+
+    When an allocation is created, the payout request transitions to the `in-progress` status,
+    and the allocation starts in the `pending` status.
+
+    The allocation transitions to the `processing` status when payment processing begins.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            payoutRequestId:
+              type: string
+              description: ID of the payout request to allocate.
+              maxLength: 50
+              example: pout_req_0YVDMDE2BMC6KBB5MX76RF6T80
+            paymentInstrumentId:
+              type: string
+              description: ID of the payment instrument to allocate.
+              maxLength: 50
+              example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
+            gatewayAccountId:
+              type: string
+              description: ID of the gateway account.
+              maxLength: 50
+              example: gw_acc_0YVCXMF26DDNKAERE5NW727S34
+            amount:
+              type: number
+              format: double
+              description: Amount to allocate to this payment instrument.
+              x-type: Money
+          required:
+            - payoutRequestId
+            - paymentInstrumentId
+            - gatewayAccountId
+            - amount
+    description: Payout request allocation resource.
+    required: true
+  responses:
+    '201':
+      description: Payout request allocation created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PayoutRequestAllocation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
