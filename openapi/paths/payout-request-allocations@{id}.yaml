@@ -1,0 +1,65 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+patch:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Update allocation status
+  operationId: PatchPayoutRequestAllocation
+  x-sdk-operation-name: update
+  description: |-
+    Updates the status of a payout request allocation with a specified ID.
+
+    Only the `processing` and `canceled` statuses can be set with this operation.
+    The `processing` status transitions an allocation from `pending` when payment processing begins.
+    The `canceled` status stops the allocation before it is processed.
+
+    The `completed` and `failed` statuses are set automatically during transaction processing.
+    Allocations are always created in the `pending` status.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: string
+              description: |-
+                New status for the allocation.
+                Use `processing` to move an allocation from `pending` to `processing`,
+                which begins payment processing.
+                Use `canceled` to stop the allocation before it is processed.
+              enum:
+                - processing
+                - canceled
+              example: processing
+          required:
+            - status
+  responses:
+    '200':
+      description: Payout request allocation updated.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PayoutRequestAllocation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
