@@ -2,101 +2,36 @@ type: object
 description: Risk score blocklist configuration.
 properties:
   address:
-    deprecated: true
-    description: |-
-      House number and ZIP code of the customer's address.
-      This field supports the old format for backward compatibility. 
-      
-      > **Note:** This field is deprecated.
-      Use the `permanentlyBlockList` or `temporaryBlockList` field instead.
+    description: House number and ZIP code of the customer's address.
     $ref: ./RiskScoreBlocklistType.yaml
   bank-account:
-    deprecated: true
-    description: |-
-      Bank account for the charge.
-      This field supports the old format for backward compatibility. 
-      
-      > **Note:** This field is deprecated.
-      Use the `permanentlyBlockList` or `temporaryBlockList` field instead.
+    description: Bank account being charged.
     $ref: ./RiskScoreBlocklistType.yaml
   bin:
-    deprecated: true
-    description: |-
-      Bank Identification Number (BIN) of the payment card for the charge.
-      This field supports the old format for backward compatibility. 
-      
-      > **Note:** This field is deprecated.
-      Use the `permanentlyBlockList` or `temporaryBlockList` field instead.
+    description: Bank Identification Number (BIN) of the payment card being charged.
     $ref: ./RiskScoreBlocklistType.yaml
   country:
-    deprecated: true
-    description: |-
-      Country where the customer is making the purchase, and country of the payment card billing address.
-      This field supports the old format for backward compatibility. 
-      
-      > **Note:** This field is deprecated.
-      Use the `permanentlyBlockList` or `temporaryBlockList` field instead.
+    description: Country where the customer is making the purchase, and of the payment card billing address.
     $ref: ./RiskScoreBlocklistType.yaml
   customer-id:
-    deprecated: true
-    description: |-
-      Rebilly `customerId` of the customer making the purchase.
-      This field supports the old format for backward compatibility. 
-      
-      > **Note:** This field is deprecated.
-      Use the `permanentlyBlockList` or `temporaryBlockList` field instead.
+    description: Rebilly `customerId` of the customer making the purchase.
     $ref: ./RiskScoreBlocklistType.yaml
   email:
-    deprecated: true
-    description: |-
-      Email address of the customer making the purchase.
-      This field supports the old format for backward compatibility. 
-      
-      > **Note:** This field is deprecated.
-      Use the `permanentlyBlockList` or `temporaryBlockList` field instead.
+    description: Email address of the customer making the purchase.
     $ref: ./RiskScoreBlocklistType.yaml
   email-domain:
-    deprecated: true
-    description: |-
-      Email address domain of the customer making the purchase.
-      This field supports the old format for backward compatibility. 
-      
-      > **Note:** This field is deprecated.
-      Use the `permanentlyBlockList` or `temporaryBlockList` field instead.
+    description: Email address domain of the customer making the purchase.
     $ref: ./RiskScoreBlocklistType.yaml
   fingerprint:
-    deprecated: true
     description: |-
       Fingerprint of the user's device.
-      This field supports the old format for backward compatibility. 
       A device fingerprint is a unique token that is used to identify the user.
       The device fingerprint is generated based on device attributes,
       such as: hardware, software, IP address, language, browser, and more.
-      
-      > **Note:** This field is deprecated.
-      Use the `permanentlyBlockList` or `temporaryBlockList` field instead.
     $ref: ./RiskScoreBlocklistType.yaml
   ip-address:
-    deprecated: true
-    description: |-
-      IP address of the customer making the purchase.
-      This field supports the old format for backward compatibility.
-      
-      > **Note:** This field is deprecated.
-      Use the `permanentlyBlockList` or `temporaryBlockList` field instead.
+    description: IP address of the customer making the purchase.
     $ref: ./RiskScoreBlocklistType.yaml
   payment-card:
-    deprecated: true
-    description: |-
-      Payment card number being charged.
-      This field supports the old format for backward compatibility.
-      
-      > **Note:** This field is deprecated.
-      Use the `permanentlyBlockList` or `temporaryBlockList` field instead.
+    description: Payment card number being charged.
     $ref: ./RiskScoreBlocklistType.yaml
-  permanentlyBlockList:
-    description: Items permanently blocklisted when TTL is equal to `0`.
-    $ref: ./RiskScoreBlocklistPermanentRules.yaml
-  temporaryBlockList:
-    description: Items temporarily blocklisted when TTL is greater than `0`.
-    $ref: ./RiskScoreBlocklistTemporaryRules.yaml
