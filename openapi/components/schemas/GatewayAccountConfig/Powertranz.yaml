@@ -1,0 +1,22 @@
+description: Powertranz gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Powertranz credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: Powertranz merchant ID.
+          password:
+            type: string
+            description: Powertranz password.
+            format: password
+            writeOnly: true
+        required:
+          - merchantId
+          - password
