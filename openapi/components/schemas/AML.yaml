@@ -184,5 +184,51 @@ properties:
     description: |-
       Additional information.
       This content varies per list.
+  matchDetails:
+    type:
+      - 'object'
+      - 'null'
+    description: Details of the matching logic and confidence scoring.
+    properties:
+      confidenceFactors:
+        type: array
+        readOnly: true
+        description: List of factors that contributed to the confidence score calculation.
+        items:
+          type: string
+          enum:
+            - confidence_exact_country
+            - confidence_mismatch_country
+            - confidence_missing_country
+            - confidence_exact_dob
+            - confidence_mismatch_dob
+            - confidence_missing_dob
+            - confidence_exact_yob
+            - confidence_inexact_yob
+            - confidence_strong_hit_relevance
+            - confidence_weak_hit_relevance
+            - confidence_exact_full_name
+            - confidence_fuzzy_full_name
+      matchCriteria:
+        type: array
+        readOnly: true
+        description: List of specific criteria that matched against the watchlist.
+        items:
+          type: string
+          enum:
+            - match_exact_name
+            - match_phonetic_first_name
+            - match_phonetic_last_name
+            - match_exact_full_name
+            - match_aka_exact_name
+            - match_aka_phonetic_first_name
+            - match_aka_phonetic_last_name
+            - match_aka_exact_full_name
+            - match_fuzzy_nationality
+            - match_exact_address
+            - match_exact_city
+            - match_exact_region
+            - match_exact_country
+            - match_exact_post_code
   _links:
     $ref: ./SelfLink.yaml
