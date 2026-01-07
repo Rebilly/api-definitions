@@ -10,15 +10,19 @@ This topic provides guidance on how to write API documentation descriptions.
 - Avoid future (often includes "will") and past tense (often includes words ending in "ed").
 - Avoid [passive voice](https://developers.google.com/tech-writing/one/active-voice).
 - Avoid using ("should", "could", "can").
-- To add multi-lined descriptions, after a `description:`, add one space, then insert `|-`. This escapes the YAML formatting and enables the use of Markdown.
+- To add multi-lined descriptions, after a `description:`, add one space, then insert `|-`.
+  This escapes the YAML formatting and enables the use of Markdown.
 
 ## Avoid knowledge bias
 
-Do not assume that the reader has the same knowledge of the product as you. We all do this to some extent. This is a cognitive bias known as the [Curse of knowledge](https://effectiviology.com/curse-of-knowledge).
+Do not assume that the reader has the same knowledge of the product as you.
+We all do this to some extent.
+This is a cognitive bias known as the [Curse of knowledge](https://effectiviology.com/curse-of-knowledge).
 
 > The curse of knowledge is a cognitive bias that occurs when an individual, communicating with other individuals, unknowingly assumes that the others have the background to understand.
 
-Avoid this bias by describing information that may seem obvious to you when writing. For example, when describing the `hardLimit` field , describe what that value is and how it works in a Rebilly context, or link to detailed information.
+Avoid this bias by describing information that may seem obvious to you when writing.
+For example, when describing the `hardLimit` field , describe what that value is and how it works in a Rebilly context, or link to detailed information.
 
 ### Undesired example of the knowledge bias
 
@@ -28,9 +32,15 @@ Avoid this bias by describing information that may seem obvious to you when writ
     description: Hard usage limit.
 ```
 
-This field may be obvious to you if you have expert knowledge of the product. The reader may not.
+This field may be obvious to you if you have expert knowledge of the product.
+The reader may not.
 
-If the reader does not know exactly what a hard limit is or are how it works in Rebilly, they need to search the docs to find out, and then come back to API docs. This is frustrating for the reader. It's infuriating if they need to continually do this to understand an API. Over time, if the reader is persistent, they will learn these concepts themselves. This is a major hurdle for new users to overcome. Many readers may simply quit, or may label the docs as "bad" and not use them, or our product.
+If the reader does not know exactly what a hard limit is or are how it works in Rebilly, they need to search the docs to find out, and then come back to API docs.
+This is frustrating for the reader.
+It's infuriating if they need to continually do this to understand an API.
+Over time, if the reader is persistent, they will learn these concepts themselves.
+This is a major hurdle for new users to overcome.
+Many readers may simply quit, or may label the docs as "bad" and not use them, or our product.
 
 ### Example which avoids knowledge bias
 
@@ -57,7 +67,8 @@ This description provides detail on what a hard limit is.
 
 ## Possessive apostrophes
 
-Possessive apostrophes (`'s`) indicate ownership. Do not assign ownership to inanimate objects.
+Possessive apostrophes (`'s`) indicate ownership.
+Do not assign ownership to inanimate objects.
 This is [anthropomorphic](https://www.oreilly.com/library/view/microsoft-manual-of/9780735669833/ch01s03.html), and in some instances, may infer a hierarchy.
 
 ### Examples
@@ -117,11 +128,15 @@ Feature descriptions:
 
 ## Acronyms
 
-An acronym is an abbreviation formed from the initial letters of words that are often used together. Acronyms are often pronounced as a word, or each letter is spelt.
+An acronym is an abbreviation formed from the initial letters of words that are often used together.
+Acronyms are often pronounced as a word, or each letter is spelt.
 
-Do not assume that your audience will understand and be familiar with all acronyms, especially acronyms for financial terms or for state bodies that are specific to one country. It is important to be consistent in our use of acronyms and related descriptions. If we are not, we may confuse our audience.
+Do not assume that your audience will understand and be familiar with all acronyms, especially acronyms for financial terms or for state bodies that are specific to one country.
+It is important to be consistent in our use of acronyms and related descriptions.
+If we are not, we may confuse our audience.
 
-In descriptions, define acronyms that may not be commonly used in their first instance. Thereafter, use the acronym.
+In descriptions, define acronyms that may not be commonly used in their first instance.
+Thereafter, use the acronym.
 
 Example:
 
@@ -130,7 +145,8 @@ Example:
 
 ## Capitalization
 
-Use sentence-style capitalization for all descriptions. Capitalize the first letter of the first word and use lowercase thereafter.
+Use sentence-style capitalization for all descriptions.
+Capitalize the first letter of the first word and use lowercase thereafter.
 
 ### Exceptions
 
@@ -147,7 +163,10 @@ Use sentence-style capitalization for all descriptions. Capitalize the first let
 
 ## Line breaks
 
-Use [semantic line breaks](https://sembr.org/). This standard specifies that you must add a line break after each substantial unit of thought. A written unit of thought ends with punctuation. Only add a new line after a period, or a comma.
+Use [semantic line breaks](https://sembr.org/).
+This standard specifies that you must add a line break after each substantial unit of thought.
+A written unit of thought ends with punctuation.
+Only add a new line after a period, or a comma.
 
 ### Examples
 
@@ -169,13 +188,18 @@ Use [semantic line breaks](https://sembr.org/). This standard specifies that you
 
 ## Noun strings (or noun stacks)
 
-Avoid using a series of nouns together consecutively. This can make descriptions difficult to understand because it may not be clear which words are modifier nouns and which noun is the object. In writing, this is known as a [noun string (or noun stack)](https://www.plainlanguage.gov/guidelines/words/avoid-noun-strings/). This often occurs in business and technical content when the author attempts to make content concise, but mistakenly removes important context.
+Avoid using a series of nouns together consecutively.
+This can make descriptions difficult to understand because it may not be clear which words are modifier nouns and which noun is the object.
+In writing, this is known as a [noun string (or noun stack)](https://www.plainlanguage.gov/guidelines/words/avoid-noun-strings/).
+This often occurs in business and technical content when the author attempts to make content concise, but mistakenly removes important context.
 
-To avoid noun strings, place the modifier noun before the noun that it modifies. This makes it easier to understand the relationship between the words. This often requires the use of articles (a, an, the) and prepositions (of, from, in, on, to, for ...).
+To avoid noun strings, place the modifier noun before the noun that it modifies.
+This makes it easier to understand the relationship between the words.
+This often requires the use of articles (a, an, the) and prepositions (of, from, in, on, to, for ...).
 
 ### Examples
 
-<details> 
+<details>
 <summary> Example 1</summary>
 
 #### Incorrect use
@@ -201,7 +225,7 @@ scope:
 
 </details>
 
-<details> 
+<details>
 <summary> Example 2 </summary>
 
 #### Incorrect use
@@ -223,12 +247,12 @@ creationTime:
 ```
 
 | Noun | conjunction & article | noun (object)| verb | modifier noun | |
-|---|---|---|---|---|---| 
+|---|---|---|---|---|---|
 | Time| when the | coupon | was | created | ✅ |
 
 </details>
 
-<details> 
+<details>
 <summary> Example 3</summary>
 
 #### Incorrect use
@@ -255,7 +279,7 @@ organizationName:
 
 </details>
 
-<details> 
+<details>
 <summary> Example 4</summary>
 
 #### Incorrect use
@@ -284,7 +308,9 @@ taxNumberType:
 
 ## Tags
 
-We use tags to group related operations. When searching operations, the reader may look at the tag description for the context. It is important that we add detail to these descriptions and link to related content if required.
+We use tags to group related operations.
+When searching operations, the reader may look at the tag description for the context.
+It is important that we add detail to these descriptions and link to related content if required.
 
 ### Tag example
 
@@ -333,15 +359,19 @@ This section provides guidance on how to write operation, object, and parameter 
 ### Operations
 
 - Start all operation descriptions with an active verb (Retrieves, Adds, Creates, Updates, Deletes, Sets, Specifies ...)
-- Describe what the operation does. Use verb phrases for operation descriptions. For example, "Retrieves customer information with a specified ID."
-- Do not start with an imperative (Create, Retrieve, Merge ...). The user may read this as a command.
-- Avoid starting with "The" or "A". Omit articles for ease of reading.
+- Describe what the operation does.
+  Use verb phrases for operation descriptions.
+  For example, "Retrieves customer information with a specified ID."
+- Do not start with an imperative (Create, Retrieve, Merge ...).
+  The user may read this as a command.
+- Avoid starting with "The" or "A".
+  Omit articles for ease of reading.
 - Avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
 - Provide detail and link to related content if necessary.
 
 **Tip:**
 > Place this imaginary text before your operation descriptions: _This operation..._.
-> 
+>
 > Example: _"This operation"_ Creates a new customer account. \
 > Result: Creates a new customer account.
 
@@ -369,9 +399,11 @@ Delete a customer by ID:
 ```
 ### Fields
 
-- Describe what the field is. Use noun phrases for field descriptions.
+- Describe what the field is.
+  Use noun phrases for field descriptions.
 - Avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
-- Avoid starting with "The" or "A". Omit articles for ease of reading.
+- Avoid starting with "The" or "A".
+  Omit articles for ease of reading.
 - Provide detail and link to related content if necessary.
 
 Example:
@@ -382,7 +414,8 @@ state:
 ```
 #### ID fields
 
-Avoid repeating the field name as the description. This provides no value to the reader.
+Avoid repeating the field name as the description.
+This provides no value to the reader.
 Also, avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
 
 ##### ID examples
@@ -505,7 +538,7 @@ responses:
 
 ### Objects, parameters, and properties descriptions examples
 
-Provide as much detail as is necessary for the reader to understand what the value is, and how it relates to an operation. 
+Provide as much detail as is necessary for the reader to understand what the value is, and how it relates to an operation.
 Avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
 
 ```Markdown

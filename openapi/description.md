@@ -16,7 +16,9 @@ This topic describes the different forms of authentication that are available in
 
 Rebilly offers four forms of authentication: secret key, publishable key, JSON Web Tokens, and public signature key.
 
-- Secret API key: Use to make requests from the server side. Never share these keys. Keep them guarded and secure.
+- Secret API key: Use to make requests from the server side.
+  Never share these keys.
+  Keep them guarded and secure.
 - Publishable API key: Use in your client-side code to tokenize payment information.
 - JWT: Use to make short-life tokens that expire after a set period of time.
 
@@ -32,7 +34,8 @@ To create or manage API keys, select one of the following:
 For more information on API keys, see [API keys](https://www.rebilly.com/docs/concepts-and-features/concept/api-keys).
 
 # Errors
-Rebilly follows the error response format proposed in [RFC 9457](https://tools.ietf.org/html/rfc9457), which is also known as Problem Details for HTTP APIs. As with any API responses, your client must be prepared to gracefully handle additional members of the response.
+Rebilly follows the error response format proposed in [RFC 9457](https://tools.ietf.org/html/rfc9457), which is also known as Problem Details for HTTP APIs.
+As with any API responses, your client must be prepared to gracefully handle additional members of the response.
 
 # SDKs
 

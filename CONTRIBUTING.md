@@ -2,7 +2,9 @@
 
 👍🎉 Welcome! And thanks for taking the time to contribute! 🎉👍
 
-**Important note:** we are designing in public (this repository is open for the world to see and contribute if they want). Do not post any confidential information in this repository (whether as a commit or a comment on a PR). See Rebilly security policies for more information about data classification.
+**Important note:** we are designing in public (this repository is open for the world to see and contribute if they want).
+Do not post any confidential information in this repository (whether as a commit or a comment on a PR).
+See Rebilly security policies for more information about data classification.
 
 ## Design APIs
 

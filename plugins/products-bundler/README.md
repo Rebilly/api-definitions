@@ -33,4 +33,5 @@ All products' configuration is available in the `mapping` directory. Every file 
 represents a configuration for bundling the result bundle. Use name of these files as a value
 for the `REBILLY_API_PRODUCT` env variable during build.
 
-Add a new product bundle by adding a new YAML file in the `mapping` directory with a structure similar to the other files there. The env variable `REBILLY_API_PRODUCT` value maps to the YAML file used during the `bundle` process.
+Add a new product bundle by adding a new YAML file in the `mapping` directory with a structure similar to the other files there.
+The env variable `REBILLY_API_PRODUCT` value maps to the YAML file used during the `bundle` process.
