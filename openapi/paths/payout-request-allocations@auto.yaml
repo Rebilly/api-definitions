@@ -1,0 +1,47 @@
+post:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Create an automatic payout request allocation
+  operationId: PostPayoutRequestAutoAllocation
+  x-sdk-operation-name: autoAllocate
+  description: |-
+    Creates an automatic payout request allocation using system-selected parameters.  
+    Only the payout request ID is required; all allocation details are determined automatically.
+    
+    When an allocation is created, the payout request transitions to the `in-progress` status,
+    and the allocation starts in the `pending` status.
+    The allocation transitions to the `processing` status when payment processing begins.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            payoutRequestId:
+              type: string
+              description: ID of the payout request to allocate.
+              maxLength: 50
+              example: pout_req_0YVDMDE2BMC6KBB5MX76RF6T80
+          required:
+            - payoutRequestId
+    description: Payout request allocation resource.
+    required: true
+  responses:
+    '204':
+      description: Payout request auto-allocation completed.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
