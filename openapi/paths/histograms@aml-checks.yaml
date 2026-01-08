@@ -1,0 +1,68 @@
+get:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Reports
+  tags:
+    - Histograms
+  summary: Retrieve AML check histogram report data
+  operationId: GetHistogramAmlCheckReport
+  x-sdk-operation-name: getAmlCheckHistogramReport
+  description: Retrieves AML check histogram report data.
+  parameters:
+    - name: periodStart
+      in: query
+      description: |-
+        Date and time when the report starts.
+        The default value depends on the aggregation period:
+        - 24 hours ago for `minute` aggregation.
+        - First day of the current month for other aggregation periods.
+      schema:
+        type: string
+        format: date-time
+    - name: periodEnd
+      in: query
+      description: |-
+        Date and time when the report ends.
+        The default value depends on the aggregation period:
+        - Current time for `minute` aggregation.
+        - Last day of the current month for other aggregation periods.
+      schema:
+        type: string
+        format: date-time
+    - name: aggregationPeriod
+      in: query
+      description: Aggregation period of the report.
+      schema:
+        default: day
+        type: string
+        enum:
+          - minute
+          - hour
+          - day
+          - month
+    - name: metric
+      in: query
+      description: Metric on which the report is based.
+      schema:
+        default: sales_count
+        type: string
+        enum:
+          - aml_checks
+          - aml_check_hits
+    - name: includePropagatedResults
+      in: query
+      description: Specifies if propagated AML checks are included.
+      schema:
+        default: false
+        type: boolean
+    - $ref: ../components/parameters/collectionFilter.yaml
+  responses:
+    '200':
+      description: AML check report retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HistogramData.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
