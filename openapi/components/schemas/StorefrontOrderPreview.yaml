@@ -149,6 +149,73 @@ properties:
     type: number
     format: double
     readOnly: true
+  initialAmounts:
+    type: object
+    description: |-
+      Total amounts of the initial invoice.
+      This displays the amount the customer pays initially.
+    readOnly: true
+    properties:
+      amount:
+        description: Total amount of the initial invoice.
+        type: number
+        x-type: Money
+        format: double
+      subtotalAmount:
+        description: Subtotal amount of the initial invoice.
+        type: number
+        x-type: Money
+        format: double
+      discountAmount:
+        description: Discount amount applied to the initial invoice.
+        type: number
+        x-type: Money
+        format: double
+      shippingAmount:
+        description: Shipping amount applied to the initial invoice.
+        type: number
+        x-type: Money
+        format: double
+      taxAmount:
+        description: Tax amount applied to the initial invoice.
+        type: number
+        x-type: Money
+        format: double
+  recurringAmounts:
+    type:
+      - 'object'
+      - 'null'
+    description: |-
+      Total amounts of the recurring invoice.
+      This includes recurring items only.
+      If the order does not have recurring items, the value of this field is `null`.
+    readOnly: true
+    properties:
+      amount:
+        description: Total amount of the recurring invoice.
+        type: number
+        x-type: Money
+        format: double
+      subtotalAmount:
+        description: Subtotal amount of the recurring invoice.
+        type: number
+        x-type: Money
+        format: double
+      discountAmount:
+        description: Discount amount applied to the recurring invoice.
+        type: number
+        x-type: Money
+        format: double
+      shippingAmount:
+        description: Shipping amount applied to the recurring invoice.
+        type: number
+        x-type: Money
+        format: double
+      taxAmount:
+        description: Tax amount applied to the recurring invoice.
+        type: number
+        x-type: Money
+        format: double
   shippingRateId:
     description: |-
       ID of the shipping rate.
