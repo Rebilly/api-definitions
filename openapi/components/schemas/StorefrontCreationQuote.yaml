@@ -108,6 +108,16 @@ properties:
         oneOf:
           - $ref: ./ContactObject.yaml
           - type: 'null'
+      startTime:
+        description: |-
+          Date and time when the created order starts.
+          If this value is `null`, the quote acceptance time is used.
+        type:
+          - 'string'
+          - 'null'
+        x-sortable: true
+        x-basic: true
+        format: date-time
   invoicePreview:
     type: object
     description: Preview of the quote invoice.
