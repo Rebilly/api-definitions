@@ -23,11 +23,23 @@ properties:
     maxLength: 50
     description: User ID of the person who reviewed the AML check.
     example: 44433322-2c4y-483z-a0a9-158621f77a21
+  reviewerType:
+    type:
+      - string
+      - 'null'
+    readOnly: true
+    description: Type of reviewer for the current review outcome.
+    enum:
+      - human
+      - bot
+    example: bot
   reviewerName:
     type:
       - 'string'
       - 'null'
-    description: First and last name of the person who reviewed the AML check.
+    description: |-
+      First and last name of the person who reviewed the AML check.
+      If the result is inherited, this field is set to "bot".
   reviewStartTime:
     type:
       - 'string'
@@ -154,6 +166,43 @@ properties:
     type: array
     items:
       $ref: ./Tag.yaml
+  provenance:
+    type:
+      - object
+      - 'null'
+    readOnly: true
+    description: Origin of the AML check result.
+    properties:
+      inherited:
+        type: boolean
+        description: Specifies if the result is inherited from a previous AML check.
+        example: true
+      inheritedFromAmlCheckId:
+        type: string
+        description: ID of the AML check from which the check inherits its result.
+        maxLength: 50
+        example: aml_chk_0YV8XJT2ZWDR398Q8NFEM7DEPM
+      scope:
+        type: array
+        description: Scope of what is inherited from the source AML check.
+        items:
+          type: string
+          enum:
+            - status-only
+        example:
+          - status-only
+      reasons:
+        type: array
+        description: Reasons that triggered the inheritance of the result.
+        items:
+          type: string
+          enum:
+            - customer_duplicated_by_person_exact_match
+            - customer_duplicated_by_primary_phone_number_exact_match
+            - customer_previous_check_exact_match
+        example:
+          - customer_duplicated_by_person_exact_match
+
   _links:
     type: array
     description: Related links.
