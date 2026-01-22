@@ -1,0 +1,20 @@
+type: object
+description: |-
+  Specifies a maximum order amount for a coupon application.
+  For example, if the restriction amount is $20, 
+  the coupon is only applied to invoices with a total amount of $20 or less.
+required:
+  - type
+  - amount
+  - currency
+properties:
+  type:
+    type: string
+    description: Type of coupon restriction.
+    enum: ["maximum-order-amount"]
+  amount:
+    type: number
+    format: double
+    description: Maximum order amount that is allowed to apply the coupon.
+  currency:
+    $ref: ./CurrencyCode.yaml
