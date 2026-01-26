@@ -1,0 +1,41 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Allocate batch payout requests automatically
+  operationId: PostPayoutRequestBatchAutoAllocate
+  x-sdk-operation-name: autoAllocate
+  description: |-
+    Creates allocations automatically for all payout requests in the batch using the auto-allocation algorithm.
+
+    Each payout request is processed independently.
+  responses:
+    '200':
+      description: Batch auto-allocation completed.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PayoutRequestBatch.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
+

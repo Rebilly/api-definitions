@@ -1,5 +1,29 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Retrieve a payout request allocation
+  operationId: GetPayoutRequestAllocation
+  x-sdk-operation-name: get
+  description: Retrieves a payout request allocation with a specified ID.
+  responses:
+    '200':
+      description: Payout request allocation retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PayoutRequestAllocation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
 patch:
   x-badges:
     - name: Experimental

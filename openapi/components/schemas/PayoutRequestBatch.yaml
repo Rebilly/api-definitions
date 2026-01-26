@@ -1,0 +1,84 @@
+type: object
+properties:
+  id:
+    type: string
+    readOnly: true
+    description: ID of the batch.
+    maxLength: 50
+    example: preq_batch_0YVDMDE2BMC6KBB5MX76RF6T80
+  userId:
+    type: string
+    readOnly: true
+    description: ID of the user who created the batch.
+    maxLength: 50
+    example: usr_0YVCEENYJ3D7Q9EN6BN16HA0G4
+  status:
+    description: Status of the batch.
+    type: string
+    readOnly: true
+    enum:
+      - pending
+      - processing
+      - completed
+      - failed
+    x-enumDescriptions:
+      pending: Batch is pending processing.
+      processing: Batch is currently being processed.
+      completed: Batch processing has completed.
+      failed: Batch processing has failed.
+  totalCount:
+    description: Total number of payout requests in the batch.
+    type: integer
+    readOnly: true
+    minimum: 0
+    example: 10
+  successCount:
+    description: Number of payout requests successfully processed.
+    type: integer
+    readOnly: true
+    minimum: 0
+    example: 8
+  failureCount:
+    description: Number of payout requests that failed to process.
+    type: integer
+    readOnly: true
+    minimum: 0
+    example: 2
+  payoutRequestIds:
+    description: Array of payout request IDs in this batch.
+    type: array
+    readOnly: true
+    items:
+      type: string
+      maxLength: 50
+      example: pout_req_0YVDMDE2BMC6KBB5MX76RF6T80
+  description:
+    description: Optional description of the batch.
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 255
+    example: Batch processed on 2024-01-15
+  createdTime:
+    description: Date and time when the batch was created.
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    description: Date and time when the batch was last updated.
+    $ref: ./UpdatedTime.yaml
+  _links:
+    type: array
+    description: Related links.
+    readOnly: true
+    items:
+      type: object
+      properties:
+        href:
+          description: Link URL.
+          type: string
+        rel:
+          description: Type of link.
+          type: string
+          enum:
+            - self
+            - payoutRequests
+
