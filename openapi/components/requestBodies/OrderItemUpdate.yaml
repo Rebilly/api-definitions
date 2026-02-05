@@ -1,6 +1,4 @@
 type: object
-required:
-  - quantityFilled
 properties:
   quantityFilled:
     description: Filled quantity of the subscription item (experimental property).
@@ -10,3 +8,17 @@ properties:
   excludeFromMrr:
     type: boolean
     description: Specifies if this item should be excluded from monthly recurring revenue calculations.
+  plan:
+    type: object
+    description: Details of the subscription item plan.
+    properties:
+      productOptions:
+        type:
+          - 'object'
+          - 'null'
+        description: Name-value pairs that specify the product options.
+        additionalProperties:
+          type: string
+        example:
+          color: red
+          size: xxl
