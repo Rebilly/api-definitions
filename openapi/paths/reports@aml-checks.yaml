@@ -1,0 +1,54 @@
+get:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Reports
+  tags:
+    - Reports
+  summary: Retrieve an AML checks report
+  operationId: GetAmlCheckReport
+  x-sdk-operation-name: getAmlChecks
+  description: Retrieves an AML checks report.
+  parameters:
+    - name: periodStart
+      in: query
+      description: |-
+        Date and time when the report starts.
+        If not provided or null, the report starts from the first day of the current month.
+      schema:
+        type: string
+        format: date-time
+    - name: periodEnd
+      in: query
+      description: |-
+        Date and time when the report ends.
+        If not provided or null, the report ends at the last day of the current month.
+      schema:
+        type: string
+        format: date-time
+    - name: metric
+      in: query
+      description: Metric on which the report is based.
+      schema:
+        default: aml_checks
+        type: string
+        enum:
+          - aml_checks
+          - aml_check_hits
+    - name: includePropagatedResults
+      in: query
+      description: Specifies if propagated AML checks are included.
+      schema:
+        type: boolean
+    - $ref: ../components/parameters/collectionFilter.yaml
+  responses:
+    '200':
+      description: Report retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ReportAmlChecks.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
