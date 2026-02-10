@@ -9,7 +9,7 @@ content:
           type: string
           enum:
             - pending
-            - flushed
+            - ready
             - approved
             - canceled
             - customer-reversed
@@ -17,7 +17,7 @@ content:
             - admin-reversed
           x-enumDescriptions:
             pending: Request was created by the customer.
-            flushed: Request was assessed, deemed eligible for processing and is ready for approval.
+            ready: Request was assessed, deemed eligible for processing and is ready for approval.
             approved: Request was approved and is ready for processing.
             canceled: Request is canceled by merchant or customer.
             customer-reversed: Request was reversed by the customer.
@@ -32,11 +32,11 @@ content:
           description: |-
             Specifies whether the payout request is blocked or unblocked.
             This field can only be applied to payout requests in the following statuses:
-            `pending`, `flushed`, `approved`, or `in-progress`.
+            `pending`, `ready`, `approved`, or `in-progress`.
 
             When a payout request is blocked, it cannot:
             - Move to the next status in the workflow.
-              For example: `pending` → `flushed` → `approved` → `in-progress`.
+              For example: `pending` → `ready` → `approved` → `in-progress`.
             - Have allocations created.
             - Have allocations processed.
           type: boolean
