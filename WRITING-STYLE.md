@@ -399,8 +399,8 @@ Delete a customer by ID:
 ```
 ### Fields
 
-- Describe what the field is.
-  Use noun phrases for field descriptions.
+- Use [noun phrases](#noun-phrase-examples) for field descriptions.
+  Describe what the field is, not what it does.
 - Avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
 - Avoid starting with "The" or "A".
   Omit articles for ease of reading.
@@ -412,6 +412,22 @@ Example:
 state:
   description: State of the bonus.
 ```
+
+#### Noun phrase examples
+
+Use noun phrases to describe fields.
+
+A noun phrase describes what the field is, not what it does.
+
+**Tip:**
+> Place this imaginary text before your field descriptions: _This field is the …_.
+>
+> Example: _"This field is the"_ Date and time when the coupon expires. \
+> Result: Date and time when the coupon expires.
+>
+> Example: _"This field is the"_ ID of the coupon. \
+> Result: ID of the coupon.
+
 #### ID fields
 
 Avoid repeating the field name as the description.
@@ -424,21 +440,20 @@ Invoice ID:
 
 ```yaml
   invoiceId:
-    description: ID of the invoice that contains the item which generated the revenue.
-```
+    description: ID of the invoice.
 
 Invoice item ID:
 
 ```yaml
   invoiceItemId:
-    description: ID of the invoice item which generated the revenue.
+    description: ID of the invoice item.
 ```
 
 Customer ID:
 
 ```yaml
   customerId:
-    description: ID of the invoiced customer.
+    description: ID of the customer.
 ```
 
 #### Timestamp fields
