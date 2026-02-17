@@ -6,6 +6,7 @@ This topic provides guidance on how to write API documentation descriptions.
 
 - Start all sentences with a capital letter and end them with a period (except summaries).
 - Add meaningful descriptions to all operations, objects, and parameters.
+- Do not start descriptions with articles (The, A, An).
 - Avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
 - Avoid future (often includes "will") and past tense (often includes words ending in "ed").
 - Avoid [passive voice](https://developers.google.com/tech-writing/one/active-voice).
@@ -375,6 +376,11 @@ This section provides guidance on how to write operation, object, and parameter 
 > Example: _"This operation"_ Creates a new customer account. \
 > Result: Creates a new customer account.
 
+> Use "This operation …" as a drafting aid for the first sentence.
+> Do not start the first sentence with "This operation" in the final description.
+
+> In multi-line descriptions, "This operation …" is acceptable in later sentences when it adds clarity.
+
 #### Operation examples
 
 Get a customer by ID:
@@ -402,7 +408,7 @@ Delete a customer by ID:
 - Use [noun phrases](#noun-phrase-examples) for field descriptions.
   Describe what the field is, not what it does.
 - Avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
-- Avoid starting with "The" or "A".
+- Avoid starting with articles (The, A, An).
   Omit articles for ease of reading.
 - Provide detail and link to related content if necessary.
 
@@ -516,7 +522,7 @@ This ID must be described in detail because the reader may not be aware of its c
       Unique website ID.
       This value is a unique identifier which describes a website or websites in Rebilly.
       A website is where an organization obtains a customer through a subscription.
-      For more information, see [Obtain an organization ID and website ID](https://www.rebilly.com/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+      For more information, see [Obtain your organization ID and website ID](https://www.rebilly.com/docs/settings/organizations-and-websites#obtain-your-organization-id-and-website-id).
 ```
 
 ##### Organization ID example
@@ -528,7 +534,7 @@ This ID must be described in detail because the reader may not be aware of its c
     description: |-
       Unique organization ID.
       An organization is an entity that represents a company as a merchant.
-      For more information, see [Obtain an organization ID and website ID](https://www.rebilly.com/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+      For more information, see [Obtain your organization ID and website ID](https://www.rebilly.com/docs/settings/organizations-and-websites#obtain-your-organization-id-and-website-id).
 ```
 
 ### Response objects
@@ -562,7 +568,25 @@ Avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate obje
 - Specifies the trial end date and time.
 ```
 
-Parameter example:
+### Parameters
+
+Parameter descriptions depend on the parameter location.
+
+- For `in: query` parameters, use imperative verb phrases because query parameters modify the request behavior.
+  - Examples: "Filter by player IDs.", "Sort by created time.", "Limit the number of items returned."
+- For `in: path`, `in: header`, and `in: cookie` parameters, use noun phrases that describe what the value is.
+  - Examples: "ID of the transaction.", "Date and time when the coupon expires.", "status of the payout request.", "Total amount of the order."
+- Avoid starting parameter descriptions with articles (The, A, An).
+
+Parameter examples:
+
+```yaml
+  playerIds:
+    type: array
+    description: Filter by player IDs.
+    items:
+      type: string
+```
 
 ```yaml
 bookedFrom:
@@ -573,8 +597,6 @@ bookedFrom:
     pattern: '^\d{4}-\d{2}$'
     example: 2022-01
 ```
-
-Parameter example:
 
 ```yaml
 bookedTo:
