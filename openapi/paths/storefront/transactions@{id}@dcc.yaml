@@ -1,0 +1,73 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Storefront
+  tags:
+    - Storefront transactions
+  summary: Retrieve a transaction DCC offer
+  operationId: StorefrontGetTransactionDccOffer
+  x-sdk-operation-name: getDcc
+  security:
+    - CustomerJWT: []
+  description: Retrieves a transaction DCC offer with a specified ID.
+  responses:
+    '200':
+      description: Transaction DCC offer retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/StorefrontTransaction.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../../components/responses/NotFound.yaml
+patch:
+  x-products:
+    - Storefront
+  tags:
+    - Storefront transactions
+  summary: Update a transaction DCC offer
+  operationId: StorefrontPatchTransactionDccOffer
+  x-sdk-operation-name: updateDcc
+  security:
+    - CustomerJWT: []
+  description: Updates a transaction DCC offer with a specified ID.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - choice
+          properties:
+            choice:
+              type: string
+              description: DCC offer choice.
+              enum:
+                - selected
+                - rejected
+  responses:
+    '200':
+      description: Transaction DCC offer updated.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/StorefrontTransaction.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../../components/responses/NotFound.yaml
+    '422':
+      $ref: ../../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../../components/responses/TooManyRequests.yaml

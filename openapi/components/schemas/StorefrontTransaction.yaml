@@ -300,6 +300,32 @@ properties:
     description: URL to redirect the end-customer when transaction `status` is `waiting-approval` or `offsite`.
     type: string
     format: uri
+  hasDcc:
+    description: Specifies if Dynamic Currency Conversion (DCC) applies to the transaction.
+    type: boolean
+    readOnly: true
+  dcc:
+    description: |-
+      Details of the Dynamic Currency Conversion (DCC).
+      If DCC is not applied to the transaction, this value is `null`.
+    type:
+      - 'object'
+      - 'null'
+    readOnly: true
+    properties:
+      base:
+        description: Initial amount and currency to convert from.
+        $ref: ./Money.yaml
+      quote:
+        description: Suggested amount and currency to convert to.
+        $ref: ./Money.yaml
+      outcome:
+        type: string
+        description: Outcome of the dynamic currency conversion.
+        enum:
+          - unprocessed
+          - rejected
+          - selected
   token:
     description: |-
       Session token used for authentication.
