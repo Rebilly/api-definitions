@@ -202,6 +202,18 @@ properties:
             - customer_previous_check_exact_match
         example:
           - customer_duplicated_by_person_exact_match
+  noMatchReason:
+    readOnly: true
+    description: Reason for the no-match result.
+    type:
+      - 'string'
+      - 'null'
+    enum:
+      - 'no_hits_found'
+      - 'mismatched_hits'
+      - 'hits_are_below_relevance_score_threshold'
+      - 'internal_system_error'
+    example: 'no_hits_found'
 
   _links:
     type: array
