@@ -4,3 +4,13 @@ minimumReleaseAge: 1440
 onlyBuiltDependencies:
   - core-js
   - protobufjs
+
+# Define package resolutions
+overrides:
+  # Overrides to address security vulnerabilities
+  # This is a last-resort measure to address security vulnerabilities.
+  # Ensure that:
+  # - The override is limited in scope to a version range or package
+  #   - Do not: 'axios': '^1.6.3'
+  #   - Do: 'axios@<1.6.3': '^1.6.3'
+  'fast-xml-parser@<5.3.6': '^5.3.6'
