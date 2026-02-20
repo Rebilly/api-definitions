@@ -41,4 +41,14 @@ content:
             - Have allocations processed.
           type: boolean
           example: false
+        blockReason:
+          oneOf:
+            - $ref: ../schemas/PayoutRequestBlockReason.yaml
+            - type: 'null'
+        blockDescription:
+          description: Additional description for blocking the payout request.
+          type:
+            - 'string'
+            - 'null'
+          maxLength: 255
 description: Fields for updating the payout request status, description, and blocked state.

@@ -14,6 +14,22 @@ post:
     Blocks all payout requests in a specified batch.
 
     Each payout request is processed independently.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - reason
+          properties:
+            reason:
+              $ref: ../components/schemas/PayoutRequestBlockReason.yaml
+            description:
+              description: Additional description for blocking the payout requests in the batch.
+              type:
+                - 'string'
+                - 'null'
+              maxLength: 255
   responses:
     '200':
       description: Batch blocking completed.
