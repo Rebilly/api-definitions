@@ -80,7 +80,9 @@ properties:
     maximum: 1000000000
   quantityFilled:
     description: Number of filled product units.
-    type: number
+    type:
+      - 'number'
+      - 'null'
     format: double
     example: 5.125
   usageLimits:
@@ -93,6 +95,10 @@ properties:
       - $ref: ./UsageStatus.yaml
       - type: 'null'
     default: null
+  revision:
+    type: integer
+    readOnly: true
+    description: Revision number that increments with each overriding change to this specific item.
   excludeFromMrr:
     type: boolean
     description: Specifies if this item should be excluded from monthly recurring revenue calculations.
