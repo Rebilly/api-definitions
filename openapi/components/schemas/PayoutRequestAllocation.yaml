@@ -54,16 +54,20 @@ properties:
     type: string
     enum:
       - pending
+      - queued
       - processing
       - completed
       - failed
       - canceled
+      - declined
     x-enumDescriptions:
       pending: Allocation was created and is waiting to be processed.
+      queued: Allocation is queued for processing.
       processing: Allocation is being processed and a transaction is being created.
       completed: Allocation was successfully processed and the transaction was approved.
-      failed: Allocation could not be processed because the transaction was declined or an error occurred.
+      failed: Allocation was not processed because of an error.
       canceled: Allocation was canceled before processing.
+      declined: Allocation was declined by the gateway.
   transactionId:
     description: ID of the transaction that is created when processing this allocation, if applicable.
     type:
