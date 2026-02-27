@@ -23,6 +23,26 @@ properties:
     description: ID of the requested payment instrument to offer for the payout.
     maxLength: 50
     example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
+  splitFromPayoutRequestId:
+    description: |-
+      ID of the payout request from which this request is split,
+      or `null` if this request is not created by a split operation.
+    type:
+      - 'string'
+      - 'null'
+    readOnly: true
+    maxLength: 50
+    example: pout_req_0YVDMDE2BMC6KBB5MX76RF6T80
+  mergedIntoPayoutRequestId:
+    description: |-
+      ID of the payout request that this request is merged into,
+      or `null` if it is not merged into another request.
+    type:
+      - 'string'
+      - 'null'
+    readOnly: true
+    maxLength: 50
+    example: pout_req_0YVDMDE2BMC6KBB5MX76RF6T80
   currency:
     description: Currency of the payout.
     $ref: ./CurrencyCode.yaml
@@ -57,6 +77,8 @@ properties:
       - customer-reversed
       - system-reversed
       - admin-reversed
+      - split
+      - merged
     x-enumDescriptions:
       pending: Request was created by the customer.
       ready: Request was assessed, deemed eligible for processing and is ready for approval.
@@ -69,6 +91,8 @@ properties:
       customer-reversed: Request was reversed by the customer.
       system-reversed: Request was reversed by the system.
       admin-reversed: Request was reversed by the admin.
+      split: Request was split into two or more payout requests.
+      merged: Request was merged into another payout request.
   blocked:
     description: Specifies whether the payout request is blocked or unblocked.
     type: boolean
@@ -129,4 +153,6 @@ properties:
           type: string
           enum:
             - self
+            - splitFrom
+            - mergedInto
             - paymentInstrument

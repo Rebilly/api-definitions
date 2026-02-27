@@ -1,0 +1,20 @@
+type: object
+required:
+  - amounts
+properties:
+  amounts:
+    description: |-
+      Amounts for each new payout request.
+      One request is created per amount.
+      Each amount must be greater than zero.
+      The sum must be less than the original amount.
+      Provide one amount to create two requests, or multiple amounts to create additional requests.
+    type: array
+    minItems: 1
+    maxItems: 100
+    items:
+      type: number
+      format: double
+      x-type: Money
+      exclusiveMinimum: 0
+    example: [50.00, 30.00, 20.00]

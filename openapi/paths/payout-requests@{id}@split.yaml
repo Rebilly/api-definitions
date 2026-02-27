@@ -1,0 +1,54 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Request a payout request split
+  operationId: PostPayoutRequestSplit
+  x-sdk-operation-name: split
+  description: |-
+    Splits a pending payout request into two or more separate requests.
+    Provide an array of amounts; one new payout request is created per amount.
+    The original request amount is reduced by the sum of the amounts and transitions to the `split` status.
+    The total of the provided amounts must be less than the original amount.
+    The remaining amount remains in the original request.
+    This operation returns the newly created payout requests.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PayoutRequestSplit.yaml
+    description: Payout request split parameters.
+    required: true
+  responses:
+    '201':
+      description: Payout requests created by the split operation.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/PayoutRequestV2.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
