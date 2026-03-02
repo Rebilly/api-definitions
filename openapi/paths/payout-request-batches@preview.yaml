@@ -1,0 +1,65 @@
+get:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Preview payout request batch results
+  operationId: GetPayoutRequestBatchPreview
+  x-sdk-operation-name: preview
+  description: |-
+    Retrieves the total number of payout requests that match a specified filter or are associated with an existing batch.
+
+    Use this operation to preview the number of payout requests that would be included in a batch before creating it,
+    or to view aggregate information for an existing batch.
+
+    Provide either a `filter` or `batchId` query parameter, but not both.
+  parameters:
+    - name: filter
+      in: query
+      description: |-
+        Filter string that is used to select payout requests.
+        This field uses the same format as collection filter parameters.
+        
+        Use semicolons to separate multiple filter conditions.
+        Available filter fields: `id`, `status`, `websiteId`, `customerId`, `currency`, `amount`, `createdTime`, `updatedTime`.
+        
+        The `batchId` filter is not supported.
+        This prevents the addition of payout requests that are already included in a batch.
+      schema:
+        type: string
+        example: 'status:pending;websiteId:ws_0YVDMDE2BMC6KBB5MX76RF6T80'
+  responses:
+    '200':
+      description: Preview retrieved.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              filter:
+                description: Filter string that adds payout requests to preview.
+                type: string
+                example: 'status:pending;websiteId:ws_0YVDMDE2BMC6KBB5MX76RF6T80'
+              matchingCount:
+                description: Number of matching payout requests.
+                type: integer
+                minimum: 0
+                example: 42
+    '400':
+      description: |-
+        Invalid parameters.
+        Provide either a `filter` or `batchId`, not both.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ProblemTypes/Problem.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml

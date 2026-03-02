@@ -51,32 +51,62 @@ post:
 
     The batch links multiple payout requests together so they can be auto-allocated and processed together.
     Each payout request can be assigned to only one batch.
-    If any of the specified payout requests are already included in another batch, the operation returns a 409 Conflict error.
+    If any of the specified payout requests are already included in another batch, a `409 Conflict error` is returned.
+
+    Two mutually exclusive approaches are supported:
+    - **Explicit IDs**: Provide an array of payout request IDs in the `payoutRequestIds` field.
+    - **Filter-based**: Provide a `filter` string to select payout requests that match the specified criteria at execution time.
+      To view the number of matching items before creating the batch, use the [Preview payout request batch filter results](../GetPayoutRequestBatchPreview) operation.
   requestBody:
     content:
       application/json:
         schema:
           type: object
-          required:
-            - payoutRequestIds
-          properties:
-            payoutRequestIds:
-              description: Array of payout request IDs to include in the batch.
-              type: array
-              minItems: 1
-              maxItems: 1000
-              items:
-                type: string
-                maxLength: 50
-                example: pout_req_0YVDMDE2BMC6KBB5MX76RF6T80
-            description:
-              description: Optional description of the batch.
-              type:
-                - 'string'
-                - 'null'
-              maxLength: 255
-              example: Batch processed on 2024-01-15
-    description: Payout request batch resource.
+          oneOf:
+            - title: Explicit IDs
+              required:
+                - payoutRequestIds
+              properties:
+                payoutRequestIds:
+                  description: Array of payout request IDs to include in the batch.
+                  type: array
+                  minItems: 1
+                  maxItems: 1000
+                  items:
+                    type: string
+                    maxLength: 50
+                    example: pout_req_0YVDMDE2BMC6KBB5MX76RF6T80
+                description:
+                  description: Optional description of the batch.
+                  type:
+                    - 'string'
+                    - 'null'
+                  maxLength: 255
+                  example: Batch processed on 2024-01-15
+            - title: Filter-based
+              required:
+                - filter
+              properties:
+                filter:
+                  description: |-
+                    Filter string that is used to select payout requests.
+                    This field uses the same format as collection filter parameters.
+                    Use semicolons to separate multiple filter conditions.
+
+                    Available filter fields: `id`, `status`, `websiteId`, `customerId`, `currency`, `amount`, `createdTime`, `updatedTime`.
+
+                    The `batchId` filter is not supported.
+                    This prevents the addition of payout requests that are already included in a batch.
+                  type: string
+                  example: 'status:pending;websiteId:ws_0YVDMDE2BMC6KBB5MX76RF6T80'
+                description:
+                  description: Optional description of the batch.
+                  type:
+                    - 'string'
+                    - 'null'
+                  maxLength: 255
+                  example: Pending payout requests batch - 2024-01-15
+    description: Resource for the payout request batch.
     required: true
   responses:
     '201':
@@ -92,6 +122,12 @@ post:
         application/json:
           schema:
             $ref: ../components/schemas/PayoutRequestBatch.yaml
+    '400':
+      description: Invalid filter provided or no payout requests match the filter.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ProblemTypes/Problem.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
