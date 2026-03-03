@@ -10,7 +10,15 @@ required:
   - method
 properties:
   method:
-    $ref: ./PaymentMethod.yaml
+    allOf:
+      - $ref: ./PaymentMethod.yaml
+      - not:
+          enum:
+            - payment-card
+            - ach
+            - paypal
+            - cash
+            - check
   paymentInstrumentId:
     type: string
     description: ID of the payment instrument.
