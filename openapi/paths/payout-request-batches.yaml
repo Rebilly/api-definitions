@@ -53,9 +53,13 @@ post:
     Each payout request can be assigned to only one batch.
     If any of the specified payout requests are already included in another batch, a `409 Conflict error` is returned.
 
+    Both approaches are limited to a maximum of 1000 payout requests per batch.
+
     Two mutually exclusive approaches are supported:
     - **Explicit IDs**: Provide an array of payout request IDs in the `payoutRequestIds` field.
     - **Filter-based**: Provide a `filter` string to select payout requests that match the specified criteria at execution time.
+      Payout requests that are already included in a batch are automatically excluded from the filter results.
+      If more than 1000 payout requests match the filter, only the oldest 1000 are included in the batch, sorted by creation time.
       To view the number of matching items before creating the batch, use the [Preview payout request batch filter results](../GetPayoutRequestBatchPreview) operation.
   requestBody:
     content:
@@ -97,6 +101,8 @@ post:
 
                     The `batchId` filter is not supported.
                     This prevents the addition of payout requests that are already included in a batch.
+
+                    If more than 1000 payout requests match the filter, only the oldest 1000 are included in the batch, sorted by creation time.
                   type: string
                   example: 'status:pending;websiteId:ws_0YVDMDE2BMC6KBB5MX76RF6T80'
                 description:
