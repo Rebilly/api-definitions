@@ -13,8 +13,6 @@ get:
 
     Use this operation to preview the number of payout requests that would be included in a batch before creating it,
     or to view aggregate information for an existing batch.
-
-    Provide either a `filter` or `batchId` query parameter, but not both.
   parameters:
     - name: filter
       in: query
@@ -48,9 +46,7 @@ get:
                 minimum: 0
                 example: 42
     '400':
-      description: |-
-        Invalid parameters.
-        Provide either a `filter` or `batchId`, not both.
+      description: Empty or invalid filter provided.
       content:
         application/json:
           schema:

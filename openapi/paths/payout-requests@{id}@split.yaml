@@ -12,10 +12,9 @@ post:
   x-sdk-operation-name: split
   description: |-
     Splits a pending payout request into two or more separate requests.
-    Provide an array of amounts; one new payout request is created per amount.
-    The original request amount is reduced by the sum of the amounts and transitions to the `split` status.
-    The total of the provided amounts must be less than the original amount.
-    The remaining amount remains in the original request.
+    Provide an array of at least two amounts; one new payout request is created per amount.
+    The sum of the amounts must equal the original payout request amount.
+    The original request transitions to the `split` status.
     This operation returns the newly created payout requests.
   requestBody:
     content:
