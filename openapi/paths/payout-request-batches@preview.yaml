@@ -23,8 +23,8 @@ get:
         Use semicolons to separate multiple filter conditions.
         Available filter fields: `id`, `status`, `websiteId`, `customerId`, `currency`, `amount`, `createdTime`, `updatedTime`.
         
-        The `batchId` filter is not supported.
-        This prevents the addition of payout requests that are already included in a batch.
+        If a `batchId` filter is provided, it is ignored.
+        Payout requests that are already included in a batch are always excluded from the results.
       schema:
         type: string
         example: 'status:pending;websiteId:ws_0YVDMDE2BMC6KBB5MX76RF6T80'
