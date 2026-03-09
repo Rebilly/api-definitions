@@ -9,10 +9,9 @@ get:
   operationId: GetPayoutRequestBatchPreview
   x-sdk-operation-name: preview
   description: |-
-    Retrieves the total number of payout requests that match a specified filter or are associated with an existing batch.
+    Retrieves aggregate information for the payout requests that match a specified filter.
 
-    Use this operation to preview the number of payout requests that would be included in a batch before creating it,
-    or to view aggregate information for an existing batch.
+    If more than 1000 payout requests match the filter, only the oldest 1000 are included in the preview.
   parameters:
     - name: filter
       in: query
@@ -37,10 +36,28 @@ get:
             type: object
             properties:
               matchingCount:
-                description: Number of matching payout requests.
+                description: Total number of matching payout requests, regardless of the preview limit.
                 type: integer
                 minimum: 0
                 example: 42
+              customerCount:
+                description: Number of unique customers in the matching payout requests.
+                type: integer
+                minimum: 0
+                example: 3
+              totalAmountByCurrency:
+                description: Total amount grouped by currency for matching payout requests.
+                type: array
+                items:
+                  type: object
+                  required:
+                    - currency
+                    - amount
+                  properties:
+                    currency:
+                      $ref: ../components/schemas/CurrencyCode.yaml
+                    amount:
+                      type: number
     '400':
       description: Empty or invalid filter provided.
       content:

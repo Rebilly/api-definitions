@@ -44,6 +44,27 @@ properties:
     readOnly: true
     minimum: 0
     example: 2
+  customerCount:
+    description: Number of unique customers in the batch.
+    type: integer
+    readOnly: true
+    minimum: 0
+    example: 3
+  totalAmountByCurrency:
+    description: Total payout amount grouped by currency in the batch.
+    type: array
+    readOnly: true
+    items:
+      type: object
+      additionalProperties: false
+      required:
+        - currency
+        - amount
+      properties:
+        currency:
+          $ref: ./CurrencyCode.yaml
+        amount:
+          type: number
   description:
     description: Optional description of the batch.
     type:
