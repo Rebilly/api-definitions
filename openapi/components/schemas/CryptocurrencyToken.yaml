@@ -1,28 +1,29 @@
 type: object
-title: Alternative payment token
+title: Cryptocurrency token
 required:
   - method
-  - billingAddress
 properties:
   method:
     description: Payment method of the token.
     type: string
-    allOf:
-      - $ref: ./AlternativePaymentMethods.yaml
-      - not:
-          enum:
-            - payment-card
-            - paypal
-            - ach
-            - echeck
-            - digital-wallet
-            - plaid-account
-            - Khelocard
-            - Klarna
-            - cryptocurrency
+    enum: [cryptocurrency]
+  walletName:
+    description: Name of the crypto wallet.
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 255
+  walletAddress:
+    description: Address of the crypto wallet.
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 255
   billingAddress:
     description: Billing address object.
-    $ref: ./ContactObject.yaml
+    oneOf:
+      - $ref: ./ContactObject.yaml
+      - type: 'null'
   id:
     description: ID of the token.
     readOnly: true
