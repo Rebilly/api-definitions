@@ -1,0 +1,32 @@
+description: Viva gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Viva credentials object.
+        properties:
+          clientId:
+            type: string
+            description: ID of the Viva OAuth 2.0.
+          clientSecret:
+            type: string
+            description: Secret of the Viva OAuth 2.0.
+            format: password
+            writeOnly: true
+          merchantId:
+            type: string
+            description: ID of the Viva basic authentication.
+          apiKey:
+            type: string
+            description: API key for Viva basic authentication.
+            format: password
+            writeOnly: true
+        required:
+          - clientId
+          - clientSecret
+          - merchantId
+          - apiKey
