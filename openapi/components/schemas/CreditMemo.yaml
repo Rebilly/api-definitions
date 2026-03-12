@@ -121,6 +121,7 @@ properties:
     readOnly: true
     enum:
       - draft
+      - quotation
       - issued
       - applied
       - partially-applied
@@ -129,6 +130,9 @@ properties:
       draft: |-
         Credit memo is in process of being created.
         The full amount of the credit memo is unused, and the customer has not seen it yet.
+      quotation: |-
+        Credit memo is associated with a quotation invoice.
+        If the customer approves the quotation, the credit memo changes to the `issued` state.
       issued: Credit memo is available with a full amount to be applied.
       applied: |-
         The full amount of the credit memo has been applied.
