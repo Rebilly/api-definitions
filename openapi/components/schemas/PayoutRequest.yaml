@@ -92,15 +92,10 @@ properties:
           $ref: ./TransactionId.yaml
         transactionResult:
           description: Result of a transaction.
-          type: string
+          allOf:
+            - $ref: ./TransactionResult.yaml
           x-basic: true
           readOnly: true
-          enum:
-            - abandoned
-            - approved
-            - canceled
-            - declined
-            - unknown
         method:
           $ref: ./PaymentMethod.yaml
         gatewayName:

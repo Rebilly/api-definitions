@@ -31,6 +31,11 @@ properties:
     description: ID of the payment instrument allocated to the payout request.
     maxLength: 50
     example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
+  paymentMethod:
+    description: Payment method of the allocation.
+    allOf:
+      - $ref: ./PaymentMethod.yaml
+    readOnly: true
   gatewayAccountId:
     type: string
     description: ID of the gateway account to use for processing this allocation.
@@ -76,6 +81,18 @@ properties:
     readOnly: true
     maxLength: 50
     example: txn_0YVB8KPKNXCBR9EDX7JHSED75N
+  transactionResult:
+    description: Result of the transaction created for this allocation, if applicable.
+    readOnly: true
+    oneOf:
+      - $ref: ./TransactionResult.yaml
+      - type: 'null'
+  transactionStatus:
+    description: Status of the transaction created for this allocation, if applicable.
+    readOnly: true
+    oneOf:
+      - $ref: ./TransactionStatus.yaml
+      - type: 'null'
   createdTime:
     description: Date and time when the allocation for the payout request was created.
     $ref: ./CreatedTime.yaml

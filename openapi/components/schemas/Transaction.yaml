@@ -29,35 +29,15 @@ properties:
       - void
   status:
     description: Status of the transaction.
-    type: string
+    allOf:
+      - $ref: ./TransactionStatus.yaml
     readOnly: true
-    enum:
-      - completed
-      - conn-error
-      - disputed
-      - never-sent
-      - offsite
-      - partially-refunded
-      - pending
-      - refunded
-      - sending
-      - timeout
-      - voided
-      - waiting-approval
-      - waiting-capture
-      - waiting-gateway
-      - waiting-refund
   result:
     description: Result of the transaction.
-    type: string
+    allOf:
+      - $ref: ./TransactionResult.yaml
     x-basic: true
     readOnly: true
-    enum:
-      - abandoned
-      - approved
-      - canceled
-      - declined
-      - unknown
   amount:
     x-type: Money
     x-sortable: true
