@@ -1,14 +1,12 @@
 allOf:
-  - title: Validation error
+  - title: Bad request
   - type: object
     properties:
       status:
         type: integer
         description: HTTP status code.
-        minimum: 422
-        maximum: 422
-  - $ref: ./BaseProblem.yaml
-  - type: object
-    properties:
+        minimum: 400
+        maximum: 400
       invalidFields:
         $ref: ./InvalidFields.yaml
+  - $ref: ./BaseProblem.yaml
