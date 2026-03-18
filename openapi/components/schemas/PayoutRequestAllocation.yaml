@@ -1,7 +1,7 @@
 type: object
 required:
   - payoutRequestId
-  - paymentInstrumentId  
+  - paymentInstrumentId
   - gatewayAccountId
   - amount
   - currency
@@ -84,15 +84,39 @@ properties:
   transactionResult:
     description: Result of the transaction created for this allocation, if applicable.
     readOnly: true
-    oneOf:
-      - $ref: ./TransactionResult.yaml
-      - type: 'null'
+    type:
+      - 'string'
+      - 'null'
+    enum:
+      - abandoned
+      - approved
+      - canceled
+      - declined
+      - unknown
+      - null
   transactionStatus:
     description: Status of the transaction created for this allocation, if applicable.
     readOnly: true
-    oneOf:
-      - $ref: ./TransactionStatus.yaml
-      - type: 'null'
+    type:
+      - 'string'
+      - 'null'
+    enum:
+      - completed
+      - conn-error
+      - disputed
+      - never-sent
+      - offsite
+      - partially-refunded
+      - pending
+      - refunded
+      - sending
+      - timeout
+      - voided
+      - waiting-approval
+      - waiting-capture
+      - waiting-gateway
+      - waiting-refund
+      - null
   createdTime:
     description: Date and time when the allocation for the payout request was created.
     $ref: ./CreatedTime.yaml

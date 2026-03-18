@@ -91,9 +91,14 @@ properties:
           description: ID of the transaction to which the payout request is allocated.
           $ref: ./TransactionId.yaml
         transactionResult:
-          description: Result of a transaction.
-          allOf:
-            - $ref: ./TransactionResult.yaml
+          type: string
+          description: Result of the transaction.
+          enum:
+            - abandoned
+            - approved
+            - canceled
+            - declined
+            - unknown
           x-basic: true
           readOnly: true
         method:
