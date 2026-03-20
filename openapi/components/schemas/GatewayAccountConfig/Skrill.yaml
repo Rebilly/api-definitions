@@ -25,6 +25,11 @@ allOf:
           currencyAccountIds:
             type: string
             description: Comma-separated list of currency account IDs.
+          merchantId:
+            type: string
+            description: |-
+              ID of the Skrill merchant account.
+              This value is required if `enableCustomerVerification` is set to `true`.
         required:
           - accountEmail
           - secretWord
@@ -40,3 +45,8 @@ allOf:
             type: boolean
             description: Specifies whether to use SPX code for PIX payment method.
             default: false
+          enableCustomerVerification:
+            type: boolean
+            description: Specifies whether to perform a Customer Verification Service check before the payout.
+            default: false
+            example: false
