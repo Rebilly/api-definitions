@@ -250,6 +250,25 @@ properties:
               type: string
               format: email
             default: [ ]
+      payoutRequestAllocationOrder:
+        description: |-
+          Default order for auto-allocation of payout requests.
+          When set, this value is used when a payout request batch does not specify its own allocation order.
+          The order defines which payment instruments are attempted first during auto-allocation.
+          Must contain `selected-payment-instrument` exactly once.
+          Valid values: `payment-card` (payment cards), `alternative-payment-methods` (catch-all for alternative payment methods), `selected-payment-instrument` (customer-requested instrument), or any payment method API name (for example, `paypal`, `Interac-eTransfer`).
+        type:
+          - 'array'
+          - 'null'
+        items:
+          type: string
+        minItems: 2
+        maxItems: 25
+        uniqueItems: true
+        example:
+          - payment-card
+          - alternative-payment-methods
+          - selected-payment-instrument
   taxNumbers:
     type:
       - 'array'

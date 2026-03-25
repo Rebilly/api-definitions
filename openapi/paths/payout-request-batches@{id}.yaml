@@ -31,4 +31,41 @@ get:
       $ref: ../components/responses/NotFound.yaml
     '429':
       $ref: ../components/responses/TooManyRequests.yaml
+patch:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Update a payout request batch
+  operationId: PatchPayoutRequestBatch
+  x-sdk-operation-name: patch
+  description: |-
+    Partially updates a payout request batch with a specified ID.
+    Use this operation to update the description and allocation order.
+  requestBody:
+    $ref: ../components/requestBodies/PatchPayoutRequestBatch.yaml
+  responses:
+    '200':
+      description: Payout request batch updated.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PayoutRequestBatch.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
 

@@ -1,0 +1,37 @@
+content:
+  application/json:
+    schema:
+      type: object
+      title: Patch payout request batch
+      properties:
+        description:
+          description: |-
+            Description of the batch.
+            Omit this property when not updating the description.
+            Do not send `null`; use a string value when this property is present.
+          type: string
+          maxLength: 255
+        allocationOrder:
+          description: |-
+            Order for auto-allocation of payout requests in this batch.
+            When set, this field overrides the organization-level allocation order during batch auto-allocation.
+            Must contain `selected-payment-instrument` exactly once.
+            Valid values: `payment-card` (payment cards), `alternative-payment-methods` (catch-all for alternative payment methods), `selected-payment-instrument` (customer-requested instrument), or any payment method API name (for example, `paypal`, `Interac-eTransfer`).
+            Omit this property when not updating the allocation order.
+            Do not send `null`; use an array value when this property is present.
+          type: array
+          items:
+            type: string
+          minItems: 2
+          maxItems: 25
+          uniqueItems: true
+          example:
+            - paypal
+            - Interac-eTransfer
+            - payment-card
+            - alternative-payment-methods
+            - selected-payment-instrument
+description: |-
+  Fields for updating the payout request batch.
+  At least one property must be present.
+  Do not set `description` or `allocationOrder` to `null`.

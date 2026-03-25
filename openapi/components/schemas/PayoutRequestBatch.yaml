@@ -72,6 +72,26 @@ properties:
       - 'null'
     maxLength: 255
     example: Batch processed on 2024-01-15
+  allocationOrder:
+    description: |-
+      Order for auto-allocation of payout requests in this batch.
+      When set, this field overrides the organization-level allocation order during batch auto-allocation.
+      Must contain `selected-payment-instrument` exactly once.
+      Valid values: `payment-card` (payment cards), `alternative-payment-methods` (catch-all for alternative payment methods), `selected-payment-instrument` (customer-requested instrument), or any payment method API name (for example, `paypal`, `Interac-eTransfer`).
+    type:
+      - 'array'
+      - 'null'
+    items:
+      type: string
+    minItems: 2
+    maxItems: 25
+    uniqueItems: true
+    example:
+      - paypal
+      - Interac-eTransfer
+      - payment-card
+      - alternative-payment-methods
+      - selected-payment-instrument
   createdTime:
     description: Date and time when the batch was created.
     $ref: ./CreatedTime.yaml
