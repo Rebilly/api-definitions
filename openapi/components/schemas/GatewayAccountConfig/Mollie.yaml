@@ -1,0 +1,18 @@
+description: Mollie gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Mollie credentials object.
+        properties:
+          apiKey:
+            type: string
+            description: Mollie API key.
+            format: password
+            writeOnly: true
+        required:
+          - apiKey
