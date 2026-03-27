@@ -1,0 +1,49 @@
+get:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Reports
+  tags:
+    - Reports
+  summary: Retrieve AML inherited-match report
+  operationId: GetAmlInheritedMatchSummaryReport
+  x-sdk-operation-name: getAmlChecksInheritedSummary
+  description: |-
+    Retrieves a summary of AML checks that inherit status from another check,
+    grouped by provenance reason, for the selected period.
+
+    Each category row contains the number of checks. This value is used to calculate the percentage of all inherited checks in the period.
+    Propagated checks, which are reviewed without a human reviewer, are included in the total.
+
+    Use the collection filter to filter results by AML check fields from the AML checks report.
+  parameters:
+    - name: periodStart
+      in: query
+      description: |-
+        Date and time when the report starts.
+        If this value is not provided or is `null`, the report starts on the first day of the current month.
+      schema:
+        type: string
+        format: date-time
+    - name: periodEnd
+      in: query
+      description: |-
+        Date and time when the report ends.
+        If this value is not provided or is `null`, the report ends on the last day of the current month.
+      schema:
+        type: string
+        format: date-time
+    - $ref: ../components/parameters/collectionFilter.yaml
+  responses:
+    '200':
+      description: Report retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ReportAmlChecksInheritedSummary.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml

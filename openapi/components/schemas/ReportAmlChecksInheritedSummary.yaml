@@ -1,0 +1,29 @@
+type: object
+description: Summary of inherited AML checks, grouped by provenance reason.
+properties:
+  totalInherited:
+    description: Number of AML checks in the period that have inherited status.
+    type: integer
+  categories:
+    description: Categories of inherited checks, grouped by provenance reason.
+    type: array
+    items:
+      type: object
+      properties:
+        reason:
+          description: Provenance reason code for the inherited status.
+          type: string
+        count:
+          description: Number of inherited checks for this reason code.
+          type: integer
+        percentage:
+          description: Percentage of inherited checks for this reason code, calculated as a proportion of `totalInherited`.
+          type: number
+          format: float
+      required:
+        - reason
+        - count
+        - percentage
+required:
+  - totalInherited
+  - categories
