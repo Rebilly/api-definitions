@@ -6,6 +6,8 @@ get:
   tags:
     - Credit memos
   summary: Retrieve a credit memo
+  parameters:
+    - $ref: ../components/parameters/mediaTypeJsonPdf.yaml
   operationId: GetCreditMemo
   x-sdk-operation-name: get
   security:
@@ -20,6 +22,10 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/CreditMemo.yaml
+        application/pdf:
+          schema:
+            type: string
+            format: binary
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
