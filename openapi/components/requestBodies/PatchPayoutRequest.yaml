@@ -12,17 +12,26 @@ content:
             - ready
             - approved
             - canceled
-            - customer-reversed
-            - system-reversed
-            - admin-reversed
           x-enumDescriptions:
             pending: Request was created by the customer.
             ready: Request was assessed, deemed eligible for processing and is ready for approval.
             approved: Request was approved and is ready for processing.
-            canceled: Request is canceled by merchant or customer.
-            customer-reversed: Request was reversed by the customer.
-            system-reversed: Request was reversed by the system.
-            admin-reversed: Request was manually reversed.
+            canceled: Request is canceled. This status requires the `canceledBy` field.
+        canceledBy:
+          description: |-
+            Initiator of the cancellation.
+            Required when `status` is `canceled`.
+          type: string
+          enum:
+            - customer
+            - merchant
+            - system
+        cancellationDescription:
+          description: Description of the cancellation reason.
+          type:
+            - 'string'
+            - 'null'
+          maxLength: 255
         description:
           description: Description of the payout request.
           type:
