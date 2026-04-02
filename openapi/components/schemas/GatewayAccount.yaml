@@ -429,6 +429,15 @@ properties:
         Do not allow any payouts with this gateway.
         This is the default value,
         merchants must opt into payouts.
+  transactionEmailAliasTemplate:
+    description: |-
+      Email address template used in place of a customer's real email address when sending transaction data to a processor.
+      Use `{{customerId}}` as a placeholder for the customer's ID.
+      When empty, the customer's real email address is used.
+    type:
+      - 'string'
+      - 'null'
+    example: '{{customerId}}@receipts.example.com'
   customFields:
     $ref: ./ResourceCustomFields.yaml
   createdTime:
