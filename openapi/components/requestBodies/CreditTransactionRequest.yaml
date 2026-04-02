@@ -122,7 +122,13 @@ content:
           format: date-time
 
         payoutRequestId:
-          description: ID of the payout request for which the transaction is fully allocated.
+          deprecated: true
+          description: |-
+            ID of the payout request for which the transaction is fully allocated.
+
+            > **Note:** Use the payout request allocation flow instead of this field.
+            Create an allocation with `POST /payout-request-allocations`,
+            then initiate processing with `POST /payout-request-allocations/process`.
           writeOnly: true
           type: string
           maxLength: 50
