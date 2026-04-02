@@ -1,0 +1,24 @@
+description: Configuration for the PayXpert gateway.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Credentials object for PayXpert.
+        properties:
+          username:
+            type: string
+            description: Username for the PayXpert API.
+          password:
+            type: string
+            description: Password for the PayXpert API.
+            format: password
+            writeOnly: true
+        required:
+          - username
+          - password
+      threeDSecureServer:
+        $ref: ./ThreeDSecureIO3dsServer.yaml
