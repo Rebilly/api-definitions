@@ -1,0 +1,24 @@
+parameters:
+  - $ref: ../components/parameters/customerId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Customers
+  summary: Retrieve customer credit balance
+  operationId: GetCustomerCreditBalance
+  x-sdk-operation-name: getCustomerCreditBalance
+  description: Customer credit balance grouped by currency.
+  responses:
+    '200':
+      description: Customer credit balance retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CustomerCreditBalance.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

@@ -1,0 +1,23 @@
+type: object
+required:
+  - balances
+properties:
+  balances:
+    description: Customer credit balances grouped by currency.
+    readOnly: true
+    type: array
+    items:
+      type: object
+      required:
+        - currency
+        - unallocatedAmount
+      properties:
+        currency:
+          $ref: ./CurrencyCode.yaml
+        unallocatedAmount:
+          description: Sum of unallocated credit memo amounts for the currency.
+          readOnly: true
+          type: number
+          format: double
+          x-type: Money
+          x-currency-field: currency
