@@ -1,14 +1,5 @@
 type: object
-required:
-  - startSendingTime
-  - messages
 properties:
-  id:
-    type: string
-    description: ID of the broadcast message.
-    readOnly: true
-    maxLength: 50
-    example: mail_bcst_0YV8XW5EXWDVEAP64XP8CY2X40
   filter:
     type:
       - 'string'
@@ -23,9 +14,7 @@ properties:
     example: 'firstName:John;lastName:Doe'
   title:
     type: string
-    description: |-
-      Title of the message.
-      This title displays in reports.
+    description: Title of the message. This title displays in reports.
     maxLength: 255
   messages:
     type: array
@@ -115,29 +104,13 @@ properties:
               - locale
       required:
         - templates
-  splitTestStartTime:
-    readOnly: true
-    type:
-      - 'string'
-      - 'null'
-    format: date-time
-    description: Date and time when the split test messages are scheduled to send.
   startSendingTime:
     type: string
     format: date-time
     description: Date and time when the message is scheduled to send.
   status:
-    readOnly: true
     type: string
-    description: Status of the broadcast message.
+    description: Status of the broadcast message. Setting it to `archived` archives the message, but only if it has already been sent.
     enum:
       - draft
-      - sending
-      - sent
       - archived
-  createdTime:
-    $ref: ./CreatedTime.yaml
-  updatedTime:
-    $ref: ./UpdatedTime.yaml
-  _links:
-    $ref: ./SelfLink.yaml
