@@ -1,0 +1,18 @@
+description: Txn gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Txn credentials object.
+        properties:
+          apiKey:
+            type: string
+            description: API key of the Txn.
+            format: password
+            writeOnly: true
+        required:
+          - apiKey
