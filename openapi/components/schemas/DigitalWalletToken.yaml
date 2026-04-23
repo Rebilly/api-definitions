@@ -39,15 +39,27 @@ properties:
       bin:
         description: |-
           Bank Identification Number (BIN) of the payment card.
-          This value is the same as the first 6 digits of the associated Primary Account Number (PAN).
+          This value is the same as the first 6 digits of the associated Device Primary Account Number (DPAN).
         type:
           - 'string'
           - 'null'
         format: bin
         readOnly: true
       last4:
-        description: Last 4 digits of the Primary Account Number (PAN) of the payment card.
+        description: |-
+          Last 4 digits of the Device Primary Account Number (DPAN) of the payment card.
+          The DPAN is the tokenized card number used in digital wallet transactions,
+          as opposed to the Funding Primary Account Number (FPAN) which is the physical card number visible to the cardholder.
         type: string
+        readOnly: true
+      fpanLast4:
+        description: |-
+          Last 4 digits of the Funding Primary Account Number (FPAN) of the payment card.
+          The FPAN is the physical card number visible to the cardholder,
+          as opposed to the Device Primary Account Number (DPAN) used in digital wallet transactions.
+        type:
+          - 'string'
+          - 'null'
         readOnly: true
       brand:
         readOnly: true
