@@ -12,6 +12,10 @@ post:
   x-sdk-operation-name: split
   description: |-
     Splits a pending payout request into two or more separate requests.
+
+    Use this operation when the full amount cannot be processed due to amount restrictions, but a smaller amount can be processed.
+    For example, if a payout request for `$4,000` cannot be processed, but `$3,000` can be processed, split the request into two. This allows you to approve and process `$3,000` instead of blocking the entire request.
+
     Provide an array of at least two amounts; one new payout request is created per amount.
     The sum of the amounts must equal the original payout request amount.
     The original request transitions to the `split` status.
