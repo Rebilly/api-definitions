@@ -22,6 +22,21 @@ allOf:
             description: Awepay secret key for the P2P REST API.
             format: password
             writeOnly: true
+          apiKey:
+            type: string
+            description: Awepay API key for REST API.
+            format: password
+            writeOnly: true
+          publicKey:
+            type: string
+            description: Awepay public key for REST API.
+            x-multiline: true
+          privateKey:
+            type: string
+            description: Awepay private key for REST API.
+            format: password
+            x-multiline: true
+            writeOnly: true
         required:
           - sid
           - rcode
@@ -32,3 +47,12 @@ allOf:
           useP2pRest:
             type: boolean
             description: Specifies whether to use the P2P REST API.
+          useRestApi:
+            type: boolean
+            description: Specifies whether to use REST API.
+          paymentCode:
+            type: string
+            description: Awepay payment code.
+          methodType:
+            type: string
+            description: Awepay method type.
