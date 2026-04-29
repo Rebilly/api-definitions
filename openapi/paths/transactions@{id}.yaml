@@ -15,6 +15,7 @@ get:
   description: Retrieves a transaction with a specified ID.
   parameters:
     - $ref: ../components/parameters/collectionExpand.yaml
+    - $ref: ../components/parameters/mediaTypeJsonPdf.yaml
   responses:
     '200':
       description: Transaction retrieved.
@@ -22,6 +23,10 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/Transaction.yaml
+        application/pdf:
+          schema:
+            type: string
+            format: binary
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
