@@ -1,0 +1,27 @@
+type: object
+required:
+  - invoiceId
+  - currency
+  - appliedCreditMemos
+  - remainingInvoiceAmount
+properties:
+  invoiceId:
+    type: string
+    description: ID of the invoice.
+    readOnly: true
+    maxLength: 50
+    example: in_0YVF9605RKC62BP14NE2R7V2XT
+  currency:
+    $ref: ./CurrencyCode.yaml
+    readOnly: true
+  appliedCreditMemos:
+    type: array
+    readOnly: true
+    description: List of credit memos applied to the invoice and the amount allocated from each.
+    items:
+      $ref: ./InvoiceAppliedCreditMemoAllocation.yaml
+  remainingInvoiceAmount:
+    description: Remaining amount due on the invoice after credit memo allocation.
+    type: number
+    readOnly: true
+    format: double

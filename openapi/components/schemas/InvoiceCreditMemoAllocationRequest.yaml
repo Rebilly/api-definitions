@@ -1,0 +1,26 @@
+type: object
+description: |-
+  Allocation request settings.
+  Credit memo IDs are not accepted and are selected automatically by the system.
+properties:
+  amount:
+    type: number
+    format: double
+    exclusiveMinimum: 0
+    description: |-
+      Optional maximum amount to allocate from customer credit memos to the invoice.
+      If provided, allocation is capped at this value.
+      If omitted, the allocated amount is the lesser of:
+      - Invoice unpaid amount.
+      - Available allocatable credit memo balance.
+  allocationOrder:
+    type: string
+    description: |-
+      Credit memo application order.
+    enum:
+      - oldest-first
+      - newest-first
+    x-enumDescriptions:
+      oldest-first: Applies oldest allocatable credit memos first.
+      newest-first: Applies newest allocatable credit memos first.
+    default: oldest-first

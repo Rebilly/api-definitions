@@ -1,0 +1,44 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Core
+  tags:
+    - Invoices
+  summary: Allocate customer credit balance to an invoice
+  operationId: PostInvoiceAllocateCreditBalance
+  x-sdk-operation-name: allocateCreditBalance
+  description: |-
+    Allocates existing allocatable credit memos related to the invoice customer.
+    Specific credit memos cannot be provided in the request and are selected automatically.
+    Allocation can be capped with `amount`.
+    Credit memos are applied automatically in the specified allocation order.
+    If no order is specified, `oldest-first` is used.
+  requestBody:
+    description: Invoice credit memo automatic allocation settings.
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/InvoiceCreditMemoAllocationRequest.yaml
+  responses:
+    '200':
+      description: Credit memos allocated to invoice.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InvoiceCreditMemoAllocationResponse.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
