@@ -16,3 +16,15 @@ allOf:
             writeOnly: true
         required:
           - apiKey
+      settings:
+        type: object
+        description: Txn settings object.
+        properties:
+          payoutNetwork:
+            type: string
+            description: Blockchain network to use for the payout.
+            enum:
+              - 'btc'
+              - 'usdt'
+              - 'eth'
+              - 'xrp'
