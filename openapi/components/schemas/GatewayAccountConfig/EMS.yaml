@@ -54,11 +54,24 @@ allOf:
           merchantName:
             type: string
             description: Merchant name for SFTP reconciliation.
+          sftpUsername:
+            type: string
+            description: SFTP reconciliation username.
+          sftpPassword:
+            type: string
+            format: password
+            description: SFTP reconciliation password.
+            writeOnly: true
           sftpPrivateKey:
             type: string
             format: password
             description: SFTP reconciliation private key.
             x-multiline: true
+            writeOnly: true
+          sftpKeyPassphrase:
+            type: string
+            format: password
+            description: Passphrase of the SFTP private key.
             writeOnly: true
         required:
           - storeId
