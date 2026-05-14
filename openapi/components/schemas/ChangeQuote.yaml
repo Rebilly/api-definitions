@@ -173,6 +173,20 @@ properties:
           If this value is `null`, the related order autopay is not affected.
       shipping:
         $ref: ./Shipping.yaml
+      deliveryAddress:
+        description: |-
+          Delivery address of the order.
+          If this value is `null`, the order delivery address is not affected.
+        oneOf:
+          - $ref: ./ContactObject.yaml
+          - type: 'null'
+      billingAddress:
+        description: |-
+          Billing address of the order.
+          If this value is `null`, the order billing address is not affected.
+        oneOf:
+          - $ref: ./ContactObject.yaml
+          - type: 'null'
   invoicePreview:
     type: object
     description: Preview of the quote invoice.
