@@ -129,6 +129,20 @@ properties:
             minLength: 20
             maxLength: 50
             example: '35d1795750c585984f7e6b01c0ca6e19'
+      payoutRequest:
+        type: object
+        description: Payout request settings for the website.
+        properties:
+          automaticReadinessEnabled:
+            type: boolean
+            default: false
+            description: Specifies whether pending payout requests are automatically marked as ready after the pending period.
+          pendingPeriodHours:
+            type: integer
+            description: Number of hours a payout request stays pending before the automatic readiness job can set it to ready.
+            minimum: 1
+            maximum: 8760
+            default: 48
   logoId:
     type:
       - 'string'
