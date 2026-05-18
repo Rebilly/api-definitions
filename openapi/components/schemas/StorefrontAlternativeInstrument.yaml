@@ -36,6 +36,19 @@ properties:
     $ref: ./LastPaymentTime.yaml
   customFields:
     $ref: ./ResourceCustomFields.yaml
+  referenceData:
+    description: |-
+      Subset of payment instrument reference data available to the authenticated customer.
+      Contains only fields that are safe to expose on the Storefront.
+    type: object
+    readOnly: true
+    properties:
+      walletName:
+        description: Name of the cryptocurrency wallet associated with the payment instrument. This field is only applicable for cryptocurrency payment instruments.
+        type:
+          - 'string'
+          - 'null'
+    additionalProperties: false
   token:
     description: |-
       New customer JSON Web Token (JWT) that is used for further requests.
