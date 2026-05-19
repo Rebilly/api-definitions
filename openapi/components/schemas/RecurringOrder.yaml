@@ -354,12 +354,14 @@ properties:
     format: date-time
     readOnly: true
   currentPeriodEnd:
-    description: Date and time of the current service period end.
+    description: |-
+      Date and time of the current service period end.
+      If subscriptions have different recurring settings or the order is not active, providing this field causes the request to be rejected with a conflict.
+      This field is ignored if the order is in trial.
     type:
       - 'string'
       - 'null'
     format: date-time
-    readOnly: true
   renewalTime:
     description: Date and time when the next subscription in this recurring order renews.
     type:
