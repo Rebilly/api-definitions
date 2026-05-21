@@ -1,0 +1,105 @@
+type: object
+required:
+  - attribute
+  - displayName
+  - requirementLevel
+  - validationType
+  - order
+  - step
+properties:
+  attribute:
+    type: string
+    description: |-
+      Attribute of the Keycloak user profile.
+      This value determines which user attribute the field maps to.
+    enum:
+      - username
+      - firstName
+      - lastName
+      - email
+      - gender
+      - dateOfBirth
+      - addressLine1
+      - addressLine2
+      - city
+      - postalCode
+      - country
+      - province
+      - currency
+      - mobileNumber
+      - industry
+      - occupation
+      - marketingOptIn
+      - termsAccepted
+      - passwordStep
+    example: email
+  displayName:
+    type: string
+    description: Display name of the registration field.
+    minLength: 1
+    maxLength: 255
+    example: Email Address
+  requirementLevel:
+    type: string
+    description: |-
+      Requirement level of the field.
+      This value determines whether the field is required, optional, or hidden during registration.
+    enum:
+      - required
+      - optional
+      - hidden
+    default: required
+    example: required
+  validationType:
+    type: string
+    description: Type of validation applied to the field input.
+    enum:
+      - none
+      - email
+      - phone
+      - alphanumeric
+      - numeric
+      - date
+      - url
+      - regex
+      - password
+    default: none
+    example: email
+  validationPattern:
+    type:
+      - 'string'
+      - 'null'
+    description: |-
+      Custom validation regex pattern for the field.
+      Only applicable when `validationType` is `regex`.
+    maxLength: 255
+  minLength:
+    type:
+      - 'integer'
+      - 'null'
+    description: Minimum length of the field value.
+    minimum: 0
+    example: 1
+  maxLength:
+    type:
+      - 'integer'
+      - 'null'
+    description: Maximum length of the field value.
+    minimum: 1
+    example: 255
+  helpText:
+    type:
+      - 'string'
+      - 'null'
+    description: Help text displayed to the user for the field.
+    maxLength: 500
+    example: Enter your email address
+  order:
+    type: integer
+    description: Display order of the field within a registration step.
+    minimum: 0
+    default: 0
+    example: 0
+  step:
+    description: Registration step associated with the field.
+    $ref: ./RegistrationFieldStep.yaml

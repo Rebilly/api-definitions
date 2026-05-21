@@ -1,0 +1,18 @@
+type: object
+required:
+  - id
+  - displayHeader
+properties:
+  id:
+    type: string
+    description: |-
+      ID of the registration step.
+      This value must start with `step-` followed by lowercase alphanumeric characters or hyphens.
+    pattern: '^step-[a-z0-9-]+$'
+    example: step-0
+  displayHeader:
+    type: string
+    description: Display header of the registration step.
+    minLength: 1
+    maxLength: 255
+    example: Contact information

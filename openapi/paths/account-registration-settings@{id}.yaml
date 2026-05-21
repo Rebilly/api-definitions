@@ -1,0 +1,106 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  x-badges:
+    - name: Experimental
+  tags:
+    - Account registration settings
+  summary: Retrieve account registration settings
+  operationId: GetAccountRegistrationSettings
+  x-sdk-operation-name: get
+  description: Retrieves account registration settings with a specified ID.
+  responses:
+    '200':
+      description: Account registration settings retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/AccountRegistrationSettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  x-badges:
+    - name: Experimental
+  tags:
+    - Account registration settings
+  summary: Upsert account registration settings
+  operationId: PutAccountRegistrationSettings
+  x-sdk-operation-name: update
+  description: |-
+    Creates or updates account registration settings with a specified ID.
+  requestBody:
+    $ref: ../components/requestBodies/AccountRegistrationSettings.yaml
+  responses:
+    '200':
+      description: Account registration settings updated.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/AccountRegistrationSettings.yaml
+    '201':
+      description: Account registration settings created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/AccountRegistrationSettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
+delete:
+  x-products:
+    - Core
+  x-badges:
+    - name: Experimental
+  tags:
+    - Account registration settings
+  summary: Delete account registration settings
+  operationId: DeleteAccountRegistrationSettings
+  x-sdk-operation-name: delete
+  description: |-
+    Deletes account registration settings with a specified ID.
+    Default account registration settings cannot be deleted.
+  responses:
+    '204':
+      description: Account registration settings deleted.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml

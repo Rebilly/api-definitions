@@ -1,0 +1,78 @@
+type: object
+description: |-
+  Account registration settings define the fields, steps, and validation rules
+  for a customer registration flow.
+  Each account registration settings resource is scoped to a set of locations
+  and is synchronized with a Keycloak realm.
+required:
+  - name
+properties:
+  id:
+    type: string
+    description: |-
+      ID of the account registration settings.
+      If not provided, the ID is generated from the name.
+    maxLength: 50
+    pattern: '^[a-z0-9\-]+$'
+    example: eu-registration
+  name:
+    type: string
+    description: Name of the account registration settings.
+    minLength: 1
+    maxLength: 255
+    example: EU Registration Requirements
+  description:
+    type:
+      - 'string'
+      - 'null'
+    description: Description of the account registration settings.
+    maxLength: 1000
+    example: Account registration settings for EU customers
+  isEnabled:
+    type: boolean
+    description: Specifies if the account registration settings are active.
+    default: true
+    example: true
+  locations:
+    type: array
+    description: |-
+      List of locations that the account registration settings apply to.
+      Each location consists of a country and an optional region.
+    items:
+      type: object
+      required:
+        - country
+      properties:
+        country:
+          type: string
+          description: |-
+            Country code of the location.
+            Use ISO 3166-1 alpha-2 country codes.
+          example: CA
+        region:
+          type: string
+          description: |-
+            Region code of the location within the country.
+            Use ISO 3166-2 subdivision codes without the country prefix.
+          example: ON
+    example:
+      - country: CA
+        region: ON
+      - country: GB
+  fields:
+    type: array
+    description: List of registration fields that define the registration form.
+    items:
+      $ref: ./RegistrationField.yaml
+  realm:
+    type:
+      - 'string'
+      - 'null'
+    description: Keycloak realm associated with the account registration settings.
+    readOnly: true
+  createdTime:
+    $ref: CreatedTime.yaml
+  updatedTime:
+    $ref: UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml
