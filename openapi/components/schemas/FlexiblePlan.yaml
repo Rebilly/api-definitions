@@ -1,14 +1,34 @@
-allOf:
-  - type: object
-    required:
-      - id
-    properties:
-      id:
-        type: string
-        description: ID of the plan.
-        maxLength: 50
-        example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
-  - oneOf:
+anyOf:
+  - allOf:
+      - type: object
+        required:
+          - id
+        properties:
+          id:
+            type: string
+            description: ID of the plan.
+            maxLength: 50
+            example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
       - $ref: ./OneTimeSalePlan.yaml
+  - allOf:
+      - type: object
+        required:
+          - id
+        properties:
+          id:
+            type: string
+            description: ID of the plan.
+            maxLength: 50
+            example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
       - $ref: ./SubscriptionPlan.yaml
+  - allOf:
+      - type: object
+        required:
+          - id
+        properties:
+          id:
+            type: string
+            description: ID of the plan.
+            maxLength: 50
+            example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
       - $ref: ./TrialOnlyPlan.yaml
