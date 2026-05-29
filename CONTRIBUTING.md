@@ -174,4 +174,4 @@ Set up lint rules to enforce any design rules to keep this list to a minimum (an
 
 - [Redocly CLI documentation](https://redocly.com/docs/cli/)
 - [Redocly VS Code extension](https://marketplace.visualstudio.com/items?itemName=Redocly.openapi-vs-code)
-- [OpenAPI specification](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3/)
+- [OpenAPI specification](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.1.md)
