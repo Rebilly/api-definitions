@@ -29,7 +29,16 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/PayoutRequestAllocation.yaml
+              allOf:
+                - $ref: ../components/schemas/PayoutRequestAllocation.yaml
+                - type: object
+                  properties:
+                    exposureAmount:
+                      description: Total approved sales and captures minus approved payouts for the customer, gateway account, and payment instrument, in the allocation currency.
+                      readOnly: true
+                      type: number
+                      format: double
+                      example: 2
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

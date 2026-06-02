@@ -46,6 +46,29 @@ properties:
     description: Name of the gateway account to use for processing this allocation.
     maxLength: 50
     example: TestProcessor
+  gatewayPayoutInstruction:
+    description: Payout configuration of the gateway account that processes this allocation.
+    readOnly: true
+    type:
+      - 'string'
+      - 'null'
+    enum:
+      - all
+      - covered-payout
+      - approved-payment
+      - none
+      - null
+    x-enumDescriptions:
+      all: Payout any amount from this gateway.
+      covered-payout: |-
+        Payout from this gateway if it previously processed a payment for the same,
+        or a greater, amount.
+      approved-payment: |-
+        Payout any amount from this gateway if it processed an earlier payment.
+        The customer must have a previously approved transaction,
+        in the same currency, on this gateway.
+      none: Do not allow any payouts with this gateway.
+    example: covered-payout
   amount:
     description: Amount allocated to this payment instrument.
     type: number
