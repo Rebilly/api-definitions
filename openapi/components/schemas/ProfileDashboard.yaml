@@ -1,0 +1,37 @@
+type: object
+required:
+  - tabs
+properties:
+  dateRange:
+    type: string
+    description: |-
+      Date range of the dashboard, in ISO-8601 interval format, extended with `NOW` and `NOW-P*` values for relative dates.
+      This range applies to every tile that does not define its own `dateRange`.
+      Supported formats:
+
+      - Start and end: `2024-01-01T00:00:00Z/2024-02-01T00:00:00Z`.
+      - Start and duration `2024-01-01T00:00:00Z/P1M`.
+      - Duration and end: `P1M/2024-02-01T00:00:00Z`.
+      - Now and duration: `NOW-P1M/NOW`. This format represents the last month.
+      - Month before last month: `NOW-P2M/NOW-P1M`.
+    default: 'NOW-P1M/NOW'
+  periodStart:
+    type: string
+    format: date-time
+    readOnly: true
+    description: |-
+      Date and time when the dashboard period starts.
+      The value is resolved from `dateRange`.
+  periodEnd:
+    type: string
+    format: date-time
+    readOnly: true
+    description: |-
+      Date and time when the dashboard period ends.
+      The value is resolved from `dateRange`.
+  tabs:
+    type: array
+    description: List of dashboard tabs.
+    maxItems: 10
+    items:
+      $ref: ./DashboardTab.yaml

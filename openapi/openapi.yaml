@@ -248,6 +248,10 @@ tags:
       For information on the customer resource, see [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
   - name: Customers timeline
     description: Use customer timelines to maintain an audit trail of changes and activity for each customer.
+  - name: Dashboards
+    description: |-
+      Use dashboard operations to manage the user's dashboard and its tabs with metrics over key performance indicators.
+      Each tab is a customizable view of tiles that display report data.
   - name: Data exports
     description: |-
       Use data export operations to manage the export of resource data, such as:
@@ -1340,6 +1344,10 @@ paths:
     $ref: ./paths/websites@{id}.yaml
   '/experimental/customers/{customerId}/summary-metrics':
     $ref: ./paths/customers@{customerId}@summary-metrics.yaml
+  /profile/dashboard:
+    $ref: ./paths/profile@dashboard.yaml
+  '/profile/dashboard/metrics/{metric}':
+    $ref: ./paths/profile@dashboard@metrics@{metric}.yaml
   /experimental/data-exports:
     $ref: ./paths/data-exports.yaml
   '/experimental/data-exports/{id}':

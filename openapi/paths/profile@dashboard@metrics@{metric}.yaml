@@ -1,0 +1,54 @@
+parameters:
+  - name: metric
+    in: path
+    required: true
+    description: Name of the dashboard metric.
+    schema:
+      $ref: ../components/schemas/DashboardMetric.yaml
+get:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Reports
+  tags:
+    - Dashboards
+  summary: Retrieve dashboard metric data
+  operationId: GetProfileDashboardMetricReport
+  x-sdk-operation-name: getDashboardMetricReport
+  description: Retrieves the report data for a single dashboard metric.
+  parameters:
+    - name: periodStart
+      in: query
+      required: true
+      description: |-
+        Start date and time of the metric range.
+        The interval between `periodStart` and `periodEnd` must not exceed 100 days.
+      schema:
+        type: string
+        format: date-time
+      example: 2024-01-01T00:00:00Z
+    - name: periodEnd
+      in: query
+      required: true
+      description: |-
+        End date and time of the metric range.
+        The interval between `periodStart` and `periodEnd` must not exceed 100 days.
+      schema:
+        type: string
+        format: date-time
+      example: 2024-01-31T23:59:59Z
+  responses:
+    '200':
+      description: Metric report retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DashboardTileReport.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml

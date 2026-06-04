@@ -1,0 +1,27 @@
+type: object
+required:
+  - metric
+properties:
+  metric:
+    description: Metric displayed in the tile.
+    anyOf:
+      - $ref: ./DashboardMetric.yaml
+      - type: string
+  dateRange:
+    type: string
+    description: |-
+      Date range of the tile, in ISO-8601 interval format, extended with `NOW` and `NOW-P*` values for relative dates.
+      When omitted, the dashboard `dateRange` is used.
+      Supported formats:
+
+      - Start and end: `2024-01-01T00:00:00Z/2024-02-01T00:00:00Z`.
+      - Start and duration `2024-01-01T00:00:00Z/P1M`.
+      - Duration and end: `P1M/2024-02-01T00:00:00Z`.
+      - Now and duration: `NOW-P1M/NOW`. This format represents the last month.
+      - Month before last month: `NOW-P2M/NOW-P1M`.
+  columnsWidth:
+    type: integer
+    description: Number of dashboard columns that the tile occupies.
+    minimum: 1
+    maximum: 2
+    default: 1

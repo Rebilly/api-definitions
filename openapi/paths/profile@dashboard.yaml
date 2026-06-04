@@ -1,0 +1,60 @@
+get:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Reports
+  tags:
+    - Dashboards
+  summary: Retrieve profile dashboard
+  operationId: GetProfileDashboard
+  x-sdk-operation-name: getDashboard
+  description: Retrieves the profile dashboard configuration.
+  responses:
+    '200':
+      description: Profile dashboard retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ProfileDashboard.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+put:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Reports
+  tags:
+    - Dashboards
+  summary: Update profile dashboard
+  operationId: PutProfileDashboard
+  x-sdk-operation-name: updateDashboard
+  description: Updates the profile dashboard configuration.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ProfileDashboard.yaml
+    description: Profile dashboard resource.
+    required: true
+  responses:
+    '200':
+      description: Profile dashboard updated.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ProfileDashboard.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
