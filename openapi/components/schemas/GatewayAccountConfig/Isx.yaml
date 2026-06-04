@@ -1,0 +1,30 @@
+description: Isx gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Isx credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: ID of the Isx API merchant.
+          workflow:
+            type: string
+            description: Isx workflow.
+          apiClient:
+            type: string
+            description: Isx API client.
+          apiToken:
+            type: string
+            description: Isx API token.
+            format: password
+            writeOnly: true
+        required:
+          - merchantId
+          - workflow
+          - apiClient
+          - apiToken
