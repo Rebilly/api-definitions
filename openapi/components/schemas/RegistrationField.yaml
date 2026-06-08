@@ -12,6 +12,7 @@ properties:
     description: |-
       Attribute of the Keycloak user profile.
       This value determines which user attribute the field maps to.
+      Use the `contentBlock` attribute for static text in the registration form that requires no user input.
     enum:
       - username
       - firstName
@@ -32,6 +33,7 @@ properties:
       - marketingOptIn
       - termsAccepted
       - passwordStep
+      - contentBlock
     example: email
   displayName:
     type: string
@@ -77,14 +79,18 @@ properties:
     type:
       - 'integer'
       - 'null'
-    description: Minimum length of the field value.
+    description: |-
+      Minimum length of the field value.
+      Not applicable when the `attribute` value is `dateOfBirth` or `contentBlock`.
     minimum: 0
     example: 1
   maxLength:
     type:
       - 'integer'
       - 'null'
-    description: Maximum length of the field value.
+    description: |-
+      Maximum length of the field value.
+      Not applicable when the `attribute` value is `dateOfBirth` or `contentBlock`.
     minimum: 1
     example: 255
   helpText:
@@ -94,6 +100,44 @@ properties:
     description: Help text displayed to the user for the field.
     maxLength: 500
     example: Enter your email address
+  minimumAge:
+    type:
+      - 'integer'
+      - 'null'
+    description: |-
+      Minimum age in years for the registrant, calculated from their date of birth.
+      This field is only applicable when the `attribute` value is `dateOfBirth`.
+    minimum: 1
+    maximum: 100
+    example: 19
+  inputType:
+    type:
+      - 'string'
+      - 'null'
+    description: Type of input control for the field in the registration form.
+    enum:
+      - text
+      - select
+      - checkbox
+      - date
+      - null
+    example: text
+  placeholder:
+    type:
+      - 'string'
+      - 'null'
+    description: Placeholder text displayed in the input field before the user enters a value.
+    maxLength: 255
+    example: Enter your email address
+  contentBlock:
+    type:
+      - 'string'
+      - 'null'
+    description: |-
+      Static informational text in the registration form.
+      This field is only applicable when the `attribute` value is `contentBlock`.
+    maxLength: 2048
+    example: For problem gaming assistance call 1-111-111-1111.
   order:
     type: integer
     description: Display order of the field within a registration step.
