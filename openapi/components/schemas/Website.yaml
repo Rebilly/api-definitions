@@ -143,6 +143,14 @@ properties:
             minimum: 0
             maximum: 8760
             default: 48
+          automaticReadinessTime:
+            description: |-
+              Time of day when the automatic readiness job processes eligible pending payout requests.
+              Use extended ISO-8601 time format (`HH:MM:SS`) with an optional timezone offset.
+            allOf:
+              - $ref: ./TimeIso8601Extended.yaml
+            default: '10:00:00'
+            example: '10:00:00Z'
   logoId:
     type:
       - 'string'
