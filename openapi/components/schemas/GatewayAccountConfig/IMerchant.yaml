@@ -1,0 +1,20 @@
+description: IMerchant gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Credentials of the IMerchant gateway.
+        properties:
+          apiKey:
+            type: string
+            description: IMerchant API key.
+            format: password
+            writeOnly: true
+        required:
+          - apiKey
+      threeDSecureServer:
+        $ref: ./ThreeDSecureIO3dsServer.yaml
