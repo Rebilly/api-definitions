@@ -132,6 +132,15 @@ properties:
           - 'null'
         format: float
         minimum: 0.01
+      sticky:
+        description: |-
+          When enabled, if no usage is reported during a service period,
+          the plan bills the last known reported quantity from a previous period instead of zero.
+          This is suitable for hosted or persistent resources whose usage does not change every period.
+          Only supported with `strategy`: `last`.
+        type: boolean
+        default: false
+        example: false
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:
