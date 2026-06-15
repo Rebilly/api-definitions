@@ -1,6 +1,7 @@
 type: object
 required:
   - amounts
+  - splitReason
 properties:
   amounts:
     description: |-
@@ -18,3 +19,11 @@ properties:
       x-type: Money
       exclusiveMinimum: 0
     example: [50.00, 30.00, 20.00]
+  splitReason:
+    $ref: ./PayoutRequestSplitReason.yaml
+  splitDescription:
+    description: Additional description for splitting the payout request.
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 255
