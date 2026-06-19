@@ -26,12 +26,27 @@ properties:
     readOnly: true
     enum:
       - pending
+      - ready
+      - approved
       - in-progress
       - fulfilled
+      - canceled
+      - split
+      - merged
     x-enumDescriptions:
-      pending: Request is awaiting fulfillment.
+      pending: |-
+        Request was created by the customer and is in a pending state for the [configured pending period](https://www.rebilly.com/catalog/all/websites/putwebsite#websites/putwebsite/t=request&path=settings/payoutrequest/pendingperiodhours), unless it is marked as ready by a member of your organization.
+        When the pending period ends, the payout request automatically transitions to the `ready` state.
+        Depending on the configured [`automaticReadinessEnabled`](https://www.rebilly.com/catalog/all/websites/putwebsite#websites/putwebsite/t=request&path=settings/payoutrequest/automaticreadinessenabled) setting, this may be the initial status assigned to new payout requests, or this status may not be used.
+      ready: |-
+        Request was created by the customer and is ready for review.
+        Depending on the configured [`automaticReadinessEnabled`](https://www.rebilly.com/catalog/all/websites/putwebsite#websites/putwebsite/t=request&path=settings/payoutrequest/automaticreadinessenabled) setting, this may be the initial status assigned to new payout requests.
+      approved: Request was reviewed, approved, and is ready for processing.
       in-progress: Request has allocations and is being processed.
-      fulfilled: Request is fully paid out when `availableAmount` reaches zero.
+      fulfilled: Request is fully paid out.
+      canceled: Request is canceled by merchant or customer.
+      split: Request was split into two or more payout requests.
+      merged: Request was merged into another payout request.
   createdTime:
     description: Date and time when the payout request is created.
     $ref: ./ServerTimestamp.yaml
