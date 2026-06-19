@@ -136,20 +136,25 @@ properties:
           automaticReadinessEnabled:
             type: boolean
             default: false
-            description: Specifies whether pending payout requests are automatically marked as ready after the pending period.
+            description: |-
+              Specifies whether pending payout requests are automatically marked as `ready`.
+              When this value is `false`, payout requests are created in the `ready` status and automatic transition is not used.
+              When this value is `true`, payout requests remain in the `pending` status until the pending period elapses and the configured transition time is reached.
           pendingPeriodHours:
             type: integer
-            description: Number of hours a payout request stays pending before the automatic readiness job can set it to ready.
+            description: |-
+              Minimum number of hours a payout request stays in the `pending` status before it can be automatically set to `ready`.
+              Required when `automaticReadinessEnabled` is `true`.
             minimum: 1
             maximum: 8760
-            default: 48
+            example: 48
           automaticReadinessTime:
             description: |-
               Time of day when the automatic readiness job processes eligible pending payout requests.
+              Required when `automaticReadinessEnabled` is `true`.
               Use extended ISO-8601 time format (`HH:MM:SS`) with an optional timezone offset.
             allOf:
               - $ref: ./TimeIso8601Extended.yaml
-            default: '10:00:00'
             example: '10:00:00Z'
   logoId:
     type:
