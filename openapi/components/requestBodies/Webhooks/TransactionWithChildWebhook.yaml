@@ -8,23 +8,16 @@ content:
           type: string
           description: Type of event that triggered the webhook.
           enum:
-            - gateway-account-requested
-            - offsite-payment-completed
-            - risk-score-changed
-            - transaction-amount-discrepancy-found
-            - transaction-declined
-            - transaction-discrepancy-found
-            - transaction-process-requested
-            - transaction-processed
-            - transaction-reconciled
-            - transaction-timeout-resolved
-            - waiting-gateway-transaction-completed
-            - autodeposit-lookup-performed
+            - transaction-partially-refunded
+            - transaction-refunded
+            - transaction-voided
         _embedded:
           type: object
           description: Embedded objects related to the transaction event.
           properties:
             transaction:
+              $ref: ../../schemas/Transaction.yaml
+            childTransaction:
               $ref: ../../schemas/Transaction.yaml
         _links:
           type: array
@@ -40,4 +33,5 @@ content:
                 type: string
                 enum:
                   - transaction
+                  - childTransaction
 description: Payload of transaction-related webhook event.
