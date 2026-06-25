@@ -8,6 +8,7 @@ required:
   - currency
   - productId
   - pricing
+  - recurringInterval
 properties:
   name:
     description: |-
@@ -66,12 +67,11 @@ properties:
       Compare this value with materialized subscription item revision values.
   isTrialOnly:
     type: boolean
+    const: false
     description: Specifies if a plan is a trial that does not have recurring instructions.
     readOnly: true
   recurringInterval:
-    description: |-
-      Service interval settings.
-      For a one-time sale, set this value to `null`.
+    description: Service interval settings.
     type: object
     required:
       - unit
