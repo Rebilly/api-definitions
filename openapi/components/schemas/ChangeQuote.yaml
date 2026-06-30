@@ -100,16 +100,37 @@ properties:
         items:
           $ref: ./QuoteItem.yaml
       renewalPolicy:
-        description: Specifies if the order retains its current `renewalTime` or resets it to a newly calculated `renewalTime`.
+        description: |-
+          How the service periods and trial state of the related order are managed when the quote is accepted.
+
+          The `reset` and `retain` values are deprecated.
+          The deprecated `keepTrial` flag is ignored unless `reset` or `retain` is used.
         type: string
         default: retain
         enum:
+          - resetToRecurring
+          - retainRecurring
+          - retainTrialThenRecurring
           - reset
           - retain
+        x-enumDescriptions:
+          resetToRecurring: Resets the service periods, ends any trial, and converts trial-only items to recurring.
+          retainRecurring: Retains the current service periods, ends any trial, and converts trial-only items to recurring.
+          retainTrialThenRecurring: |-
+            Retains the trial until it ends, then converts the item to recurring.
+            Returns a validation error if the order has no trial.
+          reset: |-
+            Deprecated.
+            Use `resetToRecurring` instead.
+            Resets the `renewalTime` to a newly calculated value.
+          retain: |-
+            Deprecated.
+            Use `retainRecurring` or `retainTrialThenRecurring` instead.
+            Retains the current `renewalTime`.
       prorated:
         description: |-
           Specifies whether to give a pro rata credit for the amount of time remaining between the `effectiveTime` and the end of the current period.
-          In addition, if the `renewalTime` is retained, by setting the `renewalPolicy` to `retain`,
+          In addition, if the `renewalTime` is retained, by setting the `renewalPolicy` to `retainRecurring` or `retainTrialThenRecurring`,
           a pro rata debit occurs for the amount between the `effectiveTime` and the `renewalTime` as a percentage of the normal period length.
         type: boolean
       effectiveTime:
@@ -121,9 +142,13 @@ properties:
           - 'null'
         format: date-time
       keepTrial:
+        deprecated: true
         description: |-
+          Deprecated.
+          Use the `retainTrialThenRecurring` value of `renewalPolicy` instead.
+
           Specifies if the order must retain its active trial.
-          This field is only applicable if `renewalPolicy` is set to `retain`.
+          This field is only applicable if `renewalPolicy` is set to the deprecated value `retain`.
         type: boolean
         default: false
       interimOnly:
