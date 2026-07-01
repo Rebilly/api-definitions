@@ -1,0 +1,37 @@
+description: PayGlocal gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: PayGlocal credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: ID of the PayGlocal merchant (MID).
+          privateKeyId:
+            type: string
+            description: Key ID of the merchant RSA private key used to sign payment API requests.
+          publicKeyId:
+            type: string
+            description: Key ID of the PayGlocal RSA public key used to encrypt payment API request payloads.
+          publicKey:
+            type: string
+            description: |-
+              PayGlocal RSA public key used to encrypt payment API request payloads and verify merchant callback token signatures.
+            x-multiline: true
+          privateKey:
+            type: string
+            description: Merchant RSA private key used to sign payment API requests.
+            format: password
+            x-multiline: true
+            writeOnly: true
+        required:
+          - merchantId
+          - privateKeyId
+          - publicKeyId
+          - publicKey
+          - privateKey
