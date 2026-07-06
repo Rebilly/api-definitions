@@ -12,6 +12,7 @@ required:
   - depositCustomAmount
   - depositMethods
   - payoutMethods
+  - coinPurchase
 properties:
   id:
     type: string
@@ -134,6 +135,12 @@ properties:
     description: |-
       Value of the default amount in the `depositAmounts` list.
       This value is calculated from the `defaultIndex` property of the deposit strategy that is applied to the deposit request.
+  coinPurchase:
+    type: boolean
+    readOnly: true
+    description: |-
+      Specifies if the deposit is a coin purchase that credits the coin balance instead of the cash balance.
+      Determined by the deposit amount strategy that is applied to the deposit request.
   lastDepositRequestId:
     type: string
     description: ID of the last deposit request that is made for this cashier.

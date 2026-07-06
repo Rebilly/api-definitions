@@ -44,6 +44,12 @@ properties:
       attempted: A funds deposit transaction was attempted and declined. This is a temporary state.
       completed: A funds deposit transaction has been approved and completed. This is a permanent state.
       expired: Request expired without an approved deposit transaction. This is a permanent state.
+  coinPurchase:
+    type: boolean
+    readOnly: true
+    description: |-
+      Specifies if the deposit is a coin purchase that credits the coin balance instead of the cash balance.
+      Determined by the deposit amount strategy that is applied to the deposit request.
   currency:
     $ref: ./CurrencyCode.yaml
   amounts:
