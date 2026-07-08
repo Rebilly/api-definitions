@@ -153,9 +153,17 @@ properties:
               Time of day when the automatic readiness job processes eligible pending payout requests.
               Required when `automaticReadinessEnabled` is `true`.
               Use extended ISO-8601 time format (`HH:MM:SS`) with an optional timezone offset.
+              When the timezone offset is omitted, the server timezone is used.
             allOf:
               - $ref: ./TimeIso8601Extended.yaml
             example: '10:00:00Z'
+          automaticReadinessLastExecutedAt:
+            type:
+              - string
+              - 'null'
+            format: date-time
+            readOnly: true
+            description: Date and time when the automatic readiness job last completed successfully for this website.
   logoId:
     type:
       - 'string'
