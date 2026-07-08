@@ -61,16 +61,18 @@ properties:
     format: date-time
     readOnly: true
   documentMatches:
-    type: object
+    type:
+      - 'object'
+      - 'null'
     readOnly: true
     description: Document matches.
     properties:
-      score:
-        description: Calculated score that represents the percentage of confidence that this ID represents the customer.
-        type: number
-        format: double
-        example: 0.75
+      version:
+        description: Version of the document matches.
+        type: string
+        readOnly: true
+        example: '2.0'
       data:
-        $ref: ./KycIdentityMatches.yaml
+        $ref: ./StorefrontKycIdentityMatches.yaml
   _links:
     $ref: ./SelfLink.yaml

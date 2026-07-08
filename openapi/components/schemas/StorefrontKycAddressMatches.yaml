@@ -1,53 +1,41 @@
 type: object
-description: Matched address data.
+description: Matched address data returned to the customer.
 properties:
   firstName:
     description: |-
       First name of the customer.
-      This value is null if no match is found.
-    type:
-      - 'string'
-      - 'null'
+      This value is an empty string if no match is found.
+    type: string
     example: John
   lastName:
     description: |-
       Last name of the customer.
-      This value is null if no match is found.
-    type:
-      - 'string'
-      - 'null'
+      This value is an empty string if no match is found.
+    type: string
     example: Doe
   line1:
     description: |-
       Address of the customer's residence.
-      This value is null if no match is found.
-    type:
-      - 'string'
-      - 'null'
+      This value is an empty string if no match is found.
+    type: string
     example: 36 Craven St
   city:
     description: |-
       Customer's city of residence.
-      This value is null if no match is found.
-    type:
-      - 'string'
-      - 'null'
+      This value is an empty string if no match is found.
+    type: string
     example: London
   region:
     description: |-
       Customer's region of residence.
-      This value is null if no match is found.
-    type:
-      - 'string'
-      - 'null'
+      This value is an empty string if no match is found.
+    type: string
     example: London
   postalCode:
     description: |-
       Postal code of the customer's residence.
-      This value is null if no match is found.
-    type:
-      - 'string'
-      - 'null'
+      This value is an empty string if no match is found.
+    type: string
     example: WC2N 5NF
   wordCount:
     description: Total number of words in the document.
@@ -67,10 +55,10 @@ properties:
     format: date-time
     example: '2021-01-01T00:00:00+00:00'
   phone:
-    description: Phone number of the company or agency that issued the document.
-    type:
-      - 'string'
-      - 'null'
+    description: |-
+      Phone number of the company or agency that issued the document.
+      This value is an empty string if no phone number is detected.
+    type: string
     example: (123) 456-7890
   documentSubtype:
     description: Interpreted subtype of the uploaded document.
@@ -78,7 +66,3 @@ properties:
       - 'string'
       - 'null'
     $ref: ./KycDocumentSubtypes.yaml
-  isTampered:
-    description: Specifies if an address proof document has been tampered with.
-    type: boolean
-    example: false
