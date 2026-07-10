@@ -44,10 +44,12 @@ content:
             `pending`, `ready`, `approved`, or `in-progress`.
 
             When a payout request is blocked, it cannot:
-            - Move to the next status in the workflow.
-              For example: `pending` → `ready` → `approved` → `in-progress`.
+            - Transition to `ready`, `approved`, `in-progress`, `merged`, `split`, or `canceled`.
             - Have allocations created.
-            - Have allocations processed.
+            - Start allocation processing.
+            - Cancel pending allocations.
+
+            A blocked payout request can still transition to the `fulfilled` status if allocation processing starts before the payout request is blocked.
           type: boolean
           example: false
         blockReason:

@@ -90,7 +90,12 @@ properties:
       split: Request was split into two or more payout requests.
       merged: Request was merged into another payout request.
   blocked:
-    description: Specifies whether the payout request is blocked or unblocked.
+    description: |-
+      Specifies whether the payout request is blocked or unblocked.
+
+      When blocked, the payout request cannot transition to `ready`, `approved`, `in-progress`, `merged`, `split`, or `canceled`.
+      Allocation creation, allocation processing, and cancellation of pending allocations are also prevented.
+      A blocked payout request can still transition to the `fulfilled` status if allocation processing starts before the payout request is blocked.
     type: boolean
     readOnly: false
     example: false
