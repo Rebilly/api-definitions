@@ -68,4 +68,34 @@ patch:
       $ref: ../components/responses/ValidationError.yaml
     '429':
       $ref: ../components/responses/TooManyRequests.yaml
+delete:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Delete a payout request batch
+  operationId: DeletePayoutRequestBatch
+  x-sdk-operation-name: delete
+  description: |-
+    Deletes a payout request batch with a specified ID and clears the `batchId` field from every payout request in the batch.
+    This operation preserves every payout request, status, and blocked state.
+    This operation is atomic. It clears all `batchId` fields or leaves them all unchanged.
+  responses:
+    '204':
+      description: Payout request batch deleted.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
 

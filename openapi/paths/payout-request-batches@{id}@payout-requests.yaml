@@ -1,0 +1,110 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Add requests to a payout request batch
+  operationId: PostPayoutRequestsToBatch
+  x-sdk-operation-name: addPayoutRequests
+  description: |-
+    Adds payout requests to a batch with a specified ID.
+    Accepts payout requests in any status, with or without allocations.
+    A batch contains a maximum of 1000 payout requests.
+
+    Provide exactly one of the following fields:
+    - `payoutRequestIds` to add specific payout requests.
+    - `filter` to add payout requests that match the filter when the operation runs.
+
+    If any explicitly specified payout request is already associated with a batch,
+    the operation returns a `409 Conflict` response.
+    Filter results exclude payout requests that are already associated with a batch.
+    If more payout requests match the filter than the batch can contain,
+    the operation adds only the oldest matching requests up to the batch limit,
+    sorted by creation time.
+    If adding explicitly specified payout requests would increase the batch to more than 1000 requests,
+    the operation returns a `409 Conflict` response.
+    If the batch has reached its payout request limit,
+    the operation returns a `409 Conflict` response for either selection method.
+    This operation is atomic. If a conflict occurs, the operation adds no payout requests to the batch.
+  requestBody:
+    required: true
+    description: Selection of payout requests to add to the batch.
+    content:
+      application/json:
+        schema:
+          type: object
+          oneOf:
+            - title: Explicit IDs
+              additionalProperties: false
+              required:
+                - payoutRequestIds
+              properties:
+                payoutRequestIds:
+                  description: IDs of the payout requests to add to the batch.
+                  type: array
+                  minItems: 1
+                  maxItems: 1000
+                  uniqueItems: true
+                  items:
+                    type: string
+                    maxLength: 50
+                    example: pout_req_0YVDMDE2BMC6KBB5MX76RF6T80
+            - title: Filter-based
+              additionalProperties: false
+              required:
+                - filter
+              properties:
+                filter:
+                  description: |-
+                    Filter string that selects payout requests to add to the batch.
+                    This field uses the same format as filter parameters for collections.
+                    Use semicolons to separate multiple filter conditions.
+
+                    Available fields for filtering: `id`, `status`, `websiteId`, `customerId`, `currency`, `amount`, `createdTime`, `updatedTime`.
+
+                    This operation ignores a `batchId` filter.
+                    Filter results always exclude payout requests that are already associated with a batch.
+                    If the filter matches more payout requests than the batch can contain,
+                    the operation adds only the oldest matching requests up to the batch limit,
+                    sorted by creation time.
+                  type: string
+                  minLength: 1
+                  example: 'status:pending;websiteId:ws_0YVDMDE2BMC6KBB5MX76RF6T80'
+  responses:
+    '200':
+      description: Payout requests added to the batch.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PayoutRequestBatch.yaml
+    '400':
+      description: Invalid filter provided or no payout requests match the filter.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ProblemTypes/Problem.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      description: Batch limit reached or would be exceeded, or one or more explicitly specified payout requests are already associated with a batch.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ProblemTypes/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
