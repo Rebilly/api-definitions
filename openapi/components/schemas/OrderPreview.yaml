@@ -16,6 +16,7 @@ properties:
       type: object
       required:
         - planId
+        - quantity
       properties:
         planId:
           type: string
@@ -25,6 +26,8 @@ properties:
         quantity:
           description: Number of product units in the specified plan.
           type: integer
+          minimum: 1
+          maximum: 1000000000
   billingAddress:
     description: Billing address details.
     writeOnly: true
