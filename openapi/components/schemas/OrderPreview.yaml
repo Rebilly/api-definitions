@@ -15,19 +15,32 @@ properties:
     items:
       type: object
       required:
-        - planId
         - quantity
       properties:
         planId:
           type: string
-          description: ID of the plan.
+          description: |-
+            ID of the plan.
+            Either this field or the `plan` object must be provided.
+            Use `plan.id` instead.
           maxLength: 50
           example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+          deprecated: true
+        plan:
+          description: |-
+            Details of the plan.
+            Either this object or the deprecated `planId` field must be provided.
+          oneOf:
+            - $ref: ./OriginalPlan.yaml
+            - $ref: ./FlexiblePlan.yaml
         quantity:
           description: Number of product units in the specified plan.
           type: integer
           minimum: 1
           maximum: 1000000000
+      anyOf:
+        - required: ['plan']
+        - required: ['planId']
   billingAddress:
     description: Billing address details.
     writeOnly: true
