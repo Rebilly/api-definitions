@@ -1,5 +1,6 @@
 // first set the required properties for the new service credential
 const data = {
+    type: 'webhook',
     host: 'foobar.test.com',
     auth: {
         type: 'none'

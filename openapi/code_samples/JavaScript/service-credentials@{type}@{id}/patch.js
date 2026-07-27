@@ -1,5 +1,6 @@
 // first set the status to update for the service credential
 const data = {
+    type: 'webhook',
     status: 'deactivated'
 };
 
