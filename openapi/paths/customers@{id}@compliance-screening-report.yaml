@@ -1,28 +1,36 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-get:
+post:
   x-products:
     - Core
   tags:
     - Customers
-  summary: Download a compliance screening report
-  operationId: GetCustomerComplianceScreeningReport
-  x-sdk-operation-name: downloadComplianceScreeningReport
+  summary: Create a compliance screening report
+  operationId: PostCustomerComplianceScreeningReport
+  x-sdk-operation-name: generateComplianceScreeningReport
   description: |-
-    Retrieves a compliance screening report in PDF format for a customer.
-    The report includes the customer's Know Your Customer (KYC) and Anti-Money Laundering (AML) screening results.
+    Creates a compliance screening report that includes Know Your Customer (KYC) and Anti-Money Laundering (AML) results for a customer.
+    The report is stored as a PDF customer attachment.
     Requires the KYC and AML products to be enabled for the organization.
   responses:
-    '200':
-      description: Compliance screening report retrieved.
+    '201':
+      description: Compliance screening report generated.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
       content:
-        application/pdf:
+        application/json:
           schema:
-            type: string
-            format: binary
+            $ref: ../components/schemas/Attachment.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
