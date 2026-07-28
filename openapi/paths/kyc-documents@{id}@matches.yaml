@@ -12,14 +12,23 @@ post:
     Updates the document matches of a KYC document with a specified ID.
 
     > **Note:** Use this operation for manual overrides.
+
+    The request body schema depends on the KYC document `documentType`.
+    The operation rejects unknown fields.
+
+    Optionally send `type` with one of:
+    `identity-proof`, `address-proof`, `purchase-proof`, or `funds-proof`.
+    If provided, `type` matches the document type of the KYC document.
   requestBody:
     content:
       application/json:
         schema:
           anyOf:
-            - $ref: ../components/schemas/KycIdentityMatches.yaml
-            - $ref: ../components/schemas/KycAddressMatches.yaml
-    description: Kyc document resource.
+            - $ref: ../components/schemas/KycIdentityMatchesOverwrite.yaml
+            - $ref: ../components/schemas/KycAddressMatchesOverwrite.yaml
+            - $ref: ../components/schemas/KycPurchaseMatchesOverwrite.yaml
+            - $ref: ../components/schemas/KycFundsMatchesOverwrite.yaml
+    description: KYC document matches overwrite payload.
     required: true
   responses:
     '204':
@@ -35,5 +44,7 @@ post:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
     '429':
       $ref: ../components/responses/TooManyRequests.yaml

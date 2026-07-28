@@ -1,0 +1,14 @@
+type: object
+description: Request body for overwriting purchase KYC document matches.
+allOf:
+  - $ref: ./PurchaseMatches.yaml
+  - type: object
+    properties:
+      type:
+        description: |-
+          Type of KYC document matches.
+          If provided, value is `purchase-proof` and matches the document type of the KYC document.
+        type: string
+        enum:
+          - purchase-proof
+        example: purchase-proof
