@@ -1,0 +1,32 @@
+allOf:
+  - title: Data export limit exceeded
+  - type: object
+    required:
+      - type
+    properties:
+      type:
+        type: string
+        description: Machine-readable error code for this problem type, which consumers use to handle the failure programmatically.
+        enum:
+          - data-export-limit-exceeded
+      status:
+        type: integer
+        description: HTTP status code.
+        minimum: 422
+        maximum: 422
+  # DetailedProblem instead of BaseProblem: BaseProblem constrains `type` to `format: uri`,
+  # but this problem reports a machine-readable code
+  - $ref: ./DetailedProblem.yaml
+  - type: object
+    required:
+      - matchedRecords
+      - maxRecords
+    properties:
+      matchedRecords:
+        type: integer
+        description: Number of records that match the export request.
+        example: 12500000
+      maxRecords:
+        type: integer
+        description: Maximum number of records for a single export.
+        example: 10000000
