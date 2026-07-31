@@ -16,18 +16,25 @@ post:
     The request body schema depends on the KYC document `documentType`.
     The operation rejects unknown fields.
 
-    Optionally send `type` with one of:
+    Send `type` with one of:
     `identity-proof`, `address-proof`, `purchase-proof`, or `funds-proof`.
-    If provided, `type` matches the document type of the KYC document.
+    The specified value identifies the `type` of the document match.
   requestBody:
     content:
       application/json:
         schema:
-          anyOf:
+          oneOf:
             - $ref: ../components/schemas/KycIdentityMatchesOverwrite.yaml
             - $ref: ../components/schemas/KycAddressMatchesOverwrite.yaml
             - $ref: ../components/schemas/KycPurchaseMatchesOverwrite.yaml
             - $ref: ../components/schemas/KycFundsMatchesOverwrite.yaml
+          discriminator:
+            propertyName: type
+            mapping:
+              identity-proof: ../components/schemas/KycIdentityMatchesOverwrite.yaml
+              address-proof: ../components/schemas/KycAddressMatchesOverwrite.yaml
+              purchase-proof: ../components/schemas/KycPurchaseMatchesOverwrite.yaml
+              funds-proof: ../components/schemas/KycFundsMatchesOverwrite.yaml
     description: KYC document matches overwrite payload.
     required: true
   responses:

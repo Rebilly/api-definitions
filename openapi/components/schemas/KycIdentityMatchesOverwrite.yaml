@@ -1,14 +1,16 @@
 type: object
 description: Request body for overwriting identity KYC document matches.
 allOf:
-  - $ref: ./KycIdentityMatches.yaml
   - type: object
+    required:
+      - type
     properties:
       type:
         description: |-
           Type of KYC document matches.
-          If provided, value is `identity-proof` and matches the document type of the KYC document.
+           This value identifies the document match type as `identity-proof`.
         type: string
         enum:
           - identity-proof
         example: identity-proof
+  - $ref: ./KycIdentityMatches.yaml

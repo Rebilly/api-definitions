@@ -1,14 +1,16 @@
 type: object
 description: Request body for overwriting funds KYC document matches.
 allOf:
-  - $ref: ./FundsMatches.yaml
   - type: object
+    required:
+      - type
     properties:
       type:
         description: |-
           Type of KYC document matches.
-          If provided, value is `funds-proof` and matches the document type of the KYC document.
+          This value identifies the document match type as `funds-proof`.
         type: string
         enum:
           - funds-proof
         example: funds-proof
+  - $ref: ./FundsMatches.yaml
