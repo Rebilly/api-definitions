@@ -91,12 +91,13 @@ properties:
           $ref: ./QuoteItem.yaml
       renewalPolicy:
         description: |-
-          How the service periods and trial state of the related order are managed when the quote is accepted.
+          Policy for managing service periods and trial state of the related order when the quote is accepted.
 
           The `reset` and `retain` values are deprecated.
           The deprecated `keepTrial` flag is ignored unless `reset` or `retain` is used.
+          In responses, the value is `reset` or `retain`.
         type: string
-        default: retain
+        default: retainRecurring
         enum:
           - resetToRecurring
           - retainRecurring

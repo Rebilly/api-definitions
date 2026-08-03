@@ -103,12 +103,14 @@ properties:
           $ref: ./QuoteItem.yaml
       renewalPolicy:
         description: |-
-          How the service periods and trial state of the related order are managed when the quote is accepted.
+          Policy for managing service periods and trial state of the related order when the quote is accepted.
 
           The `reset` and `retain` values are deprecated.
-          The deprecated `keepTrial` flag is ignored unless `reset` or `retain` is used.
+          The deprecated `keepTrial` flag is ignored unless `retain` is used, or this field is omitted.
+          If this field is omitted, this value defaults to `retainRecurring`.
+          If this field is omitted and `keepTrial` is `true`, `renewalPolicy` is set to `retainTrialThenRecurring`.
         type: string
-        default: retain
+        default: retainRecurring
         enum:
           - resetToRecurring
           - retainRecurring
@@ -150,7 +152,8 @@ properties:
           Use the `retainTrialThenRecurring` value of `renewalPolicy` instead.
 
           Specifies if the order must retain its active trial.
-          This field is only applicable if `renewalPolicy` is set to the deprecated value `retain`.
+          This field is only applicable if `renewalPolicy` is set to the deprecated value `retain`, or omitted.
+          If `renewalPolicy` is omitted and this field is `true`, `renewalPolicy` is set to `retainTrialThenRecurring`.
         type: boolean
         default: false
       interimOnly:
