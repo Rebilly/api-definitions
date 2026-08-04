@@ -14,7 +14,7 @@ properties:
     example: qt_01HXBZMEGPETPHJZH6V4RHBMA8
   type:
     description: |-
-      Type of the quote for modifications to existing recurring orders.
+      Type of the quote.
       When a quote is accepted, quote items and settings are applied to the related order.
       Change quotes can only be created for orders with `active` or `trial-ended` status.
       For `trial-ended` orders, use this quote type to convert a trial-only order to a regular recurring order.
@@ -202,7 +202,11 @@ properties:
           or the default payment instrument on the order.
           If this value is `null`, the related order autopay is not affected.
       shipping:
-        $ref: ./Shipping.yaml
+        description: |-
+          Shipping settings of the order.
+          If this value is omitted, the order shipping is not affected.
+        allOf:
+          - $ref: ./Shipping.yaml
       deliveryAddress:
         description: |-
           Delivery address of the order.

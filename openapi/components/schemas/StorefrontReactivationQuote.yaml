@@ -129,7 +129,11 @@ properties:
           or the default payment instrument on the order.
           If this value is `null`, the related order autopay is not affected.
       shipping:
-        $ref: ./Shipping.yaml
+        description: |-
+          Shipping settings of the order.
+          If this value is omitted, the order shipping is not affected.
+        allOf:
+          - $ref: ./Shipping.yaml
       deliveryAddress:
         description: |-
           Delivery address of the order.
