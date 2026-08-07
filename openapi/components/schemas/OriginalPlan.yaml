@@ -5,6 +5,10 @@ description: |-
   To create a new plan, see [Create a plan](https://www.rebilly.com/catalog/all/plans/postplan).
 required:
   - id
+# Closed so that `id` alone means "reference this plan", and anything carrying
+# further fields is an inline plan instead. This mirrors the backend, which
+# treats a payload of exactly one `id` key as a plan reference.
+additionalProperties: false
 properties:
   id:
     description: ID of the plan.
