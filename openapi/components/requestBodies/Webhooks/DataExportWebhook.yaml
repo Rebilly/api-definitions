@@ -8,8 +8,12 @@ content:
           maxLength: 50
           example: exp_0YVCNQ2C1AD1RA3HXKP492GNZB
         fileId:
-          type: string
-          description: ID of the data export file.
+          type:
+            - 'string'
+            - 'null'
+          description: |-
+            ID of the data export file.
+            This value is `null` if the export failed.
           maxLength: 50
           example: file_0YV7HZ7KDCC5WBV9Q7WRKG1H6N
         eventType:
@@ -17,6 +21,7 @@ content:
           description: Type of event that triggered the webhook.
           enum:
             - data-export-completed
+            - data-export-failed
         _embedded:
           type: object
           description: Embedded objects related to the data export event.
