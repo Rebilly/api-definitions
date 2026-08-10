@@ -38,9 +38,16 @@ properties:
           type: integer
           minimum: 0
           maximum: 1000000000
-      anyOf:
+      oneOf:
         - required: ['plan']
+          properties:
+            planId:
+              not: {} # Enforces ONLY plan
         - required: ['planId']
+          properties:
+            plan:
+              not: {} # Enforces ONLY planId
+        - required: ['plan', 'planId'] # Enforces BOTH plan and planId
   billingAddress:
     description: Billing address details.
     oneOf:

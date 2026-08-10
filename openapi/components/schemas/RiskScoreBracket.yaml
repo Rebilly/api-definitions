@@ -30,6 +30,13 @@ properties:
         value:
           type: integer
           description: Value added to the risk score of the transaction.
-      anyOf:
+      oneOf:
         - required: [ 'start' ]
+          properties:
+            end:
+              not: {} # Enforces ONLY start
         - required: [ 'end' ]
+          properties:
+            start:
+              not: {} # Enforces ONLY end
+        - required: [ 'start', 'end' ] # Enforces BOTH start and end
