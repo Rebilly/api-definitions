@@ -250,6 +250,28 @@ properties:
               type: string
               format: email
             default: [ ]
+      annualComplianceScreening:
+        description: |-
+          Settings for annual compliance screening of all active customers.
+          When enabled, a compliance screening report is generated for every active customer
+          on the configured month and day each year.
+        type: object
+        properties:
+          enabled:
+            description: Specifies whether annual compliance screening is enabled for the organization.
+            type: boolean
+            default: false
+          monthDay:
+            description: |-
+              Month and day when annual compliance screening runs, in `MM-DD` format.
+              Required when `enabled` is `true`.
+              Valid calendar date only. Leap day `02-29` is not allowed.
+            type:
+              - 'string'
+              - 'null'
+            pattern: '^(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$'
+            example: '02-15'
+            default: null
       payoutRequestAllocationOrder:
         description: |-
           Default order for auto-allocation of payout requests.
