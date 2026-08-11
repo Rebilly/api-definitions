@@ -16,6 +16,23 @@ content:
             This value is `null` if the export failed.
           maxLength: 50
           example: file_0YV7HZ7KDCC5WBV9Q7WRKG1H6N
+        recordCount:
+          type: integer
+          description: |-
+            Total number of records in the export, excluding the header row.
+            This value is `0` if the export failed.
+          example: 1500
+        status:
+          type: string
+          description: |-
+            Status of the data export.
+            This webhook is sent only when the data export reaches a terminal status.
+            This value is never `pending`, `queued`, or `processing`.
+          enum:
+            - completed
+            - failed
+        failureReason:
+          $ref: ../../schemas/DataExportFailureReason.yaml
         eventType:
           type: string
           description: Type of event that triggered the webhook.
