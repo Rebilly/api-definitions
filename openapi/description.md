@@ -12,8 +12,6 @@ This API reference documentation contains the most commonly integrated resources
 
 # Authentication
 
-This topic describes the different forms of authentication that are available in the Rebilly API, and how to use them.
-
 Rebilly offers four forms of authentication: secret key, publishable key, JSON Web Tokens, and public signature key.
 
 - Secret API key: Use to make requests from the server side.
@@ -21,8 +19,6 @@ Rebilly offers four forms of authentication: secret key, publishable key, JSON W
   Keep them guarded and secure.
 - Publishable API key: Use in your client-side code to tokenize payment information.
 - JWT: Use to make short-life tokens that expire after a set period of time.
-
-<!-- ReDoc-Inject: <security-definitions> -->
 
 ## Manage API keys
 
