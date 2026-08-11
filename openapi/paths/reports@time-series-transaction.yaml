@@ -8,11 +8,15 @@ get:
   summary: Retrieve a time series transactions report
   operationId: GetTimeSeriesTransactionReport
   x-sdk-operation-name: getTimeSeriesTransaction
-  description: Retrieves a transactions report that is aggregated by time periods.
+  description: |-
+    Retrieves a report of sale and capture transactions, with one row for each day of the period.
+    Each row holds an aggregation of every transaction of the day,
+    and a breakdown of that day by the `subaggregate` field.
+    Transactions occur on the day of the `processedTime` value.
   parameters:
     - name: type
       in: query
-      description: Type of report aggregation.
+      description: Aggregate the transactions of each day by count, sum of amounts, approval rate, or incomplete rate.
       schema:
         type: string
         default: count
@@ -23,7 +27,7 @@ get:
           - incomplete-rate
     - name: subaggregate
       in: query
-      description: Report subaggregate.
+      description: Group the transactions of each day by this field, one subaggregate for each value.
       schema:
         type: string
         default: gateway-account

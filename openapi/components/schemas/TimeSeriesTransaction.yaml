@@ -10,19 +10,37 @@ properties:
       properties:
         date:
           type: string
-          description: Date in `YYYY-MM-DD` format .
+          description: Date in `YYYY-MM-DD` format.
         total:
           type: number
           format: double
-          description: Total number of all transactions within the aggregation.
+          description: |-
+            Aggregated value for all transactions for the day, in the unit specified by the `type` parameter:
+              - `count`: Total number of transactions.
+              - `amount`: Total amount of approved transactions in the merchant reporting currency.
+              - `approval-rate`: Ratio of approved transactions to all transactions.
+              - `incomplete-rate`: Ratio of incomplete transactions to all transactions.
+
+            This value does not depend on the `subaggregate` parameter and is not the sum of the values in `subaggregates`.
+            Each transaction is included once, even if the `subaggregate` field contains multiple values for the transaction.
+            Transactions with no value for the `subaggregate` field are also included.
         subaggregates:
-          type: object
-          description: Subaggregates that have transactions within the range.
-          properties:
-            subaggregate:
-              type: string
-              description: ID of the subaggregate.
-            value:
-              type: number
-              format: double
-              description: Total number of all subaggregate transactions within the aggregation.
+          type: array
+          description: |-
+            Breakdown by the `subaggregate` field for the day.
+            Each element contains one `subaggregate` value and its aggregated value.
+            Each `subaggregate` value found in the report has an element,
+            in the same order for each day.
+          items:
+            type: object
+            properties:
+              subaggregate:
+                type: string
+                description: One value of the `subaggregate` field, such as a website ID, a currency code, or a lead source.
+              value:
+                type: number
+                format: double
+                description: |-
+                  Aggregated value for transactions that have this `subaggregate` value,
+                  in the same unit as `total`.
+                  This value is `0` if no transactions have this `subaggregate` value.
