@@ -1,9 +1,11 @@
 # Contributing to the Rebilly API definitions
 
-👍🎉 Welcome! And thanks for taking the time to contribute! 🎉👍
+👍🎉 Welcome!
+And thanks for taking the time to contribute! 🎉👍
 
-**Important note:** we are designing in public (this repository is open for the world to see and contribute if they want).
-Do not post any confidential information in this repository (whether as a commit or a comment on a PR).
+**Important note:** Rebilly is designing in public.
+This repository is open for the world to see and contribute if they want.
+Do not post any confidential information in this repository, whether as a commit or a comment on a PR.
 See Rebilly security policies for more information about data classification.
 
 ## Design APIs
@@ -11,13 +13,14 @@ See Rebilly security policies for more information about data classification.
 Rebilly follows a design-first approach to APIs.
 
 - Use OpenAPI 3.1 to describe APIs according to below.
-- Use [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow) (create a branch and open a pull request for any change).
-- Check your work with Redocly CLI which runs `lint` and `bundle` commands controlled through the `redocly.yaml` configuration file when a pull request is opened (you will see the green checks or red x marks).
+- Use [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow), create a branch and open a pull request for any change.
+- Check your work with Redocly CLI which runs `lint` and `bundle` commands controlled through the `redocly.yaml` configuration file when a pull request is opened.
+  You will see the green checks or red x marks.
 - In terms of sequence, merge the API definitions before merging and releasing software to production.
 
 To get started:
 - Set up your environment.
-- Read the remainder of this page to understand how we design APIs and write API definitions.
+- Read the remainder of this page to understand how Rebilly designs APIs and writes API definitions.
 
 ## API description writing guidance
 
@@ -132,7 +135,7 @@ Rebilly uses the following lint rules:
 
 ### Maintenance
 
-Set up lint rules to enforce any design rules to keep this list to a minimum (and remove from this list as rules are enabled to automate these checks).
+Set up lint rules to enforce any design rules to keep this list to a minimum, and remove from this list as rules are enabled to automate these checks.
 
 ### Schemas
 
@@ -141,12 +144,13 @@ Set up lint rules to enforce any design rules to keep this list to a minimum (an
 - Define all properties explicitly (whenever possible).
 - List required properties.
 - Mark properties read or write only when appropriate.
-- Re-use schemas by reference objects (`$ref`). Some commonly used include:
+- Re-use schemas by reference objects, such as `$ref`.
+  Some commonly used include:
     - `ResourceId`
     - `CreatedTime`
     - `UpdatedTime`
 - Most APIs have a `_links` property (with at least "self" link).
-- If a resource has nested objects, consider separating them with the reference objects (`$ref`) if they have potential for reuse.
+- If a resource has nested objects, consider separating them with the reference objects, such as `$ref`, if they have potential for reuse.
 - You may organize schemas into sub-folders when appropriate.
 
 ### Operations
@@ -154,10 +158,12 @@ Set up lint rules to enforce any design rules to keep this list to a minimum (an
 - Follow [path conventions](./openapi/paths/README.md)
 - Use appropriate HTTP methods.
     - POST to insert a new resource.
-    - PUT to create with specified ID or replace existing Resource (must return 200 for updated and 201 for created).
+    - PUT to create with specified ID or replace existing Resource.
+      Must return 200 for updated and 201 for created.
     - GET to get a resource or a collection.
     - DELETE to delete a resource.
-- Response must contain http header `Location` of the newly created resource; if the status is 201, the `Location` header must exist.
+- Response must contain http header `Location` of the newly created resource.
+  If the status is 201, the `Location` header must exist.
 
 #### Collections
 

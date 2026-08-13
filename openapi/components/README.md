@@ -11,4 +11,4 @@ Reusable components
   - `links` - reusable [Link Objects](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.1.md#link-object)
   - `callbacks` - reusable [Callback Objects](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.1.md#callback-object)
   - `securitySchemes` - reusable [Security Scheme Objects](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.1.md#security-scheme-object)
-- Filename of files inside the folders represent component name, i.e. `Customer.yaml`
+- Filename of files inside the folders represent component name, for example, `Customer.yaml`

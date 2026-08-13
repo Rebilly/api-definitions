@@ -17,7 +17,7 @@ This topic provides guidance on how to write API documentation descriptions.
 ## Avoid knowledge bias
 
 Do not assume that the reader has the same knowledge of the product as you.
-We all do this to some extent.
+Writers often do this to some extent.
 This is a cognitive bias known as the [Curse of knowledge](https://effectiviology.com/curse-of-knowledge).
 
 > The curse of knowledge is a cognitive bias that occurs when an individual, communicating with other individuals, unknowingly assumes that the others have the background to understand.
@@ -38,10 +38,10 @@ The reader may not.
 
 If the reader does not know exactly what a hard limit is or are how it works in Rebilly, they need to search the docs to find out, and then come back to API docs.
 This is frustrating for the reader.
-It's infuriating if they need to continually do this to understand an API.
+It is infuriating if they need to continually do this to understand an API.
 Over time, if the reader is persistent, they will learn these concepts themselves.
 This is a major hurdle for new users to overcome.
-Many readers may simply quit, or may label the docs as "bad" and not use them, or our product.
+Many readers may simply quit, or may label the docs as "bad" and not use them, or the product.
 
 ### Example which avoids knowledge bias
 
@@ -133,8 +133,8 @@ An acronym is an abbreviation formed from the initial letters of words that are 
 Acronyms are often pronounced as a word, or each letter is spelt.
 
 Do not assume that your audience will understand and be familiar with all acronyms, especially acronyms for financial terms or for state bodies that are specific to one country.
-It is important to be consistent in our use of acronyms and related descriptions.
-If we are not, we may confuse our audience.
+It is important to be consistent in the use of acronyms and related descriptions in Rebilly documentation.
+If documentation is not consistent, this may confuse the audience.
 
 In descriptions, define acronyms that may not be commonly used in their first instance.
 Thereafter, use the acronym.
@@ -309,9 +309,9 @@ taxNumberType:
 
 ## Tags
 
-We use tags to group related operations.
+Use tags to group related operations in the Rebilly API reference.
 When searching operations, the reader may look at the tag description for the context.
-It is important that we add detail to these descriptions and link to related content if required.
+Add detail to these descriptions and link to related content if required.
 
 ### Tag example
 
@@ -359,11 +359,11 @@ This section provides guidance on how to write operation, object, and parameter 
 
 ### Operations
 
-- Start all operation descriptions with an active verb (Retrieves, Adds, Creates, Updates, Deletes, Sets, Specifies ...)
+- Start all operation descriptions with an active verb, such as Retrieves, Adds, Creates, Updates, Deletes, Sets, Specifies, and more.
 - Describe what the operation does.
   Use verb phrases for operation descriptions.
   For example, "Retrieves customer information with a specified ID."
-- Do not start with an imperative (Create, Retrieve, Merge ...).
+- Do not start with an imperative, such as Create, Retrieve, Merge, and more.
   The user may read this as a command.
 - Avoid starting with "The" or "A".
   Omit articles for ease of reading.
@@ -371,9 +371,9 @@ This section provides guidance on how to write operation, object, and parameter 
 - Provide detail and link to related content if necessary.
 
 **Tip:**
-> Place this imaginary text before your operation descriptions: _This operation..._.
+> Place this imaginary text before your operation descriptions: This operation...
 >
-> Example: _"This operation"_ Creates a new customer account. \
+> Example: "This operation" creates a new customer account. \
 > Result: Creates a new customer account.
 
 > Use "This operation …" as a drafting aid for the first sentence.
@@ -426,12 +426,12 @@ Use noun phrases to describe fields.
 A noun phrase describes what the field is, not what it does.
 
 **Tip:**
-> Place this imaginary text before your field descriptions: _This field is the …_.
+> Place this imaginary text before your field descriptions: This field is the ….
 >
-> Example: _"This field is the"_ Date and time when the coupon expires. \
+> Example: "This field is the" date and time when the coupon expires. \
 > Result: Date and time when the coupon expires.
 >
-> Example: _"This field is the"_ ID of the coupon. \
+> Example: "This field is the" ID of the coupon. \
 > Result: ID of the coupon.
 
 #### ID fields

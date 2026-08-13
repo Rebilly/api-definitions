@@ -1,6 +1,6 @@
-# Rebilly OpenAPI Definitions
+# Rebilly OpenAPI definitions
 
-Our website (www.rebilly.com) is powered by [Redocly Realm](https://redocly.com/realm/).
+The Rebilly website [Rebilly.com](https://www.rebilly.com/) is powered by [Redocly Realm](https://redocly.com/realm/).
 
 ## View API docs
 
@@ -15,7 +15,7 @@ see [Get started](https://www.rebilly.com/docs/dev-docs#get-started).
 
 ## Contributing
 
-[Read our contribution guide](./CONTRIBUTING.md).
+[Read the contribution guide](./CONTRIBUTING.md).
 
 ## Environment setup
 
