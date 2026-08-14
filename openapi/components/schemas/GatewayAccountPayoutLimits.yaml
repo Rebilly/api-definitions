@@ -1,0 +1,77 @@
+description: |-
+  Payout method limits for payout request auto-allocation.
+  Limits apply to auto-allocation only.
+  Manual allocations are uncapped.
+type: object
+properties:
+  maxPerTransaction:
+    description: |-
+      Maximum amount limit for single allocation.
+      At most one entry per each currency that this gateway account supports.
+    type:
+      - 'array'
+      - 'null'
+    minItems: 1
+    uniqueItems: true
+    items:
+      type: object
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          description: Limit amount.
+          type: number
+          format: double
+          exclusiveMinimum: 0
+          x-type: Money
+          example: 3000
+        currency:
+          $ref: ./CurrencyCode.yaml
+    example:
+      - amount: 3000
+        currency: CAD
+  maxPerPeriod:
+    description: |-
+      Maximum amount limit for a rolling period.
+      At most one entry per each currency that this gateway account supports.
+    type:
+      - 'array'
+      - 'null'
+    minItems: 1
+    uniqueItems: true
+    items:
+      type: object
+      required:
+        - amount
+        - currency
+        - period
+      properties:
+        amount:
+          description: Limit amount.
+          type: number
+          format: double
+          exclusiveMinimum: 0
+          x-type: Money
+          example: 10000
+        currency:
+          $ref: ./CurrencyCode.yaml
+        period:
+          description: Rolling period for the amount limit.
+          type: string
+          enum:
+            - 24-hours
+          x-enumDescriptions:
+            24-hours: Rolling 24-hour period.
+    example:
+      - amount: 10000
+        currency: CAD
+        period: 24-hours
+example:
+  maxPerTransaction:
+    - amount: 3000
+      currency: CAD
+  maxPerPeriod:
+    - amount: 10000
+      currency: CAD
+      period: 24-hours
