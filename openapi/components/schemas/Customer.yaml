@@ -41,8 +41,8 @@ properties:
     description: |-
       Write-only payment token.
       If supplied, the token is converted into a payment instrument, and its ID is assigned to `defaultPaymentInstrumentId` value.
-      If both are supplied, the value of this property overrides the `defaultPaymentInstrumentId` value.
-      The token expires after first use.
+      The value of this property overrides the `defaultPaymentInstrumentId` if both are supplied.
+      This token may only be used once before it expires.
   defaultPaymentInstrument:
     type:
       - 'object'
@@ -50,12 +50,20 @@ properties:
     description: |-
       Default payment instrument of the customer.
 
-      This field is deprecated for writes. Use the `defaultPaymentInstrumentId` field instead.
-    oneOf:
-      - $ref: ./VaultedInstrument.yaml
-      - $ref: ./AlternativePaymentInstrument.yaml
-      - $ref: ./CashInstrument.yaml
-      - $ref: ./CheckInstrument.yaml
+      The default payment instrument is used to automatically pay subscription renewals,
+      and for transaction requests where a specific payment instrument is not provided.
+    readOnly: true
+    required:
+      - method
+      - paymentInstrumentId
+    properties:
+      method:
+        $ref: ./PaymentMethod.yaml
+      paymentInstrumentId:
+        type: string
+        description: ID of the payment instrument.
+        maxLength: 50
+        example: inst_0YVB8KPKNXCBR9EDX7JHSED75N
   defaultPaymentInstrumentId:
     type:
       - 'string'
