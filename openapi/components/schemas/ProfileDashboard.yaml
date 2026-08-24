@@ -5,7 +5,7 @@ properties:
   dateRange:
     type: string
     description: |-
-      Date range of the dashboard, in ISO-8601 interval format, extended with `NOW` and `NOW-P*` values for relative dates.
+      Date range of the dashboard, in ISO-8601 interval format, extended with `NOW` and relative anchor tokens for relative dates.
       This range applies to every tile that does not define its own `dateRange`.
       Supported formats:
 
@@ -14,6 +14,13 @@ properties:
       - Duration and end: `P1M/2024-02-01T00:00:00Z`.
       - Now and duration: `NOW-P1M/NOW`. This format represents the last month.
       - Month before last month: `NOW-P2M/NOW-P1M`.
+      - Anchor tokens: `NOW_D`, `NOW_W`, `NOW_M` and `NOW_Y` resolve to the start of the current day, week, month or year when used as the start of the range, and to the end of that period when used as the end of the range.
+        Combine an anchor with a signed duration, for example `NOW_M-P1M`, to shift the period after snapping to the boundary.
+      - Today: `NOW_D/NOW_D`.
+      - Yesterday: `NOW_D-P1D/NOW_D-P1D`.
+      - This week: `NOW_W/NOW_D`.
+      - Last week: `NOW_W-P1W/NOW_W-P1W`.
+      - Last month: `NOW_M-P1M/NOW_M-P1M`.
     default: 'NOW-P1M/NOW'
   periodStart:
     type: string
