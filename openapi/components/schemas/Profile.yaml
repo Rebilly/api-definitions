@@ -93,5 +93,67 @@ properties:
     type: string
     description: Unique hash value that represents the user.
     readOnly: true
+  requiresCardOnFile:
+    type: boolean
+    description: Specifies whether the current organization must have a payment card on file before it can transact in the live environment.
+    readOnly: true
+    default: false
+  hasCardOnFile:
+    type: boolean
+    description: Specifies whether the current organization has an active payment card on file.
+    readOnly: true
+    default: false
+  billingManagementToken:
+    type:
+      - 'string'
+      - 'null'
+    format: password
+    description: |-
+      Session token used to manage the payment method on file for a Rebilly subscription.
+      This value is returned only to organization owners.
+
+      {% admonition type="warning" %}
+      Treat as a secret.
+      Do not log, do not expose in URLs, do not store in shared client storage.
+      {% /admonition %}
+    readOnly: true
+  pastDueInvoice:
+    type:
+      - 'object'
+      - 'null'
+    description: |-
+      Details of the oldest past-due invoice for the Rebilly subscription associated with the current organization.
+      This value is returned to all organization members to support consistent enforcement of the billing gate.
+      The `token` is returned only to organization owners.
+    readOnly: true
+    required:
+      - invoiceId
+      - websiteId
+      - token
+    properties:
+      invoiceId:
+        type: string
+        description: ID of the past-due invoice.
+        maxLength: 50
+        readOnly: true
+      websiteId:
+        type: string
+        description: ID of the website for the invoice.
+        maxLength: 50
+        readOnly: true
+      token:
+        type:
+          - 'string'
+          - 'null'
+        format: password
+        description: |-
+          JWT that is used to authorize payment of the invoice through the Rebilly Instruments JavaScript library.
+          This value is `null` for non-owners, who cannot pay the invoice.
+
+          {% admonition type="warning" %}
+          Treat as a secret.
+          Do not log, do not expose in URLs, do not store in shared client storage.
+          {% /admonition %}
+        readOnly: true
   _links:
     $ref: ./SelfLink.yaml
