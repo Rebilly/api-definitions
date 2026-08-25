@@ -10,8 +10,9 @@ properties:
     maxLength: 50
     example: kyc_liv_01HXBZ0MS1GPS6S34MPQXYT5TZ
   customerId:
-    $ref: ./CustomerId.yaml
     readOnly: true
+    allOf:
+      - $ref: ./CustomerId.yaml
   kycRequestId:
     type: string
     description: ID of the KYC request that the liveness session is associated with.
