@@ -140,6 +140,14 @@ properties:
           If autopay is enabled, the payment is retrieved from the customer on the renewal date using the payment instrument that is set at `paymentInstrumentId`,
           or the default payment instrument on the order.
           If this value is `null`, the related order autopay is not affected.
+      includeUnpaidInvoices:
+        type: boolean
+        default: false
+        example: false
+        description: |-
+          Specifies whether the quote invoice includes items from outstanding unpaid and past-due invoices for the related order.
+          When this value is `true`, the quote invoice includes charges for eligible items from those invoices.
+          When the quote is accepted, only invoices included in the quote that remain unpaid or past due and can be voided are voided.
       shipping:
         description: |-
           Shipping settings of the order.
