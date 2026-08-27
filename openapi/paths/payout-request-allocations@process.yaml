@@ -10,9 +10,11 @@ post:
   x-sdk-operation-name: process
   description: |-
     Initiates the processing of one or more payout request allocations.
-    
+
     Only allocations with status `pending` are processed.
     Each allocation is processed by creating a transaction.
+    Rejects the request without queueing allocations when any allocation uses an inactive gateway account
+    or a gateway account with payout instruction `none`.
   requestBody:
     content:
       application/json:
