@@ -2,6 +2,12 @@ description: |-
   Payout method limits for payout request auto-allocation.
   Limits apply to auto-allocation only.
   Manual allocations are uncapped.
+
+  Validation is per currency.
+  When multiple limit types contain
+  an entry for the same currency, the following requirements apply:
+  - `minPerTransaction.amount < maxPerTransaction.amount`.
+  - `minPerTransaction.amount <= maxPerPeriod.amount`.
 type: object
 minProperties: 1
 properties:
@@ -31,6 +37,33 @@ properties:
           $ref: ./CurrencyCode.yaml
     example:
       - amount: 3000
+        currency: CAD
+  minPerTransaction:
+    description: |-
+      Minimum amount limit for single allocation.
+      At most one entry per each currency that this gateway account supports.
+    type:
+      - 'array'
+      - 'null'
+    minItems: 1
+    uniqueItems: true
+    items:
+      type: object
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          description: Limit amount.
+          type: number
+          format: double
+          exclusiveMinimum: 0
+          x-type: Money
+          example: 100
+        currency:
+          $ref: ./CurrencyCode.yaml
+    example:
+      - amount: 100
         currency: CAD
   maxPerPeriod:
     description: |-
@@ -71,6 +104,9 @@ properties:
 example:
   maxPerTransaction:
     - amount: 3000
+      currency: CAD
+  minPerTransaction:
+    - amount: 100
       currency: CAD
   maxPerPeriod:
     - amount: 10000
