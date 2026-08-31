@@ -2,14 +2,14 @@
 
 $service = new \Rebilly\Sdk\Service($client);
 
-$plan = \Rebilly\Sdk\Model\SubscriptionPlan::from([])
+$plan = \Rebilly\Sdk\Model\PlanSubscriptionPlan::from([])
     ->setProductId('productId')
     ->setName('Test plan')
     ->setCurrency('USD')
     ->setPricing(new \Rebilly\Sdk\Model\PlanFormulaFlatRate(['price' => 9.99]))
     ->setRecurringInterval(
-        \Rebilly\Sdk\Model\SubscriptionPlanRecurringInterval::from()
-            ->setUnit(\Rebilly\Sdk\Model\SubscriptionPlanRecurringInterval::UNIT_MONTH)
+        \Rebilly\Sdk\Model\PlanSubscriptionPlanRecurringInterval::from()
+            ->setUnit(\Rebilly\Sdk\Model\PlanSubscriptionPlanRecurringInterval::UNIT_MONTH)
             ->setLength(1),
     );
 
