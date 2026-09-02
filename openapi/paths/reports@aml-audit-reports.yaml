@@ -1,0 +1,67 @@
+get:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Reports
+  tags:
+    - Reports
+  summary: Retrieve an AML audit report
+  operationId: GetAmlAuditReport
+  x-sdk-operation-name: getAmlAuditReport
+  description: |-
+    Retrieves an Anti-Money Laundering (AML) audit report for a person with a specified ID.
+    The maximum reporting period is 180 days.
+
+    The report includes linked customers, screening summary metrics, screening history, and related transactions for the selected period.
+
+    Use the `Accept` header to select the response format: `application/json` (default), `application/pdf`, or `text/csv`.
+
+    Each section of the report includes at most 10,000 records, and the `truncated` property is `true` when a section reaches that limit.
+  parameters:
+    - name: personId
+      in: query
+      required: true
+      description: ID of the person for the report.
+      schema:
+        type: string
+        maxLength: 50
+    - name: periodStart
+      in: query
+      description: |-
+        Date and time when the report starts.
+        If this value is not provided or is `null`, the report starts 90 days before the current date and time at midnight utc.
+      schema:
+        type: string
+        format: date-time
+    - name: periodEnd
+      in: query
+      description: |-
+        Date and time when the report ends.
+        If this value is not provided or is `null`, the report ends at the current date and time.
+      schema:
+        type: string
+        format: date-time
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/mediaTypeJsonPdfCsv.yaml
+  responses:
+    '200':
+      description: Report retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ReportAmlAuditReport.yaml
+        application/pdf:
+          schema:
+            type: string
+            format: binary
+        text/csv:
+          schema:
+            type: string
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

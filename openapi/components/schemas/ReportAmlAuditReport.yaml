@@ -1,0 +1,190 @@
+type: object
+description: AML audit report for a person.
+properties:
+  personId:
+    type: string
+    description: ID of the person associated with the report.
+    maxLength: 50
+  status:
+    type:
+      - string
+      - 'null'
+    description: Person-level AML screening status for the selected period.
+    enum:
+      - clear
+      - confirmed-match
+      - pending-review
+  linkedCustomers:
+    type: array
+    description: Customers linked to the person.
+    items:
+      type: object
+      properties:
+        id:
+          $ref: ./CustomerId.yaml
+        websiteId:
+          $ref: ./WebsiteId.yaml
+      required:
+        - id
+        - websiteId
+  summary:
+    type: object
+    description: Screening summary metrics for the selected period.
+    properties:
+      totalChecks:
+        type: integer
+        description: Total number of AML checks in the selected period.
+      hitCount:
+        type: integer
+        description: Number of AML hits across all checks in the selected period.
+      lastCheckTime:
+        type:
+          - string
+          - 'null'
+        format: date-time
+        description: Date and time of the most recent AML check in the selected period.
+    required:
+      - totalChecks
+      - hitCount
+      - lastCheckTime
+  screeningHistory:
+    type: array
+    description: AML screening history for the selected period.
+    items:
+      type: object
+      properties:
+        createdTime:
+          $ref: ./CreatedTime.yaml
+        updatedTime:
+          $ref: ./UpdatedTime.yaml
+        customerId:
+          $ref: ./CustomerId.yaml
+        source:
+          type: string
+          description: Source of the AML check.
+          enum:
+            - sign-up
+            - recurring
+            - purchase
+        hitSources:
+          type:
+            - string
+            - 'null'
+          description: |-
+            Comma-separated list of AML Hit sources for the AML check.
+
+            The value is `null` if the AML Check did not find any hits.
+        result:
+          type: string
+          description: Screening result for the AML check.
+          enum:
+            - clear
+            - confirmed-match
+            - pending-review
+        reviewer:
+          type:
+            - string
+            - 'null'
+          description: Name of the reviewer, `bot` for checks that run automatically, or `null` when the check hasn't been reviewed yet.
+      required:
+        - createdTime
+        - updatedTime
+        - customerId
+        - source
+        - hitSources
+        - result
+        - reviewer
+  transactions:
+    type: array
+    description: Transactions for customers linked to the person in the selected period.
+    items:
+      type: object
+      properties:
+        id:
+          $ref: ./TransactionId.yaml
+        customerId:
+          $ref: ./CustomerId.yaml
+        createdTime:
+          $ref: ./CreatedTime.yaml
+        updatedTime:
+          $ref: ./UpdatedTime.yaml
+        amount:
+          type: number
+          description: Transaction amount converted to the report currency of the organization.
+        currency:
+          $ref: ./CurrencyCode.yaml
+        type:
+          description: Type of transaction.
+          type: string
+          x-basic: true
+          readOnly: true
+          enum:
+            - 3ds-authentication
+            - authorize
+            - capture
+            - credit
+            - refund
+            - sale
+            - setup
+            - void
+        status:
+          description: Status of the transaction.
+          type: string
+          readOnly: true
+          enum:
+            - completed
+            - conn-error
+            - disputed
+            - never-sent
+            - offsite
+            - partially-refunded
+            - pending
+            - refunded
+            - sending
+            - timeout
+            - voided
+            - waiting-approval
+            - waiting-capture
+            - waiting-gateway
+            - waiting-refund
+        result:
+          description: Result of the transaction.
+          type: string
+          x-basic: true
+          readOnly: true
+          enum:
+            - approved
+            - canceled
+            - declined
+            - unknown
+      required:
+        - id
+        - customerId
+        - createdTime
+        - updatedTime
+        - amount
+        - currency
+        - type
+        - status
+        - result
+  periodStart:
+    type: string
+    format: date-time
+    description: Start date time of the report period.
+  periodEnd:
+    type: string
+    format: date-time
+    description: End date time of the report period.
+  truncated:
+    type: boolean
+    description: Indicates whether any list within the report is truncated due to too many results.
+required:
+  - personId
+  - status
+  - linkedCustomers
+  - summary
+  - screeningHistory
+  - transactions
+  - periodStart
+  - periodEnd
+  - truncated
