@@ -46,7 +46,11 @@ content:
                       Defines thresholds for notification purposes.
                       For example, to notify the customer that their usage is near the hard limit of their metered billing plan.
                       This notification informs the customer so that they can upgrade their plan before the hard limit is reached.
-                      When the reported usage reaches 75%, 90%, and 100% of the configured limit a specific event is fired.
+                      When metered usage equals or exceeds the configured soft limit, the `soft-usage-limit-reached` event is triggered.
+                      The quantity limit applies to the larger of the reported and billed quantity.
+                      If a minimum billable quantity results in a billed quantity that is higher than the reported quantity, the billed quantity applies to the limit.
+                      If a maximum billable quantity results in a billed quantity that is lower than the reported quantity, the reported quantity applies to the limit.
+                      The amount limit applies to the billed amount.
                       To notify the customer, a webhook and notification can be configured for this event.
                       This field is useful for accounting and customer success purposes.
                       The usage of metered billing plans can still be reported if the soft limit is reached.
