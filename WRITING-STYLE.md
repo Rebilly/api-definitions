@@ -200,8 +200,7 @@ This often requires the use of articles (a, an, the) and prepositions (of, from,
 
 ### Examples
 
-<details>
-<summary> Example 1</summary>
+{% accordion title="Example 1" %}
 
 #### Incorrect use
 
@@ -224,10 +223,9 @@ scope:
 |---|---|---|---|
 | Scope| of the | API key |  ✅ |
 
-</details>
+{% /accordion %}
 
-<details>
-<summary> Example 2 </summary>
+{% accordion title="Example 2" %}
 
 #### Incorrect use
 
@@ -251,10 +249,9 @@ creationTime:
 |---|---|---|---|---|---|
 | Time| when the | coupon | was | created | ✅ |
 
-</details>
+{% /accordion %}
 
-<details>
-<summary> Example 3</summary>
+{% accordion title="Example 3" %}
 
 #### Incorrect use
 
@@ -278,10 +275,9 @@ organizationName:
 |---|---|---|---|
 | Name| of the | organization | ✅ |
 
-</details>
+{% /accordion %}
 
-<details>
-<summary> Example 4</summary>
+{% accordion title="Example 4" %}
 
 #### Incorrect use
 
@@ -305,7 +301,7 @@ taxNumberType:
 |---|---|---|---|
 | Type | of | tax number | ✅ |
 
-</details>
+{% /accordion %}
 
 ## Tags
 
