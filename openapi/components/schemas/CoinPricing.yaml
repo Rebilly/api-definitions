@@ -1,0 +1,10 @@
+description: Formula for calculating the number of coins to credit to the coin balance based on a paid amount in fiat currency.
+type: object
+discriminator:
+  propertyName: formula
+  mapping:
+    flat-rate: ./CoinPricingFlatRate.yaml
+    volume: ./CoinPricingVolume.yaml
+oneOf:
+  - $ref: ./CoinPricingFlatRate.yaml
+  - $ref: ./CoinPricingVolume.yaml

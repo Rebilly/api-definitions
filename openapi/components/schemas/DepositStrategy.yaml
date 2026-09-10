@@ -157,8 +157,26 @@ properties:
     default: true
   coinPurchase:
     type: boolean
-    description: Specifies if deposits created from this strategy are coin purchases that credit the coin balance instead of the cash balance.
+    deprecated: true
+    description: |-
+      Specifies if deposits created from this strategy are coin purchases that credit the coin balance instead of the cash balance.
+      Use the `coinPricing` field instead.
     default: false
+  coinPricing:
+    description: |-
+      Formula that converts the paid fiat amount into coins credited to the coin balance.
+      A `null` value means deposits created from this strategy credit the cash balance.
+      If both `coinPricing` and `coinPurchase` are provided, `coinPricing` takes precedence.
+      Setting a `coinPricing` object requires the Replay add-on.
+      For `volume`, every configured deposit amount must match a bracket,
+      and the last bracket has a `null` `maxAmount` when `customAmount` has a value or `adjustBaseToLastDeposit` is `true`.
+      For deposit amount strategies with `coinPurchase: true` and no `coinPricing`, responses include default flat-rate pricing with `coinsPerFiatMinor: 10`.
+    oneOf:
+      - $ref: ./CoinPricing.yaml
+      - type: 'null'
+    example:
+      formula: flat-rate
+      coinsPerFiatMinor: 10
   createdTime:
     $ref: ./CreatedTime.yaml
   updatedTime:

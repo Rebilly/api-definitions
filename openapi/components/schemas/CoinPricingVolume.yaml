@@ -1,0 +1,26 @@
+title: Volume
+description: |-
+  Volume-based coin pricing that multiplies the full paid amount in minor units by `coinsPerFiatMinor` from the matching bracket.
+  For example, if `coinsPerFiatMinor` is `10` for amounts up to `$10.00` and `12` for amounts from `$10.01` through `$50.00`,
+  a `$10.00` deposit credits `10,000` coins and a `$10.01` deposit credits `12,012` coins.
+type: object
+additionalProperties: false
+required:
+  - formula
+  - brackets
+properties:
+  formula:
+    type: string
+    description: Volume-based formula for converting the paid fiat amount into coins.
+    enum:
+      - volume
+  brackets:
+    type: array
+    minItems: 1
+    description: |-
+      Amount ranges that define the coin rate for a paid amount.
+      The first range matches amounts less than or equal to `maxAmount`.
+      Each subsequent range matches amounts greater than the previous `maxAmount` and less than or equal to the current `maxAmount`.
+      A final range with a `null` `maxAmount` has no upper limit.
+    items:
+      $ref: ./CoinPricingVolumeBracket.yaml

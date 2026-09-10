@@ -46,10 +46,20 @@ properties:
       expired: Request expired without an approved deposit transaction. This is a permanent state.
   coinPurchase:
     type: boolean
+    deprecated: true
     readOnly: true
     description: |-
       Specifies if the deposit is a coin purchase that credits the coin balance instead of the cash balance.
       Determined by the deposit amount strategy that is applied to the deposit request.
+      Use the `coinPricing` field instead.
+  coinPricing:
+    readOnly: true
+    description: |-
+      Formula copied from the deposit amount strategy when the deposit request is created.
+      A `null` value means the deposit credits the cash balance instead of the coin balance.
+    oneOf:
+      - $ref: ./CoinPricing.yaml
+      - type: 'null'
   currency:
     $ref: ./CurrencyCode.yaml
   amounts:
