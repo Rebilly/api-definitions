@@ -4,15 +4,70 @@ This topic provides guidance on how to write API documentation descriptions.
 
 ## General guidance
 
-- Start all sentences with a capital letter and end them with a period (except summaries).
+- Start all sentences with a capital letter and end them with a period, except for summaries.
 - Add meaningful descriptions to all operations, objects, and parameters.
-- Do not start descriptions with articles (The, A, An).
+- Do not start the first sentence of operation, response, field, or parameter descriptions with articles `The`, `A`, or `An`.
+  This restriction does not apply to subsequent sentences.
 - Avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
-- Avoid future (often includes "will") and past tense (often includes words ending in "ed").
-- Avoid [passive voice](https://developers.google.com/tech-writing/one/active-voice).
-- Avoid using ("should", "could", "can").
+- Use present tense in OpenAPI descriptions.
+  Timestamp noun phrases may use past tense.
+  For example, use `Date and time when the resource was created.`
+  Response descriptions may use short status phrases such as `Report retrieved.`
+  See [Future tense](#future-tense).
+- Prefer [active voice](https://developers.google.com/tech-writing/one/active-voice).
+  See [Passive and indirect outcomes](#passive-and-indirect-outcomes).
+- Describe [observable API behavior](#describe-observable-behavior), not implementation details.
+- Do not name a product, service, or vague entity as the actor when describing API behavior.
+  See [Actor references](#actor-references).
+- Avoid using `should`, `could`, and `can`.
+- Avoid using [parentheses](#parentheses) in descriptions, except on the first instance of an acronym.
 - To add multi-lined descriptions, after a `description:`, add one space, then insert `|-`.
   This escapes the YAML formatting and enables the use of Markdown.
+
+## Parentheses
+
+Avoid parentheses in API descriptions except when defining an acronym on first use.
+Parentheses can interrupt sentence flow and can confuse readers.
+Readers may interpret parenthetical text in different ways.
+
+Rephrase the text as part of the main sentence, or split it into a separate sentence.
+
+When defining an acronym on first use in a description, use parentheses.
+For more information, see [Acronyms](#acronyms).
+
+### Examples
+
+Incorrect:
+
+```yaml
+description: Retrieves customer information (including payment methods).
+```
+
+Correct:
+
+```yaml
+description: Retrieves customer information, including payment methods.
+```
+
+Incorrect:
+
+```yaml
+description: Updates a subscription with a specified ID (use this to change plan items).
+```
+
+Correct:
+
+```yaml
+description: |-
+  Updates a subscription with a specified ID.
+  Use this operation to change plan items.
+```
+
+Acronym on first use:
+
+```yaml
+description: Retrieves Electronic Funds Transfer (EFT) transactions.
+```
 
 ## Avoid knowledge bias
 
@@ -68,7 +123,7 @@ This description provides detail on what a hard limit is.
 
 ## Possessive apostrophes
 
-Possessive apostrophes (`'s`) indicate ownership.
+Possessive apostrophes, written as `'s`, indicate ownership.
 Do not assign ownership to inanimate objects.
 This is [anthropomorphic](https://www.oreilly.com/library/view/microsoft-manual-of/9780735669833/ch01s03.html), and in some instances, may infer a hierarchy.
 
@@ -104,7 +159,7 @@ Features:
 - Use the MRR report in revenue recognition to view predictable recurring revenue. ✅
 - To view predictable recurring revenue, use the MRR report in revenue recognition. ✅
 
-## Anthropomorphic verbs
+## Anthropomorphism
 
 Do not attribute human actions or capabilities to inanimate objects.
 This is [anthropomorphic](https://www.oreilly.com/library/view/microsoft-manual-of/9780735669833/ch01s03.html).
@@ -187,16 +242,16 @@ Only add a new line after a period, or a comma.
     the KYC document score becomes `95`.
 ```
 
-## Noun strings (or noun stacks)
+## Noun strings, or noun stacks
 
 Avoid using a series of nouns together consecutively.
 This can make descriptions difficult to understand because it may not be clear which words are modifier nouns and which noun is the object.
-In writing, this is known as a [noun string (or noun stack)](https://www.plainlanguage.gov/guidelines/words/avoid-noun-strings/).
+In writing, this is known as a [noun string, or noun stack](https://www.plainlanguage.gov/guidelines/words/avoid-noun-strings/).
 This often occurs in business and technical content when the author attempts to make content concise, but mistakenly removes important context.
 
-To avoid noun strings, place the modifier noun before the noun that it modifies.
+To avoid unclear noun strings, use a preposition or relative clause to show the relationship between nouns.
 This makes it easier to understand the relationship between the words.
-This often requires the use of articles (a, an, the) and prepositions (of, from, in, on, to, for ...).
+This often requires the use of articles such as `a`, `an`, and `the`, and prepositions such as `of`, `from`, `in`, `on`, `to`, and `for`.
 
 ### Examples
 
@@ -208,7 +263,7 @@ This often requires the use of articles (a, an, the) and prepositions (of, from,
 scope:
   description: API key scope.
 ```
-| Noun (object)| modifier noun| |
+| Compound modifier | Head noun | |
 |---|---|---|
 | API key| scope |  ❌  |
 
@@ -219,7 +274,7 @@ scope:
   description: Scope of the API key.
 ```
 
-| Modifier noun | preposition & article | noun (object)| |
+| Head noun | Preposition & article | Object of the preposition | |
 |---|---|---|---|
 | Scope| of the | API key |  ✅ |
 
@@ -234,7 +289,7 @@ creationTime:
   description: Coupon creation time.
 ```
 
-| Noun (object)| modifier noun | noun | |
+| Noun modifier | Noun modifier | Head noun | |
 |---|---|---|---|
 | Coupon | creation | time | ❌ |
 
@@ -245,9 +300,9 @@ creationTime:
   description: Time when the coupon was created.
 ```
 
-| Noun | conjunction & article | noun (object)| verb | modifier noun | |
-|---|---|---|---|---|---|
-| Time| when the | coupon | was | created | ✅ |
+| Head noun | Relative adverb | Article | Noun | Auxiliary verb | Past participle | |
+|---|---|---|---|---|---|---|
+| Time | when | the | coupon | was | created | ✅ |
 
 {% /accordion %}
 
@@ -260,7 +315,7 @@ organizationName:
   description: Organization name
 ```
 
-| Noun (object)| noun | |
+| Noun modifier | Head noun | |
 |---|---|---|
 | Organization| name | ❌ |
 
@@ -271,7 +326,7 @@ organizationName:
   description: Name of the organization.
 ```
 
-| Noun | preposition & article | noun (object)| |
+| Head noun | Preposition & article | Object of the preposition | |
 |---|---|---|---|
 | Name| of the | organization | ✅ |
 
@@ -286,7 +341,7 @@ taxNumberType:
   description: Tax number type.
 ```
 
-| Noun (object) | modifier noun | |
+| Compound modifier | Head noun | |
 |---|---|---|
 | Tax number | type | ❌ |
 
@@ -297,11 +352,262 @@ taxNumberType:
   description: Type of tax number.
 ```
 
-| Noun | preposition | noun (object)| |
+| Head noun | Preposition | Object of the preposition | |
 |---|---|---|---|
 | Type | of | tax number | ✅ |
 
 {% /accordion %}
+
+## Describe observable behavior
+
+API descriptions explain what happens when a client sends a request or reads a response.
+Focus on observable API behavior rather than how the implementation achieves it.
+Prefer terminology that matches the API contract, the UI, or user-visible behavior.
+See also [Avoid knowledge bias](#avoid-knowledge-bias).
+
+When a description explains API behavior, it should:
+
+1. Identify the affected object.
+2. Describe the action.
+3. Describe the outcome.
+
+### Implementation details
+
+Do not describe internal storage or processing when the reader only needs the API effect.
+
+Incorrect:
+
+```yaml
+description: |-
+  ...
+  The API sets the `customer.status` database column to `active`.
+```
+
+Correct:
+
+```yaml
+description: |-
+  ...
+  The status of the customer account changes to `active`.
+```
+
+### Actor references
+
+Do not name a product, service, or vague entity as the actor when describing API behavior.
+Do not use vague pronouns such as `it` or `they` to stand in for a product or service.
+Using the product as the actor adds little information and places unnecessary emphasis on the product rather than the behavior.
+
+This includes `Rebilly`, `Replay`, `Recomm`, `the system`, `the server`, `the platform`, and so on.
+
+Describe the affected object, the relationship, and the outcome instead.
+Prefer object-focused phrasing when it names the affected object and outcome clearly.
+See also [Passive and indirect outcomes](#passive-and-indirect-outcomes).
+
+Incorrect:
+
+```yaml
+description: |-
+  ...
+  Mercure includes the tournament ID in the event.
+```
+
+```yaml
+description: |-
+  ...
+  When Rebilly skips unproven cards, it adds a timeline message on the gateway account.
+```
+
+Correct:
+
+```yaml
+description: |-
+  ...
+  The event contains the tournament ID.
+```
+
+```yaml
+description: |-
+  ...
+  When unproven cards are skipped, a timeline message is added on the gateway account.
+```
+
+Exceptions:
+
+- Use `Rebilly` when describing a product boundary, such as `processed outside of Rebilly`.
+- Use `Rebilly` in tag descriptions or links when the reader needs product context.
+- Use `the API` only when distinguishing the server from the client is necessary.
+  Prefer describing the affected object instead.
+  See [Implementation details](#implementation-details).
+
+### Abstract nouns and operation names
+
+Actions are easier to understand than abstract nouns or internal operation names.
+Prefer verbs and verb phrases.
+
+Incorrect:
+
+```yaml
+description: |-
+  ...
+  Use this operation for payout request status transitions.
+  This operation performs the allocation of funds from the payout request to payment instruments.
+```
+
+Correct:
+
+```yaml
+description: |-
+  ...
+  Use this operation to change the status of a payout request.
+  This operation allocates funds from the payout request to payment instruments.
+```
+
+### Passive and indirect outcomes
+
+Describe what happens, not what becomes available, is determined, or is treated as something.
+Prefer active voice when it is clearer.
+Passive voice is acceptable when it names the affected object and the outcome clearly.
+See also [active voice](https://developers.google.com/tech-writing/one/active-voice).
+
+Incorrect:
+
+```yaml
+description: |-
+  ...
+  Blocked payout requests will no longer be available for status transitions.
+  An omitted field is treated as "not provided" and keeps the stored value.
+  This operation determines which payment instruments will be allocated funds.
+```
+
+Correct:
+
+```yaml
+description: |-
+  ...
+  Blocked payout requests cannot transition to new statuses.
+  If the field is omitted, the field is not updated.
+  This operation determines which payment instruments receive funds.
+```
+
+### Future tense
+
+API descriptions describe behavior, not future events.
+Use present tense, including for scheduled and time-based conditions.
+
+Incorrect:
+
+```yaml
+description: |-
+  ...
+  Funds will be allocated to payment instruments in this order.
+  Blocked payout requests will no longer transition to new statuses.
+```
+
+Correct:
+
+```yaml
+description: |-
+  ...
+  Funds are allocated to payment instruments in this order.
+  Blocked payout requests cannot transition to new statuses.
+```
+
+### State descriptions vs effects
+
+Choose the phrasing that best helps the reader understand the API contract.
+An effect on a specific object is clearer than an abstract state description.
+
+Incorrect:
+
+```yaml
+description: |-
+  ...
+  The stored value remains unchanged.
+```
+
+```yaml
+description: |-
+  ...
+  Allocation is unavailable for blocked payout requests.
+```
+
+Correct:
+
+```yaml
+description: |-
+  ...
+  The field is not updated.
+```
+
+```yaml
+description: |-
+  ...
+  Blocked payout requests cannot be allocated.
+```
+
+### Process metaphors
+
+Avoid metaphors that obscure API behavior, such as `runs in the background`, `reaches fulfilled status`, or `reaches a worker`.
+See also [Anthropomorphism](#anthropomorphism).
+Prefer state transitions, direct outcomes, and explicit behavior when they are clearer.
+See also [Internal terminology](#internal-terminology).
+
+Incorrect:
+
+```yaml
+description: |-
+  ...
+  Report generation runs in the background until the report reaches completed status.
+```
+
+Correct:
+
+```yaml
+description: |-
+  ...
+  The status of the report changes to `completed` after the report is generated.
+```
+
+### Reduced relative clauses
+
+A reduced relative clause can be concise, but it is not always easier to read.
+Use a full relative clause when omitting a relative pronoun and a form of `be`, such as `that are` or `that were`, makes the modifier ambiguous.
+Do not expand a short, clear modifier solely to avoid a reduced relative clause.
+
+Incorrect:
+
+```yaml
+description: |-
+  ...
+  Transactions associated with payment instruments created in the last 30 days are returned.
+```
+
+Correct:
+
+```yaml
+description: |-
+  ...
+  This operation returns transactions that were created in the last 30 days and that are associated with payment instruments.
+```
+
+### Internal terminology
+
+Do not expose implementation concepts without explanation.
+Define the term or link to related content when more context is needed.
+
+Incorrect:
+
+```yaml
+sticky:
+  description: Specifies if sticky usage is enabled.
+```
+
+Correct:
+
+```yaml
+sticky:
+  description: Specifies if the plan bills the last reported quantity from a previous service period instead of zero when no usage is reported during the current service period.
+```
 
 ## Tags
 
@@ -314,8 +620,7 @@ Add detail to these descriptions and link to related content if required.
 ```yaml
 - name: Customers
   description: |-
-    A customer is an entity that purchases goods or services from you (a merchant),
-    and is the payee in any transaction that is credited to you.
+    A customer is an entity that purchases goods or services from a merchant and is the payer in transactions credited to the merchant.
     Customers are associated with payment cards, subscriptions, invoices,
     and other miscellaneous relationship models.
 
@@ -326,7 +631,7 @@ Add detail to these descriptions and link to related content if required.
 
 - Do not end a summary with a period.
 - Avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
-- Start with an imperative verb (Create, Retrieve, Merge, Delete ...)
+- Start with an imperative verb such as `Create`, `Retrieve`, `Merge`, or `Delete`.
 - Use sentence case capitalization, capitalize the first letter of the first word and use lowercase thereafter.
 
 ### Summary examples
@@ -352,14 +657,16 @@ summary: Deactivate a payment instrument
 ## Descriptions
 
 This section provides guidance on how to write operation, object, and parameter descriptions.
+For guidance that applies to operations, fields, parameters, and errors, see [Describe observable behavior](#describe-observable-behavior).
 
 ### Operations
 
-- Start all operation descriptions with an active verb, such as Retrieves, Adds, Creates, Updates, Deletes, Sets, Specifies, and more.
+- Start all operation descriptions with an active verb such as `Retrieves`, `Adds`, `Creates`, `Updates`, `Deletes`, `Sets`, or `Specifies`.
 - Describe what the operation does.
   Use verb phrases for operation descriptions.
   For example, "Retrieves customer information with a specified ID."
-- Do not start with an imperative, such as Create, Retrieve, Merge, and more.
+- Describe [observable API behavior](#describe-observable-behavior), not implementation details.
+- Do not start with an imperative such as `Create`, `Retrieve`, or `Merge`.
   The user may read this as a command.
 - Avoid starting with "The" or "A".
   Omit articles for ease of reading.
@@ -399,12 +706,13 @@ Delete a customer by ID:
   operationId: DeleteCustomer
   description: Deletes a customer account with a specified ID.
 ```
+
 ### Fields
 
 - Use [noun phrases](#noun-phrase-examples) for field descriptions.
   Describe what the field is, not what it does.
 - Avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
-- Avoid starting with articles (The, A, An).
+- Avoid starting with articles `The`, `A`, or `An`.
   Omit articles for ease of reading.
 - Provide detail and link to related content if necessary.
 
@@ -572,7 +880,7 @@ Parameter descriptions depend on the parameter location.
   - Examples: "Filter by player IDs.", "Sort by created time.", "Limit the number of items returned."
 - For `in: path`, `in: header`, and `in: cookie` parameters, use noun phrases that describe what the value is.
   - Examples: "ID of the transaction.", "Date and time when the coupon expires.", "status of the payout request.", "Total amount of the order."
-- Avoid starting parameter descriptions with articles (The, A, An).
+- Avoid starting parameter descriptions with articles `The`, `A`, or `An`.
 
 Parameter examples:
 
