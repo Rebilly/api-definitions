@@ -10,6 +10,22 @@ properties:
     description: ID of the plan.
     maxLength: 50
     example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
+  type:
+    description: |-
+      Variant of the plan.
+      The variant is `subscription` when `recurringInterval` is present.
+      The variant is `trial-only` when `trial` is present without `recurringInterval`.
+      The variant is `one-time-sale` when both fields are omitted.
+    type: string
+    readOnly: true
+    enum:
+      - subscription
+      - one-time-sale
+      - trial-only
+    x-enumDescriptions:
+      subscription: Recurring plan.
+      one-time-sale: Non-recurring, one-time sale plan.
+      trial-only: Trial plan without recurring interval settings.
   name:
     description: |-
       Name of the plan.
