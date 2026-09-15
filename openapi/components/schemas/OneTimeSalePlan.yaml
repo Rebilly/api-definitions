@@ -9,6 +9,17 @@ required:
   - productId
   - pricing
 properties:
+  type:
+    type: string
+    description: |-
+      Variant of the plan.
+      This field is optional in create and update requests.
+      The variant is `one-time-sale` when both `recurringInterval` and `trial` are omitted.
+      If included, this field must match the applicable variant.
+      A mismatch results in an HTTP `422` response.
+      Responses always include this field.
+    enum:
+      - one-time-sale
   name:
     description: |-
       Name of the plan.

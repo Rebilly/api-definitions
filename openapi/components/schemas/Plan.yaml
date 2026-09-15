@@ -1,37 +1,11 @@
+type: object
+discriminator:
+  propertyName: type
+  mapping:
+    subscription: ./SubscriptionPlanDetails.yaml
+    one-time-sale: ./OneTimeSalePlanDetails.yaml
+    trial-only: ./TrialOnlyPlanDetails.yaml
 oneOf:
-  - allOf:
-      - type: object
-        required:
-          - id
-        properties:
-          id:
-            type: string
-            description: ID of the plan.
-            maxLength: 50
-            example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
-            readOnly: true
-      - $ref: ./OneTimeSalePlan.yaml
-  - allOf:
-      - type: object
-        required:
-          - id
-        properties:
-          id:
-            type: string
-            description: ID of the plan.
-            maxLength: 50
-            example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
-            readOnly: true
-      - $ref: ./SubscriptionPlan.yaml
-  - allOf:
-      - type: object
-        required:
-          - id
-        properties:
-          id:
-            type: string
-            description: ID of the plan.
-            maxLength: 50
-            example: plan_0YV7DENSVGDBW9S71XZNNYYQ0X
-            readOnly: true
-      - $ref: ./TrialOnlyPlan.yaml
+  - $ref: ./SubscriptionPlanDetails.yaml
+  - $ref: ./OneTimeSalePlanDetails.yaml
+  - $ref: ./TrialOnlyPlanDetails.yaml
