@@ -1,4 +1,4 @@
-const yaml = require('js-yaml');
+const { load } = require('js-yaml');
 const fs = require('fs');
 const path = require('path');
 
@@ -15,7 +15,7 @@ function getRequestedProduct() {
 function getProductMappingToBundle(requestedProduct) {
   const filename = `mapping/${requestedProduct.replace(/ /g, '')}.yaml`;
 
-  return yaml.load(fs.readFileSync(path.resolve(__dirname, filename), 'utf8'));
+  return load(fs.readFileSync(path.resolve(__dirname, filename), 'utf8'));
 }
 
 /** @type {import('@redocly/openapi-cli').CustomRulesConfig} */
