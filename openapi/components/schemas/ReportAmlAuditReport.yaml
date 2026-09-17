@@ -53,6 +53,11 @@ properties:
     items:
       type: object
       properties:
+        id:
+          type: string
+          description: ID of the AML check.
+          maxLength: 50
+          example: aml_chk_0YV8XJT2ZWDR398Q8NFEM7DEPM
         createdTime:
           $ref: ./CreatedTime.yaml
         updatedTime:
@@ -87,6 +92,7 @@ properties:
             - 'null'
           description: Name of the reviewer, `bot` for checks that run automatically, or `null` when the check hasn't been reviewed yet.
       required:
+        - id
         - createdTime
         - updatedTime
         - customerId
