@@ -1,0 +1,65 @@
+post:
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Create automatic payout request allocations
+  operationId: PostPayoutRequestAutoAllocations
+  x-sdk-operation-name: create
+  description: |-
+    Creates allocations for a payout request using automatically selected payment instruments and gateway accounts.
+    Only the payout request ID is required.
+
+    When an allocation is created, the payout request transitions to the `in-progress` status,
+    and the allocation starts in the `pending` status.
+    The allocation transitions to the `processing` status when payment processing begins.
+    This operation returns the created allocations.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            payoutRequestId:
+              type: string
+              description: |-
+                ID of the payout request to allocate automatically.
+                A payout request is a customer request to withdraw funds.
+              maxLength: 50
+              example: pout_req_0YVDMDE2BMC6KBB5MX76RF6T80
+          required:
+            - payoutRequestId
+    description: Payout request auto-allocation resource.
+    required: true
+  responses:
+    '201':
+      description: Allocations created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/PayoutRequestAllocation.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml

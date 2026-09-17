@@ -8,13 +8,17 @@ post:
   summary: Create an automatic payout request allocation
   operationId: PostPayoutRequestAutoAllocation
   x-sdk-operation-name: autoAllocate
+  deprecated: true
   description: |-
-    Creates an automatic payout request allocation using system-selected parameters.  
+    Creates an automatic payout request allocation using system-selected parameters.
     Only the payout request ID is required; all allocation details are determined automatically.
-    
+
     When an allocation is created, the payout request transitions to the `in-progress` status,
     and the allocation starts in the `pending` status.
     The allocation transitions to the `processing` status when payment processing begins.
+
+    This endpoint is deprecated.
+    Use [Create automatic payout request allocations](../PostPayoutRequestAutoAllocations) instead.
   requestBody:
     content:
       application/json:
