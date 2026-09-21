@@ -13,7 +13,6 @@ required:
   - depositCustomAmount
   - depositMethods
   - payoutMethods
-  - coinPurchase
   - coinPricing
 properties:
   id:
@@ -144,14 +143,6 @@ properties:
     description: |-
       Value of the default amount in the `depositAmounts` list.
       This value is calculated from the `defaultIndex` property of the deposit strategy that is applied to the deposit request.
-  coinPurchase:
-    type: boolean
-    deprecated: true
-    readOnly: true
-    description: |-
-      Specifies if the deposit is a coin purchase that credits the coin balance instead of the cash balance.
-      Determined by the deposit amount strategy that is applied to the deposit request.
-      Use the `coinPricing` field instead.
   coinPricing:
     readOnly: true
     description: |-
