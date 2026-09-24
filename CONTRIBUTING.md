@@ -64,7 +64,6 @@ Rebilly uses the following lint rules:
 - [rule/operation-id-post](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
 - [rule/operation-id-put](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
 - [rule/no-x-code-samples](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
-- [rule/no-x-internal](https://redocly.com/docs/cli/rules/custom-rules/) (custom rules)
 
 ### Parameters
 

@@ -15,6 +15,11 @@ function RemoveUnusedTags() {
     Root: {
       leave(Root) {
         Root.tags = Root.tags.filter(tag => usedTags.has(tag.name));
+        if (Root['x-tagGroups']) {
+          Root['x-tagGroups'] = Root['x-tagGroups']
+            .map(group => ({ ...group, tags: group.tags.filter(tag => usedTags.has(tag)) }))
+            .filter(group => group.tags.length > 0);
+        }
       }
     }
   }
