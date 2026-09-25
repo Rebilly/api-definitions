@@ -1,0 +1,10 @@
+name: limit
+in: query
+description: |-
+  Limit the number of subscriptions to return.
+  Use `0` to return an empty collection and still receive the count of matching items in `Pagination-Total`.
+  When `expand` includes `initialInvoice` or `recentInvoice`, cap values greater than `100` at `100`.
+schema:
+  type: integer
+  minimum: 0
+  maximum: 1000
