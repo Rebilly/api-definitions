@@ -25,7 +25,7 @@ allOf:
             type: string
             description: |-
               Client certificate for mutual TLS (mTLS) authentication.
-              This value is required if `useMtls` is set to `true`.
+              This value is required to process transactions.
             format: password
             writeOnly: true
             x-multiline: true
@@ -33,7 +33,7 @@ allOf:
             type: string
             description: |-
               Client private key for mutual TLS (mTLS) authentication.
-              This value is required if `useMtls` is set to `true`.
+              This value is required to process transactions.
             format: password
             x-multiline: true
             writeOnly: true
@@ -60,8 +60,11 @@ allOf:
           useMtls:
             type: boolean
             default: false
+            deprecated: true
             description: |-
-              Indicates whether to use mutual TLS (mTLS) for the connection.
+              Deprecated.
+              This setting has no effect.
+              All connections use mutual TLS (mTLS).
         required:
           - cardAcceptorName
           - cardAcceptorLocation
