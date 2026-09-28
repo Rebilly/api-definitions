@@ -1,0 +1,23 @@
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - cashierId
+      properties:
+        cashierId:
+          type: string
+          description: ID of the cashier resource with pending payout requests to cancel.
+          maxLength: 50
+          example: cashier_0YV7DE4Z26DQSA1AC92FBJ7SEG
+        amount:
+          description: |-
+            Pending payout request amount to be canceled.
+            To cancel all pending payout requests, omit this field or set it to `null`.
+          type:
+            - 'number'
+            - 'null'
+          format: double
+          exclusiveMinimum: 0
+          example: 1500.00
+required: true
