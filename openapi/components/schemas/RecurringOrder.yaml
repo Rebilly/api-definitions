@@ -230,6 +230,11 @@ properties:
     readOnly: true
     $ref: ./CurrencyCode.yaml
   shipping:
+    description: |-
+      Shipping settings of the order.
+      Changes to shipping apply to the upcoming invoice and to invoices created after the change.
+      Issued invoices are not updated unless the order is `pending`.
+      To change shipping on an unpaid, past-due, or partially paid invoice, use the [upsert an invoice API operation](https://www.rebilly.com/catalog/all/invoices/putinvoice#invoices/putinvoice/t=request&path=shipping).
     $ref: ./Shipping.yaml
   autopay:
     description: |-
