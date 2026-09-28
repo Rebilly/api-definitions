@@ -23,17 +23,13 @@ allOf:
             description: Merchant payment gateway ID from Mastercard.
           clientCertificate:
             type: string
-            description: |-
-              Client certificate for mutual TLS (mTLS) authentication.
-              This value is required to process transactions.
+            description: Client certificate for mutual TLS (mTLS) authentication.
             format: password
             writeOnly: true
             x-multiline: true
           privateKey:
             type: string
-            description: |-
-              Client private key for mutual TLS (mTLS) authentication.
-              This value is required to process transactions.
+            description: Client private key for mutual TLS (mTLS) authentication.
             format: password
             x-multiline: true
             writeOnly: true
@@ -41,6 +37,8 @@ allOf:
           - cardAcceptorIdCode
           - acquiringInstitutionIdentificationCode
           - mpgId
+          - clientCertificate
+          - privateKey
       settings:
         type: object
         description: WorldlineAtosFrankfurt settings.
@@ -57,14 +55,6 @@ allOf:
           terminalIds:
             type: string
             description: Comma-separated list of terminal IDs.
-          useMtls:
-            type: boolean
-            default: false
-            deprecated: true
-            description: |-
-              Deprecated.
-              This setting has no effect.
-              All connections use mutual TLS (mTLS).
         required:
           - cardAcceptorName
           - cardAcceptorLocation
