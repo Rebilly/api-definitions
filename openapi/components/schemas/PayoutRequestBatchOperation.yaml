@@ -1,0 +1,33 @@
+type: object
+description: |-
+  Action applied to every payout request in a payout request batch.
+  A payout request batch groups payout requests so one action applies to every request in the group.
+required:
+  - type
+  - batchId
+  - status
+properties:
+  type:
+    description: Type of action applied to the batch.
+    type: string
+    readOnly: true
+    enum:
+      - approve
+      - block
+      - unblock
+      - auto-allocate
+      - process
+  batchId:
+    description: ID of the payout request batch.
+    type: string
+    readOnly: true
+    maxLength: 50
+    example: prb_0YVDMDE2BMC6KBB5MX76RF6T80
+  status:
+    description: |-
+      Status of the operation.
+      The operation completes before the response returns, so the status is always `completed`.
+    type: string
+    readOnly: true
+    enum:
+      - completed

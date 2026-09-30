@@ -1,0 +1,16 @@
+type: object
+description: Action to apply to a payout request batch.
+discriminator:
+  propertyName: type
+  mapping:
+    approve: ./ApprovePayoutRequestBatchOperation.yaml
+    block: ./BlockPayoutRequestBatchOperation.yaml
+    unblock: ./UnblockPayoutRequestBatchOperation.yaml
+    auto-allocate: ./AutoAllocatePayoutRequestBatchOperation.yaml
+    process: ./ProcessPayoutRequestBatchOperation.yaml
+oneOf:
+  - $ref: ./ApprovePayoutRequestBatchOperation.yaml
+  - $ref: ./BlockPayoutRequestBatchOperation.yaml
+  - $ref: ./UnblockPayoutRequestBatchOperation.yaml
+  - $ref: ./AutoAllocatePayoutRequestBatchOperation.yaml
+  - $ref: ./ProcessPayoutRequestBatchOperation.yaml
