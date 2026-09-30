@@ -1,0 +1,104 @@
+post:
+  x-internal: true
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Core
+  tags:
+    - Transactions
+  summary: Create a payout request batch preview
+  operationId: PostPayoutRequestBatchPreview
+  x-sdk-operation-name: create
+  description: |-
+    Creates a preview of the payout requests that match a specified filter and that a batch can include.
+    This operation does not create a batch or change payout requests.
+
+    A batch can contain a maximum of 1000 payout requests.
+    If more payout requests match the filter than the batch can accept, only the oldest payout requests are selected, sorted by creation time.
+    To preview payout requests to add to an existing batch, provide the `batchId` of that batch.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - filter
+          properties:
+            filter:
+              type: string
+              description: |-
+                Filter string that is used to select payout requests.
+                This field uses the same format as collection filter parameters.
+
+                Use semicolons to separate multiple filter conditions.
+                Available filter fields: `id`, `status`, `websiteId`, `customerId`, `currency`, `amount`, `createdTime`, `updatedTime`.
+
+                If a `batchId` filter is provided, it is ignored.
+                Payout requests that are already included in a batch are always excluded from the results.
+              example: 'status:pending;websiteId:ws_0YVDMDE2BMC6KBB5MX76RF6T80'
+            batchId:
+              type: string
+              description: |-
+                ID of the payout request batch to add payout requests to.
+                If this field is provided, the preview selects only as many payout requests as the batch can accept.
+              maxLength: 50
+              example: prb_0YVDMDE2BMC6KBB5MX76RF6T80
+    description: Payout request batch preview resource.
+    required: true
+  responses:
+    '200':
+      description: Preview created.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - matchingCount
+              - selectedCount
+              - customerCount
+              - totalAmountByCurrency
+            properties:
+              matchingCount:
+                description: Total number of payout requests that match the filter, regardless of the batch limit.
+                type: integer
+                minimum: 0
+                example: 1450
+              selectedCount:
+                description: |-
+                  Number of payout requests that a batch includes when you use the same filter.
+                  This value is the lower of `matchingCount` and the number of payout requests that the batch can accept.
+                type: integer
+                minimum: 0
+                example: 1000
+              customerCount:
+                description: Number of unique customers in the selected payout requests.
+                type: integer
+                minimum: 0
+                example: 212
+              totalAmountByCurrency:
+                description: Total amount grouped by currency for the selected payout requests.
+                type: array
+                items:
+                  type: object
+                  required:
+                    - currency
+                    - amount
+                  properties:
+                    currency:
+                      $ref: ../components/schemas/CurrencyCode.yaml
+                    amount:
+                      type: number
+    '400':
+      description: Invalid filter provided.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ProblemTypes/Problem.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
