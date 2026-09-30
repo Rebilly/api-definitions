@@ -1,0 +1,37 @@
+get:
+  x-internal: true
+  x-products:
+    - Users
+  tags:
+    - Organizations
+  summary: Retrieve enabled release flags
+  operationId: GetReleaseFlags
+  x-sdk-resource: ReleaseFlags
+  x-sdk-operation-name: getEnabled
+  description: |-
+    Retrieves the keys of the release flags that are on for the current organization.
+
+    A release flag is a temporary switch that turns an unfinished feature on for some organizations.
+    Every user of the organization can call this operation.
+  responses:
+    '200':
+      description: Enabled release flags retrieved.
+      content:
+        application/json:
+          schema:
+            type: object
+            title: ReleaseFlags
+            required:
+              - enabled
+            properties:
+              enabled:
+                description: Keys of the release flags that are on for the current organization.
+                type: array
+                items:
+                  type: string
+                  pattern: '^[a-z][a-z0-9-]{0,63}$'
+                  example: new-webhooks
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
