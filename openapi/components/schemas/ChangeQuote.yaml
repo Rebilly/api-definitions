@@ -145,6 +145,27 @@ properties:
           - 'string'
           - 'null'
         format: date-time
+      applyAt:
+        description: |-
+          Time when the new items are applied.
+
+          - `now`: The items change at once.
+            `prorated`, `renewalPolicy` and `effectiveTime` apply.
+          - `nextRenewal`: The current items stay until the next renewal.
+            The new items are billed on the next renewal invoice.
+            `prorated` and `renewalPolicy` are ignored.
+            Omit `effectiveTime`.
+            If the request includes `effectiveTime`, a validation error is returned.
+            `couponIds` and `usageSettings` are not supported.
+            If the request includes either field, a validation error is returned.
+            `interimOnly` must be `true`.
+            A later request replaces the pending change.
+            The pending change is locked when the next renewal invoice is issued.
+            One-time sale items that are already on the order are retained.
+            A one-time sale item cannot be added with `nextRenewal`.
+        type: string
+        enum: [now, nextRenewal]
+        default: now
       keepTrial:
         deprecated: true
         description: |-
@@ -162,6 +183,8 @@ properties:
         description: |-
           Specifies if the quotation invoice must include interim items only.
           If this value is set to `false`, all upcoming items are included.
+          With `applyAt` set to `nextRenewal`, this value must be `true`.
+          To bill the next period now, issue the upcoming invoice of the order.
       usageSettings:
         type: array
         default: []

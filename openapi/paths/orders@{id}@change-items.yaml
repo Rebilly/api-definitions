@@ -10,12 +10,14 @@ post:
   x-sdk-operation-name: changeItems
   parameters:
     - $ref: ../components/parameters/orderExpand.yaml
-  description: Changes order items or quantities, and designates if or when pro-rata credits should be given.
+  description: |-
+    Changes order items or quantities and specifies if and when to give pro rata credits.
+    To change the items at the next renewal, use the `POST /order-changes` operation with `applyAt` set to `nextRenewal`.
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/OrderChange.yaml
+          $ref: ../components/schemas/OrderItemsChange.yaml
     description: Change items request.
     required: true
   responses:
@@ -36,6 +38,13 @@ post:
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      description: |-
+        Change to the order items rejected.
+        For example, the next renewal invoice is already issued with a pending order change.
+      $ref: ../components/responses/Conflict.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
     '429':

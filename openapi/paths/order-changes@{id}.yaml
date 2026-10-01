@@ -1,0 +1,106 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Retrieve an order change
+  operationId: GetOrderChange
+  x-sdk-operation-name: get
+  description: Retrieves an order change with a specified ID.
+  responses:
+    '200':
+      description: Order change retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OrderChange.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Upsert an order change
+  operationId: PutOrderChange
+  x-sdk-operation-name: update
+  description: |-
+    Creates an order change with a specified ID, or replaces the items of a pending order change.
+    A change that is not pending cannot be updated.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/OrderChange.yaml
+  responses:
+    '200':
+      description: Order change updated.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OrderChange.yaml
+    '201':
+      description: Order change created.
+      headers:
+        Location:
+          $ref: ../components/headers/Location.yaml
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OrderChange.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '409':
+      description: Order change rejected, or the change is not pending.
+      $ref: ../components/responses/Conflict.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
+delete:
+  x-products:
+    - Core
+  tags:
+    - Orders
+  summary: Cancel an order change
+  operationId: DeleteOrderChange
+  x-sdk-operation-name: delete
+  description: |-
+    Cancels a pending order change with a specified ID.
+    The current items of the order stay as they are.
+    A change cannot be canceled after it is locked by an issued invoice, applied, canceled, or superseded.
+  responses:
+    '204':
+      description: Order change canceled.
+      headers:
+        X-RateLimit-Limit:
+          $ref: ../components/headers/X-RateLimit-Limit.yaml
+        X-RateLimit-Remaining:
+          $ref: ../components/headers/X-RateLimit-Remaining.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml

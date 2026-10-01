@@ -1019,6 +1019,10 @@ paths:
     $ref: ./paths/order-pauses.yaml
   /order-pauses/{id}:
     $ref: ./paths/order-pauses@{id}.yaml
+  /order-changes:
+    $ref: ./paths/order-changes.yaml
+  /order-changes/{id}:
+    $ref: ./paths/order-changes@{id}.yaml
   /order-cancellations:
     $ref: ./paths/order-cancellations.yaml
   /order-cancellations/{id}:
@@ -1957,6 +1961,15 @@ webhooks:
   orders-experimental-subscription-pause-revoked:
     post:
       $ref: ./webhooks/orders-experimental-subscription-pause-revoked.yaml
+  orders-experimental-order-change-created:
+    post:
+      $ref: ./webhooks/orders-experimental-order-change-created.yaml
+  orders-experimental-order-change-canceled:
+    post:
+      $ref: ./webhooks/orders-experimental-order-change-canceled.yaml
+  orders-experimental-order-change-applied:
+    post:
+      $ref: ./webhooks/orders-experimental-order-change-applied.yaml
   subscription-resumed:
     post:
       $ref: ./webhooks/subscription-resumed.yaml

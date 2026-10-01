@@ -1,0 +1,43 @@
+content:
+  application/json:
+    schema:
+      properties:
+        orderId:
+          type: string
+          description: ID of the order.
+          example: ord_01HRF27SATGE4Z6PBJE6PD8328
+        orderChangeId:
+          type: string
+          description: ID of the order change.
+          example: ord_chg_0YV7DES3WPC5J8JD8QTVNZBZQ8
+        eventType:
+          type: string
+          description: Type of event that triggered the webhook.
+          enum:
+            - order-change-created
+            - order-change-canceled
+            - order-change-applied
+        _embedded:
+          type: object
+          description: Embedded objects related to the order change event.
+          properties:
+            order:
+              $ref: ../../schemas/Order.yaml
+            orderChange:
+              $ref: ../../schemas/OrderChange.yaml
+        _links:
+          type: array
+          description: Links to related resources.
+          items:
+            type: object
+            properties:
+              href:
+                description: URL of the link.
+                type: string
+              rel:
+                description: Relationship type of the link.
+                type: string
+                enum:
+                  - order
+                  - orderChange
+description: Payload of a webhook event related to an order change.

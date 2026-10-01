@@ -1,18 +1,103 @@
 type: object
+description: |-
+  Change to the items of a recurring order.
+  A change with `applyAt` set to `now` replaces the items immediately.
+  A change with `applyAt` set to `nextRenewal` records the new items and applies them at the next renewal.
+  The current items remain until the next renewal, when the new items are applied and billed on the renewal invoice.
+
+  This resource records changes made through this resource and changes created by a quote with `applyAt` set to `nextRenewal`.
+  Changes made through the `POST /orders/{id}/change-items` operation or through a quote with `applyAt` set to `now` are not recorded.
+  A change with `applyAt` set to `now` triggers the `order-change-created` and `order-change-applied` events and the item events of the order.
 required:
+  - orderId
   - items
-  - renewalPolicy
-  - prorated
 properties:
+  id:
+    description: ID of the order change.
+    type: string
+    maxLength: 50
+    readOnly: true
+    example: ord_chg_0YV7DES3WPC5J8JD8QTVNZBZQ8
+  orderId:
+    description: ID of the order.
+    type: string
+    maxLength: 50
+    example: ord_01HRF27SATGE4Z6PBJE6PD8328
+  status:
+    description: Status of the order change.
+    type: string
+    readOnly: true
+    enum:
+      - pending
+      - applied
+      - canceled
+      - superseded
+    x-enumDescriptions:
+      pending: Scheduled to apply at the next renewal.
+      applied: Items of the order are replaced.
+      canceled: Canceled before the change is applied.
+      superseded: Replaced by a later change for the same order.
+  applyAt:
+    description: |-
+      Time when the new items are applied.
+
+      - `now`: The items change immediately.
+        `renewalPolicy`, `prorated`, and `effectiveTime` apply.
+      - `nextRenewal`: The current items stay until the next renewal.
+        The new items are billed on the next renewal invoice.
+        `renewalPolicy`, `prorated`, and `effectiveTime` are not allowed.
+        A later change for the same order supersedes the pending change.
+        The pending change is locked once the next renewal invoice is issued.
+        To remove a pending change, use the `DELETE /order-changes/{id}` operation.
+        The new items must differ from the current items.
+        One-time sale items that are already on the order remain.
+        A one-time sale item cannot be added with `nextRenewal`.
+    type: string
+    enum:
+      - now
+      - nextRenewal
+    default: now
+  effectiveTime:
+    description: |-
+      Date and time when the change is applied.
+      If `applyAt` is set to `now`, this value is the date from which the renewal time for `resetToRecurring` and the proration are calculated.
+      If this field is omitted, this value defaults to the current time.
+      If `applyAt` is set to `nextRenewal`, this value is read-only and equals the renewal time of the order.
+    type: string
+    format: date-time
+  lockedTime:
+    description: |-
+      Date and time when the items of a pending change are billed.
+      After this time, the change is locked and cannot be modified until the renewal.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+  appliedTime:
+    description: Date and time when the items of the order are replaced.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+  quoteId:
+    description: |-
+      ID of the quote that is used to create the change.
+      This value is `null` if the change is not created from a quote.
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 50
+    readOnly: true
   items:
-    description: Details of items in the order.
+    description: |-
+      New items for the order.
+      To remove an item, include the items array and exclude the items you want to remove.
     type: array
     minItems: 1
     items:
       type: object
-      description: |-
-        New items for the order.
-        To remove an item, include the items array and exclude the items you want to remove.
       required:
         - plan
       properties:
@@ -25,21 +110,25 @@ properties:
           description: Number of units of the product on the given plan.
           type: integer
         usageLimits:
-          $ref: ./UsageLimits.yaml
+          oneOf:
+            - $ref: ./UsageLimits.yaml
+            - type: 'null'
+        excludeFromMrr:
+          description: Specifies if this item is excluded from monthly recurring revenue calculations.
+          type:
+            - 'boolean'
+            - 'null'
   renewalPolicy:
     description: |-
-      How the service periods and trial state of the subscription order are managed when its items change.
-
-      The `reset` and `retain` values are deprecated.
-      The deprecated `keepTrial` and `ignoreRecurring` are ignored unless `reset` or `retain` is used.
+      How the service periods and trial state of the order are managed when its items change now.
+      Required when `applyAt` is `now`.
+      Not allowed when `applyAt` is `nextRenewal`.
     type: string
     enum:
       - resetToRecurring
       - retainRecurring
       - retainTrialThenRecurring
       - retainTrialOnly
-      - reset
-      - retain
     x-enumDescriptions:
       resetToRecurring: Resets the service periods, ends any trial, and converts trial-only items to recurring.
       retainRecurring: Retains the current service periods, ends any trial, and converts trial-only items to recurring.
@@ -49,51 +138,18 @@ properties:
       retainTrialOnly: |-
         Retains the trial and keeps the item as trial-only.
         Returns a validation error if the order is not trial-only.
-      reset: |-
-        Deprecated.
-        Use `resetToRecurring` instead.
-        Resets the `renewalTime` to a newly calculated value.
-      retain: |-
-        Deprecated.
-        Use `retainRecurring`, `retainTrialThenRecurring`, or `retainTrialOnly` instead.
-        Retains the current `renewalTime`.
   prorated:
     description: |-
       Specifies whether to give a pro rata credit for the amount of time remaining between the `effectiveTime` and the end of the current period.
+      Required when `applyAt` is `now`.
+      Not allowed when `applyAt` is `nextRenewal`.
 
-      In addition, if the `renewalTime` is retained, by setting the `renewalPolicy` to `retainRecurring`, `retainTrialThenRecurring` or `retainTrialOnly`,
-      a pro rata debit occurs for the amount between the `effectiveTime` and the `renewalTime` as a percentage of the normal period size.
+      If `renewalTime` is retained by setting `renewalPolicy` to `retainRecurring`, `retainTrialThenRecurring`, or `retainTrialOnly`,
+      a pro rata debit is also applied for the time between `effectiveTime` and `renewalTime`, as a percentage of the normal period size.
     type: boolean
-  effectiveTime:
-    description: |-
-      Date from which the renewal time for `reset` operations and proration calculations are made.
-      If this field is omitted, this value defaults to the current time.
-    type: string
-    format: date-time
-  preview:
-    description: |-
-      Specifies if changes to the order can be previewed.
-      Orders cannot be changed in preview.
-    type: boolean
-    default: false
-  keepTrial:
-    deprecated: true
-    description: |-
-      Deprecated.
-      Use the `retainTrialThenRecurring` or `retainTrialOnly` value of `renewalPolicy` instead.
-
-      Specifies if the order must retain its active trial.
-      This field is only applicable if `renewalPolicy` is set to the deprecated value `retain`.
-    type: boolean
-    default: false
-  ignoreRecurring:
-    deprecated: true
-    description: |-
-      Deprecated.
-      Use the `retainTrialOnly` value of `renewalPolicy` instead.
-
-      Specifies if the order must ignore the recurring settings of its items.
-      This field is only applicable if the order is trial-only and the `keepTrial` value is `true`.
-      For more information, see [Trial-only order](https://www.rebilly.com/docs/dev-docs/subscriptions#trial-only-subscription).
-    type: boolean
-    default: false
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
+  _links:
+    $ref: ./SelfLink.yaml

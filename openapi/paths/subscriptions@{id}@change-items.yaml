@@ -10,7 +10,9 @@ post:
   x-sdk-operation-name: changeItems
   parameters:
     - $ref: ../components/parameters/subscriptionExpand.yaml
-  description: Changes subscription order items or quantities, and designates if or when pro-rata credits should be given.
+  description: |-
+    Changes the items or quantities of an order that contains subscription items and specifies if and when to give pro rata credits.
+    To change the items at the next renewal, use the `POST /order-changes` operation with `applyAt` set to `nextRenewal`.
   requestBody:
     content:
       application/json:
@@ -36,6 +38,11 @@ post:
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      description: Change to the order items rejected.
+      $ref: ../components/responses/Conflict.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
     '429':
