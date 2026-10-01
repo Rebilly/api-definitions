@@ -41,7 +41,12 @@ get:
           - cash
           - accrual
     - $ref: ../components/parameters/collectionLimit.yaml
-    - $ref: ../components/parameters/collectionOffset.yaml
+    - name: offset
+      in: query
+      description: Starting point within the collection of items to return.
+      schema:
+        type: integer
+        minimum: 0
   responses:
     '200':
       description: Report retrieved.
