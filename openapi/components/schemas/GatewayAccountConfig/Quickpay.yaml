@@ -14,7 +14,13 @@ allOf:
             description: Quickpay API key.
             format: password
             writeOnly: true
+          privateKey:
+            type: string
+            description: Private key of the Quickpay account that signs callback checksums.
+            format: password
+            writeOnly: true
         required:
           - apiKey
+          - privateKey
       threeDSecureServer:
         $ref: ./ThreeDSecureIO3dsServer.yaml
