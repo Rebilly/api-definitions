@@ -313,12 +313,20 @@ properties:
     items:
       $ref: ./SubscriptionOrOneTimeSaleItem.yaml
   deliveryAddress:
-    description: Delivery address of the order.
+    description: |-
+      Delivery address of the order.
+      Changes to the delivery address apply to the upcoming invoice and to invoices created after the change.
+      Issued invoices are not updated unless the order is `pending`.
+      To change the delivery address on an unpaid, past-due, or partially paid invoice, use the [upsert an invoice API operation](https://www.rebilly.com/catalog/all/invoices/putinvoice#invoices/putinvoice/t=request&path=deliveryaddress).
     oneOf:
       - $ref: ./ContactObject.yaml
       - type: 'null'
   billingAddress:
-    description: Billing address of the order.
+    description: |-
+      Billing address of the order.
+      Changes to the billing address apply to the upcoming invoice and to invoices created after the change.
+      Issued invoices are not updated unless the order is `pending`.
+      To change the billing address on an issued invoice that has no payment attempts or applied credits, use the [upsert an invoice API operation](https://www.rebilly.com/catalog/all/invoices/putinvoice#invoices/putinvoice/t=request&path=billingaddress).
     oneOf:
       - $ref: ./ContactObject.yaml
       - type: 'null'
