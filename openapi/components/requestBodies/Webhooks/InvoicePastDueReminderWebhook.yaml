@@ -1,0 +1,36 @@
+content:
+  application/json:
+    schema:
+      properties:
+        invoiceId:
+          description: ID of the invoice.
+          type: string
+        eventType:
+          description: Type of event that triggered the webhook.
+          type: string
+          enum:
+            - invoice-past-due-reminder-15-days
+            - invoice-past-due-reminder-30-days
+            - invoice-past-due-reminder-60-days
+            - invoice-past-due-reminder-90-days
+        _embedded:
+          type: object
+          description: Embedded objects related to the invoice event.
+          properties:
+            invoice:
+              $ref: ../../schemas/Invoice.yaml
+        _links:
+          type: array
+          description: Links to related resources.
+          items:
+            type: object
+            properties:
+              href:
+                description: URL of the link.
+                type: string
+              rel:
+                description: Relationship type of the link.
+                type: string
+                enum:
+                  - invoice
+description: Payload of the invoice past due reminder webhook event.
