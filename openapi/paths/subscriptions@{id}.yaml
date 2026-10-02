@@ -47,7 +47,12 @@ put:
   summary: Upsert an order
   operationId: PutSubscription
   x-sdk-operation-name: update
-  description: Creates or updates (upserts) an order with a specified ID.
+  description: |-
+    Creates or updates (upserts) an order with a specified ID.
+
+    Organizations that use the current order model cannot create legacy orders.
+    For these organizations, this operation only updates an existing order, and returns a validation error when the order does not exist.
+    To create an order with the current order model, use the [Create an order](../PostOrder) operation.
   parameters:
     - $ref: ../components/parameters/subscriptionExpand.yaml
   requestBody:

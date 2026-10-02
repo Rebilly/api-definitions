@@ -131,9 +131,12 @@ properties:
         x-basic: true
         format: date-time
       isLegacy:
-        description: Specifies if the order is a legacy order.
+        description: |-
+          Specifies if the order is a legacy order.
+          If omitted when the quote is created, the value follows the order model that is used by the organization: `false` for the current order model and `true` for the legacy order model.
+          If omitted when the quote is updated, the value does not change.
+          Organizations that use the current order model cannot set this value to `true`.
         type: boolean
-        default: true
         example: true
   invoicePreview:
     type: object

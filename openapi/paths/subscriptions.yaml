@@ -61,6 +61,9 @@ post:
     Creates an order.
 
     To create or update an order with a specified ID, use the [Upsert an order](../PutSubscription) operation.
+
+    Organizations that use the current order model cannot create legacy orders, and this operation returns a validation error for them.
+    To create an order with the current order model, use the [Create an order](../PostOrder) operation.
   parameters:
     - $ref: ../components/parameters/subscriptionExpand.yaml
   requestBody:
