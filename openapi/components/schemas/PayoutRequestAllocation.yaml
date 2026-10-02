@@ -76,8 +76,12 @@ properties:
     x-type: Money
   exposureAmount:
     description: |-
-      Total approved sales and captures minus approved payouts for the customer,
+      Approved sales and captures minus approved payouts for the customer,
       gateway account, and payment instrument, in the allocation currency.
+      The calculation includes only transactions created within the last 180 days.
+      The value is `0` when there are no transactions in the last 180 days,
+      the gateway account is inactive,
+      or its `readyToPayoutInstruction` is `none`.
     readOnly: true
     type: number
     format: double
