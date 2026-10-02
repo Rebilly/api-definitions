@@ -1,0 +1,77 @@
+description: Details specific to the payout request or allocation change that triggered the webhook.
+type: object
+additionalProperties: false
+properties:
+  previousStatus:
+    description: Resource status before the change.
+    type: string
+  status:
+    description: Resource status after the change.
+    type: string
+  blockReason:
+    description: Reason for blocking the payout request.
+    type: string
+  blockDescription:
+    description: Additional information about the block.
+    type:
+      - string
+      - 'null'
+  splitReason:
+    description: Reason for splitting the payout request.
+    type: string
+  splitDescription:
+    description: Additional information about the split.
+    type:
+      - string
+      - 'null'
+  canceledBy:
+    description: Party that canceled the payout request.
+    type: string
+  description:
+    description: Additional information about the cancellation.
+    type: string
+  amount:
+    description: Amount of the change in the resource currency.
+    type: number
+    format: double
+    x-type: Money
+  remainingAllocationAmount:
+    description: Payout request amount that remains available for allocation.
+    type: number
+    format: double
+    x-type: Money
+  totalFulfilled:
+    description: Total fulfilled amount in the payout request currency.
+    type: number
+    format: double
+    x-type: Money
+  paymentInstrumentId:
+    description: ID of the payment instrument.
+    type: string
+    maxLength: 50
+  allocationId:
+    description: ID of the payout request allocation.
+    type: string
+    maxLength: 50
+  transactionId:
+    description: ID of the transaction, or `null` when no transaction is available.
+    type:
+      - string
+      - 'null'
+    maxLength: 50
+  mergedIntoPayoutRequestId:
+    description: ID of the payout request that received the merged amount.
+    type: string
+    maxLength: 50
+  replayTransferId:
+    description: ID of the related Replay transfer.
+    type:
+      - string
+      - 'null'
+    maxLength: 50
+  isAutoAllocation:
+    description: Specifies whether the allocation is created automatically.
+    type: boolean
+  replacedByRemainder:
+    description: Specifies whether a replacement payout request contains the remaining amount.
+    type: boolean

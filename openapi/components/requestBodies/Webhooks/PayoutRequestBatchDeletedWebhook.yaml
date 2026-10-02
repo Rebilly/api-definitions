@@ -1,0 +1,24 @@
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - batchId
+        - eventType
+        - occurredTime
+      properties:
+        batchId:
+          description: ID of the deleted batch of payout requests.
+          type: string
+          maxLength: 50
+          example: preq_batch_0YVDMDE2BMC6KBB5MX76RF6T80
+        eventType:
+          description: Type of event that triggered the webhook.
+          type: string
+          enum:
+            - payout-request-batch-deleted
+        occurredTime:
+          description: Date and time of the batch deletion.
+          type: string
+          format: date-time
+description: Payload of a webhook event for a deleted batch of payout requests.

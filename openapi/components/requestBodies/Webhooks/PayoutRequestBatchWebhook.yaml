@@ -1,0 +1,52 @@
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - batchId
+        - eventType
+        - occurredTime
+        - _embedded
+        - _links
+      properties:
+        batchId:
+          description: ID of the batch of payout requests.
+          type: string
+          maxLength: 50
+          example: preq_batch_0YVDMDE2BMC6KBB5MX76RF6T80
+        eventType:
+          description: Type of event that triggered the webhook.
+          type: string
+          enum:
+            - payout-request-batch-created
+            - payout-request-batch-modified
+        occurredTime:
+          description: Date and time when the batch change occurred.
+          type: string
+          format: date-time
+        _embedded:
+          type: object
+          description: Embedded objects related to the batch event for payout requests.
+          required:
+            - payoutRequestBatch
+          properties:
+            payoutRequestBatch:
+              $ref: ../../schemas/PayoutRequestBatch.yaml
+        _links:
+          type: array
+          description: Links to related resources.
+          items:
+            type: object
+            required:
+              - href
+              - rel
+            properties:
+              href:
+                description: URL of the link.
+                type: string
+              rel:
+                description: Type of relationship for the link.
+                type: string
+                enum:
+                  - payoutRequestBatch
+description: Payload of a webhook event for a batch of payout requests.

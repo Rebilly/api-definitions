@@ -1,0 +1,82 @@
+title: Payout request allocation change
+type: object
+additionalProperties: false
+required:
+  - eventType
+  - changeType
+  - change
+  - allocationId
+  - payoutRequestId
+  - customerId
+  - occurredTime
+  - _embedded
+  - _links
+properties:
+  eventType:
+    description: Webhook event type.
+    type: string
+    const: payout-request-changed
+  changeType:
+    description: Specific payout request allocation change that triggered the webhook.
+    type: string
+    enum:
+      - payout-request-allocation-created
+      - payout-request-allocation-queued
+      - payout-request-allocation-returned-to-pending
+      - payout-request-allocation-processing-started
+      - payout-request-allocation-waiting-completion
+      - payout-request-allocation-completed
+      - payout-request-allocation-declined
+      - payout-request-allocation-failed
+      - payout-request-allocation-canceled
+  change:
+    $ref: ./PayoutRequestChange.yaml
+  allocationId:
+    description: ID of the changed payout request allocation.
+    type: string
+    maxLength: 50
+    example: pra_0YVDMDE2BMC6KBB5MX76RF6T80
+  payoutRequestId:
+    description: ID of the payout request.
+    type: string
+    maxLength: 50
+    example: pout_req_0YVDMDE2BMC6KBB5MX76RF6T80
+  customerId:
+    description: ID of the customer associated with the payout request.
+    type: string
+    maxLength: 50
+    example: cus_0YV7DDSDD1C8DA64KHH2W33CPF
+  occurredTime:
+    description: Date and time when the change occurred.
+    type: string
+    format: date-time
+  _embedded:
+    type: object
+    required:
+      - allocation
+      - payoutRequest
+      - customer
+    properties:
+      allocation:
+        $ref: ./PayoutRequestAllocation.yaml
+      payoutRequest:
+        $ref: ./PayoutRequest.yaml
+      customer:
+        $ref: ./Customer.yaml
+  _links:
+    type: array
+    items:
+      type: object
+      required:
+        - href
+        - rel
+      properties:
+        href:
+          description: URL of the related resource.
+          type: string
+        rel:
+          description: Type of related resource.
+          type: string
+          enum:
+            - allocation
+            - payoutRequest

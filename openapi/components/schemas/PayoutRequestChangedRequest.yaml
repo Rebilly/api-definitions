@@ -1,0 +1,76 @@
+title: Payout request change
+type: object
+additionalProperties: false
+required:
+  - eventType
+  - changeType
+  - change
+  - payoutRequestId
+  - customerId
+  - occurredTime
+  - _embedded
+  - _links
+properties:
+  eventType:
+    description: Webhook event type.
+    type: string
+    const: payout-request-changed
+  changeType:
+    description: Specific payout request change that triggered the webhook.
+    type: string
+    enum:
+      - payout-request-created
+      - payout-request-modified
+      - payout-request-blocked
+      - payout-request-unblocked
+      - payout-request-ready
+      - payout-request-returned-to-pending
+      - payout-request-approved
+      - payout-request-approval-undone
+      - payout-request-processing-started
+      - payout-request-fulfilled
+      - payout-request-payment-instrument-selected
+      - payout-request-allocated
+      - payout-request-split
+      - payout-request-merged
+      - payout-request-canceled
+  change:
+    $ref: ./PayoutRequestChange.yaml
+  payoutRequestId:
+    description: ID of the payout request.
+    type: string
+    maxLength: 50
+    example: pout_req_0YVDMDE2BMC6KBB5MX76RF6T80
+  customerId:
+    description: ID of the customer associated with the payout request.
+    type: string
+    maxLength: 50
+    example: cus_0YV7DDSDD1C8DA64KHH2W33CPF
+  occurredTime:
+    description: Date and time when the change occurred.
+    type: string
+    format: date-time
+  _embedded:
+    type: object
+    required:
+      - payoutRequest
+      - customer
+    properties:
+      payoutRequest:
+        $ref: ./PayoutRequest.yaml
+      customer:
+        $ref: ./Customer.yaml
+  _links:
+    type: array
+    items:
+      type: object
+      required:
+        - href
+        - rel
+      properties:
+        href:
+          description: URL of the related payout request.
+          type: string
+        rel:
+          type: string
+          const: payoutRequest

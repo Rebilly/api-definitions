@@ -1,0 +1,32 @@
+type: object
+description: Payout request or payout request allocation change details.
+discriminator:
+  propertyName: changeType
+  mapping:
+    payout-request-created: ./PayoutRequestChangedRequest.yaml
+    payout-request-modified: ./PayoutRequestChangedRequest.yaml
+    payout-request-blocked: ./PayoutRequestChangedRequest.yaml
+    payout-request-unblocked: ./PayoutRequestChangedRequest.yaml
+    payout-request-ready: ./PayoutRequestChangedRequest.yaml
+    payout-request-returned-to-pending: ./PayoutRequestChangedRequest.yaml
+    payout-request-approved: ./PayoutRequestChangedRequest.yaml
+    payout-request-approval-undone: ./PayoutRequestChangedRequest.yaml
+    payout-request-processing-started: ./PayoutRequestChangedRequest.yaml
+    payout-request-fulfilled: ./PayoutRequestChangedRequest.yaml
+    payout-request-payment-instrument-selected: ./PayoutRequestChangedRequest.yaml
+    payout-request-allocated: ./PayoutRequestChangedRequest.yaml
+    payout-request-split: ./PayoutRequestChangedRequest.yaml
+    payout-request-merged: ./PayoutRequestChangedRequest.yaml
+    payout-request-canceled: ./PayoutRequestChangedRequest.yaml
+    payout-request-allocation-created: ./PayoutRequestChangedAllocation.yaml
+    payout-request-allocation-queued: ./PayoutRequestChangedAllocation.yaml
+    payout-request-allocation-returned-to-pending: ./PayoutRequestChangedAllocation.yaml
+    payout-request-allocation-processing-started: ./PayoutRequestChangedAllocation.yaml
+    payout-request-allocation-waiting-completion: ./PayoutRequestChangedAllocation.yaml
+    payout-request-allocation-completed: ./PayoutRequestChangedAllocation.yaml
+    payout-request-allocation-declined: ./PayoutRequestChangedAllocation.yaml
+    payout-request-allocation-failed: ./PayoutRequestChangedAllocation.yaml
+    payout-request-allocation-canceled: ./PayoutRequestChangedAllocation.yaml
+oneOf:
+  - $ref: ./PayoutRequestChangedRequest.yaml
+  - $ref: ./PayoutRequestChangedAllocation.yaml
