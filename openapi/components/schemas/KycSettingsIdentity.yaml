@@ -165,3 +165,19 @@ properties:
           - country: US
             state: AL
             minimumAge: 19
+  faceProofSettings:
+    type: object
+    description: Quality requirements for the face proof image of an identity proof document.
+    properties:
+      minimumBrightness:
+        type: integer
+        minimum: 0
+        maximum: 100
+        default: 40
+        description: |-
+          Minimum brightness of the lighting in the detected face area of the face proof image.
+          The brightness scale ranges from `0` to `100`.
+          A higher value indicates brighter lighting.
+          If the detected brightness is below this value,
+          the `hasMatchingFaceProof` check fails with the `face_match_low_brightness` reason.
+          Use `0` to disable the brightness requirement.
