@@ -6,16 +6,13 @@ properties:
     $ref: ./ResourceId.yaml
   status:
     type: integer
-    x-sortable: true
     description: Response code of the HTTP request.
   url:
     type: string
     x-basic: true
-    x-sortable: true
     description: URL of the HTTP request.
   route:
     type: string
-    x-sortable: true
     description: API request route.
     example: '/customers/{param}'
   method:
@@ -31,11 +28,9 @@ properties:
     x-basic: true
   request:
     type: string
-    x-sortable: true
     description: Request body of the HTTP request.
   response:
     type: string
-    x-sortable: true
     description: Response body of the HTTP request.
   requestHeaders:
     $ref: ./HttpHeaders.yaml
@@ -47,7 +42,6 @@ properties:
     readOnly: true
     properties:
       userId:
-        x-sortable: true
         type: string
         description: ID of the user.
         maxLength: 50
@@ -61,25 +55,20 @@ properties:
         description: Email address of the user.
         type: string
         format: email
-        x-sortable: true
       firstName:
         description: First name of the user.
         type: string
-        x-sortable: true
       lastName:
         description: Last name of the user.
         type: string
-        x-sortable: true
       ipAddress:
         type: string
-        x-sortable: true
         deprecated: true
         description: Client IP address.
         format: ipv4
       userAgent:
         description: Software that is acting on behalf of the user.
         type: string
-        x-sortable: true
       fingerprint:
         description: |-
           User's device fingerprint hash.
@@ -87,11 +76,9 @@ properties:
           The device fingerprint is generated based on device attributes,
           such as: hardware, software, IP address, language, browser, and more.
         type: string
-        x-sortable: true
       isSupport:
         description: Specifies if the API request is completed by a Rebilly Support Team member.
         type: boolean
-        x-sortable: true
   ipAddress:
     type: string
     x-basic: true
@@ -114,8 +101,17 @@ properties:
     $ref: ./OrganizationId.yaml
   createdTime:
     $ref: ./CreatedTime.yaml
+  # Inlined from UpdatedTime. OpenAPI 3.0 ignores keywords beside $ref, and an allOf
+  # wrapper makes generated clients type this field as any instead of a date-time string.
   updatedTime:
-    $ref: ./UpdatedTime.yaml
+    type: string
+    description: |-
+      Date and time when the resource is updated.
+      This value is set automatically when the resource is updated.
+    format: date-time
+    readOnly: true
+    x-sortable: false
+    x-label: Last Update Time
   _links:
     $ref: ./SelfLink.yaml
   _embedded:
