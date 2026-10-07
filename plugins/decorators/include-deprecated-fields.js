@@ -1,4 +1,4 @@
-const { set } = require('es-toolkit/compat')
+const { has, set } = require('es-toolkit/compat')
 module.exports = RemoveTagGroups;
 
 /** @type {import('@redocly/cli').OasDecorator} */
@@ -20,27 +20,26 @@ function RemoveTagGroups() {
               type: 'string',
             },
           },
-          {
-            path: 'components.schemas.VaultedInstrument.properties.paymentCardId',
-            definition: {
-              type: 'string',
-            },
-          },
-          {
-            path: 'components.schemas.VaultedInstrument.properties.payPalAccountId',
-            definition: {
-              type: 'string',
-            },
-          },
-          {
-            path: 'components.schemas.VaultedInstrument.properties.bankAccountId',
-            definition: {
-              type: 'string',
-            },
-          },
+          // The legacy payment instrument IDs, next to `paymentInstrumentId`
+          // (`Customer::DEPRECATED_PAYMENT_INSTRUMENT_FIELDS` in core).
+          ...['VaultedInstrument', 'Customer.properties.defaultPaymentInstrument'].flatMap((schema) =>
+            ['paymentCardId', 'payPalAccountId', 'bankAccountId'].map((field) => ({
+              path: `components.schemas.${schema}.properties.${field}`,
+              definition: {
+                type: 'string',
+                deprecated: true,
+              },
+            })),
+          ),
         ]
 
         hiddenDeprecatedProperties.forEach(({ path, definition }) => {
+          // `set` creates a missing path, so a renamed or moved schema would
+          // get an untyped object that accepts anything. Fail instead.
+          const parent = path.split('.').slice(0, -1).join('.');
+          if (!has(Root, parent)) {
+            throw new Error(`include-deprecated-fields: ${parent} not found`);
+          }
           set(Root, path, definition);
         })
 
