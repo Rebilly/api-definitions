@@ -1,0 +1,475 @@
+arazzo: 1.0.1
+
+info:
+  title: Allowlists parity
+  version: 1.0.0
+  description: >-
+    One workflow for each request shape that the allowlists resource answers in
+    production. `tools/parity/run.sh allowlists` runs this file twice: once with
+    the legacy stack, once with the API Platform stack. The seed came from
+    `tools/traffic-to-arazzo` over a recorded HAR file. A person then split the
+    shapes that share a parameter name but not a value, added the exact-value
+    assertions, and made each workflow create what it reads and delete what it
+    creates.
+
+# The parity runner reads this block.
+x-parity:
+  resource: allowlists
+  operations:
+    - GetAllowlist
+    - GetAllowlistCollection
+    - PostAllowlist
+    - DeleteAllowlist
+  # The operations that the API Platform stack answers today. The runner moves
+  # these two and leaves the writes on the legacy stack, one operation at a
+  # time, as the migration does.
+  nextOperations:
+    - GetAllowlist
+    - GetAllowlistCollection
+  kinds: [collection, item, write]
+  # Capabilities that this resource has. The runner asks for a checklist item
+  # only when the resource declares its capability. Allowlists document no
+  # `expand` parameter and no CSV response, and they have no update operation.
+  supports: [valueLists, fields, writes]
+  # Volatile fields. The two passes create their own records, so the ids and the
+  # times differ between the passes, and the links carry the id.
+  ignore:
+    - id
+    - createdTime
+    - updatedTime
+    - _links
+    - header:location
+
+sourceDescriptions:
+  - name: api
+    type: openapi
+    url: ../../catalog/all.yaml
+
+components:
+  inputs:
+    parityInputs:
+      type: object
+      properties:
+        apiKey:
+          type: string
+          format: password
+          description: A secret API key.
+        organizationId:
+          type: string
+          description: The organization that owns the records.
+        uniqueValue:
+          type: string
+          default: parity-harness-fixture
+          description: >-
+            The value of the allowlist record that each workflow creates. The
+            runner gives one value for both passes, so the two passes read the
+            same record.
+  parameters:
+    apiKey:
+      name: REB-APIKEY
+      in: header
+      value: $inputs.apiKey
+
+workflows:
+  # The value list filter. Issue #25841 showed that a hand-written parity test
+  # misses this shape.
+  - workflowId: value-list-filter
+    summary: Filter by a value list, and by the negation of a value list.
+    inputs:
+      $ref: '#/components/inputs/parityInputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+    steps:
+      - stepId: createList
+        operationId: PostList
+        requestBody:
+          contentType: application/json
+          payload:
+            name: parity-harness-list
+            description: The parity harness creates and deletes this list.
+            type: string
+            values:
+              - $inputs.uniqueValue
+        successCriteria:
+          - condition: $statusCode == 201
+        outputs:
+          listId: $response.body#/id
+
+      # Count the records before the workflow adds one. The negated filter must
+      # answer this same number afterwards, because it excludes the new record.
+      - stepId: countBefore
+        operationId: GetAllowlistCollection
+        parameters:
+          - name: limit
+            in: query
+            value: 0
+        successCriteria:
+          - condition: $statusCode == 200
+        outputs:
+          total: $response.header.Pagination-Total
+
+      - stepId: createAllowlist
+        operationId: PostAllowlist
+        requestBody:
+          contentType: application/json
+          payload:
+            type: customer-id
+            value: $inputs.uniqueValue
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.body#/value == $inputs.uniqueValue
+        outputs:
+          allowlistId: $response.body#/id
+
+      - stepId: filterByList
+        operationId: GetAllowlistCollection
+        parameters:
+          - name: filter
+            in: query
+            value: value:@{$steps.createList.outputs.listId}
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Pagination-Total == 1
+          - condition: $response.body#/0/id == $steps.createAllowlist.outputs.allowlistId
+          - condition: $response.body#/0/value == $inputs.uniqueValue
+
+      - stepId: filterByNegatedList
+        operationId: GetAllowlistCollection
+        parameters:
+          - name: filter
+            in: query
+            value: value:!@{$steps.createList.outputs.listId}
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Pagination-Total == $steps.countBefore.outputs.total
+          - context: $response.body
+            condition: $[?count(@[?@.value == '{$inputs.uniqueValue}']) == 0]
+            type: jsonpath
+
+      - stepId: deleteAllowlist
+        operationId: DeleteAllowlist
+        parameters:
+          - name: id
+            in: path
+            value: $steps.createAllowlist.outputs.allowlistId
+        successCriteria:
+          - condition: $statusCode == 204
+
+      - stepId: deleteList
+        operationId: DeleteList
+        parameters:
+          - name: id
+            in: path
+            value: $steps.createList.outputs.listId
+        successCriteria:
+          - condition: $statusCode == 204
+
+  # `limit` and `offset` at their edges. Every step filters on the value that
+  # the workflow created, so the total is exactly one.
+  - workflowId: collection-limits
+    summary: limit=0, limit=1001, limit=abc, and an offset beyond the total.
+    inputs:
+      $ref: '#/components/inputs/parityInputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+    steps:
+      - stepId: createAllowlist
+        operationId: PostAllowlist
+        requestBody:
+          contentType: application/json
+          payload:
+            type: customer-id
+            value: $inputs.uniqueValue
+        successCriteria:
+          - condition: $statusCode == 201
+        outputs:
+          allowlistId: $response.body#/id
+
+      - stepId: limitZero
+        operationId: GetAllowlistCollection
+        parameters:
+          - name: filter
+            in: query
+            value: value:{$inputs.uniqueValue}
+          - name: limit
+            in: query
+            value: 0
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Pagination-Total == 1
+          - context: $response.body
+            condition: $[?length(@) == 0]
+            type: jsonpath
+
+      - stepId: limitAboveMaximum
+        operationId: GetAllowlistCollection
+        parameters:
+          - name: filter
+            in: query
+            value: value:{$inputs.uniqueValue}
+          - name: limit
+            in: query
+            value: 1001
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Pagination-Total == 1
+          - condition: $response.body#/0/value == $inputs.uniqueValue
+
+      - stepId: limitNotANumber
+        operationId: GetAllowlistCollection
+        parameters:
+          - name: filter
+            in: query
+            value: value:{$inputs.uniqueValue}
+          - name: limit
+            in: query
+            value: abc
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Pagination-Total == 1
+
+      - stepId: offsetBeyondTotal
+        operationId: GetAllowlistCollection
+        parameters:
+          - name: filter
+            in: query
+            value: value:{$inputs.uniqueValue}
+          - name: offset
+            in: query
+            value: 9999
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Pagination-Total == 1
+          - context: $response.body
+            condition: $[?length(@) == 0]
+            type: jsonpath
+
+      - stepId: deleteAllowlist
+        operationId: DeleteAllowlist
+        parameters:
+          - name: id
+            in: path
+            value: $steps.createAllowlist.outputs.allowlistId
+        successCriteria:
+          - condition: $statusCode == 204
+
+  - workflowId: collection-unknown-fields
+    summary: An unknown filter field and an unknown sort field.
+    inputs:
+      $ref: '#/components/inputs/parityInputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+    steps:
+      - stepId: createAllowlist
+        operationId: PostAllowlist
+        requestBody:
+          contentType: application/json
+          payload:
+            type: customer-id
+            value: $inputs.uniqueValue
+        successCriteria:
+          - condition: $statusCode == 201
+        outputs:
+          allowlistId: $response.body#/id
+
+      - stepId: unknownFilterField
+        operationId: GetAllowlistCollection
+        parameters:
+          - name: filter
+            in: query
+            value: nosuchfield:whatever
+        successCriteria:
+          - condition: $statusCode == 200
+
+      - stepId: unknownSortField
+        operationId: GetAllowlistCollection
+        parameters:
+          - name: filter
+            in: query
+            value: value:{$inputs.uniqueValue}
+          - name: sort
+            in: query
+            value: nosuchfield
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Pagination-Total == 1
+
+      - stepId: deleteAllowlist
+        operationId: DeleteAllowlist
+        parameters:
+          - name: id
+            in: path
+            value: $steps.createAllowlist.outputs.allowlistId
+        successCriteria:
+          - condition: $statusCode == 204
+
+  - workflowId: collection-shaping
+    summary: 'fields=id, Accept: application/hal+json and Accept: */*.'
+    inputs:
+      $ref: '#/components/inputs/parityInputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+    steps:
+      - stepId: createAllowlist
+        operationId: PostAllowlist
+        requestBody:
+          contentType: application/json
+          payload:
+            type: customer-id
+            value: $inputs.uniqueValue
+        successCriteria:
+          - condition: $statusCode == 201
+        outputs:
+          allowlistId: $response.body#/id
+
+      - stepId: fieldsId
+        operationId: GetAllowlistCollection
+        parameters:
+          - name: filter
+            in: query
+            value: value:{$inputs.uniqueValue}
+          - name: fields
+            in: query
+            value: id
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Pagination-Total == 1
+          - condition: $response.body#/0/id == $steps.createAllowlist.outputs.allowlistId
+
+      - stepId: acceptHal
+        operationId: GetAllowlistCollection
+        parameters:
+          - name: filter
+            in: query
+            value: value:{$inputs.uniqueValue}
+          - name: Accept
+            in: header
+            value: application/hal+json
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/0/id == $steps.createAllowlist.outputs.allowlistId
+
+      - stepId: acceptAny
+        operationId: GetAllowlistCollection
+        parameters:
+          - name: filter
+            in: query
+            value: value:{$inputs.uniqueValue}
+          - name: Accept
+            in: header
+            value: '*/*'
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Pagination-Total == 1
+
+      - stepId: deleteAllowlist
+        operationId: DeleteAllowlist
+        parameters:
+          - name: id
+            in: path
+            value: $steps.createAllowlist.outputs.allowlistId
+        successCriteria:
+          - condition: $statusCode == 204
+
+  - workflowId: item-create-read-delete
+    summary: Create, read back every field that was sent, delete, read back a 404.
+    inputs:
+      $ref: '#/components/inputs/parityInputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+    steps:
+      - stepId: createAllowlist
+        operationId: PostAllowlist
+        requestBody:
+          contentType: application/json
+          payload:
+            type: customer-id
+            value: $inputs.uniqueValue
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.body#/type == 'customer-id'
+          - condition: $response.body#/value == $inputs.uniqueValue
+        outputs:
+          allowlistId: $response.body#/id
+
+      - stepId: readBack
+        operationId: GetAllowlist
+        parameters:
+          - name: id
+            in: path
+            value: $steps.createAllowlist.outputs.allowlistId
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/id == $steps.createAllowlist.outputs.allowlistId
+          - condition: $response.body#/type == 'customer-id'
+          - condition: $response.body#/value == $inputs.uniqueValue
+
+      - stepId: deleteAllowlist
+        operationId: DeleteAllowlist
+        parameters:
+          - name: id
+            in: path
+            value: $steps.createAllowlist.outputs.allowlistId
+        successCriteria:
+          - condition: $statusCode == 204
+
+      - stepId: readBackDeleted
+        operationId: GetAllowlist
+        parameters:
+          - name: id
+            in: path
+            value: $steps.createAllowlist.outputs.allowlistId
+        successCriteria:
+          - condition: $statusCode == 404
+          - condition: $response.body#/status == 404
+          - condition: $response.body#/title != ''
+          - condition: $response.body#/details != null
+
+  - workflowId: errors-with-a-key
+    summary: A 404 on an id that does not exist, and a 422 on an invalid payload.
+    inputs:
+      $ref: '#/components/inputs/parityInputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+    steps:
+      - stepId: notFound
+        operationId: GetAllowlist
+        parameters:
+          - name: id
+            in: path
+            value: alwl_0000000000000000000000000
+        successCriteria:
+          - condition: $statusCode == 404
+          - condition: $response.body#/status == 404
+          - condition: $response.body#/title != ''
+          - condition: $response.body#/details != null
+
+      # The payload carries no `value`. The API answers 422 and names the field.
+      - stepId: invalidPayload
+        operationId: PostAllowlist
+        requestBody:
+          contentType: application/json
+          payload:
+            type: customer-id
+        successCriteria:
+          - condition: $statusCode == 422
+          - condition: $response.body#/status == 422
+          - condition: $response.body#/title != ''
+          - condition: $response.body#/details != null
+
+  - workflowId: unauthorized
+    summary: A request with no API key.
+    inputs:
+      $ref: '#/components/inputs/parityInputs'
+    steps:
+      - stepId: noKey
+        operationId: GetAllowlistCollection
+        parameters:
+          - name: limit
+            in: query
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 401
+          - condition: $response.body#/status == 401
+          - condition: $response.body#/title != ''
+          - condition: $response.body#/details != null
