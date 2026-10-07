@@ -1,0 +1,117 @@
+type: object
+description: |-
+  Change to the items of a recurring order of the customer.
+  A change with `applyAt` set to `nextRenewal` records the new items and applies them at the next renewal.
+  The current items remain until the next renewal, when the new items are applied and billed on the renewal invoice.
+required:
+  - id
+  - orderId
+  - status
+  - applyAt
+  - effectiveTime
+  - items
+  - createdTime
+  - updatedTime
+properties:
+  id:
+    description: ID of the order change.
+    type: string
+    maxLength: 50
+    readOnly: true
+    example: ord_chg_0YV7DES3WPC5J8JD8QTVNZBZQ8
+  orderId:
+    description: ID of the order.
+    type: string
+    maxLength: 50
+    readOnly: true
+    example: ord_01HRF27SATGE4Z6PBJE6PD8328
+  status:
+    description: Status of the order change.
+    type: string
+    readOnly: true
+    enum:
+      - pending
+      - applied
+      - canceled
+      - superseded
+    x-enumDescriptions:
+      pending: Scheduled to apply at the next renewal.
+      applied: Items of the order are replaced.
+      canceled: Canceled before the change is applied.
+      superseded: Replaced by a later change for the same order.
+  applyAt:
+    description: |-
+      Time when the new items are applied.
+
+      - `now`: The items change immediately.
+      - `nextRenewal`: The current items stay until the next renewal.
+        The new items are billed on the next renewal invoice.
+        To cancel a pending change, use the `DELETE /storefront/order-changes/{id}` operation.
+    type: string
+    readOnly: true
+    enum:
+      - now
+      - nextRenewal
+  effectiveTime:
+    description: |-
+      Date and time when the change is applied.
+      If `applyAt` is set to `nextRenewal`, this value equals the renewal time of the order.
+    type: string
+    format: date-time
+    readOnly: true
+  lockedTime:
+    description: |-
+      Date and time when the items of a pending change are billed.
+      After this time, the change is locked and cannot be modified until the renewal.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+  appliedTime:
+    description: Date and time when the items of the order are replaced.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+  quoteId:
+    description: |-
+      ID of the quote that is used to create the change.
+      This value is `null` if the change is not created from a quote.
+    type:
+      - 'string'
+      - 'null'
+    maxLength: 50
+    readOnly: true
+  items:
+    description: New items for the order.
+    type: array
+    minItems: 1
+    readOnly: true
+    items:
+      type: object
+      required:
+        - plan
+      properties:
+        plan:
+          description: Plan details.
+          oneOf:
+            - $ref: ./OriginalPlan.yaml
+            - $ref: ./FlexiblePlan.yaml
+        quantity:
+          description: Number of units of the product on the given plan.
+          type: integer
+        usageLimits:
+          oneOf:
+            - $ref: ./UsageLimits.yaml
+            - type: 'null'
+        excludeFromMrr:
+          description: Specifies if this item is excluded from monthly recurring revenue calculations.
+          type:
+            - 'boolean'
+            - 'null'
+  createdTime:
+    $ref: ./CreatedTime.yaml
+  updatedTime:
+    $ref: ./UpdatedTime.yaml
