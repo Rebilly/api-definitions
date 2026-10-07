@@ -1,0 +1,45 @@
+description: Thunes gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+      - settings
+    properties:
+      credentials:
+        type: object
+        description: Thunes credentials object.
+        properties:
+          apiKey:
+            type: string
+            description: Thunes API key used for HTTP basic authentication.
+            format: password
+            writeOnly: true
+          apiSecret:
+            type: string
+            description: Thunes API secret used for HTTP basic authentication.
+            format: password
+            writeOnly: true
+          merchantId:
+            type: string
+            description: Thunes merchant identifier.
+          paymentPageId:
+            type: string
+            description: Thunes payment page identifier for hosted checkout.
+        required:
+          - apiKey
+          - apiSecret
+          - merchantId
+          - paymentPageId
+      settings:
+        type: object
+        description: Thunes settings object.
+        required:
+          - transactionType
+        properties:
+          transactionType:
+            type: string
+            description: Payer type for the Thunes payment order.
+            enum:
+              - C2B
+              - B2B
