@@ -10,8 +10,8 @@ post:
   operationId: PostPayoutRequestBatchOperations
   x-sdk-operation-name: create
   description: |-
-    Creates a payout request batch operation and applies one action to every payout request in the batch.
-    A payout request batch groups payout requests so one action applies to every request in the group.
+    Creates a payout request batch operation that applies one action to a payout request batch.
+    A payout request batch is a group of payout requests that you manage together.
 
     The `type` field specifies the action:
     - `approve`: Approves payout requests in the `ready` status.
@@ -19,8 +19,14 @@ post:
     - `unblock`: Removes the block from blocked payout requests.
     - `auto-allocate`: Creates allocations automatically for payout requests that can be allocated.
     - `process`: Queues pending allocations of the payout requests in the batch for processing.
+    - `add`: Adds the specified payout requests, or the payout requests that match a filter, to the batch.
+    - `remove`: Removes the specified payout requests from the batch.
 
-    Each payout request is checked independently.
+    A batch contains a maximum of 1000 payout requests.
+    For `add` and `remove`, the operation is atomic.
+    If the operation cannot add or remove a specified payout request,
+    the operation returns a `409` response and changes no batch membership.
+    For the other types, each payout request is checked independently.
     Payout requests that do not qualify for the action are skipped.
     For `process`, allocations that do not qualify are skipped, and allocations that qualify are queued together.
     If queueing fails, no allocation is queued and the operation returns an error.
@@ -45,10 +51,22 @@ post:
         application/json:
           schema:
             $ref: ../components/schemas/PayoutRequestBatchOperation.yaml
+    '400':
+      description: Invalid filter provided or no payout requests match the filter.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ProblemTypes/Problem.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
+    '409':
+      description: Batch limit reached or would be exceeded by the request, a specified payout request is already associated with another batch, or a specified payout request is not associated with this batch.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ProblemTypes/Conflict.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
     '429':
