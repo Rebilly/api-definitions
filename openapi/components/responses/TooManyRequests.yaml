@@ -1,7 +1,21 @@
 description: Request rate limit exceeded.
 headers:
-  X-RateLimit-Retry-After:
-    $ref: ../headers/X-RateLimit-Retry-After.yaml
+  Rate-Limit-Limit:
+    $ref: ../headers/Rate-Limit-Limit.yaml
+  Rate-Limit-Remaining:
+    description: |-
+      Number of requests still available for this rate limit.
+      For more information, see [Rate limits](#section/Rate-limits).
+    schema:
+      type: integer
+    example: 0
+  Rate-Limit-Retry-After:
+    $ref: ../headers/Rate-Limit-Retry-After.yaml
+  Retry-After:
+    description: Number of seconds to wait before retrying the request.
+    schema:
+      type: integer
+    example: 1
 content:
   application/json:
     schema:

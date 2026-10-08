@@ -75,9 +75,12 @@ To create and manage API keys, see [API keys](https://www.rebilly.com/docs/dev-d
 
 # Rate limits
 
-Rebilly enforces rate limits on the API to ensure that no single organization consumes too many resources.
-Rate limits are applied to the organization, and not to the API key.
-In sandbox environment, rate limits are enforced for non-GET endpoints and are set at 3000 requests per 10 minutes.
-You can find the exact number of consumed requests in the `X-RateLimit-Limit` and `X-RateLimit-Remaining` headers in the response.
-If the rate limit is exceeded, the API returns a `429 Too Many Requests` response
-and a `X-RateLimit-Retry-After` header that includes a UTC timestamp of when the rate limit resets.
+Rate limits apply to the organization, not to the API key.
+
+API responses for rate-limited operations include `Rate-Limit-Limit` and `Rate-Limit-Remaining`.
+`Rate-Limit-Limit` is the maximum number of requests available at one time.
+`Rate-Limit-Remaining` is the number of requests still available.
+
+A request over the limit returns `429 Too Many Requests`.
+The response includes `Retry-After` and `Rate-Limit-Retry-After`.
+Both values are the number of seconds to wait before retrying.
