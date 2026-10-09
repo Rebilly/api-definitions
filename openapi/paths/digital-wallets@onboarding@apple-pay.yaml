@@ -1,3 +1,27 @@
+get:
+  x-products:
+    - Users
+  tags:
+    - Gateway accounts
+  summary: Retrieve Apple Pay domains
+  operationId: GetDigitalWalletOnboardingApplePay
+  x-sdk-operation-name: getApplePayDomains
+  description: |-
+    Retrieves the domains that Apple Pay has registered for the organization.
+    Apple Pay registers domains for the whole organization, not for one gateway account.
+  responses:
+    '200':
+      description: Apple Pay domains retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DigitalWalletOnboardingApplePayDomains.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
 post:
   x-products:
     - Users

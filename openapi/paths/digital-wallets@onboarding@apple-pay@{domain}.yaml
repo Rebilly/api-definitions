@@ -1,0 +1,38 @@
+parameters:
+  - name: domain
+    in: path
+    description: Domain to remove from Apple Pay.
+    required: true
+    schema:
+      type: string
+      maxLength: 255
+      pattern: '^[@~\-\.\w]+$'
+delete:
+  x-products:
+    - Users
+  tags:
+    - Gateway accounts
+  summary: Remove an Apple Pay domain
+  operationId: DeleteDigitalWalletOnboardingApplePayDomain
+  x-sdk-operation-name: deleteApplePayDomain
+  description: |-
+    Removes a domain from Apple Pay for the organization.
+    Apple Pay stops working on the domain.
+  responses:
+    '204':
+      description: Apple Pay domain removed.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
