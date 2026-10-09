@@ -10,7 +10,11 @@ get:
     - SecretApiKey: []
     - JWT: []
     - ApplicationJWT: []
-  description: Retrieves a list of invoices.
+  description: |-
+    Retrieves a list of invoices.
+    Each invoice in the list includes up to 10 of the most recent transactions in `transactions`.
+    To retrieve transactions for an invoice, use [Retrieve transactions](https://www.rebilly.com/catalog/all/transactions/gettransactioncollection) with the `invoiceIds` filter.
+    Search results can lag briefly behind a write.
   parameters:
     - $ref: ../components/parameters/collectionFilter.yaml
     - $ref: ../components/parameters/collectionSort.yaml

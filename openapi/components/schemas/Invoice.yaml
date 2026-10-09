@@ -276,7 +276,10 @@ properties:
       - $ref: ./CustomerId.yaml
   transactions:
     type: array
-    description: Invoice transactions array.
+    description: |-
+      Up to 10 of the most recent transactions for the invoice.
+      To retrieve transactions for an invoice, use [Retrieve transactions](https://www.rebilly.com/catalog/all/transactions/gettransactioncollection) with the `invoiceIds` filter.
+      Search results can lag briefly behind a write.
     maxItems: 10
     readOnly: true
     items:
