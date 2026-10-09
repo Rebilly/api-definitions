@@ -1,0 +1,37 @@
+get:
+  x-internal: true
+  x-products:
+    - Users
+  tags:
+    - Webhooks
+  summary: Retrieve webhook event types
+  operationId: GetWebhookEventCollection
+  x-sdk-operation-name: getAll
+  description: |-
+    Retrieves the event types that your organization can use in the events filter of a webhook.
+    If your organization uses the Replay add-on, the list also contains Replay event types.
+  parameters:
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+  responses:
+    '200':
+      description: Webhook event types retrieved.
+      headers:
+        Pagination-Total:
+          $ref: ../components/headers/Pagination-Total.yaml
+        Pagination-Limit:
+          $ref: ../components/headers/Pagination-Limit.yaml
+        Pagination-Offset:
+          $ref: ../components/headers/Pagination-Offset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/WebhookEvent.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml

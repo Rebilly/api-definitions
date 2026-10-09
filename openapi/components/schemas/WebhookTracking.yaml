@@ -50,8 +50,10 @@ properties:
       - $ref: ./OrganizationId.yaml
   eventType:
     x-sortable: true
-    allOf:
+    anyOf:
       - $ref: ./GlobalEventType.yaml
+      - type: string
+        description: Additional event type that is available to your organization.
   source:
     type: string
     x-sortable: true

@@ -1,0 +1,23 @@
+type: object
+required:
+  - eventType
+  - product
+properties:
+  eventType:
+    type: string
+    description: Event type that a webhook can subscribe to.
+    readOnly: true
+    example: wagering-requirement-met
+  product:
+    type: string
+    description: |-
+      Product in which the event occurs.
+      Use this value to distinguish between Replay events and non-Replay events.
+    enum:
+      - core
+      - replay
+    x-enumDescriptions:
+      core: Rebilly event.
+      replay: Replay event.
+    readOnly: true
+    example: replay

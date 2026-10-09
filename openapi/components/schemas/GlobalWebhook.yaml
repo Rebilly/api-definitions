@@ -17,7 +17,10 @@ properties:
     type: array
     default: []
     items:
-      $ref: ./GlobalEventType.yaml
+      anyOf:
+        - $ref: ./GlobalEventType.yaml
+        - type: string
+          description: Additional event type that is available to your organization.
   status:
     x-basic: true
     type: string
