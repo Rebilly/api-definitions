@@ -11,23 +11,18 @@ properties:
     example: hook_log_01HXC7HJ1V2FNJD1R396WCG2HB
   status:
     type: integer
-    x-sortable: true
     description: Response code of the webhook request.
   duration:
     type: integer
-    x-sortable: true
     description: Duration of the webhook request in milliseconds.
   initiatedTime:
     description: Date and time when the webhook is initiated.
-    x-sortable: true
     $ref: ./ServerTimestamp.yaml
   url:
     type: string
-    x-sortable: true
     description: URL that receives the webhook.
   method:
     type: string
-    x-sortable: true
     description: HTTP method for sending the webhook.
     example: POST
   request:
@@ -42,38 +37,30 @@ properties:
     $ref: ./HttpHeaders.yaml
   entityId:
     type: string
-    x-sortable: true
     description: ID of the main entity related to the event type.
   organizationId:
-    x-sortable: true
     allOf:
       - $ref: ./OrganizationId.yaml
   eventType:
-    x-sortable: true
     anyOf:
       - $ref: ./GlobalEventType.yaml
       - type: string
         description: Additional event type that is available to your organization.
   source:
     type: string
-    x-sortable: true
     description: Source that triggered the webhook.
     enum:
       - webhooks
       - rules
   attempt:
     type: integer
-    x-sortable: true
     description: Number of attempts to send the webhook.
   sentTime:
-    x-sortable: true
     description: Date and time when the webhook is sent.
     $ref: ./ServerTimestamp.yaml
   createdTime:
-    x-sortable: true
-    $ref: ./CreatedTime.yaml
+    $ref: ./CreatedTimeNoSort.yaml
   updatedTime:
-    x-sortable: true
-    $ref: ./UpdatedTime.yaml
+    $ref: ./UpdatedTimeNoSort.yaml
   _links:
     $ref: ./SelfLink.yaml
