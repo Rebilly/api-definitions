@@ -127,8 +127,9 @@ content:
             ID of the payout request for which the transaction is fully allocated.
 
             > **Note:** Use the payout request allocation flow instead of this field.
-            Create an allocation with `POST /payout-request-allocations`,
-            then initiate processing with `POST /payout-request-allocations/process`.
+            Create an allocation with `POST /payout-request-allocations`.
+            To process a selected set, send `POST /payout-request-allocation-operations` with `type` set to `process`.
+            To process a batch, send `POST /payout-request-batch-operations` with `type` set to `process`.
           writeOnly: true
           type: string
           maxLength: 50

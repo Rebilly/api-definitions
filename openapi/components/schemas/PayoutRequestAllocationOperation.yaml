@@ -1,0 +1,28 @@
+type: object
+description: Action applied to a set of payout request allocations.
+required:
+  - type
+  - allocationIds
+  - status
+properties:
+  type:
+    description: Type of action applied to the allocations.
+    type: string
+    readOnly: true
+    enum:
+      - process
+  allocationIds:
+    description: IDs of the payout request allocations in the operation.
+    type: array
+    readOnly: true
+    items:
+      type: string
+      maxLength: 50
+  status:
+    description: |-
+      Status of the operation.
+      The operation completes before the response returns, so the status is always `completed`.
+    type: string
+    readOnly: true
+    enum:
+      - completed
