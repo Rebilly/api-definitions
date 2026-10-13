@@ -21,24 +21,6 @@ components:
       value: $inputs.organizationId
 
 workflows:
-  - workflowId: rebilly-api/applications
-
-    inputs:
-      properties:
-        organizationId:
-          type: string
-        apiKey:
-          type: string
-          format: password
-    parameters:
-      - reference: $components.parameters.apiKey
-      - reference: $components.parameters.organizationId
-    steps:
-      - stepId: GetApplicationCollection
-        operationId: GetApplicationCollection
-        successCriteria:
-          - condition: $statusCode == 200
-
   - workflowId: rebilly-api/webhooks
 
     inputs:
