@@ -1,0 +1,30 @@
+description: CPS gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: CPS credentials object.
+        properties:
+          clientKey:
+            type: string
+            description: Client key of the CPS gateway.
+          password:
+            type: string
+            description: Password of the CPS gateway.
+            format: password
+            writeOnly: true
+        required:
+          - clientKey
+          - password
+      settings:
+        type: object
+        properties:
+          paymentUrl:
+            type: string
+            description: Payment URL of the CPS gateway for server-to-server integration.
+        required:
+          - paymentUrl
