@@ -47,7 +47,10 @@ put:
   summary: Modify a data export
   operationId: PutDataExport
   x-sdk-operation-name: update
-  description: Modifies a pending data export.
+  description: |-
+    Modifies a pending data export.
+    Requires permission to retrieve the collection of the exported resource, such as `GetTransactionCollection` for transactions.
+    Invoice items require `GetInvoiceCollection`.
   parameters:
     - $ref: ../components/parameters/collectionExpand.yaml
   requestBody:
@@ -93,7 +96,10 @@ delete:
   summary: Delete a data export
   operationId: DeleteDataExport
   x-sdk-operation-name: delete
-  description: Deletes a data export.
+  description: |-
+    Deletes a data export.
+    Requires permission to retrieve the collection of the exported resource, such as `GetTransactionCollection` for transactions.
+    Invoice items require `GetInvoiceCollection`.
   responses:
     '204':
       $ref: ../components/responses/NoContent.yaml

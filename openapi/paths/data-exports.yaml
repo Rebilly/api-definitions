@@ -6,7 +6,10 @@ post:
   summary: Request the data export of a resource
   operationId: PostDataExport
   x-sdk-operation-name: queue
-  description: Requests the export of a specific data resource.
+  description: |-
+    Requests the export of a specific data resource.
+    Requires permission to retrieve the collection of the exported resource, such as `GetTransactionCollection` for transactions.
+    Invoice items require `GetInvoiceCollection`.
   parameters:
     - $ref: ../components/parameters/collectionExpand.yaml
   requestBody:
