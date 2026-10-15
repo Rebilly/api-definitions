@@ -12,6 +12,23 @@ properties:
     description: ID of the user who created the batch.
     maxLength: 50
     example: usr_0YVCEENYJ3D7Q9EN6BN16HA0G4
+  user:
+    description: Creator of the batch.
+    readOnly: true
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        description: User ID of the creator.
+        type: string
+        maxLength: 50
+        example: usr_0YVCEENYJ3D7Q9EN6BN16HA0G4
+      name:
+        description: First and last name of the creator.
+        type: string
+        example: John Doe
   totalCount:
     description: Total number of payout requests in the batch.
     type: integer
