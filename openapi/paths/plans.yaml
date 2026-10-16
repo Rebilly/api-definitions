@@ -10,7 +10,15 @@ get:
     - SecretApiKey: []
     - JWT: []
     - ApplicationJWT: []
-  description: Retrieves a list of plans.
+  description: |-
+    Retrieves a list of plans.
+
+    To retrieve plans by type, use `filter=type:{type}`,
+    where `{type}` is `subscription`, `one-time-sale`, or `trial-only`.
+    To retrieve plans of several types, separate the types with commas,
+    for example: `filter=type:one-time-sale,trial-only`.
+    Other `type` values, including negated values such as `type:!subscription`,
+    match no plans.
   parameters:
     - $ref: ../components/parameters/collectionFilter.yaml
     - $ref: ../components/parameters/collectionSort.yaml
