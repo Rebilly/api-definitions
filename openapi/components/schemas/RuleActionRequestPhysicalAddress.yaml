@@ -1,0 +1,35 @@
+description: |-
+  Displays a Rebilly-hosted page where the customer can provide a street address and postal code before the payment is sent to the gateway.
+  The page is displayed only if the customer's primary address is a PO Box.
+  The submitted values are stored in the `referenceData` field of the transaction using the `physicalAddress` and `physicalAddressPostalCode` keys.
+  After the customer provides an address, the page is not displayed on their later payments.
+  If the customer skips this step, the page is displayed again on their next payment.
+allOf:
+  - $ref: ./RuleAction.yaml
+  - type: object
+    properties:
+      instructionsText:
+        description: |-
+          Text that is displayed above the form.
+          HTML is permitted.
+          If this value is omitted or null, the default text is displayed in the customer's language.
+        type:
+          - 'string'
+          - 'null'
+        maxLength: 65535
+      buttonText:
+        description: |-
+          Text of the button that the customer can press to submit the address.
+          If this value is omitted or null, the default text is displayed in the customer's language.
+        type:
+          - 'string'
+          - 'null'
+        maxLength: 255
+      skipLinkText:
+        description: |-
+          Text of the link that the customer can select to skip the address step and continue the payment without providing an address.
+          If this value is omitted or null, the default text is displayed in the customer's language.
+        type:
+          - 'string'
+          - 'null'
+        maxLength: 255
