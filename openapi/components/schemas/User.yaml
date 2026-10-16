@@ -104,5 +104,16 @@ properties:
       type: string
   allowedIps:
     $ref: ./AllowedIps.yaml
+  mfaEnabled:
+    type:
+      - 'boolean'
+      - 'null'
+    readOnly: true
+    description: |-
+      Specifies if the user has multi-factor authentication (MFA) set up.
+      This value is present only in responses from the [Retrieve a list of users](https://www.rebilly.com/catalog/all/users/getusercollection) operation
+      for an organization that has [security settings](https://www.rebilly.com/catalog/all/organizations/getsecuritysettings),
+      and is omitted for Rebilly staff.
+      This value is `null` when this information is temporarily unavailable.
   _links:
     $ref: ./SelfLink.yaml

@@ -85,6 +85,15 @@ properties:
     type: boolean
     description: Specifies if the current user session has permissions emulation enabled.
     readOnly: true
+  mfaRequiredByOrganization:
+    type: boolean
+    description: |-
+      Specifies if the user is in an organization in the current environment that requires multi-factor authentication (MFA).
+      Deactivated organizations are not included.
+      The requirement is enforced on each request to an organization that requires MFA, regardless of this value.
+      This value is `false` for API key and service account sessions.
+    readOnly: true
+    default: false
   displayName:
     type: string
     description: User's full display name.

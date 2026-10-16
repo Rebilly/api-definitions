@@ -6,7 +6,18 @@ get:
   summary: Retrieve a list of users
   operationId: GetUserCollection
   x-sdk-operation-name: getAll
-  description: Retrieves a list of users.
+  description: |-
+    Retrieves a list of users.
+    To retrieve the users of the organization who have multi-factor authentication (MFA) set up,
+    use `filter=mfaEnabled:true`.
+    To retrieve the users who do not have MFA set up, including users who have not accepted their invitation,
+    use `filter=mfaEnabled:false`.
+    The `mfaEnabled` filter applies only to the list of users of an organization
+    that has [security settings](https://www.rebilly.com/catalog/all/organizations/getsecuritysettings).
+    Inactive users and Rebilly staff are not part of the `mfaEnabled` filter.
+    User objects of Rebilly staff do not include `mfaEnabled`.
+    The totals are the same as those returned by the [Retrieve security settings](https://www.rebilly.com/catalog/all/organizations/getsecuritysettings) operation.
+    If the MFA status is temporarily unavailable, the response is `503` and `error` is `mfa_status_unavailable`.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -33,6 +44,12 @@ get:
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
+    '503':
+      description: MFA status unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ProblemTypes/Problem.yaml
   x-codeSamples:
     - lang: PHP
       label: PHP-SDK-2.0

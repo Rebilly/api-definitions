@@ -7,4 +7,11 @@ allOf:
         description: HTTP status code.
         minimum: 403
         maximum: 403
+      error:
+        type: string
+        description: |-
+          Message that describes why the request is forbidden.
+          Most responses use a descriptive message, such as `Not allowed to change security settings`.
+          If the organization requires multi-factor authentication (MFA) and MFA verification has not been completed for the session, this value is `mfa_required`.
+          If the request sets `requireMfa` to `true` and MFA verification has not been completed for the session, this value is `mfa_required_for_caller`.
   - $ref: ./BaseProblem.yaml

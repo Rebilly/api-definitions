@@ -12,6 +12,7 @@ properties:
     readOnly: true
     maxLength: 50
     example: org_0YVDM8RC7GDADADSBSMW124JA8
+    x-sortable: true
   name:
     description: Name of the organization.
     type: string
@@ -261,6 +262,19 @@ properties:
               type: string
               format: email
             default: [ ]
+      security:
+        type: object
+        readOnly: true
+        description: |-
+          Organization sign-in security settings.
+          This value is read-only on the [Create an organization](https://www.rebilly.com/catalog/all/organizations/postorganization) and [Update an organization](https://www.rebilly.com/catalog/all/organizations/patchorganization) operations.
+          To change these settings, use the [Update security settings](https://www.rebilly.com/catalog/all/organizations/putsecuritysettings) operation.
+          To retrieve how many users have multi-factor authentication (MFA) set up, use the [Retrieve security settings](https://www.rebilly.com/catalog/all/organizations/getsecuritysettings) operation.
+        properties:
+          requireMfa:
+            type: boolean
+            description: Specifies if users must pass multi-factor authentication (MFA) to use this organization in the Rebilly app.
+            default: false
       annualComplianceScreening:
         description: |-
           Settings for annual compliance screening of all active customers.

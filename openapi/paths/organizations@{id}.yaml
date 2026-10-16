@@ -8,7 +8,12 @@ get:
   summary: Retrieve an organization
   operationId: GetOrganization
   x-sdk-operation-name: get
-  description: Retrieves an organization with a specified ID.
+  description: |-
+    Retrieves an organization with a specified ID.
+    If the organization requires multi-factor authentication (MFA) and your session has not passed MFA,
+    the response includes only `id`, `name`, `country`, `features`, `settings.security`, and `_links`,
+    and omits all other fields.
+    To require MFA, use the [Update security settings](https://www.rebilly.com/catalog/all/organizations/putsecuritysettings) operation.
   responses:
     '200':
       description: Organization retrieved.

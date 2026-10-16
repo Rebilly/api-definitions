@@ -1,0 +1,35 @@
+type: object
+required:
+  - requireMfa
+properties:
+  requireMfa:
+    type: boolean
+    description: Specifies if users must pass multi-factor authentication (MFA) to use this organization in the Rebilly UI.
+    default: false
+  mfaAdoption:
+    type:
+      - 'object'
+      - 'null'
+    readOnly: true
+    description: |-
+      Number of users who have set up multi-factor authentication (MFA), excluding Rebilly staff.
+      Pending invitations are counted as users without MFA.
+      This value is `null` when this information is temporarily unavailable.
+    required:
+      - enrolled
+      - total
+      - pending
+    properties:
+      enrolled:
+        type: integer
+        description: Number of active users who have multi-factor authentication (MFA) set up.
+      total:
+        type: integer
+        description: Number of active users and pending invitations.
+      pending:
+        type: integer
+        description: |-
+          Number of pending invitations included in `total`.
+          Invited users must set up multi-factor authentication (MFA) after they accept the invitation.
+  _links:
+    $ref: ./SelfLink.yaml

@@ -1,0 +1,81 @@
+get:
+  x-products:
+    - Users
+  tags:
+    - Organizations
+  summary: Retrieve security settings
+  operationId: GetSecuritySettings
+  x-sdk-operation-name: get
+  x-sdk-resource: SecuritySettings
+  description: |-
+    Retrieves the sign-in security settings of the organization,
+    and the number of users who have multi-factor authentication (MFA) set up.
+    Settings apply to the current environment only: live and sandbox are configured separately.
+  responses:
+    '200':
+      description: Security settings retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SecuritySettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Users
+  tags:
+    - Organizations
+  summary: Update security settings
+  operationId: PutSecuritySettings
+  x-sdk-operation-name: update
+  x-sdk-resource: SecuritySettings
+  security:
+    - JWT: []
+  description: |-
+    Updates the sign-in security settings of the organization.
+    If `requireMfa` is `true`, every user who signs in to the Rebilly UI must pass multi-factor authentication (MFA).
+    If the session of a user has not passed MFA, other operations respond with `403` and `error` is `mfa_required`.
+    Only owners and administrators who are signed in to the Rebilly UI can change this setting.
+    This setting does not apply to API keys, and a request that uses an API key cannot change this setting.
+    To turn on `requireMfa`, the session must have passed MFA.
+    If the session has not passed MFA, the response is `403` and `error` is `mfa_required_for_caller`.
+    If the number of users who have MFA set up is temporarily unavailable, `requireMfa` cannot be turned on and the response is `503`.
+    Settings apply to the current environment only: live and sandbox are configured separately.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/SecuritySettings.yaml
+  responses:
+    '200':
+      description: Security settings updated.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SecuritySettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
+    '503':
+      description: MFA adoption unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ProblemTypes/Problem.yaml
