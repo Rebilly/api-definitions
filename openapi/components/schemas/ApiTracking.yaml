@@ -48,7 +48,7 @@ properties:
         example: usr_0YVCEENYJ3D7Q9EN6BN16HA0G4
       apiKeyId:
         type: string
-        description: ID of the API tracking log.
+        description: ID of the API key.
         maxLength: 50
         example: api_key_0YV7JQMY6ED2FBE58BMFHBWBZH
       email:
@@ -79,6 +79,34 @@ properties:
       isSupport:
         description: Specifies if the API request is completed by a Rebilly Support Team member.
         type: boolean
+  authenticationMethod:
+    description: |-
+      Authentication method of the API request.
+      This value is `null` if the request is unauthenticated.
+    type:
+      - 'string'
+      - 'null'
+    readOnly: true
+    enum:
+      - secret-api-key
+      - signature
+      - jwt-user
+      - jwt-customer
+      - publishable-key
+      - jwt-guest
+      - jwt-application
+      - jwt-service-account
+      - null
+    x-enumDescriptions:
+      secret-api-key: Secret API key.
+      signature: Request signed with a secret API key in the `REB-AUTH` header.
+      jwt-user: JSON Web Token (JWT) of a user.
+      jwt-customer: JWT of a customer.
+      publishable-key: Publishable API key.
+      jwt-guest: JWT of a guest session.
+      jwt-application: JWT of an application instance.
+      jwt-service-account: JWT of a service account.
+      'null': Unauthenticated request.
   ipAddress:
     type: string
     x-basic: true
