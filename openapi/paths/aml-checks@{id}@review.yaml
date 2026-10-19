@@ -10,7 +10,11 @@ post:
   x-sdk-operation-name: review
   description: |-
     Reviews an AML check.
-    The AML check can be either confirmed or marked as a false positive.
+    Records a decision on each listed hit, then applies `status` to every hit that has no decision yet.
+    The status of the AML check is calculated from the hit decisions.
+    If any hit has no decision, the AML check remains in review.
+    If any hit is a confirmed match, the AML check is a confirmed match.
+    If every hit is a false positive, the AML check is a false positive.
   requestBody:
     content:
       application/json:

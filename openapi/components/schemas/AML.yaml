@@ -242,5 +242,27 @@ properties:
             - match_exact_region
             - match_exact_country
             - match_exact_post_code
+  decision:
+    type:
+      - 'string'
+      - 'null'
+    readOnly: true
+    description: |-
+      Reviewer decision for this hit.
+      This value is `null` if the hit has not been decided yet.
+    enum:
+      - confirmed-match
+      - false-positive
+      - null
+    example: false-positive
+  decisionInherited:
+    type: boolean
+    readOnly: true
+    default: false
+    description: |-
+      Specifies if the decision is copied from an earlier AML check instead of recorded by a reviewer.
+      The decision is copied from a matching hit on the previous AML check of the same customer or of a related customer,
+      or from the `false-positive` status of an earlier AML check of the same customer or a related customer.
+    example: false
   _links:
     $ref: ./SelfLink.yaml

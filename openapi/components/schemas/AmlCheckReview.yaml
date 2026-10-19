@@ -1,9 +1,28 @@
 type: object
-description: AML check review.
+description: |-
+  AML check review.
+  Provide a status, a list of hit decisions, or both.
+  The status of the AML check is calculated from the hit decisions.
+anyOf:
+  - required:
+      - status
+  - required:
+      - hits
 properties:
   status:
     type: string
-    description: Status of the AML check.
+    description: |-
+      Decision applied to every hit that has no decision yet.
+      If `hits` is also provided, those decisions apply first.
+      If every hit already has a decision and this value differs from the status those decisions give, it replaces the decision on every hit that is not listed in `hits`.
+      If it equals that status, the decided hits are left as they are.
+      If the AML check has no hits, this value becomes the status of the AML check.
     enum:
       - confirmed-match
       - false-positive
+  hits:
+    type: array
+    description: Decisions for individual hits.
+    minItems: 1
+    items:
+      $ref: ./AmlHitDecision.yaml

@@ -1,0 +1,21 @@
+type: object
+description: Decision for one hit of an AML check.
+required:
+  - index
+  - decision
+properties:
+  index:
+    type: integer
+    minimum: 0
+    description: Zero-based position of the hit in the `hits` array of the AML check.
+    example: 0
+  decision:
+    type: string
+    description: Outcome of the review of the hit.
+    enum:
+      - confirmed-match
+      - false-positive
+    x-enumDescriptions:
+      confirmed-match: The hit is the customer.
+      false-positive: The hit is not the customer.
+    example: false-positive
