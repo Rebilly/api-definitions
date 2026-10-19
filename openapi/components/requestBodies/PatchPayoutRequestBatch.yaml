@@ -4,6 +4,15 @@ content:
       type: object
       title: Patch payout request batch
       properties:
+        name:
+          description: |-
+            Short name used to identify the batch.
+            Omit this property when not updating the name.
+            Do not send `null`; use a string value when this property is present.
+            If this property is an empty string, the name is removed.
+          type: string
+          maxLength: 255
+          example: Weekly CAD payouts
         description:
           description: |-
             Description of the batch.
@@ -34,4 +43,4 @@ content:
 description: |-
   Fields for updating the payout request batch.
   At least one property must be present.
-  Do not set `description` or `allocationOrder` to `null`.
+  Do not set `name`, `description`, or `allocationOrder` to `null`.
