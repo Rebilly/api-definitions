@@ -16,6 +16,8 @@ post:
   description: |-
     Creates a quote for requested changes to items and quantities.
     This operation applies the requested changes to the subscription when the quote is accepted.
+    If `effectiveTime` is `auto` or `next-service-period`, a downgrade is scheduled for the next renewal.
+    The `order.applyAt` value of the quote indicates when the changes are applied.
   requestBody:
     content:
       application/json:

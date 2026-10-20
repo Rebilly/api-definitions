@@ -128,10 +128,32 @@ properties:
         description: |-
           Date from which the renewal time for `reset` operations and proration calculations are made.
           If this field is omitted, this value defaults to the time of quote acceptance.
+          If `applyAt` is `nextRenewal`, this value is `null`.
         type:
           - 'string'
           - 'null'
         format: date-time
+      applyAt:
+        description: |-
+          Time when the new items are applied.
+
+          - `now`: The items change when the quote is accepted.
+            `prorated`, `renewalPolicy` and `effectiveTime` apply.
+          - `nextRenewal`: The current items remain until the next renewal.
+            The new items are billed on the next renewal invoice.
+            `prorated`, `renewalPolicy` and `usageSettings` are ignored.
+            `effectiveTime` is `null`.
+            A later change of items replaces the pending change.
+            The pending change is locked when the next renewal invoice is issued.
+
+          If the request `effectiveTime` is `auto` or `next-service-period` and the order can take a scheduled change,
+          a downgrade is scheduled for the next renewal.
+        type: string
+        readOnly: true
+        enum:
+          - now
+          - nextRenewal
+        default: now
       keepTrial:
         deprecated: true
         description: |-

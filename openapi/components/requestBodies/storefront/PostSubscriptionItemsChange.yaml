@@ -3,16 +3,21 @@ description: Change customer subscription items.
 properties:
   effectiveTime:
     type: string
-    description: Effective time when changes are applied.
-    default: now
+    description: |-
+      Effective time when changes are applied.
+      If this value is `auto` or `next-service-period`, a downgrade is scheduled for the next renewal,
+      and the quote `order.applyAt` value is `nextRenewal`.
+      If the order cannot take a scheduled change, for example a legacy order or an order in trial,
+      the downgrade is applied at the beginning of the next service period.
+    default: auto
     enum:
       - now
       - next-service-period
       - auto
     x-enumDescriptions:
       now: Apply changes immediately.
-      next-service-period: Apply changes at the beginning of next service period.
-      auto: Apply changes at the beginning of next service period in case of a downgrade, and immediately in case of an upgrade.
+      next-service-period: Schedule a downgrade for the next renewal. Apply an upgrade at the beginning of the next service period.
+      auto: Schedule a downgrade for the next renewal. Apply an upgrade immediately.
   items:
     type: array
     description: Details of items in the subscription.
