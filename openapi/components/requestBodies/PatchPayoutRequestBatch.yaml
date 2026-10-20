@@ -6,18 +6,18 @@ content:
       properties:
         name:
           description: |-
-            Short name used to identify the batch.
-            Omit this property when not updating the name.
-            Do not send `null`; use a string value when this property is present.
-            If this property is an empty string, the name is removed.
+            Name that is used to identify the batch.
+            To retain the current name, omit this property.
+            This value must be a string.
+            To remove the name, set this property to an empty string.
           type: string
           maxLength: 255
           example: Weekly CAD payouts
         description:
           description: |-
             Description of the batch.
-            Omit this property when not updating the description.
-            Do not send `null`; use a string value when this property is present.
+            To retain the current description, omit this property.
+            This value must be a string.
           type: string
           maxLength: 255
         allocationOrder:
@@ -26,8 +26,8 @@ content:
             When set, this field overrides the organization-level allocation order during batch auto-allocation.
             Must contain `selected-payment-instrument` exactly once.
             Valid values: `payment-card` (payment cards), `alternative-payment-methods` (catch-all for alternative payment methods), `selected-payment-instrument` (customer-requested instrument), or any payment method API name (for example, `paypal`, `Interac-eTransfer`).
-            Omit this property when not updating the allocation order.
-            Do not send `null`; use an array value when this property is present.
+            To retain the current allocation order, omit this property.
+            This value must be an array.
           type: array
           items:
             type: string
@@ -43,4 +43,3 @@ content:
 description: |-
   Fields for updating the payout request batch.
   At least one property must be present.
-  Do not set `name`, `description`, or `allocationOrder` to `null`.
