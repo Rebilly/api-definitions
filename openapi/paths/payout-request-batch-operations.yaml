@@ -21,10 +21,11 @@ post:
     - `process`: Queues pending allocations of the payout requests in the batch for processing.
     - `add`: Adds the specified payout requests, or the payout requests that match a filter, to the batch.
     - `remove`: Removes the specified payout requests from the batch.
+    - `move`: Moves the specified payout requests from the source batch to a destination batch.
 
     A batch contains a maximum of 1000 payout requests.
-    For `add` and `remove`, the operation is atomic.
-    If the operation cannot add or remove a specified payout request,
+    For `add`, `remove`, and `move`, the operation is atomic.
+    If the operation cannot add, remove, or move a specified payout request,
     the operation returns a `409` response and changes no batch membership.
     For the other types, each payout request is checked independently.
     Payout requests that do not qualify for the action are skipped.
