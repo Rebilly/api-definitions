@@ -318,7 +318,10 @@ properties:
       - customer
       - rebilly
   cancelCategory:
-    description: Category of the cancellation.
+    description: |-
+      Category of the cancellation.
+
+      The `sandbox-retention` value is set only in the sandbox environment when a recurring order is canceled 90 days after creation.
     type: string
     readOnly: true
     enum:
@@ -335,6 +338,7 @@ properties:
       - never-started
       - switched-plan
       - organization-deactivated
+      - sandbox-retention
       - other
   cancelDescription:
     description: Description of the cancellation reason in free form.

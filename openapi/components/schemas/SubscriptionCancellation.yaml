@@ -38,7 +38,11 @@ properties:
       - customer
       - rebilly
   reason:
-    description: Reason for the cancellation.
+    description: |-
+      Reason for the cancellation.
+
+      The `sandbox-retention` value is set only in the sandbox environment when a recurring order is canceled 90 days after creation.
+      If a request includes it, a validation error is returned.
     type: string
     default: other
     enum:
@@ -52,6 +56,9 @@ properties:
       - too-expensive
       - other
       - billing-failure
+      - delinquency
+      - organization-deactivated
+      - sandbox-retention
   description:
     description: Description of the cancellation reason in free form.
     type: string
