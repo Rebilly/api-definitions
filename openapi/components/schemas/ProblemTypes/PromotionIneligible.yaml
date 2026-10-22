@@ -1,0 +1,32 @@
+allOf:
+  - title: Promotion ineligible
+  - type: object
+    required:
+      - type
+    properties:
+      type:
+        type: string
+        description: Machine-readable error code for this problem type, which consumers use to handle the failure programmatically.
+        enum:
+          - promotion-ineligible
+      status:
+        type: integer
+        description: HTTP status code.
+        minimum: 409
+        maximum: 409
+  # DetailedProblem instead of BaseProblem: BaseProblem constrains `type` to `format: uri`,
+  # but this problem reports a machine-readable code
+  - $ref: ./DetailedProblem.yaml
+  - type: object
+    required:
+      - ineligibleReasonCode
+    properties:
+      ineligibleReasonCode:
+        description: |-
+          Code of the promotion eligibility rule that the deposit fails, such as `min-deposit-not-met` or `payment-method-restricted`.
+          This value is `null` when a pre-check rejects the promotion before the eligibility rules run,
+          for example because the promotion is not active or the customer already claimed it.
+        type:
+          - string
+          - 'null'
+        example: payment-method-restricted

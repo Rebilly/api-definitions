@@ -37,9 +37,14 @@ content:
         promotionId:
           type: string
           description: |-
-            ID of the Replay promotion to apply to this deposit.
-            The customer must have an active opt-in for the promotion.
-            If the customer does not have an active opt-in, the deposit completes without the promotion.
+            ID of the promotion to apply to this deposit.
+            Requires `paymentInstrumentId` or `token`.
+
+            Before the deposit is charged, the deposit amount, currency, and payment method are checked against the promotion rules,
+            and the promotion is reserved for the customer.
+            If the customer is not eligible, the response has status `409` and the customer is not charged.
+            If the check cannot run, the response has status `503` and the customer is not charged.
+            When the deposit completes, the customer receives the promotion.
           minLength: 1
           maxLength: 50
           example: prom_01KS2T05CHEN49NANT1CRVWGF8

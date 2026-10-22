@@ -34,7 +34,24 @@ post:
       $ref: ../../components/responses/Forbidden.yaml
     '404':
       $ref: ../../components/responses/NotFound.yaml
+    '409':
+      description: |-
+        Promotion in `promotionId` does not apply to the deposit.
+        Rebilly checks the deposit amount, currency, and payment method against the promotion rules before the deposit is charged.
+        The customer is not charged.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/ProblemTypes/PromotionIneligible.yaml
     '422':
       $ref: ../../components/responses/ValidationError.yaml
     '429':
       $ref: ../../components/responses/TooManyRequests.yaml
+    '503':
+      description: |-
+        Promotion in `promotionId` cannot be checked against the deposit, and the customer is not charged.
+        Retry the request, or send it without `promotionId` to deposit without a promotion.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/ProblemTypes/PromotionCheckUnavailable.yaml

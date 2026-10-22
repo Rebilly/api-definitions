@@ -1,0 +1,19 @@
+allOf:
+  - title: Promotion check unavailable
+  - type: object
+    required:
+      - type
+    properties:
+      type:
+        type: string
+        description: Machine-readable error code for this problem type, which consumers use to handle the failure programmatically.
+        enum:
+          - promotion-check-unavailable
+      status:
+        type: integer
+        description: HTTP status code.
+        minimum: 503
+        maximum: 503
+  # DetailedProblem instead of BaseProblem: BaseProblem constrains `type` to `format: uri`,
+  # but this problem reports a machine-readable code
+  - $ref: ./DetailedProblem.yaml
