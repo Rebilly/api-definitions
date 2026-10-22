@@ -15,7 +15,8 @@ post:
 
     The `type` field specifies the action:
     - `approve`: Approves payout requests in the `ready` status.
-    - `block`: Blocks payout requests that are not blocked and can be blocked in their current status.
+    - `block`: Blocks payout requests that can be blocked in their current status.
+      If `overwriteExisting` is `true`, already blocked payout requests receive the new block reason.
     - `unblock`: Removes the block from blocked payout requests.
     - `auto-allocate`: Creates allocations automatically for payout requests that can be allocated.
     - `process`: Queues pending allocations of the payout requests in the batch for processing.
