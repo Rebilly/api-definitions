@@ -17,7 +17,11 @@ post:
     - `approve`: Approves payout requests in the `ready` status.
     - `block`: Blocks payout requests that can be blocked in their current status.
       If `overwriteExisting` is `true`, already blocked payout requests receive the new block reason.
+      If the request includes `payoutRequestIds`,
+      the operation checks only the specified payout requests to determine if they can be blocked.
     - `unblock`: Removes the block from blocked payout requests.
+      If the request includes `payoutRequestIds`,
+      the operation checks only the specified payout requests to determine if they can be unblocked.
     - `auto-allocate`: Creates allocations automatically for payout requests that can be allocated.
     - `process`: Queues pending allocations of the payout requests in the batch for processing.
     - `add`: Adds the specified payout requests, or the payout requests that match a filter, to the batch.
@@ -28,6 +32,9 @@ post:
     For `add`, `remove`, and `move`, the operation is atomic.
     If the operation cannot add, remove, or move a specified payout request,
     the operation returns a `409` response and changes no batch membership.
+    For `block` and `unblock`, if the request includes `payoutRequestIds`
+    and a specified payout request is not associated with this batch,
+    the operation returns a `409` response and changes no payout request.
     For the other types, each payout request is checked independently.
     Payout requests that do not qualify for the action are skipped.
     For `process`, allocations that do not qualify are skipped, and allocations that qualify are queued together.
