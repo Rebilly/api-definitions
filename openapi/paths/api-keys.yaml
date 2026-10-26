@@ -51,7 +51,11 @@ post:
   summary: Create an API key
   operationId: PostApiKey
   x-sdk-operation-name: create
-  description: Create an API key.
+  description: |-
+    Creates an API key for the authenticated user.
+    The key is not assigned to another user.
+    If the authenticated user is removed from an organization, a request to that organization that uses the API key is not authorized.
+    For more information, see [Ownership of an API key](https://www.rebilly.com/docs/dev-docs/api-keys/#ownership-of-an-api-key).
   requestBody:
     $ref: ../components/requestBodies/ApiKey.yaml
   responses:

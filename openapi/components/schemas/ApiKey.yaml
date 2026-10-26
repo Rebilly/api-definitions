@@ -21,8 +21,14 @@ properties:
       - publishable
   acl:
     description: |-
-      Specify access control list here if creating a restricted API key.
-      Send all matching permission with an empty scope to allow all permissions.
+      Permissions for this API key.
+
+      A request is authorized only when these permissions include the permission for the operation,
+      and the associated user has that permission.
+      If these permissions include `*`, each operation is limited to the permissions of the associated user.
+      If the associated user loses a permission and these permissions still include that permission, a request that requires that permission is not authorized.
+      If the associated user gains a permission, a request that requires that permission is authorized only when these permissions include that permission or `*`.
+      For more information, see [Ownership of an API key](https://www.rebilly.com/docs/dev-docs/api-keys/#ownership-of-an-api-key).
     $ref: ./Acl.yaml
   allowedIps:
     $ref: ./AllowedIps.yaml
