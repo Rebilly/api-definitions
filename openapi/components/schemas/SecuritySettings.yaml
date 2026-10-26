@@ -6,6 +6,27 @@ properties:
     type: boolean
     description: Specifies if users must pass multi-factor authentication (MFA) to use this organization in the Rebilly UI.
     default: false
+  allowedIps:
+    description: |-
+      List of IP addresses and Classless Inter-Domain Routing (CIDR) ranges from which users can use this organization in the Rebilly UI.
+      This setting does not apply to API keys.
+      This setting applies to the current environment only: live and sandbox are configured separately.
+      If an IP address has no prefix length, only that address is allowed.
+      Wildcards, such as `198.51.*.*`, are not accepted.
+      To remove the restriction, set this value to `null` or an empty array.
+      To retain the current list, omit this property.
+    maxItems: 200
+    $ref: ./AllowedIps.yaml
+  currentIpAddress:
+    type:
+      - 'string'
+      - 'null'
+    format: ip
+    readOnly: true
+    description: |-
+      IP address of the client that sent the request.
+      This value is `null` if the IP address of the client cannot be determined.
+    example: 153.12.32.33
   mfaAdoption:
     type:
       - 'object'

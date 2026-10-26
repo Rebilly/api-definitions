@@ -14,4 +14,11 @@ allOf:
           Most responses use a descriptive message, such as `Not allowed to change security settings`.
           If the organization requires multi-factor authentication (MFA) and MFA verification has not been completed for the session, this value is `mfa_required`.
           If the request sets `requireMfa` to `true` and MFA verification has not been completed for the session, this value is `mfa_required_for_caller`.
+          If the organization restricts access to a list of IP addresses and the request comes from an IP address that is not in the list, this value is `ip_not_allowed`.
+      organizationId:
+        description: |-
+          ID of the organization that does not allow the IP address of the request.
+          This property is present only if `error` is `ip_not_allowed`.
+          The organization is the organization of the request or another organization that the request acts on.
+        $ref: ../OrganizationId.yaml
   - $ref: ./BaseProblem.yaml

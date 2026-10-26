@@ -44,6 +44,9 @@ put:
     To turn on `requireMfa`, the session must have passed MFA.
     If the session has not passed MFA, the response is `403` and `error` is `mfa_required_for_caller`.
     If the number of users who have MFA set up is temporarily unavailable, `requireMfa` cannot be turned on and the response is `503`.
+    If `allowedIps` contains IP addresses, users can use the organization in the Rebilly UI only from those IP addresses.
+    If a request comes from another IP address, other operations respond with `403` and `error` is `ip_not_allowed`.
+    If the list does not include the IP address of the caller, the response is `422`.
     Settings apply to the current environment only: live and sandbox are configured separately.
   requestBody:
     required: true
