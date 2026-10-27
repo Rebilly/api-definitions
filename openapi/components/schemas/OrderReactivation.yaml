@@ -28,9 +28,9 @@ properties:
   effectiveTime:
     description: |-
       Date and time when the service period starts,
-      unless the order is canceled but still active.
+      unless the order is canceled but still active at this time.
 
-      If the order is still active,
+      If the order is still active at this time,
       the order continues for the current service period.
 
       If this field is omitted, this value defaults to the current time.
@@ -42,8 +42,8 @@ properties:
       Date and time of the next order renewal.
       If this field is omitted, this value is computed from the `effectiveTime` field.
 
-      If the order is canceled but still active,
-      it is ignored and the next renewal occurs as scheduled.
+      If the order is canceled but still active at the `effectiveTime`,
+      this field is ignored and the next renewal occurs as scheduled.
     type: string
     format: date-time
   paymentInstrumentId:
