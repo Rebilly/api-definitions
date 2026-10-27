@@ -72,6 +72,9 @@ properties:
         description: |-
           Specifies if there is a trial for this subscription.
           Plans without trial prices are free trials.
+          If the order is active, all its items are in a trial, and `isTrialOnly` is `false`, setting this value to `false` ends the trial immediately.
+          In the response, this field remains `true`, and `endTime` contains the date and time when the trial ended.
+          If only some items of an active order are in a trial, setting this value to `false` returns a 409 error.
         type: boolean
       endTime:
         description: |-
