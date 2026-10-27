@@ -37,7 +37,11 @@ properties:
     type: string
     readOnly: true
   secretKey:
-    description: Value of the API secret key.
+    description: |-
+      Value of the API secret key.
+      For a secret key, the full value is returned only in the response to the request that creates the key.
+      Other responses return a masked value that keeps only the prefix and the `apiUser` value.
+      For a publishable key, every response returns the full value.
     type: string
     readOnly: true
   createdTime:
