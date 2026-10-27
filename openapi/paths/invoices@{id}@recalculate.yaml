@@ -13,6 +13,15 @@ post:
 
     One use case for this operation to apply a revoked coupon,
     or coupon that is redeemed by a customer after the invoice is issued.
+
+    Shipping amount recalculation depends on the `shipping.calculator` property:
+
+    - If `shipping.calculator` is `manual` and the invoice is issued, the shipping amount is not changed.
+    - If `shipping.calculator` is `manual` and the invoice is a scheduled draft or a quotation, the shipping amount is 0 if no invoice item requires shipping.
+    - If `shipping.calculator` is `rebilly`, the shipping amount is recalculated from the current shipping rates.
+      This amount can differ from the original shipping amount of the invoice.
+      The shipping amount is 0 if no invoice item requires shipping.
+      A scheduled draft without a shipping rate also gets a shipping amount of 0.
   responses:
     '201':
       description: Invoice recalculated.

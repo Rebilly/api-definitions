@@ -73,6 +73,19 @@ properties:
     format: double
     readOnly: true
   shipping:
+    description: |-
+      Shipping settings of the invoice.
+      The `calculator` property is `manual` when the shipping amount is provided
+      and `rebilly` when the amount is calculated from shipping rates.
+      If `calculator` is `manual` and an issued invoice is recalculated or its items change,
+      the shipping amount is not changed, even if no invoice item requires shipping.
+      If `calculator` is `manual` and no invoice item requires shipping, the shipping amount is 0 in these cases:
+
+      - A draft invoice is issued with the [Issue an invoice](https://www.rebilly.com/catalog/all/invoices/postinvoiceissuance) operation, a renewal invoice is issued, or a scheduled draft invoice is recalculated.
+      - An order is created or previewed, a quote is created, or a `pending` order is updated.
+        This applies to the order invoice. The order keeps its shipping amount.
+
+      To change the shipping amount of an issued invoice, use the [Upsert an invoice](https://www.rebilly.com/catalog/all/invoices/putinvoice) operation.
     $ref: ./Shipping.yaml
   tax:
     $ref: ./Taxes.yaml
