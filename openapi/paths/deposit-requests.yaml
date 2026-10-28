@@ -54,7 +54,11 @@ get:
   summary: Retrieve deposit requests
   operationId: GetDepositRequestCollection
   x-sdk-operation-name: getAll
-  description: Retrieves a list of deposit requests.
+  description: |-
+    Retrieves a list of deposit requests.
+    The listed deposit requests omit the `cashierToken` property.
+    To obtain the token, use the [Create a deposit request](https://www.rebilly.com/catalog/all/deposits/postdepositrequest)
+    or [Retrieve a deposit request](https://www.rebilly.com/catalog/all/deposits/getdepositrequest) operation.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
