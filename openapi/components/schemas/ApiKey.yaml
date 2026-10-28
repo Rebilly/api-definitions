@@ -32,6 +32,22 @@ properties:
     $ref: ./Acl.yaml
   allowedIps:
     $ref: ./AllowedIps.yaml
+  lastUsedTime:
+    description: |-
+      Date and time when the API key last authenticated a request.
+      This value is updated at most once every 5 minutes.
+      This value is `null` if the API key has no recorded use.
+    type: ['string', 'null']
+    format: date-time
+    readOnly: true
+    x-sortable: true
+  lastUsedIp:
+    description: |-
+      IP address of the request that last updated `lastUsedTime`.
+      This value is `null` if the API key has no recorded use.
+    type: ['string', 'null']
+    format: ip
+    readOnly: true
   apiUser:
     description: API user name.
     type: string
