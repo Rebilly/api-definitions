@@ -1,0 +1,32 @@
+type:
+  - object
+  - 'null'
+description: |-
+  Sandbox recurring order retention.
+  In the sandbox environment, a recurring order is canceled 90 days after it is created or on the start date of the policy,
+  whichever is later, unless the order is retained or the organization is excluded from the policy.
+  This property is returned in the sandbox environment only, for recurring orders.
+  In the live environment, if the request includes this property with a value, a validation error is returned.
+  A `null` value in a request does not update the property.
+required:
+  - excluded
+properties:
+  autoCancelTime:
+    description: |-
+      Date and time of the automatic cancellation of the order: 90 days after the order is created or the start date of the policy,
+      whichever is later.
+      This value is `null` when the organization is excluded from the policy,
+      and for an order that can no longer bill, such as a churned or abandoned order.
+    type:
+      - 'string'
+      - 'null'
+    format: date-time
+    readOnly: true
+    example: '2027-01-10T06:00:00+00:00'
+  excluded:
+    description: |-
+      Specifies if the order is retained and not canceled on its `autoCancelTime`.
+      An organization retains up to 50 recurring orders.
+      If the request omits `sandboxRetention`, this value is not updated.
+    type: boolean
+    example: false
