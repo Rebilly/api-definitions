@@ -30,6 +30,21 @@ properties:
             currency:
               readOnly: true
               $ref: ../schemas/CurrencyCode.yaml
+            status:
+              type: string
+              description: Resolution status of the transaction allocation.
+              readOnly: true
+              enum:
+                - pending
+                - approved
+              x-enumDescriptions:
+                pending: |-
+                  Result of the refund transaction is unknown, for example, after a timeout.
+                  Allocated amount reduces the unused amount of the credit memo,
+                  but the credit memo status remains unchanged.
+                  If the transaction is approved, the allocation status changes to `approved`.
+                  If the transaction is declined, canceled, or abandoned, the allocation is removed.
+                approved: Allocated amount counts toward the `partially-applied` or `applied` status of the credit memo.
             createdTime:
               $ref: ../schemas/CreatedTime.yaml
             updatedTime:
