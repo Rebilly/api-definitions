@@ -48,6 +48,17 @@ properties:
     type: ['string', 'null']
     format: ip
     readOnly: true
+  expirationTime:
+    description: |-
+      Date and time when the API key expires.
+      From this time, a request that uses the API key gets a `401` response.
+      If this value is not in the future, a validation error is returned.
+      To remove the expiration, set this property to `null`.
+      If an update request omits this property, the expiration time is not changed.
+      This value is `null` if the API key does not expire.
+    type: ['string', 'null']
+    format: date-time
+    x-sortable: true
   apiUser:
     description: API user name.
     type: string
