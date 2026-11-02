@@ -384,8 +384,12 @@ properties:
     description: |-
       Date and time when the related order is considered delinquent, and is canceled.
       If this value is `null`, no delinquency time is configured.
-      If the `dueTime` of the order becomes greater than the `delinquencyTime` value,
-      the `delinquencyTime` value becomes equal to `dueTime`.
+      When the invoice `dueTime` is changed to a later date and time, `delinquencyTime` increases by the same amount.
+      If `dueTime` is changed to an earlier date and time or `delinquencyTime` is `null`, `delinquencyTime` remains unchanged.
+      Changing `dueTime` to an earlier date and time increases the gap between `dueTime` and `delinquencyTime`.
+      This wider gap is preserved if `dueTime` subsequently changes to a later date and time.
+      If the request also specifies `delinquencyTime`, the specified value takes precedence.
+      If `delinquencyTime` is earlier than the invoice `dueTime`, it is set to the same value as `dueTime`.
 
       If an invoice is not related to an order, this field can only be `null`.
     type:
