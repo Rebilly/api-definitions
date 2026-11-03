@@ -1,0 +1,12 @@
+type: object
+description: |-
+  Map of prohibited document subtypes for a type of KYC document.
+  Each key must be a subtype of the specified document type.
+  Use an empty object to accept all document subtypes.
+additionalProperties:
+  $ref: ./KycProhibitedSubtypeRule.yaml
+example:
+  birth-certificate: {}
+  public-health-card:
+    when:
+      faceProofRequired: false

@@ -5,6 +5,15 @@ properties:
     $ref: ./KycSettingsIdentity.yaml
   addressProof:
     $ref: ./KycSettingsAddress.yaml
+  scopedKycSettings:
+    description: |-
+      Document subtype restrictions for the organization and its websites.
+      When updating KYC settings, this object replaces the existing scoped KYC settings.
+      If this field is omitted, the existing scoped KYC settings do not change.
+      Use `null` to remove all scoped KYC settings.
+    oneOf:
+      - $ref: ./ScopedKycSettings.yaml
+      - type: 'null'
   uiVersion:
     description: Version of the KYC document gatherer UI.
     type:

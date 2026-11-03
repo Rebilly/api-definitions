@@ -1,0 +1,41 @@
+type: object
+additionalProperties: false
+description: |-
+  Document subtype restrictions for an organization and the websites associated with it.
+  Proof type keys are `identityProof`, `addressProof`, `fundsProof`, and `purchaseProof`.
+  This object does not include `credit-file-proof` because it has no subtypes.
+  Restrictions at the organization level apply by default.
+  A website overrides the organization restrictions for a proof type when `prohibitedSubtypes` is specified.
+properties:
+  identityProof:
+    $ref: ./ScopedKycSettingsProofBlock.yaml
+  addressProof:
+    $ref: ./ScopedKycSettingsProofBlock.yaml
+  fundsProof:
+    $ref: ./ScopedKycSettingsProofBlock.yaml
+  purchaseProof:
+    $ref: ./ScopedKycSettingsProofBlock.yaml
+  websiteOverrides:
+    type: array
+    maxItems: 50
+    description: |-
+      Document subtype restrictions that override subtype restrictions for selected websites.
+      Each website ID can appear in only one override.
+    items:
+      $ref: ./ScopedKycSettingsWebsiteOverride.yaml
+example:
+  identityProof:
+    prohibitedSubtypes:
+      driver-license: {}
+  addressProof:
+    prohibitedSubtypes:
+      income-statement: {}
+  websiteOverrides:
+    - websiteIds:
+        - web_abc
+      identityProof:
+        prohibitedSubtypes:
+          public-health-card:
+            when:
+              faceProofRequired: false
+          birth-certificate: {}

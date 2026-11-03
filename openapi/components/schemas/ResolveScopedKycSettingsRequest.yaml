@@ -1,0 +1,16 @@
+type: object
+required:
+  - websiteId
+additionalProperties: false
+description: Information that is used to evaluate document subtype restrictions for a website.
+properties:
+  websiteId:
+    $ref: ./WebsiteId.yaml
+  documents:
+    type: array
+    maxItems: 20
+    description: |-
+      KYC document settings to evaluate for subtype restrictions.
+      If omitted or empty, the response contains only unconditional restrictions for all configured document types.
+    items:
+      $ref: ./ResolveScopedKycSettingsDocument.yaml

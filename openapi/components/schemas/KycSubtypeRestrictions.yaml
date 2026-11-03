@@ -1,0 +1,38 @@
+type: object
+additionalProperties: false
+description: |-
+  Document subtypes that are prohibited for `identityProof`, `addressProof`, `fundsProof`, and `purchaseProof`.
+  This object does not include `credit-file-proof` because it has no subtypes.
+properties:
+  identityProof:
+    type: array
+    description: Prohibited subtypes of proof of identity.
+    items:
+      type: string
+      allOf:
+        - $ref: ./KycDocumentSubtypes.yaml
+  addressProof:
+    type: array
+    description: Prohibited subtypes of proof of address.
+    items:
+      type: string
+      allOf:
+        - $ref: ./KycDocumentSubtypes.yaml
+  fundsProof:
+    type: array
+    description: Prohibited subtypes of proof of funds.
+    items:
+      type: string
+      allOf:
+        - $ref: ./KycDocumentSubtypes.yaml
+  purchaseProof:
+    type: array
+    description: Prohibited subtypes of proof of purchase.
+    items:
+      type: string
+      allOf:
+        - $ref: ./KycDocumentSubtypes.yaml
+example:
+  identityProof:
+    - driver-license
+    - public-health-card

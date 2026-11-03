@@ -1,0 +1,30 @@
+type: object
+required:
+  - websiteIds
+additionalProperties: false
+description: |-
+  Document subtype restrictions that override the organization-level restrictions for a group of websites.
+  Website IDs must identify websites associated with the organization.
+  Each website ID can appear in only one override.
+  Proof types are `identityProof`, `addressProof`, `fundsProof`, and `purchaseProof`.
+  This object does not include `credit-file-proof` because it has no subtypes.
+  For each proof type, `prohibitedSubtypes` overrides the organization value.
+  If `prohibitedSubtypes` is omitted, the proof type inherits the organization value.
+  Use an empty `prohibitedSubtypes` object to accept all subtypes for the websites.
+properties:
+  websiteIds:
+    type: array
+    minItems: 1
+    maxItems: 50
+    uniqueItems: true
+    description: IDs of websites where the override applies.
+    items:
+      $ref: ./WebsiteId.yaml
+  identityProof:
+    $ref: ./ScopedKycSettingsProofBlock.yaml
+  addressProof:
+    $ref: ./ScopedKycSettingsProofBlock.yaml
+  fundsProof:
+    $ref: ./ScopedKycSettingsProofBlock.yaml
+  purchaseProof:
+    $ref: ./ScopedKycSettingsProofBlock.yaml

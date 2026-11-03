@@ -1,0 +1,22 @@
+type: object
+required:
+  - type
+additionalProperties: false
+description: KYC document settings that are used to evaluate document subtype restrictions.
+properties:
+  type:
+    description: Type of KYC document.
+    $ref: ./KycDocumentTypes.yaml
+  subtypes:
+    type: array
+    description: |-
+      Document subtypes to evaluate for restrictions.
+      If omitted, all configured restrictions for the document type are evaluated.
+    items:
+      type: string
+      allOf:
+        - $ref: ./KycDocumentSubtypes.yaml
+  faceProofRequired:
+    type: boolean
+    default: false
+    description: Specifies if the customer must provide proof of their face with the KYC document.

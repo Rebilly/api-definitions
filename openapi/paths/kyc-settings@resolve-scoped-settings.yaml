@@ -1,0 +1,39 @@
+post:
+  x-products:
+    - Core
+  tags:
+    - KYC documents
+  summary: Resolve document subtype restrictions
+  operationId: PostResolveScopedKycSettings
+  x-sdk-operation-name: resolveScopedSettings
+  description: |-
+    Resolves document subtype restrictions for a website.
+    When `documents` are provided, the response contains restrictions that match the document types, subtypes, and face proof requirements.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ResolveScopedKycSettingsRequest.yaml
+  responses:
+    '200':
+      description: Scoped KYC settings resolved.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ResolveScopedKycSettingsResponse.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
