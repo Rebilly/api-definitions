@@ -104,12 +104,21 @@ properties:
     readOnly: true
   requiresCardOnFile:
     type: boolean
-    description: Specifies whether the current organization must have a payment card on file before it can transact in the live environment.
+    description: Specifies if the current organization must have a Rebilly subscription to use the Rebilly UI.
     readOnly: true
     default: false
   hasCardOnFile:
     type: boolean
     description: Specifies whether the current organization has an active payment card on file.
+    readOnly: true
+    default: false
+  hasActivePlan:
+    type: boolean
+    description: |-
+      Specifies if the current organization has a Rebilly subscription.
+      This value is `true` while the subscription is active, in its trial period, or paused,
+      and after the subscription is canceled until the end of its current service period.
+      This value applies only when `requiresCardOnFile` is `true`.
     readOnly: true
     default: false
   billingManagementToken:
