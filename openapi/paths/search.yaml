@@ -32,9 +32,13 @@ get:
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: ../components/schemas/Search.yaml
+            $ref: ../components/schemas/Search.yaml
+    '400':
+      description: Invalid search query provided.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ProblemTypes/BadRequest.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
