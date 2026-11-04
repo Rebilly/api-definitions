@@ -11,9 +11,39 @@ properties:
     description: Fully qualified domain name.
     type: string
     maxLength: 255
+  purpose:
+    description: |-
+      Purpose of the custom domain.
+      Use `hosted-pages` for hosted pages, such as billing portals and checkout forms,
+      and `media` for the public files of the organization.
+      Each organization has at most one custom domain with the `purpose` field set to `media`.
+    type: string
+    enum:
+      - hosted-pages
+      - media
+    default: hosted-pages
   isVerified:
     description: True if the domain is verified by Rebilly.
     type: boolean
+    readOnly: true
+  verificationFailure:
+    description: |-
+      Reason why the media domain cannot be verified,
+      or why a verified media domain fails its hourly check.
+      A verified media domain keeps `isVerified` set to `true` while it fails the check.
+      This value is `null` if verification is pending, or if the custom domain has no failure.
+    type:
+      - string
+      - 'null'
+    enum:
+      - certificate-failed
+      - hostname-taken
+      - cname-missing
+      - null
+    x-enumDescriptions:
+      certificate-failed: The certificate of the domain cannot be issued or is no longer valid. To retry, delete the custom domain and create it again.
+      hostname-taken: The domain is already set up on a content delivery network (CDN), for example as a media domain in the other environment, live or sandbox.
+      cname-missing: The CNAME record of the verified domain no longer points to the media host.
     readOnly: true
   createdTime:
     $ref: CreatedTime.yaml
