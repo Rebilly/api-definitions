@@ -8,6 +8,10 @@ properties:
   amount:
     description: |-
       Amount of credit that is allocated from the credit memo to the invoice.
+      When a credit memo is updated, the specified `amount` replaces the existing allocation to the invoice.
+      It is not added to the existing allocation.
+      If the credit memo is already allocated to the invoice,
+      the unused amount of the credit memo and the amount due on the invoice both include the existing allocation.
       If the `amount` value is not supplied or exceeds the unused amount of the credit memo or the invoice due amount, the lesser of the following two values is used:
       - The unused amount of the credit memo.
       - The invoice due amount.
