@@ -18,6 +18,12 @@ get:
     User objects of Rebilly staff do not include `mfaEnabled`.
     The totals are the same as those returned by the [Retrieve security settings](https://www.rebilly.com/catalog/all/organizations/getsecuritysettings) operation.
     If the MFA status is temporarily unavailable, the response is `503` and `error` is `mfa_status_unavailable`.
+
+    To retrieve users of the organization who can sign in only from allowed IP addresses, with `allowedIps` configured for the user or one of their roles, use `filter=hasAllowedIps:true`.
+    To retrieve users who have no `allowedIps` configured for the user or any of their roles, use `filter=hasAllowedIps:false`.
+    The `hasAllowedIps` filter applies only when listing users of an organization.
+    It does not include allowed IP addresses configured in the [security settings](https://www.rebilly.com/catalog/all/organizations/getsecuritysettings).
+    Inactive users and Rebilly staff are excluded from the `hasAllowedIps` filter.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml

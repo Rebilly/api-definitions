@@ -32,13 +32,16 @@ post:
     For `add`, `remove`, and `move`, the operation is atomic.
     If the operation cannot add, remove, or move a specified payout request,
     the operation returns a `409` response and changes no batch membership.
+
     For `block` and `unblock`, if the request includes `payoutRequestIds`
     and a specified payout request is not associated with this batch,
     the operation returns a `409` response and changes no payout request.
     For the other types, each payout request is checked independently.
     Payout requests that do not qualify for the action are skipped.
+
     For `process`, allocations that do not qualify are skipped, and allocations that qualify are queued together.
     If queueing fails, no allocation is queued and the operation returns an error.
+
     The operation completes before the response returns.
     If the batch does not exist, the operation returns a `422` response.
   requestBody:

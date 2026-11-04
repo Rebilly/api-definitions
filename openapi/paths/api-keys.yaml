@@ -6,7 +6,12 @@ get:
   summary: Retrieve API keys
   operationId: GetApiKeyCollection
   x-sdk-operation-name: getAll
-  description: Retrieve a list of API keys.
+  description: |-
+    Retrieves a list of API keys.
+
+    To retrieve secret API keys that are not expired and have no `allowedIps` restrictions,
+    so they can be used from any IP address, use `filter=usableFromAnyIp:true`.
+    To retrieve all other API keys, use `filter=usableFromAnyIp:false`.
   parameters:
     - $ref: ../components/parameters/collectionFilter.yaml
     - $ref: ../components/parameters/collectionSort.yaml

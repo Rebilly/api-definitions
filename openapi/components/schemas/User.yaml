@@ -104,6 +104,20 @@ properties:
       type: string
   allowedIps:
     $ref: ./AllowedIps.yaml
+  computedAllowedIps:
+    type:
+      - 'array'
+      - 'null'
+    readOnly: true
+    description: |-
+      IP addresses specified in `allowedIps` for the user,
+      the roles assigned to the user,
+      and any roles included in those roles.
+      This value is `null` if no allowed IP addresses are configured for any of them.
+      This value is also `null` when a Rebilly admin retrieves their own user.
+    items:
+      type: string
+      format: ip
   mfaEnabled:
     type:
       - 'boolean'

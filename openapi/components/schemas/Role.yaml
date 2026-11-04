@@ -24,6 +24,17 @@ properties:
     $ref: ./Acl.yaml
   allowedIps:
     $ref: ./AllowedIps.yaml
+  computedAllowedIps:
+    type:
+      - 'array'
+      - 'null'
+    readOnly: true
+    description: |-
+      IP addresses specified in `allowedIps` for this role and any roles included in it.
+      This value is `null` if no allowed IP addresses are configured for any of these roles.
+    items:
+      type: string
+      format: ip
   seniorIds:
     type: array
     description: |-
