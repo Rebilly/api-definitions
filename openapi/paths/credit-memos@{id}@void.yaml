@@ -13,6 +13,8 @@ post:
     Removes the invoice allocations of the credit memo and returns the allocated amounts to the invoices.
     If the credit memo is allocated to an invoice that is not payable, such as a paid invoice,
     the request fails with a `409` response and the credit memo is not changed.
+    If the credit memo has an unresolved refund,
+    the request fails with a `409` response and the credit memo is not changed.
   responses:
     '201':
       description: Credit memo voided.

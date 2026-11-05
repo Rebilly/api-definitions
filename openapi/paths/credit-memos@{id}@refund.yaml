@@ -12,6 +12,9 @@ post:
   description: |-
     Refunds a credit memo with a specified ID.
     The transactions of the last invoice for the order or the invoice directly related to the credit memo are refunded.
+    If the credit memo available amount exceeds the refundable amount of invoice transactions,
+    the request fails with a `409` response and no refund is created.
+    If the credit memo has the `quotation` status, the request fails in the same way.
   responses:
     '200':
       description: Credit memo refunded.
@@ -33,7 +36,7 @@ post:
     '404':
       $ref: ../components/responses/NotFound.yaml
     '409':
-      description: Credit memo available amount exceeds the refundable amount of invoice transactions.
+      description: Credit memo not refunded.
       $ref: ../components/responses/Conflict.yaml
     '429':
       $ref: ../components/responses/TooManyRequests.yaml
