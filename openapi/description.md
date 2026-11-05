@@ -10,11 +10,29 @@ which are available in [PHP](https://github.com/Rebilly/rebilly-php) and [JavaSc
 Every action in the [Rebilly UI](https://app.rebilly.com) is supported by an API which is documented and available for use, so that you may automate any necessary workflows or processes.
 This API reference documentation contains the most commonly integrated resources.
 
+# Base URL
+
+Each environment has its own base URL.
+The organization ID is part of the path.
+
+| Environment | Base URL |
+| --- | --- |
+| Sandbox | `https://api-sandbox.rebilly.com/organizations/{organizationId}` |
+| Live | `https://api.rebilly.com/organizations/{organizationId}` |
+
+The sandbox and live environments do not share data, API keys, or configuration.
+For more information, see [Environments](/docs/tutorials/environments/).
+
+To obtain your organization ID, see [Obtain your organization ID and website ID](/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+
 # Authentication
 
 Rebilly offers four forms of authentication: secret key, publishable key, JSON Web Tokens, and public signature key.
 
 - Secret API key: Use to make requests from the server side.
+  Send the key in the `REB-APIKEY` header.
+  Sandbox keys start with `sk_sandbox_` and live keys start with `sk_live_`.
+  To obtain a key, see [Obtain a secret key](/docs/dev-docs/api-keys/#obtain-a-secret-key).
   Never share these keys.
   Keep them guarded and secure.
 - Publishable API key: Use in your client-side code to tokenize payment information.
@@ -72,6 +90,32 @@ To integrate Rebilly, and learn about related resources and concepts,
 see [Get started](https://www.rebilly.com/docs/dev-docs#get-started).
 
 To create and manage API keys, see [API keys](https://www.rebilly.com/docs/dev-docs/api-keys/).
+
+## Send your first request
+
+This cURL request lists the five most recent customers in your sandbox organization.
+
+1. In a terminal, paste the following command:
+
+    ```bash
+    curl 'https://api-sandbox.rebilly.com/organizations/your_organization_id/customers?limit=5&sort=-createdTime' \
+      -H 'REB-APIKEY: your_secret_API_key'
+    ```
+
+1. Replace `your_organization_id` with your organization ID.
+   For more information, see [Obtain your organization ID and website ID](/docs/settings/organizations-and-websites/#obtain-your-organization-id-and-website-id).
+1. Replace `your_secret_API_key` with a sandbox secret key.
+   For more information, see [Obtain a secret key](/docs/dev-docs/api-keys/#obtain-a-secret-key).
+1. Run the command.
+
+In the response, a `200` status code indicates a successful request.
+The response body contains a JSON array of customers.
+An empty array means the request succeeded and the organization has no customers yet.
+
+List operations accept `limit`, `offset`, `filter`, and `sort` query parameters.
+For more information on filters, see [Search filters](/docs/dev-docs/search-filters/).
+
+To try operations in the browser, use the interactive examples in [Set up your environment](/docs/dev-docs/set-up-environment/#add-data-to-your-rebilly-environment).
 
 # Rate limits
 
