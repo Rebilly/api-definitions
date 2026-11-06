@@ -1,0 +1,106 @@
+type: object
+description: API key that a member of the organization owns.
+required:
+  - id
+  - description
+  - type
+  - apiUser
+  - secretKey
+  - owner
+properties:
+  id:
+    type: string
+    readOnly: true
+    description: ID of the API key.
+    maxLength: 50
+    example: api_key_0YV7JQMY6ED2FBE58BMFHBWBZH
+  description:
+    description: API key description.
+    type: string
+    readOnly: true
+  type:
+    description: Type of API key.
+    type: string
+    readOnly: true
+    enum:
+      - secret
+      - publishable
+  acl:
+    description: |-
+      Permissions of the API key that apply to the organization.
+      Permissions that apply only to other organizations are not included,
+      and an `organizationId` scope lists only the ID of the organization.
+      For more information, see [Ownership of an API key](https://www.rebilly.com/docs/dev-docs/api-keys/#ownership-of-an-api-key).
+    readOnly: true
+    $ref: ./Acl.yaml
+  allowedIps:
+    readOnly: true
+    $ref: ./AllowedIps.yaml
+  lastUsedTime:
+    description: |-
+      Date and time when the API key last authenticated a request.
+      This value is updated at most once every 5 minutes.
+      This value is `null` if the API key has no recorded use.
+    type: ['string', 'null']
+    format: date-time
+    readOnly: true
+    x-sortable: true
+  lastUsedIp:
+    description: |-
+      IP address of the request that last updated `lastUsedTime`.
+      This value is `null` if the API key has no recorded use.
+    type: ['string', 'null']
+    format: ip
+    readOnly: true
+  expirationTime:
+    description: |-
+      Date and time when the API key expires.
+      From this time, a request that uses the API key gets a `401` response.
+      This value is `null` if the API key does not expire.
+    type: ['string', 'null']
+    format: date-time
+    readOnly: true
+    x-sortable: true
+  apiUser:
+    description: API user name.
+    type: string
+    readOnly: true
+  secretKey:
+    description: |-
+      Value of the API key.
+      For a secret key, this operation returns a masked value that keeps only the prefix and the `apiUser` value.
+      For a publishable key, the value is the full key.
+    type: string
+    readOnly: true
+  createdTime:
+    $ref: CreatedTime.yaml
+  updatedTime:
+    $ref: UpdatedTime.yaml
+  owner:
+    description: Member of the organization who owns the API key.
+    type: object
+    readOnly: true
+    required:
+      - id
+      - email
+      - firstName
+      - lastName
+    properties:
+      id:
+        description: ID of the user.
+        type: string
+        maxLength: 50
+        example: usr_0YVCEENYJ3D7Q9EN6BN16HA0G4
+      email:
+        description: Email address of the user.
+        type: string
+        format: email
+        example: jane.doe@example.com
+      firstName:
+        description: First name of the user.
+        type: string
+        example: Jane
+      lastName:
+        description: Last name of the user.
+        type: string
+        example: Doe
