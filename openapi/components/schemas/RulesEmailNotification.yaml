@@ -126,12 +126,15 @@ properties:
             The use of template placeholders is permitted for this field.
           example: <p>Demonstration text</p>
         editor:
-          type: string
+          type:
+            - string
+            - 'null'
           description: |-
             Source of the message.
             This value is required for the email editor.
             This value is not used for sending emails.
             It is used by the editor to reproduce the message for future updates.
+            A `null` value is returned as an empty string.
           example: <div class="block">Demonstration text</div>
         attachments:
           description: Attachments of the email message.
