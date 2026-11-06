@@ -13,7 +13,8 @@ allOf:
           Message that describes why the request is forbidden.
           Most responses use a descriptive message, such as `Not allowed to change security settings`.
           If the organization requires multi-factor authentication (MFA) and MFA verification has not been completed for the session, this value is `mfa_required`.
-          If the request sets `requireMfa` to `true` and MFA verification has not been completed for the session, this value is `mfa_required_for_caller`.
+          If MFA verification has not been completed for the session and the operation requires a confirmed session, this value is `mfa_required_for_caller`.
+          This includes turning on `requireMfa` and resetting MFA for a user.
           If the organization restricts access to a list of IP addresses and the request comes from an IP address that is not in the list, this value is `ip_not_allowed`.
       organizationId:
         description: |-

@@ -1,0 +1,48 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-internal: true
+  x-products:
+    - Users
+  tags:
+    - Users
+  summary: Reset MFA for a user
+  operationId: PostUserMfaReset
+  x-sdk-operation-name: resetMfa
+  security:
+    - JWT: []
+  description: |-
+    Removes the multi-factor authentication (MFA) authenticator of a user in the organization.
+    The user is signed out within 5 minutes and receives an email notification.
+    The user must set up MFA again the next time they sign in to an organization that requires MFA.
+    The reset applies to the user's account and includes both the live and sandbox environments.
+    Only organization owners and users with the administrator role who are signed in to the Rebilly app are permitted to reset MFA.
+    The session of the caller must be confirmed with MFA.
+    If the session is not confirmed with MFA, the response is `403` and `error` is `mfa_required_for_caller`.
+    The reset is refused in these cases:
+
+    - Attempting to reset MFA for yourself.
+    - Attempting to reset MFA for Rebilly staff.
+    - User is deactivated.
+    - User has not accepted the invitation.
+    - User is a member of another organization in the current environment.
+    - User does not have MFA set up.
+  responses:
+    '204':
+      description: MFA reset.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '429':
+      $ref: ../components/responses/TooManyRequests.yaml
+    '503':
+      description: MFA reset unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ProblemTypes/Problem.yaml
