@@ -125,7 +125,20 @@ properties:
     readOnly: true
     description: |-
       Specifies if the user has multi-factor authentication (MFA) set up.
-      This field is included in the response for users in the current organization and omitted for Rebilly staff.
+      This field is included in [Retrieve a user](https://www.rebilly.com/catalog/all/users/getuser) responses for users in the current organization,
+      and in [Retrieve a list of users](https://www.rebilly.com/catalog/all/users/getusercollection) responses only when the organization requires MFA.
+      This field is omitted for Rebilly staff.
       This value is `null` when this information is temporarily unavailable.
+  mfaResetBlockedByOtherOrganizations:
+    x-internal: true
+    type: boolean
+    readOnly: true
+    description: |-
+      Specifies if the user is associated with another organization in the current environment
+      where the caller is not an owner and does not have full access.
+      If this value is `true`, MFA cannot be reset for the user with the [Reset MFA for a user](https://www.rebilly.com/catalog/all/users/postusermfareset) operation.
+      This field is included only in [Retrieve a user](https://www.rebilly.com/catalog/all/users/getuser) responses when MFA reset is available for the organization.
+      The caller must be an organization owner, a user with full access, or a Rebilly admin.
+      This field is omitted when the caller retrieves their own user, when the user is Rebilly staff, or when the caller authenticates with an API key.
   _links:
     $ref: ./SelfLink.yaml
