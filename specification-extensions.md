@@ -1,7 +1,7 @@
 # OpenAPI specification extensions
 This document contains all OpenAPI extensions used in the Rebilly API definitions.
 
-- `x-basic` is a boolean that specifies if the field appears by default in data tables and data exports.
+- `x-basic` is a boolean that specifies if the field is included by default in data tables and data exports.
 
 - `x-multiline`
   This flag is currently used in the configuration schemas for payment gateways (`openapi/components/schemas/GatewayAccountConfig`).

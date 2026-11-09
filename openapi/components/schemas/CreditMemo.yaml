@@ -207,6 +207,11 @@ properties:
     readOnly: true
     description: Number of times the credit memo has been modified.
   customerId:
+    description: |-
+      ID of the customer.
+      An update request cannot change the customer of an existing credit memo.
+      To credit another customer, use the [Void a credit memo](https://www.rebilly.com/catalog/all/credit-memos/postcreditmemovoid) operation,
+      then the [Create a credit memo](https://www.rebilly.com/catalog/all/credit-memos/postcreditmemo) operation for that customer.
     $ref: ./CustomerId.yaml
   currency:
     $ref: ./CurrencyCode.yaml
@@ -235,8 +240,7 @@ properties:
       The transaction must be approved and associated with the same customer as the credit memo.
       Approved transactions of any type are accepted, including refunds and voided sales.
       If the transaction result changes later, the association is retained.
-      If this field is omitted in an update request and `customerId` is not changed, this field retains its current value.
-      If this field is omitted and `customerId` is changed, the transaction is removed from the credit memo.
+      If this field is omitted in an update request, this field retains its current value.
       To remove the transaction from the credit memo, set this field to `null`.
     maxLength: 50
     example: txn_0YVDTQJ8YKC82BP14NE2R7V2XT
