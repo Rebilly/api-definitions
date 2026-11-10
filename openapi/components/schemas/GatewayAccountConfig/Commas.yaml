@@ -1,0 +1,24 @@
+description: Commas gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Commas credentials object.
+        properties:
+          apiKey:
+            type: string
+            description: Commas API key.
+            format: password
+            writeOnly: true
+          webhookSecret:
+            type: string
+            description: Secret key of the Commas webhook subscription.
+            format: password
+            writeOnly: true
+        required:
+          - apiKey
+          - webhookSecret
