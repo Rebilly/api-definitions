@@ -16,8 +16,8 @@ post:
     - `process`: Queues the given allocations for processing.
 
     Only allocations with status `pending` are processed.
-    Rejects the request without queueing allocations when any allocation uses an inactive gateway account
-    or a gateway account with payout instruction `none`.
+    If any allocation uses an inactive gateway account or a gateway account with payout instruction `none`,
+    the request is rejected and no allocations are queued.
     Poll the allocation status for the result.
     The operation completes before the response returns.
   requestBody:

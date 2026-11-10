@@ -10,8 +10,8 @@ This topic provides guidance on how to write API documentation descriptions.
   This restriction does not apply to subsequent sentences.
 - Avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate objects.
 - Use present tense in OpenAPI descriptions.
-  Timestamp noun phrases may use past tense.
-  For example, use `Date and time when the resource was created.`
+  Timestamp phrases stay in present tense: `Date and time when the resource is created.`
+  Lint rejects `was`, `were`, and `will` in descriptions.
   Response descriptions may use short status phrases such as `Report retrieved.`
   See [Future tense](#future-tense).
 - Prefer [active voice](https://developers.google.com/tech-writing/one/active-voice).
@@ -297,12 +297,12 @@ creationTime:
 
 ```yaml
 creationTime:
-  description: Time when the coupon was created.
+  description: Date and time when the coupon is created.
 ```
 
 | Head noun | Relative adverb | Article | Noun | Auxiliary verb | Past participle | |
 |---|---|---|---|---|---|---|
-| Time | when | the | coupon | was | created | ✅ |
+| Date and time | when | the | coupon | is | created | ✅ |
 
 {% /accordion %}
 
@@ -467,6 +467,7 @@ description: |-
 Describe what happens, not what becomes available, is determined, or is treated as something.
 Prefer active voice when it is clearer.
 Passive voice is acceptable when it names the affected object and the outcome clearly.
+Prefer a passive sentence to a noun string, and never use past tense to avoid either.
 See also [active voice](https://developers.google.com/tech-writing/one/active-voice).
 
 Incorrect:
@@ -571,7 +572,7 @@ description: |-
 ### Reduced relative clauses
 
 A reduced relative clause can be concise, but it is not always easier to read.
-Use a full relative clause when omitting a relative pronoun and a form of `be`, such as `that are` or `that were`, makes the modifier ambiguous.
+Use a full relative clause when omitting a relative pronoun and a form of `be`, such as `that is` or `that are`, makes the modifier ambiguous.
 Do not expand a short, clear modifier solely to avoid a reduced relative clause.
 
 Incorrect:
@@ -587,7 +588,7 @@ Correct:
 ```yaml
 description: |-
   ...
-  This operation returns transactions that were created in the last 30 days and that are associated with payment instruments.
+  This operation returns transactions that are created in the last 30 days and that are associated with payment instruments.
 ```
 
 ### Internal terminology
@@ -813,7 +814,7 @@ Is processed outside of Rebilly:
 ```yaml
   isProcessedOutside:
     type: boolean
-    description: Specifies if the transaction was processed outside of Rebilly.
+    description: Specifies if the transaction is processed outside of Rebilly.
 ```
 
 ##### Website ID example
@@ -874,12 +875,9 @@ Avoid using [possessive apostrophes](#possessive-apostrophes) for inanimate obje
 
 ### Parameters
 
-Parameter descriptions depend on the parameter location.
+Parameter descriptions are noun phrases that describe what the value is, for every `in` value.
 
-- For `in: query` parameters, use imperative verb phrases because query parameters modify the request behavior.
-  - Examples: "Filter by player IDs.", "Sort by created time.", "Limit the number of items returned."
-- For `in: path`, `in: header`, and `in: cookie` parameters, use noun phrases that describe what the value is.
-  - Examples: "ID of the transaction.", "Date and time when the coupon expires.", "status of the payout request.", "Total amount of the order."
+- Examples: "ID of the transaction.", "Date and time when the coupon expires.", "Criteria for filtering collection items.", "Maximum number of items to return."
 - Avoid starting parameter descriptions with articles `The`, `A`, or `An`.
 
 Parameter examples:
@@ -887,7 +885,7 @@ Parameter examples:
 ```yaml
   playerIds:
     type: array
-    description: Filter by player IDs.
+    description: IDs of the players to return.
     items:
       type: string
 ```

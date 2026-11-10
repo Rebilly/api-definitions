@@ -47,7 +47,7 @@ properties:
         The new items are billed on the next renewal invoice.
         `renewalPolicy`, `prorated`, and `effectiveTime` are not allowed.
         A later change for the same order supersedes the pending change.
-        The pending change is locked once the next renewal invoice is issued.
+        The pending change is locked when the next renewal invoice is issued.
         To remove a pending change, use the `DELETE /order-changes/{id}` operation.
         The new items must differ from the current items.
         One-time sale items that are already on the order remain.
@@ -107,7 +107,7 @@ properties:
             - $ref: ./OriginalPlan.yaml
             - $ref: ./FlexiblePlan.yaml
         quantity:
-          description: Number of units of the product on the given plan.
+          description: Number of units of the product on the specified plan.
           type: integer
         usageLimits:
           oneOf:

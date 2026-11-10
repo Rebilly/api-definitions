@@ -13,8 +13,8 @@ post:
     This operation assigns the quote the `status` of `issued`,
     clears the `canceledTime` and `rejectedTime` fields,
     and resets the fulfilled acceptance conditions.
-    If the request omits `expirationTime`, the quote keeps its expiration time when it has not passed,
-    otherwise the quote expires one month after it is reissued.
+    If the request omits `expirationTime` and the current expiration time has not passed, the current expiration time is retained.
+    If the request omits `expirationTime` and the current expiration time has passed, the quote expires one month after it is reissued.
 
     This operation restores the voided quotation invoice to the `quotation` status,
     and recalculates the invoice from the current quote items and order.

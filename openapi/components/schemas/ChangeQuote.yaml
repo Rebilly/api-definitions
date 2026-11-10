@@ -149,7 +149,7 @@ properties:
         description: |-
           Time when the new items are applied.
 
-          - `now`: The items change at once.
+          - `now`: The items change immediately.
             `prorated`, `renewalPolicy` and `effectiveTime` apply.
           - `nextRenewal`: The current items stay until the next renewal.
             The new items are billed on the next renewal invoice.
@@ -172,7 +172,7 @@ properties:
           Deprecated.
           Use the `retainTrialThenRecurring` value of `renewalPolicy` instead.
 
-          Specifies if the order must retain its active trial.
+          Specifies if the active trial of the order is retained.
           This field is only applicable if `renewalPolicy` is set to the deprecated value `retain`, or omitted.
           If `renewalPolicy` is omitted and this field is `true`, `renewalPolicy` is set to `retainTrialThenRecurring`.
         type: boolean
@@ -183,7 +183,7 @@ properties:
         description: |-
           Specifies if the quotation invoice must include interim items only.
           If this value is set to `false`, all upcoming items are included.
-          With `applyAt` set to `nextRenewal`, this value must be `true`.
+          If `applyAt` is set to `nextRenewal`, this value must be `true`.
           To bill the next period now, issue the upcoming invoice of the order.
       usageSettings:
         type: array
