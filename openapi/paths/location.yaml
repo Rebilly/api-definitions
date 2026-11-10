@@ -1,0 +1,23 @@
+servers:
+  - url: 'https://api-sandbox.rebilly.com'
+    description: Sandbox server
+  - url: 'https://api.rebilly.com'
+    description: Live server
+get:
+  x-internal: true
+  x-products:
+    - Users
+  tags:
+    - Metadata
+  summary: Retrieve the location of the request
+  operationId: GetLocation
+  x-sdk-operation-name: query
+  description: Retrieves the approximate location and time zone of the IP address of the request.
+  security: []
+  responses:
+    '200':
+      description: Location retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Location.yaml

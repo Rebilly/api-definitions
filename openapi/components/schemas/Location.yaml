@@ -1,0 +1,99 @@
+type: object
+description: Approximate location of the IP address of the request.
+required:
+  - ip
+  - country
+  - region
+  - currency
+  - city
+  - location
+  - zip
+  - timezone
+  - time
+properties:
+  ip:
+    description: |-
+      IP address of the request.
+      This value is `null` if the IP address is unknown.
+    type:
+      - 'string'
+      - 'null'
+    readOnly: true
+    example: 192.0.2.10
+  country:
+    description: |-
+      Country of the IP address in ISO 3166 alpha-2 format.
+      This value is `null` if the country is unknown.
+    type:
+      - 'string'
+      - 'null'
+    readOnly: true
+    example: US
+  region:
+    description: |-
+      Region of the IP address, such as a state or a province.
+      This value is `null` if the country or the region is unknown.
+    type:
+      - 'string'
+      - 'null'
+    readOnly: true
+    example: CA
+  currency:
+    description: |-
+      Currency of the country of the IP address in ISO 4217 format.
+      This value is `null` if the country is unknown.
+    type:
+      - 'string'
+      - 'null'
+    readOnly: true
+    example: USD
+  city:
+    description: |-
+      City of the IP address.
+      This value is `null` if the city is unknown.
+    type:
+      - 'string'
+      - 'null'
+    readOnly: true
+    example: San Francisco
+  location:
+    description: |-
+      Coordinates of the IP address.
+      This value is `null` if the coordinates are unknown.
+    type:
+      - 'object'
+      - 'null'
+    readOnly: true
+    required:
+      - lat
+      - lng
+    properties:
+      lat:
+        description: Latitude of the IP address.
+        type: number
+        example: 37.7749
+      lng:
+        description: Longitude of the IP address.
+        type: number
+        example: -122.4194
+  zip:
+    description: |-
+      Postal code of the IP address.
+      This value is `null` if the postal code is unknown.
+    type:
+      - 'string'
+      - 'null'
+    readOnly: true
+    example: '94103'
+  timezone:
+    description: |-
+      Time zone of the IP address, such as `America/Los_Angeles`.
+      This value is `null` if the time zone is unknown.
+    type:
+      - 'string'
+      - 'null'
+    readOnly: true
+    example: America/Los_Angeles
+  time:
+    description: Current date and time.
+    $ref: ./ServerTimestamp.yaml
