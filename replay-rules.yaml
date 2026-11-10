@@ -23,50 +23,6 @@ rules:
       # period + spaces (not newline) + Uppercase => inline multi-sentence
       notPattern: /\.(?!\r?\n)[ ]+[A-Z]/
 
-  rule/descriptions-must-not-start-with-articles:
-    severity: warn
-    subject:
-      type: Schema
-      property: description
-    message: |-
-      Description must not start with 'The' or 'A'
-      For more information, see [Redocly documentation](../website/api-definitions/WRITING-STYLE.md).
-    where:
-      - subject:
-          type: Schema
-          property: description
-        assertions:
-          defined: true
-          minLength: 1
-    assertions:
-      notPattern: /^(The|A)\s/
-
-  rule/id-fields-must-have-meaningful-context:
-    severity: warn
-    subject:
-      type: Schema
-      property: description
-    message: |-
-      ID fields must provide meaningful context,
-      and not just repeat the field name.
-      For more information, see [Writing style](../website/api-definitions/WRITING-STYLE.md).
-    where:
-      - subject:
-          type: Schema
-          property: description
-        assertions:
-          defined: true
-          minLength: 1
-      - subject:
-          type: Schema
-          property: name
-        assertions:
-          defined: true
-          pattern: /[Ii]d$/
-    assertions:
-      # Check if description is just repeating the field name
-      notPattern: /^(The\s+)?[Ii]d\s+(of\s+)?(the\s+)?(item|field|object|value)\.?$/
-
   rule/timestamp-fields-must-start-correctly:
     severity: error
     subject:
@@ -142,26 +98,3 @@ rules:
           minLength: 1
     assertions:
       notPattern: /\.$/
-
-  rule/descriptions-must-not-use-possessive-apostrophes:
-    severity: error
-    subject:
-      type: any
-      property: description
-    message: |-
-      Descriptions must not use possessive apostrophes ('s) for inanimate objects.
-      Use prepositions instead.
-      Example: "invoice for a subscription" not "subscription's invoice".
-      For more information, see [Writing style](../website/api-definitions/WRITING-STYLE.md#possessive-apostrophes).
-    where:
-      - subject:
-          type: any
-          property: description
-        assertions:
-          defined: true
-          minLength: 1
-    assertions:
-      # Match possessive apostrophes for inanimate objects
-      # Pattern matches: word's, WORD's, acronym's, etc.
-      # Excludes: customer's, player's, merchant's (animate objects)
-      notPattern: /\b(?!customer|player|merchant|contact|user|individual|person)\w+'s\b/i
