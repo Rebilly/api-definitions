@@ -187,8 +187,11 @@ properties:
       `methods`.
   transactions:
     type: array
-    description: Invoice transactions array.
+    description: |-
+      Up to 10 of the newest transactions associated with the invoice.
+      [`GET /storefront/invoices`](https://www.rebilly.com/catalog/all/storefront-invoices/storefrontgetinvoicecollection) does not return this field.
     readOnly: true
+    maxItems: 10
     items:
       $ref: ./StorefrontTransaction.yaml
   _links:
