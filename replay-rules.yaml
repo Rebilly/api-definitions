@@ -29,7 +29,8 @@ rules:
       type: Schema
       property: description
     message: |-
-      Timestamp fields must start with 'Date and time when'
+      Timestamp fields must start with 'Date and time when' or 'Date and time of'.
+      Lifecycle timestamps use 'Date and time when'. One-shot audit timestamps use 'Date and time of'.
       For more information, see [Writing style](../website/api-definitions/WRITING-STYLE.md#timestamp-fields).
     where:
       - subject:
@@ -50,7 +51,7 @@ rules:
         assertions:
           notPattern: /^Default value\.$/
     assertions:
-      pattern: /^Date and time when/
+      pattern: /^Date and time (when|of) /
 
   rule/boolean-fields-must-start-correctly:
     severity: error

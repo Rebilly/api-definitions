@@ -787,6 +787,13 @@ Coupon expired time:
     description: Date and time when the coupon expires.
 ```
 
+One-shot audit time:
+
+```yaml
+  evaluatedAt:
+    description: Date and time of the eligibility evaluation.
+```
+
 ### Boolean fields
 
 Use the following format to convey boolean types.
