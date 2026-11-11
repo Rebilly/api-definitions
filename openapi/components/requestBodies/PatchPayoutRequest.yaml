@@ -27,7 +27,12 @@ content:
             - merchant
             - system
         cancellationDescription:
-          description: Description of the cancellation reason.
+          description: |-
+            Description of the cancellation reason.
+            When a blocked payout request is canceled, the block reason is added to this description.
+            For example, `Fraud confirmed` becomes `Fraud confirmed (blocked: fraud-suspected)`.
+            If this field is omitted, the description is the block reason only, such as `blocked: fraud-suspected`.
+            If the combined text is longer than 255 characters, the text before the block reason is shortened to fit.
           type:
             - 'string'
             - 'null'
@@ -40,17 +45,19 @@ content:
             - 'null'
         blocked:
           description: |-
-            Specifies whether the payout request is blocked or unblocked.
+            Specifies if the payout request is blocked or unblocked.
             This field can only be applied to payout requests in the following statuses:
             `pending`, `ready`, `approved`, or `in-progress`.
 
             When a payout request is blocked, it cannot:
-            - Transition to `ready`, `approved`, `in-progress`, `merged`, `split`, or `canceled`.
+            - Transition to `ready`, `approved`, `in-progress`, `merged`, or `split`.
             - Have allocations created.
             - Start allocation processing.
-            - Cancel pending allocations.
 
-            A blocked payout request can still transition to the `fulfilled` status if allocation processing starts before the payout request is blocked.
+            Cancellation of the payout request and pending allocations remains available.
+            When a blocked payout request is canceled, `blocked` is set to `false`, `blockReason` is set to `null`,
+            and the block reason is added to `cancellationDescription`.
+            If allocation processing starts before the payout request is blocked, the request still transitions to the `fulfilled` status.
           type: boolean
           example: false
         blockReason:

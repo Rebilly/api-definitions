@@ -91,11 +91,14 @@ properties:
       merged: Request was merged into another payout request.
   blocked:
     description: |-
-      Specifies whether the payout request is blocked or unblocked.
+      Specifies if the payout request is blocked or unblocked.
 
-      When blocked, the payout request cannot transition to `ready`, `approved`, `in-progress`, `merged`, `split`, or `canceled`.
-      Allocation creation, allocation processing, and cancellation of pending allocations are also prevented.
-      A blocked payout request can still transition to the `fulfilled` status if allocation processing starts before the payout request is blocked.
+      When blocked, the payout request cannot transition to `ready`, `approved`, `in-progress`, `merged`, or `split`.
+      Allocation creation and allocation processing are also blocked.
+      Cancellation of the payout request and pending allocations remains available.
+      When a blocked payout request is canceled, `blocked` is set to `false`, `blockReason` is set to `null`,
+      and the block reason is added to the cancellation description.
+      If allocation processing starts before the payout request is blocked, the request still transitions to the `fulfilled` status.
     type: boolean
     readOnly: false
     example: false
