@@ -101,6 +101,7 @@ properties:
       - failed
       - canceled
       - declined
+      - returned
     x-enumDescriptions:
       pending: Allocation was created and is waiting to be processed.
       queued: Allocation is queued for processing.
@@ -110,6 +111,9 @@ properties:
       failed: Allocation was not processed because of an error.
       canceled: Allocation was canceled before processing.
       declined: Allocation was declined by the gateway.
+      returned: |-
+        Allocation transaction is declined or canceled after it is approved.
+        If the gateway then reports the payout as approved again, the allocation returns to `completed`.
   transactionId:
     description: ID of the transaction that is created when processing this allocation, if applicable.
     type:
