@@ -2,7 +2,7 @@
 
 $service = new \Rebilly\Sdk\Service($client);
 
-$gatewayAccountsPaginator = $service->gatewayAccounts()->getAllPaginator(limit: 5, filter: 'currency:USD');
+$gatewayAccountsPaginator = $service->gatewayAccounts()->getAllPaginator(limit: 5, filter: 'acceptedCurrencies:USD');
 foreach ($gatewayAccountsPaginator as $gatewayAccountsPage) {
     printf("Gateway accounts page %d/%d\n", $gatewayAccountsPaginator->key() + 1, $gatewayAccountsPaginator->count());
     foreach ($gatewayAccountsPage as $gatewayAccount) {
@@ -12,7 +12,7 @@ foreach ($gatewayAccountsPaginator as $gatewayAccountsPage) {
 
 // OR
 
-$gatewayAccounts = $service->gatewayAccounts()->getAll(filter: 'currency:USD');
+$gatewayAccounts = $service->gatewayAccounts()->getAll(filter: 'acceptedCurrencies:USD');
 foreach ($gatewayAccounts as $gatewayAccount) {
     printf("Gateway account #%s: %s\n", $gatewayAccount->getId(), $gatewayAccount->getGatewayName());
 }
