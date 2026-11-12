@@ -26,6 +26,10 @@ properties:
     description: |-
       Number of filled product units.
       This field is not used for metered billing plans.
+
+      In a reactivation quote, if you omit this value or set it to `null`, the item retains the value from the existing order item with the same plan.
+      This applies only if exactly one order item and exactly one quote item have that plan.
+      If the quantity is lower than the quantity of the existing order item, the quantity cannot be less than `quantityFilled`.
     type:
       - 'number'
       - 'null'
