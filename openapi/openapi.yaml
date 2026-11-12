@@ -90,6 +90,17 @@ components:
       scheme: bearer
       bearerFormat: JWT
 
+    PlayerJWT:
+      x-internal: true
+      description: |-
+        JSON Web Token (JWT) that the player sign-in service of the organization signs for a signed-in player.
+        Its audience must include `rebilly-cashier`.
+
+        Usage format: `Bearer <JWT>`.
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
 tags:
   - name: Allowlists
     description: |-
@@ -1440,6 +1451,8 @@ paths:
     $ref: paths/storefront/deposit-strategies@{id}.yaml
   '/storefront/deposit-requests/{id}':
     $ref: paths/storefront/deposit-requests@{id}.yaml
+  '/storefront/cashiers':
+    $ref: paths/storefront/cashiers.yaml
   '/storefront/cashiers/{id}':
     $ref: paths/storefront/cashiers@{id}.yaml
   '/storefront/deposit':

@@ -1,0 +1,55 @@
+post:
+  x-internal: true
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Storefront
+  tags:
+    - Storefront cashiers
+  summary: Create a cashier
+  operationId: StorefrontPostCashier
+  x-sdk-operation-name: create
+  security:
+    - PlayerJWT: [ ]
+  description: |-
+    Creates a cashier for the customer and website associated with the player token.
+    If a cashier already exists for that customer, website, and requested currency, the existing cashier is retrieved.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - currency
+          properties:
+            currency:
+              $ref: ../../components/schemas/CurrencyCode.yaml
+  responses:
+    '201':
+      description: Cashier created.
+      headers:
+        Location:
+          $ref: ../../components/headers/Location.yaml
+        Rate-Limit-Limit:
+          $ref: ../../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../../components/headers/Rate-Limit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Cashier.yaml
+    '200':
+      description: Cashier retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Cashier.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../../components/responses/ValidationError.yaml
+    '429':
+      $ref: ../../components/responses/TooManyRequests.yaml
