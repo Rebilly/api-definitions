@@ -1,0 +1,32 @@
+description: Fyntra gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Values that authenticate the merchant to Fyntra.
+        properties:
+          clientId:
+            type: string
+            description: ID of the Fyntra client that authenticates API requests.
+          clientSecret:
+            type: string
+            description: Secret of the Fyntra client that authenticates API requests.
+            format: password
+            writeOnly: true
+          pointOfSaleId:
+            type: string
+            description: ID of the Fyntra point of sale.
+          webhookSecret:
+            type: string
+            description: Secret that is used to verify Fyntra webhook signatures.
+            format: password
+            writeOnly: true
+        required:
+          - clientId
+          - clientSecret
+          - pointOfSaleId
+          - webhookSecret
