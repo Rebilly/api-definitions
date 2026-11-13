@@ -14,7 +14,15 @@ properties:
         sum:
           type: number
           format: double
-          description: Total amount of future renewals in the user's reporting currency.
+          description: |-
+            Total amount of future renewals in the reporting currency of the signed-in user.
+            For plans with metered billing, renewal amounts are calculated using the minimum plan quantity.
+            If a plan has no minimum quantity, the renewal amount is 0.
+        unpricedRenewalsCount:
+          type: integer
+          description: |-
+            Number of future renewals in the month that are excluded from `sum` because their prices cannot be calculated.
+            These renewals are still included in `plansCount`.
         plansCount:
           type: array
           description: Plan within the aggregation.
