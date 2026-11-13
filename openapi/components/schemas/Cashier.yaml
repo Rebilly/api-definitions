@@ -10,7 +10,6 @@ required:
   - bonusBalance
   - pendingPayoutTotal
   - canWithdraw
-  - notificationUrl
 properties:
   id:
     type: string
@@ -27,12 +26,11 @@ properties:
   redirectUrl:
     description: |-
       URL to redirect the customer to when a deposit or withdrawal is completed.
-      The default value is the website URL.
-    type:
-      - 'string'
-      - 'null'
+      The value is the website URL.
+    type: string
     maxLength: 2083
     format: uri
+    readOnly: true
   balance:
     type: number
     format: double
@@ -47,23 +45,6 @@ properties:
     description: Bonus balance available to the customer.
     readOnly: true
     example: 0
-  notificationUrl:
-    description: |-
-      URL where a server-to-server `POST` notification is sent.
-      This notification is sent when the transaction result is finalized after a timeout or an offsite interaction.
-
-      Do not interpret this notification as a confirmation,
-      complete a `GET` request to confirm the result of the transaction.
-      To ensure the request is not reattempted,
-      when the result is confirmed, respond with a `2xx` HTTP status code.
-
-      The following placeholders are available to use in this URI: `{id}` and `{result}`.
-      These placeholders are replaced the with the transaction ID and result accordingly.
-    type:
-      - 'string'
-      - 'null'
-    maxLength: 2083
-    format: uri
   expirationTime:
     description: |-
       Date and time at which the cashier expires.
