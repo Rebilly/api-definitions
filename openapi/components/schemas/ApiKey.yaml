@@ -29,6 +29,9 @@ properties:
       If the associated user loses a permission and these permissions still include that permission, a request that requires that permission is not authorized.
       If the associated user gains a permission, a request that requires that permission is authorized only when these permissions include that permission or `*`.
       For more information, see [Ownership of an API key](https://www.rebilly.com/docs/dev-docs/api-keys/#ownership-of-an-api-key).
+
+      Permissions in a `scope` with no `organizationId` value apply in all organizations of the associated user.
+      These permissions are accepted only when the API key or JWT that authenticates the request has them with no organization limit.
     $ref: ./Acl.yaml
   allowedIps:
     $ref: ./AllowedIps.yaml
