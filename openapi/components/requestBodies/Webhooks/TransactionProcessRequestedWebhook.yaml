@@ -1,0 +1,50 @@
+content:
+  application/json:
+    schema:
+      properties:
+        transactionId:
+          $ref: ../../schemas/TransactionId.yaml
+        depositRequestId:
+          description: |-
+            ID of the deposit request associated with the transaction.
+            If the transaction has no deposit request, this value is `null`.
+          type:
+            - 'string'
+            - 'null'
+          maxLength: 50
+        customerDepositCount:
+          description: |-
+            Number of other `sale` transactions for the same customer in the 24 hours before this transaction.
+            Transactions with an `approved` status and transactions awaiting a result are included in this number.
+            Transactions with a `declined`, `canceled`, or `voided` status are excluded.
+            Sales without a deposit request are also included.
+            If the transaction is not a `sale`, this value is `null`.
+          type:
+            - integer
+            - 'null'
+        eventType:
+          type: string
+          description: Type of event that triggered the webhook.
+          enum:
+            - transaction-process-requested
+        _embedded:
+          type: object
+          description: Embedded objects related to the transaction event.
+          properties:
+            transaction:
+              $ref: ../../schemas/Transaction.yaml
+        _links:
+          type: array
+          description: Links to related resources.
+          items:
+            type: object
+            properties:
+              href:
+                description: URL of the link.
+                type: string
+              rel:
+                description: Relationship type of the link.
+                type: string
+                enum:
+                  - transaction
+description: Payload of the transaction process requested webhook event.
