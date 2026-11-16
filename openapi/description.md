@@ -119,12 +119,22 @@ To try operations in the browser, use the interactive examples in [Set up your e
 
 # Rate limits
 
-Rate limits apply to the organization, not to the API key.
+Rate limits apply to the organization.
+Requests made with a secret API key also count toward limits of that key,
+separately in each organization where the key is used.
+A secret API key has one limit for all read requests, a lower limit for list and report requests,
+and a limit for requests that start a data export.
+Requests authenticated with a signature made from a secret API key have these limits for each client IP address.
+
+A list or report request made with a secret API key counts as one request for each 100 items in `limit`,
+up to 10 requests for a `limit` of 1000.
 
 API responses for rate-limited operations include `Rate-Limit-Limit` and `Rate-Limit-Remaining`.
 `Rate-Limit-Limit` is the maximum number of requests available at one time.
 `Rate-Limit-Remaining` is the number of requests still available.
+When a request counts toward more than one limit, these headers describe the limit with the fewest requests remaining,
+so `Rate-Limit-Limit` can change from one request to the next.
 
-A request over the limit returns `429 Too Many Requests`.
+A request over a limit returns `429 Too Many Requests`, and its headers describe the limit that the request exceeds.
 The response includes `Retry-After` and `Rate-Limit-Retry-After`.
 Both values are the number of seconds to wait before retrying.
