@@ -40,7 +40,12 @@ put:
   summary: Upsert a credit memo
   operationId: PutCreditMemo
   x-sdk-operation-name: update
-  description: Creates or updates (upserts) a credit memo with a specified ID.
+  description: |-
+    Creates or updates (upserts) a credit memo with a specified ID.
+    If the credit memo has allocations, an update request cannot change the invoice or currency.
+    If `unusedAmount` is `0`, an update request also cannot change the shipping amount or items.
+    To change any of these properties, void the credit memo and create a new one.
+    If the credit memo cannot be voided, these properties are final.
   requestBody:
     required: true
     content:
@@ -90,7 +95,11 @@ patch:
   summary: Partially update a credit memo
   operationId: PatchCreditMemo
   x-sdk-operation-name: patch
-  description: Partially updates a credit memo with a specified ID.
+  description: |-
+    Partially updates a credit memo with a specified ID.
+    If `unusedAmount` is `0`, this operation cannot change the shipping amount or items.
+    To change any of these properties, void the credit memo and create a new one.
+    If the credit memo cannot be voided, these properties are final.
   requestBody:
     required: true
     content:
