@@ -50,6 +50,10 @@ put:
     If a request comes from another IP address, other operations respond with `403` and `error` is `ip_not_allowed`.
     If the list does not include the IP address of the caller, the response is `422`.
 
+    If `requireAllowedIpsForFullAccessApiKeys` is `true`,
+    secret API keys with full access (`*`) permissions in the organization must have `allowedIps` configured.
+    If `allowedIps` is not configured, the [Create an API key](https://www.rebilly.com/catalog/all/api-keys/postapikey) and [Upsert an API key](https://www.rebilly.com/catalog/all/api-keys/putapikey) operations return a `422` error.
+
     Settings apply to the current environment only: live and sandbox are configured separately.
   requestBody:
     required: true

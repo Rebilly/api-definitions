@@ -1,11 +1,10 @@
 type: object
-required:
-  - requireMfa
 properties:
   requireMfa:
     type: boolean
-    description: Specifies if users must pass multi-factor authentication (MFA) to use this organization in the Rebilly UI.
-    default: false
+    description: |-
+      Specifies if users must pass multi-factor authentication (MFA) to use this organization in the Rebilly UI.
+      To retain the current value, omit this property.
   allowedIps:
     description: |-
       List of IP addresses and Classless Inter-Domain Routing (CIDR) ranges from which users can use this organization in the Rebilly UI.
@@ -17,6 +16,27 @@ properties:
       To retain the current list, omit this property.
     maxItems: 200
     $ref: ./AllowedIps.yaml
+  requireAllowedIpsForFullAccessApiKeys:
+    type: boolean
+    description: |-
+      Specifies whether secret API keys with full access (`*`) permissions in this organization must have `allowedIps`.
+      If this value is `true`, the API returns a `422` error when a request:
+
+      - Creates a secret API key with full access permissions but no `allowedIps`.
+      - Removes `allowedIps` from a secret API key with full access permissions.
+      - Adds full access permissions to a secret API key without `allowedIps`.
+      - Extends the `expirationTime` of an expired secret API key with full access permissions but no `allowedIps`.
+
+      An `allowedIps` list that includes every IPv4 or every IPv6 address, such as `0.0.0.0/0`, counts as having no `allowedIps`.
+
+      Existing API keys with full access permissions and no `allowedIps` continue to work and can still be updated.
+
+      The requirement is enforced when an API key is saved and does not apply to API keys created by their owner before joining this organization.
+
+      This setting applies only to the current environment.
+      Live and sandbox environments are configured separately.
+
+      To retain the current value, omit this property.
   currentIpAddress:
     type:
       - 'string'
@@ -36,6 +56,7 @@ properties:
       Number of users who have set up multi-factor authentication (MFA), excluding Rebilly staff.
       Pending invitations are counted as users without MFA.
       This value is `null` when this information is temporarily unavailable.
+      This value is also `null` if the organization cannot require MFA.
     required:
       - enrolled
       - total
