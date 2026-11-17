@@ -38,11 +38,11 @@ const secondInvoice = await api.subscriptions.create({id: 'my-second-id', data})
 
 
 // updating a subscription
-const data = {
+const updateData = {
     // determines if a payment attempt will be automatic
     autopay: false,
     // set the next renewal time
     renewalTime: '2018-09-26T15:34:29Z'
 };
 
-const subscription = await api.subscriptions.update({id: 'my-second-id', data});
+const subscription = await api.subscriptions.update({id: 'my-second-id', data: updateData});

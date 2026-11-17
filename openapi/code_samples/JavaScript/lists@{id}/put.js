@@ -16,11 +16,11 @@ const secondList = await api.lists.create({id: 'my-second-key', data});
 
 
 // updating a list
-const data = {
+const updateData = {
     name: 'My better list',
     values: [
         'foobar-0004', 'foobar-0005', 'foobar-0006'  
     ]
 };
 
-const list = await api.lists.update({id: 'my-second-key', data});
+const list = await api.lists.update({id: 'my-second-key', data: updateData});

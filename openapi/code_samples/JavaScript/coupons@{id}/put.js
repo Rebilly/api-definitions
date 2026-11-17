@@ -20,8 +20,8 @@ const secondKey = await api.coupons.create({id: 'my-second-id', data});
 
 
 // updating a coupon
-const data = {
+const updateData = {
     description: 'a small update'
 };
 
-const coupon = await api.coupons.update({id: 'my-second-id', data});
+const coupon = await api.coupons.update({id: 'my-second-id', data: updateData});

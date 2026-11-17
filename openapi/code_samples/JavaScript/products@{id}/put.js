@@ -17,7 +17,7 @@ const secondProduct = await api.products.create({id: 'my-second-key', data});
 
 
 // updating a product
-const data = {
+const updateData = {
     name: 'my first product',
     description: 'made to be of the highest quality',
     taxCategoryId: '20010',
@@ -26,4 +26,4 @@ const data = {
     customFields: []
 };
 
-const product = await api.products.update({id: 'my-second-key', data});
+const product = await api.products.update({id: 'my-second-key', data: updateData});

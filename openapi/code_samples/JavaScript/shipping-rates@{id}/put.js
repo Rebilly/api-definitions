@@ -14,11 +14,11 @@ const secondRate = await api.shippingRates.create({id: 'my-second-key', data});
 
 
 // updating a shipping rate
-const data = {
+const updateData = {
   name: 'regular shipping',
   filter: '',
   price: 9.99,
   currency: 'USD'
 };
 
-const shippingRate = await api.shippingRates.update({id: 'my-second-key', data});
+const shippingRate = await api.shippingRates.update({id: 'my-second-key', data: updateData});

@@ -32,7 +32,7 @@ console.log(ruleset.fields.version);
 
 // define the ruleset to override the current values within
 // the event
-const data = {
+const updateData = {
     rules: [
         {
             name: 'The One Rule',
@@ -56,7 +56,7 @@ const data = {
     ]
 };
 
-const ruleset = await api.events.updateRules({eventType: 'risk-score-changed', data});
+const updatedRuleset = await api.events.updateRules({eventType: 'risk-score-changed', data: updateData});
 // each time the event's ruleset is modified
 // the version number is incremented
-console.log(ruleset.fields.version);
+console.log(updatedRuleset.fields.version);

@@ -16,9 +16,9 @@ const file = await api.files.update({id: 'my-file-id', data});
 const fileObject = fileList[0];
 
 // define file data
-const data = {
+const fileData = {
     description: 'my new file',
     tags: ['original']
 };
 
-const addedFile = await api.files.uploadAndUpdate({fileObject, data});
+const addedFile = await api.files.uploadAndUpdate({fileObject, data: fileData});

@@ -20,7 +20,7 @@ const secondCustomer = await api.customers.create({id: 'my-second-id', data});
 
 
 // updating a customer
-const data = {
+const updateData = {
     primaryAddress: {
         firstName: 'Johnny',
         lastName: 'Doe',
@@ -32,4 +32,4 @@ const data = {
     }
 };
 
-const customer = await api.customers.update({id: 'my-second-id', data});
+const customer = await api.customers.update({id: 'my-second-id', data: updateData});

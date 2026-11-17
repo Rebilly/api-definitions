@@ -20,7 +20,7 @@ const secondDispute = await api.disputes.create({id: 'my-second-id', data});
 
 
 // updating a dispute
-const data = {
+const updateData = {
     transactionId: 'my-other-transaction-id',
     currency: 'USD',
     amount: 5,
@@ -32,4 +32,4 @@ const data = {
     deadlineTime: '2017-09-19T20:46:48Z'
 };
 
-const dispute = await api.disputes.update({id: 'my-second-id', data});
+const dispute = await api.disputes.update({id: 'my-second-id', data: updateData});

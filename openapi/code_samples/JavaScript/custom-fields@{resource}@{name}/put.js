@@ -9,8 +9,8 @@ const data = {
 const params = {resource: 'customers', name: 'dob', data};
 
 // create the custom field
-const customField = await api.customFields.create(params);
+const createdField = await api.customFields.create(params);
 
 // or update the custom field
-const customField = await api.customFields.update(params);
-console.log(customField.fields.name);
+const updatedField = await api.customFields.update(params);
+console.log(updatedField.fields.name);

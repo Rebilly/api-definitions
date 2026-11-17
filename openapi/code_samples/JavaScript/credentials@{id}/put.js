@@ -20,9 +20,9 @@ const secondCredential = await api.customerAuthentication.createCredential({id: 
 
 
 // updating a credential
-const data = {
+const updateData = {
     username: 'foobar',
     password: 'hell0'
 };
 
-const secondCredential = await api.customerAuthentication.updateCredential({id: 'my-second-id', data});
+const credential = await api.customerAuthentication.updateCredential({id: 'my-second-id', data: updateData});

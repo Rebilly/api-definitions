@@ -6,4 +6,4 @@ const params = {limit: 20, offset: 100, sort: '-createdTime'};
 const secondCollection = await api.exports.getAll(params);
 
 // access the collection items, each item is a DataExport
-secondCollection.items.forEach(export => console.log(export.fields.status));
+secondCollection.items.forEach(dataExport => console.log(dataExport.fields.status));

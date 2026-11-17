@@ -19,11 +19,11 @@ const secondProduct = await api.users.create({id: 'my-second-key', data});
 
 
 // updating a user
-const data = {
+const updateData = {
     email: 'john.doe+test@grr.la',
     firstName: 'John',
     lastName: 'Doe',
     country: 'CA',
 };
 
-const user = await api.users.update({id: 'my-second-key', data});
+const user = await api.users.update({id: 'my-second-key', data: updateData});
