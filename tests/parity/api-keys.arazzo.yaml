@@ -1,0 +1,473 @@
+arazzo: 1.0.1
+
+info:
+  title: API keys parity
+  version: 1.0.0
+  description: >-
+    The write workflows of `PostApiKey` and `PutApiKey`, gate 3 of the pitch
+    "Put the first three write operations on the new API stack". `tools/parity/run.sh
+    api-keys` runs this file twice: once with the legacy stack, once with the API
+    Platform stack. Each workflow creates the keys it reads and deletes them.
+    Every key that a run creates belongs to the owner of the API key of the run,
+    counts against the creation limit of that user (a burst of 10, then one every
+    6 minutes), and, while the release flag `notify-api-key-created-by-api-key`
+    is on, sends that user an email. A run creates two keys in each pass. Each key
+    is scoped to read permissions and allowed only from 192.0.2.1 or 192.0.2.2,
+    addresses that are never routed, so a key left behind by a failed run
+    authenticates nothing. Its description is the run value. The steps that
+    expect a refusal send a key that expires a day later, and a delete follows
+    each of them, so a stack that accepts such a write by mistake leaves no
+    lasting key.
+
+# The parity runner reads this block.
+x-parity:
+  resource: api-keys
+  operations:
+    - PostApiKey
+    - PutApiKey
+    - GetApiKey
+    - DeleteApiKey
+  # The two writes that move to the API Platform stack. The reads and the delete
+  # stay on the legacy stack.
+  nextOperations:
+    - PostApiKey
+    - PutApiKey
+  kinds: [item, write]
+  # API keys have no value-list filter, `fields`, `expand` or CSV on the item.
+  supports: [creates, updates, deletes, validation]
+  # Volatile fields. Each pass creates its own keys, so the id, the API user, the
+  # secret and the times differ between the passes, and the links and the
+  # Location header carry the id.
+  ignore:
+    - id
+    - apiUser
+    - secretKey
+    - createdTime
+    - updatedTime
+    - _links
+    - header:location
+
+sourceDescriptions:
+  - name: api
+    type: openapi
+    url: ../../catalog/all.yaml
+
+components:
+  inputs:
+    parityInputs:
+      type: object
+      properties:
+        apiKey:
+          type: string
+          format: password
+          description: A secret API key.
+        organizationId:
+          type: string
+          description: The organization of the run. Each key is scoped to it.
+        uniqueValue:
+          type: string
+          default: parity-harness-fixture
+          description: >-
+            The value of the run, the description of each key it creates, so
+            that a key left behind by a failed run can be found. The runner
+            gives one value for both passes.
+        passValue:
+          type: string
+          default: parity-harness-pass
+          description: >-
+            The id of the key that `PUT` creates. It must differ between the
+            passes: pass two would find the key of pass one deleted and answer
+            409. The runner gives the run value and the name of the pass. When
+            you run Respect by hand, give a new value for each pass.
+        probeExpirationTime:
+          type: string
+          description: >-
+            The expiration time of the keys that the steps expecting a refusal
+            send, a day after the run, such as `2026-11-17T18:00:00+00:00`. The
+            runner gives it. When you run Respect by hand, give it too.
+  parameters:
+    apiKey:
+      name: REB-APIKEY
+      in: header
+      value: $inputs.apiKey
+
+workflows:
+  - workflowId: item-create-read-update-delete
+    summary: >-
+      Create, read back every field, update, read back, update with each Accept,
+      delete, read back a 404, and update the deleted key for a 409.
+    inputs:
+      $ref: '#/components/inputs/parityInputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+    steps:
+      - stepId: createApiKey
+        operationId: PostApiKey
+        requestBody:
+          contentType: application/json
+          payload:
+            description: $inputs.uniqueValue
+            type: secret
+            acl:
+              - scope:
+                  organizationId:
+                    - $inputs.organizationId
+                permissions:
+                  - GetCustomerCollection
+            allowedIps:
+              - 192.0.2.1/32
+            expirationTime: '2037-12-31T00:00:00+00:00'
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.body#/description == $inputs.uniqueValue
+          - condition: $response.body#/type == 'secret'
+          - condition: $response.body#/acl/0/scope/organizationId/0 == $inputs.organizationId
+          - condition: $response.body#/acl/0/permissions/0 == 'GetCustomerCollection'
+          - condition: $response.body#/allowedIps/0 == '192.0.2.1/32'
+          - condition: $response.body#/expirationTime == '2037-12-31T00:00:00+00:00'
+          # The diff ignores the Location header and the links, because they
+          # carry the id of the pass. These two checks hold them to the public
+          # path of the key, on the host of the request, with no /_next.
+          - context: $response.header.Location
+            condition: '^https://[^/]+/api-keys/[^/]+$'
+            type: regex
+          - context: $response.body#/_links/0/href
+            condition: '^https://[^/]+/api-keys/[^/]+$'
+            type: regex
+        outputs:
+          apiKeyId: $response.body#/id
+
+      - stepId: readBack
+        operationId: GetApiKey
+        parameters:
+          - name: id
+            in: path
+            value: $steps.createApiKey.outputs.apiKeyId
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/id == $steps.createApiKey.outputs.apiKeyId
+          - condition: $response.body#/description == $inputs.uniqueValue
+          - condition: $response.body#/type == 'secret'
+          - condition: $response.body#/acl/0/scope/organizationId/0 == $inputs.organizationId
+          - condition: $response.body#/acl/0/permissions/0 == 'GetCustomerCollection'
+          - condition: $response.body#/allowedIps/0 == '192.0.2.1/32'
+          - condition: $response.body#/expirationTime == '2037-12-31T00:00:00+00:00'
+
+      # A null expiration removes it. Every update keeps the description, the run
+      # value, and an allowed IP that is never routed, so a key that a failed run
+      # leaves can be found and authenticates nothing.
+      - stepId: updateApiKey
+        operationId: PutApiKey
+        parameters:
+          - name: id
+            in: path
+            value: $steps.createApiKey.outputs.apiKeyId
+        requestBody:
+          contentType: application/json
+          payload:
+            description: $inputs.uniqueValue
+            type: secret
+            acl:
+              - scope:
+                  organizationId:
+                    - $inputs.organizationId
+                permissions:
+                  - GetCustomerCollection
+                  - GetCustomer
+            allowedIps:
+              - 192.0.2.2/32
+            expirationTime: null
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/id == $steps.createApiKey.outputs.apiKeyId
+          - condition: $response.body#/description == $inputs.uniqueValue
+          - condition: $response.body#/acl/0/permissions/1 == 'GetCustomer'
+          - condition: $response.body#/allowedIps/0 == '192.0.2.2/32'
+          - condition: $response.body#/expirationTime == null
+
+      - stepId: readBackUpdated
+        operationId: GetApiKey
+        parameters:
+          - name: id
+            in: path
+            value: $steps.createApiKey.outputs.apiKeyId
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/description == $inputs.uniqueValue
+          - condition: $response.body#/acl/0/permissions/0 == 'GetCustomerCollection'
+          - condition: $response.body#/acl/0/permissions/1 == 'GetCustomer'
+          - condition: $response.body#/allowedIps/0 == '192.0.2.2/32'
+          - condition: $response.body#/expirationTime == null
+
+      - stepId: updateAcceptHal
+        operationId: PutApiKey
+        parameters:
+          - name: id
+            in: path
+            value: $steps.createApiKey.outputs.apiKeyId
+          - name: Accept
+            in: header
+            value: application/hal+json
+        requestBody:
+          contentType: application/json
+          payload:
+            description: $inputs.uniqueValue
+            acl:
+              - scope:
+                  organizationId:
+                    - $inputs.organizationId
+                permissions:
+                  - GetCustomerCollection
+            allowedIps:
+              - 192.0.2.2/32
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/id == $steps.createApiKey.outputs.apiKeyId
+          - condition: $response.body#/acl/0/permissions/0 == 'GetCustomerCollection'
+
+      - stepId: updateAcceptAny
+        operationId: PutApiKey
+        parameters:
+          - name: id
+            in: path
+            value: $steps.createApiKey.outputs.apiKeyId
+          - name: Accept
+            in: header
+            value: '*/*'
+        requestBody:
+          contentType: application/json
+          payload:
+            description: $inputs.uniqueValue
+            acl:
+              - scope:
+                  organizationId:
+                    - $inputs.organizationId
+                permissions:
+                  - GetCustomerCollection
+            allowedIps:
+              - 192.0.2.2/32
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/id == $steps.createApiKey.outputs.apiKeyId
+
+      - stepId: deleteApiKey
+        operationId: DeleteApiKey
+        parameters:
+          - name: id
+            in: path
+            value: $steps.createApiKey.outputs.apiKeyId
+        successCriteria:
+          - condition: $statusCode == 204
+
+      - stepId: readBackDeleted
+        operationId: GetApiKey
+        parameters:
+          - name: id
+            in: path
+            value: $steps.createApiKey.outputs.apiKeyId
+        successCriteria:
+          - condition: $statusCode == 404
+          - condition: $response.body#/status == 404
+          - condition: $response.body#/title != ''
+          - condition: $response.body#/details != null
+
+      # A PUT to the id of a deleted key does not bring it back.
+      - stepId: updateDeleted
+        operationId: PutApiKey
+        parameters:
+          - name: id
+            in: path
+            value: $steps.createApiKey.outputs.apiKeyId
+        requestBody:
+          contentType: application/json
+          payload:
+            description: $inputs.uniqueValue
+            acl:
+              - scope:
+                  organizationId:
+                    - $inputs.organizationId
+                permissions:
+                  - GetCustomerCollection
+            allowedIps:
+              - 192.0.2.2/32
+        successCriteria:
+          - condition: $statusCode == 409
+          - condition: $response.body#/status == 409
+          - condition: $response.body#/title != ''
+          - condition: $response.body#/details != null
+
+      # A stack that brings the key back on the PUT above leaves it behind. This
+      # delete removes it then, and answers 404 when the PUT created nothing.
+      - stepId: deleteRevived
+        operationId: DeleteApiKey
+        parameters:
+          - name: id
+            in: path
+            value: $steps.createApiKey.outputs.apiKeyId
+        successCriteria:
+          - condition: $statusCode == 404
+
+  - workflowId: put-new-id
+    summary: A PUT to an id that does not exist creates the key, with 201.
+    inputs:
+      $ref: '#/components/inputs/parityInputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+    steps:
+      - stepId: createByPut
+        operationId: PutApiKey
+        parameters:
+          - name: id
+            in: path
+            value: $inputs.passValue
+        requestBody:
+          contentType: application/json
+          payload:
+            description: $inputs.uniqueValue
+            acl:
+              - scope:
+                  organizationId:
+                    - $inputs.organizationId
+                permissions:
+                  - GetCustomerCollection
+            allowedIps:
+              - 192.0.2.1/32
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.body#/id == $inputs.passValue
+          - condition: $response.body#/description == $inputs.uniqueValue
+          - condition: $response.body#/type == 'secret'
+          - condition: $response.body#/allowedIps/0 == '192.0.2.1/32'
+          - condition: $response.body#/expirationTime == null
+          # The diff ignores the Location header and the links, because they
+          # carry the id of the pass. These two checks hold them to the public
+          # path of the key, on the host of the request, with no /_next.
+          - context: $response.header.Location
+            condition: '^https://[^/]+/api-keys/[^/]+$'
+            type: regex
+          - context: $response.body#/_links/0/href
+            condition: '^https://[^/]+/api-keys/[^/]+$'
+            type: regex
+
+      - stepId: readBack
+        operationId: GetApiKey
+        parameters:
+          - name: id
+            in: path
+            value: $inputs.passValue
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/id == $inputs.passValue
+          - condition: $response.body#/description == $inputs.uniqueValue
+
+      - stepId: deleteApiKey
+        operationId: DeleteApiKey
+        parameters:
+          - name: id
+            in: path
+            value: $inputs.passValue
+        successCriteria:
+          - condition: $statusCode == 204
+
+  - workflowId: invalid-payloads
+    summary: A blank description answers 422 on POST and on PUT, and creates nothing.
+    inputs:
+      $ref: '#/components/inputs/parityInputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+    steps:
+      - stepId: createBlankDescription
+        operationId: PostApiKey
+        requestBody:
+          contentType: application/json
+          payload:
+            description: ''
+            acl:
+              - scope:
+                  organizationId:
+                    - $inputs.organizationId
+                permissions:
+                  - GetCustomerCollection
+            allowedIps:
+              - 192.0.2.1/32
+            expirationTime: $inputs.probeExpirationTime
+        successCriteria:
+          - condition: $statusCode == 422
+          - condition: $response.body#/status == 422
+          - condition: $response.body#/title != ''
+          - condition: $response.body#/details != null
+          - condition: $response.body#/invalidFields/0/field == 'description'
+
+      - stepId: putBlankDescription
+        operationId: PutApiKey
+        parameters:
+          - name: id
+            in: path
+            value: '{$inputs.passValue}-invalid'
+        requestBody:
+          contentType: application/json
+          payload:
+            description: ''
+            acl:
+              - scope:
+                  organizationId:
+                    - $inputs.organizationId
+                permissions:
+                  - GetCustomerCollection
+            allowedIps:
+              - 192.0.2.1/32
+            expirationTime: $inputs.probeExpirationTime
+        successCriteria:
+          - condition: $statusCode == 422
+          - condition: $response.body#/status == 422
+          - condition: $response.body#/title != ''
+          - condition: $response.body#/details != null
+          - condition: $response.body#/invalidFields/0/field == 'description'
+
+      - stepId: readBackInvalid
+        operationId: GetApiKey
+        parameters:
+          - name: id
+            in: path
+            value: '{$inputs.passValue}-invalid'
+        successCriteria:
+          - condition: $statusCode == 404
+
+      # A stack that accepts the PUT above leaves the key behind. This delete
+      # removes it then, and answers 404 when the PUT created nothing. A key that
+      # the POST above creates by mistake has an id the run cannot know, so it
+      # expires a day later.
+      - stepId: deleteInvalid
+        operationId: DeleteApiKey
+        parameters:
+          - name: id
+            in: path
+            value: '{$inputs.passValue}-invalid'
+        successCriteria:
+          - condition: $statusCode == 404
+
+  # Authentication answers 401 before the stack switch runs, so both passes
+  # answer this step on the legacy pipeline. The step pins that the move leaves
+  # the 401 as it is.
+  - workflowId: unauthorized
+    summary: A POST with no API key.
+    inputs:
+      $ref: '#/components/inputs/parityInputs'
+    steps:
+      - stepId: noKey
+        operationId: PostApiKey
+        requestBody:
+          contentType: application/json
+          payload:
+            description: $inputs.uniqueValue
+            acl:
+              - scope:
+                  organizationId:
+                    - $inputs.organizationId
+                permissions:
+                  - GetCustomerCollection
+        successCriteria:
+          - condition: $statusCode == 401
+          - condition: $response.body#/status == 401
+          - condition: $response.body#/title != ''
+          - condition: $response.body#/details != null

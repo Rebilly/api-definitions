@@ -1,0 +1,343 @@
+arazzo: 1.0.1
+
+info:
+  title: Custom fields parity
+  version: 1.0.0
+  description: >-
+    The write workflows of `PutCustomField`, gate 3 of the pitch "Put the first
+    three write operations on the new API stack". `tools/parity/run.sh
+    custom-fields` runs this file twice: once with the legacy stack, once with
+    the API Platform stack. The API has no operation that deletes a custom
+    field, so every run leaves its fields behind in the organization it runs
+    against: in each pass, one field on `subscriptions` and its mirror on
+    `orders`, named after the run and the pass, and disabled at the end. Run it
+    only against the internal organization.
+
+# The parity runner reads this block.
+x-parity:
+  resource: custom-fields
+  operations:
+    - PutCustomField
+    - GetCustomField
+  # The write that moves to the API Platform stack. The read stays on the
+  # legacy stack.
+  nextOperations:
+    - PutCustomField
+  kinds: [item, write]
+  # A PUT creates a field (201) and updates it (200). Nothing deletes a field,
+  # so the resource does not declare `deletes`.
+  supports: [creates, updates, validation]
+  # Volatile fields. Each pass names its own field, so the name differs between
+  # the passes, and the links and the Location header carry it. The workflows
+  # assert the name in each pass.
+  ignore:
+    - name
+    - _links
+    - header:location
+
+sourceDescriptions:
+  - name: api
+    type: openapi
+    url: ../../catalog/all.yaml
+
+components:
+  inputs:
+    parityInputs:
+      type: object
+      properties:
+        apiKey:
+          type: string
+          format: password
+          description: A secret API key.
+        organizationId:
+          type: string
+          description: The organization of the run.
+        passValue:
+          type: string
+          default: parity-harness-pass
+          description: >-
+            The name of the field that the pass creates. It must differ between
+            the passes, because pass two would otherwise update the field of
+            pass one and answer 200 where pass one answered 201. The runner
+            gives the run value and the name of the pass. When you run Respect
+            by hand, give a new value for each pass.
+  parameters:
+    apiKey:
+      name: REB-APIKEY
+      in: header
+      value: $inputs.apiKey
+
+workflows:
+  - workflowId: create-read-update-read
+    summary: >-
+      Create a field on subscriptions, read it back on subscriptions and on its
+      orders mirror, update it, read both back, update with each Accept, then a
+      type change (422) and an unknown resource type (400).
+    inputs:
+      $ref: '#/components/inputs/parityInputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+    steps:
+      - stepId: createField
+        operationId: PutCustomField
+        parameters:
+          - name: resource
+            in: path
+            value: subscriptions
+          - name: name
+            in: path
+            value: $inputs.passValue
+        requestBody:
+          contentType: application/json
+          payload:
+            type: string
+            description: Parity harness field
+            additionalSchema:
+              maxLength: 100
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.body#/name == $inputs.passValue
+          - condition: $response.body#/type == 'string'
+          - condition: $response.body#/description == 'Parity harness field'
+          - condition: $response.body#/isEnabled == true
+          - condition: $response.body#/additionalSchema/maxLength == 100
+          # The diff ignores the Location header and the links, because they
+          # carry the name of the pass. These two checks hold them to the public
+          # path of the field, on the host of the request, with no /_next.
+          - context: $response.header.Location
+            condition: '^https://[^/]+/organizations/[^/]+/custom-fields/subscriptions/[^/]+$'
+            type: regex
+          - context: $response.body#/_links/0/href
+            condition: '^https://[^/]+/organizations/[^/]+/custom-fields/subscriptions/[^/]+$'
+            type: regex
+
+      - stepId: readBack
+        operationId: GetCustomField
+        parameters:
+          - name: resource
+            in: path
+            value: subscriptions
+          - name: name
+            in: path
+            value: $inputs.passValue
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/name == $inputs.passValue
+          - condition: $response.body#/type == 'string'
+          - condition: $response.body#/description == 'Parity harness field'
+          - condition: $response.body#/isEnabled == true
+          - condition: $response.body#/additionalSchema/maxLength == 100
+
+      # A field on subscriptions has a mirror on orders, saved in the same flush.
+      - stepId: readMirror
+        operationId: GetCustomField
+        parameters:
+          - name: resource
+            in: path
+            value: orders
+          - name: name
+            in: path
+            value: $inputs.passValue
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/name == $inputs.passValue
+          - condition: $response.body#/type == 'string'
+          - condition: $response.body#/description == 'Parity harness field'
+          - condition: $response.body#/additionalSchema/maxLength == 100
+
+      - stepId: updateField
+        operationId: PutCustomField
+        parameters:
+          - name: resource
+            in: path
+            value: subscriptions
+          - name: name
+            in: path
+            value: $inputs.passValue
+        requestBody:
+          contentType: application/json
+          payload:
+            type: string
+            description: Parity harness field update
+            isEnabled: false
+            additionalSchema:
+              maxLength: 200
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/name == $inputs.passValue
+          - condition: $response.body#/description == 'Parity harness field update'
+          - condition: $response.body#/isEnabled == false
+          - condition: $response.body#/additionalSchema/maxLength == 200
+
+      - stepId: readBackUpdated
+        operationId: GetCustomField
+        parameters:
+          - name: resource
+            in: path
+            value: subscriptions
+          - name: name
+            in: path
+            value: $inputs.passValue
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/description == 'Parity harness field update'
+          - condition: $response.body#/isEnabled == false
+          - condition: $response.body#/additionalSchema/maxLength == 200
+
+      - stepId: readMirrorUpdated
+        operationId: GetCustomField
+        parameters:
+          - name: resource
+            in: path
+            value: orders
+          - name: name
+            in: path
+            value: $inputs.passValue
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/description == 'Parity harness field update'
+          - condition: $response.body#/isEnabled == false
+          - condition: $response.body#/additionalSchema/maxLength == 200
+
+      - stepId: updateAcceptHal
+        operationId: PutCustomField
+        parameters:
+          - name: resource
+            in: path
+            value: subscriptions
+          - name: name
+            in: path
+            value: $inputs.passValue
+          - name: Accept
+            in: header
+            value: application/hal+json
+        requestBody:
+          contentType: application/json
+          payload:
+            type: string
+            description: Parity harness field update
+            isEnabled: false
+            additionalSchema:
+              maxLength: 200
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/name == $inputs.passValue
+
+      - stepId: updateAcceptAny
+        operationId: PutCustomField
+        parameters:
+          - name: resource
+            in: path
+            value: subscriptions
+          - name: name
+            in: path
+            value: $inputs.passValue
+          - name: Accept
+            in: header
+            value: '*/*'
+        requestBody:
+          contentType: application/json
+          payload:
+            type: string
+            description: Parity harness field update
+            isEnabled: false
+            additionalSchema:
+              maxLength: 200
+        successCriteria:
+          - condition: $statusCode == 200
+
+      # The type of a field cannot change.
+      - stepId: changeType
+        operationId: PutCustomField
+        parameters:
+          - name: resource
+            in: path
+            value: subscriptions
+          - name: name
+            in: path
+            value: $inputs.passValue
+        requestBody:
+          contentType: application/json
+          payload:
+            type: integer
+            description: Parity harness field update
+            # A stack that accepts this by mistake leaves the field disabled.
+            isEnabled: false
+        successCriteria:
+          - condition: $statusCode == 422
+          - condition: $response.body#/status == 422
+          - condition: $response.body#/title != ''
+          - condition: $response.body#/details != null
+
+      # The path validation answers 400 for a resource type outside the enum.
+      - stepId: unknownResourceType
+        operationId: PutCustomField
+        parameters:
+          - name: resource
+            in: path
+            value: nosuch-resource
+          - name: name
+            in: path
+            value: $inputs.passValue
+        requestBody:
+          contentType: application/json
+          payload:
+            type: string
+            description: Parity harness field
+            # A stack that accepts this by mistake leaves the field disabled.
+            isEnabled: false
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/status == 400
+          - condition: $response.body#/title != ''
+          - condition: $response.body#/details != null
+
+  - workflowId: errors-with-a-key
+    summary: A 404 on a field that does not exist.
+    inputs:
+      $ref: '#/components/inputs/parityInputs'
+    parameters:
+      - reference: $components.parameters.apiKey
+    steps:
+      - stepId: notFound
+        operationId: GetCustomField
+        parameters:
+          - name: resource
+            in: path
+            value: subscriptions
+          - name: name
+            in: path
+            value: '{$inputs.passValue}-nosuch'
+        successCriteria:
+          - condition: $statusCode == 404
+          - condition: $response.body#/status == 404
+          - condition: $response.body#/title != ''
+          - condition: $response.body#/details != null
+
+  # Authentication answers 401 before the stack switch runs, so both passes
+  # answer this step on the legacy pipeline. The step pins that the move leaves
+  # the 401 as it is.
+  - workflowId: unauthorized
+    summary: A PUT with no API key creates nothing.
+    inputs:
+      $ref: '#/components/inputs/parityInputs'
+    steps:
+      - stepId: noKey
+        operationId: PutCustomField
+        parameters:
+          - name: resource
+            in: path
+            value: subscriptions
+          - name: name
+            in: path
+            value: '{$inputs.passValue}-nokey'
+        requestBody:
+          contentType: application/json
+          payload:
+            type: string
+            description: Parity harness field
+        successCriteria:
+          - condition: $statusCode == 401
+          - condition: $response.body#/status == 401
+          - condition: $response.body#/title != ''
+          - condition: $response.body#/details != null
