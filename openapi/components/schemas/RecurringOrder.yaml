@@ -70,8 +70,13 @@ properties:
     properties:
       enabled:
         description: |-
-          Specifies if there is a trial for this subscription.
+          Specifies if there is a trial for this order.
           Plans without trial prices are free trials.
+          If the order is active, all order items are in a trial, and `isTrialOnly` is `false`, setting this value to `false` ends the trial immediately.
+          If the request that sets this value to `false` also changes `currentPeriodEnd`, the order renews at that time.
+          If the request does not change `currentPeriodEnd`, the order renews immediately.
+          In the response, this field remains `true`, and `endTime` contains the date and time when the trial ended.
+          If only some items of an active order are in a trial, changing this value from `true` to `false` returns a 409 error.
         type: boolean
       endTime:
         description: |-
@@ -436,7 +441,7 @@ properties:
     description: |-
       Date and time of the current service period end.
       If subscriptions have different recurring settings or the order is not active, providing this field causes the request to be rejected with a conflict.
-      This field is ignored if the order is in trial.
+      This field is ignored if the order is in trial, unless the same request sets `trial.enabled` to `false`.
     type:
       - 'string'
       - 'null'
