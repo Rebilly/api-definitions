@@ -454,6 +454,9 @@ workflows:
     inputs:
       $ref: '#/components/inputs/parityInputs'
     steps:
+      # The 401 comes before the body is read. The body still keeps to the
+      # rules tools/parity/src/guard.js holds every PostApiKey body to on
+      # sandbox and live.
       - stepId: noKey
         operationId: PostApiKey
         requestBody:
@@ -466,6 +469,8 @@ workflows:
                     - $inputs.organizationId
                 permissions:
                   - GetCustomerCollection
+            allowedIps:
+              - 192.0.2.1/32
         successCriteria:
           - condition: $statusCode == 401
           - condition: $response.body#/status == 401
