@@ -8,6 +8,8 @@ description: |-
   an entry for the same currency, the following requirements apply:
   - `minPerTransaction.amount < maxPerTransaction.amount`.
   - `minPerTransaction.amount <= maxPerPeriod.amount`.
+  - `minPerTransaction.amount <= maxPerCustomerPerPeriod.amount`.
+  - `maxPerCustomerPerPeriod.amount <= maxPerPeriod.amount`.
 type: object
 minProperties: 1
 properties:
@@ -27,7 +29,7 @@ properties:
         - currency
       properties:
         amount:
-          description: Limit amount.
+          description: Amount of the limit.
           type: number
           format: double
           exclusiveMinimum: 0
@@ -54,7 +56,7 @@ properties:
         - currency
       properties:
         amount:
-          description: Limit amount.
+          description: Amount of the limit.
           type: number
           format: double
           exclusiveMinimum: 0
@@ -68,6 +70,8 @@ properties:
   maxPerPeriod:
     description: |-
       Maximum amount limit for a rolling period.
+      Approved payouts and allocations for all customers on this gateway account count toward this limit.
+      Only allocations with the status `pending`, `queued`, `processing`, or `waiting-completion` are included.
       At most one entry per each currency that this gateway account supports.
     type:
       - 'array'
@@ -82,7 +86,7 @@ properties:
         - period
       properties:
         amount:
-          description: Limit amount.
+          description: Amount of the limit.
           type: number
           format: double
           exclusiveMinimum: 0
@@ -101,6 +105,44 @@ properties:
       - amount: 10000
         currency: CAD
         period: 24-hours
+  maxPerCustomerPerPeriod:
+    description: |-
+      Maximum amount limit for one customer in a rolling period.
+      Approved payouts and allocations for each customer on this gateway account count toward the customer's limit.
+      Only allocations with the status `pending`, `queued`, `processing`, or `waiting-completion` are included.
+      Each currency that this gateway account supports can have at most one entry, and that entry applies to every customer individually.
+    type:
+      - 'array'
+      - 'null'
+    minItems: 1
+    uniqueItems: true
+    items:
+      type: object
+      required:
+        - amount
+        - currency
+        - period
+      properties:
+        amount:
+          description: Amount of the limit.
+          type: number
+          format: double
+          exclusiveMinimum: 0
+          x-type: Money
+          example: 5000
+        currency:
+          $ref: ./CurrencyCode.yaml
+        period:
+          description: Rolling period for the amount limit.
+          type: string
+          enum:
+            - 24-hours
+          x-enumDescriptions:
+            24-hours: Rolling 24-hour period.
+    example:
+      - amount: 5000
+        currency: CAD
+        period: 24-hours
 example:
   maxPerTransaction:
     - amount: 3000
@@ -110,5 +152,9 @@ example:
       currency: CAD
   maxPerPeriod:
     - amount: 10000
+      currency: CAD
+      period: 24-hours
+  maxPerCustomerPerPeriod:
+    - amount: 5000
       currency: CAD
       period: 24-hours
