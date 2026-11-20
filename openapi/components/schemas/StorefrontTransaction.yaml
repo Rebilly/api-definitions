@@ -173,16 +173,22 @@ properties:
     readOnly: true
   gatewayName:
     readOnly: true
+    deprecated: true
     description: |-
-      Name of the payment gateway that processed, or is selected to process, the transaction.
-      This value is only available after a gateway is selected for the transaction.
+      Name of the payment gateway that processes the transaction.
+      This value is always `null`.
+      To retrieve the gateway name, use the [Retrieve a transaction](https://www.rebilly.com/catalog/all/transactions/gettransaction) operation.
     x-label: Gateway
     x-basic: true
-    allOf:
+    oneOf:
       - $ref: ./GatewayName.yaml
+      - type: 'null'
   gateway:
     type: object
-    description: Related gateway information.
+    description: |-
+      Related gateway information.
+      To retrieve the full gateway response, and the AVS and CVV results,
+      use the [Retrieve a transaction](https://www.rebilly.com/catalog/all/transactions/gettransaction) operation.
     readOnly: true
     properties:
       response:
@@ -190,27 +196,41 @@ properties:
         type: object
         properties:
           code:
-            description: Gateway response code.
+            description: |-
+              Gateway response code.
+              If the transaction is not approved, this value is `05`, except `N7` for a card verification value (CVV) mismatch and `54` for an expired card.
             type:
               - 'string'
               - 'null'
           message:
-            description: Gateway response message.
+            description: |-
+              Gateway response message.
+              This value is always `null`.
+            deprecated: true
             type:
               - 'string'
               - 'null'
           type:
-            description: Gateway response type.
+            description: |-
+              Gateway response type.
+              This value is always `null`.
+            deprecated: true
             type:
               - 'string'
               - 'null'
           originalCode:
-            description: Raw, unmapped gateway response code.
+            description: |-
+              Raw, unmapped gateway response code.
+              This value is always `null`.
+            deprecated: true
             type:
               - 'string'
               - 'null'
           originalMessage:
-            description: Raw, unmapped gateway response message.
+            description: |-
+              Raw, unmapped gateway response message.
+              This value is always `null`.
+            deprecated: true
             type:
               - 'string'
               - 'null'
@@ -225,7 +245,10 @@ properties:
               - 'string'
               - 'null'
       avsResponse:
-        description: Gateway Address Verification System (AVS) response.
+        description: |-
+          Gateway Address Verification System (AVS) response.
+          Each value in this object is always `null`.
+        deprecated: true
         type: object
         properties:
           code:
@@ -249,7 +272,10 @@ properties:
               - 'string'
               - 'null'
       cvvResponse:
-        description: Gateway Card Verification Value (CVV) response.
+        description: |-
+          Gateway Card Verification Value (CVV) response.
+          Each value in this object is always `null`.
+        deprecated: true
         type: object
         properties:
           code:
