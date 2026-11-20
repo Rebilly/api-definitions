@@ -10,7 +10,10 @@ get:
   security:
     - CustomerJWT: []
     - PublishableApiKey: []
-  description: Retrieves a list of products.
+  description: |-
+    Retrieves a list of products.
+    If the JWT or the publishable API key has no permission to read a custom field,
+    a filter on that custom field is ignored.
   parameters:
     - $ref: ../../components/parameters/collectionFilter.yaml
     - $ref: ../../components/parameters/collectionSort.yaml
