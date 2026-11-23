@@ -15,8 +15,12 @@ properties:
       - confirmed-match
       - pending-review
   linkedCustomers:
-    type: array
-    description: Customers linked to the person.
+    type:
+      - array
+      - 'null'
+    description: |-
+      Customers linked to the person.
+      This value is `null` unless the API key or user has the `GetCustomerCollection` permission.
     items:
       type: object
       properties:
@@ -101,8 +105,12 @@ properties:
         - result
         - reviewer
   transactions:
-    type: array
-    description: Transactions for customers linked to the person in the selected period.
+    type:
+      - array
+      - 'null'
+    description: |-
+      Transactions for customers linked to the person in the selected period.
+      This value is `null` unless the API key or user has the `GetTransactionCollection` permission.
     items:
       type: object
       properties:
