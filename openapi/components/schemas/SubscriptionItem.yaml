@@ -42,7 +42,10 @@ properties:
       periodAnchorInstruction:
         $ref: ./ServicePeriodAnchorInstruction.yaml
   renewalTime:
-    description: Date and time when the subscription renews.
+    description: |-
+      Date and time when the subscription renews.
+      If the item has no trial, the first service period ends at the date and time specified in the request that creates an order or updates a `pending` order.
+      If the item has a trial, the specified date and time are ignored, and the subscription renews when the trial ends.
     type:
       - 'string'
       - 'null'
