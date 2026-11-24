@@ -9,7 +9,8 @@ allOf:
         type: object
         description: |-
           PayPal credentials object.
-          This object specifies the PayPal Partner account from which a gateway account is registered.
+          This object specifies the PayPal Partner account from which a gateway account is registered,
+          and the PayPal merchant account that the gateway account is connected to.
         properties:
           partnerId:
             type: string
@@ -27,6 +28,12 @@ allOf:
             description: |-
               BN Code for the PayPal Partner account.
               This unique code tracks the source of API requests.
+          merchantId:
+            type: string
+            description: |-
+              ID of the PayPal merchant account that is connected to this gateway account.
+              Transactions that use this gateway account are processed in this PayPal merchant account.
+            readOnly: true
       settings:
         type: object
         description: PayPal settings object.
