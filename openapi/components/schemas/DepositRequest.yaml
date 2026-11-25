@@ -92,10 +92,12 @@ properties:
         description: Minimum custom amount.
         type: number
         format: double
-        minimum: 0.01
+        exclusiveMinimum: 0
+        maximum: 9999999
       multipleOf:
         description: |-
           Multiple that is used to calculate valid custom amounts.
+          `multipleOf` must have no more than 4 decimal places.
 
           For example, if `minimum` is 5.30 and `multipleOf` is 0.50, the valid custom amounts are 5.50, 6.00, 6.50, 7.00, and so on.
           The last valid amount is the largest multiple of `multipleOf` that does not exceed `maximum`.
@@ -104,14 +106,15 @@ properties:
           and must be from `minimum` to `maximum`.
         type: number
         format: double
-        minimum: 0.01
+        exclusiveMinimum: 0
       maximum:
         description: |-
           Maximum custom amount.
           The range from `minimum` to `maximum` must include at least one multiple of `multipleOf`.
         type: number
         format: double
-        minimum: 0.01
+        exclusiveMinimum: 0
+        maximum: 9999999
       buttonText:
         type:
           - 'object'
