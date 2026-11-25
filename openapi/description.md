@@ -3,6 +3,9 @@
 The Rebilly API is built on HTTP and is RESTful.
 It has predictable resource URLs and returns HTTP response codes to indicate errors.
 It also accepts and returns JSON in the HTTP body.
+Requests to `GET` endpoints must not carry a body.
+Send parameters in the query string.
+A `GET` request that carries a body may be rejected with a `403` error.
 Use your favorite HTTP/REST library in your programming language when using this API,
 or use one of the Rebilly SDKs,
 which are available in [PHP](https://github.com/Rebilly/rebilly-php) and [JavaScript](https://www.npmjs.com/package/rebilly-js-sdk).
