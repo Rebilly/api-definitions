@@ -30,3 +30,28 @@ allOf:
           - clientSecret
           - pointOfSaleId
           - webhookSecret
+      settings:
+        type: object
+        properties:
+          checkoutCurrency:
+            type: string
+            description: Cryptocurrency of the Fyntra checkout widget.
+            default: USDC
+            enum:
+              - USDC
+              - USDT
+          minAmount:
+            type: number
+            minimum: 0
+            description: |-
+              Smallest deposit amount, in the currency of the checkout widget.
+              A smaller deposit is declined.
+              If this value is omitted, the minimum is `1`.
+              If this value is `0`, no minimum applies.
+          maxAmount:
+            type: number
+            minimum: 0
+            description: |-
+              Largest deposit amount, in the currency of the checkout widget.
+              A larger deposit is declined.
+              If this value is omitted or `0`, no maximum applies.
