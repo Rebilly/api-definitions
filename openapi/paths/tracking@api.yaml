@@ -6,7 +6,10 @@ get:
   summary: Retrieve API tracking logs
   operationId: GetTrackingApiCollection
   x-sdk-operation-name: getAllApiLogs
-  description: Retrieves API tracking log records.
+  description: |-
+    Retrieves API tracking log records.
+    To retrieve the records faster, use `fields` to omit `request`, `response`, `requestHeaders`, and `responseHeaders`.
+    Then retrieve the full record of a log with the [Retrieve an API tracking log](https://www.rebilly.com/catalog/all/tracking/gettrackingapi) operation.
   parameters:
     - $ref: ../components/parameters/collectionLimitMax100.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
@@ -14,6 +17,7 @@ get:
     - $ref: ../components/parameters/collectionFilter.yaml
     - $ref: ../components/parameters/collectionQuery.yaml
     - $ref: ../components/parameters/collectionExpand.yaml
+    - $ref: ../components/parameters/collectionFields.yaml
   responses:
     '200':
       description: Tracking API logs retrieved.
