@@ -31,7 +31,15 @@ post:
     '401':
       $ref: ../../components/responses/Unauthorized.yaml
     '403':
-      $ref: ../../components/responses/Forbidden.yaml
+      description: |-
+        Access forbidden, or a restriction on deposits is active for the customer.
+        If a restriction on deposits is active, `type` is `deposit-restricted`, and the customer is not charged.
+      content:
+        application/json:
+          schema:
+            anyOf:
+              - $ref: ../../components/schemas/ProblemTypes/Forbidden.yaml
+              - $ref: ../../components/schemas/ProblemTypes/DepositRestricted.yaml
     '404':
       $ref: ../../components/responses/NotFound.yaml
     '409':
@@ -49,9 +57,17 @@ post:
       $ref: ../../components/responses/TooManyRequests.yaml
     '503':
       description: |-
-        Promotion in `promotionId` cannot be checked against the deposit, and the customer is not charged.
-        Retry the request, or send it without `promotionId` to deposit without a promotion.
+        Deposit is refused because a condition of the deposit cannot be verified.
+        The customer is not charged.
+        The `type` value identifies the check that is not available:
+
+        - `promotion-check-unavailable`: Promotion in `promotionId` cannot be verified against the deposit.
+          Retry the request, or send it without `promotionId` to deposit without a promotion.
+        - `deposit-restriction-check-unavailable`: Restrictions on deposits cannot be verified for the customer.
+          Retry the request.
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/ProblemTypes/PromotionCheckUnavailable.yaml
+            oneOf:
+              - $ref: ../../components/schemas/ProblemTypes/PromotionCheckUnavailable.yaml
+              - $ref: ../../components/schemas/ProblemTypes/DepositRestrictionCheckUnavailable.yaml

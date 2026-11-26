@@ -17,6 +17,13 @@ post:
     - To cancel all pending payout requests, omit the `amount` field.
     - To cancel payout requests based on a specific amount, include the amount in the request body.
     The oldest requests are canceled first until the specified amount is reached.
+
+    If the total amount of the canceled payout requests is greater than the specified amount, a new payout request is created for the difference.
+    That payout request is a new withdrawal.
+    If the customer cannot make that withdrawal,
+    or if the withdrawal cannot be checked,
+    no payout request is canceled, and a `422` error is returned.
+    For example, the customer cannot make a new withdrawal while a restriction on the `withdrawal` operation is active.
   requestBody:
     $ref: ../../components/requestBodies/storefront/PostPayoutRequestCancellation.yaml
   responses:
