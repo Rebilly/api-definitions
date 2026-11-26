@@ -20,7 +20,10 @@ allOf:
             writeOnly: true
           hmacKey:
             type: string
-            description: Adyen HMAC key to verify IPN signature.
+            description: |-
+              Adyen HMAC key to verify IPN signature.
+              To verify with more than one key, such as during a key rotation, separate the keys with commas.
+              An IPN signature that matches any of the keys is accepted.
             format: password
             writeOnly: true
         required:
