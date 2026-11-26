@@ -43,6 +43,10 @@ put:
 
     When more than one deposit amount strategy applies to a deposit request,
     the deposit amount strategy with the greater `priority` value is applied.
+
+    When a deposit amount strategy is created or updated,
+    open cashier deposit requests in the `created`, `pending`, or `attempted` status expire within a few minutes.
+    The next cashier session uses the deposit amount strategy that applies to the deposit request.
   requestBody:
     content:
       application/json:
@@ -91,7 +95,11 @@ delete:
   summary: Delete a deposit amount strategy
   operationId: DeleteDepositStrategy
   x-sdk-operation-name: delete
-  description: Deletes a deposit amount strategy with a specified ID.
+  description: |-
+    Deletes a deposit amount strategy with a specified ID.
+    When a deposit amount strategy is deleted,
+    open cashier deposit requests in the `created`, `pending`, or `attempted` status expire within a few minutes.
+    The next cashier session uses the deposit amount strategy that applies to the deposit request.
   responses:
     '204':
       description: Deposit amount strategy deleted.

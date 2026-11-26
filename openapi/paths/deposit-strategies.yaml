@@ -23,6 +23,10 @@ post:
       - If the `customAmount` property is not specified when a deposit request is created, amount restrictions are determined from the chosen deposit amount strategy.
       - If the `amounts` property is not specified when a deposit request is created, amounts are determined from the chosen deposit amount strategy.
 
+    When a deposit amount strategy is created,
+    open cashier deposit requests in the `created`, `pending`, or `attempted` status expire within a few minutes.
+    The next cashier session uses the deposit amount strategy that applies to the deposit request.
+
   requestBody:
     content:
       application/json:
