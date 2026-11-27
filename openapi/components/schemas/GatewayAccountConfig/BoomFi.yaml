@@ -1,0 +1,27 @@
+description: BoomFi gateway configuration.
+allOf:
+  - $ref: ../GatewayAccount.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Values that authenticate the merchant to BoomFi.
+        properties:
+          apiKey:
+            type: string
+            description: Key that authenticates requests to BoomFi.
+            format: password
+            writeOnly: true
+          orgId:
+            type: string
+            description: ID of the BoomFi organization.
+          webhookPublicKey:
+            type: string
+            description: Public key for BoomFi webhook signatures.
+            x-multiline: true
+        required:
+          - apiKey
+          - orgId
+          - webhookPublicKey
