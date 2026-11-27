@@ -1,0 +1,66 @@
+parameters:
+  - $ref: ../../components/parameters/resourceId.yaml
+post:
+  x-internal: true
+  x-badges:
+    - name: Experimental
+  x-products:
+    - Storefront
+  tags:
+    - Storefront cashiers
+  summary: Create a PayPal billing agreement token
+  operationId: StorefrontPostCashierPayPalToken
+  x-sdk-operation-name: createPayPalBillingAgreementToken
+  security:
+    - CustomerJWT: [ ]
+  description: |-
+    Creates a PayPal billing agreement token for the specified cashier and deposit amount.
+    If a PayPal billing agreement token is already valid for the cashier, it is returned.
+    If PayPal billing agreement is not available for the amount, a `400` error is returned.
+
+    The [Retrieve a cashier](https://www.rebilly.com/catalog/all/storefront-cashiers/storefrontgetcashier)
+    operation returns the PayPal billing agreement feature without `billingAgreementToken` and `expirationTime`.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - amount
+          properties:
+            amount:
+              type: number
+              format: double
+              minimum: 0.01
+              description: |-
+                Deposit amount for which the PayPal billing agreement token is created.
+                This value must be one of the deposit amounts of the cashier.
+              example: 10.00
+  responses:
+    '200':
+      description: PayPal billing agreement token created.
+      headers:
+        Rate-Limit-Limit:
+          $ref: ../../components/headers/Rate-Limit-Limit.yaml
+        Rate-Limit-Remaining:
+          $ref: ../../components/headers/Rate-Limit-Remaining.yaml
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/schemas/PayPalBillingAgreementFeature.yaml
+              - type: object
+                required:
+                  - billingAgreementToken
+                  - expirationTime
+    '400':
+      $ref: ../../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../../components/responses/NotFound.yaml
+    '429':
+      $ref: ../../components/responses/TooManyRequests.yaml

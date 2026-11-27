@@ -4,8 +4,6 @@ required:
   - name
   - paypalMerchantId
   - paypalClientId
-  - billingAgreementToken
-  - expirationTime
 properties:
   name:
     type: string
@@ -20,8 +18,12 @@ properties:
     description: ID of the PayPal client.
   billingAgreementToken:
     type: string
-    description: PayPal billing agreement token.
+    description: |-
+      PayPal billing agreement token.
+      This property is always included in the response of the [`POST /ready-to-pay`](https://www.rebilly.com/catalog/all/transactions/postreadytopay) operation.
   expirationTime:
     type: string
     format: date-time
-    description: Date and time when the billing agreement token expires.
+    description: |-
+      Date and time when the billing agreement token expires.
+      This property is always included in the response of the [`POST /ready-to-pay`](https://www.rebilly.com/catalog/all/transactions/postreadytopay) operation.
