@@ -17,6 +17,16 @@ allOf:
             description: Coppr API key.
             format: password
             writeOnly: true
+          rebillySecretKey:
+            type: string
+            minLength: 1
+            description: |-
+              Rebilly secret API key with permission for the [Create a payment token](https://www.rebilly.com/catalog/all/payment-tokens/posttoken) operation.
+              If `rebillyPublishableKey` is also provided,
+              the payment token for each transaction is created with the secret key instead of the publishable key.
+              To obtain an API key, see [Manage API keys](https://www.rebilly.com/docs/dev-docs/api-keys/#manage-api-keys).
+            format: password
+            writeOnly: true
         required:
           - organizationId
           - apiKey
